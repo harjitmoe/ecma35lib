@@ -106,9 +106,9 @@ def _procesc(stream, mode, bytewidth, structmode):
 
 if __name__ == "__main__":
     import io, pprint
-    import utf8filter
+    import utf8filter, utf16filter, utf32filter
     teststr = "かFooらら¥~¥𐐈𐐤𐐓𐐀¥"
-    dat = (b"\x1B%G" + teststr.encode("utf-8-sig") + 
+    dat = (b"\x1B%G" + teststr.encode("utf-8-sig") + b"\xc1\x80\xed\xa0\x81\xed\xb0\xa4" + 
            b"\x1B%/L" + teststr.encode("utf-16be") + 
            "\x1B%/L\uFFFE".encode("utf-16be") + teststr.encode("utf-16le") + 
            "\x1B%/F".encode("utf-16le") + teststr.encode("utf-32be") + 
@@ -117,8 +117,10 @@ if __name__ == "__main__":
            b"\x1B-A" + "Français".encode("latin-1") + 
            b"\x1BA\x81\x1B%/B\x1B%@HAHA_AS_IF\xA1" # i.e. the last DOCS @ should not switch back.
     )
-    #pprint.pprint(list(tokenfeed(io.BytesIO(dat))))
-    pprint.pprint(list(utf8filter.utf8filter(tokenfeed(io.BytesIO(dat)))))
+    x = io.BytesIO(dat)
+    for f in [tokenfeed, utf8filter.utf8filter, utf16filter.utf16filter, utf32filter.utf32filter,
+              list, pprint.pprint]:
+        x = f(x)
 
 
 

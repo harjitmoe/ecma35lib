@@ -7,7 +7,7 @@ utf8docs = (("DOCS", False, (0x47,)),
             ("DOCS", True, (0x48,)),
             ("DOCS", True, (0x49,)))
 
-def utf8filter(stream):
+def utf8filter(stream, pedantic_overlong=True, overlong_null=True, pass_cesu=False):
     is_utf8 = False
     utf8_brot = []
     utf8_seeking = 0
@@ -56,12 +56,30 @@ def utf8filter(stream):
                     utf8_brot.append(token[1])
                     assert len(utf8_brot) <= utf8_seeking
                     if len(utf8_brot) == utf8_seeking:
+                        save_brot = tuple(utf8_brot) # Converting to tuple, of course, copies it.
                         ucs = utf8_brot.pop(0) & ((0x80 >> utf8_seeking) - 1)
                         while utf8_brot:
                             ucs <<= 6
                             ucs |= utf8_brot.pop(0) & 0b00111111
+                        if pedantic_overlong:
+                            overlong = (ucs < 0x80)
+                            overlong = overlong or ((ucs < 0x800) and (utf8_seeking > 2))
+                            overlong = overlong or ((ucs < 0x10000) and (utf8_seeking > 3))
+                            if overlong_null and (utf8_seeking == 2) and (ucs == 0):
+                                # 0xC0 0x80 sometimes used for NUL if 0x00 is a terminator.
+                                overlong = False
+                            if overlong:
+                                firstchar = False
+                                yield ("ERROR", "UTF8OVERLONG", save_brot)
+                                continue
                         if ucs == 0xFEFF and firstchar:
                             yield ("BOM", None)
+                        elif pass_cesu and (0xD800 <= ucs < 0xE000):
+                            # Pass surrogate halves through to the UTF-16 filter for handling.
+                            # If used, the UTF-16 filter must be used after the UTF-8 one.
+                            yield ("CESU", ucs)
+                        elif pedantic_overlong and (0xD800 <= ucs < 0xE000):
+                            yield ("ERROR", "UTF8SURROGATE", ucs)
                         else:
                             yield ("UCS", ucs)
                         firstchar = False
