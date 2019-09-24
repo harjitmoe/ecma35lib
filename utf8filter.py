@@ -7,7 +7,8 @@ utf8docs = (("DOCS", False, (0x47,)),
             ("DOCS", True, (0x48,)),
             ("DOCS", True, (0x49,)))
 
-def utf8filter(stream, *, pedantic_overlong=True, overlong_null=False, pass_cesu=False):
+def utf8filter(stream, *, pedantic_overlong=True, overlong_null=False, pass_cesu=False,
+                          pedantic_surrogates=True):
     is_utf8 = False
     utf8_brot = []
     utf8_seeking = 0
@@ -78,7 +79,7 @@ def utf8filter(stream, *, pedantic_overlong=True, overlong_null=False, pass_cesu
                             # Pass surrogate halves through to the UTF-16 filter for handling.
                             # If used, the UTF-16 filter must be used after the UTF-8 one.
                             yield ("CESU", ucs)
-                        elif pedantic_overlong and (0xD800 <= ucs < 0xE000):
+                        elif pedantic_surrogates and (0xD800 <= ucs < 0xE000):
                             yield ("ERROR", "UTF8SURROGATE", ucs)
                         else:
                             yield ("UCS", ucs)
