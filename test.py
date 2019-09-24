@@ -7,16 +7,18 @@
 # - Processing of UTF-8 sections to codepoints.
 # - Processing of UTF-16 sections to codepoints.
 # - Processing of UTF-32 sections to codepoints.
-# STILL TO DO IN THAT ORDER:
-# - Fixed control processing (at very least LS1R, LS2, LS2R, LS3, LS3R).
+# - Opcoding the fixed-controls LS1R, LS2, LS2R, LS3 and LS3R.
 # - Invocation processing (i.e. resolving GL/GR tokens to G0/G1/G2/G3).
+# STILL TO DO:
 # - Graphical set processing.
-# STILL TO DO AT SOME POINT:
+# - Some sort of output.
+# - Other fixed controls.
 # - Processing of UTF-1 sections to codepoints.
 # - More control sets.
+# - Announcements, and some means of verifying them.
 
 import io, pprint
-import tokenfeed, utf8filter, utf16filter, utf32filter, controlsets
+import tokenfeed, utf8filter, utf16filter, utf32filter, controlsets, controlsfixed, invocations
 
 teststr = "かFoo\nらら¥~¥𐐈𐐤𐐓𐐀¥"
 
@@ -27,14 +29,15 @@ dat = (b"\x1B%G" + teststr.encode("utf-8-sig") +
        "\x1B%/F".encode("utf-16le") + teststr.encode("utf-32be") + 
        "\x1B%/F\uFFFE".encode("utf-32be") + teststr.encode("utf-32le") + 
        "\x1B%@".encode("utf-32le") + teststr.encode("iso-2022-jp-ext", errors="replace") +
-       b"\x1B-A" + "FrançaisFran\x0Eg\x0Fais".encode("latin-1") + 
+       "\x1B-A\x1B.BFrançaisFran\x0Eg\x0FaisÐð\x1B}Ðð".encode("latin-1") + 
        b"\x1BA\x81\x1B%/B\x1B%@HAHA_AS_IF\xA1" # i.e. the last DOCS @ should not switch back.
 )
 
 x = io.BytesIO(dat)
 
 for f in [tokenfeed.tokenfeed, utf8filter.utf8filter, utf16filter.utf16filter,
-          utf32filter.utf32filter, controlsets.controlsfilter,
+          utf32filter.utf32filter, controlsets.controlsfilter, controlsfixed.fixedcontrolsfilter,
+          invocations.invocationfilter,
           list, pprint.pprint]:
     x = f(x)
 

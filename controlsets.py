@@ -38,7 +38,7 @@ c0bytes = {tuple(b"@"): "001",
 c1bytes = {tuple(b"G"): "105",
            tuple(b"~"): "nil"}
 
-def controlsfilter(stream, def_c0="001", def_c1="105"):
+def controlsfilter(stream, *, def_c0="001", def_c1="105"):
     cur_c0 = def_c0, c0sets[def_c0]
     cur_c1 = def_c1, c1sets[def_c1]
     for token in stream:
@@ -67,6 +67,7 @@ def controlsfilter(stream, def_c0="001", def_c1="105"):
                 yield ("ERROR", "UNDEFC0", token[1])
             else:
                 yield ("CTRL", ctr, "C0")
+        # NOTE: assumes C1 control escape sequences already recognised as such by tokenfeed.
         elif token[0] == "C1":
             ctr = cur_c1[1][token[1]]
             if ctr is None:
