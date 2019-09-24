@@ -4,12 +4,15 @@
 
 import struct
 
-def tokenfeed(stream, *, default_endian=">", regard_bom=1):
+def tokenfeed(stream, *, default_endian=">", regard_bom=1, start_in_utf8=False):
     mode = "normal"
     bytewidth = 1
     firstchar = True
     endian = default_endian # Is stipulated in ISO 10646 as being big-endian.
     assert default_endian in "<>"
+    if start_in_utf8:
+        yield ("DOCS", False, tuple(b"G"))
+        mode = "wsr"
     while 1:
         structmode = endian + [..., "B", "H", ..., "L"][bytewidth]
         code = stream.read(bytewidth)
@@ -57,11 +60,11 @@ def _procesc(stream, mode, bytewidth, structmode):
     while 1:
         code = stream.read(bytewidth)
         if not code:
-            return ("ERROR", "TRUNCESC", tuple(inums)), mode, bytewidth, 0
+            return ("ERROR", "TRUNCESC", tuple(inums)), mode, bytewidth, False
         code, = struct.unpack(structmode, code)
         if (code < 0x20) or (code > 0x7E):
             stream.seek(-bytewidth, 1)
-            return ("ERROR", "TRUNCESC", tuple(inums)), mode, bytewidth, 0
+            return ("ERROR", "TRUNCESC", tuple(inums)), mode, bytewidth, False
         elif code < 0x30:
             inums.append(code)
         else:
@@ -81,28 +84,28 @@ def _procesc(stream, mode, bytewidth, structmode):
         # Deal with byte-width changes, mode changes and raw mode instigation.
         if (not ret2[1]) and (ret2[2] == (b"@"[0],)):
             # Standard return to ECMA-35 (DOCS @)
-            return ret2, "normal", 1, 1
+            return ret2, "normal", 1, True
         elif not ret2[1]:
             # UTF-8 (DOCS G), UTF-1 (DOCS B), or otherwise bytewise with standard return.
-            return ret2, "wsr", 1, 1
+            return ret2, "wsr", 1, True
         elif (not ret[2][1:]) and (ret[3] in tuple(b"GHI")):
             # UTF-8 (DOCS / I preferred, others deprecated)
             # Afaict, ISO 10646 doesn't actually distinguish DOCS / I from DOCS G.
-            return ret2, "wsr", 1, 1
+            return ret2, "wsr", 1, True
         elif (not ret[2][1:]) and (ret[3] in tuple(b"@CEJKL")):
             # UTF-16 (DOCS / L preferred, others deprecated)
-            return ret2, "wsr", 2, 1
+            return ret2, "wsr", 2, True
         elif (not ret[2][1:]) and (ret[3] in tuple(b"ADF")):
             # UTF-32 (DOCS / F preferred, others deprecated)
-            return ret2, "wsr", 4, 1
+            return ret2, "wsr", 4, True
         else:
             # Either raw pass-through (DOCS / B), or as-good-as so far as we can know.
-            return ret2, "raw", 1, 1
+            return ret2, "raw", 1, True
     elif (not ret[1]) and (not ret[2]) and (0x40 <= ret[3] < 0x60):
         # C1 control characters in 7-bit escape form.
-        return ("C1", ret[3] - 0x40, "ESC"), mode, bytewidth, 0
+        return ("C1", ret[3] - 0x40, "ESC"), mode, bytewidth, False
     else:
-        return ret, mode, bytewidth, 0
+        return ret, mode, bytewidth, False
 
 
 
