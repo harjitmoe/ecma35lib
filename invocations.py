@@ -10,10 +10,14 @@ def invocationfilter(stream, *, def_grset=1):
     single_set = -1
     single_token = None
     single_need = 0
+    single_area = None
     for token in stream:
         if single_set >= 0:
-            if token[0] in ("GL", "GR"):
-                yield ("SINGLEAREA", token[0]) # Inject for announcement verification.
+            expected = (single_area,) if single_area else ("GL", "GR")
+            if token[0] in expected:
+                if not single_area: # Don't inject in the middle of the code sequence.
+                    yield ("SINGLEAREA", token[0]) # Inject for announcement verification.
+                    single_area = token[0]
                 yield (workingsets[single_set], token[1])
                 single_need -= 1
                 if not single_need:
@@ -43,6 +47,7 @@ def invocationfilter(stream, *, def_grset=1):
             grset = 2
             yield token
         elif token[0] == "CTRL" and token[1] == "SS2":
+            single_area = None
             single_set = 2
             single_token = token
             single_need = sizes[single_set]
@@ -56,6 +61,7 @@ def invocationfilter(stream, *, def_grset=1):
             grset = 3
             yield token
         elif token[0] == "CTRL" and token[1] == "SS3":
+            single_area = None
             single_set = 3
             single_token = token
             single_need = sizes[single_set]
