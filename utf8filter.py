@@ -81,6 +81,8 @@ def utf8filter(stream, *, pedantic_overlong=True, overlong_null=False, pass_cesu
                             yield ("CESU", ucs)
                         elif pedantic_surrogates and (0xD800 <= ucs < 0xE000):
                             yield ("ERROR", "UTF8SURROGATE", ucs)
+                        elif ucs > 0x10FFFF:
+                            yield ("ERROR", "UTF8BEYOND", ucs)
                         else:
                             yield ("UCS", ucs)
                         firstchar = False

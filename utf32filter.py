@@ -15,6 +15,8 @@ def utf32filter(stream):
         elif is_utf32:
             if token[0] != "WORD":
                 yield token # Escape code passing through
+            elif token[1] > 0x10FFFF:
+                yield ("ERROR", "UTF32BEYOND", ucs)
             else:
                 yield ("UCS", token[1])
         else: # i.e. isn't a DOCS, nor a UTF-32 part of the stream
