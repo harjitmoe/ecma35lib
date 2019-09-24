@@ -9,6 +9,7 @@
 # - Processing of UTF-32 sections to codepoints.
 # - Opcoding the fixed-controls LS1R, LS2, LS2R, LS3 and LS3R.
 # - Invocation processing (i.e. resolving GL/GR tokens to G0/G1/G2/G3).
+#   [NOTE: single shifts can't be used yet due to needing multi-byte set sizes sorting out first.]
 # STILL TO DO:
 # - Graphical set processing.
 # - Some sort of output.
@@ -20,7 +21,7 @@
 import io, pprint
 import tokenfeed, utf8filter, utf16filter, utf32filter, controlsets, controlsfixed, invocations
 
-teststr = "かFoo\nらら¥~¥𐐈𐐤𐐓𐐀¥"
+teststr = "かFoo\nら侅ら¥~¥𐐈𐐤𐐓𐐀¥"
 
 dat = (b"\x1B%G" + teststr.encode("utf-8-sig") +
        b"\xa4\xed\xa0\xc1\x80\xed\xa0\x81\xed\xb0\xa4" + 
@@ -30,6 +31,7 @@ dat = (b"\x1B%G" + teststr.encode("utf-8-sig") +
        "\x1B%/F\uFFFE".encode("utf-32be") + teststr.encode("utf-32le") + 
        "\x1B%@".encode("utf-32le") + teststr.encode("iso-2022-jp-ext", errors="replace") +
        "\x1B-A\x1B.BFrançaisFran\x0Eg\x0FaisÐð\x1B}Ðð".encode("latin-1") + 
+       b"\x1B&@\x1B$)B\x1B$+D" + teststr.encode("euc-jp", errors="replace") +
        b"\x1BA\x81\x1B%/B\x1B%@HAHA_AS_IF\xA1" # i.e. the last DOCS @ should not switch back.
 )
 
