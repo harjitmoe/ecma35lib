@@ -2,6 +2,19 @@
 # -*- mode: python; coding: utf-8 -*-
 # By HarJIT in 2019.
 
+# DONE:
+# - Tokenisation of ECMA-35 streams with DOCS-integrated ISO 10646 streams.
+# - Processing of UTF-8 sections to codepoints.
+# - Processing of UTF-16 sections to codepoints.
+# - Processing of UTF-32 sections to codepoints.
+# STILL TO DO IN THAT ORDER:
+# - Fixed control processing (at very least LS1R, LS2, LS2R, LS3, LS3R).
+# - Invocation processing (i.e. resolving GL/GR tokens to G0/G1/G2/G3).
+# - Graphical set processing.
+# STILL TO DO AT SOME POINT:
+# - Processing of UTF-1 sections to codepoints.
+# - More control sets.
+
 import io, pprint
 import tokenfeed, utf8filter, utf16filter, utf32filter, controlsets
 
