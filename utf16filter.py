@@ -9,7 +9,7 @@ utf16docs = (("DOCS", True, (0x40,)),
              ("DOCS", True, (0x4B,)),
              ("DOCS", True, (0x4C,)))
 
-def utf16filter(stream):
+def utf16filter(stream, *, pedantic_surrogates=True):
     is_utf16 = False
     utf16_lead = None
     reconsume = None
@@ -18,7 +18,10 @@ def utf16filter(stream):
         reconsume = None
         if (token[0] == "DOCS"):
             if utf16_lead:
-                yield ("UCS", utf16_lead)
+                if pedantic_surrogates:
+                    yield ("ERROR", "UTF16ISOLATE", utf16_lead)
+                else:
+                    yield ("UCS", utf16_lead)
                 utf16_lead = None
             is_utf16 = (token in utf16docs)
             yield token
@@ -28,7 +31,10 @@ def utf16filter(stream):
                 if token[0] not in ("WORD", "CESU"):
                     yield token # Escape code passing through
                 elif (token[1] < 0xD800) or (token[1] >= 0xDC00):
-                    yield ("UCS", token[1]) # non-surrogate BMP code
+                    if (0xDC00 <= token[1] < 0xE000) and pedantic_surrogates:
+                        yield ("ERROR", "UTF16ISOLATE", token[1]) # isolated trailing surrogate
+                    else:
+                        yield ("UCS", token[1]) # non-surrogate BMP code
                 else:
                     utf16_lead = token[1]
             else:
@@ -36,7 +42,10 @@ def utf16filter(stream):
                 if ((token[0] not in ("WORD", "CESU")) or (token[1] < 0xDC00)
                                                        or (token[1] >= 0xE000)):
                     # i.e. isn't a continuation word
-                    yield ("UCS", utf16_lead)
+                    if pedantic_surrogates:
+                        yield ("ERROR", "UTF16ISOLATE", utf16_lead)
+                    else:
+                        yield ("UCS", utf16_lead)
                     utf16_lead = None
                     reconsume = token
                     continue

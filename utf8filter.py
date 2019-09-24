@@ -7,7 +7,7 @@ utf8docs = (("DOCS", False, (0x47,)),
             ("DOCS", True, (0x48,)),
             ("DOCS", True, (0x49,)))
 
-def utf8filter(stream, pedantic_overlong=True, overlong_null=True, pass_cesu=False):
+def utf8filter(stream, *, pedantic_overlong=True, overlong_null=False, pass_cesu=False):
     is_utf8 = False
     utf8_brot = []
     utf8_seeking = 0
@@ -34,7 +34,7 @@ def utf8filter(stream, pedantic_overlong=True, overlong_null=True, pass_cesu=Fal
                     firstchar = False
                 elif (token[1] & 0b11000000) == 0x80:
                     # i.e. is a continuation byte
-                    yield ("ERROR", "UTF8ISOLCONT", (token[1],))
+                    yield ("ERROR", "UTF8ISOLATE", (token[1],))
                     firstchar = False
                 else:
                     for bc in range(8):
@@ -47,7 +47,7 @@ def utf8filter(stream, pedantic_overlong=True, overlong_null=True, pass_cesu=Fal
                 # Continuation byte
                 if (token[0] != "WORD") or (token[1] < 0x80) or ((token[1] & 0b11000000) != 0x80):
                     # i.e. isn't a continuation byte
-                    yield ("ERROR", "UTF8TRUNC", tuple(utf8_brot))
+                    yield ("ERROR", "UTF8TRUNCATE", tuple(utf8_brot))
                     del utf8_brot[:]
                     reconsume = token
                     firstchar = False
