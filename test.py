@@ -8,8 +8,8 @@
 # - Processing of UTF-16 sections to codepoints.
 # - Processing of UTF-32 sections to codepoints.
 # - Opcoding the fixed-controls LS1R, LS2, LS2R, LS3 and LS3R.
+# - Parsing graphical set designator sequences.
 # - Invocation processing (i.e. resolving GL/GR tokens to G0/G1/G2/G3).
-#   [NOTE: single shifts can't be used yet due to needing multi-byte set sizes sorting out first.]
 # STILL TO DO:
 # - Graphical set processing.
 # - Some sort of output.
