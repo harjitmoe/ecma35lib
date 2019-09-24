@@ -42,6 +42,11 @@ def controlsfilter(stream, def_c0="001", def_c1="105"):
     cur_c0 = def_c0, c0sets[def_c0]
     cur_c1 = def_c1, c1sets[def_c1]
     for token in stream:
+        if token[0] == "UCS" and token[1] < 0x20:
+            token = ("C0", token[1])
+        elif token[0] == "UCS" and 0x80 <= token[1] < 0xA0:
+            token = ("C1", token[1] - 0x80, "CR")
+        # Not elif:
         if token[0] == "ESC" and token[1] == 0x21:
             c0seq = token[2] + (token[3],)
             try:

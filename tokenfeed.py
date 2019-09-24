@@ -4,7 +4,7 @@
 
 import struct
 
-def tokenfeed(stream, default_endian=">", regard_bom=1):
+def tokenfeed(stream, *, default_endian=">", regard_bom=1):
     mode = "normal"
     bytewidth = 1
     firstchar = True
@@ -107,7 +107,7 @@ def _procesc(stream, mode, bytewidth, structmode):
 if __name__ == "__main__":
     import io, pprint
     import utf8filter, utf16filter, utf32filter, controlsets
-    teststr = "かFooらら¥~¥𐐈𐐤𐐓𐐀¥"
+    teststr = "かFoo\nらら¥~¥𐐈𐐤𐐓𐐀¥"
     dat = (b"\x1B%G" + teststr.encode("utf-8-sig") +
            b"\xa4\xed\xa0\xc1\x80\xed\xa0\x81\xed\xb0\xa4" + 
            b"\x1B%/L" + teststr.encode("utf-16be") + b"\xDC\x20\xD8\x20" +
