@@ -29,13 +29,13 @@ c0sets = {"001": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", "BS", 
           "nil": (None,)*16} 
 
 c1sets = {"077": (None, None, "BPH", "NBH", "IND", "NEL", "SSA", "ESA", "HTS", "HTJ", "VTS", "PLD",
-                  "PLU", "RI", "SS2", "SS3"
+                  "PLU", "RI", "SS2", "SS3",
                   "DCS", "PU1", "PU2", "STS", "CCH", "MW", "SPA", "EPA", "SOS", None, "SCI", "CSI",
                   "ST", "OSC", "PM", "APC"),
           "105": (None,)*14 + ("SS2", "SS3") + (None,)*16,
           # The C1 of the infamous RFC 1345 (IR-111 *cough*), whence Unicode's "figment" aliases:
           "rfc": ("PAD", "HOP", "BPH", "NBH", "IND", "NEL", "SSA", "ESA", "HTS", "HTJ", "VTS", 
-                  "PLD", "PLU", "RI", "SS2", "SS3"
+                  "PLD", "PLU", "RI", "SS2", "SS3",
                   "DCS", "PU1", "PU2", "STS", "CCH", "MW", "SPA", "EPA", "SOS", "SGCI", "SCI", 
                   "CSI", "ST", "OSC", "PM", "APC"),
           "nil": (None,)*16}
