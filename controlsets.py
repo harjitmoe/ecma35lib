@@ -64,6 +64,8 @@ def decode_control_sets(stream, *, def_c0="001", def_c1="rfc"):
                 except KeyError:
                     yield ("ERROR", "UNSUPC0", token[2])
                     cur_c0 = "nil", c0sets["nil"]
+                else:
+                    yield ("RDESIG", "C0", c0bytes[token[2]], token)
             else:
                 assert token[1] == "C1"
                 try:
@@ -71,7 +73,8 @@ def decode_control_sets(stream, *, def_c0="001", def_c1="rfc"):
                 except KeyError:
                     yield ("ERROR", "UNSUPC1", token[2])
                     cur_c1 = "nil", c1sets["nil"]
-            yield token
+                else:
+                    yield ("RDESIG", "C0", c0bytes[token[2]], token)
         elif token[0] == "C0":
             ctr = cur_c0[1][token[1]]
             if ctr is None:

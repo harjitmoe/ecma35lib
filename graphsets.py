@@ -281,7 +281,8 @@ def decode_graphical_sets(stream, *, def_g0="006", def_g1="100", def_g2="nil", d
             except KeyError:
                 yield ("ERROR", "UNSUPSET", token)
                 curs[token[1]] = "nil", gsets["nil"]
-            yield token
+            else:
+                yield ("RDESIG", "G{}".format(token[1]), sump[token[3]], token)
         else:
             yield token
 

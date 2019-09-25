@@ -31,7 +31,7 @@ import io, pprint
 import tokenfeed, utf8filter, utf16filter, utf32filter, controlsets, controlsfixed, invocations, \
        designations, graphsets, simpleprinter
 
-teststr = "\nかFoo\x7fら侅ら¥a ~¥𐐈𐐤𐐓𐐀¥\n"
+teststr = "\nかFoo\x7fら侅ら¥a~염盐塩鹽｜걈 ~¥𐐈𐐤𐐓𐐀¥\n"
 
 dat = (b"\x1B%G" + teststr.encode("utf-8-sig") +
        b"\xa4\xed\xa0\xc1\x80\xed\xa0\x81\xed\xb0\xa4" + 
@@ -43,7 +43,7 @@ dat = (b"\x1B%G" + teststr.encode("utf-8-sig") +
        "\x1B-A\x1B.BFrançaisFran\x0Eg\x0FaisÐð\x1B}Ðð\x1B~\x1b#//5".encode("latin-1") + 
        b"\x1B&@\x1B$)B\x1B$+D" + teststr.encode("euc-jp", errors="replace") +
        b"\x1B$)A\x1B$+~" + teststr.encode("euc-cn", errors="replace") +
-       b"\x1B$)C\x1B$+~" + teststr.encode("euc-kr", errors="replace") +
+       b"\x1B$)C" + teststr.encode("euc-kr", errors="replace") +
        b"\x1BB\x82\x1B%/B\x1B%@HAHA_AS_IF\xA1" # i.e. the last DOCS @ should not switch back.
 )
 
