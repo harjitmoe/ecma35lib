@@ -2,7 +2,7 @@
 # -*- mode: python; coding: utf-8 -*-
 # By HarJIT in 2019.
 
-def invocationfilter(stream, *, def_grset=1):
+def decode_invocations(stream, *, def_grset=1):
     glset = 0
     grset = def_grset
     workingsets = ("G0", "G1", "G2", "G3")
@@ -16,7 +16,7 @@ def invocationfilter(stream, *, def_grset=1):
             expected = (single_area,) if single_area else ("GL", "GR")
             if token[0] in expected:
                 if not single_area: # Don't inject in the middle of the code sequence.
-                    yield ("SINGLEAREA", token[0]) # Inject for announcement verification.
+                    yield ("SINGLEOVER", token[0], single_token) # For announcement verification.
                     single_area = token[0]
                 yield (workingsets[single_set], token[1])
                 single_need -= 1

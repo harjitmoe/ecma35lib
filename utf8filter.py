@@ -7,8 +7,8 @@ utf8docs = (("DOCS", False, (0x47,)),
             ("DOCS", True, (0x48,)),
             ("DOCS", True, (0x49,)))
 
-def utf8filter(stream, *, pedantic_overlong=True, overlong_null=False, pass_cesu=False,
-                          pedantic_surrogates=True):
+def decode_utf8(stream, *, pedantic_overlong=True, overlong_null=False, pass_cesu=False,
+                           pedantic_surrogates=True):
     is_utf8 = False
     utf8_brot = []
     utf8_seeking = 0

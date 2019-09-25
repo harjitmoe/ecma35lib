@@ -7,20 +7,25 @@
 # - Processing of UTF-8 sections to codepoints.
 # - Processing of UTF-16 sections to codepoints.
 # - Processing of UTF-32 sections to codepoints.
+# - Opcoding C0 and C1 control characters.
 # - Opcoding the fixed-controls LS1R, LS2, LS2R, LS3 and LS3R.
-# - Parsing graphical set designator sequences.
+# - Parsing designator sequences.
 # - Invocation processing (i.e. resolving GL/GR tokens to G0/G1/G2/G3).
 # STILL TO DO:
 # - Graphical set processing.
 # - Some sort of output.
 # - Other fixed controls.
+# - CSI and (ideally) CEX sequences. CSI sequences are open-access in ECMA-48, and fairly well
+#   documented besides, so they should be doable. CEX sequences are defined in JIS C 6225 a.k.a.
+#   JIS X 0207, which is withdrawn and also not open-access (ISO-IR-74 gives only a vague overview,
+#   which could just as validly apply to CSI), so likely unattainable.
 # - Processing of UTF-1 sections to codepoints.
 # - More control sets.
 # - Announcements, and some means of verifying them.
 
 import io, pprint
 import tokenfeed, utf8filter, utf16filter, utf32filter, controlsets, controlsfixed, invocations, \
-       settypes
+       designations
 
 teststr = "かFoo\nら侅ら¥~¥𐐈𐐤𐐓𐐀¥"
 
@@ -38,9 +43,10 @@ dat = (b"\x1B%G" + teststr.encode("utf-8-sig") +
 
 x = io.BytesIO(dat)
 
-for f in [tokenfeed.tokenfeed, utf8filter.utf8filter, utf16filter.utf16filter,
-          utf32filter.utf32filter, controlsets.controlsfilter, controlsfixed.fixedcontrolsfilter,
-          settypes.typesfilter, invocations.invocationfilter,
+for f in [tokenfeed.tokenise_stream, utf8filter.decode_utf8, utf16filter.decode_utf16,
+          utf32filter.decode_utf32, controlsets.decode_control_sets,
+          controlsfixed.decode_fixed_controls, designations.decode_designations,
+          invocations.decode_invocations,
           list, pprint.pprint]:
     x = f(x)
 

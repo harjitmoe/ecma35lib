@@ -9,7 +9,7 @@ utf16docs = (("DOCS", True, (0x40,)),
              ("DOCS", True, (0x4B,)),
              ("DOCS", True, (0x4C,)))
 
-def utf16filter(stream, *, pedantic_surrogates=True):
+def decode_utf16(stream, *, pedantic_surrogates=True):
     is_utf16 = False
     utf16_lead = None
     reconsume = None

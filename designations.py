@@ -2,7 +2,7 @@
 # -*- mode: python; coding: utf-8 -*-
 # By HarJIT in 2019.
 
-def typesfilter(stream):
+def decode_designations(stream):
     for token in stream:
         if token[0] == "ESC" and token[1] in tuple(b"()*+-./$"):
             if token[1] in tuple(b"()*+"):
@@ -21,6 +21,7 @@ def typesfilter(stream):
                 idbytes = token[2][1:] + (token[3],)
                 if (0x40 <= token[3] <= 0x51) and (not token[2][1:]):
                     # All current registrations are double-byte
+                    # Note: this is used solely by single shifts:
                     size = 2
                 # May need to add to here if I add DRCS features.
                 else:
@@ -44,7 +45,14 @@ def typesfilter(stream):
                 assert wsetbyte in tuple(b"+/")
                 wset = 3
             yield ("DESIG", wset, settype, idbytes, not wsetbyte)
+            # Note: this is used solely by single shifts:
             yield ("SETSIZE", wset, size)
+        elif token[0] == "ESC" and token[1] == 0x21:
+            c0seq = token[2] + (token[3],)
+            yield ("CDESIG", "C0", c0seq)
+        elif token[0] == "ESC" and token[1] == 0x22:
+            c1seq = token[2] + (token[3],)
+            yield ("CDESIG", "C1", c1seq)
         else:
             yield token
 

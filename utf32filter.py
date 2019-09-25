@@ -6,7 +6,7 @@ utf32docs = (("DOCS", True, (0x41,)),
              ("DOCS", True, (0x44,)),
              ("DOCS", True, (0x46,)))
 
-def utf32filter(stream):
+def decode_utf32(stream):
     is_utf32 = False
     for token in stream:
         if (token[0] == "DOCS"):

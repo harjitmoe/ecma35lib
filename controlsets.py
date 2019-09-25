@@ -38,7 +38,7 @@ c0bytes = {tuple(b"@"): "001",
 c1bytes = {tuple(b"G"): "105",
            tuple(b"~"): "nil"}
 
-def controlsfilter(stream, *, def_c0="001", def_c1="105"):
+def decode_control_sets(stream, *, def_c0="001", def_c1="105"):
     cur_c0 = def_c0, c0sets[def_c0]
     cur_c1 = def_c1, c1sets[def_c1]
     for token in stream:
@@ -47,20 +47,20 @@ def controlsfilter(stream, *, def_c0="001", def_c1="105"):
         elif token[0] == "UCS" and 0x80 <= token[1] < 0xA0:
             token = ("C1", token[1] - 0x80, "CRUCS")
         # Not elif:
-        if token[0] == "ESC" and token[1] == 0x21:
-            c0seq = token[2] + (token[3],)
-            try:
-                cur_c0 = c0bytes[c0seq], c0sets[c0bytes[c0seq]]
-            except KeyError:
-                yield ("ERROR", "UNSUPC0", c0seq)
-                cur_c0 = "nil", c0sets["nil"]
-        elif token[0] == "ESC" and token[1] == 0x22:
-            c1seq = token[2] + (token[3],)
-            try:
-                cur_c1 = c1bytes[c1seq], c1sets[c1bytes[c1seq]]
-            except KeyError:
-                yield ("ERROR", "UNSUPC1", c1seq)
-                cur_c1 = "nil", c1sets["nil"]
+        if token[0] == "CDESIG":
+            if token[1] == "C0":
+                try:
+                    cur_c0 = c0bytes[token[2]], c0sets[c0bytes[token[2]]]
+                except KeyError:
+                    yield ("ERROR", "UNSUPC0", token[2])
+                    cur_c0 = "nil", c0sets["nil"]
+            else:
+                assert token[1] == "C1"
+                try:
+                    cur_c1 = c1bytes[token[2]], c1sets[c1bytes[token[2]]]
+                except KeyError:
+                    yield ("ERROR", "UNSUPC1", token[2])
+                    cur_c1 = "nil", c1sets["nil"]
         elif token[0] == "C0":
             ctr = cur_c0[1][token[1]]
             if ctr is None:

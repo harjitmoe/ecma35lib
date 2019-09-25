@@ -4,11 +4,18 @@
 
 import struct
 
-def tokenfeed(stream, *, default_endian=">", regard_bom=1, start_in_utf8=False):
+def tokenise_stream(stream, *, default_endian=">", regard_bom=1, start_in_utf8=False):
     mode = "normal"
     bytewidth = 1
     firstchar = True
-    endian = default_endian # Is stipulated in ISO 10646 as being big-endian.
+    # DOCS are stipulated in ISO 10646 as big-endian (>). Actually, ISO 10646 does not provide for
+    # any means of embedding little-endian UTF data in ECMA-35 (i.e. our regard_bom=0). However,
+    # it isn't the last word on this matter (WHATWG stipulates that unmarked UTF-16 is little-
+    # endian, for example). Regarding a byte-order mark at the start of the UTF stream (i.e. our
+    # regard_bom=1) seems reasonable. However, regarding the designated noncharacter U+FFFE as a
+    # generic "switch byte order" control probably isn't, except on trusted data containing
+    # misconcatenated UTF-16 (our regard_bom=2).
+    endian = default_endian
     assert default_endian in "<>"
     if start_in_utf8:
         yield ("DOCS", False, tuple(b"G"))
@@ -24,6 +31,7 @@ def tokenfeed(stream, *, default_endian=">", regard_bom=1, start_in_utf8=False):
             yield ("RAWBYTE", code)
             continue
         if mode in ("normal", "wsr") and code == 0x1B:
+            # 0x1B is guaranteed by ECMA-35 to always be ESC and vice versa.
             r, mode, bytewidth, firstchar = _procesc(stream, mode, bytewidth, structmode)
             if firstchar:
                 # Don't persist a BOM from a previous Unicode stream.
