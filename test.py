@@ -40,8 +40,10 @@ dat = (b"\x1B%G" + teststr.encode("utf-8-sig") +
        "\x1B%/F".encode("utf-16le") + teststr.encode("utf-32be") + 
        "\x1B%/F\uFFFE".encode("utf-32be") + teststr.encode("utf-32le") + 
        "\x1B%@".encode("utf-32le") + teststr.encode("iso-2022-jp-ext", errors="replace") +
-       "\x1B-A\x1B.BFrançaisFran\x0Eg\x0FaisÐð\x1B}Ðð\x1B~".encode("latin-1") + 
-       b"\x1B&@\x1B$)B\x1B$+D\x1b#//5" + teststr.encode("euc-jp", errors="replace") +
+       "\x1B-A\x1B.BFrançaisFran\x0Eg\x0FaisÐð\x1B}Ðð\x1B~\x1b#//5".encode("latin-1") + 
+       b"\x1B&@\x1B$)B\x1B$+D" + teststr.encode("euc-jp", errors="replace") +
+       b"\x1B$)A\x1B$+~" + teststr.encode("euc-cn", errors="replace") +
+       b"\x1B$)C\x1B$+~" + teststr.encode("euc-kr", errors="replace") +
        b"\x1BB\x82\x1B%/B\x1B%@HAHA_AS_IF\xA1" # i.e. the last DOCS @ should not switch back.
 )
 
@@ -51,7 +53,7 @@ for f in [tokenfeed.tokenise_stream, utf8filter.decode_utf8, utf16filter.decode_
           utf32filter.decode_utf32, controlsets.decode_control_sets,
           controlsfixed.decode_fixed_controls, designations.decode_designations,
           invocations.decode_invocations, graphsets.decode_graphical_sets,
-          simpleprinter.simple_print, list, pprint.pprint]:
+          simpleprinter.simple_print, list]:
     x = f(x)
 
 print()
