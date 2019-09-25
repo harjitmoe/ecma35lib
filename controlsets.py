@@ -17,10 +17,10 @@
 # Information separators (aliases IS1 thru IS4):
 #    US, RS, GS, FS
 
-c0sets = {"001": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", "BS", "HT", "LF", "VT",
-                  "FF", "CR", "SO", "SI",
-                  "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", "CAN", "EM", "SUB", 
-                  "ESC", "FS", "GS", "RS", "US"),
+c0sets = {"001": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
+                  "BS", "HT", "LF", "VT", "FF", "CR", "SO", "SI",
+                  "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
+                  "CAN", "EM", "SUB", "ESC", "FS", "GS", "RS", "US"),
           # 104 and nil are de facto the same, since (a) ECMA-35 guarantees that ESC is always
           # available at 0x1B, no matter what's designated, and (b) ESC was already processed by
           # tokenfeed (it has to be, for to be able to parse through DOCS regions), so ESC will
@@ -28,16 +28,16 @@ c0sets = {"001": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", "BS", 
           "104": (None,)*27 + ("ESC",) + (None,)*4,
           "nil": (None,)*16} 
 
-c1sets = {"077": (None, None, "BPH", "NBH", "IND", "NEL", "SSA", "ESA", "HTS", "HTJ", "VTS", "PLD",
-                  "PLU", "RI", "SS2", "SS3",
-                  "DCS", "PU1", "PU2", "STS", "CCH", "MW", "SPA", "EPA", "SOS", None, "SCI", "CSI",
-                  "ST", "OSC", "PM", "APC"),
+c1sets = {"077": (None, None, "BPH", "NBH", "IND", "NEL", "SSA", "ESA", 
+                  "HTS", "HTJ", "VTS", "PLD", "PLU", "RI", "SS2", "SS3",
+                  "DCS", "PU1", "PU2", "STS", "CCH", "MW", "SPA", "EPA", 
+                  "SOS", None, "SCI", "CSI", "ST", "OSC", "PM", "APC"),
           "105": (None,)*14 + ("SS2", "SS3") + (None,)*16,
           # The C1 of the infamous RFC 1345 (IR-111 *cough*), whence Unicode's "figment" aliases:
-          "rfc": ("PAD", "HOP", "BPH", "NBH", "IND", "NEL", "SSA", "ESA", "HTS", "HTJ", "VTS", 
-                  "PLD", "PLU", "RI", "SS2", "SS3",
-                  "DCS", "PU1", "PU2", "STS", "CCH", "MW", "SPA", "EPA", "SOS", "SGCI", "SCI", 
-                  "CSI", "ST", "OSC", "PM", "APC"),
+          "rfc": ("PAD", "HOP", "BPH", "NBH", "IND", "NEL", "SSA", "ESA", 
+                  "HTS", "HTJ", "VTS", "PLD", "PLU", "RI", "SS2", "SS3",
+                  "DCS", "PU1", "PU2", "STS", "CCH", "MW", "SPA", "EPA", 
+                  "SOS", "SGCI", "SCI", "CSI", "ST", "OSC", "PM", "APC"),
           "nil": (None,)*16}
 
 c0bytes = {tuple(b"@"): "001",
@@ -71,6 +71,7 @@ def decode_control_sets(stream, *, def_c0="001", def_c1="rfc"):
                 except KeyError:
                     yield ("ERROR", "UNSUPC1", token[2])
                     cur_c1 = "nil", c1sets["nil"]
+            yield token
         elif token[0] == "C0":
             ctr = cur_c0[1][token[1]]
             if ctr is None:
