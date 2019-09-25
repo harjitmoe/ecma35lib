@@ -12,9 +12,10 @@
 # - Parsing designator sequences.
 # - Invocation processing (i.e. resolving GL/GR tokens to G0/G1/G2/G3).
 # - Graphical set processing.
-# STILL TO DO:
 # - Some sort of output.
+# STILL TO DO:
 # - More graphical sets.
+# - Rich or annotated output of some sort.
 # - Other fixed controls.
 # - CSI and (ideally) CEX sequences. CSI sequences are open-access in ECMA-48, and fairly well
 #   documented besides, so they should be doable. CEX sequences are defined in JIS C 6225 a.k.a.
@@ -29,9 +30,9 @@
 
 import io, pprint
 import tokenfeed, utf8filter, utf16filter, utf32filter, controlsets, controlsfixed, invocations, \
-       designations, graphsets
+       designations, graphsets, simpleprinter
 
-teststr = "かFoo\n\x7fら侅ら¥a ~¥𐐈𐐤𐐓𐐀¥"
+teststr = "\nかFoo\x7fら侅ら¥a ~¥𐐈𐐤𐐓𐐀¥\n"
 
 dat = (b"\x1B%G" + teststr.encode("utf-8-sig") +
        b"\xa4\xed\xa0\xc1\x80\xed\xa0\x81\xed\xb0\xa4" + 
@@ -51,7 +52,7 @@ for f in [tokenfeed.tokenise_stream, utf8filter.decode_utf8, utf16filter.decode_
           utf32filter.decode_utf32, controlsets.decode_control_sets,
           controlsfixed.decode_fixed_controls, designations.decode_designations,
           invocations.decode_invocations, graphsets.decode_graphical_sets,
-          list, pprint.pprint]:
+          simpleprinter.simple_print, list]:
     x = f(x)
 
 
