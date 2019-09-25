@@ -8,7 +8,7 @@
 # - Processing of UTF-16 sections to codepoints.
 # - Processing of UTF-32 sections to codepoints.
 # - Opcoding C0 and C1 control characters.
-# - Opcoding the fixed-controls LS1R, LS2, LS2R, LS3 and LS3R.
+# - Opcoding the fixed controls.
 # - Parsing designator sequences.
 # - Invocation processing (i.e. resolving GL/GR tokens to G0/G1/G2/G3).
 # - Graphical set processing.
@@ -16,7 +16,6 @@
 # STILL TO DO:
 # - More graphical sets.
 # - Rich or annotated output of some sort.
-# - Other fixed controls.
 # - CSI and (ideally) CEX sequences. CSI sequences are open-access in ECMA-48, and fairly well
 #   documented besides, so they should be doable. CEX sequences are defined in JIS C 6225 a.k.a.
 #   JIS X 0207, which is withdrawn and also not open-access (ISO-IR-74 gives only a vague overview,

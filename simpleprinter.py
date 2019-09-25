@@ -4,7 +4,7 @@
 
 def simple_print(stream):
     for token in stream:
-        if token[0] == "CHAR":
+        if token[0] in ("CHAR", "RAWBYTE"):
             print(end = chr(token[1]))
         elif token[0] == "CTRL" and token[1] == "LF":
             print()
@@ -20,3 +20,5 @@ def simple_print(stream):
         else:
             print(end = "\uFFFC")
         yield token
+    print()
+    print()
