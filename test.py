@@ -11,23 +11,27 @@
 # - Opcoding the fixed-controls LS1R, LS2, LS2R, LS3 and LS3R.
 # - Parsing designator sequences.
 # - Invocation processing (i.e. resolving GL/GR tokens to G0/G1/G2/G3).
-# STILL TO DO:
 # - Graphical set processing.
+# STILL TO DO:
 # - Some sort of output.
+# - More graphical sets.
 # - Other fixed controls.
 # - CSI and (ideally) CEX sequences. CSI sequences are open-access in ECMA-48, and fairly well
 #   documented besides, so they should be doable. CEX sequences are defined in JIS C 6225 a.k.a.
 #   JIS X 0207, which is withdrawn and also not open-access (ISO-IR-74 gives only a vague overview,
 #   which could just as validly apply to CSI), so likely unattainable.
+#   - Documentation for an implementation of CEX is available here, actually (doesn't seem to be
+#     all the codes, and those it includes are not in enough detail to understand arg format):
+#     http://printronix.com/wp-content/uploads/manuals/PTX_PRM_OKI_N7_256482A.pdf
 # - Processing of UTF-1 sections to codepoints.
 # - More control sets.
 # - Announcements, and some means of verifying them.
 
 import io, pprint
 import tokenfeed, utf8filter, utf16filter, utf32filter, controlsets, controlsfixed, invocations, \
-       designations
+       designations, graphsets
 
-teststr = "かFoo\nら侅ら¥~¥𐐈𐐤𐐓𐐀¥"
+teststr = "かFoo\n\x7fら侅ら¥a ~¥𐐈𐐤𐐓𐐀¥"
 
 dat = (b"\x1B%G" + teststr.encode("utf-8-sig") +
        b"\xa4\xed\xa0\xc1\x80\xed\xa0\x81\xed\xb0\xa4" + 
@@ -46,7 +50,7 @@ x = io.BytesIO(dat)
 for f in [tokenfeed.tokenise_stream, utf8filter.decode_utf8, utf16filter.decode_utf16,
           utf32filter.decode_utf32, controlsets.decode_control_sets,
           controlsfixed.decode_fixed_controls, designations.decode_designations,
-          invocations.decode_invocations,
+          invocations.decode_invocations, graphsets.decode_graphical_sets,
           list, pprint.pprint]:
     x = f(x)
 

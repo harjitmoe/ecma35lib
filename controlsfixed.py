@@ -2,12 +2,18 @@
 # -*- mode: python; coding: utf-8 -*-
 # By HarJIT in 2019.
 
-fixedcontrols = {tuple(b"n"): "LS2",
-                 tuple(b"o"): "LS3",
-                 tuple(b"~"): "LS1R",
-                 tuple(b"}"): "LS2R",
-                 tuple(b"|"): "LS3R",
-                 }
+fixedcontrols = {(0x60,): "DMI", # `
+                 (0x61,): "INT", # a
+                 (0x62,): "EMI", # b
+                 (0x63,): "RIS", # c
+                 (0x64,): "CMD", # d
+                 #
+                 (0x6E,): "LS2", # n
+                 (0x6F,): "LS3", # o
+                 #
+                 (0x7C,): "LS3R", # |
+                 (0x7D,): "LS2R", # }
+                 (0x7E,): "LS1R"} # ~
 
 def _proc_pu(token):
     assert token[0] == "ESC"

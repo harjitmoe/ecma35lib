@@ -7,6 +7,7 @@ def decode_invocations(stream, *, def_grset=1):
     grset = def_grset
     workingsets = ("G0", "G1", "G2", "G3")
     sizes = [1, None, None, None]
+    is_96 = [0, 0, 1, 1]
     single_set = -1
     single_token = None
     single_need = 0
@@ -70,10 +71,22 @@ def decode_invocations(stream, *, def_grset=1):
                 single_set = -1
         elif token[0] == "SETSIZE":
             sizes[token[1]] = token[2]
+        elif token[0] == "DESIG":
+            yield token
+            is_96[token[1]] = (token[2] not in ("94", "94n"))
         elif token[0] == "GL":
-            yield (workingsets[glset], token[1])
+            if (not is_96[glset]) and (token[1] == 0):
+                yield ("CTRL", "SP", "GL")
+            elif (not is_96[glset]) and (token[1] == 95):
+                yield ("CTRL", "DEL", "GL")
+            else:
+                yield (workingsets[glset], token[1], "GL")
         elif token[0] == "GR":
-            yield (workingsets[grset], token[1])
+            yield (workingsets[grset], token[1], "GR")
+        elif token[0] == "UCS" and token[1] == 0x20:
+            yield ("CTRL", "SP", "UCS")
+        elif token[0] == "UCS" and token[1] == 0x7F:
+            yield ("CTRL", "DEL", "UCS")
         else:
             yield token
 
