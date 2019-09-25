@@ -28,17 +28,27 @@ c0sets = {"001": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", "BS", 
           "104": (None,)*27 + ("ESC",) + (None,)*4,
           "nil": (None,)*16} 
 
-c1sets = {"105": (None,)*14 + ("SS2", "SS3") + (None,)*16,
+c1sets = {"077": (None, None, "BPH", "NBH", "IND", "NEL", "SSA", "ESA", "HTS", "HTJ", "VTS", "PLD",
+                  "PLU", "RI", "SS2", "SS3"
+                  "DCS", "PU1", "PU2", "STS", "CCH", "MW", "SPA", "EPA", "SOS", None, "SCI", "CSI",
+                  "ST", "OSC", "PM", "APC"),
+          "105": (None,)*14 + ("SS2", "SS3") + (None,)*16,
+          # The C1 of the infamous RFC 1345 (IR-111 *cough*), whence Unicode's "figment" aliases:
+          "rfc": ("PAD", "HOP", "BPH", "NBH", "IND", "NEL", "SSA", "ESA", "HTS", "HTJ", "VTS", 
+                  "PLD", "PLU", "RI", "SS2", "SS3"
+                  "DCS", "PU1", "PU2", "STS", "CCH", "MW", "SPA", "EPA", "SOS", "SGCI", "SCI", 
+                  "CSI", "ST", "OSC", "PM", "APC"),
           "nil": (None,)*16}
 
 c0bytes = {tuple(b"@"): "001",
            tuple(b"G"): "104",
            tuple(b"~"): "nil"}
 
-c1bytes = {tuple(b"G"): "105",
+c1bytes = {tuple(b"C"): "077",
+           tuple(b"G"): "105",
            tuple(b"~"): "nil"}
 
-def decode_control_sets(stream, *, def_c0="001", def_c1="105"):
+def decode_control_sets(stream, *, def_c0="001", def_c1="rfc"):
     cur_c0 = def_c0, c0sets[def_c0]
     cur_c1 = def_c1, c1sets[def_c1]
     for token in stream:
