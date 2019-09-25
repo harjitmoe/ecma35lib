@@ -32,7 +32,7 @@ dat = (b"\x1B%G" + teststr.encode("utf-8-sig") +
        "\x1B%/F\uFFFE".encode("utf-32be") + teststr.encode("utf-32le") + 
        "\x1B%@".encode("utf-32le") + teststr.encode("iso-2022-jp-ext", errors="replace") +
        "\x1B-A\x1B.BFrançaisFran\x0Eg\x0FaisÐð\x1B}Ðð\x1B~".encode("latin-1") + 
-       b"\x1B&@\x1B$)B\x1B$+D" + teststr.encode("euc-jp", errors="replace") +
+       b"\x1B&@\x1B$)B\x1B$+D\x1b#//5" + teststr.encode("euc-jp", errors="replace") +
        b"\x1BA\x81\x1B%/B\x1B%@HAHA_AS_IF\xA1" # i.e. the last DOCS @ should not switch back.
 )
 

@@ -47,7 +47,7 @@ def tokenfeed(stream, *, default_endian=">", regard_bom=1, start_in_utf8=False):
             continue
         assert code < 0x100
         if code < 0x20:
-            yield ("C0", code)
+            yield ("C0", code, "CL")
         elif code < 0x80:
             yield ("GL", code - 0x20)
         elif code < 0xA0:
