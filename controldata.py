@@ -121,13 +121,6 @@ csiseq = {tuple(b"@"): "ICH", # Insert Character
           tuple(b"m"): "SGR", # Select Graphic Rendition
           tuple(b"n"): "DSR", # Device Status Report
           tuple(b"o"): "DAQ", # Define Area Qualification
-          #
-          tuple(b"p"): "XTPUSHSGR", # XTerm Push Select Graphic Rendition
-          tuple(b"q"): "DECLL", # DEC Load LEDs
-          tuple(b"s"): "SCOSC", # SCO Save Cursor Position
-          tuple(b"u"): "SCORC", # SCO Restore Cursor Position
-          tuple(b"x"): "DECREQTPARM", # DEC Request Terminal Parameters
-          #
           tuple(b"\x20@"): "SL", # Scroll Left
           tuple(b"\x20A"): "SR", # Scroll Right
           tuple(b"\x20B"): "GSM", # Graphic Size Modification
@@ -171,20 +164,39 @@ csiseq = {tuple(b"@"): "ICH", # Insert Character
           tuple(b"\x20j"): "SPL", # Set Page Limit
           tuple(b"\x20k"): "SCP", # Select Character Path
           #
+          tuple(b"q"): "DECLL", # DEC Load LEDs
+          tuple(b"s"): "SCOSC", # SCO Save Cursor Position (collisive with DECSLRM
+          tuple(b"u"): "SCORC", # SCO Restore Cursor Position
+          tuple(b"x"): "DECREQTPARM", # DEC Request Terminal Parameters
           tuple(b"\x20q"): "DECSCUSR", # DEC Set Cursor Style
           tuple(b"\x20t"): "DECSWBV", # DEC Set Warning Bell Volume
           tuple(b"\x20u"): "DECSMBV", # DEC Set Margin Bell Volume
+          tuple(b"!p"): "DECSTR", # DEC Soft Terminal Reset
+          tuple(b"\"p"): "DECSCL", # DEC Set Conformance Level
           tuple(b"\"q"): "DECSCA", # DEC Select Character Protection Attribute
+          tuple(b"#p"): "XTPUSHSGR2", # XTerm Push Select Graphic Rendition
+          tuple(b"#q"): "XTPOPSGR2", # XTerm Pop Select Graphic Rendition
+          tuple(b"#y"): "XTCHECKSUM", # XTerm Select Checksum Extension
+          tuple(b"#{"): "XTPUSHSGR", # XTerm Push Select Graphic Rendition
+          tuple(b"#|"): "XTREPORTSGR", # XTerm Report Selected Graphic Rendition
+          tuple(b"#}"): "XTPOPSGR", # XTerm Pop Select Graphic Rendition
+          tuple(b"$p"): "DECRQM", # DEC Request Mode
           tuple(b"$t"): "DECRARA", # DEC Reverse Attributes in Rectangular Area
           tuple(b"$v"): "DECCRA", # DEC Copy Rectangular Area
           tuple(b"$w"): "DECRQPSR", # DEC Request Presentation State Report
           tuple(b"$x"): "DECFRA", # DEC Fill Rectangular Area
-          tuple(b"#q"): "XTPOPSGR", # XTerm Pop Select Graphic Rendition
-          tuple(b"#y"): "XTCHECKSUM", # XTerm Select Checksum Extension
+          tuple(b"$z"): "DECERA", # DEC Erase Rectangular Area
+          tuple(b"${"): "DECSERA", # DEC Selective Erase Rectangular Area
+          tuple(b"$|"): "DECSCPP", # DEC Select Columns Per Page
           tuple(b"'w"): "DECEFR", # DEC Enable Filter Rectangle
           tuple(b"'z"): "DECELR", # DEC Enable Locator Reporting
+          tuple(b"'{"): "DECSLE", # DEC Select Locator Events
+          tuple(b"'|"): "DECRQLP", # DEC Request Locator Position
+          tuple(b"'}"): "DECIC", # DEC Insert Columns
+          tuple(b"'~"): "DECDC", # DEC Delete Columns
           tuple(b"*x"): "DECSACE", # DEC Select Attribute Change Extent
           tuple(b"*y"): "DECRQCRA", # DEC Request Checksum of Rectangular Area
+          tuple(b"*|"): "DECSNLS", # DEC Select Number of Lines per Screen
           }
 
 # Since the JIS standard behind them is withdrawn, documentation for CEX sequences is pauce.
