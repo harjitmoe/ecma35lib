@@ -22,18 +22,18 @@
 
 format_effectors = ["BS", "HT", "LF", "VT", "FF", "CR"]
 
-fixed_controls = {(0x60,): "DMI", # `
-                  (0x61,): "INT", # a
-                  (0x62,): "EMI", # b
-                  (0x63,): "RIS", # c (this is what the "reset" command does)
-                  (0x64,): "CMD", # d
+fixed_controls = {(0x60,): "DMI", # Disable Manual Input, `
+                  (0x61,): "INT", # Interrupt, a
+                  (0x62,): "EMI", # Enable Manual Input, b
+                  (0x63,): "RIS", # Reset to Initial State, c (what the "reset" command does)
+                  (0x64,): "CMD", # Coding Method Delimiter, d
                   #
-                  (0x6E,): "LS2", # n
-                  (0x6F,): "LS3", # o
+                  (0x6E,): "LS2", # Locking Shift Two, n
+                  (0x6F,): "LS3", # Locking Shift Three, o
                   #
-                  (0x7C,): "LS3R", # |
-                  (0x7D,): "LS2R", # }
-                  (0x7E,): "LS1R"} # ~
+                  (0x7C,): "LS3R", # Locking Shift Three Right, |
+                  (0x7D,): "LS2R", # Locking Shift Two Right, }
+                  (0x7E,): "LS1R"} # Locking Shift One Right, ~
 
 c0sets = {"001": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
                   "BS", "HT", "LF", "VT", "FF", "CR", "SO", "SI",
@@ -72,7 +72,22 @@ c1bytes = {tuple(b"C"): "077",
            tuple(b"G"): "105",
            tuple(b"~"): "nil"}
 
-csiseq = {tuple(b"A"): "CUU",}
+csiseq = {tuple(b"A"): "CUU", # Cursor Up
+          tuple(b"B"): "CUD", # Cursor Down
+          tuple(b"C"): "CUF", # Cursor Forward
+          tuple(b"D"): "CUB", # Cursor Backward
+          tuple(b"E"): "CNL", # Cursor Next Line
+          tuple(b"F"): "CPL", # Cursor Previous Line
+          tuple(b"G"): "CHA", # Cursor Horizontal Absolute
+          tuple(b"H"): "CUP", # Cursor Position
+          tuple(b"J"): "ED", # Erase in Display
+          tuple(b"K"): "EL", # Erase in Line
+          tuple(b"S"): "SU", # Scroll Up
+          tuple(b"T"): "SD", # Scroll Down
+          tuple(b"f"): "HVP", # Horizontal and Vertical Position
+          tuple(b"m"): "SGR", # Select Graphic Rendition
+          tuple(b"s"): "SCP", # Save Cursor Position
+          tuple(b"u"): "RCP"} # Restore Cursor Position
 
 # Since the JIS standard behind them is withdrawn, documentation for CEX sequences is pauce.
 # Only thing I've been able to find is the "OKI® Programmer’s Reference Manual" released by
