@@ -58,7 +58,7 @@ for f in [tokenfeed.tokenise_stream, utf8filter.decode_utf8, utf16filter.decode_
           utf32filter.decode_utf32, controlsets.decode_control_sets,
           fixedcontrols.decode_fixed_controls, designations.decode_designations,
           invocations.decode_invocations, graphsets.decode_graphical_sets,
-          simpleprinter.simple_print, list]:
+          simpleprinter.simple_print, list, pprint.pprint]:
     x = f(x)
 
 print()

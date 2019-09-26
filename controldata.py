@@ -20,10 +20,12 @@
 # Information separators (aliases IS1 thru IS4):
 #    US, RS, GS, FS
 
+format_effectors = ["BS", "HT", "LF", "VT", "FF", "CR"]
+
 fixed_controls = {(0x60,): "DMI", # `
                   (0x61,): "INT", # a
                   (0x62,): "EMI", # b
-                  (0x63,): "RIS", # c
+                  (0x63,): "RIS", # c (this is what the "reset" command does)
                   (0x64,): "CMD", # d
                   #
                   (0x6E,): "LS2", # n
@@ -37,6 +39,11 @@ c0sets = {"001": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL",
                   "BS", "HT", "LF", "VT", "FF", "CR", "SO", "SI",
                   "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
                   "CAN", "EM", "SUB", "ESC", "FS", "GS", "RS", "US"),
+          # JIS C 6225's C0 set, differs by replacing IS4 (that is to say, FS) with CEX.
+          "074": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
+                  "BS", "HT", "LF", "VT", "FF", "CR", "SO", "SI",
+                  "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
+                  "CAN", "EM", "SUB", "ESC", "CEX", "GS", "RS", "US"),
           # 104 and nil are de facto the same, since (a) ECMA-35 guarantees that ESC is always
           # available at 0x1B, no matter what's designated, and (b) ESC was already processed by
           # tokenfeed (it has to be, for to be able to parse through DOCS regions), so ESC will

@@ -76,17 +76,17 @@ def decode_invocations(stream, *, def_grset=1):
             is_96[token[1]] = (token[2] not in ("94", "94n"))
         elif token[0] == "GL":
             if (not is_96[glset]) and (token[1] == 0):
-                yield ("CTRL", "SP", "GL")
+                yield ("CTRL", "SP", "GL", token)
             elif (not is_96[glset]) and (token[1] == 95):
-                yield ("CTRL", "DEL", "GL")
+                yield ("CTRL", "DEL", "GL", token)
             else:
                 yield (workingsets[glset], token[1], "GL")
         elif token[0] == "GR":
             yield (workingsets[grset], token[1], "GR")
         elif token[0] == "UCS" and token[1] == 0x20:
-            yield ("CTRL", "SP", "UCS")
+            yield ("CTRL", "SP", "UCS", token)
         elif token[0] == "UCS" and token[1] == 0x7F:
-            yield ("CTRL", "DEL", "UCS")
+            yield ("CTRL", "DEL", "UCS", token)
         else:
             yield token
 

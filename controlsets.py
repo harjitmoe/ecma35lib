@@ -38,14 +38,14 @@ def decode_control_sets(stream, *, def_c0="001", def_c1="rfc"):
             if ctr is None:
                 yield ("ERROR", "UNDEFC0", token[1], cur_c0[0])
             else:
-                yield ("CTRL", ctr, token[2] + "C0")
+                yield ("CTRL", ctr, token[2] + "C0", token)
         # NOTE: assumes C1 control escape sequences already recognised as such by tokenfeed.
         elif token[0] == "C1":
             ctr = cur_c1[1][token[1]]
             if ctr is None:
                 yield ("ERROR", "UNDEFC1", token[1], cur_c1[0])
             else:
-                yield ("CTRL", ctr, token[2] + "C1")
+                yield ("CTRL", ctr, token[2] + "C1", token)
         else:
             yield token
 
