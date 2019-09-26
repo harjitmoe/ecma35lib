@@ -13,17 +13,12 @@
 # - Invocation processing (i.e. resolving GL/GR tokens to G0/G1/G2/G3).
 # - Graphical set processing.
 # - Some sort of output.
+# - Mnemonic parsing for CSI sequences, and CEX sequences for which I can get enough info.
 # STILL TO DO:
 # - More graphical sets.
 # - Rich or annotated output of some sort.
 # - Composition sequences (Hangul ones, also backspace ones).
-# - CSI and (ideally) CEX sequences. CSI sequences are open-access in ECMA-48, and fairly well
-#   documented besides, so they should be doable. CEX sequences are defined in JIS C 6225 a.k.a.
-#   JIS X 0207, which is withdrawn and also not open-access (ISO-IR-74 gives only a vague overview,
-#   which could just as validly apply to CSI), so likely unattainable.
-#   - Documentation for an implementation of CEX is available here, actually (doesn't seem to be
-#     all the codes, and those it includes are not in enough detail to understand arg format):
-#     http://printronix.com/wp-content/uploads/manuals/PTX_PRM_OKI_N7_256482A.pdf
+# - Functionality of CSI, CEX, C1 _et cetera_ controls.
 # - Processing of UTF-1 sections to codepoints.
 # - More control sets.
 # - Announcements, and some means of verifying them.
@@ -32,7 +27,7 @@ import io, pprint
 import tokenfeed, utf8filter, utf16filter, utf32filter, controlsets, fixedcontrols, invocations, \
        designations, graphsets, simpleprinter, controlsequences
 
-teststr = "\nかFoo\x7fら侅ら¥a~염盐塩鹽｜걈 ~¥\x1b[A\x1b[B\x1b]0;𐐈𐐤𐐓𐐀\x1b\\𐐈𐐤𐐓𐐀¥\n"
+teststr = "\nかFoo\x7fら侅ら¥a~염盐塩鹽｜걈 ~¥\x1b[A\x1b[B\x1b]0;𐐈𐐤𐐓𐐀\x1b\\𐐈𐐤𐐓𐐀\x1b[\x20_kg¥\n"
 test2 = "\nНаш благодетель знает своё высокое призвание и будет верен ему.\n"
 
 dat = (b"\x1B%G\x1B!F" + teststr.encode("utf-8-sig") + "\x1CJ염盐塩鹽\x1CK".encode("utf-8") +

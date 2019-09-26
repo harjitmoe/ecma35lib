@@ -55,6 +55,8 @@ c1sets = {"077": (None, None, "BPH", "NBH", "IND", "NEL", "SSA", "ESA",
                   "HTS", "HTJ", "VTS", "PLD", "PLU", "RI", "SS2", "SS3",
                   "DCS", "PU1", "PU2", "STS", "CCH", "MW", "SPA", "EPA", 
                   "SOS", None, "SCI", "CSI", "ST", "OSC", "PM", "APC"),
+          # Registered due to being the minimal C1 set for ECMA-43 levels 2 and 3, but is also
+          # the _de facto_ C1 set of EUC-JP in terms of what decoders see as valid:
           "105": (None,)*14 + ("SS2", "SS3") + (None,)*16,
           # The C1 of the infamous RFC 1345 (IR-111 *cough*), whence Unicode's "figment" aliases:
           "rfc": ("PAD", "HOP", "BPH", "NBH", "IND", "NEL", "SSA", "ESA", 
@@ -104,11 +106,11 @@ csiseq = {tuple(b"@"): "ICH", # Insert Character
           tuple(b"]"): "SDS", # Start Directed String
           tuple(b"^"): "SIMD", # Select Implicit Movement Direction
           tuple(b"`"): "HPA", # Character [Horizontal] Position Absolute
-          tuple(b"a"): "HPR", # Character [Horizontal] Position Forward [Right]
+          tuple(b"a"): "HPR", # Character [Horizontal] Position Forward [Relative]
           tuple(b"b"): "REP", # Repeat
           tuple(b"c"): "DA", # Device Attributes
           tuple(b"d"): "VPA", # Line [Vertical] Position Absolute
-          tuple(b"e"): "VPR", # Line [Vertical] Position Forward [Right]
+          tuple(b"e"): "VPR", # Line [Vertical] Position Forward [Relative]
           tuple(b"f"): "HVP", # Horizontal and Vertical Position
           tuple(b"g"): "TBC", # Tabulation Clear
           tuple(b"h"): "SM", # Set Mode
@@ -119,8 +121,13 @@ csiseq = {tuple(b"@"): "ICH", # Insert Character
           tuple(b"m"): "SGR", # Select Graphic Rendition
           tuple(b"n"): "DSR", # Device Status Report
           tuple(b"o"): "DAQ", # Define Area Qualification
-          tuple(b"s"): "SCP", # Save Cursor Position
-          tuple(b"u"): "RCP", # Restore Cursor Position
+          #
+          tuple(b"p"): "XTPUSHSGR", # XTerm Push Select Graphic Rendition
+          tuple(b"q"): "DECLL", # DEC Load LEDs
+          tuple(b"s"): "SCOSC", # SCO Save Cursor Position
+          tuple(b"u"): "SCORC", # SCO Restore Cursor Position
+          tuple(b"x"): "DECREQTPARM", # DEC Request Terminal Parameters
+          #
           tuple(b"\x20@"): "SL", # Scroll Left
           tuple(b"\x20A"): "SR", # Scroll Right
           tuple(b"\x20B"): "GSM", # Graphic Size Modification
@@ -163,6 +170,21 @@ csiseq = {tuple(b"@"): "ICH", # Insert Character
           tuple(b"\x20i"): "SPH", # Set Page Home
           tuple(b"\x20j"): "SPL", # Set Page Limit
           tuple(b"\x20k"): "SCP", # Select Character Path
+          #
+          tuple(b"\x20q"): "DECSCUSR", # DEC Set Cursor Style
+          tuple(b"\x20t"): "DECSWBV", # DEC Set Warning Bell Volume
+          tuple(b"\x20u"): "DECSMBV", # DEC Set Margin Bell Volume
+          tuple(b"\"q"): "DECSCA", # DEC Select Character Protection Attribute
+          tuple(b"$t"): "DECRARA", # DEC Reverse Attributes in Rectangular Area
+          tuple(b"$v"): "DECCRA", # DEC Copy Rectangular Area
+          tuple(b"$w"): "DECRQPSR", # DEC Request Presentation State Report
+          tuple(b"$x"): "DECFRA", # DEC Fill Rectangular Area
+          tuple(b"#q"): "XTPOPSGR", # XTerm Pop Select Graphic Rendition
+          tuple(b"#y"): "XTCHECKSUM", # XTerm Select Checksum Extension
+          tuple(b"'w"): "DECEFR", # DEC Enable Filter Rectangle
+          tuple(b"'z"): "DECELR", # DEC Enable Locator Reporting
+          tuple(b"*x"): "DECSACE", # DEC Select Attribute Change Extent
+          tuple(b"*y"): "DECRQCRA", # DEC Request Checksum of Rectangular Area
           }
 
 # Since the JIS standard behind them is withdrawn, documentation for CEX sequences is pauce.
@@ -186,8 +208,7 @@ cexseq = {b"J"[0]: "SVP", # Select Vertical Printing
           b"r"[0]: "SDHW", # Set DBCS Half-Width Mode
           b"s"[0]: "CDHW", # Cancel DBCS Half-Width Mode
           b"t"[0]: "DSVP", # Disable DBCS ASCII [SBCS???] Vertical Printing Mode 
-          b"u"[0]: "ESVP", # Enable SBCS Vertical Printing Mode (i.e. puts them upright?)
-          }
+          b"u"[0]: "ESVP"} # Enable SBCS Vertical Printing Mode (i.e. puts them upright?)
 
 # Not supposed to be an exhaustive list per se, nor follow any specific cat:
 formats = {0x00AD: 'SHY', 0x061C: 'ALM', 0x180E: 'MVS', 0x200B: 'ZWSP', 0x200C: 'ZWNJ', 
