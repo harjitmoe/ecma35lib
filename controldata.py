@@ -64,6 +64,7 @@ c1sets = {"077": (None, None, "BPH", "NBH", "IND", "NEL", "SSA", "ESA",
           "nil": (None,)*16}
 
 c0bytes = {tuple(b"@"): "001",
+           tuple(b"F"): "074",
            tuple(b"G"): "104",
            tuple(b"~"): "nil"}
 
@@ -72,6 +73,30 @@ c1bytes = {tuple(b"C"): "077",
            tuple(b"~"): "nil"}
 
 csiseq = {tuple(b"A"): "CUU",}
+
+# Since the JIS standard behind them is withdrawn, documentation for CEX sequences is pauce.
+# Only thing I've been able to find is the "OKI® Programmer’s Reference Manual" released by
+# Printronix Inc., which has its own issues, in particular a complete lack of detail on what the
+# format of those with parameters is. It also seems to list an incomplete set of CEX sequences
+# including only the ones it supports (and not how the 78JIS/83JIS/90JIS diacritic composites were
+# supposed to be formed). I'm listing the documented ones without parameters below, insofar as
+# I can decipher what it's saying. Mnemonics are made up for this software.
+cexseq = {b"J"[0]: "SVP", # Select Vertical Printing
+          b"K"[0]: "SHP", # Select Horizontal Printing
+          b"N"[0]: "SSP", # Select Superscript Printing
+          b"O"[0]: "CSP", # Cancel Superscript Printing
+          b"P"[0]: "SSBP", # Select Subscript Printing
+          b"Q"[0]: "CSBP", # Cancel Subscript Printing
+          b"R"[0]: "SSSP", # Select Super/Subscript Printing (i.e. both on one space, super first)
+          b"S"[0]: "CSSP", # Cancel Super/Subscript Printing
+          b"-"[0]: "PTAC", # Pair Two ASCII Characters in Vertical Print Mode
+          b"p"[0]: "DDWP", # DBCS Double-Width Print
+          b"q"[0]: "CDDW", # Cancel DBCS Double-Width Print
+          b"r"[0]: "SDHW", # Set DBCS Half-Width Mode
+          b"s"[0]: "CDHW", # Cancel DBCS Half-Width Mode
+          b"t"[0]: "DSVP", # Disable DBCS ASCII [SBCS???] Vertical Printing Mode 
+          b"u"[0]: "ESVP", # Enable SBCS Vertical Printing Mode (i.e. puts them upright?)
+          }
 
 # Not supposed to be an exhaustive list per se, nor follow any specific cat:
 formats = {0x00AD: 'SHY', 0x061C: 'ALM', 0x180E: 'MVS', 0x200B: 'ZWSP', 0x200C: 'ZWNJ', 

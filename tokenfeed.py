@@ -62,6 +62,7 @@ def tokenise_stream(stream, *, default_endian=">", regard_bom=1, start_in_utf8=F
             yield ("C1", code - 0x80, "CR")
         else:
             yield ("GR", code - 0xA0)
+    yield ("ENDSTREAM",)
 
 def _procesc(stream, mode, bytewidth, structmode):
     inums = []

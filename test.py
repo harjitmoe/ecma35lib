@@ -35,7 +35,7 @@ import tokenfeed, utf8filter, utf16filter, utf32filter, controlsets, fixedcontro
 teststr = "\nかFoo\x7fら侅ら¥a~염盐塩鹽｜걈 ~¥\x1b[A\x1b]0;𐐈𐐤𐐓𐐀\x1b\\𐐈𐐤𐐓𐐀¥\n"
 test2 = "\nНаш благодетель знает своё высокое призвание и будет верен ему.\n"
 
-dat = (b"\x1B%G" + teststr.encode("utf-8-sig") +
+dat = (b"\x1B%G\x1B!F" + teststr.encode("utf-8-sig") + "\x1CJ염盐塩鹽\x1CK".encode("utf-8") +
        b"\xa4\xed\xa0\xc1\x80\xed\xa0\x81\xed\xb0\xa4" + # Deliberately invalid UTF-8
        b"\x1B%/L" + teststr.encode("utf-16be") + 
        b"\xDC\x20\xD8\x20" +                             # Deliberately invalid UTF-16BE
@@ -54,12 +54,13 @@ dat = (b"\x1B%G" + teststr.encode("utf-8-sig") +
 
 x = io.BytesIO(dat)
 
+print(end = "\x1Bc")
+
 for f in [tokenfeed.tokenise_stream, utf8filter.decode_utf8, utf16filter.decode_utf16,
-          utf32filter.decode_utf32, controlsets.decode_control_sets,
-          fixedcontrols.decode_fixed_controls, designations.decode_designations,
-          controlsequences.decode_control_strings_csi,
+          utf32filter.decode_utf32, designations.decode_designations, 
+          controlsets.decode_control_sets,
+          fixedcontrols.decode_fixed_controls, controlsequences.decode_control_strings, 
           invocations.decode_invocations, graphsets.decode_graphical_sets,
-          controlsequences.decode_control_strings_st,
           simpleprinter.simple_print, list, pprint.pprint]:
     x = f(x)
 

@@ -4,61 +4,7 @@
 
 import controldata
 
-def decode_control_strings_st(stream, *, accept_bel_as_st=True):
-    active = []
-    mode = "normal"
-    reconsume = None
-    while 1:
-        token = next(stream) if reconsume is None else reconsume
-        reconsume = None
-        if mode == "normal":
-            if (token[0] == "CTRL") and (token[1] in ("DCS", "SOS", "OSC", "PM", "APC")):
-                active.append(token)
-                mode = "string"
-            elif (token[0] == "CTRL") and (token[1] in ("CSI", "CEX")):
-                raise ValueError("run decode_control_strings_csi before "+
-                                 "decode_invocations and decode_control_strings_st")
-            else:
-                yield token # Pass everything else through
-        elif mode == "string":
-            # FIXME: Running this at such a late stage is an awful kludge, since the actual string
-            # itself (apart from SOS) is supposed to be of CL bytes and format effectors.
-            # However, in practice, you can set window titles in UTF-8 mode as follows:
-            #   OSC 0 ; 庭 に は 二 羽 鶏 が い る 。 ST
-            # Thus, this is possibly the correct approach? I'm not sure how it ought to be 
-            # processed when (say) JIS X 0208 is over CL.
-            if token[0] == "CHAR":
-                active.append(token)
-                continue
-            elif token[0] == "CTRL":
-                if token[1] in controldata.format_effectors:
-                    active.append(token)
-                    continue
-                elif token[1] == "ST":
-                    active.append(token)
-                    yield ("CTRLSTRING", active[0][1], tuple(active))
-                    del active[:]
-                    mode = "normal"
-                    continue
-                elif token[1] == "BEL" and accept_bel_as_st: # TODO for all or just OSC?
-                    active.append(token)
-                    yield ("CTRLSTRING", active[0][1], tuple(active))
-                    del active[:]
-                    mode = "normal"
-                    continue
-                # Otherwise fall through
-            # Not elif (this is fall-through from several cases):
-            if active[0][1] == "SOS":
-                # All characters permitted, only terminates at ST (TODO does it at BEL?)
-                active.append(token)
-            else:
-                yield ("ERROR", "TRUNCSEQ", tuple(active))
-                del active[:]
-                mode = "normal"
-                reconsume = token
-                continue
-
-def decode_control_strings_csi(stream):
+def decode_control_strings(stream, *, osc_bel_term=True):
     active = []
     idbytes = []
     parbytes = []
@@ -68,7 +14,10 @@ def decode_control_strings_csi(stream):
         token = next(stream) if reconsume is None else reconsume
         reconsume = None
         if mode == "normal":
-            if (token[0] == "CTRL") and (token[1] in ("CSI",)):
+            if (token[0] == "CTRL") and (token[1] in ("DCS", "SOS", "OSC", "PM", "APC")):
+                active.append(token)
+                mode = "string"
+            elif (token[0] == "CTRL") and (token[1] in ("CSI",)):
                 active.append(token)
                 mode = "csi"
             elif (token[0] == "CTRL") and (token[1] in ("CEX",)):
@@ -76,7 +25,28 @@ def decode_control_strings_csi(stream):
                 mode = "cex"
             else:
                 yield token # Pass everything else through
+        elif mode == "string":
+            if token[0] == "CTRL" and (token[1] == "ST" or
+                    (token[1] == "BEL" and active[0][1] == "OSC" and osc_bel_term)):
+                active.append(token)
+                yield ("CTRLSTRING", active[0][1], tuple(active))
+                del active[:]
+                mode = "normal"
+            elif token[0] == "ENDSTREAM":
+                # String was never terminated.
+                yield ("ERROR", "TRUNCSEQ", tuple(active))
+                yield token
+                return
+            else:
+                active.append(token)
         elif mode in ("csi", "csinoparam"):
+            savetoken = token
+            if token[0] == "UCS" and 0x20 <= token[1] < 0x7F:
+                # Can use CSI in UTF-8.
+                # Note the following transformation is only appropriate *because* we know that
+                # we're in a CSI sequence, hence savetoken is used for reconsume.
+                token = ("GL", token[1] - 0x20)
+            # Not elif:
             bytevalue = token[1] + 0x20
             if token[0] == "GL" and (0x30 <= bytevalue < 0x40) and (mode != "csinoparam"):
                 active.append(token)
@@ -103,10 +73,36 @@ def decode_control_strings_csi(stream):
                 del idbytes[:]
                 del parbytes[:]
                 mode = "normal"
-                reconsume = token
+                reconsume = savetoken
                 continue
         else:
-            raise NotImplementedError
+            assert mode == "cex"
+            savetoken = token
+            if token[0] == "UCS" and 0x20 <= token[1] < 0x7F:
+                # Treat the same as CSI (see above)
+                token = ("GL", token[1] - 0x20)
+            elif token[0] != "GL":
+                yield ("ERROR", "TRUNCSEQ", tuple(active))
+                del active[:]
+                mode = "normal"
+                reconsume = savetoken
+                continue
+            bytevalue = token[1] + 0x20
+            if bytevalue in controldata.cexseq:
+                yield ("CEXSEQ", controldata.cexseq[bytevalue], (), active[0][3])
+                del active[:]
+                mode = "normal"
+            else:
+                # Some take parameters (including CEX $ n, CEX 0 n1 n2 and 
+                # CEX 2 a1 a2 d1 d2 d3 ... d72). Sadly, I've not been able to
+                # find adequate documentation on the format or parsing of
+                # those parameters.
+                active.append(token)
+                yield ("ERROR", "UNSUPCEX", tuple(active))
+                del active[:]
+                mode = "normal"
+                reconsume = savetoken
+                continue
             
             
 
