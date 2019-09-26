@@ -24,7 +24,7 @@ def tokenise_stream(stream, *, default_endian=">", regard_bom=1, start_in_utf8=F
         structmode = endian + [..., "B", "H", ..., "L"][bytewidth]
         code = stream.read(bytewidth)
         if not code:
-            return
+            break
         code, = struct.unpack(structmode, code)
         if mode == "raw":
             firstchar = False
