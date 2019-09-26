@@ -89,6 +89,7 @@ csiseq = {tuple(b"@"): "ICH", # Insert Character
           tuple(b"N"): "EF", # Erase in Field
           tuple(b"O"): "EA", # Erase in Area
           tuple(b"P"): "DCH", # Delete Character
+          tuple(b"Q"): "SEE", # Select Editing Extent
           tuple(b"R"): "CPR", # Active [Cursor] Position Report
           tuple(b"S"): "SU", # Scroll Up
           tuple(b"T"): "SD", # Scroll Down
@@ -98,36 +99,70 @@ csiseq = {tuple(b"@"): "ICH", # Insert Character
           tuple(b"X"): "ECH", # Erase Character
           tuple(b"Y"): "CVT", # Cursor Line [Vertical] Tabulation
           tuple(b"Z"): "CBT", # Cursor Backward Tabulation
+          tuple(b"["): "SRS", # Start Reversed String
           tuple(b"\\"): "PTX", # Parallel Texts
+          tuple(b"]"): "SDS", # Start Directed String
+          tuple(b"^"): "SIMD", # Select Implicit Movement Direction
           tuple(b"`"): "HPA", # Character [Horizontal] Position Absolute
           tuple(b"a"): "HPR", # Character [Horizontal] Position Forward [Right]
           tuple(b"b"): "REP", # Repeat
           tuple(b"c"): "DA", # Device Attributes
+          tuple(b"d"): "VPA", # Line [Vertical] Position Absolute
+          tuple(b"e"): "VPR", # Line [Vertical] Position Forward [Right]
           tuple(b"f"): "HVP", # Horizontal and Vertical Position
+          tuple(b"g"): "TBC", # Tabulation Clear
+          tuple(b"h"): "SM", # Set Mode
           tuple(b"i"): "MC", # Media Copy
           tuple(b"j"): "HPB", # Character [Horizontal] Position Backward
+          tuple(b"k"): "VPB", # Line [Vertical] Position Backward
           tuple(b"l"): "RM", # Reset Mode
           tuple(b"m"): "SGR", # Select Graphic Rendition
           tuple(b"n"): "DSR", # Device Status Report
           tuple(b"o"): "DAQ", # Define Area Qualification
           tuple(b"s"): "SCP", # Save Cursor Position
           tuple(b"u"): "RCP", # Restore Cursor Position
+          tuple(b"\x20@"): "SL", # Scroll Left
+          tuple(b"\x20A"): "SR", # Scroll Right
           tuple(b"\x20B"): "GSM", # Graphic Size Modification
           tuple(b"\x20C"): "GSS", # Graphic Size Selection
+          tuple(b"\x20E"): "TSS", # Thin Space Specification
           tuple(b"\x20F"): "JFY", # Justify
+          tuple(b"\x20G"): "SPI", # Spacing Increment
           tuple(b"\x20H"): "QUAD", # Quad
+          tuple(b"\x20I"): "SSU", # Select Size Unit
           tuple(b"\x20J"): "PFS", # Page Format Selection
-          tuple(b"\x20O"): "IDCS", # Identify Device Control String
+          tuple(b"\x20K"): "SHS", # Select Character [Horizontal] Spacing
+          tuple(b"\x20L"): "SVS", # Select Line [Vertical] Spacing
           tuple(b"\x20M"): "IGS", # Identify Graphic Subrepertoire
+          tuple(b"\x20O"): "IDCS", # Identify Device Control String
           tuple(b"\x20P"): "PPA", # Page Position Absolute
           tuple(b"\x20Q"): "PPR", # Page Position Forward [Right]
           tuple(b"\x20R"): "PPB", # Page Position Backward
+          tuple(b"\x20S"): "SPD", # Select Presentation Directions
           tuple(b"\x20T"): "DTA", # Dimension Text Area
+          tuple(b"\x20U"): "SLH", # Set Line Home
+          tuple(b"\x20V"): "SLL", # Set Line Limit
           tuple(b"\x20W"): "FNK", # Function Key
+          tuple(b"\x20X"): "SPQR", # Select Print Quality and Rapidity
+          tuple(b"\x20Y"): "SEF", # Sheet Eject and Feed
           tuple(b"\x20Z"): "PEC", # Presentation Expand or Contract
+          tuple(b"\x20["): "SSW", # Set Space Width
           tuple(b"\x20\\"): "SACS", # Set Additional Character Separation
           tuple(b"\x20]"): "SAPV", # Set Additional Presentation Variants
+          tuple(b"\x20^"): "STAB", # Selective Tabulation
           tuple(b"\x20_"): "GCC", # Graphic Character Combination
+          tuple(b"\x20`"): "TATE", # Tabulation Aligned Trailing Edge (i.e. set a normal tab stop)
+          tuple(b"\x20a"): "TALE", # Tabulation Aligned Leading Edge (i.e. set a "right tab" stop)
+          tuple(b"\x20b"): "TAC", # Tabulation Aligned Centred
+          tuple(b"\x20c"): "TCC", # Tabulation Centred on Character
+          tuple(b"\x20d"): "TSR", # Tabulation Stop Remove
+          tuple(b"\x20e"): "SCO", # Select Character Orientation
+          tuple(b"\x20f"): "SRCS", # Set Reduced Character Separation
+          tuple(b"\x20g"): "SCS", # Select Character Spacing
+          tuple(b"\x20h"): "SLS", # Select Line Spacing
+          tuple(b"\x20i"): "SPH", # Set Page Home
+          tuple(b"\x20j"): "SPL", # Set Page Limit
+          tuple(b"\x20k"): "SCP", # Select Character Path
           }
 
 # Since the JIS standard behind them is withdrawn, documentation for CEX sequences is pauce.
