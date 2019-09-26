@@ -256,14 +256,6 @@ g96nbytes = {tuple(b"~"): "nil"}
 
 sumps = {"94": g94bytes, "96": g96bytes, "94n": g94nbytes, "96n": g96nbytes}
 
-# Not supposed to be an exhaustive list per se, nor follow any specific cat:
-formats = {0x00AD: 'SHY', 0x061C: 'ALM', 0x180E: 'MVS', 0x200B: 'ZWSP', 0x200C: 'ZWNJ', 
-           0x200D: 'ZWJ', 0x200E: 'LRM', 0x200F: 'RLM', 0x2028: 'LSEP', 0x2029: 'PSEP', 
-           0x202A: 'LRE', 0x202B: 'RLE', 0x202C: 'PDF', 0x202D: 'LRO', 0x202E: 'RLO', 
-           0x2060: 'WJ', 0x2061: 'AF', 0x2062: 'IT', 0x2063: 'IC', 0x2064: 'IP', 
-           0x2066: 'LRI', 0x2067: 'RLI', 0x2068: 'FSI', 0x2069: 'PDI', 0x3164: "HF", 
-           0xFEFF: 'ZWNBSP', 0xFFF9: 'IAA', 0xFFFA: 'IAS', 0xFFFB: 'IAT'}
-
 
 
 
