@@ -72,22 +72,63 @@ c1bytes = {tuple(b"C"): "077",
            tuple(b"G"): "105",
            tuple(b"~"): "nil"}
 
-csiseq = {tuple(b"A"): "CUU", # Cursor Up
+csiseq = {tuple(b"@"): "ICH", # Insert Character
+          tuple(b"A"): "CUU", # Cursor Up
           tuple(b"B"): "CUD", # Cursor Down
-          tuple(b"C"): "CUF", # Cursor Forward
-          tuple(b"D"): "CUB", # Cursor Backward
+          tuple(b"C"): "CUF", # Cursor Right [Forward]
+          tuple(b"D"): "CUB", # Cursor Left [Backward]
           tuple(b"E"): "CNL", # Cursor Next Line
           tuple(b"F"): "CPL", # Cursor Previous Line
           tuple(b"G"): "CHA", # Cursor Horizontal Absolute
           tuple(b"H"): "CUP", # Cursor Position
-          tuple(b"J"): "ED", # Erase in Display
+          tuple(b"I"): "CHT", # Cursor Forward [Horizontal] Tabulation
+          tuple(b"J"): "ED", # Erase in Page [Display]
           tuple(b"K"): "EL", # Erase in Line
+          tuple(b"L"): "IL", # Insert Line
+          tuple(b"M"): "DL", # Delete Line
+          tuple(b"N"): "EF", # Erase in Field
+          tuple(b"O"): "EA", # Erase in Area
+          tuple(b"P"): "DCH", # Delete Character
+          tuple(b"R"): "CPR", # Active [Cursor] Position Report
           tuple(b"S"): "SU", # Scroll Up
           tuple(b"T"): "SD", # Scroll Down
+          tuple(b"U"): "NP", # Next Page
+          tuple(b"V"): "PP", # Previous Page
+          tuple(b"W"): "CTC", # Cursor Tabulation Control
+          tuple(b"X"): "ECH", # Erase Character
+          tuple(b"Y"): "CVT", # Cursor Line [Vertical] Tabulation
+          tuple(b"Z"): "CBT", # Cursor Backward Tabulation
+          tuple(b"\\"): "PTX", # Parallel Texts
+          tuple(b"`"): "HPA", # Character [Horizontal] Position Absolute
+          tuple(b"a"): "HPR", # Character [Horizontal] Position Forward [Right]
+          tuple(b"b"): "REP", # Repeat
+          tuple(b"c"): "DA", # Device Attributes
           tuple(b"f"): "HVP", # Horizontal and Vertical Position
+          tuple(b"i"): "MC", # Media Copy
+          tuple(b"j"): "HPB", # Character [Horizontal] Position Backward
+          tuple(b"l"): "RM", # Reset Mode
           tuple(b"m"): "SGR", # Select Graphic Rendition
+          tuple(b"n"): "DSR", # Device Status Report
+          tuple(b"o"): "DAQ", # Define Area Qualification
           tuple(b"s"): "SCP", # Save Cursor Position
-          tuple(b"u"): "RCP"} # Restore Cursor Position
+          tuple(b"u"): "RCP", # Restore Cursor Position
+          tuple(b"\x20B"): "GSM", # Graphic Size Modification
+          tuple(b"\x20C"): "GSS", # Graphic Size Selection
+          tuple(b"\x20F"): "JFY", # Justify
+          tuple(b"\x20H"): "QUAD", # Quad
+          tuple(b"\x20J"): "PFS", # Page Format Selection
+          tuple(b"\x20O"): "IDCS", # Identify Device Control String
+          tuple(b"\x20M"): "IGS", # Identify Graphic Subrepertoire
+          tuple(b"\x20P"): "PPA", # Page Position Absolute
+          tuple(b"\x20Q"): "PPR", # Page Position Forward [Right]
+          tuple(b"\x20R"): "PPB", # Page Position Backward
+          tuple(b"\x20T"): "DTA", # Dimension Text Area
+          tuple(b"\x20W"): "FNK", # Function Key
+          tuple(b"\x20Z"): "PEC", # Presentation Expand or Contract
+          tuple(b"\x20\\"): "SACS", # Set Additional Character Separation
+          tuple(b"\x20]"): "SAPV", # Set Additional Presentation Variants
+          tuple(b"\x20_"): "GCC", # Graphic Character Combination
+          }
 
 # Since the JIS standard behind them is withdrawn, documentation for CEX sequences is pauce.
 # Only thing I've been able to find is the "OKI® Programmer’s Reference Manual" released by
