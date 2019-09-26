@@ -16,6 +16,7 @@
 # STILL TO DO:
 # - More graphical sets.
 # - Rich or annotated output of some sort.
+# - Composition sequences (Hangul ones, also backspace ones).
 # - CSI and (ideally) CEX sequences. CSI sequences are open-access in ECMA-48, and fairly well
 #   documented besides, so they should be doable. CEX sequences are defined in JIS C 6225 a.k.a.
 #   JIS X 0207, which is withdrawn and also not open-access (ISO-IR-74 gives only a vague overview,

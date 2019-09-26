@@ -5,11 +5,14 @@
 # Transmission controls (aliases TC1 thru TC10):
 #    SOH, STX, ETX, EOT, ENQ,
 #    ACK, DLE, NAK, SYN, ETB
-# These are constrained to appear in their ASCII positions or not at all.
+# These are constrained to appear in their ASCII positions or not at all (whereäs other ASCII 
+# controls may not be moved around in the C0 set, but may be moved to the C1 set). Furthermore, 
+# they are the only transmission control characters permitted to appear in the C0 set.
 
 # Format effectors (aliases FE0 thru FE5):
 #    BS, HT, LF,
 #    VT, FF, CR
+# These (in addition to GL bytes) may be used in DCS, OSC, PM and APC sequences or follow SCI.
 
 # Device controls (aliases DC1 thru DC4):
 #    XON, DC2, XOFF, DC4
