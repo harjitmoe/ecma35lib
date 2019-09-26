@@ -29,14 +29,16 @@
 # - Announcements, and some means of verifying them.
 
 import io, pprint
-import tokenfeed, utf8filter, utf16filter, utf32filter, controlsets, controlsfixed, invocations, \
+import tokenfeed, utf8filter, utf16filter, utf32filter, controlsets, fixedcontrols, invocations, \
        designations, graphsets, simpleprinter
 
 teststr = "\nかFoo\x7fら侅ら¥a~염盐塩鹽｜걈 ~¥𐐈𐐤𐐓𐐀¥\n"
+test2 = "\nНаш благодетель знает своё высокое призвание и будет верен ему.\n"
 
 dat = (b"\x1B%G" + teststr.encode("utf-8-sig") +
-       b"\xa4\xed\xa0\xc1\x80\xed\xa0\x81\xed\xb0\xa4" + 
-       b"\x1B%/L" + teststr.encode("utf-16be") + b"\xDC\x20\xD8\x20" +
+       b"\xa4\xed\xa0\xc1\x80\xed\xa0\x81\xed\xb0\xa4" + # Deliberately invalid UTF-8
+       b"\x1B%/L" + teststr.encode("utf-16be") + 
+       b"\xDC\x20\xD8\x20" +                             # Deliberately invalid UTF-16BE
        "\x1B%/L\uFFFE".encode("utf-16be") + teststr.encode("utf-16le") + 
        "\x1B%/F".encode("utf-16le") + teststr.encode("utf-32be") + 
        "\x1B%/F\uFFFE".encode("utf-32be") + teststr.encode("utf-32le") + 
@@ -45,6 +47,8 @@ dat = (b"\x1B%G" + teststr.encode("utf-8-sig") +
        b"\x1B&@\x1B$)B\x1B$+D" + teststr.encode("euc-jp", errors="replace") +
        b"\x1B$)A\x1B$+~" + teststr.encode("euc-cn", errors="replace") +
        b"\x1B$)C" + teststr.encode("euc-kr", errors="replace") +
+       b"\x1B-@" + test2.encode("koi8-r") + 
+       b"\x1B-L" + test2.encode("iso-8859-5") + 
        b"\x1BB\x82\x1B%/B\x1B%@HAHA_AS_IF\xA1" # i.e. the last DOCS @ should not switch back.
 )
 
@@ -52,7 +56,7 @@ x = io.BytesIO(dat)
 
 for f in [tokenfeed.tokenise_stream, utf8filter.decode_utf8, utf16filter.decode_utf16,
           utf32filter.decode_utf32, controlsets.decode_control_sets,
-          controlsfixed.decode_fixed_controls, designations.decode_designations,
+          fixedcontrols.decode_fixed_controls, designations.decode_designations,
           invocations.decode_invocations, graphsets.decode_graphical_sets,
           simpleprinter.simple_print, list]:
     x = f(x)

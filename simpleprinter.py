@@ -4,8 +4,10 @@
 
 def simple_print(stream):
     for token in stream:
-        if token[0] in ("CHAR", "RAWBYTE"):
+        if token[0] == "CHAR":
             print(end = chr(token[1]))
+        elif token[0] in ("RAWBYTE",):
+            print(end = "[{:02X}]".format(token[1]))
         elif token[0] == "CTRL" and token[1] == "LF":
             print()
         elif token[0] == "CTRL" and token[1] == "SP":

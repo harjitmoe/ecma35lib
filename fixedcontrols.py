@@ -2,18 +2,7 @@
 # -*- mode: python; coding: utf-8 -*-
 # By HarJIT in 2019.
 
-fixedcontrols = {(0x60,): "DMI", # `
-                 (0x61,): "INT", # a
-                 (0x62,): "EMI", # b
-                 (0x63,): "RIS", # c
-                 (0x64,): "CMD", # d
-                 #
-                 (0x6E,): "LS2", # n
-                 (0x6F,): "LS3", # o
-                 #
-                 (0x7C,): "LS3R", # |
-                 (0x7D,): "LS2R", # }
-                 (0x7E,): "LS1R"} # ~
+import controldata
 
 def _proc_pu(token):
     assert token[0] == "ESC"
@@ -50,8 +39,8 @@ def decode_fixed_controls(stream):
         else:
             assert 0x40 <= token[3] <= 0x7E
             seq = ((token[1],) if token[1] is not None else ()) + token[2] + (token[3],)
-            if seq in fixedcontrols:
-                yield ("CTRL", fixedcontrols[seq], "FIXESC")
+            if seq in controldata.fixed_controls:
+                yield ("CTRL", controldata.fixed_controls[seq], "FIXESC")
             else:
                 yield ("ERROR", "UNSUPPESC", seq)
 
