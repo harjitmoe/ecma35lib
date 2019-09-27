@@ -88,7 +88,7 @@ c0sets = {"001": ("NUL", # Null
                   "ECD", # End of Instruction
                   "SCD", # Start of Instruction
                   "QL", # Quad Left
-                  "UR", # Upper Rail (i.e. emphasised, or the original TTY ribbon sense of SO)
+                  "UR", # Upper Rail (i.e. emphasised, or the older TTY-ribbon sense of SO)
                   "LR", # Lower Rail
                   "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
                   "KW", # Kill Word (sense not massively different from CAN, but more specific).
@@ -105,7 +105,7 @@ c0sets = {"001": ("NUL", # Null
                   "FT2", # Font 2 (italic)
                   "FT3", # Font 3 (bold)
                   "DC4", "NAK", "SYN", "ETB", 
-                  # Similarly calling it "Super Shift (SS)"
+                  # Similarly calling the single-shift "Super Shift (SS)"
                   "KW", "EM", "SUB", "ESC", "SS2", "QC", "QR", "JY"),
           # Closer to ASCII, but with SS2 over FS, this time calling it that. Document seems to be 
           # a Q&D scissors-and-photocopier edit of 001. Apparently submitted by SC2/WG1.
@@ -145,7 +145,8 @@ c0sets = {"001": ("NUL", # Null
                   "CAN", "SS2", "SUB", "ESC", "FS", "GS", "RS", "US"),
           "nil": (None,)*16} 
 
-c1sets = {"077": (None, # Vacant
+c1sets = {# FUTURE NOTE: Our code assumes OSC is the ANSI OSC, NOT the unrelated DIN OSC.
+          "077": (None, # Vacant
                   None, # Vacant
                   "BPH", # Break Permitted Here (basically ZWSP)
                   "NBH", # No Break Here (basically WJ)
@@ -180,6 +181,11 @@ c1sets = {"077": (None, # Vacant
           # Registered due to being the minimal C1 set for ECMA-43 levels 2 and 3, but is also
           # the _de facto_ C1 set of EUC-JP in terms of what decoders see as valid:
           "105": (None,)*14 + ("SS2", "SS3") + (None,)*16,
+          # Small subset, but includes CSI, for CCITT Rec. T.61 Teletex (i.e. accompanies 106 C0):
+          "107": (None, None, None, None, None, None, None, None, 
+                  None, None, None, "PLD", "PLU", None, None, None,
+                  None, None, None, None, None, None, None, None, 
+                  None, None, None, "CSI", None, None, None, None),
           # The C1 of the infamous RFC 1345 (IR-111 *cough*), whence Unicode's "figment" aliases:
           "RFC1345": ("PAD", # Padding Character
                   "HOP", # High Octet Preset
