@@ -44,7 +44,8 @@ dat = (b"\x1B%G\x1B!F" + teststr.encode("utf-8-sig") + "\x1CJ염盐塩鹽\x1CK".
        b"\x1B$)C" + teststr.encode("euc-kr", errors="replace") +
        b"\x1B-@" + test2.encode("koi8-r") + 
        b"\x1B-L" + test2.encode("iso-8859-5") + 
-       b"\x1BB\x82\x1B%/B\x1B%@HAHA_AS_IF\xA1" # i.e. the last DOCS @ should not switch back.
+       b"\x1BB\x82\x1B[?25h" +
+       b"\x1B%/B\x1B%@HAHA_AS_IF\xA1" # i.e. the last DOCS @ should not switch back.
 )
 
 x = io.BytesIO(dat)

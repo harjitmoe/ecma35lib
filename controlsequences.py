@@ -58,8 +58,18 @@ def decode_control_strings(stream, *, osc_bel_term=True):
             elif token[0] == "GL" and (bytevalue >= 0x40):
                 active.append(token)
                 idbytes.append(bytevalue)
-                if tuple(idbytes) in controldata.csiseq:
-                    yield ("CSISEQ", controldata.csiseq[tuple(idbytes)], tuple(parbytes), active[0][3])
+                puscbytes = [] # Corporate (or private) use subcommand
+                while parbytes and parbytes[0] in tuple(b"<=>?"):
+                    puscbytes.append(parbytes.pop(0))
+                # Note: puscbytes are appended, not prepended, to idbytes in controldata.
+                # Some are mnemoniced separately, others should just get the puscbytes in
+                # their parbytes and go to the same handler.
+                if tuple(idbytes) + tuple(puscbytes) in controldata.csiseq:
+                    yield ("CSISEQ", controldata.csiseq[tuple(idbytes) + tuple(puscbytes)], 
+                                     tuple(parbytes), active[0][3])
+                elif tuple(idbytes) in controldata.csiseq:
+                    yield ("CSISEQ", controldata.csiseq[tuple(idbytes)], 
+                                     tuple(puscbytes) + tuple(parbytes), active[0][3])
                 else:
                     yield ("CTRLSTRING", active[0][1], tuple(active))
                 del active[:]

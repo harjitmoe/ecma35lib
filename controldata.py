@@ -85,7 +85,9 @@ csiseq = {tuple(b"@"): "ICH", # Insert Character
           tuple(b"H"): "CUP", # Cursor Position
           tuple(b"I"): "CHT", # Cursor Forward [Horizontal] Tabulation
           tuple(b"J"): "ED", # Erase in Page [Display]
+          tuple(b"J?"): "DECSED", # DEC Selective Erase in Display
           tuple(b"K"): "EL", # Erase in Line
+          tuple(b"K?"): "DECSEL", # DEC Selective Erase in Line
           tuple(b"L"): "IL", # Insert Line
           tuple(b"M"): "DL", # Delete Line
           tuple(b"N"): "EF", # Erase in Field
@@ -94,7 +96,10 @@ csiseq = {tuple(b"@"): "ICH", # Insert Character
           tuple(b"Q"): "SEE", # Select Editing Extent
           tuple(b"R"): "CPR", # Active [Cursor] Position Report
           tuple(b"S"): "SU", # Scroll Up
+          tuple(b"S?"): "XTCGRP", # XTerm configure graphics (no standard name/mnemonic?)
           tuple(b"T"): "SD", # Scroll Down
+          # XTerm initiate highlight mouse tracking seems (per its docs) arg-overloaded on SD?
+          tuple(b"T>"): "XTRSTM", # XTerm reset title mode (no standard name/mnemonic?)
           tuple(b"U"): "NP", # Next Page
           tuple(b"V"): "PP", # Previous Page
           tuple(b"W"): "CTC", # Cursor Tabulation Control
@@ -104,6 +109,8 @@ csiseq = {tuple(b"@"): "ICH", # Insert Character
           tuple(b"["): "SRS", # Start Reversed String
           tuple(b"\\"): "PTX", # Parallel Texts
           tuple(b"]"): "SDS", # Start Directed String
+          # XTerm apparantly treats SIMD as an alternative SD syntax due to errors in the 1991
+          # printing of ECMA-48?
           tuple(b"^"): "SIMD", # Select Implicit Movement Direction
           tuple(b"`"): "HPA", # Character [Horizontal] Position Absolute
           tuple(b"a"): "HPR", # Character [Horizontal] Position Forward [Relative]
@@ -114,15 +121,19 @@ csiseq = {tuple(b"@"): "ICH", # Insert Character
           tuple(b"f"): "HVP", # Horizontal and Vertical Position
           tuple(b"g"): "TBC", # Tabulation Clear
           tuple(b"h"): "SM", # Set Mode
+          tuple(b"h?"): "DECSET", # DEC Private Mode Set
           tuple(b"i"): "MC", # Media Copy
           tuple(b"j"): "HPB", # Character [Horizontal] Position Backward
           tuple(b"k"): "VPB", # Line [Vertical] Position Backward
           tuple(b"l"): "RM", # Reset Mode
+          tuple(b"l?"): "DECRST", # DEC Private Mode Reset
           tuple(b"m"): "SGR", # Select Graphic Rendition
+          tuple(b"m>"): "XTSMR", # XTerm set modifier resource (no standard name/mnemonic?)
           tuple(b"n"): "DSR", # Device Status Report
+          tuple(b"n>"): "XTUMR", # XTerm unset modifier resource (no standard name/mnemonic?)
           tuple(b"o"): "DAQ", # Define Area Qualification
-          tuple(b"\x20@"): "SL", # Scroll Left
-          tuple(b"\x20A"): "SR", # Scroll Right
+          tuple(b"\x20@"): "SL", # Scroll [Shift] Left
+          tuple(b"\x20A"): "SR", # Scroll [Shift] Right
           tuple(b"\x20B"): "GSM", # Graphic Size Modification
           tuple(b"\x20C"): "GSS", # Graphic Size Selection
           tuple(b"\x20E"): "TSS", # Thin Space Specification
@@ -164,8 +175,10 @@ csiseq = {tuple(b"@"): "ICH", # Insert Character
           tuple(b"\x20j"): "SPL", # Set Page Limit
           tuple(b"\x20k"): "SCP", # Select Character Path
           #
+          # Generally recognised corporate-use CSIs
+          tuple(b"p>"): "XTSPM", # XTerm set pointer mode (no standard name/mnemonic?)
           tuple(b"q"): "DECLL", # DEC Load LEDs
-          tuple(b"s"): "SCOSC", # SCO Save Cursor Position (collisive with DECSLRM
+          tuple(b"s"): "SCOSC", # SCO Save Cursor Position (collisive with DECSLRM)
           tuple(b"u"): "SCORC", # SCO Restore Cursor Position
           tuple(b"x"): "DECREQTPARM", # DEC Request Terminal Parameters
           tuple(b"\x20q"): "DECSCUSR", # DEC Set Cursor Style
@@ -196,8 +209,7 @@ csiseq = {tuple(b"@"): "ICH", # Insert Character
           tuple(b"'~"): "DECDC", # DEC Delete Columns
           tuple(b"*x"): "DECSACE", # DEC Select Attribute Change Extent
           tuple(b"*y"): "DECRQCRA", # DEC Request Checksum of Rectangular Area
-          tuple(b"*|"): "DECSNLS", # DEC Select Number of Lines per Screen
-          }
+          tuple(b"*|"): "DECSNLS"} # DEC Select Number of Lines per Screen
 
 # Since the JIS standard behind them is withdrawn, documentation for CEX sequences is pauce.
 # Only thing I've been able to find is the "OKI® Programmer’s Reference Manual" released by
