@@ -33,10 +33,12 @@ def tokenise_stream(stream, *, default_endian=">", regard_bom=1, start_in_utf8=F
         if mode in ("normal", "wsr") and code == 0x1B:
             # 0x1B is guaranteed by ECMA-35 to always be ESC and vice versa.
             r, mode, bytewidth, firstchar = _procesc(stream, mode, bytewidth, structmode)
-            if firstchar:
-                # Don't persist a BOM from a previous Unicode stream.
-                endian = default_endian
             yield r
+            if firstchar:
+                endian = default_endian
+                if bytewidth > 1:
+                    # For the UTF-16/-32 filters to be able to report original format.
+                    yield ("DEFBO", endian)
             continue
         if mode == "wsr" and code == 0xFFFE and ((firstchar and regard_bom) or (regard_bom > 1)):
             # Note that this part will not affect UTF-8 (which will never have a FFFE codeword).

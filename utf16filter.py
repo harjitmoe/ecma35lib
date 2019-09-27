@@ -13,6 +13,7 @@ def decode_utf16(stream, *, pedantic_surrogates=True):
     is_utf16 = False
     utf16_lead = None
     reconsume = None
+    bo = "?"
     while 1:
         token = next(stream) if reconsume is None else reconsume
         reconsume = None
@@ -21,14 +22,20 @@ def decode_utf16(stream, *, pedantic_surrogates=True):
                 if pedantic_surrogates:
                     yield ("ERROR", "UTF16ISOLATE", utf16_lead)
                 else:
-                    yield ("UCS", utf16_lead, "UTF-16", "UCS-2")
+                    yield ("UCS", utf16_lead, "UTF-16", "UCS-2" + bo)
                 utf16_lead = None
             is_utf16 = (token in utf16docs)
             yield token
+            bo = "?"
         elif is_utf16 or (token[0] == "CESU"):
             if not utf16_lead:
                 # Lead word
-                if token[0] not in ("WORD", "CESU"):
+                if token[0] == "DEFBO":
+                    bo = {"<": "le", ">": "be"}[token[1]]
+                elif token[0] == "BOM":
+                    bo = {"<": "le", ">": "be"}[token[1]]
+                    yield token
+                elif token[0] not in ("WORD", "CESU"):
                     yield token # Escape code passing through
                 elif (token[1] < 0xD800) or (token[1] >= 0xDC00):
                     if (0xDC00 <= token[1] < 0xE000) and pedantic_surrogates:
@@ -37,7 +44,7 @@ def decode_utf16(stream, *, pedantic_surrogates=True):
                         # Can only get here with pass_cesu ON and pedantic_surrogates OFF.
                         yield ("UCS", token[1], "UTF-8", "WTF-8") # "Wobbly UTF-8"
                     else:
-                        yield ("UCS", token[1], "UTF-16", "UCS-2") # non-surrogate BMP code
+                        yield ("UCS", token[1], "UTF-16", "UCS-2" + bo) # non-surrogate BMP code
                 else:
                     utf16_lead = token[1]
             else:
@@ -51,7 +58,7 @@ def decode_utf16(stream, *, pedantic_surrogates=True):
                         # Can only get here with pass_cesu ON and pedantic_surrogates OFF.
                         yield ("UCS", utf16_lead, "UTF-8", "WTF-8") # "Wobbly UTF-8"
                     else:
-                        yield ("UCS", utf16_lead, "UTF-16", "UCS-2")
+                        yield ("UCS", utf16_lead, "UTF-16", "UCS-2" + bo)
                     utf16_lead = None
                     reconsume = token
                     continue
@@ -60,7 +67,7 @@ def decode_utf16(stream, *, pedantic_surrogates=True):
                     if token[0] == "CESU":
                         yield ("UCS", ucs, "UTF-8", "CESU-8")
                     else:
-                        yield ("UCS", ucs, "UTF-16", "UTF-16")
+                        yield ("UCS", ucs, "UTF-16", "UTF-16" + bo)
                     utf16_lead = None
                 #
             #
