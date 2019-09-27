@@ -18,7 +18,7 @@ def decode_graphical_sets(stream, *, def_g0="006", def_g1="100", def_g2="nil", d
     pset = -1
     invrange = None
     reconsume = None
-    hwat = None
+    hwat = [None, None, None, None]
     while 1:
         token = next(stream) if reconsume is None else reconsume
         reconsume = None
@@ -49,7 +49,7 @@ def decode_graphical_sets(stream, *, def_g0="006", def_g1="100", def_g2="nil", d
                     if curs[tno][0] != "Unknown":
                         yield ("ERROR", "UNDEFGRAPH", curs[tno][0], tuple(pending), pset, invrange)
                     else:
-                        yield ("CHAR?", hwat, tuple(pending), token[0], invrange)
+                        yield ("CHAR?", hwat[tno], tuple(pending), token[0], invrange)
                 else:
                     yield ("CHAR", ucs, curs[tno][0], tuple(pending), token[0], invrange)
                 pset = -1
@@ -62,16 +62,15 @@ def decode_graphical_sets(stream, *, def_g0="006", def_g1="100", def_g2="nil", d
             invrange = None
             reconsume = token
         elif token[0] == "UCS":
-            yield ("CHAR", token[1], "ucs", (token[1],), token[2], token[3])
+            yield ("CHAR", token[1], "UCS", (token[1],), token[2], token[3])
         elif token[0] == "DESIG":
             sump = graphdata.sumps[token[2]]
             try:
                 curs[token[1]] = sump[token[3]], graphdata.gsets[sump[token[3]]]
             except KeyError:
-                yield ("RDESIG", "G{}".format(token[1]), "Unknown",
-                       token[2], token[3], token[4])
+                yield token
                 curs[token[1]] = "Unknown", graphdata.gsets["nil"]
-                hwat = token[2], token[3]
+                hwat[token[1]] = token[2], token[3]
             else:
                 yield ("RDESIG", "G{}".format(token[1]), sump[token[3]],
                        token[2], token[3], token[4])

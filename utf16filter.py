@@ -25,8 +25,11 @@ def decode_utf16(stream, *, pedantic_surrogates=True):
                     yield ("UCS", utf16_lead, "UTF-16", "UCS-2" + bo)
                 utf16_lead = None
             is_utf16 = (token in utf16docs)
-            yield token
-            bo = "?"
+            if is_utf16:
+                yield ("RDOCS", "UTF-16", token[1], token[2])
+                bo = "?"
+            else:
+                yield token
         elif is_utf16 or (token[0] == "CESU"):
             if not utf16_lead:
                 # Lead word

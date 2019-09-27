@@ -12,8 +12,11 @@ def decode_utf32(stream):
     for token in stream:
         if (token[0] == "DOCS"):
             is_utf32 = (token in utf32docs)
-            yield token
-            bo = "?"
+            if is_utf32:
+                yield ("RDOCS", "UTF-32", token[1], token[2])
+                bo = "?"
+            else:
+                yield token
         elif is_utf32:
             if token[0] == "DEFBO":
                 bo = {"<": "le", ">": "be"}[token[1]]

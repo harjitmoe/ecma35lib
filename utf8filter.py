@@ -22,8 +22,11 @@ def decode_utf8(stream, *, pedantic_overlong=True, overlong_null=False, pass_ces
                 yield ("ERROR", "UTF8TRUNC", tuple(utf8_brot))
                 del utf8_brot[:]
             is_utf8 = (token in utf8docs)
-            firstchar = True
-            yield token
+            if is_utf8:
+                yield ("RDOCS", "UTF-8", token[1], token[2])
+                firstchar = True
+            else:
+                yield token
         elif is_utf8:
             if not utf8_brot:
                 # Lead byte
