@@ -3,22 +3,23 @@
 # By HarJIT in 2019.
 
 # Transmission controls (aliases TC1 thru TC10):
-#    SOH, STX, ETX, EOT, ENQ,
-#    ACK, DLE, NAK, SYN, ETB
+#    SOH (SOM), STX (EOA), ETX, EOT, ENQ (WRU), ACK, DLE, NAK, SYN, ETB
 # These are constrained to appear in their ASCII positions or not at all (whereäs other ASCII 
 # controls may not be moved around in the C0 set, but may be moved to the C1 set). Furthermore, 
 # they are the only transmission control characters permitted to appear in the C0 set.
+# The 1963 version lacked DLE and ETB (see below), and additionally had RU (Are You…).
 
 # Format effectors (aliases FE0 thru FE5):
-#    BS, HT, LF,
-#    VT, FF, CR
+#    BS, HT, LF, VT, FF, CR
 # These (in addition to GL bytes) may be used in DCS, OSC, PM and APC sequences or follow SCI.
 
-# Device controls (aliases DC1 thru DC4):
-#    XON, DC2, XOFF, DC4
+# Device controls (aliases DC0 thru DC4):
+#    DC0, XON, DC2, XOFF, DC4
+# DC0 in the 1963 version was later removed in favour of DLE (TC7).
 
-# Information separators (aliases IS1 thru IS4):
-#    US, RS, GS, FS
+# Information separators (aliases IS8 thru IS1, or S0 thru S7):
+#    S0, S1, S2, S3, FS, GS, RS, US
+# The first four were in the 1963 version but later removed (see below).
 
 format_effectors = ["BS", "HT", "LF", "VT", "FF", "CR"]
 
@@ -35,15 +36,57 @@ fixed_controls = {(0x60,): "DMI", # Disable Manual Input, `
                   (0x7D,): "LS2R", # Locking Shift Two Right, }
                   (0x7E,): "LS1R"} # Locking Shift One Right, ~
 
-c0sets = {"001": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
-                  "BS", "HT", "LF", "VT", "FF", "CR", "SO", "SI",
-                  "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
-                  "CAN", "EM", "SUB", "ESC", "FS", "GS", "RS", "US"),
+c0sets = {"001": ("NUL", # Null
+                  "SOH", # Start of Header, Start of Message (SOM), Transmission Control One (TC1)
+                  "STX", # Start of Text, End of Address (EOA), Transmission Control Two (TC2)
+                  "ETX", # End of Text, Transmission Control Three (TC3)
+                  "EOT", # End of Transmission, Transmission Control Four (TC4)
+                  "ENQ", # Enquiry, Who Are You (WRU), Transmission Control Five (TC5)
+                  # RU (Are You…) was included in the 1963 ASCII over where ACK is now placed.
+                  # ACK was at 0x7C, outside the current control character range.
+                  "ACK", # Acknowledgement, Transmission Control Six (TC6)
+                  "BEL", # Bell, Alert
+                  "BS", # Backspace, Format Effector Zero (FE0)
+                  "HT", # Character [Horizontal] Tabulation, Tab, Format Effector One (FE1)
+                  "LF", # Line Feed, Format Effector Two (FE2)
+                  "VT", # Line [Vertical] Tabulation (VTAB), Format Effector Three (FE3)
+                  "FF", # Form Feed, Format Effector Four (FE4)
+                  "CR", # Carriage Return, Format Effector Five (FE5)
+                  # ECMA-35 and ECMA-48 insist that the exact same control codes be called
+                  # SO and SI in 7-bit environments, and LS1 and LS0 in 8-bit environments.
+                  # To the point of wording things as if they were different pairs of controls,
+                  # one used in 7-bit environments and the other in 8-bit environments, despite
+                  # both the representation and the behaviour being identical.
+                  # I'm just using SO and SI as the mnemonics since otherwise is overcomplicated.
+                  "SO", # Shift Out, Locking Shift One (LS1)
+                  "SI", # Shift In, Locking Shift Two (LS0)
+                  # The 1963 ASCII had DC0 instead of TC7 (DLE).
+                  "DLE", # Data Link Escape, Transmission Control Seven (TC7)
+                  # The XON and XOFF mnemonics are conventional.
+                  "XON", # Transmit On, Device Control One (DC1)
+                  "DC2", # Device Control Two
+                  "XOFF", # Transmit Off, Device Control Three (DC3)
+                  "DC4", # Device Control Four
+                  "NAK", # Negative Acknowledgement, Transmission Control Eight (TC8)
+                  "SYN", # Synchronous Idle (SYNC), Transmission Control Nine (TC9)
+                  "ETB", # End of Transmission Block, Transmission Control Ten (TC10)
+                  "CAN", # Cancel
+                  "EM", # End of Medium, Logical End of Media (LEM)
+                  "SUB", # Substitute
+                  "ESC", # Escape
+                  # S0 through S3 were included in the 1963 ASCII over where CAN/EM/SUB/ESC now
+                  # are. ESC was at 0x7E, and EM was where ETB now is. CAN/SUB/ETB were absent.
+                  "FS", # File Separator, Information Separator Four (IS4), Separator Four (S4)
+                  "GS", # Group Separator, Information Separator Three (IS3), Separator Five (S5)
+                  "RS", # Record Separator, Information Separator Two (IS2), Separator Six (S6)
+                  "US"), # Unit Separator, Information Separator One (IS1), Separator Seven (S7)
           # JIS C 6225's C0 set, differs by replacing IS4 (that is to say, FS) with CEX.
           "074": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
                   "BS", "HT", "LF", "VT", "FF", "CR", "SO", "SI",
                   "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
-                  "CAN", "EM", "SUB", "ESC", "CEX", "GS", "RS", "US"),
+                  "CAN", "EM", "SUB", "ESC", 
+                  "CEX", # Control Extension
+                  "GS", "RS", "US"),
           # 104 and nil are de facto the same, since (a) ECMA-35 guarantees that ESC is always
           # available at 0x1B, no matter what's designated, and (b) ESC was already processed by
           # tokenfeed (it has to be, for to be able to parse through DOCS regions), so ESC will
@@ -51,18 +94,50 @@ c0sets = {"001": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL",
           "104": (None,)*27 + ("ESC",) + (None,)*4,
           "nil": (None,)*16} 
 
-c1sets = {"077": (None, None, "BPH", "NBH", "IND", "NEL", "SSA", "ESA", 
-                  "HTS", "HTJ", "VTS", "PLD", "PLU", "RI", "SS2", "SS3",
-                  "DCS", "PU1", "PU2", "STS", "CCH", "MW", "SPA", "EPA", 
-                  "SOS", None, "SCI", "CSI", "ST", "OSC", "PM", "APC"),
+c1sets = {"077": (None, # Vacant
+                  None, # Vacant
+                  "BPH", # Break Permitted Here (basically ZWSP)
+                  "NBH", # No Break Here (basically WJ)
+                  "IND", # Index (meaning a pure line feed)
+                  "NEL", # New Line (used mainly in converted EBCDIC data)
+                  "SSA", # Start of Selected Area
+                  "ESA", # End of Selected Area
+                  "HTS", # Character [Horizontal] Tabulation Set
+                  "HTJ", # Character [Horizontal] Tabulation with Justification
+                  "VTS", # Line [Vertical] Tabulation Set
+                  "PLD", # Partial Line Down
+                  "PLU", # Partial Line Up
+                  "RI", # Reverse Index, Reverse Line Feed
+                  "SS2", # Single Shift Two
+                  "SS3", # Single Shift Three
+                  "DCS", # Device Control String
+                  "PU1", # Private Use One
+                  "PU2", # Private Use Two
+                  "STS", # Set Transmit State
+                  "CCH", # Cancel Character (meaning a destructive backspace)
+                  "MW", # Message Waiting
+                  "SPA", # Start of Protected Area
+                  "EPA", # End of Protected Area
+                  "SOS", # Start of String
+                  None, # Vacant
+                  "SCI", # Single Character Introducer
+                  "CSI", # Control Sequence Introducer
+                  "ST", # String Terminator
+                  "OSC", # Operating System Command
+                  "PM", # Privacy Message
+                  "APC"), # Application Program Command
           # Registered due to being the minimal C1 set for ECMA-43 levels 2 and 3, but is also
           # the _de facto_ C1 set of EUC-JP in terms of what decoders see as valid:
           "105": (None,)*14 + ("SS2", "SS3") + (None,)*16,
           # The C1 of the infamous RFC 1345 (IR-111 *cough*), whence Unicode's "figment" aliases:
-          "rfc": ("PAD", "HOP", "BPH", "NBH", "IND", "NEL", "SSA", "ESA", 
+          "RFC1345": ("PAD", # Padding Character
+                  "HOP", # High Octet Preset
+                  "BPH", "NBH", "IND", "NEL", "SSA", "ESA", 
                   "HTS", "HTJ", "VTS", "PLD", "PLU", "RI", "SS2", "SS3",
                   "DCS", "PU1", "PU2", "STS", "CCH", "MW", "SPA", "EPA", 
-                  "SOS", "SGCI", "SCI", "CSI", "ST", "OSC", "PM", "APC"),
+                  "SOS", 
+                  "SGCI", # Single Graphical Character Introducer
+                  "SCI", "CSI", "ST", "OSC", "PM", "APC"),
           "nil": (None,)*16}
 
 c0bytes = {tuple(b"@"): "001",
