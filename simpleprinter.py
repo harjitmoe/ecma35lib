@@ -4,7 +4,7 @@
 
 def simple_print(stream):
     for token in stream:
-        if token[0] == "CHAR":
+        if token[0] == "CHAR" and token[1]:
             print(end = chr(token[1]))
         elif token[0] in ("RAWBYTE",):
             print(end = "[{:02X}]".format(token[1]))
