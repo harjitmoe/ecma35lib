@@ -84,7 +84,8 @@ c0sets = {# The ECMA-6 controls, i.e. originating from 1967 edition ASCII:
           # Scandinavian newspaper (NATS) controls. Particular perculiarities include commandeering
           # FS as a single-shift and GS/RS/US as EOLs which centre/right-align/justify the
           # terminated line, and changing the mnemonics of HT to be vague and CAN to be specific.
-          # I presume the "SS" is supposed to be SS2 (assuming 036 to be related somewhat), and 
+          # VT and FF demarcate something but I'm not sure exactly how this is supposed to work.
+          # I presume the single-shift is supposed to be SS2 (assuming 036 to be related), and 
           # for sure my decode_invocations isn't gonna respond to the "SS" mnemonic.
           "007": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL",
                   "BS",
@@ -98,7 +99,7 @@ c0sets = {# The ECMA-6 controls, i.e. originating from 1967 edition ASCII:
                   "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
                   "KW", # Kill Word (sense not massively different from CAN, but more specific).
                   "EM", "SUB", "ESC", # Escape
-                  "SS2", # Calls it "Super Shift (SS)", but means a single shift.
+                  "SS2", # Calls it "Super Shift (SS)", but descibes single-shift behaviour.
                   "QC", # Quad Centre
                   "QR", # Quad Right
                   "JY"), # Justify
@@ -128,7 +129,7 @@ c0sets = {# The ECMA-6 controls, i.e. originating from 1967 edition ASCII:
                   "BS", "HT", "LF", "VT", "FF", "CR", "SO", "SI",
                   "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
                   "CAN", "EM", "SUB", "ESC", 
-                  "CEX", # Control Extension
+                  "CEX", # Control Extension (see definitions (that I can find) below)
                   "GS", "RS", "US"),
           # 104 and nil are de facto the same, since (a) ECMA-35 guarantees that ESC is always
           # available at 0x1B, no matter what's designated, and (b) ESC was already processed by
@@ -182,7 +183,7 @@ c1sets = {# NOTE: decode_control_strings assumes OSC is the ANSI OSC, NOT the un
                   "SOS", # Start of String
                   None, # Vacant
                   "SCI", # Single Character Introducer
-                  "CSI", # Control Sequence Introducer
+                  "CSI", # Control Sequence Introducer (see definitions below)
                   "ST", # String Terminator
                   "OSC", # Operating System Command
                   "PM", # Privacy Message
@@ -207,12 +208,29 @@ c1sets = {# NOTE: decode_control_strings assumes OSC is the ANSI OSC, NOT the un
           "nil": (None,)*16}
 
 c0bytes = {tuple(b"@"): "001",
+           tuple(b"A"): "007",
+           tuple(b"B"): "048",
+           tuple(b"C"): "026",
+           tuple(b"D"): "036",
+           tuple(b"E"): "105",
            tuple(b"F"): "074",
            tuple(b"G"): "104",
+           tuple(b"H"): "130",
+           tuple(b"I"): "132",
+           tuple(b"J"): "134",
+           tuple(b"K"): "135",
+           tuple(b"L"): "140",
            tuple(b"~"): "nil"}
 
-c1bytes = {tuple(b"C"): "077",
+c1bytes = {tuple(b"@"): "056",
+           tuple(b"A"): "073",
+           tuple(b"B"): "124", # Older version: 067
+           tuple(b"C"): "077",
+           tuple(b"D"): "133",
+           tuple(b"E"): "040",
+           tuple(b"F"): "136",
            tuple(b"G"): "105",
+           tuple(b"H"): "107",
            tuple(b"~"): "nil"}
 
 csiseq = {tuple(b"@"): "ICH", # Insert Character
