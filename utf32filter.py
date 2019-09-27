@@ -18,7 +18,7 @@ def decode_utf32(stream):
             elif token[1] > 0x10FFFF:
                 yield ("ERROR", "UTF32BEYOND", ucs)
             else:
-                yield ("UCS", token[1])
+                yield ("UCS", token[1], "UTF-32", "UCS-4")
         else: # i.e. isn't a DOCS, nor a UTF-32 part of the stream
             yield token
         #

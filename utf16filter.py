@@ -21,7 +21,7 @@ def decode_utf16(stream, *, pedantic_surrogates=True):
                 if pedantic_surrogates:
                     yield ("ERROR", "UTF16ISOLATE", utf16_lead)
                 else:
-                    yield ("UCS", utf16_lead)
+                    yield ("UCS", utf16_lead, "UTF-16", "UCS-2")
                 utf16_lead = None
             is_utf16 = (token in utf16docs)
             yield token
@@ -33,8 +33,11 @@ def decode_utf16(stream, *, pedantic_surrogates=True):
                 elif (token[1] < 0xD800) or (token[1] >= 0xDC00):
                     if (0xDC00 <= token[1] < 0xE000) and pedantic_surrogates:
                         yield ("ERROR", "UTF16ISOLATE", token[1]) # isolated trailing surrogate
+                    elif token[0] == "CESU":
+                        # Can only get here with pass_cesu ON and pedantic_surrogates OFF.
+                        yield ("UCS", token[1], "UTF-8", "WTF-8") # "Wobbly UTF-8"
                     else:
-                        yield ("UCS", token[1]) # non-surrogate BMP code
+                        yield ("UCS", token[1], "UTF-16", "UCS-2") # non-surrogate BMP code
                 else:
                     utf16_lead = token[1]
             else:
@@ -44,14 +47,20 @@ def decode_utf16(stream, *, pedantic_surrogates=True):
                     # i.e. isn't a continuation word
                     if pedantic_surrogates:
                         yield ("ERROR", "UTF16ISOLATE", utf16_lead)
+                    elif token[0] == "CESU":
+                        # Can only get here with pass_cesu ON and pedantic_surrogates OFF.
+                        yield ("UCS", utf16_lead, "UTF-8", "WTF-8") # "Wobbly UTF-8"
                     else:
-                        yield ("UCS", utf16_lead)
+                        yield ("UCS", utf16_lead, "UTF-16", "UCS-2")
                     utf16_lead = None
                     reconsume = token
                     continue
                 else:
                     ucs = (((utf16_lead & 1023) << 10) | (token[1] & 1023)) + 0x10000
-                    yield ("UCS", ucs)
+                    if token[0] == "CESU":
+                        yield ("UCS", ucs, "UTF-8", "CESU-8")
+                    else:
+                        yield ("UCS", ucs, "UTF-16", "UTF-16")
                     utf16_lead = None
                 #
             #

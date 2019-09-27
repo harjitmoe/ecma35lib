@@ -16,11 +16,17 @@ def decode_graphical_sets(stream, *, def_g0="006", def_g1="100", def_g2="nil", d
             (def_g3, graphdata.gsets[def_g3])]
     pending = []
     pset = -1
-    for token in stream:
+    invrange = None
+    reconsume = None
+    while 1:
+        token = next(stream) if reconsume is None else reconsume
+        reconsume = None
         tno = _tonumber(token[0])
-        if (tno >= 0) and (pset in (-1, tno)):
+        if (tno >= 0) and (pset in (-1, tno)) and (invrange in (token[2], None)):
             if pset == -1:
                 pset = tno
+                invrange = token[2]
+            # NOT else (falls through from first "then" clause)
             size = curs[tno][1][1]
             pending.append(token[1])
             assert len(pending) <= size
@@ -39,17 +45,20 @@ def decode_graphical_sets(stream, *, def_g0="006", def_g1="100", def_g2="nil", d
                         pointer += byt
                 ucs = curs[tno][1][2][pointer]
                 if ucs is None:
-                    yield ("ERROR", "UNDEFGRAPH", tuple(pending), curs[tno][0], token)
+                    yield ("ERROR", "UNDEFGRAPH", curs[tno][0], tuple(pending), pset, invrange)
                 else:
-                    yield ("CHAR", ucs, curs[tno][0], token)
+                    yield ("CHAR", ucs, curs[tno][0], tuple(pending), token[0], invrange)
                 pset = -1
+                invrange = None
                 del pending[:]
         elif pending:
-            yield ("ERROR", "TRUNCMB", tuple(pending))
+            yield ("ERROR", "TRUNCMB", curs[tno][0], tuple(pending), pset, invrange)
             del pending[:]
             pset = -1
+            invrange = None
+            reconsume = token
         elif token[0] == "UCS":
-            yield ("CHAR", token[1], "ucs", token)
+            yield ("CHAR", token[1], "ucs", (token[1],), token[2], token[3])
         elif token[0] == "DESIG":
             sump = graphdata.sumps[token[2]]
             try:

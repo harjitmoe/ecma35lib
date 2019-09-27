@@ -19,7 +19,7 @@ def decode_invocations(stream, *, def_grset=1):
                 if not single_area: # Don't inject in the middle of the code sequence.
                     yield ("SINGLEOVER", token[0], single_token) # For announcement verification.
                     single_area = token[0]
-                yield (workingsets[single_set], token[1])
+                yield (workingsets[single_set], token[1], "S" + token[0])
                 single_need -= 1
                 if not single_need:
                     single_set = -1
@@ -76,17 +76,17 @@ def decode_invocations(stream, *, def_grset=1):
             is_96[token[1]] = (token[2] not in ("94", "94n"))
         elif token[0] == "GL":
             if (not is_96[glset]) and (token[1] == 0):
-                yield ("CTRL", "SP", "GL", token)
+                yield ("CTRL", "SP", "GL", token[1])
             elif (not is_96[glset]) and (token[1] == 95):
-                yield ("CTRL", "DEL", "GL", token)
+                yield ("CTRL", "DEL", "GL", token[1])
             else:
                 yield (workingsets[glset], token[1], "GL")
         elif token[0] == "GR":
             yield (workingsets[grset], token[1], "GR")
         elif token[0] == "UCS" and token[1] == 0x20:
-            yield ("CTRL", "SP", "UCS", token)
+            yield ("CTRL", "SP", "UCS", token[1])
         elif token[0] == "UCS" and token[1] == 0x7F:
-            yield ("CTRL", "DEL", "UCS", token)
+            yield ("CTRL", "DEL", "UCS", token[1])
         else:
             yield token
 

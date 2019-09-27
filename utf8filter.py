@@ -31,7 +31,7 @@ def decode_utf8(stream, *, pedantic_overlong=True, overlong_null=False, pass_ces
                     yield token # Escape code passing through
                     firstchar = False
                 elif token[1] < 0x80:
-                    yield ("UCS", token[1]) # 1-byte code
+                    yield ("UCS", token[1], "UTF-8", "ASCII") # 1-byte code
                     firstchar = False
                 elif (token[1] & 0b11000000) == 0x80:
                     # i.e. is a continuation byte
@@ -84,7 +84,7 @@ def decode_utf8(stream, *, pedantic_overlong=True, overlong_null=False, pass_ces
                         elif ucs > 0x10FFFF:
                             yield ("ERROR", "UTF8BEYOND", ucs)
                         else:
-                            yield ("UCS", ucs)
+                            yield ("UCS", ucs, "UTF-8", "UTF-8")
                         firstchar = False
                         # utf8_brot is now empty, and utf8_seeking will be set by next lead byte
                     #

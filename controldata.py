@@ -115,21 +115,21 @@ csiseq = {tuple(b"@"): "ICH", # Insert Character
           tuple(b"`"): "HPA", # Character [Horizontal] Position Absolute
           tuple(b"a"): "HPR", # Character [Horizontal] Position Forward [Relative]
           tuple(b"b"): "REP", # Repeat
-          tuple(b"c"): "DA", # Device Attributes
+          tuple(b"c"): "DA", # Device Attributes (has DEC extensions also)
           tuple(b"d"): "VPA", # Line [Vertical] Position Absolute
           tuple(b"e"): "VPR", # Line [Vertical] Position Forward [Relative]
           tuple(b"f"): "HVP", # Horizontal and Vertical Position
           tuple(b"g"): "TBC", # Tabulation Clear
           tuple(b"h"): "SM", # Set Mode
           tuple(b"h?"): "DECSET", # DEC Private Mode Set
-          tuple(b"i"): "MC", # Media Copy
+          tuple(b"i"): "MC", # Media Copy (has DEC extensions also)
           tuple(b"j"): "HPB", # Character [Horizontal] Position Backward
           tuple(b"k"): "VPB", # Line [Vertical] Position Backward
           tuple(b"l"): "RM", # Reset Mode
           tuple(b"l?"): "DECRST", # DEC Private Mode Reset
           tuple(b"m"): "SGR", # Select Graphic Rendition
           tuple(b"m>"): "XTSMR", # XTerm set modifier resource (no standard name/mnemonic?)
-          tuple(b"n"): "DSR", # Device Status Report
+          tuple(b"n"): "DSR", # Device Status Report (has DEC extensions also)
           tuple(b"n>"): "XTUMR", # XTerm unset modifier resource (no standard name/mnemonic?)
           tuple(b"o"): "DAQ", # Define Area Qualification
           tuple(b"\x20@"): "SL", # Scroll [Shift] Left

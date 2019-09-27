@@ -103,9 +103,11 @@ def _procesc(stream, mode, bytewidth, structmode):
             return ret2, "wsr", 1, True
         elif (not ret[2][1:]) and (ret[3] in tuple(b"@CEJKL")):
             # UTF-16 (DOCS / L preferred, others deprecated)
+            # Not a WSR sequence due to different word size, but WSR once we know the size.
             return ret2, "wsr", 2, True
         elif (not ret[2][1:]) and (ret[3] in tuple(b"ADF")):
             # UTF-32 (DOCS / F preferred, others deprecated)
+            # Not a WSR sequence due to different word size, but WSR once we know the size.
             return ret2, "wsr", 4, True
         else:
             # Either raw pass-through (DOCS / B), or as-good-as so far as we can know.

@@ -32,6 +32,7 @@ test2 = "\nНаш благодетель знает своё высокое пр
 
 dat = (b"\x1B%G\x1B!F" + teststr.encode("utf-8-sig") + "\x1CJ염盐塩鹽\x1CK".encode("utf-8") +
        b"\xa4\xed\xa0\xc1\x80\xed\xa0\x81\xed\xb0\xa4" + # Deliberately invalid UTF-8
+       b"\x1Bc\x1B%0unrecdata" + # Unrecognised WSR DOCS, should stay as WORD ops in output.
        b"\x1B%/L" + teststr.encode("utf-16be") + 
        b"\xDC\x20\xD8\x20" +                             # Deliberately invalid UTF-16BE
        "\x1B%/L\uFFFE".encode("utf-16be") + teststr.encode("utf-16le") + 

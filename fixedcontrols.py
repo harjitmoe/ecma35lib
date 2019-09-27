@@ -40,7 +40,7 @@ def decode_fixed_controls(stream):
             assert 0x40 <= token[3] <= 0x7E
             seq = ((token[1],) if token[1] is not None else ()) + token[2] + (token[3],)
             if seq in controldata.fixed_controls:
-                yield ("CTRL", controldata.fixed_controls[seq], "FIXESC", token)
+                yield ("CTRL", controldata.fixed_controls[seq], "FIXESC", seq)
             else:
                 yield ("ERROR", "UNSUPPESC", seq)
 
