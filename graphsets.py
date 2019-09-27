@@ -67,7 +67,8 @@ def decode_graphical_sets(stream, *, def_g0="006", def_g1="100", def_g2="nil", d
                 yield ("ERROR", "UNSUPSET", token)
                 curs[token[1]] = "nil", graphdata.gsets["nil"]
             else:
-                yield ("RDESIG", "G{}".format(token[1]), sump[token[3]], token)
+                yield ("RDESIG", "G{}".format(token[1]), sump[token[3]],
+                       token[2], token[3], token[4])
         else:
             yield token
 

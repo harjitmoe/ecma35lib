@@ -17,7 +17,8 @@ def decode_invocations(stream, *, def_grset=1):
             expected = (single_area,) if single_area else ("GL", "GR")
             if token[0] in expected:
                 if not single_area: # Don't inject in the middle of the code sequence.
-                    yield ("SINGLEOVER", token[0], single_token) # For announcement verification.
+                    # For announcement verification.
+                    yield ("SINGLEOVER", token[0], single_token[1], single_token[2], single_token[3])
                     single_area = token[0]
                 yield (workingsets[single_set], token[1], "S" + token[0])
                 single_need -= 1

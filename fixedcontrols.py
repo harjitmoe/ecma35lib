@@ -32,7 +32,8 @@ def decode_fixed_controls(stream):
         elif token[1] not in (None, b"#"[0]):
             yield token
         elif 0x30 <= token[3] < 0x40:
-            yield ("CTRL", _proc_pu(token), "FIXESC", token)
+            seq = ((token[1],) if token[1] is not None else ()) + token[2] + (token[3],)
+            yield ("CTRL", _proc_pu(token), "FIXESC", seq)
         # NOTE: assumes C1 controls already recognised as such by tokenfeed, and as such won't
         # still show up as control escapes. Otherwise, we'd need to test that the ones without the
         # intervening "#" byte aren't in fact C1 controls.
