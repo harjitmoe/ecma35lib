@@ -28,7 +28,7 @@ def tokenise_stream(stream, *, default_endian=">", regard_bom=1, start_in_utf8=F
         code, = struct.unpack(structmode, code)
         if mode == "raw":
             firstchar = False
-            yield ("RAWBYTE", code)
+            yield ("BYTE", code)
             continue
         if mode in ("normal", "wsr") and code == 0x1B:
             # 0x1B is guaranteed by ECMA-35 to always be ESC and vice versa.
