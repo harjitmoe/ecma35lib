@@ -36,7 +36,8 @@ fixed_controls = {(0x60,): "DMI", # Disable Manual Input, `
                   (0x7D,): "LS2R", # Locking Shift Two Right, }
                   (0x7E,): "LS1R"} # Locking Shift One Right, ~
 
-c0sets = {"001": ("NUL", # Null
+c0sets = {# The ECMA-6 controls, i.e. originating from 1967 edition ASCII:
+          "001": ("NUL", # Null
                   "SOH", # Start of Header, Start of Message (SOM), Transmission Control One (TC1)
                   "STX", # Start of Text, End of Address (EOA), Transmission Control Two (TC2)
                   "ETX", # End of Text, Transmission Control Three (TC3)
@@ -80,15 +81,19 @@ c0sets = {"001": ("NUL", # Null
                   "GS", # Group Separator, Information Separator Three (IS3), Separator Five (S5)
                   "RS", # Record Separator, Information Separator Two (IS2), Separator Six (S6)
                   "US"), # Unit Separator, Information Separator One (IS1), Separator Seven (S7)
-          # Scandinavian Newspaper (NATS) controls
+          # Scandinavian newspaper (NATS) controls. Particular perculiarities include commandeering
+          # FS as a single-shift and GS/RS/US as EOLs which centre/right-align/justify the
+          # terminated line, and changing the mnemonics of HT to be vague and CAN to be specific.
+          # I presume the "SS" is supposed to be SS2 (assuming 036 to be related somewhat), and 
+          # for sure my decode_invocations isn't gonna respond to the "SS" mnemonic.
           "007": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL",
                   "BS",
-                  "FO", # Formatting (still basically a tab in normal contexts though)
+                  "FO", # Formatting (still seems to be basically a tab in normal contexts though).
                   "LF",
                   "ECD", # End of Instruction
                   "SCD", # Start of Instruction
                   "QL", # Quad Left
-                  "UR", # Upper Rail (i.e. emphasised, or the older TTY-ribbon sense of SO)
+                  "UR", # Upper Rail (i.e. emphasised, or, the older TTY-ribbon sense of SO).
                   "LR", # Lower Rail
                   "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
                   "KW", # Kill Word (sense not massively different from CAN, but more specific).
@@ -97,7 +102,8 @@ c0sets = {"001": ("NUL", # Null
                   "QC", # Quad Centre
                   "QR", # Quad Right
                   "JY"), # Justify
-          # International Newspaper (IPTC) controls
+          # International newspaper (IPTC) controls. Very similar to the NATS controls, but 
+          # commandeers DC1/DC2/DC3 for (two orthogonal types of) emphasis, instead of SI/SO.
           "026": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL",
                   "BS", "FO", "LF", "ECD", "SCD", "QL", "SO", "SI",
                   "DLE",
@@ -107,14 +113,15 @@ c0sets = {"001": ("NUL", # Null
                   "DC4", "NAK", "SYN", "ETB", 
                   # Similarly calling the single-shift "Super Shift (SS)"
                   "KW", "EM", "SUB", "ESC", "SS2", "QC", "QR", "JY"),
-          # Closer to ASCII, but with SS2 over FS, this time calling it that. Document seems to be 
-          # a Q&D scissors-and-photocopier edit of 001. Apparently submitted by SC2/WG1.
+          # Closer to ASCII, but still with SS2 over FS, this time calling it SS2. Document seems  
+          # to be a Q&D scissors-and-photocopier edit of 001.
+          # Apparently submitted by ISO/TC97/SC2/WG1 (ISO/TC97 = ISO/IEC JTC1).
           "036": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
                   "BS", "HT", "LF", "VT", "FF", "CR", "SO", "SI",
                   "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
                   "CAN", "EM", "SUB", "ESC", "SS2", "GS", "RS", "US"),
           # The International Nuclear Information System (INIS)'s subset of ASCII apparently
-          # also subsets its controls to only GS, RS and the (mandatory) ESC.
+          # also subsets its controls to only GS, RS and (the mandatory) ESC.
           "048": (None,)*27 + ("ESC",) + (None, "GS", "RS", None),
           # JIS C 6225's C0 set, differs by replacing IS4 (that is to say, FS) with CEX.
           "074": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
@@ -125,10 +132,10 @@ c0sets = {"001": ("NUL", # Null
                   "GS", "RS", "US"),
           # 104 and nil are de facto the same, since (a) ECMA-35 guarantees that ESC is always
           # available at 0x1B, no matter what's designated, and (b) ESC was already processed by
-          # tokenfeed (it has to be, for to be able to parse through DOCS regions), so ESC will
-          # not reach us here anyway. Include both here anyway for the sake of academic utility.
+          # tokenfeed (it has to be, for to be able to parse through DOCS regions), so a C0 token
+          # will never contain an ESC. Including both here anyway for the sake of academic utility.
           "104": (None,)*27 + ("ESC",) + (None,)*4,
-          # Small subset of ASCII controls plus SS2 and SS3, for CCITT Rec. T.61 Teletex:
+          # Small subset of ASCII controls plus two single-shifts, for CCITT Rec. T.61 Teletex:
           "106": (None, None, None, None, None, None, None, None, 
                   "BS", None, "LF", None, "FF", "CR", "SO", "SI",
                   None, None, None, None, None, None, None, None, 
@@ -138,14 +145,16 @@ c0sets = {"001": ("NUL", # Null
                   "BS", "HT", "LF", "VT", "FF", "CR", None, None,
                   "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
                   "CAN", "EM", "SUB", "ESC", "FS", "GS", "RS", "US"),
-          # SS2 replacing EM, apparently used in Czechoslovakia:
+          # SS2 replacing EM, was apparently used in Czechoslovakia:
           "140": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
                   "BS", "HT", "LF", "VT", "FF", "CR", "SO", "SI",
                   "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
                   "CAN", "SS2", "SUB", "ESC", "FS", "GS", "RS", "US"),
           "nil": (None,)*16} 
 
-c1sets = {# FUTURE NOTE: Our code assumes OSC is the ANSI OSC, NOT the unrelated DIN OSC.
+c1sets = {# NOTE: decode_control_strings assumes OSC is the ANSI OSC, NOT the unrelated DIN OSC.
+          #
+          # The "ANSI escape" codes (ECMA-48) which occupy the C1 area:
           "077": (None, # Vacant
                   None, # Vacant
                   "BPH", # Break Permitted Here (basically ZWSP)
@@ -366,7 +375,7 @@ cexseq = {b"J"[0]: "SVP", # Select Vertical Printing
           b"t"[0]: "DSVP", # Disable DBCS ASCII [SBCS???] Vertical Printing Mode 
           b"u"[0]: "ESVP"} # Enable SBCS Vertical Printing Mode (i.e. puts them upright?)
 
-# Not supposed to be an exhaustive list per se, nor follow any specific cat:
+# Not supposed to be an exhaustive list _per se_, nor to follow any specific category:
 formats = {0x00AD: 'SHY', 0x061C: 'ALM', 0x180E: 'MVS', 0x200B: 'ZWSP', 0x200C: 'ZWNJ', 
            0x200D: 'ZWJ', 0x200E: 'LRM', 0x200F: 'RLM', 0x2028: 'LSEP', 0x2029: 'PSEP', 
            0x202A: 'LRE', 0x202B: 'RLE', 0x202C: 'PDF', 0x202D: 'LRO', 0x202E: 'RLO', 
