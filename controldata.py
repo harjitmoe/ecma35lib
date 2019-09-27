@@ -80,6 +80,42 @@ c0sets = {"001": ("NUL", # Null
                   "GS", # Group Separator, Information Separator Three (IS3), Separator Five (S5)
                   "RS", # Record Separator, Information Separator Two (IS2), Separator Six (S6)
                   "US"), # Unit Separator, Information Separator One (IS1), Separator Seven (S7)
+          # Scandinavian Newspaper (NATS) controls
+          "007": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL",
+                  "BS",
+                  "FO", # Formatting (still basically a tab in normal contexts though)
+                  "LF",
+                  "ECD", # End of Instruction
+                  "SCD", # Start of Instruction
+                  "QL", # Quad Left
+                  "UR", # Upper Rail (i.e. emphasised, or the original TTY ribbon sense of SO)
+                  "LR", # Lower Rail
+                  "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
+                  "KW", # Kill Word (sense not massively different from CAN, but more specific).
+                  "EM", "SUB", "ESC", # Escape
+                  "SS2", # Calls it "Super Shift (SS)", but means a single shift.
+                  "QC", # Quad Centre
+                  "QR", # Quad Right
+                  "JY"), # Justify
+          # International Newspaper (IPTC) controls
+          "026": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL",
+                  "BS", "FO", "LF", "ECD", "SCD", "QL", "SO", "SI",
+                  "DLE",
+                  "FT1", # Font 1 (normal)
+                  "FT2", # Font 2 (italic)
+                  "FT3", # Font 3 (bold)
+                  "DC4", "NAK", "SYN", "ETB", 
+                  # Similarly calling it "Super Shift (SS)"
+                  "KW", "EM", "SUB", "ESC", "SS2", "QC", "QR", "JY"),
+          # Closer to ASCII, but with SS2 over FS, this time calling it that. Document seems to be 
+          # a Q&D scissors-and-photocopier edit of 001. Apparently submitted by SC2/WG1.
+          "036": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
+                  "BS", "HT", "LF", "VT", "FF", "CR", "SO", "SI",
+                  "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
+                  "CAN", "EM", "SUB", "ESC", "SS2", "GS", "RS", "US"),
+          # The International Nuclear Information System (INIS)'s subset of ASCII apparently
+          # also subsets its controls to only GS, RS and the (mandatory) ESC.
+          "048": (None,)*27 + ("ESC",) + (None, "GS", "RS", None),
           # JIS C 6225's C0 set, differs by replacing IS4 (that is to say, FS) with CEX.
           "074": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
                   "BS", "HT", "LF", "VT", "FF", "CR", "SO", "SI",
@@ -92,6 +128,21 @@ c0sets = {"001": ("NUL", # Null
           # tokenfeed (it has to be, for to be able to parse through DOCS regions), so ESC will
           # not reach us here anyway. Include both here anyway for the sake of academic utility.
           "104": (None,)*27 + ("ESC",) + (None,)*4,
+          # Small subset of ASCII controls plus SS2 and SS3, for CCITT Rec. T.61 Teletex:
+          "106": (None, None, None, None, None, None, None, None, 
+                  "BS", None, "LF", None, "FF", "CR", "SO", "SI",
+                  None, None, None, None, None, None, None, None, 
+                  None, "SS2", "SUB", "ESC", None, "SS3", None, None),
+          # ASCII controls minus the shifts, since apparently some standards require that:
+          "130": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
+                  "BS", "HT", "LF", "VT", "FF", "CR", None, None,
+                  "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
+                  "CAN", "EM", "SUB", "ESC", "FS", "GS", "RS", "US"),
+          # SS2 replacing EM, apparently used in Czechoslovakia:
+          "140": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
+                  "BS", "HT", "LF", "VT", "FF", "CR", "SO", "SI",
+                  "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
+                  "CAN", "SS2", "SUB", "ESC", "FS", "GS", "RS", "US"),
           "nil": (None,)*16} 
 
 c1sets = {"077": (None, # Vacant
@@ -160,9 +211,7 @@ csiseq = {tuple(b"@"): "ICH", # Insert Character
           tuple(b"H"): "CUP", # Cursor Position
           tuple(b"I"): "CHT", # Cursor Forward [Horizontal] Tabulation
           tuple(b"J"): "ED", # Erase in Page [Display]
-          tuple(b"J?"): "DECSED", # DEC Selective Erase in Display
           tuple(b"K"): "EL", # Erase in Line
-          tuple(b"K?"): "DECSEL", # DEC Selective Erase in Line
           tuple(b"L"): "IL", # Insert Line
           tuple(b"M"): "DL", # Delete Line
           tuple(b"N"): "EF", # Erase in Field
@@ -171,10 +220,8 @@ csiseq = {tuple(b"@"): "ICH", # Insert Character
           tuple(b"Q"): "SEE", # Select Editing Extent
           tuple(b"R"): "CPR", # Active [Cursor] Position Report
           tuple(b"S"): "SU", # Scroll Up
-          tuple(b"S?"): "XTCGRP", # XTerm configure graphics (no standard name/mnemonic?)
           tuple(b"T"): "SD", # Scroll Down
           # XTerm initiate highlight mouse tracking seems (per its docs) arg-overloaded on SD?
-          tuple(b"T>"): "XTRSTM", # XTerm reset title mode (no standard name/mnemonic?)
           tuple(b"U"): "NP", # Next Page
           tuple(b"V"): "PP", # Previous Page
           tuple(b"W"): "CTC", # Cursor Tabulation Control
@@ -196,16 +243,12 @@ csiseq = {tuple(b"@"): "ICH", # Insert Character
           tuple(b"f"): "HVP", # Horizontal and Vertical Position
           tuple(b"g"): "TBC", # Tabulation Clear
           tuple(b"h"): "SM", # Set Mode
-          tuple(b"h?"): "DECSET", # DEC Private Mode Set
           tuple(b"i"): "MC", # Media Copy (has DEC extensions also)
           tuple(b"j"): "HPB", # Character [Horizontal] Position Backward
           tuple(b"k"): "VPB", # Line [Vertical] Position Backward
           tuple(b"l"): "RM", # Reset Mode
-          tuple(b"l?"): "DECRST", # DEC Private Mode Reset
           tuple(b"m"): "SGR", # Select Graphic Rendition
-          tuple(b"m>"): "XTSMR", # XTerm set modifier resource (no standard name/mnemonic?)
           tuple(b"n"): "DSR", # Device Status Report (has DEC extensions also)
-          tuple(b"n>"): "XTUMR", # XTerm unset modifier resource (no standard name/mnemonic?)
           tuple(b"o"): "DAQ", # Define Area Qualification
           tuple(b"\x20@"): "SL", # Scroll [Shift] Left
           tuple(b"\x20A"): "SR", # Scroll [Shift] Right
@@ -251,6 +294,14 @@ csiseq = {tuple(b"@"): "ICH", # Insert Character
           tuple(b"\x20k"): "SCP", # Select Character Path
           #
           # Generally recognised corporate-use CSIs
+          tuple(b"J?"): "DECSED", # DEC Selective Erase in Display
+          tuple(b"K?"): "DECSEL", # DEC Selective Erase in Line
+          tuple(b"S?"): "XTCGRP", # XTerm configure graphics (no standard name/mnemonic?)
+          tuple(b"T>"): "XTRSTM", # XTerm reset title mode (no standard name/mnemonic?)
+          tuple(b"h?"): "DECSET", # DEC Private Mode Set
+          tuple(b"l?"): "DECRST", # DEC Private Mode Reset
+          tuple(b"m>"): "XTSMR", # XTerm set modifier resource (no standard name/mnemonic?)
+          tuple(b"n>"): "XTUMR", # XTerm unset modifier resource (no standard name/mnemonic?)
           tuple(b"p>"): "XTSPM", # XTerm set pointer mode (no standard name/mnemonic?)
           tuple(b"q"): "DECLL", # DEC Load LEDs
           tuple(b"s"): "SCOSC", # SCO Save Cursor Position (collisive with DECSLRM)
