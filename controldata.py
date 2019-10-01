@@ -37,7 +37,7 @@ fixed_controls = {(0x60,): "DMI", # Disable Manual Input, `
                   (0x7E,): "LS1R"} # Locking Shift One Right, ~
 
 c0sets = {# The ECMA-6 controls, i.e. originating from 1967 edition ASCII:
-          "001": ("NUL", # Null
+          "ir001": ("NUL", # Null
                   "SOH", # Start of Header, Start of Message (SOM), Transmission Control One (TC1)
                   "STX", # Start of Text, End of Address (EOA), Transmission Control Two (TC2)
                   "ETX", # End of Text, Transmission Control Three (TC3)
@@ -87,7 +87,7 @@ c0sets = {# The ECMA-6 controls, i.e. originating from 1967 edition ASCII:
           # VT and FF demarcate something but I'm not sure exactly how this is supposed to work.
           # I presume the single-shift is supposed to be SS2 (assuming 036 to be related), and 
           # for sure my decode_invocations isn't gonna respond to the "SS" mnemonic.
-          "007": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL",
+          "ir007": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL",
                   "BS",
                   "FO", # Formatting (still seems to be basically a tab in normal contexts though).
                   "LF",
@@ -105,7 +105,7 @@ c0sets = {# The ECMA-6 controls, i.e. originating from 1967 edition ASCII:
                   "JY"), # Justify
           # International newspaper (IPTC) controls. Very similar to the NATS controls, but 
           # commandeers DC1/DC2/DC3 for (two orthogonal types of) emphasis, instead of SI/SO.
-          "026": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL",
+          "ir026": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL",
                   "BS", "FO", "LF", "ECD", "SCD", "QL", "SO", "SI",
                   "DLE",
                   "FT1", # Font 1 (normal)
@@ -117,46 +117,79 @@ c0sets = {# The ECMA-6 controls, i.e. originating from 1967 edition ASCII:
           # Closer to ASCII, but still with SS2 over FS, this time calling it SS2. Document seems  
           # to be a Q&D scissors-and-photocopier edit of 001.
           # Apparently submitted by ISO/TC97/SC2/WG1 (ISO/TC97 = ISO/IEC JTC1).
-          "036": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
+          "ir036": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
                   "BS", "HT", "LF", "VT", "FF", "CR", "SO", "SI",
                   "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
                   "CAN", "EM", "SUB", "ESC", "SS2", "GS", "RS", "US"),
           # The International Nuclear Information System (INIS)'s subset of ASCII apparently
           # also subsets its controls to only GS, RS and (the mandatory) ESC.
-          "048": (None,)*27 + ("ESC",) + (None, "GS", "RS", None),
+          "ir048": (None,)*27 + ("ESC",) + (None, "GS", "RS", None),
           # JIS C 6225's C0 set, differs by replacing IS4 (that is to say, FS) with CEX.
-          "074": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
+          "ir074": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
                   "BS", "HT", "LF", "VT", "FF", "CR", "SO", "SI",
                   "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
                   "CAN", "EM", "SUB", "ESC", 
                   "CEX", # Control Extension (see definitions (that I can find) below)
                   "GS", "RS", "US"),
-          # 104 and nil are de facto the same, since (a) ECMA-35 guarantees that ESC is always
+          # ir104 and nil are de facto the same, since (a) ECMA-35 guarantees that ESC is always
           # available at 0x1B, no matter what's designated, and (b) ESC was already processed by
           # tokenfeed (it has to be, for to be able to parse through DOCS regions), so a C0 token
           # will never contain an ESC. Including both here anyway for the sake of academic utility.
-          "104": (None,)*27 + ("ESC",) + (None,)*4,
+          "ir104": (None,)*27 + ("ESC",) + (None,)*4,
           # Small subset of ASCII controls plus two single-shifts, for CCITT Rec. T.61 Teletex:
-          "106": (None, None, None, None, None, None, None, None, 
+          "ir106": (None, None, None, None, None, None, None, None, 
                   "BS", None, "LF", None, "FF", "CR", "SO", "SI",
                   None, None, None, None, None, None, None, None, 
                   None, "SS2", "SUB", "ESC", None, "SS3", None, None),
           # ASCII controls minus the shifts, since apparently some standards require that:
-          "130": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
+          "ir130": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
                   "BS", "HT", "LF", "VT", "FF", "CR", None, None,
                   "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
                   "CAN", "EM", "SUB", "ESC", "FS", "GS", "RS", "US"),
           # SS2 replacing EM, was apparently used in Czechoslovakia:
-          "140": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
+          "ir140": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
                   "BS", "HT", "LF", "VT", "FF", "CR", "SO", "SI",
                   "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
                   "CAN", "SS2", "SUB", "ESC", "FS", "GS", "RS", "US"),
           "nil": (None,)*16} 
 
-c1sets = {# NOTE: decode_control_strings assumes OSC is the ANSI OSC, NOT the unrelated DIN OSC.
-          #
-          # The "ANSI escape" codes (ECMA-48) which occupy the C1 area:
-          "077": (None, # Vacant
+c1sets = {# German bibliographic controls used in DIN 31626
+          "ir040": (None, None, None, None, None, None, None,
+                  "CUS", # Close-up for Sorting
+                  "NSB", # Non-sorting Characters Begin
+                  "NSE", # Non-sorting Characters End
+                  "FIL", # Filler Character
+                  "TCI", # Tag in Context Identifier
+                  "ICI", # Identification in Context Identifier
+                  # NOTE: decode_control_strings assumes "OSC" is the ANSI OSC, not the DIN OSC:
+                  "DINOSC", # Optional Syllabi[fi]cation Control (a "print control", basically SHY)
+                  "SS2", "SS3",
+                  None,
+                  "EAB", # Embedded Annotation Beginning
+                  "EAE", # Embedded Annotation End
+                  "ISB", # Item Specification Beginning
+                  "ISE", # Item Specification End
+                  None, None, None,
+                  None,
+                  "INC", # Indicator for Nonstandard Character
+                  None, None,
+                  "KWB", # Keyword Beginning
+                  "KWE", # Keyword End
+                  "PSB", # Permutation String Beginning
+                  "PSE"), # Permutation String End
+          # Bibliographic controls from pre-1985 ISO 6630; closely related to the DIN controls but 
+          # omits several, and adds four more controls in space unused by the DIN controls.
+          # As such doesn't collide with DIN at any point, unlike its IRR replacement ir124.
+          "ir067": (None, None, None, None, None, None, None, "CUS",
+                  "NSB", "NSE", None, None, None, None, None, None,
+                  None, "EAB", "EAE", None, None,
+                  "SIB", # Sorting Interpolation Beginning
+                  "SIE", # Sorting Interpolation End
+                  "SSB", # Secondary Sorting Value Beginning
+                  "SSE", # Secondary Sorting Value End
+                  None, None, None, "KWB", "KWE", "PSB", "PSE"),
+          # Those of the "ANSI escape" codes (ECMA-48) which occupy the C1 area:
+          "ir077": (None, # Vacant
                   None, # Vacant
                   "BPH", # Break Permitted Here (basically ZWSP)
                   "NBH", # No Break Here (basically WJ)
@@ -190,12 +223,23 @@ c1sets = {# NOTE: decode_control_strings assumes OSC is the ANSI OSC, NOT the un
                   "APC"), # Application Program Command
           # Registered due to being the minimal C1 set for ECMA-43 levels 2 and 3, but is also
           # the _de facto_ C1 set of EUC-JP in terms of what decoders see as valid:
-          "105": (None,)*14 + ("SS2", "SS3") + (None,)*16,
+          "ir105": (None,)*14 + ("SS2", "SS3") + (None,)*16,
           # Small subset, but includes CSI, for CCITT Rec. T.61 Teletex (i.e. accompanies 106 C0):
-          "107": (None, None, None, None, None, None, None, None, 
+          "ir107": (None, None, None, None, None, None, None, None, 
                   None, None, None, "PLD", "PLU", None, None, None,
                   None, None, None, None, None, None, None, None, 
                   None, None, None, "CSI", None, None, None, None),
+          # Bibliographic controls from ISO 6630:1985; adds PLD and PLU in their ANSI locations
+          # (corresponding to TCI and ICI in DIN, and as such breaking the earlier ir067 property 
+          # of not colliding with DIN on any control code).
+          "ir124": (None, None, None, None, None, None, None, "CUS",
+                  "NSB", "NSE", None, "PLD", "PLU", None, None, None,
+                  None, "EAB", "EAE", None, None,
+                  "SIB", # Sorting Interpolation Beginning
+                  "SIE", # Sorting Interpolation End
+                  "SSB", # Secondary Sorting Value Beginning
+                  "SSE", # Secondary Sorting Value End
+                  None, None, None, "KWB", "KWE", "PSB", "PSE"),
           # The C1 of the infamous RFC 1345 (IR-111 *cough*), whence Unicode's "figment" aliases:
           "RFC1345": ("PAD", # Padding Character
                   "HOP", # High Octet Preset
@@ -207,30 +251,30 @@ c1sets = {# NOTE: decode_control_strings assumes OSC is the ANSI OSC, NOT the un
                   "SCI", "CSI", "ST", "OSC", "PM", "APC"),
           "nil": (None,)*16}
 
-c0bytes = {tuple(b"@"): "001",
-           tuple(b"A"): "007",
-           tuple(b"B"): "048",
-           tuple(b"C"): "026",
-           tuple(b"D"): "036",
-           tuple(b"E"): "105",
-           tuple(b"F"): "074",
-           tuple(b"G"): "104",
-           tuple(b"H"): "130",
-           tuple(b"I"): "132",
-           tuple(b"J"): "134",
-           tuple(b"K"): "135",
-           tuple(b"L"): "140",
+c0bytes = {tuple(b"@"): "ir001",
+           tuple(b"A"): "ir007",
+           tuple(b"B"): "ir048",
+           tuple(b"C"): "ir026",
+           tuple(b"D"): "ir036",
+           tuple(b"E"): "ir105",
+           tuple(b"F"): "ir074",
+           tuple(b"G"): "ir104",
+           tuple(b"H"): "ir130",
+           tuple(b"I"): "ir132",
+           tuple(b"J"): "ir134",
+           tuple(b"K"): "ir135",
+           tuple(b"L"): "ir140",
            tuple(b"~"): "nil"}
 
-c1bytes = {tuple(b"@"): "056",
-           tuple(b"A"): "073",
-           tuple(b"B"): "124", # Older version: 067
-           tuple(b"C"): "077",
-           tuple(b"D"): "133",
-           tuple(b"E"): "040",
-           tuple(b"F"): "136",
-           tuple(b"G"): "105",
-           tuple(b"H"): "107",
+c1bytes = {tuple(b"@"): "ir056",
+           tuple(b"A"): "ir073",
+           tuple(b"B"): "ir124", # Older version: ir067
+           tuple(b"C"): "ir077",
+           tuple(b"D"): "ir133",
+           tuple(b"E"): "ir040",
+           tuple(b"F"): "ir136",
+           tuple(b"G"): "ir105",
+           tuple(b"H"): "ir107",
            tuple(b"~"): "nil"}
 
 csiseq = {tuple(b"@"): "ICH", # Insert Character

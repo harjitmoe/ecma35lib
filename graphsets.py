@@ -9,7 +9,7 @@ def _tonumber(s):
         return -1
     return ord(s[1]) - ord("0")
 
-def decode_graphical_sets(stream, *, def_g0="006", def_g1="100", def_g2="nil", def_g3="nil"):
+def decode_graphical_sets(stream, *, def_g0="ir006", def_g1="ir100", def_g2="nil", def_g3="nil"):
     curs = [(def_g0, graphdata.gsets[def_g0]),
             (def_g1, graphdata.gsets[def_g1]),
             (def_g2, graphdata.gsets[def_g2]),

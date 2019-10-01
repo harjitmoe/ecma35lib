@@ -4,7 +4,7 @@
 
 import controldata
 
-def decode_control_sets(stream, *, def_c0="001", def_c1="RFC1345"):
+def decode_control_sets(stream, *, def_c0="ir001", def_c1="RFC1345"):
     cur_c0 = def_c0, controldata.c0sets[def_c0]
     cur_c1 = def_c1, controldata.c1sets[def_c1]
     hwotc0 = hwotc1 = None
