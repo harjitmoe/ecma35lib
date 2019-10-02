@@ -163,7 +163,8 @@ c1sets = {# German bibliographic controls used in DIN 31626
                   "ICI", # Identification in Context Identifier
                   # NOTE: decode_control_strings assumes "OSC" is the ANSI OSC, not the DIN OSC:
                   "DINOSC", # Optional Syllabi[fi]cation Control (a "print control", basically SHY)
-                  "SS2", "SS3",
+                  "SS2", # Single Shift Two
+                  "SS3", # Single Shift Three
                   None,
                   "EAB", # Embedded Annotation Beginning
                   "EAE", # Embedded Annotation End
@@ -203,8 +204,7 @@ c1sets = {# German bibliographic controls used in DIN 31626
                   "PLD", # Partial Line Down
                   "PLU", # Partial Line Up
                   "RI", # Reverse Index, Reverse Line Feed
-                  "SS2", # Single Shift Two
-                  "SS3", # Single Shift Three
+                  "SS2", "SS3", 
                   "DCS", # Device Control String
                   "PU1", # Private Use One
                   "PU2", # Private Use Two
