@@ -25,7 +25,7 @@ def _proc_pu(token):
     index |= (token[3] & 0x0F)
     return "PU{:d}".format(start + index)
 
-def decode_fixed_controls(stream):
+def decode_fixed_controls(stream, state):
     for token in stream:
         if token[0] != "ESC":
             yield token

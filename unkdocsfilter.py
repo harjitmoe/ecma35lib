@@ -2,7 +2,7 @@
 # -*- mode: python; coding: utf-8 -*-
 # By HarJIT in 2019.
 
-def decode_remaining_docs(stream):
+def decode_remaining_docs(stream, state):
     lingering = None
     for token in stream:
         if (token[0] == "DOCS"):

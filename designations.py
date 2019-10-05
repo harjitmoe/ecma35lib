@@ -2,7 +2,7 @@
 # -*- mode: python; coding: utf-8 -*-
 # By HarJIT in 2019.
 
-def decode_designations(stream):
+def decode_designations(stream, state):
     for token in stream:
         if token[0] == "ESC" and token[1] in tuple(b"()*+-./$"):
             if token[1] in tuple(b"()*+"):

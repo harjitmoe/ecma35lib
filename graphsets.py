@@ -9,16 +9,12 @@ def _tonumber(s):
         return -1
     return ord(s[1]) - ord("0")
 
-def decode_graphical_sets(stream, *, def_g0="ir006", def_g1="ir100", def_g2="nil", def_g3="nil"):
-    curs = [(def_g0, graphdata.gsets[def_g0]),
-            (def_g1, graphdata.gsets[def_g1]),
-            (def_g2, graphdata.gsets[def_g2]),
-            (def_g3, graphdata.gsets[def_g3])]
+def decode_graphical_sets(stream, state):
     pending = []
     pset = -1
     invrange = None
     reconsume = None
-    hwat = [None, None, None, None]
+    state.ghwots = [None, None, None, None]
     while 1:
         token = next(stream) if reconsume is None else reconsume
         reconsume = None
@@ -28,35 +24,36 @@ def decode_graphical_sets(stream, *, def_g0="ir006", def_g1="ir100", def_g2="nil
                 pset = tno
                 invrange = token[2]
             # NOT else (falls through from first "then" clause)
-            size = curs[tno][1][1]
+            size = graphdata.gsets[state.cur_gsets[tno]][1]
             pending.append(token[1])
             assert len(pending) <= size
             if len(pending) == size:
                 pointer = 0
-                if curs[tno][1][0] == 94:
+                if graphdata.gsets[state.cur_gsets[tno]][0] == 94:
                     for byt in pending:
                         assert 1 <= byt <= 94
                         pointer *= 94
                         pointer += byt - 1
                 else:
-                    assert curs[tno][1][0] == 96
+                    assert graphdata.gsets[state.cur_gsets[tno]][0] == 96
                     for byt in pending:
                         assert 0 <= byt <= 95
                         pointer *= 96
                         pointer += byt
-                ucs = curs[tno][1][2][pointer]
+                ucs = graphdata.gsets[state.cur_gsets[tno]][2][pointer]
                 if ucs is None:
-                    if curs[tno][0] != "Unknown":
-                        yield ("ERROR", "UNDEFGRAPH", curs[tno][0], tuple(pending), pset, invrange)
+                    if state.cur_gsets[tno] != "Unknown":
+                        yield ("ERROR", "UNDEFGRAPH", state.cur_gsets[tno],
+                               tuple(pending), pset, invrange)
                     else:
-                        yield ("CHAR?", hwat[tno], tuple(pending), token[0], invrange)
+                        yield ("CHAR?", state.ghwots[tno], tuple(pending), token[0], invrange)
                 else:
-                    yield ("CHAR", ucs, curs[tno][0], tuple(pending), token[0], invrange)
+                    yield ("CHAR", ucs, state.cur_gsets[tno], tuple(pending), token[0], invrange)
                 pset = -1
                 invrange = None
                 del pending[:]
         elif pending:
-            yield ("ERROR", "TRUNCMB", curs[tno][0], tuple(pending), pset, invrange)
+            yield ("ERROR", "TRUNCMB", state.cur_gsets[tno], tuple(pending), pset, invrange)
             del pending[:]
             pset = -1
             invrange = None
@@ -66,11 +63,11 @@ def decode_graphical_sets(stream, *, def_g0="ir006", def_g1="ir100", def_g2="nil
         elif token[0] == "DESIG":
             sump = graphdata.sumps[token[2]]
             try:
-                curs[token[1]] = sump[token[3]], graphdata.gsets[sump[token[3]]]
+                state.cur_gsets[token[1]] = sump[token[3]]
             except KeyError:
                 yield token
-                curs[token[1]] = "Unknown", graphdata.gsets["nil"]
-                hwat[token[1]] = token[2], token[3]
+                state.cur_gsets[token[1]] = "Unknown"
+                state.ghwots[token[1]] = token[2], token[3]
             else:
                 yield ("RDESIG", "G{}".format(token[1]), sump[token[3]],
                        token[2], token[3], token[4])

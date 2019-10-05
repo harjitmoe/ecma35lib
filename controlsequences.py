@@ -4,7 +4,7 @@
 
 import controldata
 
-def decode_control_strings(stream, *, osc_bel_term=True):
+def decode_control_strings(stream, state):
     active = []
     idbytes = []
     parbytes = []
@@ -27,7 +27,7 @@ def decode_control_strings(stream, *, osc_bel_term=True):
                 yield token # Pass everything else through
         elif mode == "string":
             if token[0] == "CTRL" and (token[1] == "ST" or
-                    (token[1] == "BEL" and active[0][1] == "OSC" and osc_bel_term)):
+                    (token[1] == "BEL" and active[0][1] == "OSC" and state.osc_bel_term)):
                 active.append(token)
                 yield ("CTRLSTRING", active[0][1], tuple(active))
                 del active[:]

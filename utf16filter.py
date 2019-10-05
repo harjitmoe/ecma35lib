@@ -9,7 +9,7 @@ utf16docs = (("DOCS", True, (0x40,)),
              ("DOCS", True, (0x4B,)),
              ("DOCS", True, (0x4C,)))
 
-def decode_utf16(stream, *, pedantic_surrogates=True):
+def decode_utf16(stream, state):
     is_utf16 = False
     utf16_lead = None
     reconsume = None
@@ -19,7 +19,7 @@ def decode_utf16(stream, *, pedantic_surrogates=True):
         reconsume = None
         if (token[0] == "DOCS"):
             if utf16_lead:
-                if pedantic_surrogates:
+                if state.pedantic_surrogates:
                     yield ("ERROR", "UTF16ISOLATE", utf16_lead)
                 else:
                     yield ("UCS", utf16_lead, "UTF-16", "UCS-2" + bo)
@@ -41,7 +41,7 @@ def decode_utf16(stream, *, pedantic_surrogates=True):
                 elif token[0] not in ("WORD", "CESU"):
                     yield token # Escape code passing through
                 elif (token[1] < 0xD800) or (token[1] >= 0xDC00):
-                    if (0xDC00 <= token[1] < 0xE000) and pedantic_surrogates:
+                    if (0xDC00 <= token[1] < 0xE000) and state.pedantic_surrogates:
                         yield ("ERROR", "UTF16ISOLATE", token[1]) # isolated trailing surrogate
                     elif token[0] == "CESU":
                         # Can only get here with pass_cesu ON and pedantic_surrogates OFF.
@@ -55,7 +55,7 @@ def decode_utf16(stream, *, pedantic_surrogates=True):
                 if ((token[0] not in ("WORD", "CESU")) or (token[1] < 0xDC00)
                                                        or (token[1] >= 0xE000)):
                     # i.e. isn't a continuation word
-                    if pedantic_surrogates:
+                    if state.pedantic_surrogates:
                         yield ("ERROR", "UTF16ISOLATE", utf16_lead)
                     elif token[0] == "CESU":
                         # Can only get here with pass_cesu ON and pedantic_surrogates OFF.

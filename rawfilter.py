@@ -4,7 +4,7 @@
 
 rawdocs = ("DOCS", True, (0x42,))
 
-def decode_raw(stream):
+def decode_raw(stream, state):
     is_raw = False
     for token in stream:
         if (token[0] == "DOCS"):

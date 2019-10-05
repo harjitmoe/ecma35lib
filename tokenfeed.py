@@ -4,7 +4,7 @@
 
 import struct
 
-def tokenise_stream(stream, *, default_endian=">", regard_bom=1, start_in_utf8=False):
+def tokenise_stream(stream, state):
     mode = "normal"
     bytewidth = 1
     firstchar = True
@@ -15,13 +15,13 @@ def tokenise_stream(stream, *, default_endian=">", regard_bom=1, start_in_utf8=F
     # regard_bom=1) seems reasonable. However, regarding the designated noncharacter U+FFFE as a
     # generic "switch byte order" control probably isn't, except on trusted data containing
     # misconcatenated UTF-16 (our regard_bom=2).
-    endian = default_endian
-    assert default_endian in "<>"
-    if start_in_utf8:
+    state.endian = state.default_endian
+    assert state.endian in "<>"
+    if state.start_in_utf8:
         yield ("DOCS", False, tuple(b"G"))
         mode = "wsr"
     while 1:
-        structmode = endian + [..., "B", "H", ..., "L"][bytewidth]
+        structmode = state.endian + [..., "B", "H", ..., "L"][bytewidth]
         code = stream.read(bytewidth)
         if not code:
             break
@@ -35,21 +35,22 @@ def tokenise_stream(stream, *, default_endian=">", regard_bom=1, start_in_utf8=F
             r, mode, bytewidth, firstchar = _procesc(stream, mode, bytewidth, structmode)
             yield r
             if firstchar:
-                endian = default_endian
+                state.endian = state.default_endian
                 if bytewidth > 1:
                     # For the UTF-16/-32 filters to be able to report original format.
-                    yield ("DEFBO", endian)
+                    yield ("DEFBO", state.endian)
             continue
-        if mode == "wsr" and code == 0xFFFE and ((firstchar and regard_bom) or (regard_bom > 1)):
+        if mode == "wsr" and code == 0xFFFE and (
+                (firstchar and state.regard_bom) or (state.regard_bom > 1)):
             # Note that this part will not affect UTF-8 (which will never have a FFFE codeword).
             firstchar = False
-            endian = {">": "<", "<": ">"}[endian] # Requires the other byte order.
-            yield ("BOM", endian)
+            state.endian = {">": "<", "<": ">"}[state.endian] # Requires the other byte order.
+            yield ("BOM", state.endian)
             continue
-        if mode == "wsr" and code == 0xFEFF and firstchar and regard_bom:
+        if mode == "wsr" and code == 0xFEFF and firstchar and state.regard_bom:
             # Note that this will not handle the UTF-8 BOM (which is a downstream task).
             firstchar = False
-            yield ("BOM", endian) # Confirms the assumed byte order.
+            yield ("BOM", state.endian) # Confirms the assumed byte order.
             continue
         firstchar = False
         if mode == "wsr":

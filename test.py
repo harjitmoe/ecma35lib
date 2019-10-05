@@ -23,12 +23,17 @@
 # - More control sets.
 # - Announcements, and some means of verifying them.
 
-import io, pprint
+import io, pprint, types
 import tokenfeed, utf8filter, utf16filter, utf32filter, controlsets, fixedcontrols, invocations, \
        designations, graphsets, simpleprinter, controlsequences, rawfilter, unkdocsfilter
 
 teststr = "\nかFoo\x7fら侅ら¥a~염盐塩鹽｜걈 ~¥\x1b[A\x1b[B\x1b]0;𐐈𐐤𐐓𐐀\x1b\\𐐈𐐤𐐓𐐀\x1b[\x20_kg¥\n"
 test2 = "\nНаш благодетель знает своё высокое призвание и будет верен ему.\n"
+
+state = types.SimpleNamespace(pedantic_overlong=True, overlong_null=False, pass_cesu=False,
+    pedantic_surrogates=True, osc_bel_term=True, cur_c0="ir001", cur_c1="RFC1345",
+    glset=0, grset=1, default_endian=">", regard_bom=1, start_in_utf8=False,
+    cur_gsets=["ir006", "ir100", "nil", "nil"])
 
 dat = (b"\x1B%G\x1B!F" + teststr.encode("utf-8-sig") + "\x1CJ염盐塩鹽\x1CK".encode("utf-8") +
        b"\xa4\xed\xa0\xc1\x80\xed\xa0\x81\xed\xb0\xa4" + # Deliberately invalid UTF-8
@@ -58,9 +63,16 @@ for f in [tokenfeed.tokenise_stream, utf8filter.decode_utf8, utf16filter.decode_
           designations.decode_designations, controlsets.decode_control_sets,
           fixedcontrols.decode_fixed_controls, controlsequences.decode_control_strings, 
           invocations.decode_invocations, graphsets.decode_graphical_sets,
-          simpleprinter.simple_print, list, pprint.pprint]:
-    x = f(x)
+          simpleprinter.simple_print]:
+    x = f(x, state)
 
+# Note: nothing's actually executed yet.
+
+x = list(x)
+
+# Note: now it has.
+
+pprint.pprint(x)
 print()
 
 

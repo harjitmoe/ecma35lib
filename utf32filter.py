@@ -6,7 +6,7 @@ utf32docs = (("DOCS", True, (0x41,)),
              ("DOCS", True, (0x44,)),
              ("DOCS", True, (0x46,)))
 
-def decode_utf32(stream):
+def decode_utf32(stream, state):
     is_utf32 = False
     bo = "?"
     for token in stream:
@@ -25,6 +25,8 @@ def decode_utf32(stream):
                 yield token
             elif token[0] != "WORD":
                 yield token # Escape code passing through
+            elif (0xD800 <= token[1] < 0xE000) and state.pedantic_surrogates:
+                yield ("ERROR", "UTF32SURROGATE", token[1])
             elif token[1] > 0x10FFFF:
                 yield ("ERROR", "UTF32BEYOND", ucs)
             else:

@@ -345,7 +345,8 @@ gsets = {# ECMA-6:US, current ECMA-6:IRV, US-ASCII
                          0x05D8, 0x05D9, 0x05DA, 0x05DB, 0x05DC, 0x05DD, 0x05DE, 0x05DF, 
                          0x05E0, 0x05E1, 0x05E2, 0x05E3, 0x05E4, 0x05E5, 0x05E6, 0x05E7, 
                          0x05E8, 0x05E9, 0x05EA, None, None, 0x200E, 0x200F, None)),
-         "nil": (94, 1, (None,)*94)}
+         "nil": (94, 1, (None,)*94),
+         "Unknown": (94, 1, (None,)*94)}
 
 g94bytes = {tuple(b"@"): "ir002",
             tuple(b"A"): "ir004",

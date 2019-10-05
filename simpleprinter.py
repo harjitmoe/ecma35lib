@@ -2,7 +2,7 @@
 # -*- mode: python; coding: utf-8 -*-
 # By HarJIT in 2019.
 
-def simple_print(stream):
+def simple_print(stream, state):
     for token in stream:
         if token[0] == "CHAR" and token[1]:
             print(end = chr(token[1]))

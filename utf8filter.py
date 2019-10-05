@@ -7,8 +7,7 @@ utf8docs = (("DOCS", False, (0x47,)),
             ("DOCS", True, (0x48,)),
             ("DOCS", True, (0x49,)))
 
-def decode_utf8(stream, *, pedantic_overlong=True, overlong_null=False, pass_cesu=False,
-                           pedantic_surrogates=True):
+def decode_utf8(stream, state):
     is_utf8 = False
     utf8_brot = []
     utf8_seeking = 0
@@ -65,11 +64,11 @@ def decode_utf8(stream, *, pedantic_overlong=True, overlong_null=False, pass_ces
                         while utf8_brot:
                             ucs <<= 6
                             ucs |= utf8_brot.pop(0) & 0b00111111
-                        if pedantic_overlong:
+                        if state.pedantic_overlong:
                             overlong = (ucs < 0x80)
                             overlong = overlong or ((ucs < 0x800) and (utf8_seeking > 2))
                             overlong = overlong or ((ucs < 0x10000) and (utf8_seeking > 3))
-                            if overlong_null and (utf8_seeking == 2) and (ucs == 0):
+                            if state.overlong_null and (utf8_seeking == 2) and (ucs == 0):
                                 # 0xC0 0x80 sometimes used for NUL if 0x00 is a terminator.
                                 overlong = False
                             if overlong:
@@ -78,11 +77,11 @@ def decode_utf8(stream, *, pedantic_overlong=True, overlong_null=False, pass_ces
                                 continue
                         if ucs == 0xFEFF and firstchar:
                             yield ("BOM", None)
-                        elif pass_cesu and (0xD800 <= ucs < 0xE000):
+                        elif state.pass_cesu and (0xD800 <= ucs < 0xE000):
                             # Pass surrogate halves through to the UTF-16 filter for handling.
                             # If used, the UTF-16 filter must be used after the UTF-8 one.
                             yield ("CESU", ucs)
-                        elif pedantic_surrogates and (0xD800 <= ucs < 0xE000):
+                        elif state.pedantic_surrogates and (0xD800 <= ucs < 0xE000):
                             yield ("ERROR", "UTF8SURROGATE", ucs)
                         elif ucs > 0x10FFFF:
                             yield ("ERROR", "UTF8BEYOND", ucs)

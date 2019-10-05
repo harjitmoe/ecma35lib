@@ -84,7 +84,8 @@ c0sets = {# The ECMA-6 controls, i.e. originating from 1967 edition ASCII:
           # Scandinavian newspaper (NATS) controls. Particular perculiarities include commandeering
           # FS as a single-shift and GS/RS/US as EOLs which centre/right-align/justify the
           # terminated line, and changing the mnemonics of HT to be vague and CAN to be specific.
-          # VT and FF demarcate something but I'm not sure exactly how this is supposed to work.
+          # UR and LR are used for emphasis, seemingly from SO and SI's typewriter rubric senses.
+          # VT and FF are changed to demarcate format instructions, but I don't know their format.
           # I presume the single-shift is supposed to be SS2 (assuming 036 to be related), and 
           # for sure my decode_invocations isn't gonna respond to the "SS" mnemonic.
           "ir007": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL",
@@ -98,7 +99,7 @@ c0sets = {# The ECMA-6 controls, i.e. originating from 1967 edition ASCII:
                   "LR", # Lower Rail
                   "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
                   "KW", # Kill Word (sense not massively different from CAN, but more specific).
-                  "EM", "SUB", "ESC", # Escape
+                  "EM", "SUB", "ESC",
                   "SS2", # Calls it "Super Shift (SS)", but descibes single-shift behaviour.
                   "QC", # Quad Centre
                   "QR", # Quad Right
@@ -123,7 +124,7 @@ c0sets = {# The ECMA-6 controls, i.e. originating from 1967 edition ASCII:
                   "CAN", "EM", "SUB", "ESC", "SS2", "GS", "RS", "US"),
           # The International Nuclear Information System (INIS)'s subset of ASCII apparently
           # also subsets its controls to only GS, RS and (the mandatory) ESC.
-          "ir048": (None,)*27 + ("ESC",) + (None, "GS", "RS", None),
+          "ir048": (None,)*27 + ("ESC", None, "GS", "RS", None),
           # JIS C 6225's C0 set, differs by replacing IS4 (that is to say, FS) with CEX.
           "ir074": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
                   "BS", "HT", "LF", "VT", "FF", "CR", "SO", "SI",
@@ -134,8 +135,8 @@ c0sets = {# The ECMA-6 controls, i.e. originating from 1967 edition ASCII:
           # ir104 and nil are de facto the same, since (a) ECMA-35 guarantees that ESC is always
           # available at 0x1B, no matter what's designated, and (b) ESC was already processed by
           # tokenfeed (it has to be, for to be able to parse through DOCS regions), so a C0 token
-          # will never contain an ESC. Including both here anyway for the sake of academic utility.
-          "ir104": (None,)*27 + ("ESC",) + (None,)*4,
+          # will never contain an ESC. Including both here anyway.
+          "ir104": (None,)*27 + ("ESC", None, None, None, None),
           # Small subset of ASCII controls plus two single-shifts, for CCITT Rec. T.61 Teletex:
           "ir106": (None, None, None, None, None, None, None, None, 
                   "BS", None, "LF", None, "FF", "CR", "SO", "SI",
@@ -151,7 +152,8 @@ c0sets = {# The ECMA-6 controls, i.e. originating from 1967 edition ASCII:
                   "BS", "HT", "LF", "VT", "FF", "CR", "SO", "SI",
                   "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
                   "CAN", "SS2", "SUB", "ESC", "FS", "GS", "RS", "US"),
-          "nil": (None,)*16} 
+          "nil": (None,)*16,
+          "Unknown": (None,)*16} 
 
 c1sets = {# German bibliographic controls used in DIN 31626
           "ir040": (None, None, None, None, None, None, None,
@@ -249,7 +251,8 @@ c1sets = {# German bibliographic controls used in DIN 31626
                   "SOS", 
                   "SGCI", # Single Graphical Character Introducer
                   "SCI", "CSI", "ST", "OSC", "PM", "APC"),
-          "nil": (None,)*16}
+          "nil": (None,)*16,
+          "Unknown": (None,)*16}
 
 c0bytes = {tuple(b"@"): "ir001",
            tuple(b"A"): "ir007",
@@ -373,7 +376,7 @@ csiseq = {tuple(b"@"): "ICH", # Insert Character
           # Generally recognised corporate-use CSIs
           tuple(b"J?"): "DECSED", # DEC Selective Erase in Display
           tuple(b"K?"): "DECSEL", # DEC Selective Erase in Line
-          tuple(b"S?"): "XTCGRP", # XTerm configure graphics (no standard name/mnemonic?)
+          tuple(b"S?"): "XTCGPH", # XTerm configure graphics (no standard name/mnemonic?)
           tuple(b"T>"): "XTRSTM", # XTerm reset title mode (no standard name/mnemonic?)
           tuple(b"h?"): "DECSET", # DEC Private Mode Set
           tuple(b"l?"): "DECRST", # DEC Private Mode Reset
