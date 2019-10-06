@@ -1,8 +1,13 @@
+#!/usr/bin/env python3
+# -*- mode: python; coding: utf-8 -*-
+# By HarJIT in 2019.
+
+import ast
+
 # Referencing https://www.unicode.org/reports/tr16/tr16-8.html
 # Differs from the https://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/EBCDIC/CP037.TXT control
 # mappings slightly in terms of which way around LF and NL are. But the table from the UTF-EBCDIC
-# standard seems a more sensible choice for a generic EBCDIC correspondance.
-
+# standard seems the most sensible choice for a generic EBCDIC correspondance.
 ebcdic_to_ecma35 = [
     0x00, 0x01, 0x02, 0x03, 0x9C, 0x09, 0x86, 0x7F, 0x97, 0x8D, 0x8E, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F,
     0x10, 0x11, 0x12, 0x13, 0x9D, 0x0A, 0x08, 0x87, 0x18, 0x19, 0x92, 0x8F, 0x1C, 0x1D, 0x1E, 0x1F,
@@ -63,11 +68,11 @@ ebcdic_ctrls = [
     "LF",
     "ETB",
     "ESC",
-    "SA", # Set Attribute
-    "SFE", # Start Field Extended
+    "SA", # Set Attribute (deprecated in favour of CSP)
+    "SFE", # Start Field Extended (deprecated in favour of CSP)
     "SM/SW", # Set Mode or Switch
     "CSP", # Control Sequence Prefix
-    "MFA", # Modify Field Attribute
+    "MFA", # Modify Field Attribute (deprecated in favour of CSP)
     "ENQ",
     "ACK",
     "BEL",
@@ -96,6 +101,19 @@ for n, i in list(enumerate(ebcdic_ctrls)) + [(0xFF, "EO")]:
         c0ibm[ecma35] = i
     elif 0x80 <= ecma35 < 0xA0:
         c1ibm[ecma35 - 0x80] = i
+
+g0_500 = [...] * 94
+g1_500 = [...] * 96
+for line in open("CP500.TXT", "r"):
+    if line[0] == "#" or not line.lstrip().lstrip("\x1A"):
+        continue
+    ebcdic, ucs = [ast.literal_eval(i) for i in line.split(None, 2)[:2]]
+    ecma35 = ebcdic_to_ecma35[ebcdic]
+    if 0x21 <= ecma35 < 0x7F:
+        g0_500[ecma35 - 0x21] = ucs
+    elif 0xA0 <= ecma35:
+        g1_500[ecma35 - 0xA0] = ucs
+    
 
 
 

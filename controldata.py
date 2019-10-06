@@ -38,49 +38,49 @@ fixed_controls = {(0x60,): "DMI", # Disable Manual Input, `
 
 c0sets = {# The ECMA-6 controls, i.e. originating from 1967 edition ASCII:
           "ir001": ("NUL", # Null
-                  "SOH", # Start of Header, Start of Message (SOM), Transmission Control One (TC1)
-                  "STX", # Start of Text, End of Address (EOA), Transmission Control Two (TC2)
-                  "ETX", # End of Text, Transmission Control Three (TC3)
-                  "EOT", # End of Transmission, Transmission Control Four (TC4)
-                  "ENQ", # Enquiry, Who Are You (WRU), Transmission Control Five (TC5)
-                  # RU (Are You…) was included in the 1963 ASCII over where ACK is now placed.
-                  # ACK was at 0x7C, outside the current control character range.
-                  "ACK", # Acknowledgement, Transmission Control Six (TC6)
-                  "BEL", # Bell, Alert
-                  "BS", # Backspace, Format Effector Zero (FE0)
-                  "HT", # Character [Horizontal] Tabulation, Tab, Format Effector One (FE1)
-                  "LF", # Line Feed, Format Effector Two (FE2)
-                  "VT", # Line [Vertical] Tabulation (VTAB), Format Effector Three (FE3)
-                  "FF", # Form Feed, Format Effector Four (FE4)
-                  "CR", # Carriage Return, Format Effector Five (FE5)
-                  # ECMA-35 and ECMA-48 insist that the exact same control codes be called
-                  # SO and SI in 7-bit environments, and LS1 and LS0 in 8-bit environments.
-                  # To the point of wording things as if they were different pairs of controls,
-                  # one used in 7-bit environments and the other in 8-bit environments, despite
-                  # both the representation and the behaviour being identical.
-                  # I'm just using SO and SI as the mnemonics since otherwise is overcomplicated.
-                  "SO", # Shift Out, Locking Shift One (LS1)
-                  "SI", # Shift In, Locking Shift Two (LS0)
-                  # The 1963 ASCII had DC0 instead of TC7 (DLE).
-                  "DLE", # Data Link Escape, Transmission Control Seven (TC7)
-                  # The XON and XOFF mnemonics are conventional.
-                  "XON", # Transmit On, Device Control One (DC1)
-                  "DC2", # Device Control Two
-                  "XOFF", # Transmit Off, Device Control Three (DC3)
-                  "DC4", # Device Control Four
-                  "NAK", # Negative Acknowledgement, Transmission Control Eight (TC8)
-                  "SYN", # Synchronous Idle (SYNC), Transmission Control Nine (TC9)
-                  "ETB", # End of Transmission Block, Transmission Control Ten (TC10)
-                  "CAN", # Cancel
-                  "EM", # End of Medium, Logical End of Media (LEM)
-                  "SUB", # Substitute
-                  "ESC", # Escape
-                  # S0 through S3 were included in the 1963 ASCII over where CAN/EM/SUB/ESC now
-                  # are. ESC was at 0x7E, and EM was where ETB now is. CAN/SUB/ETB were absent.
-                  "FS", # File Separator, Information Separator Four (IS4), Separator Four (S4)
-                  "GS", # Group Separator, Information Separator Three (IS3), Separator Five (S5)
-                  "RS", # Record Separator, Information Separator Two (IS2), Separator Six (S6)
-                  "US"), # Unit Separator, Information Separator One (IS1), Separator Seven (S7)
+                    "SOH", # Start of Header, Start of Message (SOM), Transmission Control One (TC1)
+                    "STX", # Start of Text, End of Address (EOA), Transmission Control Two (TC2)
+                    "ETX", # End of Text, Transmission Control Three (TC3)
+                    "EOT", # End of Transmission, Transmission Control Four (TC4)
+                    "ENQ", # Enquiry, Who Are You (WRU), Transmission Control Five (TC5)
+                    # RU (Are You…) was included in the 1963 ASCII over where ACK is now placed.
+                    # ACK was at 0x7C, outside the current control character range.
+                    "ACK", # Acknowledgement, Transmission Control Six (TC6)
+                    "BEL", # Bell, Alert
+                    "BS", # Backspace, Format Effector Zero (FE0)
+                    "HT", # Character [Horizontal] Tabulation, Tab, Format Effector One (FE1)
+                    "LF", # Line Feed, Format Effector Two (FE2)
+                    "VT", # Line [Vertical] Tabulation (VTAB), Format Effector Three (FE3)
+                    "FF", # Form Feed, Format Effector Four (FE4)
+                    "CR", # Carriage Return, Format Effector Five (FE5)
+                    # ECMA-35 and ECMA-48 insist that the exact same control codes be called
+                    # SO and SI in 7-bit environments, and LS1 and LS0 in 8-bit environments.
+                    # To the point of wording things as if they were different pairs of controls,
+                    # one used in 7-bit environments and the other in 8-bit environments, despite
+                    # both the representation and the behaviour being identical.
+                    # I'm just using SO and SI as the mnemonics since otherwise is overcomplicated.
+                    "SO", # Shift Out, Locking Shift One (LS1)
+                    "SI", # Shift In, Locking Shift Two (LS0)
+                    # The 1963 ASCII had DC0 instead of TC7 (DLE).
+                    "DLE", # Data Link Escape, Transmission Control Seven (TC7)
+                    # The XON and XOFF mnemonics are conventional.
+                    "XON", # Transmit On, Device Control One (DC1)
+                    "DC2", # Device Control Two
+                    "XOFF", # Transmit Off, Device Control Three (DC3)
+                    "DC4", # Device Control Four
+                    "NAK", # Negative Acknowledgement, Transmission Control Eight (TC8)
+                    "SYN", # Synchronous Idle (SYNC), Transmission Control Nine (TC9)
+                    "ETB", # End of Transmission Block, Transmission Control Ten (TC10)
+                    "CAN", # Cancel
+                    "EM", # End of Medium, Logical End of Media (LEM)
+                    "SUB", # Substitute
+                    "ESC", # Escape
+                    # S0 through S3 were included in the 1963 ASCII over where CAN/EM/SUB/ESC now
+                    # are. ESC was at 0x7E, and EM was where ETB now is. CAN/SUB/ETB were absent.
+                    "FS", # File Separator, Information Separator Four (IS4), Separator Four (S4)
+                    "GS", # Group Separator, Information Separator Three (IS3), Separator Five (S5)
+                    "RS", # Record Separator, Information Separator Two (IS2), Separator Six (S6)
+                    "US"), # Unit Separator, Information Separator One (IS1), Separator Seven (S7)
           # Scandinavian newspaper (NATS) controls. Particular perculiarities include commandeering
           # FS as a single-shift and GS/RS/US as EOLs which centre/right-align/justify the
           # terminated line, and changing the mnemonics of HT to be vague and CAN to be specific.
@@ -89,49 +89,50 @@ c0sets = {# The ECMA-6 controls, i.e. originating from 1967 edition ASCII:
           # I presume the single-shift is supposed to be SS2 (assuming 036 to be related), and 
           # for sure my decode_invocations isn't gonna respond to the "SS" mnemonic.
           "ir007": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL",
-                  "BS",
-                  "FO", # Formatting (still seems to be basically a tab in normal contexts though).
-                  "LF",
-                  "ECD", # End of Instruction
-                  "SCD", # Start of Instruction
-                  "QL", # Quad Left
-                  "UR", # Upper Rail (i.e. emphasised, or, the older TTY-ribbon sense of SO).
-                  "LR", # Lower Rail
-                  "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
-                  "KW", # Kill Word (sense not massively different from CAN, but more specific).
-                  "EM", "SUB", "ESC",
-                  "SS2", # Calls it "Super Shift (SS)", but descibes single-shift behaviour.
-                  "QC", # Quad Centre
-                  "QR", # Quad Right
-                  "JY"), # Justify
+                    "BS",
+                    "FO", # Formatting (still seems to be basically a tab in normal contexts).
+                    "LF",
+                    "ECD", # End of Instruction
+                    "SCD", # Start of Instruction
+                    "QL", # Quad Left
+                    "UR", # Upper Rail (i.e. emphasised, or, the older TTY-ribbon sense of SO).
+                    "LR", # Lower Rail
+                    "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
+                    "KW", # Kill Word (sense not massively different from CAN, but more specific).
+                    "EM", "SUB", "ESC",
+                    "SS2", # Calls it "Super Shift (SS)", but descibes single-shift behaviour.
+                    "QC", # Quad Centre
+                    "QR", # Quad Right
+                    "JY"), # Justify
           # International newspaper (IPTC) controls. Very similar to the NATS controls, but 
           # commandeers DC1/DC2/DC3 for (two orthogonal types of) emphasis, instead of SI/SO.
           "ir026": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL",
-                  "BS", "FO", "LF", "ECD", "SCD", "QL", "SO", "SI",
-                  "DLE",
-                  "FT1", # Font 1 (normal)
-                  "FT2", # Font 2 (italic)
-                  "FT3", # Font 3 (bold)
-                  "DC4", "NAK", "SYN", "ETB", 
-                  # Similarly calling the single-shift "Super Shift (SS)"
-                  "KW", "EM", "SUB", "ESC", "SS2", "QC", "QR", "JY"),
+                    "BS", "FO", "LF", "ECD", "SCD", "QL", "SO", "SI",
+                    "DLE",
+                    "FT1", # Font 1 (normal)
+                    "FT2", # Font 2 (italic)
+                    "FT3", # Font 3 (bold)
+                    "DC4", "NAK", "SYN", "ETB", 
+                    # Similarly calling the single-shift "Super Shift (SS)"
+                    "KW", "EM", "SUB", "ESC", "SS2", "QC", "QR", "JY"),
           # Closer to ASCII, but still with SS2 over FS, this time calling it SS2. Document seems  
           # to be a Q&D scissors-and-photocopier edit of 001.
           # Apparently submitted by ISO/TC97/SC2/WG1 (ISO/TC97 = ISO/IEC JTC1).
           "ir036": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
-                  "BS", "HT", "LF", "VT", "FF", "CR", "SO", "SI",
-                  "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
-                  "CAN", "EM", "SUB", "ESC", "SS2", "GS", "RS", "US"),
+                    "BS", "HT", "LF", "VT", "FF", "CR", "SO", "SI",
+                    "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
+                    "CAN", "EM", "SUB", "ESC", "SS2", "GS", "RS", "US"),
           # The International Nuclear Information System (INIS)'s subset of ASCII apparently
           # also subsets its controls to only GS, RS and (the mandatory) ESC.
           "ir048": (None,)*27 + ("ESC", None, "GS", "RS", None),
+          #
           # JIS C 6225's C0 set, differs by replacing IS4 (that is to say, FS) with CEX.
           "ir074": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
-                  "BS", "HT", "LF", "VT", "FF", "CR", "SO", "SI",
-                  "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
-                  "CAN", "EM", "SUB", "ESC", 
-                  "CEX", # Control Extension (see definitions (that I can find) below)
-                  "GS", "RS", "US"),
+                    "BS", "HT", "LF", "VT", "FF", "CR", "SO", "SI",
+                    "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
+                    "CAN", "EM", "SUB", "ESC", 
+                    "CEX", # Control Extension (see definitions (that I can find) below)
+                    "GS", "RS", "US"),
           # ir104 and nil are de facto the same, since (a) ECMA-35 guarantees that ESC is always
           # available at 0x1B, no matter what's designated, and (b) ESC was already processed by
           # tokenfeed (it has to be, for to be able to parse through DOCS regions), so a C0 token
@@ -139,19 +140,26 @@ c0sets = {# The ECMA-6 controls, i.e. originating from 1967 edition ASCII:
           "ir104": (None,)*27 + ("ESC", None, None, None, None),
           # Small subset of ASCII controls plus two single-shifts, for CCITT Rec. T.61 Teletex:
           "ir106": (None, None, None, None, None, None, None, None, 
-                  "BS", None, "LF", None, "FF", "CR", "SO", "SI",
-                  None, None, None, None, None, None, None, None, 
-                  None, "SS2", "SUB", "ESC", None, "SS3", None, None),
+                    "BS", None, "LF", None, "FF", "CR", "SO", "SI",
+                    None, None, None, None, None, None, None, None, 
+                    None, "SS2", "SUB", "ESC", None, "SS3", None, None),
           # ASCII controls minus the shifts, since apparently some standards require that:
           "ir130": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
-                  "BS", "HT", "LF", "VT", "FF", "CR", None, None,
-                  "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
-                  "CAN", "EM", "SUB", "ESC", "FS", "GS", "RS", "US"),
+                    "BS", "HT", "LF", "VT", "FF", "CR", None, None,
+                    "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
+                    "CAN", "EM", "SUB", "ESC", "FS", "GS", "RS", "US"),
           # SS2 replacing EM, was apparently used in Czechoslovakia:
           "ir140": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
-                  "BS", "HT", "LF", "VT", "FF", "CR", "SO", "SI",
-                  "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
-                  "CAN", "SS2", "SUB", "ESC", "FS", "GS", "RS", "US"),
+                    "BS", "HT", "LF", "VT", "FF", "CR", "SO", "SI",
+                    "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
+                    "CAN", "SS2", "SUB", "ESC", "FS", "GS", "RS", "US"),
+          # EBCDIC, as translated using the EBCDIC bytes table from UTR 16.
+          # Not that much changed from ASCII, although LF has been
+          # swabbed out with NL (that is, NEL).
+          "c0ebcdic": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
+                       "BS", "HT", "NL", "VT", "FF", "CR", "IBMSO", "IBMSI",
+                       "DLE", "DC1", "DC2", "DC3", "DC4", "NAK", "SYN", "ETB", 
+                       "CAN", "EM", "SUB", "ESC", "IFS", "IGS", "IRS", "IUS/ITB"),
           "nil": (None,)*16,
           "Unknown": (None,)*16} 
 
@@ -251,6 +259,40 @@ c1sets = {# German bibliographic controls used in DIN 31626
                   "SOS", 
                   "SGCI", # Single Graphical Character Introducer
                   "SCI", "CSI", "ST", "OSC", "PM", "APC"),
+          # EBCDIC, as translated using the EBCDIC bytes table from UTR 16.
+          # Names and mnemonics: 
+          # IA 20180911044845 https://www-01.ibm.com/software/globalization/cdra/appendix_g1.html
+          "c1ebcdic": ("DS", # Digit Select
+                       "IBMSOS", # Start of Significance
+                       "IBMFS", # Field Separator
+                       "WUS", # Word Underscore (i.e. underline previous word)
+                       "BYP/INP", # Bypass or Inhibit Presentation (i.e. ignore printing chars)
+                       "LF", # Is just linefeed, but overall maybe analogous to IND?
+                       "RNL", # Required Newline (i.e. cancelling indent)
+                       "POC", # Program Operator Communication (takes two bytes: action, effector)
+                       "SA", # Set Attribute (deprecated in favour of CSP)
+                       "SFE", # Start Field Extended (deprecated in favour of CSP)
+                       "SM/SW", # Set Mode or Switch
+                       "CSP", # Ctrl Seq Prefx (bytes: class, len (inc. len byte), type, params)
+                       "MFA", # Modify Field Attribute (deprecated in favour of CSP)
+                       "SPS", # Superscript (fractional linefeed up, pretty much PLU)
+                       "RPT", # Repeat
+                       "CU1", # Customer Use One
+                       None, None, 
+                       "UBS", # Unit Backspace (i.e. partial backspace)
+                       "IR", # Index Return (functions as either NL or US; name evokes IND+CR)
+                       "PP", # Presentation Position
+                       "TRN", # Transparant (takes len byte (not counting len byte) then raw data)
+                       "NBS", # Numeric Backspace (i.e. negative figure-space)
+                       "GE", # Graphic Escape (EBCDIC single shift)
+                       "SBS", # Subscript (fractional linefeed down, pretty much PLD)
+                       "IT", # Indent Tab (i.e. HT now and after every NL until a RNL or RFF)
+                       "RFF", # Required Form Feed (i.e. cancelling indent)
+                       "CU3", # Customer Use Three (apparently no CU2)
+                       "SEL", # Select (followed by one byte to command a device)
+                       "RES/ENP", # Restore or Enable Presentation (i.e. end a BYP/INP)
+                       None, 
+                       "EO"), # Eight Ones
           "nil": (None,)*16,
           "Unknown": (None,)*16}
 
