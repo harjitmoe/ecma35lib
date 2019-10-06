@@ -65,6 +65,13 @@ raw_variants = {
                              None, None, None, None, 0x203E], {}),
     "ksromantilde": ([None, None, None, None, 0x20A9, None, None, None, 
                                   None, None, None, None, None], {}),
+    # Olivetti Italian
+    "ir015": ([0xA3, None, 0xA7, 0xB0, 0xE7, 0xE9, None, None, 
+                           0xF9, 0xE0, 0xF2, 0xE8, 0xEC], {}),
+    # Roman G0 set of ETS 300 706 for Italy
+    # Violation of ECMA-6:1991: 0x5F is not _.
+    "ir015ets": ([0xA3, None, 0xE9, 0xB0, 0xE7, 0x2192, 0x2191, 0x2317, 
+                              0xF9, 0xE0, 0xF2, 0xE8,   0xEC], {}),
     # Olivetti Portugese
     "ir016": ([None, None, 0xA7, 0xC3, 0xC7, 0xD5, None, None, 
                            None, 0xE3, 0xE7, 0xF5, 0xB0], {}),
@@ -124,6 +131,9 @@ raw_variants = {
     # IBM Spanish
     "ir085": ([None, None, 0xB7, 0xA1, 0xD1, 0xC7, 0xBF, None, 
                            None, 0xB4, 0xF1, 0xE7, 0xA8], {}),
+    # MSZ 7795/3 (Hungarian)
+    "ir086": ([None, 0xA4, 0xC1, 0xC9, 0xD6, 0xDC, None, None, 
+                           0xE1, 0xE9, 0xF6, 0xFC, 0x2DD], {}),
     # JIS C 6220 / JIS X 0201 Roman set, OCR subset
     "ir092": ([None, None, None, None, 0xA5, None, None, None, 
                            -1, None, None, None, -1], {}),
@@ -157,11 +167,14 @@ raw_variants = {
     "ir207": ([0xA3, None, 0xD3, 0xC9, 0xCD, 0xDA, 0xC1, None, 
                            0xF3, 0xE9, 0xED, 0xFA, 0xE1], {}),
     ##
-    # DEC NRCS for Switzerland
+    # DEC NRCS for Switzerland; IBM's 1021
     # Violation of ECMA-6:1991: 0x23 is not # or £.
     # Violation of ECMA-6:1991: 0x5F is not _.
     "decswiss": ([0xF9, None, 0xE0, 0xE9, 0xE7, 0xEA, 0xEE, 0xE8, 
                               0xF4, 0xE4, 0xF6, 0xFC, 0xFB], {}),
+    # DEC NRCS for the Netherlands; IBM's 1102
+    "decdutch": ([0xA3, None, 0xBE, 0x133, 0xBD, 0x7C, None, None, 
+                              None, 0xA8, 0x192, 0xBC, 0xB4], {}),
     # Supposed Icelandic version (cannot verify)
     "icelandic": ([None, None, 0xD0, 0xDE, None, 0xC6, 0xD6, None, 
                                0xF0, 0xFE, None, 0xE6, 0xF6], {}),
@@ -170,6 +183,9 @@ raw_variants = {
     "polish": ([None, (0x7A, 0x200D, 0x142), 
                             0x119, 0x17A, None, 0x144, 0x15B, None, 
                             0x105, 0xF3, 0x142, 0x17C, 0x107], {}),
+    # Supposed Maltese version (cannot verify)
+    "maltese": ([None, None, None,  0x121, 0x17C, 0x127, None, None, 
+                             0x10B, 0x120, 0x17B, 0x126, 0x10A], {}),
     ##
     # Roman G0 set of ETS 300 706 for French
     # Violation of ECMA-6:1991: 0x23 is not # or £.
@@ -206,9 +222,20 @@ raw_variants = {
     # Roman G0 set of ETS 300 706 for Polish
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
     # Violation of ECMA-6:1991: 0x5F is not _.
-    "polish": ([None, 0x144, 0x105, (0x7A, 0x200D, 0x142), 
-                                           0x15A, 0x141, 0x107, 0xF3, 
-                             0x119, 0x17C, 0x15B, 0x142, 0x17A], {}),
+    "etspolish": ([None, 0x144, 0x105, (0x7A, 0x200D, 0x142), 
+                                              0x15A, 0x141, 0x107, 0xF3, 
+                                0x119, 0x17C, 0x15B, 0x142, 0x17A], {}),
+    # Roman G0 set of ETS 300 706 for Romanian
+    # Violation of ECMA-6:1991: 0x5F is not _.
+    "etsromanian": ([None, 0xA4, 0x21A, 0xC2, 0x218, 0x102, 0xCE, 0x131, 
+                                 0x21B, 0xE2, 0x219, 0x103, 0xEE], {}),
+    # Roman G0 set of ETS 300 706 for Turkish
+    # Violation of ECMA-6:1991: 0x23 is not # or £.
+    # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
+    # Violation of ECMA-6:1991: 0x5F is not _.
+    "etsturkish": ([(0x54, 0x200D, 0x4C), 
+                          0x11F, 0x130, 0x15E, 0xD6, 0xC7, 0xDC,
+                          0x11E, 0x131, 0x15F, 0xF6, 0xE7, 0xFC], {}),
 }
 
 for (name, (myvars, override)) in raw_variants.items():
