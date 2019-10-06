@@ -102,17 +102,19 @@ for n, i in list(enumerate(ebcdic_ctrls)) + [(0xFF, "EO")]:
     elif 0x80 <= ecma35 < 0xA0:
         c1ibm[ecma35 - 0x80] = i
 
-g0_500 = [...] * 94
-g1_500 = [...] * 96
-for line in open("CP500.TXT", "r"):
-    if line[0] == "#" or not line.lstrip().lstrip("\x1A"):
-        continue
-    ebcdic, ucs = [ast.literal_eval(i) for i in line.split(None, 2)[:2]]
-    ecma35 = ebcdic_to_ecma35[ebcdic]
-    if 0x21 <= ecma35 < 0x7F:
-        g0_500[ecma35 - 0x21] = ucs
-    elif 0xA0 <= ecma35:
-        g1_500[ecma35 - 0xA0] = ucs
+def readms(fn):
+    g0 = [...] * 94
+    g1 = [...] * 96
+    for line in open(fn, "r"):
+        if line[0] == "#" or not line.lstrip().lstrip("\x1A"):
+            continue
+        ebcdic, ucs = [ast.literal_eval(i) for i in line.split(None, 2)[:2]]
+        ecma35 = ebcdic_to_ecma35[ebcdic]
+        if 0x21 <= ecma35 < 0x7F:
+            g0[ecma35 - 0x21] = ucs if ucs != 0x1A else None
+        elif 0xA0 <= ecma35:
+            g1[ecma35 - 0xA0] = ucs if ucs != 0x1A else None
+    return g0, g1
     
 
 
