@@ -8,7 +8,7 @@ utf32docs = (("DOCS", True, (0x41,)),
 
 def decode_utf32(stream, state):
     is_utf32 = False
-    bo = "?"
+    bomap = {"<": "le", ">": "be"}
     for token in stream:
         if (token[0] == "DOCS"):
             is_utf32 = (token in utf32docs)
@@ -18,18 +18,14 @@ def decode_utf32(stream, state):
             else:
                 yield token
         elif is_utf32:
-            if token[0] == "DEFBO":
-                bo = {"<": "le", ">": "be"}[token[1]]
-            elif token[0] == "BOM":
-                bo = {"<": "le", ">": "be"}[token[1]]
-                yield token
-            elif token[0] != "WORD":
+            if token[0] != "WORD":
                 yield token # Escape code passing through
             elif (0xD800 <= token[1] < 0xE000) and state.pedantic_surrogates:
                 yield ("ERROR", "UTF32SURROGATE", token[1])
             elif token[1] > 0x10FFFF:
                 yield ("ERROR", "UTF32BEYOND", ucs)
             else:
+                bo = bomap[state.endian]
                 yield ("UCS", token[1], "UTF-32", "UCS-4" + bo)
         else: # i.e. isn't a DOCS, nor a UTF-32 part of the stream
             yield token
