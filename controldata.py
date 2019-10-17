@@ -133,11 +133,6 @@ c0sets = {# The ECMA-6 controls, i.e. originating from 1967 edition ASCII:
                     "CAN", "EM", "SUB", "ESC", 
                     "CEX", # Control Extension (see definitions (that I can find) below)
                     "GS", "RS", "US"),
-          # ir104 and nil are de facto the same, since (a) ECMA-35 guarantees that ESC is always
-          # available at 0x1B, no matter what's designated, and (b) ESC was already processed by
-          # tokenfeed (it has to be, for to be able to parse through DOCS regions), so a C0 token
-          # will never contain an ESC. Including both here anyway.
-          "ir104": (None,)*27 + ("ESC", None, None, None, None),
           # Small subset of ASCII controls plus two single-shifts, for CCITT Rec. T.61 Teletex:
           "ir106": (None, None, None, None, None, None, None, None, 
                     "BS", None, "LF", None, "FF", "CR", "SO", "SI",
@@ -160,8 +155,11 @@ c0sets = {# The ECMA-6 controls, i.e. originating from 1967 edition ASCII:
                        "BS", "HT", "NL", "VT", "FF", "CR", "IBMSO", "IBMSI",
                        "DLE", "DC1", "DC2", "DC3", "DC4", "NAK", "SYN", "ETB", 
                        "CAN", "EM", "SUB", "ESC", "IFS", "IGS", "IRS", "IUS/ITB"),
-          "nil": (None,)*16,
-          "Unknown": (None,)*16} 
+          # ir104 and nil are de facto the same, since ECMA-35 guarantees that ESC is always
+          # available at 0x1B, no matter what's designated.
+          "ir104": (None,)*27 + ("ESC", None, None, None, None),
+          "nil": (None,)*27 + ("ESC", None, None, None, None),
+          "Unknown": (None,)*27 + ("ESC", None, None, None, None)} 
 
 c1sets = {# German bibliographic controls used in DIN 31626
           "ir040": (None, None, None, None, None, None, None,

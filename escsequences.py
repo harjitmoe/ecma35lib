@@ -68,11 +68,13 @@ def decode_esc_sequences(stream, state):
                     # UTF-16 (DOCS / L preferred, others deprecated)
                     # Not a WSR sequence due to different word size, but WSR once we know the size.
                     state.mode, state.bytewidth, state.firstchar = "wsr", 2, True
+                    state.endian = state.default_endian
                     state.feedback.append(ret2)
                 elif (not ret[2][1:]) and (ret[3] in tuple(b"ADF")):
                     # UTF-32 (DOCS / F preferred, others deprecated)
                     # Not a WSR sequence due to different word size, but WSR once we know the size.
                     state.mode, state.bytewidth, state.firstchar = "wsr", 4, True
+                    state.endian = state.default_endian
                     state.feedback.append(ret2)
                 else:
                     # Either raw pass-through (DOCS / B), or as-good-as so far as we can know.
