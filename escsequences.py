@@ -27,6 +27,9 @@ def decode_esc_sequences(stream, state):
                 return
             elif token[0] == "UCS" and 0x20 <= token[1] < 0x7F:
                 code = token[1]
+            elif token[0] == "CODEWORD" and 0x20 <= token[2] < 0x7F:
+                # CODEWORD may reach here if were in an unknown DOCS with standard return.
+                code = token[2]
             elif token[0] == "GL":
                 code = token[1] + 0x20
             else:

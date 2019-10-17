@@ -33,6 +33,7 @@ def tokenise_stream(stream, state):
             state.firstchar = False
             yield ("BYTE", code)
             continue
+        # If it gets here, it's not raw.
         if state.mode == "wsr" and code == 0xFFFE and (
                 (state.firstchar and state.regard_bom) or (state.regard_bom > 1)):
             # Note that this part will not affect UTF-8 (which will never have a FFFE codeword).
@@ -46,18 +47,23 @@ def tokenise_stream(stream, state):
             yield ("BOM", state.endian) # Confirms the assumed byte order.
             continue
         state.firstchar = False
-        if state.mode == "wsr":
-            yield ("WORD", code)
-            continue
-        assert code < 0x100
-        if code < 0x20:
+        # Likewise won't get here if it's raw mode, so it must be wsr or normal.
+        # In either case, 0x1B is guaranteed to be a C0 code (by definition of wsr).
+        if code == 0x1B:
             yield ("C0", code, "CL")
-        elif code < 0x80:
-            yield ("GL", code - 0x20)
-        elif code < 0xA0:
-            yield ("C1", code - 0x80, "CR")
+        elif state.mode == "wsr":
+            yield ("WORD", code)
         else:
-            yield ("GR", code - 0xA0)
+            assert state.mode == "normal"
+            assert code < 0x100
+            if code < 0x20:
+                yield ("C0", code, "CL")
+            elif code < 0x80:
+                yield ("GL", code - 0x20)
+            elif code < 0xA0:
+                yield ("C1", code - 0x80, "CR")
+            else:
+                yield ("GR", code - 0xA0)
     yield ("ENDSTREAM",)
 
 

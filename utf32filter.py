@@ -23,7 +23,7 @@ def decode_utf32(stream, state):
             elif (0xD800 <= token[1] < 0xE000) and state.pedantic_surrogates:
                 yield ("ERROR", "UTF32SURROGATE", token[1])
             elif token[1] > 0x10FFFF:
-                yield ("ERROR", "UTF32BEYOND", ucs)
+                yield ("ERROR", "UTF32BEYOND", token[1])
             else:
                 bo = bomap[state.endian]
                 yield ("UCS", token[1], "UTF-32", "UCS-4" + bo)
