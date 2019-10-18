@@ -54,14 +54,12 @@ def decode_esc_sequences(stream, state):
                 if not ret2[1]:
                     # UTF-8 (DOCS G), UTF-1 (DOCS B), ECMA-35 (DOCS @), or otherwise bytewise with 
                     # standard return.
-                    state.hasesc = 0x1B
-                    state.bytewidth = 1
-                    state.feedback.append(ret2)
+                    state.hasesc = True # Only referenced if there is no filter for this DOCS.
                 else:
                     # Something else to be dealt with by its own filter, or treated as raw.
-                    state.hasesc = -1 # May be overridden by the filter itself.
-                    state.bytewidth = 1
-                    state.feedback.append(ret2)
+                    state.hasesc = False # Only referenced if there is no filter for this DOCS.
+                state.bytewidth = 1 # May be subsequently overridden by the specific filter.
+                state.feedback.append(ret2)
             elif (not ret[1]) and (not ret[2]) and (0x40 <= ret[3] < 0x60):
                 # C1 control characters in 7-bit escape form.
                 state.feedback.append(("C1", ret[3] - 0x40, "ESC"))

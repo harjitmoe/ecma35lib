@@ -27,7 +27,6 @@ def decode_utf16(stream, state):
             is_utf16 = (token in utf16docs)
             if is_utf16:
                 yield ("RDOCS", "UTF-16", token[1], token[2])
-                state.hasesc = 0x1B
                 state.bytewidth = 2
                 state.endian = state.default_endian
                 firstchar = True

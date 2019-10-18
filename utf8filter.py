@@ -24,8 +24,6 @@ def decode_utf8(stream, state):
             if is_utf8:
                 yield ("RDOCS", "UTF-8", token[1], token[2])
                 firstchar = True
-                # Need to set hasesc explicitly since three of the escapes use a without-SR syntax.
-                state.hasesc = 0x1B
                 state.bytewidth = 1
             else:
                 yield token

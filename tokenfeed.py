@@ -5,7 +5,6 @@
 import struct
 
 def tokenise_stream(stream, state):
-    state.hasesc = 0x1B
     state.bytewidth = 1
     state.feedback = []
     # DOCS are stipulated in ISO 10646 as big-endian (>). Actually, ISO 10646 does not provide for
@@ -19,7 +18,6 @@ def tokenise_stream(stream, state):
     assert state.endian in "<>"
     if state.start_in_utf8:
         yield ("DOCS", False, tuple(b"G"))
-        state.mode = "wsr"
     while 1:
         yield from iter(state.feedback)
         del state.feedback[:]
@@ -28,13 +26,7 @@ def tokenise_stream(stream, state):
         if not code:
             break
         code, = struct.unpack(structmode, code)
-        if (state.hasesc >= 0) and (code == state.hasesc):
-            # state.hasesc is set by the DOCS filter (for instance, in ECMA-35 itself and in all
-            # DOCS syntaces without a forwardslash, it's 0x1B). It may be set to -1 if there isn't
-            # an ESC (say, in transparent raw mode).
-            yield ("C0", code, "CL")
-        else:
-            yield ("WORD", code)
+        yield ("WORD", code)
     yield ("ENDSTREAM",)
 
 

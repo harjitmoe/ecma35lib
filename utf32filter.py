@@ -14,7 +14,6 @@ def decode_utf32(stream, state):
             is_utf32 = (token in utf32docs)
             if is_utf32:
                 yield ("RDOCS", "UTF-32", token[1], token[2])
-                state.hasesc = 0x1B
                 state.bytewidth = 4
                 state.endian = state.default_endian
                 firstchar = True

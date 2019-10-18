@@ -14,12 +14,12 @@ def decode_remaining_docs(stream, state):
         elif token[0] == "ENDSTREAM":
             yield token
         elif lingering:
-            if token[0] == "BYTE":
-                # A single byte in an encoding of unknown code width
-                yield ("CODEBYTE", lingering, token[1])
-            elif token[0] == "WORD":
-                # A single one-byte word in an encoding with a known code width of one byte
-                yield ("CODEWORD", lingering, token[1])
+            if token[0] == "WORD":
+                if state.hasesc and (token[1] == 0x1B):
+                    # We need to recognise standard return if we're in a DOCS with standard return.
+                    yield ("C0", token[1], "CL")
+                else:
+                    yield ("CODEWORD", lingering, token[1])
             else:
                 yield token
         else:
