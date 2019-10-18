@@ -5,19 +5,19 @@
 rawdocs = ("DOCS", True, (0x42,))
 
 def decode_raw(stream, state):
-    is_raw = False
     for token in stream:
         if (token[0] == "DOCS"):
-            is_raw = (token == rawdocs)
-            if is_raw:
+            if token == rawdocs:
                 yield ("RDOCS", "RAW", token[1], token[2])
+                state.bytewidth = 1
+                state.docsmode = "raw"
             else:
                 yield token
-        elif is_raw:
+        elif state.docsmode == "raw":
             if token[0] == "ENDSTREAM":
                 yield token
             else:
-                assert (token[0] == "WORD") and (0 <= token[1] < 256)
+                assert (token[0] == "WORD") and (0 <= token[1] < 256), token
                 yield ("RAWBYTE", token[1])
         else: # i.e. isn't a DOCS, nor a raw part of the stream
             yield token

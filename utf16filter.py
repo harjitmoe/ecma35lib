@@ -10,7 +10,6 @@ utf16docs = (("DOCS", True, (0x40,)),
              ("DOCS", True, (0x4C,)))
 
 def decode_utf16(stream, state):
-    is_utf16 = False
     utf16_lead = None
     reconsume = None
     bomap = {"<": "le", ">": "be"}
@@ -24,15 +23,15 @@ def decode_utf16(stream, state):
                 else:
                     yield ("UCS", utf16_lead, "UTF-16", "UCS-2" + bo)
                 utf16_lead = None
-            is_utf16 = (token in utf16docs)
-            if is_utf16:
+            if token in utf16docs:
                 yield ("RDOCS", "UTF-16", token[1], token[2])
                 state.bytewidth = 2
                 state.endian = state.default_endian
                 firstchar = True
+                state.docsmode = "utf-16"
             else:
                 yield token
-        elif is_utf16 or (token[0] == "CESU"):
+        elif (state.docsmode == "utf-16") or (token[0] == "CESU"):
             if not utf16_lead:
                 # Lead word
                 if token[0] not in ("WORD", "CESU"):

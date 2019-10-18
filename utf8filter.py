@@ -8,7 +8,6 @@ utf8docs = (("DOCS", False, (0x47,)),
             ("DOCS", True, (0x49,)))
 
 def decode_utf8(stream, state):
-    is_utf8 = False
     utf8_brot = []
     utf8_seeking = 0
     reconsume = None
@@ -20,14 +19,14 @@ def decode_utf8(stream, state):
             if utf8_brot:
                 yield ("ERROR", "UTF8TRUNC", tuple(utf8_brot))
                 del utf8_brot[:]
-            is_utf8 = (token in utf8docs)
-            if is_utf8:
+            if token in utf8docs:
                 yield ("RDOCS", "UTF-8", token[1], token[2])
                 firstchar = True
                 state.bytewidth = 1
+                state.docsmode = "utf-8"
             else:
                 yield token
-        elif is_utf8:
+        elif state.docsmode == "utf-8":
             if not utf8_brot:
                 # Lead byte
                 if token[0] != "WORD":

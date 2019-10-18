@@ -7,6 +7,7 @@ def decode_remaining_docs(stream, state):
     for token in stream:
         if (token[0] == "DOCS"):
             lingering = (token[1], token[2])
+            state.docsmode = "Unknown"
             yield token
         elif (token[0] == "RDOCS"):
             lingering = None

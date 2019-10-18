@@ -16,8 +16,6 @@ def _tokenise_stream(stream, state):
     # misconcatenated UTF-16 (our regard_bom=2).
     state.endian = state.default_endian
     assert state.endian in "<>"
-    if state.start_in_utf8:
-        yield ("DOCS", False, tuple(b"G"))
     while 1:
         yield from iter(state.feedback)
         del state.feedback[:]
@@ -33,7 +31,7 @@ def process_stream(stream, **kwargs): # The entry point.
     statedict = {"pedantic_overlong": True, "overlong_null": False, "pass_cesu": False,
                  "pedantic_surrogates": True, "osc_bel_term": True, "cur_c0": "ir001", 
                  "cur_c1": "RFC1345", "glset": 0, "grset": 1, "default_endian": ">", 
-                 "regard_bom": 1, "start_in_utf8": False,
+                 "regard_bom": 1, "docsmode": "ecma-35",
                  "cur_gsets": ["ir006", "ir100", "nil", "nil"]}
     statedict.update(kwargs)
     state = types.SimpleNamespace(**statedict)

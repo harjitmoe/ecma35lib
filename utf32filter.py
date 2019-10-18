@@ -7,19 +7,18 @@ utf32docs = (("DOCS", True, (0x41,)),
              ("DOCS", True, (0x46,)))
 
 def decode_utf32(stream, state):
-    is_utf32 = False
     bomap = {"<": "le", ">": "be"}
     for token in stream:
         if (token[0] == "DOCS"):
-            is_utf32 = (token in utf32docs)
-            if is_utf32:
+            if token in utf32docs:
                 yield ("RDOCS", "UTF-32", token[1], token[2])
                 state.bytewidth = 4
                 state.endian = state.default_endian
                 firstchar = True
+                state.docsmode = "utf-32"
             else:
                 yield token
-        elif is_utf32:
+        elif state.docsmode == "utf-32":
             if token[0] != "WORD":
                 yield token # Escape code passing through
             elif (0xD800 <= token[1] < 0xE000) and state.pedantic_surrogates:
