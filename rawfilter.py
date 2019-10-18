@@ -17,7 +17,7 @@ def decode_raw(stream, state):
             if token[0] == "ENDSTREAM":
                 yield token
             else:
-                assert token[0] == "BYTE" # Anything else shouldn't get here.
+                assert (token[0] == "WORD") and (0 <= token[1] < 256)
                 yield ("RAWBYTE", token[1])
         else: # i.e. isn't a DOCS, nor a raw part of the stream
             yield token

@@ -265,7 +265,7 @@ FrançaisFrançaisÐðĐđ￼￼
  ('CHAR', 103, 'UCS', (103,), 'UTF-32', 'UCS-4le'),
  ('CHAR', 165, 'UCS', (165,), 'UTF-32', 'UCS-4le'),
  ('CTRL', 'LF', 'ir074', 10, 'C0', 'UCS-4le'),
- ('DOCS', False, (64,)),
+ ('RDOCS', 'ECMA-35', False, (64,)),
  ('CTRL', 'LF', 'ir074', 10, 'C0', 'CL'),
  ('RDESIG', 'G0', 'ir168', '94n', (66,), True),
  ('CHAR', 12363, 'ir168', (4, 11), 'G0', 'GL'),

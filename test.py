@@ -26,7 +26,7 @@
 import io, pprint, types
 import tokenfeed, utf8filter, utf16filter, utf32filter, controlsets, fixedcontrols, invocations, \
        designations, graphsets, simpleprinter, escsequences, csisequences, controlstrings, \
-       rawfilter, unkdocsfilter
+       rawfilter, unkdocsfilter, ecma35docsfilter
 
 teststr = "\nかFoo\x7fら侅ら¥a~염盐塩鹽｜걈 ~¥\x1b[A\x1b[B\x1b]0;𐐈𐐤𐐓𐐀\x1b\\𐐈𐐤𐐓𐐀\x1b[\x20_kg¥\n"
 test2 = "\nНаш благодетель знает своё высокое призвание и будет верен ему.\n"
@@ -59,7 +59,8 @@ x = io.BytesIO(dat)
 
 print(end = "\x1Bc")
 
-for f in [tokenfeed.tokenise_stream, utf8filter.decode_utf8, utf16filter.decode_utf16,
+for f in [tokenfeed.tokenise_stream, ecma35docsfilter.decode_ecma35docs, utf8filter.decode_utf8, 
+          utf16filter.decode_utf16,
           utf32filter.decode_utf32, rawfilter.decode_raw, unkdocsfilter.decode_remaining_docs, 
           designations.decode_designations, controlsets.decode_control_sets, 
           fixedcontrols.decode_fixed_controls, escsequences.decode_esc_sequences, 

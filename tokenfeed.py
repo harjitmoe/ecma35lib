@@ -5,9 +5,8 @@
 import struct
 
 def tokenise_stream(stream, state):
-    state.mode = "normal"
+    state.hasesc = 0x1B
     state.bytewidth = 1
-    state.firstchar = True
     state.feedback = []
     # DOCS are stipulated in ISO 10646 as big-endian (>). Actually, ISO 10646 does not provide for
     # any means of embedding little-endian UTF data in ECMA-35 (i.e. our regard_bom=0). However,
@@ -29,41 +28,13 @@ def tokenise_stream(stream, state):
         if not code:
             break
         code, = struct.unpack(structmode, code)
-        if state.mode == "raw":
-            state.firstchar = False
-            yield ("BYTE", code)
-            continue
-        # If it gets here, it's not raw.
-        if state.mode == "wsr" and code == 0xFFFE and (
-                (state.firstchar and state.regard_bom) or (state.regard_bom > 1)):
-            # Note that this part will not affect UTF-8 (which will never have a FFFE codeword).
-            state.firstchar = False
-            state.endian = {">": "<", "<": ">"}[state.endian] # Requires the other byte order.
-            yield ("BOM", state.endian)
-            continue
-        if state.mode == "wsr" and code == 0xFEFF and state.firstchar and state.regard_bom:
-            # Note that this will not handle the UTF-8 BOM (which is a downstream task).
-            state.firstchar = False
-            yield ("BOM", state.endian) # Confirms the assumed byte order.
-            continue
-        state.firstchar = False
-        # Likewise won't get here if it's raw mode, so it must be wsr or normal.
-        # In either case, 0x1B is guaranteed to be a C0 code (by definition of wsr).
-        if code == 0x1B:
+        if (state.hasesc >= 0) and (code == state.hasesc):
+            # state.hasesc is set by the DOCS filter (for instance, in ECMA-35 itself and in all
+            # DOCS syntaces without a forwardslash, it's 0x1B). It may be set to -1 if there isn't
+            # an ESC (say, in transparent raw mode).
             yield ("C0", code, "CL")
-        elif state.mode == "wsr":
-            yield ("WORD", code)
         else:
-            assert state.mode == "normal"
-            assert code < 0x100
-            if code < 0x20:
-                yield ("C0", code, "CL")
-            elif code < 0x80:
-                yield ("GL", code - 0x20)
-            elif code < 0xA0:
-                yield ("C1", code - 0x80, "CR")
-            else:
-                yield ("GR", code - 0xA0)
+            yield ("WORD", code)
     yield ("ENDSTREAM",)
 
 
