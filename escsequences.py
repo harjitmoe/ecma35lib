@@ -8,36 +8,33 @@ def decode_esc_sequences(stream, state):
     active = []
     idbytes = []
     parbytes = []
-    mode = "normal"
+    inesc = False
     reconsume = None
     while 1:
         token = next(stream) if reconsume is None else reconsume
         reconsume = None
-        if mode == "normal":
+        if not inesc:
             if (token[0] == "CTRL") and (token[1] in ("ESC",)):
                 active.append(token)
-                mode = "esc"
+                inesc = True
             else:
                 yield token # Pass everything else through
         else:
-            assert mode == "esc"
-            if token[0] == "ENDSTREAM":
-                yield ("ERROR", "TRUNCESC", tuple(active), None)
-                yield token
-                return
-            elif token[0] == "UCS" and 0x20 <= token[1] < 0x7F:
+            if token[0] == "UCS" and 0x20 <= token[1] < 0x7F:
+                # If we're in a Unicode format
                 code = token[1]
             elif token[0] == "CODEWORD" and 0x20 <= token[2] < 0x7F:
-                # CODEWORD may reach here if were in an unknown DOCS with standard return.
+                # If we're in an unknown DOCS with standard return
                 code = token[2]
             elif token[0] == "GL":
+                # If we're in ECMA-35
                 code = token[1] + 0x20
             else:
                 yield ("ERROR", "TRUNCESC", tuple(active), token)
                 del active[:]
                 del idbytes[:]
                 del parbytes[:]
-                mode = "normal"
+                inesc = False
                 reconsume = token
                 continue
             active.append(token)
@@ -65,7 +62,7 @@ def decode_esc_sequences(stream, state):
                 state.feedback.append(("C1", ret[3] - 0x40, "ESC"))
             else:
                 state.feedback.append(ret)
-            mode = "normal"
+            inesc = False
             del active[:]
             del idbytes[:]
             del parbytes[:]

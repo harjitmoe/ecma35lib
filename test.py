@@ -2,6 +2,12 @@
 # -*- mode: python; coding: utf-8 -*-
 # By HarJIT in 2019.
 
+# Comments:
+# ECMA-35 (ISO/IEC 2022, JIS X 0202) has the inherent property that it is basically
+# impossible to sanitise a text in the full encoding system (as opposed to a secure
+# subset). Please do not use this facing the internet. If you do, don't say I didn't
+# warn you precisely why you shouldn't.
+
 # DONE:
 # - Tokenisation of ECMA-35 streams with DOCS-integrated ISO 10646 streams.
 # - Processing of UTF-8 sections to codepoints.
@@ -16,6 +22,7 @@
 # - Mnemonic parsing for CSI sequences, and CEX sequences for which I can get enough info.
 # STILL TO DO:
 # - More graphical sets.
+# - Proper way of switching between variants of (e.g.) JIS X 0208.
 # - Rich or annotated output of some sort.
 # - Composition sequences (Hangul ones, also backspace ones).
 # - Functionality of CSI, CEX, C1 _et cetera_ controls.
