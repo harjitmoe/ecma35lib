@@ -21,12 +21,12 @@
 # - Some sort of output.
 # - Mnemonic parsing for CSI sequences, and CEX sequences for which I can get enough info.
 # - Hangul composition sequences.
+# - Processing of UTF-1 sections to codepoints (not thoroughly tested).
 # STILL TO DO:
 # - More graphical sets.
 # - Figure out how the relevant parts of Videotex work:
 #   - The rest of the control sets.
-#   - The rest of the DOCS codes besides UTF-1.
-# - Processing of UTF-1 sections to codepoints.
+#   - The rest of the DOCS codes.
 # - Proper way of switching between variants of (e.g.) JIS X 0208.
 # - Rich or annotated output of some sort.
 # - Backspace composition sequences; some handling of the GCC CSI with respect to Unicode.
@@ -55,6 +55,7 @@ dat = (b"\x1B%G\x1B!F" + teststr.encode("utf-8-sig") + "\x1CJ염盐塩鹽\x1CK".
        b"\x1B-@" + test2.encode("koi8-r") + 
        b"\x1B-L" + test2.encode("iso-8859-5") + 
        b"\x1BB\x82\x1B[?25h\x1B(0unrecdata" +
+       "\x1B%BFran\xA0çais//".encode("latin-1") + b"\xA1\x7E\xF6\x21\x21" + # i.e. "ŝ䀖" in UTF-1
        b"\x1B%/B\x1B%@HAHA_AS_IF\xA1" # i.e. the last DOCS @ should not switch back.
 )
 
