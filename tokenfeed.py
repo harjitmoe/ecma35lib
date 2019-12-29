@@ -25,6 +25,8 @@ def _tokenise_stream(stream, state):
             break
         code, = struct.unpack(structmode, code)
         yield ("WORD", code)
+    # End sentinel signals truncation, so the individual filters don't need duplicate handling for
+    # encountering the end of the stream as opposed to merely an unexpected token.
     yield ("ENDSTREAM",)
 
 def process_stream(stream, **kwargs): # The entry point.
