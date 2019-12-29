@@ -6,7 +6,12 @@
 
 utf1docs = ("DOCS", False, (0x42,))
 
-def _decode_continuation_byte(z): # ISO-IR-178's "U" function
+# ISO-IR-178's "U" function used in the *decoder* for UTF-1.
+#  Basically: the GL range (narrowly defined) is mapped to the first 94 values, GR to the next 96.
+#  The CL, SP, DEL and CR ranges are mapped to the remaining values, solely to make it a reversible
+#   transformation (they're not actually used).
+#  The "T" function used by the *encoder* for UTF-1 is the reverse of this transform.
+def _decode_continuation_byte(z):
     if z <= 0x20:
         return z + 0xBE
     elif z <= 0x7E:
