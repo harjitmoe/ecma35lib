@@ -20,11 +20,12 @@
 # - Graphical set processing.
 # - Some sort of output.
 # - Mnemonic parsing for CSI sequences, and CEX sequences for which I can get enough info.
+# - Hangul composition sequences.
 # STILL TO DO:
 # - More graphical sets.
 # - Proper way of switching between variants of (e.g.) JIS X 0208.
 # - Rich or annotated output of some sort.
-# - Composition sequences (Hangul ones, also backspace ones).
+# - Backspace composition sequences; some handling of the GCC CSI with respect to Unicode.
 # - Functionality of CSI, CEX, C1 _et cetera_ controls.
 # - Processing of UTF-1 sections to codepoints.
 # - More control sets.
