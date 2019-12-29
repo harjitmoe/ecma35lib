@@ -5,7 +5,9 @@
 def simple_print(stream, state):
     for token in stream:
         if token[0] == "CHAR" and token[1]:
-            if not isinstance(token[1], tuple):
+            if token[5][:3] == "WTF": # wobbly UTF, i.e. an isolated surrogate
+                print(end = "\uFFFD")
+            elif not isinstance(token[1], tuple):
                 print(end = chr(token[1]))
             elif token[1][0] >= 0:
                 print(end = "".join(chr(i) for i in token[1]))

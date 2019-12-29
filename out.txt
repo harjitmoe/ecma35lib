@@ -1,8 +1,8 @@
 c﻿
 かFoo￼ら侅ら¥a~염盐塩鹽｜걈 ~¥￼￼￼𐐈𐐤𐐓𐐀￼kg¥
-￼염盐塩鹽￼�����￼￼￼￼￼￼￼￼￼￼
+￼염盐塩鹽￼���@�𐐤￼￼￼￼￼￼￼￼￼￼
 かFoo￼ら侅ら¥a~염盐塩鹽｜걈 ~¥￼￼￼𐐈𐐤𐐓𐐀￼kg¥
-��
+����
 かFoo￼ら侅ら¥a~염盐塩鹽｜걈 ~¥￼￼￼𐐈𐐤𐐓𐐀￼kg¥
 
 かFoo￼ら侅ら¥a~염盐塩鹽｜걈 ~¥￼￼￼𐐈𐐤𐐓𐐀￼kg¥
@@ -76,8 +76,9 @@ FrançaisFrançaisÐðĐđ￼￼
  ('ERROR', 'UTF8ISOLATE', (164,)),
  ('ERROR', 'UTF8TRUNCATE', (237, 160)),
  ('ERROR', 'UTF8OVERLONG', (193, 128)),
- ('ERROR', 'UTF8SURROGATE', 55297),
- ('ERROR', 'UTF8SURROGATE', 56356),
+ ('CHAR', 64, 'UCS', (64,), 'UTF-8', 'UTF-8-OVERLONG'),
+ ('ERROR', 'UTF8CESU', 66596),
+ ('CHAR', 66596, 'UCS', (66596,), 'UTF-8', 'CESU-8'),
  ('CTRL', 'RIS', 'ISO-IR', (99,), 'FIXED', 'ESC'),
  ('DOCS', False, (48,)),
  ('CODEWORD', (False, (48,)), 117),
@@ -133,7 +134,9 @@ FrançaisFrançaisÐðĐđ￼￼
  ('CHAR', 165, 'UCS', (165,), 'UTF-16', 'UCS-2be'),
  ('CTRL', 'LF', 'ir074', 10, 'C0', 'UCS-2be'),
  ('ERROR', 'UTF16ISOLATE', 56352),
+ ('CHAR', 56352, 'UCS', (56352,), 'UTF-16', 'WTF-16be'),
  ('ERROR', 'UTF16ISOLATE', 55328),
+ ('CHAR', 55328, 'UCS', (55328,), 'UTF-16', 'WTF-16be'),
  ('RDOCS', 'UTF-16', True, (76,)),
  ('BOM', '<'),
  ('CTRL', 'LF', 'ir074', 10, 'C0', 'UCS-2le'),

@@ -64,29 +64,31 @@ def decode_utf8(stream, state):
                         while utf8_brot:
                             ucs <<= 6
                             ucs |= utf8_brot.pop(0) & 0b00111111
-                        if state.pedantic_overlong:
-                            overlong = (ucs < 0x80)
-                            overlong = overlong or ((ucs < 0x800) and (utf8_seeking > 2))
-                            overlong = overlong or ((ucs < 0x10000) and (utf8_seeking > 3))
-                            if state.overlong_null and (utf8_seeking == 2) and (ucs == 0):
-                                # 0xC0 0x80 sometimes used for NUL if 0x00 is a terminator.
-                                overlong = False
-                            if overlong:
-                                firstchar = False
+                        #
+                        subtype = "UTF-8"
+                        overlong = (ucs < 0x80)
+                        overlong = overlong or ((ucs < 0x800) and (utf8_seeking > 2))
+                        overlong = overlong or ((ucs < 0x10000) and (utf8_seeking > 3))
+                        if overlong:
+                            firstchar = False
+                            if (utf8_seeking == 2) and (ucs == 0):
+                                # Two-byte U+0000 is sometimes deliberately used as an escaped NUL
+                                # in a null-terminated UTF-8 string.
+                                yield ("ERROR", "UTF8OVERLONGNULL", save_brot)
+                                subtype = "UTF-8-OVERLONG-NULL"
+                            else:
                                 yield ("ERROR", "UTF8OVERLONG", save_brot)
-                                continue
+                                subtype = "UTF-8-OVERLONG"
                         if ucs == 0xFEFF and firstchar:
                             yield ("BOM", None)
-                        elif state.pass_cesu and (0xD800 <= ucs < 0xE000):
+                        elif 0xD800 <= ucs < 0xE000:
                             # Pass surrogate halves through to the UTF-16 filter for handling.
-                            # If used, the UTF-16 filter must be used after the UTF-8 one.
+                            # The UTF-16 filter must be used after the UTF-8 one.
                             yield ("CESU", ucs)
-                        elif state.pedantic_surrogates and (0xD800 <= ucs < 0xE000):
-                            yield ("ERROR", "UTF8SURROGATE", ucs)
                         elif ucs > 0x10FFFF:
                             yield ("ERROR", "UTF8BEYOND", ucs)
                         else:
-                            yield ("UCS", ucs, "UTF-8", "UTF-8")
+                            yield ("UCS", ucs, "UTF-8", subtype)
                         firstchar = False
                         # utf8_brot is now empty, and utf8_seeking will be set by next lead byte
                     #

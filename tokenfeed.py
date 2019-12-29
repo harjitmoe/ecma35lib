@@ -28,10 +28,10 @@ def _tokenise_stream(stream, state):
     yield ("ENDSTREAM",)
 
 def process_stream(stream, **kwargs): # The entry point.
-    statedict = {"pedantic_overlong": True, "overlong_null": False, "pass_cesu": False,
-                 "pedantic_surrogates": True, "osc_bel_term": True, "cur_c0": "ir001", 
-                 "cur_c1": "RFC1345", "glset": 0, "grset": 1, "default_endian": ">", 
-                 "regard_bom": 1, "docsmode": "ecma-35",
+    statedict = {"osc_bel_term": True, 
+                 "docsmode": "ecma-35", "default_endian": ">", "regard_bom": 1, 
+                 "cur_c0": "ir001", "cur_c1": "RFC1345",
+                 "glset": 0, "grset": 1, 
                  "cur_gsets": ["ir006", "ir100", "nil", "nil"]}
     statedict.update(kwargs)
     state = types.SimpleNamespace(**statedict)

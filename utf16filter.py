@@ -18,10 +18,8 @@ def decode_utf16(stream, state):
         reconsume = None
         if (token[0] == "DOCS"):
             if utf16_lead:
-                if state.pedantic_surrogates:
-                    yield ("ERROR", "UTF16ISOLATE", utf16_lead)
-                else:
-                    yield ("UCS", utf16_lead, "UTF-16", "UCS-2" + bo)
+                yield ("ERROR", "UTF16ISOLATE", utf16_lead)
+                yield ("UCS", utf16_lead, "UTF-16", "WTF-16" + bo) # "Wobbly UTF-16"
                 utf16_lead = None
             if token in utf16docs:
                 yield ("RDOCS", "UTF-16", token[1], token[2])
@@ -37,8 +35,14 @@ def decode_utf16(stream, state):
                 if token[0] not in ("WORD", "CESU"):
                     yield token # Escape code passing through
                 elif (token[1] < 0xD800) or (token[1] >= 0xDC00):
-                    if (0xDC00 <= token[1] < 0xE000) and state.pedantic_surrogates:
-                        yield ("ERROR", "UTF16ISOLATE", token[1]) # isolated trailing surrogate
+                    if 0xDC00 <= token[1] < 0xE000:
+                        # isolated trailing surrogate
+                        if token[0] == "CESU":
+                            yield ("ERROR", "UTF8SURROGATE", token[1])
+                            yield ("UCS", token[1], "UTF-8", "WTF-8") # "Wobbly UTF-8"
+                        else:
+                            yield ("ERROR", "UTF16ISOLATE", token[1])
+                            yield ("UCS", token[1], "UTF-16", "WTF-16" + bo) # "Wobbly UTF-16"
                     elif token[1] == 0xFFFE and (
                             (firstchar and state.regard_bom) or (state.regard_bom > 1)):
                         state.endian = {">": "<", "<": ">"}[state.endian]
@@ -46,8 +50,7 @@ def decode_utf16(stream, state):
                     elif token[1] == 0xFEFF and firstchar and state.regard_bom:
                         yield ("BOM", state.endian) # Confirms the assumed byte order.
                     elif token[0] == "CESU":
-                        # Can only get here with pass_cesu ON and pedantic_surrogates OFF.
-                        yield ("UCS", token[1], "UTF-8", "WTF-8") # "Wobbly UTF-8"
+                        raise AssertionError("non-surrogate UTF-8 passed through to UTF-16 filter")
                     else:
                         bo = bomap[state.endian]
                         yield ("UCS", token[1], "UTF-16", "UCS-2" + bo) # single BMP code
@@ -59,24 +62,24 @@ def decode_utf16(stream, state):
                 if ((token[0] not in ("WORD", "CESU")) or (token[1] < 0xDC00)
                                                        or (token[1] >= 0xE000)):
                     # i.e. isn't a continuation word
-                    if state.pedantic_surrogates:
-                        yield ("ERROR", "UTF16ISOLATE", utf16_lead)
-                    elif token[0] == "CESU":
-                        # Can only get here with pass_cesu ON and pedantic_surrogates OFF.
+                    if token[0] == "CESU":
+                        yield ("ERROR", "UTF8SURROGATE", utf16_lead)
                         yield ("UCS", utf16_lead, "UTF-8", "WTF-8") # "Wobbly UTF-8"
                     else:
                         bo = bomap[state.endian]
-                        yield ("UCS", utf16_lead, "UTF-16", "UCS-2" + bo)
+                        yield ("ERROR", "UTF16ISOLATE", utf16_lead)
+                        yield ("UCS", utf16_lead, "UTF-16", "WTF-16" + bo) # "Wobbly UTF-8"
                     firstchar = False
                     utf16_lead = None
                     reconsume = token
                 else:
                     ucs = (((utf16_lead & 1023) << 10) | (token[1] & 1023)) + 0x10000
                     if token[0] == "CESU":
+                        yield ("ERROR", "UTF8CESU", ucs)
                         yield ("UCS", ucs, "UTF-8", "CESU-8")
                     else:
                         bo = bomap[state.endian]
-                        yield ("UCS", ucs, "UTF-16", "UTF-16" + bo)
+                        yield ("UCS", ucs, "UTF-16", "UTF-16" + bo) # validly coded surrogate pair
                     firstchar = False
                     utf16_lead = None
                 #
