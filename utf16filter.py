@@ -31,15 +31,18 @@ def decode_utf16(stream, state):
                 yield token
         elif (state.docsmode == "utf-16") or (token[0] == "CESU"):
             if not utf16_lead:
-                # Lead word
                 if token[0] not in ("WORD", "CESU"):
-                    yield token # Escape code passing through
-                elif (token[1] < 0xD800) or (token[1] >= 0xDC00):
+                    # ESC passing through
+                    yield token
+                    continue
+                # Lead word
+                if (token[1] < 0xD800) or (token[1] >= 0xDC00):
                     if 0xDC00 <= token[1] < 0xE000:
                         # isolated trailing surrogate
                         if token[0] == "CESU":
-                            yield ("ERROR", "UTF8SURROGATE", token[1])
-                            yield ("UCS", token[1], "UTF-8", "WTF-8") # "Wobbly UTF-8"
+                            utf = utf16_lead[2][-1] # "1" or "8"
+                            yield ("ERROR", "UTF" + utf + "SURROGATE", token[1])
+                            yield ("UCS", token[1], "UTF-" + utf, "WTF-" + utf) # "Wobbly UTF"
                         else:
                             yield ("ERROR", "UTF16ISOLATE", token[1])
                             yield ("UCS", token[1], "UTF-16", "WTF-16" + bo) # "Wobbly UTF-16"
@@ -56,27 +59,29 @@ def decode_utf16(stream, state):
                         yield ("UCS", token[1], "UTF-16", "UCS-2" + bo) # single BMP code
                     firstchar = False
                 else:
-                    utf16_lead = token[1]
+                    utf16_lead = token
             else:
                 # Trail word
                 if ((token[0] not in ("WORD", "CESU")) or (token[1] < 0xDC00)
                                                        or (token[1] >= 0xE000)):
                     # i.e. isn't a continuation word
-                    if token[0] == "CESU":
-                        yield ("ERROR", "UTF8SURROGATE", utf16_lead)
-                        yield ("UCS", utf16_lead, "UTF-8", "WTF-8") # "Wobbly UTF-8"
+                    if utf16_lead[0] == "CESU":
+                        utf = utf16_lead[2][-1] # "1" or "8"
+                        yield ("ERROR", "UTF" + utf + "SURROGATE", utf16_lead[1])
+                        yield ("UCS", utf16_lead[1], "UTF-" + utf, "WTF-" + utf) # "Wobbly UTF"
                     else:
                         bo = bomap[state.endian]
-                        yield ("ERROR", "UTF16ISOLATE", utf16_lead)
-                        yield ("UCS", utf16_lead, "UTF-16", "WTF-16" + bo) # "Wobbly UTF-8"
+                        yield ("ERROR", "UTF16ISOLATE", utf16_lead[1])
+                        yield ("UCS", utf16_lead[1], "UTF-16", "WTF-16" + bo) # "Wobbly UTF-16"
                     firstchar = False
                     utf16_lead = None
                     reconsume = token
                 else:
-                    ucs = (((utf16_lead & 1023) << 10) | (token[1] & 1023)) + 0x10000
+                    ucs = (((utf16_lead[1] & 1023) << 10) | (token[1] & 1023)) + 0x10000
                     if token[0] == "CESU":
-                        yield ("ERROR", "UTF8CESU", ucs)
-                        yield ("UCS", ucs, "UTF-8", "CESU-8")
+                        utf = utf16_lead[2][-1] # "1" or "8"
+                        yield ("ERROR", "UTF" + utf + "CESU", ucs)
+                        yield ("UCS", ucs, "UTF-" + utf, token[2])
                     else:
                         bo = bomap[state.endian]
                         yield ("UCS", ucs, "UTF-16", "UTF-16" + bo) # validly coded surrogate pair

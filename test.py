@@ -23,12 +23,14 @@
 # - Hangul composition sequences.
 # STILL TO DO:
 # - More graphical sets.
+# - Figure out how the relevant parts of Videotex work:
+#   - The rest of the control sets.
+#   - The rest of the DOCS codes besides UTF-1.
+# - Processing of UTF-1 sections to codepoints.
 # - Proper way of switching between variants of (e.g.) JIS X 0208.
 # - Rich or annotated output of some sort.
 # - Backspace composition sequences; some handling of the GCC CSI with respect to Unicode.
 # - Functionality of CSI, CEX, C1 _et cetera_ controls.
-# - Processing of UTF-1 sections to codepoints.
-# - More control sets.
 # - Announcements, and some means of verifying them.
 
 import io, pprint

@@ -28,11 +28,12 @@ def decode_utf8(stream, state):
                 yield token
         elif state.docsmode == "utf-8":
             if not utf8_brot:
-                # Lead byte
                 if token[0] != "WORD":
-                    yield token # Escape code passing through
-                    firstchar = False
-                elif token[1] < 0x80:
+                    # ESC passing through
+                    yield token
+                    continue
+                # Lead byte
+                if token[1] < 0x80:
                     yield ("UCS", token[1], "UTF-8", "ASCII") # 1-byte code
                     firstchar = False
                 elif (token[1] & 0b11000000) == 0x80:
@@ -84,7 +85,7 @@ def decode_utf8(stream, state):
                         elif 0xD800 <= ucs < 0xE000:
                             # Pass surrogate halves through to the UTF-16 filter for handling.
                             # The UTF-16 filter must be used after the UTF-8 one.
-                            yield ("CESU", ucs)
+                            yield ("CESU", ucs, "CESU-8")
                         elif ucs > 0x10FFFF:
                             yield ("ERROR", "UTF8BEYOND", ucs)
                         else:

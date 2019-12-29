@@ -39,9 +39,9 @@ def process_stream(stream, **kwargs): # The entry point.
     state = types.SimpleNamespace(**statedict)
     import utf8filter, utf16filter, utf32filter, controlsets, fixedcontrols, invocations, \
        designations, graphsets, simpleprinter, escsequences, csisequences, controlstrings, \
-       rawfilter, unkdocsfilter, ecma35docsfilter, hangulfillers
+       rawfilter, unkdocsfilter, ecma35docsfilter, hangulfillers, utf1filter
     for f in [_tokenise_stream, ecma35docsfilter.decode_ecma35docs, utf8filter.decode_utf8, 
-              utf16filter.decode_utf16,
+              utf1filter.decode_utf1, utf16filter.decode_utf16,
               utf32filter.decode_utf32, rawfilter.decode_raw, unkdocsfilter.decode_remaining_docs, 
               designations.decode_designations, controlsets.decode_control_sets, 
               fixedcontrols.decode_fixed_controls, escsequences.decode_esc_sequences, 
