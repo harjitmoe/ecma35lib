@@ -13,6 +13,11 @@ def simple_print(stream, state):
                 print(end = "".join(chr(i) for i in token[1]))
             else:
                 raise ValueError("prefix diacritics unhandled")
+        elif token[0] == "COMPCHAR":
+            if token[1][0] >= 0:
+                print(end = "".join(chr(i) for i in token[1]))
+            else:
+                raise ValueError("prefix diacritics unhandled")
         elif token[0] in ("RAWBYTE",):
             print(end = "[{:02X}]".format(token[1]))
         elif token[0] == "CTRL" and token[1] == "LF":

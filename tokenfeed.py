@@ -37,7 +37,7 @@ def process_stream(stream, **kwargs): # The entry point.
     state = types.SimpleNamespace(**statedict)
     import utf8filter, utf16filter, utf32filter, controlsets, fixedcontrols, invocations, \
        designations, graphsets, simpleprinter, escsequences, csisequences, controlstrings, \
-       rawfilter, unkdocsfilter, ecma35docsfilter
+       rawfilter, unkdocsfilter, ecma35docsfilter, hangulfillers
     for f in [_tokenise_stream, ecma35docsfilter.decode_ecma35docs, utf8filter.decode_utf8, 
               utf16filter.decode_utf16,
               utf32filter.decode_utf32, rawfilter.decode_raw, unkdocsfilter.decode_remaining_docs, 
@@ -45,6 +45,7 @@ def process_stream(stream, **kwargs): # The entry point.
               fixedcontrols.decode_fixed_controls, escsequences.decode_esc_sequences, 
               csisequences.decode_csi_sequences, controlstrings.decode_control_strings, 
               invocations.decode_invocations, graphsets.decode_graphical_sets,
+              hangulfillers.proc_hangul_fillers,
               simpleprinter.simple_print]:
         stream = f(stream, state)
     yield from stream
