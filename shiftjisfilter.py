@@ -61,7 +61,7 @@ def decode_shiftjis(stream, state):
                     yield ("G1", ku, "SJIS")
                     yield ("G1", ten, "SJIS")
                 elif ku <= 103:
-                    yield ("G3", (1, 8, 3, 4, 5, 12, 13, 14, 15)[ku - 94], "SJIS")
+                    yield ("G3", (1, 8, 3, 4, 5, 12, 13, 14, 15)[ku - 95], "SJIS")
                     yield ("G3", ten, "SJIS")
                 else:
                     yield ("G3", ku - 104 + 78, "SJIS")
