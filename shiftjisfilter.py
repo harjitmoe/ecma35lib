@@ -6,6 +6,10 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+# Note that this works by interpreting Shift_JIS codes as the correspending EUC-JP codes would
+# have been interpreted; it is therefore possible to make full use of designation sequences to,
+# for example, switch to a certain edition of JIS X 0208, or switch to JIS X 0213 (inc. plane 2).
+
 # Completely private (hence in col 3); should come up with some way to config this.
 shiftjisdocs = ("DOCS", False, (0x30,))
 
@@ -23,16 +27,18 @@ def decode_shiftjis(stream, state):
                 yield ("RDOCS", "Shift_JIS", token[1], token[2])
                 state.bytewidth = 1
                 state.docsmode = "shift_jis"
-                # Sensible-ish defaults (entirety of ir159 is inaccessible)
-                state.cur_gsets = ["ir014", "ir168web", "ir013", "nil"]
+                # Sensible-ish defaults (corresponding to Windows-31J, or WHATWG's Shift_JIS)
+                state.cur_gsets = ["ir014", "ir168web", "ir013", "ibmsjisext"]
             else:
                 yield token
         elif state.docsmode == "shift_jis" and token[0] == "WORD":
             assert (token[1] < 0x100), token
             if sjis_lead is None:
                 if token[1] < 0x20:
-                    yield ("C0", token[1], "CL")
+                    yield ("C0", token[1], "SJISONEBYTE")
                 elif token[1] < 0x80:
+                    # Note: using "G0" rather than "GL" will break ESC entirely, since it relies
+                    #       on raw GL (or UCS) opcodes going through (for obvious reasons).
                     yield ("GL", token[1] - 0x20)
                 elif token[1] == 0x80:
                     yield ("G2", 0x40, "SJISONEBYTE")

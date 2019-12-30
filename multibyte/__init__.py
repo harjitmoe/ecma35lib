@@ -44,6 +44,36 @@ def _read(fil, whatwgjis=False):
     del _temp[:]
     return r
 
+def _read_jistrailer(fil):
+    for _i in open(os.path.join(_dir, fil), "r"):
+        if _i.strip() and (_i[0] != "#"):
+            byts, ucs = _i.split("\t", 2)[:2]
+            #
+            pointer = int(byts.strip(), 10)
+            ku = (pointer // 94) + 1
+            ten = (pointer % 94) + 1
+            if ku <= 94:
+                continue
+            elif ku <= 103:
+                g3ku = (1, 8, 3, 4, 5, 12, 13, 14, 15)[ku - 95]
+            else:
+                g3ku = ku + 78 - 104
+            g3pointer = ((g3ku - 1) * 94) + (ten - 1)
+            #
+            assert ucs[:2] in ("0x", "U+")
+            ucs = int(ucs[2:], 16)
+            #
+            if len(_temp) > g3pointer:
+                assert _temp[g3pointer] is None
+                _temp[g3pointer] = ucs
+            else:
+                while len(_temp) < g3pointer:
+                    _temp.append(None)
+                _temp.append(ucs)
+    r = tuple(_temp) # Making a tuple makes a copy, of course.
+    del _temp[:]
+    return r
+
 # JIS C 6226:1978 / JIS X 0208:1978
 graphdata.gsets["ir042"] = jisx0208_gzdm4_at = (94, 2, _read("x208_1978.txt"))
 # GB 2312 (EUC-CN RHS)
@@ -58,6 +88,7 @@ graphdata.gsets["ir159"] = jisx0212 = (94, 2, _read("index-jis0212.txt", whatwgj
 graphdata.gsets["ir168"] = jisx0208_irr_at_gzdm4_b = (94, 2, _read("x208_1990.txt"))
 # JIS X 0208, Microsoft and WHATWG version, as specified for use in HTML5
 graphdata.gsets["ir168web"] = jisx0208_html5 = (94, 2, _read("index-jis0208.txt", whatwgjis=True))
+graphdata.gsets["ibmsjisext"] = sjis_html5_g3 = (94, 2, _read_jistrailer("index-jis0208.txt"))
 
 
 

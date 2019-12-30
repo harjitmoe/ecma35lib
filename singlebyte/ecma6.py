@@ -254,7 +254,14 @@ for (name, (myvars, override)) in raw_variants.items():
 
 # Assorted supplements
 
+# JIS C 6220 / JIS X 0201 Katakana set
 graphdata.gsets["ir013"] = (94, 1, tuple(range(0xFF61, 0xFFA0)) + ((None,) * 31))
+# IBM's 4992 (or unrestricted 896)
+graphdata.gsets["ir013ibm"] = (94, 1, tuple(range(0xFF61, 0xFFA0)) + (
+                0xA2, 0xA3, 0xAC, 0x5C, 0x7E) + ((None,) * 26))
+# Apple's MacRoman, converted by correspondences between IBM's 1041 and 4992.
+graphdata.gsets["ir013apple"] = (94, 1, tuple(range(0xFF61, 0xFFA0)) + (
+                0x5C, 0xA0, 0xA9, 0x2122, 0x2026) + ((None,) * 26))
 
 
 
