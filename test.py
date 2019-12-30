@@ -2,36 +2,9 @@
 # -*- mode: python; coding: utf-8 -*-
 # By HarJIT in 2019.
 
-# Comments:
-# ECMA-35 (ISO/IEC 2022, JIS X 0202) has the inherent property that it is basically
-# impossible to sanitise a text in the full encoding system (as opposed to a secure
-# subset). Please do not use this facing the internet. If you do, don't say I didn't
-# warn you precisely why you shouldn't.
-
-# DONE:
-# - Tokenisation of ECMA-35 streams with DOCS-integrated ISO 10646 streams.
-# - Processing of UTF-8 sections to codepoints.
-# - Processing of UTF-16 sections to codepoints.
-# - Processing of UTF-32 sections to codepoints.
-# - Opcoding C0 and C1 control characters.
-# - Opcoding the fixed controls.
-# - Parsing designator sequences.
-# - Invocation processing (i.e. resolving GL/GR tokens to G0/G1/G2/G3).
-# - Graphical set processing.
-# - Some sort of output.
-# - Mnemonic parsing for CSI sequences, and CEX sequences for which I can get enough info.
-# - Hangul composition sequences.
-# - Processing of UTF-1 sections to codepoints (not thoroughly tested).
-# STILL TO DO:
-# - More graphical sets.
-# - Figure out how the relevant parts of Videotex work:
-#   - The rest of the control sets.
-#   - The rest of the DOCS codes.
-# - Proper way of switching between variants of (e.g.) JIS X 0208.
-# - Rich or annotated output of some sort.
-# - Backspace composition sequences; some handling of the GCC CSI with respect to Unicode.
-# - Functionality of CSI, CEX, C1 _et cetera_ controls.
-# - Announcements, and some means of verifying them.
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import io, pprint
 import tokenfeed
@@ -41,7 +14,7 @@ test2 = "\nНаш благодетель знает своё высокое пр
 
 dat = (b"\x1B%G\x1B!F" + teststr.encode("utf-8-sig") + "\x1CJ염盐塩鹽\x1CK".encode("utf-8") +
        b"\xa4\xed\xa0\xc1\x80\xed\xa0\x81\xed\xb0\xa4" + # Deliberately invalid UTF-8
-       b"\x1Bc\x1B%0unrecdata" + # Unrecognised WSR DOCS, should stay as WORD ops in output.
+       b"\x1Bc\x1B%9unrecdata" + # Unrecognised WSR DOCS, should stay as WORD ops in output.
        b"\x1B%/L" + teststr.encode("utf-16be") + 
        b"\xDC\x20\xD8\x20" +                             # Deliberately invalid UTF-16BE
        "\x1B%/L\uFFFE".encode("utf-16be") + teststr.encode("utf-16le") + 
@@ -56,6 +29,7 @@ dat = (b"\x1B%G\x1B!F" + teststr.encode("utf-8-sig") + "\x1CJ염盐塩鹽\x1CK".
        b"\x1B-L" + test2.encode("iso-8859-5") + 
        b"\x1BB\x82\x1B[?25h\x1B(0unrecdata" +
        "\x1B%BFran\xA0çais//".encode("latin-1") + b"\xA1\x7E\xF6\x21\x21" + # i.e. "ŝ䀖" in UTF-1
+       "\x1B%0⑨/⑨ちるのﾁﾙﾉ".encode("ms-kanji") + 
        b"\x1B%/B\x1B%@HAHA_AS_IF\xA1" # i.e. the last DOCS @ should not switch back.
 )
 

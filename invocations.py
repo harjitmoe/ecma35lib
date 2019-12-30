@@ -2,6 +2,10 @@
 # -*- mode: python; coding: utf-8 -*-
 # By HarJIT in 2019.
 
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
 def decode_invocations(stream, state):
     workingsets = ("G0", "G1", "G2", "G3")
     sizes = [1, None, None, None]

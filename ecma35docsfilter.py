@@ -2,11 +2,14 @@
 # -*- mode: python; coding: utf-8 -*-
 # By HarJIT in 2019.
 
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
 ecma35docs = ("DOCS", False, (0x40,))
 
 def decode_ecma35docs(stream, state):
     for token in stream:
-        reconsume = None
         if (token[0] == "DOCS"):
             if token == ecma35docs:
                 yield ("RDOCS", "ECMA-35", token[1], token[2])

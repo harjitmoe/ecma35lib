@@ -2,6 +2,10 @@
 # -*- mode: python; coding: utf-8 -*-
 # By HarJIT in 2019.
 
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
 import graphdata
 
 # ISO/IEC 10367 G0 set (i.e. same as ECMA-6:US, current ECMA-6:IRV, US-ASCII)
@@ -248,6 +252,9 @@ for (name, (myvars, override)) in raw_variants.items():
                 myset[frm - 0x21] = None
     graphdata.gsets[name] = (94, 1, tuple(myset))
 
+# Assorted supplements
+
+graphdata.gsets["ir013"] = (94, 1, tuple(range(0xFF61, 0xFFA0)) + ((None,) * 31))
 
 
 
