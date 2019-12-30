@@ -41,16 +41,22 @@ def decode_shiftjis(stream, state):
                     #       on raw GL (or UCS) opcodes going through (for obvious reasons).
                     yield ("GL", token[1] - 0x20)
                 elif token[1] == 0x80:
+                    # With reference to correspondances between IBM's 1041 and 4992 (full 896)
                     yield ("G2", 0x40, "SJISONEBYTE")
                 elif token[1] < 0xA0:
+                    # Lead bytes before the single-byte Katakana
                     sjis_lead = token
                 elif token[1] == 0xA0:
-                    yield ("G2", 0x41, "SJIS")
+                    # Also with reference to IBM 1041/4992.
+                    yield ("G2", 0x41, "SJISONEBYTE")
                 elif token[1] < 0xE0:
+                    # Standard mapping of the JIS X 0201 Kana set to Shift_JIS.
                     yield ("G2", token[1] - 0xA0, "SJISONEBYTE")
                 elif token[1] < 0xFD:
+                    # Lead bytes after the single-byte Katakana, including those beyond JIS X 0208
                     sjis_lead = token
                 else:
+                    # Also with reference to IBM 1041/4992.
                     yield ("G2", token[1] - 0xFD + 0x42, "SJISONEBYTE")
             else:
                 if token[1] < 0x40 or token[1] > 0xFC or token[1] == 0x7F:
@@ -64,12 +70,21 @@ def decode_shiftjis(stream, state):
                 ku = (pointer // 94) + 1
                 ten = (pointer % 94) + 1
                 if ku <= 94:
+                    # JIS X 0208 or JIS X 0213 plane 1 rows.
                     yield ("G1", ku, "SJIS")
                     yield ("G1", ten, "SJIS")
                 elif ku <= 103:
+                    # JIS X 0213 plane 2 Kanji rows interspersed amongst JIS X 0212 non-Kanji.
+                    # Or it could be part of a purpose-designed SJIS trailer set which I've
+                    # re-ordered homologously to JIS X 0213 plane 2 so that it can be put in G3.
+                    # Shift_JISx0213's placement of row 8 between rows 1 and 3 means that the usual
+                    # correspondence between odd/evenness of the ku and the range over which the
+                    # ten can be considered to be encoded is preserved.
                     yield ("G3", (1, 8, 3, 4, 5, 12, 13, 14, 15)[ku - 95], "SJIS")
                     yield ("G3", ten, "SJIS")
                 else:
+                    # JIS X 0213 plane 2 Kanji rows following JIS X 0212 Kanji.
+                    # Same as above applies regarding other possible sets.
                     yield ("G3", ku - 104 + 78, "SJIS")
                     yield ("G3", ten, "SJIS")
                 sjis_lead = None
