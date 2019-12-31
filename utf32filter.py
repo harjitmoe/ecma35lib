@@ -41,9 +41,6 @@ def decode_utf32(stream, state):
             elif token[1] == 0xFEFF and firstchar and state.regard_bom:
                 yield ("BOM", state.endian) # Confirms the assumed byte order.
             else:
-                if token[1] == 0xFFFE:
-                    print(token, firstchar, state.regard_bom)
-                    raise AssertionError
                 bo = bomap[state.endian]
                 yield ("UCS", token[1], "UTF-32", subtype + bo)
             firstchar = False

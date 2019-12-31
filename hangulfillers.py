@@ -18,7 +18,10 @@ repertoire = set(finals.keys()) | set(vowels.keys()) | set(initials.keys())
 
 def proc_hangul_fillers(stream, state):
     first = second = third = fourth = None
-    for token in stream:
+    reconsume = None
+    while 1:
+        token = next(stream) if reconsume is None else reconsume
+        reconsume = None
         if first is not None:
             assert fourth is None # Shouldn't remain non-None across iterations.
             if token[0] != "CHAR" or chr(token[1]) not in repertoire:
@@ -29,7 +32,8 @@ def proc_hangul_fillers(stream, state):
                 if third is not None:
                     yield third
                 first = second = third = None
-                state.feedback.append(token) # Don't swallow upcoming token
+                reconsume = token
+                continue
             elif third is not None:
                 fourth = token
                 try:
