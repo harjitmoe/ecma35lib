@@ -22,7 +22,7 @@ FrançaisFrançaisÐðĐđ￼￼
 Наш благодетель знает своё высокое призвание и будет верен ему.
 ￼￼￼￼￼￼￼￼￼￼￼￼Français//ŝ䀖
 ⑨/⑨ちるの＇ﾁﾙﾉ＇
-　♪リンゴ可愛いや可愛いやリンゴ。半世紀も前に流行した「リンゴの歌」がぴったりするかもしれない。米アップルコンピュータ社のパソコン「マック（マッキントッシュ）」を、こよなく愛する人たちのことだ。「アップル信者」なんて言い方まである。
+Öl fließt Москва　♪リンゴ可愛いや可愛いやリンゴ。半世紀も前に流行した「リンゴの歌」がぴったりするかもしれない。米アップルコンピュータ社のパソコン「マック（マッキントッシュ）」を、こよなく愛する人たちのことだ。「アップル信者」なんて言い方まである。
 [1B][25][40][48][41][48][41][5F][41][53][5F][49][46][A1]￼
 
 [('RDOCS', 'ECMA-35', False, (64,)),
@@ -665,6 +665,23 @@ FrançaisFrançaisÐðĐđ￼￼
  ('CHAR', 65417, 'ir013', (41,), 'G2', 'SJISONEBYTE'),
  ('CHAR', 65287, 'ibmsjisext', (89, 23), 'G3', 'SJIS'),
  ('CTRL', 'LF', 'ir001', 10, 'C0', 'SJISONEBYTE'),
+ ('CHAR', 214, 'UCS', (214,), 'SCSU', 'SCSU-LDW'),
+ ('CHAR', 108, 'UCS', (108,), 'SCSU', 'SCSU-ASCII'),
+ ('CTRL', 'SP', 'UCS', 32, 'SCSU', 'SCSU-ASCII'),
+ ('CHAR', 102, 'UCS', (102,), 'SCSU', 'SCSU-ASCII'),
+ ('CHAR', 108, 'UCS', (108,), 'SCSU', 'SCSU-ASCII'),
+ ('CHAR', 105, 'UCS', (105,), 'SCSU', 'SCSU-ASCII'),
+ ('CHAR', 101, 'UCS', (101,), 'SCSU', 'SCSU-ASCII'),
+ ('CHAR', 223, 'UCS', (223,), 'SCSU', 'SCSU-LDW'),
+ ('CHAR', 116, 'UCS', (116,), 'SCSU', 'SCSU-ASCII'),
+ ('CTRL', 'SP', 'UCS', 32, 'SCSU', 'SCSU-ASCII'),
+ ('SCSUSHIFT', 2),
+ ('CHAR', 1052, 'UCS', (1052,), 'SCSU', 'SCSU-LDW'),
+ ('CHAR', 1086, 'UCS', (1086,), 'SCSU', 'SCSU-LDW'),
+ ('CHAR', 1089, 'UCS', (1089,), 'SCSU', 'SCSU-LDW'),
+ ('CHAR', 1082, 'UCS', (1082,), 'SCSU', 'SCSU-LDW'),
+ ('CHAR', 1074, 'UCS', (1074,), 'SCSU', 'SCSU-LDW'),
+ ('CHAR', 1072, 'UCS', (1072,), 'SCSU', 'SCSU-LDW'),
  ('CHAR', 12288, 'UCS', (12288,), 'SCSU', 'SCSU-SW'),
  ('SCSUDESIG', 3, 76),
  ('CHAR', 9834, 'UCS', (9834,), 'SCSU', 'SCSU-LDW'),
