@@ -33,6 +33,7 @@ file, You can obtain one at https://mozilla.org/MPL/2.0/
 - Processing of UTF-16 sections to codepoints.
 - Processing of UTF-32 sections to codepoints.
 - Processing of UTF-1 sections to codepoints (not thoroughly tested).
+- Processing of SCSU sections to codepoints (not thoroughly tested).
 - Opcoding C0 and C1 control characters.
 - Opcoding the fixed controls.
 - Parsing designator sequences.
@@ -45,7 +46,6 @@ file, You can obtain one at https://mozilla.org/MPL/2.0/
 # Still to do
 
 - More graphical sets.
-- SCSU support.
 - Proper handling of the T.51 / T.61 and ANSEL combining sequences. Probably don't need to stick to
   any hardcoded repertoire though, since (a) we're not trying to implement ISO/IEC 6937, but rather
   T.51 (which confines the entire ISO 6937 repertoire definition (rather than just one of the 

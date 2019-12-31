@@ -89,7 +89,7 @@ def decode_utf8(stream, state):
                         elif 0xD800 <= ucs < 0xE000:
                             # Pass surrogate halves through to the UTF-16 filter for handling.
                             # The UTF-16 filter must be used after the UTF-8 one.
-                            yield ("CESU", ucs, "CESU-8")
+                            yield ("CESU", ucs, "8")
                         elif ucs > 0x10FFFF:
                             yield ("ERROR", "UTF8BEYOND", ucs)
                         else:

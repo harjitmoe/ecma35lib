@@ -31,7 +31,8 @@ def simple_print(stream, state):
         elif token[0] == "CTRL" and token[1] in ("SI", "SO", "LS0", "LS1", "LS2", "LS3",
                                                  "LS1R", "LS2R", "LS3R"):
             pass
-        elif token[0] in ("DESIG", "RDESIG", "BOM", "DOCS", "RDOCS", "SINGLEOVER"):
+        elif token[0] in ("DESIG", "RDESIG", "BOM", "DOCS", "RDOCS", "SINGLEOVER", "SCSUSHIFT",
+                          "SCSUDESIG"):
             pass
         elif token[0] == "ERROR":
             print(end = "\uFFFD")

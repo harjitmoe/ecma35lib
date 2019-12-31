@@ -156,10 +156,12 @@ c0sets = {# The ECMA-6 controls, i.e. originating from 1967 edition ASCII:
           # SD* designates and invokes a window, SC* locking shifts to it, SQ* single shifts to it.
           # SQ0 is also used to escape the usual ASCII use of the C0 bytes through.
           # *X is for the supplementary region. *U is for modified UTF-16 (or UCS-2 for SQU).
-          "scsu": ("NUL", "SQ0", "SQ1", "SQ2", "SQ3", "SQ4", "SQ5", "SQ6", 
-                   "SQ7", "HT", "LF", "SDX", None, "CR", "SQU", "SCU",
-                   "SC0", "SC1", "SC2", "SC3", "SC4", "SC5", "SC6", "SC7", 
-                   "SD0", "SD1", "SD2", "SD3", "SD4", "SD5", "SD6", "SD7"),
+          # Not actually used like this (no ESC), but here for educational reference:
+          #"scsu": ("NUL", "SQ0", "SQ1", "SQ2", "SQ3", "SQ4", "SQ5", "SQ6", 
+          #         "SQ7", "HT", "LF", "SDX", None, "CR", "SQU", "SCU",
+          #         "SC0", "SC1", "SC2", "SC3", "SC4", "SC5", "SC6", "SC7", 
+          #         "SD0", "SD1", "SD2", "SD3", "SD4", "SD5", "SD6", "SD7"),
+          #
           # EBCDIC, as translated using the EBCDIC bytes table from UTR 16.
           # Not that much changed from ASCII, although LF has been
           # swabbed out with NL (that is, NEL).
