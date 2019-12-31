@@ -45,6 +45,7 @@ file, You can obtain one at https://mozilla.org/MPL/2.0/
 # Still to do
 
 - More graphical sets.
+- SCSU support.
 - Proper handling of the T.51 / T.61 and ANSEL combining sequences. Probably don't need to stick to
   any hardcoded repertoire though, since (a) we're not trying to implement ISO/IEC 6937, but rather
   T.51 (which confines the entire ISO 6937 repertoire definition (rather than just one of the 
@@ -60,6 +61,7 @@ file, You can obtain one at https://mozilla.org/MPL/2.0/
   - The rest of the control sets.
   - The rest of the DOCS codes.
 - Announcements, and some means of verifying them. Preferably by generating ERROR tokens.
-- Some sort of decent API for using in from outside.
+- Some sort of encoder.
+- Some sort of decent API for using it from outside.
 
 
