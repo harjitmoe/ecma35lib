@@ -70,10 +70,18 @@ def decode_scsu(stream, state):
                 window = state.cur_dynwindows[pending[1]]
                 offset = _get_offset(window)
                 if token[1] >= 0x80 and offset is not None:
-                    yield ("UCS", token[1] - 0x80 + offset, "SCSU", "SCSU-SDW")
+                    if state.cur_windex == pending[1]:
+                        yield ("ERROR", "SCSUREDUNDANTSQDW", token[1])
+                        yield ("UCS", token[1] - 0x80 + offset, "SCSU", "SCSU-SDW-REDUNDANT")
+                    else:
+                        yield ("UCS", token[1] - 0x80 + offset, "SCSU", "SCSU-SDW")
                 elif token[1] < 0x80:
                     offset = _staticoffset[pending[1]]
-                    yield ("UCS", token[1] + offset, "SCSU", "SCSU-SW")
+                    if (offset == 0) and ((token[1] > 0x1F) or (token[1] in (0x0, 0x9, 0xA, 0xD))):
+                        yield ("ERROR", "SCSUREDUNDANTSQZERO", token[1])
+                        yield ("UCS", token[1] + offset, "SCSU", "SCSU-SW-REDUNDANT")
+                    else:
+                        yield ("UCS", token[1] + offset, "SCSU", "SCSU-SW")
                 else:
                     yield ("ERROR", "SCSUINVALIDWINDOW", (pending[1], token[1] - 0x80))
                 pending = None
@@ -141,12 +149,12 @@ def decode_scsu(stream, state):
                     word = (pending[1] << 8) | token[1]
                     if 0xD800 <= word < 0xE000:
                         yield ("ERROR", "SCSUUQUSURROGATE", word)
-                        yield ("UCS", word, "SCSU", "WTF-SCSU-DUCS")
+                        yield ("UCS", word, "SCSU", "WTF-SCSU-DUCS-UQU")
                     elif 0xE000 <= word < 0xF300:
-                        yield ("UCS", word, "SCSU", "SCSU-DUCS")
+                        yield ("UCS", word, "SCSU", "SCSU-DUCS-UQU")
                     else:
                         yield ("ERROR", "SCSUREDUNDANTUQU", word)
-                        yield ("UCS", word, "SCSU", "SCSU-DUCS")
+                        yield ("UCS", word, "SCSU", "SCSU-DUCS-UQU-REDUNDANT")
                     pending = None
             elif pending[0] == "UD":
                 yield ("SCSUDESIG", pending[1], token[1])
