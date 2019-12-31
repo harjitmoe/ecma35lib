@@ -10,7 +10,7 @@ import struct, types
 
 def _tokenise_stream(stream, state):
     state.bytewidth = 1
-    state.feedback = []
+    state.feedback = [("DOCS", False, (0x40,))]
     # DOCS are stipulated in ISO 10646 as big-endian (>). Actually, ISO 10646 does not provide for
     # any means of embedding little-endian UTF data in ECMA-35 (i.e. our regard_bom=0). However,
     # it isn't the last word on this matter (WHATWG stipulates that unmarked UTF-16 is little-
@@ -34,13 +34,7 @@ def _tokenise_stream(stream, state):
     yield ("ENDSTREAM",)
 
 def process_stream(stream, **kwargs): # The entry point.
-    statedict = {"osc_bel_term": True, 
-                 "docsmode": "ecma-35", "default_endian": ">", "regard_bom": 1, 
-                 "cur_c0": "ir001", "cur_c1": "RFC1345",
-                 "glset": 0, "grset": 1, 
-                 "cur_gsets": ["ir006", "ir100", "nil", "nil"],
-                 "cur_dynwindows": [0x1, 0xF9, 0x8, 0xC, 0x12, 0xFD, 0xFE, 0xA6],
-                 "cur_windex": 0}
+    statedict = {"osc_bel_term": True, "default_endian": ">", "regard_bom": 1, "docsmode": None}
     statedict.update(kwargs)
     state = types.SimpleNamespace(**statedict)
     import utf8filter, utf16filter, utf32filter, controlsets, fixedcontrols, invocations, \

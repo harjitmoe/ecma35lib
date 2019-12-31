@@ -30,6 +30,8 @@ def decode_scsu(stream, state):
             if token == scsudocs:
                 state.bytewidth = 1
                 state.docsmode = "scsu-1byte"
+                state.cur_dynwindows = [0x1, 0xF9, 0x8, 0xC, 0x12, 0xFD, 0xFE, 0xA6]
+                state.cur_windex = 0
             else:
                 yield token
         elif state.docsmode == "scsu-1byte" and token[0] == "WORD":

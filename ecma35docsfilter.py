@@ -15,6 +15,11 @@ def decode_ecma35docs(stream, state):
                 yield ("RDOCS", "ECMA-35", token[1], token[2])
                 state.bytewidth = 1
                 state.docsmode = "ecma-35"
+                state.cur_c0 = "ir001"
+                state.cur_c1 = "RFC1345"
+                state.glset = 0
+                state.grset = 1
+                state.cur_gsets = ["ir006", "ir100", "nil", "nil"]
             else:
                 yield token
         elif state.docsmode == "ecma-35" and token[0] == "WORD":
