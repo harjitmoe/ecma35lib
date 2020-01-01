@@ -2,7 +2,11 @@
 # -*- mode: python; coding: utf-8 -*-
 # By HarJIT in 2019.
 
-import graphdata
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+from ecma35.data import graphdata
 
 # The portions of EBCDIC sets which end up in GL or GR when mapped according to UTR 16.
 # Obviously a highly artificial construction: EBCDIC sets have no concept of

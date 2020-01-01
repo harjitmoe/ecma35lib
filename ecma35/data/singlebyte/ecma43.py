@@ -2,7 +2,11 @@
 # -*- mode: python; coding: utf-8 -*-
 # By HarJIT in 2019.
 
-import graphdata
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+from ecma35.data import graphdata
 
 # ISO/IEC 10367 G0 set (i.e. same as ECMA-6:US, current ECMA-6:IRV, US-ASCII)
 graphdata.gsets["ir006"] = (94, 1, tuple(range(0x21, 0x7F)))

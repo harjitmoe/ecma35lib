@@ -37,7 +37,8 @@ def process_stream(stream, **kwargs): # The entry point.
     statedict = {"osc_bel_term": True, "default_endian": ">", "regard_bom": 1, "docsmode": None}
     statedict.update(kwargs)
     state = types.SimpleNamespace(**statedict)
-    import utf8filter, utf16filter, utf32filter, controlsets, fixedcontrols, invocations, \
+    from ecma35.decoder import utf8filter, utf16filter, utf32filter, \
+       controlsets, fixedcontrols, invocations, \
        designations, graphsets, simpleprinter, escsequences, csisequences, controlstrings, \
        rawfilter, unkdocsfilter, ecma35docsfilter, hangulfillers, utf1filter, shiftjisfilter, \
        scsufilter

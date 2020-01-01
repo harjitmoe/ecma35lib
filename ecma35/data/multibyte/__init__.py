@@ -7,7 +7,7 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import os
-import graphdata
+from ecma35.data import graphdata
 _dir = os.path.dirname(os.path.abspath(__file__))
 
 _temp = []

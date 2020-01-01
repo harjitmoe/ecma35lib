@@ -6,7 +6,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import graphdata
+from ecma35.data import graphdata
 
 def _tonumber(s):
     if (len(s) != 2) or (s[0] != "G") or (s[1] not in "0123"):

@@ -6,7 +6,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-# Note that this also handles surrogate pairs retrieved by DOCN filters further in, either as an
+# Note that this also handles surrogate pairs retrieved by DOCS filters upstream, either as an
 # error case (UTF-8, UTF-1, UTF-32) or as a legitimate part of the respective encodings 
 # (SCSU, LMBCS, UTF-7). Hence, it must be used after most UCS formats (except maybe GB18030).
 
