@@ -38,7 +38,8 @@ def decode_fixed_controls(stream, state):
         elif 0x30 <= token[3] < 0x40:
             seq = ((token[1],) if token[1] is not None else ()) + token[2] + (token[3],)
             yield ("CTRL", _proc_pu(token), "ISO-IR", seq, "FIXED", "ESC")
-        # NOTE: assumes C1 controls already recognised as such by tokenfeed, and as such won't
+        # NOTE: assumes C1 controls already recognised as such by decode_esc_sequences (which is
+        # below here, but responsible for all ESC tokens via state.feedback), and as such won't
         # still show up as control escapes. Otherwise, we'd need to test that the ones without the
         # intervening "#" byte aren't in fact C1 controls.
         else:

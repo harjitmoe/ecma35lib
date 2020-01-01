@@ -44,7 +44,8 @@ def decode_control_sets(stream, state):
                     yield ("ERROR", "UNDEFC0", token[1], state.cur_c0)
             else:
                 yield ("CTRL", ctr, state.cur_c0, token[1], "C0", token[2])
-        # NOTE: assumes C1 control escape sequences already recognised as such by tokenfeed.
+        # NOTE: assumes C1 escapes will be recognised as such by decode_esc_sequences, and sent
+        # back through as "C1" tokens via state.feedback.
         elif token[0] == "C1":
             ctr = controldata.c1sets[state.cur_c1][token[1]]
             if ctr is None:

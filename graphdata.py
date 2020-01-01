@@ -7,16 +7,17 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 # Note: since gsets specifies length as second member, no more need for "94n" distinct from "94".
-# Necessary since a set could have a length of, say, 3 (take the EUC-TW (DRCS-ish) G2 set).
+# Necessary since a set could have a length of, say, 3 (take the EUC-TW G2 set).
 # Also, the individual characters may be:
-#  - None, meaning reserved space.
+#  - None, meaning reserved encoding space.
 #  - An integer, giving an equivalent UCS codepoint.
 #  - A tuple of:
 #     - Positive integers, giving an equivalent UCS codepoint sequence.
 #     - The number -1 and one or more positive integers, giving one or more combining diacritics
 #       to be combined with the next (not previous) spacing character (e.g. those from ANSEL or
 #       from T.51), and would thus need to be moved after it in a Unicode representation.
-# Beside None, these are put in CHAR tokens verbatim and may be processed by downstream filters.
+# The individual codepoints are put in individual CHAR tokens verbatim without re-ordering, and
+# may be processed further by downstream filters.
 gsets = {"nil": (94, 1, (None,)*94),
          "Unknown": (94, 1, (None,)*94)}
 

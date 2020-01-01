@@ -8,9 +8,6 @@
 
 import graphdata
 
-# ISO/IEC 10367 G0 set (i.e. same as ECMA-6:US, current ECMA-6:IRV, US-ASCII)
-graphdata.gsets["ir006"] = (94, 1, tuple(range(0x21, 0x7F)))
-
 # DEC doesn't vary 0x24. ECMA-6:1991 does not vary 0x5F, and puts strict restrictions on permitted
 # glyphs for 0x23 (# or £) and 0x24 ($ or ¤), which is deviated from by the Mainland Chinese
 # version. ETS 300 706 liberally varies all three.
@@ -30,7 +27,7 @@ raw_variants = {
                            None, None, None, None, 0x203E], {}),
     "ir004dec": ([0xA3, None, None, None, None, None, None, None, 
                               None, None, None, None, None], {}),
-    # US-ASCII / New IRV
+    # US-ASCII / New IRV, ISO/IEC 10367 G0 set
     "ir006": ([None, None, None, None, None, None, None, None, 
                            None, None, None, None, None], {}),
     # Supposedly CNS 5205 and also Dutch (non-DEC) set; IBM's 1019.

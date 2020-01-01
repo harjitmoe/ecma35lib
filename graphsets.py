@@ -51,6 +51,10 @@ def decode_graphical_sets(stream, state):
                                tuple(pending), pset, invrange)
                     else:
                         yield ("CHAR?", state.ghwots[tno], tuple(pending), token[0], invrange)
+                elif isinstance(ucs, tuple):
+                    for iucs in ucs:
+                        yield ("CHAR", iucs, state.cur_gsets[tno], tuple(pending), 
+                               token[0], invrange)
                 else:
                     yield ("CHAR", ucs, state.cur_gsets[tno], tuple(pending), token[0], invrange)
                 pset = -1

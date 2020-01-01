@@ -24,7 +24,7 @@ scsutest = (b"\xD6\x6C\x20\x66\x6C\x69\x65\xDF\x74\x20\x12\x9C\xBE\xC1\xBA\xB2\x
             b"\x4F\xE1\x80\x05\xEC\x60\x8D\xEA\x06\xD3\xE6\x0F\x8A\x00\x30\x44\x65" + 
             b"\xB9\xE4\xFE\xE7\xC2\x06\xCB\x82")
 
-dat = (b"\x1B%G\x1B!F" + teststr.encode("utf-8-sig") + "\x1CJ염盐塩鹽\x1CK".encode("utf-8") +
+dat = (b"\x1B[m\x1B%G\x1B!F" + teststr.encode("utf-8-sig") + "\x1CJ염盐塩鹽\x1CK".encode("utf-8") +
        b"\xa4\xed\xa0\xc1\x80\xed\xa0\x81\xed\xb0\xa4" + # Deliberately invalid UTF-8
        b"\x1Bc\x1B%9unrecdata" + # Unrecognised WSR DOCS, should stay as WORD ops in output.
        b"\x1B%/L" + teststr.encode("utf-16be") + 
