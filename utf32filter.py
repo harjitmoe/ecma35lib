@@ -6,9 +6,9 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-utf32docs = (("DOCS", True, (0x41,)),
-             ("DOCS", True, (0x44,)),
-             ("DOCS", True, (0x46,)))
+utf32docs = (("DOCS", True, (0x41,)), # Deprecated (UCS-4 level 1)
+             ("DOCS", True, (0x44,)), # Deprecated (UCS-4 level 2)
+             ("DOCS", True, (0x46,))) # Current (still in ISO/IEC 10646 for UTF-32be)
 
 def decode_utf32(stream, state):
     bomap = {"<": "le", ">": "be"}

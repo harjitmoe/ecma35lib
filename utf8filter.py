@@ -6,10 +6,10 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-utf8docs = (("DOCS", False, (0x47,)),
-            ("DOCS", True, (0x47,)),
-            ("DOCS", True, (0x48,)),
-            ("DOCS", True, (0x49,)))
+utf8docs = (("DOCS", False, (0x47,)), # Current (still in ISO/IEC 10646 for UTF-8)
+            ("DOCS", True, (0x47,)),  # Deprecated (UTF-8 level 1)
+            ("DOCS", True, (0x48,)),  # Deprecated (UTF-8 level 2)
+            ("DOCS", True, (0x49,)))  # Current (still in ISO/IEC 10646 for UTF-8)
 
 def decode_utf8(stream, state):
     utf8_brot = []

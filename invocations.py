@@ -6,9 +6,10 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+import graphdata
+
 def decode_invocations(stream, state):
     workingsets = ("G0", "G1", "G2", "G3")
-    sizes = [1, None, None, None]
     is_96 = [0, 0, 1, 1]
     single_set = -1
     single_token = None
@@ -57,7 +58,9 @@ def decode_invocations(stream, state):
             single_area = None
             single_set = 2
             single_token = token
-            single_need = sizes[single_set]
+            single_need = graphdata.gsets[state.cur_gsets[single_set]][1]
+            if single_set in (state.glset, state.grset):
+                yield ("ERROR", "REDUNDANTSINGLESHIFT", single_set)
             if not single_need:
                 yield ("ERROR", "INDETERMSINGLE", token)
                 single_set = -1
@@ -71,7 +74,9 @@ def decode_invocations(stream, state):
             single_area = None
             single_set = 3
             single_token = token
-            single_need = sizes[single_set]
+            single_need = graphdata.gsets[state.cur_gsets[single_set]][1]
+            if single_set in (state.glset, state.grset):
+                yield ("ERROR", "REDUNDANTSINGLESHIFT", single_set)
             if not single_need:
                 yield ("ERROR", "INDETERMSINGLE", token)
                 single_set = -1
@@ -87,8 +92,6 @@ def decode_invocations(stream, state):
             state.glset = 0
             state.grset = 1
             yield token
-        elif token[0] == "SETSIZE":
-            sizes[token[1]] = token[2]
         elif token[0] == "DESIG":
             yield token
             is_96[token[1]] = (token[2] not in ("94", "94n"))

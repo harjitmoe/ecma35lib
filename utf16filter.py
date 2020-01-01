@@ -6,12 +6,16 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-utf16docs = (("DOCS", True, (0x40,)),
-             ("DOCS", True, (0x43,)),
-             ("DOCS", True, (0x45,)),
-             ("DOCS", True, (0x4A,)),
-             ("DOCS", True, (0x4B,)),
-             ("DOCS", True, (0x4C,)))
+# Note that this also handles surrogate pairs retrieved by DOCN filters further in, either as an
+# error case (UTF-8, UTF-1, UTF-32) or as a legitimate part of the respective encodings 
+# (SCSU, LMBCS, UTF-7). Hence, it must be used after most UCS formats (except maybe GB18030).
+
+utf16docs = (("DOCS", True, (0x40,)), # Deprecated (UCS-2 level 1)
+             ("DOCS", True, (0x43,)), # Deprecated (UCS-2 level 2)
+             ("DOCS", True, (0x45,)), # Deprecated (UCS-2 level 3)
+             ("DOCS", True, (0x4A,)), # Deprecated (UTF-16 level 1)
+             ("DOCS", True, (0x4B,)), # Deprecated (UTF-16 level 2)
+             ("DOCS", True, (0x4C,))) # Current (still in ISO/IEC 10646 for UTF-16be)
 
 def decode_utf16(stream, state):
     utf16_lead = None
