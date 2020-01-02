@@ -23,7 +23,8 @@ def decode_graphical_sets(stream, state):
         token = next(stream) if reconsume is None else reconsume
         reconsume = None
         tno = _tonumber(token[0])
-        if (tno >= 0) and (pset in (-1, tno)) and (invrange in (token[2], None)):
+        if (tno >= 0) and (pset in (-1, tno)) and (invrange in (token[2], None)) and (
+                    graphdata.gsets[state.cur_gsets[tno]][0] == 96 or 1 <= token[1] <= 94):
             if pset == -1:
                 pset = tno
                 invrange = token[2]
@@ -66,6 +67,10 @@ def decode_graphical_sets(stream, state):
             pset = -1
             invrange = None
             reconsume = token
+        elif (tno >= 0) and (graphdata.gsets[state.cur_gsets[tno]][0] == 94
+                      ) and token[1] in (0, 95):
+            # Should only get here if using 0xA0 or 0xFF when a 94*-set is in GR.
+            yield ("ERROR", "OUTSIDE94", token)
         elif token[0] == "UCS":
             yield ("CHAR", token[1], "UCS", (token[1],), token[2], token[3])
         elif token[0] == "DESIG":

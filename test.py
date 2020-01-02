@@ -34,11 +34,12 @@ dat = (b"\x1B[m\x1B%G\x1B!F" + teststr.encode("utf-8-sig") + "\x1CJ염盐塩鹽\
        "\x1B%/F\uFFFE".encode("utf-32be") + teststr.encode("utf-32le") + 
        "\x1B%@".encode("utf-32le") + teststr.encode("iso-2022-jp-ext", errors="replace") +
        "\x1B-A\x1B.BFrançaisFran\x0Eg\x0FaisÐð\x1B}Ðð\x1B~\x1b#//5".encode("latin-1") + 
-       b"\x1B&@\x1B$)B\x1B$+D" + teststr.encode("euc-jp", errors="replace") +
+       b"\x1B&@\x1B$)B\x1B$+D" + teststr.encode("euc-jp", errors="replace") + b"\xA0\xA0" + 
        b"\x1B$)A\x1B$+~" + teststr.encode("euc-cn", errors="replace") +
        b"\x1B$)C" + teststr.encode("euc-kr", errors="replace") +
        b"\x1B-@" + test2.encode("koi8-r") + 
        b"\x1B-L" + test2.encode("iso-8859-5") + 
+       b"\x1B$)G\x1B$*!1\x8E\xA3\xC0\xDA\xFC\xFC" + # i.e. 塩鹽 in EUC-TW
        b"\x1BB\x82\x1B[?25h\x1B(0unrecdata" +
        "\x1B%BFran\xA0çais//".encode("latin-1") + b"\xA1\x7E\xF6\x21\x21\n" + # i.e. "ŝ䀖" in UTF-1
        "\x1B%0⑨/⑨ちるの＇ﾁﾙﾉ".encode("ms-kanji") + b"\xFA\x56\n" +
@@ -52,7 +53,7 @@ print(end = "\x1Bc")
 
 x = tokenfeed.process_stream(x)
 
-# Note: nothing's actually executed yet.
+# Note: nothing's actually executed yet.\x83\x40\x5A
 
 x = list(x)
 

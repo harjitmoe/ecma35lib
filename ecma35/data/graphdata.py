@@ -22,7 +22,7 @@ gsets = {"nil": (94, 1, (None,)*94),
          "Unknown": (94, 1, (None,)*94)}
 
 # Note: has to be imported after gsets is defined
-from ecma35.data.multibyte import korea, japan, guobiao
+from ecma35.data.multibyte import korea, japan, guobiao, traditional
 from ecma35.data.singlebyte import ecma6, ecma43, ebcdic
 
 g94bytes = {tuple(b"@"): "ir002",
@@ -158,6 +158,7 @@ g94nbytes = {tuple(b"@"): "ir042",
              tuple(b"O"): "ir228",
              tuple(b"P"): "ir229",
              tuple(b"Q"): "ir233",
+             tuple(b"!1"): "cns-euc", # Strictly temporary, so EUC-TW can be tested.
              tuple(b"~"): "nil"}
 
 g96nbytes = {tuple(b"~"): "nil"}
