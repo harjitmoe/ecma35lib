@@ -10,7 +10,8 @@
 # have been interpreted; it is therefore possible to make full use of designation sequences to,
 # for example, switch to a certain edition of JIS X 0208, or switch to JIS X 0213 (inc. plane 2).
 
-# Completely private (hence in col 3); should come up with some way to config this.
+# The 1B 25 40 sequence will indeed switch to ECMA-35, and cannot occur coincidentally since C0/CL
+# bytes are not used as trail bytes, so it is in fact "with standard return".
 shiftjisdocs = ("DOCS", False, (0x30,))
 
 def decode_shiftjis(stream, state):
