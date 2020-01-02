@@ -11,7 +11,7 @@
 scsudocs = ("DOCS", True, (0x30,))
 
 def _get_offset(window):
-    if window < 0:
+    if window < 0: # i.e. an astral window (U+10000 or higher)
         return ((~window) * 0x80) + 0x10000 # Reverse the one's complement applied in decode_scsu.
     elif 0x01 <= window <= 0x67:
         return window * 0x80
@@ -21,7 +21,7 @@ def _get_offset(window):
         return {0xF9: 0xC0, 0xFA: 0x250, 0xFB: 0x370, 0xFC: 0x530, 0xFD: 0x3040, 
                 0xFE: 0x30A0, 0xFF: 0xFF60}[window]
     else:
-        return None
+        return None # Window identifier reserved for future use (although UTS 6 is stablised).
 
 _staticoffset = [0x00, 0x80, 0x100, 0x300, 0x2000, 0x2080, 0x2100, 0x3000]
 

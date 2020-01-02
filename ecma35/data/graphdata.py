@@ -22,7 +22,7 @@ gsets = {"nil": (94, 1, (None,)*94),
          "Unknown": (94, 1, (None,)*94)}
 
 # Note: has to be imported after gsets is defined
-from ecma35.data import multibyte
+from ecma35.data.multibyte import korea, japan, guobiao
 from ecma35.data.singlebyte import ecma6, ecma43, ebcdic
 
 g94bytes = {tuple(b"@"): "ir002",
