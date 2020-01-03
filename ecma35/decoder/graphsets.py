@@ -23,55 +23,55 @@ def decode_graphical_sets(stream, state):
         token = next(stream) if reconsume is None else reconsume
         reconsume = None
         tno = _tonumber(token[0])
+        # The cur_gsets state prop might not yet be defined if e.g. DOCS % @ hasn't happened yet.
+        tgset = state.cur_gsets[tno] if hasattr(state, "cur_gsets") else "Unknown"
         if (tno >= 0) and (pset in (-1, tno)) and (invrange in (token[2], None)) and (
-                    graphdata.gsets[state.cur_gsets[tno]][0] == 96 or 1 <= token[1] <= 94):
+                    graphdata.gsets[tgset][0] == 96 or 1 <= token[1] <= 94):
             if pset == -1:
                 pset = tno
                 invrange = token[2]
             # NOT else (falls through from first "then" clause)
-            size = graphdata.gsets[state.cur_gsets[tno]][1]
+            size = graphdata.gsets[tgset][1]
             pending.append(token[1])
             assert len(pending) <= size
             if len(pending) == size:
                 pointer = 0
-                if graphdata.gsets[state.cur_gsets[tno]][0] == 94:
+                if graphdata.gsets[tgset][0] == 94:
                     for byt in pending:
                         assert 1 <= byt <= 94
                         pointer *= 94
                         pointer += byt - 1
                 else:
-                    assert graphdata.gsets[state.cur_gsets[tno]][0] == 96
+                    assert graphdata.gsets[tgset][0] == 96
                     for byt in pending:
                         assert 0 <= byt <= 95
                         pointer *= 96
                         pointer += byt
-                ucs = graphdata.gsets[state.cur_gsets[tno]][2][pointer]
+                array = graphdata.gsets[tgset][2]
+                ucs = array[pointer] if pointer < len(array) else None
                 if ucs is None:
-                    if state.cur_gsets[tno] != "Unknown":
-                        yield ("ERROR", "UNDEFGRAPH", state.cur_gsets[tno],
-                               tuple(pending), pset, invrange)
+                    if tgset != "Unknown":
+                        yield ("ERROR", "UNDEFGRAPH", tgset, tuple(pending), pset, invrange)
                     else:
                         yield ("CHAR?", state.ghwots[tno], tuple(pending), token[0], invrange)
                 elif isinstance(ucs, tuple):
                     for iucs in ucs:
-                        yield ("CHAR", iucs, state.cur_gsets[tno], tuple(pending), 
-                               token[0], invrange)
+                        yield ("CHAR", iucs, tgset, tuple(pending), token[0], invrange)
                 else:
-                    yield ("CHAR", ucs, state.cur_gsets[tno], tuple(pending), token[0], invrange)
+                    yield ("CHAR", ucs, tgset, tuple(pending), token[0], invrange)
                 pset = -1
                 invrange = None
                 del pending[:]
         elif pending:
-            yield ("ERROR", "TRUNCMB", state.cur_gsets[tno], tuple(pending), pset, invrange)
+            yield ("ERROR", "TRUNCMB", tgset, tuple(pending), pset, invrange)
             del pending[:]
             pset = -1
             invrange = None
             reconsume = token
-        elif (tno >= 0) and (graphdata.gsets[state.cur_gsets[tno]][0] == 94
-                      ) and token[1] in (0, 95):
+        elif (tno >= 0) and (graphdata.gsets[tgset][0] == 94) and token[1] in (0, 95):
             # Should only get here if using 0xA0 or 0xFF when a 94 or 94^n set is in GR.
             assert token[2] in ("GR", "SSGR")
-            yield ("ERROR", "OUTSIDE94", token[0], token[1], token[2], state.cur_gsets[tno])
+            yield ("ERROR", "OUTSIDE94", token[0], token[1], token[2], tgset)
         elif token[0] == "UCS":
             yield ("CHAR", token[1], "UCS", (token[1],), token[2], token[3])
         elif token[0] == "DESIG":

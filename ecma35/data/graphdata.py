@@ -158,7 +158,7 @@ g94nbytes = {tuple(b"@"): "ir042",
              tuple(b"O"): "ir228",
              tuple(b"P"): "ir229",
              tuple(b"Q"): "ir233",
-             tuple(b"!1"): "cns-euc", # Strictly temporary, so EUC-TW can be tested.
+             tuple(b"!1"): "cns-eucg2", # Strictly temporary, so EUC-TW can be tested.
              tuple(b"~"): "nil"}
 
 g96nbytes = {tuple(b"~"): "nil"}

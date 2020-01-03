@@ -19,10 +19,10 @@ graphdata.gsets["ir184"] = cns4 = (94, 2, parsers.read_main_plane("cns-11643-199
 graphdata.gsets["ir185"] = cns5 = (94, 2, parsers.read_main_plane("cns-11643-1992.ucm", plane=5))
 graphdata.gsets["ir186"] = cns6 = (94, 2, parsers.read_main_plane("cns-11643-1992.ucm", plane=6))
 graphdata.gsets["ir187"] = cns7 = (94, 2, parsers.read_main_plane("cns-11643-1992.ucm", plane=7))
-# Plane 7 is the last one to be regestered with ISO-IR. Plane 8 is unused.
+# Plane 7 is the last one to be registered with ISO-IR. Plane 8 is unused.
 graphdata.gsets["cns-9"] = cns9 = (94, 2, parsers.read_main_plane("cns-11643-1992.ucm", plane=9))
 # The entirety does also exist as an unregistered 94^n set, used by EUC-TW:
-graphdata.gsets["cns-euc"] = euctwg2 = (94, 3, parsers.read_main_plane("cns-11643-1992.ucm"))
+graphdata.gsets["cns-eucg2"] = euctw_g2 = (94, 3, parsers.read_main_plane("cns-11643-1992.ucm"))
 
 
 
