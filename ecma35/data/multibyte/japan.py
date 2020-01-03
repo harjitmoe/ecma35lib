@@ -7,8 +7,28 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import os
+import unicodedata as ucd
 from ecma35.data import graphdata
 from ecma35.data.multibyte import parsers
+
+# Use of Zenkaku vs. Hankaku codepoints differs between the x0213.org mappings for EUC vs. SJIS.
+# If we don't know what SBCS it's being used with, best to just use Zenkaku consistently…
+def _flatten(u):
+    if u == "\uffe3":
+        # U+203E is usually considered the normal equivalent, at least in CJK contexts, although
+        # the formal name seems to suggest U+00AF (informal annotations identify U+203E as
+        # another). In either case, the NFKC is actually U+0020+0304, which isn't suitable here.
+        return "\u203e"
+    return ucd.normalize("NFKC", u)
+_to_zenkaku = dict([
+    (ord(_flatten(chr(i))), i)
+    for i in range(0xFF00, 0xFFF0) 
+    if ucd.east_asian_width(chr(i)) == "F"
+])
+def map_to_zenkaku(pointer, ucs):
+    if len(ucs) == 1 and ucs[0] in _to_zenkaku:
+        return (_to_zenkaku[ucs[0]],)
+    return ucs
 
 # JIS C 6226:1978 / JIS X 0208:1978
 graphdata.gsets["ir042"] = jisx0208_gzdm4_at = (94, 2, parsers.read_main_plane("x208_1978.txt"))
@@ -21,8 +41,12 @@ graphdata.gsets["ir168"] = jisx0208_irr_at_gzdm4_b = (94, 2, parsers.read_main_p
 # JIS X 0208, Microsoft and WHATWG version, as specified for use in HTML5
 graphdata.gsets["ir168web"] = jisx0208_html5 = (94, 2, parsers.read_main_plane("index-jis0208.txt", whatwgjis=True))
 graphdata.gsets["ibmsjisext"] = sjis_html5_g3 = (94, 2, parsers.read_jis_trailer("index-jis0208.txt"))
-
-
+# JIS X 2013:2004
+graphdata.gsets["ir233"] = jisx0213_plane1 = (94, 2,
+        parsers.read_main_plane("euc-jis-2004-std.txt", eucjp = True, plane=1))
+graphdata.gsets["ir228"] = jisx0213_plane1 # 2000 edition with different escape, treat same for now
+graphdata.gsets["ir229"] = jisx0213_plane2 = (94, 2, # Code unchanged from original edition.
+        parsers.read_main_plane("euc-jis-2004-std.txt", eucjp = True, plane=2))
 
 
 

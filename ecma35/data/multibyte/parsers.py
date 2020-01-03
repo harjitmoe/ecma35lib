@@ -10,8 +10,9 @@ import os, binascii
 
 directory = os.path.dirname(os.path.abspath(__file__))
 _temp = []
+_identitymap = lambda pointer, ucs: ucs
 
-def read_main_plane(fil, *, whatwgjis=False, plane=None):
+def read_main_plane(fil, *, whatwgjis=False, eucjp=False, plane=None, mapper=_identitymap):
     for _i in open(os.path.join(directory, fil), "r"):
         if not _i.strip():
             continue
@@ -22,11 +23,34 @@ def read_main_plane(fil, *, whatwgjis=False, plane=None):
         elif _i.strip() in ("CHARMAP", "END CHARMAP"):
             continue # ICU delimitors we don't care about.
         elif _i[:2] == "0x":
-            # Consortium-style format, over GL without transformation.
+            # Consortium-style format, over GL (or GR with eucjp=1) without transformation.
             byts, ucs = _i.split("\t", 2)[:2]
-            men = 1
-            ku = int(byts[2:4], 16) - 0x20
-            ten = int(byts[4:6], 16) - 0x20
+            if not eucjp:
+                men = 1
+                ku = int(byts[2:4], 16) - 0x20
+                ten = int(byts[4:6], 16) - 0x20
+            else:
+                men = 1
+                if byts[2].upper() in "01234567": # ASCII
+                    continue
+                elif byts[2:4].upper() == "8E": # Half-width Katakana (via SS2)
+                    continue
+                elif byts[2:4].upper() == "8F":
+                    if len(byts) == 4: # i.e. SS3 itself rather than an SS3 sequence
+                        continue
+                    byts = byts[2:]
+                    men = 2
+                elif byts[2].upper() in ("8", "9"): # Remaining CR C1 controls
+                    continue
+                elif not ucs.strip(): # i.e. code not used
+                    continue
+                ku = int(byts[2:4], 16) - 0xA0
+                ten = int(byts[4:6], 16) - 0xA0
+            if plane is not None: # i.e. if we want a particular plane's two-byte mapping.
+                if men != plane:
+                    continue
+                else:
+                    men = 1
         elif _i[:2] == "<U":
             # ICU-style format, over GL without transformation
             ucs, byts, direction = _i.split(" ", 2)
@@ -74,8 +98,8 @@ def read_main_plane(fil, *, whatwgjis=False, plane=None):
                 continue
         pointer = ((men - 1) * 94 * 94) + ((ku - 1) * 94) + (ten - 1)
         #
-        assert ucs[:2] in ("0x", "U+", "<U")
-        ucs = int(ucs[2:].rstrip(">"), 16)
+        assert ucs[:2] in ("0x", "U+", "<U"), ucs
+        ucs = mapper(pointer, tuple(int(j, 16) for j in ucs[2:].rstrip(">").split("+")))
         #
         if len(_temp) > pointer:
             assert _temp[pointer] is None
@@ -88,7 +112,7 @@ def read_main_plane(fil, *, whatwgjis=False, plane=None):
     del _temp[:]
     return r
 
-def read_jis_trailer(fil):
+def read_jis_trailer(fil, *, mapper=_identitymap):
     for _i in open(os.path.join(directory, fil), "r"):
         if _i.strip() and (_i[0] != "#"):
             byts, ucs = _i.split("\t", 2)[:2]
@@ -105,7 +129,7 @@ def read_jis_trailer(fil):
             g3pointer = ((g3ku - 1) * 94) + (ten - 1)
             #
             assert ucs[:2] in ("0x", "U+")
-            ucs = int(ucs[2:], 16)
+            ucs = mapper(g3pointer, int(ucs[2:], 16))
             #
             if len(_temp) > g3pointer:
                 assert _temp[g3pointer] is None
