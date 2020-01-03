@@ -6,7 +6,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-# Note that this works by interpreting Shift_JIS codes as the correspending EUC-JP codes would
+# Note that this works by interpreting Shift_JIS codes as the corresponding EUC-JP codes would
 # have been interpreted; it is therefore possible to make full use of designation sequences to,
 # for example, switch to a certain edition of JIS X 0208, or switch to JIS X 0213 (inc. plane 2).
 

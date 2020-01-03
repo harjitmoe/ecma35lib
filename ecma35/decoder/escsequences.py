@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019.
+# By HarJIT in 2019/2020.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -51,14 +51,6 @@ def decode_esc_sequences(stream, state):
                     ret2 = ("DOCS", True, ret[2][1:] + (ret[3],))
                 else:
                     ret2 = ("DOCS", False, ret[2] + (ret[3],))
-                # Deal with byte-width changes, mode changes and raw mode instigation.
-                if not ret2[1]:
-                    # UTF-8 (DOCS G), UTF-1 (DOCS B), ECMA-35 (DOCS @), or otherwise bytewise with 
-                    # standard return.
-                    state.hasesc = True # Only referenced if there is no filter for this DOCS.
-                else:
-                    # Something else to be dealt with by its own filter, or treated as raw.
-                    state.hasesc = False # Only referenced if there is no filter for this DOCS.
                 state.bytewidth = 1 # May be subsequently overridden by the specific filter.
                 state.feedback.append(ret2)
             elif (not ret[1]) and (not ret[2]) and (0x40 <= ret[3] < 0x60):

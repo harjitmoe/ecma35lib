@@ -11,13 +11,6 @@ import struct, types
 def _tokenise_stream(stream, state):
     state.bytewidth = 1
     state.feedback = [("DOCS", False, (0x40,))]
-    # DOCS are stipulated in ISO 10646 as big-endian (>). Actually, ISO 10646 does not provide for
-    # any means of embedding little-endian UTF data in ECMA-35 (i.e. our regard_bom=0). However,
-    # it isn't the last word on this matter (WHATWG stipulates that unmarked UTF-16 is little-
-    # endian, for example). Regarding a byte-order mark at the start of the UTF stream (i.e. our
-    # regard_bom=1) seems reasonable. However, regarding the designated noncharacter U+FFFE as a
-    # generic "switch byte order" control probably isn't, except on trusted data containing
-    # misconcatenated UTF-16 (our regard_bom=2).
     state.endian = state.default_endian
     assert state.endian in "<>"
     while 1:
@@ -34,6 +27,13 @@ def _tokenise_stream(stream, state):
     yield ("ENDSTREAM",)
 
 def process_stream(stream, **kwargs): # The entry point.
+    # DOCS are stipulated in ISO 10646 as big-endian (>). Actually, ISO 10646 does not provide for
+    # any means of embedding little-endian UTF data in ECMA-35 (i.e. our regard_bom=0). However,
+    # it isn't the last word on this matter (WHATWG stipulates that unmarked UTF-16 is little-
+    # endian, for example). Regarding a byte-order mark at the start of the UTF stream (i.e. our
+    # regard_bom=1) seems reasonable. However, regarding the designated noncharacter U+FFFE as a
+    # generic "switch byte order" control probably isn't, except on trusted data containing
+    # misconcatenated UTF-16 (our regard_bom=2).
     statedict = {"osc_bel_term": True, "default_endian": ">", "regard_bom": 1, "docsmode": None}
     statedict.update(kwargs)
     state = types.SimpleNamespace(**statedict)
