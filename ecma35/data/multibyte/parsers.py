@@ -142,6 +142,23 @@ def read_jis_trailer(fil, *, mapper=_identitymap):
     del _temp[:]
     return r
 
+# Layout of GBK (per GB 18030:2005):
+#   GB2312-inherited main EUC plane: [A1-FE][A1-FE], charted between:
+#     DBCS 1: [A1-A9][A1-FE] (GB2312 non-hanzi)
+#     DBCS PUA 1: [AA-AF][A1-FE] (U+E11A thru U+E233)
+#     DBCS 2: [B0-F7][A1-FE] (GB2312 hanzi)
+#     DBCS PUA 2: [F8-FE][A1-FE] (U+E234 thru U+E4C5)
+#   DBCS 3: [81-A0][40-7E,80-FE] (non-GB2312 hanzi)
+#   DBCS PUA 3: [A1-A7][40-7E,80-A0] (U+E4C6 thru U+E765)
+#   DBCS 5: [A8-A9][40-7E,80-A0] (non-GB2312 non-hanzi)
+#   DBCS 4: [AA-FE][40-7E,80-A0] (non-GB2312 hanzi)
+#
+#     From a cursory skim, DBCS 3 seems to be walking through the URO and picking only
+#     the hanzi not included in DBCS 2, abruptly finishing when it runs out of space.
+#     DBCS 4 picks up immediately from where DBCS 3 left off, and continues this until
+#     0xFD9B (U+9FA5, i.e. the last character in the "URO proper" from Unicode 1.0.1,
+#     as opposed to URO additions) as the last one following this pattern. The remaining
+#     row-and-a-bit is somewhat chaotic, with a mixture of mappings to PUA, CJKA, CJKCI.
 
 
 
