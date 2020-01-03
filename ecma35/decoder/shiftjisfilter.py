@@ -28,7 +28,8 @@ def decode_shiftjis(stream, state):
                 yield ("RDOCS", "Shift_JIS", token[1], token[2])
                 state.bytewidth = 1
                 state.docsmode = "shift_jis"
-                # Sensible-ish defaults (corresponding to Windows-31J, or WHATWG's Shift_JIS)
+                # Sensible-ish defaults (if ir014 is changed to ir006, it would correspond
+                # in mapping to IBM-943C, Windows-31J or WHATWG's Shift_JIS, minus EUDC)
                 state.cur_gsets = ["ir014", "ir168web", "ir013", "ibmsjisext"]
             else:
                 yield token
