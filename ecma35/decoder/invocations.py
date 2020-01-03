@@ -23,7 +23,7 @@ def decode_invocations(stream, state):
                     # For announcement verification.
                     yield ("SINGLEOVER", token[0], single_token[1], single_token[2], single_token[3])
                     single_area = token[0]
-                yield (workingsets[single_set], token[1], "S" + token[0])
+                yield (workingsets[single_set], token[1], "SS" + token[0])
                 single_need -= 1
                 if not single_need:
                     single_set = -1

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019.
+# By HarJIT in 2019/2020.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -69,8 +69,9 @@ def decode_graphical_sets(stream, state):
             reconsume = token
         elif (tno >= 0) and (graphdata.gsets[state.cur_gsets[tno]][0] == 94
                       ) and token[1] in (0, 95):
-            # Should only get here if using 0xA0 or 0xFF when a 94*-set is in GR.
-            yield ("ERROR", "OUTSIDE94", token)
+            # Should only get here if using 0xA0 or 0xFF when a 94 or 94^n set is in GR.
+            assert token[2] in ("GR", "SSGR")
+            yield ("ERROR", "OUTSIDE94", token[0], token[1], token[2], state.cur_gsets[tno])
         elif token[0] == "UCS":
             yield ("CHAR", token[1], "UCS", (token[1],), token[2], token[3])
         elif token[0] == "DESIG":
