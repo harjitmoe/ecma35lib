@@ -67,16 +67,30 @@ def decode_gbk(stream, state):
                     yield ("UCS", guobiao.non_euccn_uro101[index], "GBK", "GBK/4")
                     gbk_lead = None
                 else:
-                    # TODO: the non-URO part of GBK/4
-                    yield ("ERROR", "NOT_IMPLEMENTED", gbk_lead[1], token[1])
+                    exception_index = 192 + index - len(guobiao.non_euccn_uro101)
+                    yield ("UCS", guobiao.gbk_exceptions[exception_index], "GBK", "GBK/4+")
                     gbk_lead = None
             elif (0xA1 <= gbk_lead[1] <= 0xA9) and (
                           (0x40 <= token[1] <= 0x7E) or (0x80 <= token[1] <= 0xA0)):
-                # TODO: the GBK/5 level and associated private use region
-                yield ("ERROR", "NOT_IMPLEMENTED", gbk_lead[1], token[1])
+                row_number = gbk_lead[1] - 0xA1
+                extra_index = (row_number * 96) + (token[1] - 0x40)
+                if token[1] > 0x7F:
+                    extra_index -= 1
+                #
+                if extra_index < (96 * 7):
+                    yield ("UCS", 0xE4C6 + extra_index, "GBK", "GBK/UDC3")
+                else:
+                    exception_index = extra_index - (96 * 7)
+                    assert exception_index < 192
+                    yield ("UCS", guobiao.gbk_exceptions[exception_index], "GBK", "GBK/5")
+                gbk_lead = None
+            elif (0x81 <= gbk_lead[1] <= 0xFE) and (0x30 <= token[1] <= 0x39):
+                # GB18030 half-code
+                pointer = ((gbk_lead[1] - 0x81) * 10) + (token[1] - 0x30)
+                yield ("GBHALFCODE", pointer)
                 gbk_lead = None
             else:
-                yield ("ERROR", "UHCTRUNCATE", gbk_lead[1])
+                yield ("ERROR", "GBKTRUNCATE", gbk_lead[1])
                 gbk_lead = None
                 reconsume = token # Note: token being reconsumed is a non-letter single byte code.
         else:

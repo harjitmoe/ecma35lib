@@ -13,6 +13,8 @@ from ecma35.data.multibyte import parsers
 
 _temp = []
 def read_jis_trailer(fil, *, mapper=parsers.identitymap):
+    # Read the post-94^n part from the end of the extended JIS X 0208 index from WHATWG and map it
+    # onto a G3 set by JIS X 0213 rules.
     # Only used here, so not much point putting this in multibyte.parsers…
     for _i in open(os.path.join(parsers.directory, fil), "r"):
         if _i.strip() and (_i[0] != "#"):
@@ -75,10 +77,10 @@ graphdata.gsets["ir168web"] = jisx0208_html5 = (94, 2, parsers.read_main_plane("
 graphdata.gsets["ibmsjisext"] = sjis_html5_g3 = (94, 2, read_jis_trailer("index-jis0208.txt"))
 # JIS X 2013:2004
 graphdata.gsets["ir233"] = jisx0213_plane1 = (94, 2,
-        parsers.read_main_plane("euc-jis-2004-std.txt", eucjp = True, plane=1))
+        parsers.read_main_plane("euc-jis-2004-std.txt", eucjp = True, plane = 1, mapper = map_to_zenkaku))
 graphdata.gsets["ir228"] = jisx0213_plane1 # 2000 edition with different escape, treat same for now
 graphdata.gsets["ir229"] = jisx0213_plane2 = (94, 2, # Code unchanged from original edition.
-        parsers.read_main_plane("euc-jis-2004-std.txt", eucjp = True, plane=2))
+        parsers.read_main_plane("euc-jis-2004-std.txt", eucjp = True, plane = 2, mapper = map_to_zenkaku))
 
 
 

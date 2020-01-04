@@ -10,6 +10,10 @@ __all__ = [
     "codepoint_coverages", "gsets", "g94bytes", "g96bytes", "g94nbytes", "g96nbytes", "sumps"
 ]
 
+# Although we could just use (x in gsets[foo][2]) to test whether a codepoint is covered by a
+# given set, it is almost certainly faster to look it up in a set than having to sequentially 
+# search a list every time, especially if we're doing it for a large number of codepoints 
+# (e.g. the entire original URO in multibyte.guobiao).
 codepoint_coverages = {}
 class GSetCollection(dict):
     def __setitem__(self, label, data):
@@ -21,7 +25,8 @@ class GSetCollection(dict):
                 if len(codeset) != 1:
                     continue
                 codeset = codeset[0]
-            my_coverage |= {codeset}
+            if codeset is not None:
+                my_coverage |= {codeset}
 
 # Note: since gsets specifies length as second member, no more need for "94n" distinct from "94".
 # Necessary since a set could have a length of, say, 3 (take the EUC-TW G2 set).
@@ -37,6 +42,7 @@ class GSetCollection(dict):
 # may be processed further by downstream filters.
 gsets = GSetCollection({"nil": (94, 1, (None,)*94),
                         "Unknown": (94, 1, (None,)*94)})
+# Presumably not getting codepoint_coverages for "nil" and "Unknown" doesn't really matter. 
 
 # Note: has to be imported after gsets is defined
 from ecma35.data.multibyte import korea, japan, guobiao, traditional
