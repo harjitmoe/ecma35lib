@@ -12,7 +12,7 @@ from ecma35.data.multibyte import korea
 
 uhcdocs = ("DOCS", False, (0x31,))
 
-def decode_uhcdocs(stream, state):
+def decode_uhc(stream, state):
     uhc_lead = None
     reconsume = None
     while 1:
