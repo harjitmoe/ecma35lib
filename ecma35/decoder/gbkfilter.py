@@ -6,7 +6,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-# Very incomplete filter for GBK.
+# DOCS filter for GBK, also generating GBHALFCODE tokens for GB18030.
 
 from ecma35.data.multibyte import guobiao
 
@@ -27,7 +27,7 @@ def decode_gbk(stream, state):
                 state.cur_c1 = "RFC1345"
                 state.glset = 0
                 state.grset = 1
-                state.cur_gsets = ["ir006", "ir058", "nil", "nil"]
+                state.cur_gsets = ["ir006", "ir058-2005", "nil", "nil"]
             else:
                 yield token
         elif state.docsmode == "gbk" and token[0] == "WORD":

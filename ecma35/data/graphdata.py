@@ -164,7 +164,7 @@ g96bytes = {tuple(b"@"): "ir111",
             tuple(b"~"): "nil"}
 
 g94nbytes = {tuple(b"@"): "ir042",
-             tuple(b"A"): "ir058",
+             tuple(b"A"): "ir058-2005", # Will do for now.
              tuple(b"B"): "ir168", # Or older pre-IRR "ir087"
              tuple(b"C"): "ir149",
              tuple(b"D"): "ir159",

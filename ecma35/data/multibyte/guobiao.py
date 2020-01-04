@@ -57,16 +57,34 @@ def read_gbkexceptions(fil):
     del _temp[:]
     return r
 
+gb2000map = lambda pointer, ucs: ucs if ucs != (0x1E3F,) else (0xE7C7,)
+
 # GB 2312 (EUC-CN RHS)
-graphdata.gsets["ir058"] = gb2312 = (94, 2, parsers.read_main_plane("index-gb18030.txt"))
+graphdata.gsets["ir058-2000"] = gb2312_2000 = (94, 2, 
+                                parsers.read_main_plane("index-gb18030.txt", mapper = gb2000map))
+graphdata.gsets["ir058-2005"] = gb2312 = (94, 2, 
+                                parsers.read_main_plane("index-gb18030.txt"))
 # Since graphdata.gsets isn't merely a dict, the above line also set graphdata.codepoint_coverages
 
 # Amounting to the entirety of GBK/3 and most of GBK/4, minus the non-URO end part.
 non_euccn_uro101 = [i for i in range(0x4E00, 0x9FA6) 
-                      if i not in graphdata.codepoint_coverages["ir058"]]
+                      if i not in graphdata.codepoint_coverages["ir058-2005"]]
 
 gbk_exceptions = read_gbkexceptions("index-gb18030.txt")
 gbk_exceptions_coverage = set(gbk_exceptions)
+
+# Amounting to the first section of four-byte codes in GB18030 (the second section can be mapped
+# directly since no astral character is in any part of GBK). This does have to be generated from
+# the 2000 edition two-byte codes (otherwise everything between U+1E3F and U+E7C7 finishes up off
+# by one); the re-mapping of index 7457(dec) to 0xE7C7 in the 2005 version is handled directly by
+# decoders.gbhalfcodes itself.
+non_gbk_bmp = [i for i in range(0x0080, 0x10000)
+           if ((i < 0x4E00 or i > 0x9FA5) and # i.e. not part of the original URO set
+               (i < 0xE4C6 or i > 0xE765) and # i.e. not part of the GBK third PUA section
+               (i < 0xD800 or i > 0xDFFF) and # i.e. not surrogate (don't count as codepoints)
+               (i not in gbk_exceptions_coverage) and # i.e. not part of GBK/4 additions or GBK/5
+               (i not in graphdata.codepoint_coverages[ # i.e. not in main plane of 2000 edition
+                         "ir058-2000"]))]
 
 
 
