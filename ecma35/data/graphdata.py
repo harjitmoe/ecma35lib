@@ -6,6 +6,23 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+__all__ = [
+    "codepoint_coverages", "gsets", "g94bytes", "g96bytes", "g94nbytes", "g96nbytes", "sumps"
+]
+
+codepoint_coverages = {}
+class GSetCollection(dict):
+    def __setitem__(self, label, data):
+        super().__setitem__(label, data)
+        codepoint_coverages[label] = my_coverage = set()
+        kind, xbcs, codepoints = data
+        for codeset in codepoints:
+            if isinstance(codeset, tuple):
+                if len(codeset) != 1:
+                    continue
+                codeset = codeset[0]
+            my_coverage |= {codeset}
+
 # Note: since gsets specifies length as second member, no more need for "94n" distinct from "94".
 # Necessary since a set could have a length of, say, 3 (take the EUC-TW G2 set).
 # Also, the individual characters may be:
@@ -18,8 +35,8 @@
 #       from T.51), and would thus need to be moved after it in a Unicode representation.
 # The individual codepoints are put in individual CHAR tokens verbatim without re-ordering, and
 # may be processed further by downstream filters.
-gsets = {"nil": (94, 1, (None,)*94),
-         "Unknown": (94, 1, (None,)*94)}
+gsets = GSetCollection({"nil": (94, 1, (None,)*94),
+                        "Unknown": (94, 1, (None,)*94)})
 
 # Note: has to be imported after gsets is defined
 from ecma35.data.multibyte import korea, japan, guobiao, traditional

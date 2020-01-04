@@ -38,7 +38,8 @@ dat = (b"\x1B[m\x1B%G\x1B!F" + teststr.encode("utf-8-sig") + "\x1CJ염盐塩鹽\
        b"\x1B$)Q\x1B$+P" + teststr.encode("euc-jis-2004", errors="replace") + b"\x8F\xA0\xA0" + 
        b"\x1B$)A\x1B$+~" + teststr.encode("euc-cn", errors="replace") +
        b"\x1B$)C" + teststr.encode("euc-kr", errors="replace") +
-       b"\x1B-@" + test2.encode("koi8-r") + 
+       b"\x1B%1" + teststr.encode("uhc", errors="replace") +
+       b"\x1B%@\x1B-@" + test2.encode("koi8-r") + 
        b"\x1B-L" + test2.encode("iso-8859-5") + 
        b"\x1B$)G\x1B$*!1\x8E\xA3\xC0\xDA\xFC\xFC" + # i.e. 塩鹽 in EUC-TW
        b"\x1BB\x82\x1B[?25h\x1B(0unrecdata" +

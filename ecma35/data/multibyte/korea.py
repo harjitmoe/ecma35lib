@@ -12,6 +12,11 @@ from ecma35.data.multibyte import parsers
 
 # KS C 5601 / KS X 1001 EUC-KR Wansung RHS
 graphdata.gsets["ir149"] = wansung = (94, 2, parsers.read_main_plane("index-euc-kr.txt"))
+# Since graphdata.gsets isn't merely a dict, the above line also set graphdata.codepoint_coverages
+
+# Amounting to the entirety of the UHC extensions, in order:
+non_wangsung_johab = [i for i in range(0xAC00, 0xD7A4) 
+                        if i not in graphdata.codepoint_coverages["ir149"]]
 
 
 

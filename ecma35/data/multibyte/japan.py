@@ -11,6 +11,38 @@ import unicodedata as ucd
 from ecma35.data import graphdata
 from ecma35.data.multibyte import parsers
 
+_temp = []
+def read_jis_trailer(fil, *, mapper=parsers.identitymap):
+    # Only used here, so not much point putting this in multibyte.parsers…
+    for _i in open(os.path.join(parsers.directory, fil), "r"):
+        if _i.strip() and (_i[0] != "#"):
+            byts, ucs = _i.split("\t", 2)[:2]
+            #
+            pointer = int(byts.strip(), 10)
+            ku = (pointer // 94) + 1
+            ten = (pointer % 94) + 1
+            if ku <= 94:
+                continue
+            elif ku <= 103:
+                g3ku = (1, 8, 3, 4, 5, 12, 13, 14, 15)[ku - 95]
+            else:
+                g3ku = ku + 78 - 104
+            g3pointer = ((g3ku - 1) * 94) + (ten - 1)
+            #
+            assert ucs[:2] in ("0x", "U+")
+            ucs = mapper(g3pointer, int(ucs[2:], 16))
+            #
+            if len(_temp) > g3pointer:
+                assert _temp[g3pointer] is None
+                _temp[g3pointer] = ucs
+            else:
+                while len(_temp) < g3pointer:
+                    _temp.append(None)
+                _temp.append(ucs)
+    r = tuple(_temp) # Making a tuple makes a copy, of course.
+    del _temp[:]
+    return r
+
 # Use of Zenkaku vs. Hankaku codepoints differs between the x0213.org mappings for EUC vs. SJIS.
 # If we don't know what SBCS it's being used with, best to just use Zenkaku consistently…
 def _flatten(u):
@@ -40,7 +72,7 @@ graphdata.gsets["ir159"] = jisx0212 = (94, 2, parsers.read_main_plane("index-jis
 graphdata.gsets["ir168"] = jisx0208_irr_at_gzdm4_b = (94, 2, parsers.read_main_plane("x208_1990.txt"))
 # JIS X 0208, Microsoft and WHATWG version, as specified for use in HTML5
 graphdata.gsets["ir168web"] = jisx0208_html5 = (94, 2, parsers.read_main_plane("index-jis0208.txt", whatwgjis=True))
-graphdata.gsets["ibmsjisext"] = sjis_html5_g3 = (94, 2, parsers.read_jis_trailer("index-jis0208.txt"))
+graphdata.gsets["ibmsjisext"] = sjis_html5_g3 = (94, 2, read_jis_trailer("index-jis0208.txt"))
 # JIS X 2013:2004
 graphdata.gsets["ir233"] = jisx0213_plane1 = (94, 2,
         parsers.read_main_plane("euc-jis-2004-std.txt", eucjp = True, plane=1))
