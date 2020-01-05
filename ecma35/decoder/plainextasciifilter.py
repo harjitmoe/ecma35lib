@@ -62,6 +62,9 @@ def decode_plainextascii(stream, state):
                 yield ("GL", token[1] - 0x20)
             else: # i.e. it is on the right-hand side
                 index = token[1] - 0x80
+                if state.cur_rhs not in graphdata.rhses:
+                    yield ("CHAR?", state.cur_rhs, (index,), "RHS", "RHS")
+                    continue
                 ucs = graphdata.rhses[state.cur_rhs][index]
                 if ucs is None:
                     yield ("ERROR", "UNDEFGRAPH", state.cur_rhs, (index,), -1, "RHS")
