@@ -9,10 +9,12 @@
 def decode_designations(stream, state):
     reconsume = None
     irrset = None
+    inesc = False
     while 1:
         token = next(stream) if reconsume is None else reconsume
         reconsume = None
         if token[0] == "ESC" and token[1] in tuple(b"()*+-./$"):
+            inesc = False
             if token[1] in tuple(b"()*+"):
                 settype = "94"
                 wsetbyte = token[1]
@@ -43,26 +45,35 @@ def decode_designations(stream, state):
             irrset = None
             yield ("DESIG", wset, settype, idbytes, not wsetbyte, myirr)
         elif token[0] == "ESC" and token[1] == 0x21:
+            inesc = False
             c0seq = token[2] + (token[3],)
             myirr = irrset[2] + (irrset[3],) if irrset is not None else ()
             irrset = None
             yield ("CDESIG", "C0", c0seq, myirr)
         elif token[0] == "ESC" and token[1] == 0x22:
+            inesc = False
             c1seq = token[2] + (token[3],)
             myirr = irrset[2] + (irrset[3],) if irrset is not None else ()
             irrset = None
             yield ("CDESIG", "C1", c1seq, myirr)
-        # We actually can't do this yet since we seem to have to be upstream from the ESC sequence
-        # processing. So we need to pass the individual (GL and C0) tokens through for the ESC
-        # token to ever even arrive (i.e. via feedback).
-        #elif irrset is not None:
-        #    yield ("ERROR", "IRRISOLATE", irrset[2] + (irrset[3],))
-        #    irrset = None
-        #    reconsume = token
-        #    continue
+        elif irrset is not None:
+            if (token[0] == "C0" and token[1] == 0x1B) or (token[0] == "GL" and inesc):
+                # Because the ESC tokens arrive by feedback from a filter downstream from here,
+                # we do have to pass the C0 and GL tokens needed to give us the designation ESC
+                # token.
+                inesc = True
+                yield token
+            else:
+                inesc = False
+                yield ("ERROR", "IRRISOLATE", irrset[2] + (irrset[3],))
+                irrset = None
+                reconsume = token
+                continue
         elif token[0] == "ESC" and token[1] == 0x26:
+            inesc = False
             irrset = token
         else:
+            inesc = False
             yield token
 
 

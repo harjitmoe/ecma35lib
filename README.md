@@ -42,19 +42,14 @@ file, You can obtain one at https://mozilla.org/MPL/2.0/
 - Some sort of output.
 - Mnemonic parsing for CSI sequences, and CEX sequences for which I can get enough info.
 - Hangul composition sequences.
+- IRR codes.
 
 # Still to do
 
 - More graphical sets.
 - Support for Big-5 as a DOCS set.
 - Support for general extended ASCII (i.e. with only the LHS following ECMA-35), e.g. Windows-1252.
-- Proper way of switching between variants of (e.g.) JIS X 0208. The standard way (IRR) does not
-  even pretend to cover the type of vendor variation actually observed.
-- For that matter, support for IRR sequences. Problem is, usually only the `IRR @` one if anything
-  is registered, meaning the only selectable revision is the lastest one anyway. Maybe I should add
-  functionality to `IRR ?` (where `?` is in private use column 3 but also immediately before `@`)
-  for their original versions?
-- Privately allocating sets and DOCS codes (e.g. Shift_JIS) in some configurable way.
+- Dynamically allocating sets, IRR codes, DOCS codes (e.g. Shift_JIS) in some configurable way.
 - Proper handling of the T.51 / T.61 and ANSEL combining sequences. Probably don't need to stick to
   any hardcoded repertoire though, since (a) we're not trying to implement ISO/IEC 6937, but rather
   T.51 (which confines the entire ISO 6937 repertoire definition (rather than just one of the 
