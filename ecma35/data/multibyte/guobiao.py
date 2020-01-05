@@ -8,7 +8,7 @@
 
 import os
 from ecma35.data import graphdata
-from ecma35.data.multibyte import parsers
+from ecma35.data.multibyte import mbmapparsers as parsers
 
 # Layout of GBK (per GB 18030:2005):
 #   GB2312-inherited main EUC plane: [A1-FE][A1-FE], charted between:
@@ -60,7 +60,7 @@ def read_gbkexceptions(fil):
 gb2000map = lambda pointer, ucs: ucs if ucs != (0x1E3F,) else (0xE7C7,)
 
 # GB/T 2312 (EUC-CN RHS); note that the 2000 and 2005 "editions" refer to GB 18030 edition subsets.
-graphdata.gsets["ir058-1980"] = gb2312_1980 = (94, 2, 
+graphdata.gsets["ir058-1980"] = gb2312_1980 = (94, 2, # is this same as ibm-5478_P100-1995.ucm ?
                                 parsers.read_main_plane("GB2312.TXT"))
 graphdata.gsets["ir058-2000"] = gb2312_2000 = (94, 2, 
                                 parsers.read_main_plane("index-gb18030.txt", mapper = gb2000map))
@@ -68,7 +68,13 @@ graphdata.gsets["ir058-2005"] = gb2312_2005 = (94, 2,
                                 parsers.read_main_plane("index-gb18030.txt"))
 # Since graphdata.gsets isn't merely a dict, the above lines also set graphdata.codepoint_coverages
 
-# GB/T 12345 (Traditional Chinese in Mainland China)
+# ITU's extension of ir058-1980, i.e. with 6763 GB 2312 chars, 705 GB 8565.2 chars and 139 others.
+# Basically sticks a load of stuff (both hankaku and zenkaku) in what GBK would consider the
+# PUA 1 and PUA 2.
+graphdata.gsets["ir165"] = gb2312_1980 = (94, 2, parsers.read_main_plane("iso-ir-165.ucm"))
+
+# GB/T 12345 (Traditional Chinese in Mainland China, homologous to GB/T 2312 where possible)
+# Unlike GB2312.TXT, redistribution of GB12345.TXT is apparently not permitted…
 #graphdata.gsets["ir058-hant"] = gb12345 = (94, 2, parsers.read_main_plane("GB12345.TXT"))
 
 # Amounting to the entirety of GBK/3 and most of GBK/4, minus the non-URO end part.

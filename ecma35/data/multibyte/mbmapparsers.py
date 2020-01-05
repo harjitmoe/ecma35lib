@@ -8,7 +8,7 @@
 
 import os, binascii
 
-directory = os.path.dirname(os.path.abspath(__file__))
+directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mbmaps")
 _temp = []
 identitymap = lambda pointer, ucs: ucs
 
@@ -58,7 +58,7 @@ def read_main_plane(fil, *, whatwgjis=False, eucjp=False, plane=None, mapper=ide
             byts = [int(i, 16) for i in byts[2:].split("\\x")]
             if direction.strip() == "|1":
                 # i.e. best-fit mapped by the encoder only
-                # Whereas, |3 means it's used only be the decoder (usually because duplicate)
+                # Whereas, |3 means it's used only by the decoder (usually because duplicate)
                 continue
             if len(byts) == 3:
                 if 0x80 < byts[0] < 0xA0: # cns-11643-1992.ucm does this for some reason.

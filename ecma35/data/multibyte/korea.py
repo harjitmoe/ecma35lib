@@ -8,7 +8,7 @@
 
 import os
 from ecma35.data import graphdata
-from ecma35.data.multibyte import parsers
+from ecma35.data.multibyte import mbmapparsers as parsers
 
 # KS C 5601 / KS X 1001 EUC-KR Wansung RHS
 graphdata.gsets["ir149"] = wansung = (94, 2, parsers.read_main_plane("index-euc-kr.txt"))

@@ -8,7 +8,7 @@
 
 import os
 from ecma35.data import graphdata
-from ecma35.data.multibyte import parsers
+from ecma35.data.multibyte import mbmapparsers as parsers
 
 # CNS 11643
 graphdata.gsets["ir171"] = cns1 = (94, 2, parsers.read_main_plane("cns-11643-1992.ucm", plane=1))

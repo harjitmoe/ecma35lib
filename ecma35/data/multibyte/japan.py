@@ -9,7 +9,7 @@
 import os
 import unicodedata as ucd
 from ecma35.data import graphdata
-from ecma35.data.multibyte import parsers
+from ecma35.data.multibyte import mbmapparsers as parsers
 
 _temp = []
 def read_jis_trailer(fil, *, mapper=parsers.identitymap):

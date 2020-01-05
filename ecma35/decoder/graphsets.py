@@ -20,17 +20,47 @@ def proc_irrset(myset, irrid):
     elif not irrid:
         return myset[0]
     else:
-        if 0x30 <= irrid[-1] <= 0x3E:
-            index = irrid[-1] - 0x30
-            for n, i in enumerate(irrid[:-1:-1]):
-                index += 15 * (i - 0x20) * (16 ** n)
+        if irrid == (0x3F,): # i.e. only do this if it's the ONLY byte after the ESC
+            # It is private really, but we use it for the faithful original reg, i.e. the first
+            # item in the registered versions tuple. ECMA-35 doesn't provide a standard way of
+            # doing this (IRRs start at IRR 0x40 for the first registered *update*), but using
+            # IRR 0x3F for this (0x3F being private-use, and one less than 0x40) is (a) permitted
+            # and (b) sensible.
+            private = False
+        elif 0x30 <= irrid[-1] <= 0x3F:
+            # Used for the unregistered versions tuple. Technically, we're abusing the mechanism
+            # with this, since all IRR sets are supposed to be upwardly compatible, and much of
+            # what we're doing here plainly is not, but never mind.
+            private = True
+        else:
+            # Used for the rest of the registered versions tuple.
+            assert 0x40 <= irrid[-1] <= 0x7E
+            private = False
+        start = 0 # it's a tuple index here, and they start from zero.
+        # First number for N bytes after ESC is one more than the largest number
+        # representable with N-1 bytes after ESC.
+        # Akin to as if "00" meant 10 so "99" meant 109 so "000" meant 110, etc…
+        for i in range(len(irrid)): # i.e. includes 0 but not len(irrid) itself
+            if i == 0:
+                noatlevel = 0 # There are no IRRs with no trail byte
+            elif i == 1:
+                if private:
+                    noatlevel = 15 # i.e. 16, but excluding IRR 0x3F
+                else:
+                    noatlevel = 64 # i.e. 63, but with the addition of IRR 0x3F
+            else:
+                if private:
+                    # Sixteen possible I bytes, sixteen possible F bytes
+                    noatlevel = 16 ** i
+                else:
+                    # Sixteen possible I bytes, sixty-three possible F bytes
+                    noatlevel = 63 * (16 ** (i - 1))
+            start += noatlevel
+        if private:
+            index = start + (irrid[-1] - 0x30)
             hs = myset[1]
         else:
-            index = irrid[-1] - 0x40
-            for n, i in enumerate(irrid[:-1:-1]):
-                index += 96 * (i - 0x20) * (16 ** n)
-            # 0x3F is private but we're using it for the original (i.e. one before 0x40)
-            index += 1
+            index = start + (irrid[-1] - 0x40) + 1
             hs = myset[2]
         if index < len(hs):
             return hs[index]
