@@ -7,7 +7,11 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 def decode_designations(stream, state):
-    for token in stream:
+    reconsume = None
+    irrset = None
+    while 1:
+        token = next(stream) if reconsume is None else reconsume
+        reconsume = None
         if token[0] == "ESC" and token[1] in tuple(b"()*+-./$"):
             if token[1] in tuple(b"()*+"):
                 settype = "94"
@@ -35,13 +39,29 @@ def decode_designations(stream, state):
             else:
                 assert wsetbyte in tuple(b"+/")
                 wset = 3
-            yield ("DESIG", wset, settype, idbytes, not wsetbyte)
+            myirr = irrset[2] + (irrset[3],) if irrset is not None else ()
+            irrset = None
+            yield ("DESIG", wset, settype, idbytes, not wsetbyte, myirr)
         elif token[0] == "ESC" and token[1] == 0x21:
             c0seq = token[2] + (token[3],)
-            yield ("CDESIG", "C0", c0seq)
+            myirr = irrset[2] + (irrset[3],) if irrset is not None else ()
+            irrset = None
+            yield ("CDESIG", "C0", c0seq, myirr)
         elif token[0] == "ESC" and token[1] == 0x22:
             c1seq = token[2] + (token[3],)
-            yield ("CDESIG", "C1", c1seq)
+            myirr = irrset[2] + (irrset[3],) if irrset is not None else ()
+            irrset = None
+            yield ("CDESIG", "C1", c1seq, myirr)
+        # We actually can't do this yet since we seem to have to be upstream from the ESC sequence
+        # processing. So we need to pass the individual (GL and C0) tokens through for the ESC
+        # token to ever even arrive (i.e. via feedback).
+        #elif irrset is not None:
+        #    yield ("ERROR", "IRRISOLATE", irrset[2] + (irrset[3],))
+        #    irrset = None
+        #    reconsume = token
+        #    continue
+        elif token[0] == "ESC" and token[1] == 0x26:
+            irrset = token
         else:
             yield token
 

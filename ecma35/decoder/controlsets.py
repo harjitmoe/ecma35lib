@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019.
+# By HarJIT in 2019/2020.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 from ecma35.data import controldata
+from ecma35.decoder.graphsets import proc_irrset
 
 def decode_control_sets(stream, state):
     for token in stream:
@@ -18,23 +19,35 @@ def decode_control_sets(stream, state):
         if token[0] == "CDESIG":
             if token[1] == "C0":
                 try:
-                    state.cur_c0 = controldata.c0bytes[token[2]]
+                    mycset = controldata.c0bytes[token[2]]
                 except KeyError:
                     yield token
                     state.cur_c0 = "Unknown"
                     state.hwotc0 = token[2]
                 else:
-                    yield ("RDESIG", "C0", controldata.c0bytes[token[2]], "C0", token[2], False)
+                    mycseti = proc_irrset(mycset, token[3])
+                    if mycseti is not None:
+                        state.cur_c0 = mycseti
+                    else:
+                        yield ("ERROR", "UNRECIRR", mycset, token[3])
+                        state.cur_c0 = mycset[0] if isinstance(mycset, tuple) else mycset
+                    yield ("RDESIG", "C0", controldata.c0bytes[token[2]], "C0", token[2], False, token[3])
             else:
                 assert token[1] == "C1"
                 try:
-                    state.cur_c1 = controldata.c1bytes[token[2]]
+                    mycset = controldata.c1bytes[token[2]]
                 except KeyError:
                     yield token
                     state.cur_c1 = "Unknown"
                     state.hwotc1 = token[2]
                 else:
-                    yield ("RDESIG", "C1", controldata.c1bytes[token[2]], "C1", token[2], False)
+                    mycseti = proc_irrset(mycset, token[3])
+                    if mycseti is not None:
+                        state.cur_c1 = mycseti
+                    else:
+                        yield ("ERROR", "UNRECIRR", mycset, token[3])
+                        state.cur_c1 = mycset[0] if isinstance(mycset, tuple) else mycset
+                    yield ("RDESIG", "C1", controldata.c1bytes[token[2]], "C1", token[2], False, token[3])
         elif token[0] == "C0":
             ctr = controldata.c0sets[state.cur_c0][token[1]]
             if ctr is None:

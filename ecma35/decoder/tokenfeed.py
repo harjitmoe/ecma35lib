@@ -47,8 +47,8 @@ def process_stream(stream, **kwargs): # The entry point.
               scsufilter.decode_scsu, uhcfilter.decode_uhc, gbkfilter.decode_gbk,
               utf16filter.decode_utf16, rawfilter.decode_raw, unkdocsfilter.decode_remaining_docs, 
               #
-              gbhalfcodes.decode_gbhalfcodes,
-              designations.decode_designations, controlsets.decode_control_sets, 
+              designations.decode_designations, 
+              gbhalfcodes.decode_gbhalfcodes, controlsets.decode_control_sets, 
               fixedcontrols.decode_fixed_controls, escsequences.decode_esc_sequences, 
               csisequences.decode_csi_sequences, controlstrings.decode_control_strings, 
               invocations.decode_invocations, graphsets.decode_graphical_sets,

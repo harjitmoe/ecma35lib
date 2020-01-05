@@ -46,6 +46,15 @@ file, You can obtain one at https://mozilla.org/MPL/2.0/
 # Still to do
 
 - More graphical sets.
+- Support for Big-5 as a DOCS set.
+- Support for general extended ASCII (i.e. with only the LHS following ECMA-35), e.g. Windows-1252.
+- Proper way of switching between variants of (e.g.) JIS X 0208. The standard way (IRR) does not
+  even pretend to cover the type of vendor variation actually observed.
+- For that matter, support for IRR sequences. Problem is, usually only the `IRR @` one if anything
+  is registered, meaning the only selectable revision is the lastest one anyway. Maybe I should add
+  functionality to `IRR ?` (where `?` is in private use column 3 but also immediately before `@`)
+  for their original versions?
+- Privately allocating sets and DOCS codes (e.g. Shift_JIS) in some configurable way.
 - Proper handling of the T.51 / T.61 and ANSEL combining sequences. Probably don't need to stick to
   any hardcoded repertoire though, since (a) we're not trying to implement ISO/IEC 6937, but rather
   T.51 (which confines the entire ISO 6937 repertoire definition (rather than just one of the 
@@ -53,9 +62,6 @@ file, You can obtain one at https://mozilla.org/MPL/2.0/
   mapping to ISO/IEC 10646, not to ISO/IEC 10367 or 8859, so combining marks aren't a problem.
 - Functionality of CSI, CEX, C1 _et cetera_ controls.
   - Rich or annotated output of some sort.
-- Proper way of switching between variants of (e.g.) JIS X 0208. The standard way (IRR) does not
-  even pretend to cover the type of vendor variation actually observed.
-  - Privately allocating sets and DOCS codes (e.g. Shift_JIS) in some configurable way.
 - Backspace composition sequences; some handling of the GCC CSI with respect to Unicode.
 - Figure out how the relevant parts of Videotex work:
   - The rest of the control sets.

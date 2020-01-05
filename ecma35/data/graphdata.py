@@ -84,7 +84,9 @@ g94bytes = {tuple(b"@"): "ir002",
             tuple(b"a"): "ir061",
             tuple(b"b"): "ir070",
             tuple(b"c"): "ir071",
-            tuple(b"d"): "ir173", # or pre-IRR ir072
+            tuple(b"d"): ("ir173", # Preferred version
+                          (), # Private versions
+                          ("ir072", "ir173")), # Original followed by any registered revisions
             tuple(b"e"): "ir068",
             tuple(b"f"): "ir069",
             tuple(b"g"): "ir084",
@@ -164,8 +166,12 @@ g96bytes = {tuple(b"@"): "ir111",
             tuple(b"~"): "nil"}
 
 g94nbytes = {tuple(b"@"): "ir042",
-             tuple(b"A"): "ir058-2005", # Will do for now.
-             tuple(b"B"): "ir168", # Or older pre-IRR "ir087"
+             tuple(b"A"): ("ir058-2005", # Preferred version
+                           ("ir058-hant", "ir058-2000", "ir058-2005"), # Private versions
+                           ("ir058-1980",)), # Original followed by any registered revisions
+             tuple(b"B"): ("ir168web",
+                           ("ir168web"),
+                           ("ir087", "ir168")),
              tuple(b"C"): "ir149",
              tuple(b"D"): "ir159",
              tuple(b"E"): "ir165",

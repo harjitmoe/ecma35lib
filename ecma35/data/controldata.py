@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019.
+# By HarJIT in 2019/2020.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -325,7 +325,9 @@ c0bytes = {tuple(b"@"): "ir001",
 
 c1bytes = {tuple(b"@"): "ir056",
            tuple(b"A"): "ir073",
-           tuple(b"B"): "ir124", # Older version: ir067
+           tuple(b"B"): ("ir124", # Preferred version
+                         (), # Private versions
+                         ("ir067", "ir124")), # Original followed by any registered revisions
            tuple(b"C"): "ir077",
            tuple(b"D"): "ir133",
            tuple(b"E"): "ir040",

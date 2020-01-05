@@ -59,12 +59,17 @@ def read_gbkexceptions(fil):
 
 gb2000map = lambda pointer, ucs: ucs if ucs != (0x1E3F,) else (0xE7C7,)
 
-# GB 2312 (EUC-CN RHS); note that the 2000 and 2005 "editions" refer to GB 18030 edition subsets.
+# GB/T 2312 (EUC-CN RHS); note that the 2000 and 2005 "editions" refer to GB 18030 edition subsets.
+graphdata.gsets["ir058-1980"] = gb2312_1980 = (94, 2, 
+                                parsers.read_main_plane("GB2312.TXT"))
 graphdata.gsets["ir058-2000"] = gb2312_2000 = (94, 2, 
                                 parsers.read_main_plane("index-gb18030.txt", mapper = gb2000map))
 graphdata.gsets["ir058-2005"] = gb2312_2005 = (94, 2, 
                                 parsers.read_main_plane("index-gb18030.txt"))
 # Since graphdata.gsets isn't merely a dict, the above lines also set graphdata.codepoint_coverages
+
+# GB/T 12345 (Traditional Chinese in Mainland China)
+#graphdata.gsets["ir058-hant"] = gb12345 = (94, 2, parsers.read_main_plane("GB12345.TXT"))
 
 # Amounting to the entirety of GBK/3 and most of GBK/4, minus the non-URO end part.
 # And, yes, it would indeed be more straightforward to just read the GBK mappings for

@@ -13,6 +13,30 @@ def _tonumber(s):
         return -1
     return ord(s[1]) - ord("0")
 
+def proc_irrset(myset, irrid):
+    # This is used both here and in controlsets
+    if not isinstance(myset, tuple):
+        return myset if not irrid else None
+    elif not irrid:
+        return myset[0]
+    else:
+        if 0x30 <= irrid[-1] <= 0x3E:
+            index = irrid[-1] - 0x30
+            for n, i in enumerate(irrid[:-1:-1]):
+                index += 15 * (i - 0x20) * (16 ** n)
+            hs = myset[1]
+        else:
+            index = irrid[-1] - 0x40
+            for n, i in enumerate(irrid[:-1:-1]):
+                index += 96 * (i - 0x20) * (16 ** n)
+            # 0x3F is private but we're using it for the original (i.e. one before 0x40)
+            index += 1
+            hs = myset[2]
+        if index < len(hs):
+            return hs[index]
+        else:
+            return None
+
 def decode_graphical_sets(stream, state):
     pending = []
     pset = -1
@@ -77,14 +101,20 @@ def decode_graphical_sets(stream, state):
         elif token[0] == "DESIG":
             sump = graphdata.sumps[token[2]]
             try:
-                state.cur_gsets[token[1]] = sump[token[3]]
+                mygset = sump[token[3]]
             except KeyError:
                 yield token
                 state.cur_gsets[token[1]] = "Unknown"
                 state.ghwots[token[1]] = token[2], token[3]
             else:
+                mygseti = proc_irrset(mygset, token[5])
+                if mygseti is not None:
+                    state.cur_gsets[token[1]] = mygseti
+                else:
+                    yield ("ERROR", "UNRECIRR", mygset, token[5])
+                    state.cur_gsets[token[1]] = mygset[0] if isinstance(mygset, tuple) else mygset
                 yield ("RDESIG", "G{}".format(token[1]), sump[token[3]],
-                       token[2], token[3], token[4])
+                       token[2], token[3], token[4], token[5])
         else:
             yield token
 
