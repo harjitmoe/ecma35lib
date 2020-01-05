@@ -30,7 +30,7 @@ def simple_print(stream, state):
                                                  "LS1R", "LS2R", "LS3R"):
             pass
         elif token[0] in ("DESIG", "RDESIG", "BOM", "DOCS", "RDOCS", "SINGLEOVER", "SCSUSHIFT",
-                          "SCSUDESIG"):
+                          "SCSUDESIG", "C0GRAPH", "CHCP"):
             pass
         elif token[0] == "ERROR":
             print(end = "\uFFFD")

@@ -9,7 +9,7 @@
 import io, pprint
 from ecma35.decoder import tokenfeed
 
-teststr = "\nかFoo\x7fら侅ら¥a~염盐塩鹽䝼/〒｜걈 ~¥\x1b[A\x1b[B\x1b]0;𐐈𐐤𐐓𐐀\x1b\\𐐈𐐤𐐓𐐀\x1b[\x20_kg¥\n"
+teststr = "\nかFoo\x7fら侅ら¥a~염盐塩鹽䝼/〒｜“걈 ~¥”\x1b[A\x1b[B\x1b]0;𐐈𐐤𐐓𐐀\x1b\\𐐈𐐤𐐓𐐀\x1b[\x20_kg¥\n"
 test2 = "\nНаш благодетель знает своё высокое призвание и будет верен ему.\n"
 scsutest = (b"\xD6\x6C\x20\x66\x6C\x69\x65\xDF\x74\x20\x12\x9C\xBE\xC1\xBA\xB2\xB0" +
             b"\x08\x00\x1B\x4C\xEA\x16\xCA\xD3\x94\x0F\x53\xEF\x61\x1B\xE5\x84\xC4" + 
@@ -50,6 +50,7 @@ dat = (b"\x1B[m\x1B%G\x1B!F" + teststr.encode("utf-8-sig") + "\x1CJ염盐塩鹽\
        "\x1B%0⑨/⑨ちるの＇ﾁﾙﾉ".encode("ms-kanji") + b"\xFA\x56\n" +
        "\x1B$)Q\x1B$+P⑨/⑨ちるの＇ﾁﾙﾉ＇\n".encode("shift_jis-2004") +
        b"\x1B&0foo \x1B%/0" + scsutest + b"\n\x01" + 
+       b"\x1B%3\x1B[1252*p\x1B[4)p\v\f\x1B[3)p" + teststr.encode("cp1252", errors="replace") + 
        b"\x1B%/B\x1B%@HAHA_AS_IF\xA1" # i.e. the last DOCS @ should not switch back.
 )
 

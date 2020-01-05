@@ -51,12 +51,14 @@ def decode_csi_sequences(stream, state):
                 # Note: puscbytes are appended, not prepended, to idbytes in controldata.
                 # Some are mnemoniced separately, others should just get the puscbytes in
                 # their parbytes and go to the same handler.
+                # Need to feedback since some CSI sequences control some designations
+                # (notably in the plainextascii DOCS).
                 if tuple(idbytes) + tuple(puscbytes) in controldata.csiseq:
-                    yield ("CSISEQ", controldata.csiseq[tuple(idbytes) + tuple(puscbytes)], 
-                                     tuple(parbytes), active[0][3])
+                    state.feedback.append(("CSISEQ", controldata.csiseq[tuple(idbytes) + 
+                                     tuple(puscbytes)], tuple(parbytes), active[0]))
                 elif tuple(idbytes) in controldata.csiseq:
-                    yield ("CSISEQ", controldata.csiseq[tuple(idbytes)], 
-                                     tuple(puscbytes) + tuple(parbytes), active[0][3])
+                    state.feedback.append(("CSISEQ", controldata.csiseq[tuple(idbytes)], 
+                                     tuple(puscbytes) + tuple(parbytes), active[0]))
                 else:
                     yield ("CTRLSTRING", active[0][1], tuple(active))
                 del active[:]

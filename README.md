@@ -43,12 +43,15 @@ file, You can obtain one at https://mozilla.org/MPL/2.0/
 - Mnemonic parsing for CSI sequences, and CEX sequences for which I can get enough info.
 - Hangul composition sequences.
 - IRR codes.
+- Support for general extended ASCII (i.e. only the LHS follows ECMA-35) as a DOCS set.
 
 # Still to do
 
 - More graphical sets.
-- Support for Big-5 as a DOCS set.
-- Support for general extended ASCII (i.e. with only the LHS following ECMA-35), e.g. Windows-1252.
+- More general RHS sets.
+- Support for Big5 as a DOCS set.
+- Support for JOHAB as a DOCS set.
+- Support for LMBCS as a DOCS set.
 - Dynamically allocating sets, IRR codes, DOCS codes (e.g. Shift_JIS) in some configurable way.
 - Proper handling of the T.51 / T.61 and ANSEL combining sequences. Probably don't need to stick to
   any hardcoded repertoire though, since (a) we're not trying to implement ISO/IEC 6937, but rather

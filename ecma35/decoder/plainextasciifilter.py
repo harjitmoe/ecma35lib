@@ -1,0 +1,98 @@
+#!/usr/bin/env python3
+# -*- mode: python; coding: utf-8 -*-
+# By HarJIT in 2019.
+
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+# Filter for "plain extended ASCII", i.e. a single-byte 8-bit encoding which encodes the C0 
+# controls normally, but doesn't have a GR area. C1 controls might still be used (c.f. CSI 
+# in ANSI.SYS) but they must be represented by escape sequences, like in a seven-bit code.
+# Basically amounts to a 7-bit ECMA-35 code version plus 128 extra graphical codes, and not 
+# an actual 8-bit ECMA-35 version.
+# Also supports a "Print All Characters" mode, i.e. with C0 area graphics. It makes an exception
+# for 0x1B, though, to try and keep it possible to go back.
+
+from ecma35.data import graphdata
+
+plainextasciidocs = ("DOCS", False, (0x33,))
+
+def decode_plainextascii(stream, state):
+    for token in stream:
+        if (token[0] == "DOCS"):
+            if token == plainextasciidocs:
+                yield ("RDOCS", "PLAINEXTASCII", token[1], token[2])
+                state.bytewidth = 1
+                state.docsmode = "plainextascii"
+                state.cur_c0 = "ir001"
+                state.cur_c1 = "RFC1345"
+                state.glset = 0
+                state.grset = 1
+                state.cur_gsets = ["ir006", "ir100", "nil", "nil"]
+                state.cur_rhs = "1252"
+                state.c0_graphics = False
+            else:
+                yield token
+        elif state.docsmode == "plainextascii" and token[0] == "WORD":
+            assert (token[1] < 0x100), token
+            if token[1] < 0x20:
+                if (not state.c0_graphics) or token[1] == 0x1B:
+                    # The 0x1B exception to Print All Characters arguably shouldn't be here, but
+                    # since there's no out-of-band way of controlling the IO, not making this an
+                    # exception would make the switch permanent. Although permanent switches can
+                    # be a thing (as with DOCS / B), they're not really how this implementation
+                    # is designed to work as a general rule.
+                    # Also, not having that exception would make this filter without standard
+                    # return, when the vast majority of usage cases are very much with it.
+                    # So far as I can tell, using 0x1B as ESC does not damage TCVN-1/VSCII-1, nor
+                    # VPS, nor VISCII. Damage to OEM is relatively minor, and 0x1B being read as
+                    # ESC (vide ANSI.SYS) is probably expected anyway. So, it's fine.
+                    yield ("C0", token[1], "CL")
+                else:
+                    c0replset = state.cur_rhs
+                    if c0replset not in graphdata.c0graphics:
+                        c0replset = "437"
+                    c0repl = graphdata.c0graphics[c0replset][token[1]]
+                    if c0repl is not None:
+                        yield ("CHAR", c0repl, c0replset, (token[1],), "C0REPL", "C0REPL")
+                    else:
+                        yield ("C0", token[1], "CL")
+            elif token[1] < 0x80:
+                yield ("GL", token[1] - 0x20)
+            else: # i.e. it is on the right-hand side
+                index = token[1] - 0x80
+                ucs = graphdata.rhses[state.cur_rhs][index]
+                if ucs is None:
+                    yield ("ERROR", "UNDEFGRAPH", state.cur_rhs, (index,), -1, "RHS")
+                elif isinstance(ucs, tuple):
+                    for iucs in ucs:
+                        yield ("CHAR", iucs, state.cur_rhs, (index,), "RHS", "RHS")
+                else:
+                    yield ("CHAR", ucs, state.cur_rhs, (index,), "RHS", "RHS")
+        elif state.docsmode == "plainextascii" and token[0] == "CSISEQ" and token[1] == "DECSPPCS":
+            # DEC Select [IBM] ProPrinter Character Set, i.e. CSI sequence for basically chcp.
+            codepage = bytes(token[2]).decode("ascii")
+            state.cur_rhs = codepage
+            yield ("CHCP", codepage)
+        elif state.docsmode == "plainextascii" and token[0] == "CSISEQ" and token[1] == "DECSPDT":
+            # Select Digital Printed Data Type, also part of DEC's IBM ProPrinter emulation.
+            if token[2] == (0x34,): # 4: Print All Characters
+                state.c0_graphics = True
+                yield ("C0GRAPH", True)
+            else:
+                state.c0_graphics = False
+                yield ("C0GRAPH", False)
+        else:
+            yield token
+        #
+    #
+#
+
+
+
+
+
+
+
+

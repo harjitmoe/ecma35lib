@@ -429,7 +429,7 @@ csiseq = {tuple(b"@"): "ICH", # Insert Character
           tuple(b"\x20j"): "SPL", # Set Page Limit
           tuple(b"\x20k"): "SCP", # Select Character Path
           #
-          # Generally recognised corporate-use CSIs
+          # Some deployed corporate-use CSIs
           tuple(b"J?"): "DECSED", # DEC Selective Erase in Display
           tuple(b"K?"): "DECSEL", # DEC Selective Erase in Line
           tuple(b"S?"): "XTCGPH", # XTerm configure graphics (no standard name/mnemonic?)
@@ -443,12 +443,16 @@ csiseq = {tuple(b"@"): "ICH", # Insert Character
           tuple(b"s"): "SCOSC", # SCO Save Cursor Position (collisive with DECSLRM)
           tuple(b"u"): "SCORC", # SCO Restore Cursor Position
           tuple(b"x"): "DECREQTPARM", # DEC Request Terminal Parameters
+          tuple(b"\x20p"): "DECSSCLS", # DEC Set Scroll Speed
           tuple(b"\x20q"): "DECSCUSR", # DEC Set Cursor Style
+          tuple(b"\x20r"): "DECSKCV", # DEC Set Key Click Volume
           tuple(b"\x20t"): "DECSWBV", # DEC Set Warning Bell Volume
           tuple(b"\x20u"): "DECSMBV", # DEC Set Margin Bell Volume
+          tuple(b"\x20v"): "DECSLCK", # DEC Set Lock Key Style
           tuple(b"!p"): "DECSTR", # DEC Soft Terminal Reset
           tuple(b"\"p"): "DECSCL", # DEC Set Conformance Level
           tuple(b"\"q"): "DECSCA", # DEC Select Character Protection Attribute
+          tuple(b"\"t"): "DECSRFR", # DEC Select Refresh Rate
           tuple(b"#p"): "XTPUSHSGR2", # XTerm Push Select Graphic Rendition
           tuple(b"#q"): "XTPOPSGR2", # XTerm Pop Select Graphic Rendition
           tuple(b"#y"): "XTCHECKSUM", # XTerm Select Checksum Extension
@@ -456,19 +460,30 @@ csiseq = {tuple(b"@"): "ICH", # Insert Character
           tuple(b"#|"): "XTREPORTSGR", # XTerm Report Selected Graphic Rendition
           tuple(b"#}"): "XTPOPSGR", # XTerm Pop Select Graphic Rendition
           tuple(b"$p"): "DECRQM", # DEC Request Mode
+          tuple(b"$q"): "DECSDDT", # DEC (Set?) Disconnect Delay Time
+          tuple(b"$r"): "DECCARA", # DEC Change Attribute in Rectangle
+          tuple(b"$s"): "DECSPRTT", # DEC Select Printer Type
           tuple(b"$t"): "DECRARA", # DEC Reverse Attributes in Rectangular Area
+          tuple(b"$u"): "DECRQTSR", # DEC Request Terminal State Report
           tuple(b"$v"): "DECCRA", # DEC Copy Rectangular Area
           tuple(b"$w"): "DECRQPSR", # DEC Request Presentation State Report
           tuple(b"$x"): "DECFRA", # DEC Fill Rectangular Area
+          tuple(b"$y"): "DECRPRTMDE", # DEC Report Mode (no standard name/mnemonic?)
           tuple(b"$z"): "DECERA", # DEC Erase Rectangular Area
           tuple(b"${"): "DECSERA", # DEC Selective Erase Rectangular Area
           tuple(b"$|"): "DECSCPP", # DEC Select Columns Per Page
+          tuple(b"$}"): "DECSASD", # DEC Select Active Status Display
+          tuple(b"$~"): "DECSSDT", # DEC Select Status Display (Line) Type
           tuple(b"'w"): "DECEFR", # DEC Enable Filter Rectangle
           tuple(b"'z"): "DECELR", # DEC Enable Locator Reporting
           tuple(b"'{"): "DECSLE", # DEC Select Locator Events
           tuple(b"'|"): "DECRQLP", # DEC Request Locator Position
           tuple(b"'}"): "DECIC", # DEC Insert Columns
           tuple(b"'~"): "DECDC", # DEC Delete Columns
+          tuple(b")p"): "DECSPDT", # DEC Select Digital Printed Data Type
+          tuple(b"*p"): "DECSPPCS", # DEC Select ProPrinter Character Set [i.e. IBM codepage]
+          tuple(b"*r"): "DECSCS", # DEC Select Communication Speed
+          tuple(b"*u"): "DECSCP", # DEC Select Communication Port
           tuple(b"*x"): "DECSACE", # DEC Select Attribute Change Extent
           tuple(b"*y"): "DECRQCRA", # DEC Request Checksum of Rectangular Area
           tuple(b"*|"): "DECSNLS"} # DEC Select Number of Lines per Screen
