@@ -60,7 +60,8 @@ def decode_uhc(stream, state):
                 else:
                     index += 52 + (token[1] - 0x81)
                 if index < len(korea.non_wangsung_johab):
-                    yield ("UCS", korea.non_wangsung_johab[index], "UHC", "UHCext")
+                    yield ("CHAR", korea.non_wangsung_johab[index], 
+                           "UHCext", (index,), "UHC", "UHCext")
                     uhc_lead = None
                 else:
                     # Following the UHC structure but beyond the region used.

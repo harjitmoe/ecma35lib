@@ -31,13 +31,18 @@ def decode_plainextascii(stream, state):
                 state.grset = 1
                 state.cur_gsets = ["ir006", "ir100", "nil", "nil"]
                 state.cur_rhs = "1252"
-                state.c0_graphics = False
+                state.c0_graphics_mode = 1
             else:
                 yield token
         elif state.docsmode == "plainextascii" and token[0] == "WORD":
             assert (token[1] < 0x100), token
-            if token[1] < 0x20:
-                if (not state.c0_graphics) or token[1] == 0x1B:
+            if token[1] < 0x20 or token[1] == 0x7F:
+                assert state.c0_graphics_mode in (1, 2, 4), state.c0_graphics_mode
+                if (state.c0_graphics_mode == 1) or token[1] == 0x1B or (
+                        state.c0_graphics_mode == 2 and token[1] in (7, 8, 9, 0xA, 0xD)):
+                    # BEL, BS, HT, LF and CR don't print as graphic in Windows terminal mode.
+                    # The rest do.
+                    # They do have their own graphics though, used for Print All Characters.
                     # The 0x1B exception to Print All Characters arguably shouldn't be here, but
                     # since there's no out-of-band way of controlling the IO, not making this an
                     # exception would make the switch permanent. Although permanent switches can
@@ -48,16 +53,23 @@ def decode_plainextascii(stream, state):
                     # So far as I can tell, using 0x1B as ESC does not damage TCVN-1/VSCII-1, nor
                     # VPS, nor VISCII. Damage to OEM is relatively minor, and 0x1B being read as
                     # ESC (vide ANSI.SYS) is probably expected anyway. So, it's fine.
-                    yield ("C0", token[1], "CL")
+                    if token[1] == 0x7F:
+                        yield ("GL", token[1] - 32)
+                    else:
+                        yield ("C0", token[1], "CL")
                 else:
                     c0replset = state.cur_rhs
                     if c0replset not in graphdata.c0graphics:
                         c0replset = "437"
-                    c0repl = graphdata.c0graphics[c0replset][token[1]]
+                    c0repl = graphdata.c0graphics[c0replset][
+                             token[1] if token[1] != 0x7F else 0x20]
                     if c0repl is not None:
                         yield ("CHAR", c0repl, c0replset, (token[1],), "C0REPL", "C0REPL")
                     else:
-                        yield ("C0", token[1], "CL")
+                        if token[1] == 0x7F:
+                            yield ("GL", token[1] - 32)
+                        else:
+                            yield ("C0", token[1], "CL")
             elif token[1] < 0x80:
                 yield ("GL", token[1] - 0x20)
             else: # i.e. it is on the right-hand side
@@ -78,14 +90,17 @@ def decode_plainextascii(stream, state):
             codepage = bytes(token[2]).decode("ascii")
             state.cur_rhs = codepage
             yield ("CHCP", codepage)
-        elif state.docsmode == "plainextascii" and token[0] == "CSISEQ" and token[1] == "DECSPDT":
+        elif state.docsmode == "plainextascii" and token[0] == "CSISEQ" and token[1] == "DECSDPT":
             # Select Digital Printed Data Type, also part of DEC's IBM ProPrinter emulation.
             if token[2] == (0x34,): # 4: Print All Characters
-                state.c0_graphics = True
-                yield ("C0GRAPH", True)
-            else:
-                state.c0_graphics = False
-                yield ("C0GRAPH", False)
+                state.c0_graphics_mode = 4
+                yield ("C0GRAPH", 4)
+            elif token[2] == (0x32,): # 2: National and Line Drawing
+                state.c0_graphics_mode = 2
+                yield ("C0GRAPH", 2)
+            else: # Default behaviour
+                state.c0_graphics_mode = 1
+                yield ("C0GRAPH", 1)
         else:
             yield token
         #

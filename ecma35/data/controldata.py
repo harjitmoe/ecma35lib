@@ -480,7 +480,7 @@ csiseq = {tuple(b"@"): "ICH", # Insert Character
           tuple(b"'|"): "DECRQLP", # DEC Request Locator Position
           tuple(b"'}"): "DECIC", # DEC Insert Columns
           tuple(b"'~"): "DECDC", # DEC Delete Columns
-          tuple(b")p"): "DECSPDT", # DEC Select Digital Printed Data Type
+          tuple(b")p"): "DECSDPT", # DEC Select Digital Printed Data Type
           tuple(b"*p"): "DECSPPCS", # DEC Select ProPrinter Character Set [i.e. IBM codepage]
           tuple(b"*r"): "DECSCS", # DEC Select Communication Speed
           tuple(b"*u"): "DECSCP", # DEC Select Communication Port
