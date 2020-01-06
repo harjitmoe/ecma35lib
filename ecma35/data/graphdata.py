@@ -50,7 +50,7 @@ rhses = {}
 
 # Note: has to be imported after gsets &co are defined
 from ecma35.data.multibyte import korea, japan, guobiao, traditional
-from ecma35.data.singlebyte import ecma6, ecma43, ebcdic, plainext
+from ecma35.data.singlebyte import ecma6, ecma43, plainext
 
 g94bytes = {tuple(b"@"): "ir002",
             tuple(b"A"): "ir004",
