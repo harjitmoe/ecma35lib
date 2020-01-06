@@ -30,7 +30,7 @@ def decode_plainextascii(stream, state):
                 state.glset = 0
                 state.grset = 1
                 state.cur_gsets = ["ir006", "ir100", "nil", "nil"]
-                state.cur_rhs = "1252"
+                state.cur_rhs = "437"
                 state.c0_graphics_mode = 1
             else:
                 yield token
