@@ -47,8 +47,8 @@ dat = (b"\x1B[m\x1B%G\x1B!F" + teststr.encode("utf-8-sig") + "\x1CJ염盐塩鹽\
        b"\x1BB\x82\x1B[?25h\x1B(0unrecdata" +
        "\x1B%BFran\xA0çais//".encode("latin-1") + b"\xA1\x7E\xF6\x21\x21\n" + # i.e. "ŝ䀖" in UTF-1
        b"\x1B%@\x1B(!2\x1B)!2\x1B*!2\x1B+!2undefinedset\x8Editto\n" +
-       "\x1B%0⑨/⑨ちるの＇ﾁﾙﾉ".encode("ms-kanji") + b"\xFA\x56\n" +
-       "\x1B$)Q\x1B$+P⑨/⑨ちるの＇ﾁﾙﾉ＇\n".encode("shift_jis-2004") +
+       "\x1B%0⑨/⑨ちるの ＇ﾁﾙﾉ".encode("ms-kanji") + b"\xFA\x56\n" +
+       "\x1B$)Q\x1B$+P⑨/⑨ちるの ＇ﾁﾙﾉ＇\n".encode("shift_jis-2004") +
        b"\x1B&0foo \x1B%/0" + scsutest + b"\n\x01" + 
        b"\x1B%3\x1B[437*p\x1B[4)p\n\x7f\v\x1B[2)p\f\x1B[)p" + 
        teststr.encode("cp437", errors="replace") + 

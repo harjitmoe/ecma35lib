@@ -9,6 +9,7 @@
 from ecma35.data import controldata
 
 def decode_esc_sequences(stream, state):
+    workingsets = ("G0", "G1", "G2", "G3")
     active = []
     idbytes = []
     parbytes = []
@@ -30,9 +31,12 @@ def decode_esc_sequences(stream, state):
             elif token[0] == "CODEWORD" and 0x20 <= token[2] < 0x7F:
                 # If we're in an unknown DOCS with standard return
                 code = token[2]
-            elif token[0] == "GL":
+            elif token[0] in workingsets and token[2] == "GL":
                 # If we're in ECMA-35
                 code = token[1] + 0x20
+            elif token == ("CTRL", "SP", "ECMA-35", 0, "GL", "G0"):
+                # Space is exceptionally not treated the same as DEL here.
+                code == 0x20
             else:
                 yield ("ERROR", "TRUNCESC", tuple(active), token)
                 del active[:]

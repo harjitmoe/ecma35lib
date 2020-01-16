@@ -13,6 +13,7 @@ from ecma35.data.multibyte import korea
 uhcdocs = ("DOCS", False, (0x31,))
 
 def decode_uhc(stream, state):
+    workingsets = ("G0", "G1", "G2", "G3")
     uhc_lead = None
     reconsume = None
     while 1:
@@ -28,6 +29,7 @@ def decode_uhc(stream, state):
                 state.glset = 0
                 state.grset = 1
                 state.cur_gsets = ["ir006", "ir149", "nil", "nil"]
+                state.is_96 = [0, 0, 0, 0]
             else:
                 yield token
         elif state.docsmode == "uhc" and token[0] == "WORD":
@@ -36,17 +38,22 @@ def decode_uhc(stream, state):
                 yield ("C0", token[1], "CL")
             elif uhc_lead is None: # i.e. the current one is a lead (or single) byte
                 if token[1] < 0x80:
-                    yield ("GL", token[1] - 0x20)
+                    if (not state.is_96[state.glset]) and (token[1] == 0x20):
+                        yield ("CTRL", "SP", "ECMA-35", 0, "GL", workingsets[state.glset])
+                    elif (not state.is_96[state.glset]) and (token[1] == 0x7F):
+                        yield ("CTRL", "DEL", "ECMA-35", 95, "GL", workingsets[state.glset])
+                    else:
+                        yield (workingsets[state.glset], token[1] - 0x20, "GL")
                 elif token[1] == 0x80:
-                    yield ("G2", 0x40) # TODO review what to actually do here
+                    yield ("G2", 0x40, "FOO") # TODO review what to actually do here
                 elif token[1] == 0xFF:
-                    yield ("G2", 0x41) # TODO review what to actually do here
+                    yield ("G2", 0x41, "FOO") # TODO review what to actually do here
                 else:
                     uhc_lead = token
             elif (0xA1 <= token[1] <= 0xFE) and (0xA1 <= uhc_lead[1] <= 0xFE):
                 # Ordinary EUC code: treat normally.
-                yield ("GR", uhc_lead[1] - 0xA0)
-                yield ("GR", token[1] - 0xA0)
+                yield (workingsets[state.grset], uhc_lead[1] - 0xA0, "GR")
+                yield (workingsets[state.grset], token[1] - 0xA0, "GR")
                 uhc_lead = None
             elif (0x41 <= token[1] <= 0x5A) or (0x61 <= token[1] <= 0x7A) or (
                   0x81 <= token[1] <= 0xFE):

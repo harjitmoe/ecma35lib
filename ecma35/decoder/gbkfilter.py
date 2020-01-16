@@ -13,6 +13,7 @@ from ecma35.data.multibyte import guobiao
 gbkdocs = ("DOCS", False, (0x32,))
 
 def decode_gbk(stream, state):
+    workingsets = ("G0", "G1", "G2", "G3")
     gbk_lead = None
     reconsume = None
     while 1:
@@ -28,6 +29,7 @@ def decode_gbk(stream, state):
                 state.glset = 0
                 state.grset = 1
                 state.cur_gsets = ["ir006", "ir058-2005", "nil", "nil"]
+                state.is_96 = [0, 0, 0, 0]
             else:
                 yield token
         elif state.docsmode == "gbk" and token[0] == "WORD":
@@ -36,7 +38,12 @@ def decode_gbk(stream, state):
                 yield ("C0", token[1], "CL")
             elif gbk_lead is None: # i.e. the current one is a lead (or single) byte
                 if token[1] < 0x80:
-                    yield ("GL", token[1] - 0x20)
+                    if (not state.is_96[state.glset]) and (token[1] == 0x20):
+                        yield ("CTRL", "SP", "ECMA-35", 0, "GL", workingsets[state.glset])
+                    elif (not state.is_96[state.glset]) and (token[1] == 0x7F):
+                        yield ("CTRL", "DEL", "ECMA-35", 95, "GL", workingsets[state.glset])
+                    else:
+                        yield (workingsets[state.glset], token[1] - 0x20, "GL")
                 elif token[1] == 0x80:
                     yield ("G2", 0x40) # TODO review what to actually do here
                 elif token[1] == 0xFF:
@@ -45,8 +52,8 @@ def decode_gbk(stream, state):
                     gbk_lead = token
             elif (0xA1 <= token[1] <= 0xFE) and (0xA1 <= gbk_lead[1] <= 0xFE):
                 # Ordinary EUC code: treat normally.
-                yield ("GR", gbk_lead[1] - 0xA0)
-                yield ("GR", token[1] - 0xA0)
+                yield (workingsets[state.grset], gbk_lead[1] - 0xA0, "GR")
+                yield (workingsets[state.grset], token[1] - 0xA0, "GR")
                 gbk_lead = None
             elif (0x81 <= gbk_lead[1] <= 0xA0) and (
                           (0x40 <= token[1] <= 0x7E) or (0x80 <= token[1] <= 0xFE)):

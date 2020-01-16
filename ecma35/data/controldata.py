@@ -256,12 +256,8 @@ c1sets = {# German bibliographic controls used in DIN 31626
           # of not colliding with DIN on any control code).
           "ir124": (None, None, None, None, None, None, None, "CUS",
                   "NSB", "NSE", None, "PLD", "PLU", None, None, None,
-                  None, "EAB", "EAE", None, None,
-                  "SIB", # Sorting Interpolation Beginning
-                  "SIE", # Sorting Interpolation End
-                  "SSB", # Secondary Sorting Value Beginning
-                  "SSE", # Secondary Sorting Value End
-                  None, None, None, "KWB", "KWE", "PSB", "PSE"),
+                  None, "EAB", "EAE", None, None, "SIB", "SIE", "SSB",
+                  "SSE", None, None, None, "KWB", "KWE", "PSB", "PSE"),
           # The C1 of the infamous RFC 1345 (IR-111 *cough*), whence Unicode's "figment" aliases:
           "RFC1345": ("PAD", # Padding Character
                   "HOP", # High Octet Preset

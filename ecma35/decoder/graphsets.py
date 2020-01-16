@@ -124,7 +124,7 @@ def decode_graphical_sets(stream, state):
             reconsume = token
         elif (tno >= 0) and (graphdata.gsets[tgset][0] == 94) and token[1] in (0, 95):
             # Should only get here if using 0xA0 or 0xFF when a 94 or 94^n set is in GR.
-            assert token[2] in ("GR", "SSGR")
+            assert token[2] in ("GR", "SSGR"), token
             yield ("ERROR", "OUTSIDE94", token[0], token[1], token[2], tgset)
         elif token[0] == "UCS":
             yield ("CHAR", token[1], "UCS", (token[1],), token[2], token[3])

@@ -7,6 +7,7 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 def decode_designations(stream, state):
+    workingsets = ("G0", "G1", "G2", "G3")
     reconsume = None
     irrset = None
     inesc = False
@@ -57,7 +58,8 @@ def decode_designations(stream, state):
             irrset = None
             yield ("CDESIG", "C1", c1seq, myirr)
         elif irrset is not None:
-            if (token[0] == "C0" and token[1] == 0x1B) or (token[0] == "GL" and inesc):
+            if (token[0] == "C0" and token[1] == 0x1B) or (token[0] in workingsets and
+                                                           token[2] == "GL" and inesc):
                 # Because the ESC tokens arrive by feedback from a filter downstream from here,
                 # we do have to pass the C0 and GL tokens needed to give us the designation ESC
                 # token.

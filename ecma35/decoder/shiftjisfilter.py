@@ -15,6 +15,7 @@
 shiftjisdocs = ("DOCS", False, (0x30,))
 
 def decode_shiftjis(stream, state):
+    workingsets = ("G0", "G1", "G2", "G3")
     sjis_lead = None
     reconsume = None
     while 1:
@@ -31,6 +32,7 @@ def decode_shiftjis(stream, state):
                 # Sensible-ish defaults (if ir014 is changed to ir006, it would correspond
                 # in mapping to IBM-943C, Windows-31J or WHATWG's Shift_JIS, minus EUDC)
                 state.cur_gsets = ["ir014", "ir168web", "ir013", "ibmsjisext"]
+                state.is_96 = [0, 0, 0, 0]
             else:
                 yield token
         elif state.docsmode == "shift_jis" and token[0] == "WORD":
@@ -39,9 +41,12 @@ def decode_shiftjis(stream, state):
                 if token[1] < 0x20:
                     yield ("C0", token[1], "SJISONEBYTE")
                 elif token[1] < 0x80:
-                    # Note: using "G0" rather than "GL" will break ESC entirely, since it relies
-                    #       on raw GL (or UCS) opcodes going through (for obvious reasons).
-                    yield ("GL", token[1] - 0x20)
+                    if (not state.is_96[state.glset]) and (token[1] == 0x20):
+                        yield ("CTRL", "SP", "ECMA-35", 0, "GL", workingsets[state.glset])
+                    elif (not state.is_96[state.glset]) and (token[1] == 0x7F):
+                        yield ("CTRL", "DEL", "ECMA-35", 95, "GL", workingsets[state.glset])
+                    else:
+                        yield (workingsets[state.glset], token[1] - 0x20, "GL")
                 elif token[1] == 0x80:
                     # With reference to correspondances between IBM's 1041 and 4992 (full 896)
                     yield ("G2", 0x40, "SJISONEBYTE")

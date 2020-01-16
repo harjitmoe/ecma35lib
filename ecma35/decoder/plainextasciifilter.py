@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019.
+# By HarJIT in 2020.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -19,6 +19,7 @@ from ecma35.data import graphdata
 plainextasciidocs = ("DOCS", False, (0x33,))
 
 def decode_plainextascii(stream, state):
+    workingsets = ("G0", "G1", "G2", "G3")
     for token in stream:
         if (token[0] == "DOCS"):
             if token == plainextasciidocs:
@@ -30,6 +31,7 @@ def decode_plainextascii(stream, state):
                 state.glset = 0
                 state.grset = 1
                 state.cur_gsets = ["ir006", "ir100", "nil", "nil"]
+                state.is_96 = [0, 1, 1, 1]
                 state.cur_rhs = "437"
                 state.c0_graphics_mode = 1
             else:
@@ -54,7 +56,7 @@ def decode_plainextascii(stream, state):
                     # VPS, nor VISCII. Damage to OEM is relatively minor, and 0x1B being read as
                     # ESC (vide ANSI.SYS) is probably expected anyway. So, it's fine.
                     if token[1] == 0x7F:
-                        yield ("GL", token[1] - 32)
+                        yield ("CTRL", "DEL", "ECMA-35", 95, "GL", workingsets[state.glset])
                     else:
                         yield ("C0", token[1], "CL")
                 else:
@@ -67,11 +69,14 @@ def decode_plainextascii(stream, state):
                         yield ("CHAR", c0repl, c0replset, (token[1],), "C0REPL", "C0REPL")
                     else:
                         if token[1] == 0x7F:
-                            yield ("GL", token[1] - 32)
+                            yield ("CTRL", "DEL", "ECMA-35", 95, "GL", workingsets[state.glset])
                         else:
                             yield ("C0", token[1], "CL")
             elif token[1] < 0x80:
-                yield ("GL", token[1] - 0x20)
+                if (not state.is_96[state.glset]) and (token[1] == 0x20):
+                    yield ("CTRL", "SP", "ECMA-35", 0, "GL", workingsets[state.glset])
+                else:
+                    yield (workingsets[state.glset], token[1] - 0x20, "GL")
             else: # i.e. it is on the right-hand side
                 index = token[1] - 0x80
                 if state.cur_rhs not in graphdata.rhses:

@@ -9,6 +9,7 @@
 from ecma35.data import controldata
 
 def decode_csi_sequences(stream, state):
+    workingsets = ("G0", "G1", "G2", "G3")
     active = []
     idbytes = []
     parbytes = []
@@ -32,17 +33,20 @@ def decode_csi_sequences(stream, state):
                 # Can use CSI in UTF-8.
                 # Note the following transformation is only appropriate *because* we know that
                 # we're in a CSI sequence, hence savetoken is used for reconsume.
-                token = ("GL", token[1] - 0x20)
+                token = ("G0", token[1] - 0x20, "GL")
+            if token == ("CTRL", "SP", "ECMA-35", 0, "GL", "G0"):
+                # Space is exceptionally not treated the same as DEL here.
+                token = ("G0", 0, "GL")
             # Not elif:
-            bytevalue = token[1] + 0x20
-            if token[0] == "GL" and (0x30 <= bytevalue < 0x40) and (mode != "csinoparam"):
+            bytevalue = token[1] + 0x20 if isinstance(token[1], int) else None
+            if token[0] in workingsets and token[2] == "GL" and (0x30 <= bytevalue < 0x40) and (mode != "csinoparam"):
                 active.append(token)
                 parbytes.append(bytevalue)
-            elif token[0] == "GL" and (0x20 <= bytevalue < 0x30):
+            elif token[0] in workingsets and token[2] == "GL" and (0x20 <= bytevalue < 0x30):
                 active.append(token)
                 idbytes.append(bytevalue)
                 mode = "csinoparam"
-            elif token[0] == "GL" and (bytevalue >= 0x40):
+            elif token[0] in workingsets and token[2] == "GL" and (bytevalue >= 0x40):
                 active.append(token)
                 idbytes.append(bytevalue)
                 puscbytes = [] # Corporate (or private) use subcommand
@@ -79,8 +83,8 @@ def decode_csi_sequences(stream, state):
             savetoken = token
             if token[0] == "UCS" and 0x20 <= token[1] < 0x7F:
                 # Treat the same as CSI (see above)
-                token = ("GL", token[1] - 0x20)
-            elif token[0] != "GL":
+                token = ("G0", token[1] - 0x20, "GL")
+            elif token[0] not in workingsets or token[2] != "GL":
                 yield ("ERROR", "TRUNCSEQ", tuple(active))
                 del active[:]
                 mode = "normal"
