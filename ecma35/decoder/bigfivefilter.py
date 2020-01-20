@@ -26,7 +26,7 @@ def decode_bigfive(stream, state):
                 state.cur_c1 = "RFC1345"
                 state.glset = 0
                 state.grset = 1
-                state.cur_gsets = ["ir006", "ir171", "cns-eucg2", "ir058-2005"]
+                state.cur_gsets = ["ir006", "ir171", "cns-eucg2", "hkscs"]
                 state.is_96 = [0, 0, 0, 0]
             else:
                 yield token
@@ -49,24 +49,34 @@ def decode_bigfive(stream, state):
                 else:
                     big5_lead = token
             elif (0x40 <= token[1] <= 0xFE) and (token[1] != 0x7F):
-                if big5_lead[1] >= 0xA1:
-                    number = (big5_lead[1] << 8) | token[1]
-                    if number in traditional.big5_to_cns1:
-                        for i in traditional.big5_to_cns1[number]:
-                            yield ("G1", i, "Big5")
-                            big5_lead = None
-                    elif number in traditional.big5_to_cns2:
-                        for i in traditional.big5_to_cns2[number]:
-                            yield ("G2", i, "Big5")
-                            big5_lead = None
-                    elif number in traditional.big5_to_guobiao_fallback:
-                        for i in traditional.big5_to_guobiao_fallback[number]:
-                            yield ("G3", i, "Big5")
-                            big5_lead = None
-                else:
-                    yield ("ERROR", "HKSCSUNIMPLEMENTED", big5_lead[1], token[1]) # TODO
+                number = (big5_lead[1] << 8) | token[1]
+                if number in traditional.big5_to_cns1:
+                    for i in traditional.big5_to_cns1[number]:
+                        yield ("G1", i, "Big5")
+                        big5_lead = None
+                elif number in traditional.big5_to_cns2:
+                    for i in traditional.big5_to_cns2[number]:
+                        yield ("G2", i, "Big5")
+                        big5_lead = None
+                elif (number < 0xA140) or (0xC6A1 <= number < 0xC940) or (number >= 0xF9D6):
+                    extku = big5_lead[1] - 0x81 + 1
+                    extten = (token[1] - 0x40) + 1 if token[1] < 0x7F else (token[1] - 0xA1 + 63) + 1
+                    if number < 0xA140:
+                        pass
+                    elif number < 0xC940:
+                        extku -= 37
+                    else:
+                        extku -= 85
+                    #
+                    if extten <= 63:
+                        ku = (extku * 2) - 1
+                        ten = (extten - 63) + 94
+                    else:
+                        ku = extku * 2
+                        ten = extten - 63
+                    yield ("G3", ku, "Big5")
+                    yield ("G3", ten, "Big5")
                     big5_lead = None
-                    # Don't reconsume: HKSCS codes are valid albeit not yet implemented.
             else:
                 yield ("ERROR", "BIG5TRUNCATE", big5_lead[1])
                 big5_lead = None
