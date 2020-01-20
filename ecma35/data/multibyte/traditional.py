@@ -87,6 +87,10 @@ graphdata.gsets["cns-9"] = cns9 = (94, 2, parsers.read_main_plane("cns-11643-199
 # The entirety does also exist as an unregistered 94^n set, used by EUC-TW:
 graphdata.gsets["cns-eucg2"] = euctw_g2 = (94, 3, parsers.read_main_plane("cns-11643-1992.ucm"))
 
+# Comments: the Kana correspondance of RFC 1922 matches the Big5 Kana encoding in the WHATWG Big5
+# mappings, but not the Big5 Kana encoding in the Python Big5 codec.
+# Since there exist at least two ways of encoding kana in the same private range of Big5, this is
+# not vastly surprising.
 big5_to_cns1 = read_big5_rangemap("rfc1922.txt", 1)
 big5_to_cns1.update(read_big5_rangemap("rfc1922.txt", 2))
 big5_to_cns2 = read_big5_rangemap("rfc1922.txt", 3, plane=2)
