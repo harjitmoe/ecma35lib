@@ -44,13 +44,12 @@ file, You can obtain one at https://mozilla.org/MPL/2.0/
 - Hangul composition sequences.
 - IRR codes.
 - Support for general extended ASCII (i.e. only the LHS follows ECMA-35) as a DOCS set.
+- Support for Big5 as a DOCS set, including both incompatible maps of the Kana/Cyrillic.
 
 # Still to do
 
 - More graphical sets.
 - More general RHS sets.
-- Support for Big5 as a DOCS set (partly done, but wanting of more flexibility in the extension
-  regions).
 - Support for JOHAB as a DOCS set.
 - Support for LMBCS as a DOCS set.
 - Dynamically allocating sets, IRR codes, DOCS codes (e.g. Shift_JIS) in some configurable way.

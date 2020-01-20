@@ -191,7 +191,11 @@ g94nbytes = {tuple(b"@"): "ir042",
              tuple(b"O"): "ir228",
              tuple(b"P"): "ir229",
              tuple(b"Q"): "ir233",
-             tuple(b"!1"): "cns-eucg2", # Strictly temporary, so EUC-TW can be tested.
+             # Traditional Chinese off doing its own thing, as you do... no standard escapes here.
+             # Private designators, so not much point using private revision identifiers.
+             tuple(b"!1"): "cns-eucg2",
+             tuple(b"!2"): ("hkscs", (), ("ms950exts", "etenexts", "hkscs")),
+             tuple(b"!3"): ("ms950utcexts", (), ("utcbig5exts", "ms950utcexts")),
              tuple(b"~"): "nil"}
 
 g96nbytes = {tuple(b"~"): "nil"}

@@ -47,7 +47,7 @@ def read_big5extras(fil):
             lead = int(byts[2:4], 16)
             trail = int(byts[4:6], 16)
             first = lead - 0x81
-            last = (trail - 0xA1 + 63) if trail > 0xA1 else (trail - 0x40)
+            last = (trail - 0xA1 + 63) if trail >= 0xA1 else (trail - 0x40)
             extpointer = (157 * first) + last
         else:
             continue
@@ -76,7 +76,7 @@ def read_big5extras(fil):
             ten = pseudoten - 63
         newpointer = ((ku - 1) * 94) + (ten - 1)
         if len(_temp) > newpointer:
-            assert _temp[newpointer] is None
+            assert _temp[newpointer] is None, (newpointer, int(ucs[2:], 16), _temp[newpointer])
             _temp[newpointer] = int(ucs[2:], 16)
         else:
             while len(_temp) < newpointer:
@@ -152,12 +152,15 @@ def read_big5_rangemap(fil, appendix, *, plane=None):
 
 # Comments: the Kana correspondance of RFC 1922 matches the Big5 Kana encoding in the WHATWG Big5
 # mappings, but not the Big5 Kana encoding in the Python Big5 codec (although it does match the
-# Python Big5HKSCS codec). Since there exist at least two ways of encoding kana in the same 
+# Python Big5-HKSCS codec). Since there exist at least two ways of encoding kana in the same 
 # corporate range of Big5, this is not vastly surprising.
-# What it does mean is that the codec Python uses for "Big5" and "CP950" actually includes some
+# Big5-HKSCS is an extension of Big5-ETEN. Unicode's supplied (semi-withdrawn) BIG5.TXT includes
+# the non-ETEN Kana and Cyrillic mappings.
+# What it does mean is that the codecs Python uses for "Big5" and "CP950" actually includes some
 # allocations collisive with Big5-ETEN; notably, CP950 itself per CP950.TXT appears only to contain
-# a very small subset of the ETEN extensions (碁銹裏墻恒粧嫺 and box drawing).
-# So, Big5-HKSCS (HTML5 decoder) > Big5-ETEN (HTML5 encoder) > Actual CP950 < Python's CP950?
+# a very small subset of the ETEN extensions (碁銹裏墻恒粧嫺 and box drawing). The difference between
+# Python's "Big5" and "CP950" codecs seems to be the incorporation of these extensions.
+# Moral: don't encode Kana and Cyrillic in Big5. Pretty much.
 big5_to_cns1 = read_big5_rangemap("rfc1922.txt", 1)
 big5_to_cns1.update(read_big5_rangemap("rfc1922.txt", 2))
 big5_to_cns2 = read_big5_rangemap("rfc1922.txt", 3, plane=2)
@@ -165,7 +168,22 @@ big5_to_cns1[0xC94A] = big5_to_cns2[0xC94A][-2:] # Exceptional: level 2 mapped t
 del big5_to_cns2[0xC94A]
 
 graphdata.gsets["hkscs"] = hkscs_extras = (94, 2, read_big5extras("index-big5.txt"))
-graphdata.gsets["ms950exts"] = ms_extras = (94, 2, read_big5extras("CP950.TXT"))
+graphdata.gsets["etenexts"] = eten_extras = (94, 2, 
+    ((None,) * (32 * 188)) + hkscs_extras[2][(32 * 188):])
+graphdata.gsets["ms950exts"] = ms_big5_extras = (94, 2, read_big5extras("CP950.TXT"))
+graphdata.gsets["utcbig5exts"] = utc_big5_extras = (94, 2, read_big5extras("BIG5.TXT"))
+graphdata.gsets["ms950utcexts"] = msutc_big5_extras = (94, 2,
+    utc_big5_extras[2] + ms_big5_extras[2][len(utc_big5_extras[2]):])
+
+def show(x):
+    for (n, i) in enumerate(x[2]):
+        if not (n % 47):
+            print()
+            print((n // 188) + 1, (n // 47) % 4, sep = ":", end = " ")
+        print(end = chr(i) if i is not None else "\uFFFD")
+    print()
+
+
 
 
 
