@@ -49,7 +49,8 @@ file, You can obtain one at https://mozilla.org/MPL/2.0/
 
 - More graphical sets.
 - More general RHS sets.
-- Support for Big5 as a DOCS set.
+- Support for Big5 as a DOCS set (partly done, but wanting of more flexibility in the extension
+  regions and also of HKSCS).
 - Support for JOHAB as a DOCS set.
 - Support for LMBCS as a DOCS set.
 - Dynamically allocating sets, IRR codes, DOCS codes (e.g. Shift_JIS) in some configurable way.

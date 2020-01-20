@@ -7,12 +7,12 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 # Filter for "plain extended ASCII", i.e. a single-byte 8-bit encoding which encodes the C0 
-# controls normally, but doesn't have a GR area. C1 controls might still be used (c.f. CSI 
+# controls normally, but doesn't have a CR area. C1 controls might still be used (c.f. CSI 
 # in ANSI.SYS) but they must be represented by escape sequences, like in a seven-bit code.
 # Basically amounts to a 7-bit ECMA-35 code version plus 128 extra graphical codes, and not 
 # an actual 8-bit ECMA-35 version.
 # Also supports a "Print All Characters" mode, i.e. with C0 area graphics. It makes an exception
-# for 0x1B, though, to try and keep it possible to go back.
+# for 0x1B, though, to try and keep it possible to go back (thus keeping it With Standard Return).
 
 from ecma35.data import graphdata
 
