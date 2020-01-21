@@ -40,7 +40,9 @@ dat = (b"\x1B[m\x1B%G\x1B!F" + teststr.encode("utf-8-sig") + "\x1CJ염盐塩鹽\
        #b"\x1B&0\x1B$)A" + teststr.encode("euc-cn", errors="replace") +
        b"\x1B$)C" + teststr.encode("euc-kr", errors="replace") +
        b"\x1B%1" + teststr.encode("uhc", errors="replace") +
-       b"\x1B%2" + teststr.encode("gb18030", errors="replace") + b"\x815\xF47" +
+       b"\xc0\x79\x1B$)N\x1B$+~\n\xc0\x79\xae\xf0\n" +
+       b"\x1B%2" + teststr.encode("gb18030", errors="replace") + 
+       b"\x815\xF47\x1B&3\x1B$)A\xa3\xa0\x1B&4\x1B$)A\xA6\xF3\xFE\x6C\x815\xF47" +
        b"\x1B%4" + teststr.encode("big5hkscs", errors="replace") +
        b"\x1B$+!3" + teststr.encode("big5", errors="replace") +
        b"\x1B%@\x1B-@" + test2.encode("koi8-r") + 

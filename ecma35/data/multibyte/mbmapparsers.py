@@ -12,7 +12,7 @@ directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mbmaps")
 _temp = []
 identitymap = lambda pointer, ucs: ucs
 
-def read_main_plane(fil, *, whatwgjis=False, eucjp=False, plane=None, mapper=identitymap):
+def read_main_plane(fil, *, whatwgjis=False, eucjp=False, kps=False, plane=None, mapper=identitymap):
     for _i in open(os.path.join(directory, fil), "r"):
         if not _i.strip():
             continue
@@ -25,7 +25,7 @@ def read_main_plane(fil, *, whatwgjis=False, eucjp=False, plane=None, mapper=ide
         elif _i[:2] == "0x":
             # Consortium-style format, over GL (or GR with eucjp=1) without transformation.
             byts, ucs = _i.split("\t", 2)[:2]
-            if not eucjp:
+            if not (eucjp or kps):
                 men = 1
                 ku = int(byts[2:4], 16) - 0x20
                 ten = int(byts[4:6], 16) - 0x20
@@ -33,9 +33,9 @@ def read_main_plane(fil, *, whatwgjis=False, eucjp=False, plane=None, mapper=ide
                 men = 1
                 if byts[2].upper() in "01234567": # ASCII
                     continue
-                elif byts[2:4].upper() == "8E": # Half-width Katakana (via SS2)
+                elif eucjp and byts[2:4].upper() == "8E": # Half-width Katakana (via SS2)
                     continue
-                elif byts[2:4].upper() == "8F":
+                elif eucjp and byts[2:4].upper() == "8F":
                     if len(byts) == 4: # i.e. SS3 itself rather than an SS3 sequence
                         continue
                     byts = byts[2:]
@@ -46,6 +46,8 @@ def read_main_plane(fil, *, whatwgjis=False, eucjp=False, plane=None, mapper=ide
                     continue
                 ku = int(byts[2:4], 16) - 0xA0
                 ten = int(byts[4:6], 16) - 0xA0
+                if kps and ((ku < 1) or (ku > 94) or (ten < 1) or (ten > 94)):
+                    continue
             if plane is not None: # i.e. if we want a particular plane's two-byte mapping.
                 if men != plane:
                     continue

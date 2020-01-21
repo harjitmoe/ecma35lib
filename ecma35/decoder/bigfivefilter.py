@@ -50,15 +50,7 @@ def decode_bigfive(stream, state):
                     big5_lead = token
             elif (0x40 <= token[1] <= 0xFE) and (token[1] != 0x7F):
                 number = (big5_lead[1] << 8) | token[1]
-                if number in traditional.big5_to_cns1:
-                    for i in traditional.big5_to_cns1[number]:
-                        yield ("G1", i, "Big5")
-                        big5_lead = None
-                elif number in traditional.big5_to_cns2:
-                    for i in traditional.big5_to_cns2[number]:
-                        yield ("G2", i, "Big5")
-                        big5_lead = None
-                elif (number < 0xA140) or (0xC6A1 <= number < 0xC940) or (number >= 0xF9D6):
+                if (number < 0xA140) or (0xC6A1 <= number < 0xC940) or (number >= 0xF9D6):
                     extku = big5_lead[1] - 0x81 + 1
                     extten = (token[1] - 0x40) + 1 if token[1] < 0x7F else (token[1] - 0xA1 + 63) + 1
                     if number < 0xA140:
@@ -77,6 +69,14 @@ def decode_bigfive(stream, state):
                     yield ("G3", ku, "Big5")
                     yield ("G3", ten, "Big5")
                     big5_lead = None
+                elif number in traditional.big5_to_cns1:
+                    for i in traditional.big5_to_cns1[number]:
+                        yield ("G1", i, "Big5")
+                        big5_lead = None
+                elif number in traditional.big5_to_cns2:
+                    for i in traditional.big5_to_cns2[number]:
+                        yield ("G2", i, "Big5")
+                        big5_lead = None
             else:
                 yield ("ERROR", "BIG5TRUNCATE", big5_lead[1])
                 big5_lead = None

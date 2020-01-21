@@ -57,15 +57,20 @@ def read_gbkexceptions(fil):
     del _temp[:]
     return r
 
-gb2000map = lambda pointer, ucs: ucs if ucs != (0x1E3F,) else (0xE7C7,)
+full2005dict = {0xE78D: 0xFE10, 0xE78E: 0xFE12, 0xE78F: 0xFE11, 0xE790: 0xFE13, 0xE791: 0xFE14, 0xE792: 0xFE15, 0xE793: 0xFE16, 0xE794: 0xFE17, 0xE795: 0xFE18, 0xE796: 0xFE19, 0xE816: 0x20087, 0xE817: 0x20089, 0xE818: 0x200CC, 0xE81E: 0x9FB4, 0xE826: 0x9FB5, 0xE82B: 0x9FB6, 0xE82C: 0x9FB7, 0xE831: 0x215D7, 0xE832: 0x9FB8, 0xE83B: 0x2298F, 0xE843: 0x9FB9, 0xE854: 0x9FBA, 0xE855: 0x241FE, 0xE864: 0x9FBB}
+gb2005tofullmap = lambda pointer, ucs: (full2005dict.get(ucs[0], ucs[0]),) if not ucs[1:] else ucs
+gb2005to2000map = lambda pointer, ucs: ucs if ucs != (0x1E3F,) else (0xE7C7,)
 
 # GB/T 2312 (EUC-CN RHS); note that the 2000 and 2005 "editions" refer to GB 18030 edition subsets.
 graphdata.gsets["ir058-1980"] = gb2312_1980 = (94, 2, # is this same as ibm-5478_P100-1995.ucm ?
                                 parsers.read_main_plane("GB2312.TXT"))
 graphdata.gsets["ir058-2000"] = gb2312_2000 = (94, 2, 
-                                parsers.read_main_plane("index-gb18030.txt", mapper = gb2000map))
+                                parsers.read_main_plane("index-gb18030.txt", mapper = gb2005to2000map))
 graphdata.gsets["ir058-2005"] = gb2312_2005 = (94, 2, 
                                 parsers.read_main_plane("index-gb18030.txt"))
+graphdata.gsets["ir058-web"] = gb2312_2005 # Not different here, but treated differently by gbkfilter
+graphdata.gsets["ir058-full"] = gb2312_full = (94, 2,
+                                parsers.read_main_plane("index-gb18030.txt", mapper = gb2005tofullmap))
 # Since graphdata.gsets isn't merely a dict, the above lines also set graphdata.codepoint_coverages
 
 # ITU's extension of ir058-1980, i.e. with 6763 GB 2312 chars, 705 GB 8565.2 chars and 139 others.
@@ -86,7 +91,9 @@ non_euccn_uro101 = [i for i in range(0x4E00, 0x9FA6)
 
 # GBK/5, and the non-URO part of GBK/4.
 gbk_exceptions = read_gbkexceptions("index-gb18030.txt")
+gbk_exceptions_full = tuple(full2005dict.get(_i, _i) for _i in gbk_exceptions) # For use with ir058-full
 gbk_exceptions_coverage = set(gbk_exceptions)
+gbk_exceptions_full_coverage = set(gbk_exceptions_full)
 
 # Amounting to the first section of four-byte codes in GB18030 (the second section can be mapped
 # directly since no astral character is in any part of GBK). This does have to be generated from

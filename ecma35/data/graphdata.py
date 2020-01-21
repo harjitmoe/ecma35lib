@@ -171,7 +171,8 @@ g96bytes = {tuple(b"@"): "ir111",
 
 g94nbytes = {tuple(b"@"): "ir042",
              tuple(b"A"): ("ir058-2005", # Preferred version
-                           ("ir058-hant", "ir058-2000", "ir058-2005"), # Private versions
+                           # Private versions
+                           ("ir058-hant", "ir058-2000", "ir058-2005", "ir058-web", "ir058-full"),
                            ("ir058-1980",)), # Original followed by any registered revisions
              tuple(b"B"): ("ir168web",
                            ("ir168web"),

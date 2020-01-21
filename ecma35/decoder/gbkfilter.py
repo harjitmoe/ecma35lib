@@ -51,12 +51,13 @@ def decode_gbk(stream, state):
                 else:
                     gbk_lead = token
             elif (0xA1 <= token[1] <= 0xFE) and (0xA1 <= gbk_lead[1] <= 0xFE):
-                # Ordinary EUC code: treat normally.
+                # Ordinary EUC code ("Level 1" / "Level 2"): treat normally.
                 yield (workingsets[state.grset], gbk_lead[1] - 0xA0, "GR")
                 yield (workingsets[state.grset], token[1] - 0xA0, "GR")
                 gbk_lead = None
             elif (0x81 <= gbk_lead[1] <= 0xA0) and (
                           (0x40 <= token[1] <= 0x7E) or (0x80 <= token[1] <= 0xFE)):
+                # "Level 3"
                 row_number = gbk_lead[1] - 0x81
                 index = (row_number * 190) + (token[1] - 0x40)
                 if token[1] > 0x7F:
@@ -65,6 +66,7 @@ def decode_gbk(stream, state):
                 gbk_lead = None
             elif (0xAA <= gbk_lead[1] <= 0xFE) and (
                           (0x40 <= token[1] <= 0x7E) or (0x80 <= token[1] <= 0xA0)):
+                # "Level 4"
                 row_number = gbk_lead[1] - 0xAA
                 index = (0x20 * 190) + (row_number * 96) + (token[1] - 0x40)
                 if token[1] > 0x7F:
@@ -75,17 +77,25 @@ def decode_gbk(stream, state):
                     gbk_lead = None
                 else:
                     exception_index = 192 + index - len(guobiao.non_euccn_uro101)
-                    yield ("UCS", guobiao.gbk_exceptions[exception_index], "GBK", "GBK/4+")
+                    if state.cur_gsets[1] != "ir058-full":
+                        yield ("UCS", guobiao.gbk_exceptions[exception_index], "GBK", "GBK/4+")
+                    else:
+                        yield ("UCS", guobiao.gbk_exceptions_full[exception_index], "GBK", "GBK/4+")
                     gbk_lead = None
             elif (0xA1 <= gbk_lead[1] <= 0xA9) and (
                           (0x40 <= token[1] <= 0x7E) or (0x80 <= token[1] <= 0xA0)):
+                # "Level 5"
                 row_number = gbk_lead[1] - 0xA1
                 extra_index = (row_number * 96) + (token[1] - 0x40)
                 if token[1] > 0x7F:
                     extra_index -= 1
                 #
                 if extra_index < (96 * 7):
-                    yield ("UCS", 0xE4C6 + extra_index, "GBK", "GBK/UDC3")
+                    if (extra_index == (0xE5E5 - 0xE4C6)) and (
+                            state.cur_gsets[1] in ("ir058-web", "ir058-full")):
+                        yield ("UCS", 0x3000, "GBK", "GBK/UDC3")
+                    else:
+                        yield ("UCS", 0xE4C6 + extra_index, "GBK", "GBK/UDC3")
                 else:
                     exception_index = extra_index - (96 * 7)
                     assert exception_index < 192

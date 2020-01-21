@@ -31,10 +31,11 @@ def decode_gbhalfcodes(stream, state):
                         para_ucs = index + (189000 - len(guobiao.non_gbk_bmp))
                         yield ("ERROR", "GB18030BEYOND", para_ucs)
                 else:
-                    if (index == 7457) and (state.cur_gsets[1] == "ir058-2005"):
+                    if (index == 7457) and (state.cur_gsets[1] in ("ir058-2005", "ir058-web")):
                         # No longer follows the logical pattern due to changes in 2005.
                         # This only affects this one code (plus the corresponding one in the
                         # main plane), making it anomalously out of order.
+                        # Don't do this for ir058-full, since it prefers duplicate over PUA maps.
                         yield ("UCS", 0xE7C7, "GBK", "GB18030-BMP")
                     elif index < len(guobiao.non_gbk_bmp):
                         yield ("UCS", guobiao.non_gbk_bmp[index], "GBK", "GB18030-BMP")
