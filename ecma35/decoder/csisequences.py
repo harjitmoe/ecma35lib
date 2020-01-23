@@ -59,10 +59,10 @@ def decode_csi_sequences(stream, state):
                 # (notably in the plainextascii DOCS).
                 if tuple(idbytes) + tuple(puscbytes) in controldata.csiseq:
                     state.feedback.append(("CSISEQ", controldata.csiseq[tuple(idbytes) + 
-                                     tuple(puscbytes)], tuple(parbytes), active[0]))
+                                     tuple(puscbytes)], tuple(parbytes), tuple(active)))
                 elif tuple(idbytes) in controldata.csiseq:
                     state.feedback.append(("CSISEQ", controldata.csiseq[tuple(idbytes)], 
-                                     tuple(puscbytes) + tuple(parbytes), active[0]))
+                                     tuple(puscbytes) + tuple(parbytes), tuple(active)))
                 else:
                     yield ("CTRLSTRING", active[0][1], tuple(active))
                 del active[:]

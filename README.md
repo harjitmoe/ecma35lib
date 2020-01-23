@@ -45,6 +45,7 @@ file, You can obtain one at https://mozilla.org/MPL/2.0/
 - IRR codes.
 - Support for general extended ASCII (i.e. only the LHS follows ECMA-35) as a DOCS set.
 - Support for Big5 as a DOCS set, including both incompatible maps of the Kana/Cyrillic.
+- Support for GCC CSI sequences
 
 # Still to do
 
@@ -60,7 +61,7 @@ file, You can obtain one at https://mozilla.org/MPL/2.0/
   mapping to ISO/IEC 10646, not to ISO/IEC 10367 or 8859, so combining marks aren't a problem.
 - Functionality of CSI, CEX, C1 _et cetera_ controls.
   - Rich or annotated output of some sort.
-- Backspace composition sequences; some handling of the GCC CSI with respect to Unicode.
+- Backspace composition sequences.
 - Figure out how the relevant parts of Videotex work:
   - The rest of the control sets.
   - The rest of the DOCS codes.
