@@ -27,6 +27,7 @@ scsutest = (b"\xD6\x6C\x20\x66\x6C\x69\x65\xDF\x74\x20\x12\x9C\xBE\xC1\xBA\xB2\x
 dat = (b"\x1B[m\x1B%G\x1B!F" + teststr.encode("utf-8-sig") + "\x1CJ염盐塩鹽\x1CK".encode("utf-8") +
        b"\xa4\xed\xa0\xc1\x80\xed\xa0\x81\xed\xb0\xa4" + # Deliberately invalid UTF-8
        '\nDisplay test: "Muhammad \x1B[1\x20_صلى الله عليه وسلم\x1B[2\x20_"\n'.encode("utf-8") +
+       '\n\x1B[1\x20_2/3\x1B[1\x20_2\u20443\x1B[2\x20_\n'.encode("utf-8") +
        b"\x1Bc\x1B%9unrecdata" + # Unrecognised WSR DOCS, should stay as WORD ops in output.
        b"\x1B%/L" + teststr.encode("utf-16be") + 
        b"\xDC\x20\xD8\x20" +                             # Deliberately invalid UTF-16BE
@@ -44,8 +45,8 @@ dat = (b"\x1B[m\x1B%G\x1B!F" + teststr.encode("utf-8-sig") + "\x1CJ염盐塩鹽\
        b"\xc0\x79\x1B$)N\x1B$+~\n\xc0\x79\xae\xf0\n" +
        b"\x1B%2" + teststr.encode("gb18030", errors="replace") + 
        b"\x815\xF47\x1B&3\x1B$)A\xa3\xa0\x1B&4\x1B$)A\xA6\xF3\xFE\x6C\x815\xF47" +
-       b"\x1B%4" + teststr.encode("big5hkscs", errors="replace") +
-       b"\x1B$+!3" + teststr.encode("big5", errors="replace") +
+       b"\x1B%4" + (teststr + "糎").encode("big5hkscs", errors="replace") +
+       b"\x1B$+!3" + (teststr + "糎").encode("big5", errors="replace") +
        b"\x1B%@\x1B-@" + test2.encode("koi8-r") + 
        b"\x1B-L" + test2.encode("iso-8859-5") + 
        b"\x1B$)G\x1B$*!1\x8E\xA3\xC0\xDA\xFC\xFC" + # i.e. 塩鹽 in EUC-TW
