@@ -203,18 +203,25 @@ g96nbytes = {tuple(b"~"): "nil"}
 
 sumps = {"94": g94bytes, "96": g96bytes, "94n": g94nbytes, "96n": g96nbytes}
 
-def show(x):
+def show(x, *, plane=None):
     import unicodedata as ucd
-    if x[1] == 2:
-        sz = x[0]
-        hs = sz // 2
-        ofs = 8 - (hs % 8)
-        series = x[2]
-    elif x[1] == 1:
+    if x[1] == 1:
         sz = 0
         hs = 16
         ofs = 2
         series = ((0x20,) if x[0] < 96 else ()) + x[2]
+    elif x[1] == 2:
+        sz = x[0]
+        hs = sz // 2
+        ofs = (8 - (hs % 8)) % 8
+        series = x[2]
+    elif x[1] == 3:
+        if plane is None:
+            raise ValueError("must specify a plane to display a three-byte set")
+        sz = x[0]
+        hs = sz // 2
+        ofs = (8 - (hs % 8)) % 8
+        series = x[2][(sz * sz) * (plane - 1):][:(sz * sz)]
     else:
         raise ValueError("unsupported set byte length size")
     for (n, i) in enumerate(series):
@@ -240,6 +247,8 @@ def show(x):
             curchar = chr(i)
             zenkaku = (ucd.east_asian_width(chr(i)) in ("W", "F"))
         print(curchar, end = " " if not zenkaku else "")
+    for i in range((hs - (n % hs) - 1) % hs):
+        print(end = "\uFFFD ")
     print()
 
 
