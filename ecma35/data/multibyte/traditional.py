@@ -77,11 +77,11 @@ def read_big5extras(fil):
         newpointer = ((ku - 1) * 94) + (ten - 1)
         if len(_temp) > newpointer:
             assert _temp[newpointer] is None, (newpointer, int(ucs[2:], 16), _temp[newpointer])
-            _temp[newpointer] = int(ucs[2:], 16)
+            _temp[newpointer] = (int(ucs[2:], 16),)
         else:
             while len(_temp) < newpointer:
                 _temp.append(None)
-            _temp.append(int(ucs[2:], 16))
+            _temp.append((int(ucs[2:], 16),))
     r = tuple(_temp) # Making a tuple makes a copy, of course.
     del _temp[:]
     return r
@@ -174,14 +174,6 @@ graphdata.gsets["ms950exts"] = ms_big5_extras = (94, 2, read_big5extras("CP950.T
 graphdata.gsets["utcbig5exts"] = utc_big5_extras = (94, 2, read_big5extras("BIG5.TXT"))
 graphdata.gsets["ms950utcexts"] = msutc_big5_extras = (94, 2,
     utc_big5_extras[2] + ms_big5_extras[2][len(utc_big5_extras[2]):])
-
-def show(x):
-    for (n, i) in enumerate(x[2]):
-        if not (n % 47):
-            print()
-            print((n // 188) + 1, (n // 47) % 4, sep = ":", end = " ")
-        print(end = chr(i) if i is not None else "\uFFFD")
-    print()
 
 
 

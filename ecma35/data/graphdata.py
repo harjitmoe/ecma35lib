@@ -203,6 +203,45 @@ g96nbytes = {tuple(b"~"): "nil"}
 
 sumps = {"94": g94bytes, "96": g96bytes, "94n": g94nbytes, "96n": g96nbytes}
 
+def show(x):
+    import unicodedata as ucd
+    if x[1] == 2:
+        sz = x[0]
+        hs = sz // 2
+        ofs = 8 - (hs % 8)
+        series = x[2]
+    elif x[1] == 1:
+        sz = 0
+        hs = 16
+        ofs = 2
+        series = ((0x20,) if x[0] < 96 else ()) + x[2]
+    else:
+        raise ValueError("unsupported set byte length size")
+    for (n, i) in enumerate(series):
+        if not (n % hs):
+            print()
+            if sz:
+                print("{:02d}".format((n // sz) + ofs), (n // hs) % 2, sep = ":", end = ": ")
+            else:
+                print((n // hs) + ofs, end = ": ")
+        if i is None:
+            curchar = "\uFFFD"
+            zenkaku = False
+        elif isinstance(i, tuple) and (len(i) == 1) and (ucd.category(chr(i[0])) == "Co"):
+            curchar = "\uFFFC"
+            zenkaku = False
+        elif isinstance(i, tuple):
+            curchar = "".join(chr(j) for j in i)
+            zenkaku = (ucd.east_asian_width(chr(i[0])) in ("W", "F"))
+        elif ucd.category(chr(i)) == "Co":
+            curchar = "\uFFFC"
+            zenkaku = False
+        else:
+            curchar = chr(i)
+            zenkaku = (ucd.east_asian_width(chr(i)) in ("W", "F"))
+        print(curchar, end = " " if not zenkaku else "")
+    print()
+
 
 
 

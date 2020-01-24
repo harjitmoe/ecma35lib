@@ -43,7 +43,7 @@ raw_variants = {
     # Violation of ECMA-6:1991: 0x22 is not ".
     # Violation of ECMA-6:1991: 0x23 is not # or £.
     "ir009-1": ([0xBB, None, 0x3000, 0xC6, 0xD8, 0xC5, 0x25A0, None, 
-                             0x2007, 0xE6, 0xF8, 0xE5, 0x2013], {0x22: 0xBA}),
+                             0x2007, 0xE6, 0xF8, 0xE5, 0x2013], {0x22: 0xAB}),
     # DEC NRCS for Denmark and Norway
     "ir009-1dec": ([None, None, 0xC4, 0xC6, 0xD8, 0xC5, 0xDC, None, 
                                 0xE4, 0xE6, 0xF8, 0xE5, 0xFC], {}),
@@ -101,9 +101,9 @@ raw_variants = {
     # INIS subset of ASCII
     # Violation of ECMA-6:1991: 0x21, 0x22, 0x26, 0x3F and 0x5F are omitted.
     # Violation of ECMA-6:1991: 0x23 is omitted, not # or £.
-    "ir049": ([-1, None, -1, None, -1, None, -1, None, 
+    "ir049": ([-1, None, -1, None, -1, None, -1, -1, 
                          -1, -1, None, -1, -1], {
-              0x21: -1, 0x22: -1, 0x26: -1, 0x3F: -1, 0x5F: -1}),
+              0x21: -1, 0x22: -1, 0x26: -1, 0x3F: -1}),
     # GB 1988 (Mainland China)
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
     "ir057": ([None, 0xA5, None, None, None, None, None, None, 
@@ -154,16 +154,16 @@ raw_variants = {
     "ir151": ([None, 0xA4, None, 0xA1, 0xD1, None, 0xBF, None, 
                            None, 0xB4, 0xF1, 0x5B, 0xA8], {}),
     # Invariant subset of ECMA-6
-    "ir170": ([-1, -1, -1, -1, -1, -1, -1, -1, 
+    "ir170": ([-1, -1, -1, -1, -1, -1, -1, 0x5F, 
                        -1, -1, -1, -1, -1], {}),
     # Invariant subset of DEC NRCS
     # Violation of ECMA-6:1991: 0x5F is omitted.
     "ir170dec": ([-1, None, -1, -1, -1, -1, -1, -1, 
-                            -1, -1, -1, -1, -1], {0x5F: -1}),
+                            -1, -1, -1, -1, -1], {}),
     # Invariant subset of Roman G0 set of ETS 300 706
     # Violation of ECMA-6:1991: 0x5F is omitted.
     "ir170ets": ([-1, -1, -1, -1, -1, -1, -1, -1, 
-                          -1, -1, -1, -1, -1], {0x5F: -1}),
+                          -1, -1, -1, -1, -1], {}),
     # I.S. 433 (Irish Gaelic)
     "ir207": ([0xA3, None, 0xD3, 0xC9, 0xCD, 0xDA, 0xC1, None, 
                            0xF3, 0xE9, 0xED, 0xFA, 0xE1], {}),
