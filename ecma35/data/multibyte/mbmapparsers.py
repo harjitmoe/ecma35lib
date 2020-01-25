@@ -54,7 +54,7 @@ def read_main_plane(fil, *, whatwgjis=False, eucjp=False, kps=False, plane=None,
                 else:
                     men = 1
         elif _i[:2] == "<U":
-            # ICU-style format, over GL without transformation
+            # ICU-style format, over GL (or EUC-TW) without transformation
             ucs, byts, direction = _i.split(" ", 2)
             assert byts[:2] == "\\x"
             byts = [int(i, 16) for i in byts[2:].split("\\x")]
@@ -62,18 +62,30 @@ def read_main_plane(fil, *, whatwgjis=False, eucjp=False, kps=False, plane=None,
                 # i.e. best-fit mapped by the encoder only
                 # Whereas, |3 means it's used only by the decoder (usually because duplicate)
                 continue
-            if len(byts) == 3:
+            if len(byts) == 4:
+                assert byts[0] == 0x8E
+                men = byts[1] - 0xA0
+                ku = byts[2] - 0xA0
+                ten = byts[3] - 0xA0
+            elif len(byts) == 3:
                 if 0x80 < byts[0] < 0xA0: # cns-11643-1992.ucm does this for some reason.
                     men = byts[0] - 0x80
                 else:
                     men = byts[0] - 0x20
                 ku = byts[1] - 0x20
                 ten = byts[2] - 0x20
-            else:
-                assert len(byts) == 2 # Otherwise why is it in the multibyte folder?
+            elif len(byts) == 2:
                 men = 1
-                ku = byts[0] - 0x20
-                ten = byts[1] - 0x20
+                if byts[0] >= 0xA0:
+                    ku = byts[0] - 0xA0
+                    ten = byts[1] - 0xA0
+                else:
+                    ku = byts[0] - 0x20
+                    ten = byts[1] - 0x20
+            else:
+                assert len(byts) == 1
+                continue
+            #
             if plane is not None: # i.e. if we want a particular plane's two-byte mapping.
                 if men != plane:
                     continue

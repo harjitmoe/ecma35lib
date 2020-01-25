@@ -11,18 +11,22 @@ from ecma35.data import graphdata
 from ecma35.data.multibyte import mbmapparsers as parsers
 
 # CNS 11643
-graphdata.gsets["ir171"] = cns1 = (94, 2, parsers.read_main_plane("cns-11643-1992.ucm", plane=1))
-graphdata.gsets["ir172"] = cns2 = (94, 2, parsers.read_main_plane("cns-11643-1992.ucm", plane=2))
+graphdata.gsets["ir171"] = cns1 = (94, 2, parsers.read_main_plane("euc-tw-2014.ucm", plane=1))
+graphdata.gsets["ir172"] = cns2 = (94, 2, parsers.read_main_plane("euc-tw-2014.ucm", plane=2))
 # ISO-IR numbers jump by ten here (between the Big-5 and non-Big-5 planes).
-graphdata.gsets["ir183"] = cns3 = (94, 2, parsers.read_main_plane("cns-11643-1992.ucm", plane=3))
-graphdata.gsets["ir184"] = cns4 = (94, 2, parsers.read_main_plane("cns-11643-1992.ucm", plane=4))
-graphdata.gsets["ir185"] = cns5 = (94, 2, parsers.read_main_plane("cns-11643-1992.ucm", plane=5))
-graphdata.gsets["ir186"] = cns6 = (94, 2, parsers.read_main_plane("cns-11643-1992.ucm", plane=6))
-graphdata.gsets["ir187"] = cns7 = (94, 2, parsers.read_main_plane("cns-11643-1992.ucm", plane=7))
+graphdata.gsets["ir183"] = cns3 = (94, 2, parsers.read_main_plane("euc-tw-2014.ucm", plane=3))
+graphdata.gsets["ir184"] = cns4 = (94, 2, parsers.read_main_plane("euc-tw-2014.ucm", plane=4))
+graphdata.gsets["ir185"] = cns5 = (94, 2, parsers.read_main_plane("euc-tw-2014.ucm", plane=5))
+graphdata.gsets["ir186"] = cns6 = (94, 2, parsers.read_main_plane("euc-tw-2014.ucm", plane=6))
+graphdata.gsets["ir187"] = cns7 = (94, 2, parsers.read_main_plane("euc-tw-2014.ucm", plane=7))
 # Plane 7 is the last one to be registered with ISO-IR. Plane 8 is unused.
-graphdata.gsets["cns-9"] = cns9 = (94, 2, parsers.read_main_plane("cns-11643-1992.ucm", plane=9))
+# Plane 9 in cns-11643-1992.ucm (i.e. not the newer versions of that file which reduce the planes
+#   included to 1 and 2) corresponds to Plane 15 (the last of four PUA planes) in euc-tw-2014.ucm,
+#   suggesting it might not actually be part of the CNS spec. Notably, the filename names the
+#   2002 spec, which Lunde's 1995 CJK.INF Version 1.9 gives as having seven planes with an eighth
+#   rumoured underway. This would explain 8 being skipped and 9 not being registered with ISO-IR.
 # The entirety does also exist as an unregistered 94^n set, used by EUC-TW:
-graphdata.gsets["cns-eucg2"] = euctw_g2 = (94, 3, parsers.read_main_plane("cns-11643-1992.ucm"))
+graphdata.gsets["cns-eucg2"] = euctw_g2 = (94, 3, parsers.read_main_plane("euc-tw-2014.ucm"))
 
 # # # # # # # # # #
 # Big Five
@@ -164,8 +168,11 @@ def read_big5_rangemap(fil, appendix, *, plane=None):
 big5_to_cns1 = read_big5_rangemap("rfc1922.txt", 1)
 big5_to_cns1.update(read_big5_rangemap("rfc1922.txt", 2))
 big5_to_cns2 = read_big5_rangemap("rfc1922.txt", 3, plane=2)
-big5_to_cns1[0xC94A] = big5_to_cns2[0xC94A][-2:] # Exceptional: level 2 mapped to plane 1
-del big5_to_cns2[0xC94A]
+# The two duplicate kanji. RFC 1922 includes mappings to the same CNS codepoints as the other ones,
+# (and confusingly lists a single plane 1 mapping in Appendix 2 which maps to plane 2, hmm…) but
+# we can preserve their round-trippability by mapping them to IBM points in (PUA) plane 13.
+big5_to_cns2[0xC94A] = (13, 4, 40)
+big5_to_cns2[0xDDFC] = (13, 4, 42)
 
 graphdata.gsets["hkscs"] = hkscs_extras = (94, 2, read_big5extras("index-big5.txt"))
 graphdata.gsets["etenexts"] = eten_extras = (94, 2, 

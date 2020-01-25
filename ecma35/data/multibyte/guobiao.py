@@ -95,10 +95,13 @@ gbk_exceptions_full = tuple(full2005dict.get(_i, _i) for _i in gbk_exceptions) #
 gbk_exceptions_coverage = set(gbk_exceptions)
 gbk_exceptions_full_coverage = set(gbk_exceptions_full)
 
-# Amounting to the first section of four-byte codes in GB18030 (the second section can be mapped
-# directly since no astral character is in any part of GBK). This does have to be generated from
-# the 2000 edition two-byte codes (otherwise everything between U+1E3F and U+E7C7 finishes up off
-# by one); the re-mapping of index 7457(dec) to 0xE7C7 in the 2005 version is handled directly by
+# Amounting to the first section of four-byte codes in GB18030: the second section can be mapped
+# directly, since no astral codepoint is in any part of the 2000 standard mappings for GBK (nor in
+# the 2005 standard mappings, for that matter), even though they do appear there in _de facto_
+# mappings which avoid mapping fully defined characters to PUA (see full2005dict above).
+# This does have to be generated from the 2000 edition standard mappings for the two-byte codes
+# (if the 2005 edition mappings are used, everything between U+1E3F and U+E7C7 finishes up off by 
+# one); the re-mapping of index 7457(dec) to 0xE7C7 in the 2005 version is handled directly by 
 # decoders.gbhalfcodes itself.
 non_gbk_bmp = [i for i in range(0x0080, 0x10000)
            if ((i < 0x4E00 or i > 0x9FA5) and # i.e. not part of the original URO set

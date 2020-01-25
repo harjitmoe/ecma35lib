@@ -45,8 +45,8 @@ dat = (b"\x1B[m\x1B%G\x1B!F" + teststr.encode("utf-8-sig") + "\x1CJ염盐塩鹽\
        b"\xc0\x79\x1B$)N\x1B$+~\n\xc0\x79\xae\xf0\n" +
        b"\x1B%2" + teststr.encode("gb18030", errors="replace") + 
        b"\x815\xF47\x1B&3\x1B$)A\xa3\xa0\x1B&4\x1B$)A\xA6\xF3\xFE\x6C\x815\xF47" +
-       b"\x1B%4" + (teststr + "糎").encode("big5hkscs", errors="replace") +
-       b"\x1B$+!3" + (teststr + "糎").encode("big5", errors="replace") +
+       b"\x1B%4" + (teststr + "糎兀嗀兀嗀").encode("big5hkscs", errors="replace") +
+       b"\x1B$+!3" + (teststr + "糎兀嗀兀嗀").encode("big5", errors="replace") +
        b"\x1B%@\x1B-@" + test2.encode("koi8-r") + 
        b"\x1B-L" + test2.encode("iso-8859-5") + 
        b"\x1B$)G\x1B$*!1\x8E\xA3\xC0\xDA\xFC\xFC" + # i.e. 塩鹽 in EUC-TW
