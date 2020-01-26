@@ -203,12 +203,26 @@ g96nbytes = {tuple(b"~"): "nil"}
 
 sumps = {"94": g94bytes, "96": g96bytes, "94n": g94nbytes, "96n": g96nbytes}
 
-def show(x, *, plane=None):
+def show(name, *, plane=None):
     import unicodedata as ucd
+    if isinstance(name, tuple):
+        x = name
+    elif name in rhses:
+        if name in c0graphics:
+            assert len(c0graphics[name]) == 33
+            x = (256, 1, c0graphics[name][:-1] + (0x20,) + gsets["ir006"][2] + 
+                         c0graphics[name][-1:] + rhses[name])
+        else:
+            x = (128, 1, rhses[name])
+    elif name in gsets:
+        x = gsets[name]
+    else:
+        raise ValueError("unknown set: {!r}".format(name))
+    #
     if x[1] == 1:
         sz = 0
         hs = 16
-        ofs = 2
+        ofs = 2 if x[0] <= 96 else (8 if x[0] <= 128 else 0)
         series = ((0x20,) if x[0] < 96 else ()) + x[2]
     elif x[1] == 2:
         sz = x[0]
@@ -230,17 +244,19 @@ def show(x, *, plane=None):
             if sz:
                 print("{:02d}".format((n // sz) + ofs), (n // hs) % 2, sep = ":", end = ": ")
             else:
-                print((n // hs) + ofs, end = ": ")
+                print("{:2d}".format((n // hs) + ofs), end = ": ")
+        #
         if i is None:
             curchar = "\uFFFD"
             zenkaku = False
-        elif isinstance(i, tuple) and (len(i) == 1) and (ucd.category(chr(i[0])) == "Co"):
+        elif isinstance(i, tuple) and (len(i) == 1) and (
+                (ucd.category(chr(i[0])) == "Co") or (0x80 <= i[0] <= 0x9F)):
             curchar = "\uFFFC"
             zenkaku = False
         elif isinstance(i, tuple):
             curchar = "".join(chr(j) for j in i)
             zenkaku = (ucd.east_asian_width(chr(i[0])) in ("W", "F"))
-        elif ucd.category(chr(i)) == "Co":
+        elif (ucd.category(chr(i)) == "Co") or (0x80 <= i <= 0x9F):
             curchar = "\uFFFC"
             zenkaku = False
         else:

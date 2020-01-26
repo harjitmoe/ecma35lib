@@ -6,13 +6,21 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import os, binascii
+import os, binascii, json
 
 directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mbmaps")
 _temp = []
 identitymap = lambda pointer, ucs: ucs
 
 def read_main_plane(fil, *, whatwgjis=False, eucjp=False, kps=False, plane=None, mapper=identitymap):
+    cachefn = os.path.join(directory, fil + ("_plane{:02d}".format(plane) if plane is not None
+                                                                    else "") + ".json")
+    if (mapper is identitymap) and os.path.exists(cachefn):
+        # Cache output since otherwise several seconds are spend in here upon importing graphdata
+        f = open(cachefn, "r")
+        r = json.load(f)
+        f.close()
+        return tuple(tuple(i) if i is not None else None for i in r)
     for _i in open(os.path.join(directory, fil), "r"):
         if not _i.strip():
             continue
@@ -124,6 +132,12 @@ def read_main_plane(fil, *, whatwgjis=False, eucjp=False, kps=False, plane=None,
             _temp.append(ucs)
     r = tuple(_temp) # Making a tuple makes a copy, of course.
     del _temp[:]
+    if mapper is identitymap:
+        # Write output cache.
+        f = open(cachefn, "w")
+        f.write(json.dumps(r))
+        f.close()
+        return tuple(r)
     return r
 
 
