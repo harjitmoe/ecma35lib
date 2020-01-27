@@ -9,12 +9,14 @@
 import os, binascii, json
 
 directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mbmaps")
+cachedirectory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mbmapscache")
 _temp = []
 identitymap = lambda pointer, ucs: ucs
 
 def read_main_plane(fil, *, whatwgjis=False, eucjp=False, kps=False, plane=None, mapper=identitymap):
-    cachefn = os.path.join(directory, fil + ("_plane{:02d}".format(plane) if plane is not None
-                                                                    else "") + ".json")
+    cachefn = os.path.join(cachedirectory,
+                  os.path.splitext(fil)[0] + ("_plane{:02d}".format(plane) if plane is not None
+                                              else "_mainplane") + ".json")
     if (mapper is identitymap) and os.path.exists(cachefn):
         # Cache output since otherwise several seconds are spend in here upon importing graphdata
         f = open(cachefn, "r")

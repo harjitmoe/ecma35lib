@@ -6,7 +6,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import os
+import os, json
 from ecma35.data import graphdata
 from ecma35.data.multibyte import mbmapparsers as parsers
 
@@ -79,8 +79,10 @@ graphdata.gsets["ir058-full"] = gb2312_full = (94, 2,
 graphdata.gsets["ir165"] = gb2312_1980 = (94, 2, parsers.read_main_plane("iso-ir-165.ucm"))
 
 # GB/T 12345 (Traditional Chinese in Mainland China, homologous to GB/T 2312 where possible)
-# Unlike GB2312.TXT, redistribution of GB12345.TXT is apparently not permitted…
-#graphdata.gsets["ir058-hant"] = gb12345 = (94, 2, parsers.read_main_plane("GB12345.TXT"))
+# Unlike GB2312.TXT, redistribution of GB12345.TXT itself is apparently not permitted, although
+#   using/incorporating the information is apparently fine.
+graphdata.gsets["ir058-hant"] = gb12345 = (94, 2, tuple(tuple(i) if i is not None else None for
+    i in json.load(open(os.path.join(parsers.directory, "GB_12345.json"), "r"))))
 
 # Amounting to the entirety of GBK/3 and most of GBK/4, minus the non-URO end part.
 # And, yes, it would indeed be more straightforward to just read the GBK mappings for

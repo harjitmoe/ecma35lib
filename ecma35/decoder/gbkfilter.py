@@ -45,9 +45,9 @@ def decode_gbk(stream, state):
                     else:
                         yield (workingsets[state.glset], token[1] - 0x20, "GL")
                 elif token[1] == 0x80:
-                    yield ("G2", 0x40) # TODO review what to actually do here
+                    yield ("G2", 0x40, "PLACEHOLDER") # TODO review what to actually do here
                 elif token[1] == 0xFF:
-                    yield ("G2", 0x41) # TODO review what to actually do here
+                    yield ("G2", 0x41, "PLACEHOLDER") # TODO review what to actually do here
                 else:
                     gbk_lead = token
             elif (0xA1 <= token[1] <= 0xFE) and (0xA1 <= gbk_lead[1] <= 0xFE):

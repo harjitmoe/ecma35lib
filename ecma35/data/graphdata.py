@@ -231,20 +231,27 @@ def show(name, *, plane=None):
         series = x[2]
     elif x[1] == 3:
         if plane is None:
-            raise ValueError("must specify a plane to display a three-byte set")
+            raise ValueError("must specify a single plane to display a multi-plane set")
+        elif (plane < 1) and (x[0] <= 94):
+            raise ValueError("plane number for a 94^n-set must be at least 1")
+        elif plane < 0:
+            raise ValueError("plane number for a 96^n-set must be at least 0")
         sz = x[0]
         hs = sz // 2
         ofs = (8 - (hs % 8)) % 8
-        series = x[2][(sz * sz) * (plane - 1):][:(sz * sz)]
+        series = x[2][(sz * sz) * ((plane - 1) if x[0] <= 94 else plane):][:(sz * sz)]
     else:
         raise ValueError("unsupported set byte length size")
     for (n, i) in enumerate(series):
         if not (n % hs):
             print()
             if sz:
-                print("{:02d}".format((n // sz) + ofs), (n // hs) % 2, sep = ":", end = ": ")
+                if not ((n // hs) % 2):
+                    print(end = "{:2d}: ".format((n // sz) + ofs))
+                else:
+                    print(end = " " * 4)
             else:
-                print("{:2d}".format((n // hs) + ofs), end = ": ")
+                print(end = "{:2d}: ".format((n // hs) + ofs))
         #
         if i is None:
             curchar = "\uFFFD"
