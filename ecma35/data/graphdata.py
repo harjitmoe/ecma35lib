@@ -127,6 +127,19 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"!D"): "ir230",
             tuple(b"!E"): "ir231",
             tuple(b"!F"): "ir232",
+            # Other ETS sets
+            tuple(b"#1"): "etsfrench",
+            tuple(b"#2"): "etsiberian",
+            tuple(b"#3"): "etsestonian",
+            tuple(b"#4"): "etsbaltic",
+            tuple(b"#5"): ("etsgajica", ("etsgajicadollar",), ("etsgajica",)),
+            tuple(b"#6"): "etsczechoslovak",
+            tuple(b"#7"): "etspolish",
+            tuple(b"#8"): "etsromanian",
+            tuple(b"#9"): "etsturkish",
+            # Other NRCS sets
+            tuple(b"$1"): "decswiss", # Note: DEC itself uses b"4" (collides with ARIB Mosaic C)
+            tuple(b"$2"): "decdutch", # Note: DEC itself uses b"="
             tuple(b"~"): "nil"}
 
 g96bytes = {tuple(b"@"): "ir111",
@@ -171,6 +184,7 @@ g96bytes = {tuple(b"@"): "ir111",
             tuple(b"h"): "ir209",
             tuple(b"i"): "ir227",
             tuple(b"j"): "ir234",
+            tuple(b"!0"): "ir111rfc1345", # Not even a private IRR: no practical compatibility.
             tuple(b"~"): "nil"}
 
 g94nbytes = {tuple(b"@"): "ir042",
@@ -197,7 +211,6 @@ g94nbytes = {tuple(b"@"): "ir042",
              tuple(b"P"): "ir229",
              tuple(b"Q"): "ir233",
              # Traditional Chinese off doing its own thing, as you do... no standard escapes here.
-             # Private designators, so not much point using private revision identifiers.
              tuple(b"!1"): "cns-eucg2",
              tuple(b"!2"): ("hkscs", (), ("ms950exts", "etenexts", "hkscs")),
              tuple(b"!3"): ("ms950utcexts", (), ("utcbig5exts", "ms950utcexts")),
