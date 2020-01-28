@@ -85,6 +85,12 @@ c0sets = {# The ECMA-6 controls, i.e. originating from 1967 edition ASCII:
                     "GS", # Group Separator, Information Separator Three (IS3), Separator Five (S5)
                     "RS", # Record Separator, Information Separator Two (IS2), Separator Six (S6)
                     "US"), # Unit Separator, Information Separator One (IS1), Separator Seven (S7)
+          # Alternative version with newline (NL) for linefeed. This is listed as a prior agreement
+          # permitted alternative in ISO-IR-001. NL and LF are Unicode aliases for the same code.
+          "ir001nl": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
+                      "BS", "HT", "NL", "VT", "FF", "CR", "SO", "SI", 
+                      "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
+                      "CAN", "EM", "SUB", "ESC", "FS", "GS", "RS", "US"), 
           # Scandinavian newspaper (NATS) controls. Particular perculiarities include commandeering
           # FS as a single-shift and GS/RS/US as EOLs which centre/right-align/justify the
           # terminated line, and changing the mnemonics of HT to be vague and CAN to be specific.
@@ -162,13 +168,6 @@ c0sets = {# The ECMA-6 controls, i.e. originating from 1967 edition ASCII:
           #         "SC0", "SC1", "SC2", "SC3", "SC4", "SC5", "SC6", "SC7", 
           #         "SD0", "SD1", "SD2", "SD3", "SD4", "SD5", "SD6", "SD7"),
           #
-          # EBCDIC, as translated using the EBCDIC bytes table from UTR 16.
-          # Not that much changed from ASCII, although LF has been
-          # swabbed out with NL (that is, NEL).
-          "c0ebcdic": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
-                       "BS", "HT", "NL", "VT", "FF", "CR", "IBMSO", "IBMSI",
-                       "DLE", "DC1", "DC2", "DC3", "DC4", "NAK", "SYN", "ETB", 
-                       "CAN", "EM", "SUB", "ESC", "IFS", "IGS", "IRS", "IUS/ITB"),
           # ir104 and nil are de facto the same, since ECMA-35 guarantees that ESC is always
           # available at 0x1B, no matter what's designated.
           "ir104": (None,)*27 + ("ESC", None, None, None, None),
@@ -267,7 +266,7 @@ c1sets = {# German bibliographic controls used in DIN 31626
                   "SOS", 
                   "SGCI", # Single Graphical Character Introducer
                   "SCI", "CSI", "ST", "OSC", "PM", "APC"),
-          # EBCDIC, as translated using the EBCDIC bytes table from UTR 16.
+          # EBCDIC, as translated using the EBCDIC bytes table from UTR 16 and/or others.
           # Names and mnemonics: 
           # IA 20180911044845 https://www-01.ibm.com/software/globalization/cdra/appendix_g1.html
           "c1ebcdic": ("DS", # Digit Select
@@ -275,7 +274,7 @@ c1sets = {# German bibliographic controls used in DIN 31626
                        "IBMFS", # Field Separator
                        "WUS", # Word Underscore (i.e. underline previous word)
                        "BYP/INP", # Bypass or Inhibit Presentation (i.e. ignore printing chars)
-                       "LF", # Is just linefeed, but overall maybe analogous to IND?
+                       "NL/LF", # NL or LF, whichever isn't being mapped to the C0 set.
                        "RNL", # Required Newline (i.e. cancelling indent)
                        "POC", # Program Operator Communication (takes two bytes: action, effector)
                        "SA", # Set Attribute (deprecated in favour of CSP)
@@ -304,7 +303,7 @@ c1sets = {# German bibliographic controls used in DIN 31626
           "nil": (None,)*16,
           "Unknown": (None,)*16}
 
-c0bytes = {tuple(b"@"): "ir001",
+c0bytes = {tuple(b"@"): ("ir001", ("ir001nl",), ("ir001",)),
            tuple(b"A"): "ir007",
            tuple(b"B"): "ir048",
            tuple(b"C"): "ir026",

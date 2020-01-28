@@ -79,18 +79,6 @@ def decode_invocations(stream, state):
             if not single_need:
                 yield ("ERROR", "INDETERMSINGLE", token)
                 single_set = -1
-        # Note: if designation escapes were ever implemented for EBCDIC this probably
-        # totally breaks compatibility with them. I'd need advice from someone more
-        # knowledgeable on that regard. For now, regard this as experimental.
-        # TODO: cannot approximate GE (though, was it ever used and when?)
-        elif token[0] == "CTRL" and token[1] == "IBMSO":
-            state.glset = 2
-            state.grset = 3
-            yield token
-        elif token[0] == "CTRL" and token[1] == "IBMSI":
-            state.glset = 0
-            state.grset = 1
-            yield token
         elif token[0] == "DESIG":
             yield token
             state.is_96[token[1]] = (token[2] not in ("94", "94n"))
