@@ -28,7 +28,7 @@ def decode_uhc(stream, state):
                 state.cur_c1 = "RFC1345"
                 state.glset = 0
                 state.grset = 1
-                state.cur_gsets = ["ir006", "ir149", "nil", "nil"]
+                state.cur_gsets = ["ir006", "ir149", "ir013win", "nil"]
                 state.is_96 = [0, 0, 0, 0]
             else:
                 yield token
@@ -45,12 +45,15 @@ def decode_uhc(stream, state):
                     else:
                         yield (workingsets[state.glset], token[1] - 0x20, "GL")
                 elif token[1] == 0x80:
-                    yield ("G2", 0x40, "PLACEHOLDER") # TODO review what to actually do here
+                    if state.cur_gsets[2] == "ir013win":
+                        yield ("C1", 0x00, "UHC1BYTE")
+                    else:
+                        yield ("G2", 0x40, "UHC1BYTE")
                 elif token[1] == 0xFF:
-                    yield ("G2", 0x41, "PLACEHOLDER") # TODO review what to actually do here
+                    yield ("G2", 0x48, "UHC1BYTE")
                 else:
                     uhc_lead = token
-            elif (0xA1 <= token[1] <= 0xFE) and (0xA1 <= uhc_lead[1] <= 0xFE):
+            elif (0xA1 <= uhc_lead[1] <= 0xFE) and (0xA1 <= token[1] <= 0xFE):
                 # Ordinary EUC code: treat normally.
                 yield (workingsets[state.grset], uhc_lead[1] - 0xA0, "GR")
                 yield (workingsets[state.grset], token[1] - 0xA0, "GR")
@@ -68,11 +71,11 @@ def decode_uhc(stream, state):
                     index += 52 + (token[1] - 0x81)
                 if (state.cur_gsets[1] == "ir149") and (index < len(korea.non_wangsung_johab)):
                     yield ("CHAR", korea.non_wangsung_johab[index], 
-                           "ExtWansung", (index,), "UHC", "UHCext")
+                           "ExtWansung", (0, index), "UHC", "UHCext")
                     uhc_lead = None
                 elif (state.cur_gsets[1] == "ir202") and (index < len(korea.non_kps9566_johab)):
                     yield ("CHAR", korea.non_kps9566_johab[index], 
-                           "ExtKPS9566", (index,), "UHC", "UHCext")
+                           "ExtKPS9566", (0, index), "UHC", "UHCext")
                     uhc_lead = None
                 else:
                     # Following the UHC structure but beyond the region used.
@@ -80,6 +83,9 @@ def decode_uhc(stream, state):
                     yield ("ERROR", "UHCTRUNCATE", uhc_lead[1])
                     uhc_lead = None
                     reconsume = token
+            elif (uhc_lead[1] == 0xAE) and (token[1] == 0xFF) and (state.cur_gsets[1] == "ir202"):
+                # Encoding of ÿ.
+                yield ("CHAR", 0xFF, "ExtKPS9566", (14, 95), "UHC", "UHCext")
             else:
                 yield ("ERROR", "UHCTRUNCATE", uhc_lead[1])
                 uhc_lead = None

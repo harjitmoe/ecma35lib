@@ -251,14 +251,37 @@ for (name, (myvars, override)) in raw_variants.items():
 
 # Assorted supplements
 
+# Windows mappings:
+#       0x80   0xA0   0xFD   0xFE   0xFF
+# SJIS U+0080 U+F8F0 U+F8F1 U+F8F2 U+F8F3
+# GBK  U+20AC (lead) (lead) (lead) U+F8F5
+# UHC  U+0080 (lead) (lead) (lead) U+F8F7
+# Big5 U+0080 (lead) (lead) (lead) U+F8F8
+# 
+# Projected EUC mappings:
+#       0x80   0xA0   0xFD   0xFE   0xFF
+# SJIS 0x8EE0 0x8EE1 0x8EE2 0x8EE3 0x8EE4 (between IBM's 1041 and 4992)
+# GBK  0x8EE0 (lead) (lead) (lead) 0x8EE6 
+# UHC  0x8EE0 (lead) (lead) (lead) 0x8EE8
+# Big5 0x8EE0 (lead) (lead) (lead) 0x8EE9
+#
+# Sadly, since I'm already using EUC-TW's unused G3 set for the corporate regions,
+# I can't use this mechanism for Big5, at least for the time being.
+
 # JIS C 6220 / JIS X 0201 Katakana set
 graphdata.gsets["ir013"] = (94, 1, tuple(range(0xFF61, 0xFFA0)) + ((None,) * 31))
 # IBM's 4992 (or unrestricted 896)
 graphdata.gsets["ir013ibm"] = (94, 1, tuple(range(0xFF61, 0xFFA0)) + (
                 0xA2, 0xA3, 0xAC, 0x5C, 0x7E) + ((None,) * 26))
-# 1-byte MacJapanese, converted by correspondences between IBM's 1041 and 4992.
+# 1-byte MacJapanese
 graphdata.gsets["ir013apple"] = (94, 1, tuple(range(0xFF61, 0xFFA0)) + (
                 0x5C, 0xA0, 0xA9, 0x2122, 0x2026) + ((None,) * 26))
+# For Windows code pages
+graphdata.gsets["ir013win"] = (94, 1, tuple(range(0xFF61, 0xFFA0)) + (
+                0x20AC,) + tuple(range(0xF8F0, 0xF8F9)) + ((None,) * 21))
+# Not any different here, but treated differently by the individual DOCS filters
+#   (i.e. it might use a control mapping for 0x80 if ir013win detected):
+graphdata.gsets["ir013euro"] = graphdata.gsets["ir013win"]
 
 
 

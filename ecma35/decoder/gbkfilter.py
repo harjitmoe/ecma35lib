@@ -28,7 +28,7 @@ def decode_gbk(stream, state):
                 state.cur_c1 = "RFC1345"
                 state.glset = 0
                 state.grset = 1
-                state.cur_gsets = ["ir006", "ir058-2005", "nil", "nil"]
+                state.cur_gsets = ["ir006", "ir058-2005", "ir013euro", "nil"]
                 state.is_96 = [0, 0, 0, 0]
             else:
                 yield token
@@ -45,9 +45,12 @@ def decode_gbk(stream, state):
                     else:
                         yield (workingsets[state.glset], token[1] - 0x20, "GL")
                 elif token[1] == 0x80:
-                    yield ("G2", 0x40, "PLACEHOLDER") # TODO review what to actually do here
+                    if state.cur_gsets[2] == "ir013win":
+                        yield ("C1", 0x00, "GBK1BYTE")
+                    else:
+                        yield ("G2", 0x40, "GBK1BYTE")
                 elif token[1] == 0xFF:
-                    yield ("G2", 0x41, "PLACEHOLDER") # TODO review what to actually do here
+                    yield ("G2", 0x46, "GBK1BYTE")
                 else:
                     gbk_lead = token
             elif (0xA1 <= token[1] <= 0xFE) and (0xA1 <= gbk_lead[1] <= 0xFE):
