@@ -47,6 +47,7 @@ gsets = GSetCollection({"nil": (94, 1, (None,)*94),
 
 c0graphics = {}
 rhses = {}
+defgsets = {}
 
 # Note: has to be imported after gsets &co are defined
 from ecma35.data.multibyte import korea, japan, guobiao, traditional
@@ -212,11 +213,20 @@ def show(name, *, plane=None):
         x = name
     elif name in rhses:
         if name in c0graphics:
-            assert len(c0graphics[name]) == 33
-            x = (256, 1, c0graphics[name][:-1] + (0x20,) + gsets["ir006"][2] + 
-                         c0graphics[name][-1:] + rhses[name])
+            c0list = c0graphics[name]
         else:
-            x = (128, 1, rhses[name])
+            c0list = c0graphics["437"]
+        assert len(c0list) == 33
+        if name in defcsets:
+            g0set = defcsets[name][0]
+        else:
+            g0set = "ir006"
+        if gsets[g0set][0] == 94:
+            x = (256, 1, c0list[:-1] + (0x20,) + gsets[g0set][2] + 
+                         c0list[-1:] + rhses[name])
+        else:
+            assert gsets[g0set][0] == 96
+            x = (256, 1, c0list[:-1] + gsets[g0set][2] + rhses[name])
     elif name in gsets:
         x = gsets[name]
     else:

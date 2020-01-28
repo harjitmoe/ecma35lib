@@ -10,14 +10,18 @@ from ecma35.data import graphdata
 from ecma35.data.singlebyte import sbmapparsers as parsers
 
 graphdata.c0graphics["437"] = (None, 0x263A, 0x263B, 0x2665, 0x2666, 0x2663, 0x2660, 0x2022, 0x25D8, 0x25CB, 0x25D9, 0x2642, 0x2640, 0x266A, 0x266B, 0x263C, 0x25BA, 0x25C4, 0x2195, 0x203C, 0xB6, 0xA7, 0x25AC, 0x21A8, 0x2191, 0x2193, 0x2192, 0x2190, 0x221F, 0x2194, 0x25B2, 0x25BC, 0x2302)
-graphdata.c0graphics["904"] = (None, 0x2554, 0x2557, 0x255A, 0x255D, 0x2551, 0x2550, 0xFFEC, None, 0xFFEE, None, 0x303F, None, None, 0xFFED, 0x263C, 0x256C, None, 0x2195, None, 0x2593, 0x2569, 0x2566, 0x2563, None, 0x2560, 0x2591, 0x21B5, 0xFFEA, 0xFFE8, 0xFFEB, 0xFFE9, None)
+graphdata.c0graphics["897"] = (None, 0x2554, 0x2557, 0x255A, 0x255D, 0x2551, 0x2550, 0xFFEC, None, 0xFFEE, None, 0x303F, None, None, 0xFFED, 0x263C, 0x256C, None, 0x2195, None, 0x2593, 0x2569, 0x2566, 0x2563, None, 0x2560, 0x2591, 0x21B5, 0xFFEA, 0xFFE8, 0xFFEB, 0xFFE9, None)
+graphdata.c0graphics["903"] = graphdata.c0graphics["897"]
+graphdata.c0graphics["904"] = graphdata.c0graphics["897"]
 
 # Windows-125x pages
 graphdata.rhses["1250"] = parsers.read_single_byte("index-windows-1250.txt")
 graphdata.rhses["1251"] = parsers.read_single_byte("index-windows-1251.txt")
 graphdata.rhses["1252"] = parsers.read_single_byte("index-windows-1252.txt") # ISO-8859-1 ext.
+graphdata.defgsets["1252"] = ("ir006", "ir100", "nil", "nil")
 graphdata.rhses["1253"] = parsers.read_single_byte("index-windows-1253.txt")
 graphdata.rhses["1254"] = parsers.read_single_byte("index-windows-1254.txt") # ISO-8859-9 ext.
+graphdata.defgsets["1254"] = ("ir006", "ir148", "nil", "nil")
 graphdata.rhses["1255"] = parsers.read_single_byte("index-windows-1255.txt")
 graphdata.rhses["1256"] = parsers.read_single_byte("index-windows-1256.txt")
 graphdata.rhses["1257"] = parsers.read_single_byte("index-windows-1257.txt")
@@ -25,6 +29,7 @@ graphdata.rhses["1258"] = parsers.read_single_byte("index-windows-1258.txt")
 
 # OEM pages
 graphdata.rhses["437"] = parsers.read_single_byte("ibm-437_P100-1995.ucm")
+graphdata.defgsets["437"] = ("ir006", "nil", "nil", "nil")
 graphdata.rhses["720"] = parsers.read_single_byte("ibm-720_P100-1997.ucm")
 graphdata.rhses["737"] = parsers.read_single_byte("ibm-737_P100-1997.ucm")
 graphdata.rhses["775"] = parsers.read_single_byte("ibm-775_P100-1996.ucm")
@@ -41,7 +46,12 @@ graphdata.rhses["864"] = parsers.read_single_byte("ibm-864_X110-1999.ucm")
 graphdata.rhses["865"] = parsers.read_single_byte("ibm-865_P100-1995.ucm")
 graphdata.rhses["866"] = parsers.read_single_byte("index-ibm866.txt")
 graphdata.rhses["869"] = parsers.read_single_byte("ibm-869_P100-1995.ucm")
+graphdata.rhses["897"] = ((None,) * 33) + tuple(range(0xFF61, 0xFFA0)) + ((None,) * 32)
+graphdata.defgsets["897"] = ("ir014", "ir013", "nil", "nil")
+graphdata.rhses["903"] = (None,) * 128
+graphdata.defgsets["903"] = ("ir014", "nil", "nil", "nil")
 graphdata.rhses["904"] = (None,) * 128
+graphdata.defgsets["904"] = ("ir006", "nil", "nil", "nil")
 
 # Code pages 874 (ISO-8859-11 exts)
 # Per alias comments in ICU's convrtrs.txt, IBM's 874 is identical to IBM's 9066.

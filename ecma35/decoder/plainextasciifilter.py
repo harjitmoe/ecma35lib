@@ -14,6 +14,7 @@
 # Also supports a "Print All Characters" mode, i.e. with C0 area graphics. It makes an exception
 # for 0x1B, though, to try and keep it possible to go back (thus keeping it With Standard Return).
 
+import sys
 from ecma35.data import graphdata
 
 plainextasciidocs = ("DOCS", False, (0x33,))
@@ -30,9 +31,9 @@ def decode_plainextascii(stream, state):
                 state.cur_c1 = "RFC1345"
                 state.glset = 0
                 state.grset = 1
-                state.cur_gsets = ["ir006", "ir100", "nil", "nil"]
-                state.is_96 = [0, 1, 1, 1]
                 state.cur_rhs = "437"
+                state.cur_gsets = list(graphdata.defgsets[state.cur_rhs])
+                state.is_96 = [graphdata.gsets[i][0] > 94 for i in state.cur_gsets]
                 state.c0_graphics_mode = 1
             else:
                 yield token
@@ -94,6 +95,10 @@ def decode_plainextascii(stream, state):
             # DEC Select [IBM] ProPrinter Character Set, i.e. CSI sequence for basically chcp.
             codepage = bytes(token[2]).decode("ascii")
             state.cur_rhs = codepage
+            state.cur_gsets = list(graphdata.defgsets[state.cur_rhs
+                                                      if state.cur_rhs in graphdata.defgsets
+                                                      else "437"])
+            state.is_96 = [graphdata.gsets[i][0] > 94 for i in state.cur_gsets]
             yield ("CHCP", codepage)
         elif state.docsmode == "plainextascii" and token[0] == "CSISEQ" and token[1] == "DECSDPT":
             # Select Digital Printed Data Type, also part of DEC's IBM ProPrinter emulation.
