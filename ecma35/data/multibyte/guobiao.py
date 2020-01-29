@@ -75,14 +75,36 @@ graphdata.gsets["ir058-full"] = gb2312_full = (94, 2,
 
 # ITU's extension of ir058-1980, i.e. with 6763 GB 2312 chars, 705 GB 8565.2 chars and 139 others.
 # Basically sticks a load of stuff (both hankaku and zenkaku) in what GBK would consider the
-# PUA 1 and PUA 2.
-graphdata.gsets["ir165"] = gb2312_1980 = (94, 2, parsers.read_main_plane("iso-ir-165.ucm"))
+#   PUA 1 and PUA 2.
+# Actually includes the extended Pinyin letters from GB 6345.1-1986, which would later be
+#   incorporated into GB 18030 (including the infamous m-acute). However, iso-ir-165.ucm doesn't of
+#   course have the benefit of all the GB 18030-2005 mappings…
+# Also, the plain and script "g" glyphs are inverted in the ISO-IR-165 registration with respect to
+#   (say) GB 18030 or Macintosh Simplified Chinese, and this is reflected in the UCM mapping.
+ir165 = list(parsers.read_main_plane("iso-ir-165.ucm"))
+ir165[688] = (0x01F9,) # in IR-165 but not mapped in UCM; added in Unicode 3.0.
+ir165[916] = ir165[258] + (0xF87F,)
+for _i in range(658, 689): # Not 689/971 itself since that one gets equated to the ASCII characters.
+    _j = _i + (3 * 94)
+    ir165[_j] = ir165[_i] + (0xF87F,)
+# The various pattern fill characters in the latter part of the Greek row are still unmapped,
+#   but shouganai. (The range also corresponds to GB 18030 and Macintosh vertical forms.)
+graphdata.gsets["ir165"] = isoir165 = (94, 2, tuple(ir165))
 
-# GB/T 12345 (Traditional Chinese in Mainland China, homologous to GB/T 2312 where possible)
+# GB/T 12345 (Traditional Chinese in Mainland China, homologous to GB/T 2312 where possible, with
+#   the others being added as a couple of rows at the end)
 # Unlike GB2312.TXT, redistribution of GB12345.TXT itself is apparently not permitted, although
 #   using/incorporating the information is apparently fine.
 graphdata.gsets["ir058-hant"] = gb12345 = (94, 2, tuple(tuple(i) if i is not None else None for
     i in json.load(open(os.path.join(parsers.directory, "GB_12345.json"), "r"))))
+
+# Apple's version. Note that it changes 0xFD and 0xFE to single-byte codes.
+# Includes the vertical form encodings which would make it into GB 18030, plus a few more which
+#   didn't. Not all exist as Unicode presentation forms.
+# It also includes the GB 6345.1-1986 letters (seeming to have "ɒ" instead of "ɑ" is an editorial
+#   error in CHINSIMP.TXT; the listed mapping (as opposed to name) is "ɑ").
+graphdata.gsets["ir058-mac"] = gb2312_mac = (94, 2, tuple(tuple(i) if i is not None else None for
+    i in json.load(open(os.path.join(parsers.directory, "macGB2312.json"), "r"))))
 
 # Amounting to the entirety of GBK/3 and most of GBK/4, minus the non-URO end part.
 # And, yes, it would indeed be more straightforward to just read the GBK mappings for

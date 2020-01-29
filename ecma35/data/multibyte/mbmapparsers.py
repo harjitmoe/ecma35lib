@@ -54,6 +54,8 @@ def read_main_plane(fil, *, whatwgjis=False, eucjp=False, kps=False, plane=None,
                     continue
                 elif not ucs.strip(): # i.e. code not used
                     continue
+                elif len(byts) == 4:
+                    continue
                 ku = int(byts[2:4], 16) - 0xA0
                 ten = int(byts[4:6], 16) - 0xA0
                 if kps and ((ku < 1) or (ku > 94) or (ten < 1) or (ten > 94)):

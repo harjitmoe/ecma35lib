@@ -190,7 +190,8 @@ g96bytes = {tuple(b"@"): "ir111",
 g94nbytes = {tuple(b"@"): "ir042",
              tuple(b"A"): ("ir058-2005", # Preferred version
                            # Private versions
-                           ("ir058-hant", "ir058-2000", "ir058-2005", "ir058-web", "ir058-full"),
+                           ("ir058-hant", "ir058-2000", "ir058-2005", "ir058-web", "ir058-full",
+                            "ir058-mac"),
                            ("ir058-1980",)), # Original followed by any registered revisions
              tuple(b"B"): ("ir168web",
                            ("ir168web"),
@@ -287,7 +288,7 @@ def show(name, *, plane=None):
             curchar = "\uFFFC"
             zenkaku = False
         elif isinstance(i, tuple):
-            curchar = "".join(chr(j) for j in i)
+            curchar = "".join(chr(j) for j in i).rstrip("\uF87F").rstrip("\uF87E")
             zenkaku = (ucd.east_asian_width(chr(i[0])) in ("W", "F"))
         elif (ucd.category(chr(i)) == "Co") or (0x80 <= i <= 0x9F):
             curchar = "\uFFFC"
