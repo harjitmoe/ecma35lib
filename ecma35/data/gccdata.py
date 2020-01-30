@@ -35,7 +35,7 @@ if not os.path.exists(cachefile):
         # Other adjacently stacked vertical arrow pairs are included for purpose of completeness.
         "↓↑": "⇵", "↑↓": "⇅", "↑↑": "⇈", "↓↓": "⇊",
         "⭣⭡": "⮃", "⭡⭣": "⮁", "⭡⭡": "⮅", "⭣⭣": "⮇",
-        "⥯": "⇃↾", "⥮": "↿⇂", "⥣": "↿↾", "⥥": "⇃⇂",
+        "⇃↾": "⥯", "↿⇂": "⥮", "↿↾": "⥣", "⇃⇂": "⥥",
     }
 
     # Exclude most Arabic composites, since they're just sequences of letters, and often one sequence 
