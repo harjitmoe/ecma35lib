@@ -21,8 +21,8 @@ cachefile = os.path.join(os.path.dirname(os.path.abspath(__file__)), "gcc_sequen
 
 if not os.path.exists(cachefile):
     gcc_sequences = {
-        # "Pts" is specifically listed as a GCC example in Annex C of ECMA-43.
-        # It doesn't have a standard decomposition, so including it manually.
+        # "Pts" is specifically listed as a GCC example in Annex C of ECMA-43, so we should
+        # include it. It doesn't have a standard decomposition, so including it manually.
         # Although rendering of U+20A7 is actually quite varied: it might show up as any symbol 
         # sometimes used for the Peseta (including a single-barred P), depending on font.
         "Pts": "₧",
@@ -31,8 +31,11 @@ if not os.path.exists(cachefile):
         "بسم الله الرحمن الرحيم": "﷽",
         # For now, the Reiwa might not be present in the unicodedata module, so make sure it's there.
         "令和": "㋿",
-        # MacJapanese mapping uses a character combination here.
-        "↓↑": "⇵",
+        # MacJapanese mapping uses a character combination of ↓ and ↑ for ⇵ (added to UCS later??).
+        # Other adjacently stacked vertical arrow pairs are included for purpose of completeness.
+        "↓↑": "⇵", "↑↓": "⇅", "↑↑": "⇈", "↓↓": "⇊",
+        "⭣⭡": "⮃", "⭡⭣": "⮁", "⭡⭡": "⮅", "⭣⭣": "⮇",
+        "⥯": "⇃↾", "⥮": "↿⇂", "⥣": "↿↾", "⥥": "⇃⇂",
     }
 
     # Exclude most Arabic composites, since they're just sequences of letters, and often one sequence 

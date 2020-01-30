@@ -11,6 +11,7 @@ from ecma35.data.gccdata import gcc_tuples
 
 def proc_gcc_sequences(stream, state):
     mode = "normal"
+    bytesleft = 0
     reconsume = None
     series = []
     chars = []
@@ -20,10 +21,27 @@ def proc_gcc_sequences(stream, state):
         if mode == "normal":
             if token[:3] in (("CSISEQ", "GCC", (0x30,)), ("CSISEQ", "GCC", ())):
                 mode = "firstbyte"
+                bytesleft = 2
                 series = [token]
                 chars = []
             elif token[:3] == ("CSISEQ", "GCC", (0x31,)):
                 mode = "variable"
+                series = [token]
+                chars = []
+            # Transcoding hints for composition used in Apple mappings
+            elif token[:2] in (("CHAR", 0xF860), ("CHAR", 0xF86A)):
+                mode = "firstbyte"
+                bytesleft = 2
+                series = [token]
+                chars = []
+            elif token[:2] == ("CHAR", 0xF861):
+                mode = "firstbyte"
+                bytesleft = 3
+                series = [token]
+                chars = []
+            elif token[:2] in (("CHAR", 0xF862), ("CHAR", 0xF86B)):
+                mode = "firstbyte"
+                bytesleft = 4
                 series = [token]
                 chars = []
             else:
@@ -32,15 +50,18 @@ def proc_gcc_sequences(stream, state):
             if token[0] == "CHAR":
                 series.append(token)
                 chars.append(token[1])
-                mode = "secondbyte"
+                bytesleft -= 1
+                mode = "secondbyte" if bytesleft <= 1 else "firstbyte"
             elif token[0] == "COMPCHAR":
                 series.extend(token[2])
                 chars.extend(token[1])
-                mode = "secondbyte"
+                bytesleft -= 1
+                mode = "secondbyte" if bytesleft <= 1 else "firstbyte"
             elif token[:2] == ("CTRL", "SP"):
                 series.append(token)
                 chars.append(0x20)
-                mode = "secondbyte"
+                bytesleft -= 1
+                mode = "secondbyte" if bytesleft <= 1 else "firstbyte"
             else:
                 yield ("ERROR", "TRUNCGCC")
                 yield from series
