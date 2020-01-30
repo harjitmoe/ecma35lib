@@ -254,16 +254,32 @@ for (name, (myvars, override)) in raw_variants.items():
 # Windows mappings:
 #       0x80   0xA0   0xFD   0xFE   0xFF
 # SJIS U+0080 U+F8F0 U+F8F1 U+F8F2 U+F8F3
-# GBK  U+20AC (lead) (lead) (lead) U+F8F5
+# GBK  U+20AC (lead) (lead) (lead) U+F8F5 (U+20AC = €)
 # UHC  U+0080 (lead) (lead) (lead) U+F8F7
 # Big5 U+0080 (lead) (lead) (lead) U+F8F8
+#
+# Apple usage (editorial errors in comment blurb 2(second a) of CHINSIMP.TXT notwithstanding):
+#       0x80   0x81   0x82   0x83   0x84   0xA0   0xFD   0xFE   0xFF
+# SJIS   \    (lead) (lead) (lead) (lead)  NBSP    ©      ™      …
+# Big5   \     HMC    WMC   (none) (none)  NBSP    ©      ™      …
+# GB     ü     HMC    WMC   (none) (none)  NBSP    ©      ™      …   
+# KSC   NBSP   Won   NDASH    ©     FW _  (none) (lead) (lead)   …     
 # 
-# Projected EUC mappings:
-#       0x80   0xA0   0xFD   0xFE   0xFF
-# SJIS 0x8EE0 0x8EE1 0x8EE2 0x8EE3 0x8EE4 (between IBM's 1041 and 4992)
-# GBK  0x8EE0 (lead) (lead) (lead) 0x8EE6 
-# UHC  0x8EE0 (lead) (lead) (lead) 0x8EE8
-# Big5 0x8EE0 (lead) (lead) (lead) 0x8EE9
+# Projected EUC mappings (SJIS from IBM's 1041 to 4992, rest extrapolated):
+#          0x80   0x81   0x82   0x83   0x84   0xA0   0xFD   0xFE   0xFF
+# SJIS    0x8EE0 (lead) (lead) (lead) (lead) 0x8EE1 0x8EE2 0x8EE3 0x8EE4
+# MacBig5 0x8EE0 0x8EE6 0x8EE7 (none) (none) 0x8EE1 0x8EE2 0x8EE3 0x8EE4
+# MacGB   0x8EE5 0x8EE6 0x8EE7 (none) (none) 0x8EE1 0x8EE2 0x8EE3 0x8EE4
+# GBK     0x8EE0 (lead) (lead) (lead) (lead) (lead) (lead) (lead) 0x8EE6
+# UHC     0x8EE0 (lead) (lead) (lead) (lead) (lead) (lead) (lead) 0x8EE8
+# Big5    0x8EE0 (lead) (lead) (lead) (lead) (lead) (lead) (lead) 0x8EE9
+# MacKSC  0x8EE1 0x8EE8 0x8EE9 0x8EE2 0x8EEA (none) (lead) (lead) 0x8EE4
+#
+# Therefore:
+# EUC  0x8EE0 0x8EE1 0x8EE2 0x8EE3 0x8EE4 0x8EE5 0x8EE6 0x8EE7 0x8EE8 0x8EE9 0x8EEA
+# MS   0x80/€ U+F8F0 U+F8F1 U+F8F2 U+F8F3 U+F8F4 U+F8F5 U+F8F6 U+F8F7 U+F8F8 (none)
+# Mac    \     NBSP    ©      ™      …      ü     HMC    WMC    Won   NDASH   FW _ 
+# IBM    ¢      £      ¬      \      ~    (none) (none) (none) (none) (none) (none)
 #
 # Sadly, since I'm already using EUC-TW's unused G3 set for the corporate regions,
 # I can't use this mechanism for Big5, at least for the time being.
@@ -274,8 +290,9 @@ graphdata.gsets["ir013"] = (94, 1, tuple(range(0xFF61, 0xFFA0)) + ((None,) * 31)
 graphdata.gsets["ir013ibm"] = (94, 1, tuple(range(0xFF61, 0xFFA0)) + (
                 0xA2, 0xA3, 0xAC, 0x5C, 0x7E) + ((None,) * 26))
 # 1-byte MacJapanese
-graphdata.gsets["ir013apple"] = (94, 1, tuple(range(0xFF61, 0xFFA0)) + (
-                0x5C, 0xA0, 0xA9, 0x2122, 0x2026) + ((None,) * 26))
+graphdata.gsets["ir013mac"] = (94, 1, tuple(range(0xFF61, 0xFFA0)) + (
+                0x5C, 0xA0, 0xA9, 0x2122, 0x2026, 
+                0xFC, 0xF880, 0xF881, 0x20A9, 0x2013, 0xFF3F) + ((None,) * 21))
 # For Windows code pages
 graphdata.gsets["ir013win"] = (94, 1, tuple(range(0xFF61, 0xFFA0)) + (
                 0x20AC,) + tuple(range(0xF8F0, 0xF8F9)) + ((None,) * 21))

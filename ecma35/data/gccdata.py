@@ -31,6 +31,8 @@ if not os.path.exists(cachefile):
         "بسم الله الرحمن الرحيم": "﷽",
         # For now, the Reiwa might not be present in the unicodedata module, so make sure it's there.
         "令和": "㋿",
+        # MacJapanese mapping uses a character combination here.
+        "↓↑": "⇵",
     }
 
     # Exclude most Arabic composites, since they're just sequences of letters, and often one sequence 

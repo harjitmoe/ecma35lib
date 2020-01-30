@@ -64,7 +64,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"F"): "ir009-2",
             tuple(b"G"): "ir010",
             tuple(b"H"): ("ir011", ("ir011dec",), ("ir011dec",)),
-            tuple(b"I"): ("ir013", ("ir013ibm", "ir013apple", "ir013win", "ir013euro"),
+            tuple(b"I"): ("ir013", ("ir013ibm", "ir013mac", "ir013win", "ir013euro"),
                                    ("ir013",)),
             tuple(b"J"): ("ir014", ("ir014tilde",), ("ir014",)),
             tuple(b"K"): "ir021",
@@ -194,7 +194,7 @@ g94nbytes = {tuple(b"@"): "ir042",
                             "ir058-mac"),
                            ("ir058-1980",)), # Original followed by any registered revisions
              tuple(b"B"): ("ir168web",
-                           ("ir168web"),
+                           ("ir168web", "ir168mac"),
                            ("ir087", "ir168")),
              tuple(b"C"): "ir149",
              tuple(b"D"): "ir159",
@@ -283,15 +283,56 @@ def show(name, *, plane=None):
         if i is None:
             curchar = "\uFFFD"
             zenkaku = False
-        elif isinstance(i, tuple) and (len(i) == 1) and (
-                (ucd.category(chr(i[0])) == "Co") or (0x80 <= i[0] <= 0x9F)):
-            curchar = "\uFFFC"
+        elif isinstance(i, tuple) and (ucd.category(chr(i[0])) == "Co"):
+            if len(i) == 1:
+                curchar = "\x1B[35m\uFFFC\x1B[m"
+            else:
+                curchar = "\x1B[33m\uFFFC\x1B[m"
+            zenkaku = False
+        elif isinstance(i, tuple) and (0x80 <= i[0] <= 0x9F):
+            curchar = "\x1B[31m\uFFFC\x1B[m"
             zenkaku = False
         elif isinstance(i, tuple):
-            curchar = "".join(chr(j) for j in i).rstrip("\uF87F").rstrip("\uF87E")
+            curchar = "".join(chr(j) for j in i)
+            if 0xF870 <= ord(curchar[-1]) <= 0xF87F:
+                if curchar[-1] == "\uF874":
+                    # Left position (red).
+                    curchar = "\x1B[91m" + curchar[:-1] + "\x1B[m"
+                elif curchar[-1] == "\uF875":
+                    # Low left position (darker red).
+                    curchar = "\x1B[31m" + curchar[:-1] + "\x1B[m"
+                elif curchar[-1] == "\uF876":
+                    # Rotated (turquoise).
+                    curchar = "\x1B[36m" + curchar[:-1] + "\x1B[m"
+                elif curchar[-1] == "\uF877":
+                    # Superscript (yellow).
+                    curchar = "\x1B[93m" + curchar[:-1] + "\x1B[m"
+                elif curchar[-1] == "\uF878":
+                    # Small (dim grey)
+                    curchar = "\x1B[90m" + curchar[:-1] + "\x1B[m"
+                elif curchar[-1] == "\uF879":
+                    # Large (bright blue)
+                    curchar = "\x1B[94m" + curchar[:-1] + "\x1B[m"
+                elif curchar[-1] == "\uF87A":
+                    # Negative (inverse video)
+                    curchar = "\x1B[7m" + curchar[:-1] + "\x1B[m"
+                elif curchar[-1] == "\uF87B":
+                    # Medium bold (bright white)
+                    curchar = "\x1B[97m" + curchar[:-1] + "\x1B[m"
+                elif curchar[-1] == "\uF87C":
+                    # Bold
+                    curchar = "\x1B[1m" + curchar[:-1] + "\x1B[m"
+                elif curchar[-1] == "\uF87E":
+                    # VERTical forms not in Unicode: show in green.
+                    curchar = "\x1B[32m" + curchar[:-1] + "\x1B[m"
+                else:
+                    curchar = "\x1B[33m" + curchar[:-1] + "\x1B[m"
             zenkaku = (ucd.east_asian_width(chr(i[0])) in ("W", "F"))
-        elif (ucd.category(chr(i)) == "Co") or (0x80 <= i <= 0x9F):
-            curchar = "\uFFFC"
+        elif ucd.category(chr(i)) == "Co":
+            curchar = "\x1B[32m\uFFFC\x1B[m"
+            zenkaku = False
+        elif 0x80 <= i <= 0x9F:
+            curchar = "\x1B[31m\uFFFC\x1B[m"
             zenkaku = False
         else:
             curchar = chr(i)

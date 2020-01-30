@@ -6,7 +6,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import os
+import os, json
 import unicodedata as ucd
 from ecma35.data import graphdata
 from ecma35.data.multibyte import mbmapparsers as parsers
@@ -31,6 +31,11 @@ def _sort_by_kps(syll):
 # KS C 5601 / KS X 1001 EUC-KR Wansung RHS
 graphdata.gsets["ir149"] = wansung = (94, 2, parsers.read_main_plane("index-euc-kr.txt"))
 # Since graphdata.gsets isn't merely a dict, the above line also sets graphdata.codepoint_coverages
+
+# The main-plane part of Apple's Wansung version, as opposed to its sidecarriage or
+#   single-byte extensions (mostly C1 replacements)
+graphdata.gsets["ir149-mac"] = macwansung = (94, 2, tuple(tuple(i) if i is not None else None for
+    i in json.load(open(os.path.join(parsers.directory, "macWansung.json"), "r"))))
 
 # KPS 9566
 graphdata.gsets["ir202"] = kps9566 = (94, 2, parsers.read_main_plane("KPS9566.TXT", kps=1))

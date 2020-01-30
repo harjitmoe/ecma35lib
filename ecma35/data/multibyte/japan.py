@@ -74,6 +74,8 @@ graphdata.gsets["ir159"] = jisx0212 = (94, 2, parsers.read_main_plane("index-jis
 graphdata.gsets["ir168"] = jisx0208_1990 = (94, 2, parsers.read_main_plane("x208_1990.txt"))
 # JIS X 0208, Microsoft and WHATWG version, as specified for use in HTML5
 graphdata.gsets["ir168web"] = jisx0208_html5 = (94, 2, parsers.read_main_plane("index-jis0208.txt", whatwgjis=True))
+graphdata.gsets["ir168mac"] = jisx0208_apple = (94, 2, parsers.read_main_plane("sjis_mac_std9_0208part.txt"))
+graphdata.gsets["ir168macps"] = jisx0208_appleps = (94, 2, parsers.read_main_plane("sjis_mac_ps_0208part.txt"))
 graphdata.gsets["ibmsjisext"] = sjis_html5_g3 = (94, 2, read_jis_trailer("index-jis0208.txt"))
 # JIS X 2013:2004
 graphdata.gsets["ir233"] = jisx0213_plane1 = (94, 2,
