@@ -34,8 +34,8 @@ graphdata.gsets["ir149"] = wansung = (94, 2, parsers.read_main_plane("index-euc-
 
 # The main-plane part of Apple's Wansung version, as opposed to its sidecarriage or
 #   single-byte extensions (mostly C1 replacements)
-graphdata.gsets["ir149-mac"] = macwansung = (94, 2, tuple(tuple(i) if i is not None else None for
-    i in json.load(open(os.path.join(parsers.directory, "macWansung.json"), "r"))))
+graphdata.gsets["ir149-mac"] = macwansung = (94, 2, tuple(parsers.ahmap(0, tuple(i)) if i is not None 
+    else None for i in json.load(open(os.path.join(parsers.directory, "macWansung.json"), "r"))))
 
 # KPS 9566
 graphdata.gsets["ir202"] = kps9566 = (94, 2, parsers.read_main_plane("KPS9566.TXT", kps=1))

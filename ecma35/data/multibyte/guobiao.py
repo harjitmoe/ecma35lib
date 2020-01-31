@@ -58,8 +58,14 @@ def read_gbkexceptions(fil):
     return r
 
 full2005dict = {0xE78D: 0xFE10, 0xE78E: 0xFE12, 0xE78F: 0xFE11, 0xE790: 0xFE13, 0xE791: 0xFE14, 0xE792: 0xFE15, 0xE793: 0xFE16, 0xE794: 0xFE17, 0xE795: 0xFE18, 0xE796: 0xFE19, 0xE816: 0x20087, 0xE817: 0x20089, 0xE818: 0x200CC, 0xE81E: 0x9FB4, 0xE826: 0x9FB5, 0xE82B: 0x9FB6, 0xE82C: 0x9FB7, 0xE831: 0x215D7, 0xE832: 0x9FB8, 0xE83B: 0x2298F, 0xE843: 0x9FB9, 0xE854: 0x9FBA, 0xE855: 0x241FE, 0xE864: 0x9FBB}
-gb2005tofullmap = lambda pointer, ucs: (full2005dict.get(ucs[0], ucs[0]),) if not ucs[1:] else ucs
-gb2005to2000map = lambda pointer, ucs: ucs if ucs != (0x1E3F,) else (0xE7C7,)
+def gb2005tofullmap(pointer, ucs):
+    if not ucs[1:]:
+        return (full2005dict.get(ucs[0], ucs[0]),)
+    return ucs
+def gb2005to2000map(pointer, ucs):
+    if ucs == (0x1E3F,):
+        return (0xE7C7,)
+    return ucs
 
 # GB/T 2312 (EUC-CN RHS); note that the 2000 and 2005 "editions" refer to GB 18030 edition subsets.
 graphdata.gsets["ir058-1980"] = gb2312_1980 = (94, 2, # is this same as ibm-5478_P100-1995.ucm ?
@@ -103,8 +109,8 @@ graphdata.gsets["ir058-hant"] = gb12345 = (94, 2, tuple(tuple(i) if i is not Non
 #   didn't. Not all exist as Unicode presentation forms.
 # It also includes the GB 6345.1-1986 letters (seeming to have "ɒ" instead of "ɑ" is an editorial
 #   error in CHINSIMP.TXT; the listed mapping (as opposed to name) is "ɑ").
-graphdata.gsets["ir058-mac"] = gb2312_mac = (94, 2, tuple(tuple(i) if i is not None else None for
-    i in json.load(open(os.path.join(parsers.directory, "macGB2312.json"), "r"))))
+graphdata.gsets["ir058-mac"] = gb2312_mac = (94, 2, tuple(parsers.ahmap(0, tuple(i)) if i is not None 
+    else None for i in json.load(open(os.path.join(parsers.directory, "macGB2312.json"), "r"))))
 
 # Amounting to the entirety of GBK/3 and most of GBK/4, minus the non-URO end part.
 # And, yes, it would indeed be more straightforward to just read the GBK mappings for

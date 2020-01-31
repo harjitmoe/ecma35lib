@@ -11,13 +11,36 @@ import os, binascii, json
 directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mbmaps")
 cachedirectory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mbmapscache")
 _temp = []
-identitymap = lambda pointer, ucs: ucs
+def identitymap(pointer, ucs):
+    return ucs
+
+applesinglehints = {
+    # Bold arrows:
+    (0x21e6, 0xf87a): (0x2b05,), # ⬅
+    (0x21e7, 0xf87a): (0x2b06,), # ⬆
+    (0x21e8, 0xf87a): (0x2b95,), # ⬇
+    (0x21e9, 0xf87a): (0x2b07,), # ⬈
+    # Vertical forms not present when mappings written, but later added from GB 18030:
+    (0x2026, 0xf87e): (0xfe19,), # Ellipsis
+    (0x3001, 0xf87e): (0xfe11,), # Comma
+    (0x3002, 0xf87e): (0xfe12,), # Full stop
+    (0xff3b, 0xf87e): (0xfe47,), # Opening hard bracket
+    (0xff3d, 0xf87e): (0xfe48,), # Closing hard bracket
+}
+def ahmap(pointer, ucs):
+    return applesinglehints.get(ucs, ucs)
 
 def read_main_plane(fil, *, whatwgjis=False, eucjp=False, kps=False, plane=None, mapper=identitymap):
+    if mapper is identitymap:
+        mappername = ""
+    elif mapper.__name__ != "<lambda>":
+        mappername = "_" + mapper.__name__
+    else:
+        mappername = "_FIXME"
     cachefn = os.path.join(cachedirectory,
                   os.path.splitext(fil)[0] + ("_plane{:02d}".format(plane) if plane is not None
-                                              else "_mainplane") + ".json")
-    if (mapper is identitymap) and os.path.exists(cachefn):
+                                              else "_mainplane") + mappername + ".json")
+    if os.path.exists(cachefn):
         # Cache output since otherwise several seconds are spend in here upon importing graphdata
         f = open(cachefn, "r")
         r = json.load(f)
@@ -136,12 +159,10 @@ def read_main_plane(fil, *, whatwgjis=False, eucjp=False, kps=False, plane=None,
             _temp.append(ucs)
     r = tuple(_temp) # Making a tuple makes a copy, of course.
     del _temp[:]
-    if mapper is identitymap:
-        # Write output cache.
-        f = open(cachefn, "w")
-        f.write(json.dumps(r))
-        f.close()
-        return tuple(r)
+    # Write output cache.
+    f = open(cachefn, "w")
+    f.write(json.dumps(r))
+    f.close()
     return r
 
 

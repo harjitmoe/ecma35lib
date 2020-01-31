@@ -6,7 +6,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import os, ast, sys
+import os, ast, sys, json
 from ecma35.data import graphdata
 from ecma35.data.multibyte import mbmapparsers as parsers
 
@@ -41,6 +41,13 @@ corporate2_start = 18956
 
 _temp = []
 def read_big5extras(fil):
+    cachefn = os.path.join(parsers.cachedirectory, os.path.splitext(fil)[0] + "_big5extras.json")
+    if os.path.exists(cachefn):
+        # Cache output since otherwise several seconds are spend in here upon importing graphdata
+        f = open(cachefn, "r")
+        r = json.load(f)
+        f.close()
+        return tuple(tuple(i) if i is not None else None for i in r)
     for _i in open(os.path.join(parsers.directory, fil), "r"):
         if (not _i.strip()) or _i[0] == "#":
             continue
@@ -88,6 +95,10 @@ def read_big5extras(fil):
             _temp.append((int(ucs[2:], 16),))
     r = tuple(_temp) # Making a tuple makes a copy, of course.
     del _temp[:]
+    # Write output cache.
+    f = open(cachefn, "w")
+    f.write(json.dumps(r))
+    f.close()
     return r
 
 def read_big5_rangemap(fil, appendix, *, plane=None):
