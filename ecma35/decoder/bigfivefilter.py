@@ -6,9 +6,11 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+from ecma35.data import graphdata
 from ecma35.data.multibyte import traditional
 
 bigfivedocs = ("DOCS", False, (0x34,))
+bigfivenarrowdocs = ("DOCS", False, (0x35,))
 
 def decode_bigfive(stream, state):
     workingsets = ("G0", "G1", "G2", "G3")
@@ -18,10 +20,10 @@ def decode_bigfive(stream, state):
         token = (next(stream) if reconsume is None else reconsume)
         reconsume = None
         if (token[0] == "DOCS"):
-            if token == bigfivedocs:
+            if token in (bigfivedocs, bigfivenarrowdocs):
                 yield ("RDOCS", "BIGFIVE", token[1], token[2])
                 state.bytewidth = 1
-                state.docsmode = "bigfive"
+                state.docsmode = "bigfive" if token == bigfivedocs else "bigfivenarrow"
                 state.cur_c0 = "ir001"
                 state.cur_c1 = "RFC1345"
                 state.glset = 0
@@ -30,7 +32,7 @@ def decode_bigfive(stream, state):
                 state.is_96 = [0, 0, 0, 0]
             else:
                 yield token
-        elif state.docsmode == "bigfive" and token[0] == "WORD":
+        elif state.docsmode in ("bigfive", "bigfivenarrow") and token[0] == "WORD":
             assert (token[1] < 0x100), token
             if token[1] < 0x20:
                 yield ("C0", token[1], "CL")
@@ -42,15 +44,33 @@ def decode_bigfive(stream, state):
                         yield ("CTRL", "DEL", "ECMA-35", 95, "GL", workingsets[state.glset])
                     else:
                         yield (workingsets[state.glset], token[1] - 0x20, "GL")
-                elif token[1] == 0x80:
-                    yield ("ERROR", "BIG5UNUSEDBYTE")
-                elif token[1] == 0xFF:
-                    yield ("ERROR", "BIG5UNUSEDBYTE")
+                elif (token[1] in (0x80, 0xFF)) or ((state.docsmode == "bigfivenarrow") and
+                                                  (token[1] in (0x81, 0x82, 0xA0, 0xFD, 0xFE))):
+                    if graphdata.gsets[state.cur_gsets[3]][1] != 1:
+                        yield ("ERROR", "BIG5UNUSEDBYTE")
+                    elif token[1] == 0x80:
+                        yield ("G3", 0x40, "BIG5ONEBYTE")
+                    elif token[1] == 0xA0:
+                        yield ("G3", 0x41, "BIG5MONEBYTE")
+                    elif token[1] == 0xFD:
+                        yield ("G3", 0x42, "BIG5MONEBYTE")
+                    elif token[1] == 0xFE:
+                        yield ("G3", 0x42, "BIG5MONEBYTE")
+                    elif (token[1] == 0xFF) and (state.docsmode == "bigfivenarrow"):
+                        yield ("G3", 0x44, "BIG5MONEBYTE")
+                    elif token[1] == 0x81:
+                        yield ("G3", 0x46, "BIG5MONEBYTE")
+                    elif token[1] == 0x82:
+                        yield ("G3", 0x47, "BIG5MONEBYTE")
+                    else:
+                        assert token[1] == 0xFF
+                        yield ("G3", 0x49, "BIG5ONEBYTE")
                 else:
                     big5_lead = token
             elif (0x40 <= token[1] <= 0xFE) and (token[1] != 0x7F):
                 number = (big5_lead[1] << 8) | token[1]
-                if (number < 0xA140) or (0xC6A1 <= number < 0xC940) or (number >= 0xF9D6):
+                if (((number < 0xA140) or (0xC6A1 <= number < 0xC940) or (number >= 0xF9D6)) and
+                        (graphdata.gsets[state.cur_gsets[3]][1] == 2)):
                     extku = big5_lead[1] - 0x81 + 1
                     extten = (token[1] - 0x40) + 1 if token[1] < 0x7F else (token[1] - 0xA1 + 63) + 1
                     if number < 0xA140:

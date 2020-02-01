@@ -26,6 +26,68 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at https://mozilla.org/MPL/2.0/
 
+# Private assignments (incomplete)
+
+Separate coding systems:
+
+|Private assignment|Meaning|
+|---|---|
+|`DOCS 0`|Shift\_JIS. Actually a frontend on an equivalent EUC-JP model, so variant can be thereby customised.|
+|`DOCS 1`|Unified Hangul Code. Also supports the KPS equivalent.|
+|`DOCS 2`|GBK (including GB 18030 surrogates).|
+|`DOCS 3`|"Plain extended ASCII", i.e. without `0x80-0x9F` as a control character range.|
+|`DOCS 4`|Big Five (lead byte range `0x81-0xFE`)|
+|`DOCS 5`|Big Five (lead byte range `0xA1-0xFC`)|
+|`DOCS / 0`|Standard Compression Scheme for Unicode (SCSU)|
+
+Regarding World System Teletext:
+
+|Private assignment|Meaning|
+|---|---|
+|`IRR 1 G*D4 ! B`|World System Teletext Latin G0, invariant subset|
+|`IRR 0 G*D4 Y`|World System Teletext Latin G0 for Italy|
+|`G*D4 # 1`|World System Teletext Latin G0 for France|
+|`G*D4 # 2`|World System Teletext Latin G0 for Spain and Portugal|
+|`G*D4 # 3`|World System Teletext Latin G0 for Estonia|
+|`G*D4 # 4`|World System Teletext Latin G0 for Latvia and Lithuania|
+|`G*D4 # 5`|World System Teletext Latin G0 for Serbia, Bosnia, Croatia and Slovenia|
+|`IRR 0 G*D4 # 5`|World System Teletext Latin G0 for Serbia, Slovenia _et al._ with the Dollar sign|
+|`G*D4 # 6`|World System Teletext Latin G0 for Czech and Slovak|
+|`G*D4 # 7`|World System Teletext Latin G0 for Poland|
+|`G*D4 # 8`|World System Teletext Latin G0 for Romania|
+|`G*D4 # 9`|World System Teletext Latin G0 for Turkey|
+
+Miscellaneous single-byte assignments:
+
+|Private assignment|Meaning|
+|---|---|
+|`IRR 0 G*D4 @`|Old IRV with tilde (rather than overscore)|
+|``IRR 0 G*D4 [ACEH`g]``|DEC NRCS, where they differ from standard|
+|``IRR 0 G*D4 B``|ASCII with overscore (rather than tilde)|
+|`IRR [*] G*D4 I`|With `IRR 0`, IBM's 4992 (used for its counterparts in IBM's 1041 where applicable). With `IRR 1`, an equivalent extraction from MacJapanese. With `IRR 2` or `IRR 3`, much the same treatment of Windows-31J and friends (in some non-ECMA35 DOCS filters, `IRR 3` will suppress the 0x80 control mapping in favour of the Euro while `IRR 2` will not; otherwise, they are the same).|
+|`IRR 0 G*D4 ! B`|DEC NRCS, invariant subset|
+|`G*D4 $ 1`|DEC NRCS for Switzerland (corresponding to DEC's (not ARIB's) `G*D4 4`)|
+|`G*D4 $ 2`|DEC NRCS for the Netherlands (corresponding to DEC's `G*D4 =`)|
+|``IRR 1 G*D4 ` ``|Danish equivalent to NS 4551 (IBM's 1017)|
+|`G*D6 ! 0`|RFC 1345's so-called ISO-IR-111/ECMA-Cyrillic (incompatible with ISO-IR-111 itself).|
+
+Double-byte assignments:
+
+|Private assignment|Meaning|
+|---|---|
+|`IRR 0 G*DM4 A`|GB/T 12345|
+|`IRR 1 G*DM4 A`|GB 18030-2000 (only levels 1 and 2 unless in GBK DOCS)|
+|`IRR 2 G*DM4 A`|GB 18030-2005 (only levels 1 and 2 unless in GBK DOCS)|
+|`IRR 3 G*DM4 A`|GB 18030, WHATWG variant (only differs from GB 18030-2005 when in GBK DOCS)|
+|`IRR 4 G*DM4 A`|GB 18030, favouring duplicate mappings over PUA mappings for defined characters|
+|`IRR 5 G*DM4 A`|GB 2312, variant used on classic Mac OS|
+|`IRR 0 G*DM4 B`|JIS X 0208, WHATWG variant (synchronised with Windows-31J)|
+|`IRR 1 G*DM4 B`|JIS X 0208, variant used on classic Mac OS|
+|`IRR 2 G*DM4 B`|JIS X 0208, "PostScript" variant used on classic Mac OS|
+|`G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, as used in EUC-TW|
+|`G*DM4 ! 2`|Hong Kong Supplementary Character Set, including ETEN characters (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
+|`G*DM4 ! 3`|Non-ETEN Big5 kana and Cyrillic (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
+
 # Carried out
 
 - Tokenisation of ECMA-35 streams with DOCS-integrated ISO 10646 streams.
