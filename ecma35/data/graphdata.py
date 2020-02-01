@@ -140,6 +140,8 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             # Other NRCS sets
             tuple(b"$1"): "decswiss", # Note: DEC itself uses b"4" (collides with ARIB Mosaic C)
             tuple(b"$2"): "decdutch", # Note: DEC itself uses b"="
+            # Others
+            tuple(b"#0"): ("ksroman", ("ksromantilde",), ("ksroman",)),
             tuple(b"~"): "nil"}
 
 g96bytes = {tuple(b"@"): "ir111",
@@ -215,6 +217,7 @@ g94nbytes = {tuple(b"@"): "ir042",
              tuple(b"!1"): "cns-eucg2",
              tuple(b"!2"): ("hkscs", (), ("ms950exts", "etenexts", "hkscs")),
              tuple(b"!3"): ("ms950utcexts", (), ("utcbig5exts", "ms950utcexts")),
+             tuple(b"!4"): "ibmsjisext",
              tuple(b"~"): "nil"}
 
 g96nbytes = {tuple(b"~"): "nil"}

@@ -65,7 +65,10 @@ Miscellaneous single-byte assignments:
 |``IRR 0 G*D4 [ACEH`g]``|DEC NRCS, where they differ from standard|
 |``IRR 0 G*D4 B``|ASCII with overscore (rather than tilde)|
 |`IRR [*] G*D4 I`|With `IRR 0`, IBM's 4992 (used for its counterparts in IBM's 1041 where applicable). With `IRR 1`, an equivalent extraction from MacJapanese. With `IRR 2` or `IRR 3`, much the same treatment of Windows-31J and friends (in some non-ECMA35 DOCS filters, `IRR 3` will suppress the 0x80 control mapping in favour of the Euro while `IRR 2` will not; otherwise, they are the same).|
+|`IRR 0 G*D4 J`|JIS-Roman with tilde (rather than overscore)|
 |`IRR 0 G*D4 ! B`|DEC NRCS, invariant subset|
+|`G*D4 # 0`|KS X 1003|
+|`IRR 0 G*D4 # 0`|KS X 1003 with tilde|
 |`G*D4 $ 1`|DEC NRCS for Switzerland (corresponding to DEC's (not ARIB's) `G*D4 4`)|
 |`G*D4 $ 2`|DEC NRCS for the Netherlands (corresponding to DEC's `G*D4 =`)|
 |``IRR 1 G*D4 ` ``|Danish equivalent to NS 4551 (IBM's 1017)|
@@ -75,18 +78,22 @@ Double-byte assignments:
 
 |Private assignment|Meaning|
 |---|---|
+|`IRR ? G*DM4 A`|GB/T 2312-1980|
 |`IRR 0 G*DM4 A`|GB/T 12345|
 |`IRR 1 G*DM4 A`|GB 18030-2000 (only levels 1 and 2 unless in GBK DOCS)|
-|`IRR 2 G*DM4 A`|GB 18030-2005 (only levels 1 and 2 unless in GBK DOCS)|
+|`IRR 2 G*DM4 A`|GB 18030-2005 (default; only levels 1 and 2 unless in GBK DOCS)|
 |`IRR 3 G*DM4 A`|GB 18030, WHATWG variant (only differs from GB 18030-2005 when in GBK DOCS)|
-|`IRR 4 G*DM4 A`|GB 18030, favouring duplicate mappings over PUA mappings for defined characters|
-|`IRR 5 G*DM4 A`|GB 2312, variant used on classic Mac OS|
-|`IRR 0 G*DM4 B`|JIS X 0208, WHATWG variant (synchronised with Windows-31J)|
+|`IRR 4 G*DM4 A`|GB 18030, favouring duplicate mappings over PUA mappings for standard characters|
+|`IRR 5 G*DM4 A`|GB/T 2312, variant used on classic Mac OS|
+|`IRR ? G*DM4 B`|JIS X 0208-1983|
+|`IRR @ G*DM4 B`|JIS X 0208-1990 (standard sequence, listed here for completeness)|
+|`IRR 0 G*DM4 B`|JIS X 0208, WHATWG variant (default; synchronised with Windows-31J)|
 |`IRR 1 G*DM4 B`|JIS X 0208, variant used on classic Mac OS|
 |`IRR 2 G*DM4 B`|JIS X 0208, "PostScript" variant used on classic Mac OS|
 |`G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, as used in EUC-TW|
 |`G*DM4 ! 2`|Hong Kong Supplementary Character Set, including ETEN characters (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`G*DM4 ! 3`|Non-ETEN Big5 kana and Cyrillic (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
+|`G*DM4 ! 4`|IBM extensions for Shift\_JIS (accepted by Shift\_JIS filter in G3 slot, mapped to/from Shift\_JIS by the same mapping scheme as JIS X 0213 plane 2)|
 
 # Carried out
 
