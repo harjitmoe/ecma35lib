@@ -16,7 +16,10 @@ def decode_esc_sequences(stream, state):
     inesc = False
     reconsume = None
     while 1:
-        token = next(stream) if reconsume is None else reconsume
+        try:
+            token = (next(stream) if reconsume is None else reconsume)
+        except StopIteration:
+            break
         reconsume = None
         if not inesc:
             if (token[0] == "CTRL") and (token[1] in ("ESC",)):

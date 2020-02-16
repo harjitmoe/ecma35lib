@@ -14,7 +14,10 @@ def decode_gbhalfcodes(stream, state):
     halfcode_lead = None
     reconsume = None
     while 1:
-        token = (next(stream) if reconsume is None else reconsume)
+        try:
+            token = (next(stream) if reconsume is None else reconsume)
+        except StopIteration:
+            break
         reconsume = None
         if (token[0] == "GBHALFCODE"):
             if halfcode_lead is None:

@@ -75,7 +75,10 @@ def decode_graphical_sets(stream, state):
     reconsume = None
     state.ghwots = [None, None, None, None]
     while 1:
-        token = next(stream) if reconsume is None else reconsume
+        try:
+            token = (next(stream) if reconsume is None else reconsume)
+        except StopIteration:
+            break
         reconsume = None
         tno = _tonumber(token[0])
         # The cur_gsets state prop might not yet be defined if e.g. DOCS % @ hasn't happened yet.

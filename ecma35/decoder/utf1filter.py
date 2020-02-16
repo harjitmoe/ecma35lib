@@ -31,7 +31,10 @@ def decode_utf1(stream, state):
     reconsume = None
     firstchar = True
     while 1:
-        token = next(stream) if reconsume is None else reconsume
+        try:
+            token = (next(stream) if reconsume is None else reconsume)
+        except StopIteration:
+            break
         reconsume = None
         if (token[0] == "DOCS"):
             if utf1_brot:

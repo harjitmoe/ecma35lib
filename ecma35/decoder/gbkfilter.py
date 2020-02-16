@@ -17,7 +17,10 @@ def decode_gbk(stream, state):
     gbk_lead = None
     reconsume = None
     while 1:
-        token = (next(stream) if reconsume is None else reconsume)
+        try:
+            token = (next(stream) if reconsume is None else reconsume)
+        except StopIteration:
+            break
         reconsume = None
         if (token[0] == "DOCS"):
             if token == gbkdocs:

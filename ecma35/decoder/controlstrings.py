@@ -15,7 +15,10 @@ def decode_control_strings(stream, state):
     mode = "normal"
     reconsume = None
     while 1:
-        token = next(stream) if reconsume is None else reconsume
+        try:
+            token = (next(stream) if reconsume is None else reconsume)
+        except StopIteration:
+            break
         reconsume = None
         if mode == "normal":
             if (token[0] == "CTRL") and (token[1] in ("DCS", "SOS", "OSC", "PM", "APC")):

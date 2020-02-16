@@ -13,7 +13,10 @@ def proc_hangul_fillers(stream, state):
     first = second = third = fourth = None
     reconsume = None
     while 1:
-        token = next(stream) if reconsume is None else reconsume
+        try:
+            token = (next(stream) if reconsume is None else reconsume)
+        except StopIteration:
+            break
         reconsume = None
         if first is not None:
             assert fourth is None # Shouldn't remain non-None across iterations.

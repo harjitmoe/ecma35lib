@@ -12,7 +12,10 @@ def decode_designations(stream, state):
     irrset = None
     inesc = False
     while 1:
-        token = next(stream) if reconsume is None else reconsume
+        try:
+            token = (next(stream) if reconsume is None else reconsume)
+        except StopIteration:
+            break
         reconsume = None
         if token[0] == "ESC" and token[1] in tuple(b"()*+-./$"):
             inesc = False

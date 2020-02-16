@@ -16,7 +16,10 @@ def proc_gcc_sequences(stream, state):
     series = []
     chars = []
     while 1:
-        token = next(stream) if reconsume is None else reconsume
+        try:
+            token = (next(stream) if reconsume is None else reconsume)
+        except StopIteration:
+            break
         reconsume = None
         if mode == "normal":
             if token[:3] in (("CSISEQ", "GCC", (0x30,)), ("CSISEQ", "GCC", ())):
