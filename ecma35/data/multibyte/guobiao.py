@@ -104,8 +104,9 @@ graphdata.gsets["ir058-full"] = gb2312_full = (94, 2,
 # Basically sticks a load of stuff (both hankaku and zenkaku) in what GBK would consider the
 #   PUA 1 and PUA 2.
 # Actually includes the extended Pinyin letters from GB 6345.1-1986, which would later be
-#   incorporated into GB 18030 (including the infamous m-acute). However, iso-ir-165.ucm doesn't of
-#   course have the benefit of all the GB 18030-2005 mappings…
+#   incorporated into GB 18030 (including the infamous m-acute). However, iso-ir-165.ucm doesn't 
+#   have the benefit of all the GB 18030-2005 mappings, omitting any mapping for the n-grave, which
+#   was added in Unicode 3.0.
 # Also, the closed-tail and open-tail "g" glyphs are inverted in the ISO-IR-165 registration with
 #   respect to (say) GB 18030 or Macintosh Simplified Chinese, and this is reflected in the ICU UCM 
 #   mapping, with their mappings also being the other way around. This is apparently related to the
