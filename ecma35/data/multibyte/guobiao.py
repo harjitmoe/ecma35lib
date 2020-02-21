@@ -66,15 +66,36 @@ def gb2005to2000map(pointer, ucs):
     if ucs == (0x1E3F,):
         return (0xE7C7,)
     return ucs
+def gb1986to1980map(pointer, ucs):
+    # Reversing non-extensional changes made to GB 2312-1980 by GB 6345.1-1986 and also included
+    # in GB 8565.2-1988 (which did not include the extensional changes, rather being an independent
+    # but non-collisive extension). These corrigienda were incoporated into mappings such as
+    # GB2312.TXT, and into GB 18030.
+    if ucs == (0x953A,):
+        return (0x937E,)
+    if ucs == (0xFF47,):
+        return (0x0261,)
+    return ucs
+def gb1986toregmap(pointer, ucs):
+    # The registered ISO-IR chart apparently does it like this. Go figure. Although it does make
+    # the ISO-IR chart for the ITU version swapping the lowercase Gs seem even weirder, considering
+    # that the ISO-IR reg for GB 2312 displayed a closed one in the ISO-646 row to begin with…
+    if ucs == (0x953A,):
+        return (0x937E,)
+    return ucs
 
 # GB/T 2312 (EUC-CN RHS); note that the 2000 and 2005 "editions" refer to GB 18030 edition subsets.
-graphdata.gsets["ir058-1980"] = gb2312_1980 = (94, 2, # is this same as ibm-5478_P100-1995.ucm ?
+graphdata.gsets["ir058-1980"] = gb2312_1980 = (94, 2,
+                                parsers.read_main_plane("GB2312.TXT", mapper = gb1986to1980map))
+graphdata.gsets["ir058"]      = gb2312_1980 = (94, 2,
+                                parsers.read_main_plane("GB2312.TXT", mapper = gb1986toregmap))
+graphdata.gsets["ir058-1986"] = gb2312_1980 = (94, 2, # is this same as ibm-5478_P100-1995.ucm ?
                                 parsers.read_main_plane("GB2312.TXT"))
 graphdata.gsets["ir058-2000"] = gb2312_2000 = (94, 2, 
                                 parsers.read_main_plane("index-gb18030.txt", mapper = gb2005to2000map))
 graphdata.gsets["ir058-2005"] = gb2312_2005 = (94, 2, 
                                 parsers.read_main_plane("index-gb18030.txt"))
-graphdata.gsets["ir058-web"] = gb2312_2005 # Not different here, but treated differently by gbkfilter
+graphdata.gsets["ir058-web"]  = gb2312_2005 # Not different here, but treated differently by gbkfilter
 graphdata.gsets["ir058-full"] = gb2312_full = (94, 2,
                                 parsers.read_main_plane("index-gb18030.txt", mapper = gb2005tofullmap))
 # Since graphdata.gsets isn't merely a dict, the above lines also set graphdata.codepoint_coverages
@@ -86,7 +107,12 @@ graphdata.gsets["ir058-full"] = gb2312_full = (94, 2,
 #   incorporated into GB 18030 (including the infamous m-acute). However, iso-ir-165.ucm doesn't of
 #   course have the benefit of all the GB 18030-2005 mappings…
 # Also, the plain and script "g" glyphs are inverted in the ISO-IR-165 registration with respect to
-#   (say) GB 18030 or Macintosh Simplified Chinese, and this is reflected in the UCM mapping.
+#   (say) GB 18030 or Macintosh Simplified Chinese, and this is reflected in the ICU UCM mapping.
+#   This is apparently because the plain "g" was defined as open-tailed in GB 2312-1980, and
+#   altered to closed-tailed in GB 6345.1-1986, with GB 8565.2-1988 also including this
+#   change (see Lunde). Interestingly, Lunde doesn't seem to mention this discrepency, rather
+#   listing it as incorporating all modifications and additions in both… but keeping ICU mappings
+#   in all respects besides adding the missing ones where possible seems sensible.
 ir165 = list(parsers.read_main_plane("iso-ir-165.ucm"))
 ir165[688] = (0x01F9,) # in IR-165 but not mapped in UCM; added in Unicode 3.0.
 ir165[916] = ir165[258] + (0xF87F,)
@@ -94,8 +120,14 @@ for _i in range(658, 689): # Not 689/971 itself since that one gets equated to t
     _j = _i + (3 * 94)
     ir165[_j] = ir165[_i] + (0xF87F,)
 # The various pattern fill characters in the latter part of the Greek row are still unmapped,
-#   but shouganai. (The range also corresponds to GB 18030 and Macintosh vertical forms.)
+#   but shouganai. (The range also corresponds to GB 18030 and Macintosh vertical forms, and 
+#   appears to be original to ITU.)
 graphdata.gsets["ir165"] = isoir165 = (94, 2, tuple(ir165))
+# Include one which actually conforms to standards in which way around the lowercase Gs are too…
+ir165_std = ir165[:]
+ir165_std[258], ir165_std[689] = ir165_std[689], ir165_std[258]
+ir165_std[916], ir165_std[971] = ir165_std[971], ir165_std[916]
+graphdata.gsets["ir165std"] = isoir165 = (94, 2, tuple(ir165_std))
 
 # GB/T 12345 (Traditional Chinese in Mainland China, homologous to GB/T 2312 where possible, with
 #   the others being added as a couple of rows at the end)

@@ -193,14 +193,14 @@ g94nbytes = {tuple(b"@"): "ir042",
              tuple(b"A"): ("ir058-2005", # Preferred version
                            # Private versions
                            ("ir058-hant", "ir058-2000", "ir058-2005", "ir058-web", "ir058-full",
-                            "ir058-mac"),
-                           ("ir058-1980",)), # Original followed by any registered revisions
+                            "ir058-mac", "ir058-1980", "ir058-1986"),
+                           ("ir058",)), # Original followed by any registered revisions
              tuple(b"B"): ("ir168web",
                            ("ir168web", "ir168mac", "ir168macps"),
                            ("ir087", "ir168")),
              tuple(b"C"): "ir149",
              tuple(b"D"): "ir159",
-             tuple(b"E"): "ir165",
+             tuple(b"E"): ("ir165", ("ir165std",), ("ir165",)),
              tuple(b"F"): "ir169",
              tuple(b"G"): "ir171",
              tuple(b"H"): "ir172",
