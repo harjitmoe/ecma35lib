@@ -100,19 +100,25 @@ graphdata.gsets["ir058-full"] = gb2312_full = (94, 2,
                                 parsers.read_main_plane("index-gb18030.txt", mapper = gb2005tofullmap))
 # Since graphdata.gsets isn't merely a dict, the above lines also set graphdata.codepoint_coverages
 
-# ITU's extension of ir058-1980, i.e. with 6763 GB 2312 chars, 705 GB 8565.2 chars and 139 others.
+# ITU's extension of ir058, i.e. with 6763 GB 2312 chars, 705 GB 8565.2 chars and 139 others.
 # Basically sticks a load of stuff (both hankaku and zenkaku) in what GBK would consider the
 #   PUA 1 and PUA 2.
 # Actually includes the extended Pinyin letters from GB 6345.1-1986, which would later be
 #   incorporated into GB 18030 (including the infamous m-acute). However, iso-ir-165.ucm doesn't of
 #   course have the benefit of all the GB 18030-2005 mappings…
-# Also, the plain and script "g" glyphs are inverted in the ISO-IR-165 registration with respect to
-#   (say) GB 18030 or Macintosh Simplified Chinese, and this is reflected in the ICU UCM mapping.
-#   This is apparently because the plain "g" was defined as open-tailed in GB 2312-1980, and
-#   altered to closed-tailed in GB 6345.1-1986, with GB 8565.2-1988 also including this
-#   change (see Lunde). Interestingly, Lunde doesn't seem to mention this discrepency, rather
-#   listing it as incorporating all modifications and additions in both… but keeping ICU mappings
-#   in all respects besides adding the missing ones where possible seems sensible.
+# Also, the closed-tail and open-tail "g" glyphs are inverted in the ISO-IR-165 registration with
+#   respect to (say) GB 18030 or Macintosh Simplified Chinese, and this is reflected in the ICU UCM 
+#   mapping, with their mappings also being the other way around. This is apparently related to the
+#   plain "g" being defined as open-tailed in GB 2312-1980, and altered to closed-tailed in 
+#   GB 6345.1-1986 (which added the separate code for the open-tailed one), with GB 8565.2-1988 
+#   also including this change (see Lunde). The question remains, of course, of whether the ITU
+#   version swapped them to restore the 1980 layout, or just double-applied the swap (that the
+#   ISO-IR-58 registration actually shows a closed-tail version for the plain "g" anyway — despite
+#   not changing 鍾 to 锺, per the other corrigiendum made by GB 6345.1 to an existing GB 2312
+#   character — might suggest the latter, if it had any impact). Interestingly, Lunde doesn't seem
+#   to mention this discrepency, rather listing it as incorporating all modifications and additions
+#   in both GB 6345.1 and GB 8565.2… but keeping ICU mappings, in all respects besides adding the
+#   missing ones where possible, seems sensible.
 ir165 = list(parsers.read_main_plane("iso-ir-165.ucm"))
 ir165[688] = (0x01F9,) # in IR-165 but not mapped in UCM; added in Unicode 3.0.
 ir165[916] = ir165[258] + (0xF87F,)

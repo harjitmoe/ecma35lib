@@ -18,6 +18,8 @@ variants = [0x23, 0x24, 0x40, 0x5B, 0x5C, 0x5D, 0x5E, 0x5F, 0x60, 0x7B, 0x7C, 0x
 # What WHATWG would call "willful violations" wrt ECMA-6:1991 are acknowledged where applicable.
 raw_variants = {
     # Old IRV
+    # Worth pointing out from the get-go that I'm mapping the ISO 646 overline to U+203E (per CJK
+    # convention) rather than U+00AF (per convention in more ISO 8859 influenced areas).
     "ir002": ([None, 0xA4, None, None, None, None, None, None, 
                            None, None, None, None, 0x203E], {}),
     "ir002tilde": ([None, 0xA4, None, None, None, None, None, None, 
@@ -30,7 +32,7 @@ raw_variants = {
     # US-ASCII / New IRV, ISO/IEC 10367 G0 set
     "ir006": ([None, None, None, None, None, None, None, None, 
                            None, None, None, None, None], {}),
-    # Supposedly CNS 5205 and also Dutch (non-DEC) set; IBM's 1019.
+    # CNS 5205 and also apparently the Dutch (non-DEC) set; IBM's 1019.
     "ir006overline": ([None, None, None, None, None, None, None, None, 
                                    None, None, None, None, 0x203E], {}),
     # NATS-SEFI (Swedish and Finnish Journalism)
@@ -56,12 +58,12 @@ raw_variants = {
     # DEC NRCS for Sweden
     "ir011dec": ([None, None, None, 0xC4, 0xD6, 0xC5, 0xDC, None, 
                               0xE9, 0xE4, 0xF6, 0xE5, 0xFC], {}),
-    # JIS C 6220 / JIS X 0201 Roman set
+    # JIS C 6220 / JIS X 0201 Roman set (JIS-Roman)
     "ir014": ([None, None, None, None, 0xA5, None, None, None, 
                            None, None, None, None, 0x203E], {}),
     "ir014tilde": ([None, None, None, None, 0xA5, None, None, None, 
                                 None, None, None, None, None], {}),
-    # KS X 1003 / G0 set of non-ASCII EUC-KR
+    # KS X 1003 / G0 set of non-ASCII EUC-KR (KS-Roman, KSC-Roman)
     "ksroman": ([None, None, None, None, 0x20A9, None, None, None, 
                              None, None, None, None, 0x203E], {}),
     "ksromantilde": ([None, None, None, None, 0x20A9, None, None, None, 
