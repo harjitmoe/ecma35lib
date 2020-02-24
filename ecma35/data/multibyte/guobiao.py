@@ -108,9 +108,9 @@ graphdata.gsets["ir058-full"] = gb2312_full = (94, 2,
 #   have the benefit of all the GB 18030-2005 mappings, omitting any mapping for the n-grave, which
 #   was added in Unicode 3.0.
 # Also, the closed-tail and open-tail "g" glyphs are inverted in the ISO-IR-165 registration with
-#   respect to (say) GB 18030 or Macintosh Simplified Chinese, and this is reflected in the ICU UCM 
-#   mapping, with their mappings also being the other way around. This is apparently related to the
-#   plain "g" being defined as open-tailed in GB 2312-1980, and altered to closed-tailed in 
+#   respect to (say) GB 18030 or Macintosh Simplified Chinese, and this is reflected in the UCM  
+#   file from ICU, with their mappings also being the other way around. This is apparently related 
+#   to the plain "g" being defined as open-tailed in GB 2312-1980, and altered to closed-tailed in 
 #   GB 6345.1-1986 (which added the separate code for the open-tailed one), with GB 8565.2-1988 
 #   also including this change (see Lunde). The question remains, of course, of whether the ITU
 #   version swapped them to restore the 1980 layout, or just double-applied the swap (that the

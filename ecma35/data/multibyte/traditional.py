@@ -11,22 +11,42 @@ from ecma35.data import graphdata
 from ecma35.data.multibyte import mbmapparsers as parsers
 
 # CNS 11643
-graphdata.gsets["ir171"] = cns1 = (94, 2, parsers.read_main_plane("euc-tw-2014.ucm", plane=1))
-graphdata.gsets["ir172"] = cns2 = (94, 2, parsers.read_main_plane("euc-tw-2014.ucm", plane=2))
+planesize = 94 * 94
+cns_bmp = parsers.read_main_plane("CNS2UNICODE_Unicode BMP.txt")
+cns_sip = parsers.read_main_plane("CNS2UNICODE_Unicode 2.txt")
+cns_spuaa = parsers.read_main_plane("CNS2UNICODE_Unicode 15.txt")
+if not os.path.exists(os.path.join(parsers.cachedirectory, "CNS2UNICODE.json")):
+    cns = []
+    for n in range(max(len(cns_bmp), len(cns_sip), len(cns_spuaa))):
+        if n < len(cns_bmp) and (cns_bmp[n] is not None):
+            cns.append(cns_bmp[n])
+        elif n < len(cns_sip) and (cns_sip[n] is not None):
+            cns.append(cns_sip[n])
+        elif n < len(cns_spuaa) and (cns_spuaa[n] is not None):
+            cns.append(cns_spuaa[n])
+        else:
+            cns.append(None)
+    _f = open(os.path.join(parsers.cachedirectory, "CNS2UNICODE.json"), "w")
+    _f.write(json.dumps(cns))
+    _f.close()
+    cns = tuple(cns)
+else:
+    _f = open(os.path.join(parsers.cachedirectory, "CNS2UNICODE.json"), "r")
+    cns = tuple(tuple(i) if i is not None else None for i in json.load(_f))
+    _f.close()
+#graphdata.gsets["ir171"] = cns1 = (94, 2, parsers.read_main_plane("euc-tw-2014.ucm", plane=1))
+graphdata.gsets["ir171"] = cns1 = (94, 2, cns[planesize * 0 : planesize * 1])
+graphdata.gsets["ir172"] = cns2 = (94, 2, cns[planesize * 1 : planesize * 2])
 # ISO-IR numbers jump by ten here (between the Big-5 and non-Big-5 planes).
-graphdata.gsets["ir183"] = cns3 = (94, 2, parsers.read_main_plane("euc-tw-2014.ucm", plane=3))
-graphdata.gsets["ir184"] = cns4 = (94, 2, parsers.read_main_plane("euc-tw-2014.ucm", plane=4))
-graphdata.gsets["ir185"] = cns5 = (94, 2, parsers.read_main_plane("euc-tw-2014.ucm", plane=5))
-graphdata.gsets["ir186"] = cns6 = (94, 2, parsers.read_main_plane("euc-tw-2014.ucm", plane=6))
-graphdata.gsets["ir187"] = cns7 = (94, 2, parsers.read_main_plane("euc-tw-2014.ucm", plane=7))
-# Plane 7 is the last one to be registered with ISO-IR. Plane 8 is unused.
-# Plane 9 in cns-11643-1992.ucm (i.e. not the newer versions of that file which reduce the planes
-#   included to 1 and 2) corresponds to Plane 15 (the last of four PUA planes) in euc-tw-2014.ucm,
-#   suggesting it might not actually be part of the CNS spec. Notably, the filename names the
-#   2002 spec, which Lunde's 1995 CJK.INF Version 1.9 gives as having seven planes with an eighth
-#   rumoured underway. This would explain 8 being skipped and 9 not being registered with ISO-IR.
+graphdata.gsets["ir183"] = cns3 = (94, 2, cns[planesize * 2 : planesize * 3])
+graphdata.gsets["ir184"] = cns4 = (94, 2, cns[planesize * 3 : planesize * 4])
+graphdata.gsets["ir185"] = cns5 = (94, 2, cns[planesize * 4 : planesize * 5])
+graphdata.gsets["ir186"] = cns6 = (94, 2, cns[planesize * 5 : planesize * 6])
+graphdata.gsets["ir187"] = cns7 = (94, 2, cns[planesize * 6 : planesize * 7])
+# Plane 7 is the last one to be registered with ISO-IR.
 # The entirety does also exist as an unregistered 94^n set, used by EUC-TW:
-graphdata.gsets["cns-eucg2"] = euctw_g2 = (94, 3, parsers.read_main_plane("euc-tw-2014.ucm"))
+graphdata.gsets["cns-eucg2"] = euctw_g2 = (94, 3, cns)
+graphdata.gsets["cns-eucg2-ibm"] = euctw_g2_ibm = (94, 3, parsers.read_main_plane("euc-tw-2014.ucm"))
 
 # # # # # # # # # #
 # Big Five
@@ -180,10 +200,9 @@ big5_to_cns1 = read_big5_rangemap("rfc1922.txt", 1)
 big5_to_cns1.update(read_big5_rangemap("rfc1922.txt", 2))
 big5_to_cns2 = read_big5_rangemap("rfc1922.txt", 3, plane=2)
 # The two duplicate kanji. RFC 1922 includes mappings to the same CNS codepoints as the other ones,
-# (and confusingly lists a single plane 1 mapping in Appendix 2 which maps to plane 2, hmm…) but
-# we can preserve their round-trippability by mapping them to IBM points in (PUA) plane 13.
-big5_to_cns2[0xC94A] = (13, 4, 40)
-big5_to_cns2[0xDDFC] = (13, 4, 42)
+# (and confusingly lists a single plane 1 mapping in Appendix 2 which maps to plane 2, hmm…).
+big5_to_cns2[0xC94A] = (1, 36, 34) # IBM's (13, 4, 40)
+big5_to_cns2[0xDDFC] = (2, 33, 86) # IBM's (13, 4, 42)
 
 graphdata.gsets["hkscs"] = hkscs_extras = (94, 2, read_big5extras("index-big5.txt"))
 graphdata.gsets["etenexts"] = eten_extras = (94, 2, 

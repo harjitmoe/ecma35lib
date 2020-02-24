@@ -126,6 +126,14 @@ def read_main_plane(fil, *, whatwgjis=False, eucjp=False, kps=False, plane=None,
                     continue
                 else:
                     men = 1
+        elif "-" in _i[:3]: # Maximum possible plane number is 94, so this will remain correct
+            # Format of the Taiwanese government supplied CNS 11643 mapping data
+            cod, ucs = _i.split("\t", 2)[:2]
+            men, byts = cod.split("-")
+            men = int(men, 10)
+            assert len(byts) == 4
+            ku = int(byts[:2], 16) - 0x20
+            ten = int(byts[2:], 16) - 0x20
         elif whatwgjis:
             # Format of the WHATWG-supplied indices for Windows-31J and JIS X 0212.
             # Needs an argument since we can't otherwise tell it from the next one.
@@ -147,8 +155,9 @@ def read_main_plane(fil, *, whatwgjis=False, eucjp=False, kps=False, plane=None,
                 continue
         pointer = ((men - 1) * 94 * 94) + ((ku - 1) * 94) + (ten - 1)
         #
-        assert ucs[:2] in ("0x", "U+", "<U"), ucs
-        ucs = mapper(pointer, tuple(int(j, 16) for j in ucs[2:].rstrip(">").split("+")))
+        if ucs[:2] in ("0x", "U+", "<U"):
+            ucs = ucs[2:]
+        ucs = mapper(pointer, tuple(int(j, 16) for j in ucs.rstrip(">").split("+")))
         #
         if len(_temp) > pointer:
             assert _temp[pointer] is None
