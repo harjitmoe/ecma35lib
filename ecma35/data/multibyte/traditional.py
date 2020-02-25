@@ -34,19 +34,61 @@ else:
     _f = open(os.path.join(parsers.cachedirectory, "CNS2UNICODE.json"), "r")
     cns = tuple(tuple(i) if i is not None else None for i in json.load(_f))
     _f.close()
-#graphdata.gsets["ir171"] = cns1 = (94, 2, parsers.read_main_plane("euc-tw-2014.ucm", plane=1))
+
+# Planes present in the original 1986 edition of CNS 11643.
+# Closely related to Big5. ISO-IR numbers in the 170s (whereas the 1992 additions are in the 180s).
+# ir171 was mostly kept the same until 2007, then extended a bit, due to being the non-kanji plane.
 graphdata.gsets["ir171"] = cns1 = (94, 2, cns[planesize * 0 : planesize * 1])
+graphdata.gsets["ir171-1986"] = euctw_g2_ibm = (94, 3,
+        parsers.read_main_plane("euc-tw-2014.ucm", plane=1))
 graphdata.gsets["ir172"] = cns2 = (94, 2, cns[planesize * 1 : planesize * 2])
-# ISO-IR numbers jump by ten here (between the Big-5 and non-Big-5 planes).
+
+# ISO-IR-183 deserves particular mention.
+# It was first published in 1988, containing 6319 characters, as an extension to CNS 11643
+#   occupying plane 14. The main block within that plane, being the first 6148 characters,
+#   became plane 3 in 1992, with the rest distributed throughout plane 4 (this is what the
+#   ISO-IR registrations themselves are based on).
+# The version of CNS 11643 submitted to the IRG, and therefore represented by the Consortium
+#   mappings, is actually the 1986 version, plus the IR-183 plane as plane 14, plus additions
+#   to the end of the IR-183 plane (meaning it contains more than even the 1988 version)
+#   representing other desired characters.
+# In 2007, 128 characters were added to plane 3, mostly corresponding to and at the same
+#   locations as those added to the IRG submission's plane 14 (comparing the mappings, and
+#   insofar as CNS11643.TXT has a lot more gaps for some reason, the only difference seems to
+#   be the current 毵 versus the CNS11643.TXT 毶 at 69-26). Note that an unrelated plane 14
+#   was added in 2007.
 graphdata.gsets["ir183"] = cns3 = (94, 2, cns[planesize * 2 : planesize * 3])
+_ir183full = []
+for _n, _i in enumerate(parsers.read_main_plane("CNS11643.TXT", plane=14)):
+    if _i and cns[(planesize * 2) + _n]:
+        assert (cns[(planesize * 2) + _n] == _i) or (_n == 6417)
+        _ir183full.append(_i)
+    elif cns[(planesize * 2) + _n]:
+        _ir183full.append(cns[(planesize * 2) + _n])
+    else:
+        _ir183full.append(_i)
+graphdata.gsets["ir183-1988"] = cns3_1988 = (94, 2, tuple(_ir183full)[:6319])
+graphdata.gsets["ir183-1988plus"] = cns3plus = (94, 2, tuple(_ir183full))
+graphdata.gsets["ir183-1992"] = cns3_1988 = (94, 2, tuple(_ir183full)[:6148])
+
 graphdata.gsets["ir184"] = cns4 = (94, 2, cns[planesize * 3 : planesize * 4])
 graphdata.gsets["ir185"] = cns5 = (94, 2, cns[planesize * 4 : planesize * 5])
 graphdata.gsets["ir186"] = cns6 = (94, 2, cns[planesize * 5 : planesize * 6])
 graphdata.gsets["ir187"] = cns7 = (94, 2, cns[planesize * 6 : planesize * 7])
 # Plane 7 is the last one to be registered with ISO-IR.
+
 # The entirety does also exist as an unregistered 94^n set, used by EUC-TW:
 graphdata.gsets["cns-eucg2"] = euctw_g2 = (94, 3, cns)
-graphdata.gsets["cns-eucg2-ibm"] = euctw_g2_ibm = (94, 3, parsers.read_main_plane("euc-tw-2014.ucm"))
+# The version of EUC-TW used by ICU, with standard assignments in planes 1-7 and 15,
+#   a user-defined area in plane 12, and IBM corporate assignments in plane 13.
+#   Note that this is incompatible with the current standard's use of planes 12 and 13.
+# Special mention is warrented for plane 15: it was published as an extension in 1990,
+#   but was only integrated into the standard proper in 2007, by which point several
+#   assignments were redundant and were skipped. Actually, the early full versions of
+#   cns-11643-1992.ucm include it as plane 9 for some reason (later versions remove
+#   it due to limiting that mapping's scope to ISO-2022-CN-EXT, then to ISO-2022-CN).
+graphdata.gsets["cns-eucg2-ibm"] = euctw_g2_ibm = (94, 3,
+        parsers.read_main_plane("euc-tw-2014.ucm"))
 
 # # # # # # # # # #
 # Big Five

@@ -59,9 +59,16 @@ def read_main_plane(fil, *, whatwgjis=False, eucjp=False, kps=False, plane=None,
             # Consortium-style format, over GL (or GR with eucjp=1) without transformation.
             byts, ucs = _i.split("\t", 2)[:2]
             if not (eucjp or kps):
-                men = 1
-                ku = int(byts[2:4], 16) - 0x20
-                ten = int(byts[4:6], 16) - 0x20
+                if len(byts) == 6:
+                    men = 1
+                    ku = int(byts[2:4], 16) - 0x20
+                    ten = int(byts[4:6], 16) - 0x20
+                else:
+                    # Like the Consortium supplied CNS 11643 mappings
+                    assert len(byts) == 7
+                    men = int(byts[2], 16)
+                    ku = int(byts[3:5], 16) - 0x20
+                    ten = int(byts[5:7], 16) - 0x20
             else:
                 men = 1
                 if byts[2].upper() in "01234567": # ASCII
