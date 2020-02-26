@@ -12,9 +12,9 @@ from ecma35.data.multibyte import mbmapparsers as parsers
 
 # CNS 11643
 planesize = 94 * 94
-cns_bmp = parsers.read_main_plane("CNS2UNICODE_Unicode BMP.txt")
-cns_sip = parsers.read_main_plane("CNS2UNICODE_Unicode 2.txt")
-cns_spuaa = parsers.read_main_plane("CNS2UNICODE_Unicode 15.txt")
+cns_bmp = parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode BMP.txt")
+cns_sip = parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 2.txt")
+cns_spuaa = parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 15.txt")
 if not os.path.exists(os.path.join(parsers.cachedirectory, "CNS2UNICODE.json")):
     cns = []
     for n in range(max(len(cns_bmp), len(cns_sip), len(cns_spuaa))):
@@ -40,7 +40,7 @@ else:
 # ir171 was mostly kept the same until 2007, then extended a bit, due to being the non-kanji plane.
 graphdata.gsets["ir171"] = cns1 = (94, 2, cns[planesize * 0 : planesize * 1])
 graphdata.gsets["ir171-1986"] = euctw_g2_ibm = (94, 3,
-        parsers.read_main_plane("euc-tw-2014.ucm", plane=1))
+        parsers.read_main_plane("ICU/euc-tw-2014.ucm", plane=1))
 graphdata.gsets["ir172"] = cns2 = (94, 2, cns[planesize * 1 : planesize * 2])
 
 # ISO-IR-183 deserves particular mention.
@@ -59,7 +59,7 @@ graphdata.gsets["ir172"] = cns2 = (94, 2, cns[planesize * 1 : planesize * 2])
 #   was added in 2007.
 graphdata.gsets["ir183"] = cns3 = (94, 2, cns[planesize * 2 : planesize * 3])
 _ir183full = []
-for _n, _i in enumerate(parsers.read_main_plane("CNS11643.TXT", plane=14)):
+for _n, _i in enumerate(parsers.read_main_plane("UTC/CNS11643.TXT", plane=14)):
     if _i and cns[(planesize * 2) + _n]:
         assert (cns[(planesize * 2) + _n] == _i) or (_n == 6417)
         _ir183full.append(_i)
@@ -88,7 +88,101 @@ graphdata.gsets["cns-eucg2"] = euctw_g2 = (94, 3, cns)
 #   cns-11643-1992.ucm include it as plane 9 for some reason (later versions remove
 #   it due to limiting that mapping's scope to ISO-2022-CN-EXT, then to ISO-2022-CN).
 graphdata.gsets["cns-eucg2-ibm"] = euctw_g2_ibm = (94, 3,
-        parsers.read_main_plane("euc-tw-2014.ucm"))
+        parsers.read_main_plane("ICU/euc-tw-2014.ucm"))
+
+def scrutenise(first, second):
+    for _n, (_i, _j) in enumerate(zip(first[2], second[2])):
+        _men = (_n // planesize) + 1
+        _ku = ((_n % planesize) // 94) + 1
+        _ten = (_n % 94) + 1
+        if _i != _j:
+            if (_men == 3) and ((_n % planesize) > 6148):
+                continue
+            if (_men > 7) and (_men != 15):
+                continue
+            if (_i is not None) and (len(_i) == 1) and (_i[0] > 0xF0000) and (_j is None):
+                continue
+            print("{:02d}-{:02d}-{:02d}".format(_men, _ku, _ten), graphdata.formatcode(_i),
+                                                                  graphdata.formatcode(_j))
+
+# Punctuation (CNS mappings first, then ICU mappings):
+#   01-01-23 U+2015 (―)　U+2014 (—)
+#   01-01-25 U+2014 (—)  U+FE58 (﹘)
+#   01-02-36 U+FF5E (～)　U+223C (∼)
+#   01-02-55 U+2190 (←)  U+2192 (→)  -- odd
+#   01-02-56 U+2192 (→)  U+2190 (←)  -- odd
+# No idea (CNS mappings first, then ICU mappings):
+#   01-05-84 U+312D (ㄭ)  U+E000 (PUA)
+#   01-05-85 None      　 U+E001 (PUA)
+# Radicals (CNS mappings first, then ICU mappings):
+#   01-06-48 U+31D0 (㇐) None
+#   01-06-50 U+31D1 (㇑) None
+#   01-06-51 U+31D2 (㇒) None
+#   01-06-52 U+31D3 (㇓) None
+#   01-06-53 U+31D4 (㇔) None
+#   01-06-55 U+31CF (㇏) None
+#   01-06-56 U+31C0 (㇀) None
+#   01-06-57 U+31D5 (㇕) None
+#   01-06-58 U+31D6 (㇖) None
+#   01-06-59 U+31C7 (㇇) None
+#   01-06-60 U+31D7 (㇗) None
+#   01-06-61 U+31C4 (㇄) None
+#   01-06-62 U+31D8 (㇘) None
+#   01-06-63 U+31D9 (㇙) None
+#   01-06-64 U+31DA (㇚) None
+#   01-06-65 U+31C3 (㇃) None
+#   01-06-66 U+31C2 (㇂) None
+#   01-06-67 U+31C1 (㇁) None
+#   01-06-68 U+31DB (㇛) None
+#   01-06-70 U+31DC (㇜) None
+#   01-06-71 U+31DD (㇝) None
+#   01-06-72 U+31C5 (㇅) None
+#   01-06-73 U+31CD (㇍) None
+#   01-06-74 U+31C6 (㇆) None
+#   01-06-75 U+31C8 (㇈) None
+#   01-06-76 U+31DE (㇞) None
+#   01-06-78 U+31DF (㇟) None
+#   01-06-79 U+31CE (㇎) None
+#   01-06-80 U+31E0 (㇠) None
+#   01-06-81 U+31C9 (㇉) None
+#   01-06-82 U+31E1 (㇡) None
+#   01-06-94 None      　U+2F21 (⼡)
+#   01-07-44 U+2F2C (⼬) U+5C6E (屮)
+#   01-08-39 U+2F85 (⾅) U+81FC (臼)
+#   01-08-45 U+2F8B (⾋) U+8278 (艸)
+# Plane 4 kanji (CNS mappings first, then ICU mappings)
+#   04-02-59 U+FFF7A (SPUA)　 U+5B90 (宐) -- compare 04-06-05
+#   04-03-65 U+FFFFD (SPUA)　 U+5759 (坙)
+#   04-04-76 U+2634B (𦍋)     U+8288 (芈)
+#   04-06-05  U+5B90 (宐)    None       　-- compare 04-02-59
+#   04-06-25 U+221F7 (𢇷)     U+5E9F (废)
+#   04-07-74 U+FFFFC (SPUA)　 U+80BB (肻)
+#   04-08-07 U+FFFFB (SPUA)　 U+488C (䢌) -- compare 15-08-82
+#   04-08-93 U+FFFFA (SPUA)　 U+5CD5 (峕)
+#   04-10-78 U+FFFF9 (SPUA)　 U+79CC (秌)
+#   04-16-34 U+FFFF8 (SPUA)　 U+98E4 (飤)
+#   04-24-60 U+FFFF7 (SPUA)　 U+6E7C (湼)
+#   04-25-38  U+FAD4 (䀹)     U+4039 (䀹)
+#   04-34-90 U+21C09 (𡰉)     U+5C32 (尲)
+#   04-36-56 U+FFFF6 (SPUA)　 U+7193 (熓)
+#   04-51-28 U+FFF7B (SPUA)　 U+8786 (螆) -- compare 15-49-93
+#   04-67-25 U+FFFF5 (SPUA)　 U+5E71 (幱)
+#   04-72-47 U+2FA16 (䵖)     U+4D56 (䵖) -- compare 05-79-52
+#   05-79-52  U+4D56 (䵖)    U+2FA16 (䵖) -- compare 04-72-47
+#   05-90-24  U+4695 (䚕)    U+2F9CB (𧢮)
+# Plane 15 kanji (CNS mappings first, then ICU mappings):
+#   15-03-23 None       　U+2F81F (㓟)
+#   15-08-82  U+488C (䢌) None       　-- compare 04-08-07
+#   15-13-72 None       　U+2F807 (倂)
+#   15-16-59 None       　U+2F906 (𣴞)
+#   15-27-74  U+692C (椬) None
+#   15-28-30  U+6BF6 (毶) None       　-- compare 03-69-26 ("14"-69-26) in UTC mapping
+#   15-28-69  U+713F (焿) None
+#   15-48-22  U+71B4 (熴) None
+#   15-49-93  U+8786 (螆) U+2F9BE (螆) -- compare 04-51-28
+#   15-67-66 None       　U+27068 (𧁨) -- compare 15-67-74
+#   15-67-74 U+27068 (𧁨) None       　-- compare 15-67-66
+#   15-69-57  U+7922 (礢) None
 
 # # # # # # # # # #
 # Big Five
@@ -103,7 +197,8 @@ corporate2_start = 18956
 
 _temp = []
 def read_big5extras(fil):
-    cachefn = os.path.join(parsers.cachedirectory, os.path.splitext(fil)[0] + "_big5extras.json")
+    cachefn = os.path.join(parsers.cachedirectory,
+              os.path.splitext(fil)[0].replace("/", "---") + "_big5extras.json")
     if os.path.exists(cachefn):
         # Cache output since otherwise several seconds are spend in here upon importing graphdata
         f = open(cachefn, "r")
@@ -238,19 +333,19 @@ def read_big5_rangemap(fil, appendix, *, plane=None):
 # a very small subset of the ETEN extensions (碁銹裏墻恒粧嫺 and box drawing). The difference between
 # Python's "Big5" and "CP950" codecs seems to be the incorporation of these extensions.
 # Moral: don't encode Kana and Cyrillic in Big5. Pretty much.
-big5_to_cns1 = read_big5_rangemap("rfc1922.txt", 1)
-big5_to_cns1.update(read_big5_rangemap("rfc1922.txt", 2))
-big5_to_cns2 = read_big5_rangemap("rfc1922.txt", 3, plane=2)
+big5_to_cns1 = read_big5_rangemap("Other/rfc1922.txt", 1)
+big5_to_cns1.update(read_big5_rangemap("Other/rfc1922.txt", 2))
+big5_to_cns2 = read_big5_rangemap("Other/rfc1922.txt", 3, plane=2)
 # The two duplicate kanji. RFC 1922 includes mappings to the same CNS codepoints as the other ones,
 # (and confusingly lists a single plane 1 mapping in Appendix 2 which maps to plane 2, hmm…).
 big5_to_cns2[0xC94A] = (1, 36, 34) # IBM's (13, 4, 40)
 big5_to_cns2[0xDDFC] = (2, 33, 86) # IBM's (13, 4, 42)
 
-graphdata.gsets["hkscs"] = hkscs_extras = (94, 2, read_big5extras("index-big5.txt"))
+graphdata.gsets["hkscs"] = hkscs_extras = (94, 2, read_big5extras("WHATWG/index-big5.txt"))
 graphdata.gsets["etenexts"] = eten_extras = (94, 2, 
     ((None,) * (32 * 188)) + hkscs_extras[2][(32 * 188):])
-graphdata.gsets["ms950exts"] = ms_big5_extras = (94, 2, read_big5extras("CP950.TXT"))
-graphdata.gsets["utcbig5exts"] = utc_big5_extras = (94, 2, read_big5extras("BIG5.TXT"))
+graphdata.gsets["ms950exts"] = ms_big5_extras = (94, 2, read_big5extras("Vendor/CP950.TXT"))
+graphdata.gsets["utcbig5exts"] = utc_big5_extras = (94, 2, read_big5extras("UTC/BIG5.TXT"))
 graphdata.gsets["ms950utcexts"] = msutc_big5_extras = (94, 2,
     utc_big5_extras[2] + ms_big5_extras[2][len(utc_big5_extras[2]):])
 

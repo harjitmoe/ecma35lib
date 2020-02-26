@@ -29,16 +29,16 @@ def _sort_by_kps(syll):
     return (i_order[init], v_order[vow], f_order[fin])
 
 # KS C 5601 / KS X 1001 EUC-KR Wansung RHS
-graphdata.gsets["ir149"] = wansung = (94, 2, parsers.read_main_plane("index-euc-kr.txt"))
+graphdata.gsets["ir149"] = wansung = (94, 2, parsers.read_main_plane("WHATWG/index-euc-kr.txt"))
 # Since graphdata.gsets isn't merely a dict, the above line also sets graphdata.codepoint_coverages
 
 # The main-plane part of Apple's Wansung version, as opposed to its sidecarriage or
 #   single-byte extensions (mostly C1 replacements)
 graphdata.gsets["ir149-mac"] = macwansung = (94, 2, tuple(parsers.ahmap(0, tuple(i)) if i is not None 
-    else None for i in json.load(open(os.path.join(parsers.directory, "macWansung.json"), "r"))))
+    else None for i in json.load(open(os.path.join(parsers.directory, "Vendor/macWansung.json"), "r"))))
 
 # KPS 9566
-graphdata.gsets["ir202"] = kps9566 = (94, 2, parsers.read_main_plane("KPS9566.TXT", kps=1))
+graphdata.gsets["ir202"] = kps9566 = (94, 2, parsers.read_main_plane("UTC/KPS9566.TXT", kps=1))
 i_order = tuple(initials[_i] for _i in "ㄱㄴㄷㄹㅁㅂㅅㅈㅊㅋㅌㅍㅎㄲㄸㅃㅆㅉㅇ")
 i_order = dict((_i, i_order.index(_i)) for _i in i_order)
 v_order = tuple(vowels[_i] for _i in "ㅏㅑㅓㅕㅗㅛㅜㅠㅡㅣㅐㅒㅔㅖㅚㅟㅢㅘㅝㅙㅞ")

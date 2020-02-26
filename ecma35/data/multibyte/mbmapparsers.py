@@ -37,9 +37,9 @@ def read_main_plane(fil, *, whatwgjis=False, eucjp=False, kps=False, plane=None,
         mappername = "_" + mapper.__name__
     else:
         mappername = "_FIXME"
-    cachefn = os.path.join(cachedirectory,
-                  os.path.splitext(fil)[0] + ("_plane{:02d}".format(plane) if plane is not None
-                                              else "_mainplane") + mappername + ".json")
+    cachebfn = os.path.splitext(fil)[0].replace("/", "---") + ("_plane{:02d}".format(plane)
+               if plane is not None else "_mainplane") + mappername + ".json"
+    cachefn = os.path.join(cachedirectory, cachebfn)
     if os.path.exists(cachefn):
         # Cache output since otherwise several seconds are spend in here upon importing graphdata
         f = open(cachefn, "r")

@@ -86,18 +86,18 @@ def gb1986toregmap(pointer, ucs):
 
 # GB/T 2312 (EUC-CN RHS); note that the 2000 and 2005 "editions" refer to GB 18030 edition subsets.
 graphdata.gsets["ir058-1980"] = gb2312_1980 = (94, 2,
-                                parsers.read_main_plane("GB2312.TXT", mapper = gb1986to1980map))
+                            parsers.read_main_plane("UTC/GB2312.TXT", mapper = gb1986to1980map))
 graphdata.gsets["ir058"]      = gb2312_1980 = (94, 2,
-                                parsers.read_main_plane("GB2312.TXT", mapper = gb1986toregmap))
+                            parsers.read_main_plane("UTC/GB2312.TXT", mapper = gb1986toregmap))
 graphdata.gsets["ir058-1986"] = gb2312_1980 = (94, 2, # is this same as ibm-5478_P100-1995.ucm ?
-                                parsers.read_main_plane("GB2312.TXT"))
+                            parsers.read_main_plane("UTC/GB2312.TXT"))
 graphdata.gsets["ir058-2000"] = gb2312_2000 = (94, 2, 
-                                parsers.read_main_plane("index-gb18030.txt", mapper = gb2005to2000map))
+                            parsers.read_main_plane("WHATWG/index-gb18030.txt", mapper = gb2005to2000map))
 graphdata.gsets["ir058-2005"] = gb2312_2005 = (94, 2, 
-                                parsers.read_main_plane("index-gb18030.txt"))
+                            parsers.read_main_plane("WHATWG/index-gb18030.txt"))
 graphdata.gsets["ir058-web"]  = gb2312_2005 # Not different here, but treated differently by gbkfilter
 graphdata.gsets["ir058-full"] = gb2312_full = (94, 2,
-                                parsers.read_main_plane("index-gb18030.txt", mapper = gb2005tofullmap))
+                            parsers.read_main_plane("WHATWG/index-gb18030.txt", mapper = gb2005tofullmap))
 # Since graphdata.gsets isn't merely a dict, the above lines also set graphdata.codepoint_coverages
 
 # ITU's extension of ir058, i.e. with 6763 GB 2312 chars, 705 GB 8565.2 chars and 139 others.
@@ -120,7 +120,7 @@ graphdata.gsets["ir058-full"] = gb2312_full = (94, 2,
 #   to mention this discrepency, rather listing it as incorporating all modifications and additions
 #   in both GB 6345.1 and GB 8565.2… but keeping ICU mappings, in all respects besides adding the
 #   missing ones where possible, seems sensible.
-ir165 = list(parsers.read_main_plane("iso-ir-165.ucm"))
+ir165 = list(parsers.read_main_plane("ICU/iso-ir-165.ucm"))
 ir165[688] = (0x01F9,) # in IR-165 but not mapped in UCM; added in Unicode 3.0.
 ir165[916] = ir165[258] + (0xF87F,)
 for _i in range(658, 689): # Not 689/971 itself since that one gets equated to the ASCII characters.
@@ -141,7 +141,7 @@ graphdata.gsets["ir165std"] = isoir165 = (94, 2, tuple(ir165_std))
 # Unlike GB2312.TXT, redistribution of GB12345.TXT itself is apparently not permitted, although
 #   using/incorporating the information is apparently fine.
 graphdata.gsets["ir058-hant"] = gb12345 = (94, 2, tuple(tuple(i) if i is not None else None for
-    i in json.load(open(os.path.join(parsers.directory, "GB_12345.json"), "r"))))
+    i in json.load(open(os.path.join(parsers.directory, "UTC/GB_12345.json"), "r"))))
 
 # Apple's version. Note that it changes 0xFD and 0xFE to single-byte codes.
 # Includes the vertical form encodings which would make it into GB 18030, plus a few more which
@@ -149,7 +149,7 @@ graphdata.gsets["ir058-hant"] = gb12345 = (94, 2, tuple(tuple(i) if i is not Non
 # It also includes the GB 6345.1-1986 letters (seeming to have "ɒ" instead of "ɑ" is an editorial
 #   error in CHINSIMP.TXT; the listed mapping (as opposed to name) is "ɑ").
 graphdata.gsets["ir058-mac"] = gb2312_mac = (94, 2, tuple(parsers.ahmap(0, tuple(i)) if i is not None 
-    else None for i in json.load(open(os.path.join(parsers.directory, "macGB2312.json"), "r"))))
+    else None for i in json.load(open(os.path.join(parsers.directory, "Vendor/macGB2312.json"), "r"))))
 
 # Amounting to the entirety of GBK/3 and most of GBK/4, minus the non-URO end part.
 # And, yes, it would indeed be more straightforward to just read the GBK mappings for
@@ -159,7 +159,7 @@ non_euccn_uro101 = [i for i in range(0x4E00, 0x9FA6)
                       if i not in graphdata.codepoint_coverages["ir058-2005"]]
 
 # GBK/5, and the non-URO part of GBK/4.
-gbk_exceptions = read_gbkexceptions("index-gb18030.txt")
+gbk_exceptions = read_gbkexceptions("WHATWG/index-gb18030.txt")
 gbk_exceptions_full = tuple(full2005dict.get(_i, _i) for _i in gbk_exceptions) # For use with ir058-full
 gbk_exceptions_coverage = set(gbk_exceptions)
 gbk_exceptions_full_coverage = set(gbk_exceptions_full)

@@ -65,32 +65,32 @@ def map_to_zenkaku(pointer, ucs):
     return ucs
 
 # JIS C 6226:1978 / JIS X 0208:1978
-graphdata.gsets["ir042"] = jisx0208_1978 = (94, 2, parsers.read_main_plane("x208_1978.txt"))
+graphdata.gsets["ir042"] = jisx0208_1978 = (94, 2, parsers.read_main_plane("JIS-Conc/x208_1978.txt"))
 # JIS C 6226:1983 / JIS X 0208:1983
-graphdata.gsets["ir087"] = jisx0208_1983 = (94, 2, parsers.read_main_plane("x208_1983.txt"))
+graphdata.gsets["ir087"] = jisx0208_1983 = (94, 2, parsers.read_main_plane("JIS-Conc/x208_1983.txt"))
 # JIS X 0212:1990 (i.e. the 1990 supplementary plane)
 graphdata.gsets["ir159"] = jisx0212 = (94, 2,
-        parsers.read_main_plane("index-jis0212.txt", whatwgjis=True))
+        parsers.read_main_plane("WHATWG/index-jis0212.txt", whatwgjis=True))
 # JIS X 0212 with allocated but not published (per Lunde) va/vi/ve/vo codepoints
 graphdata.gsets["ir159va"] = jisx0212_extva = (94, 2,
         jisx0212[:462] + tuple(range(0x30F7, 0x30FB)) + jisx0212[466:])
 # JIS X 0208:1990 or 1997
-graphdata.gsets["ir168"] = jisx0208_1990 = (94, 2, parsers.read_main_plane("x208_1990.txt"))
+graphdata.gsets["ir168"] = jisx0208_1990 = (94, 2, parsers.read_main_plane("JIS-Conc/x208_1990.txt"))
 # JIS X 0208, Microsoft and WHATWG version, as specified for use in HTML5
 graphdata.gsets["ir168web"] = jisx0208_html5 = (94, 2,
-        parsers.read_main_plane("index-jis0208.txt", whatwgjis=True))
+        parsers.read_main_plane("WHATWG/index-jis0208.txt", whatwgjis=True))
 graphdata.gsets["ir168mac"] = jisx0208_apple = (94, 2,
-        parsers.read_main_plane("sjis_mac_std9_0208part.txt", mapper = parsers.ahmap))
+        parsers.read_main_plane("JIS-Conc/sjis_mac_std9_0208part.txt", mapper = parsers.ahmap))
 graphdata.gsets["ir168macps"] = jisx0208_appleps = (94, 2,
-        parsers.read_main_plane("sjis_mac_ps_0208part.txt", mapper = parsers.ahmap))
-graphdata.gsets["ibmsjisext"] = sjis_html5_g3 = (94, 2, read_jis_trailer("index-jis0208.txt"))
+        parsers.read_main_plane("JIS-Conc/sjis_mac_ps_0208part.txt", mapper = parsers.ahmap))
+graphdata.gsets["ibmsjisext"] = sjis_html5_g3 = (94, 2, read_jis_trailer("WHATWG/index-jis0208.txt"))
 # JIS X 2013:2004
 graphdata.gsets["ir233"] = jisx0213_plane1 = (94, 2,
-        parsers.read_main_plane("euc-jis-2004-std.txt", eucjp = True, plane = 1,
+        parsers.read_main_plane("Other/euc-jis-2004-std.txt", eucjp = True, plane = 1,
             mapper = map_to_zenkaku))
 graphdata.gsets["ir228"] = jisx0213_plane1 # 2000 edition with different escape, treat same for now
 graphdata.gsets["ir229"] = jisx0213_plane2 = (94, 2, # Code unchanged from original edition.
-        parsers.read_main_plane("euc-jis-2004-std.txt", eucjp = True, plane = 2,
+        parsers.read_main_plane("Other/euc-jis-2004-std.txt", eucjp = True, plane = 2,
             mapper = map_to_zenkaku))
 
 

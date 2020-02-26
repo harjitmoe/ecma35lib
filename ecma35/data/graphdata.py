@@ -49,6 +49,12 @@ c0graphics = {}
 rhses = {}
 defgsets = {}
 
+def formatcode(tpl):
+    if tpl is None:
+        return "None"
+    return "U+{} ({})".format("+".join("{:04X}".format(i) for i in tpl),
+                              "".join(chr(i) if i < 0xF0000 else (chr(i) + " ") for i in tpl))
+
 # Note: has to be imported after gsets &co are defined
 from ecma35.data.multibyte import korea, japan, guobiao, traditional
 from ecma35.data.singlebyte import ecma6, ecma43, plainext
