@@ -30,7 +30,22 @@ applesinglehints = {
 def ahmap(pointer, ucs):
     return applesinglehints.get(ucs, ucs)
 
-def read_main_plane(fil, *, whatwgjis=False, eucjp=False, kps=False, plane=None, mapper=identitymap):
+def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False,
+                    plane=None, mapper=identitymap):
+    """
+    Read a mapping from a file in the directory given by mbmapparsers.directory.
+    Only positional argument is the name (including subdirectory) of that file.
+
+    Keyword arguments are as follows:
+
+    - eucjp: (if the file is in UTC format) interpret as EUC format, with planes
+      01 and 02 invoked with GR and SS3-over-GR respectively. If neither this nor
+      euckrlike is passed, it is interpreted as one plane over GL.
+    - euckrlike: interpret as an EUC format with non-EUC extensions; read only
+      the main plane.
+    - twoway: (if the file is in ICU format) ignore one-way decoder mappings.
+    - plane: isolate only one plane of a multi-plane mapping (e.g. CNS 11643).
+    """
     if mapper is identitymap:
         mappername = ""
     elif mapper.__name__ != "<lambda>":
@@ -58,7 +73,7 @@ def read_main_plane(fil, *, whatwgjis=False, eucjp=False, kps=False, plane=None,
         elif _i[:2] == "0x":
             # Consortium-style format, over GL (or GR with eucjp=1) without transformation.
             byts, ucs = _i.split("\t", 2)[:2]
-            if not (eucjp or kps):
+            if not (eucjp or euckrlike):
                 if len(byts) == 6:
                     men = 1
                     ku = int(byts[2:4], 16) - 0x20
@@ -88,19 +103,20 @@ def read_main_plane(fil, *, whatwgjis=False, eucjp=False, kps=False, plane=None,
                     continue
                 ku = int(byts[2:4], 16) - 0xA0
                 ten = int(byts[4:6], 16) - 0xA0
-                if kps and ((ku < 1) or (ku > 94) or (ten < 1) or (ten > 94)):
+                if euckrlike and ((ku < 1) or (ku > 94) or (ten < 1) or (ten > 94)):
                     continue
             if plane is not None: # i.e. if we want a particular plane's two-byte mapping.
                 if men != plane:
                     continue
                 else:
                     men = 1
+            mkts = ((men, ku, ten),)
         elif _i[:2] == "<U":
             # ICU-style format, over GL (or EUC-TW) without transformation
             ucs, byts, direction = _i.split(" ", 2)
             assert byts[:2] == "\\x"
             byts = [int(i, 16) for i in byts[2:].split("\\x")]
-            if direction.strip() == "|1":
+            if (direction.strip() == "|1") or (twoway and (direction.strip() == "|3")):
                 # i.e. best-fit mapped by the encoder only
                 # Whereas, |3 means it's used only by the decoder (usually because duplicate)
                 continue
@@ -133,6 +149,7 @@ def read_main_plane(fil, *, whatwgjis=False, eucjp=False, kps=False, plane=None,
                     continue
                 else:
                     men = 1
+            mkts = ((men, ku, ten),)
         elif "-" in _i[:3]: # Maximum possible plane number is 94, so this will remain correct
             # Format of the Taiwanese government supplied CNS 11643 mapping data
             cod, ucs = _i.split("\t", 2)[:2]
@@ -141,14 +158,40 @@ def read_main_plane(fil, *, whatwgjis=False, eucjp=False, kps=False, plane=None,
             assert len(byts) == 4
             ku = int(byts[:2], 16) - 0x20
             ten = int(byts[2:], 16) - 0x20
-        elif whatwgjis:
+            if plane is not None: # i.e. if we want a particular plane's two-byte mapping.
+                if men != plane:
+                    continue
+                else:
+                    men = 1
+            mkts = ((men, ku, ten),)
+        elif ("\t" in _i) and ("-" in _i.split("\t", 1)[1][:3]):
+            # Format of Koichi Yasuoka's CNS 11643 mapping data
+            while _i.count("\t") < 4:
+                _i += "\t" # the U+5E94 line is missing its tab-tab-tab-hash-CJK at the end.
+            ucs, cod1, cod2, cod3 = _i.split("\t", 4)[:4]
+            mkts = ()
+            for cod in (cod1, cod2, cod3):
+                if not cod.strip():
+                    continue
+                men, byts = cod.rstrip().split("-")
+                men = int(men, 10)
+                assert len(byts) == 4, repr(byts)
+                ku = int(byts[:2], 16) - 0x20
+                ten = int(byts[2:], 16) - 0x20
+                if plane is not None: # i.e. if we want a particular plane's two-byte mapping.
+                    if men != plane:
+                        continue
+                    else:
+                        men = ((men, ku, ten),)
+                mkts += ((men, ku, ten),)
+        elif not euckrlike:
             # Format of the WHATWG-supplied indices for Windows-31J and JIS X 0212.
-            # Needs an argument since we can't otherwise tell it from the next one.
             byts, ucs = _i.split("\t", 2)[:2]
             pointer = int(byts.strip(), 10)
             men = 1
             ku = (pointer // 94) + 1
             ten = (pointer % 94) + 1
+            mkts = ((men, ku, ten),)
             if ku > 94:
                 continue
         else:
@@ -158,21 +201,21 @@ def read_main_plane(fil, *, whatwgjis=False, eucjp=False, kps=False, plane=None,
             men = 1
             ku = (extpointer // 190) - 31
             ten = (extpointer % 190) - 95
+            mkts = ((men, ku, ten),)
             if not ((1 <= ku <= 94) and (1 <= ten <= 94)):
                 continue
-        pointer = ((men - 1) * 94 * 94) + ((ku - 1) * 94) + (ten - 1)
-        #
         if ucs[:2] in ("0x", "U+", "<U"):
             ucs = ucs[2:]
-        ucs = mapper(pointer, tuple(int(j, 16) for j in ucs.rstrip(">").split("+")))
-        #
-        if len(_temp) > pointer:
-            assert _temp[pointer] is None
-            _temp[pointer] = ucs
-        else:
-            while len(_temp) < pointer:
-                _temp.append(None)
-            _temp.append(ucs)
+        for men, ku, ten in mkts:
+            pointer = ((men - 1) * 94 * 94) + ((ku - 1) * 94) + (ten - 1)
+            iucs = mapper(pointer, tuple(int(j, 16) for j in ucs.rstrip(">").split("+")))
+            if len(_temp) > pointer:
+                assert _temp[pointer] is None
+                _temp[pointer] = iucs
+            else:
+                while len(_temp) < pointer:
+                    _temp.append(None)
+                _temp.append(iucs)
     r = tuple(_temp) # Making a tuple makes a copy, of course.
     del _temp[:]
     # Write output cache.

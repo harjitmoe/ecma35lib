@@ -10,11 +10,155 @@ import os, ast, sys, json
 from ecma35.data import graphdata
 from ecma35.data.multibyte import mbmapparsers as parsers
 
-# CNS 11643
+# CNS 11643 and Big 5.
+# Bumpy ride here, so brace yourselves.
+
+# Punctuation (gov.tw mappings first, then ICU mappings):
+#   01-01-23 U+2015 (―)　U+2014 (—)　 -- m-dash vs horiz-bar; tale as old as time for legacy CJK.
+#   01-01-25 U+2014 (—)  U+FE58 (﹘)　-- U+FE58 is "small em dash"
+#   01-02-36 U+FF5E (～)　U+223C (∼)  -- Fullwidth tilde, tilde operator(, wave dash); old as time.
+#   01-02-55 U+2190 (←)  U+2192 (→)  -- odd (ICU, Yasuoka AND ISO-IR-171 agree contra gov.tw)
+#   01-02-56 U+2192 (→)  U+2190 (←)  -- odd (ICU, Yasuoka AND ISO-IR-171 agree contra gov.tw)
+# Other gov.tw versus Yasuoka from that range (excluding mere use of hankaku counterparts):
+#   01-01-06 U+2027 (‧) U+00B7 (·)  -- U+2027 is "hyphenation point"; U+00B7 is from Latin-1
+#   01-01-29 U+FE4F (﹏) U+FE4B (﹋)
+#   01-01-78 U+FF0A (＊) U+2733 (✳) 　-- U+2733 is "eight spoked asterisk"
+#   01-02-06 U+02CD (ˍ) U+005F (_)   -- U+02CD is "modifier letter low macron"
+#   01-02-36 U+FF5E (～) U+301C (〜)  -- The "(, wave dash)" mentioned above, just as expected
+#   01-02-61 U+2225 (∥) U+2016 (‖) 　-- Parallel versus double vertical bar; old as time.
+#   01-02-62 U+2223 (∣) U+007C (|) 　-- "Divides" versus the vertical bar.
+#   01-02-63 U+FF0F (／) U+2044 (⁄)   -- Slash versus fraction slash (apparently).
+#   01-02-65 U+2215 (∕) U+002F (/) 　-- Division slash versus slash.
+# Being as gov.tw and ICU agree for the following, I presume Yasuoka has it mistaken:
+#   01-06-04 U+2463 (④) U+2464 (⑤)
+#   01-06-05 U+2464 (⑤) U+2465 (⑥)
+#   01-06-06 U+2465 (⑥) U+2466 (⑦)
+#   01-06-07 U+2466 (⑦) U+2467 (⑧)
+#   01-06-08 U+2467 (⑧) U+2468 (⑨)
+#   01-06-09 U+2468 (⑨) U+2469 (⑩)
+#   01-06-10 U+2469 (⑩) U+246A (⑪)
+# No idea (gov.tw mappings first, then ICU mappings):
+#   01-05-84 U+312D (ㄭ)  U+E000 (PUA)
+#   01-05-85 None      　 U+E001 (PUA)
+# Strokes (gov.tw mappings first, then ICU mappings):
+#   01-06-48 U+31D0 (㇐) None
+#   01-06-50 U+31D1 (㇑) None
+#   01-06-51 U+31D2 (㇒) None
+#   01-06-52 U+31D3 (㇓) None
+#   01-06-53 U+31D4 (㇔) None
+#   01-06-55 U+31CF (㇏) None
+#   01-06-56 U+31C0 (㇀) None
+#   01-06-57 U+31D5 (㇕) None
+#   01-06-58 U+31D6 (㇖) None
+#   01-06-59 U+31C7 (㇇) None
+#   01-06-60 U+31D7 (㇗) None
+#   01-06-61 U+31C4 (㇄) None
+#   01-06-62 U+31D8 (㇘) None
+#   01-06-63 U+31D9 (㇙) None
+#   01-06-64 U+31DA (㇚) None
+#   01-06-65 U+31C3 (㇃) None
+#   01-06-66 U+31C2 (㇂) None
+#   01-06-67 U+31C1 (㇁) None
+#   01-06-68 U+31DB (㇛) None
+#   01-06-70 U+31DC (㇜) None
+#   01-06-71 U+31DD (㇝) None
+#   01-06-72 U+31C5 (㇅) None
+#   01-06-73 U+31CD (㇍) None
+#   01-06-74 U+31C6 (㇆) None
+#   01-06-75 U+31C8 (㇈) None
+#   01-06-76 U+31DE (㇞) None
+#   01-06-78 U+31DF (㇟) None
+#   01-06-79 U+31CE (㇎) None
+#   01-06-80 U+31E0 (㇠) None
+#   01-06-81 U+31C9 (㇉) None
+#   01-06-82 U+31E1 (㇡) None
+# Radicals (gov.tw mappings first, then ICU mappings):
+#   01-06-94 None      　U+2F21 (⼡) -- extension rad 34; CNS does not consider rads 34/35 distinct
+#   01-07-44 U+2F2C (⼬) U+5C6E (屮)
+#   01-08-39 U+2F85 (⾅) U+81FC (臼)
+#   01-08-45 U+2F8B (⾋) U+8278 (艸)
+# Yasuoka consistently maps these radicals to their main kanji codepoints; I shan't list them all.
+# From this point… Yasuoka makes extensive use of many-to-one mappings for best-fit itaiji in the
+#   basic multilingual plane (being authored in 1998, the SIP presumably didn't exist yet?). I've
+#   only bothered noting these where the gov.tw mappings are to SPUA, i.e. the fit is still "best".
+# Plane 4 kanji (gov.tw mappings first, then ICU mappings)
+#   04-02-59 U+FFF7A (SPUA)　 U+5B90 (宐) -- compare 04-06-05
+#   04-03-65 U+FFFFD (SPUA)　 U+5759 (坙)
+#   04-04-76 U+2634B (𦍋)     U+8288 (芈)
+#   04-06-05  U+5B90 (宐)    None       　-- compare 04-02-59
+#   04-06-25 U+221F7 (𢇷)     U+5E9F (废)
+#   04-07-74 U+FFFFC (SPUA)　 U+80BB (肻)
+#   04-08-07 U+FFFFB (SPUA)　 U+488C (䢌) -- compare 15-08-82
+#   04-08-93 U+FFFFA (SPUA)　 U+5CD5 (峕)
+#   04-10-78 U+FFFF9 (SPUA)　 U+79CC (秌)
+#   04-16-34 U+FFFF8 (SPUA)　 U+98E4 (飤)
+#   04-24-60 U+FFFF7 (SPUA)　 U+6E7C (湼)
+#   04-25-38  U+FAD4 (䀹)     U+4039 (䀹)
+#   04-34-90 U+21C09 (𡰉)     U+5C32 (尲)
+#   04-36-56 U+FFFF6 (SPUA)　 U+7193 (熓)
+#   04-51-28 U+FFF7B (SPUA)　 U+8786 (螆) -- compare 15-49-93
+#   04-67-25 U+FFFF5 (SPUA)　 U+5E71 (幱)
+#   04-72-47 U+2FA16 (䵖)     U+4D56 (䵖) -- compare 05-79-52
+#   05-79-52  U+4D56 (䵖)    U+2FA16 (䵖) -- compare 04-72-47
+#   05-90-24  U+4695 (䚕)    U+2F9CB (𧢮)
+# Plane 5 kanji (gov.tw mapping first, then Yasuoka mapping):
+#   05-03-43 U+FFFF3 (SPUA) U+5324 (匤)
+# Plane 6 kanji (gov.tw mapping first, then Yasuoka mapping):
+#   06-10-01 U+FFFF1 (SPUA) U+5365 (卥)
+#   06-60-15 U+FFFF0 (SPUA) U+5900 (夀)
+# Plane 7 kanji (gov.tw mapping first, then Yasuoka mapping):
+#   07-33-57 U+FFFEF (SPUA) U+7E64 (繤)
+# Plane 15 kanji (gov.tw mappings first, then ICU mappings):
+#   15-03-23 None       　U+2F81F (㓟)
+#   15-08-82  U+488C (䢌) None       　-- compare 04-08-07
+#   15-13-72 None       　U+2F807 (倂)
+#   15-16-59 None       　U+2F906 (𣴞)
+#   15-27-74  U+692C (椬) None
+#   15-28-30  U+6BF6 (毶) None       　-- compare 03-69-26 ("14"-69-26; see below) in UTC mapping
+#   15-28-69  U+713F (焿) None
+#   15-48-22  U+71B4 (熴) None
+#   15-49-93  U+8786 (螆) U+2F9BE (螆) -- compare 04-51-28
+#   15-67-66 None       　U+27068 (𧁨) -- also in cns-11643-1992.ucm; compare 15-67-74
+#   15-67-74 U+27068 (𧁨) None       　-- compare 15-67-66
+#   15-69-57  U+7922 (礢) None
+
+_contraspua = {
+    # Alternative mappings per Yasuoka/ICU for some of the ones that otherwise get mapped to SPUA.
+    # On the basis that PUA mappings for defined characters are kinda a last resort… since there's
+    #   no guarantee it'll show up even legibly (and you can forget about aural rendering).
+    (0xFFF7A,): (0x5B90,),
+    (0xFFF7B,): (0x8786,),
+    (0xFFFEF,): (0x7E64,),
+    (0xFFFF0,): (0x5900,),
+    (0xFFFF1,): (0x5365,),
+    (0xFFFF3,): (0x5324,),
+    (0xFFFF5,): (0x5E71,),
+    (0xFFFF6,): (0x7193,),
+    (0xFFFF7,): (0x6E7C,),
+    (0xFFFF8,): (0x98E4,),
+    (0xFFFF9,): (0x79CC,),
+    (0xFFFFA,): (0x5CD5,),
+    (0xFFFFB,): (0x488C,),
+    (0xFFFFC,): (0x80BB,),
+    (0xFFFFD,): (0x5759,)}
+def cnsmapper_contraspua(pointer, ucs):
+    return _contraspua.get(ucs, ucs)
+
+# Since the gov.tw data disagrees with literally every other source I have on the matter
+# (ISO-IR-171, UTC mappings, ICU mappings, Yasuoka's mappings…), change it to match.
+def cnsmapper_swaparrows(pointer, ucs):
+    if (pointer == 148) and (ucs == (0x2190,)):
+        return (0x2192,)
+    elif (pointer == 149) and (ucs == (0x2192,)):
+        return (0x2190,)
+    return ucs
+
 planesize = 94 * 94
-cns_bmp = parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode BMP.txt")
+cns_bmp = parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode BMP.txt",
+        mapper = cnsmapper_swaparrows)
 cns_sip = parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 2.txt")
-cns_spuaa = parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 15.txt")
+cns_spuaa = parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 15.txt",
+        mapper = cnsmapper_contraspua)
 if not os.path.exists(os.path.join(parsers.cachedirectory, "CNS2UNICODE.json")):
     cns = []
     for n in range(max(len(cns_bmp), len(cns_sip), len(cns_spuaa))):
@@ -90,8 +234,8 @@ graphdata.gsets["cns-eucg2"] = euctw_g2 = (94, 3, cns)
 graphdata.gsets["cns-eucg2-ibm"] = euctw_g2_ibm = (94, 3,
         parsers.read_main_plane("ICU/euc-tw-2014.ucm"))
 
-def scrutenise(first, second):
-    for _n, (_i, _j) in enumerate(zip(first[2], second[2])):
+def scrutenise(first, second, *, short=False):
+    for _n, (_i, _j) in enumerate(zip(first, second)):
         _men = (_n // planesize) + 1
         _ku = ((_n % planesize) // 94) + 1
         _ten = (_n % 94) + 1
@@ -102,87 +246,10 @@ def scrutenise(first, second):
                 continue
             if (_i is not None) and (len(_i) == 1) and (_i[0] > 0xF0000) and (_j is None):
                 continue
+            if (_j is None) and short:
+                continue
             print("{:02d}-{:02d}-{:02d}".format(_men, _ku, _ten), graphdata.formatcode(_i),
-                                                                  graphdata.formatcode(_j))
-
-# Punctuation (CNS mappings first, then ICU mappings):
-#   01-01-23 U+2015 (―)　U+2014 (—)
-#   01-01-25 U+2014 (—)  U+FE58 (﹘)
-#   01-02-36 U+FF5E (～)　U+223C (∼)
-#   01-02-55 U+2190 (←)  U+2192 (→)  -- odd
-#   01-02-56 U+2192 (→)  U+2190 (←)  -- odd
-# No idea (CNS mappings first, then ICU mappings):
-#   01-05-84 U+312D (ㄭ)  U+E000 (PUA)
-#   01-05-85 None      　 U+E001 (PUA)
-# Radicals (CNS mappings first, then ICU mappings):
-#   01-06-48 U+31D0 (㇐) None
-#   01-06-50 U+31D1 (㇑) None
-#   01-06-51 U+31D2 (㇒) None
-#   01-06-52 U+31D3 (㇓) None
-#   01-06-53 U+31D4 (㇔) None
-#   01-06-55 U+31CF (㇏) None
-#   01-06-56 U+31C0 (㇀) None
-#   01-06-57 U+31D5 (㇕) None
-#   01-06-58 U+31D6 (㇖) None
-#   01-06-59 U+31C7 (㇇) None
-#   01-06-60 U+31D7 (㇗) None
-#   01-06-61 U+31C4 (㇄) None
-#   01-06-62 U+31D8 (㇘) None
-#   01-06-63 U+31D9 (㇙) None
-#   01-06-64 U+31DA (㇚) None
-#   01-06-65 U+31C3 (㇃) None
-#   01-06-66 U+31C2 (㇂) None
-#   01-06-67 U+31C1 (㇁) None
-#   01-06-68 U+31DB (㇛) None
-#   01-06-70 U+31DC (㇜) None
-#   01-06-71 U+31DD (㇝) None
-#   01-06-72 U+31C5 (㇅) None
-#   01-06-73 U+31CD (㇍) None
-#   01-06-74 U+31C6 (㇆) None
-#   01-06-75 U+31C8 (㇈) None
-#   01-06-76 U+31DE (㇞) None
-#   01-06-78 U+31DF (㇟) None
-#   01-06-79 U+31CE (㇎) None
-#   01-06-80 U+31E0 (㇠) None
-#   01-06-81 U+31C9 (㇉) None
-#   01-06-82 U+31E1 (㇡) None
-#   01-06-94 None      　U+2F21 (⼡)
-#   01-07-44 U+2F2C (⼬) U+5C6E (屮)
-#   01-08-39 U+2F85 (⾅) U+81FC (臼)
-#   01-08-45 U+2F8B (⾋) U+8278 (艸)
-# Plane 4 kanji (CNS mappings first, then ICU mappings)
-#   04-02-59 U+FFF7A (SPUA)　 U+5B90 (宐) -- compare 04-06-05
-#   04-03-65 U+FFFFD (SPUA)　 U+5759 (坙)
-#   04-04-76 U+2634B (𦍋)     U+8288 (芈)
-#   04-06-05  U+5B90 (宐)    None       　-- compare 04-02-59
-#   04-06-25 U+221F7 (𢇷)     U+5E9F (废)
-#   04-07-74 U+FFFFC (SPUA)　 U+80BB (肻)
-#   04-08-07 U+FFFFB (SPUA)　 U+488C (䢌) -- compare 15-08-82
-#   04-08-93 U+FFFFA (SPUA)　 U+5CD5 (峕)
-#   04-10-78 U+FFFF9 (SPUA)　 U+79CC (秌)
-#   04-16-34 U+FFFF8 (SPUA)　 U+98E4 (飤)
-#   04-24-60 U+FFFF7 (SPUA)　 U+6E7C (湼)
-#   04-25-38  U+FAD4 (䀹)     U+4039 (䀹)
-#   04-34-90 U+21C09 (𡰉)     U+5C32 (尲)
-#   04-36-56 U+FFFF6 (SPUA)　 U+7193 (熓)
-#   04-51-28 U+FFF7B (SPUA)　 U+8786 (螆) -- compare 15-49-93
-#   04-67-25 U+FFFF5 (SPUA)　 U+5E71 (幱)
-#   04-72-47 U+2FA16 (䵖)     U+4D56 (䵖) -- compare 05-79-52
-#   05-79-52  U+4D56 (䵖)    U+2FA16 (䵖) -- compare 04-72-47
-#   05-90-24  U+4695 (䚕)    U+2F9CB (𧢮)
-# Plane 15 kanji (CNS mappings first, then ICU mappings):
-#   15-03-23 None       　U+2F81F (㓟)
-#   15-08-82  U+488C (䢌) None       　-- compare 04-08-07
-#   15-13-72 None       　U+2F807 (倂)
-#   15-16-59 None       　U+2F906 (𣴞)
-#   15-27-74  U+692C (椬) None
-#   15-28-30  U+6BF6 (毶) None       　-- compare 03-69-26 ("14"-69-26) in UTC mapping
-#   15-28-69  U+713F (焿) None
-#   15-48-22  U+71B4 (熴) None
-#   15-49-93  U+8786 (螆) U+2F9BE (螆) -- compare 04-51-28
-#   15-67-66 None       　U+27068 (𧁨) -- compare 15-67-74
-#   15-67-74 U+27068 (𧁨) None       　-- compare 15-67-66
-#   15-69-57  U+7922 (礢) None
+                  graphdata.formatcode(_j), file=sys.stderr)
 
 # # # # # # # # # #
 # Big Five

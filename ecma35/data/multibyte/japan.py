@@ -70,7 +70,7 @@ graphdata.gsets["ir042"] = jisx0208_1978 = (94, 2, parsers.read_main_plane("JIS-
 graphdata.gsets["ir087"] = jisx0208_1983 = (94, 2, parsers.read_main_plane("JIS-Conc/x208_1983.txt"))
 # JIS X 0212:1990 (i.e. the 1990 supplementary plane)
 graphdata.gsets["ir159"] = jisx0212 = (94, 2,
-        parsers.read_main_plane("WHATWG/index-jis0212.txt", whatwgjis=True))
+        parsers.read_main_plane("WHATWG/index-jis0212.txt"))
 # JIS X 0212 with allocated but not published (per Lunde) va/vi/ve/vo codepoints
 graphdata.gsets["ir159va"] = jisx0212_extva = (94, 2,
         jisx0212[:462] + tuple(range(0x30F7, 0x30FB)) + jisx0212[466:])
@@ -78,7 +78,7 @@ graphdata.gsets["ir159va"] = jisx0212_extva = (94, 2,
 graphdata.gsets["ir168"] = jisx0208_1990 = (94, 2, parsers.read_main_plane("JIS-Conc/x208_1990.txt"))
 # JIS X 0208, Microsoft and WHATWG version, as specified for use in HTML5
 graphdata.gsets["ir168web"] = jisx0208_html5 = (94, 2,
-        parsers.read_main_plane("WHATWG/index-jis0208.txt", whatwgjis=True))
+        parsers.read_main_plane("WHATWG/index-jis0208.txt"))
 graphdata.gsets["ir168mac"] = jisx0208_apple = (94, 2,
         parsers.read_main_plane("JIS-Conc/sjis_mac_std9_0208part.txt", mapper = parsers.ahmap))
 graphdata.gsets["ir168macps"] = jisx0208_appleps = (94, 2,

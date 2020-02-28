@@ -92,12 +92,12 @@ graphdata.gsets["ir058"]      = gb2312_1980 = (94, 2,
 graphdata.gsets["ir058-1986"] = gb2312_1980 = (94, 2, # is this same as ibm-5478_P100-1995.ucm ?
                             parsers.read_main_plane("UTC/GB2312.TXT"))
 graphdata.gsets["ir058-2000"] = gb2312_2000 = (94, 2, 
-                            parsers.read_main_plane("WHATWG/index-gb18030.txt", mapper = gb2005to2000map))
+            parsers.read_main_plane("WHATWG/index-gb18030.txt", euckrlike=True, mapper = gb2005to2000map))
 graphdata.gsets["ir058-2005"] = gb2312_2005 = (94, 2, 
-                            parsers.read_main_plane("WHATWG/index-gb18030.txt"))
+                            parsers.read_main_plane("WHATWG/index-gb18030.txt", euckrlike=True))
 graphdata.gsets["ir058-web"]  = gb2312_2005 # Not different here, but treated differently by gbkfilter
 graphdata.gsets["ir058-full"] = gb2312_full = (94, 2,
-                            parsers.read_main_plane("WHATWG/index-gb18030.txt", mapper = gb2005tofullmap))
+            parsers.read_main_plane("WHATWG/index-gb18030.txt", euckrlike=True, mapper = gb2005tofullmap))
 # Since graphdata.gsets isn't merely a dict, the above lines also set graphdata.codepoint_coverages
 
 # ITU's extension of ir058, i.e. with 6763 GB 2312 chars, 705 GB 8565.2 chars and 139 others.
