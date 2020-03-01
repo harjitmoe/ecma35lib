@@ -1,18 +1,28 @@
 <!DOCTYPE html><title>CNS 11643 plane 6</title>
 <style>
-        table, th, tr, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
+        /* Sadly border-collapse: collapse; borks the borders on the position: sticky; */
         table {
+            border-spacing: 0;
             margin-left: auto;
             margin-right: auto;
             background: white;
             color: black;
         }
         th, td {
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+            box-sizing: content-box;
             max-width: 10rem;
             min-width: 7rem;
+        }
+        th:first-child, td:first-child {
+            border-left: 1px solid black;
+        }
+        thead:first-of-type th, thead:first-of-type td {
+            border-top: 1px solid black;
+            position: sticky;
+            top: 0;
+            background: white;
         }
         .codepoint {
             font-family: monospace;
@@ -20,6 +30,12 @@
         }
         .codepicture {
             font-family: Noto Serif CJK TC, Source Han Serif TC, Noto Sans CJK TC, Source Han Sans TC, TW-Sung-Ext-B, TW-Kai-Ext-B, BabelStone Han, serif;
+            font-size: 1.5rem;
+        }
+        .codepicture.roman {
+            /* Noto Sans CJK TC renders the combining hacek as a large glyph to the letter's right,
+             * for some reason. So don't list it. Doulos SIL is good for combining sequences. */
+            font-family: Doulos SIL, serif;
             font-size: 1.5rem;
         }
         .codepicture::after {

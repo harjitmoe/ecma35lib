@@ -136,19 +136,29 @@ def dump_plane(outfile, number, setnames, plarray):
     zplarray = tuple(zip(*plarray))
     print("<!DOCTYPE html><title>CNS 11643 plane {}</title>".format(number), file=outfile)
     print("""<style>
-        table, th, tr, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
+        /* Sadly border-collapse: collapse; borks the borders on the position: sticky; */
         table {
+            border-spacing: 0;
             margin-left: auto;
             margin-right: auto;
             background: white;
             color: black;
         }
         th, td {
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+            box-sizing: content-box;
             max-width: 10rem;
             min-width: 7rem;
+        }
+        th:first-child, td:first-child {
+            border-left: 1px solid black;
+        }
+        thead:first-of-type th, thead:first-of-type td {
+            border-top: 1px solid black;
+            position: sticky;
+            top: 0;
+            background: white;
         }
         .codepoint {
             font-family: monospace;
@@ -156,6 +166,12 @@ def dump_plane(outfile, number, setnames, plarray):
         }
         .codepicture {
             font-family: Noto Serif CJK TC, Source Han Serif TC, Noto Sans CJK TC, Source Han Sans TC, TW-Sung-Ext-B, TW-Kai-Ext-B, BabelStone Han, serif;
+            font-size: 1.5rem;
+        }
+        .codepicture.roman {
+            /* Noto Sans CJK TC renders the combining hacek as a large glyph to the letter's right,
+             * for some reason. So don't list it. Doulos SIL is good for combining sequences. */
+            font-family: Doulos SIL, serif;
             font-size: 1.5rem;
         }
         .codepicture::after {
@@ -225,6 +241,9 @@ def dump_plane(outfile, number, setnames, plarray):
                         print("<td><span class='codepicture pua' lang=zh-TW>", file=outfile)
                         # Object Replacement Character (FFFD is already used by BIG5.TXT)
                         strep = "\uFFFC"
+                    elif i[0] < 0x7F: # i.e. either ASCII or combining sequence with ASCII base
+                        print("<td><span class='codepicture roman'>", file=outfile)
+                        strep = "".join(chr(j) for j in i)
                     else:
                         print("<td><span class=codepicture lang=zh-TW>", file=outfile)
                         strep = "".join(chr(j) for j in i)
@@ -254,6 +273,10 @@ def dump_plane(outfile, number, setnames, plarray):
                             print("(URO+)", file=outfile) # URO additions
                         elif 0x3400 <= i[0] < 0x4DC0:
                             print("(CJKA)", file=outfile) # CJK Unified Ideographs Extension A
+                        elif 0x2E80 <= i[0] < 0x2FE0:
+                            print("(RAD)", file=outfile) # the BMP's Radicals blocks
+                        elif 0x31C0 <= i[0] < 0x31E0:
+                            print("(STRK)", file=outfile) # the BMP's CJK Strokes block
                         elif 0xF900 <= i[0] < 0xFB00:
                             if i[0] in (0xFA0E, 0xFA0F, 0xFA11, 0xFA13, 0xFA14, 0xFA1F,
                                         0xFA21, 0xFA23, 0xFA24, 0xFA27, 0xFA28, 0xFA29):
