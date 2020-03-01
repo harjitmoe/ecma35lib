@@ -6,11 +6,11 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import os, ast, sys, json
+import os, ast, sys, json, pprint
 from ecma35.data import graphdata
 from ecma35.data.multibyte import mbmapparsers as parsers
 
-# CNS 11643 and Big 5.
+# CNS 11643 and Big 5 (not gb12345; see guobiao.py for that one).
 # Bumpy ride here, so brace yourselves.
 
 # Punctuation (gov.tw mappings first, then ICU mappings):
@@ -19,6 +19,10 @@ from ecma35.data.multibyte import mbmapparsers as parsers
 #   01-02-36 U+FF5E (～)　U+223C (∼)  -- Fullwidth tilde, tilde operator(, wave dash); old as time.
 #   01-02-55 U+2190 (←)  U+2192 (→)  -- odd (ICU, Yasuoka AND ISO-IR-171 agree contra gov.tw)
 #   01-02-56 U+2192 (→)  U+2190 (←)  -- odd (ICU, Yasuoka AND ISO-IR-171 agree contra gov.tw)
+#     Note: the gov.tw mappings swapping the left and right arrows does regularise the non-kanji
+#     mappings between Big5 and CNS 11643 (making EUC-TW a2d6, a2d7, a2d8, a2d9 represent Big5
+#     a1f5, a1f6, a1f7, a1f8 rather than a1f5, a1f7, a1f6, a1f8; see appendix A.1 of RFC 1922 for
+#     the range map, noting how it makes an explicit exception for those two points).
 # Other gov.tw versus Yasuoka from that range (excluding mere use of hankaku counterparts):
 #   01-01-06 U+2027 (‧) U+00B7 (·)  -- U+2027 is "hyphenation point"; U+00B7 is from Latin-1
 #   01-01-29 U+FE4F (﹏) U+FE4B (﹋)
@@ -83,19 +87,30 @@ from ecma35.data.multibyte import mbmapparsers as parsers
 #   only bothered noting these where the gov.tw mappings are to SPUA, i.e. the fit is still "best".
 # Plane 4 kanji (gov.tw mappings first, then ICU mappings)
 #   04-02-59 U+FFF7A (SPUA)　 U+5B90 (宐) -- compare 04-06-05
-#   04-03-65 U+FFFFD (SPUA)　 U+5759 (坙)
+#     Note: U+FFF7A has the middle part looking like two interlocking counterrotated Ls.
+#   04-03-65 U+FFFFD (SPUA)　 U+5759 (坙) -- seems like a legit duplicate.
 #   04-04-76 U+2634B (𦍋)     U+8288 (芈)
 #   04-06-05  U+5B90 (宐)    None       　-- compare 04-02-59
 #   04-06-25 U+221F7 (𢇷)     U+5E9F (废)
 #   04-07-74 U+FFFFC (SPUA)　 U+80BB (肻)
+#     Note: U+FFFFC has the lines within the meat radical drawn at angles.
 #   04-08-07 U+FFFFB (SPUA)　 U+488C (䢌) -- compare 15-08-82
-#   04-08-93 U+FFFFA (SPUA)　 U+5CD5 (峕)
+#     Note: U+FFFFB has the zig-zaggy style of the walking radical, like in handwriting.
+#     Can I just ask who the hell thought that deserved its own CNS codepoint?
+#   04-08-93 U+FFFFA (SPUA)　 U+5CD5 (峕) -- seems like a legit duplicate.
 #   04-10-78 U+FFFF9 (SPUA)　 U+79CC (秌)
+#     Note: Seemingly supposed to be a difference in the left dot direction on the fire radical?
+#     Tellingly, the text editor font I'm using renders U+79CC like TW Sung renders U+FFFF9.
 #   04-16-34 U+FFFF8 (SPUA)　 U+98E4 (飤)
+#     Note: U+FFFF8 has the dot in the top part of the left radical drawn horizontally.
 #   04-24-60 U+FFFF7 (SPUA)　 U+6E7C (湼)
+#     Note: U+FFFF7 uses a straight diagonal for the bottom stroke of the water radical.
+#     In my text editor font, U+6E7C does that anyway.
 #   04-25-38  U+FAD4 (䀹)     U+4039 (䀹)
 #   04-34-90 U+21C09 (𡰉)     U+5C32 (尲)
 #   04-36-56 U+FFFF6 (SPUA)　 U+7193 (熓)
+#     Similar to U+FFFF9, although this time the text editor font I'm using renders U+7193
+#     differently to TW Sung's U+FFFF6. Still an odd quibble.
 #   04-51-28 U+FFF7B (SPUA)　 U+8786 (螆) -- compare 15-49-93
 #   04-67-25 U+FFFF5 (SPUA)　 U+5E71 (幱)
 #   04-72-47 U+2FA16 (䵖)     U+4D56 (䵖) -- compare 05-79-52
@@ -140,12 +155,33 @@ _contraspua = {
     (0xFFFFA,): (0x5CD5,),
     (0xFFFFB,): (0x488C,),
     (0xFFFFC,): (0x80BB,),
-    (0xFFFFD,): (0x5759,)}
+    (0xFFFFD,): (0x5759,),
+    # The Gov-TW mappings seem to insist on SPUA assignments for Roman characters which
+    # Unicode represents as combining sequences.
+    (0xF91D1,): (0x6D, 0x0302),
+    (0xF91D2,): (0x6E, 0x0302),
+    (0xF91D3,): (0x6D, 0x030C),
+    (0xF91D4,): (0x6D, 0x0304),
+    (0xF91D5,): (0x6E, 0x0304),
+    (0xF91D6,): (0x6D, 0x030D),
+    (0xF91D7,): (0x6E, 0x030D),
+    (0xF91D8,): (0x61, 0x030D),
+    (0xF91D9,): (0x69, 0x030D),
+    (0xF91DA,): (0x75, 0x030D),
+    (0xF91DB,): (0x65, 0x030D),
+    (0xF91DC,): (0x6F, 0x030D),
+    (0xF91DD,): (0x6D, 0x030B),
+    (0xF91DE,): (0x6E, 0x030B),
+    (0xF91DF,): (0x61, 0x030B),
+    (0xF91E0,): (0x69, 0x030B),
+    (0xF91F7,): (0x65, 0x030B),
+}
 def cnsmapper_contraspua(pointer, ucs):
     return _contraspua.get(ucs, ucs)
 
 # Since the gov.tw data disagrees with literally every other source I have on the matter
-# (ISO-IR-171, UTC mappings, ICU mappings, Yasuoka's mappings…), change it to match.
+# (ISO-IR-171, UTC mappings, ICU mappings, Yasuoka's mappings…; although not without
+# reason, see comments about the Big5 order above), change it to match.
 def cnsmapper_swaparrows(pointer, ucs):
     if (pointer == 148) and (ucs == (0x2190,)):
         return (0x2192,)
@@ -389,6 +425,64 @@ def read_big5_rangemap(fil, appendix, *, plane=None):
         #
     return mapping
 
+def read_big5_planes(fil, *, plane=None, mapper=parsers.identitymap):
+    if mapper is parsers.identitymap:
+        mappername = ""
+    elif mapper.__name__ != "<lambda>":
+        mappername = "_" + mapper.__name__
+    else:
+        mappername = "_FIXME"
+    cachebfn = os.path.splitext(fil)[0].replace("/", "---") + ("_plane{:02d}".format(plane)
+               if plane is not None else "_mainplane") + mappername + ".json"
+    cachefn = os.path.join(parsers.cachedirectory, cachebfn)
+    if os.path.exists(cachefn):
+        # Cache output since otherwise several seconds are spend in here upon importing graphdata
+        f = open(cachefn, "r")
+        r = json.load(f)
+        f.close()
+        return tuple(tuple(i) if i is not None else None for i in r)
+    for _i in open(os.path.join(parsers.directory, fil), "r"):
+        if not _i.strip():
+            continue
+        elif _i[0] == "#":
+            continue # is a comment..
+        elif _i[:2] == "0x":
+            # Consortium-style format, over GL (or GR with eucjp=1) without transformation.
+            byts, ucs = _i.split("\t", 2)[:2]
+            byts = int(byts[2:], 16)
+            if byts not in big5_to_cns2:
+                continue
+            men, ku, ten = big5_to_cns2[byts]
+            if plane is not None: # i.e. if we want a particular plane's two-byte mapping.
+                if men != plane:
+                    continue
+                else:
+                    men = 1
+        else:
+            raise AssertionError(line)
+        assert ucs[:2] in ("0x", "U+")
+        ucs = ucs[2:]
+        pointer = ((men - 1) * 94 * 94) + ((ku - 1) * 94) + (ten - 1)
+        iucs = mapper(pointer, tuple(int(j, 16) for j in ucs.rstrip(">").split("+")))
+        if len(_temp) > pointer:
+            if _temp[pointer] == None:
+                _temp[pointer] = iucs
+        else:
+            while len(_temp) < pointer:
+                _temp.append(None)
+            _temp.append(iucs)
+    # Try to end it on a natural plane boundary.
+    _temp.extend([None] * (((94 * 94) - (len(_temp) % (94 * 94))) % (94 * 94)))
+    if not _temp:
+        _temp.extend([None] * (94 * 94)) # Don't just return an empty tuple.
+    r = tuple(_temp) # Making a tuple makes a copy, of course.
+    del _temp[:]
+    # Write output cache.
+    f = open(cachefn, "w")
+    f.write(json.dumps(r))
+    f.close()
+    return r
+
 # Comments: the Kana correspondance of RFC 1922 matches the Big5 Kana encoding in the WHATWG Big5
 # mappings, but not the Big5 Kana encoding in the Python Big5 codec (although it does match the
 # Python Big5-HKSCS codec). Since there exist at least two ways of encoding kana in the same 
@@ -407,6 +501,9 @@ big5_to_cns2 = read_big5_rangemap("Other/rfc1922.txt", 3, plane=2)
 # (and confusingly lists a single plane 1 mapping in Appendix 2 which maps to plane 2, hmm…).
 big5_to_cns2[0xC94A] = (1, 36, 34) # IBM's (13, 4, 40)
 big5_to_cns2[0xDDFC] = (2, 33, 86) # IBM's (13, 4, 42)
+
+for _i in big5_to_cns1:
+    big5_to_cns2[_i] = (1,) + big5_to_cns1[_i]
 
 graphdata.gsets["hkscs"] = hkscs_extras = (94, 2, read_big5extras("WHATWG/index-big5.txt"))
 graphdata.gsets["etenexts"] = eten_extras = (94, 2, 

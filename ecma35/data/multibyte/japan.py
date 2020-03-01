@@ -71,9 +71,10 @@ graphdata.gsets["ir087"] = jisx0208_1983 = (94, 2, parsers.read_main_plane("JIS-
 # JIS X 0212:1990 (i.e. the 1990 supplementary plane)
 graphdata.gsets["ir159"] = jisx0212 = (94, 2,
         parsers.read_main_plane("WHATWG/index-jis0212.txt"))
-# JIS X 0212 with allocated but not published (per Lunde) va/vi/ve/vo codepoints
+# JIS X 0212 with allocated but not published (per Lunde) va/vi/ve/vo codepoints. Note that these
+# codepoints explicitly clash with (either plane of) JIS X 0213.
 graphdata.gsets["ir159va"] = jisx0212_extva = (94, 2,
-        jisx0212[:462] + tuple(range(0x30F7, 0x30FB)) + jisx0212[466:])
+        jisx0212[2][:462] + tuple(range(0x30F7, 0x30FB)) + jisx0212[2][466:])
 # JIS X 0208:1990 or 1997
 graphdata.gsets["ir168"] = jisx0208_1990 = (94, 2, parsers.read_main_plane("JIS-Conc/x208_1990.txt"))
 # JIS X 0208, Microsoft and WHATWG version, as specified for use in HTML5

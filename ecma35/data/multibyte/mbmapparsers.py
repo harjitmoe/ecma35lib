@@ -42,8 +42,10 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False,
       01 and 02 invoked with GR and SS3-over-GR respectively. If neither this nor
       euckrlike is passed, it is interpreted as one plane over GL.
     - euckrlike: interpret as an EUC format with non-EUC extensions; read only
-      the main plane.
+      the main plane. Consulted for UTC and WHATWG formats, else currently ignored.
     - twoway: (if the file is in ICU format) ignore one-way decoder mappings.
+      This is ignored for the other supported formats, since they do not annotate
+      whether or not a given mapping is also used by the encoder.
     - plane: isolate only one plane of a multi-plane mapping (e.g. CNS 11643).
     """
     if mapper is identitymap:
@@ -182,7 +184,7 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False,
                     if men != plane:
                         continue
                     else:
-                        men = ((men, ku, ten),)
+                        men = 1
                 mkts += ((men, ku, ten),)
         elif not euckrlike:
             # Format of the WHATWG-supplied indices for Windows-31J and JIS X 0212.
@@ -216,6 +218,10 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False,
                 while len(_temp) < pointer:
                     _temp.append(None)
                 _temp.append(iucs)
+    # Try to end it on a natural plane boundary.
+    _temp.extend([None] * (((94 * 94) - (len(_temp) % (94 * 94))) % (94 * 94)))
+    if not _temp:
+        _temp.extend([None] * (94 * 94)) # Don't just return an empty tuple.
     r = tuple(_temp) # Making a tuple makes a copy, of course.
     del _temp[:]
     # Write output cache.
