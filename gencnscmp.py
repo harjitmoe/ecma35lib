@@ -171,8 +171,8 @@ def dump_plane(outfile, number, setnames, plarray):
         .codepicture.roman {
             /* Noto Sans CJK TC renders the combining hacek as a large glyph to the letter's right,
              * for some reason (i.e. as if it were the spacing character). So don't list it.
-             * Doulos SIL is good for combining sequences. */
-            font-family: Doulos SIL, DejaVu Serif, DejaVu Sans, serif;
+             * Doulos SIL, Segoe UI and the DejaVus are good for LCG combining sequences. */
+            font-family: Doulos SIL, DejaVu Serif, Segoe UI, DejaVu Sans, serif;
             font-size: 1.5rem;
         }
         .codepicture::after {
