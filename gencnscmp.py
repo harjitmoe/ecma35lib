@@ -132,9 +132,10 @@ planeF = (15, ("ICU CNS 1992", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
           graphdata.gsets["cns-eucg2"][2][94*94*14:94*94*15],
 ])
 
-def dump_plane(outfile, number, setnames, plarray):
+def dump_plane(outfile, number, setnames, plarray, *, part=0):
     zplarray = tuple(zip(*plarray))
-    print("<!DOCTYPE html><title>CNS 11643 plane {}</title>".format(number), file=outfile)
+    h = ", part {:d}".format(part) if part else ""
+    print("<!DOCTYPE html><title>CNS 11643 plane {:d}{}</title>".format(number, h), file=outfile)
     print("""<style>
         /* Sadly border-collapse: collapse; borks the borders on the position: sticky; */
         table {
@@ -204,8 +205,9 @@ def dump_plane(outfile, number, setnames, plarray):
             background: #f99;
         }
     </style>""", file=outfile)
+    print("<h1>CNS 11643 plane {:d}{}</h1>".format(number, h), file=outfile)
     print("<table>", file=outfile)
-    for row in range(1, 95):
+    for row in range(max((part - 1) * 16, 1), min(part * 16, 95)) if part else range(1, 95):
         print("<thead><tr><th>Codepoint</th>", file=outfile)
         for i in setnames:
             print("<th>", i, "<br>", file=outfile)
@@ -346,30 +348,15 @@ def dump_plane(outfile, number, setnames, plarray):
             print("</tr>", file=outfile)
     print("</table>", file=outfile)
 
-f = open("cnsplane1.html", "w")
-dump_plane(f, *plane1)
-f.close()
-f = open("cnsplane2.html", "w")
-dump_plane(f, *plane2)
-f.close()
-f = open("cnsplane3.html", "w")
-dump_plane(f, *plane3)
-f.close()
-f = open("cnsplane4.html", "w")
-dump_plane(f, *plane4)
-f.close()
-f = open("cnsplane5.html", "w")
-dump_plane(f, *plane5)
-f.close()
-f = open("cnsplane6.html", "w")
-dump_plane(f, *plane6)
-f.close()
-f = open("cnsplane7.html", "w")
-dump_plane(f, *plane7)
-f.close()
-f = open("cnsplaneF.html", "w")
-dump_plane(f, *planeF)
-f.close()
+for n, p in enumerate([plane1, plane2, plane3, plane4, plane5, plane6, plane7, planeF]):
+    for q in range(1, 7):
+        bn = (1, 2, 3, 4, 5, 6, 7, 15)[n]
+        f = open("cnsplane{:X}{}.html".format(bn, chr(0x60 + q)), "w")
+        dump_plane(f, *p, part=q)
+        f.close()
+
+
+
 
 
 
