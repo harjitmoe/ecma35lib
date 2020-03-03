@@ -137,6 +137,13 @@ def dump_plane(outfile, number, setnames, plarray, *, part=0):
     h = ", part {:d}".format(part) if part else ""
     print("<!DOCTYPE html><title>CNS 11643 plane {:d}{}</title>".format(number, h), file=outfile)
     print("""<style>
+        @font-face {
+            font-family: 'TW-Sung-Plus';
+            font-style: normal;
+            font-weight: 400;
+            /* If only the other one is present, use the other one; only download if necessary. */
+            src: local('TW-Sung-Plus'), local('TW-Kai-Plus'), url('https://harjit.moe/fonts/TW-Sung-Plus-98_1.ttf') format('ttf');
+        }
         /* Sadly border-collapse: collapse; borks the borders on the position: sticky; */
         table {
             border-spacing: 0;
@@ -206,6 +213,7 @@ def dump_plane(outfile, number, setnames, plarray, *, part=0):
         }
     </style>""", file=outfile)
     print("<h1>CNS 11643 plane {:d}{}</h1>".format(number, h), file=outfile)
+    print("<a href='/cns-conc.html'>Up to menu</a>".format(number, h), file=outfile)
     print("<table>", file=outfile)
     for row in range(max((part - 1) * 16, 1), min(part * 16, 95)) if part else range(1, 95):
         print("<thead><tr><th>Codepoint</th>", file=outfile)
