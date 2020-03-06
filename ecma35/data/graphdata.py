@@ -377,7 +377,8 @@ def dump_plane(outfile, planefunc, kutenfunc, css, menu, number, setnames, plarr
                 print("<tr>", file=outfile)
             print("<th class=codepoint>", file=outfile)
             print("<a name='{:d}.{:d}.{:d}' class=anchor></a>".format(number, row, cell), file=outfile)
-            print(kutenfunc(number, row, cell), file=outfile)
+            print("<a href='#{:d}.{:d}.{:d}'>".format(number, row, cell), file=outfile)
+            print(kutenfunc(number, row, cell), "</a>", file=outfile)
             print("</th>", file=outfile)
             for i in st:
                 if i is None:
@@ -402,6 +403,8 @@ def dump_plane(outfile, planefunc, kutenfunc, css, menu, number, setnames, plarr
                         print("<td><span class=codepicture lang={}>".format(lang), file=outfile)
                 #
                 strep = strep.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+                if ucd.category(strep[0])[0] == "M":
+                    strep = "◌" + strep
                 if i[-1] == 0xF87C: # Apple encoding hint for bold form
                     print("<b>", file=outfile)
                     print(strep.rstrip("\uF87C"), file=outfile)
