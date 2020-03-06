@@ -36,10 +36,10 @@ def to_sjis(men, ku, ten):
     else:
         return "<br>(<abbr title='Shift JIS'>SJIS</abbr> {:02x}{:02x})".format(lead, trail)
 
-plane1 = (1, ("1978 JIS", "1983 JIS", "1990 JIS", "UTC",
+plane1 = (1, ("1978 JIS", "1983 JIS", "1990 JIS", "UTC JIS",
               "MS / HTML5", "Mac KT6", "Mac KT7", "Mac PS",
-              "OSF", "OSF ASCII", "OSF MS",
-              "2004 JIS"), [
+              "OSF", "OSF ASCII", "OSF MS", # "IBM 78JIS",
+              "IBM 90JIS", "2004 JIS"), [
           graphdata.gsets["ir042"][2],
           graphdata.gsets["ir087"][2],
           graphdata.gsets["ir168"][2],
@@ -51,11 +51,13 @@ plane1 = (1, ("1978 JIS", "1983 JIS", "1990 JIS", "UTC",
           graphdata.gsets["ir168osf"][2],
           graphdata.gsets["ir168osfa"][2],
           graphdata.gsets["ir168osfm"][2],
+          #graphdata.gsets["ir042ibm"][2],
+          graphdata.gsets["ir168ibm"][2],
           graphdata.gsets["ir233"][2],
 ])
 
 plane2 = (2, ("1990 JIS", "1990 JIS Ext", "MS / HTML5<br>SJIS Ext",
-              "OSF", "OSF ASCII", "OSF MS",
+              "OSF", "OSF ASCII", "OSF MS", "IBM 90JIS",
               "2004 JIS"), [
           graphdata.gsets["ir159"][2],
           graphdata.gsets["ir159va"][2],
@@ -63,13 +65,14 @@ plane2 = (2, ("1990 JIS", "1990 JIS Ext", "MS / HTML5<br>SJIS Ext",
           graphdata.gsets["ir159osf"][2],
           graphdata.gsets["ir159osfa"][2],
           graphdata.gsets["ir159osfm"][2],
+          graphdata.gsets["ir159ibm"][2],
           graphdata.gsets["ir229"][2],
 ])
 
 def planefunc(number, mapname=None):
     if mapname is None:
         return "JIS plane {:d}".format(number)
-    elif mapname in ("1978 JIS", "1983 JIS", "Mac KT6", "Mac KT7", "Mac PS"):
+    elif mapname in ("1978 JIS", "1983 JIS", "Mac KT6", "Mac KT7", "Mac PS", "IBM 78JIS"):
         return ""
     elif "<br>" in mapname:
         return ""

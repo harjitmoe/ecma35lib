@@ -205,10 +205,12 @@ g94nbytes = {tuple(b"@"): "ir042",
                            ("ir058",)), # Original followed by any registered revisions
              tuple(b"B"): ("ir168web",
                            ("ir168web", "ir168mac", "ir168macps", "ir168mackt6", "ir168utc",
-                            "ir168osf", "ir168osfa", "ir168osfm"),
+                            "ir168osf", "ir168osfa", "ir168osfm", "ir168ibm"),
                            ("ir087", "ir168")),
              tuple(b"C"): "ir149",
-             tuple(b"D"): ("ir159", ("ir159va", "ir159osf", "ir159osfa", "ir159osfm"), ("ir159",)),
+             tuple(b"D"): ("ir159",
+                           ("ir159va", "ir159osf", "ir159osfa", "ir159osfm", "ir159ibm"),
+                           ("ir159",)),
              tuple(b"E"): ("ir165", ("ir165std",), ("ir165",)),
              tuple(b"F"): "ir169",
              tuple(b"G"): ("ir171", ("ir171",), ("ir171-1986",)),
@@ -374,6 +376,7 @@ def dump_plane(outfile, planefunc, kutenfunc, css, menu, number, setnames, plarr
             else:
                 print("<tr>", file=outfile)
             print("<th class=codepoint>", file=outfile)
+            print("<a name='{:d}.{:d}.{:d}' class=anchor></a>".format(number, row, cell), file=outfile)
             print(kutenfunc(number, row, cell), file=outfile)
             print("</th>", file=outfile)
             for i in st:

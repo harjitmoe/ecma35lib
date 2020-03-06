@@ -38,14 +38,15 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False,
 
     Keyword arguments are as follows:
 
-    - eucjp: (if the file is in UTC format) interpret as EUC format, with planes
-      01 and 02 invoked with GR and SS3-over-GR respectively. If neither this nor
-      euckrlike is passed, it is interpreted as one plane over GL.
+    - eucjp: interpret as EUC format, with planes 01 and 02 invoked with GR and
+      SS3-over-GR respectively. (If neither this nor euckrlike is passed, UTC
+      format is interpreted as one plane over GL, and ICU format is interpreted
+      as the format used for ICU's CNS 11643 mappings.)
     - euckrlike: interpret as an EUC format with non-EUC extensions; read only
-      the main plane. Consulted for UTC and WHATWG formats, else currently ignored.
+      the main plane.
     - twoway: (if the file is in ICU format) ignore one-way decoder mappings.
-      This is ignored for the other supported formats, since they do not annotate
-      whether or not a given mapping is also used by the encoder.
+      This is ignored for the other supported formats, since they do not
+      annotate which mappings are also used by the encoder.
     - plane: isolate only one plane of a multi-plane mapping (e.g. CNS 11643).
     """
     if mapper is identitymap:
@@ -127,24 +128,43 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False,
                 continue
             if len(byts) == 4:
                 assert byts[0] == 0x8E
+                assert not eucjp
                 men = byts[1] - 0xA0
                 ku = byts[2] - 0xA0
                 ten = byts[3] - 0xA0
             elif len(byts) == 3:
-                if 0x80 < byts[0] < 0xA0: # cns-11643-1992.ucm does this for some reason.
-                    men = byts[0] - 0x80
+                if eucjp:
+                    if byts[0] == 0x8F: # SS3
+                        men = 2
+                    else:
+                        continue
                 else:
-                    men = byts[0] - 0x20
-                ku = byts[1] - 0x20
-                ten = byts[2] - 0x20
+                    if 0x80 < byts[0] < 0xA0: # cns-11643-1992.ucm does this for some reason.
+                        men = byts[0] - 0x80
+                    else:
+                        men = byts[0] - 0x20
+                #
+                if eucjp:
+                    ku = byts[1] - 0xA0
+                    ten = byts[2] - 0xA0
+                    assert 1 <= ku <= 94, (_i, byts[1], byts[2])
+                    assert 1 <= ten <= 94, (_i, byts[1], byts[2])
+                else:
+                    ku = byts[1] - 0x20
+                    ten = byts[2] - 0x20
             elif len(byts) == 2:
                 men = 1
                 if byts[0] >= 0xA0:
                     ku = byts[0] - 0xA0
                     ten = byts[1] - 0xA0
+                elif eucjp and byts[0] == 0x8E: # SS2
+                    continue
                 else:
                     ku = byts[0] - 0x20
                     ten = byts[1] - 0x20
+                assert 1 <= ten <= 94, (_i, byts[0], byts[1])
+                if euckrlike and ((ku < 1) or (ku > 94) or (ten < 1) or (ten > 94)):
+                    continue
             else:
                 assert len(byts) == 1
                 continue
@@ -212,10 +232,11 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False,
         if ucs[:2] in ("0x", "U+", "<U"):
             ucs = ucs[2:]
         for men, ku, ten in mkts:
+            assert (1 <= ten <= 94) and (ku >= 1), (men, ku, ten)
             pointer = ((men - 1) * 94 * 94) + ((ku - 1) * 94) + (ten - 1)
             iucs = mapper(pointer, tuple(int(j, 16) for j in ucs.rstrip(">").split("+")))
             if len(_temp) > pointer:
-                assert _temp[pointer] is None
+                assert _temp[pointer] is None, (men, ku, ten, pointer, _temp[pointer], iucs)
                 _temp[pointer] = iucs
             else:
                 while len(_temp) < pointer:

@@ -70,6 +70,7 @@ def map_to_zenkaku(pointer, ucs):
 
 # JIS C 6226:1978 / JIS X 0208:1978
 graphdata.gsets["ir042"] = jisx0208_1978 = (94, 2, parsers.read_main_plane("JIS-Conc/x208_1978.txt"))
+#graphdata.gsets["ir042ibm"] = jisx0208_ibm78 = (94, 2, read_sjis("ICU/ibm-942_P12A-1999.ucm"))
 # JIS C 6226:1983 / JIS X 0208:1983
 graphdata.gsets["ir087"] = jisx0208_1983 = (94, 2, parsers.read_main_plane("JIS-Conc/x208_1983.txt"))
 # JIS X 0212:1990 (i.e. the 1990 supplementary plane)
@@ -79,9 +80,13 @@ graphdata.gsets["ir159"] = jisx0212 = (94, 2,
 # codepoints explicitly clash with (either plane of) JIS X 0213.
 graphdata.gsets["ir159va"] = jisx0212_extva = (94, 2,
         jisx0212[2][:462] + tuple((_i,) for _i in range(0x30F7, 0x30FB)) + jisx0212[2][466:])
+graphdata.gsets["ir159ibm"] = jisx0212ibm = (94, 2,
+        parsers.read_main_plane("ICU/ibm-954_P101-2007.ucm", eucjp=1, plane=2))
 # JIS X 0208:1990 or 1997
 graphdata.gsets["ir168"] = jisx0208_1990 = (94, 2, parsers.read_main_plane("JIS-Conc/x208_1990.txt"))
-graphdata.gsets["ir168utc"] = jisx0208_1990 = (94, 2, parsers.read_main_plane("UTC/JIS0208.TXT"))
+graphdata.gsets["ir168utc"] = jisx0208_utc = (94, 2, parsers.read_main_plane("UTC/JIS0208.TXT"))
+graphdata.gsets["ir168ibm"] = jisx0208_ibm90 = (94, 2,
+        parsers.read_main_plane("ICU/ibm-954_P101-2007.ucm", eucjp=1, plane=1))
 # JIS X 0208, Microsoft and WHATWG version, as specified for use in HTML5
 graphdata.gsets["ir168web"] = jisx0208_html5 = (94, 2,
         parsers.read_main_plane("WHATWG/index-jis0208.txt"))
@@ -113,8 +118,8 @@ osfeuc_nec = parsers.read_main_plane("OSF/eucJP-13th.txt", eucjp = True, plane =
 osfeuc_0212j = parsers.read_main_plane("OSF/eucJP-0212.txt", eucjp = True, plane = 2)
 osfeuc_0212a = parsers.read_main_plane("OSF/eucJP-0212A.txt", eucjp = True, plane = 2)
 osfeuc_0212m = parsers.read_main_plane("OSF/eucJP-0212M.txt", eucjp = True, plane = 2)
-# Oddly different and even mutually collisive with the IBM 0212 extensions (per ICU) in layout.
-# Repertoire and order match the IBM 0212 extensions though.
+# Oddly different and even mutually collisive with the IBM JIS X 0212 extensions (per ICU).
+# Repertoire matches the IBM JIS X 0212 extensions though.
 osfeuc_ibm = parsers.read_main_plane("OSF/eucJP-ibmext.txt", eucjp = True, plane = 2)
 osfeuc_puaone = parsers.read_main_plane("OSF/eucJP-udc.txt", eucjp = True, plane = 1)
 osfeuc_puatwo = parsers.read_main_plane("OSF/eucJP-udc.txt", eucjp = True, plane = 2)
