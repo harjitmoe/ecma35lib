@@ -204,10 +204,11 @@ g94nbytes = {tuple(b"@"): "ir042",
                             "ir058-mac", "ir058-1980", "ir058-1986"),
                            ("ir058",)), # Original followed by any registered revisions
              tuple(b"B"): ("ir168web",
-                           ("ir168web", "ir168mac", "ir168macps"),
+                           ("ir168web", "ir168mac", "ir168macps", "ir168mackt6", "ir168utc",
+                            "ir168osf", "ir168osfa", "ir168osfm"),
                            ("ir087", "ir168")),
              tuple(b"C"): "ir149",
-             tuple(b"D"): "ir159",
+             tuple(b"D"): ("ir159", ("ir159va", "ir159osf", "ir159osfa", "ir159osfm"), ("ir159",)),
              tuple(b"E"): ("ir165", ("ir165std",), ("ir165",)),
              tuple(b"F"): "ir169",
              tuple(b"G"): ("ir171", ("ir171",), ("ir171-1986",)),
@@ -353,7 +354,7 @@ def show(name, *, plane=None):
         print(end = "\uFFFD ")
     print()
 
-def dump_plane(outfile, planefunc, kutenfunc, css, menu, number, setnames, plarray, *, part=0):
+def dump_plane(outfile, planefunc, kutenfunc, css, menu, number, setnames, plarray, *, part=0, lang="zh-TW"):
     zplarray = tuple(zip(*plarray))
     h = ", part {:d}".format(part) if part else ""
     print("<!DOCTYPE html><title>{}{}</title>".format(planefunc(number), h), file=outfile)
@@ -364,8 +365,7 @@ def dump_plane(outfile, planefunc, kutenfunc, css, menu, number, setnames, plarr
     for row in range(max((part - 1) * 16, 1), min(part * 16, 95)) if part else range(1, 95):
         print("<thead><tr><th>Codepoint</th>", file=outfile)
         for i in setnames:
-            print("<th>", i, "<br>", file=outfile)
-            print(planefunc(number, i), file=outfile)
+            print("<th>", i, planefunc(number, i), file=outfile)
         print("</tr></thead>", file=outfile)
         for cell in range(1, 95):
             st = zplarray[((row - 1) * 94) + (cell - 1)]
@@ -382,13 +382,13 @@ def dump_plane(outfile, planefunc, kutenfunc, css, menu, number, setnames, plarr
                     continue
                 #
                 if i[0] >= 0xF0000:
-                    print("<td><span class='codepicture spua' lang=zh-TW>", file=outfile)
+                    print("<td><span class='codepicture spua' lang={}>".format(lang), file=outfile)
                     strep = "".join(chr(j) for j in i)
                 elif 0xF860 <= i[0] < 0xF863 and len(i) != 1:
-                    print("<td><span class='codepicture' lang=zh-TW>", file=outfile)
+                    print("<td><span class='codepicture' lang={}>".format(lang), file=outfile)
                     strep = "".join(chr(j) for j in i[1:])
                 elif 0xE000 <= i[0] < 0xF900:
-                    print("<td><span class='codepicture pua' lang=zh-TW>", file=outfile)
+                    print("<td><span class='codepicture pua' lang={}>".format(lang), file=outfile)
                     # Object Replacement Character (FFFD is already used by BIG5.TXT)
                     strep = "\uFFFC"
                 else:
@@ -396,8 +396,9 @@ def dump_plane(outfile, planefunc, kutenfunc, css, menu, number, setnames, plarr
                     if ord(ucd.normalize("NFD", strep)[0]) < 0x7F: # Note: NOT NFKD.
                         print("<td><span class='codepicture roman'>", file=outfile)
                     else:
-                        print("<td><span class=codepicture lang=zh-TW>", file=outfile)
+                        print("<td><span class=codepicture lang={}>".format(lang), file=outfile)
                 #
+                strep = strep.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
                 if i[-1] == 0xF87C: # Apple encoding hint for bold form
                     print("<b>", file=outfile)
                     print(strep.rstrip("\uF87C"), file=outfile)

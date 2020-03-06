@@ -137,13 +137,13 @@ def planefunc(number, mapname=None):
         return "CNS 11643 plane {:d}".format(number)
     else:
         if (mapname == "UTC CNS") and (number == 3):
-            return 'Plane "14"'
+            return '<br>Plane "14"'
         elif (mapname == "ICU CNS 1992") and (number == 15):
-            return 'Plane "9"'
+            return '<br>Plane "9"'
         elif "Big5" in mapname:
-            return "Level {}".format(number) if number <= 2 else "(beyond)"
+            return "<br>Level {}".format(number) if number <= 2 else "(beyond)"
         else:
-            return "Plane {}".format(number)
+            return "<br>Plane {}".format(number)
 
 def kutenfunc(number, row, cell):
     if number == 1:

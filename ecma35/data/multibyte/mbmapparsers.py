@@ -30,7 +30,7 @@ applesinglehints = {
 def ahmap(pointer, ucs):
     return applesinglehints.get(ucs, ucs)
 
-def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False,
+def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, 
                     plane=None, mapper=identitymap):
     """
     Read a mapping from a file in the directory given by mbmapparsers.directory.
@@ -74,6 +74,9 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False,
             continue # ICU delimitors we don't care about.
         elif _i[:2] == "0x":
             # Consortium-style format, over GL (or GR with eucjp=1) without transformation.
+            if _i.split("#", 1)[0].count("0x") == 3:
+                # Consortium-style format for JIS X 0208 (just skip the SJIS column)
+                _i = _i.split("\t", 1)[1]
             byts, ucs = _i.split("\t", 2)[:2]
             if not (eucjp or euckrlike):
                 if len(byts) == 6:
@@ -230,7 +233,25 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False,
     f.close()
     return r
 
-
+def fuse(arrays, filename):
+    if not os.path.exists(os.path.join(cachedirectory, filename)):
+        out = []
+        for n in range(max(*tuple(len(i) for i in arrays))):
+            for array in arrays:
+                if n < len(array) and (array[n] is not None):
+                    out.append(array[n])
+                    break
+            else: # for...else, i.e. if the loop finishes without encountering break
+                out.append(None)
+        _f = open(os.path.join(cachedirectory, filename), "w")
+        _f.write(json.dumps(out))
+        _f.close()
+        return tuple(out)
+    else:
+        _f = open(os.path.join(cachedirectory, filename), "r")
+        out = tuple(tuple(i) if i is not None else None for i in json.load(_f))
+        _f.close()
+        return out
 
 
 

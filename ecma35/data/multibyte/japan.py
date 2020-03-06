@@ -36,11 +36,15 @@ def read_jis_trailer(fil, *, mapper=parsers.identitymap):
             #
             if len(_temp) > g3pointer:
                 assert _temp[g3pointer] is None
-                _temp[g3pointer] = ucs
+                _temp[g3pointer] = (ucs,)
             else:
                 while len(_temp) < g3pointer:
                     _temp.append(None)
-                _temp.append(ucs)
+                _temp.append((ucs,))
+    # Try to end it on a natural plane boundary.
+    _temp.extend([None] * (((94 * 94) - (len(_temp) % (94 * 94))) % (94 * 94)))
+    if not _temp:
+        _temp.extend([None] * (94 * 94)) # Don't just return an empty tuple.
     r = tuple(_temp) # Making a tuple makes a copy, of course.
     del _temp[:]
     return r
@@ -77,13 +81,20 @@ graphdata.gsets["ir159va"] = jisx0212_extva = (94, 2,
         jisx0212[2][:462] + tuple((_i,) for _i in range(0x30F7, 0x30FB)) + jisx0212[2][466:])
 # JIS X 0208:1990 or 1997
 graphdata.gsets["ir168"] = jisx0208_1990 = (94, 2, parsers.read_main_plane("JIS-Conc/x208_1990.txt"))
+graphdata.gsets["ir168utc"] = jisx0208_1990 = (94, 2, parsers.read_main_plane("UTC/JIS0208.TXT"))
 # JIS X 0208, Microsoft and WHATWG version, as specified for use in HTML5
 graphdata.gsets["ir168web"] = jisx0208_html5 = (94, 2,
         parsers.read_main_plane("WHATWG/index-jis0208.txt"))
-graphdata.gsets["ir168mac"] = jisx0208_apple = (94, 2,
+graphdata.gsets["ir168mac"] = jisx0208_applekt7 = (94, 2,
         parsers.read_main_plane("JIS-Conc/sjis_mac_std9_0208part.txt", mapper = parsers.ahmap))
 graphdata.gsets["ir168macps"] = jisx0208_appleps = (94, 2,
         parsers.read_main_plane("JIS-Conc/sjis_mac_ps_0208part.txt", mapper = parsers.ahmap))
+kanjitalk6 = (jisx0208_applekt7[2][:8 * 94] + ((None,) * 188) +
+              jisx0208_applekt7[2][84 * 94 : 86 * 94] +
+              jisx0208_appleps[2][12 * 94 : 13 * 94] +
+              jisx0208_applekt7[2][87 * 94 : 89 * 94] +
+              jisx0208_applekt7[2][15 * 94 : 84 * 94] + ((None,) * 940))
+graphdata.gsets["ir168mackt6"] = jisx0208_applekt7 = (94, 2, kanjitalk6)
 graphdata.gsets["ibmsjisext"] = sjis_html5_g3 = (94, 2, read_jis_trailer("WHATWG/index-jis0208.txt"))
 # JIS X 2013:2004
 graphdata.gsets["ir233"] = jisx0213_plane1 = (94, 2,
@@ -94,5 +105,31 @@ graphdata.gsets["ir229"] = jisx0213_plane2 = (94, 2, # Code unchanged from origi
         parsers.read_main_plane("Other/euc-jis-2004-std.txt", eucjp = True, plane = 2,
             mapper = map_to_zenkaku))
 
+# The Open Group Japan's (OSF Japan's) definitions of EUC-JP
+osfeuc_0208j = parsers.read_main_plane("OSF/eucJP-0208.txt", eucjp = True, plane = 1)
+osfeuc_0208a = parsers.read_main_plane("OSF/eucJP-0208A.txt", eucjp = True, plane = 1)
+osfeuc_0208m = parsers.read_main_plane("OSF/eucJP-0208M.txt", eucjp = True, plane = 1)
+osfeuc_nec = parsers.read_main_plane("OSF/eucJP-13th.txt", eucjp = True, plane = 1)
+osfeuc_0212j = parsers.read_main_plane("OSF/eucJP-0212.txt", eucjp = True, plane = 2)
+osfeuc_0212a = parsers.read_main_plane("OSF/eucJP-0212A.txt", eucjp = True, plane = 2)
+osfeuc_0212m = parsers.read_main_plane("OSF/eucJP-0212M.txt", eucjp = True, plane = 2)
+# Oddly different and even mutually collisive with the IBM 0212 extensions (per ICU) in layout.
+# Repertoire and order match the IBM 0212 extensions though.
+osfeuc_ibm = parsers.read_main_plane("OSF/eucJP-ibmext.txt", eucjp = True, plane = 2)
+osfeuc_puaone = parsers.read_main_plane("OSF/eucJP-udc.txt", eucjp = True, plane = 1)
+osfeuc_puatwo = parsers.read_main_plane("OSF/eucJP-udc.txt", eucjp = True, plane = 2)
+#
+graphdata.gsets["ir168osf"]  = osf_0208_j = (94, 2, parsers.fuse([
+    osfeuc_0208j, osfeuc_nec, osfeuc_puaone], "OSF--eucJP-0208j-complete.json"))
+graphdata.gsets["ir168osfa"] = osf_0208_a = (94, 2, parsers.fuse([
+    osfeuc_0208a, osfeuc_nec, osfeuc_puaone], "OSF--eucJP-0208a-complete.json"))
+graphdata.gsets["ir168osfm"] = osf_0208_m = (94, 2, parsers.fuse([
+    osfeuc_0208m, osfeuc_nec, osfeuc_puaone], "OSF--eucJP-0208m-complete.json"))
+graphdata.gsets["ir159osf"]  = osf_0212_j = (94, 2, parsers.fuse([
+    osfeuc_0212j, osfeuc_ibm, osfeuc_puatwo], "OSF--eucJP-0212j-complete.json"))
+graphdata.gsets["ir159osfa"] = osf_0212_a = (94, 2, parsers.fuse([
+    osfeuc_0212a, osfeuc_ibm, osfeuc_puatwo], "OSF--eucJP-0212a-complete.json"))
+graphdata.gsets["ir159osfm"] = osf_0212_m = (94, 2, parsers.fuse([
+    osfeuc_0212m, osfeuc_ibm, osfeuc_puatwo], "OSF--eucJP-0212m-complete.json"))
 
 

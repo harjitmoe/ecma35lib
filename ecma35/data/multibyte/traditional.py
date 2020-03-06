@@ -196,25 +196,7 @@ cns_bmp = parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode BMP.txt",
 cns_sip = parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 2.txt")
 cns_spuaa = parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 15.txt",
         mapper = cnsmapper_contraspua)
-if not os.path.exists(os.path.join(parsers.cachedirectory, "CNS2UNICODE.json")):
-    cns = []
-    for n in range(max(len(cns_bmp), len(cns_sip), len(cns_spuaa))):
-        if n < len(cns_bmp) and (cns_bmp[n] is not None):
-            cns.append(cns_bmp[n])
-        elif n < len(cns_sip) and (cns_sip[n] is not None):
-            cns.append(cns_sip[n])
-        elif n < len(cns_spuaa) and (cns_spuaa[n] is not None):
-            cns.append(cns_spuaa[n])
-        else:
-            cns.append(None)
-    _f = open(os.path.join(parsers.cachedirectory, "CNS2UNICODE.json"), "w")
-    _f.write(json.dumps(cns))
-    _f.close()
-    cns = tuple(cns)
-else:
-    _f = open(os.path.join(parsers.cachedirectory, "CNS2UNICODE.json"), "r")
-    cns = tuple(tuple(i) if i is not None else None for i in json.load(_f))
-    _f.close()
+cns = parsers.fuse([cns_bmp, cns_sip, cns_spuaa], "GOV-TW---CNS2UNICODE_swaparrows_contraspua.json")
 
 # Planes present in the original 1986 edition of CNS 11643.
 # Closely related to Big5. ISO-IR numbers in the 170s (whereas the 1992 additions are in the 180s).
