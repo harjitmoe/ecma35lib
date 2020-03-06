@@ -23,10 +23,10 @@ def to_sjis(men, ku, ten):
         else:
             return ""
     sward = (ku - 1) >> 1
-    spos = (((ku - 1) & 0x1) * 94) + ten
+    spos = (((ku - 1) & 0x1) * 94) + ten - 1
     lead = sward + 0x81
     if lead >= 0xA0:
-        lead += 0x20
+        lead += 0x40
     trail = spos + 0x40
     if trail >= 0x7F:
         trail += 1
@@ -38,7 +38,7 @@ def to_sjis(men, ku, ten):
 
 plane1 = (1, ("1978 JIS", "1983 JIS", "1990 JIS", "UTC JIS",
               "MS / HTML5", "Mac KT6", "Mac KT7", "Mac PS",
-              "OSF", "OSF ASCII", "OSF MS", # "IBM 78JIS",
+              "OSF", "OSF ASCII", "OSF MS", "IBM 78JIS",
               "IBM 90JIS", "2004 JIS"), [
           graphdata.gsets["ir042"][2],
           graphdata.gsets["ir087"][2],
@@ -51,7 +51,7 @@ plane1 = (1, ("1978 JIS", "1983 JIS", "1990 JIS", "UTC JIS",
           graphdata.gsets["ir168osf"][2],
           graphdata.gsets["ir168osfa"][2],
           graphdata.gsets["ir168osfm"][2],
-          #graphdata.gsets["ir042ibm"][2],
+          graphdata.gsets["ir042ibm"][2],
           graphdata.gsets["ir168ibm"][2],
           graphdata.gsets["ir233"][2],
 ])

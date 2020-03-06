@@ -70,7 +70,8 @@ def map_to_zenkaku(pointer, ucs):
 
 # JIS C 6226:1978 / JIS X 0208:1978
 graphdata.gsets["ir042"] = jisx0208_1978 = (94, 2, parsers.read_main_plane("JIS-Conc/x208_1978.txt"))
-#graphdata.gsets["ir042ibm"] = jisx0208_ibm78 = (94, 2, read_sjis("ICU/ibm-942_P12A-1999.ucm"))
+graphdata.gsets["ir042ibm"] = jisx0208_ibm78 = (94, 2,
+        parsers.read_main_plane("ICU/ibm-942_P12A-1999.ucm", sjis=True))
 # JIS C 6226:1983 / JIS X 0208:1983
 graphdata.gsets["ir087"] = jisx0208_1983 = (94, 2, parsers.read_main_plane("JIS-Conc/x208_1983.txt"))
 # JIS X 0212:1990 (i.e. the 1990 supplementary plane)

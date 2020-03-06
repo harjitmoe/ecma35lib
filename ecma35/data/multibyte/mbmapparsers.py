@@ -30,7 +30,33 @@ applesinglehints = {
 def ahmap(pointer, ucs):
     return applesinglehints.get(ucs, ucs)
 
-def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, 
+def _grok_sjis(byts):
+    pku = byts[0]
+    if pku > 0xA0:
+        pku -= 0x40
+    pku -= 0x81
+    pten = byts[1]
+    if pten > 0x7F:
+        pten -= 1
+    pten -= 0x40
+    if pten >= 94:
+        ku = (pku * 2) + 2
+        ten = pten - 93
+    else:
+        ku = (pku * 2) + 1
+        ten = pten + 1
+    #
+    if ku <= 94:
+        men = 1
+    elif ku <= 103:
+        men = 2
+        ku = (1, 8, 3, 4, 5, 12, 13, 14, 15)[ku - 95]
+    else:
+        men = 2
+        ku = ku + 78 - 104
+    return men, ku, ten
+
+def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=False,
                     plane=None, mapper=identitymap):
     """
     Read a mapping from a file in the directory given by mbmapparsers.directory.
@@ -77,9 +103,17 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False,
             # Consortium-style format, over GL (or GR with eucjp=1) without transformation.
             if _i.split("#", 1)[0].count("0x") == 3:
                 # Consortium-style format for JIS X 0208 (just skip the SJIS column)
-                _i = _i.split("\t", 1)[1]
+                if not sjis:
+                    _i = _i.split("\t", 1)[1]
+                else:
+                    _i = "\t".join(_i.split("\t", 2)[1::2])
             byts, ucs = _i.split("\t", 2)[:2]
-            if not (eucjp or euckrlike):
+            if sjis:
+                if len(byts) == 6:
+                    men, ku, ten = _grok_sjis(byts)
+                else:
+                    continue
+            elif not (eucjp or euckrlike):
                 if len(byts) == 6:
                     men = 1
                     ku = int(byts[2:4], 16) - 0x20
@@ -147,24 +181,27 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False,
                 if eucjp:
                     ku = byts[1] - 0xA0
                     ten = byts[2] - 0xA0
-                    assert 1 <= ku <= 94, (_i, byts[1], byts[2])
-                    assert 1 <= ten <= 94, (_i, byts[1], byts[2])
+                    assert sjis or 1 <= ku <= 94, (_i, byts[1], byts[2])
+                    assert sjis or 1 <= ten <= 94, (_i, byts[1], byts[2])
                 else:
                     ku = byts[1] - 0x20
                     ten = byts[2] - 0x20
             elif len(byts) == 2:
-                men = 1
-                if byts[0] >= 0xA0:
-                    ku = byts[0] - 0xA0
-                    ten = byts[1] - 0xA0
-                elif eucjp and byts[0] == 0x8E: # SS2
-                    continue
+                if sjis:
+                    men, ku, ten = _grok_sjis(byts)
                 else:
-                    ku = byts[0] - 0x20
-                    ten = byts[1] - 0x20
-                assert 1 <= ten <= 94, (_i, byts[0], byts[1])
-                if euckrlike and ((ku < 1) or (ku > 94) or (ten < 1) or (ten > 94)):
-                    continue
+                    men = 1
+                    if byts[0] >= 0xA0:
+                        ku = byts[0] - 0xA0
+                        ten = byts[1] - 0xA0
+                    elif eucjp and byts[0] == 0x8E: # SS2
+                        continue
+                    else:
+                        ku = byts[0] - 0x20
+                        ten = byts[1] - 0x20
+                    assert sjis or 1 <= ten <= 94, (_i, byts[0], byts[1])
+                    if euckrlike and ((ku < 1) or (ku > 94) or (ten < 1) or (ten > 94)):
+                        continue
             else:
                 assert len(byts) == 1
                 continue
