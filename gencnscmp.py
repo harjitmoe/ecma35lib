@@ -132,235 +132,35 @@ planeF = (15, ("ICU CNS 1992", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
           graphdata.gsets["cns-eucg2"][2][94*94*14:94*94*15],
 ])
 
-def dump_plane(outfile, number, setnames, plarray, *, part=0):
-    zplarray = tuple(zip(*plarray))
-    h = ", part {:d}".format(part) if part else ""
-    print("<!DOCTYPE html><title>CNS 11643 plane {:d}{}</title>".format(number, h), file=outfile)
-    print("""<style>
-        @font-face {
-            font-family: 'TW-Sung-Plus';
-            font-style: normal;
-            font-weight: 400;
-            /* If only the other one is present, use the other one; only download if necessary. */
-            src: local('TW-Sung-Plus'), local('TW-Kai-Plus'), url('https://harjit.moe/fonts/TW-Sung-Plus-98_1.ttf') format('ttf');
-        }
-        /* Sadly border-collapse: collapse; borks the borders on the position: sticky; */
-        table {
-            border-spacing: 0;
-            margin-left: auto;
-            margin-right: auto;
-            background: white;
-            color: black;
-        }
-        th, td {
-            border-right: 1px solid black;
-            border-bottom: 1px solid black;
-            box-sizing: content-box;
-            max-width: 10rem;
-            min-width: 7rem;
-        }
-        th:first-child, td:first-child {
-            border-left: 1px solid black;
-        }
-        thead:first-of-type th, thead:first-of-type td {
-            border-top: 1px solid black;
-            position: sticky;
-            top: 0;
-            background: white;
-        }
-        .codepoint {
-            font-family: monospace;
-            font-size: 0.7rem;
-        }
-        .codepicture {
-            font-family: Noto Serif CJK TC, Source Han Serif TC, Noto Sans CJK TC, Source Han Sans TC, TW-Sung-Ext-B, TW-Kai-Ext-B, BabelStone Han, serif;
-            font-size: 1.5rem;
-        }
-        .codepicture.roman {
-            /* Noto Sans CJK TC renders the combining hacek as a large glyph to the letter's right,
-             * for some reason (i.e. as if it were the spacing character). So don't list it.
-             * Doulos SIL, Segoe UI and the DejaVus are good for LCG combining sequences. */
-            font-family: Doulos SIL, DejaVu Serif, Segoe UI, DejaVu Sans, serif;
-            font-size: 1.5rem;
-        }
-        .codepicture::after {
-            /* Ensure more-or-less even vertical position of codepoint */
-            content: "\u3000";
-            font-family: Noto Serif CJK TC, Source Han Serif TC, Noto Sans CJK TC, Source Han Sans TC, TW-Sung-Ext-B, TW-Kai-Ext-B, BabelStone Han, serif;
-            font-size: 1.5rem;
-        }
-        .pua {
-            color: dimgray;
-        }
-        .spua {
-            /* TW-Sung-Plus and TW-Kai-Plus are the Gov-TW-supplied SPUA fonts for CNS */
-            font-family: TW-Sung-Plus, TW-Kai-Plus;
-            font-size: 1.5rem;
-        }
-        .vertical {
-            -webkit-writing-mode: tb-rl;
-            -ms-writing-mode: tb-rl;
-            writing-mode: tb-rl;
-            writing-mode: vertical-rl;
-            display: inline-block;
-            width: 1em;
-        }
-        .undefined {
-            background: #999;
-        }
-        .collision {
-            background: #f99;
-        }
-    </style>""", file=outfile)
-    print("<h1>CNS 11643 plane {:d}{}</h1>".format(number, h), file=outfile)
-    print("<a href='/cns-conc.html'>Up to menu</a>".format(number, h), file=outfile)
-    print("<table>", file=outfile)
-    for row in range(max((part - 1) * 16, 1), min(part * 16, 95)) if part else range(1, 95):
-        print("<thead><tr><th>Codepoint</th>", file=outfile)
-        for i in setnames:
-            print("<th>", i, "<br>", file=outfile)
-            if (i == "UTC CNS") and (number == 3):
-                print('Plane "14"', file=outfile)
-            elif (i == "ICU CNS 1992") and (number == 15):
-                print('Plane "9"', file=outfile)
-            elif "Big5" in i:
-                print("Level {}".format(number) if number <= 2 else "(beyond)", file=outfile)
-            else:
-                print("Plane {}".format(number), file=outfile)
-        print("</tr></thead>", file=outfile)
-        for cell in range(1, 95):
-            st = zplarray[((row - 1) * 94) + (cell - 1)]
-            if len(set(i for i in st if i is not None)) > 1:
-                print("<tr class=collision>", file=outfile)
-            else:
-                print("<tr>", file=outfile)
-            if number == 1:
-                euc = "{:02x}{:02x}".format(0xA0 + row, 0xA0 + cell)
-            else:
-                euc = "8e{:02x}{:02x}{:02x}".format(0xA0 + number, 0xA0 + row, 0xA0 + cell)
-            print(("<th class=codepoint>{:02d}-{:02d}-{:02d}<br>(" +
-                   "<abbr title='Extended Unix Code'>EUC</abbr> {})").format(
-                    number, row, cell, euc), file=outfile)
-            if (number, row, cell) in inverse:
-                print("<br>(Big5 {:04x})".format(inverse[number, row, cell]), file=outfile)
-            print("</th>", file=outfile)
-            for i in st:
-                if i is None:
-                    print("<td class=undefined></td>", file=outfile)
-                    continue
-                #
-                if i[0] >= 0xF0000:
-                    print("<td><span class='codepicture spua' lang=zh-TW>", file=outfile)
-                    strep = "".join(chr(j) for j in i)
-                elif 0xE000 <= i[0] < 0xF900:
-                    print("<td><span class='codepicture pua' lang=zh-TW>", file=outfile)
-                    # Object Replacement Character (FFFD is already used by BIG5.TXT)
-                    strep = "\uFFFC"
-                elif i[0] < 0x7F: # i.e. either ASCII or combining sequence with ASCII base
-                    print("<td><span class='codepicture roman'>", file=outfile)
-                    strep = "".join(chr(j) for j in i)
-                else:
-                    print("<td><span class=codepicture lang=zh-TW>", file=outfile)
-                    strep = "".join(chr(j) for j in i)
-                #
-                if i[-1] == 0xF87C: # Apple encoding hint for bold form
-                    print("<b>", file=outfile)
-                    print(strep.rstrip("\uF87C"), file=outfile)
-                    print("</b>", file=outfile)
-                elif i[-1] == 0xF87E: # Apple encoding hint for vertical presentation form
-                    print("<span class=vertical>", file=outfile)
-                    print(strep.rstrip("\uF87E"), file=outfile)
-                    print("</span>", file=outfile)
-                else:
-                    # Horizontal presentation form, alternative form.
-                    # Neither of which we can really do anything with here.
-                    print(strep.rstrip("\uF87D\uF87F"), file=outfile)
-                print("</span>", file=outfile)
-                print("<br><span class=codepoint>", file=outfile)
-                print("U+" + "+".join("{:04X}".format(j) for j in i), file=outfile)
-                if len(i) == 1:
-                    #####################################
-                    # BASIC MULTILINGUAL PLANE
-                    if i[0] < 0x80:
-                        print("(<abbr title='American Standard Code for " +
-                              "Information Interchange'>ASCII</abbr>)", file=outfile)
-                    elif 0x80 <= i[0] < 0x100:
-                        print("(<abbr title='Latin-1 Supplement'>LAT1S</abbr>)", file=outfile)
-                    elif 0x2E80 <= i[0] < 0x2FE0:
-                        print("(<abbr title='CJK Radical'>RAD</abbr>)", file=outfile)
-                    elif 0x31C0 <= i[0] < 0x31E0:
-                        print("(<abbr title='CJK Stroke'>STRK</abbr>)", file=outfile)
-                    elif 0x3400 <= i[0] < 0x4DC0:
-                        print("(<abbr title='CJK Extension A'>CJKA</abbr>)", file=outfile)
-                    elif 0x4E00 <= i[0] < 0x9FA6:
-                        print("(<abbr title='Unified Repertoire and Ordering'>URO</abbr>)", file=outfile)
-                    elif 0x9FA6 <= i[0] < 0xA000:
-                        print("(<abbr title='Appendage to Unified Repertoire and Ordering'>URO+</abbr>)", 
-                              file=outfile)
-                    elif 0xE000 <= i[0] < 0xF900:
-                        print("(<abbr title='Private Use Area'>PUA</abbr>)", file=outfile)
-                    elif 0xF900 <= i[0] < 0xFB00: # the BMP's Compatibility Ideographs block
-                        if i[0] in (0xFA0E, 0xFA0F, 0xFA11, 0xFA13, 0xFA14, 0xFA1F,
-                                    0xFA21, 0xFA23, 0xFA24, 0xFA27, 0xFA28, 0xFA29):
-                            print("(<abbr title='Dirty Dozen (of unified ideographs in the "
-                                  "Compatibility Ideographs block)'>DD</abbr>)", file=outfile)
-                        else:
-                            print("(<abbr title='Compatibility Ideograph'>CI</abbr>)", file=outfile)
-                    elif 0xFE50 <= i[0] < 0xFE70:
-                        print("(<abbr title='Small Form Variant'>SFV</abbr>)", file=outfile)
-                    elif (0xFF01 <= i[0] < 0xFF61) or (0xFFE0 <= i[0] < 0xFFE7):
-                        print("(<abbr title='Full-Width Form'>FWF</abbr>)", file=outfile)
-                    elif i[0] in (0xFFFC, 0xFFFD):
-                        print("(<abbr title='Replacement Character'>REPL</abbr>)", file=outfile)
-                    elif i[0] < 0x10000:
-                        print("(<abbr title='Miscellaneous Basic Multilingual Plane'>BMP</abbr>)", 
-                              file=outfile)
-                    #####################################
-                    # SUPPLEMENTARY MULTILINGUAL PLANE
-                    elif 0x10000 <= i[0] < 0x20000:
-                        print("(SMP</abbr>)", file=outfile) # Supplementary Multilingual Plane
-                    #####################################
-                    # SUPPLEMENTARY IDEOGRAPHIC PLANE
-                    elif 0x20000 <= i[0] < 0x2A6E0:
-                        print("(<abbr title='CJK Extension B'>CJKB</abbr>)", file=outfile)
-                    elif 0x2A700 <= i[0] < 0x2B740:
-                        print("(<abbr title='CJK Extension C'>CJKC</abbr>)", file=outfile)
-                    elif 0x2B740 <= i[0] < 0x2B820:
-                        print("(<abbr title='CJK Extension D'>CJKD</abbr>)", file=outfile)
-                    elif 0x2B820 <= i[0] < 0x2CEB0:
-                        print("(<abbr title='CJK Extension E'>CJKE</abbr>)", file=outfile)
-                    elif 0x2CEB0 <= i[0] < 0x2EBF0:
-                        print("(<abbr title='CJK Extension F'>CJKF</abbr>)", file=outfile)
-                    elif 0x2F800 <= i[0] < 0x2FA20:
-                        print("(<abbr title='Compatibility Ideographs Supplement'>CIS</abbr>)", 
-                              file=outfile)
-                    elif 0x20000 <= i[0] < 0x30000:
-                        print("(<abbr title='Miscellaneous Supplementary Ideographic Plane'>SIP</abbr>)", 
-                              file=outfile)
-                    #####################################
-                    # TERTIARY IDEOGRAPHIC PLANE
-                    elif 0x30000 <= i[0] < 0x40000:
-                        print("(<abbr title='Tertiary Ideographic Plane'>TIP</abbr>)", file=outfile)
-                    #####################################
-                    # SUPPLEMENTARY SPECIAL-PURPOSE PLANE
-                    elif 0xE0000 <= i[0] < 0xF0000:
-                        print("(<abbr title='Supplementary Special-purpose Plane'>SSP</abbr>)", 
-                              file=outfile)
-                    #####################################
-                    # SUPPLEMENTARY PRIVATE USE AREA
-                    elif 0xF0000 <= i[0] < 0x100000:
-                        print("(<abbr title='Supplementary Private-Use Area A'>SPUA</abbr>)", file=outfile)
-                    elif i[0] >= 0x100000:
-                        print("(<abbr title='Supplementary Private-Use Area B'>SPUB</abbr>)", file=outfile)
-                print("</span></td>", file=outfile)
-            print("</tr>", file=outfile)
-    print("</table>", file=outfile)
+def planefunc(number, mapname=None):
+    if mapname is None:
+        return "CNS 11643 plane {:d}".format(number)
+    else:
+        if (mapname == "UTC CNS") and (number == 3):
+            return 'Plane "14"'
+        elif (mapname == "ICU CNS 1992") and (number == 15):
+            return 'Plane "9"'
+        elif "Big5" in mapname:
+            return "Level {}".format(number) if number <= 2 else "(beyond)"
+        else:
+            return "Plane {}".format(number)
+
+def kutenfunc(number, row, cell):
+    if number == 1:
+        euc = "{:02x}{:02x}".format(0xA0 + row, 0xA0 + cell)
+    else:
+        euc = "8e{:02x}{:02x}{:02x}".format(0xA0 + number, 0xA0 + row, 0xA0 + cell)
+    big5 = ""
+    if (number, row, cell) in inverse:
+        big5 = "<br>(Big5 {:04x})".format(inverse[number, row, cell])
+    return "{:02d}-{:02d}-{:02d}<br>(<abbr title='Extended Unix Code'>EUC</abbr> {}){}".format(
+           number, row, cell, euc, big5)
 
 for n, p in enumerate([plane1, plane2, plane3, plane4, plane5, plane6, plane7, planeF]):
     for q in range(1, 7):
         bn = (1, 2, 3, 4, 5, 6, 7, 15)[n]
         f = open("cnsplane{:X}{}.html".format(bn, chr(0x60 + q)), "w")
-        dump_plane(f, *p, part=q)
+        graphdata.dump_plane(f, planefunc, kutenfunc, "/css/cns.css", "/cns-conc.html", *p, part=q)
         f.close()
 
 

@@ -101,6 +101,7 @@ from ecma35.data.multibyte import mbmapparsers as parsers
 #   04-10-78 U+FFFF9 (SPUA)　 U+79CC (秌)
 #     Note: Seemingly supposed to be a difference in the left dot direction on the fire radical?
 #     Tellingly, the text editor font I'm using renders U+79CC like TW Sung renders U+FFFF9.
+#     Also tellingly, U+79CC+E0100 using Adobe IVD sequences seems to do the opposite?
 #   04-16-34 U+FFFF8 (SPUA)　 U+98E4 (飤)
 #     Note: U+FFFF8 has the dot in the top part of the left radical drawn horizontally.
 #   04-24-60 U+FFFF7 (SPUA)　 U+6E7C (湼)
