@@ -7,6 +7,7 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import unicodedata as ucd
+import os, urllib.parse, json
 
 __all__ = [
     "codepoint_coverages", "gsets", "g94bytes", "g96bytes", "g94nbytes", "g96nbytes", "sumps",
@@ -17,19 +18,31 @@ __all__ = [
 # given set, it is almost certainly faster to look it up in a set than having to sequentially 
 # search a list every time, especially if we're doing it for a large number of codepoints 
 # (e.g. the entire original URO in multibyte.guobiao).
+cachedirectory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "covcache")
 codepoint_coverages = {}
 class GSetCollection(dict):
     def __setitem__(self, label, data):
         super().__setitem__(label, data)
-        codepoint_coverages[label] = my_coverage = set()
-        kind, xbcs, codepoints = data
-        for codeset in codepoints:
-            if isinstance(codeset, tuple):
-                if len(codeset) != 1:
-                    continue
-                codeset = codeset[0]
-            if codeset is not None:
-                my_coverage |= {codeset}
+        path = os.path.join(cachedirectory, urllib.parse.quote(label) + ".json")
+        if not os.path.exists(path):
+            codepoint_coverages[label] = my_coverage = set()
+            kind, xbcs, codepoints = data
+            for codeset in codepoints:
+                if isinstance(codeset, tuple):
+                    if len(codeset) != 1:
+                        continue
+                    codeset = codeset[0]
+                if isinstance(codeset, (list, tuple)): # i.e. STILL
+                    raise ValueError(codepoints)
+                if codeset is not None:
+                    my_coverage |= {codeset}
+            f = open(path, "w")
+            f.write(json.dumps(tuple(my_coverage)))
+            f.close()
+        else:
+            f = open(path, "r")
+            codepoint_coverages[label] = set(json.load(f))
+            f.close()
 
 # Note: since gsets specifies length as second member, no more need for "94n" distinct from "94".
 # Necessary since a set could have a length of, say, 3 (take the EUC-TW G2 set).

@@ -243,7 +243,8 @@ def dump_plane(outfile, planefunc, kutenfunc, css, menu, number, setnames, plarr
                     #####################################
                     # SUPPLEMENTARY MULTILINGUAL PLANE
                     elif 0x10000 <= i[0] < 0x20000:
-                        print("(SMP</abbr>)", file=outfile) # Supplementary Multilingual Plane
+                        print("(<abbr title='Supplementary Multilingual Plane'>SMP</abbr>)", 
+                              file=outfile)
                     #####################################
                     # SUPPLEMENTARY IDEOGRAPHIC PLANE
                     elif 0x20000 <= i[0] < 0x2A6E0:

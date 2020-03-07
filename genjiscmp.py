@@ -36,10 +36,12 @@ def to_sjis(men, ku, ten):
     else:
         return "<br>(<abbr title='Shift JIS'>SJIS</abbr> {:02x}{:02x})".format(lead, trail)
 
-plane1 = (1, ("1978 JIS", "NEC 78JIS", "1983 JIS", "1990 JIS", "UTC JIS", 
-              "MS / HTML5", "Mac KT6", "Mac KT7", "Mac PS",
-              "OSF", "OSF ASCII", "OSF MS", "IBM 78JIS",
-              "IBM 90JIS", "2000 JIS", "2004 JIS"), [
+plane1 = (1, ("1978 JIS",   "NEC 78JIS", "1983 JIS", "1990 JIS", "UTC JIS", 
+              "MS / HTML5", "Mac KT6",   "Mac KT7",  "Mac PS",
+              "OSF JIS<br>Plane 1", "OSF JIS<br>Plane 1A", "OSF JIS<br>Plane 1M",
+              "IBM 78JIS", "IBM 90JIS",
+              "ARIB<br>JIS", "DoCoMo<br>JIS", "KDDI<br>JIS", "SoftBank<br>JIS",
+              "2000 JIS",  "2004 JIS"), [
           graphdata.gsets["ir042"][2],
           graphdata.gsets["ir042nec"][2],
           graphdata.gsets["ir087"][2],
@@ -54,13 +56,18 @@ plane1 = (1, ("1978 JIS", "NEC 78JIS", "1983 JIS", "1990 JIS", "UTC JIS",
           graphdata.gsets["ir168osfm"][2],
           graphdata.gsets["ir042ibm"][2],
           graphdata.gsets["ir168ibm"][2],
+          graphdata.gsets["ir168arib"][2],
+          graphdata.gsets["ir168docomo"][2],
+          graphdata.gsets["ir168kddi"][2],
+          graphdata.gsets["ir168sbank"][2],
           graphdata.gsets["ir228"][2],
           graphdata.gsets["ir233"][2],
 ])
 
 plane2 = (2, ("1990 JIS", "1990 JIS Ext", "MS / HTML5<br>SJIS Ext",
-              "OSF", "OSF ASCII", "OSF MS", "IBM 90JIS",
-              "2004 JIS"), [
+              "OSF JIS<br>Plane 1", "OSF JIS<br>Plane 1A", "OSF JIS<br>Plane 1M",
+              "IBM 90JIS", "DoCoMo<br>SJIS Ext", "KDDI<br>SJIS Ext", "SoftBank<br>SJIS Ext",
+              "2000/04 JIS"), [
           graphdata.gsets["ir159"][2],
           graphdata.gsets["ir159va"][2],
           graphdata.gsets["ibmsjisext"][2],
@@ -68,6 +75,9 @@ plane2 = (2, ("1990 JIS", "1990 JIS Ext", "MS / HTML5<br>SJIS Ext",
           graphdata.gsets["ir159osfa"][2],
           graphdata.gsets["ir159osfm"][2],
           graphdata.gsets["ir159ibm"][2],
+          graphdata.gsets["docomosjisext"][2],
+          graphdata.gsets["kddisjisext"][2],
+          graphdata.gsets["sbanksjisext"][2],
           graphdata.gsets["ir229"][2],
 ])
 

@@ -14,12 +14,20 @@ from ecma35.data.multibyte import mbmapparsers as parsers
 _temp = []
 def read_jis_trailer(fil, *, mapper=parsers.identitymap):
     # Read the post-94^n part from the end of the extended JIS X 0208 index from WHATWG and map it
-    # onto a G3 set by JIS X 0213 rules.
+    # onto a G3 set by JIS X 0213 rules. Or the same from a UTC-format SJIS mapping.
     # Only used here, so not much point putting this in multibyte.parsers…
     for _i in open(os.path.join(parsers.directory, fil), "r"):
-        if _i.strip() and (_i[0] != "#"):
-            byts, ucs = _i.split("\t", 2)[:2]
-            #
+        if (not _i.strip()) or (_i[0] == "#"):
+            continue
+        byts, ucs = _i.split("\t", 2)[:2]
+        if byts.startswith("0x"):
+            if len(byts) == 6:
+                men, g3ku, ten = parsers._grok_sjis((int(byts[2:4], 16), int(byts[4:], 16)))
+                if men != 2:
+                    continue
+            else:
+                continue
+        else:
             pointer = int(byts.strip(), 10)
             ku = (pointer // 94) + 1
             ten = (pointer % 94) + 1
@@ -29,18 +37,18 @@ def read_jis_trailer(fil, *, mapper=parsers.identitymap):
                 g3ku = (1, 8, 3, 4, 5, 12, 13, 14, 15)[ku - 95]
             else:
                 g3ku = ku + 78 - 104
-            g3pointer = ((g3ku - 1) * 94) + (ten - 1)
-            #
-            assert ucs[:2] in ("0x", "U+")
-            ucs = mapper(g3pointer, int(ucs[2:], 16))
-            #
-            if len(_temp) > g3pointer:
-                assert _temp[g3pointer] is None
-                _temp[g3pointer] = (ucs,)
-            else:
-                while len(_temp) < g3pointer:
-                    _temp.append(None)
-                _temp.append((ucs,))
+        g3pointer = ((g3ku - 1) * 94) + (ten - 1)
+        #
+        assert ucs[:2] in ("0x", "U+")
+        ucs = mapper(g3pointer, tuple(int(j, 16) for j in ucs[2:].split("+")))
+        #
+        if len(_temp) > g3pointer:
+            assert _temp[g3pointer] is None
+            _temp[g3pointer] = ucs
+        else:
+            while len(_temp) < g3pointer:
+                _temp.append(None)
+            _temp.append(ucs)
     # Try to end it on a natural plane boundary.
     _temp.extend([None] * (((94 * 94) - (len(_temp) % (94 * 94))) % (94 * 94)))
     if not _temp:
@@ -76,6 +84,7 @@ graphdata.gsets["ir042nec"] = jisx0208_nec = (94, 2,
         parsers.read_main_plane("JIS-Conc/NEC-C-6226-visual.txt"))
 # JIS C 6226:1983 / JIS X 0208:1983
 graphdata.gsets["ir087"] = jisx0208_1983 = (94, 2, parsers.read_main_plane("JIS-Conc/x208_1983.txt"))
+
 # JIS X 0212:1990 (i.e. the 1990 supplementary plane)
 graphdata.gsets["ir159"] = jisx0212 = (94, 2,
         parsers.read_main_plane("WHATWG/index-jis0212.txt"))
@@ -85,6 +94,7 @@ graphdata.gsets["ir159va"] = jisx0212_extva = (94, 2,
         jisx0212[2][:462] + tuple((_i,) for _i in range(0x30F7, 0x30FB)) + jisx0212[2][466:])
 graphdata.gsets["ir159ibm"] = jisx0212ibm = (94, 2,
         parsers.read_main_plane("ICU/ibm-954_P101-2007.ucm", eucjp=1, plane=2))
+
 # JIS X 0208:1990 or 1997
 graphdata.gsets["ir168"] = jisx0208_1990 = (94, 2, parsers.read_main_plane("JIS-Conc/x208_1990.txt"))
 graphdata.gsets["ir168utc"] = jisx0208_utc = (94, 2, parsers.read_main_plane("UTC/JIS0208.TXT"))
@@ -97,14 +107,51 @@ graphdata.gsets["ir168mac"] = jisx0208_applekt7 = (94, 2,
         parsers.read_main_plane("JIS-Conc/sjis_mac_std9_0208part.txt", mapper = parsers.ahmap))
 graphdata.gsets["ir168macps"] = jisx0208_appleps = (94, 2,
         parsers.read_main_plane("JIS-Conc/sjis_mac_ps_0208part.txt", mapper = parsers.ahmap))
-kanjitalk6 = (jisx0208_applekt7[2][:8 * 94] + ((None,) * 188) +
-              jisx0208_applekt7[2][84 * 94 : 86 * 94] +
-              jisx0208_appleps[2][12 * 94 : 13 * 94] +
-              jisx0208_applekt7[2][87 * 94 : 89 * 94] +
+kanjitalk6 = (jisx0208_applekt7[2][:8 * 94] + ((None,) * 188) + # Normal non-Kanji rows
+              jisx0208_applekt7[2][84 * 94 : 86 * 94] +         # Vertical forms
+              jisx0208_appleps[2][12 * 94 : 13 * 94] +          # NEC Row Thirteen
+              jisx0208_applekt7[2][87 * 94 : 89 * 94] +         # Vertical forms
               jisx0208_applekt7[2][15 * 94 : 84 * 94] + ((None,) * 940))
 graphdata.gsets["ir168mackt6"] = jisx0208_applekt7 = (94, 2, kanjitalk6)
+
+# Emoji
+def mapper_for_freedial(pointer, ucs):
+    # The [フリーダイヤル] approximation (inherited here from JIS-Conc) isn't needed; ICU uses U+27BF.
+    if ucs == (0xF862, 0x5B, 0x30D5, 0x30EA, 0x30FC, 0xF861,
+               0x30C0, 0x30A4, 0x30E4, 0xF860, 0x30EB, 0x005D):
+        return (0x27BF,)
+    return ucs
+graphdata.gsets["ir168arib"] = jisx0208_arib = (94, 2, 
+        parsers.fuse([parsers.read_main_plane("Emoji/pict_arib.txt", sjis=1), jisx0208_1990[2]],
+                     "Emoji--ARIB.json"))
+graphdata.gsets["ir168docomo"] = jisx0208_arib = (94, 2, 
+        parsers.fuse([parsers.read_main_plane("Emoji/emoj_imod.txt", sjis=1, plane=1, 
+                                              mapper=mapper_for_freedial),
+                      parsers.read_main_plane("ICU/docomo-sjis.ucm", sjis=1, plane=1)],
+                     "Emoji--DoCoMo-freedial.json"))
+graphdata.gsets["ir168kddi"] = jisx0208_arib = (94, 2, 
+        parsers.fuse([parsers.read_main_plane("Emoji/emoj_kddi.txt", sjis=1, plane=1),
+                      parsers.read_main_plane("ICU/kddi-sjis.ucm", sjis=1, plane=1)],
+                     "Emoji--KDDI.json"))
+graphdata.gsets["ir168sbank"] = jisx0208_arib = (94, 2, 
+        parsers.fuse([parsers.read_main_plane("Emoji/emoj_voda_auto.txt", sjis=1, plane=1, 
+                                              mapper=mapper_for_freedial),
+                      parsers.read_main_plane("ICU/softbank-sjis.ucm", sjis=1, plane=1)],
+                     "Emoji--Softbank-freedial.json"))
+
 graphdata.gsets["ibmsjisext"] = sjis_html5_g3 = (94, 2, read_jis_trailer("WHATWG/index-jis0208.txt"))
-# JIS X 2013:2004
+graphdata.gsets["docomosjisext"] = docomo_g3 = (94, 2, read_jis_trailer("Emoji/emoj_imod.txt", 
+                                                       mapper=mapper_for_freedial))
+graphdata.gsets["kddisjisext"] = docomo_g3 = (94, 2, read_jis_trailer("Emoji/emoj_kddi.txt"))
+graphdata.gsets["sbanksjisext"] = sbank_g3 = (94, 2, read_jis_trailer("Emoji/emoj_voda_auto.txt", 
+                                                     mapper=mapper_for_freedial))
+
+# JIS X 2013:2000 and :2004
+# Note: Python's *jisx0213 (i.e. JIS X 0213:2000) codecs map 02-93-27 to U+9B1D, rather than U+9B1C
+#   as done by its *jis-2004 codecs and also by the Project X0213 mappings.
+# Since only plane 1 got a new ISO 2022 registration in 2004, one would expect plane 2 to be the
+#   same. Moreover, the glyph in the ISO-IR-229 registration itself (despite being barely legible) 
+#   is clearly already U+9B1C, not U+9B1D.
 graphdata.gsets["ir233"] = jisx0213_plane1 = (94, 2,
         parsers.read_main_plane("Other/euc-jis-2004-std.txt", eucjp = True, plane = 1,
             mapper = map_to_zenkaku))

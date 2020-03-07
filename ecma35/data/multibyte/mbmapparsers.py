@@ -119,7 +119,7 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
             byts, ucs = _i.split("\t", 2)[:2]
             if sjis:
                 if len(byts) == 6:
-                    men, ku, ten = _grok_sjis(byts)
+                    men, ku, ten = _grok_sjis([int(byts[2:4], 16), int(byts[4:], 16)])
                 else:
                     continue
             elif not (eucjp or euckrlike):
