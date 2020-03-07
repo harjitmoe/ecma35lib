@@ -8,7 +8,7 @@
 
 from ecma35.data.multibyte import mbmapparsers as parsers
 from ecma35.data.multibyte import japan
-from ecma35.data import graphdata
+from ecma35.data import graphdata, showgraph
 import json, os
 
 def to_sjis(men, ku, ten):
@@ -93,7 +93,7 @@ for n, p in enumerate([plane1, plane2]):
     for q in range(1, 7):
         bn = (1, 2, 3, 4, 5, 6, 7, 15)[n]
         f = open("jisplane{:X}{}.html".format(bn, chr(0x60 + q)), "w")
-        graphdata.dump_plane(f, planefunc, kutenfunc, "/css/jis.css", "/jis-conc.html",
+        showgraph.dump_plane(f, planefunc, kutenfunc, "/css/jis.css", "/jis-conc.html",
                              *p, lang="ja", part=q)
         f.close()
 

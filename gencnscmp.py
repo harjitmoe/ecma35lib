@@ -8,7 +8,7 @@
 
 from ecma35.data.multibyte import mbmapparsers as parsers
 from ecma35.data.multibyte import traditional
-from ecma35.data import graphdata
+from ecma35.data import graphdata, showgraph
 import json, os
 
 inverse = dict(zip(traditional.big5_to_cns2.values(), traditional.big5_to_cns2.keys()))
@@ -160,7 +160,7 @@ for n, p in enumerate([plane1, plane2, plane3, plane4, plane5, plane6, plane7, p
     for q in range(1, 7):
         bn = (1, 2, 3, 4, 5, 6, 7, 15)[n]
         f = open("cnsplane{:X}{}.html".format(bn, chr(0x60 + q)), "w")
-        graphdata.dump_plane(f, planefunc, kutenfunc, "/css/cns.css", "/cns-conc.html", *p, part=q)
+        showgraph.dump_plane(f, planefunc, kutenfunc, "/css/cns.css", "/cns-conc.html", *p, part=q)
         f.close()
 
 

@@ -253,23 +253,6 @@ graphdata.gsets["cns-eucg2"] = euctw_g2 = (94, 3, cns)
 graphdata.gsets["cns-eucg2-ibm"] = euctw_g2_ibm = (94, 3,
         parsers.read_main_plane("ICU/euc-tw-2014.ucm"))
 
-def scrutenise(first, second, *, short=False):
-    for _n, (_i, _j) in enumerate(zip(first, second)):
-        _men = (_n // planesize) + 1
-        _ku = ((_n % planesize) // 94) + 1
-        _ten = (_n % 94) + 1
-        if _i != _j:
-            if (_men == 3) and ((_n % planesize) > 6148):
-                continue
-            if (_men > 7) and (_men != 15):
-                continue
-            if (_i is not None) and (len(_i) == 1) and (_i[0] > 0xF0000) and (_j is None):
-                continue
-            if (_j is None) and short:
-                continue
-            print("{:02d}-{:02d}-{:02d}".format(_men, _ku, _ten), graphdata.formatcode(_i),
-                  graphdata.formatcode(_j), file=sys.stderr)
-
 # # # # # # # # # #
 # Big Five
 
