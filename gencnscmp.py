@@ -158,9 +158,25 @@ def kutenfunc(number, row, cell):
 
 for n, p in enumerate([plane1, plane2, plane3, plane4, plane5, plane6, plane7, planeF]):
     for q in range(1, 7):
-        bn = (1, 2, 3, 4, 5, 6, 7, 15)[n]
+        bnx = (1, 2, 3, 4, 5, 6, 7, 15)
+        bn = bnx[n]
         f = open("cnsplane{:X}{}.html".format(bn, chr(0x60 + q)), "w")
-        showgraph.dump_plane(f, planefunc, kutenfunc, "/css/cns.css", "/cns-conc.html", *p, part=q)
+        lasturl = lastname = nexturl = nextname = None
+        if q > 1:
+            lasturl = "cnsplane{:X}{}.html".format(bn, chr(0x60 + q - 1))
+            lastname = "CNS 11643 plane {:d}, part {:d}".format(bn, q - 1)
+        elif bn > 1:
+            lasturl = "cnsplane{:X}f.html".format(bnx[n - 1])
+            lastname = "CNS 11643 plane {:d}, part 6".format(bnx[n - 1])
+        if q < 6:
+            nexturl = "cnsplane{:X}{}.html".format(bn, chr(0x60 + q + 1))
+            nextname = "CNS 11643 plane {:d}, part {:d}".format(bn, q + 1)
+        elif bn < 15:
+            nexturl = "cnsplane{:X}a.html".format(bnx[n + 1])
+            nextname = "CNS 11643 plane {:d}, part 1".format(bnx[n + 1])
+        showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="zh-TW", part=q, css="/css/cns.css",
+                             menuurl="/cns-conc.html", menuname="CNS 11643 and Big5 comparison tables",
+                             lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname)
         f.close()
 
 

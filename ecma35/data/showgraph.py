@@ -139,13 +139,32 @@ def show(name, *, plane=None):
 def _isbmppua(tpl):
     return (len(tpl) == 1) and 0xE000 <= tpl[0] < 0xF900
 
-def dump_plane(outfile, planefunc, kutenfunc, css, menu, number, setnames, plarray, *, part=0, lang="zh-TW"):
+def _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname):
+    print("<hr><nav><ul class=navbar>", file=outfile)
+    if lasturl:
+        print("<li><span class=navlabel>Previous:</span>", file=outfile)
+        print("<a href='{}' rel=prev class=sectref>{}</a></li>".format(lasturl, lastname), file=outfile)
+    if menuurl:
+        print("<li><span class=navlabel>Up:</span>", file=outfile)
+        print("<a href='{}' rel=parent class=sectref>{}</a></li>".format(menuurl, menuname), file=outfile)
+    if nexturl:
+        print("<li><span class=navlabel>Next:</span>", file=outfile)
+        print("<a href='{}' rel=next class=sectref>{}</a></li>".format(nexturl, nextname), file=outfile)
+    print("</ul></nav><hr>", file=outfile)
+
+def dump_plane(outfile, planefunc, kutenfunc,
+               number, setnames, plarray, *,
+               part=0, lang="zh-TW", css=None,
+               menuurl=None, menuname="Up to menu",
+               lasturl=None, nexturl=None, lastname=None, nextname=None):
     zplarray = tuple(zip(*plarray))
     h = ", part {:d}".format(part) if part else ""
     print("<!DOCTYPE html><title>{}{}</title>".format(planefunc(number), h), file=outfile)
-    print("<link rel='stylesheet' href='{}'>".format(css), file=outfile)
+    if css:
+        print("<link rel='stylesheet' href='{}'>".format(css), file=outfile)
     print("<h1>{}{}</h1>".format(planefunc(number), h), file=outfile)
-    print("<a href='{}'>Up to menu</a>".format(menu), file=outfile)
+    if menuurl or lasturl or nexturl:
+        _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname)
     print("<table>", file=outfile)
     for row in range(max((part - 1) * 16, 1), min(part * 16, 95)) if part else range(1, 95):
         print("<thead><tr><th>Codepoint</th>", file=outfile)
@@ -173,11 +192,17 @@ def dump_plane(outfile, planefunc, kutenfunc, css, menu, number, setnames, plarr
                     strep = "".join(chr(j) for j in i)
                 elif 0xF860 <= i[0] < 0xF863 and len(i) != 1:
                     print("<td><span class='codepicture' lang={}>".format(lang), file=outfile)
-                    strep = "".join(chr(j) for j in i[1:])
+                    strep = "".join(chr(j) for j in i[1:]).replace("\uF860", "").replace("\uF861", 
+                                                                   "").replace("\uF862", "")
                 elif 0xE000 <= i[0] < 0xF900:
                     print("<td><span class='codepicture pua' lang={}>".format(lang), file=outfile)
                     # Object Replacement Character (FFFD is already used by BIG5.TXT)
                     strep = "\uFFFC"
+                elif 0x10000 <= i[0] < 0x20000:
+                    # SMP best to fall back to applicable emoji (or otherwise applicable) fonts,
+                    # and not try to push CJK fonts first.
+                    print("<td><span class='codepicture smp' lang={}>".format(lang), file=outfile)
+                    strep = "".join(chr(j) for j in i)
                 else:
                     strep = "".join(chr(j) for j in i)
                     firststrep = ucd.normalize("NFD", strep)[0] # Note: NOT NFKD.
@@ -284,8 +309,10 @@ def dump_plane(outfile, planefunc, kutenfunc, css, menu, number, setnames, plarr
                 print("</span></td>", file=outfile)
             print("</tr>", file=outfile)
     print("</table>", file=outfile)
+    if menuurl or lasturl or nexturl:
+        _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname)
 
 
 
- 
+
 

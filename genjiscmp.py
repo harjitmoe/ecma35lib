@@ -103,10 +103,24 @@ def kutenfunc(number, row, cell):
 
 for n, p in enumerate([plane1, plane2]):
     for q in range(1, 7):
-        bn = (1, 2, 3, 4, 5, 6, 7, 15)[n]
+        bn = n + 1
         f = open("jisplane{:X}{}.html".format(bn, chr(0x60 + q)), "w")
-        showgraph.dump_plane(f, planefunc, kutenfunc, "/css/jis.css", "/jis-conc.html",
-                             *p, lang="ja", part=q)
+        lasturl = lastname = nexturl = nextname = None
+        if q > 1:
+            lasturl = "jisplane{:X}{}.html".format(bn, chr(0x60 + q - 1))
+            lastname = "JIS plane {:d}, part {:d}".format(bn, q - 1)
+        elif bn > 1:
+            lasturl = "jisplane{:X}f.html".format(bn - 1)
+            lastname = "JIS plane {:d}, part 6".format(bn - 1)
+        if q < 6:
+            nexturl = "jisplane{:X}{}.html".format(bn, chr(0x60 + q + 1))
+            nextname = "JIS plane {:d}, part {:d}".format(bn, q + 1)
+        elif bn < 2:
+            nexturl = "jisplane{:X}a.html".format(bn + 1)
+            nextname = "JIS plane {:d}, part 1".format(bn + 1)
+        showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ja", part=q, css="/css/jis.css",
+                             menuurl="/jis-conc.html", menuname="JIS character set variant comparison",
+                             lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname)
         f.close()
 
 
