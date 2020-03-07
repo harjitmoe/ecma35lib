@@ -36,11 +36,12 @@ def to_sjis(men, ku, ten):
     else:
         return "<br>(<abbr title='Shift JIS'>SJIS</abbr> {:02x}{:02x})".format(lead, trail)
 
-plane1 = (1, ("1978 JIS", "1983 JIS", "1990 JIS", "UTC JIS",
+plane1 = (1, ("1978 JIS", "NEC 78JIS", "1983 JIS", "1990 JIS", "UTC JIS", 
               "MS / HTML5", "Mac KT6", "Mac KT7", "Mac PS",
               "OSF", "OSF ASCII", "OSF MS", "IBM 78JIS",
-              "IBM 90JIS", "2004 JIS"), [
+              "IBM 90JIS", "2000 JIS", "2004 JIS"), [
           graphdata.gsets["ir042"][2],
+          graphdata.gsets["ir042nec"][2],
           graphdata.gsets["ir087"][2],
           graphdata.gsets["ir168"][2],
           graphdata.gsets["ir168utc"][2],
@@ -53,6 +54,7 @@ plane1 = (1, ("1978 JIS", "1983 JIS", "1990 JIS", "UTC JIS",
           graphdata.gsets["ir168osfm"][2],
           graphdata.gsets["ir042ibm"][2],
           graphdata.gsets["ir168ibm"][2],
+          graphdata.gsets["ir228"][2],
           graphdata.gsets["ir233"][2],
 ])
 

@@ -6,7 +6,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import os, binascii, json
+import os, binascii, json, urllib.parse
 
 directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mbmaps")
 cachedirectory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mbmapscache")
@@ -57,7 +57,7 @@ def _grok_sjis(byts):
     return men, ku, ten
 
 def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=False,
-                    plane=None, mapper=identitymap):
+                    skipstring=None, plane=None, mapper=identitymap):
     """
     Read a mapping from a file in the directory given by mbmapparsers.directory.
     Only positional argument is the name (including subdirectory) of that file.
@@ -70,6 +70,8 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
       as the format used for ICU's CNS 11643 mappings.)
     - euckrlike: interpret as an EUC format with non-EUC extensions; read only
       the main plane.
+    - sjis: interpret (a UTC or ICU format mapping) as Shift_JIS encoded.
+    - skipstring: particular substring denoting a line must be skipped.
     - twoway: (if the file is in ICU format) ignore one-way decoder mappings.
       This is ignored for the other supported formats, since they do not
       annotate which mappings are also used by the encoder.
@@ -81,6 +83,11 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
         mappername = "_" + mapper.__name__
     else:
         mappername = "_FIXME"
+    #
+    if skipstring:
+        mappername += "_skip" + urllib.parse.quote(skipstring)
+    if twoway:
+        mappername += "_twoway"
     cachebfn = os.path.splitext(fil)[0].replace("/", "---") + ("_plane{:02d}".format(plane)
                if plane is not None else "_mainplane") + mappername + ".json"
     cachefn = os.path.join(cachedirectory, cachebfn)
@@ -92,6 +99,8 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
         return tuple(tuple(i) if i is not None else None for i in r)
     for _i in open(os.path.join(directory, fil), "r"):
         if not _i.strip():
+            continue
+        elif (skipstring is not None) and (skipstring in _i):
             continue
         elif _i[0] == "#":
             continue # is a comment.

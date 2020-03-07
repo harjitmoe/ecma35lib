@@ -72,6 +72,8 @@ def map_to_zenkaku(pointer, ucs):
 graphdata.gsets["ir042"] = jisx0208_1978 = (94, 2, parsers.read_main_plane("JIS-Conc/x208_1978.txt"))
 graphdata.gsets["ir042ibm"] = jisx0208_ibm78 = (94, 2,
         parsers.read_main_plane("ICU/ibm-942_P12A-1999.ucm", sjis=True))
+graphdata.gsets["ir042nec"] = jisx0208_nec = (94, 2,
+        parsers.read_main_plane("JIS-Conc/NEC-C-6226-visual.txt"))
 # JIS C 6226:1983 / JIS X 0208:1983
 graphdata.gsets["ir087"] = jisx0208_1983 = (94, 2, parsers.read_main_plane("JIS-Conc/x208_1983.txt"))
 # JIS X 0212:1990 (i.e. the 1990 supplementary plane)
@@ -106,7 +108,9 @@ graphdata.gsets["ibmsjisext"] = sjis_html5_g3 = (94, 2, read_jis_trailer("WHATWG
 graphdata.gsets["ir233"] = jisx0213_plane1 = (94, 2,
         parsers.read_main_plane("Other/euc-jis-2004-std.txt", eucjp = True, plane = 1,
             mapper = map_to_zenkaku))
-graphdata.gsets["ir228"] = jisx0213_plane1 # 2000 edition with different escape, treat same for now
+graphdata.gsets["ir228"] = jisx0213_oldplane1 = (94, 2,
+        parsers.read_main_plane("Other/euc-jis-2004-std.txt", eucjp = True, plane = 1,
+            skipstring = "[2004]", mapper = map_to_zenkaku))
 graphdata.gsets["ir229"] = jisx0213_plane2 = (94, 2, # Code unchanged from original edition.
         parsers.read_main_plane("Other/euc-jis-2004-std.txt", eucjp = True, plane = 2,
             mapper = map_to_zenkaku))

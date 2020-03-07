@@ -191,7 +191,7 @@ g96bytes = {tuple(b"@"): "ir111",
             tuple(b"!0"): "ir111rfc1345", # Not even a private IRR: no practical compatibility.
             tuple(b"~"): "nil"}
 
-g94nbytes = {tuple(b"@"): ("ir042", ("ir042ibm",), ("ir042",)),
+g94nbytes = {tuple(b"@"): ("ir042nec", ("ir042ibm", "ir042nec"), ("ir042",)),
              tuple(b"A"): ("ir058-2005", # Preferred version
                            # Private versions
                            ("ir058-hant", "ir058-2000", "ir058-2005", "ir058-web", "ir058-full",
