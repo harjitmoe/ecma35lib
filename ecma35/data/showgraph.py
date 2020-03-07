@@ -136,6 +136,9 @@ def show(name, *, plane=None):
         print(end = "\uFFFD ")
     print()
 
+def _isbmppua(tpl):
+    return (len(tpl) == 1) and 0xE000 <= tpl[0] < 0xF900
+
 def dump_plane(outfile, planefunc, kutenfunc, css, menu, number, setnames, plarray, *, part=0, lang="zh-TW"):
     zplarray = tuple(zip(*plarray))
     h = ", part {:d}".format(part) if part else ""
@@ -151,7 +154,7 @@ def dump_plane(outfile, planefunc, kutenfunc, css, menu, number, setnames, plarr
         print("</tr></thead>", file=outfile)
         for cell in range(1, 95):
             st = zplarray[((row - 1) * 94) + (cell - 1)]
-            if len(set(i for i in st if i is not None)) > 1:
+            if len(set(i for i in st if (i is not None and not _isbmppua(i)))) > 1:
                 print("<tr class=collision>", file=outfile)
             else:
                 print("<tr>", file=outfile)

@@ -64,27 +64,27 @@ plane1 = (1, ("1978 JIS",   "NEC 78JIS", "1983 JIS", "1990 JIS", "UTC JIS",
           graphdata.gsets["ir233"][2],
 ])
 
-plane2 = (2, ("1990 JIS", "1990 JIS Ext", "MS / HTML5<br>SJIS Ext",
-              "OSF JIS<br>Plane 1", "OSF JIS<br>Plane 1A", "OSF JIS<br>Plane 1M",
-              "IBM 90JIS", "DoCoMo<br>SJIS Ext", "KDDI<br>SJIS Ext", "SoftBank<br>SJIS Ext",
-              "2000/04 JIS"), [
+plane2 = (2, ("MS / HTML5<br>SJIS Ext", "DoCoMo<br>SJIS Ext", "KDDI<br>SJIS Ext", "SoftBank<br>SJIS Ext",
+              "1990 JIS", "1990 JIS Ext",
+              "OSF JIS<br>Plane 2", "OSF JIS<br>Plane 2A", "OSF JIS<br>Plane 2M",
+              "IBM 90JIS", "2000/04 JIS"), [
+          graphdata.gsets["ibmsjisext"][2],
+          graphdata.gsets["docomosjisext"][2],
+          graphdata.gsets["kddisjisext"][2],
+          graphdata.gsets["sbanksjisext"][2],
           graphdata.gsets["ir159"][2],
           graphdata.gsets["ir159va"][2],
-          graphdata.gsets["ibmsjisext"][2],
           graphdata.gsets["ir159osf"][2],
           graphdata.gsets["ir159osfa"][2],
           graphdata.gsets["ir159osfm"][2],
           graphdata.gsets["ir159ibm"][2],
-          graphdata.gsets["docomosjisext"][2],
-          graphdata.gsets["kddisjisext"][2],
-          graphdata.gsets["sbanksjisext"][2],
           graphdata.gsets["ir229"][2],
 ])
 
 def planefunc(number, mapname=None):
     if mapname is None:
         return "JIS plane {:d}".format(number)
-    elif mapname in ("1978 JIS", "1983 JIS", "Mac KT6", "Mac KT7", "Mac PS", "IBM 78JIS"):
+    elif mapname in ("1978 JIS", "1983 JIS", "Mac KT6", "Mac KT7", "Mac PS", "IBM 78JIS", "NEC 78JIS"):
         return ""
     elif "<br>" in mapname:
         return ""
