@@ -36,32 +36,25 @@ def to_sjis(men, ku, ten):
     else:
         return "<br>(<abbr title='Shift JIS'>SJIS</abbr> {:02x}{:02x})".format(lead, trail)
 
-plane1 = (1, ("1978 JIS",   "NEC 78JIS", "1983 JIS", "1990 JIS", "UTC JIS", 
+plane1 = (1, ("1978 JIS<br>NEC Version", "1990 JIS",
+              "2000 JIS",  "2004 JIS", 
               "MS / HTML5", "Mac KT6",   "Mac KT7",  "Mac PS",
-              "OSF JIS<br>Plane 1", "OSF JIS<br>Plane 1A", "OSF JIS<br>Plane 1M",
               "IBM 78JIS", "IBM 90JIS",
-              "ARIB<br>JIS", "DoCoMo<br>JIS", "KDDI<br>JIS", "SoftBank<br>JIS",
-              "2000 JIS",  "2004 JIS"), [
-          graphdata.gsets["ir042"][2],
+              "ARIB<br>JIS", "DoCoMo<br>JIS", "KDDI<br>JIS", "SoftBank<br>JIS"), [
           graphdata.gsets["ir042nec"][2],
-          graphdata.gsets["ir087"][2],
           graphdata.gsets["ir168"][2],
-          graphdata.gsets["ir168utc"][2],
+          graphdata.gsets["ir228"][2],
+          graphdata.gsets["ir233"][2],
           graphdata.gsets["ir168web"][2],
           graphdata.gsets["ir168mackt6"][2],
           graphdata.gsets["ir168mac"][2],
           graphdata.gsets["ir168macps"][2],
-          graphdata.gsets["ir168osf"][2],
-          graphdata.gsets["ir168osfa"][2],
-          graphdata.gsets["ir168osfm"][2],
           graphdata.gsets["ir042ibm"][2],
           graphdata.gsets["ir168ibm"][2],
           graphdata.gsets["ir168arib"][2],
           graphdata.gsets["ir168docomo"][2],
           graphdata.gsets["ir168kddi"][2],
           graphdata.gsets["ir168sbank"][2],
-          graphdata.gsets["ir228"][2],
-          graphdata.gsets["ir233"][2],
 ])
 
 plane2 = (2, ("MS / HTML5<br>SJIS Ext", "DoCoMo<br>SJIS Ext", "KDDI<br>SJIS Ext", "SoftBank<br>SJIS Ext",
@@ -101,6 +94,30 @@ def kutenfunc(number, row, cell):
     return "{:02d}-{:02d}-{:02d}<br>(<abbr title='Extended Unix Code'>EUC</abbr> {}){}".format(
            number, row, cell, euc, sjis) + to_sjis(number, row, cell)
 
+annots = {
+    (1, 1, 17): "U+FFE3 (￣) is the fullwidth counterpart of both U+00AF (¯) and U+203E (‾); the latter is the one typically used when mapping JIS C 6220 / JIS X 0201. Mapping the double-byte character to U+203E in contexts where 0x7E is mapped to U+007E (~) is done by OSF and by JIS X 0213 (2000 JIS / 2004 JIS).",
+    (1, 1, 29): "U+2014 (em dash) and U+2015 (horizontal bar) both correspond to the same JIS character.\u2002UTC mappings generally favoured U+2015, and Microsoft and consequently WHATWG (HTML5) follow this.\u2002JIS generally esteem it to be U+2014, and Apple follows suit.\u2002OSF maps it as U+2015 in their MS-based version and as U+2014 otherwise.",
+    (1, 1, 32): "U+005C (backslash) is sometimes rendered the same as U+00A5 (¥), especially when it's used to map the 7-bit code 0x5C (backslash in ASCII, yen sign in JIS C 6220 / JIS X 0201).\u2002Generally speaking, the double byte character is only mapped to U+005C if is is not used as the mapping for 0x5C: OSF map it as U+005C in JIS-Roman-based EUC but not the other versions, and JIS X 0213 (2000 JIS / 2004 JIS) maps the double byte character to U+005C in Shift_JIS but to U+FF3C in EUC.",
+    (1, 1, 33): "Various mappings of various legacy CJK sets map this character to either U+223C (tilde operator), U+301C (wave dash) and U+FF5E (fullwidth tilde).\u2002Of these: U+301C was allocated specifically for the JIS character but was displayed in the Unicode charts with curvature inverted relative to the JIS charts for a considerable time, U+223C is primarily intended as a mathematical operator, U+FF5E is just the fullwidth version of the ASCII character and might therefore be rendered as as either a dash or a spacing accent (and actually has a separate mapping in JIS X 0213, shown as a spacing accent in its chart).",
+    (1, 1, 34): "U+2225 is used by Microsoft-influenced mappings, U+2016 is used by others. U+2225 has a separate mapping in JIS X 0213. U+2016 is necessarily straight vertical, whereas U+2225 is often shown slanted.",
+    (1, 1, 61): "Microsoft-influenced mappings use U+FF0D for the minus sign (making the JIS minus sign, as opposed to the JIS hyphen, the definitive fullwidth form of the ASCII hyphen-minus). Others use the definitive minus sign codepoint (U+2212).</p><p>Also: WHATWG's (HTML5) encoders actually exceptionally treat both U+2212 and U+FF0D the same (while its decoders use U+FF0D), since doing otherwise was breaking Japanese postcode forms on Macintoshes.",
+    (1, 1, 79): "Mapping the double-byte character to U+00A5 is only done when that mapping isn't already used for 0x5C, e.g. JIS X 0213 (2000 JIS / 2004 JIS) does so for EUC but not Shift_JIS.\u2002OSF use it in their ASCII-based and MS-based EUC mappings, but not in their JIS-Roman-based EUC mappings.",
+    (1, 1, 82): "Microsoft-influenced mappings use fullwidth characters for the pound and cent sign, because they exist.\u2002Some others don't, because they aren't necessary (separate encoded representations for the regular variants don't exist).",
+    (1, 2, 44): "Microsoft-influenced mappings use a fullwidth character for the not sign, because it exists.\u2002Some others don't, because it isn't necessary (a separate encoded representations for the regular variant doesn't exist).</p><p>That being said, a duplicate also exists in the IBM extensions at 02-89-21 (and consequently another in the NEC selections), predating the allocation of the standard codepoint in 1983.\u2002Accordingly, this codepoint is not allocated in IBM's extended 78JIS (unlike most of the 1983 additions).",
+    (1, 2, 72): "The because sign is included three times in the Microsoft and HTML5 version: here (in the 1983 additions), in the NEC row 13 (01-13-90) and in the IBM extensions (02-89-28).\u2002Unlike most of the 1983 additions, this codepoint is not allocated in IBM's extended 78JIS, due to it already existing in the IBM extension section.",
+    (1, 9, 0): "NEC apparently tries to incorporate JIS X 0201 (JIS C 6220) here, somewhat like an inverse Shift_JIS. How much Macintosh PostScript follows the NEC extensions apparently varied between font versions; the repertoire shown for it here is the one handled by Apple's ConvertFromTextToUnicode in response to either flag. KanjiTalk 7 goes off doing its own thing here.</p><p>Since vanilla 78JIS isn't shown for the sake of reducing column count: the next standard 78JIS allocation is at the start of row 16 (01-16-01).",
+    (1, 11, 0): "KanjiTalk 6 encodes the vertical forms ten rows (instead of 84 rows) down.",
+    (1, 13, 0): "NEC's row 13 seems to have become somewhat of a <i>de facto</i> standard… until it became official standard with the 2000 release of JIS X 0213. KanjiTalk 7 is still off doing its own thing though.",
+    (1, 13, 63): "NEC row 13 predates the Heisei era, hence this one isn't present in the Macintosh variants besides KanjiTalk 7, which includes it elsewhere (01-14-74).",
+    (1, 13, 90): "For anyone keeping track, this is the second of the three occurances of the because sign.",
+    (1, 14, 0): "JIS X 0213 starts the kanji section at row 14, rather than row 16 as in JIS X 0208. KanjiTalk 6 and KanjiTalk 7 both already use it for their own purposes though.",
+    (1, 63, 70): "IBM's extended 78JIS maps 01-63-70 to U+7199 熙 (and 01-84-06 to U+7155). They are minor variants of one another.",
+    (1, 84, 6): "1983 JIS differed from 1990 JIS by not allocating 01-84-05 and 01-84-06 (they might be considered to have been unified with 01-49-59 and 01-63-70 respectively). Also, IBM's extended 78JIS maps 01-84-06 to U+7155 (and 01-63-70 to U+7199).",
+    (2, 89, 21): "Third occurance of the not sign in the Microsoft / WHATWG version.",
+    (2, 89, 28): "Third occurance of the because sign in the Microsoft / WHATWG version.",
+    (2, 93, 27): "For some reason, Python's 2000 JIS codecs (as opposed to its 2004 JIS codecs) map 02-93-27 to U+9B1D (鬝), not to U+9B1C. The ISO-IR-229 registration (registered for the second plane of 2000 JIS, but not superseded upon 2004 JIS) visibly shows a 鬜 (U+9B1C) though. 2004 JIS is definitely U+9B1C though.",
+}
+
 for n, p in enumerate([plane1, plane2]):
     for q in range(1, 7):
         bn = n + 1
@@ -118,9 +135,10 @@ for n, p in enumerate([plane1, plane2]):
         elif bn < 2:
             nexturl = "jisplane{:X}a.html".format(bn + 1)
             nextname = "JIS plane {:d}, part 1".format(bn + 1)
-        showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ja", part=q, css="/css/jis.css",
+        showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ja", part=q, css="https://harjit.moe/css/jis.css",
                              menuurl="/jis-conc.html", menuname="JIS character set variant comparison",
-                             lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname)
+                             lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
+                             annots=annots)
         f.close()
 
 

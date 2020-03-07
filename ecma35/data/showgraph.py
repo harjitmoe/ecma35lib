@@ -154,7 +154,7 @@ def _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname):
 
 def dump_plane(outfile, planefunc, kutenfunc,
                number, setnames, plarray, *,
-               part=0, lang="zh-TW", css=None,
+               part=0, lang="zh-TW", css=None, annots={},
                menuurl=None, menuname="Up to menu",
                lasturl=None, nexturl=None, lastname=None, nextname=None):
     zplarray = tuple(zip(*plarray))
@@ -171,6 +171,10 @@ def dump_plane(outfile, planefunc, kutenfunc,
         for i in setnames:
             print("<th>", i, planefunc(number, i), file=outfile)
         print("</tr></thead>", file=outfile)
+        if annots.get((number, row, 0), None):
+            print("<tr class=annotation><td colspan={:d}><p>".format(len(plarray) + 1), file=outfile)
+            print("Note:", annots[(number, row, 0)], file=outfile)
+            print("</p></td></tr>", file=outfile)
         for cell in range(1, 95):
             st = zplarray[((row - 1) * 94) + (cell - 1)]
             if len(set(i for i in st if (i is not None and not _isbmppua(i)))) > 1:
@@ -308,6 +312,10 @@ def dump_plane(outfile, planefunc, kutenfunc,
                         print("(<abbr title='Supplementary Private-Use Area B'>SPUB</abbr>)", file=outfile)
                 print("</span></td>", file=outfile)
             print("</tr>", file=outfile)
+            if annots.get((number, row, cell), None):
+                print("<tr class=annotation><td colspan={:d}><p>".format(len(plarray) + 1), file=outfile)
+                print("Note:", annots[(number, row, cell)], file=outfile)
+                print("</p></td></tr>", file=outfile)
     print("</table>", file=outfile)
     if menuurl or lasturl or nexturl:
         _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname)

@@ -70,6 +70,7 @@ _to_zenkaku = dict([
     (ord(_flatten(chr(i))), i)
     for i in range(0xFF00, 0xFFF0) 
     if ucd.east_asian_width(chr(i)) == "F"
+       and i not in (0xFFE0, 0xFFE1, 0xFFE2) # Not affected by which out of EUC and SJIS is used.
 ])
 def map_to_zenkaku(pointer, ucs):
     if len(ucs) == 1 and ucs[0] in _to_zenkaku:
@@ -162,7 +163,7 @@ graphdata.gsets["sbanksjisext"] = sbank_g3 = (94, 2, read_jis_trailer("Emoji/emo
 # JIS X 2013:2000 and :2004
 # Note: Python's *jisx0213 (i.e. JIS X 0213:2000) codecs map 02-93-27 to U+9B1D, rather than U+9B1C
 #   as done by its *jis-2004 codecs and also by the Project X0213 mappings.
-# Since only plane 1 got a new ISO 2022 registration in 2004, one would expect plane 2 to be the
+# Since only plane 1 got a new ISO 2022 registration in 2004, one would expect plane 2 to stay the
 #   same. Moreover, the glyph in the ISO-IR-229 registration itself (despite being barely legible) 
 #   is clearly already U+9B1C, not U+9B1D.
 graphdata.gsets["ir233"] = jisx0213_plane1 = (94, 2,
