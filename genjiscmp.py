@@ -36,12 +36,14 @@ def to_sjis(men, ku, ten):
     else:
         return "<br>(<abbr title='Shift JIS'>SJIS</abbr> {:02x}{:02x})".format(lead, trail)
 
-plane1 = (1, ("1978 JIS<br>NEC Version", "1990 JIS",
+plane1 = (1, ("1978 JIS", "NEC 78JIS", "1983 JIS", "1990 JIS",
               "2000 JIS",  "2004 JIS", 
               "MS / HTML5", "Mac KT6",   "Mac KT7",  "Mac PS",
               "IBM 78JIS", "IBM 90JIS",
               "ARIB<br>JIS", "DoCoMo<br>JIS", "KDDI<br>JIS", "SoftBank<br>JIS"), [
+          graphdata.gsets["ir042"][2],
           graphdata.gsets["ir042nec"][2],
+          graphdata.gsets["ir087"][2],
           graphdata.gsets["ir168"][2],
           graphdata.gsets["ir228"][2],
           graphdata.gsets["ir233"][2],
@@ -103,19 +105,22 @@ annots = {
     (1, 1, 61): "Microsoft-influenced mappings use U+FF0D for the minus sign (making the JIS minus sign, as opposed to the JIS hyphen, the definitive fullwidth form of the ASCII hyphen-minus). Others use the definitive minus sign codepoint (U+2212).</p><p>Also: WHATWG's (HTML5) encoders actually exceptionally treat both U+2212 and U+FF0D the same (while its decoders use U+FF0D), since doing otherwise was breaking Japanese postcode forms on Macintoshes.",
     (1, 1, 79): "Mapping the double-byte character to U+00A5 is only done when that mapping isn't already used for 0x5C, e.g. JIS X 0213 (2000 JIS / 2004 JIS) does so for EUC but not Shift_JIS.\u2002OSF use it in their ASCII-based and MS-based EUC mappings, but not in their JIS-Roman-based EUC mappings.",
     (1, 1, 82): "Microsoft-influenced mappings use fullwidth characters for the pound and cent sign, because they exist.\u2002Some others don't, because they aren't necessary (separate encoded representations for the regular variants don't exist).",
-    (1, 2, 44): "Microsoft-influenced mappings use a fullwidth character for the not sign, because it exists.\u2002Some others don't, because it isn't necessary (a separate encoded representations for the regular variant doesn't exist).</p><p>That being said, a duplicate also exists in the IBM extensions at 02-89-21 (and consequently another in the NEC selections), predating the allocation of the standard codepoint in 1983.\u2002Accordingly, this codepoint is not allocated in IBM's extended 78JIS (unlike most of the 1983 additions).",
+    (1, 2, 44): "Microsoft-influenced mappings use a fullwidth character for the not sign, because it exists.\u2002Some others don't, because it isn't necessary (a separate encoded representations for the regular variant doesn't exist).</p><p>That being said, a duplicate also exists in the IBM extensions at 02-89-21 (and consequently another in the NEC selection at 01-92-91), predating the allocation of the standard codepoint in 1983.\u2002Accordingly, this codepoint is not allocated in IBM's extended 78JIS (unlike most of the 1983 additions).",
     (1, 2, 72): "The because sign is included three times in the Microsoft and HTML5 version: here (in the 1983 additions), in the NEC row 13 (01-13-90) and in the IBM extensions (02-89-28).\u2002Unlike most of the 1983 additions, this codepoint is not allocated in IBM's extended 78JIS, due to it already existing in the IBM extension section.",
-    (1, 9, 0): "NEC apparently tries to incorporate JIS X 0201 (JIS C 6220) here, somewhat like an inverse Shift_JIS. How much Macintosh PostScript follows the NEC extensions apparently varied between font versions; the repertoire shown for it here is the one handled by Apple's ConvertFromTextToUnicode in response to either flag. KanjiTalk 7 goes off doing its own thing here.</p><p>Since vanilla 78JIS isn't shown for the sake of reducing column count: the next standard 78JIS allocation is at the start of row 16 (01-16-01).",
+    (1, 9, 0): "NEC apparently tries to incorporate JIS X 0201 (JIS C 6220) here, somewhat like an inverse Shift_JIS. How much Macintosh PostScript follows the NEC extensions apparently varied between font versions; the repertoire shown for it here is the one handled by Apple's ConvertFromTextToUnicode in response to either flag.\u2002KanjiTalk 7 goes off doing its own thing here.",
     (1, 11, 0): "KanjiTalk 6 encodes the vertical forms ten rows (instead of 84 rows) down.",
-    (1, 13, 0): "NEC's row 13 seems to have become somewhat of a <i>de facto</i> standard… until it became official standard with the 2000 release of JIS X 0213. KanjiTalk 7 is still off doing its own thing though.",
+    (1, 13, 0): "NEC's row 13 seems to have become somewhat of a <i>de facto</i> standard… until it became official standard with the 2000 release of JIS X 0213.\u2002Several of its mathematical symbols duplicate 1983 additions to row 2.\u2002KanjiTalk 7 is still off doing its own thing.",
     (1, 13, 63): "NEC row 13 predates the Heisei era, hence this one isn't present in the Macintosh variants besides KanjiTalk 7, which includes it elsewhere (01-14-74).",
-    (1, 13, 90): "For anyone keeping track, this is the second of the three occurances of the because sign.",
-    (1, 14, 0): "JIS X 0213 starts the kanji section at row 14, rather than row 16 as in JIS X 0208. KanjiTalk 6 and KanjiTalk 7 both already use it for their own purposes though.",
-    (1, 63, 70): "IBM's extended 78JIS maps 01-63-70 to U+7199 熙 (and 01-84-06 to U+7155). They are minor variants of one another.",
-    (1, 84, 6): "1983 JIS differed from 1990 JIS by not allocating 01-84-05 and 01-84-06 (they might be considered to have been unified with 01-49-59 and 01-63-70 respectively). Also, IBM's extended 78JIS maps 01-84-06 to U+7155 (and 01-63-70 to U+7199).",
-    (2, 89, 21): "Third occurance of the not sign in the Microsoft / WHATWG version.",
-    (2, 89, 28): "Third occurance of the because sign in the Microsoft / WHATWG version.",
-    (2, 93, 27): "For some reason, Python's 2000 JIS codecs (as opposed to its 2004 JIS codecs) map 02-93-27 to U+9B1D (鬝), not to U+9B1C. The ISO-IR-229 registration (registered for the second plane of 2000 JIS, but not superseded upon 2004 JIS) visibly shows a 鬜 (U+9B1C) though. 2004 JIS is definitely U+9B1C though.",
+    (1, 13, 90): "Compare 01-02-72.",
+    (1, 14, 0): "JIS X 0213 starts the kanji section at row 14, rather than row 16 as in JIS X 0208.\u2002KanjiTalk 6 and KanjiTalk 7 both already use it for their own purposes though.",
+    (1, 63, 70): "Compare 01-84-06.",
+    (1, 89, 0): "In the NEC and Windows / HTML5 versions, this is the start of the so-called NEC Selection (rows 89–92 inclusive): an alternative encoding within the JIS X 0208 bounds of all the characters in the IBM Extensions block except for those also in NEC row 13.</p><p>Hence in the context of the Windows or HTML5 Shift_JIS variant, all of its allocations are duplicates.\u2002Encoders of that Shift_JIS variant (Windows-31J) vary as to whether they favour the IBM Extensions over the NEC Selection (Windows, WHATWG) or <i>vice versa</i> (Python).",
+    (1, 92, 91): "Compare 01-02-44.",
+    (1, 93, 70): "01-93-70 (or 02-92-12) is Softbank's Shibuya 109 emoji, U+E50A () in the Unicode Private Use Area.",
+    (2, 89, 21): "Compare 01-02-44.",
+    (2, 89, 28): "Compare 01-02-72.",
+    (2, 92, 12): "02-92-12 (or 01-93-70) is Softbank's Shibuya 109 emoji, U+E50A () in the Unicode Private Use Area.",
+    (2, 93, 27): "For some reason, Python's 2000 JIS codecs (unlike its 2004 JIS codecs) map 02-93-27 to U+9B1D (鬝), not to U+9B1C. The ISO-IR-229 registration (registered for the second plane of 2000 JIS, but not superseded upon 2004 JIS) visibly shows a 鬜 (U+9B1C) though.",
 }
 
 for n, p in enumerate([plane1, plane2]):
@@ -135,7 +140,7 @@ for n, p in enumerate([plane1, plane2]):
         elif bn < 2:
             nexturl = "jisplane{:X}a.html".format(bn + 1)
             nextname = "JIS plane {:d}, part 1".format(bn + 1)
-        showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ja", part=q, css="https://harjit.moe/css/jis.css",
+        showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ja", part=q, css="/css/jis.css",
                              menuurl="/jis-conc.html", menuname="JIS character set variant comparison",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
                              annots=annots)
