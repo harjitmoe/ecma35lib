@@ -7,6 +7,7 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import os, binascii, json, urllib.parse
+from ecma35.data import gccdata
 
 directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mbmaps")
 cachedirectory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mbmapscache")
@@ -28,7 +29,12 @@ applesinglehints = {
     (0xff3d, 0xf87e): (0xfe48,), # Closing hard bracket
 }
 def ahmap(pointer, ucs):
-    return applesinglehints.get(ucs, ucs)
+    if 0xf870 <= ucs[-1] < 0xf880:
+        return applesinglehints.get(ucs, ucs)
+    elif 0xf860 <= ucs[0] < 0xf870:
+        ucss = "".join(chr(i) for i in ucs)
+        return tuple(ord(i) for i in gccdata.gcc_sequences.get(ucss[1:], ucss))
+    return ucs
 
 def _grok_sjis(byts):
     pku = byts[0]
