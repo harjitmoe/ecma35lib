@@ -19,20 +19,20 @@ __all__ = [
 # search a list every time, especially if we're doing it for a large number of codepoints 
 # (e.g. the entire original URO in multibyte.guobiao).
 cachedirectory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "covcache")
-codepoint_coverages = {}
-class GSetCollection(dict):
-    def __setitem__(self, label, data):
-        super().__setitem__(label, data)
+class CoveragesOnDemand(dict):
+    def __getitem__(self, label):
+        if super().__contains__(label):
+            return super().__getitem__(label)
         path = os.path.join(cachedirectory, urllib.parse.quote(label) + ".json")
         if not os.path.exists(path):
-            codepoint_coverages[label] = my_coverage = set()
-            kind, xbcs, codepoints = data
+            my_coverage = set()
+            kind, xbcs, codepoints = gsets[label]
             for codeset in codepoints:
                 if isinstance(codeset, tuple):
                     if len(codeset) != 1:
                         continue
                     codeset = codeset[0]
-                if isinstance(codeset, (list, tuple)): # i.e. STILL
+                if isinstance(codeset, (list, tuple)): # i.e. STILL tuple (was double wrapped)
                     raise ValueError(codepoints)
                 if codeset is not None:
                     my_coverage |= {codeset}
@@ -41,8 +41,11 @@ class GSetCollection(dict):
             f.close()
         else:
             f = open(path, "r")
-            codepoint_coverages[label] = set(json.load(f))
+            my_coverage = set(json.load(f))
             f.close()
+        self[label] = my_coverage
+        return my_coverage
+codepoint_coverages = CoveragesOnDemand()
 
 # Note: since gsets specifies length as second member, no more need for "94n" distinct from "94".
 # Necessary since a set could have a length of, say, 3 (take the EUC-TW G2 set).
@@ -56,9 +59,7 @@ class GSetCollection(dict):
 #       from T.51), and would thus need to be moved after it in a Unicode representation.
 # The individual codepoints are put in individual CHAR tokens verbatim without re-ordering, and
 # may be processed further by downstream filters.
-gsets = GSetCollection({"nil": (94, 1, (None,)*94),
-                        "Unknown": (94, 1, (None,)*94)})
-# Presumably not getting codepoint_coverages for "nil" and "Unknown" doesn't really matter. 
+gsets = {"nil": (94, 1, (None,)*94), "Unknown": (94, 1, (None,)*94)}
 
 c0graphics = {}
 rhses = {}

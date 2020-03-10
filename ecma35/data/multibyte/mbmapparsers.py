@@ -306,6 +306,53 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
     f.close()
     return r
 
+def read_unihan_source(fil, region, source):
+    cachebfn = os.path.splitext(fil)[0].replace("/", "---") + ("_{}_{}".format(region, source)
+               ) + ".json"
+    cachefn = os.path.join(cachedirectory, cachebfn)
+    if os.path.exists(cachefn):
+        # Cache output since otherwise several seconds are spend in here upon importing graphdata
+        f = open(cachefn, "r")
+        r = json.load(f)
+        f.close()
+        return tuple(tuple(i) if i is not None else None for i in r)
+    wantkey = "kIRG_" + region + "Source"
+    wantsource = source + "-"
+    f = open(os.path.join(directory, fil), "r")
+    for i in f:
+        if i[0] == "#":
+            continue
+        elif not i.strip():
+            continue
+        ucs, prop, data = i.strip().split("\t", 2)
+        if (prop != wantkey) or (not data.startswith(wantsource)):
+            continue
+        assert ucs[:2] == "U+"
+        ucs = int(ucs[2:], 16)
+        dat = data[len(wantsource):]
+        assert (len(dat) == 4)
+        ku = int(dat[:2], 16) - 0x20
+        ten = int(dat[2:], 16) - 0x20
+        pointer = ((ku - 1) * 94) + (ten - 1)
+        if len(_temp) > pointer:
+            assert _temp[pointer] is None, (i, ku, ten, pointer, _temp[pointer], (ucs,))
+            _temp[pointer] = (ucs,)
+        else:
+            while len(_temp) < pointer:
+                _temp.append(None)
+            _temp.append((ucs,))
+    # Try to end it on a natural plane boundary.
+    _temp.extend([None] * (((94 * 94) - (len(_temp) % (94 * 94))) % (94 * 94)))
+    if not _temp:
+        _temp.extend([None] * (94 * 94)) # Don't just return an empty tuple.
+    ret = tuple(_temp)
+    del _temp[:]
+    # Write output cache.
+    f = open(cachefn, "w")
+    f.write(json.dumps(ret))
+    f.close()
+    return ret
+
 def fuse(arrays, filename):
     if not os.path.exists(os.path.join(cachedirectory, filename)):
         out = []
