@@ -78,9 +78,9 @@ Double-byte assignments:
 
 |Private assignment|Meaning|
 |---|---|
-|`IRR ? G*DM4 @`|JIS X 0208-1978|
-|`IRR 0 G*DM4 @`|JIS X 0208, version encoded by IBM-942|
-|`IRR 1 G*DM4 @`|JIS X 0208, version used by NEC PC'98 (default for this F-byte)|
+|`IRR ? G*DM4 @`|JIS C 6226-1978|
+|`IRR 0 G*DM4 @`|JIS C 6226, version encoded by IBM-942|
+|`IRR 1 G*DM4 @`|JIS C 6226, version used by NEC PC98 (default for this F-byte)|
 |`IRR ? G*DM4 A`|GB/T 2312-1980, with half of the GB 6345.1-1986 corrigienda, as shown in the ISO-IR-58 registration itself|
 |`IRR 0 G*DM4 A`|GB/T 12345|
 |`IRR 1 G*DM4 A`|GB 18030-2000 (only levels 1 and 2 unless in GBK DOCS)|
@@ -90,7 +90,7 @@ Double-byte assignments:
 |`IRR 5 G*DM4 A`|GB/T 2312, variant used on classic Mac OS|
 |`IRR 6 G*DM4 A`|GB/T 2312-1980, without GB 6345.1-1986 corrigienda (including script g, rather than fullwidth or standard g)|
 |`IRR 7 G*DM4 A`|GB/T 2312-1980, with corrigienda but not extensions from GB 6345.1-1986|
-|`IRR ? G*DM4 B`|JIS X 0208-1983|
+|`IRR ? G*DM4 B`|JIS C 6226 / X 0208-1983|
 |`IRR @ G*DM4 B`|JIS X 0208-1990 (standard sequence, listed here for completeness)|
 |`IRR 0 G*DM4 B`|JIS X 0208, WHATWG variant (default; synchronised with Windows-31J)|
 |`IRR 1 G*DM4 B`|JIS X 0208, "KanjiTalk 7" variant used on classic Mac OS|
