@@ -88,32 +88,32 @@ from ecma35.data.multibyte import mbmapparsers as parsers
 # Plane 4 kanji (gov.tw mappings first, then ICU mappings)
 #   04-02-59 U+FFF7A (SPUA)　 U+5B90 (宐) -- compare 04-06-05
 #     Note: U+FFF7A has the middle part looking like two interlocking counterrotated Ls.
-#   04-03-65 U+FFFFD (SPUA)　 U+5759 (坙) -- seems like a legit duplicate.
+#   04-03-65 U+FFFFD (SPUA)　 U+5759 (坙) -- seems like a legit duplicate (compare FE 03-68-63).
 #   04-04-76 U+2634B (𦍋)     U+8288 (芈)
 #   04-06-05  U+5B90 (宐)    None       　-- compare 04-02-59
 #   04-06-25 U+221F7 (𢇷)     U+5E9F (废)
-#   04-07-74 U+FFFFC (SPUA)　 U+80BB (肻)
+#   04-07-74 U+FFFFC (SPUA)　 U+80BB (肻) -- compare FE 03-70-17.
 #     Note: U+FFFFC has the lines within the meat radical drawn at angles.
 #   04-08-07 U+FFFFB (SPUA)　 U+488C (䢌) -- compare 15-08-82
 #     Note: U+FFFFB has the zig-zaggy style of the walking radical, like in handwriting.
 #     Can I just ask who the hell thought that deserved its own CNS codepoint?
-#   04-08-93 U+FFFFA (SPUA)　 U+5CD5 (峕) -- seems like a legit duplicate.
-#   04-10-78 U+FFFF9 (SPUA)　 U+79CC (秌)
+#   04-08-93 U+FFFFA (SPUA)　 U+5CD5 (峕) -- seems like a legit duplicate (compare FE 03-68-77).
+#   04-10-78 U+FFFF9 (SPUA)　 U+79CC (秌) -- compare FE 03-69-44.
 #     Note: Seemingly supposed to be a difference in the left dot direction on the fire radical?
 #     Tellingly, the text editor font I'm using renders U+79CC like TW Sung renders U+FFFF9.
 #     Also tellingly, U+79CC+E0100 using Adobe IVD sequences seems to do the opposite?
-#   04-16-34 U+FFFF8 (SPUA)　 U+98E4 (飤)
+#   04-16-34 U+FFFF8 (SPUA)　 U+98E4 (飤) -- compare FE 03-70-80
 #     Note: U+FFFF8 has the dot in the top part of the left radical drawn horizontally.
-#   04-24-60 U+FFFF7 (SPUA)　 U+6E7C (湼)
+#   04-24-60 U+FFFF7 (SPUA)　 U+6E7C (湼) -- compare FE 03-69-34.
 #     Note: U+FFFF7 uses a straight diagonal for the bottom stroke of the water radical.
 #     In my text editor font, U+6E7C does that anyway.
 #   04-25-38  U+FAD4 (䀹)     U+4039 (䀹)
 #   04-34-90 U+21C09 (𡰉)     U+5C32 (尲)
-#   04-36-56 U+FFFF6 (SPUA)　 U+7193 (熓)
+#   04-36-56 U+FFFF6 (SPUA)　 U+7193 (熓) -- compare FE 03-69-59.
 #     Similar to U+FFFF9, although this time the text editor font I'm using renders U+7193
 #     differently to TW Sung's U+FFFF6. Still an odd quibble.
 #   04-51-28 U+FFF7B (SPUA)　 U+8786 (螆) -- compare 15-49-93
-#   04-67-25 U+FFFF5 (SPUA)　 U+5E71 (幱)
+#   04-67-25 U+FFFF5 (SPUA)　 U+5E71 (幱) -- compare FE 03-70-87.
 #   04-72-47 U+2FA16 (䵖)     U+4D56 (䵖) -- compare 05-79-52
 #   05-79-52  U+4D56 (䵖)    U+2FA16 (䵖) -- compare 04-72-47
 #   05-90-24  U+4695 (䚕)    U+2F9CB (𧢮)
@@ -130,7 +130,7 @@ from ecma35.data.multibyte import mbmapparsers as parsers
 #   15-13-72 None       　U+2F807 (倂)
 #   15-16-59 None       　U+2F906 (𣴞)
 #   15-27-74  U+692C (椬) None
-#   15-28-30  U+6BF6 (毶) None       　-- compare 03-69-26 ("14"-69-26; see below) in UTC mapping
+#   15-28-30  U+6BF6 (毶) None       　-- compare FE 03-69-26 ("14"-69-26; see below) in UTC mapping
 #   15-28-69  U+713F (焿) None
 #   15-48-22  U+71B4 (熴) None
 #   15-49-93  U+8786 (螆) U+2F9BE (螆) -- compare 04-51-28

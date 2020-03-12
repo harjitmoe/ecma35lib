@@ -78,18 +78,40 @@ Double-byte assignments:
 
 |Private assignment|Meaning|
 |---|---|
-|`IRR ? G*DM4 A`|GB/T 2312-1980|
+|`IRR ? G*DM4 @`|JIS X 0208-1978|
+|`IRR 0 G*DM4 @`|JIS X 0208, version encoded by IBM-942|
+|`IRR 1 G*DM4 @`|JIS X 0208, version used by NEC PC'98 (default for this F-byte)|
+|`IRR ? G*DM4 A`|GB/T 2312-1980, with half of the GB 6345.1-1986 corrigienda, as shown in the ISO-IR-58 registration itself|
 |`IRR 0 G*DM4 A`|GB/T 12345|
 |`IRR 1 G*DM4 A`|GB 18030-2000 (only levels 1 and 2 unless in GBK DOCS)|
 |`IRR 2 G*DM4 A`|GB 18030-2005 (default; only levels 1 and 2 unless in GBK DOCS)|
 |`IRR 3 G*DM4 A`|GB 18030, WHATWG variant (only differs from GB 18030-2005 when in GBK DOCS)|
 |`IRR 4 G*DM4 A`|GB 18030, favouring duplicate mappings over PUA mappings for standard characters|
 |`IRR 5 G*DM4 A`|GB/T 2312, variant used on classic Mac OS|
+|`IRR 6 G*DM4 A`|GB/T 2312-1980, without GB 6345.1-1986 corrigienda (including script g, rather than fullwidth or standard g)|
+|`IRR 7 G*DM4 A`|GB/T 2312-1980, with corrigienda but not extensions from GB 6345.1-1986|
 |`IRR ? G*DM4 B`|JIS X 0208-1983|
 |`IRR @ G*DM4 B`|JIS X 0208-1990 (standard sequence, listed here for completeness)|
 |`IRR 0 G*DM4 B`|JIS X 0208, WHATWG variant (default; synchronised with Windows-31J)|
-|`IRR 1 G*DM4 B`|JIS X 0208, variant used on classic Mac OS|
+|`IRR 1 G*DM4 B`|JIS X 0208, "KanjiTalk 7" variant used on classic Mac OS|
 |`IRR 2 G*DM4 B`|JIS X 0208, "PostScript" variant used on classic Mac OS|
+|`IRR 3 G*DM4 B`|JIS X 0208, "KanjiTalk 6" variant used on classic Mac OS|
+|`IRR 4 G*DM4 B`|JIS X 0208, with UTC-style mapping of em dash / horizontal bar character|
+|`IRR 5 G*DM4 B`|JIS X 0208, Open Group version for JIS-Roman based EUC-JP|
+|`IRR 6 G*DM4 B`|JIS X 0208, Open Group version for ASCII-based EUC-JP|
+|`IRR 7 G*DM4 B`|JIS X 0208, Open Group version for Microsoft-style EUC-JP|
+|`IRR 8 G*DM4 D`|JIS X 0208, version encoded by IBM-954|
+|`IRR 9 G*DM4 D`|JIS X 0208, DoCoMo JIS emoji (falling through to WHATWG variant)|
+|`IRR : G*DM4 D`|JIS X 0208, KDDI JIS emoji (falling through to WHATWG variant)|
+|`IRR ; G*DM4 D`|JIS X 0208, SoftBank JIS emoji (falling through to WHATWG variant)|
+|`IRR ? G*DM4 D`|JIS X 0212:1990|
+|`IRR 0 G*DM4 D`|JIS X 0212 with va/vi/ve/vo|
+|`IRR 1 G*DM4 D`|JIS X 0212, Open Group version for JIS-Roman based EUC-JP|
+|`IRR 2 G*DM4 D`|JIS X 0212, Open Group version for ASCII-based EUC-JP|
+|`IRR 3 G*DM4 D`|JIS X 0212, Open Group version for Microsoft-style EUC-JP|
+|`IRR 4 G*DM4 D`|JIS X 0212, version encoded by IBM-954|
+|`IRR ? G*DM4 E`|CCITT Hanzi Code, as shown in ISO-IR-165 itself|
+|`IRR 0 G*DM4 E`|CCITT Hanzi Code, amended to follow GB 6345.1-1986 where applicable|
 |`G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, as used in EUC-TW|
 |`G*DM4 ! 2`|Hong Kong Supplementary Character Set, including ETEN characters (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`G*DM4 ! 3`|Non-ETEN Big5 kana and Cyrillic (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|

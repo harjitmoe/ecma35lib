@@ -127,7 +127,7 @@ annots = {
              'MS PMincho); U+223C is primarily intended as a mathematical '
              'operator, and usually shorter; U+FF5E is just the fullwidth '
              'version of the ASCII character and might therefore be rendered '
-             'as as either a tilde dash or a spacing tilde accent, of any glyph '
+             'as either a tilde dash or a spacing tilde accent, of any glyph '
              'width, within a roughly 1em advance—although a wave dash is the '
              'most common by far (although… it actually has a separate mapping '
              'at 01-02-18 in JIS X 0213, shown as a spacing accent in its chart).',

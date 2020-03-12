@@ -98,7 +98,6 @@ graphdata.gsets["ir058-2005"] = gb2312_2005 = (94, 2,
 graphdata.gsets["ir058-web"]  = gb2312_2005 # Not different here, but treated differently by gbkfilter
 graphdata.gsets["ir058-full"] = gb2312_full = (94, 2,
             parsers.read_main_plane("WHATWG/index-gb18030.txt", euckrlike=True, mapper = gb2005tofullmap))
-# Since graphdata.gsets isn't merely a dict, the above lines also set graphdata.codepoint_coverages
 
 # ITU's extension of ir058, i.e. with 6763 GB 2312 chars, 705 GB 8565.2 chars and 139 others.
 # Basically sticks a load of stuff (both hankaku and zenkaku) in what GBK would consider the

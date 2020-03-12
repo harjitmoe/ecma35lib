@@ -30,7 +30,6 @@ def _sort_by_kps(syll):
 
 # KS C 5601 / KS X 1001 EUC-KR Wansung RHS
 graphdata.gsets["ir149"] = wansung = (94, 2, parsers.read_main_plane("WHATWG/index-euc-kr.txt", euckrlike=True))
-# Since graphdata.gsets isn't merely a dict, the above line also sets graphdata.codepoint_coverages
 
 # The main-plane part of Apple's Wansung version, as opposed to its sidecarriage or
 #   single-byte extensions (mostly C1 replacements)
