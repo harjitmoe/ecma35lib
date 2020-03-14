@@ -135,18 +135,18 @@ graphdata.gsets["ir168arib"] = jisx0208_arib = (94, 2,
 graphdata.gsets["ir168docomo"] = jisx0208_arib = (94, 2, 
         parsers.fuse([parsers.read_main_plane("Emoji/emoj_imod.txt", sjis=1, plane=1, 
                                               mapper=mapper_caps_freedial),
-                      parsers.read_main_plane("ICU/docomo-sjis.ucm", sjis=1, plane=1)],
-                     "Emoji--DoCoMo-caps-freedial.json"))
+                      jisx0208_html5[2][:-840]],
+                     "Emoji--DoCoMo-caps-freedial-2.json"))
 graphdata.gsets["ir168kddi"] = jisx0208_arib = (94, 2, 
         parsers.fuse([parsers.read_main_plane("Emoji/emoj_kddi.txt", sjis=1, plane=1, 
                                               mapper=mapper_caps),
-                      parsers.read_main_plane("ICU/kddi-sjis.ucm", sjis=1, plane=1)],
-                     "Emoji--KDDI-caps.json"))
+                      parsers.read_main_plane("ICU/kddi-sjis.ucm", sjis=1, plane=1)[:-840]],
+                     "Emoji--KDDI-caps-3.json"))
 graphdata.gsets["ir168sbank"] = jisx0208_arib = (94, 2, 
         parsers.fuse([parsers.read_main_plane("Emoji/emoj_voda_auto.txt", sjis=1, plane=1, 
                                               mapper=mapper_caps_freedial),
-                      parsers.read_main_plane("ICU/softbank-sjis.ucm", sjis=1, plane=1)],
-                     "Emoji--Softbank-caps-freedial.json"))
+                      jisx0208_html5[2][:-840]],
+                     "Emoji--Softbank-caps-freedial-2.json"))
 
 graphdata.gsets["ibmsjisext"] = sjis_html5_g3 = (94, 2, read_jis_trailer("WHATWG/index-jis0208.txt"))
 # Yes, the decoder (specifically) of WHATWG SJIS (specifically) does this.

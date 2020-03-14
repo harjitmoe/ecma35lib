@@ -101,9 +101,9 @@ Double-byte assignments:
 |`IRR 6 G*DM4 B`|JIS X 0208, Open Group version for ASCII-based EUC-JP|
 |`IRR 7 G*DM4 B`|JIS X 0208, Open Group version for Microsoft-style EUC-JP|
 |`IRR 8 G*DM4 D`|JIS X 0208, version encoded by IBM-954|
-|`IRR 9 G*DM4 D`|JIS X 0208, DoCoMo JIS emoji (falling through to WHATWG variant)|
-|`IRR : G*DM4 D`|JIS X 0208, KDDI JIS emoji (falling through to WHATWG variant)|
-|`IRR ; G*DM4 D`|JIS X 0208, SoftBank JIS emoji (falling through to WHATWG variant)|
+|`IRR 9 G*DM4 D`|JIS X 0208, DoCoMo JIS emoji|
+|`IRR : G*DM4 D`|JIS X 0208, KDDI JIS emoji|
+|`IRR ; G*DM4 D`|JIS X 0208, SoftBank JIS emoji|
 |`IRR ? G*DM4 D`|JIS X 0212:1990|
 |`IRR 0 G*DM4 D`|JIS X 0212 with va/vi/ve/vo|
 |`IRR 1 G*DM4 D`|JIS X 0212, Open Group version for JIS-Roman based EUC-JP|
@@ -116,6 +116,9 @@ Double-byte assignments:
 |`G*DM4 ! 2`|Hong Kong Supplementary Character Set, including ETEN characters (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`G*DM4 ! 3`|Non-ETEN Big5 kana and Cyrillic (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`G*DM4 ! 4`|IBM extensions for Shift\_JIS (accepted by Shift\_JIS filter in G3 slot, mapped to/from Shift\_JIS by the same mapping scheme as JIS X 0213 plane 2)|
+|`G*DM4 ! 5`|DoCoMo Emoji extensions for Shift\_JIS (as above)|
+|`G*DM4 ! 6`|KDDI Emoji extensions for Shift\_JIS (as above)|
+|`G*DM4 ! 7`|SoftBank Emoji extensions for Shift\_JIS (as above)|
 
 # Carried out
 
