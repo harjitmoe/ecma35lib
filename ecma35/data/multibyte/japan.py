@@ -11,44 +11,6 @@ import unicodedata as ucd
 from ecma35.data import graphdata
 from ecma35.data.multibyte import mbmapparsers as parsers
 
-_temp = []
-def read_jis_trailer(fil, *, mapper=parsers.identitymap):
-    # Read the post-94^n part from the end of the extended JIS X 0208 index from WHATWG and map it
-    # onto a G3 set by JIS X 0213 rules. Or the same from a UTC-format SJIS mapping.
-    # Only used here, so not much point putting this in multibyte.parsers…
-    for _i in open(os.path.join(parsers.directory, fil), "r"):
-        if (not _i.strip()) or (_i[0] == "#"):
-            continue
-        byts, ucs = _i.split("\t", 2)[:2]
-        pointer = int(byts.strip(), 10)
-        ku = (pointer // 94) + 1
-        ten = (pointer % 94) + 1
-        if ku <= 94:
-            continue
-        elif ku <= 103:
-            g3ku = (1, 8, 3, 4, 5, 12, 13, 14, 15)[ku - 95]
-        else:
-            g3ku = ku + 78 - 104
-        g3pointer = ((g3ku - 1) * 94) + (ten - 1)
-        #
-        assert ucs[:2] in ("0x", "U+")
-        ucs = mapper(g3pointer, tuple(int(j, 16) for j in ucs[2:].split("+")))
-        #
-        if len(_temp) > g3pointer:
-            assert _temp[g3pointer] is None
-            _temp[g3pointer] = ucs
-        else:
-            while len(_temp) < g3pointer:
-                _temp.append(None)
-            _temp.append(ucs)
-    # Try to end it on a natural plane boundary.
-    _temp.extend([None] * (((94 * 94) - (len(_temp) % (94 * 94))) % (94 * 94)))
-    if not _temp:
-        _temp.extend([None] * (94 * 94)) # Don't just return an empty tuple.
-    r = tuple(_temp) # Making a tuple makes a copy, of course.
-    del _temp[:]
-    return r
-
 # Use of Zenkaku vs. Hankaku codepoints differs between the x0213.org mappings for EUC vs. SJIS.
 # If we don't know what SBCS it's being used with, best to just use Zenkaku consistently…
 def _flatten(u):
@@ -192,7 +154,8 @@ graphdata.gsets["ir168sbank"] = jisx0208_arib = (94, 2,
                       jisx0208_html5[2][:-840]],
                      "Emoji--Softbank-caps-freedial-2.json"))
 
-graphdata.gsets["ibmsjisext"] = sjis_html5_g3 = (94, 2, read_jis_trailer("WHATWG/index-jis0208.txt"))
+graphdata.gsets["ibmsjisext"] = sjis_html5_g3 = (94, 2, 
+        parsers.read_main_plane("WHATWG/index-jis0208.txt", sjis=1, plane=2))
 # Yes, the decoder (specifically) of WHATWG SJIS (specifically) does this.
 # TODO: this applies only to the Beyond region, figure out how to apply it to ibmsjisext
 #graphdata.gsets["ir168webpua"] = jisx0208_html5pua = (94, 2,

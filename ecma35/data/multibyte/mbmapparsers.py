@@ -37,20 +37,24 @@ def ahmap(pointer, ucs):
     return ucs
 
 def _grok_sjis(byts):
-    pku = byts[0]
-    if pku > 0xA0:
-        pku -= 0x40
-    pku -= 0x81
-    pten = byts[1]
-    if pten > 0x7F:
-        pten -= 1
-    pten -= 0x40
-    if pten >= 94:
-        ku = (pku * 2) + 2
-        ten = pten - 93
-    else:
-        ku = (pku * 2) + 1
-        ten = pten + 1
+    if not isinstance(byts, int):
+        pku = byts[0]
+        if pku > 0xA0:
+            pku -= 0x40
+        pku -= 0x81
+        pten = byts[1]
+        if pten > 0x7F:
+            pten -= 1
+        pten -= 0x40
+        if pten >= 94:
+            ku = (pku * 2) + 2
+            ten = pten - 93
+        else:
+            ku = (pku * 2) + 1
+            ten = pten + 1
+    else: # i.e. it's a pointer from a WHATWG file (still needs this, to process the SJIS trailer)
+        ku = (byts // 94) + 1
+        ten = (byts % 94) + 1
     #
     if ku <= 94:
         men = 1
@@ -265,9 +269,13 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
             # Format of the WHATWG-supplied indices for Windows-31J and JIS X 0212.
             byts, ucs = _i.split("\t", 2)[:2]
             pointer = int(byts.strip(), 10)
-            men = 1
-            ku = (pointer // 94) + 1
-            ten = (pointer % 94) + 1
+            men, ku, ten = _grok_sjis(pointer)
+            assert (men == 1) or sjis
+            if plane is not None: # i.e. if we want a particular plane's two-byte mapping.
+                if men != plane:
+                    continue
+                else:
+                    men = 1
             mkts = ((men, ku, ten),)
             if ku > 94:
                 continue
