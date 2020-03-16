@@ -177,12 +177,12 @@ for row in sets:
                     men = 1
                     ku = byts[0] - 0x20
                     ten = byts[1] - 0x20
+                pointer = ((men - 1) * (94 * 94)) + ((ku - 1) * 94) + (ten - 1)
                 if not group.unic:
                     puaunic = chr(int(group.pua, 16))
                     if (unic != puaunic) and _hashintsre.findall(unic):
                         hints2pua[pointer,
                                 tuple(ord(i) for i in unic)] = tuple(ord(i) for i in puaunic)
-                pointer = ((men - 1) * (94 * 94)) + ((ku - 1) * 94) + (ten - 1)
                 if pointer < len(suboutmap):
                     assert suboutmap[pointer] in (None, tuple(ord(i) for i in unic))
                     suboutmap[pointer] = tuple(ord(i) for i in unic)
