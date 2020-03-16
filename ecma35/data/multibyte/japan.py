@@ -20,23 +20,15 @@ def read_jis_trailer(fil, *, mapper=parsers.identitymap):
         if (not _i.strip()) or (_i[0] == "#"):
             continue
         byts, ucs = _i.split("\t", 2)[:2]
-        if byts.startswith("0x"):
-            if len(byts) == 6:
-                men, g3ku, ten = parsers._grok_sjis((int(byts[2:4], 16), int(byts[4:], 16)))
-                if men != 2:
-                    continue
-            else:
-                continue
+        pointer = int(byts.strip(), 10)
+        ku = (pointer // 94) + 1
+        ten = (pointer % 94) + 1
+        if ku <= 94:
+            continue
+        elif ku <= 103:
+            g3ku = (1, 8, 3, 4, 5, 12, 13, 14, 15)[ku - 95]
         else:
-            pointer = int(byts.strip(), 10)
-            ku = (pointer // 94) + 1
-            ten = (pointer % 94) + 1
-            if ku <= 94:
-                continue
-            elif ku <= 103:
-                g3ku = (1, 8, 3, 4, 5, 12, 13, 14, 15)[ku - 95]
-            else:
-                g3ku = ku + 78 - 104
+            g3ku = ku + 78 - 104
         g3pointer = ((g3ku - 1) * 94) + (ten - 1)
         #
         assert ucs[:2] in ("0x", "U+")
@@ -77,14 +69,65 @@ def map_to_zenkaku(pointer, ucs):
         return (_to_zenkaku[ucs[0]],)
     return ucs
 
+to_1978 = {
+    '―': '—',
+    #
+    '∈': None, '∋': None, '⊆': None, '⊇': None, '⊂': None, '⊃': None, '∪': None, '∩': None, 
+    '∧': None, '∨': None, '¬': None, '⇒': None, '⇔': None, '∀': None, '∃': None, '∠': None, 
+    '⊥': None, '⌒': None, '∂': None, '∇': None, '≡': None, '≒': None, '≪': None, '≫': None, 
+    '√': None, '∽': None, '∝': None, '∵': None, '∫': None, '∬': None, 'Å': None, '‰': None, 
+    '♯': None, '♭': None, '♪': None, '†': None, '‡': None, '¶': None, '◯': None, 
+    #
+    '─': None, '│': None, '┌': None, '┐': None, '┘': None, '└': None, '├': None, '┬': None, 
+    '┤': None, '┴': None, '┼': None, '━': None, '┃': None, '┏': None, '┓': None, '┛': None, 
+    '┗': None, '┣': None, '┳': None, '┫': None, '┻': None, '╋': None, '┠': None, '┯': None, 
+    '┨': None, '┷': None, '┿': None, '┝': None, '┰': None, '┥': None, '┸': None, '╂': None, 
+    #
+    '唖': '啞', '鯵': '鰺', '焔': '焰', '鴬': '鶯', '鴎': '鷗', '蛎': '蠣', '撹': '攪', '竃': '竈', 
+    '噛': '嚙', '潅': '灌', '諌': '諫', '侠': '俠', '尭': '堯', '躯': '軀', '繋': '繫', '頚': '頸', 
+    '鹸': '鹼', '砿': '礦', '麹': '麴', '屡': '屢', '蕊': '蘂', '繍': '繡', '蒋': '蔣', '醤': '醬', 
+    '靭': '靱', '賎': '賤', '掻': '搔', '痩': '瘦', '掴': '摑', '壷': '壺', '填': '塡', '顛': '顚', 
+    '砺': '礪', '梼': '檮', '涛': '濤', '祷': '禱', '涜': '瀆', '迩': '邇', '嚢': '囊', '蝿': '蠅', 
+    '溌': '潑', '醗': '醱', '桧': '檜', '頬': '頰', '槙': '槇', '侭': '儘', '麺': '麵', '薮': '藪', 
+    '遥': '遙', '莱': '萊', '篭': '籠', '蝋': '蠟', '儘': '侭', '壺': '壷', '攪': '撹', '攅': '攢', 
+    '檜': '桧', '檮': '梼', '濤': '涛', '灌': '潅', '瑶': '瑤', '礦': '砿', '礪': '砺', '竈': '竃', 
+    '籠': '篭', '蘂': '蕊', '藪': '薮', '蠣': '蛎', '蠅': '蝿', '諫': '諌', '賤': '賎', '邇': '迩', 
+    '靱': '靭', '頸': '頚', '鰺': '鯵', '鶯': '鴬', 
+    #
+    '堯': None, '槇': None, '遙': None, '瑤': None, '凜': None, '熙': None, 
+}
+to_1983 = {'―': '—', '凜': None, '熙': None}
+to_1990 = {'―': '—'}
+
+def utcto78jis(pointer, ucs):
+    sucs = "".join(chr(i) for i in ucs)
+    if sucs in to_1978:
+        ret = to_1978[sucs]
+        return tuple(ord(i) for i in ret) if ret else ret
+    return ucs
+def utcto83jis(pointer, ucs):
+    sucs = "".join(chr(i) for i in ucs)
+    if sucs in to_1983:
+        ret = to_1983[sucs]
+        return tuple(ord(i) for i in ret) if ret else ret
+    return ucs
+def utcto90jis(pointer, ucs):
+    sucs = "".join(chr(i) for i in ucs)
+    if sucs in to_1990:
+        ret = to_1990[sucs]
+        return tuple(ord(i) for i in ret) if ret else ret
+    return ucs
+
 # JIS C 6226:1978 / JIS X 0208:1978
-graphdata.gsets["ir042"] = jisx0208_1978 = (94, 2, parsers.read_main_plane("JIS-Conc/x208_1978.txt"))
+graphdata.gsets["ir042"] = jisx0208_1978 = (94, 2, 
+        parsers.read_main_plane("UTC/JIS0208.TXT", mapper = utcto78jis))
 graphdata.gsets["ir042ibm"] = jisx0208_ibm78 = (94, 2,
         parsers.read_main_plane("ICU/ibm-942_P12A-1999.ucm", sjis=True))
 graphdata.gsets["ir042nec"] = jisx0208_nec = (94, 2,
         parsers.read_main_plane("JIS-Conc/NEC-C-6226-visual.txt"))
 # JIS C 6226:1983 / JIS X 0208:1983
-graphdata.gsets["ir087"] = jisx0208_1983 = (94, 2, parsers.read_main_plane("JIS-Conc/x208_1983.txt"))
+graphdata.gsets["ir087"] = jisx0208_1983 = (94, 2, 
+        parsers.read_main_plane("UTC/JIS0208.TXT", mapper = utcto83jis))
 
 # JIS X 0212:1990 (i.e. the 1990 supplementary plane)
 graphdata.gsets["ir159"] = jisx0212 = (94, 2,
@@ -97,7 +140,8 @@ graphdata.gsets["ir159ibm"] = jisx0212ibm = (94, 2,
         parsers.read_main_plane("ICU/ibm-954_P101-2007.ucm", eucjp=1, plane=2))
 
 # JIS X 0208:1990 or 1997
-graphdata.gsets["ir168"] = jisx0208_1990 = (94, 2, parsers.read_main_plane("JIS-Conc/x208_1990.txt"))
+graphdata.gsets["ir168"] = jisx0208_1990 = (94, 2, 
+        parsers.read_main_plane("UTC/JIS0208.TXT", mapper = utcto90jis))
 graphdata.gsets["ir168utc"] = jisx0208_utc = (94, 2, parsers.read_main_plane("UTC/JIS0208.TXT"))
 graphdata.gsets["ir168ibm"] = jisx0208_ibm90 = (94, 2,
         parsers.read_main_plane("ICU/ibm-954_P101-2007.ucm", eucjp=1, plane=1))
@@ -113,7 +157,7 @@ kanjitalk6 = (jisx0208_applekt7[2][:8 * 94] + ((None,) * 188) + # Normal non-Kan
               jisx0208_appleps[2][12 * 94 : 13 * 94] +          # NEC Row Thirteen
               jisx0208_applekt7[2][87 * 94 : 89 * 94] +         # Vertical forms
               jisx0208_applekt7[2][15 * 94 : 84 * 94] + ((None,) * 940))
-graphdata.gsets["ir168mackt6"] = jisx0208_applekt7 = (94, 2, kanjitalk6)
+graphdata.gsets["ir168mackt6"] = jisx0208_applekt6 = (94, 2, kanjitalk6)
 
 # Emoji
 def mapper_caps_freedial(pointer, ucs):
@@ -153,12 +197,12 @@ graphdata.gsets["ibmsjisext"] = sjis_html5_g3 = (94, 2, read_jis_trailer("WHATWG
 # TODO: this applies only to the Beyond region, figure out how to apply it to ibmsjisext
 #graphdata.gsets["ir168webpua"] = jisx0208_html5pua = (94, 2,
 #        jisx0208_html5[2][:8836] + tuple(range(0xE000, 0xE758)) + jisx0208_html5[2][10716:])
-graphdata.gsets["docomosjisext"] = docomo_g3 = (94, 2, read_jis_trailer("Emoji/emoj_imod.txt", 
-                                                     mapper=mapper_caps_freedial))
-graphdata.gsets["kddisjisext"] = docomo_g3 = (94, 2, read_jis_trailer("Emoji/emoj_kddi.txt", 
-                                                     mapper=mapper_caps))
-graphdata.gsets["sbanksjisext"] = sbank_g3 = (94, 2, read_jis_trailer("Emoji/emoj_voda_auto.txt", 
-                                                     mapper=mapper_caps_freedial))
+graphdata.gsets["docomosjisext"] = docomo_g3 = (94, 2,
+        parsers.read_main_plane("Emoji/emoj_imod.txt", sjis=1, plane=2, mapper=mapper_caps_freedial))
+graphdata.gsets["kddisjisext"] = docomo_g3 = (94, 2, 
+        parsers.read_main_plane("Emoji/emoj_kddi.txt", sjis=1, plane=2, mapper=mapper_caps))
+graphdata.gsets["sbanksjisext"] = sbank_g3 = (94, 2, 
+        parsers.read_main_plane("Emoji/emoj_voda_auto.txt", sjis=1, plane=2, mapper=mapper_caps_freedial))
 
 # JIS X 2013:2000 and :2004
 # Note: Python's *jisx0213 (i.e. JIS X 0213:2000) codecs map 02-93-27 to U+9B1D, rather than U+9B1C
