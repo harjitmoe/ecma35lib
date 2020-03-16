@@ -145,8 +145,8 @@ graphdata.gsets["ir058-hant"] = gb12345 = (94, 2, tuple(tuple(i) if i is not Non
 # Being as GB 7589, 13131, 7590, 13132 do not include non-Kanji, Unihan mappings theoretically
 # can describe their entire mappings… in reality, the GB 13131 mapping contains more or less the
 # entire set with only a few gaps, whereas the GB 13132 mapping is full of holes.
-graphdata.gsets["gb13131"] = gb13131 = (94, 2, parsers.read_unihan_source("Unihan/Unihan_IRGSources.txt", "G", "G3"))
-graphdata.gsets["gb13132"] = gb13132 = (94, 2, parsers.read_unihan_source("Unihan/Unihan_IRGSources.txt", "G", "G5"))
+graphdata.gsets["gb13131"] = gb13131 = (94, 2, parsers.read_unihan_source("UCD/Unihan_IRGSources.txt", "G", "G3"))
+graphdata.gsets["gb13132"] = gb13132 = (94, 2, parsers.read_unihan_source("UCD/Unihan_IRGSources.txt", "G", "G5"))
 
 # Apple's version. Note that it changes 0xFD and 0xFE to single-byte codes.
 # Includes the vertical form encodings which would make it into GB 18030, plus a few more which

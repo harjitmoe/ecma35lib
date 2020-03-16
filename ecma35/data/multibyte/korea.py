@@ -48,11 +48,11 @@ f_order[""] = 0
 # KPS 10721 doesn't appear to be ECMA-35 structured.
 
 # KS X 1002. I can't find charts, leave alone mappings, which aren't restricted to hanja.
-graphdata.gsets["ksx1002-hanja"] = (94, 2, parsers.read_unihan_source("Unihan/Unihan_IRGSources.txt", "K", "K1"))
+graphdata.gsets["ksx1002-hanja"] = (94, 2, parsers.read_unihan_source("UCD/Unihan_IRGSources.txt", "K", "K1"))
 
 # KS X 1027. Part 1 seems complete, part 2 has a lot of holes. Other parts are not ECMA-35 structured.
-graphdata.gsets["ksx1027_1"] = (94, 2, parsers.read_unihan_source("Unihan/Unihan_IRGSources.txt", "K", "K2"))
-graphdata.gsets["ksx1027_2"] = (94, 2, parsers.read_unihan_source("Unihan/Unihan_IRGSources.txt", "K", "K3"))
+graphdata.gsets["ksx1027_1"] = (94, 2, parsers.read_unihan_source("UCD/Unihan_IRGSources.txt", "K", "K2"))
+graphdata.gsets["ksx1027_2"] = (94, 2, parsers.read_unihan_source("UCD/Unihan_IRGSources.txt", "K", "K3"))
 
 # Amounting to the entirety of the UHC extensions, in order:
 non_wangsung_johab = [i for i in range(0xAC00, 0xD7A4) 

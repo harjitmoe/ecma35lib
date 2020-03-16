@@ -10,6 +10,7 @@ import os
 import unicodedata as ucd
 from ecma35.data import graphdata
 from ecma35.data.multibyte import mbmapparsers as parsers
+from ecma35.data.multibyte import gmojigripe
 
 # Use of Zenkaku vs. Hankaku codepoints differs between the x0213.org mappings for EUC vs. SJIS.
 # If we don't know what SBCS it's being used with, best to just use Zenkaku consistently…
@@ -122,37 +123,19 @@ kanjitalk6 = (jisx0208_applekt7[2][:8 * 94] + ((None,) * 188) + # Normal non-Kan
 graphdata.gsets["ir168mackt6"] = jisx0208_applekt6 = (94, 2, kanjitalk6)
 
 # Emoji
-def mapper_caps_freedial(pointer, ucs):
-    # The [フリーダイヤル] approximation (inherited here from JIS-Conc) isn't needed; ICU uses U+27BF.
-    if ucs == (0xF862, 0x5B, 0x30D5, 0x30EA, 0x30FC, 0xF861,
-               0x30C0, 0x30A4, 0x30E4, 0xF860, 0x30EB, 0x005D):
-        return (0x27BF,)
-    elif len(ucs) == 2 and ucs[1] == 0x20E3:
-        return (ucs[0], 0xFE0F, 0x20E3)
-    return ucs
-def mapper_caps(pointer, ucs):
-    # The UCS representation without 0xFE0F is now considered obsolete, won't always render well.
-    if len(ucs) == 2 and ucs[1] == 0x20E3:
-        return (ucs[0], 0xFE0F, 0x20E3)
-    return ucs
 graphdata.gsets["ir168arib"] = jisx0208_arib = (94, 2, 
         parsers.fuse([parsers.read_main_plane("Emoji/pict_arib.txt", sjis=1), jisx0208_1990[2]],
                      "Emoji--ARIB.json"))
 graphdata.gsets["ir168docomo"] = jisx0208_arib = (94, 2, 
-        parsers.fuse([parsers.read_main_plane("Emoji/emoj_imod.txt", sjis=1, plane=1, 
-                                              mapper=mapper_caps_freedial),
-                      jisx0208_html5[2][:-840]],
-                     "Emoji--DoCoMo-caps-freedial-2.json"))
+        parsers.fuse([gmojigripe.outmap["docomo"][:94*94], jisx0208_html5[2][:-840]],
+                     "Emoji--DoCoMo-4.json"))
 graphdata.gsets["ir168kddi"] = jisx0208_arib = (94, 2, 
-        parsers.fuse([parsers.read_main_plane("Emoji/emoj_kddi.txt", sjis=1, plane=1, 
-                                              mapper=mapper_caps),
+        parsers.fuse([gmojigripe.outmap["kddi"][:94*94],
                       parsers.read_main_plane("ICU/kddi-sjis.ucm", sjis=1, plane=1)[:-840]],
-                     "Emoji--KDDI-caps-3.json"))
+                     "Emoji--KDDI-4.json"))
 graphdata.gsets["ir168sbank"] = jisx0208_arib = (94, 2, 
-        parsers.fuse([parsers.read_main_plane("Emoji/emoj_voda_auto.txt", sjis=1, plane=1, 
-                                              mapper=mapper_caps_freedial),
-                      jisx0208_html5[2][:-840]],
-                     "Emoji--Softbank-caps-freedial-2.json"))
+        parsers.fuse([gmojigripe.outmap["softbank"][:94*94], jisx0208_html5[2][:-840]],
+                     "Emoji--Softbank-4.json"))
 
 graphdata.gsets["ibmsjisext"] = sjis_html5_g3 = (94, 2, 
         parsers.read_main_plane("WHATWG/index-jis0208.txt", sjis=1, plane=2))
@@ -160,12 +143,9 @@ graphdata.gsets["ibmsjisext"] = sjis_html5_g3 = (94, 2,
 # TODO: this applies only to the Beyond region, figure out how to apply it to ibmsjisext
 #graphdata.gsets["ir168webpua"] = jisx0208_html5pua = (94, 2,
 #        jisx0208_html5[2][:8836] + tuple(range(0xE000, 0xE758)) + jisx0208_html5[2][10716:])
-graphdata.gsets["docomosjisext"] = docomo_g3 = (94, 2,
-        parsers.read_main_plane("Emoji/emoj_imod.txt", sjis=1, plane=2, mapper=mapper_caps_freedial))
-graphdata.gsets["kddisjisext"] = docomo_g3 = (94, 2, 
-        parsers.read_main_plane("Emoji/emoj_kddi.txt", sjis=1, plane=2, mapper=mapper_caps))
-graphdata.gsets["sbanksjisext"] = sbank_g3 = (94, 2, 
-        parsers.read_main_plane("Emoji/emoj_voda_auto.txt", sjis=1, plane=2, mapper=mapper_caps_freedial))
+graphdata.gsets["docomosjisext"] = docomo_g3 = (94, 2, gmojigripe.outmap["docomo"][94*94:])
+graphdata.gsets["kddisjisext"] = docomo_g3 = (94, 2, gmojigripe.outmap["kddi"][94*94:])
+graphdata.gsets["sbanksjisext"] = sbank_g3 = (94, 2, gmojigripe.outmap["softbank"][94*94:])
 
 # JIS X 2013:2000 and :2004
 # Note: Python's *jisx0213 (i.e. JIS X 0213:2000) codecs map 02-93-27 to U+9B1D, rather than U+9B1C

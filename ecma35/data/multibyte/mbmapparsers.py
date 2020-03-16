@@ -270,7 +270,8 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
             byts, ucs = _i.split("\t", 2)[:2]
             pointer = int(byts.strip(), 10)
             men, ku, ten = _grok_sjis(pointer)
-            assert (men == 1) or sjis
+            if men != 1 and not sjis:
+                continue
             if plane is not None: # i.e. if we want a particular plane's two-byte mapping.
                 if men != plane:
                     continue

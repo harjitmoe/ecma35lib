@@ -137,6 +137,7 @@ def show(name, *, plane=None):
     print()
 
 def _isbmppua(tpl):
+    assert not tpl or not isinstance(tpl[0], str), tpl
     return (len(tpl) == 1) and 0xE000 <= tpl[0] < 0xF900
 
 def _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname):
