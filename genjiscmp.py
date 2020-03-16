@@ -7,7 +7,7 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 from ecma35.data.multibyte import mbmapparsers as parsers
-from ecma35.data.multibyte import japan
+from ecma35.data.multibyte import japan, gmojigripe
 from ecma35.data import graphdata, showgraph
 import json, os
 
@@ -311,8 +311,11 @@ annots = {
  (1, 92, 89): 'Compare 01-30-63 and 02-66-83.',
  (1, 92, 90): 'Compare 01-40-16 and 02-66-87.',
  (1, 92, 91): 'Compare 01-02-44.',
- (1, 93, 70): "01-93-70 (or 02-92-12) is Softbank's Shibuya 109 emoji, U+E50A "
-              '(\ue50a) in the Unicode Private Use Area.',
+ (1, 93, 70): "Softbank's 01-93-70 (or 02-92-12) is their Shibuya 109 emoji, U+E50A "
+              'in the Unicode Private Use Area.\u2002See <a href='
+              '"https://emojipedia.org/shibuya/">documentation on Emojipedia</a>.',
+ (1, 93, 87): "Softbank's 01-93-83 through 01-93-87 (or 02-92-60 through 02-92-64) "
+              "are a Vodafone logo.",
  (1, 93, 90): 'Compare 01-43-43 and 02-72-04.',
  (1, 94, 3): 'Compare 01-37-31 and 02-72-19.',
  (1, 94, 69): 'Compare 01-18-10 and 02-76-31.',
@@ -362,11 +365,19 @@ annots = {
  (2, 76, 59): 'Compare 01-24-20 and 01-94-74.',
  (2, 76, 79): 'Compare 01-25-77 and 01-94-79.',
  (2, 76, 80): 'Compare 01-44-45 and 01-94-80.',
+ (2, 84, 86): 'Softbank\'s 02-84-86 is named "J-PHONE SHOP".',
+ (2, 84, 87): 'Softbank\'s 02-84-87 is named "SKY WEB".',
+ (2, 84, 88): 'Softbank\'s 02-84-88 is named "SKY WALKER".',
+ (2, 84, 89): 'Softbank\'s 02-84-89 is named "SKY MELODY".',
+ (2, 84, 92): 'Softbank\'s 02-84-90 through 02-84-90 is named "J-PHONE".',
+ (2, 92, 58): 'Softbank\'s 02-92-58 through 02-92-59 is named "J-SKY".',
  (2, 89, 21): 'Compare 01-02-44.',
  (2, 89, 28): 'Compare 01-02-72.',
- (2, 92, 12): "02-92-12 (or 01-93-70) is Softbank's Shibuya 109 emoji, U+E50A "
+ (2, 92, 12): "Softbank's 02-92-12 (or 01-93-70) is their Shibuya 109 emoji, U+E50A "
               'in the Unicode Private Use Area.\u2002See <a href='
               '"https://emojipedia.org/shibuya/">documentation on Emojipedia</a>.',
+ (2, 92, 64): "Softbank's 02-92-60 through 02-92-64 (or 01-93-83 through 01-93-87) "
+              "are a Vodafone logo.",
  (2, 93, 27): "For some reason, Python's 2000 JIS codecs (unlike its 2004 JIS "
               'codecs) map 02-93-27 to U+9B1D (鬝), not to U+9B1C. The '
               'ISO-IR-229 registration (registered for the second plane of '
@@ -394,7 +405,7 @@ for n, p in enumerate([plane1, plane2]):
         showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ja", part=q, css="/css/jis.css",
                              menuurl="/jis-conc.html", menuname="JIS character set variant comparison",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
-                             annots=annots)
+                             annots=annots, cdispmap=gmojigripe.hints2pua)
         f.close()
 
 

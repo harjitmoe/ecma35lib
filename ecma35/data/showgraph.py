@@ -155,7 +155,7 @@ def _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname):
 
 def dump_plane(outfile, planefunc, kutenfunc,
                number, setnames, plarray, *,
-               part=0, lang="zh-TW", css=None, annots={},
+               part=0, lang="zh-TW", css=None, annots={}, cdispmap={}, 
                menuurl=None, menuname="Up to menu",
                lasturl=None, nexturl=None, lastname=None, nextname=None):
     zplarray = tuple(zip(*plarray))
@@ -235,38 +235,41 @@ def dump_plane(outfile, planefunc, kutenfunc,
                     print(strep.rstrip("\uF87D\uF87F"), file=outfile)
                 print("</span>", file=outfile)
                 print("<br><span class=codepoint>", file=outfile)
-                print("U+" + "<wbr>+".join("{:04X}".format(j) for j in i), file=outfile)
-                if len(i) == 1:
+                pointer = ((number - 1) * (94 * 94)) + ((row - 1) * 94) + (cell - 1)
+                cdisplayi = cdispmap.get((pointer, i), i)
+                print("U+" + "<wbr>+".join("{:04X}".format(j) for j in cdisplayi), file=outfile)
+                if len(cdisplayi) == 1:
                     #####################################
                     # BASIC MULTILINGUAL PLANE
-                    if i[0] < 0x80:
+                    if cdisplayi[0] < 0x80:
                         print("(<abbr title='American Standard Code for " +
                               "Information Interchange'>ASCII</abbr>)", file=outfile)
-                    elif 0x80 <= i[0] < 0x100:
+                    elif 0x80 <= cdisplayi[0] < 0x100:
                         print("(<abbr title='Latin-1 Supplement'>LAT1S</abbr>)", file=outfile)
-                    elif 0x2E80 <= i[0] < 0x2FE0:
-                        print("(<abbr title='CJK Radical'>RAD</abbr>)", file=outfile)
-                    elif 0x31C0 <= i[0] < 0x31E0:
-                        print("(<abbr title='CJK Stroke'>STRK</abbr>)", file=outfile)
-                    elif 0x3400 <= i[0] < 0x4DC0:
-                        print("(<abbr title='CJK Extension A'>CJKA</abbr>)", file=outfile)
-                    elif 0x4E00 <= i[0] < 0x9FA6:
+                    elif 0x2E80 <= cdisplayi[0] < 0x2FE0:
+                        print("(<abbr title='Code-point for a radical'>RAD</abbr>)", file=outfile)
+                    elif 0x31C0 <= cdisplayi[0] < 0x31E0:
+                        print("(<abbr title='Code-point for a stroke'>STRK</abbr>)", file=outfile)
+                    elif 0x3400 <= cdisplayi[0] < 0x4DC0:
+                        print("(<abbr title='Chinese/Japanese/Korean Extension A'>CJKA</abbr>)",  
+                              file=outfile)
+                    elif 0x4E00 <= cdisplayi[0] < 0x9FA6:
                         print("(<abbr title='Unified Repertoire and Ordering'>URO</abbr>)", file=outfile)
-                    elif 0x9FA6 <= i[0] < 0xA000:
+                    elif 0x9FA6 <= cdisplayi[0] < 0xA000:
                         print("(<abbr title='Appendage to Unified Repertoire and Ordering'>URO+</abbr>)", 
                               file=outfile)
-                    elif 0xE000 <= i[0] < 0xF900:
+                    elif 0xE000 <= cdisplayi[0] < 0xF900:
                         print("(<abbr title='Private Use Area'>PUA</abbr>)", file=outfile)
-                    elif 0xF900 <= i[0] < 0xFB00: # the BMP's Compatibility Ideographs block
-                        if i[0] in (0xFA0E, 0xFA0F, 0xFA11, 0xFA13, 0xFA14, 0xFA1F,
+                    elif 0xF900 <= cdisplayi[0] < 0xFB00: # the BMP's Compatibility Ideographs block
+                        if cdisplayi[0] in (0xFA0E, 0xFA0F, 0xFA11, 0xFA13, 0xFA14, 0xFA1F,
                                     0xFA21, 0xFA23, 0xFA24, 0xFA27, 0xFA28, 0xFA29):
                             print("(<abbr title='Dirty Dozen (of unified ideographs in the "
                                   "Compatibility Ideographs block)'>DD</abbr>)", file=outfile)
                         else:
                             print("(<abbr title='Compatibility Ideograph'>CI</abbr>)", file=outfile)
-                    elif 0xFE50 <= i[0] < 0xFE70:
+                    elif 0xFE50 <= cdisplayi[0] < 0xFE70:
                         print("(<abbr title='Small Form Variant'>SFV</abbr>)", file=outfile)
-                    elif (0xFF01 <= i[0] < 0xFF61) or (0xFFE0 <= i[0] < 0xFFE7):
+                    elif (0xFF01 <= cdisplayi[0] < 0xFF61) or (0xFFE0 <= i[0] < 0xFFE7):
                         print("(<abbr title='Full-Width Form'>FWF</abbr>)", file=outfile)
                     elif i[0] in (0xFFFC, 0xFFFD):
                         print("(<abbr title='Replacement Character'>REPL</abbr>)", file=outfile)
@@ -275,41 +278,49 @@ def dump_plane(outfile, planefunc, kutenfunc,
                               file=outfile)
                     #####################################
                     # SUPPLEMENTARY MULTILINGUAL PLANE
-                    elif 0x10000 <= i[0] < 0x20000:
+                    elif 0x10000 <= cdisplayi[0] < 0x20000:
                         print("(<abbr title='Supplementary Multilingual Plane'>SMP</abbr>)", 
                               file=outfile)
                     #####################################
                     # SUPPLEMENTARY IDEOGRAPHIC PLANE
-                    elif 0x20000 <= i[0] < 0x2A6E0:
-                        print("(<abbr title='CJK Extension B'>CJKB</abbr>)", file=outfile)
-                    elif 0x2A700 <= i[0] < 0x2B740:
-                        print("(<abbr title='CJK Extension C'>CJKC</abbr>)", file=outfile)
-                    elif 0x2B740 <= i[0] < 0x2B820:
-                        print("(<abbr title='CJK Extension D'>CJKD</abbr>)", file=outfile)
-                    elif 0x2B820 <= i[0] < 0x2CEB0:
-                        print("(<abbr title='CJK Extension E'>CJKE</abbr>)", file=outfile)
-                    elif 0x2CEB0 <= i[0] < 0x2EBF0:
-                        print("(<abbr title='CJK Extension F'>CJKF</abbr>)", file=outfile)
-                    elif 0x2F800 <= i[0] < 0x2FA20:
+                    elif 0x20000 <= cdisplayi[0] < 0x2A6E0:
+                        print("(<abbr title='Chinese/Japanese/Korean Extension B'>CJKB</abbr>)",  
+                              file=outfile)
+                    elif 0x2A700 <= cdisplayi[0] < 0x2B740:
+                        print("(<abbr title='Chinese/Japanese/Korean Extension C'>CJKC</abbr>)",  
+                              file=outfile)
+                    elif 0x2B740 <= cdisplayi[0] < 0x2B820:
+                        print("(<abbr title='Chinese/Japanese/Korean Extension D'>CJKD</abbr>)",  
+                              file=outfile)
+                    elif 0x2B820 <= cdisplayi[0] < 0x2CEB0:
+                        print("(<abbr title='Chinese/Japanese/Korean Extension E'>CJKE</abbr>)",  
+                              file=outfile)
+                    elif 0x2CEB0 <= cdisplayi[0] < 0x2EBF0:
+                        print("(<abbr title='Chinese/Japanese/Korean Extension F'>CJKF</abbr>)",  
+                              file=outfile)
+                    elif 0x2F800 <= cdisplayi[0] < 0x2FA20:
                         print("(<abbr title='Compatibility Ideographs Supplement'>CIS</abbr>)", 
                               file=outfile)
-                    elif 0x20000 <= i[0] < 0x30000:
+                    elif 0x20000 <= cdisplayi[0] < 0x30000:
                         print("(<abbr title='Miscellaneous Supplementary Ideographic Plane'>SIP</abbr>)", 
                               file=outfile)
                     #####################################
                     # TERTIARY IDEOGRAPHIC PLANE
-                    elif 0x30000 <= i[0] < 0x40000:
+                    elif 0x30000 <= cdisplayi[0] < 0x31350:
+                        print("(<abbr title='Chinese/Japanese/Korean Extension G'>CJKG</abbr>)",  
+                              file=outfile)
+                    elif 0x30000 <= cdisplayi[0] < 0x40000:
                         print("(<abbr title='Tertiary Ideographic Plane'>TIP</abbr>)", file=outfile)
                     #####################################
                     # SUPPLEMENTARY SPECIAL-PURPOSE PLANE
-                    elif 0xE0000 <= i[0] < 0xF0000:
+                    elif 0xE0000 <= cdisplayi[0] < 0xF0000:
                         print("(<abbr title='Supplementary Special-purpose Plane'>SSP</abbr>)", 
                               file=outfile)
                     #####################################
                     # SUPPLEMENTARY PRIVATE USE AREA
-                    elif 0xF0000 <= i[0] < 0x100000:
+                    elif 0xF0000 <= cdisplayi[0] < 0x100000:
                         print("(<abbr title='Supplementary Private-Use Area A'>SPUA</abbr>)", file=outfile)
-                    elif i[0] >= 0x100000:
+                    elif cdisplayi[0] >= 0x100000:
                         print("(<abbr title='Supplementary Private-Use Area B'>SPUB</abbr>)", file=outfile)
                 print("</span></td>", file=outfile)
             print("</tr>", file=outfile)

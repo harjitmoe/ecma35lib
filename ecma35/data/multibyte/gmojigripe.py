@@ -6,12 +6,30 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+# softbank (2, 84, 86) J-PHONE SHOP
+# softbank (2, 84, 87) SKY WEB
+# softbank (2, 84, 88) SKY WALKER
+# softbank (2, 84, 89) SKY MELODY
+# softbank (2, 84, 90) J-PHONE 1
+# softbank (2, 84, 91) J-PHONE 2
+# softbank (2, 84, 92) J-PHONE 3
+# softbank (2, 92, 58) J-SKY1
+# softbank (2, 92, 59) J-SKY2
+# 
+# softbank (1, 93, 70) BOUTIQUE 109
+# softbank (1, 93, 83) VODAFONE1
+# softbank (1, 93, 84) VODAFONE2
+# 
+# softbank (2, 92, 12) BOUTIQUE 109
+# softbank (2, 92, 60) VODAFONE1
+# softbank (2, 92, 61) VODAFONE2
+
 # Row format: <SPUA codepoint>\t<SPUA UTF-16 escape>\t<SPUA UTF-8 escape>\t<name><kddi><docomo><softbank>\t\t\t
 # Kddi:     {\t<substitute>} || {\t\t<decimal>\t<Shift_JIS (beyond JIS) hex>\t<PUA? hex>\t<JIS hex>\t<Shift_JIS (from JIS) hex>}
 # Docomo:   {\t<substitute>} || {\t\t<decimal>\t<Shift_JIS hex>\t<PUA? hex>\t<JIS hex>}
 # Softbank: {\t<substitute>} || {\t\t<decimal>\t<Shift_JIS hex>\t<PUA? hex>\t<JIS hex>}
 
-import os, collections, re
+import os, collections, re, sys
 import unicodedata as ucd
 from ecma35.data.multibyte import mbmapparsers as parsers
 
@@ -26,6 +44,7 @@ forced = {
     "FE82B": "\u27BF", # Not in the UCD data, but de-facto supported at 27BF, and 27BF used by ICU.
 }
 outmap = {}
+hints2pua = {}
 
 def pull(line, row, name, *, iskddi = False):
     mystruct = NonKddiAllocation if not iskddi else KddiAllocation
@@ -157,6 +176,11 @@ for row in sets:
                     men = 1
                     ku = byts[0] - 0x20
                     ten = byts[1] - 0x20
+                if not group.unic:
+                    puaunic = chr(int(group.pua, 16))
+                    if unic != puaunic:
+                        hints2pua[pointer,
+                                tuple(ord(i) for i in unic)] = tuple(ord(i) for i in puaunic)
                 pointer = ((men - 1) * (94 * 94)) + ((ku - 1) * 94) + (ten - 1)
                 if pointer < len(suboutmap):
                     assert suboutmap[pointer] in (None, tuple(ord(i) for i in unic))
