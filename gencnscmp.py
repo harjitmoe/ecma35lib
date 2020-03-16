@@ -69,7 +69,7 @@ plane3 = (3, ("UTC CNS", "Yasuoka CNS", "ICU CNS 1992",
               parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 2.txt", plane=3),
               parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 15.txt", plane=3)
           )),
-          graphdata.gsets["ir183"][2],
+          graphdata.gsets["ir183-full"][2],
           graphdata.gsets["ir183-1988plus"][2],
 ])
 

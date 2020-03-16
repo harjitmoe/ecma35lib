@@ -120,12 +120,13 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
             continue # ICU delimitors we don't care about.
         elif _i[:2] == "0x":
             # Consortium-style format, over GL (or GR with eucjp=1) without transformation.
-            if _i.split("#", 1)[0].count("0x") == 3:
+            if _i.split("#", 1)[0].replace("+0x", "+").count("0x") == 3:
                 # Consortium-style format for JIS X 0208 (just skip the SJIS column)
                 if not sjis:
                     _i = _i.split("\t", 1)[1]
                 else:
                     _i = "\t".join(_i.split("\t", 2)[1::2])
+            assert "\t" in _i, _i
             byts, ucs = _i.split("\t", 2)[:2]
             if sjis:
                 if len(byts) == 6:

@@ -221,18 +221,13 @@ graphdata.gsets["ir172"] = cns2 = (94, 2, cns[planesize * 1 : planesize * 2])
 #   be the current 毵 versus the CNS11643.TXT 毶 at 69-26). Note that an unrelated plane 14
 #   was added in 2007.
 graphdata.gsets["ir183"] = cns3 = (94, 2, cns[planesize * 2 : planesize * 3])
-_ir183full = []
-for _n, _i in enumerate(parsers.read_main_plane("UTC/CNS11643.TXT", plane=14)):
-    if _i and cns[(planesize * 2) + _n]:
-        assert (cns[(planesize * 2) + _n] == _i) or (_n == 6417)
-        _ir183full.append(_i)
-    elif cns[(planesize * 2) + _n]:
-        _ir183full.append(cns[(planesize * 2) + _n])
-    else:
-        _ir183full.append(_i)
-graphdata.gsets["ir183-1988"] = cns3_1988 = (94, 2, tuple(_ir183full)[:6319])
-graphdata.gsets["ir183-1988plus"] = cns3plus = (94, 2, tuple(_ir183full))
+_ir183oldirg = parsers.read_main_plane("UTC/CNS11643.TXT", plane=14)
+_ir183fullalt = parsers.fuse([_ir183oldirg, cns3[2]], "ir183fullalt.json")
+_ir183full = parsers.fuse([cns3[2], _ir183oldirg], "ir183full.json")
+graphdata.gsets["ir183-1988"] = cns3_1988 = (94, 2, tuple(_ir183fullalt)[:6319])
+graphdata.gsets["ir183-1988plus"] = cns3plus = (94, 2, tuple(_ir183fullalt))
 graphdata.gsets["ir183-1992"] = cns3_1988 = (94, 2, tuple(_ir183full)[:6148])
+graphdata.gsets["ir183-full"] = cns3_1988 = (94, 2, tuple(_ir183full))
 
 graphdata.gsets["ir184"] = cns4 = (94, 2, cns[planesize * 3 : planesize * 4])
 graphdata.gsets["ir185"] = cns5 = (94, 2, cns[planesize * 4 : planesize * 5])

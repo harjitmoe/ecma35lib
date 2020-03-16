@@ -6,7 +6,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import os
+import os, json
 import unicodedata as ucd
 from ecma35.data import graphdata
 from ecma35.data.multibyte import mbmapparsers as parsers
@@ -87,7 +87,7 @@ graphdata.gsets["ir042"] = jisx0208_1978 = (94, 2,
 graphdata.gsets["ir042ibm"] = jisx0208_ibm78 = (94, 2,
         parsers.read_main_plane("ICU/ibm-942_P12A-1999.ucm", sjis=True))
 graphdata.gsets["ir042nec"] = jisx0208_nec = (94, 2,
-        parsers.read_main_plane("JIS-Conc/NEC-C-6226-visual.txt"))
+        parsers.read_main_plane("Custom/NEC-C-6226-visual.txt"))
 # JIS C 6226:1983 / JIS X 0208:1983
 graphdata.gsets["ir087"] = jisx0208_1983 = (94, 2, 
         parsers.read_main_plane("UTC/JIS0208.TXT", mapper = utcto83jis))
@@ -112,9 +112,10 @@ graphdata.gsets["ir168ibm"] = jisx0208_ibm90 = (94, 2,
 graphdata.gsets["ir168web"] = jisx0208_html5 = (94, 2,
         parsers.read_main_plane("WHATWG/index-jis0208.txt"))
 graphdata.gsets["ir168mac"] = jisx0208_applekt7 = (94, 2,
-        parsers.read_main_plane("JIS-Conc/sjis_mac_std9_0208part.txt", mapper = parsers.ahmap))
+    tuple(parsers.ahmap(0, tuple(i)) if i is not None else None 
+    for i in json.load(open(os.path.join(parsers.directory, "Vendor/macJIS.json"), "r"))))
 graphdata.gsets["ir168macps"] = jisx0208_appleps = (94, 2,
-        parsers.read_main_plane("JIS-Conc/sjis_mac_ps_0208part.txt", mapper = parsers.ahmap))
+        parsers.read_main_plane("Custom/JAPAN_PS.TXT", sjis=1, plane=1, mapper = parsers.ahmap))
 kanjitalk6 = (jisx0208_applekt7[2][:8 * 94] + ((None,) * 188) + # Normal non-Kanji rows
               jisx0208_applekt7[2][84 * 94 : 86 * 94] +         # Vertical forms
               jisx0208_appleps[2][12 * 94 : 13 * 94] +          # NEC Row Thirteen
@@ -124,7 +125,7 @@ graphdata.gsets["ir168mackt6"] = jisx0208_applekt6 = (94, 2, kanjitalk6)
 
 # Emoji
 graphdata.gsets["ir168arib"] = jisx0208_arib = (94, 2, 
-        parsers.fuse([parsers.read_main_plane("Emoji/pict_arib.txt", sjis=1), jisx0208_1990[2]],
+        parsers.fuse([parsers.read_main_plane("Custom/pict_arib.txt", sjis=1), jisx0208_1990[2]],
                      "Emoji--ARIB.json"))
 graphdata.gsets["ir168docomo"] = jisx0208_arib = (94, 2, 
         parsers.fuse([gmojigripe.outmap["docomo"][:94*94], jisx0208_html5[2][:-840]],
