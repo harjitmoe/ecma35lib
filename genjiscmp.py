@@ -7,7 +7,7 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 from ecma35.data.multibyte import mbmapparsers as parsers
-from ecma35.data.multibyte import japan, gmojigripe
+from ecma35.data.multibyte import japan, cellemojidata
 from ecma35.data import graphdata, showgraph
 import json, os
 
@@ -369,8 +369,8 @@ annots = {
  (2, 84, 87): 'Softbank\'s 02-84-87 is named "SKY WEB".',
  (2, 84, 88): 'Softbank\'s 02-84-88 is named "SKY WALKER".',
  (2, 84, 89): 'Softbank\'s 02-84-89 is named "SKY MELODY".',
- (2, 84, 92): 'Softbank\'s 02-84-90 through 02-84-90 is named "J-PHONE".',
- (2, 92, 58): 'Softbank\'s 02-92-58 through 02-92-59 is named "J-SKY".',
+ (2, 84, 92): 'Softbank\'s 02-84-90 through 02-84-92 is named "J-PHONE".',
+ (2, 92, 59): 'Softbank\'s 02-92-58 through 02-92-59 is named "J-SKY".',
  (2, 89, 21): 'Compare 01-02-44.',
  (2, 89, 28): 'Compare 01-02-72.',
  (2, 92, 12): "Softbank's 02-92-12 (or 01-93-70) is their Shibuya 109 emoji, U+E50A "
@@ -405,7 +405,7 @@ for n, p in enumerate([plane1, plane2]):
         showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ja", part=q, css="/css/jis.css",
                              menuurl="/jis-conc.html", menuname="JIS character set variant comparison",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
-                             annots=annots, cdispmap=gmojigripe.hints2pua)
+                             annots=annots, cdispmap=cellemojidata.hints2pua)
         f.close()
 
 

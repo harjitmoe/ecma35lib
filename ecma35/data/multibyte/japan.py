@@ -10,7 +10,7 @@ import os, json
 import unicodedata as ucd
 from ecma35.data import graphdata
 from ecma35.data.multibyte import mbmapparsers as parsers
-from ecma35.data.multibyte import gmojigripe
+from ecma35.data.multibyte import cellemojidata
 
 # Use of Zenkaku vs. Hankaku codepoints differs between the x0213.org mappings for EUC vs. SJIS.
 # If we don't know what SBCS it's being used with, best to just use Zenkaku consistently…
@@ -128,14 +128,14 @@ graphdata.gsets["ir168arib"] = jisx0208_arib = (94, 2,
         parsers.fuse([parsers.read_main_plane("Custom/pict_arib.txt", sjis=1), jisx0208_1990[2]],
                      "Emoji--ARIB.json"))
 graphdata.gsets["ir168docomo"] = jisx0208_arib = (94, 2, 
-        parsers.fuse([gmojigripe.outmap["docomo"][:94*94], jisx0208_html5[2][:-840]],
+        parsers.fuse([cellemojidata.outmap["docomo"][:94*94], jisx0208_html5[2][:-840]],
                      "Emoji--DoCoMo-4.json"))
 graphdata.gsets["ir168kddi"] = jisx0208_arib = (94, 2, 
-        parsers.fuse([gmojigripe.outmap["kddi"][:94*94],
+        parsers.fuse([cellemojidata.outmap["kddi"][:94*94],
                       parsers.read_main_plane("ICU/kddi-sjis.ucm", sjis=1, plane=1)[:-840]],
                      "Emoji--KDDI-4.json"))
 graphdata.gsets["ir168sbank"] = jisx0208_arib = (94, 2, 
-        parsers.fuse([gmojigripe.outmap["softbank"][:94*94], jisx0208_html5[2][:-840]],
+        parsers.fuse([cellemojidata.outmap["softbank"][:94*94], jisx0208_html5[2][:-840]],
                      "Emoji--Softbank-4.json"))
 
 graphdata.gsets["ibmsjisext"] = sjis_html5_g3 = (94, 2, 
@@ -144,9 +144,9 @@ graphdata.gsets["ibmsjisext"] = sjis_html5_g3 = (94, 2,
 # TODO: this applies only to the Beyond region, figure out how to apply it to ibmsjisext
 #graphdata.gsets["ir168webpua"] = jisx0208_html5pua = (94, 2,
 #        jisx0208_html5[2][:8836] + tuple(range(0xE000, 0xE758)) + jisx0208_html5[2][10716:])
-graphdata.gsets["docomosjisext"] = docomo_g3 = (94, 2, gmojigripe.outmap["docomo"][94*94:])
-graphdata.gsets["kddisjisext"] = docomo_g3 = (94, 2, gmojigripe.outmap["kddi"][94*94:])
-graphdata.gsets["sbanksjisext"] = sbank_g3 = (94, 2, gmojigripe.outmap["softbank"][94*94:])
+graphdata.gsets["docomosjisext"] = docomo_g3 = (94, 2, cellemojidata.outmap["docomo"][94*94:])
+graphdata.gsets["kddisjisext"] = docomo_g3 = (94, 2, cellemojidata.outmap["kddi"][94*94:])
+graphdata.gsets["sbanksjisext"] = sbank_g3 = (94, 2, cellemojidata.outmap["softbank"][94*94:])
 
 # JIS X 2013:2000 and :2004
 # Note: Python's *jisx0213 (i.e. JIS X 0213:2000) codecs map 02-93-27 to U+9B1D, rather than U+9B1C
