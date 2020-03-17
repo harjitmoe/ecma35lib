@@ -218,6 +218,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
                     else:
                         print("<td><span class=codepicture lang={}>".format(lang), file=outfile)
                 #
+                pointer = ((number - 1) * (94 * 94)) + ((row - 1) * 94) + (cell - 1)
                 strep = strep.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
                 if ucd.category(strep[0])[0] == "M":
                     strep = "◌" + strep
@@ -229,13 +230,19 @@ def dump_plane(outfile, planefunc, kutenfunc,
                     print("<span class=vertical>", file=outfile)
                     print(strep.rstrip("\uF87E"), file=outfile)
                     print("</span>", file=outfile)
+                elif i[-1] == 0xF87A: # Apple encoding hint for inverse form
+                    print("<span class=inverse>", file=outfile)
+                    print(strep.replace("\uF87A", ""), file=outfile)
+                    print("</span>", file=outfile)
                 else:
                     # Horizontal presentation form, alternative form.
                     # Neither of which we can really do anything with here.
+                    if (strep[-1] == "\uF87F") and ((pointer, i) in cdispmap):
+                        # Since there'd be no indicator otherwise.
+                        strep = "〾" + strep
                     print(strep.rstrip("\uF87D\uF87F"), file=outfile)
                 print("</span>", file=outfile)
                 print("<br><span class=codepoint>", file=outfile)
-                pointer = ((number - 1) * (94 * 94)) + ((row - 1) * 94) + (cell - 1)
                 cdisplayi = cdispmap.get((pointer, i), i)
                 print("U+" + "<wbr>+".join("{:04X}".format(j) for j in cdisplayi), file=outfile)
                 if len(cdisplayi) == 1:
@@ -310,7 +317,8 @@ def dump_plane(outfile, planefunc, kutenfunc,
                         print("(<abbr title='Chinese/Japanese/Korean Extension G'>CJKG</abbr>)",  
                               file=outfile)
                     elif 0x30000 <= cdisplayi[0] < 0x40000:
-                        print("(<abbr title='Tertiary Ideographic Plane'>TIP</abbr>)", file=outfile)
+                        print("(<abbr title='Miscellaneous Tertiary Ideographic Plane'>TIP</abbr>)", 
+                              file=outfile)
                     #####################################
                     # SUPPLEMENTARY SPECIAL-PURPOSE PLANE
                     elif 0xE0000 <= cdisplayi[0] < 0xF0000:

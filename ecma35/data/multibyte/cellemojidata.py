@@ -108,7 +108,7 @@ def writehints(substitute, charname = ""):
         elif len(substin) == 6:
             substout += "\uf861" + substin[:3] + "\uf861" + substin[3:]
         elif len(substin) == 7:
-            substout += "\uf862" + substin[:4] + "\uf861" + substin[3:]
+            substout += "\uf862" + substin[:4] + "\uf861" + substin[4:]
         substitute = substout
     if "INVERSE" in charname:
         substout = ""
