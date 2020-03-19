@@ -142,11 +142,36 @@ graphdata.gsets["ir165std"] = isoir165 = (94, 2, tuple(ir165_std))
 graphdata.gsets["ir058-hant"] = gb12345 = (94, 2, tuple(tuple(i) if i is not None else None for
     i in json.load(open(os.path.join(parsers.directory, "UTC/GB_12345.json"), "r"))))
 
-# Being as GB 7589, 13131, 7590, 13132 do not include non-Kanji, Unihan mappings theoretically
-# can describe their entire mappings… in reality, the GB 13131 mapping contains more or less the
-# entire set with only a few gaps, whereas the GB 13132 mapping is full of holes.
-graphdata.gsets["gb13131"] = gb13131 = (94, 2, parsers.read_unihan_source("UCD/Unihan_IRGSources.txt", "G", "G3"))
-graphdata.gsets["gb13132"] = gb13132 = (94, 2, parsers.read_unihan_source("UCD/Unihan_IRGSources.txt", "G", "G5"))
+# Being as GB 7589, 13131, 7590, 13132 do not include non-Kanji, Unihan mappings theoretically can
+#   describe their entire mappings… in reality, the GB 13131 mapping contains more or less the
+#   entire set with only a few gaps, whereas the GB 13132 mapping is full of holes.
+# kGB3 and kGB5 actually provide the same data as the G3 and G5 in kIRG_GSource (despite the later
+#   citing 13131/13132 and the former citing 7589/7590), except for that kGB3 and kGB5 have many
+#   more gaps (they seem to only cover the URO).
+graphdata.gsets["gb13131"] = gb13131 = (94, 2, 
+        parsers.read_unihan_source("UCD/Unihan_IRGSources.txt", "G", "G3"))
+graphdata.gsets["gb13132"] = gb13132 = (94, 2, 
+        parsers.read_unihan_source("UCD/Unihan_IRGSources.txt", "G", "G5"))
+
+# GB 7589 and GB 7590 are just the simplified versions, right?
+# (Contrary to docs, kGB3 and kGB5 seem to be a subset of the G3 and G5 in kIRG_GSource, i.e. they
+#  are the traditional GB 13131/13132 forms. Notably, GB 13131/13132 appear never published.)
+# Cases of multiple Simplified mappings though:
+#     GB 13131:
+#   0x8b78 譸 → 0x8bea 诪,  0x2c8aa 𬢪 (0x2c8aa is a hybrid; favour BMP over SIP)
+#   0x8b32 謲 → 0x2c8b3 𬢳, 0x2c904 𬤄 (0x2c8b3 is a hybrid)
+#   0x9c44 鱄 → 0x2b68b 𫚋, 0x31210 𱈐 (0x31210 is a hybrid; favour SIP over TIP)
+#   0x9c68 鱨 → 0x9cbf 鲿,  0x31218 𱈘 (0x31218 is a hybrid; favour BMP over TIP)
+#   0x9766 靦 → 0x4a44 䩄,  0x817c 腼  (no idea; 腼 is in GB 2312 though, so 䩄 must be GB 7589)
+#     GB 13132:
+#   0x7060 灠 → 0x6f24 漤,  0x30710 𰜐 (漤 is more common in both and in GB 2312; 𰜐 is simplified 灠)
+#   0x9d82 鶂 → 0x2cdfc 𬷼, 0x31288 𱊈 (trad 鷁, simp 鹢 is today more common; favour SIP over TIP)
+resolve = {(0x8b78,): (0x8bea,), (0x8b32,): (0x2c904,), (0x9c44,): (0x2b68b,), (0x9c68,): (0x9cbf,), (0x9766,): (0x4a44,), (0x7060,): (0x30710,), (0x9d82,): (0x2cdfc,)}
+tradat = parsers.parse_variants("UCD/Unihan_Variants.txt")
+graphdata.gsets["gb7589"] = gb7589 = (94, 2, tuple(resolve.get(i, (tradat.get(i, [[],[]])[1] + [i])[0]) for i in gb13131[2]))
+graphdata.gsets["gb7590"] = gb7590 = (94, 2, tuple(resolve.get(i, (tradat.get(i, [[],[]])[1] + [i])[0]) for i in gb13132[2]))
+# Some traditional forms remain, but I guess this is good enough. They would presumably be forms
+#  where simplified counterparts do not exist in Unicode anyway.
 
 # Apple's version. Note that it changes 0xFD and 0xFE to single-byte codes.
 # Includes the vertical form encodings which would make it into GB 18030, plus a few more which

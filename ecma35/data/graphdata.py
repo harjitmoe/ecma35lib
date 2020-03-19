@@ -225,7 +225,7 @@ g94nbytes = {tuple(b"@"): ("ir042nec", ("ir042ibm", "ir042nec"), ("ir042",)),
              tuple(b"G"): ("ir171", ("ir171",), ("ir171-1986",)),
              tuple(b"H"): "ir172",
              tuple(b"I"): ("ir183-full",
-                           ("ir183-1988", "ir183-1988plus", "ir183-full",),
+                           ("ir183-1988", "ir183-1988plus", "ir183", "ir183-full"),
                            ("ir183-1992",)),
              tuple(b"J"): "ir184",
              tuple(b"K"): "ir185",
@@ -239,10 +239,14 @@ g94nbytes = {tuple(b"@"): ("ir042nec", ("ir042ibm", "ir042nec"), ("ir042",)),
              tuple(b"!1"): "cns-eucg2",
              tuple(b"!2"): ("hkscs", (), ("ms950exts", "etenexts", "hkscs")),
              tuple(b"!3"): ("ms950utcexts", (), ("utcbig5exts", "ms950utcexts")),
+             # Shift_JIS extensions for IBM/Windows/HTML5 and for cellular emoji
              tuple(b"!4"): "ibmsjisext",
              tuple(b"!5"): "docomosjisext",
              tuple(b"!6"): "kddisjisext",
              tuple(b"!7"): "sbanksjisext",
+             # GB 7589/13131 and GB 7590/13132. Insofar as I can support them.
+             tuple(b"!8"): ("gb13131", ("gb7589",), ("gb13131",)),
+             tuple(b"!9"): ("gb13132", ("gb7590",), ("gb13132",)),
              tuple(b"~"): "nil"}
 
 g96nbytes = {tuple(b"~"): "nil"}

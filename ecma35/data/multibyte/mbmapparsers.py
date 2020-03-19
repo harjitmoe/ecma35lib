@@ -321,7 +321,6 @@ def read_unihan_source(fil, region, source):
                ) + ".json"
     cachefn = os.path.join(cachedirectory, cachebfn)
     if os.path.exists(cachefn):
-        # Cache output since otherwise several seconds are spend in here upon importing graphdata
         f = open(cachefn, "r")
         r = json.load(f)
         f.close()
@@ -363,6 +362,48 @@ def read_unihan_source(fil, region, source):
     f.close()
     return ret
 
+def read_unihan_kuten(fil, wantkey):
+    cachebfn = os.path.splitext(fil)[0].replace("/", "---") + ("_{}".format(wantkey)) + ".json"
+    cachefn = os.path.join(cachedirectory, cachebfn)
+    if os.path.exists(cachefn):
+        f = open(cachefn, "r")
+        r = json.load(f)
+        f.close()
+        return tuple(tuple(i) if i is not None else None for i in r)
+    f = open(os.path.join(directory, fil), "r")
+    for i in f:
+        if i[0] == "#":
+            continue
+        elif not i.strip():
+            continue
+        ucs, prop, data = i.strip().split("\t", 2)
+        if prop != wantkey:
+            continue
+        assert ucs[:2] == "U+"
+        ucs = int(ucs[2:], 16)
+        assert (len(data) == 4), i
+        ku = int(data[:2], 10)
+        ten = int(data[2:], 10)
+        pointer = ((ku - 1) * 94) + (ten - 1)
+        if len(_temp) > pointer:
+            assert _temp[pointer] is None, (i, ku, ten, pointer, _temp[pointer], (ucs,))
+            _temp[pointer] = (ucs,)
+        else:
+            while len(_temp) < pointer:
+                _temp.append(None)
+            _temp.append((ucs,))
+    # Try to end it on a natural plane boundary.
+    _temp.extend([None] * (((94 * 94) - (len(_temp) % (94 * 94))) % (94 * 94)))
+    if not _temp:
+        _temp.extend([None] * (94 * 94)) # Don't just return an empty tuple.
+    ret = tuple(_temp)
+    del _temp[:]
+    # Write output cache.
+    f = open(cachefn, "w")
+    f.write(json.dumps(ret))
+    f.close()
+    return ret
+
 def fuse(arrays, filename):
     if not os.path.exists(os.path.join(cachedirectory, filename)):
         out = []
@@ -383,6 +424,24 @@ def fuse(arrays, filename):
         _f.close()
         return out
 
+def parse_variants(fil):
+    f = open(os.path.join(directory, fil), "r")
+    cods = {}
+    for i in f:
+        if i[0] == "#" or not i.strip():
+            continue
+        unic, key, vals = i.strip().split("\t")
+        vals = vals.split()
+        if key == "kTraditionalVariant":
+            for val in vals:
+                val = val.split("<", 1)[0]
+                cods.setdefault((int(unic[2:], 16),), [[], []])[0].append((int(val[2:], 16),))
+        elif key == "kSimplifiedVariant":
+            for val in vals:
+                val = val.split("<", 1)[0]
+                cods.setdefault((int(unic[2:], 16),), [[], []])[1].append((int(val[2:], 16),))
+    f.close()
+    return cods
 
 
 
