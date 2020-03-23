@@ -13,7 +13,7 @@ _temp = []
 identitymap = lambda pointer, ucs: ucs
 
 def read_single_byte(fil, *, mapper=identitymap): # Used for plainextascii, NOT for ecma-35.
-    for _i in open(os.path.join(directory, fil), "r"):
+    for _i in open(os.path.join(directory, fil), "r", encoding="utf-8"):
         if not _i.strip():
             continue
         elif _i[0] == "#":

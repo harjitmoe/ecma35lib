@@ -133,7 +133,7 @@ with open(os.path.join(parsers.directory, "UCD/EmojiSources.txt")) as f:
         sauces["kddi"][kddi] = unic
         sauces["softbank"][softbank] = unic
 
-with open(os.path.join(parsers.directory, "AOSP/gmojiraw.txt")) as f:
+with open(os.path.join(parsers.directory, "AOSP/gmojiraw.txt"), encoding="utf-8") as f:
     sets = []
     for no, line in enumerate(f):
         row = []

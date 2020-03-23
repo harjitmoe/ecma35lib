@@ -293,6 +293,13 @@ def dump_plane(outfile, planefunc, kutenfunc,
                     elif 0x20000 <= cdisplayi[0] < 0x2A6E0:
                         print("(<abbr title='Chinese/Japanese/Korean Extension B'>CJKB</abbr>)",  
                               file=outfile)
+                    elif 0x20000 <= cdisplayi[0] < 0x2A6D7:
+                        print("(<abbr title='Chinese/Japanese/Korean Extension B'>CJKB</abbr>)",  
+                              file=outfile)
+                    elif 0x2A6D7 <= cdisplayi[0] < 0x2A6E0:
+                        print("(<abbr title='Appendage to Chinese/Japanese/Korean "
+                              "Extension B'>CJKB+</abbr>)",  
+                              file=outfile)
                     elif 0x2A700 <= cdisplayi[0] < 0x2B740:
                         print("(<abbr title='Chinese/Japanese/Korean Extension C'>CJKC</abbr>)",  
                               file=outfile)

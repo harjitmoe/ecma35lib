@@ -113,10 +113,10 @@ Double-byte assignments:
 |`IRR ? G*DM4 E`|CCITT Hanzi Code (GB 2312 variant), as shown in ISO-IR-165 itself|
 |`IRR 0 G*DM4 E`|CCITT Hanzi Code (GB 2312 variant), amended to follow GB 6345.1-1986 where applicable|
 |`IRR ? G*DM4 I`|CNS 11643-1992 plane 3|
-|`IRR 0 G*DM4 I`|CNS 11643-1988 plane 14 (some gaps due to lack of documentation available to me)|
-|`IRR 1 G*DM4 I`|CNS 11643-1988 plane 14 with extensions, as submitted to the IRG (some gaps due to lack of documentation available to me)|
+|`IRR 0 G*DM4 I`|CNS 11643-1988 plane 14 (some gaps due to lack of source material available to me)|
+|`IRR 1 G*DM4 I`|CNS 11643-1988 plane 14 with extensions, as submitted to the IRG (some gaps due to lack of source material available to me)|
 |`IRR 2 G*DM4 I`|CNS 11643-2007 plane 3|
-|`IRR 3 G*DM4 I`|CNS 11643-2007 plane 3, with as many of the since-removed 1988 assignments that I have mappings for (default)|
+|`IRR 3 G*DM4 I`|CNS 11643-2007 plane 3, with as many of the since-removed 1988 assignments as I have mappings for (default)|
 |`G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, as used in EUC-TW|
 |`G*DM4 ! 2`|Hong Kong Supplementary Character Set, including ETEN characters (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`G*DM4 ! 3`|Non-ETEN Big5 kana and Cyrillic (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|

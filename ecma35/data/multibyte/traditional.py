@@ -138,6 +138,14 @@ from ecma35.data.multibyte import mbmapparsers as parsers
 #   15-67-74 U+27068 (𧁨) None       　-- compare 15-67-66
 #   15-69-57  U+7922 (礢) None
 
+# ISO 10646:2017 Annex P says:
+# - U+20885: mistakenly unified with T5-3669
+# - U+22936: mistakenly unified with T5-6777
+# - U+23023: mistakenly unified with T5-6C34
+# - U+23EE4: mistakenly unified with T7-243F
+# - U+243BE: T7-2F4B mapping, but should have been unified with U+24381
+# - U+28321: mistakenly unified with T6-632A
+
 _contraspua = {
     # Alternative mappings per Yasuoka/ICU for some of the ones that otherwise get mapped to SPUA.
     # On the basis that PUA mappings for defined characters are kinda a last resort… since there's

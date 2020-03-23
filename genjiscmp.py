@@ -61,8 +61,7 @@ plane1 = (1, ("1978 JIS",  "1983 JIS",  "1990 JIS",
 
 plane2 = (2, ("MS / HTML5<br>IBM SJIS Ext", "DoCoMo<br>SJIS Emoji",
               "KDDI<br>SJIS Emoji", "SoftBank<br>SJIS Emoji",
-              "1990 JIS", "1990 JIS Ext",
-              "OSF JIS<br>Plane 2", "OSF JIS<br>Plane 2A", "OSF JIS<br>Plane 2M",
+              "1990 JIS", "Va Extension", "OSF EUC<br>Plane 2M",
               "IBM 90JIS", "2000/04 JIS"), [
           graphdata.gsets["ibmsjisext"][2],
           graphdata.gsets["docomosjisext"][2],
@@ -70,8 +69,6 @@ plane2 = (2, ("MS / HTML5<br>IBM SJIS Ext", "DoCoMo<br>SJIS Emoji",
           graphdata.gsets["sbanksjisext"][2],
           graphdata.gsets["ir159"][2],
           graphdata.gsets["ir159va"][2],
-          graphdata.gsets["ir159osf"][2],
-          graphdata.gsets["ir159osfa"][2],
           graphdata.gsets["ir159osfm"][2],
           graphdata.gsets["ir159ibm"][2],
           graphdata.gsets["ir229"][2],
@@ -102,8 +99,8 @@ annots = {
              'U+203E (‾); the latter is the one typically used when mapping '
              'JIS C 6220 / JIS X 0201. Mapping the double-byte character to '
              'U+203E in contexts where 0x7E is mapped to U+007E (~) is done by '
-             'OSF in JIS-Roman based EUC-JP only, and by JIS X 0213 (2000 JIS / '
-             '2004 JIS) in Shift_JIS only.',
+             'OSF in ASCII-based EUC-JP only, and by JIS X 0213 (2000 JIS / '
+             '2004 JIS) in EUC-JP only (and then not by all encoders).',
  (1, 1, 29): 'U+2014 (em dash) and U+2015 (horizontal bar) both correspond to '
              "the same JIS character.\u2002UTC's mappings generally favoured "
              'U+2015, and Microsoft and consequently WHATWG (HTML5) follow '
@@ -124,13 +121,15 @@ annots = {
              'for the JIS character but was displayed in the Unicode charts with '
              'curvature inverted relative to the JIS charts for a considerable '
              'time (and is still displayed as such by some older fonts such as '
-             'MS PMincho); U+223C is primarily intended as a mathematical '
-             'operator, and usually shorter; U+FF5E is just the fullwidth '
+             'MS PMincho).\u2002U+223C is primarily intended as a mathematical '
+             'operator, and usually shorter</p>'
+             '<p>U+FF5E is just the fullwidth '
              'version of the ASCII character and might therefore be rendered '
              'as either a tilde dash or a spacing tilde accent, of any glyph '
              'width, within a roughly 1em advance—although a wave dash is the '
-             'most common by far (although… it actually has a separate mapping '
-             'at 01-02-18 in JIS X 0213, shown as a spacing accent in its chart).',
+             'most common by far (however, U+FF5E actually has a separate mapping '
+             'at 02-02-23 in JIS X 0212 and 01-02-18 in JIS X 0213, which is shown '
+             'as a spacing accent in their respective charts).',
  (1, 1, 34): 'U+2225 is used by Microsoft-influenced mappings, U+2016 is used '
              'by others. U+2225 has a separate mapping in JIS X 0213 (01-02-52). '
              'U+2016 is necessarily straight vertical, whereas U+2225 is often '
@@ -156,8 +155,10 @@ annots = {
  (1, 2, 15): "Compare 01-92-93 (NEC Selection) and 02-89-23 (IBM SJIS Extensions).",
  (1, 2, 16): "Compare 01-92-94 (NEC Selection) and 02-89-24 (IBM SJIS Extensions).",
  (1, 2, 17): "Compare 01-01-61.",
- (1, 2, 18): "Compare 01-01-33. Mapped to U+007E in Shift_JIS if 0x7E is "
-             "mapped to U+203E (refer to notes at 01-01-17). Also, note that the "
+ (1, 2, 18): "Compare 01-01-33 and 02-02-23.\u2002Mapped to U+007E in Shift_JIS "
+             "if 0x7E is mapped to U+203E (refer to notes at 01-01-17).\u2002"
+             'Shown as a spacing accent in the code chart; however, I know of no '
+             'context which maps it to U+02DC (˜).\u2002Also, note that the '
              "addition of these four characters (01-02-15 through 01-02-18) makes "
              "it possible to round-trip map ASCII to JIS-Kanji and back (i.e. if "
              "ASCII mappings are used in place of any fullwidth mappings).",
@@ -172,6 +173,13 @@ annots = {
              "Accordingly, this codepoint is not allocated in IBM's extended "
              '78JIS (unlike most of the 1983 additions).',
  (1, 2, 52): 'Compare 01-01-34.',
+ (1, 2, 55): 'Some codecs map 01-02-54 to U+2985 and 01-02-55 to U+2986.\u2002'
+             'Python, for example, does that in both its 2000 JIS and 2004 JIS '
+             'codecs.\u2002The Unicode codepoints U+FF5F and U+FF60 were added '
+             'in 2001–2002, since the appropriate rendering of these '
+             'characters in CJK contexts does not correspond to their rendering '
+             'in mathematical contexts.\u2002See <a href="https://www.unicode.org/L2/L2001/01157-N2345R-brackets.pdf">UTC L2/01-157 (WG2 N2345)</a> '
+             'and <a href="https://www.unicode.org/L2/L2001/01317-bracket.htm">UTC L2/01-317</a>.',
  (1, 2, 72): 'The because sign is included three times in the Microsoft and '
              'HTML5 version: here (in the 1983 additions), in the NEC row 13 '
              '(01-13-90) and in the IBM extensions (02-89-28).\u2002Unlike '
@@ -331,12 +339,21 @@ annots = {
             "which is to say, almost all other SJIS variants, row numbers are "
             "more commonly allocated sequentially as if the JIS X 0208 plane "
             "hadn't ended at row 94.\u2002Of course, the plane 2 system was used "
-            "by EUC-JP, but this means that any EUC-JP before JIS X 0213 necessarily "
-            "collides with any SJIS from the same period.</p><p>The orders aren't "
-            "entirely identical: row 96 (02-08) gets put between rows 99 (02-05) and "
+            "by EUC-JP, but this means that any extensions for EUC-JP before JIS X 0213 will "
+            "collide with any extensions for SJIS from the same period.</p>"
+            "<p>JIS X 0212 rows are represented in EUC-JP only.\u2002The orders of the remaining "
+            "rows aren't entirely identical: row 96 (02-08) gets put between rows 99 (02-05) and "
             "100 (02-12), preserving the alternating odd/even rows, and meaning that "
             "the trail byte range can still be correctly identified from whether "
             "the row number is even.",
+ (2, 2, 23): 'Compare 01-01-33 and 01-02-18.\u2002'
+             'Might be mapped to U+007E in OSF or JIS X 0213 contexts which don\'t use that as '
+             'the mapping for single-byte 0x7E (i.e. Shift_JIS, or JIS-Roman based EUC).\u2002'
+             'Included amongst a set of spacing accents, and very clearly shown as a spacing '
+             'accent in the code chart; however, I know of no context which maps it to U+02DC (˜).',
+ (2, 2, 35): 'Mapped to U+FFE4 by OSF in its Microsoft-based variant only (i.e. mapping to the '
+             'fullwidth codepoint when one exists, not only when needed for round-trip '
+             'reasons), otherwise to U+00A6.\u2002Compare 01-01-81 and 01-01-82.',
  (2, 17, 34): 'Compare 01-14-26 and 01-22-02.',
  (2, 21, 64): 'Compare 01-15-08 and 01-16-02.',
  (2, 22, 58): 'Compare 01-15-26 and 01-19-90.',
@@ -388,7 +405,7 @@ annots = {
 for n, p in enumerate([plane1, plane2]):
     for q in range(1, 7):
         bn = n + 1
-        f = open("jisplane{:X}{}.html".format(bn, chr(0x60 + q)), "w")
+        f = open("jisplane{:X}{}.html".format(bn, chr(0x60 + q)), "w", encoding="utf-8")
         lasturl = lastname = nexturl = nextname = None
         if q > 1:
             lasturl = "jisplane{:X}{}.html".format(bn, chr(0x60 + q - 1))

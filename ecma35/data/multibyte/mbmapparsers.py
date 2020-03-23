@@ -107,7 +107,7 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
         r = json.load(f)
         f.close()
         return tuple(tuple(i) if i is not None else None for i in r)
-    for _i in open(os.path.join(directory, fil), "r"):
+    for _i in open(os.path.join(directory, fil), "r", encoding="utf-8"):
         if not _i.strip():
             continue
         elif (skipstring is not None) and (skipstring in _i):

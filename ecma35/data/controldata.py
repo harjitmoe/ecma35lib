@@ -323,7 +323,7 @@ c1bytes = {tuple(b"@"): "ir056",
            tuple(b"B"): ("ir124", # Preferred version
                          (), # Private versions
                          ("ir067", "ir124")), # Original followed by any registered revisions
-           tuple(b"C"): ("ir077", ("RFC1345",), ("ir077",)),
+           tuple(b"C"): ("RFC1345", ("RFC1345",), ("ir077",)),
            tuple(b"D"): "ir133",
            tuple(b"E"): "ir040",
            tuple(b"F"): "ir136",

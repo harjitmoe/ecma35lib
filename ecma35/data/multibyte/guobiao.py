@@ -40,7 +40,7 @@ _temp = []
 def read_gbkexceptions(fil):
     # Read GBK/5 and the non-URO part of GBK/4 to an array. Since this part of the
     # mapping cannot be generated automatically from the GB 2312 mapping.
-    for _i in open(os.path.join(parsers.directory, fil), "r"):
+    for _i in open(os.path.join(parsers.directory, fil), "r", encoding="utf-8"):
         if (not _i.strip()) or _i[0] == "#":
             continue
         byts, ucs = _i.split("\t", 2)[:2]

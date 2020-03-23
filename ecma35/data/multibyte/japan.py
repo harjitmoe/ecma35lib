@@ -61,6 +61,12 @@ to_1978 = {
 }
 to_1983 = {'―': '—', '凜': None, '熙': None}
 to_1990 = {'―': '—'}
+to_2000_from_2004 = {(0xFF5F,): (0x2985,), (0xFF60,): (0x2986,)}
+
+def map_to_2000(pointer, ucs):
+    if ucs in to_2000_from_2004:
+        return to_2000_from_2004[ucs]
+    return map_to_zenkaku(pointer, ucs)
 
 def utcto78jis(pointer, ucs):
     sucs = "".join(chr(i) for i in ucs)
@@ -159,7 +165,7 @@ graphdata.gsets["ir233"] = jisx0213_plane1 = (94, 2,
             mapper = map_to_zenkaku))
 graphdata.gsets["ir228"] = jisx0213_oldplane1 = (94, 2,
         parsers.read_main_plane("Other/euc-jis-2004-std.txt", eucjp = True, plane = 1,
-            skipstring = "[2004]", mapper = map_to_zenkaku))
+            skipstring = "[2004]", mapper = map_to_2000))
 graphdata.gsets["ir229"] = jisx0213_plane2 = (94, 2, # Code unchanged from original edition.
         parsers.read_main_plane("Other/euc-jis-2004-std.txt", eucjp = True, plane = 2,
             mapper = map_to_zenkaku))
