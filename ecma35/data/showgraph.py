@@ -243,8 +243,14 @@ def dump_plane(outfile, planefunc, kutenfunc,
                     print(strep.rstrip("\uF87D\uF87F"), file=outfile)
                 print("</span>", file=outfile)
                 print("<br><span class=codepoint>", file=outfile)
-                cdisplayi = cdispmap.get((pointer, i), i)
-                print("U+" + "<wbr>+".join("{:04X}".format(j) for j in cdisplayi), file=outfile)
+                rcdisplayi = cdisplayi = cdispmap.get((pointer, i), i)
+                print("U+" + "<wbr>+".join("{:04X}".format(j) for j in rcdisplayi), file=outfile)
+                #
+                if (len(i) == 1) and (i != rcdisplayi):
+                    # Single codepoint substituting for a PUA or hint sequence worth displaying
+                    print("<br>→U+{:04X}".format(i[0]), file=outfile)
+                    cdisplayi = i
+                #
                 if len(cdisplayi) == 1:
                     #####################################
                     # BASIC MULTILINGUAL PLANE

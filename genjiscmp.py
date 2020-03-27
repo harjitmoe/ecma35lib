@@ -90,9 +90,14 @@ def kutenfunc(number, row, cell):
     else:
         assert number == 2
         euc = "8f{:02x}{:02x}".format(0xA0 + row, 0xA0 + cell)
-    sjis = "" # TODO
+    sjis = to_sjis(number, row, cell)
     return "{:02d}-{:02d}-{:02d}<br>(<abbr title='Extended Unix Code'>EUC</abbr> {}){}".format(
-           number, row, cell, euc, sjis) + to_sjis(number, row, cell)
+           number, row, cell, euc, sjis)
+
+cdispmap = cellemojidata.hints2pua.copy()
+for n, i in enumerate(japan.rawmac):
+    j = japan.jisx0208_applekt7[2][n]
+    cdispmap[(n, j)] = i
 
 annots = {
  (1, 1, 17): 'U+FFE3 (￣) is the fullwidth counterpart of both U+00AF (¯) and '
@@ -422,7 +427,7 @@ for n, p in enumerate([plane1, plane2]):
         showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ja", part=q, css="/css/jis.css",
                              menuurl="/jis-conc.html", menuname="JIS character set variant comparison",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
-                             annots=annots, cdispmap=cellemojidata.hints2pua)
+                             annots=annots, cdispmap=cdispmap)
         f.close()
 
 
