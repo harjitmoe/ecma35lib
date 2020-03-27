@@ -157,6 +157,13 @@ def kutenfunc(number, row, cell):
            number, row, cell, euc, big5)
 
 annots = {
+ (1, 1, 29): 'Compare 01-02-11.',
+ (1, 2, 11): 'Compare 01-01-29.',
+ (1, 2, 12): 'The Big5 character here is apparently epitomised as bold rather than doubled.',
+ (1, 2, 6): 'Mapping of bold versus light overscore and underscore is sometimes difficult.\u2002'
+            'The UTC Big5 mapping simply maps the bold ones to the replacement character, under '
+            'the belief that no acceptable Unicode mapping exists.\u2002Apple uses a variation '
+            'hint for a bold form.',
  (1, 2, 36): 'Various mappings of various legacy CJK sets map this character to either U+223C '
              '(tilde operator), U+301C (wave dash), or U+FF5E (fullwidth tilde).\u2002Of these: '
              'U+301C was allocated specifically for the character as it appears in JIS (at '
@@ -184,15 +191,20 @@ annots = {
              "chart registered as ISO-IR-171, and all older CNS mappings, show these arrows in the "
              "opposite order to Big5.\u2002I've deliberately deviated from the RFC 1922 "
              "correspondance for this chart only (not the ecma35lib internals) here since that way "
-             "seems more self-explanatory in this light.",
+             "seems to make this chart more self-explanatory.",
  (1, 2, 61): 'For JIS sets, U+2225 is used by Microsoft-influenced mappings where U+2016 is used '
              'by others. This pattern does not seem to hold up for variation in CNS / Big5 '
              'mappings, besides that Microsoft are indeed using U+2225. Graphically, the '
              'difference is that U+2016 is necessarily two straight vertical lines, whereas U+2225 '
              'is often shown slanted.',
- (1, 2, 89): 'The first of a sequence of nine Chinese characters created as unit symbols, which '
-             'Big5 and CNS organise in their unit symbols section, not their Chinese character '
+ (1, 3, 3): 'The preceding sequence of nine Chinese characters were created as unit symbols; '
+             'Big5 and CNS include them in their unit symbols section, not their Chinese character '
              'section.',
+ (1, 4, 32): 'The Suzhou numerals for ten, twenty and thirty were originally unified with the '
+             'sinograms of the same glyph and meaning.\u2002This made the ten and thirty here '
+             'duplicates before they were disunified in Unicode 3.0.\u2002The UTC Big5 mapping '
+             'just maps them to the replacement character, suggesting a suitable mapping not to '
+             'exist.\u2002Apple uses a private-use transcoding hint to allow round-tripping.',
  (1, 6, 10): "The older ICU mapping file counts Yasuoka amongst its attributed sources, so this "
              "seems to be an error on Yasuoka's part.\u2002Indeed, ISO-IR-171 includes the circled "
              "numbers 1 through 10 here, like the other mappings.",

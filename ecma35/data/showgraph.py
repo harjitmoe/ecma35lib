@@ -274,6 +274,13 @@ def dump_plane(outfile, planefunc, kutenfunc,
                                   "Compatibility Ideographs block)'>DD</abbr>)", file=outfile)
                         else:
                             print("(<abbr title='Compatibility Ideograph'>CI</abbr>)", file=outfile)
+                    elif 0xFE10 <= cdisplayi[0] < 0xFE20:
+                        print("(<abbr title='Vertical Form'>VF</abbr>)", file=outfile)
+                    elif 0xFE30 <= cdisplayi[0] < 0xFE50:
+                        if (cdisplayi[0] <= 0xFE44) or (cdisplayi[0] in (0xFE47, 0xFE48)):
+                            print("(<abbr title='Compatibility Form (Vertical)'>VCF</abbr>)", file=outfile)
+                        else:
+                            print("(<abbr title='Compatibility Form'>CF</abbr>)", file=outfile)
                     elif 0xFE50 <= cdisplayi[0] < 0xFE70:
                         print("(<abbr title='Small Form Variant'>SFV</abbr>)", file=outfile)
                     elif (0xFF01 <= cdisplayi[0] < 0xFF61) or (0xFFE0 <= i[0] < 0xFFE7):
