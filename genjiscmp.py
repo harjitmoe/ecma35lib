@@ -389,17 +389,41 @@ annots = {
  (2, 76, 59): 'Compare 01-24-20 and 01-94-74.',
  (2, 76, 79): 'Compare 01-25-77 and 01-94-79.',
  (2, 76, 80): 'Compare 01-44-45 and 01-94-80.',
+ (2, 83, 0): 'This row\'s content is invoked over GL (without re-designating G0) by <code>ESC $ E'
+             '</code> in Softbank\'s 2G emoji encoding (which does not conform to JIS X 0202 / '
+             'ECMA-35).\u2002It is positioned such that the first emoji (cell 2 here) is over '
+             '0x21 (<code>!</code>).',
+ (2, 84, 0): 'This row\'s content is invoked over GL (without re-designating G0) by <code>ESC $ F'
+             '</code> in Softbank\'s 2G emoji encoding (which does not conform to JIS X 0202 / '
+             'ECMA-35).\u2002It is positioned such that the first emoji (cell 3 here) is over '
+             '0x21 (<code>!</code>).',
  (2, 84, 86): 'Softbank\'s 02-84-86 is named "J-PHONE SHOP".',
  (2, 84, 87): 'Softbank\'s 02-84-87 is named "SKY WEB".',
  (2, 84, 88): 'Softbank\'s 02-84-88 is named "SKY WALKER".',
  (2, 84, 89): 'Softbank\'s 02-84-89 is named "SKY MELODY".',
  (2, 84, 92): 'Softbank\'s 02-84-90 through 02-84-92 is named "J-PHONE".',
- (2, 92, 59): 'Softbank\'s 02-92-58 through 02-92-59 is named "J-SKY".',
+ (2, 87, 0): 'This row\'s content is invoked over GL (without re-designating G0) by <code>ESC $ G'
+             '</code> in Softbank\'s 2G emoji encoding (which does not conform to JIS X 0202 / '
+             'ECMA-35).\u2002It is positioned such that the first emoji (cell 2 here) is over '
+             '0x21 (<code>!</code>).',
+ (2, 88, 0): 'This row\'s content is invoked over GL (without re-designating G0) by <code>ESC $ O'
+             '</code> in Softbank\'s 2G emoji encoding (which does not conform to JIS X 0202 / '
+             'ECMA-35).\u2002It is positioned such that the first emoji (cell 3 here) is over '
+             '0x21 (<code>!</code>).',
  (2, 89, 21): 'Compare 01-02-44.',
  (2, 89, 28): 'Compare 01-02-72.',
+ (2, 91, 0): 'This row\'s content is invoked over GL (without re-designating G0) by <code>ESC $ P'
+             '</code> in Softbank\'s 2G emoji encoding (which does not conform to JIS X 0202 / '
+             'ECMA-35).\u2002It is positioned such that the first emoji (cell 2 here) is over '
+             '0x21 (<code>!</code>).',
+ (2, 92, 0): 'This row\'s content is invoked over GL (without re-designating G0) by <code>ESC $ Q'
+             '</code> in Softbank\'s 2G emoji encoding (which does not conform to JIS X 0202 / '
+             'ECMA-35).\u2002It is positioned such that the first emoji (cell 3 here) is over '
+             '0x21 (<code>!</code>).',
  (2, 92, 12): "Softbank's 02-92-12 (or 01-93-70) is their Shibuya 109 emoji, U+E50A "
               'in the Unicode Private Use Area.\u2002See <a href='
               '"https://emojipedia.org/shibuya/">documentation on Emojipedia</a>.',
+ (2, 92, 59): 'Softbank\'s 02-92-58 through 02-92-59 is named "J-SKY".',
  (2, 92, 64): "Softbank's 02-92-60 through 02-92-64 (or 01-93-83 through 01-93-87) "
               "are a Vodafone logo.",
  (2, 93, 27): "For some reason, Python's 2000 JIS codecs (unlike its 2004 JIS "

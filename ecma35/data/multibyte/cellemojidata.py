@@ -25,9 +25,9 @@
 # softbank (2, 92, 61) VODAFONE2
 
 # Row format: <SPUA codepoint>\t<SPUA UTF-16 escape>\t<SPUA UTF-8 escape>\t<name><kddi><docomo><softbank>\t\t\t
-# Kddi:     {\t<substitute>} || {\t\t<decimal>\t<Shift_JIS (beyond JIS) hex>\t<PUA? hex>\t<JIS hex>\t<Shift_JIS (from JIS) hex>}
-# Docomo:   {\t<substitute>} || {\t\t<decimal>\t<Shift_JIS hex>\t<PUA? hex>\t<JIS hex>}
-# Softbank: {\t<substitute>} || {\t\t<decimal>\t<Shift_JIS hex>\t<PUA? hex>\t<JIS hex>}
+# Kddi:     {\t<substitute>} || {\t\t<decimal>\t<Shift_JIS (beyond JIS) hex>\t<PUA hex>\t<JIS hex>\t<Shift_JIS (from JIS) hex>}
+# Docomo:   {\t<substitute>} || {\t\t<decimal>\t<Shift_JIS hex>\t<PUA hex>\t<JIS hex>}
+# Softbank: {\t<substitute>} || {\t\t<decimal>\t<Shift_JIS hex>\t<PUA hex>\t<JIS hex>}
 
 import os, collections, re, sys
 import unicodedata as ucd
@@ -45,6 +45,7 @@ forced = {
 }
 outmap = {}
 hints2pua = {}
+softbank_pages = ([], [], [], [], [], [])
 
 def pull(line, row, name, *, iskddi = False):
     mystruct = NonKddiAllocation if not iskddi else KddiAllocation
@@ -194,6 +195,15 @@ for row in sets:
                     if (unic != puaunic) and _hashintsre.findall(unic):
                         hints2pua[pointer,
                                 tuple(ord(i) for i in unic)] = tuple(ord(i) for i in puaunic)
+                if group.pua and (group.name == "softbank"):
+                    puacode = int(group.pua, 16)
+                    pageno = (puacode >> 8) - 0xE0
+                    cellno = puacode & 0xFF
+                    page = softbank_pages[pageno]
+                    if not page:
+                        page.extend([None] * 94)
+                    page[cellno - 1] = tuple(ord(i) for i in unic)
+                #
                 if pointer < len(suboutmap):
                     assert suboutmap[pointer] in (None, tuple(ord(i) for i in unic))
                     suboutmap[pointer] = tuple(ord(i) for i in unic)

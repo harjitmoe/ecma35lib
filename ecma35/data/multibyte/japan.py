@@ -144,7 +144,6 @@ graphdata.gsets["ir168kddi"] = jisx0208_arib = (94, 2,
 graphdata.gsets["ir168sbank"] = jisx0208_arib = (94, 2, 
         parsers.fuse([cellemojidata.outmap["softbank"][:94*94], jisx0208_html5[2][:-840]],
                      "Emoji--Softbank-4.json"))
-
 graphdata.gsets["ibmsjisext"] = sjis_html5_g3 = (94, 2, 
         parsers.read_main_plane("WHATWG/index-jis0208.txt", sjis=1, plane=2))
 # Yes, the decoder (specifically) of WHATWG SJIS (specifically) does this.
@@ -154,6 +153,12 @@ graphdata.gsets["ibmsjisext"] = sjis_html5_g3 = (94, 2,
 graphdata.gsets["docomosjisext"] = docomo_g3 = (94, 2, cellemojidata.outmap["docomo"][94*94:])
 graphdata.gsets["kddisjisext"] = docomo_g3 = (94, 2, cellemojidata.outmap["kddi"][94*94:])
 graphdata.gsets["sbanksjisext"] = sbank_g3 = (94, 2, cellemojidata.outmap["softbank"][94*94:])
+graphdata.gsets["sbank2gpageG"] = (94, 1, tuple(cellemojidata.softbank_pages[0]))
+graphdata.gsets["sbank2gpageE"] = (94, 1, tuple(cellemojidata.softbank_pages[1]))
+graphdata.gsets["sbank2gpageF"] = (94, 1, tuple(cellemojidata.softbank_pages[2]))
+graphdata.gsets["sbank2gpageO"] = (94, 1, tuple(cellemojidata.softbank_pages[3]))
+graphdata.gsets["sbank2gpageP"] = (94, 1, tuple(cellemojidata.softbank_pages[4]))
+graphdata.gsets["sbank2gpageQ"] = (94, 1, tuple(cellemojidata.softbank_pages[5]))
 
 # JIS X 2013:2000 and :2004
 # Note: Python's *jisx0213 (i.e. JIS X 0213:2000) codecs map 02-93-27 to U+9B1D, rather than U+9B1C
