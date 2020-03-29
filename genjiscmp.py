@@ -98,6 +98,8 @@ cdispmap = cellemojidata.hints2pua.copy()
 for n, i in enumerate(japan.rawmac):
     j = japan.jisx0208_applekt7[2][n]
     cdispmap[(n, j)] = i
+    if n >= (84 * 94):
+        cdispmap[(n - (74 * 94), j)] = i
 
 annots = {
  (1, 1, 17): 'U+FFE3 (￣) is the fullwidth counterpart of both U+00AF (¯) and '

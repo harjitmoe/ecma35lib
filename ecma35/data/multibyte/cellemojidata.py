@@ -121,6 +121,13 @@ def writehints(substitute, charname = ""):
         substitute = substout
     return substitute
 
+wants_fe0f = set()
+for fn in ("ICU/docomo-sjis.ucm", "ICU/kddi-sjis.ucm", "ICU/softbank-sjis.ucm"):
+    with open(os.path.join(parsers.directory, fn)) as f:
+        for line in f:
+            if ("<UFE0F>" in line) and (line.count("<U") == 2):
+                wants_fe0f |= {int(line.split("<U", 1)[1].split(">", 1)[0], 16)}
+
 with open(os.path.join(parsers.directory, "UCD/EmojiSources.txt")) as f:
     for line in f:
         if line.startswith("#") or not line.strip():
@@ -166,6 +173,10 @@ for row in sets:
             else: # for...else, i.e. never reached "break"
                 if group.pua:
                     unic = chr(int(group.pua, 16))
+        #
+        if (len(unic) == 1) and (ord(unic) in wants_fe0f):
+            unic += "\uFE0F"
+        #
         for typ in ["sjis", "jis"]:
             byts = getattr(group, typ)
             if byts and ("+" not in byts) and (typ != "jis" or byts != "222E"):

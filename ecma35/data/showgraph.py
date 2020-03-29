@@ -9,6 +9,7 @@
 import unicodedata as ucd
 
 from ecma35.data import graphdata
+from ecma35.data.multibyte import cellemojidata
 
 def formatcode(tpl):
     if tpl is None:
@@ -153,6 +154,13 @@ def _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname):
         print("<a href='{}' rel=next class=sectref>{}</a></li>".format(nexturl, nextname), file=outfile)
     print("</ul></nav><hr>", file=outfile)
 
+def _codepfmt(j, oflength):
+    if (0xFE00 <= j < 0xFE10) or (0xE0100 <= j < 0xE01F0) or (
+                                  (oflength > 1) and (0xF850 <= j < 0xF880) ):
+        return "({:04X})".format(j)
+    else:
+        return "{:04X}".format(j)
+
 def dump_plane(outfile, planefunc, kutenfunc,
                number, setnames, plarray, *,
                part=0, lang="zh-TW", css=None, annots={}, cdispmap={}, 
@@ -244,7 +252,8 @@ def dump_plane(outfile, planefunc, kutenfunc,
                 print("</span>", file=outfile)
                 print("<br><span class=codepoint>", file=outfile)
                 rcdisplayi = cdisplayi = cdispmap.get((pointer, i), i)
-                print("U+" + "<wbr>+".join("{:04X}".format(j) for j in rcdisplayi), file=outfile)
+                print("U+" + "<wbr>+".join(_codepfmt(j, len(rcdisplayi))
+                                           for j in rcdisplayi), file=outfile)
                 #
                 if (len(i) == 1) and (i != rcdisplayi):
                     # Single codepoint substituting for a PUA or hint sequence worth displaying
