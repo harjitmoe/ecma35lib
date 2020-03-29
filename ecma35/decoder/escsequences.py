@@ -9,7 +9,7 @@
 from ecma35.data import controldata
 
 def decode_esc_sequences(stream, state):
-    workingsets = ("G0", "G1", "G2", "G3")
+    workingsets = ("G0", "G1", "G2", "G3", "G4") # G4 is part of a kludge for SoftBank 2G format support.
     active = []
     idbytes = []
     parbytes = []

@@ -15,7 +15,7 @@
 shiftjisdocs = ("DOCS", False, (0x30,))
 
 def decode_shiftjis(stream, state):
-    workingsets = ("G0", "G1", "G2", "G3")
+    workingsets = ("G0", "G1", "G2", "G3", "G4")
     sjis_lead = None
     reconsume = None
     while 1:
@@ -34,8 +34,10 @@ def decode_shiftjis(stream, state):
                 state.docsmode = "shift_jis"
                 # Sensible-ish defaults (if ir014 is changed to ir006, it would correspond
                 # in mapping to IBM-943C, Windows-31J or WHATWG's Shift_JIS, minus EUDC)
-                state.cur_gsets = ["ir014", "ir168web", "ir013", "ibmsjisext"]
-                state.is_96 = [0, 0, 0, 0]
+                # The G4 set is a kludge used by the SoftBank-2G emoji handling and nothing else.
+                state.cur_gsets = ["ir014", "ir168web", "ir013", "ibmsjisext", None]
+                state.is_96 = [0, 0, 0, 0, 0]
+                state.glset = 0
             else:
                 yield token
         elif state.docsmode == "shift_jis" and token[0] == "WORD":

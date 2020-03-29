@@ -10,7 +10,7 @@ import sys
 from ecma35.data import graphdata
 
 def _tonumber(s):
-    if (len(s) != 2) or (s[0] != "G") or (s[1] not in "0123"):
+    if (len(s) != 2) or (s[0] != "G") or (s[1] not in "01234"):
         return -1
     return ord(s[1]) - ord("0")
 
@@ -141,6 +141,17 @@ def decode_graphical_sets(stream, state):
                 state.cur_gsets[token[1]] = "Unknown"
                 state.ghwots[token[1]] = token[2], token[3]
             else:
+                sbankpage = "sbank2gpage" + "".join(chr(iii) for iii in token[3])
+                if (not token[5]) and token[4] and (token[2] == "94n") and (
+                                      state.docsmode == "shift_jis") and (
+                                      sbankpage in graphdata.gsets):
+                    # ESC / SI format emoji. Totally not ECMA-35 conformant, hence it's only being
+                    # done in Shift_JIS mode, and only for the legacy "multibyte" escapes (none of
+                    # the F-bytes used are grandfathered, so standard usage shouldn't strictly be 
+                    # using that exact escape syntax anyway).
+                    state.cur_gsets[4] = sbankpage
+                    state.glset = 4
+                    continue
                 mygseti = proc_irrset(mygset, token[5])
                 if mygseti is not None:
                     state.cur_gsets[token[1]] = mygseti
