@@ -245,7 +245,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
                 else:
                     # Horizontal presentation form, alternative form.
                     # Neither of which we can really do anything with here.
-                    if (strep[-1] == "\uF87F") and ((pointer, i) in cdispmap):
+                    if (strep[-1] == "\uF87F") and ((pointer, i) in cdispmap) and (len(strep) == 2):
                         # Since there'd be no indicator otherwise.
                         strep = "〾" + strep
                     print(strep.rstrip("\uF87D\uF87F"), file=outfile)
