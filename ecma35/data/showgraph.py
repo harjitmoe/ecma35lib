@@ -211,7 +211,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
                     print("<td><span class='codepicture pua' lang={}>".format(lang), file=outfile)
                     # Object Replacement Character (FFFD is already used by BIG5.TXT)
                     strep = "\uFFFC"
-                elif (0x10000 <= i[0] < 0x20000) or (i[-1] == 0xFE0F):
+                elif (0x10000 <= i[0] < 0x20000) or (0xFE0F in i):
                     # SMP best to fall back to applicable emoji (or otherwise applicable) fonts,
                     # and not try to push CJK fonts first.
                     print("<td><span class='codepicture smp' lang={}>".format(lang), file=outfile)

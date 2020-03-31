@@ -398,14 +398,21 @@ annots = {
              'ECMA-35).\u2002It is positioned such that the first emoji (cell 3 here) is over '
              '0x21 (<code>!</code>).',
  (2, 84, 86): 'Softbank\'s 02-84-86 is named "J-PHONE SHOP".',
- (2, 84, 87): 'Softbank\'s 02-84-87 is named "SKY WEB".',
- (2, 84, 88): 'Softbank\'s 02-84-88 is named "SKY WALKER".',
- (2, 84, 89): 'Softbank\'s 02-84-89 is named "SKY MELODY".',
- (2, 84, 92): 'Softbank\'s 02-84-90 through 02-84-92 is named "J-PHONE".',
+ (2, 84, 87): 'Softbank\'s 02-84-87 is named "SKY WEB", and depicts a body orbiting a planet.',
+ (2, 84, 88): 'Softbank\'s 02-84-88 is named "SKY WALKER", and depicts a paper aeroplane.',
+ (2, 84, 89): 'Softbank\'s 02-84-89 is named "SKY MELODY", and depicts a musical note and waves.',
+# (2, 84, 92): 'Softbank\'s 02-84-90 through 02-84-92 is named "J-PHONE".',
  (2, 87, 0): 'This row\'s content is invoked over GL (without re-designating G0) by <code>ESC $ G'
              '</code> in Softbank\'s 2G emoji encoding (which does not conform to JIS X 0202 / '
              'ECMA-35).\u2002It is positioned such that the first emoji (cell 2 here) is over '
              '0x21 (<code>!</code>).',
+ (2, 87, 20): '<a href="https://mail.google.com/mail/e/docomo_ne_jp/E1C">DoCoMo\'s 02-87-20</a> '
+              'has a featureless texture, without the dots / markings present in their 02-86-58 '
+              '(<a href="https://emojipedia.org/docomo/2002/movie-camera/">for comparison</a>).',
+ (2, 87, 36): 'DoCoMo\'s 02-87-32 through 02-87-36 appear as boxed letters F, D, S, C, R with '
+              'drop shadows.',
+ (2, 87, 47): 'DoCoMo\'s 02-87-44 through 02-87-47 appear as boxed letters I, M, E, VE with '
+              'drop shadows.',
  (2, 88, 0): 'This row\'s content is invoked over GL (without re-designating G0) by <code>ESC $ O'
              '</code> in Softbank\'s 2G emoji encoding (which does not conform to JIS X 0202 / '
              'ECMA-35).\u2002It is positioned such that the first emoji (cell 3 here) is over '
@@ -423,7 +430,7 @@ annots = {
  (2, 92, 12): "Softbank's 02-92-12 (or 01-93-70) is their Shibuya 109 emoji, U+E50A "
               'in the Unicode Private Use Area.\u2002See <a href='
               '"https://emojipedia.org/shibuya/">documentation on Emojipedia</a>.',
- (2, 92, 59): 'Softbank\'s 02-92-58 through 02-92-59 is named "J-SKY".',
+# (2, 92, 59): 'Softbank\'s 02-92-58 through 02-92-59 is named "J-SKY".',
  (2, 92, 64): "Softbank's 02-92-60 through 02-92-64 (or 01-93-83 through 01-93-87) "
               "are a Vodafone logo.",
  (2, 93, 27): "For some reason, Python's 2000 JIS codecs (unlike its 2004 JIS "

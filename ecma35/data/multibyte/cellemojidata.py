@@ -39,13 +39,22 @@ NonKddiAllocation = collections.namedtuple("NonKddiAllocation", ["name", "substi
 
 sauces = {"docomo": {}, "kddi": {}, "softbank": {}}
 forced = {
+    "FE82B": "\u27BF", # Not in the UCD data, but de-facto supported at 27BF, and 27BF used by ICU.
     "FEE12": "\xD0\uF87F", # DoCoMo's stylised crossed D logo
     "FEE13": "\xD0\u20E3\uF87F", # DoCoMo point
     "FEE14": "\U0001D736\uF87F", # i-Appli's bold italic alpha logo
     "FEE15": "\U0001D736\u20E3\uF87F", # i-Appli in enclosure
     "FEE1C": "\U0001F3A5\uF87F", # Lacks own Unicode mapping, bestfitted to 1F3A5 for the other two
     "FEE33": "\u2611\uF87F", # Similarly, ish.
-    "FE82B": "\u27BF", # Not in the UCD data, but de-facto supported at 27BF, and 27BF used by ICU.
+    "FEE26": "\u25EA\uF87F", # U+25EA is pretty much an exact match, but not in UCD/ICU deployed mapping.
+    "FEE28": "\u25BD\uF87F", # Closer match than the other-vendor substitutes.
+    "FEE33": "\u2612\uF87F", # Similarly, pretty much an exact match, but not in UCD/ICU deployed mapping.
+    "FEE70": "\uf861[Js",
+    "FEE71": "\uf861ky]",
+    "FEE77": "\U0001F139\uF87F",
+    "FEE7B": "\uf861[J-",
+    "FEE7C": "\uf861PHO",
+    "FEE7D": "\uf861NE]",
 }
 outmap = {}
 hints2pua = {}
@@ -90,12 +99,23 @@ def writehints(substitute, charname = ""):
     if len(substitute) == 1:
         substitute += "\uf87f"
     elif substitute[0] == "[" and substitute[2:] == "]":
-        # Single letter emoji → keycaps (as reginds might merge to flags)
-        combiner = "\u20e3" if "SQUARE" not in charname else "\u20de"
-        substitute = substitute[1] + combiner + "\uf87f"
+        if ord("A") <= ord(substitute[1]) <= ord("Z"):
+            if "INVERSE" not in charname:
+                return chr(ord(substitute[1]) + 0x1F130 - 0x41) + "\uf87f"
+            else:
+                return chr(ord(substitute[1]) + 0x1F170 - 0x41) + "\uf87f"
+        else:
+            combiner = "\u20e3" if "SQUARE" not in charname else "\u20de"
+            substitute = substitute[1] + combiner + "\uf87f"
     elif substitute[0] == "(" and substitute[2:] == ")":
         # Encircled
-        substitute = substitute[1] + "\u20dd" + "\uf87f"
+        if ord("A") <= ord(substitute[1]) <= ord("Z"):
+            if "INVERSE" not in charname:
+                return chr(ord(substitute[1]) + 0x24B6 - 0x41) + "\uf87f"
+            else:
+                return chr(ord(substitute[1]) + 0x1F150 - 0x41) + "\uf87f"
+        else:
+            substitute = substitute[1] + "\u20dd" + "\uf87f"
     else:
         # Sadly only go up to length 4, so may need multiple.
         substin, substout = substitute, ""
