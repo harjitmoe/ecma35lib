@@ -398,9 +398,9 @@ annots = {
              'ECMA-35).\u2002It is positioned such that the first emoji (cell 3 here) is over '
              '0x21 (<code>!</code>).',
  (2, 84, 86): 'Softbank\'s 02-84-86 is named "J-PHONE SHOP".',
- (2, 84, 87): 'Softbank\'s 02-84-87 is named "SKY WEB", and depicts a body orbiting a planet.',
- (2, 84, 88): 'Softbank\'s 02-84-88 is named "SKY WALKER", and depicts a paper aeroplane.',
- (2, 84, 89): 'Softbank\'s 02-84-89 is named "SKY MELODY", and depicts a musical note and waves.',
+ (2, 84, 87): 'Softbank\'s 02-84-87 is named "SKY WEB", and <a href="https://mail.google.com/mail/e/softbank_ne_jp/E78">depicts a body orbiting a planet</a>.',
+ (2, 84, 88): 'Softbank\'s 02-84-88 is named "SKY WALKER", and <a href="https://mail.google.com/mail/e/softbank_ne_jp/E79">depicts a paper aeroplane</a>.\u2002Interestingly, no current Unicode-defined emoji (as of Unicode 13) depicts one.',
+ (2, 84, 89): 'Softbank\'s 02-84-89 is named "SKY MELODY", and <a href="https://mail.google.com/mail/e/softbank_ne_jp/E7A">depicts a musical note and waves</a>.',
 # (2, 84, 92): 'Softbank\'s 02-84-90 through 02-84-92 is named "J-PHONE".',
  (2, 87, 0): 'This row\'s content is invoked over GL (without re-designating G0) by <code>ESC $ G'
              '</code> in Softbank\'s 2G emoji encoding (which does not conform to JIS X 0202 / '
@@ -413,6 +413,7 @@ annots = {
               'drop shadows.',
  (2, 87, 47): 'DoCoMo\'s 02-87-44 through 02-87-47 appear as boxed letters I, M, E, VE with '
               'drop shadows.',
+ (2, 87, 58): 'DoCoMo\'s 02-87-57 and 02-87-58 display a DoCoMo logo, which resembles a Ð.',
  (2, 88, 0): 'This row\'s content is invoked over GL (without re-designating G0) by <code>ESC $ O'
              '</code> in Softbank\'s 2G emoji encoding (which does not conform to JIS X 0202 / '
              'ECMA-35).\u2002It is positioned such that the first emoji (cell 3 here) is over '

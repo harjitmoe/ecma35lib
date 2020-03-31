@@ -45,13 +45,14 @@ forced = {
     "FEE14": "\U0001D736\uF87F", # i-Appli's bold italic alpha logo
     "FEE15": "\U0001D736\u20E3\uF87F", # i-Appli in enclosure
     "FEE1C": "\U0001F3A5\uF87F", # Lacks own Unicode mapping, bestfitted to 1F3A5 for the other two
-    "FEE33": "\u2611\uF87F", # Similarly, ish.
-    "FEE26": "\u25EA\uF87F", # U+25EA is pretty much an exact match, but not in UCD/ICU deployed mapping.
-    "FEE28": "\u25BD\uF87F", # Closer match than the other-vendor substitutes.
-    "FEE33": "\u2612\uF87F", # Similarly, pretty much an exact match, but not in UCD/ICU deployed mapping.
+    "FEE26": "\u25EA", # U+25EA is pretty much an exact match, but not in UCD/ICU deployed mapping.
+    "FEE28": "\u25BD", # Closer match than the other-vendor substitutes.
+    "FEE33": "\u2612", # Similarly, pretty much an exact match, but not in UCD/ICU deployed mapping.
     "FEE70": "\uf861[Js",
     "FEE71": "\uf861ky]",
-    "FEE77": "\U0001F139\uF87F",
+    "FEE77": "\U0001F139",
+    "FEE78": "\U0001FA90", # Newer emoji similar to this one.
+    "FEE7A": "\U0001F3B5\u200D\U0001F50A",
     "FEE7B": "\uf861[J-",
     "FEE7C": "\uf861PHO",
     "FEE7D": "\uf861NE]",
@@ -101,21 +102,21 @@ def writehints(substitute, charname = ""):
     elif substitute[0] == "[" and substitute[2:] == "]":
         if ord("A") <= ord(substitute[1]) <= ord("Z"):
             if "INVERSE" not in charname:
-                return chr(ord(substitute[1]) + 0x1F130 - 0x41) + "\uf87f"
+                return chr(ord(substitute[1]) + 0x1F130 - 0x41)
             else:
-                return chr(ord(substitute[1]) + 0x1F170 - 0x41) + "\uf87f"
+                return chr(ord(substitute[1]) + 0x1F170 - 0x41)
         else:
             combiner = "\u20e3" if "SQUARE" not in charname else "\u20de"
-            substitute = substitute[1] + combiner + "\uf87f"
+            substitute = substitute[1] + combiner
     elif substitute[0] == "(" and substitute[2:] == ")":
         # Encircled
         if ord("A") <= ord(substitute[1]) <= ord("Z"):
             if "INVERSE" not in charname:
-                return chr(ord(substitute[1]) + 0x24B6 - 0x41) + "\uf87f"
+                return chr(ord(substitute[1]) + 0x24B6 - 0x41)
             else:
-                return chr(ord(substitute[1]) + 0x1F150 - 0x41) + "\uf87f"
+                return chr(ord(substitute[1]) + 0x1F150 - 0x41)
         else:
-            substitute = substitute[1] + "\u20dd" + "\uf87f"
+            substitute = substitute[1] + "\u20dd"
     else:
         # Sadly only go up to length 4, so may need multiple.
         substin, substout = substitute, ""
@@ -216,7 +217,8 @@ for row in sets:
                 pointer = ((men - 1) * (94 * 94)) + ((ku - 1) * 94) + (ten - 1)
                 if not group.unic:
                     puaunic = chr(int(group.pua, 16))
-                    if (unic != puaunic) and _hashintsre.findall(unic):
+                    # 0x27BF being the only non-EmojiSources.txt non-PUA mapping deployed in codecs afaict.
+                    if (unic != puaunic) and (unic != "\u27BF"):
                         hints2pua[pointer,
                                 tuple(ord(i) for i in unic)] = tuple(ord(i) for i in puaunic)
                 if group.pua and (group.name == "softbank"):
