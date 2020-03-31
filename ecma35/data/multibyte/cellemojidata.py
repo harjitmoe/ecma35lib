@@ -46,7 +46,7 @@ forced = {
     "FEE15": "\U0001D736\u20E3\uF87F", # i-Appli in enclosure
     "FEE1C": "\U0001F3A5\uF87F", # Lacks own Unicode mapping, bestfitted to 1F3A5 for the other two
     "FEE26": "\u25EA", # U+25EA is pretty much an exact match, but not in UCD/ICU deployed mapping.
-    "FEE28": "\u25BD", # Closer match than the other-vendor substitutes.
+    "FEE28": "\u25BD\uF87F", # Closer match than the other-vendor substitutes.
     "FEE33": "\u2612", # Similarly, pretty much an exact match, but not in UCD/ICU deployed mapping.
     "FEE70": "\uf861[Js",
     "FEE71": "\uf861ky]",
