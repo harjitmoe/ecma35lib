@@ -169,8 +169,6 @@ with open(os.path.join(parsers.directory, "UCD/EmojiSources.txt")) as f:
         sauces["kddi"][kddi] = unic
         sauces["softbank"][softbank] = unic
 
-vav = open("nuce.txt", "w")
-
 with open(os.path.join(parsers.directory, "AOSP/gmojiraw.txt"), encoding="utf-8") as f:
     sets = []
     for no, line in enumerate(f):
@@ -183,24 +181,6 @@ with open(os.path.join(parsers.directory, "AOSP/gmojiraw.txt"), encoding="utf-8"
         pull(line, row, "softbank")
         assert [i.strip() for i in line] == ["", "", ""]
         sets.append(row)
-        if (not row[1].unic and row[1].sjis) or \
-                (not row[2].unic and row[2].sjis) or \
-                (not row[3].unic and row[3].sjis):
-            print("Google PUA:", row[0].codepoint, file=vav)
-            print("Google name:", row[0].googlename, file=vav)
-            for _i in row[1:]:
-                # ["name", "substitute", "id", "sjis", "pua", "jis", "unic", "uniname"]
-                _nom = {"docomo": "DoCoMo (iMode)", "kddi": "KDDI (au)",
-                        "softbank": "SoftBank (Vodafone)"}[_i.name]
-                if _i.sjis:
-                    print(_nom, "number:", _i.id, file=vav)
-                    print(_nom, "SJIS:", _i.sjis, file=vav)
-                    print(_nom, "PUA:", _i.pua, file=vav)
-                    if _i.jis != "222E":
-                        print(_nom, "JIS:", _i.jis, file=vav)
-            print(file=vav)
-
-vav.close()
 
 _hashintsre = re.compile("[\uf860-\uf87f]")
 for row in sets:
