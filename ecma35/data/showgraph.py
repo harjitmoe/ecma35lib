@@ -342,6 +342,10 @@ def dump_plane(outfile, planefunc, kutenfunc,
                     print("<span class=inverse>", file=outfile)
                     print(strep.replace("\uF87A", ""), file=outfile)
                     print("</span>", file=outfile)
+                elif i[-1] == 0xF878: # Apple encoding hint for small form
+                    print("<small>", file=outfile)
+                    print(strep.rstrip("\uF878"), file=outfile)
+                    print("</small>", file=outfile)
                 else:
                     # Horizontal presentation form, alternative form.
                     # Neither of which we can really do anything with here.〾
@@ -349,10 +353,13 @@ def dump_plane(outfile, planefunc, kutenfunc,
                 print("</span>", file=outfile)
                 print("<br><span class=codepoint>", file=outfile)
                 cdisplayi = cdispmap.get((pointer, i), i)
-                print("U+" + "<wbr>+".join(_codepfmt(j, len(cdisplayi))
+                if not isinstance(cdisplayi, list):
+                    print("U+" + "<wbr>+".join(_codepfmt(j, len(cdisplayi))
                                            for j in cdisplayi), file=outfile)
-                if len(cdisplayi) == 1:
-                    _classify(cdisplayi, outfile)
+                    if len(cdisplayi) == 1:
+                        _classify(cdisplayi, outfile)
+                else:
+                    print("???", file=outfile) # TODO work out what to do here.
                 #
                 if (not (0xF860 <= i[0] < 0xF870)) and (i != cdisplayi):
                     # Single codepoint substituting for a PUA or hint sequence worth displaying

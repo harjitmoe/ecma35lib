@@ -148,11 +148,55 @@ c0sets = {# The ECMA-6 controls, i.e. originating from 1967 edition ASCII:
                     "BS", None, "LF", None, "FF", "CR", "SO", "SI",
                     None, None, None, None, None, None, None, None, 
                     None, "SS2", "SUB", "ESC", None, "SS3", None, None),
+          "ir106full": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
+                        "BS", "HT", "LF", "VT", "FF", "CR", "SO", "SI",
+                        "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB",
+                        "CAN", "SS2", "SUB", "ESC", "FS", "SS3", "RS", "US"),
           # ASCII controls minus the shifts, since apparently some standards require that:
           "ir130": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
                     "BS", "HT", "LF", "VT", "FF", "CR", None, None,
                     "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
                     "CAN", "EM", "SUB", "ESC", "FS", "GS", "RS", "US"),
+          # ITU T.101 Data Syntax 1
+          "ir132": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
+                    "APB", # Active Position Backward
+                    "APF", # Active Position Forward
+                    "APD", # Active Position Down
+                    "APU", # Active Position Up
+                    "CS",  # Clear Screen
+                    "APR", # Active Position Return
+                    "SO", "SI",
+                    "DLE", "XON", "DC2", "XOFF",
+                    "KMC", # Key-in-Monitor Conceal
+                    "NAK", "SYN", "ETB", 
+                    "CAN", # Cancel (as usual, but referring to macros)
+                    "SS2", "SUB", "ESC",
+                    "APS", # Active Position Set
+                    "SS3",
+                    "APH", # Active Position Home
+                    "NSR"), # Non-Selective Reset
+          # ITU T.101 Data Syntax 2
+          "ir134": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
+                    "APB", "APF", "APD", "APU", "CS",  "APR", "SO",  "SI",
+                    "DLE",
+                    "CON", # Cursor On
+                    "RPT", # Repeat
+                    "XOFF",
+                    "COF", # Cursor Off
+                    "NAK", "SYN", "ETB", 
+                    "CAN", # Cancel (as usual, but erasing rest of line)
+                    "SS2", "SUB", "ESC", "FS",
+                    "SS3",
+                    "APH", # Active Position Home
+                    "APA"), # Active Position Address
+          # ITU T.101 Data Syntax 3
+          "ir135": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
+                    "APB", "APF", "APD", "APU", "CS", "APR", "SO", "SI",
+                    "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
+                    "CAN", # Cancel (as usual, but referring to macros)
+                    "SS2",
+                    "SDC", # Service Delimitor Character
+                    "ESC", "APS", "SS3", "APH", "NSR"),
           # SS2 replacing EM, was apparently used in Czechoslovakia:
           "ir140": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
                     "BS", "HT", "LF", "VT", "FF", "CR", "SO", "SI",

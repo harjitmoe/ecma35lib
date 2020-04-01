@@ -26,6 +26,36 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at https://mozilla.org/MPL/2.0/
 
+# Structure
+
+The `ecma35` package contains the library itself. The `data` subpackage contains mapping data for
+the various variants of the various sets to Unicode (for graphical sets) or mnemonics (for control
+code sets). It also contains code for previewing and comparing these data. It includes mapping
+data for most of the two-byte codes (except for Blissymbolics, which lacks a Unicode representation
+whatsoever), and for several common one-byte codes, but there are many one-byte codes which it does
+not currently support.
+
+The `decoder` subpackage contains code for decoding the ECMA-35 stream. However, it also includes
+code for handling other formats which conform only partially, or not at all, to ECMA-35. Several of
+these are available using ECMA-35 DOCS sequences: for instance, it includes decoders for UTF-8,
+UTF-16, SCSU and Shift\_JIS. The decoder is implemented using a stack of generator functions, all
+with access to a common state.
+
+An `encoder` subpackage is to be expected to be much more involved. It is not clear what an encoder
+for the entirety of ECMA-35, leave alone the other DOCS filters, would look like: generally
+speaking, an encoder is written for a particular code version / subset of ECMA-35.
+
+Currently, `test.py` runs a test on the `decoder` subpackage. It writes its output to stdout;
+however, I'm usually directing its output to `out.txt` as a manner of rudimentary regression
+testing: if a change makes `out.txt` differ from its previous Git revision, this could be
+indicative of an introduced problem. Its test input is highly artificial, and makes use of several
+features which would not usually be used in the same document.
+
+The scripts `genjiscmp.py` and `gencnscmp.py` use only the `data` subpackage. They generate HTML
+comparison files for JIS (X 0208 / X 0212 / X 0213) and CNS 11643 in various vendor versions,
+editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-conc.html), 
+[JIS comparison](https://harjit.moe/jis-conc.html).
+
 # Private assignments (incomplete)
 
 Separate coding systems:

@@ -47,7 +47,10 @@ forced = {
     "FEE1C": "\U0001F3A5\uF87F", # Lacks own Unicode mapping, bestfitted to 1F3A5 for the other two
     "FEE26": "\u25EA", # U+25EA is pretty much an exact match, but not in UCD/ICU deployed mapping.
     "FEE28": "\u25BD\uF87F", # Closer match than the other-vendor substitutes.
-    "FEE33": "\u2612", # Similarly, pretty much an exact match, but not in UCD/ICU deployed mapping.
+    "FEE32": "\U0001F4B3\u200D\U0001F6AB",
+    "FEE33": "\u2612\uF87A",
+    "FEE44": "C\uFE0F\u200D\u2709\uFE0F",
+    "FEE47": "\U0001F3B5\u200D\U0001F5E8\uFE0F",
     "FEE70": "\uf861[Js",
     "FEE71": "\uf861ky]",
     "FEE77": "\U0001F139",
@@ -166,6 +169,8 @@ with open(os.path.join(parsers.directory, "UCD/EmojiSources.txt")) as f:
         sauces["kddi"][kddi] = unic
         sauces["softbank"][softbank] = unic
 
+vav = open("nuce.txt", "w")
+
 with open(os.path.join(parsers.directory, "AOSP/gmojiraw.txt"), encoding="utf-8") as f:
     sets = []
     for no, line in enumerate(f):
@@ -178,6 +183,24 @@ with open(os.path.join(parsers.directory, "AOSP/gmojiraw.txt"), encoding="utf-8"
         pull(line, row, "softbank")
         assert [i.strip() for i in line] == ["", "", ""]
         sets.append(row)
+        if (not row[1].unic and row[1].sjis) or \
+                (not row[2].unic and row[2].sjis) or \
+                (not row[3].unic and row[3].sjis):
+            print("Google PUA:", row[0].codepoint, file=vav)
+            print("Google name:", row[0].googlename, file=vav)
+            for _i in row[1:]:
+                # ["name", "substitute", "id", "sjis", "pua", "jis", "unic", "uniname"]
+                _nom = {"docomo": "DoCoMo (iMode)", "kddi": "KDDI (au)",
+                        "softbank": "SoftBank (Vodafone)"}[_i.name]
+                if _i.sjis:
+                    print(_nom, "number:", _i.id, file=vav)
+                    print(_nom, "SJIS:", _i.sjis, file=vav)
+                    print(_nom, "PUA:", _i.pua, file=vav)
+                    if _i.jis != "222E":
+                        print(_nom, "JIS:", _i.jis, file=vav)
+            print(file=vav)
+
+vav.close()
 
 _hashintsre = re.compile("[\uf860-\uf87f]")
 for row in sets:
@@ -219,8 +242,15 @@ for row in sets:
                     puaunic = chr(int(group.pua, 16))
                     # 0x27BF being the only non-EmojiSources.txt non-PUA mapping deployed in codecs afaict.
                     if (unic != puaunic) and (unic != "\u27BF"):
-                        hints2pua[pointer,
-                                tuple(ord(i) for i in unic)] = tuple(ord(i) for i in puaunic)
+                        # TODO this merges two vendors where they have the same encoding (e.g. the
+                        # "JIS" rather than Shift_JIS codes)
+                        key = pointer, tuple(ord(i) for i in unic)
+                        if key not in hints2pua:
+                            hints2pua[key] = tuple(ord(i) for i in puaunic)
+                        else:
+                            if not isinstance(hints2pua, list):
+                                hints2pua[key] = [hints2pua[key]]
+                            hints2pua[key].append(tuple(ord(i) for i in puaunic))
                 if group.pua and (group.name == "softbank"):
                     puacode = int(group.pua, 16)
                     pageno = (puacode >> 8) - 0xE0
