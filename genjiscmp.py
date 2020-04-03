@@ -63,7 +63,7 @@ plane2 = (2, ("MS / HTML5<br>IBM SJIS Ext", "DoCoMo<br>SJIS Emoji",
               "KDDI<br>SJIS Emoji", "SoftBank<br>SJIS Emoji",
               "1990 JIS", "Va Extension", "OSF EUC<br>Plane 2M",
               "IBM 90JIS", "2000/04 JIS"), [
-          graphdata.gsets["ibmsjisext"][2],
+          graphdata.gsets["ibmsjisextpua"][2],
           graphdata.gsets["docomosjisext"][2],
           graphdata.gsets["kddisjisext"][2],
           graphdata.gsets["sbanksjisext"][2],

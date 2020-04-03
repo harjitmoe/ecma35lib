@@ -146,10 +146,25 @@ graphdata.gsets["ir168sbank"] = jisx0208_arib = (94, 2,
                      "Emoji--Softbank-4.json"))
 graphdata.gsets["ibmsjisext"] = sjis_html5_g3 = (94, 2, 
         parsers.read_main_plane("WHATWG/index-jis0208.txt", sjis=1, plane=2))
-# Yes, the decoder (specifically) of WHATWG SJIS (specifically) does this.
-# TODO: this applies only to the Beyond region, figure out how to apply it to ibmsjisext
-#graphdata.gsets["ir168webpua"] = jisx0208_html5pua = (94, 2,
-#        jisx0208_html5[2][:8836] + tuple(range(0xE000, 0xE758)) + jisx0208_html5[2][10716:])
+whatwgsjispuaonly = []
+for u, i in enumerate(range(0xE000, 0xE758)):
+    # Yes, the WHATWG does this, albeit only in the SJIS codec, and then only in the decoder.
+    a, b = (u // 188), (u % 188)
+    a += 0xF0
+    b += 0x40
+    if b >= 0x7F:
+        b += 1
+    men, ku, ten = parsers._grok_sjis(bytes([a, b]))
+    pointer = ((ku - 1) * 94) + (ten - 1)
+    if len(whatwgsjispuaonly) > pointer:
+        assert whatwgsjispuaonly[pointer] is None
+        whatwgsjispuaonly[pointer] = (i,)
+    else:
+        if len(whatwgsjispuaonly) < pointer:
+            whatwgsjispuaonly.extend([None] * (pointer - len(whatwgsjispuaonly)))
+        whatwgsjispuaonly.append((i,))
+graphdata.gsets["ibmsjisextpua"] = sjis_html5_g3_pua = (94, 2, 
+        parsers.fuse([whatwgsjispuaonly, sjis_html5_g3[2]], "ibmextwithpua.json"))
 graphdata.gsets["docomosjisext"] = docomo_g3 = (94, 2, cellemojidata.outmap["docomo"][94*94:])
 graphdata.gsets["kddisjisext"] = docomo_g3 = (94, 2, cellemojidata.outmap["kddi"][94*94:])
 graphdata.gsets["sbanksjisext"] = sbank_g3 = (94, 2, cellemojidata.outmap["softbank"][94*94:])

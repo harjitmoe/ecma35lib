@@ -240,7 +240,7 @@ g94nbytes = {tuple(b"@"): ("ir042nec", ("ir042ibm", "ir042nec"), ("ir042",)),
              tuple(b"!2"): ("hkscs", (), ("ms950exts", "etenexts", "hkscs")),
              tuple(b"!3"): ("ms950utcexts", (), ("utcbig5exts", "ms950utcexts")),
              # Shift_JIS extensions for IBM/Windows/HTML5 and for cellular emoji
-             tuple(b"!4"): "ibmsjisext",
+             tuple(b"!4"): ("ibmsjisextpua", (), ("ibmsjisext", "ibmsjisext")),
              tuple(b"!5"): "docomosjisext",
              tuple(b"!6"): "kddisjisext",
              tuple(b"!7"): "sbanksjisext",
