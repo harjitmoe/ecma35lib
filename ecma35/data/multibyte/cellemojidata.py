@@ -47,7 +47,7 @@ forced = {
     "FEE1C": "\U0001F3A5\uF87F", # Lacks own Unicode mapping, bestfitted to 1F3A5 for the other two
     "FEE26": "\u25EA", # U+25EA is pretty much an exact match, but not in UCD/ICU deployed mapping.
     "FEE27": "\u2BC0", # Later addition to Unicode from Wingdings 2 190(dec); probably closest one not already taken.
-    "FEE28": "\u25BD\uF87F", # Closer match than the other-vendor substitutes.
+    "FEE28": "\u25BF", # Closer match than the other-vendor substitutes.
     "FEE32": "\U0001F4B3\u200D\U0001F6AB",
     "FEE33": "\u2612\uF87A",
     "FEE44": "C\uFE0F\u200D\u2709\uFE0F",
