@@ -63,6 +63,7 @@ forced = {
 }
 outmap = {}
 hints2pua = {}
+hints2pua_sb2g = {}
 softbank_pages = ([], [], [], [], [], [])
 
 def pull(line, row, name, *, iskddi = False):
@@ -223,12 +224,12 @@ for row in sets:
                     puaunic = chr(int(group.pua, 16))
                     # 0x27BF being the only non-EmojiSources.txt non-PUA mapping deployed in codecs afaict.
                     if (unic != puaunic) and (unic != "\u27BF"):
-                        # TODO this merges two vendors where they have the same encoding (e.g. the
-                        # "JIS" rather than Shift_JIS codes)
                         key = pointer, tuple(ord(i) for i in unic)
                         if key not in hints2pua:
                             hints2pua[key] = tuple(ord(i) for i in puaunic)
                         else:
+                            # Two vendors where they have the same encoding (e.g. the
+                            # "JIS" rather than Shift_JIS codes)
                             if not isinstance(hints2pua, list):
                                 hints2pua[key] = [hints2pua[key]]
                             hints2pua[key].append(tuple(ord(i) for i in puaunic))
@@ -240,6 +241,9 @@ for row in sets:
                     if not page:
                         page.extend([None] * 94)
                     page[cellno - 1] = tuple(ord(i) for i in unic)
+                    if (not group.unic) and (unic != chr(puacode)) and (unic != "\u27BF"):
+                        key = cellno, tuple(ord(i) for i in unic)
+                        hints2pua_sb2g[key] = (puacode,)
                 #
                 if pointer < len(suboutmap):
                     assert suboutmap[pointer] in (None, tuple(ord(i) for i in unic))

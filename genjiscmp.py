@@ -401,8 +401,8 @@ annots = {
              'ECMA-35).\u2002It is positioned such that the first emoji (cell 3 here) is over '
              '0x21 (<code>!</code>).',
  (2, 84, 86): 'Softbank\'s 02-84-86 is named "J-PHONE SHOP".',
- (2, 84, 87): 'Softbank\'s 02-84-87 is named "SKY WEB", and <a href="https://mail.google.com/mail/e/softbank_ne_jp/E78">depicts a body orbiting a planet</a>.',
- (2, 84, 88): 'Softbank\'s 02-84-88 is named "SKY WALKER", and <a href="https://mail.google.com/mail/e/softbank_ne_jp/E79">depicts a paper aeroplane</a>.\u2002Interestingly, no current Unicode-defined emoji (as of Unicode 13) depicts one.',
+ (2, 84, 87): 'Softbank\'s 02-84-87 is named "SKY WEB", and <a href="https://mail.google.com/mail/e/softbank_ne_jp/E78">depicts a body orbiting a planet</a>.\u2002The displayed substitution is newer and somewhat similar, but <a href="https://commons.wikimedia.org/wiki/File:Planet_-_The_Noun_Project.svg">something like this</a> would be closer.',
+ (2, 84, 88): 'Softbank\'s 02-84-88 is named "SKY WALKER", and <a href="https://mail.google.com/mail/e/softbank_ne_jp/E79">depicts a paper aeroplane</a>.\u2002Interestingly, no current Unicode-defined emoji (as of Unicode 13) depicts one, although it\'s U+F1D8 (BMP PUA) or U+10F1D8 (SPUB) in Font Awesome.\u2002<a href="https://commons.wikimedia.org/wiki/File:Gnome-document-send.svg">A possible higher-resolution colour presentation, from the GNOME icon set.</a>',
  (2, 84, 89): 'Softbank\'s 02-84-89 is named "SKY MELODY", and <a href="https://mail.google.com/mail/e/softbank_ne_jp/E7A">depicts a musical note and waves</a>.',
 # (2, 84, 92): 'Softbank\'s 02-84-90 through 02-84-92 is named "J-PHONE".',
  (2, 87, 0): 'This row\'s content is invoked over GL (without re-designating G0) by <code>ESC $ G'

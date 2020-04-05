@@ -17,7 +17,7 @@ def formatcode(tpl):
     return "U+{} ({})".format("+".join("{:04X}".format(i) for i in tpl),
                               "".join(chr(i) if i < 0xF0000 else (chr(i) + " ") for i in tpl))
 
-def show(name, *, plane=None):
+def show(name, *, plane=None, wikitext=False, cdispmap={}, images={}, friendly=None):
     if isinstance(name, tuple):
         x = name
     elif name in graphdata.rhses:
@@ -64,33 +64,45 @@ def show(name, *, plane=None):
         series = x[2][(sz * sz) * ((plane - 1) if x[0] <= 94 else plane):][:(sz * sz)]
     else:
         raise ValueError("unsupported set byte length size")
+    #
+    if wikitext:
+        print("{|{{chset-tableformat}}")
+        print("{{chset-table-header|%s}}" % (friendly or name))
     for (n, i) in enumerate(series):
         if not (n % hs):
-            print()
+            if not wikitext:
+                print()
+            tplat = "{:2d}: "
+            if wikitext:
+                print("|-")
+                tplat = "!{{{{chset-left|{:d}}}}}\n" if not sz else "!rowspan=2|{:2d}\n"
+            #
             if sz:
                 if not ((n // hs) % 2):
-                    print(end = "{:2d}: ".format((n // sz) + ofs))
-                else:
+                    print(end = tplat.format((n // sz) + ofs))
+                elif not wikitext:
                     print(end = " " * 4)
             else:
-                print(end = "{:2d}: ".format((n // hs) + ofs))
+                print(end = tplat.format((n // hs) + ofs))
         #
         if i is None:
             curchar = "\uFFFD"
             zenkaku = False
-        elif isinstance(i, tuple) and (ucd.category(chr(i[0])) == "Co"):
+        elif isinstance(i, tuple) and (ucd.category(chr(i[0])) == "Co") and (not wikitext):
             if len(i) == 1:
                 curchar = "\x1B[35m\uFFFC\x1B[m"
             else:
                 curchar = "\x1B[33m\uFFFC\x1B[m"
             zenkaku = False
-        elif isinstance(i, tuple) and (0x80 <= i[0] <= 0x9F):
+        elif isinstance(i, tuple) and (0x80 <= i[0] <= 0x9F) and (not wikitext):
             curchar = "\x1B[31m\uFFFC\x1B[m"
             zenkaku = False
         elif isinstance(i, tuple):
             curchar = "".join(chr(j) for j in i)
             if 0xF870 <= ord(curchar[-1]) <= 0xF87F:
-                if curchar[-1] == "\uF874":
+                if wikitext:
+                    pass
+                elif curchar[-1] == "\uF874":
                     # Left position (red).
                     curchar = "\x1B[91m" + curchar[:-1] + "\x1B[m"
                 elif curchar[-1] == "\uF875":
@@ -124,18 +136,48 @@ def show(name, *, plane=None):
                     curchar = "\x1B[33m" + curchar[:-1] + "\x1B[m"
             zenkaku = (ucd.east_asian_width(chr(i[0])) in ("W", "F"))
         elif ucd.category(chr(i)) == "Co":
-            curchar = "\x1B[32m\uFFFC\x1B[m"
+            curchar = "\x1B[32m\uFFFC\x1B[m" if not wikitext else "PUA"
             zenkaku = False
         elif 0x80 <= i <= 0x9F:
-            curchar = "\x1B[31m\uFFFC\x1B[m"
+            curchar = "\x1B[31m\uFFFC\x1B[m" if not wikitext else "PUA"
             zenkaku = False
         else:
             curchar = chr(i)
             zenkaku = (ucd.east_asian_width(chr(i)) in ("W", "F"))
-        print(curchar, end = " " if not zenkaku else "")
+        #
+        if not wikitext:
+            print(curchar, end = " " if not zenkaku else "")
+        elif curchar == "\uFFFD":
+            print("|{{chset-color-undef}}|", sep="")
+        elif curchar == " ":
+            print("|{{chset-color-misc}}|{{chset-ctrl|0020|{{control code link|SP}}}}", sep="")
+        else:
+            dispi = cdispmap.get((n, i), i)
+            points = " ".join("{:04X}".format(j) for j in dispi) if isinstance(dispi, tuple) \
+                                                                 else "{:04X}".format(dispi)
+            points = points.replace(" FE0F ", " ")
+            if points.endswith(" FE0F"):
+                points = points[:-5]
+            if images and (dispi in images):
+                curchar = "[[File:" + images[dispi] + "|14px|" + "".join(chr(i) for i in dispi) + "]]"
+            elif (len(i) == 1) and (0xE000 <= i[0] < 0xF900):
+                curchar = "&nbsp;"
+            else:
+                curchar = curchar.replace("\uF860", "").replace("\uF861", "").replace("\uF862", "")
+                curchar = curchar.replace("[", "&#x5B;").replace("]", "&#x5D;")
+                if (n, i) not in cdispmap:
+                    curchar = "[[" + curchar + "]]"
+            print("|{{chset-color-graph}}|{{chset-cell|", points, "|", curchar, "}}", sep="")
     for i in range((hs - (n % hs) - 1) % hs):
-        print(end = "\uFFFD ")
-    print()
+        if not wikitext:
+            print(end = "\uFFFD ")
+        else:
+            print("|{{chset-color-undef}}|")
+    if wikitext:
+        print("|-") # Symmetry
+        print("|}")
+    else:
+        print("")
 
 def _isbmppua(tpl):
     assert not tpl or not isinstance(tpl[0], str), tpl
