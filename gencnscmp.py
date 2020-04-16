@@ -163,7 +163,9 @@ annots = {
  (1, 2, 6): 'Mapping of bold versus light overscore and underscore is sometimes difficult.\u2002'
             'The UTC Big5 mapping simply maps the bold ones to the replacement character, under '
             'the belief that no acceptable Unicode mapping exists.\u2002Apple uses a variation '
-            'hint for a bold form.',
+            'hint for a bold form.\u2002The other mappings in use seem to be a selection from '
+            'the possible mappings which aren\'t otherwise used, rather than any semantic '
+            'motivation.',
  (1, 2, 36): 'Various mappings of various legacy CJK sets map this character to either U+223C '
              '(tilde operator), U+301C (wave dash), or U+FF5E (fullwidth tilde).\u2002Of these: '
              'U+301C was allocated specifically for the character as it appears in JIS (at '
@@ -178,14 +180,18 @@ annots = {
  (1, 2, 51): 'U+2641 is the astrological symbol for the earth, and is usually rendered as a globus '
              'cruciger (upside-down Venus); if the version with cross inside the circle is '
              'desired specifically, U+1F728 (🜨, verdigris) is probably more semantically relevant '
-             'than U+2295 (⨁, a mathematical symbol), although the latter is often substituted.',
+             'than U+2295 (⨁, a mathematical symbol), although the latter is often '
+             'substituted.\u2002For mathematical use, U+2295 would of course be preferred.',
  (1, 2, 52): 'U+2609 is the astrological symbol for the sun, and U+2299 is a mathematical symbol. '
              'Besides that, they are visually much the same symbol.',
  (1, 2, 56): "Although which way around the arrows are in Big5 is not particularly controversial, "
              "their order within CNS 11643 seems to have changed to match Big5 relatively "
              "recently.\u2002Indeed, current data (as of March 2020) from the National Development "
              "Council in Taiwan (also the source for the GOV-TW column) map 01-02-55 and 01-02-56 "
-             "to Big5 A1F6 and A1F7 respectively, in contrast to older sources such as RFC 1922 "
+             "to Big5 A1F6 and A1F7 respectively (see "
+             "<a href='https://www.cns11643.gov.tw/wordView.jsp?ID=74327'>here</a> and "
+             "<a href='https://www.cns11643.gov.tw/wordView.jsp?ID=74328'>here</a>), "
+             "in contrast to older sources such as RFC 1922 "
              "(which ecma35lib uses as its primary concordance of Big5 to CNS), which go out of "
              "their way to interrupt their neat range mappings to swap them.\u2002Both the code "
              "chart registered as ISO-IR-171, and all older CNS mappings, show these arrows in the "
@@ -196,7 +202,7 @@ annots = {
              'by others. This pattern does not seem to hold up for variation in CNS / Big5 '
              'mappings, besides that Microsoft are indeed using U+2225. Graphically, the '
              'difference is that U+2016 is necessarily two straight vertical lines, whereas U+2225 '
-             'is often shown slanted.',
+             'is sometimes shown vertical and sometimes shown slanted.',
  (1, 3, 3): 'The preceding sequence of nine Chinese characters were created as unit symbols; '
              'Big5 and CNS include them in their unit symbols section, not their Chinese character '
              'section.',
@@ -205,6 +211,9 @@ annots = {
              'duplicates before they were disunified in Unicode 3.0.\u2002The UTC Big5 mapping '
              'just maps them to the replacement character, suggesting a suitable mapping not to '
              'exist.\u2002Apple uses a private-use transcoding hint to allow round-tripping.',
+ (1, 5, 77): "The UTC mappings' rubrics also list U+2003 as an alternative here, since some "
+             "existing implementations rendered an empty space here.\u2002This is attributed to "
+             "the absence of a marker being standard zhuyin for the tone in question.",
  (1, 6, 10): "The older ICU mapping file counts Yasuoka amongst its attributed sources, so this "
              "seems to be an error on Yasuoka's part.\u2002Indeed, ISO-IR-171 includes the circled "
              "numbers 1 through 10 here, like the other mappings.",
@@ -214,7 +223,9 @@ annots = {
  (1, 7, 0): "Regarding the next two-and-a-bit rows: mappings too old to have made use of Unicode's "
             "classical radical codepoints either miss these out altogether (they're outside Big5, "
             "so arguably expendable), or many-to-one map them to their ordinary Chinese character "
-            "codepoints from the URO.",
+            "codepoints from the URO.\u2002The URO mappings for the small number of them which "
+            "are only included in this section (i.e. not in the regular Chinese character part "
+            "of CNS 11643) seem to have been kept in more recent mappings though.",
  (1, 11, 45): "The CNS encoding for kana is outside of Big5; confusingly, there are actually two "
               "overlapping and incompatible / collisive ways of representing kana in Big5 "
               "(BIG5.TXT versus ETEN).\u2002For interoperability's sake, don't encode kana in Big5 "
@@ -223,7 +234,9 @@ annots = {
  (1, 21, 0): "Series of private use (i.e. not standard Unicode) mappings for various positional "
              "forms of various strokes, characters and components in brush script.\u2002This being "
              "additional to the strokes section, the radicals section, and the Chinese character "
-             "section.\u2002I do not know what they are for.",
+             "section, which sections it frequently duplicates (besides being in brush-script "
+             "even in mincho/songti style fonts for some reason).\u2002I do not know what they "
+             "are intended to be used for.",
  (1, 34, 35): "The Euro sign and circle were added in 2007.",
  (1, 34, 52): "Using private use assignments for grapheme clusters which have standard Unicode "
               "representations just (presumably) because they don't have single codepoints… why?",
@@ -267,7 +280,7 @@ for n, p in enumerate([plane1, plane2, plane3, plane4, plane5, plane6, plane7, p
     for q in range(1, 7):
         bnx = (1, 2, 3, 4, 5, 6, 7, 15)
         bn = bnx[n]
-        f = open("cnsplane{:X}{}.html".format(bn, chr(0x60 + q)), "w")
+        f = open("cnsplane{:X}{}.html".format(bn, chr(0x60 + q)), "w", encoding="utf-8")
         lasturl = lastname = nexturl = nextname = None
         if q > 1:
             lasturl = "cnsplane{:X}{}.html".format(bn, chr(0x60 + q - 1))
