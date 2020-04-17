@@ -213,7 +213,7 @@ def _classify(cdisplayi, outfile):
         print("(<abbr title='Latin-1 Supplement'>LAT1S</abbr>)", file=outfile)
     elif 0x2E80 <= cdisplayi[0] < 0x2FE0:
         print("(<abbr title='Code-point for a radical'>RAD</abbr>)", file=outfile)
-    elif 0x31C0 <= cdisplayi[0] < 0x31E0:
+    elif 0x31C0 <= cdisplayi[0] < 0x31F0:
         print("(<abbr title='Code-point for a stroke'>STRK</abbr>)", file=outfile)
     elif 0x3400 <= cdisplayi[0] < 0x4DC0:
         print("(<abbr title='Chinese/Japanese/Korean Extension A'>CJKA</abbr>)",  
