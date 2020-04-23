@@ -270,6 +270,8 @@ annots = {
  (4, 72, 47): "Compare 05-79-52",
  (5, 79, 52): "Compare 04-72-47",
  (15, 8, 82): "Compare 04-08-07",
+ (15, 16, 80): "U+3DB7 and U+2420E (CJKB) are "
+               "<a href='https://unicode.org/wg2/docs/n2644.pdf'>known exact duplicates</a>.",
  (15, 28, 30): "Compare 03-69-26.",
  (15, 49, 93): "Compare 04-51-28",
  (15, 67, 66): "Compare 15-67-74",

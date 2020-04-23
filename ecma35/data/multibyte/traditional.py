@@ -198,13 +198,20 @@ def cnsmapper_swaparrows(pointer, ucs):
         return (0x2190,)
     return ucs
 
+def cnsmapper_contraredundantcjkb(pointer, ucs):
+    # 0x2420E arguably should never have been added: https://unicode.org/wg2/docs/n2644.pdf
+    if ucs == (0x2420E,):
+        return (0x3DB7,)
+    return ucs
+
 planesize = 94 * 94
 cns_bmp = parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode BMP.txt",
         mapper = cnsmapper_swaparrows)
-cns_sip = parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 2.txt")
+cns_sip = parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 2.txt",
+        mapper = cnsmapper_contraredundantcjkb)
 cns_spuaa = parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 15.txt",
         mapper = cnsmapper_contraspua)
-cns = parsers.fuse([cns_bmp, cns_sip, cns_spuaa], "GOV-TW---CNS2UNICODE_swaparrows_contraspua.json")
+cns = parsers.fuse([cns_bmp, cns_sip, cns_spuaa], "GOV-TW---CNS2UNICODE_swar_cspua_crcb.json")
 
 # Planes present in the original 1986 edition of CNS 11643.
 # Closely related to Big5. ISO-IR numbers in the 170s (whereas the 1992 additions are in the 180s).
