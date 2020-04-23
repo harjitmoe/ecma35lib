@@ -304,7 +304,7 @@ def _classify(cdisplayi, outfile):
         print("(<abbr title='Supplementary Private-Use Area B'>SPUB</abbr>)", file=outfile)
 
 def dump_plane(outfile, planefunc, kutenfunc,
-               number, setnames, plarray, *,
+               number, setnames, plarray, *, selfhandledanchorlink=False,
                part=0, lang="zh-TW", css=None, annots={}, cdispmap={}, 
                menuurl=None, menuname="Up to menu",
                lasturl=None, nexturl=None, lastname=None, nextname=None):
@@ -334,8 +334,11 @@ def dump_plane(outfile, planefunc, kutenfunc,
                 print("<tr>", file=outfile)
             print("<th class=codepoint>", file=outfile)
             print("<a name='{:d}.{:d}.{:d}' class=anchor></a>".format(number, row, cell), file=outfile)
-            print("<a href='#{:d}.{:d}.{:d}'>".format(number, row, cell), file=outfile)
-            print(kutenfunc(number, row, cell), "</a>", file=outfile)
+            if selfhandledanchorlink:
+                print(kutenfunc(number, row, cell), file=outfile)
+            else:
+                print("<a href='#{:d}.{:d}.{:d}'>".format(number, row, cell), file=outfile)
+                print(kutenfunc(number, row, cell), "</a>", file=outfile)
             print("</th>", file=outfile)
             for i in st:
                 if i is None:

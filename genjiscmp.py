@@ -87,12 +87,16 @@ def planefunc(number, mapname=None):
 def kutenfunc(number, row, cell):
     if number == 1:
         euc = "{:02x}{:02x}".format(0xA0 + row, 0xA0 + cell)
+        jis = "(JIS {:02x}{:02x})<br>".format(0x20 + row, 0x20 + cell)
     else:
         assert number == 2
         euc = "8f{:02x}{:02x}".format(0xA0 + row, 0xA0 + cell)
+        jis = ""
+    fmteuc = "(<abbr title='Extended Unix Code'>EUC</abbr> {})".format(euc)
     sjis = to_sjis(number, row, cell)
-    return "{:02d}-{:02d}-{:02d}<br>(<abbr title='Extended Unix Code'>EUC</abbr> {}){}".format(
-           number, row, cell, euc, sjis)
+    anchorlink = "<a href='#{:d}.{:d}.{:d}'>{:02d}-{:02d}-{:02d}</a>".format(
+                 number, row, cell, number, row, cell)
+    return "{}<br>{}{}{}".format(anchorlink, jis, fmteuc, sjis)
 
 cdispmap = cellemojidata.hints2pua.copy()
 for n, i in enumerate(japan.rawmac):
@@ -464,7 +468,7 @@ for n, p in enumerate([plane1, plane2]):
         showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ja", part=q, css="/css/jis.css",
                              menuurl="/jis-conc.html", menuname="JIS character set variant comparison",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
-                             annots=annots, cdispmap=cdispmap)
+                             annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True)
         f.close()
 
 

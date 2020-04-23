@@ -153,18 +153,33 @@ def kutenfunc(number, row, cell):
     big5 = ""
     if (number, row, cell) in inverse:
         big5 = "<br>(Big5 {:04x})".format(inverse[number, row, cell])
-    return "{:02d}-{:02d}-{:02d}<br>(<abbr title='Extended Unix Code'>EUC</abbr> {}){}".format(
-           number, row, cell, euc, big5)
+    plane_hex = "{:d}-{:02X}{:02X}".format(number, 0x20 + row, 0x20 + cell)
+    linknumber = (number * 0x10000) + ((0x20 + row) * 0x100) + (0x20 + cell)
+    wordview = "https://www.cns11643.gov.tw/wordView.jsp?ID={:d}".format(linknumber)
+    anchorlink = "<a href='#{:d}.{:d}.{:d}'>{:02d}-{:02d}-{:02d}</a>".format(
+                 number, row, cell, number, row, cell)
+    linkhtml = "(CNS <a href='{}'>{}</a>)".format(wordview, plane_hex)
+    if number == 1:
+        fmteuc = "(<abbr title='Extended Unix Code'>EUC</abbr> {})".format(euc)
+    else:
+        fmteuc = "(<abbr title='Extended Unix Code'>EUC</abbr> {})".format(euc)
+    return "{}<br>{}<br>{}{}".format(
+           anchorlink, linkhtml, fmteuc, big5)
 
 annots = {
+ (1, 1, 0): 'All of plane 1 has two possible EUC codes, a four-byte code prefixed with 0x8EA1 '
+            'and a two-byte code without that prefix.&ensp;It is the two-byte codes that are '
+            'listed in this chart.',
  (1, 1, 29): 'Compare 01-02-11.',
  (1, 2, 11): 'Compare 01-01-29.',
- (1, 2, 12): 'The Big5 character here is apparently epitomised as bold rather than doubled.',
+ (1, 2, 12): 'Big5 and CNS consider this character slightly bolder than the previous one, whereas '
+             'Unicode considers it doubled for some reason.\u2002Apple\'s mapping instead uses '
+             'an appended PUA variation hint for a bold form.',
  (1, 2, 6): 'Mapping of bold versus light overscore and underscore is sometimes difficult.\u2002'
             'The UTC Big5 mapping simply maps the bold ones to the replacement character, under '
-            'the belief that no acceptable Unicode mapping exists.\u2002Apple uses a variation '
+            'the belief that no acceptable Unicode mapping exists.\u2002Apple uses a PUA variation '
             'hint for a bold form.\u2002The other mappings in use seem to be a selection from '
-            'the possible mappings which aren\'t otherwise used, rather than any semantic '
+            'the possible mappings which aren\'t otherwise used, rather than following any semantic '
             'motivation.',
  (1, 2, 36): 'Various mappings of various legacy CJK sets map this character to either U+223C '
              '(tilde operator), U+301C (wave dash), or U+FF5E (fullwidth tilde).\u2002Of these: '
@@ -210,7 +225,9 @@ annots = {
              'sinograms of the same glyph and meaning.\u2002This made the ten and thirty here '
              'duplicates before they were disunified in Unicode 3.0.\u2002The UTC Big5 mapping '
              'just maps them to the replacement character, suggesting a suitable mapping not to '
-             'exist.\u2002Apple uses a private-use transcoding hint to allow round-tripping.',
+             'exist.\u2002Apple uses a private-use transcoding hint to allow round-tripping.\u2002'
+             'Those mappings map the twenty to its URO codepoint, since its other CNS encoding '
+             '(03-01-24) was outside of Big5.',
  (1, 5, 77): "The UTC mappings' rubrics also list U+2003 as an alternative here, since some "
              "existing implementations rendered an empty space here.\u2002This is attributed to "
              "the absence of a marker being standard zhuyin for the tone in question.",
@@ -240,6 +257,7 @@ annots = {
  (1, 34, 35): "The Euro sign and circle were added in 2007.",
  (1, 34, 52): "Using private use assignments for grapheme clusters which have standard Unicode "
               "representations just (presumably) because they don't have single codepoints… why?",
+ (3, 1, 24): "Compare 01-04-31.",
  (3, 66, 38): "Between 1992 and 2007, this was the last <i>de jure</i> codepoint on this "
               "plane.\u200203-66-39 through 03-68-21 were removed and distributed amongst plane 4 "
               "in 1992 (at the same time this plane was moved from an extension in plane 14 to a "
@@ -299,7 +317,7 @@ for n, p in enumerate([plane1, plane2, plane3, plane4, plane5, plane6, plane7, p
         showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="zh-TW", part=q, css="/css/cns.css",
                              menuurl="/cns-conc.html", menuname="CNS 11643 and Big5 comparison tables",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
-                             annots=annots)
+                             annots=annots, selfhandledanchorlink=True)
         f.close()
 
 
