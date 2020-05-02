@@ -19,15 +19,6 @@ finals = {'\u3132': '\u11a9', '\u3133': '\u11aa', '\u3135': '\u11ac', '\u3136': 
 
 compjamo = set(finals.keys()) | set(vowels.keys()) | set(initials.keys())
 
-def _sort_by_kps(syll):
-    deco = ucd.normalize("NFD", chr(syll))
-    if len(deco) == 2:
-        init, vow = deco
-        fin = ""
-    else:
-        init, vow, fin = deco
-    return (i_order[init], v_order[vow], f_order[fin])
-
 # KS C 5601 / KS X 1001 EUC-KR Wansung RHS
 graphdata.gsets["ir149"] = wansung = (94, 2, parsers.read_main_plane("WHATWG/index-euc-kr.txt", euckrlike=True))
 
@@ -37,14 +28,13 @@ graphdata.gsets["ir149-mac"] = macwansung = (94, 2, tuple(parsers.ahmap(0, tuple
     else None for i in json.load(open(os.path.join(parsers.directory, "Vendor/macWansung.json"), "r"))))
 
 # KPS 9566
-graphdata.gsets["ir202"] = kps9566 = (94, 2, parsers.read_main_plane("UTC/KPS9566.TXT", euckrlike=True))
-i_order = tuple(initials[_i] for _i in "ㄱㄴㄷㄹㅁㅂㅅㅈㅊㅋㅌㅍㅎㄲㄸㅃㅆㅉㅇ")
-i_order = dict((_i, i_order.index(_i)) for _i in i_order)
-v_order = tuple(vowels[_i] for _i in "ㅏㅑㅓㅕㅗㅛㅜㅠㅡㅣㅐㅒㅔㅖㅚㅟㅢㅘㅝㅙㅞ")
-v_order = dict((_i, v_order.index(_i)) for _i in v_order)
-f_order = tuple(finals[_i] for _i in "ㄱㄳㄴㄵㄶㄷㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅄㅅㅇㅈㅊㅋㅌㅍㅎㄲㅆ")
-f_order = dict((_i, f_order.index(_i) + 1) for _i in f_order)
-f_order[""] = 0
+graphdata.gsets["ir202-2003"] = kps9566_2003 = (94, 2, parsers.read_main_plane("UTC/KPS9566.TXT", euckrlike=True))
+_kps_temp = list(kps9566_2003[2])
+_kps_temp[1080] = (0x2B97,) # Finally exists in Unicode.
+graphdata.gsets["ir202-full"] = (94, 2, tuple(_kps_temp)) # tupling creates a copy
+_kps_temp[663] = (0x212A,) # Kelvin sign (versus Euro)
+_kps_temp[1222:1316] = (None,) * 94
+graphdata.gsets["ir202"] = kps9566_1997 = (94, 2, tuple(_kps_temp))
 # KPS 10721 doesn't appear to be ECMA-35 structured.
 
 # KS X 1002. I can't find charts, leave alone mappings, which aren't restricted to hanja.
@@ -59,6 +49,21 @@ non_wangsung_johab = [i for i in range(0xAC00, 0xD7A4)
                         if i not in graphdata.codepoint_coverages["ir149"]]
 
 # Similarly for the KPS encoding:
+def _sort_by_kps(syll):
+    deco = ucd.normalize("NFD", chr(syll))
+    if len(deco) == 2:
+        init, vow = deco
+        fin = ""
+    else:
+        init, vow, fin = deco
+    return (i_order[init], v_order[vow], f_order[fin])
+i_order = tuple(initials[_i] for _i in "ㄱㄴㄷㄹㅁㅂㅅㅈㅊㅋㅌㅍㅎㄲㄸㅃㅆㅉㅇ")
+i_order = dict((_i, i_order.index(_i)) for _i in i_order)
+v_order = tuple(vowels[_i] for _i in "ㅏㅑㅓㅕㅗㅛㅜㅠㅡㅣㅐㅒㅔㅖㅚㅟㅢㅘㅝㅙㅞ")
+v_order = dict((_i, v_order.index(_i)) for _i in v_order)
+f_order = tuple(finals[_i] for _i in "ㄱㄳㄴㄵㄶㄷㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅄㅅㅇㅈㅊㅋㅌㅍㅎㄲㅆ")
+f_order = dict((_i, f_order.index(_i) + 1) for _i in f_order)
+f_order[""] = 0
 non_kps9566_johab = [i for i in range(0xAC00, 0xD7A4) 
                        if i not in graphdata.codepoint_coverages["ir202"]]
 non_kps9566_johab.sort(key = _sort_by_kps)

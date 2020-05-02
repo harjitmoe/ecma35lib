@@ -72,11 +72,13 @@ def decode_uhc(stream, state):
                     index += 26 + (token[1] - 0x61)
                 else:
                     index += 52 + (token[1] - 0x81)
-                if (state.cur_gsets[1] == "ir149") and (index < len(korea.non_wangsung_johab)):
+                if (state.cur_gsets[1] in ("ir149", "ir149-mac")) and (
+                      index < len(korea.non_wangsung_johab)):
                     yield ("CHAR", korea.non_wangsung_johab[index], 
                            "ExtWansung", (0, index), "UHC", "UHCext")
                     uhc_lead = None
-                elif (state.cur_gsets[1] == "ir202") and (index < len(korea.non_kps9566_johab)):
+                elif (state.cur_gsets[1] in ("ir202", "ir202-2003", "ir202-full")) and (
+                      index < len(korea.non_kps9566_johab)):
                     yield ("CHAR", korea.non_kps9566_johab[index], 
                            "ExtKPS9566", (0, index), "UHC", "UHCext")
                     uhc_lead = None
