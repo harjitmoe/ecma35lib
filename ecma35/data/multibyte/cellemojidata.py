@@ -49,7 +49,7 @@ forced = {
     "FEE27": "\u2BC0", # Later addition to Unicode from Wingdings 2 190(dec); probably closest one not already taken.
     "FEE28": "\u25BF", # Closer match than the other-vendor substitutes.
     "FEE32": "\U0001F4B3\u200D\U0001F6AB",
-    "FEE33": "\u2612\uF87A",
+    "FEE33": "\u274E\uF87F", # or \u2612\uF87A; U+274E is U+FEB46 but what exactly is the difference?
     "FEE44": "C\uFE0F\u200D\u2709\uFE0F",
     "FEE47": "\U0001F3B5\u200D\U0001F5E8\uFE0F",
     "FEE70": "\uf861[Js",

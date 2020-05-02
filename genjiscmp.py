@@ -40,7 +40,7 @@ plane1 = (1, ("1978 JIS",  "1983 JIS",  "1990 JIS",
               "2000 JIS",  "2004 JIS",  "NEC 78JIS",
               "IBM 78JIS", "IBM 90JIS", "MS / HTML5", 
               "Mac KT6",   "Mac PS",    "Mac KT7", 
-              "ARIB<br>JIS Emoji", "DoCoMo<br>JIS Emoji", "KDDI<br>JIS Emoji", "SoftBank<br>JIS Emoji"), [
+              "ARIB<br>JIS Emoji", "DoCoMo<br>JIS Emoji", "au by KDDI<br>JIS Emoji", "SoftBank<br>JIS Emoji"), [
           graphdata.gsets["ir042"][2],
           graphdata.gsets["ir087"][2],
           graphdata.gsets["ir168"][2],
@@ -60,7 +60,7 @@ plane1 = (1, ("1978 JIS",  "1983 JIS",  "1990 JIS",
 ])
 
 plane2 = (2, ("MS / HTML5<br>IBM SJIS Ext", "DoCoMo<br>SJIS Emoji",
-              "KDDI<br>SJIS Emoji", "SoftBank<br>SJIS Emoji",
+              "au by KDDI<br>SJIS Emoji", "SoftBank<br>SJIS Emoji",
               "1990 JIS", "Va Extension", "OSF EUC<br>Plane 2M",
               "IBM 90JIS", "2000/04 JIS"), [
           graphdata.gsets["ibmsjisextpua"][2],
@@ -315,6 +315,10 @@ annots = {
  (1, 87, 9): 'Compare 01-40-14 and 02-40-53.',
  (1, 87, 29): 'Compare 01-38-34 and 02-41-12.',
  (1, 87, 49): 'Compare 01-17-75 and 02-41-79.',
+ (1, 88, 24): 'Despite its name FLAG IN HOLE, U+26F3 actually unifies two symbols:</p><ul><li>a head of a golf '
+              'club with a ball used by pre-2013 DoCoMo, post-2012 au and Noto Jelly Bean and KitKat;</li> '
+              '<li>a flag in a golf hole, used by pre-2012 au, SoftBank, ARIB, DoCoMo since 2013, and '
+              'others.</li></ul><p><a href="https://emojipedia.org/flag-in-hole/">Details on Emojipedia.</a>',
  (1, 89, 0): 'In the NEC and Windows / HTML5 versions, this is the start of '
              'the so-called NEC Selection (rows 89–92 inclusive): an '
              'alternative encoding within the JIS X 0208 bounds of all the '
@@ -397,22 +401,28 @@ annots = {
  (2, 76, 79): 'Compare 01-25-77 and 01-94-79.',
  (2, 76, 80): 'Compare 01-44-45 and 01-94-80.',
  (2, 83, 0): 'This row\'s content is invoked over GL (without re-designating G0) by <code>ESC $ E'
-             '</code> in Softbank\'s 2G emoji encoding (which does not conform to JIS X 0202 / '
+             '</code> in SoftBank\'s 2G emoji encoding (which does not conform to JIS X 0202 / '
              'ECMA-35).\u2002It is positioned such that the first emoji (cell 2 here) is over '
              '0x21 (<code>!</code>).',
  (2, 84, 0): 'This row\'s content is invoked over GL (without re-designating G0) by <code>ESC $ F'
-             '</code> in Softbank\'s 2G emoji encoding (which does not conform to JIS X 0202 / '
+             '</code> in SoftBank\'s 2G emoji encoding (which does not conform to JIS X 0202 / '
              'ECMA-35).\u2002It is positioned such that the first emoji (cell 3 here) is over '
              '0x21 (<code>!</code>).',
- (2, 84, 86): 'Softbank\'s 02-84-86 is named "J-PHONE SHOP".',
- (2, 84, 87): 'Softbank\'s 02-84-87 is named "SKY WEB", and <a href="https://mail.google.com/mail/e/softbank_ne_jp/E78">depicts a body orbiting a planet</a>.\u2002The displayed substitution is newer and somewhat similar, but <a href="https://commons.wikimedia.org/wiki/File:Planet_-_The_Noun_Project.svg">something like this</a> would be closer.',
- (2, 84, 88): 'Softbank\'s 02-84-88 is named "SKY WALKER", and <a href="https://mail.google.com/mail/e/softbank_ne_jp/E79">depicts a paper aeroplane</a>.\u2002Interestingly, no current Unicode-defined emoji (as of Unicode 13) depicts one, although it\'s U+F1D8 (BMP PUA) or U+10F1D8 (SPUB) in Font Awesome.\u2002<a href="https://commons.wikimedia.org/wiki/File:Gnome-document-send.svg">A possible higher-resolution colour presentation, from the GNOME icon set.</a>',
- (2, 84, 89): 'Softbank\'s 02-84-89 is named "SKY MELODY", and <a href="https://mail.google.com/mail/e/softbank_ne_jp/E7A">depicts a musical note and waves</a>.',
+ (2, 84, 24): 'Despite its name FLAG IN HOLE, U+26F3 actually unifies two symbols, see 01-88-24 for details.',
+ (2, 84, 86): 'SoftBank\'s 02-84-86 is named "J-PHONE SHOP".',
+ (2, 84, 87): 'SoftBank\'s 02-84-87 is named "SKY WEB", and <a href="https://mail.google.com/mail/e/softbank_ne_jp/E78">depicts a body orbiting a planet</a>.\u2002The displayed substitution is newer and somewhat similar, but <a href="https://commons.wikimedia.org/wiki/File:Planet_-_The_Noun_Project.svg">something like this</a> would be closer.',
+ (2, 84, 88): 'SoftBank\'s 02-84-88 is named "SKY WALKER", and <a href="https://mail.google.com/mail/e/softbank_ne_jp/E79">depicts a paper aeroplane</a>.\u2002Interestingly, no current Unicode-defined emoji (as of Unicode 13) depicts one, although it\'s U+F1D8 (BMP PUA) or U+10F1D8 (SPUB) in Font Awesome.\u2002<a href="https://commons.wikimedia.org/wiki/File:Gnome-document-send.svg">A possible higher-resolution colour presentation, from the GNOME icon set.</a>',
+ (2, 84, 89): 'SoftBank\'s 02-84-89 is named "SKY MELODY", and <a href="https://mail.google.com/mail/e/softbank_ne_jp/E7A">depicts a musical note and waves</a>.',
 # (2, 84, 92): 'Softbank\'s 02-84-90 through 02-84-92 is named "J-PHONE".',
- (2, 87, 0): 'This row\'s content is invoked over GL (without re-designating G0) by <code>ESC $ G'
-             '</code> in Softbank\'s 2G emoji encoding (which does not conform to JIS X 0202 / '
-             'ECMA-35).\u2002It is positioned such that the first emoji (cell 2 here) is over '
-             '0x21 (<code>!</code>).',
+ (2, 86, 0): 'This DoCoMo row is coded at 9-9120 through 9-917F by TRON.',
+ (2, 86, 23): 'Despite its name FLAG IN HOLE, U+26F3 actually unifies two symbols, see 01-88-24 for details.',
+ (2, 87, 0): 'RE DoCoMo: this row is coded at 9-9220 through 9-927F by TRON.</p><p>'
+             'RE SoftBank: This row\'s content is invoked over GL (without re-designating G0) by '
+             '<code>ESC $ G</code> in the 2G emoji encoding (which does not conform to JIS X 0202 / '
+             'ECMA-35).\u2002It is positioned such that the first emoji (cell 2 here) is over 0x21 '
+             '(<code>!</code>).</p><p>This SoftBank row comprises the oldest emoji characters in that '
+             'set, <a href="https://blog.emojipedia.org/correcting-the-record-on-the-first-emoji-set/">'
+             'dating back to J-Phone\'s 1997 SkyWalker DP-211 SW</a>.',
  (2, 87, 20): '<a href="https://mail.google.com/mail/e/docomo_ne_jp/E1C">DoCoMo\'s 02-87-20</a> '
               'has a featureless texture, without the dots / markings present in their 02-86-58 '
               '(<a href="https://emojipedia.org/docomo/2002/movie-camera/">for comparison</a>).',
@@ -421,8 +431,9 @@ annots = {
  (2, 87, 47): 'DoCoMo\'s 02-87-44 through 02-87-47 appear as boxed letters I, M, E, VE with '
               'drop shadows.',
  (2, 87, 58): 'DoCoMo\'s 02-87-57 and 02-87-58 display a DoCoMo logo, which resembles a Ð.',
- (2, 88, 0): 'This row\'s content is invoked over GL (without re-designating G0) by <code>ESC $ O'
-             '</code> in Softbank\'s 2G emoji encoding (which does not conform to JIS X 0202 / '
+ (2, 88, 0): 'RE DoCoMo: this row is coded at 9-9320 through 9-937F by TRON.</p><p>'
+             'RE SoftBank: This row\'s content is invoked over GL (without re-designating G0) by '
+             '<code>ESC $ O</code> in the 2G emoji encoding (which does not conform to JIS X 0202 / '
              'ECMA-35).\u2002It is positioned such that the first emoji (cell 3 here) is over '
              '0x21 (<code>!</code>).',
  (2, 89, 21): 'Compare 01-02-44.',
