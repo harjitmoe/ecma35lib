@@ -257,6 +257,14 @@ annots = {
  (1, 34, 35): "The Euro sign and circle were added in 2007.",
  (1, 34, 52): "Using private use assignments for grapheme clusters which have standard Unicode "
               "representations just (presumably) because they don't have single codepoints… why?",
+ (2, 23, 79): "I'm following RFC 1922 mappings between CNS and Big5 here, even though the gov-tw "
+              "mappings seem to differ.&ensp;Not sure if these two are consistently supposed "
+              "to look different in all styles (their TW Kai reference glyphs seem to be the same, "
+              "although the TW Sung ones differ).&ensp;Compare 02-30-67.",
+ (2, 30, 67): "I'm following RFC 1922 mappings between CNS and Big5 here, even though the gov-tw "
+              "mappings seem to differ.&ensp;Not sure if these two are consistently supposed "
+              "to look different in all styles (their TW Kai reference glyphs seem to be the same, "
+              "although the TW Sung ones differ).&ensp;Compare 02-23-79.",
  (3, 1, 24): "Compare 01-04-31.",
  (3, 66, 38): "Between 1992 and 2007, this was the last <i>de jure</i> codepoint on this "
               "plane.\u200203-66-39 through 03-68-21 were removed and distributed amongst plane 4 "

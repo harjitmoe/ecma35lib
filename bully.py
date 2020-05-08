@@ -7,7 +7,7 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 # Exhaustively runs through a mapping file in a random order, testing
-# a given mode.
+# a given state of the decoder.
 
 import random, io
 from ecma35.decoder import tokenfeed, simplecomparer
@@ -50,8 +50,8 @@ print("===", "KPS 9566:2011", "===")
 bully("ecma35/data/multibyte/mbmaps/Other/AppendixA_KPS9566-2011-to-Unicode.txt", b"\x1B%1\x1B$)N")
 print("===", "KPS 9566:2003", "===")
 bully("ecma35/data/multibyte/mbmaps/UTC/KPS9566.TXT", b"\x1B%1\x1B&0\x1B$)N")
-#print("===", "Microsoft Big5", "===")
-#bully("ecma35/data/multibyte/mbmaps/Vendor/CP950.TXT", b"\x1B%4")
+print("===", "Microsoft Big5", "===")
+bully("ecma35/data/multibyte/mbmaps/Vendor/CP950.TXT", b"\x1B%4")
 
 
 

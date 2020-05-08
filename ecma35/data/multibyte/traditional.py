@@ -213,11 +213,17 @@ cns_spuaa = parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 15.txt",
         mapper = cnsmapper_contraspua)
 cns = parsers.fuse([cns_bmp, cns_sip, cns_spuaa], "GOV-TW---CNS2UNICODE_swar_cspua_crcb.json")
 
+cns_govbmp = parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode BMP.txt")
+cns_govsip = parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 2.txt")
+cns_govspuaa = parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 15.txt")
+cns_gov = parsers.fuse([cns_govbmp, cns_govsip, cns_govspuaa], "GOV-TW---CNS2UNICODE.json")
+
 # Planes present in the original 1986 edition of CNS 11643.
 # Closely related to Big5. ISO-IR numbers in the 170s (whereas the 1992 additions are in the 180s).
 # ir171 was mostly kept the same until 2007, then extended a bit, due to being the non-kanji plane.
 graphdata.gsets["ir171"] = cns1 = (94, 2, cns[planesize * 0 : planesize * 1])
-graphdata.gsets["ir171-1986"] = euctw_g2_ibm = (94, 3,
+graphdata.gsets["ir171-govtw"] = cns1_gov = (94, 2, cns_gov[planesize * 0 : planesize * 1])
+graphdata.gsets["ir171-ibm"] = euctw_g1_ibm = (94, 3,
         parsers.read_main_plane("ICU/euc-tw-2014.ucm", plane=1))
 graphdata.gsets["ir172"] = cns2 = (94, 2, cns[planesize * 1 : planesize * 2])
 
@@ -480,6 +486,25 @@ big5_to_cns2[0xDDFC] = (2, 33, 86) # IBM's (13, 4, 42)
 
 for _i in big5_to_cns1:
     big5_to_cns2[_i] = (1,) + big5_to_cns1[_i]
+
+# Now big5_to_cns2 is defined, we can do this:
+graphdata.gsets["ir171-ms"] = (94, 2, read_big5_planes("Vendor/CP950.TXT", plane=1))
+graphdata.gsets["ir171-utcbig5"] = (94, 2, read_big5_planes("UTC/BIG5.TXT", plane=1))
+graphdata.gsets["ir171-utc"] = (94, 2, parsers.read_main_plane("UTC/CNS11643.TXT", plane=1))
+graphdata.gsets["ir172-ms"] = (94, 2, read_big5_planes("Vendor/CP950.TXT", plane=2))
+graphdata.gsets["ir172-utcbig5"] = (94, 2, read_big5_planes("UTC/BIG5.TXT", plane=2))
+graphdata.gsets["ir172-utc"] = (94, 2, parsers.read_main_plane("UTC/CNS11643.TXT", plane=2))
+
+macbig5 = tuple(tuple(i) if i is not None else None for i in 
+                json.load(open(os.path.join(parsers.directory, "Vendor/macBig5.json"), "r")))
+graphdata.gsets["ir171-mac"] = (94, 2, macbig5[:94*94])
+graphdata.gsets["ir172-mac"] = (94, 2, macbig5[94*94:])
+
+# The most basic subset of EUC-TW supported is basically a transformation format of
+# Big5. Anything more isn't really supported/used nearly as much. So using Big5
+# mappings in EUC-TW implementations is applicable.
+graphdata.gsets["cns-eucg2-mac"] = euctw_g2 = (94, 3, graphdata.gsets["ir172-mac"][2])
+graphdata.gsets["cns-eucg2-ms"] = euctw_g2 = (94, 3, graphdata.gsets["ir172-ms"][2])
 
 graphdata.gsets["hkscs"] = hkscs_extras = (94, 2, read_big5extras("WHATWG/index-big5.txt"))
 graphdata.gsets["etenexts"] = eten_extras = (94, 2, 

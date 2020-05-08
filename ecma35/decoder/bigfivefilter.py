@@ -31,7 +31,7 @@ def decode_bigfive(stream, state):
                 state.cur_c1 = "RFC1345"
                 state.glset = 0
                 state.grset = 1
-                state.cur_gsets = ["ir006", "ir171", "cns-eucg2", "hkscs"]
+                state.cur_gsets = ["ir006", "ir171-ms", "cns-eucg2", "hkscs"]
                 state.is_96 = [0, 0, 0, 0]
             else:
                 yield token
@@ -100,6 +100,13 @@ def decode_bigfive(stream, state):
                     for i in traditional.big5_to_cns2[number]:
                         yield ("G2", i, "Big5")
                         big5_lead = None
+                elif number == 0xA3E1:
+                    # Kludge but I can't really do anything about it...
+                    yield ('CHAR', 0x20AC, 'Big5EuroExt', (0xA5E1,), 'Big5EuroExt', 'Big5EuroExt')
+                    big5_lead = None
+                else:
+                    yield ("ERROR", "BIG5NOEUCMAPPING")
+                    big5_lead = None
             else:
                 yield ("ERROR", "BIG5TRUNCATE", big5_lead[1])
                 big5_lead = None
