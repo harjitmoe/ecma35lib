@@ -51,7 +51,8 @@ bully("ecma35/data/multibyte/mbmaps/Other/AppendixA_KPS9566-2011-to-Unicode.txt"
 print("===", "KPS 9566:2003", "===")
 bully("ecma35/data/multibyte/mbmaps/UTC/KPS9566.TXT", b"\x1B%1\x1B&0\x1B$)N")
 print("===", "Microsoft Big5", "===")
-bully("ecma35/data/multibyte/mbmaps/Vendor/CP950.TXT", b"\x1B%4")
+print("Note: not round-tripping U+fa0c or U+fa0d is expected (duplicates omitted in underlying EUC model).")
+bully("ecma35/data/multibyte/mbmaps/Vendor/CP950.TXT", b"\x1B%4\x1B&?\x1B$+!2")
 
 
 

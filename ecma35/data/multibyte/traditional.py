@@ -503,8 +503,10 @@ graphdata.gsets["ir172-mac"] = (94, 2, macbig5[94*94:])
 # The most basic subset of EUC-TW supported is basically a transformation format of
 # Big5. Anything more isn't really supported/used nearly as much. So using Big5
 # mappings in EUC-TW implementations is applicable.
-graphdata.gsets["cns-eucg2-mac"] = euctw_g2 = (94, 3, graphdata.gsets["ir172-mac"][2])
-graphdata.gsets["cns-eucg2-ms"] = euctw_g2 = (94, 3, graphdata.gsets["ir172-ms"][2])
+graphdata.gsets["cns-eucg2-mac"] = euctw_g2 = (94, 3, graphdata.gsets["ir171-mac"][2] + 
+                                               graphdata.gsets["ir172-mac"][2])
+graphdata.gsets["cns-eucg2-ms"] = euctw_g2 = (94, 3, graphdata.gsets["ir171-mac"][2] + 
+                                              graphdata.gsets["ir172-ms"][2])
 
 graphdata.gsets["hkscs"] = hkscs_extras = (94, 2, read_big5extras("WHATWG/index-big5.txt"))
 graphdata.gsets["etenexts"] = eten_extras = (94, 2, 
