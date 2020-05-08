@@ -92,9 +92,10 @@ def decode_uhc(stream, state):
                     yield ("ERROR", "UHCTRUNCATE", uhc_lead[1])
                     uhc_lead = None
                     reconsume = token
-            elif (uhc_lead[1] == 0xAE) and (token[1] == 0xFF) and (state.cur_gsets[1] == "ir202"):
+            elif (uhc_lead[1] == 0xAE) and (token[1] == 0xFF) and (state.cur_gsets[1] in ("ir202-2003", "ir202-full")):
                 # Encoding of ÿ.
                 yield ("CHAR", 0xFF, "ExtKPS9566", (14, 95), "UHC", "UHCext")
+                uhc_lead = None
             else:
                 yield ("ERROR", "UHCTRUNCATE", uhc_lead[1])
                 uhc_lead = None

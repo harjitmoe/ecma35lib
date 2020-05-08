@@ -18,11 +18,21 @@ def bully(fn, statesequence):
         for line in f:
             if line.strip() and not line.startswith("#"):
                 a, b = line.split(None, 3)[:2]
-                assert a[:2] == "0x"
-                assert b[:2] in ("0x", "U+")
+                if b[0] == "#": # i.e. "#UNDEFINED"
+                    continue
+                assert a[:2] == "0x", (a, b)
+                assert b[:2] in ("0x", "U+"), (a, b)
                 stuff1 = int(a[2:], 16)
+                if stuff1 in (0x1B, 0x0E, 0x0F, 0x8E, 0x8F, 0x90, 0x98, 0x9B, 0x9D, 0x9E, 0x9F):
+                    # Don't insert shifts, escape sequences or other control sequences
+                    continue
                 unic = int(b[2:], 16)
-                stuff2 = bytes([stuff1]) if stuff1 < 256 else bytes([stuff1 >> 8, stuff1 & 0xFF])
+                if stuff1 < 256:
+                    stuff2 = bytes([stuff1])
+                elif stuff1 < 65536:
+                    stuff2 = bytes([stuff1 >> 8, stuff1 & 0xFF])
+                else:
+                    stuff2 = bytes([stuff1 >> 16, (stuff1 >> 8) & 0xFF, stuff1 & 0xFF])
                 stringdat.append((stuff2, chr(unic)))
     random.shuffle(stringdat)
     codestringdat, ucsstringdat = tuple(zip(*stringdat))
@@ -36,5 +46,17 @@ def bully(fn, statesequence):
             print(ascii(i))
             print()
 
+print("===", "KPS 9566:2011", "===")
 bully("ecma35/data/multibyte/mbmaps/Other/AppendixA_KPS9566-2011-to-Unicode.txt", b"\x1B%1\x1B$)N")
+print("===", "KPS 9566:2003", "===")
+bully("ecma35/data/multibyte/mbmaps/UTC/KPS9566.TXT", b"\x1B%1\x1B&0\x1B$)N")
+#print("===", "Microsoft Big5", "===")
+#bully("ecma35/data/multibyte/mbmaps/Vendor/CP950.TXT", b"\x1B%4")
+
+
+
+
+
+
+
 

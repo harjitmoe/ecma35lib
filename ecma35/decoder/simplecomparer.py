@@ -42,7 +42,7 @@ def simple_logger_maker(target_string):
                     yield (expected, "SUCCESS")
             elif token[0] == "CTRL":
                 expected = next(target)
-                if ord(expected) >= 0x20 and not (0x80 <= ord(expected) < 0xA0):
+                if ord(expected) >= 0x20 and not (0x7F <= ord(expected) < 0xA0):
                     yield (expected, token)
                 else:
                     yield (expected, "SUCCESS")
