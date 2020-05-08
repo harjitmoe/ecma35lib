@@ -31,7 +31,7 @@ def decode_uhc(stream, state):
                 state.cur_c1 = "RFC1345"
                 state.glset = 0
                 state.grset = 1
-                state.cur_gsets = ["ir006", "ir149", "ir013win", "nil"]
+                state.cur_gsets = ["ir006", "ir149", "ir013win", "2011kpsextras"]
                 state.is_96 = [0, 0, 0, 0]
             else:
                 yield token
@@ -65,7 +65,7 @@ def decode_uhc(stream, state):
                   0x81 <= token[1] <= 0xFE):
                 row_number = uhc_lead[1] - 0x81
                 prev_rows_next_to_wansung = (uhc_lead[1] - 0xA1) if uhc_lead[1] >= 0xA1 else 0
-                index = (row_number * 178) - (prev_rows_next_to_wansung * 94)
+                index = ref_index = (row_number * 178) - (prev_rows_next_to_wansung * 94)
                 if token[1] <= 0x5A:
                     index += (token[1] - 0x41)
                 elif token[1] <= 0x7A:
@@ -77,10 +77,14 @@ def decode_uhc(stream, state):
                     yield ("CHAR", korea.non_wangsung_johab[index], 
                            "ExtWansung", (0, index), "UHC", "UHCext")
                     uhc_lead = None
-                elif (state.cur_gsets[1] in ("ir202", "ir202-2003", "ir202-full")) and (
+                elif (state.cur_gsets[1] in ("ir202", "ir202-2003", "ir202-2011", "ir202-full")) and (
                       index < len(korea.non_kps9566_johab)):
                     yield ("CHAR", korea.non_kps9566_johab[index], 
                            "ExtKPS9566", (0, index), "UHC", "UHCext")
+                    uhc_lead = None
+                elif uhc_lead[1] >= 0xC8:
+                    yield ("G3", uhc_lead[1] + 1 - 0xC8, "UHCBEYONDEXT")
+                    yield ("G3", index + 1 - ref_index, "UHCBEYONDEXT")
                     uhc_lead = None
                 else:
                     # Following the UHC structure but beyond the region used.

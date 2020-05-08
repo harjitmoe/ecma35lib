@@ -11,9 +11,10 @@ from ecma35.data.multibyte import japan, cellemojidata
 from ecma35.data import graphdata, showgraph
 import json, os
 
-plane1 = (1, ("1997 KPS", "2003 KPS"), [
+plane1 = (1, ("1997 KPS", "2003 KPS", "2011 KPS"), [
           graphdata.gsets["ir202"][2],
           graphdata.gsets["ir202-2003"][2],
+          graphdata.gsets["ir202-2011"][2],
 ])
 
 def planefunc(number, mapname=None):

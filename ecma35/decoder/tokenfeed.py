@@ -26,7 +26,7 @@ def _tokenise_stream(stream, state):
     # encountering the end of the stream as opposed to merely an unexpected token.
     yield ("ENDSTREAM",)
 
-def process_stream(stream, **kwargs): # The entry point.
+def process_stream(stream, *, lastfilter=None, **kwargs): # The entry point.
     # DOCS are stipulated in ISO 10646 as big-endian (>). Actually, ISO 10646 does not provide for
     # any means of embedding little-endian UTF data in ECMA-35 (i.e. our regard_bom=0). However,
     # it isn't the last word on this matter (WHATWG stipulates that unmarked UTF-16 is little-
@@ -54,7 +54,7 @@ def process_stream(stream, **kwargs): # The entry point.
               csisequences.decode_csi_sequences, controlstrings.decode_control_strings, 
               invocations.decode_invocations, graphsets.decode_graphical_sets,
               hangulfillers.proc_hangul_fillers, gccsequences.proc_gcc_sequences,
-              simpleprinter.simple_print]:
+              lastfilter or simpleprinter.simple_print]:
         stream = f(stream, state)
     yield from stream
 

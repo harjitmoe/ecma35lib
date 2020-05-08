@@ -6,6 +6,10 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+import os, collections, re, sys
+import unicodedata as ucd
+from ecma35.data.multibyte import mbmapparsers as parsers
+
 # softbank (2, 84, 86) J-PHONE SHOP
 # softbank (2, 84, 87) SKY WEB
 # softbank (2, 84, 88) SKY WALKER
@@ -24,14 +28,50 @@
 # softbank (2, 92, 60) VODAFONE1
 # softbank (2, 92, 61) VODAFONE2
 
+f = open(os.path.join(parsers.directory, "Encode-JP-Emoji/lib/Encode/JP/Emoji/Mapping.pm"), "rU", encoding="utf-8")
+b = f.read()
+f.close()
+kddi_microsoft = range(0xE000, 0xE758)
+
+def slurpranges(stuff):
+    bits = stuff.split("}\\x{")
+    for i in bits:
+        if i.startswith("\\x{"):
+            i = i[3:]
+        elif i[-1] == "}":
+            i = i[:-1]
+        #
+        if "-" in i:
+            rang1, rang2 = i.split("}-\\x{", 1)
+            rang1 = int(rang1, 16)
+            rang2 = int(rang2, 16)
+            yield from range(rang1, rang2 + 1)
+        else:
+            yield int(i, 16)
+
+def remap(dat, rang):
+    dat = dat.split("=~", 1)[1].split("[", 1)[1]
+    dat, dat2 = dat.split("]", 1)
+    dat2 = dat2.split("[", 1)[1].split("]", 1)[0]
+    f, t = list(slurpranges(dat)), list(slurpranges(dat2))
+    assert len(f) == len(t), (len(f), len(t))
+    minidict = dict(zip(f, t))
+    for i in rang:
+        if (i not in minidict.keys()) and (i not in minidict.values()):
+            yield i
+        elif (i in minidict.keys()):
+            yield minidict[i]
+        else:
+            yield None
+
+kddi_app = list(remap(b.split("kddi_cp932_to_kddi_unicode {", 1)[1].split("];", 1)[0], kddi_microsoft))
+kddi_web = list(remap(b.split("kddiweb_cp932_to_kddiweb_unicode {", 1)[1].split("];", 1)[0], kddi_microsoft))
+app2web = dict(zip(kddi_app, kddi_web))
+
 # Row format: <SPUA codepoint>\t<SPUA UTF-16 escape>\t<SPUA UTF-8 escape>\t<name><kddi><docomo><softbank>\t\t\t
 # Kddi:     {\t<substitute>} || {\t\t<decimal>\t<Shift_JIS (beyond JIS) hex>\t<PUA hex>\t<JIS hex>\t<Shift_JIS (from JIS) hex>}
 # Docomo:   {\t<substitute>} || {\t\t<decimal>\t<Shift_JIS hex>\t<PUA hex>\t<JIS hex>}
 # Softbank: {\t<substitute>} || {\t\t<decimal>\t<Shift_JIS hex>\t<PUA hex>\t<JIS hex>}
-
-import os, collections, re, sys
-import unicodedata as ucd
-from ecma35.data.multibyte import mbmapparsers as parsers
 
 GoogleAllocation = collections.namedtuple("GoogleAllocation", ["codepoint", "utf8", "utf16", "googlename"])
 KddiAllocation = collections.namedtuple("KddiAllocation", ["name", "substitute", "id", "sjis", "pua", "jis", "jis_sjis", "unic", "uniname"])
@@ -203,7 +243,10 @@ for row in sets:
                     break
             else: # for...else, i.e. never reached "break"
                 if group.pua:
-                    unic = chr(int(group.pua, 16))
+                    if group.name != kddi:
+                        unic = chr(int(group.pua, 16))
+                    else:
+                        unic = chr(app2web[int(group.pua, 16)])
         #
         if (len(unic) == 1) and (ord(unic) in wants_fe0f):
             unic += "\uFE0F"
@@ -221,7 +264,10 @@ for row in sets:
                     ten = byts[1] - 0x20
                 pointer = ((men - 1) * (94 * 94)) + ((ku - 1) * 94) + (ten - 1)
                 if not group.unic:
-                    puaunic = chr(int(group.pua, 16))
+                    if group.name != kddi:
+                        puaunic = chr(int(group.pua, 16))
+                    else:
+                        puaunic = chr(app2web[int(group.pua, 16)])
                     # 0x27BF being the only non-EmojiSources.txt non-PUA mapping deployed in codecs afaict.
                     if (unic != puaunic) and (unic != "\u27BF"):
                         key = pointer, tuple(ord(i) for i in unic)
@@ -259,4 +305,3 @@ outmap["docomo"] = tuple(outmap["docomo"])
 outmap["kddi"] = tuple(outmap["kddi"])
 outmap["softbank"] = tuple(outmap["softbank"])
 
-        

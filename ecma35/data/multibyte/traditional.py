@@ -279,7 +279,7 @@ def read_big5extras(fil):
     cachefn = os.path.join(parsers.cachedirectory,
               os.path.splitext(fil)[0].replace("/", "---") + "_big5extras.json")
     if os.path.exists(cachefn):
-        # Cache output since otherwise several seconds are spend in here upon importing graphdata
+        # Cache output since otherwise several seconds are spent in here upon importing graphdata
         f = open(cachefn, "r")
         r = json.load(f)
         f.close()

@@ -11,6 +11,50 @@ import unicodedata as ucd
 from ecma35.data import graphdata
 from ecma35.data.multibyte import mbmapparsers as parsers
 
+_temp = []
+def read_kps9566extras(fil):
+    cachefn = os.path.join(parsers.cachedirectory,
+              os.path.splitext(fil)[0].replace("/", "---") + "_kps9566extras.json")
+    if os.path.exists(cachefn):
+        f = open(cachefn, "r")
+        r = json.load(f)
+        f.close()
+        return tuple(tuple(i) if i is not None else None for i in r)
+    for _i in open(os.path.join(parsers.directory, fil), "r", encoding="utf-8"):
+        if (not _i.strip()) or _i[0] == "#":
+            continue
+        byts, ucs = _i.split("\t", 2)[:2]
+        if len(byts) >= 6:
+            lead = int(byts[2:4], 16)
+            trail = int(byts[4:6], 16)
+            if (lead < 0xC8) or (trail > 0xA0):
+                continue
+            first = lead - 0xC8
+            if trail >= 0x81:
+                last = trail - 0x41 - 12
+            elif trail >= 0x61:
+                last = trail - 0x41 - 6
+            else:
+                last = trail - 0x41
+            newpointer = (94 * first) + last
+        else:
+            continue
+        #
+        if len(_temp) > newpointer:
+            assert _temp[newpointer] is None, (newpointer, int(ucs[2:], 16), _temp[newpointer])
+            _temp[newpointer] = (int(ucs[2:], 16),)
+        else:
+            while len(_temp) < newpointer:
+                _temp.append(None)
+            _temp.append((int(ucs[2:], 16),))
+    r = tuple(_temp) # Making a tuple makes a copy, of course.
+    del _temp[:]
+    # Write output cache.
+    f = open(cachefn, "w")
+    f.write(json.dumps(r))
+    f.close()
+    return r
+
 initials = {'\u3131': '\u1100', '\u3132': '\u1101', '\u3134': '\u1102', '\u3137': '\u1103', '\u3138': '\u1104', '\u3139': '\u1105', '\u3141': '\u1106', '\u3142': '\u1107', '\u3143': '\u1108', '\u3145': '\u1109', '\u3146': '\u110a', '\u3147': '\u110b', '\u3148': '\u110c', '\u3149': '\u110d', '\u314a': '\u110e', '\u314b': '\u110f', '\u314c': '\u1110', '\u314d': '\u1111', '\u314e': '\u1112', '\u3165': '\u1114', '\u3166': '\u1115', '\u3167': '\u115b', '\u316a': '\ua966', '\u316e': '\u111c', '\u316f': '\ua971', '\u3171': '\u111d', '\u3172': '\u111e', '\u3173': '\u1120', '\u3174': '\u1122', '\u3175': '\u1123', '\u3176': '\u1127', '\u3177': '\u1129', '\u3178': '\u112b', '\u3179': '\u112c', '\u317a': '\u112d', '\u317b': '\u112e', '\u317c': '\u112f', '\u317d': '\u1132', '\u317e': '\u1136', '\u317f': '\u1140', '\u3180': '\u1147', '\u3181': '\u114c', '\u3184': '\u1157', '\u3185': '\u1158', '\u3186': '\u1159', '\u3164': '\u115f'}
 
 vowels = {'\u314f': '\u1161', '\u3150': '\u1162', '\u3151': '\u1163', '\u3152': '\u1164', '\u3153': '\u1165', '\u3154': '\u1166', '\u3155': '\u1167', '\u3156': '\u1168', '\u3157': '\u1169', '\u3158': '\u116a', '\u3159': '\u116b', '\u315a': '\u116c', '\u315b': '\u116d', '\u315c': '\u116e', '\u315d': '\u116f', '\u315e': '\u1170', '\u315f': '\u1171', '\u3160': '\u1172', '\u3161': '\u1173', '\u3162': '\u1174', '\u3163': '\u1175', '\u3187': '\u1184', '\u3188': '\u1185', '\u3189': '\u1188', '\u318a': '\u1191', '\u318b': '\u1192', '\u318c': '\u1194', '\u318d': '\u119e', '\u318e': '\u11a1', '\u3164': '\u1160'}
@@ -28,13 +72,17 @@ graphdata.gsets["ir149-mac"] = macwansung = (94, 2, tuple(parsers.ahmap(0, tuple
     else None for i in json.load(open(os.path.join(parsers.directory, "Vendor/macWansung.json"), "r"))))
 
 # KPS 9566
+graphdata.gsets["ir202-2011"] = kps9566_2011 = (94, 2, parsers.read_main_plane("Other/AppendixA_KPS9566-2011-to-Unicode.txt", euckrlike=True))
 graphdata.gsets["ir202-2003"] = kps9566_2003 = (94, 2, parsers.read_main_plane("UTC/KPS9566.TXT", euckrlike=True))
-_kps_temp = list(kps9566_2003[2])
+_kps_temp = list(parsers.fuse([kps9566_2011[2], kps9566_2003[2]], "KPS_2011and2003.TXT"))
 _kps_temp[1080] = (0x2B97,) # Finally exists in Unicode.
-graphdata.gsets["ir202-full"] = (94, 2, tuple(_kps_temp)) # tupling creates a copy
+graphdata.gsets["ir202-full"] = (94, 2, tuple(_kps_temp))
+_kps_temp = list(kps9566_2003[2])
+_kps_temp[1080] = (0x2B97,)
 _kps_temp[663] = (0x212A,) # Kelvin sign (versus Euro)
 _kps_temp[1222:1316] = (None,) * 94
 graphdata.gsets["ir202"] = kps9566_1997 = (94, 2, tuple(_kps_temp))
+graphdata.gsets["2011kpsextras"] = (94, 2, read_kps9566extras("Other/AppendixA_KPS9566-2011-to-Unicode.txt"))
 # KPS 10721 doesn't appear to be ECMA-35 structured.
 
 # KS X 1002. I can't find charts, leave alone mappings, which aren't restricted to hanja.
