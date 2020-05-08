@@ -344,6 +344,8 @@ def dump_plane(outfile, planefunc, kutenfunc,
                 if i is None:
                     print("<td class=undefined></td>", file=outfile)
                     continue
+                pointer = ((number - 1) * (94 * 94)) + ((row - 1) * 94) + (cell - 1)
+                cdisplayi = cdispmap.get((pointer, i), i)
                 #
                 if i[0] >= 0xF0000:
                     print("<td><span class='codepicture spua' lang={}>".format(lang), file=outfile)
@@ -371,7 +373,10 @@ def dump_plane(outfile, planefunc, kutenfunc,
                     else:
                         print("<td><span class=codepicture lang={}>".format(lang), file=outfile)
                 #
-                pointer = ((number - 1) * (94 * 94)) + ((row - 1) * 94) + (cell - 1)
+                if (i != cdisplayi) and isinstance(cdisplayi, tuple) and (
+                            cdisplayi[-1] not in list(range(0xF870, 0xF880))) and not (
+                            0xE000 <= cdisplayi[0] < 0xF900):
+                    strep = "".join(chr(i) for i in cdisplayi) + " / " + strep
                 strep = strep.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
                 if ucd.category(strep[0])[0] == "M":
                     strep = "◌" + strep
@@ -397,7 +402,6 @@ def dump_plane(outfile, planefunc, kutenfunc,
                     print(strep.rstrip("\uF87D\uF87F"), file=outfile)
                 print("</span>", file=outfile)
                 print("<br><span class=codepoint>", file=outfile)
-                cdisplayi = cdispmap.get((pointer, i), i)
                 if not isinstance(cdisplayi, list):
                     print("U+" + "<wbr>+".join(_codepfmt(j, len(cdisplayi))
                                            for j in cdisplayi), file=outfile)

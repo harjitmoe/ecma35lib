@@ -28,6 +28,23 @@ from ecma35.data.multibyte import mbmapparsers as parsers
 # softbank (2, 92, 60) VODAFONE1
 # softbank (2, 92, 61) VODAFONE2
 
+# Older KDDI zodiac signs showing pictures, not symbols
+kddizodiacmap = {
+    "♈": "🐏",
+    "♉": "🐂",
+    "♊": "👬", # ...ish (two smiling faces pressed up against each other)
+    "♋": "🦀",
+    "♌": "🦁",
+    "♍": "👧", # ...ish (there isn't really a definitive equivalent)
+    "♎": "⚖️",
+    "♏": "🦂",
+    "♐": "🏹",
+    "♑": "🐐",
+    "♒": "🏺",
+    "♓": "🐟",
+}
+rkddizodiacmap = dict(zip(kddizodiacmap.values(), kddizodiacmap.keys()))
+
 f = open(os.path.join(parsers.directory, "Encode-JP-Emoji/lib/Encode/JP/Emoji/Mapping.pm"), "rU", encoding="utf-8")
 b = f.read()
 f.close()
@@ -208,7 +225,7 @@ with open(os.path.join(parsers.directory, "UCD/EmojiSources.txt")) as f:
         if len(unic) == 2 and unic[1] == "\u20E3":
             unic = unic[0] + "\uFE0F\u20E3"
         sauces["docomo"][docomo] = unic
-        sauces["kddi"][kddi] = unic
+        sauces["kddi"][kddi] = kddizodiacmap.get(unic, unic)
         sauces["softbank"][softbank] = unic
 
 with open(os.path.join(parsers.directory, "AOSP/gmojiraw.txt"), encoding="utf-8") as f:
@@ -230,7 +247,9 @@ for row in sets:
     # Each row is one GMoji SPUA. "others" is the other two vendors, for whose mappings Google's
     #   substitutes for the emoji of the vendor under scrutiny might be listed.
     for group, others in andothers_iter(row[1:]):
-        suboutmap = outmap.setdefault(group.name, [])
+        suboutmap = suboutmap2 = outmap.setdefault(group.name, [])
+        if group.name == "kddi":
+            suboutmap2 = outmap.setdefault("kddi_symboliczodiac", [])
         unic = "\uFFFD"
         if group.unic:
             unic = group.unic
@@ -279,6 +298,8 @@ for row in sets:
                             if not isinstance(hints2pua, list):
                                 hints2pua[key] = [hints2pua[key]]
                             hints2pua[key].append(tuple(ord(i) for i in puaunic))
+                if (group.name == "kddi") and (group.unic in rkddizodiacmap):
+                    hints2pua[(pointer, tuple(ord(i) for i in unic))] = tuple(ord(i) for i in rkddizodiacmap[unic])
                 if group.pua and (group.name == "softbank"):
                     puacode = int(group.pua, 16)
                     pageno = (puacode >> 8) - 0xE0
@@ -298,10 +319,22 @@ for row in sets:
                     if pointer > len(suboutmap):
                         suboutmap.extend([None] * (pointer - len(suboutmap)))
                     suboutmap.append(tuple(ord(i) for i in unic))
+                if group.name == "kddi":
+                    # With zodiacs mapped to symbols (orthodox, but not faithful for pre-2012)
+                    unic2 = rkddizodiacmap.get(unic, unic)
+                    if pointer < len(suboutmap2):
+                        assert suboutmap2[pointer] in (None, tuple(ord(i) for i in unic2))
+                        suboutmap2[pointer] = tuple(ord(i) for i in unic2)
+                    else:
+                        if pointer > len(suboutmap2):
+                            suboutmap2.extend([None] * (pointer - len(suboutmap)))
+                        suboutmap2.append(tuple(ord(i) for i in unic2))
         # Try to end it on a natural plane boundary.
         suboutmap.extend([None] * (((94 * 94) - (len(suboutmap) % (94 * 94))) % (94 * 94)))
+        suboutmap2.extend([None] * (((94 * 94) - (len(suboutmap2) % (94 * 94))) % (94 * 94)))
 
 outmap["docomo"] = tuple(outmap["docomo"])
 outmap["kddi"] = tuple(outmap["kddi"])
+outmap["kddi_symboliczodiac"] = tuple(outmap["kddi_symboliczodiac"])
 outmap["softbank"] = tuple(outmap["softbank"])
 

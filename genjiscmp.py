@@ -55,7 +55,7 @@ plane1 = (1, ("1978 JIS",  "1983 JIS",  "1990 JIS",
           graphdata.gsets["ir168mac"][2],
           graphdata.gsets["ir168arib"][2],
           graphdata.gsets["ir168docomo"][2],
-          graphdata.gsets["ir168kddi"][2],
+          graphdata.gsets["ir168kddipict"][2],
           graphdata.gsets["ir168sbank"][2],
 ])
 
@@ -65,7 +65,7 @@ plane2 = (2, ("MS / HTML5<br>IBM SJIS Ext", "DoCoMo<br>SJIS Emoji",
               "IBM 90JIS", "2000/04 JIS"), [
           graphdata.gsets["ibmsjisextpua"][2],
           graphdata.gsets["docomosjisext"][2],
-          graphdata.gsets["kddisjisext"][2],
+          graphdata.gsets["kddipictsjisext"][2],
           graphdata.gsets["sbanksjisext"][2],
           graphdata.gsets["ir159"][2],
           graphdata.gsets["ir159va"][2],
@@ -414,6 +414,16 @@ annots = {
  (2, 84, 88): 'SoftBank\'s 02-84-88 is named "SKY WALKER", and <a href="https://mail.google.com/mail/e/softbank_ne_jp/E79">depicts a paper aeroplane</a>.\u2002Interestingly, no current Unicode-defined emoji (as of Unicode 13) depicts one, although it\'s U+F1D8 (BMP PUA) or U+10F1D8 (SPUB) in Font Awesome.\u2002<a href="https://commons.wikimedia.org/wiki/File:Gnome-document-send.svg">A possible higher-resolution colour presentation, from the GNOME icon set.</a>',
  (2, 84, 89): 'SoftBank\'s 02-84-89 is named "SKY MELODY", and <a href="https://mail.google.com/mail/e/softbank_ne_jp/E7A">depicts a musical note and waves</a>.',
 # (2, 84, 92): 'Softbank\'s 02-84-90 through 02-84-92 is named "J-PHONE".',
+ (1, 85, 39): "The zodiac signs following this point were implemented as images of the actual "
+              "animals, <i>et cetera</i>, by au by KDDI prior to 2012.&ensp;Most of these today "
+              "have considerably closer Unicode mappings than just the signs.&ensp;See <a href='https://www.au.com/content/dam/au-com/static/designs/extlib/pdf/mobile/service/featurephone/communication/emoji/taiohyo_03.pdf'>au's own chart</a> for the changes and cross-vendor mappings.",
+ (1, 85, 42): "The old au-by-KDDI glyph is two smiling faces pressed together.",
+ (1, 85, 52): "The old au-by-KDDI glyph is a herculean figure wrestling a snake.",
+ (2, 81, 39): "The zodiac signs following this point were implemented as images of the actual "
+              "animals, <i>et cetera</i>, by au by KDDI prior to 2012.&ensp;Most of these today "
+              "have considerably closer Unicode mappings than just the signs.&ensp;See <a href='https://www.au.com/content/dam/au-com/static/designs/extlib/pdf/mobile/service/featurephone/communication/emoji/taiohyo_03.pdf'>au's own chart</a> for the changes and cross-vendor mappings.",
+ (2, 81, 42): "The old au-by-KDDI glyph is two smiling faces pressed together.",
+ (2, 81, 52): "The old au-by-KDDI glyph is a herculean figure wrestling a snake.",
  (2, 86, 0): 'This DoCoMo row is coded at 9-9120 through 9-917F by TRON.',
  (2, 86, 23): 'Despite its name FLAG IN HOLE, U+26F3 actually unifies two symbols, see 01-88-24 for details.',
  (2, 87, 0): 'RE DoCoMo: this row is coded at 9-9220 through 9-927F by TRON.</p><p>'

@@ -137,10 +137,14 @@ graphdata.gsets["ir168arib"] = jisx0208_arib = (94, 2,
 graphdata.gsets["ir168docomo"] = jisx0208_arib = (94, 2, 
         parsers.fuse([cellemojidata.outmap["docomo"][:94*94], jisx0208_html5[2][:-840]],
                      "Emoji--DoCoMo-4.json"))
-graphdata.gsets["ir168kddi"] = jisx0208_arib = (94, 2, 
+graphdata.gsets["ir168kddipict"] = jisx0208_arib = (94, 2, 
         parsers.fuse([cellemojidata.outmap["kddi"][:94*94],
                       parsers.read_main_plane("ICU/kddi-sjis.ucm", sjis=1, plane=1)[:-840]],
-                     "Emoji--KDDI-4.json"))
+                     "Emoji--KDDI-5-pictzodiac.json"))
+graphdata.gsets["ir168kddisym"] = jisx0208_arib = (94, 2, 
+        parsers.fuse([cellemojidata.outmap["kddi_symboliczodiac"][:94*94],
+                      parsers.read_main_plane("ICU/kddi-sjis.ucm", sjis=1, plane=1)[:-840]],
+                     "Emoji--KDDI-5-symzodiac.json"))
 graphdata.gsets["ir168sbank"] = jisx0208_arib = (94, 2, 
         parsers.fuse([cellemojidata.outmap["softbank"][:94*94], jisx0208_html5[2][:-840]],
                      "Emoji--Softbank-4.json"))
@@ -166,7 +170,8 @@ for u, i in enumerate(range(0xE000, 0xE758)):
 graphdata.gsets["ibmsjisextpua"] = sjis_html5_g3_pua = (94, 2, 
         parsers.fuse([whatwgsjispuaonly, sjis_html5_g3[2]], "ibmextwithpua.json"))
 graphdata.gsets["docomosjisext"] = docomo_g3 = (94, 2, cellemojidata.outmap["docomo"][94*94:])
-graphdata.gsets["kddisjisext"] = docomo_g3 = (94, 2, cellemojidata.outmap["kddi"][94*94:])
+graphdata.gsets["kddisymsjisext"] = docomo_g3 = (94, 2, cellemojidata.outmap["kddi_symboliczodiac"][94*94:])
+graphdata.gsets["kddipictsjisext"] = docomo_g3 = (94, 2, cellemojidata.outmap["kddi"][94*94:])
 graphdata.gsets["sbanksjisext"] = sbank_g3 = (94, 2, cellemojidata.outmap["softbank"][94*94:])
 graphdata.gsets["sbank2gpageG"] = (94, 1, tuple(cellemojidata.softbank_pages[0]))
 graphdata.gsets["sbank2gpageE"] = (94, 1, tuple(cellemojidata.softbank_pages[1]))
