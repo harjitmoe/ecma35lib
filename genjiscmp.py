@@ -416,12 +416,12 @@ annots = {
 # (2, 84, 92): 'Softbank\'s 02-84-90 through 02-84-92 is named "J-PHONE".',
  (1, 85, 39): "The zodiac signs following this point were implemented as images of the actual "
               "animals, <i>et cetera</i>, by au by KDDI prior to 2012.&ensp;Most of these today "
-              "have considerably closer Unicode mappings than just the signs.&ensp;See <a href='https://www.au.com/content/dam/au-com/static/designs/extlib/pdf/mobile/service/featurephone/communication/emoji/taiohyo_03.pdf'>au's own chart</a> for the changes and cross-vendor mappings.",
+              "have considerably closer Unicode mappings than just the signs.&ensp;See <a href='https://www.au.com/content/dam/au-com/static/designs/extlib/pdf/mobile/service/featurephone/communication/emoji/taiohyo_03.pdf'>au's own chart</a> for the changes and cross-vendor issues.",
  (1, 85, 42): "The old au-by-KDDI glyph is two smiling faces pressed together.",
  (1, 85, 52): "The old au-by-KDDI glyph is a herculean figure wrestling a snake.",
  (2, 81, 39): "The zodiac signs following this point were implemented as images of the actual "
               "animals, <i>et cetera</i>, by au by KDDI prior to 2012.&ensp;Most of these today "
-              "have considerably closer Unicode mappings than just the signs.&ensp;See <a href='https://www.au.com/content/dam/au-com/static/designs/extlib/pdf/mobile/service/featurephone/communication/emoji/taiohyo_03.pdf'>au's own chart</a> for the changes and cross-vendor mappings.",
+              "have considerably closer Unicode mappings than just the signs.&ensp;See <a href='https://www.au.com/content/dam/au-com/static/designs/extlib/pdf/mobile/service/featurephone/communication/emoji/taiohyo_03.pdf'>au's own chart</a> for the changes and cross-vendor issues.",
  (2, 81, 42): "The old au-by-KDDI glyph is two smiling faces pressed together.",
  (2, 81, 52): "The old au-by-KDDI glyph is a herculean figure wrestling a snake.",
  (2, 86, 0): 'This DoCoMo row is coded at 9-9120 through 9-917F by TRON.',
@@ -480,6 +480,9 @@ for n, p in enumerate([plane1, plane2]):
         elif bn > 1:
             lasturl = "jisplane{:X}f.html".format(bn - 1)
             lastname = "JIS plane {:d}, part 6".format(bn - 1)
+        else:
+            lasturl = "jisx0201.html"
+            lastname = "JIS X 0201"
         if q < 6:
             nexturl = "jisplane{:X}{}.html".format(bn, chr(0x60 + q + 1))
             nextname = "JIS plane {:d}, part {:d}".format(bn, q + 1)

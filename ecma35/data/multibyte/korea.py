@@ -74,7 +74,7 @@ graphdata.gsets["ir149-mac"] = macwansung = (94, 2, tuple(parsers.ahmap(0, tuple
 # KPS 9566
 graphdata.gsets["ir202-2011"] = kps9566_2011 = (94, 2, parsers.read_main_plane("Other/AppendixA_KPS9566-2011-to-Unicode.txt", euckrlike=True))
 graphdata.gsets["ir202-2003"] = kps9566_2003 = (94, 2, parsers.read_main_plane("UTC/KPS9566.TXT", euckrlike=True))
-_kps_temp = list(parsers.fuse([kps9566_2011[2], kps9566_2003[2]], "KPS_2011and2003.TXT"))
+_kps_temp = list(parsers.fuse([kps9566_2011[2], kps9566_2003[2]], "KPS_2011and2003.json"))
 _kps_temp[1080] = (0x2B97,) # Finally exists in Unicode.
 graphdata.gsets["ir202-full"] = (94, 2, tuple(_kps_temp))
 _kps_temp = list(kps9566_2003[2])
