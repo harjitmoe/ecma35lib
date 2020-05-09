@@ -418,12 +418,6 @@ graphdata.gsets["ir172"] = cns2 = (94, 2, cns[planesize * 1 : planesize * 2])
 #   insofar as CNS11643.TXT has a lot more gaps for some reason, the only difference seems to
 #   be the current 毵 versus the CNS11643.TXT 毶 at 69-26). Note that an unrelated plane 14
 #   was added in 2007.
-# Annoyingly, the table between plane "14" and 4 is no longer printed in the present edition  
-#   of CJKVIP, and cut off after less than half of the table in the PDF provided for the 
-#   no-longer-printed appendices
-#     https://resources.oreilly.com/examples/9780596514471/blob/master/cjkvip2e-appG.pdf
-#   Intact in the plain text table though, not that a link is provided anywhere...
-#     https://resources.oreilly.com/examples/9781565922242/blob/master/AppQ/cns-p14-p4.txt
 graphdata.gsets["ir183"] = cns3 = (94, 2, cns[planesize * 2 : planesize * 3])
 _ir183oldirg = parsers.read_main_plane("UTC/CNS11643.TXT", plane=14)
 _ir183full = tuple(cns_fullplane3[planesize * 2 : planesize * 3])
