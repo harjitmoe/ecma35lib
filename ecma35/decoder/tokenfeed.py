@@ -38,13 +38,13 @@ def process_stream(stream, *, lastfilter=None, **kwargs): # The entry point.
     statedict.update(kwargs)
     state = types.SimpleNamespace(**statedict)
     from ecma35.decoder import utf8filter, utf16filter, utf32filter, \
-       controlsets, fixedcontrols, invocations, gccsequences, \
+       controlsets, fixedcontrols, invocations, gccsequences, elexfilter, \
        designations, graphsets, simpleprinter, escsequences, csisequences, controlstrings, \
        rawfilter, unkdocsfilter, ecma35docsfilter, hangulfillers, utf1filter, shiftjisfilter, \
        scsufilter, uhcfilter, gbkfilter, gbhalfcodes, plainextasciifilter, bigfivefilter
     for f in [_tokenise_stream, ecma35docsfilter.decode_ecma35docs, utf8filter.decode_utf8, 
               utf1filter.decode_utf1, shiftjisfilter.decode_shiftjis, utf32filter.decode_utf32, 
-              scsufilter.decode_scsu, uhcfilter.decode_uhc, gbkfilter.decode_gbk,
+              scsufilter.decode_scsu, uhcfilter.decode_uhc, gbkfilter.decode_gbk, elexfilter.decode_elex,
               plainextasciifilter.decode_plainextascii, bigfivefilter.decode_bigfive,
               utf16filter.decode_utf16, rawfilter.decode_raw, unkdocsfilter.decode_remaining_docs, 
               #

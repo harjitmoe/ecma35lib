@@ -22,6 +22,7 @@ def simple_logger_maker(target_string):
             elif token[0] == "COMPCHAR":
                 for i in token[1]:
                     expected = next(target)
+                    assert isinstance(i, int), i
                     if i != ord(expected):
                         yield (expected, token)
                     else:

@@ -38,6 +38,9 @@ def decode_uhc(stream, state):
         elif state.docsmode == "uhc" and token[0] == "WORD":
             assert (token[1] < 0x100), token
             if token[1] < 0x20:
+                if uhc_lead is not None:
+                    yield ("ERROR", "UHCTRUNCATE", uhc_lead[1])
+                    uhc_lead = None
                 yield ("C0", token[1], "CL")
             elif uhc_lead is None: # i.e. the current one is a lead (or single) byte
                 if token[1] < 0x80:

@@ -26,14 +26,14 @@ def bully(fn, statesequence):
                 if stuff1 in (0x1B, 0x0E, 0x0F, 0x8E, 0x8F, 0x90, 0x98, 0x9B, 0x9D, 0x9E, 0x9F):
                     # Don't insert shifts, escape sequences or other control sequences
                     continue
-                unic = int(b[2:], 16)
+                unic = "".join(chr(int(j, 16)) for j in b[2:].replace("0x", "").split("+"))
                 if stuff1 < 256:
                     stuff2 = bytes([stuff1])
                 elif stuff1 < 65536:
                     stuff2 = bytes([stuff1 >> 8, stuff1 & 0xFF])
                 else:
                     stuff2 = bytes([stuff1 >> 16, (stuff1 >> 8) & 0xFF, stuff1 & 0xFF])
-                stringdat.append((stuff2, chr(unic)))
+                stringdat.append((stuff2, unic))
     random.shuffle(stringdat)
     codestringdat, ucsstringdat = tuple(zip(*stringdat))
     codestring = statesequence + b"".join(codestringdat)
@@ -53,6 +53,8 @@ bully("ecma35/data/multibyte/mbmaps/UTC/KPS9566.TXT", b"\x1B%1\x1B&0\x1B$)N")
 print("===", "Microsoft Big5", "===")
 print("Note: not round-tripping U+fa0c or U+fa0d is expected (duplicates omitted in underlying EUC model).")
 bully("ecma35/data/multibyte/mbmaps/Vendor/CP950.TXT", b"\x1B%4\x1B&?\x1B$+!2")
+#print("===", "KanjiTalk 7", "===")
+#bully("ecma35/data/multibyte/mbmaps/Vendor/JAPANESE.TXT", b"\x1B%0\x1B&1\x1B$)B")
 
 
 

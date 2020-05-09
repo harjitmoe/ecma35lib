@@ -417,12 +417,12 @@ annots = {
  (1, 85, 39): "The zodiac signs following this point were implemented as images of the actual "
               "animals, <i>et cetera</i>, by au by KDDI prior to 2012.&ensp;Most of these today "
               "have considerably closer Unicode mappings than just the signs.&ensp;See <a href='https://www.au.com/content/dam/au-com/static/designs/extlib/pdf/mobile/service/featurephone/communication/emoji/taiohyo_03.pdf'>au's own chart</a> for the changes and cross-vendor issues.",
- (1, 85, 42): "The old au-by-KDDI glyph is two smiling faces pressed together.",
+ (1, 85, 42): "The old au-by-KDDI glyph is two smiling faces (Castor and Pollux, presumably) pressed together.",
  (1, 85, 52): "The old au-by-KDDI glyph is a herculean figure wrestling a snake.",
  (2, 81, 39): "The zodiac signs following this point were implemented as images of the actual "
               "animals, <i>et cetera</i>, by au by KDDI prior to 2012.&ensp;Most of these today "
               "have considerably closer Unicode mappings than just the signs.&ensp;See <a href='https://www.au.com/content/dam/au-com/static/designs/extlib/pdf/mobile/service/featurephone/communication/emoji/taiohyo_03.pdf'>au's own chart</a> for the changes and cross-vendor issues.",
- (2, 81, 42): "The old au-by-KDDI glyph is two smiling faces pressed together.",
+ (2, 81, 42): "The old au-by-KDDI glyph is two smiling faces (Castor and Pollux, presumably) pressed together.",
  (2, 81, 52): "The old au-by-KDDI glyph is a herculean figure wrestling a snake.",
  (2, 86, 0): 'This DoCoMo row is coded at 9-9120 through 9-917F by TRON.',
  (2, 86, 23): 'Despite its name FLAG IN HOLE, U+26F3 actually unifies two symbols, see 01-88-24 for details.',

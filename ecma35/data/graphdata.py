@@ -216,7 +216,7 @@ g94nbytes = {tuple(b"@"): ("ir042nec", ("ir042ibm", "ir042nec"), ("ir042",)),
                             "ir168osf", "ir168osfa", "ir168osfm", "ir168ibm",
                             "ir168docomo", "ir168kddisym", "ir168sbank", "ir168kddipict"),
                            ("ir087", "ir168")),
-             tuple(b"C"): "ir149",
+             tuple(b"C"): ("ir149-2002", ("ir149-altutc", "ir149-1998", "ir149-2002", "ir149-mac"), ("ir149",)),
              tuple(b"D"): ("ir159",
                            ("ir159va", "ir159osf", "ir159osfa", "ir159osfm", "ir159ibm"),
                            ("ir159",)),
@@ -251,6 +251,8 @@ g94nbytes = {tuple(b"@"): ("ir042nec", ("ir042ibm", "ir042nec"), ("ir042",)),
              # GB 7589/13131 and GB 7590/13132. Insofar as I can support them.
              tuple(b"!8"): ("gb13131", ("gb7589",), ("gb13131",)),
              tuple(b"!9"): ("gb13132", ("gb7590",), ("gb13132",)),
+             tuple(b"!:"): "mac-elex-extras",
+             tuple(b"!;"): "2011kpsextras",
              tuple(b"~"): "nil"}
 
 g96nbytes = {tuple(b"~"): "nil"}

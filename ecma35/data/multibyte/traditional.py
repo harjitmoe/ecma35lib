@@ -6,7 +6,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import os, ast, sys, json, pprint
+import os, ast, sys, json, pprint, shutil
 from ecma35.data import graphdata
 from ecma35.data.multibyte import mbmapparsers as parsers
 
@@ -467,7 +467,7 @@ def read_big5extras(fil):
         r = json.load(f)
         f.close()
         return tuple(tuple(i) if i is not None else None for i in r)
-    for _i in open(os.path.join(parsers.directory, fil), "r"):
+    for _i in open(os.path.join(parsers.directory, fil), "r", encoding="utf-8"):
         if (not _i.strip()) or _i[0] == "#":
             continue
         byts, ucs = _i.split("\t", 2)[:2]
@@ -672,16 +672,27 @@ graphdata.gsets["ir172-ms"] = (94, 2, read_big5_planes("Vendor/CP950.TXT", plane
 graphdata.gsets["ir172-utcbig5"] = (94, 2, read_big5_planes("UTC/BIG5.TXT", plane=2))
 graphdata.gsets["ir172-utc"] = (94, 2, parsers.read_main_plane("UTC/CNS11643.TXT", plane=2))
 
-macbig5 = tuple(tuple(i) if i is not None else None for i in 
-                json.load(open(os.path.join(parsers.directory, "Vendor/macBig5.json"), "r")))
-graphdata.gsets["ir171-mac"] = (94, 2, macbig5[:94*94])
-graphdata.gsets["ir172-mac"] = (94, 2, macbig5[94*94:])
+# Macintosh-compatibility variants
+if os.path.exists(os.path.join(parsers.directory, "Vendor/CHINTRAD.TXT")):
+    maccnsdata = read_big5_planes("Vendor/CHINTRAD.TXT", mapper = parsers.ahmap)
+    try:
+        if os.path.exists(os.path.join(parsers.directory, "Vendor/macCNS.json")):
+            os.unlink(os.path.join(parsers.directory, "Vendor/macCNS.json"))
+        shutil.copy(os.path.join(parsers.cachedirectory, "Vendor---CHINTRAD_mainplane_ahmap.json"),
+                    os.path.join(parsers.directory, "Vendor/macCNS.json"))
+    except EnvironmentError:
+        pass
+else:
+    maccnsdata = tuple(parsers.ahmap(0, tuple(i)) if i is not None 
+        else None for i in json.load(open(os.path.join(parsers.directory, "Vendor/macCNS.json"), "r")))
+graphdata.gsets["ir171-mac"] = (94, 2, maccnsdata[:94*94])
+graphdata.gsets["ir172-mac"] = (94, 2, maccnsdata[94*94:])
 
 # The most basic subset of EUC-TW supported is basically a transformation format of
-# Big5. Anything more isn't really supported/used nearly as much. So using Big5
-# mappings in EUC-TW implementations is applicable.
-graphdata.gsets["cns-eucg2-mac"] = euctw_g2 = (94, 3, graphdata.gsets["ir171-mac"][2] + 
-                                               graphdata.gsets["ir172-mac"][2])
+#   Big5. Anything more isn't really supported/used nearly as much. So using Big5
+#   mappings in EUC-TW implementations is applicable. Expecially since we're using 
+#   EUC-TW to underpin the Big5 filter.
+graphdata.gsets["cns-eucg2-mac"] = euctw_g2 = (94, 3, maccnsdata)
 graphdata.gsets["cns-eucg2-ms"] = euctw_g2 = (94, 3, graphdata.gsets["ir171-mac"][2] + 
                                               graphdata.gsets["ir172-ms"][2])
 

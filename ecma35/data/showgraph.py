@@ -347,6 +347,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
                 pointer = ((number - 1) * (94 * 94)) + ((row - 1) * 94) + (cell - 1)
                 cdisplayi = cdispmap.get((pointer, i), i)
                 #
+                sequence_inverse = False
                 if i[0] >= 0xF0000:
                     print("<td><span class='codepicture spua' lang={}>".format(lang), file=outfile)
                     strep = "".join(chr(j) for j in i)
@@ -354,6 +355,10 @@ def dump_plane(outfile, planefunc, kutenfunc,
                     print("<td><span class='codepicture' lang={}>".format(lang), file=outfile)
                     strep = "".join(chr(j) for j in i[1:]).replace("\uF860", "").replace("\uF861", 
                                                                    "").replace("\uF862", "")
+                elif 0xF865 <= i[0] < 0xF867 and len(i) != 1:
+                    sequence_inverse = True
+                    print("<td><span class='codepicture' lang={}>".format(lang), file=outfile)
+                    strep = "".join(chr(j) for j in i[1:]).replace("\uF865", "").replace("\uF866", "")
                 elif 0xE000 <= i[0] < 0xF900:
                     print("<td><span class='codepicture pua' lang={}>".format(lang), file=outfile)
                     # Object Replacement Character (FFFD is already used by BIG5.TXT)
@@ -388,7 +393,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
                     print("<span class=vertical>", file=outfile)
                     print(strep.rstrip("\uF87E"), file=outfile)
                     print("</span>", file=outfile)
-                elif i[-1] == 0xF87A: # Apple encoding hint for inverse form
+                elif (i[-1] == 0xF87A) or sequence_inverse: # Apple encoding hint for inverse form
                     print("<span class=inverse>", file=outfile)
                     print(strep.replace("\uF87A", ""), file=outfile)
                     print("</span>", file=outfile)

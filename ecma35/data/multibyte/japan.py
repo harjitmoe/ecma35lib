@@ -6,7 +6,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import os, json
+import os, json, shutil
 import unicodedata as ucd
 from ecma35.data import graphdata
 from ecma35.data.multibyte import mbmapparsers as parsers
@@ -117,10 +117,21 @@ graphdata.gsets["ir168ibm"] = jisx0208_ibm90 = (94, 2,
 # JIS X 0208, Microsoft and WHATWG version, as specified for use in HTML5
 graphdata.gsets["ir168web"] = jisx0208_html5 = (94, 2,
         parsers.read_main_plane("WHATWG/index-jis0208.txt"))
-rawmac = tuple(tuple(i) if i is not None else None 
-    for i in json.load(open(os.path.join(parsers.directory, "Vendor/macJIS.json"), "r")))
-graphdata.gsets["ir168mac"] = jisx0208_applekt7 = (94, 2,
-    tuple(parsers.ahmap(0, i) if i is not None else None for i in rawmac))
+
+# Apple's three versions (KanjiTalk 7, PostScript, KanjiTalk 6)
+if os.path.exists(os.path.join(parsers.directory, "Vendor/JAPANESE.TXT")):
+    kanjitalk7data = parsers.read_main_plane("Vendor/JAPANESE.TXT", sjis=1, mapper = parsers.ahmap)
+    try:
+        if os.path.exists(os.path.join(parsers.directory, "Vendor/macJIS.json")):
+            os.unlink(os.path.join(parsers.directory, "Vendor/macJIS.json"))
+        shutil.copy(os.path.join(parsers.cachedirectory, "Vendor---JAPANESE_mainplane_ahmap.json"),
+                    os.path.join(parsers.directory, "Vendor/macJIS.json"))
+    except EnvironmentError:
+        pass
+else:
+    kanjitalk7data = tuple(parsers.ahmap(0, tuple(i)) if i is not None 
+        else None for i in json.load(open(os.path.join(parsers.directory, "Vendor/macJIS.json"), "r")))
+graphdata.gsets["ir168mac"] = jisx0208_applekt7 = (94, 2, kanjitalk7data)
 graphdata.gsets["ir168macps"] = jisx0208_appleps = (94, 2,
         parsers.read_main_plane("Custom/JAPAN_PS.TXT", sjis=1, plane=1, mapper = parsers.ahmap))
 kanjitalk6 = (jisx0208_applekt7[2][:8 * 94] + ((None,) * 188) + # Normal non-Kanji rows

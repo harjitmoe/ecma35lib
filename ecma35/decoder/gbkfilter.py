@@ -38,6 +38,9 @@ def decode_gbk(stream, state):
         elif state.docsmode == "gbk" and token[0] == "WORD":
             assert (token[1] < 0x100), token
             if token[1] < 0x20:
+                if gbk_lead is not None:
+                    yield ("ERROR", "GBKTRUNCATE", elex_lead[1])
+                    gbk_lead = None
                 yield ("C0", token[1], "CL")
             elif gbk_lead is None: # i.e. the current one is a lead (or single) byte
                 if token[1] < 0x80:

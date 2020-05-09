@@ -281,6 +281,9 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
             mkts = ((men, ku, ten),)
             if ku > 94:
                 continue
+        elif _i == "\x1a":
+            # EOF on an older (MS-DOS) text file
+            continue
         else:
             # Format of the WHATWG-supplied indices for UHC and GBK.
             byts, ucs = _i.split("\t", 2)[:2]
