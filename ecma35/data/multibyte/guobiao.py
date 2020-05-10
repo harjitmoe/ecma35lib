@@ -188,7 +188,7 @@ if os.path.exists(os.path.join(parsers.directory, "Vendor/CHINSIMP.TXT")):
     except EnvironmentError:
         pass
 else:
-    macgbdata = tuple(parsers.ahmap(0, tuple(i)) if i is not None 
+    macgbdata = tuple(tuple(i) if i is not None 
         else None for i in json.load(open(os.path.join(parsers.directory, "Vendor/macGB2312.json"), "r")))
 graphdata.gsets["ir058-mac"] = gb2312_mac = (94, 2, macgbdata)
 

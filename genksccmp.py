@@ -24,7 +24,10 @@ plane2 = (2, ("ELEX",), [
 
 def planefunc(number, mapname=None):
     if mapname is None:
-        return "Wansung code" if (number == 1) else "Elex extension"
+        if number == 1:
+            return "Wansung code"
+        elif number == 2:
+            return "HangulTalk additional plane"
     else:
         return ""
 
@@ -38,6 +41,8 @@ def kutenfunc(number, row, cell):
         cellbyte = 0x40 + cell
         if cellbyte > 0x7D:
             cellbyte += 3
+        if cellbyte == 0xA1: # not elif
+            cellbyte = 0xFF
         euc = "{:02x}{:02x}".format(0xA0 + row, cellbyte)
         fmteuc = "(Code {})".format(euc)
     return "{}<br>{}".format(anchorlink, fmteuc)
@@ -60,16 +65,16 @@ for n, p in enumerate([plane1, plane2]):
         lasturl = lastname = nexturl = nextname = None
         if q > 1:
             lasturl = "kscplane{:X}{}.html".format(bn, chr(0x60 + q - 1))
-            lastname = "{}, part {:d}".format("Wansung code" if (bn == 1) else "Elex extension", q - 1)
+            lastname = "{}, part {:d}".format("Wansung code" if (bn == 1) else "HangulTalk additional plane", q - 1)
         elif bn > 1:
             lasturl = "kscplane{:X}f.html".format(bn - 1)
             lastname = "Wansung code, part 6"
         if q < 6:
             nexturl = "kscplane{:X}{}.html".format(bn, chr(0x60 + q + 1))
-            nextname = "{}, part {:d}".format("Wansung code" if (bn == 1) else "Elex extension", q + 1)
+            nextname = "{}, part {:d}".format("Wansung code" if (bn == 1) else "HangulTalk additional plane", q + 1)
         elif bn < 2:
             nexturl = "kscplane{:X}a.html".format(bn + 1)
-            nextname = "Elex extension code, part 1"
+            nextname = "HangulTalk additional plane, part 1"
         showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ko-KR", part=q, css="ksc.css",
                              menuurl="/ksc-conc.html", menuname="Wansung code variant comparison",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,

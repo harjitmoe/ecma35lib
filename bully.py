@@ -65,6 +65,7 @@ bully("ecma35/data/multibyte/mbmaps/Vendor/CP950.TXT", b"\x1B%4\x1B&?\x1B$+!2")
 print("===", "KanjiTalk 7", "===")
 bully("ecma35/data/multibyte/mbmaps/Vendor/JAPANESE.TXT", b"\x1B%0\x1B&0\x1B(J\x1B&1\x1B$)B\x1B&1\x1B*I")
 print("===", "HangulTalk", "===")
+print("Note: private-use mappings may be replaced with newer standard mappings.")
 bully("ecma35/data/multibyte/mbmaps/Vendor/KOREAN.TXT", b"\x1B%6")
 
 

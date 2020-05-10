@@ -8,14 +8,16 @@
 
 # DOCS filter for HangulTalk, aka MacKorean, aka MacOS-KH, aka x-mac-korean.
 # Developed by Elex Computer (il'lek'seu) and easily the most annoying of
-#   all four MacOS encodings, both in terms of colliding with UHC but with 
-#   irreconcileable structures so there's no elegant way of even charting
-#   the collisions, and in terms of including a tonne of stylised arrows 
-#   and enclosed forms without Unicode mappings (some of the arrows have 
-#   mappings post-Unicode-7.0 due to the Wingdings 3 repertoire, but the 
-#   mappings have not been updated on this front). Apple's use of Private
-#   Use "encoding hints" as variation selectors really becomes very
-#   prominent here, but even then some end up mapped straight to PUA.
+#   all four MacOS encodings to document, both in terms of colliding with 
+#   UHC but with irreconcileable structures so there's no elegant way of 
+#   even charting the collisions, and in terms of including a tonne of 
+#   stylised arrows, enclosed forms and miscellaneous geometric dingbats 
+#   without Unicode mappings (some of the arrows have mappings 
+#   post-Unicode-7.0 due to the Wingdings 3 repertoire, but the mapping 
+#   file has not been updated on this front). Apple's use of 
+#   Private Use Area "encoding hints" as variation selectors really 
+#   becomes very prominent here, but even then some end up mapped straight 
+#   to PUA as base characters.
 
 from ecma35.data.multibyte import korea
 
@@ -84,11 +86,14 @@ def decode_elex(stream, state):
                 yield (workingsets[state.grset], elex_lead[1] - 0xA0, "GR")
                 yield (workingsets[state.grset], token[1] - 0xA0, "GR")
                 elex_lead = None
-            elif (0x41 <= token[1] <= 0x7D) or (0x81 <= token[1] <= 0xA0):
+            elif (0x41 <= token[1] <= 0x7D) or (0x81 <= token[1] <= 0xA0) or (token[1] == 0xFF):
                 row_number = elex_lead[1] - 0xA0
-                cell_number = token[1] - 0x40
-                if token[1] > 0x7D:
-                    cell_number -= 3
+                if token[1] == 0xFF:
+                    cell_number = 94
+                elif token[1] > 0x7D:
+                    cell_number = (token[1] - 0x40) - 3
+                else:
+                    cell_number = token[1] - 0x40
                 yield ("G3", row_number, "ELEXEXTRAS")
                 yield ("G3", cell_number, "ELEXEXTRAS")
                 elex_lead = None
