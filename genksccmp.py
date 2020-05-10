@@ -45,15 +45,12 @@ def kutenfunc(number, row, cell):
 cdispmap = {}
 for n, i in enumerate(korea.rawmac):
     j = graphdata.gsets["ir149-mac"][2][n]
-    cdispmap[(n, j)] = i
-    if n >= (84 * 94):
-        cdispmap[(n - (74 * 94), j)] = i
+    if j != i:
+        cdispmap[(n, j)] = i
 for n, i in enumerate(korea.rawelex):
     j = graphdata.gsets["mac-elex-extras"][2][n]
-    cdispmap[(n, j)] = i
-    if n >= (84 * 94):
-        cdispmap[(n - (74 * 94), j)] = i
-
+    if j != i:
+        cdispmap[(n + (94 * 94), j)] = i
 annots = {}
 
 for n, p in enumerate([plane1, plane2]):

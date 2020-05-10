@@ -20,47 +20,103 @@ if (os.environ.get("ECMA35LIBDECACHE", "") == "1") and os.path.exists(cachedirec
     os.makedirs(cachedirectory)
 
 applesinglehints = {
-    # White arrows in black circle:
-    (0x21e6, 0x20DD): (0x2B88,),
-    (0x21e7, 0x20DD): (0x2B89,),
-    (0x21e8, 0x20DD): (0x2B8A,),
-    (0x21e9, 0x20DD): (0x2B8B,),
-    # Heavy arrows:
-    (0x21e6, 0xf875): (0x1F844,),
-    (0x21e7, 0xf875): (0x1F845,),
-    (0x21e8, 0xf875): (0x1F846,),
-    (0x21e9, 0xf875): (0x1F847,),
-    # Bold arrows:
-    (0x21e6, 0xf87a): (0x2b05,), # ⬅
-    (0x21e7, 0xf87a): (0x2b06,), # ⬆
-    (0x21e8, 0xf87a): (0x2b95,), # ⮕ note: not U+27A1 (from Unicode 1.x, used verbatim by MacKorean)
-    (0x21e9, 0xf87a): (0x2b07,), # ⬇
-    # Heavy-headed triangle arrows:
-    (0x21e6, 0xf87b): (0x1F808,),
-    (0x21e7, 0xf87b): (0x1F809,),
-    (0x21e8, 0xf87b): (0x1F80A,),
-    (0x21e9, 0xf87b): (0x1F80B,),
-    # Bold barbed arrows:
+    # Some notes: these should be to Unicode characters postdating the mapping data.
+    # For instance, many of the arrows mapped to here are from Unicode 7.0.
+    #
+    # U+2190+F870 etc are heavy white barbed arrows
+    # U+2190+F871 etc are drafting point arrows like U+297B (no full set exists)
+    # U+2190+F872 etc are teardrop-stroked arrows
+    #
+    # Bold barbed arrows (Zapf U+2794):
     (0x2190, 0xF873): (0x1F870,),
     (0x2191, 0xF873): (0x1F871,),
     (0x2192, 0xF873): (0x1F872,),
     (0x2193, 0xF873): (0x1F873,),
+    #
+    # U+2190+F874 etc are white kite-headed arrows
+    # U+2190+F875 etc are white rounded-stroke arrows
+    # U+2190+F878 etc are bold kite-headed arrows
+    #
     # Heavy barbed arrows:
     (0x2190, 0xF879): (0x1F880,),
     (0x2191, 0xF879): (0x1F881,),
     (0x2192, 0xF879): (0x1F882,),
     (0x2193, 0xF879): (0x1F883,),
+    #
+    # U+2190+F87A etc are white barbed arrows
+    # U+2190+F87B etc are light barbed arrows
+    #
     # Light kite arrows:
     (0x2190, 0xF87C): (0x1F850,),
     (0x2191, 0xF87C): (0x1F851,),
     (0x2192, 0xF87C): (0x1F852,),
     (0x2193, 0xF87C): (0x1F853,),
+    #
+    # U+2190+F87F etc are black rounded-stroke arrows like U+279C (no full set)
+    # U+21E6+F870 is a bold black arrow with detached kite head and stem widening toward head
+    # U+21E6+F874 is a bold white arrow with triangular head and stem narrowing away from head
+    #
+    # Very heavy arrows:
+    (0x21e6, 0xf875): (0x1F844,),
+    (0x21e7, 0xf875): (0x1F845,),
+    (0x21e8, 0xf875): (0x1F846,),
+    (0x21e9, 0xf875): (0x1F847,),
+    #
+    # U+21E6+F879 is a white very heavy arrow
+    #
+    # Bold triangle-headed arrows (Zapf U+27A1):
+    (0x21e6, 0xf87a): (0x2b05,), # ⬅
+    (0x21e7, 0xf87a): (0x2b06,), # ⬆
+    (0x21e8, 0xf87a): (0x2b95,), # ⮕
+    (0x21e9, 0xf87a): (0x2b07,), # ⬇
+    #
+    # Large-headed triangle arrows (Zapf U+279E):
+    (0x21e6, 0xf87b): (0x1F808,),
+    (0x21e7, 0xf87b): (0x1F809,),
+    (0x21e8, 0xf87b): (0x1F80A,),
+    (0x21e9, 0xf87b): (0x1F80B,),
+    #
+    # U+21E6+F87C is a white very heavy arrow
+    # U+21E6+F87F is a bold triangle-headed arrow with detached head
+    #
+    # Right-angled bendy arrows (minus the five with standard mappings already):
+    (0x21BB, 0xF87B): (0x2B11,), # Left then up
+    (0x2934, 0xF87F): (0x2B0F,), # Right then up
+    (0x2939, 0xF87F): (0x2B10,), # Left then down
+    #
+    # Triangle-headed bendy arrows
+    (0x2936, 0xF87C): (0x2BA8,), # Down then left
+    (0x2937, 0xF87C): (0x2BA9,), # Down then right
+    (0x21B0, 0xF87C): (0x2BAA,), # Up then left
+    (0x21B1, 0xF87C): (0x2BAB,), # Up then right
+    (0x21BB, 0xF87C): (0x2BAC,), # Left then up
+    (0x2934, 0xF87C): (0x2BAD,), # Right then up
+    (0x2939, 0xF87C): (0x2BAE,), # Left then down
+    (0x2935, 0xF87C): (0x2BAF,), # Right then down
+    #
+    # White bendy arrows:
+    (0x2936, 0xF87A): (0x2BB0,), # Down then left
+    (0x2937, 0xF87A): (0x2BB1,), # Down then right
+    (0x21B0, 0xF87A): (0x2BB2,), # Up then left
+    (0x21B1, 0xF87A): (0x2BB3,), # Up then right
+    (0x21BB, 0xF87A): (0x2BB4,), # Left then up 
+    (0x2934, 0xF87A): (0x2BB5,), # Right then up
+    (0x2939, 0xF87A): (0x2BB6,), # Left then down
+    (0x2935, 0xF87A): (0x2BB7,), # Right then down
+    #
+    # White arrows in black circle (Zapf U+27B2):
+    (0x21e6, 0x20DD): (0x2B88,),
+    (0x21e7, 0x20DD): (0x2B89,),
+    (0x21e8, 0x20DD): (0x2B8A,),
+    (0x21e9, 0x20DD): (0x2B8B,),
+    #
     # Vertical forms not present when mappings written, but later added from GB 18030:
     (0x2026, 0xf87e): (0xfe19,), # Ellipsis
     (0x3001, 0xf87e): (0xfe11,), # Comma
     (0x3002, 0xf87e): (0xfe12,), # Full stop
     (0xff3b, 0xf87e): (0xfe47,), # Opening hard bracket
     (0xff3d, 0xf87e): (0xfe48,), # Closing hard bracket
+    #
     # Keycap numbers 1 through 9:
     (0x0031, 0x20DE, 0xF87B): (0x0031, 0x20E3),
     (0x0032, 0x20DE, 0xF87B): (0x0032, 0x20E3),
@@ -71,19 +127,22 @@ applesinglehints = {
     (0x0037, 0x20DE, 0xF87B): (0x0037, 0x20E3),
     (0x0038, 0x20DE, 0xF87B): (0x0038, 0x20E3),
     (0x0039, 0x20DE, 0xF87B): (0x0039, 0x20E3),
+    #
     # Other MacKorean hint sequences which have since gotten unique codepoints:
     (0x534D, 0xF87F): (0x0FD6,), # Manji as a non-kanji
     (0x2394, 0xF876): (0x2B21,), # White hexagon
+    # Some direct PUA mappings used by MacKorean but no longer needed
+    (0xF80A,): (0x1F668,), # "Two interwoven eye shapes" (basically a variant quilt square)
+    (0xF80B,): (0x1F66A,), # This one really close (narrow-leaf four-petal florette)
+    (0xF80B, 0xF87F): (0x1F66B,), # Less so, but may as well commit to it
+    (0xF83D,): (0x269C,), # Fleur de lis
+    (0xF83D, 0xF87F): (0x269C, 0xF87F), # Alternate fleur de lis
+    (0xF842,): (0x2B5A,), # Downward wave arrow
     (0xF844,): (0x2B9C,), # Leftward arrowhead
     (0xF84A,): (0x1F66C,), # "Arrow with bow" but basically a typographical rocket tbh (leftward)
     (0xF84B,): (0x1F66E,), # "Arrow with bow" but basically a typographical rocket tbh (rightward)
-    (0xF842,): (0x2B5A,), # Downward wave arrow
-    # Some direct PUA mappings used by MacKorean but no longer needed
-    (0xF83D,): (0x269C,), # Fleur de lis
-    (0xF83D, 0xF87F): (0x269C, 0xF87F), # Alternate fleur de lis
-    (0xF80A,): (0x1F668,), # "Two interwoven eye shapes" (basically a variant quilt square)
-    (0xF80B,): (0x1F66A,), # This one really close (narrow-leaf four-petal florette)
     (0xF84C,): (0x2B20,), # White pentagon
+    (0xF84D,): (0x23E2,), # Trapezoid
 }
 # Not sure where to put this observation, but MacKorean's U+25B4+20E4 is basically DPRK's mountain ahead.
 def ahmap(pointer, ucs):
