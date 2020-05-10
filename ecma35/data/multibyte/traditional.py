@@ -683,7 +683,7 @@ if os.path.exists(os.path.join(parsers.directory, "Vendor/CHINTRAD.TXT")):
     except EnvironmentError:
         pass
 else:
-    maccnsdata = tuple(parsers.ahmap(0, tuple(i)) if i is not None 
+    maccnsdata = tuple(tuple(i) if i is not None 
         else None for i in json.load(open(os.path.join(parsers.directory, "Vendor/macCNS.json"), "r")))
 graphdata.gsets["ir171-mac"] = (94, 2, maccnsdata[:94*94])
 graphdata.gsets["ir172-mac"] = (94, 2, maccnsdata[94*94:])

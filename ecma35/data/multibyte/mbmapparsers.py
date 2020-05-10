@@ -6,7 +6,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import os, binascii, json, urllib.parse
+import os, binascii, json, urllib.parse, shutil
 from ecma35.data import gccdata
 
 directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mbmaps")
@@ -15,25 +15,88 @@ _temp = []
 def identitymap(pointer, ucs):
     return ucs
 
+if (os.environ.get("ECMA35LIBDECACHE", "") == "1") and os.path.exists(cachedirectory):
+    shutil.rmtree(cachedirectory)
+    os.makedirs(cachedirectory)
+
 applesinglehints = {
+    # White arrows in black circle:
+    (0x21e6, 0x20DD): (0x2B88,),
+    (0x21e7, 0x20DD): (0x2B89,),
+    (0x21e8, 0x20DD): (0x2B8A,),
+    (0x21e9, 0x20DD): (0x2B8B,),
+    # Heavy arrows:
+    (0x21e6, 0xf875): (0x1F844,),
+    (0x21e7, 0xf875): (0x1F845,),
+    (0x21e8, 0xf875): (0x1F846,),
+    (0x21e9, 0xf875): (0x1F847,),
     # Bold arrows:
     (0x21e6, 0xf87a): (0x2b05,), # ⬅
     (0x21e7, 0xf87a): (0x2b06,), # ⬆
-    (0x21e8, 0xf87a): (0x2b95,), # ⬇
-    (0x21e9, 0xf87a): (0x2b07,), # ⬈
+    (0x21e8, 0xf87a): (0x2b95,), # ⮕ note: not U+27A1 (from Unicode 1.x, used verbatim by MacKorean)
+    (0x21e9, 0xf87a): (0x2b07,), # ⬇
+    # Heavy-headed triangle arrows:
+    (0x21e6, 0xf87b): (0x1F808,),
+    (0x21e7, 0xf87b): (0x1F809,),
+    (0x21e8, 0xf87b): (0x1F80A,),
+    (0x21e9, 0xf87b): (0x1F80B,),
+    # Bold barbed arrows:
+    (0x2190, 0xF873): (0x1F870,),
+    (0x2191, 0xF873): (0x1F871,),
+    (0x2192, 0xF873): (0x1F872,),
+    (0x2193, 0xF873): (0x1F873,),
+    # Heavy barbed arrows:
+    (0x2190, 0xF879): (0x1F880,),
+    (0x2191, 0xF879): (0x1F881,),
+    (0x2192, 0xF879): (0x1F882,),
+    (0x2193, 0xF879): (0x1F883,),
+    # Light kite arrows:
+    (0x2190, 0xF87C): (0x1F850,),
+    (0x2191, 0xF87C): (0x1F851,),
+    (0x2192, 0xF87C): (0x1F852,),
+    (0x2193, 0xF87C): (0x1F853,),
     # Vertical forms not present when mappings written, but later added from GB 18030:
     (0x2026, 0xf87e): (0xfe19,), # Ellipsis
     (0x3001, 0xf87e): (0xfe11,), # Comma
     (0x3002, 0xf87e): (0xfe12,), # Full stop
     (0xff3b, 0xf87e): (0xfe47,), # Opening hard bracket
     (0xff3d, 0xf87e): (0xfe48,), # Closing hard bracket
+    # Keycap numbers 1 through 9:
+    (0x0031, 0x20DE, 0xF87B): (0x0031, 0x20E3),
+    (0x0032, 0x20DE, 0xF87B): (0x0032, 0x20E3),
+    (0x0033, 0x20DE, 0xF87B): (0x0033, 0x20E3),
+    (0x0034, 0x20DE, 0xF87B): (0x0034, 0x20E3),
+    (0x0035, 0x20DE, 0xF87B): (0x0035, 0x20E3),
+    (0x0036, 0x20DE, 0xF87B): (0x0036, 0x20E3),
+    (0x0037, 0x20DE, 0xF87B): (0x0037, 0x20E3),
+    (0x0038, 0x20DE, 0xF87B): (0x0038, 0x20E3),
+    (0x0039, 0x20DE, 0xF87B): (0x0039, 0x20E3),
+    # Other MacKorean hint sequences which have since gotten unique codepoints:
+    (0x534D, 0xF87F): (0x0FD6,), # Manji as a non-kanji
+    (0x2394, 0xF876): (0x2B21,), # White hexagon
+    (0xF844,): (0x2B9C,), # Leftward arrowhead
+    (0xF84A,): (0x1F66C,), # "Arrow with bow" but basically a typographical rocket tbh (leftward)
+    (0xF84B,): (0x1F66E,), # "Arrow with bow" but basically a typographical rocket tbh (rightward)
+    (0xF842,): (0x2B5A,), # Downward wave arrow
+    # Some direct PUA mappings used by MacKorean but no longer needed
+    (0xF83D,): (0x269C,), # Fleur de lis
+    (0xF83D, 0xF87F): (0x269C, 0xF87F), # Alternate fleur de lis
+    (0xF80A,): (0x1F668,), # "Two interwoven eye shapes" (basically a variant quilt square)
+    (0xF80B,): (0x1F66A,), # This one really close (narrow-leaf four-petal florette)
+    (0xF84C,): (0x2B20,), # White pentagon
 }
+# Not sure where to put this observation, but MacKorean's U+25B4+20E4 is basically DPRK's mountain ahead.
 def ahmap(pointer, ucs):
-    if 0xf870 <= ucs[-1] < 0xf880:
-        return applesinglehints.get(ucs, ucs)
+    if ucs in applesinglehints:
+        return applesinglehints[ucs]
     elif 0xf860 <= ucs[0] < 0xf870:
         ucss = "".join(chr(i) for i in ucs)
-        return tuple(ord(i) for i in gccdata.gcc_sequences.get(ucss[1:], ucss))
+        if ucs[0] < 0xF863:
+            # Ordinary composition
+            return tuple(ord(i) for i in gccdata.gcc_sequences.get(ucss[1:], ucss))
+        else:
+            # Extra-ordinary composition
+            return tuple(ord(i) for i in gccdata.gcc_sequences.get(ucss, ucss))
     return ucs
 
 def _grok_sjis(byts):

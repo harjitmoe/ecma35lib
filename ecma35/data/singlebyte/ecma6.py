@@ -265,7 +265,14 @@ for (name, (myvars, override)) in raw_variants.items():
 # SJIS   \    (lead) (lead) (lead) (lead)  NBSP    ©      ™      …
 # Big5   \     HMC    WMC   (none) (none)  NBSP    ©      ™      …
 # GB     ü     HMC    WMC   (none) (none)  NBSP    ©      ™      …   
-# KSC   NBSP   Won   NDASH    ©     FW _  (none) (lead) (lead)   …     
+# Elex  NBSP   Won   NDASH    ©     FW _  (none) (lead) (lead)   …    
+#
+# Note that HangulTalk's use of 0x80 and 0x84 is not documented by Lunde. 
+#
+# IBM usage:
+#       0x80   0x81   0x82   0x83   0x84   0xA0   0xFD   0xFE   0xFF
+# SJIS   ¢    (lead) (lead) (lead) (lead)   £      ¬      \      ~
+# KSC    ¢      ¬      \     Ovln    ¦    (lead) (lead) (lead) (none)
 # 
 # Projected EUC mappings (SJIS from IBM's 1041 to 4992, rest extrapolated):
 #          0x80   0x81   0x82   0x83   0x84   0xA0   0xFD   0xFE   0xFF
@@ -275,13 +282,14 @@ for (name, (myvars, override)) in raw_variants.items():
 # GBK     0x8EE0 (lead) (lead) (lead) (lead) (lead) (lead) (lead) 0x8EE6
 # UHC     0x8EE0 (lead) (lead) (lead) (lead) (lead) (lead) (lead) 0x8EE8
 # Big5    0x8EE0 (lead) (lead) (lead) (lead) (lead) (lead) (lead) 0x8EE9
-# MacKSC  0x8EE1 0x8EE8 0x8EE9 0x8EE2 0x8EEA (none) (lead) (lead) 0x8EE4
+# IBMKSC  0x8EE0 0x8EE2 0x8EE3 0x8EE5 0x8EE6 (lead) (lead) (lead) 0x8EE9
+# Elex    0x8EE1 0x8EE8 0x8EE9 0x8EE2 0x8EEA 0x8EEB (lead) (lead) 0x8EE4
 #
 # Therefore:
 # EUC  0x8EE0 0x8EE1 0x8EE2 0x8EE3 0x8EE4 0x8EE5 0x8EE6 0x8EE7 0x8EE8 0x8EE9 0x8EEA
 # MS   0x80/€ U+F8F0 U+F8F1 U+F8F2 U+F8F3 U+F8F4 U+F8F5 U+F8F6 U+F8F7 U+F8F8 (none)
 # Mac    \     NBSP    ©      ™      …      ü     HMC    WMC    Won   NDASH   FW _ 
-# IBM    ¢      £      ¬      \      ~    (none) (none) (none) (none) (none) (none)
+# IBM    ¢      £      ¬      \      ~     Ovln    ¦    (none) (none) (none) (none)
 #
 # Sadly, since I'm already using EUC-TW's unused G3 set for the corporate regions,
 # I can't use this mechanism for Big5, at least for the time being.
@@ -290,7 +298,7 @@ for (name, (myvars, override)) in raw_variants.items():
 graphdata.gsets["ir013"] = (94, 1, tuple(range(0xFF61, 0xFFA0)) + ((None,) * 31))
 # IBM's 4992 (or unrestricted 896)
 graphdata.gsets["ir013ibm"] = (94, 1, tuple(range(0xFF61, 0xFFA0)) + (
-                0xA2, 0xA3, 0xAC, 0x5C, 0x7E) + ((None,) * 26))
+                0xA2, 0xA3, 0xAC, 0x5C, 0x7E, 0x203E, 0xA6) + ((None,) * 24))
 # 1-byte MacJapanese
 graphdata.gsets["ir013mac"] = (94, 1, tuple(range(0xFF61, 0xFFA0)) + (
                 0x5C, 0xA0, 0xA9, 0x2122, 0x2026, 

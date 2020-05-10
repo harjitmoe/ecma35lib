@@ -94,8 +94,11 @@ Miscellaneous single-byte assignments:
 |---|---|
 |`IRR 0 G*D4 @`|Old IRV with tilde (rather than overscore)|
 |``IRR 0 G*D4 [ACEH`g]``|DEC NRCS, where they differ from standard|
-|``IRR 0 G*D4 B``|ASCII with overscore (rather than tilde)|
-|`IRR [*] G*D4 I`|With `IRR 0`, IBM's 4992 (used for its counterparts in IBM's 1041 where applicable). With `IRR 1`, an equivalent extraction from MacJapanese. With `IRR 2` or `IRR 3`, much the same treatment of Windows-31J and friends (in some non-ECMA35 DOCS filters, `IRR 3` will suppress the 0x80 control mapping in favour of the Euro while `IRR 2` will not; otherwise, they are the same).|
+|`IRR 0 G*D4 B`|ASCII with overscore (rather than tilde)|
+|`IRR 0 G*D4 I`|JIS X 0201 katakana, IBM's 4992 (used for its counterparts from IBM's 1041 in the Shift\_JIS filter).|
+|`IRR 1 G*D4 I`|JIS X 0201 katakana, an analogous extraction from MacJapanese.|
+|`IRR 2 G*D4 I`|JIS X 0201 katakana, an extraction from Windows-31J and friends.|
+|`IRR 3 G*D4 I`|JIS X 0201 katakana, an extraction from Windows-31J and friends, suppressing the 0x80 control mapping in some DOCS filters in favour of the Euro.|
 |`IRR 0 G*D4 J`|JIS-Roman with tilde (rather than overscore)|
 |`IRR 0 G*D4 ! B`|DEC NRCS, invariant subset|
 |`G*D4 # 0`|KS X 1003|

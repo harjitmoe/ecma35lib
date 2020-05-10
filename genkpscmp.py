@@ -7,7 +7,7 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 from ecma35.data.multibyte import mbmapparsers as parsers
-from ecma35.data.multibyte import japan, cellemojidata
+from ecma35.data.multibyte import korea, cellemojidata
 from ecma35.data import graphdata, showgraph
 import json, os
 
@@ -49,10 +49,10 @@ for n, p in enumerate([plane1]):
         if q < 6:
             nexturl = "kpsplane{:X}{}.html".format(bn, chr(0x60 + q + 1))
             nextname = "KPS 9566, part {1:d}".format(bn, q + 1)
-        elif bn < 2:
+        elif bn < 1:
             nexturl = "kpsplane{:X}a.html".format(bn + 1)
             nextname = "KPS 9566, part 1".format(bn + 1)
-        showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ja", part=q, css="/css/kps.css",
+        showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ko-KP", part=q, css="/css/kps.css",
                              menuurl="/kps-conc.html", menuname="KPS character set variant comparison",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
                              annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True)

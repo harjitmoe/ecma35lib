@@ -36,6 +36,8 @@ if not os.path.exists(cachefile):
         "↓↑": "⇵", "↑↓": "⇅", "↑↑": "⇈", "↓↓": "⇊",
         "⭣⭡": "⮃", "⭡⭣": "⮁", "⭡⭡": "⮅", "⭣⭣": "⮇",
         "⇃↾": "⥯", "↿⇂": "⥮", "↿↾": "⥣", "⇃⇂": "⥥",
+        # MacKorean's shadowed keycapped number 10
+        "\uF864[10]": "\U0001F51F",
     }
 
     # Exclude most Arabic composites, since they're just sequences of letters, and often one sequence 

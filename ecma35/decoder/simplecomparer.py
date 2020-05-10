@@ -9,9 +9,9 @@
 # Must be at the end of the chain. Yields points of deviance for a
 # known test string.
 
-def simple_logger_maker(target_string):
+def simple_comparator_maker(target_string):
     target = iter(target_string)
-    def simple_logger(stream, state):
+    def simple_comparator(stream, state):
         for token in stream:
             if token[0] == "CHAR" and token[1]:
                 expected = next(target)
@@ -49,10 +49,12 @@ def simple_logger_maker(target_string):
                     yield (expected, "SUCCESS")
             elif token[0] in ("DESIG", "RDESIG", "BOM", "DOCS", "RDOCS", "SINGLEOVER", "SCSUSHIFT",
                               "SCSUDESIG", "C0GRAPH", "CHCP"):
+                # In-band logging of code features used; does not correspond to anything in reference Unicode.
                 pass
             elif token[0] == "ERROR":
-                yield (None, token)
+                yield (next(target), token)
+                return # Fatal: can't keep in sync, ERROR could correspond to zero or more reference codepoints.
             else:
                 yield (next(target), token)
-    return simple_logger
+    return simple_comparator
 

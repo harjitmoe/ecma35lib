@@ -7,7 +7,7 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 from ecma35.data.multibyte import mbmapparsers as parsers
-from ecma35.data.multibyte import japan, cellemojidata
+from ecma35.data.multibyte import korea, cellemojidata
 from ecma35.data import graphdata, showgraph
 import json, os
 
@@ -18,46 +18,67 @@ plane1 = (1, ("UTC<br>Ported old", "UTC<br>New files", "MS/HTML5", "Macintosh"),
           graphdata.gsets["ir149-mac"][2],
 ])
 
+plane2 = (2, ("ELEX",), [
+          graphdata.gsets["mac-elex-extras"][2],
+])
+
 def planefunc(number, mapname=None):
-    assert number == 1
     if mapname is None:
-        return "Wansung code"
+        return "Wansung code" if (number == 1) else "Elex extension"
     else:
         return ""
 
 def kutenfunc(number, row, cell):
-    assert number == 1
-    euc = "{:02x}{:02x}".format(0xA0 + row, 0xA0 + cell)
-    fmteuc = "(<abbr title='Extended Unix Code'>EUC</abbr> {})".format(euc)
     anchorlink = "<a href='#{:d}.{:d}.{:d}'>{:02d}-{:02d}-{:02d}</a>".format(
                  number, row, cell, number, row, cell)
+    if number == 1:
+        euc = "{:02x}{:02x}".format(0xA0 + row, 0xA0 + cell)
+        fmteuc = "(<abbr title='Extended Unix Code'>EUC</abbr> {})".format(euc)
+    else:
+        cellbyte = 0x40 + cell
+        if cellbyte > 0x7D:
+            cellbyte += 3
+        euc = "{:02x}{:02x}".format(0xA0 + row, cellbyte)
+        fmteuc = "(Code {})".format(euc)
     return "{}<br>{}".format(anchorlink, fmteuc)
 
 cdispmap = {}
+for n, i in enumerate(korea.rawmac):
+    j = graphdata.gsets["ir149-mac"][2][n]
+    cdispmap[(n, j)] = i
+    if n >= (84 * 94):
+        cdispmap[(n - (74 * 94), j)] = i
+for n, i in enumerate(korea.rawelex):
+    j = graphdata.gsets["mac-elex-extras"][2][n]
+    cdispmap[(n, j)] = i
+    if n >= (84 * 94):
+        cdispmap[(n - (74 * 94), j)] = i
+
 annots = {}
 
-for n, p in enumerate([plane1]):
+for n, p in enumerate([plane1, plane2]):
     for q in range(1, 7):
         bn = n + 1
         f = open("kscplane{:X}{}.html".format(bn, chr(0x60 + q)), "w", encoding="utf-8")
         lasturl = lastname = nexturl = nextname = None
         if q > 1:
             lasturl = "kscplane{:X}{}.html".format(bn, chr(0x60 + q - 1))
-            lastname = "Wansung code, part {1:d}".format(bn, q - 1)
+            lastname = "{}, part {:d}".format("Wansung code" if (bn == 1) else "Elex extension", q - 1)
         elif bn > 1:
             lasturl = "kscplane{:X}f.html".format(bn - 1)
-            lastname = "Wansung code, part 6".format(bn - 1)
+            lastname = "Wansung code, part 6"
         if q < 6:
             nexturl = "kscplane{:X}{}.html".format(bn, chr(0x60 + q + 1))
-            nextname = "Wansung code, part {1:d}".format(bn, q + 1)
+            nextname = "{}, part {:d}".format("Wansung code" if (bn == 1) else "Elex extension", q + 1)
         elif bn < 2:
             nexturl = "kscplane{:X}a.html".format(bn + 1)
-            nextname = "Wansung code, part 1".format(bn + 1)
-        showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ko-KR", part=q, css="http://harjit.moe/css/jis.css",
+            nextname = "Elex extension code, part 1"
+        showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ko-KR", part=q, css="ksc.css",
                              menuurl="/ksc-conc.html", menuname="Wansung code variant comparison",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
                              annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True)
         f.close()
+
 
 
 

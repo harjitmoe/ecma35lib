@@ -351,10 +351,10 @@ def dump_plane(outfile, planefunc, kutenfunc,
                 if i[0] >= 0xF0000:
                     print("<td><span class='codepicture spua' lang={}>".format(lang), file=outfile)
                     strep = "".join(chr(j) for j in i)
-                elif 0xF860 <= i[0] < 0xF863 and len(i) != 1:
+                elif 0xF860 <= i[0] < 0xF865 and len(i) != 1:
                     print("<td><span class='codepicture' lang={}>".format(lang), file=outfile)
                     strep = "".join(chr(j) for j in i[1:]).replace("\uF860", "").replace("\uF861", 
-                                                                   "").replace("\uF862", "")
+                            "").replace("\uF862", "").replace("\uF863", "").replace("\uF864", "")
                 elif 0xF865 <= i[0] < 0xF867 and len(i) != 1:
                     sequence_inverse = True
                     print("<td><span class='codepicture' lang={}>".format(lang), file=outfile)
@@ -397,10 +397,26 @@ def dump_plane(outfile, planefunc, kutenfunc,
                     print("<span class=inverse>", file=outfile)
                     print(strep.replace("\uF87A", ""), file=outfile)
                     print("</span>", file=outfile)
-                elif i[-1] == 0xF878: # Apple encoding hint for small form
+                elif (i[-1] == 0xF875): # Apple encoding hint for alternative inverse form
+                    print("<span class=inverse>", file=outfile)
+                    print(strep.replace("\uF875", ""), file=outfile)
+                    print("</span>", file=outfile)
+                elif (i[-1] == 0xF876): # Apple encoding hint for rotated form
+                    print("<span class=rotated>", file=outfile)
+                    print(strep.replace("\uF876", ""), file=outfile)
+                    print("</span>", file=outfile)
+                elif (i[-1] == 0xF877): # Apple encoding hint for superscript form
+                    print("<sup>", file=outfile)
+                    print(strep.replace("\uF877", ""), file=outfile)
+                    print("</sup>", file=outfile)
+                elif (i[-1] == 0xF878): # Apple encoding hint for small form
                     print("<small>", file=outfile)
                     print(strep.rstrip("\uF878"), file=outfile)
                     print("</small>", file=outfile)
+                elif (i[-1] == 0xF879): # Apple encoding hint for large form
+                    print("<span class=bigform>", file=outfile)
+                    print(strep.rstrip("\uF879"), file=outfile)
+                    print("</span>", file=outfile)
                 else:
                     # Horizontal presentation form, alternative form.
                     # Neither of which we can really do anything with here.〾

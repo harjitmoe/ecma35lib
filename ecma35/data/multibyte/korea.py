@@ -56,8 +56,15 @@ def read_kps9566extras(fil):
     return r
 
 def read_elexextras(fil, mapper=parsers.identitymap):
-    cachefn = os.path.join(parsers.cachedirectory,
-              os.path.splitext(fil)[0].replace("/", "---") + "_elexextras.json")
+    if mapper is parsers.identitymap:
+        mappername = ""
+    elif mapper.__name__ != "<lambda>":
+        mappername = "_" + mapper.__name__
+    else:
+        mappername = "_FIXME"
+    #
+    cachefn = os.path.join(parsers.cachedirectory, os.path.splitext(fil)[0].replace("/", "---") 
+              + "_elexextras" + mappername + ".json")
     if os.path.exists(cachefn):
         f = open(cachefn, "r")
         r = json.load(f)
@@ -83,12 +90,12 @@ def read_elexextras(fil, mapper=parsers.identitymap):
         #
         iucs = mapper(newpointer, tuple(int(j, 16) for j in ucs.replace("0x", "").split("+")))
         if len(_temp) > newpointer:
-            assert _temp[newpointer] is None, (newpointer, int(ucs[2:], 16), _temp[newpointer])
-            _temp[newpointer] = tuple(int(j, 16) for j in ucs.split("+0x"))
+            assert _temp[newpointer] is None, (newpointer, iucs, _temp[newpointer])
+            _temp[newpointer] = iucs
         else:
             while len(_temp) < newpointer:
                 _temp.append(None)
-            _temp.append(tuple(int(j, 16) for j in ucs.split("+0x")))
+            _temp.append(iucs)
     # Try to end it on a natural plane boundary.
     _temp.extend([None] * (((94 * 94) - (len(_temp) % (94 * 94))) % (94 * 94)))
     if not _temp:
@@ -128,26 +135,40 @@ _wansung_temp = list(oldunicodeksc)
 _wansung_temp[1410:3760] = wansung[2][1410:3760]
 graphdata.gsets["ir149-altutc"] = wansung_utcalt = (94, 2, tuple(_wansung_temp))
 
-# Apple and Elex's (Illekseu's) Wansung version
+# Apple and Elex's (Illekseu's) Wansung version, and its secondary plane (collectively HangulTalk)
 if os.path.exists(os.path.join(parsers.directory, "Vendor/KOREAN.TXT")):
     macwansungdata = parsers.read_main_plane("Vendor/KOREAN.TXT", euckrlike=True, mapper=parsers.ahmap)
     macelexdata = read_elexextras("Vendor/KOREAN.TXT", mapper=parsers.ahmap)
+    rawmac = parsers.read_main_plane("Vendor/KOREAN.TXT", euckrlike=True)
+    rawelex = read_elexextras("Vendor/KOREAN.TXT")
     try:
         if os.path.exists(os.path.join(parsers.directory, "Vendor/macWansung.json")):
             os.unlink(os.path.join(parsers.directory, "Vendor/macWansung.json"))
         if os.path.exists(os.path.join(parsers.directory, "Vendor/macElex.json")):
             os.unlink(os.path.join(parsers.directory, "Vendor/macElex.json"))
+        if os.path.exists(os.path.join(parsers.directory, "Vendor/macWansung-raw.json")):
+            os.unlink(os.path.join(parsers.directory, "Vendor/macWansung-raw.json"))
+        if os.path.exists(os.path.join(parsers.directory, "Vendor/macElex-raw.json")):
+            os.unlink(os.path.join(parsers.directory, "Vendor/macElex-raw.json"))
         shutil.copy(os.path.join(parsers.cachedirectory, "Vendor---KOREAN_mainplane_ahmap.json"),
                     os.path.join(parsers.directory, "Vendor/macWansung.json"))
-        shutil.copy(os.path.join(parsers.cachedirectory, "Vendor---KOREAN_elexextras.json"),
+        shutil.copy(os.path.join(parsers.cachedirectory, "Vendor---KOREAN_elexextras_ahmap.json"),
                     os.path.join(parsers.directory, "Vendor/macElex.json"))
+        shutil.copy(os.path.join(parsers.cachedirectory, "Vendor---KOREAN_mainplane.json"),
+                    os.path.join(parsers.directory, "Vendor/macWansung-raw.json"))
+        shutil.copy(os.path.join(parsers.cachedirectory, "Vendor---KOREAN_elexextras.json"),
+                    os.path.join(parsers.directory, "Vendor/macElex-raw.json"))
     except EnvironmentError:
         pass
 else:
-    macwansungdata = tuple(parsers.ahmap(0, tuple(i)) if i is not None 
+    macwansungdata = tuple(tuple(i) if i is not None 
         else None for i in json.load(open(os.path.join(parsers.directory, "Vendor/macWansung.json"), "r")))
-    macelexdata = tuple(parsers.ahmap(0, tuple(i)) if i is not None 
+    macelexdata = tuple(tuple(i) if i is not None 
         else None for i in json.load(open(os.path.join(parsers.directory, "Vendor/macElex.json"), "r")))
+    rawmac = tuple(tuple(i) if i is not None 
+        else None for i in json.load(open(os.path.join(parsers.directory, "Vendor/macWansung-raw.json"), "r")))
+    rawelex = tuple(tuple(i) if i is not None 
+        else None for i in json.load(open(os.path.join(parsers.directory, "Vendor/macElex-raw.json"), "r")))
 macwansung = graphdata.gsets["ir149-mac"] = (94, 2, macwansungdata)
 macelexexras = graphdata.gsets["mac-elex-extras"] = (94, 2, macelexdata)
 

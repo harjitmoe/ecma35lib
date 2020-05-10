@@ -6,7 +6,16 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-# DOCS filter for HangulTalk.
+# DOCS filter for HangulTalk, aka MacKorean, aka MacOS-KH, aka x-mac-korean.
+# Developed by Elex Computer (il'lek'seu) and easily the most annoying of
+#   all four MacOS encodings, both in terms of colliding with UHC but with 
+#   irreconcileable structures so there's no elegant way of even charting
+#   the collisions, and in terms of including a tonne of stylised arrows 
+#   and enclosed forms without Unicode mappings (some of the arrows have 
+#   mappings post-Unicode-7.0 due to the Wingdings 3 repertoire, but the 
+#   mappings have not been updated on this front). Apple's use of Private
+#   Use "encoding hints" as variation selectors really becomes very
+#   prominent here, but even then some end up mapped straight to PUA.
 
 from ecma35.data.multibyte import korea
 
@@ -31,7 +40,7 @@ def decode_elex(stream, state):
                 state.cur_c1 = "RFC1345"
                 state.glset = 0
                 state.grset = 1
-                state.cur_gsets = ["ir006", "ir149", "ir013win", "mac-elex-extras"]
+                state.cur_gsets = ["ir006", "ir149-mac", "ir013mac", "mac-elex-extras"]
                 state.is_96 = [0, 0, 0, 0]
             else:
                 yield token
@@ -42,10 +51,9 @@ def decode_elex(stream, state):
                     yield ("ERROR", "ELEXTRUNCATE", elex_lead[1])
                     elex_lead = None
                 yield ("C0", token[1], "CL")
-            elif 0x80 <= token[1] < 0xA0:
-                if elex_lead is not None:
-                    yield ("ERROR", "ELEXTRUNCATE", elex_lead[1])
-                    elex_lead = None
+            # 0x80 thru 0x84 (per Apple) or 0x81 thru 0x83 (per Lunde) are used for graphics
+            # Additionally, the C1 range is used as trail bytes.
+            elif (0x85 <= token[1] < 0xA0) and (elex_lead is None):
                 yield ("C1", token[1] - 0x80, "CR")
             elif elex_lead is None: # i.e. the current one is a lead (or single) byte
                 if token[1] < 0x80:
@@ -55,10 +63,20 @@ def decode_elex(stream, state):
                         yield ("CTRL", "DEL", "ECMA-35", 95, "GL", workingsets[state.glset])
                     else:
                         yield (workingsets[state.glset], token[1] - 0x20, "GL")
-                elif token[1] == 0xA0: # TODO fix this
-                    yield ("G2", 0x40, "ELEX1BYTE")
-                elif token[1] == 0xFF:
+                elif token[1] == 0x80:
+                    yield ("G2", 0x41, "ELEX1BYTE")
+                elif token[1] == 0x81:
                     yield ("G2", 0x48, "ELEX1BYTE")
+                elif token[1] == 0x82:
+                    yield ("G2", 0x49, "ELEX1BYTE")
+                elif token[1] == 0x83:
+                    yield ("G2", 0x42, "ELEX1BYTE")
+                elif token[1] == 0x84:
+                    yield ("G2", 0x4A, "ELEX1BYTE")
+                elif token[1] == 0xA0:
+                    yield ("G2", 0x4B, "ELEX1BYTE")
+                elif token[1] == 0xFF:
+                    yield ("G2", 0x44, "ELEX1BYTE")
                 else:
                     elex_lead = token
             elif 0xA1 <= token[1] <= 0xFE:
