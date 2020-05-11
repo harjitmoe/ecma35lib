@@ -245,7 +245,7 @@ for (name, (myvars, override)) in raw_variants.items():
     myset = list(range(0x21, 0x7F))
     for frm, to in list(zip(variants, myvars)) + list(override.items()):
         if to is not None:
-            if to is not -1:
+            if to != -1:
                 myset[frm - 0x21] = to
             else:
                 myset[frm - 0x21] = None
