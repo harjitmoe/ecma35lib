@@ -95,9 +95,14 @@ graphdata.gsets["ir058-2000"] = gb2312_2000 = (94, 2,
             parsers.read_main_plane("WHATWG/index-gb18030.txt", euckrlike=True, mapper = gb2005to2000map))
 graphdata.gsets["ir058-2005"] = gb2312_2005 = (94, 2, 
                             parsers.read_main_plane("WHATWG/index-gb18030.txt", euckrlike=True))
-graphdata.gsets["ir058-web"]  = gb2312_2005 # Not different here, but treated differently by gbkfilter
+graphdata.gsetflags["ir058-2005"] |= {"GBK:ALT_4BYTE_CODES"}
+graphdata.gsets["ir058-web"]  = gb2312_2005
+graphdata.gsetflags["ir058-web"] |= {"GBK:UDC_E5E5_AS_SPACE"}
+graphdata.gsetflags["ir058-web"] |= {"GBK:ALT_4BYTE_CODES"}
 graphdata.gsets["ir058-full"] = gb2312_full = (94, 2,
             parsers.read_main_plane("WHATWG/index-gb18030.txt", euckrlike=True, mapper = gb2005tofullmap))
+graphdata.gsetflags["ir058-full"] |= {"GBK:FULLEXCEPTIONS"}
+graphdata.gsetflags["ir058-full"] |= {"GBK:UDC_E5E5_AS_SPACE"}
 
 # ITU's extension of ir058, i.e. with 6763 GB 2312 chars, 705 GB 8565.2 chars and 139 others.
 # Basically sticks a load of stuff (both hankaku and zenkaku) in what GBK would consider the

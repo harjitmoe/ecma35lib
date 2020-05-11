@@ -8,6 +8,7 @@
 
 # Handles GB 18030 half-codes, completing support (the first part being decoder.gbkfilter)
 
+from ecma35.data import graphdata
 from ecma35.data.multibyte import guobiao
 
 def decode_gbhalfcodes(stream, state):
@@ -34,7 +35,7 @@ def decode_gbhalfcodes(stream, state):
                         para_ucs = index + (189000 - len(guobiao.non_gbk_bmp))
                         yield ("ERROR", "GB18030BEYOND", para_ucs)
                 else:
-                    if (index == 7457) and (state.cur_gsets[1] in ("ir058-2005", "ir058-web")):
+                    if (index == 7457) and ("GBK:ALT_4BYTE_CODES" in graphdata.gsetflags[state.cur_gsets[1]]):
                         # No longer follows the logical pattern due to changes in 2005.
                         # This only affects this one code (plus the corresponding one in the
                         # main plane), making it anomalously out of order.

@@ -7,11 +7,11 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import unicodedata as ucd
-import os, urllib.parse, json
+import os, urllib.parse, json, collections
 
 __all__ = [
     "codepoint_coverages", "gsets", "g94bytes", "g96bytes", "g94nbytes", "g96nbytes", "sumps",
-    "rhses", "c0graphics"
+    "rhses", "c0graphics", "gsetflags"
 ]
 
 # Although we could just use (x in gsets[foo][2]) to test whether a codepoint is covered by a
@@ -60,6 +60,7 @@ codepoint_coverages = CoveragesOnDemand()
 # The individual codepoints are put in individual CHAR tokens verbatim without re-ordering, and
 # may be processed further by downstream filters.
 gsets = {"nil": (94, 1, (None,)*94), "Unknown": (94, 1, (None,)*94)}
+gsetflags = collections.defaultdict(set)
 
 c0graphics = {}
 rhses = {}
@@ -251,7 +252,7 @@ g94nbytes = {tuple(b"@"): ("ir042nec", ("ir042ibm", "ir042nec"), ("ir042",)),
              # GB 7589/13131 and GB 7590/13132. Insofar as I can support them.
              tuple(b"!8"): ("gb13131", ("gb7589",), ("gb13131",)),
              tuple(b"!9"): ("gb13132", ("gb7590",), ("gb13132",)),
-             tuple(b"!:"): "mac-elex-extras",
+             tuple(b"!:"): ("mac-elex-extras", ("mac-elex-extras",), ("mac-elex-extras-unicode3_2",)),
              tuple(b"!;"): "2011kpsextras",
              tuple(b"~"): "nil"}
 

@@ -306,8 +306,7 @@ graphdata.gsets["ir013mac"] = (94, 1, tuple(range(0xFF61, 0xFFA0)) + (
 # For Windows code pages
 graphdata.gsets["ir013win"] = (94, 1, tuple(range(0xFF61, 0xFFA0)) + (
                 0x20AC,) + tuple(range(0xF8F0, 0xF8F9)) + ((None,) * 21))
-# Not any different here, but treated differently by the individual DOCS filters
-#   (i.e. it might use a control mapping for 0x80 if ir013win detected):
+graphdata.gsetflags["ir013win"] |= {"GBK:NO_EURO"}
 graphdata.gsets["ir013euro"] = graphdata.gsets["ir013win"]
 
 

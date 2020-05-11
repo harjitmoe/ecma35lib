@@ -8,6 +8,7 @@
 
 # DOCS filter for GBK, also generating GBHALFCODE tokens for GB18030.
 
+from ecma35.data import graphdata
 from ecma35.data.multibyte import guobiao
 
 gbkdocs = ("DOCS", False, (0x32,))
@@ -51,7 +52,7 @@ def decode_gbk(stream, state):
                     else:
                         yield (workingsets[state.glset], token[1] - 0x20, "GL")
                 elif token[1] == 0x80:
-                    if state.cur_gsets[2] == "ir013win":
+                    if "GBK:NO_EURO" in graphdata.gsetflags[state.cur_gsets[2]]:
                         yield ("C1", 0x00, "GBK1BYTE")
                     else:
                         yield ("G2", 0x40, "GBK1BYTE")
@@ -86,10 +87,10 @@ def decode_gbk(stream, state):
                     gbk_lead = None
                 else:
                     exception_index = 192 + index - len(guobiao.non_euccn_uro101)
-                    if state.cur_gsets[1] != "ir058-full":
-                        yield ("UCS", guobiao.gbk_exceptions[exception_index], "GBK", "GBK/4+")
-                    else:
+                    if "GBK:FULLEXCEPTIONS" in graphdata.gsetflags[state.cur_gsets[1]]:
                         yield ("UCS", guobiao.gbk_exceptions_full[exception_index], "GBK", "GBK/4+")
+                    else:
+                        yield ("UCS", guobiao.gbk_exceptions[exception_index], "GBK", "GBK/4+")
                     gbk_lead = None
             elif (0xA1 <= gbk_lead[1] <= 0xA9) and (
                           (0x40 <= token[1] <= 0x7E) or (0x80 <= token[1] <= 0xA0)):
@@ -101,7 +102,7 @@ def decode_gbk(stream, state):
                 #
                 if extra_index < (96 * 7):
                     if (extra_index == (0xE5E5 - 0xE4C6)) and (
-                            state.cur_gsets[1] in ("ir058-web", "ir058-full")):
+                            "GBK:UDC_E5E5_AS_SPACE" in graphdata.gsetflags[state.cur_gsets[1]]):
                         yield ("UCS", 0x3000, "GBK", "GBK/UDC3")
                     else:
                         yield ("UCS", 0xE4C6 + extra_index, "GBK", "GBK/UDC3")

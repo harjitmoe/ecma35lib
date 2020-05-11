@@ -8,6 +8,7 @@
 
 # DOCS filter for Unified Hangul Code (what WHATWG calls EUC-KR).
 
+from ecma35.data import graphdata
 from ecma35.data.multibyte import korea
 
 uhcdocs = ("DOCS", False, (0x31,))
@@ -75,12 +76,12 @@ def decode_uhc(stream, state):
                     index += 26 + (token[1] - 0x61)
                 else:
                     index += 52 + (token[1] - 0x81)
-                if (state.cur_gsets[1] in ("ir149", "ir149-mac")) and (
+                if ("UHC:IS_WANSUNG" in graphdata.gsetflags[state.cur_gsets[1]]) and (
                       index < len(korea.non_wangsung_johab)):
                     yield ("CHAR", korea.non_wangsung_johab[index], 
                            "ExtWansung", (0, index), "UHC", "UHCext")
                     uhc_lead = None
-                elif (state.cur_gsets[1] in ("ir202", "ir202-2003", "ir202-2011", "ir202-full")) and (
+                elif ("UHC:IS_KPS" in graphdata.gsetflags[state.cur_gsets[1]]) and (
                       index < len(korea.non_kps9566_johab)):
                     yield ("CHAR", korea.non_kps9566_johab[index], 
                            "ExtKPS9566", (0, index), "UHC", "UHCext")
@@ -95,7 +96,8 @@ def decode_uhc(stream, state):
                     yield ("ERROR", "UHCTRUNCATE", uhc_lead[1])
                     uhc_lead = None
                     reconsume = token
-            elif (uhc_lead[1] == 0xAE) and (token[1] == 0xFF) and (state.cur_gsets[1] in ("ir202-2003", "ir202-full")):
+            elif (uhc_lead[1] == 0xAE) and (token[1] == 0xFF) and (
+                        "UHC:Y_TREMA" in graphdata.gsetflags[state.cur_gsets[1]]):
                 # Encoding of ÿ.
                 yield ("CHAR", 0xFF, "ExtKPS9566", (14, 95), "UHC", "UHCext")
                 uhc_lead = None

@@ -151,6 +151,7 @@ graphdata.gsets["cns-eucg2"] = euctw_g2 = (94, 3, cns)
 #   it due to limiting that mapping's scope to ISO-2022-CN-EXT, then to ISO-2022-CN).
 graphdata.gsets["cns-eucg2-ibm"] = euctw_g2_ibm = (94, 3,
         parsers.read_main_plane("ICU/euc-tw-2014.ucm"))
+graphdata.gsetflags["cns-eucg2-ibm"] |= {"BIG5:IBMCOMPATKANJI"}
 
 # # # # # # # # # #
 # Big Five
@@ -290,7 +291,7 @@ def read_big5_rangemap(fil, appendix, *, plane=None):
         #
     return mapping
 
-def read_big5_planes(fil, *, plane=None, mapper=parsers.identitymap):
+def read_big5_planes(fil, big5_to_cns_g2, *, plane=None, mapper=parsers.identitymap):
     if mapper is parsers.identitymap:
         mappername = ""
     elif mapper.__name__ != "<lambda>":
@@ -315,9 +316,9 @@ def read_big5_planes(fil, *, plane=None, mapper=parsers.identitymap):
             # Consortium-style format, over GL (or GR with eucjp=1) without transformation.
             byts, ucs = _i.split("\t", 2)[:2]
             byts = int(byts[2:], 16)
-            if byts not in big5_to_cns2:
+            if byts not in big5_to_cns_g2:
                 continue
-            men, ku, ten = big5_to_cns2[byts]
+            men, ku, ten = big5_to_cns_g2[byts]
             if plane is not None: # i.e. if we want a particular plane's two-byte mapping.
                 if men != plane:
                     continue
@@ -332,6 +333,7 @@ def read_big5_planes(fil, *, plane=None, mapper=parsers.identitymap):
         if len(_temp) > pointer:
             if _temp[pointer] == None:
                 _temp[pointer] = iucs
+            # In cases of Big5 duplicates, prefer the first mapping
         else:
             while len(_temp) < pointer:
                 _temp.append(None)
@@ -363,24 +365,30 @@ big5_to_cns1 = read_big5_rangemap("Other/rfc1922.txt", 1)
 big5_to_cns1.update(read_big5_rangemap("Other/rfc1922.txt", 2))
 big5_to_cns2 = read_big5_rangemap("Other/rfc1922.txt", 3, plane=2)
 # The two duplicate kanji. RFC 1922 includes mappings to the same CNS codepoints as the other ones,
-# (and confusingly lists a single plane 1 mapping in Appendix 2 which maps to plane 2, hmm…).
-big5_to_cns2[0xC94A] = (1, 36, 34) # IBM's (13, 4, 40)
-big5_to_cns2[0xDDFC] = (2, 33, 86) # IBM's (13, 4, 42)
+# (and confusingly lists a single plane 1 mapping in the appendix which maps to plane 2, hmm…).
+big5_to_cns2[0xC94A] = (1, 36, 34)
+big5_to_cns2[0xDDFC] = (2, 33, 86)
 
 for _i in big5_to_cns1:
     big5_to_cns2[_i] = (1,) + big5_to_cns1[_i]
 
-# Now big5_to_cns2 is defined, we can do this:
-graphdata.gsets["ir171-ms"] = (94, 2, read_big5_planes("Vendor/CP950.TXT", plane=1))
-graphdata.gsets["ir171-utcbig5"] = (94, 2, read_big5_planes("UTC/BIG5.TXT", plane=1))
+# IBM's plane 13 contains codes mainly for round-trip compatibility with Big5 variants.
+# It is not compatible with the standard plane 13 (introduced 2007).
+big5_to_cns2_ibmvar = big5_to_cns2.copy()
+big5_to_cns2_ibmvar[0xC94A] = (13, 4, 40)
+big5_to_cns2_ibmvar[0xDDFC] = (13, 4, 42)
+
+# Now that big5_to_cns2 is defined, we can do this:
+graphdata.gsets["ir171-ms"] = (94, 2, read_big5_planes("Vendor/CP950.TXT", big5_to_cns2, plane=1))
+graphdata.gsets["ir171-utcbig5"] = (94, 2, read_big5_planes("UTC/BIG5.TXT", big5_to_cns2, plane=1))
 graphdata.gsets["ir171-utc"] = (94, 2, parsers.read_main_plane("UTC/CNS11643.TXT", plane=1))
-graphdata.gsets["ir172-ms"] = (94, 2, read_big5_planes("Vendor/CP950.TXT", plane=2))
-graphdata.gsets["ir172-utcbig5"] = (94, 2, read_big5_planes("UTC/BIG5.TXT", plane=2))
+graphdata.gsets["ir172-ms"] = (94, 2, read_big5_planes("Vendor/CP950.TXT", big5_to_cns2, plane=2))
+graphdata.gsets["ir172-utcbig5"] = (94, 2, read_big5_planes("UTC/BIG5.TXT", big5_to_cns2, plane=2))
 graphdata.gsets["ir172-utc"] = (94, 2, parsers.read_main_plane("UTC/CNS11643.TXT", plane=2))
 
 # Macintosh-compatibility variants
 if os.path.exists(os.path.join(parsers.directory, "Vendor/CHINTRAD.TXT")):
-    maccnsdata = read_big5_planes("Vendor/CHINTRAD.TXT", mapper = parsers.ahmap)
+    maccnsdata = read_big5_planes("Vendor/CHINTRAD.TXT", big5_to_cns2_ibmvar, mapper = parsers.ahmap)
     try:
         if os.path.exists(os.path.join(parsers.directory, "Vendor/macCNS.json")):
             os.unlink(os.path.join(parsers.directory, "Vendor/macCNS.json"))
@@ -399,8 +407,9 @@ graphdata.gsets["ir172-mac"] = (94, 2, maccnsdata[94*94:])
 #   mappings in EUC-TW implementations is applicable. Expecially since we're using 
 #   EUC-TW to underpin the Big5 filter.
 graphdata.gsets["cns-eucg2-mac"] = euctw_g2 = (94, 3, maccnsdata)
-graphdata.gsets["cns-eucg2-ms"] = euctw_g2 = (94, 3, graphdata.gsets["ir171-mac"][2] + 
-                                              graphdata.gsets["ir172-ms"][2])
+graphdata.gsetflags["cns-eucg2-mac"] |= {"BIG5:IBMCOMPATKANJI"}
+graphdata.gsets["cns-eucg2-ms"] = euctw_g2 = (94, 3, read_big5_planes("Vendor/CP950.TXT", big5_to_cns2_ibmvar))
+graphdata.gsetflags["cns-eucg2-ms"] |= {"BIG5:IBMCOMPATKANJI"}
 
 graphdata.gsets["hkscs"] = hkscs_extras = (94, 2, read_big5extras("WHATWG/index-big5.txt"))
 graphdata.gsets["etenexts"] = eten_extras = (94, 2, 

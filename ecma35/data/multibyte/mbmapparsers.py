@@ -84,6 +84,11 @@ applesinglehints = {
     (0x2934, 0xF87F): (0x2B0F,), # Right then up
     (0x2939, 0xF87F): (0x2B10,), # Left then down
     #
+    # Normal bendy arrows (minus the five with standard mappings already):
+    (0x21B0, 0xF87F): (0x2BAA, 0xF87F), # Up then left
+    (0x21B1, 0xF87F): (0x2BAB, 0xF87F), # Up then right
+    (0x21BB, 0xF87F): (0x2BAC, 0xF87F), # Left then up
+    #
     # Triangle-headed bendy arrows
     (0x2936, 0xF87C): (0x2BA8,), # Down then left
     (0x2937, 0xF87C): (0x2BA9,), # Down then right

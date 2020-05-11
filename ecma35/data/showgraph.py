@@ -385,7 +385,11 @@ def dump_plane(outfile, planefunc, kutenfunc,
                 strep = strep.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
                 if ucd.category(strep[0])[0] == "M":
                     strep = "◌" + strep
-                if i[-1] == 0xF87C: # Apple encoding hint for bold form
+                if i[-1] == 0xF87B: # Apple encoding hint for usually medium bold form
+                    print("<b>", file=outfile)
+                    print(strep.rstrip("\uF87B"), file=outfile)
+                    print("</b>", file=outfile)
+                elif i[-1] == 0xF87C: # Apple encoding hint for usually bold form
                     print("<b>", file=outfile)
                     print(strep.rstrip("\uF87C"), file=outfile)
                     print("</b>", file=outfile)

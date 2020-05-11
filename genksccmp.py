@@ -44,7 +44,7 @@ def kutenfunc(number, row, cell):
         if cellbyte == 0xA1: # not elif
             cellbyte = 0xFF
         euc = "{:02x}{:02x}".format(0xA0 + row, cellbyte)
-        fmteuc = "(Code {})".format(euc)
+        fmteuc = "(MacKR {})".format(euc)
     return "{}<br>{}".format(anchorlink, fmteuc)
 
 cdispmap = {}

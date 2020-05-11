@@ -72,6 +72,12 @@ def decode_bigfive(stream, state):
                     big5_lead = token
             elif (0x40 <= token[1] <= 0xFE) and (token[1] != 0x7F):
                 number = (big5_lead[1] << 8) | token[1]
+                if "BIG5:IBMCOMPATKANJI" in graphdata.gsetflags[state.cur_gsets[2]]:
+                    # Compatibility ideographs mapped to IBM's nonstandard plane 13
+                    big5_to_cns2 = traditional.big5_to_cns2_ibmvar
+                else:
+                    big5_to_cns2 = traditional.big5_to_cns2
+                #
                 if (((number < 0xA140) or (0xC6A1 <= number < 0xC940) or (number >= 0xF9D6)) and
                         (graphdata.gsets[state.cur_gsets[3]][1] == 2)):
                     extku = big5_lead[1] - 0x81 + 1
@@ -96,8 +102,8 @@ def decode_bigfive(stream, state):
                     for i in traditional.big5_to_cns1[number]:
                         yield ("G1", i, "Big5")
                         big5_lead = None
-                elif number in traditional.big5_to_cns2:
-                    for i in traditional.big5_to_cns2[number]:
+                elif number in big5_to_cns2:
+                    for i in big5_to_cns2[number]:
                         yield ("G2", i, "Big5")
                         big5_lead = None
                 elif number == 0xA3E1:
