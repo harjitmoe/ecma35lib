@@ -182,7 +182,7 @@ Double-byte assignments:
 |`IRR 0 G*DM4 ! 9`|GB 7590 (further supplementary simplified)|
 |`G*DM4 ! :`|HangulTalk second plane (accepted by HangulTalk filter in G3 slot)|
 |`G*DM4 ! ;`|Non-syllable part of KPS 9566-2011 outside the main plane (accepted by UHC filter in G3 slot)|
-|`IRR ? G*DM6 ! 0`|GBK extras (GB 18030, level 5 with associated UDC zone and non-URO part of level 4)|
+|`IRR ? G*DM6 ! 0`|GBK extras (GB 18030, level 5 with associated UDC zone and non-URO part of level 4; accepted by GBK filter in G3 slot)|
 |`IRR 0 G*DM6 ! 0`|GBK extras, WHATWG/HTML5 variant|
 |`IRR 1 G*DM6 ! 0`|GBK extras, mapping all characters with defined glyphs to non-PUA|
 

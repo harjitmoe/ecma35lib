@@ -14,7 +14,7 @@ from ecma35.data.multibyte import mbmapparsers as parsers
 _temp = []
 def read_kps9566extras(fil):
     cachefn = os.path.join(parsers.cachedirectory,
-              os.path.splitext(fil)[0].replace("/", "---") + "_kps9566extras.json")
+              os.path.splitext(fil)[0].replace("/", "---") + "_kps9566extras2.json")
     if os.path.exists(cachefn):
         f = open(cachefn, "r")
         r = json.load(f)
@@ -29,7 +29,7 @@ def read_kps9566extras(fil):
             trail = int(byts[4:6], 16)
             if (lead < 0xC8) or (trail > 0xA0):
                 continue
-            first = lead - 0xC8
+            first = lead - 0xA1
             if trail >= 0x81:
                 last = trail - 0x41 - 12
             elif trail >= 0x61:

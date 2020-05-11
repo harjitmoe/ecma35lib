@@ -86,8 +86,9 @@ def decode_uhc(stream, state):
                     yield ("CHAR", korea.non_kps9566_johab[index], 
                            "ExtKPS9566", (0, index), "UHC", "UHCext")
                     uhc_lead = None
-                elif uhc_lead[1] >= 0xC8:
-                    yield ("G3", uhc_lead[1] + 1 - 0xC8, "UHCBEYONDEXT")
+                # Note: must be after the ExtWansung / ExtKPS9566 checks:
+                elif uhc_lead[1] >= 0xA1:
+                    yield ("G3", uhc_lead[1] - 0xA0, "UHCBEYONDEXT")
                     yield ("G3", index + 1 - ref_index, "UHCBEYONDEXT")
                     uhc_lead = None
                 else:
