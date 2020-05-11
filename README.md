@@ -117,9 +117,9 @@ Double-byte assignments:
 |`IRR 1 G*DM4 @`|JIS C 6226, version used by NEC PC98 (default for this F-byte)|
 |`IRR ? G*DM4 A`|GB/T 2312-1980, with half of the GB 6345.1-1986 corrigienda, as shown in the ISO-IR-58 registration itself|
 |`IRR 0 G*DM4 A`|GB/T 12345|
-|`IRR 1 G*DM4 A`|GB 18030-2000 (only levels 1 and 2 unless in GBK DOCS)|
-|`IRR 2 G*DM4 A`|GB 18030-2005 (default; only levels 1 and 2 unless in GBK DOCS)|
-|`IRR 3 G*DM4 A`|GB 18030, WHATWG variant (only differs from GB 18030-2005 when in GBK DOCS)|
+|`IRR 1 G*DM4 A`|GB 18030-2000 levels 1 and 2|
+|`IRR 2 G*DM4 A`|GB 18030-2005 levels 1 and 2 (default)|
+|`IRR 3 G*DM4 A`|~~GB 18030, WHATWG variant, same as 2005 unless in GBK DOCS (obsolete in favour of changing the G3 set and no longer affects GBK DOCS)~~|
 |`IRR 4 G*DM4 A`|GB 18030, favouring duplicate mappings over PUA mappings for standard characters|
 |`IRR 5 G*DM4 A`|GB/T 2312, variant used on classic Mac OS|
 |`IRR 6 G*DM4 A`|GB/T 2312-1980, without GB 6345.1-1986 corrigienda (including script g, rather than fullwidth or standard g)|
@@ -182,6 +182,9 @@ Double-byte assignments:
 |`IRR 0 G*DM4 ! 9`|GB 7590 (further supplementary simplified)|
 |`G*DM4 ! :`|HangulTalk second plane (accepted by HangulTalk filter in G3 slot)|
 |`G*DM4 ! ;`|Non-syllable part of KPS 9566-2011 outside the main plane (accepted by UHC filter in G3 slot)|
+|`IRR ? G*DM6 ! 0`|GBK extras (GB 18030, level 5 with associated UDC zone and non-URO part of level 4)|
+|`IRR 0 G*DM6 ! 0`|GBK extras, WHATWG/HTML5 variant|
+|`IRR 1 G*DM6 ! 0`|GBK extras, mapping all characters with defined glyphs to non-PUA|
 
 # Carried out
 

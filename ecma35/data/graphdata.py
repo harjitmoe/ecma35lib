@@ -7,7 +7,7 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import unicodedata as ucd
-import os, urllib.parse, json, collections
+import os, urllib.parse, json, collections, shutil
 
 __all__ = [
     "codepoint_coverages", "gsets", "g94bytes", "g96bytes", "g94nbytes", "g96nbytes", "sumps",
@@ -19,6 +19,9 @@ __all__ = [
 # search a list every time, especially if we're doing it for a large number of codepoints 
 # (e.g. the entire original URO in multibyte.guobiao).
 cachedirectory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "covcache")
+if (os.environ.get("ECMA35LIBDECACHE", "") == "1") and os.path.exists(cachedirectory):
+    shutil.rmtree(cachedirectory)
+    os.makedirs(cachedirectory)
 class CoveragesOnDemand(dict):
     def __getitem__(self, label):
         if super().__contains__(label):
@@ -209,7 +212,7 @@ g96bytes = {tuple(b"@"): "ir111",
 g94nbytes = {tuple(b"@"): ("ir042nec", ("ir042ibm", "ir042nec"), ("ir042",)),
              tuple(b"A"): ("ir058-2005", # Preferred version
                            # Private versions
-                           ("ir058-hant", "ir058-2000", "ir058-2005", "ir058-web", "ir058-full",
+                           ("ir058-hant", "ir058-2000", "ir058-2005", None, "ir058-full",
                             "ir058-mac", "ir058-1980", "ir058-1986"),
                            ("ir058",)), # Original followed by any registered revisions
              tuple(b"B"): ("ir168web",
@@ -256,7 +259,8 @@ g94nbytes = {tuple(b"@"): ("ir042nec", ("ir042ibm", "ir042nec"), ("ir042",)),
              tuple(b"!;"): "2011kpsextras",
              tuple(b"~"): "nil"}
 
-g96nbytes = {tuple(b"~"): "nil"}
+g96nbytes = {tuple(b"!0"):("gbk-nonuro-extras", ("gbk-nonuro-extras-web", "gbk-nonuro-extras-full"), ("gbk-nonuro-extras",)),
+             tuple(b"~"): "nil"}
 
 sumps = {"94": g94bytes, "96": g96bytes, "94n": g94nbytes, "96n": g96nbytes}
 

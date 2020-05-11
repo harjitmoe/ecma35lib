@@ -32,7 +32,7 @@ def decode_gbk(stream, state):
                 state.cur_c1 = "RFC1345"
                 state.glset = 0
                 state.grset = 1
-                state.cur_gsets = ["ir006", "ir058-2005", "ir013euro", "nil"]
+                state.cur_gsets = ["ir006", "ir058-2005", "ir013euro", "gbk-nonuro-extras-full"]
                 state.is_96 = [0, 0, 0, 0]
             else:
                 yield token
@@ -86,30 +86,20 @@ def decode_gbk(stream, state):
                     yield ("UCS", guobiao.non_euccn_uro101[index], "GBK", "GBK/4")
                     gbk_lead = None
                 else:
-                    exception_index = 192 + index - len(guobiao.non_euccn_uro101)
-                    if "GBK:FULLEXCEPTIONS" in graphdata.gsetflags[state.cur_gsets[1]]:
-                        yield ("UCS", guobiao.gbk_exceptions_full[exception_index], "GBK", "GBK/4+")
-                    else:
-                        yield ("UCS", guobiao.gbk_exceptions[exception_index], "GBK", "GBK/4+")
+                    exception_index = (96 * 93) + 91 + (index - len(guobiao.non_euccn_uro101))
+                    yield ("G3", exception_index // 96, "GBKExtras")
+                    yield ("G3", exception_index % 96, "GBKExtras")
                     gbk_lead = None
             elif (0xA1 <= gbk_lead[1] <= 0xA9) and (
                           (0x40 <= token[1] <= 0x7E) or (0x80 <= token[1] <= 0xA0)):
                 # "Level 5"
-                row_number = gbk_lead[1] - 0xA1
-                extra_index = (row_number * 96) + (token[1] - 0x40)
+                row_number = gbk_lead[1] - 0xA0
+                cell_number = token[1] - 0x40
                 if token[1] > 0x7F:
-                    extra_index -= 1
+                    cell_number -= 1
                 #
-                if extra_index < (96 * 7):
-                    if (extra_index == (0xE5E5 - 0xE4C6)) and (
-                            "GBK:UDC_E5E5_AS_SPACE" in graphdata.gsetflags[state.cur_gsets[1]]):
-                        yield ("UCS", 0x3000, "GBK", "GBK/UDC3")
-                    else:
-                        yield ("UCS", 0xE4C6 + extra_index, "GBK", "GBK/UDC3")
-                else:
-                    exception_index = extra_index - (96 * 7)
-                    assert exception_index < 192
-                    yield ("UCS", guobiao.gbk_exceptions[exception_index], "GBK", "GBK/5")
+                yield ("G3", row_number, "GBKExtras")
+                yield ("G3", cell_number, "GBKExtras")
                 gbk_lead = None
             elif (0x81 <= gbk_lead[1] <= 0xFE) and (0x30 <= token[1] <= 0x39):
                 # GB18030 half-code

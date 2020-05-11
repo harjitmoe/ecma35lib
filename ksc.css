@@ -1,0 +1,123 @@
+/* Sadly border-collapse: collapse; borks the borders on the position: sticky; */
+table {
+    border-spacing: 0;
+    margin-left: auto;
+    margin-right: auto;
+    background: white;
+    color: black;
+}
+th, td {
+    border-right: 1px solid black;
+    border-right: 0.1rem solid black;
+    border-bottom: 1px solid black;
+    border-bottom: 0.1rem solid black;
+    box-sizing: content-box;
+    min-width: 6rem;
+    width: 7rem;
+}
+td {
+    vertical-align: top;
+}
+th a {
+    text-decoration: unset;
+    color: inherit;
+}
+th:first-child, td:first-child {
+    border-left: 1px solid black;
+    border-left: 0.1rem solid black;
+}
+thead:first-of-type th, thead:first-of-type td {
+    border-top: 1px solid black;
+    border-top: 0.1rem solid black;
+    position: sticky;
+    top: 0;
+    background: white;
+}
+.anchor {
+    position: relative;
+    top: -3rem;
+}
+.codepoint {
+    font-family: monospace;
+    font-size: 0.7rem;
+}
+.codepicture {
+    font-family: TakaoPMincho, IPAPMincho, Noto Serif CJK JP, Source Han Serif JP, TakaoPGothic, IPAPGothic, Noto Sans CJK JP, Source Han Sans JP, TW-Sung-Ext-B, TW-Kai-Ext-B, Yu Gothic, BabelStone Han, serif;
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
+.codepicture.roman {
+    font-family: Doulos SIL, DejaVu Serif, Segoe UI, DejaVu Sans, serif;
+}
+.codepicture.smp {
+    font-family: Twemoji Mozilla, Apple Color Emoji, Noto Color Emoji, Segoe UI Emoji, Noto Emoji, serif;
+    /*font-family: unset;*/
+}
+.pua {
+    color: dimgray;
+}
+.spua {
+    /* TW-Sung-Plus and TW-Kai-Plus are the Gov-TW-supplied SPUA fonts for CNS */
+    font-family: TW-Sung-Plus, TW-Kai-Plus;
+    font-size: 1.5rem;
+}
+.vertical {
+    -webkit-writing-mode: tb-rl;
+    -ms-writing-mode: tb-rl;
+    writing-mode: tb-rl;
+    writing-mode: vertical-rl;
+    display: inline-block;
+    width: 1em;
+    /* Noto Serif CJK seems not actually to use vertical glyphs here for some reason?
+     * Noto Sans CJK and TakaoP both do. */
+    font-family: TakaoPMincho, IPAPMincho, TakaoPGothic, IPAPGothic, Noto Sans CJK JP, Source Han Sans JP, Yu Gothic, serif;
+}
+.rotated {
+    transform: rotate(-90deg);
+    display: inline-block;
+    width: 1em;
+}
+.bigform {
+    font-size: larger;
+}
+.codepicture sup {
+	font-size: 0.75rem;
+}
+.inverse {
+    color: white;
+    background: black;
+}
+.undefined {
+    background: #999;
+}
+.collision {
+    background: #f99;
+}
+
+ul.navbar {
+    margin: 0;
+    padding: 0;
+}
+ul.navbar li {
+    display: inline;
+}
+ul.navbar li:first-child::before {
+    content: "| ";
+}
+ul.navbar li::after {
+    content: " |";
+}
+.navlabel {
+    font-weight: bold;
+}
+
+.annotation {
+    background: beige;
+}
+.annotation p {
+    margin: 0.3em 0 0.3em 0;
+    max-width: 98vw;
+}
+.annotation code {
+    border: 0.1rem solid silver;
+}

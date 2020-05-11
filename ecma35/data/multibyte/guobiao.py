@@ -37,7 +37,7 @@ from ecma35.data.multibyte import mbmapparsers as parsers
 # codes, and are somewhat chaotic, with a mixture of mappings to PUA, CJKA, CJKCI.
 
 _temp = []
-def read_gbkexceptions(fil):
+def read_gbk_non_uro_extras(fil):
     # Read GBK/5 and the non-URO part of GBK/4 to an array. Since this part of the
     # mapping cannot be generated automatically from the GB 2312 mapping.
     for _i in open(os.path.join(parsers.directory, fil), "r", encoding="utf-8"):
@@ -47,17 +47,26 @@ def read_gbkexceptions(fil):
         extpointer = int(byts.strip(), 10)
         pseudoku = (extpointer // 190)
         pseudoten = (extpointer % 190)
-        if (pseudoku not in (0x27, 0x28, 0x7C, 0x7D)) or (pseudoten > 95):
-            continue
-        if (pseudoku == 0x7C) and (pseudoten <= 90):
-            continue # Still in the URO part.
-        assert ucs[:2] == "0x"
-        _temp.append(int(ucs[2:], 16))
+        if pseudoku < 0x1F:
+            pass
+        elif (pseudoten > 95): # Must be before any of the non-pass elifs.
+            pass # ignore codes from the main plane
+        elif (pseudoku == 0x1F) or (0x29 <= pseudoku < 0x7C):
+            _temp.append(None)
+        elif (pseudoku == 0x7C) and (pseudoten <= 90):
+            # Still in the tail end of the URO section; not the superposed part.
+            _temp.append(None)
+        else:
+            # Actually part of the non-URO GBK extras part.
+            assert ucs[:2] == "0x"
+            _temp.append( (int(ucs[2:], 16),) )
+    # Try to end it on a natural plane boundary.
+    _temp.extend([None] * (((96 * 96) - (len(_temp) % (96 * 96))) % (96 * 96)))
     r = tuple(_temp) # Making a tuple makes a copy, of course.
     del _temp[:]
     return r
 
-full2005dict = {0xE78D: 0xFE10, 0xE78E: 0xFE12, 0xE78F: 0xFE11, 0xE790: 0xFE13, 0xE791: 0xFE14, 0xE792: 0xFE15, 0xE793: 0xFE16, 0xE794: 0xFE17, 0xE795: 0xFE18, 0xE796: 0xFE19, 0xE816: 0x20087, 0xE817: 0x20089, 0xE818: 0x200CC, 0xE81E: 0x9FB4, 0xE826: 0x9FB5, 0xE82B: 0x9FB6, 0xE82C: 0x9FB7, 0xE831: 0x215D7, 0xE832: 0x9FB8, 0xE83B: 0x2298F, 0xE843: 0x9FB9, 0xE854: 0x9FBA, 0xE855: 0x241FE, 0xE864: 0x9FBB}
+full2005dict = {(0xE78D,): (0xFE10,), (0xE78E,): (0xFE12,), (0xE78F,): (0xFE11,), (0xE790,): (0xFE13,), (0xE791,): (0xFE14,), (0xE792,): (0xFE15,), (0xE793,): (0xFE16,), (0xE794,): (0xFE17,), (0xE795,): (0xFE18,), (0xE796,): (0xFE19,), (0xE816,): (0x20087,), (0xE817,): (0x20089,), (0xE818,): (0x200CC,), (0xE81E,): (0x9FB4,), (0xE826,): (0x9FB5,), (0xE82B,): (0x9FB6,), (0xE82C,): (0x9FB7,), (0xE831,): (0x215D7,), (0xE832,): (0x9FB8,), (0xE83B,): (0x2298F,), (0xE843,): (0x9FB9,), (0xE854,): (0x9FBA,), (0xE855,): (0x241FE,), (0xE864,): (0x9FBB,)}
 def gb2005tofullmap(pointer, ucs):
     if not ucs[1:]:
         return (full2005dict.get(ucs[0], ucs[0]),)
@@ -96,13 +105,13 @@ graphdata.gsets["ir058-2000"] = gb2312_2000 = (94, 2,
 graphdata.gsets["ir058-2005"] = gb2312_2005 = (94, 2, 
                             parsers.read_main_plane("WHATWG/index-gb18030.txt", euckrlike=True))
 graphdata.gsetflags["ir058-2005"] |= {"GBK:ALT_4BYTE_CODES"}
-graphdata.gsets["ir058-web"]  = gb2312_2005
-graphdata.gsetflags["ir058-web"] |= {"GBK:UDC_E5E5_AS_SPACE"}
-graphdata.gsetflags["ir058-web"] |= {"GBK:ALT_4BYTE_CODES"}
+# ir058-full differs from ir058-2005 in (a) ACTUALLY USING the Vertical Forms block that was added
+#   for the precise purpose of GB18030 compatibility, and (b) not setting the GBK:ALT_4BYTE_CODES
+#   flag, so the original codepoint-order four-byte codes are used (i.e. there are two m-acutes).
+#   Since there are necessarily unencoded PUA codes and four-byte codes duplicating two-byte codes
+#   anyway. And since the whole point of "-full" is to use the non-PUA codepoints where applicable.
 graphdata.gsets["ir058-full"] = gb2312_full = (94, 2,
             parsers.read_main_plane("WHATWG/index-gb18030.txt", euckrlike=True, mapper = gb2005tofullmap))
-graphdata.gsetflags["ir058-full"] |= {"GBK:FULLEXCEPTIONS"}
-graphdata.gsetflags["ir058-full"] |= {"GBK:UDC_E5E5_AS_SPACE"}
 
 # ITU's extension of ir058, i.e. with 6763 GB 2312 chars, 705 GB 8565.2 chars and 139 others.
 # Basically sticks a load of stuff (both hankaku and zenkaku) in what GBK would consider the
@@ -205,10 +214,12 @@ non_euccn_uro101 = [i for i in range(0x4E00, 0x9FA6)
                       if i not in graphdata.codepoint_coverages["ir058-2005"]]
 
 # GBK/5, and the non-URO part of GBK/4.
-gbk_exceptions = read_gbkexceptions("WHATWG/index-gb18030.txt")
-gbk_exceptions_full = tuple(full2005dict.get(_i, _i) for _i in gbk_exceptions) # For use with ir058-full
-gbk_exceptions_coverage = set(gbk_exceptions)
-gbk_exceptions_full_coverage = set(gbk_exceptions_full)
+_gbk_exceptions_web = read_gbk_non_uro_extras("WHATWG/index-gb18030.txt")
+_gbk_exceptions_full = tuple(full2005dict.get(_i, _i) for _i in _gbk_exceptions_web)
+_gbk_exceptions = tuple({(0x3000,): (0xE5E5,)}.get(_i, _i) for _i in _gbk_exceptions_web)
+graphdata.gsets["gbk-nonuro-extras"] = (96, 2, _gbk_exceptions)
+graphdata.gsets["gbk-nonuro-extras-web"] = (96, 2, _gbk_exceptions_web)
+graphdata.gsets["gbk-nonuro-extras-full"] = (96, 2, _gbk_exceptions_full)
 
 # Amounting to the first section of four-byte codes in GB18030: the second section can be mapped
 # directly, since no astral codepoint is in any part of the 2000 standard mappings for GBK (nor in
@@ -220,11 +231,9 @@ gbk_exceptions_full_coverage = set(gbk_exceptions_full)
 # decoders.gbhalfcodes itself.
 non_gbk_bmp = [i for i in range(0x0080, 0x10000)
            if ((i < 0x4E00 or i > 0x9FA5) and # i.e. not part of the original URO set
-               (i < 0xE4C6 or i > 0xE765) and # i.e. not part of the GBK third PUA section
                (i < 0xD800 or i > 0xDFFF) and # i.e. not surrogate (don't count as codepoints)
-               (i not in gbk_exceptions_coverage) and # i.e. not part of GBK/4 additions or GBK/5
-               (i not in graphdata.codepoint_coverages[ # i.e. not in main plane of 2000 edition
-                         "ir058-2000"]))]
+               (i not in graphdata.codepoint_coverages["gbk-nonuro-extras"]) and
+               (i not in graphdata.codepoint_coverages["ir058-2000"]))]
 
 
 
