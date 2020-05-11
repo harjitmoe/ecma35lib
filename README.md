@@ -113,17 +113,17 @@ Double-byte assignments:
 |Private assignment|Meaning|
 |---|---|
 |`IRR ? G*DM4 @`|JIS C 6226-1978|
-|`IRR 0 G*DM4 @`|JIS C 6226, version encoded by IBM-942|
+|`IRR 0 G*DM4 @`|JIS C 6226, version encoded by IBM-932 and IBM-942|
 |`IRR 1 G*DM4 @`|JIS C 6226, version used by NEC PC98 (default for this F-byte)|
-|`IRR ? G*DM4 A`|GB/T 2312-1980, with half of the GB 6345.1-1986 corrigienda, as shown in the ISO-IR-58 registration itself|
+|`IRR ? G*DM4 A`|GB/T 2312-1980, with half of the GB 6345.1-1986 corrigienda, as shown in the ISO-IR-58 registration itself. Elsewhere, leans toward UTC mappings rather than GB 18030 mappings, e.g. unifying with the Japanese rather than Catalan interpunct.|
 |`IRR 0 G*DM4 A`|GB/T 12345|
 |`IRR 1 G*DM4 A`|GB 18030-2000 levels 1 and 2|
 |`IRR 2 G*DM4 A`|GB 18030-2005 levels 1 and 2 (default)|
 |`IRR 3 G*DM4 A`|~~GB 18030, WHATWG variant, same as 2005 unless in GBK DOCS (obsolete in favour of changing the G3 set and no longer affects GBK DOCS)~~|
 |`IRR 4 G*DM4 A`|GB 18030, favouring duplicate mappings over PUA mappings for standard characters|
 |`IRR 5 G*DM4 A`|GB/T 2312, variant used on classic Mac OS|
-|`IRR 6 G*DM4 A`|GB/T 2312-1980, without GB 6345.1-1986 corrigienda (including script g, rather than fullwidth or standard g)|
-|`IRR 7 G*DM4 A`|GB/T 2312-1980, with corrigienda but not extensions from GB 6345.1-1986|
+|`IRR 6 G*DM4 A`|GB/T 2312-1980, without GB 6345.1-1986 corrigienda (including script g, rather than fullwidth or standard g). Otherwise leans toward UTC mappings.|
+|`IRR 7 G*DM4 A`|GB/T 2312-1980, with corrigienda but not extensions from GB 6345.1-1986 (matching UTC mappings)|
 |`IRR ? G*DM4 B`|JIS C 6226 / X 0208-1983|
 |`IRR @ G*DM4 B`|JIS X 0208-1990 (standard sequence, listed here for completeness)|
 |`IRR 0 G*DM4 B`|JIS X 0208, WHATWG variant (default; synchronised with Windows-31J)|
@@ -134,11 +134,16 @@ Double-byte assignments:
 |`IRR 5 G*DM4 B`|JIS X 0208, Open Group version for JIS-Roman based EUC-JP|
 |`IRR 6 G*DM4 B`|JIS X 0208, Open Group version for ASCII-based EUC-JP|
 |`IRR 7 G*DM4 B`|JIS X 0208, Open Group version for Microsoft-style EUC-JP|
-|`IRR 8 G*DM4 D`|JIS X 0208, version encoded by IBM-954|
-|`IRR 9 G*DM4 D`|JIS X 0208, DoCoMo JIS emoji|
-|`IRR : G*DM4 D`|JIS X 0208, KDDI JIS emoji, symbolic zodiac variant|
-|`IRR ; G*DM4 D`|JIS X 0208, SoftBank JIS emoji|
-|`IRR < G*DM4 D`|JIS X 0208, KDDI JIS emoji, pictorial zodiac variant|
+|`IRR 8 G*DM4 B`|JIS X 0208, version encoded by IBM-954|
+|`IRR 9 G*DM4 B`|JIS X 0208, DoCoMo JIS emoji|
+|`IRR : G*DM4 B`|JIS X 0208, KDDI JIS emoji, symbolic zodiac variant|
+|`IRR ; G*DM4 B`|JIS X 0208, SoftBank JIS emoji|
+|`IRR < G*DM4 B`|JIS X 0208, KDDI JIS emoji, pictorial zodiac variant|
+|`IRR ? G*DM4 C`|KS C 5601-1987 Wansung code, using new-UTC mappings (harmonious with Microsoft and WHATWG)|
+|`IRR 0 G*DM4 C`|KS C 5601-1987, but using old-UTC mappings for the non-syllables|
+|`IRR 1 G*DM4 C`|KS X 1001-1998 Wansung code. The Euro sign update, also adding the registered trademark sign, and matching the WHATWG mapping.|
+|`IRR 2 G*DM4 C`|KS X 1001-2002 (adding the South Korean postal mark)|
+|`IRR 3 G*DM4 C`|KS X 1001, main plane of Apple/Elex extension (HangulTalk)|
 |`IRR ? G*DM4 D`|JIS X 0212:1990|
 |`IRR 0 G*DM4 D`|JIS X 0212 with va/vi/ve/vo|
 |`IRR 1 G*DM4 D`|JIS X 0212, Open Group version for JIS-Roman based EUC-JP|
@@ -177,9 +182,9 @@ Double-byte assignments:
 |`IRR 0 G*DM4 ! 6`|KDDI Emoji extensions for Shift\_JIS (as above), symbolic zodiac variant|
 |`G*DM4 ! 7`|SoftBank Emoji extensions for Shift\_JIS (as above)|
 |`IRR ? G*DM4 ! 8`|GB 13131 (supplementary traditional)|
-|`IRR 0 G*DM4 ! 8`|GB 7589 (supplementary simplified)|
+|`IRR 0 G*DM4 ! 8`|GB 7589 (supplementary simplified)&mdash;hopefully|
 |`IRR ? G*DM4 ! 9`|GB 13132 (further supplementary traditional)|
-|`IRR 0 G*DM4 ! 9`|GB 7590 (further supplementary simplified)|
+|`IRR 0 G*DM4 ! 9`|GB 7590 (further supplementary simplified)&mdash;hopefully|
 |`G*DM4 ! :`|HangulTalk second plane (accepted by HangulTalk filter in G3 slot)|
 |`G*DM4 ! ;`|Non-syllable part of KPS 9566-2011 outside the main plane (accepted by UHC filter in G3 slot)|
 |`IRR ? G*DM6 ! 0`|GBK extras (GB 18030, level 5 with associated UDC zone and non-URO part of level 4; accepted by GBK filter in G3 slot)|
