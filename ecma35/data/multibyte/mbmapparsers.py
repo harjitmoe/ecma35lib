@@ -443,6 +443,21 @@ def parse_variants(fil):
     f.close()
     return cods
 
+def read_untracked_mbfile(reader, fn, cachefn, shippedfn, **kwargs):
+    if os.path.exists(os.path.join(directory, fn)):
+        data = reader(fn, **kwargs)
+        try:
+            if os.path.exists(os.path.join(directory, shippedfn)):
+                os.unlink(os.path.join(directory, shippedfn))
+            shutil.copy(os.path.join(cachedirectory, cachefn),
+                        os.path.join(directory, shippedfn))
+        except EnvironmentError:
+            pass
+    else:
+        data = tuple(tuple(i) if i is not None else None for i in json.load(
+                     open(os.path.join(directory, shippedfn), "r")))
+    return data
+
 
 
 

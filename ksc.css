@@ -81,7 +81,7 @@ thead:first-of-type th, thead:first-of-type td {
     font-size: larger;
 }
 .codepicture sup {
-	font-size: 0.75rem;
+    font-size: 0.75rem;
 }
 .inverse {
     fill: white;
@@ -92,24 +92,47 @@ thead:first-of-type th, thead:first-of-type td {
     stroke: white;
 }
 .codepicture .charwrapper {
-	height: 1.6rem;
+    height: 1.6rem;
+    box-sizing: border-box;
+    vertical-align: text-bottom;
+}
+.codepicture .charwrapper.circle, .codepicture .charwrapper.darksquare, .codepicture .charwrapper.lightsquare {
+    height: 1.4rem;
+    margin: 0.1rem;
+    box-sizing: border-box;
 }
 .codepicture .charwrapper .wrappedtext {
     font-size: 72px;
 }
-.codepicture .charwrapper.darkcircle .wrappedtext {
+.codepicture .charwrapper.circle .wrappedtext {
     font-size: 48px;
 }
+.codepicture .charwrapper.lightcircle .wrappedtext {
+    font-size: 64px;
+}
 .codepicture .charwrapper .wrappedtext .redundant {
-	font-size: 0px;
+    /* Don't `display: none;` (since that excludes it from copy-paste,
+       defeating much of the object of including it to begin with). */
+    font-size: 0px;
 }
 .darksquare {
     background: black;
-	border-radius: 0.2rem;
+    border-radius: 0.2rem;
 }
 .darkcircle {
     background: black;
-	border-radius: 0.75rem;
+    border-radius: 0.75rem;
+}
+.lightsquare {
+    border: 0.1rem solid black;
+}
+b .lightsquare {
+    border: 0.1rem solid black;
+    border-radius: 0.2rem;
+}
+.lightcircle {
+    border: 0.1rem solid black;
+    border-radius: 0.75rem;
 }
 .undefined {
     background: #999;

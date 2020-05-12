@@ -9,6 +9,7 @@
 # Detail regarding Apple-compatible versus up-to-date mappings
 
 import os, json, shutil
+import unicodedata as ucd
 from ecma35.data import gccdata
 from ecma35.data.multibyte import mbmapparsers as parsers
 
@@ -187,22 +188,168 @@ def ahmap(pointer, ucs):
         else:
             # Extra-ordinary composition
             return tuple(ord(i) for i in gccdata.gcc_sequences.get(ucss, ucss))
+    elif (len(ucs) == 2) and ucd.name(chr(ucs[0]), None) and (ucs[1] == 0x20DE):
+        try:
+            return (ord(ucd.lookup("SQUARED " + ucd.name(chr(ucs[0])))), )
+        except KeyError:
+            return ucs
     return ucs
 
-def read_untracked_mbfile(reader, fn, cachefn, shippedfn, **kwargs):
-    if os.path.exists(os.path.join(parsers.directory, fn)):
-        data = reader(fn, **kwargs)
-        try:
-            if os.path.exists(os.path.join(parsers.directory, shippedfn)):
-                os.unlink(os.path.join(parsers.directory, shippedfn))
-            shutil.copy(os.path.join(parsers.cachedirectory, cachefn),
-                        os.path.join(parsers.directory, shippedfn))
-        except EnvironmentError:
-            pass
+def print_hints_to_html5(i, outfile, *, lang="ja"):
+    sequence_inverse = False
+    if i[0] >= 0xF0000:
+        print("<span class='codepicture spua' lang={}>".format(lang), file=outfile)
+        strep = "".join(chr(j) for j in i)
+    elif 0xF860 <= i[0] < 0xF865 and len(i) != 1:
+        print("<span class='codepicture' lang={}>".format(lang), file=outfile)
+        strep = "".join(chr(j) for j in i[1:]).replace("\uF860", "").replace("\uF861", 
+                "").replace("\uF862", "").replace("\uF863", "").replace("\uF864", "")
+    elif 0xF865 <= i[0] < 0xF867 and len(i) != 1:
+        sequence_inverse = True
+        print("<span class='codepicture' lang={}>".format(lang), file=outfile)
+        strep = "".join(chr(j) for j in i[1:]).replace("\uF865", "").replace("\uF866", "")
+    elif 0xE000 <= i[0] < 0xF900:
+        print("<span class='codepicture pua' lang={}>".format(lang), file=outfile)
+        # Object Replacement Character (FFFD is already used by BIG5.TXT)
+        strep = "\uFFFC"
+    elif (0x10000 <= i[0] < 0x20000) or (0xFE0F in i):
+        # SMP best to fall back to applicable emoji (or otherwise applicable) fonts,
+        # and not try to push CJK fonts first.
+        print("<span class='codepicture smp' lang={}>".format(lang), file=outfile)
+        strep = "".join(chr(j) for j in i)
     else:
-        data = tuple(tuple(i) if i is not None else None for i in json.load(
-                     open(os.path.join(parsers.directory, shippedfn), "r")))
-    return data
+        strep = "".join(chr(j) for j in i)
+        firststrep = ucd.normalize("NFD", strep)[0] # Note: NOT NFKD.
+        if ord(firststrep) < 0x7F:
+            print("<span class='codepicture roman'>", file=outfile)
+        elif (ucd.category(firststrep)[0] == "M") and (ord(firststrep) < 0x3000):
+            print("<span class='codepicture roman'>", file=outfile)
+        else:
+            print("<span class=codepicture lang={}>".format(lang), file=outfile)
+    strep = strep.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+    if ucd.category(strep[0])[0] == "M":
+        strep = "◌" + strep
+    if strep[-1] == "\uF87B": # Apple encoding hint for usually medium bold form
+        print("<b>", file=outfile)
+        print(strep.rstrip("\uF87B"), file=outfile)
+        print("</b>", file=outfile)
+    elif strep[-1] == "\uF87C": # Apple encoding hint for usually bold form
+        print("<b>", file=outfile)
+        strep2 = strep.rstrip("\uF87C")
+        # Boxed / circled versions
+        if strep2[-1] == "\u20DD":
+            print("<svg viewBox='0 0 72 72' class='charwrapper circle lightcircle'>", file=outfile)
+            print("<text y='54px' x='36px' text-anchor='middle' class='wrappedtext'>", file=outfile)
+            print(strep2[:-1], end="", file=outfile)
+            print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
+            print("</text></svg>", file=outfile)
+        elif strep2[-1] == "\u20DE":
+            print("<svg viewBox='0 0 88 88' class='charwrapper lightsquare'>", file=outfile)
+            print("<text y='72px' x='42px' text-anchor='middle' class='wrappedtext'>", file=outfile)
+            print(strep2[:-1], end="", file=outfile)
+            print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
+            print("</text></svg>", file=outfile)
+        else:
+            print(strep2, file=outfile)
+        print("</b>", file=outfile)
+    elif strep[-1] == "\uF87E": # Apple encoding hint for vertical presentation form
+        print("<span class=vertical>", file=outfile)
+        print(strep.rstrip("\uF87E"), file=outfile)
+        print("</span>", file=outfile)
+    elif (strep[-1] in "\uF87A\uF875") or sequence_inverse: # Inverse form
+        strep2 = strep.replace("\uF87A", "").replace("\uF875", "")
+        if strep2[-1] == "\u20DD":
+            print("<svg viewBox='0 0 72 72' class='charwrapper circle darkcircle'>", file=outfile)
+            print("<text y='54px' x='36px' text-anchor='middle' class='wrappedtext inverse'>", file=outfile)
+            print(strep2[:-1], end="", file=outfile)
+            print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
+            print("</text></svg>", file=outfile)
+        elif strep2[-1] == "\u20DE":
+            print("<svg viewBox='0 0 88 88' class='charwrapper darksquare'>", file=outfile)
+            print("<text y='72px' x='44px' text-anchor='middle' class='wrappedtext inverse'>", file=outfile)
+            print(strep2[:-1], end="", file=outfile)
+            print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
+            print("</text></svg>", file=outfile)
+        elif (strep2[0] == "[") and (strep2[-1] == "]"):
+            hsf = 1 if (ucd.east_asian_width(strep[1]) not in ("W", "F")) else 1.618
+            print("<svg viewBox='0 0 {:d} 88' class='charwrapper darksquare'>".format(
+                  int(hsf * 48 * len(strep2[1:-1]))), file=outfile)
+            print("<text y='72px' x='{:d}px' text-anchor='middle' class='wrappedtext inverse'>".format(
+                  int(hsf * 24 * len(strep2[1:-1]))), file=outfile)
+            print("<tspan class='redundant'>{}</tspan>".format(strep2[0]), end="", file=outfile)
+            print(strep2[1:-1], end="", file=outfile)
+            print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
+            print("</text></svg>", file=outfile)
+        elif (strep2[0] == "(") and (strep2[-1] == ")"):
+            print("<svg viewBox='0 0 {:d} 72' class='charwrapper circle darkcircle'>".format(
+                  36 * len(strep2[1:-1])), file=outfile)
+            print("<text y='54px' x='{:d}px' text-anchor='middle' class='wrappedtext inverse'>".format(
+                  18 * len(strep2[1:-1])), file=outfile)
+            print("<tspan class='redundant'>{}</tspan>".format(strep2[0]), end="", file=outfile)
+            print(strep2[1:-1], end="", file=outfile)
+            print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
+            print("</text></svg>", file=outfile)
+        else:
+            print("<svg viewBox='0 0 {:d} 88' class='charwrapper'>".format(74 * len(i[1:])), file=outfile)
+            print("<text y='72px' class='wrappedtext inverse'>", file=outfile)
+            print(strep2, file=outfile)
+            print("</text></svg>", file=outfile)
+    elif strep[-1] == "\uF876": # Apple encoding hint for rotated form
+        print("<span class=rotated>", file=outfile)
+        print(strep.replace("\uF876", ""), file=outfile)
+        print("</span>", file=outfile)
+    elif strep[-1] == "\uF877": # Apple encoding hint for superscript form
+        print("<sup>", file=outfile)
+        print(strep.replace("\uF877", ""), file=outfile)
+        print("</sup>", file=outfile)
+    elif strep[-1] == "\uF878": # Apple encoding hint for small form
+        print("<small>", file=outfile)
+        print(strep.rstrip("\uF878"), file=outfile)
+        print("</small>", file=outfile)
+    elif strep[-1] == "\uF879": # Apple encoding hint for large form
+        print("<span class=bigform>", file=outfile)
+        print(strep.rstrip("\uF879"), file=outfile)
+        print("</span>", file=outfile)
+    else:
+        # Horizontal presentation form, alternative form.
+        # Neither of which we can really do anything with here.〾
+        strep2 = strep.rstrip("\uF87D\uF87F")
+        # Boxed / circled non-negative forms
+        if strep2[-1] == "\u20DD":
+            print("<svg viewBox='0 0 72 72' class='charwrapper circle lightcircle'>", file=outfile)
+            print("<text y='58px' x='36px' text-anchor='middle' class='wrappedtext'>", file=outfile)
+            print(strep2[:-1], end="", file=outfile)
+            print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
+            print("</text></svg>", file=outfile)
+        elif strep2[-1] == "\u20DE":
+            print("<svg viewBox='0 0 88 88' class='charwrapper lightsquare'>", file=outfile)
+            print("<text y='72px' x='42px' text-anchor='middle' class='wrappedtext'>", file=outfile)
+            print(strep2[:-1], end="", file=outfile)
+            print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
+            print("</text></svg>", file=outfile)
+        elif (strep2[0] == "[") and (strep2[-1] == "]"):
+            hsf = 1 if (ucd.east_asian_width(strep[1]) not in ("W", "F")) else 1.618
+            print("<svg viewBox='0 0 {:d} 88' class='charwrapper lightsquare'>".format(
+                  int(hsf * 48 * len(strep2[1:-1]))), file=outfile)
+            print("<text y='72px' x='{:d}px' text-anchor='middle' class='wrappedtext'>".format(
+                  int(hsf * 24 * len(strep2[1:-1]))), file=outfile)
+            print("<tspan class='redundant'>{}</tspan>".format(strep2[0]), end="", file=outfile)
+            print(strep2[1:-1], end="", file=outfile)
+            print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
+            print("</text></svg>", file=outfile)
+        elif (strep2[0] == "(") and (strep2[-1] == ")") and (
+                strep2 not in ["({:d})".format(i) for i in range(1, 31)]):
+            print("<svg viewBox='0 0 {:d} 72' class='charwrapper circle lightcircle'>".format(
+                  36 * len(strep2[1:-1])), file=outfile)
+            print("<text y='58px' x='{:d}px' text-anchor='middle' class='wrappedtext'>".format(
+                  18 * len(strep2[1:-1])), file=outfile)
+            print("<tspan class='redundant'>{}</tspan>".format(strep2[0]), end="", file=outfile)
+            print(strep2[1:-1], end="", file=outfile)
+            print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
+            print("</text></svg>", file=outfile)
+        else:
+            print(strep2, file=outfile)
+    print("</span>", file=outfile)
 
 
 

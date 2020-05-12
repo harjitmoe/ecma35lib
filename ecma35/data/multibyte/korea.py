@@ -156,29 +156,29 @@ graphdata.gsets["ir149-altutc"] = wansung_utcalt = (94, 2, tuple(_wansung_temp))
 graphdata.gsetflags["ir149-altutc"] |= {"UHC:IS_WANSUNG"}
 
 # Apple and Elex's (Illekseu's) Wansung version, and its secondary plane (collectively HangulTalk)
-macwansungdata = variationhints.read_untracked_mbfile(
+macwansungdata = parsers.read_untracked_mbfile(
                  parsers.read_main_plane, "Vendor/KOREAN.TXT", "Vendor---KOREAN_mainplane_ahmap.json", 
                  "Vendor/macWansung.json", euckrlike=True, mapper=variationhints.ahmap)
-macelexdata =    variationhints.read_untracked_mbfile(
+macelexdata =    parsers.read_untracked_mbfile(
                  read_elexextras, "Vendor/KOREAN.TXT", "Vendor---KOREAN_elexextras_ahmap.json", 
                  "Vendor/macElex.json", mapper=variationhints.ahmap)
-rawmac =         variationhints.read_untracked_mbfile(
+rawmac =         parsers.read_untracked_mbfile(
                  parsers.read_main_plane, "Vendor/KOREAN.TXT", "Vendor---KOREAN_mainplane.json", 
                  "Vendor/macWansung-raw.json", euckrlike=True)
-rawelex =        variationhints.read_untracked_mbfile(
+rawelex =        parsers.read_untracked_mbfile(
                  read_elexextras, "Vendor/KOREAN.TXT", "Vendor---KOREAN_elexextras.json", 
                  "Vendor/macElex-raw.json")
-rawmac4 =        variationhints.read_untracked_mbfile(
+rawmac4 =        parsers.read_untracked_mbfile(
                  parsers.read_main_plane, "Vendor/KOREAN.TXT", "Vendor---KOREAN_mainplane_altcomments.json", 
                  "Vendor/macWansung4.json", euckrlike=True, altcomments=True)
-rawelex4 =       variationhints.read_untracked_mbfile(
+rawelex4 =       parsers.read_untracked_mbfile(
                  read_elexextras, "Vendor/KOREAN.TXT", "Vendor---KOREAN_elexextras_altcomments.json", 
                  "Vendor/macElex4.json", altcomments=True)
 macwansung = graphdata.gsets["ir149-mac"] = (94, 2, macwansungdata)
 graphdata.gsetflags["ir149-mac"] |= {"UHC:IS_WANSUNG"}
-macelexexras = graphdata.gsets["mac-elex-extras"] = (94, 2, macelexdata)
-macelexexras = graphdata.gsets["mac-elex-extras-unicode3_2"] = (94, 2, rawelex)
-macelexexras = graphdata.gsets["mac-elex-extras-unicode4_0"] = (94, 2, rawelex4)
+macelexextras = graphdata.gsets["mac-elex-extras"] = (94, 2, macelexdata)
+macelexextras32 = graphdata.gsets["mac-elex-extras-unicode3_2"] = (94, 2, rawelex)
+macelexextras40 = graphdata.gsets["mac-elex-extras-unicode4_0"] = (94, 2, rawelex4)
 
 # KPS 9566
 graphdata.gsets["ir202-2011"] = kps9566_2011 = (94, 2, parsers.read_main_plane("Other/AppendixA_KPS9566-2011-to-Unicode.txt", euckrlike=True))

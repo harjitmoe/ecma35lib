@@ -380,7 +380,7 @@ big5_to_cns2_ibmvar[0xC94A] = (13, 4, 40)
 big5_to_cns2_ibmvar[0xDDFC] = (13, 4, 42)
 
 # Now that big5_to_cns2 is defined, we can do this:
-mscnsdata = variationhints.read_untracked_mbfile(read_big5_planes,
+mscnsdata = parsers.read_untracked_mbfile(read_big5_planes,
             "Vendor/CP950.TXT", "Vendor---CP950_mainplane.json", "Vendor/msCNS.json", 
             big5_to_cns_g2 = big5_to_cns2_ibmvar)
 graphdata.gsets["ir171-ms"] = (94, 2, mscnsdata[:94*94])
@@ -391,7 +391,7 @@ graphdata.gsets["ir172-utcbig5"] = (94, 2, read_big5_planes("UTC/BIG5.TXT", big5
 graphdata.gsets["ir172-utc"] = (94, 2, parsers.read_main_plane("UTC/CNS11643.TXT", plane=2))
 
 # Macintosh-compatibility variants
-maccnsdata = variationhints.read_untracked_mbfile(read_big5_planes,
+maccnsdata = parsers.read_untracked_mbfile(read_big5_planes,
              "Vendor/CHINTRAD.TXT", "Vendor---CHINTRAD_mainplane_ahmap.json", "Vendor/macCNS.json", 
              big5_to_cns_g2 = big5_to_cns2_ibmvar, mapper = variationhints.ahmap)
 graphdata.gsets["ir171-mac"] = (94, 2, maccnsdata[:94*94])
