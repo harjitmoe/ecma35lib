@@ -12,6 +12,7 @@ import os, json, shutil
 import unicodedata as ucd
 from ecma35.data import graphdata
 from ecma35.data.multibyte import mbmapparsers as parsers
+from ecma35.data.multibyte import variationhints
 
 _temp = []
 def read_kps9566extras(fil):
@@ -57,7 +58,7 @@ def read_kps9566extras(fil):
     f.close()
     return r
 
-def read_elexextras(fil, mapper=parsers.identitymap):
+def read_elexextras(fil, *, altcomments=False, mapper=parsers.identitymap):
     if mapper is parsers.identitymap:
         mappername = ""
     elif mapper.__name__ != "<lambda>":
@@ -65,6 +66,8 @@ def read_elexextras(fil, mapper=parsers.identitymap):
     else:
         mappername = "_FIXME"
     #
+    if altcomments:
+        mappername += "_altcomments"
     cachefn = os.path.join(parsers.cachedirectory, os.path.splitext(fil)[0].replace("/", "---") 
               + "_elexextras" + mappername + ".json")
     if os.path.exists(cachefn):
@@ -75,7 +78,18 @@ def read_elexextras(fil, mapper=parsers.identitymap):
     for _i in open(os.path.join(parsers.directory, fil), "r", encoding="utf-8"):
         if (not _i.strip()) or _i[0] == "#":
             continue
-        byts, ucs = _i.split("\t", 2)[:2]
+        #
+        if altcomments and ("# or for Unicode 4.0," in _i):
+            byts, ucs = _i.split("# or for Unicode 4.0,", 1)
+            byts = byts.split("\t", 1)[0]
+            ucs = ucs.lstrip().split(None, 1)[0].rstrip(",")
+        elif altcomments and ("# or" in _i):
+            byts, ucs = _i.split("# or", 1)
+            byts = byts.split("\t", 1)[0]
+            ucs = ucs.lstrip().split(None, 1)[0].rstrip(",")
+        else:
+            byts, ucs = _i.split("\t", 2)[:2]
+        #
         if len(byts) >= 6:
             lead = int(byts[2:4], 16)
             trail = int(byts[4:6], 16)
@@ -142,43 +156,29 @@ graphdata.gsets["ir149-altutc"] = wansung_utcalt = (94, 2, tuple(_wansung_temp))
 graphdata.gsetflags["ir149-altutc"] |= {"UHC:IS_WANSUNG"}
 
 # Apple and Elex's (Illekseu's) Wansung version, and its secondary plane (collectively HangulTalk)
-if os.path.exists(os.path.join(parsers.directory, "Vendor/KOREAN.TXT")):
-    macwansungdata = parsers.read_main_plane("Vendor/KOREAN.TXT", euckrlike=True, mapper=parsers.ahmap)
-    macelexdata = read_elexextras("Vendor/KOREAN.TXT", mapper=parsers.ahmap)
-    rawmac = parsers.read_main_plane("Vendor/KOREAN.TXT", euckrlike=True)
-    rawelex = read_elexextras("Vendor/KOREAN.TXT")
-    try:
-        if os.path.exists(os.path.join(parsers.directory, "Vendor/macWansung.json")):
-            os.unlink(os.path.join(parsers.directory, "Vendor/macWansung.json"))
-        if os.path.exists(os.path.join(parsers.directory, "Vendor/macElex.json")):
-            os.unlink(os.path.join(parsers.directory, "Vendor/macElex.json"))
-        if os.path.exists(os.path.join(parsers.directory, "Vendor/macWansung-raw.json")):
-            os.unlink(os.path.join(parsers.directory, "Vendor/macWansung-raw.json"))
-        if os.path.exists(os.path.join(parsers.directory, "Vendor/macElex-raw.json")):
-            os.unlink(os.path.join(parsers.directory, "Vendor/macElex-raw.json"))
-        shutil.copy(os.path.join(parsers.cachedirectory, "Vendor---KOREAN_mainplane_ahmap.json"),
-                    os.path.join(parsers.directory, "Vendor/macWansung.json"))
-        shutil.copy(os.path.join(parsers.cachedirectory, "Vendor---KOREAN_elexextras_ahmap.json"),
-                    os.path.join(parsers.directory, "Vendor/macElex.json"))
-        shutil.copy(os.path.join(parsers.cachedirectory, "Vendor---KOREAN_mainplane.json"),
-                    os.path.join(parsers.directory, "Vendor/macWansung-raw.json"))
-        shutil.copy(os.path.join(parsers.cachedirectory, "Vendor---KOREAN_elexextras.json"),
-                    os.path.join(parsers.directory, "Vendor/macElex-raw.json"))
-    except EnvironmentError:
-        pass
-else:
-    macwansungdata = tuple(tuple(i) if i is not None 
-        else None for i in json.load(open(os.path.join(parsers.directory, "Vendor/macWansung.json"), "r")))
-    macelexdata = tuple(tuple(i) if i is not None 
-        else None for i in json.load(open(os.path.join(parsers.directory, "Vendor/macElex.json"), "r")))
-    rawmac = tuple(tuple(i) if i is not None 
-        else None for i in json.load(open(os.path.join(parsers.directory, "Vendor/macWansung-raw.json"), "r")))
-    rawelex = tuple(tuple(i) if i is not None 
-        else None for i in json.load(open(os.path.join(parsers.directory, "Vendor/macElex-raw.json"), "r")))
+macwansungdata = variationhints.read_untracked_mbfile(
+                 parsers.read_main_plane, "Vendor/KOREAN.TXT", "Vendor---KOREAN_mainplane_ahmap.json", 
+                 "Vendor/macWansung.json", euckrlike=True, mapper=variationhints.ahmap)
+macelexdata =    variationhints.read_untracked_mbfile(
+                 read_elexextras, "Vendor/KOREAN.TXT", "Vendor---KOREAN_elexextras_ahmap.json", 
+                 "Vendor/macElex.json", mapper=variationhints.ahmap)
+rawmac =         variationhints.read_untracked_mbfile(
+                 parsers.read_main_plane, "Vendor/KOREAN.TXT", "Vendor---KOREAN_mainplane.json", 
+                 "Vendor/macWansung-raw.json", euckrlike=True)
+rawelex =        variationhints.read_untracked_mbfile(
+                 read_elexextras, "Vendor/KOREAN.TXT", "Vendor---KOREAN_elexextras.json", 
+                 "Vendor/macElex-raw.json")
+rawmac4 =        variationhints.read_untracked_mbfile(
+                 parsers.read_main_plane, "Vendor/KOREAN.TXT", "Vendor---KOREAN_mainplane_altcomments.json", 
+                 "Vendor/macWansung4.json", euckrlike=True, altcomments=True)
+rawelex4 =       variationhints.read_untracked_mbfile(
+                 read_elexextras, "Vendor/KOREAN.TXT", "Vendor---KOREAN_elexextras_altcomments.json", 
+                 "Vendor/macElex4.json", altcomments=True)
 macwansung = graphdata.gsets["ir149-mac"] = (94, 2, macwansungdata)
 graphdata.gsetflags["ir149-mac"] |= {"UHC:IS_WANSUNG"}
 macelexexras = graphdata.gsets["mac-elex-extras"] = (94, 2, macelexdata)
 macelexexras = graphdata.gsets["mac-elex-extras-unicode3_2"] = (94, 2, rawelex)
+macelexexras = graphdata.gsets["mac-elex-extras-unicode4_0"] = (94, 2, rawelex4)
 
 # KPS 9566
 graphdata.gsets["ir202-2011"] = kps9566_2011 = (94, 2, parsers.read_main_plane("Other/AppendixA_KPS9566-2011-to-Unicode.txt", euckrlike=True))

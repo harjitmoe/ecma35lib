@@ -10,7 +10,7 @@ import os, json, shutil
 import unicodedata as ucd
 from ecma35.data import graphdata
 from ecma35.data.multibyte import mbmapparsers as parsers
-from ecma35.data.multibyte import cellemojidata
+from ecma35.data.multibyte import cellemojidata, variationhints
 
 # Use of Zenkaku vs. Hankaku codepoints differs between the x0213.org mappings for EUC vs. SJIS.
 # If we don't know what SBCS it's being used with, best to just use Zenkaku consistently…
@@ -121,7 +121,7 @@ graphdata.gsets["ir168web"] = jisx0208_html5 = (94, 2,
 # Apple's three versions (KanjiTalk 7, PostScript, KanjiTalk 6)
 if os.path.exists(os.path.join(parsers.directory, "Vendor/JAPANESE.TXT")):
     rawmac = parsers.read_main_plane("Vendor/JAPANESE.TXT", sjis=1)
-    kanjitalk7data = parsers.read_main_plane("Vendor/JAPANESE.TXT", sjis=1, mapper = parsers.ahmap)
+    kanjitalk7data = parsers.read_main_plane("Vendor/JAPANESE.TXT", sjis=1, mapper = variationhints.ahmap)
     try:
         if os.path.exists(os.path.join(parsers.directory, "Vendor/macJIS.json")):
             os.unlink(os.path.join(parsers.directory, "Vendor/macJIS.json"))
@@ -140,7 +140,7 @@ else:
         else None for i in json.load(open(os.path.join(parsers.directory, "Vendor/macJIS.json"), "r")))
 graphdata.gsets["ir168mac"] = jisx0208_applekt7 = (94, 2, kanjitalk7data)
 graphdata.gsets["ir168macps"] = jisx0208_appleps = (94, 2,
-        parsers.read_main_plane("Custom/JAPAN_PS.TXT", sjis=1, plane=1, mapper = parsers.ahmap))
+        parsers.read_main_plane("Custom/JAPAN_PS.TXT", sjis=1, plane=1, mapper = variationhints.ahmap))
 kanjitalk6 = (jisx0208_applekt7[2][:8 * 94] + ((None,) * 188) + # Normal non-Kanji rows
               jisx0208_applekt7[2][84 * 94 : 86 * 94] +         # Vertical forms
               jisx0208_appleps[2][12 * 94 : 13 * 94] +          # NEC Row Thirteen

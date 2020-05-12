@@ -84,8 +84,32 @@ thead:first-of-type th, thead:first-of-type td {
 	font-size: 0.75rem;
 }
 .inverse {
-    color: white;
+    fill: white;
+    stroke: black;
+    stroke-width: 3px;
+}
+.darksquare .inverse, .darkcircle .inverse {
+    stroke: white;
+}
+.codepicture .charwrapper {
+	height: 1.6rem;
+}
+.codepicture .charwrapper .wrappedtext {
+    font-size: 72px;
+}
+.codepicture .charwrapper.darkcircle .wrappedtext {
+    font-size: 48px;
+}
+.codepicture .charwrapper .wrappedtext .redundant {
+	font-size: 0px;
+}
+.darksquare {
     background: black;
+	border-radius: 0.2rem;
+}
+.darkcircle {
+    background: black;
+	border-radius: 0.75rem;
 }
 .undefined {
     background: #999;

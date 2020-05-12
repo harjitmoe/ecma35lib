@@ -19,150 +19,6 @@ if (os.environ.get("ECMA35LIBDECACHE", "") == "1") and os.path.exists(cachedirec
     shutil.rmtree(cachedirectory)
     os.makedirs(cachedirectory)
 
-applesinglehints = {
-    # Some notes: these should be to Unicode characters postdating the mapping data.
-    # For instance, many of the arrows mapped to here are from Unicode 7.0.
-    #
-    # U+2190+F870 etc are heavy white barbed arrows
-    # U+2190+F871 etc are drafting point arrows like U+297B (no full set exists)
-    # U+2190+F872 etc are teardrop-stroked arrows
-    #
-    # Bold barbed arrows (Zapf U+2794):
-    (0x2190, 0xF873): (0x1F870,),
-    (0x2191, 0xF873): (0x1F871,),
-    (0x2192, 0xF873): (0x1F872,),
-    (0x2193, 0xF873): (0x1F873,),
-    #
-    # U+2190+F874 etc are white kite-headed arrows
-    # U+2190+F875 etc are white rounded-stroke arrows
-    # U+2190+F878 etc are bold kite-headed arrows
-    #
-    # Heavy barbed arrows:
-    (0x2190, 0xF879): (0x1F880,),
-    (0x2191, 0xF879): (0x1F881,),
-    (0x2192, 0xF879): (0x1F882,),
-    (0x2193, 0xF879): (0x1F883,),
-    #
-    # U+2190+F87A etc are white barbed arrows
-    # U+2190+F87B etc are light barbed arrows
-    #
-    # Light kite arrows:
-    (0x2190, 0xF87C): (0x1F850,),
-    (0x2191, 0xF87C): (0x1F851,),
-    (0x2192, 0xF87C): (0x1F852,),
-    (0x2193, 0xF87C): (0x1F853,),
-    #
-    # U+2190+F87F etc are black rounded-stroke arrows like U+279C (no full set)
-    # U+21E6+F870 is a bold black arrow with detached kite head and stem widening toward head
-    # U+21E6+F874 is a bold white arrow with triangular head and stem narrowing away from head
-    #
-    # Very heavy arrows:
-    (0x21e6, 0xf875): (0x1F844,),
-    (0x21e7, 0xf875): (0x1F845,),
-    (0x21e8, 0xf875): (0x1F846,),
-    (0x21e9, 0xf875): (0x1F847,),
-    #
-    # U+21E6+F879 is a white very heavy arrow
-    #
-    # Bold triangle-headed arrows (Zapf U+27A1):
-    (0x21e6, 0xf87a): (0x2b05,), # ⬅
-    (0x21e7, 0xf87a): (0x2b06,), # ⬆
-    (0x21e8, 0xf87a): (0x2b95,), # ⮕
-    (0x21e9, 0xf87a): (0x2b07,), # ⬇
-    #
-    # Large-headed triangle arrows (Zapf U+279E):
-    (0x21e6, 0xf87b): (0x1F808,),
-    (0x21e7, 0xf87b): (0x1F809,),
-    (0x21e8, 0xf87b): (0x1F80A,),
-    (0x21e9, 0xf87b): (0x1F80B,),
-    #
-    # U+21E6+F87C is a white very heavy arrow
-    # U+21E6+F87F is a bold triangle-headed arrow with detached head
-    #
-    # Right-angled bendy arrows (minus the five with standard mappings already):
-    (0x21BB, 0xF87B): (0x2B11,), # Left then up
-    (0x2934, 0xF87F): (0x2B0F,), # Right then up
-    (0x2939, 0xF87F): (0x2B10,), # Left then down
-    #
-    # Normal bendy arrows (minus the five with standard mappings already):
-    (0x21B0, 0xF87F): (0x2BAA, 0xF87F), # Up then left
-    (0x21B1, 0xF87F): (0x2BAB, 0xF87F), # Up then right
-    (0x21BB, 0xF87F): (0x2BAC, 0xF87F), # Left then up
-    #
-    # Triangle-headed bendy arrows
-    (0x2936, 0xF87C): (0x2BA8,), # Down then left
-    (0x2937, 0xF87C): (0x2BA9,), # Down then right
-    (0x21B0, 0xF87C): (0x2BAA,), # Up then left
-    (0x21B1, 0xF87C): (0x2BAB,), # Up then right
-    (0x21BB, 0xF87C): (0x2BAC,), # Left then up
-    (0x2934, 0xF87C): (0x2BAD,), # Right then up
-    (0x2939, 0xF87C): (0x2BAE,), # Left then down
-    (0x2935, 0xF87C): (0x2BAF,), # Right then down
-    #
-    # White bendy arrows:
-    (0x2936, 0xF87A): (0x2BB0,), # Down then left
-    (0x2937, 0xF87A): (0x2BB1,), # Down then right
-    (0x21B0, 0xF87A): (0x2BB2,), # Up then left
-    (0x21B1, 0xF87A): (0x2BB3,), # Up then right
-    (0x21BB, 0xF87A): (0x2BB4,), # Left then up 
-    (0x2934, 0xF87A): (0x2BB5,), # Right then up
-    (0x2939, 0xF87A): (0x2BB6,), # Left then down
-    (0x2935, 0xF87A): (0x2BB7,), # Right then down
-    #
-    # White arrows in black circle (Zapf U+27B2):
-    (0x21e6, 0x20DD): (0x2B88,),
-    (0x21e7, 0x20DD): (0x2B89,),
-    (0x21e8, 0x20DD): (0x2B8A,),
-    (0x21e9, 0x20DD): (0x2B8B,),
-    #
-    # Vertical forms not present when mappings written, but later added from GB 18030:
-    (0x2026, 0xf87e): (0xfe19,), # Ellipsis
-    (0x3001, 0xf87e): (0xfe11,), # Comma
-    (0x3002, 0xf87e): (0xfe12,), # Full stop
-    (0xff3b, 0xf87e): (0xfe47,), # Opening hard bracket
-    (0xff3d, 0xf87e): (0xfe48,), # Closing hard bracket
-    #
-    # Keycap numbers 1 through 9:
-    (0x0031, 0x20DE, 0xF87B): (0x0031, 0x20E3),
-    (0x0032, 0x20DE, 0xF87B): (0x0032, 0x20E3),
-    (0x0033, 0x20DE, 0xF87B): (0x0033, 0x20E3),
-    (0x0034, 0x20DE, 0xF87B): (0x0034, 0x20E3),
-    (0x0035, 0x20DE, 0xF87B): (0x0035, 0x20E3),
-    (0x0036, 0x20DE, 0xF87B): (0x0036, 0x20E3),
-    (0x0037, 0x20DE, 0xF87B): (0x0037, 0x20E3),
-    (0x0038, 0x20DE, 0xF87B): (0x0038, 0x20E3),
-    (0x0039, 0x20DE, 0xF87B): (0x0039, 0x20E3),
-    #
-    # Other MacKorean hint sequences which have since gotten unique codepoints:
-    (0x534D, 0xF87F): (0x0FD6,), # Manji as a non-kanji
-    (0x2394, 0xF876): (0x2B21,), # White hexagon
-    # Some direct PUA mappings used by MacKorean but no longer needed
-    (0xF80A,): (0x1F668,), # "Two interwoven eye shapes" (basically a variant quilt square)
-    (0xF80B,): (0x1F66A,), # This one really close (narrow-leaf four-petal florette)
-    (0xF80B, 0xF87F): (0x1F66B,), # Less so, but may as well commit to it
-    (0xF83D,): (0x269C,), # Fleur de lis
-    (0xF83D, 0xF87F): (0x269C, 0xF87F), # Alternate fleur de lis
-    (0xF842,): (0x2B5A,), # Downward wave arrow
-    (0xF844,): (0x2B9C,), # Leftward arrowhead
-    (0xF84A,): (0x1F66C,), # "Arrow with bow" but basically a typographical rocket tbh (leftward)
-    (0xF84B,): (0x1F66E,), # "Arrow with bow" but basically a typographical rocket tbh (rightward)
-    (0xF84C,): (0x2B20,), # White pentagon
-    (0xF84D,): (0x23E2,), # Trapezoid
-}
-# Not sure where to put this observation, but MacKorean's U+25B4+20E4 is basically DPRK's mountain ahead.
-def ahmap(pointer, ucs):
-    if ucs in applesinglehints:
-        return applesinglehints[ucs]
-    elif 0xf860 <= ucs[0] < 0xf870:
-        ucss = "".join(chr(i) for i in ucs)
-        if ucs[0] < 0xF863:
-            # Ordinary composition
-            return tuple(ord(i) for i in gccdata.gcc_sequences.get(ucss[1:], ucss))
-        else:
-            # Extra-ordinary composition
-            return tuple(ord(i) for i in gccdata.gcc_sequences.get(ucss, ucss))
-    return ucs
-
 def _grok_sjis(byts):
     if not isinstance(byts, int):
         pku = byts[0]
@@ -194,7 +50,7 @@ def _grok_sjis(byts):
     return men, ku, ten
 
 def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=False,
-                    skipstring=None, plane=None, mapper=identitymap):
+                    skipstring=None, plane=None, altcomments=False, mapper=identitymap):
     """
     Read a mapping from a file in the directory given by mbmapparsers.directory.
     Only positional argument is the name (including subdirectory) of that file.
@@ -207,6 +63,7 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
       as the format used for ICU's CNS 11643 mappings.)
     - euckrlike: interpret as an EUC format with non-EUC extensions; read only
       the main plane.
+    - altcomments: prefer mappings in "# or" comments over nominal.
     - sjis: interpret (a UTC or ICU format mapping) as Shift_JIS encoded.
     - skipstring: particular substring denoting a line must be skipped.
     - twoway: (if the file is in ICU format) ignore one-way decoder mappings.
@@ -220,6 +77,9 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
         mappername = "_" + mapper.__name__
     else:
         mappername = "_FIXME"
+    #
+    if altcomments:
+        mappername += "_altcomments"
     #
     if skipstring:
         mappername += "_skip" + urllib.parse.quote(skipstring)
@@ -254,7 +114,17 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
                 else:
                     _i = "\t".join(_i.split("\t", 2)[1::2])
             assert "\t" in _i, _i
-            byts, ucs = _i.split("\t", 2)[:2]
+            if altcomments and ("# or for Unicode 4.0," in _i):
+                byts, ucs = _i.split("# or for Unicode 4.0,", 1)
+                byts = byts.split("\t", 1)[0]
+                ucs = ucs.lstrip().split(None, 1)[0].rstrip(",")
+            elif altcomments and ("# or" in _i):
+                byts, ucs = _i.split("# or", 1)
+                byts = byts.split("\t", 1)[0]
+                ucs = ucs.lstrip().split(None, 1)[0].rstrip(",")
+            else:
+                byts, ucs = _i.split("\t", 2)[:2]
+            #
             if sjis:
                 if len(byts) == 6:
                     men, ku, ten = _grok_sjis([int(byts[2:4], 16), int(byts[4:], 16)])

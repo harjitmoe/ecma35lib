@@ -9,6 +9,7 @@
 import os, json, shutil
 from ecma35.data import graphdata
 from ecma35.data.multibyte import mbmapparsers as parsers
+from ecma35.data.multibyte import variationhints
 
 # Layout of GBK (per GB 18030:2005):
 #   GB2312-inherited main EUC plane: [A1-FE][A1-FE], charted between:
@@ -193,7 +194,7 @@ graphdata.gsets["gb7590"] = gb7590 = (94, 2, tuple(resolve.get(i, (tradat.get(i,
 # It also includes the GB 6345.1-1986 letters (seeming to have "ɒ" instead of "ɑ" is an editorial
 #   error in CHINSIMP.TXT; the listed mapping (as opposed to name) is "ɑ").
 if os.path.exists(os.path.join(parsers.directory, "Vendor/CHINSIMP.TXT")):
-    macgbdata = parsers.read_main_plane("Vendor/CHINSIMP.TXT", euckrlike = 1, mapper = parsers.ahmap)
+    macgbdata = parsers.read_main_plane("Vendor/CHINSIMP.TXT", euckrlike = 1, mapper = variationhints.ahmap)
     try:
         if os.path.exists(os.path.join(parsers.directory, "Vendor/macGB2312.json")):
             os.unlink(os.path.join(parsers.directory, "Vendor/macGB2312.json"))

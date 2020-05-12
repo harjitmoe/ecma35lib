@@ -385,39 +385,50 @@ def dump_plane(outfile, planefunc, kutenfunc,
                 strep = strep.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
                 if ucd.category(strep[0])[0] == "M":
                     strep = "◌" + strep
-                if i[-1] == 0xF87B: # Apple encoding hint for usually medium bold form
+                if strep[-1] == "\uF87B": # Apple encoding hint for usually medium bold form
                     print("<b>", file=outfile)
                     print(strep.rstrip("\uF87B"), file=outfile)
                     print("</b>", file=outfile)
-                elif i[-1] == 0xF87C: # Apple encoding hint for usually bold form
+                elif strep[-1] == "\uF87C": # Apple encoding hint for usually bold form
                     print("<b>", file=outfile)
                     print(strep.rstrip("\uF87C"), file=outfile)
                     print("</b>", file=outfile)
-                elif i[-1] == 0xF87E: # Apple encoding hint for vertical presentation form
+                elif strep[-1] == "\uF87E": # Apple encoding hint for vertical presentation form
                     print("<span class=vertical>", file=outfile)
                     print(strep.rstrip("\uF87E"), file=outfile)
                     print("</span>", file=outfile)
-                elif (i[-1] == 0xF87A) or sequence_inverse: # Apple encoding hint for inverse form
-                    print("<span class=inverse>", file=outfile)
-                    print(strep.replace("\uF87A", ""), file=outfile)
-                    print("</span>", file=outfile)
-                elif (i[-1] == 0xF875): # Apple encoding hint for alternative inverse form
-                    print("<span class=inverse>", file=outfile)
-                    print(strep.replace("\uF875", ""), file=outfile)
-                    print("</span>", file=outfile)
-                elif (i[-1] == 0xF876): # Apple encoding hint for rotated form
+                elif (strep[-1] in "\uF87A\uF875") or sequence_inverse: # Inverse form
+                    strep2 = strep.replace("\uF87A", "").replace("\uF875", "")
+                    if strep2[-1] == "\u20DD":
+                        print("<svg viewBox='0 0 72 72' class='charwrapper darkcircle'>", file=outfile)
+                        print("<text y='54px' x='36px' text-anchor='middle' class='wrappedtext inverse'>", file=outfile)
+                        print(strep2[:-1], end="", file=outfile)
+                        print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
+                        print("</text></svg>", file=outfile)
+                    elif strep2[-1] == "\u20DE":
+                        print("<svg viewBox='0 0 72 88' class='charwrapper darksquare'>", file=outfile)
+                        print("<text y='72px' x='36px' text-anchor='middle' class='wrappedtext inverse'>", file=outfile)
+                        print(strep2[:-1], end="", file=outfile)
+                        print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
+                        print("</text></svg>", file=outfile)
+                    else:
+                        print("<svg viewBox='0 0 {:d} 88' class='charwrapper'>".format(74 * len(i[1:])), file=outfile)
+                        print("<text y='72px' class='wrappedtext inverse'>", file=outfile)
+                        print(strep2, file=outfile)
+                        print("</text></svg>", file=outfile)
+                elif strep[-1] == "\uF876": # Apple encoding hint for rotated form
                     print("<span class=rotated>", file=outfile)
                     print(strep.replace("\uF876", ""), file=outfile)
                     print("</span>", file=outfile)
-                elif (i[-1] == 0xF877): # Apple encoding hint for superscript form
+                elif strep[-1] == "\uF877": # Apple encoding hint for superscript form
                     print("<sup>", file=outfile)
                     print(strep.replace("\uF877", ""), file=outfile)
                     print("</sup>", file=outfile)
-                elif (i[-1] == 0xF878): # Apple encoding hint for small form
+                elif strep[-1] == "\uF878": # Apple encoding hint for small form
                     print("<small>", file=outfile)
                     print(strep.rstrip("\uF878"), file=outfile)
                     print("</small>", file=outfile)
-                elif (i[-1] == 0xF879): # Apple encoding hint for large form
+                elif strep[-1] == "\uF879": # Apple encoding hint for large form
                     print("<span class=bigform>", file=outfile)
                     print(strep.rstrip("\uF879"), file=outfile)
                     print("</span>", file=outfile)

@@ -255,7 +255,9 @@ g94nbytes = {tuple(b"@"): ("ir042nec", ("ir042ibm", "ir042nec"), ("ir042",)),
              # GB 7589/13131 and GB 7590/13132. Insofar as I can support them.
              tuple(b"!8"): ("gb13131", ("gb7589",), ("gb13131",)),
              tuple(b"!9"): ("gb13132", ("gb7590",), ("gb13132",)),
-             tuple(b"!:"): ("mac-elex-extras", ("mac-elex-extras",), ("mac-elex-extras-unicode3_2",)),
+             tuple(b"!:"): ("mac-elex-extras", 
+                            ("mac-elex-extras", "mac-elex-extras-unicode4_0"),
+                            ("mac-elex-extras-unicode3_2",)),
              tuple(b"!;"): "2011kpsextras",
              tuple(b"~"): "nil"}
 

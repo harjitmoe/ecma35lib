@@ -1,6 +1,3 @@
 __pycache__
 attic
-ecma35/data/multibyte/mbmaps/Vendor/CHINSIMP.TXT
-ecma35/data/multibyte/mbmaps/Vendor/CHINTRAD.TXT
-ecma35/data/multibyte/mbmaps/Vendor/JAPANESE.TXT
-ecma35/data/multibyte/mbmaps/Vendor/KOREAN.TXT
+ecma35/data/multibyte/mbmaps/Vendor/*.TXT

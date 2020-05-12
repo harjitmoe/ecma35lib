@@ -9,6 +9,7 @@
 import os, ast, sys, json, pprint, shutil
 from ecma35.data import graphdata
 from ecma35.data.multibyte import mbmapparsers as parsers
+from ecma35.data.multibyte import variationhints
 
 # CNS 11643 and Big 5 (not gb12345; see guobiao.py for that one).
 # Bumpy ride here, so brace yourselves.
@@ -379,28 +380,22 @@ big5_to_cns2_ibmvar[0xC94A] = (13, 4, 40)
 big5_to_cns2_ibmvar[0xDDFC] = (13, 4, 42)
 
 # Now that big5_to_cns2 is defined, we can do this:
-graphdata.gsets["ir171-ms"] = (94, 2, read_big5_planes("Vendor/CP950.TXT", big5_to_cns2, plane=1))
+mscnsdata = variationhints.read_untracked_mbfile(read_big5_planes,
+            "Vendor/CP950.TXT", "Vendor---CP950_mainplane.json", "Vendor/msCNS.json", 
+            big5_to_cns_g2 = big5_to_cns2_ibmvar)
+graphdata.gsets["ir171-ms"] = (94, 2, mscnsdata[:94*94])
 graphdata.gsets["ir171-utcbig5"] = (94, 2, read_big5_planes("UTC/BIG5.TXT", big5_to_cns2, plane=1))
 graphdata.gsets["ir171-utc"] = (94, 2, parsers.read_main_plane("UTC/CNS11643.TXT", plane=1))
-graphdata.gsets["ir172-ms"] = (94, 2, read_big5_planes("Vendor/CP950.TXT", big5_to_cns2, plane=2))
+graphdata.gsets["ir172-ms"] = (94, 2, mscnsdata[94*94:94*94*2])
 graphdata.gsets["ir172-utcbig5"] = (94, 2, read_big5_planes("UTC/BIG5.TXT", big5_to_cns2, plane=2))
 graphdata.gsets["ir172-utc"] = (94, 2, parsers.read_main_plane("UTC/CNS11643.TXT", plane=2))
 
 # Macintosh-compatibility variants
-if os.path.exists(os.path.join(parsers.directory, "Vendor/CHINTRAD.TXT")):
-    maccnsdata = read_big5_planes("Vendor/CHINTRAD.TXT", big5_to_cns2_ibmvar, mapper = parsers.ahmap)
-    try:
-        if os.path.exists(os.path.join(parsers.directory, "Vendor/macCNS.json")):
-            os.unlink(os.path.join(parsers.directory, "Vendor/macCNS.json"))
-        shutil.copy(os.path.join(parsers.cachedirectory, "Vendor---CHINTRAD_mainplane_ahmap.json"),
-                    os.path.join(parsers.directory, "Vendor/macCNS.json"))
-    except EnvironmentError:
-        pass
-else:
-    maccnsdata = tuple(tuple(i) if i is not None 
-        else None for i in json.load(open(os.path.join(parsers.directory, "Vendor/macCNS.json"), "r")))
+maccnsdata = variationhints.read_untracked_mbfile(read_big5_planes,
+             "Vendor/CHINTRAD.TXT", "Vendor---CHINTRAD_mainplane_ahmap.json", "Vendor/macCNS.json", 
+             big5_to_cns_g2 = big5_to_cns2_ibmvar, mapper = variationhints.ahmap)
 graphdata.gsets["ir171-mac"] = (94, 2, maccnsdata[:94*94])
-graphdata.gsets["ir172-mac"] = (94, 2, maccnsdata[94*94:])
+graphdata.gsets["ir172-mac"] = (94, 2, maccnsdata[94*94:94*94*2])
 
 # The most basic subset of EUC-TW supported is basically a transformation format of
 #   Big5. Anything more isn't really supported/used nearly as much. So using Big5
