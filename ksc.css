@@ -77,12 +77,69 @@ thead:first-of-type th, thead:first-of-type td {
     display: inline-block;
     width: 1em;
 }
+
+.taegeuk {
+	/*
+     * The MacKorean mappings' variation hint sequences for the taeguek assume that the Unicode character is
+     * rendered as in its code charts (yang above yin, like MacKorean 0xA693) as opposed to being rendered
+     * with yin to the left of yang (Source Han; MacKorean 0xA698), or yang to left of yin (BabelStone Han).
+     * Although the Unicode character effectively unifies all orientations, the following fonts use the first:
+     */
+    font-family: "DejaVu Sans", "Segoe UI Symbol", "Linux Libertine", "Linux Libertine G", "Arial Unicode MS";
+    display: inline-block;
+    width: 1.5rem;
+	line-height: 1.5rem;
+	text-align: center;
+}
+.taegeuk.taegeuk90 {
+    transform: rotate(90deg);
+}
+.taegeuk.taegeuk180 {
+    transform: rotate(180deg);
+}
+
 .bigform {
     font-size: larger;
 }
 .codepicture sup {
     font-size: 0.75rem;
 }
+
+.undefined {
+    background: #999;
+}
+.collision {
+    background: #f99;
+}
+
+ul.navbar {
+    margin: 0;
+    padding: 0;
+}
+ul.navbar li {
+    display: inline;
+}
+ul.navbar li:first-child::before {
+    content: "| ";
+}
+ul.navbar li::after {
+    content: " |";
+}
+.navlabel {
+    font-weight: bold;
+}
+
+.annotation {
+    background: beige;
+}
+.annotation p {
+    margin: 0.3em 0 0.3em 0;
+    max-width: 98vw;
+}
+.annotation code {
+    border: 0.1rem solid silver;
+}
+
 .inverse {
     fill: white;
     stroke: black;
@@ -133,38 +190,4 @@ b .lightsquare {
 .lightcircle {
     border: 0.1rem solid black;
     border-radius: 0.75rem;
-}
-.undefined {
-    background: #999;
-}
-.collision {
-    background: #f99;
-}
-
-ul.navbar {
-    margin: 0;
-    padding: 0;
-}
-ul.navbar li {
-    display: inline;
-}
-ul.navbar li:first-child::before {
-    content: "| ";
-}
-ul.navbar li::after {
-    content: " |";
-}
-.navlabel {
-    font-weight: bold;
-}
-
-.annotation {
-    background: beige;
-}
-.annotation p {
-    margin: 0.3em 0 0.3em 0;
-    max-width: 98vw;
-}
-.annotation code {
-    border: 0.1rem solid silver;
 }

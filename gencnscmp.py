@@ -21,15 +21,12 @@ inverse[(1, 2, 56)] = 0xA1F7
 def swap_arrows(t):
     return t[:148] + (t[149], t[148]) + t[150:]
 
-macbig5 = tuple(tuple(i) if i is not None else None for i in 
-                json.load(open(os.path.join(parsers.directory, "Vendor/macBig5.json"), "r")))
-
 plane1 = (1, ("UTC Big5", "UTC CNS", "MS Big5", "Mac Big5", "Yasuoka CNS",
               "ICU CNS 1992", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
-          swap_arrows(traditional.read_big5_planes("UTC/BIG5.TXT", plane=1)),
+          swap_arrows(traditional.read_big5_planes("UTC/BIG5.TXT", big5_to_cns_g2=traditional.big5_to_cns2, plane=1)),
           parsers.read_main_plane("UTC/CNS11643.TXT", plane=1),
-          swap_arrows(traditional.read_big5_planes("Vendor/CP950.TXT", plane=1)),
-          swap_arrows(macbig5[:94*94]),
+          swap_arrows(graphdata.gsets["ir171-ms"][2]),
+          swap_arrows(graphdata.gsets["ir171-mac"][2]),
           parsers.read_main_plane("Other/Uni2CNS", plane=1),
           parsers.read_main_plane("ICU/cns-11643-1992.ucm", plane=1),
           parsers.read_main_plane("ICU/euc-tw-2014.ucm", plane=1),
@@ -43,10 +40,10 @@ plane1 = (1, ("UTC Big5", "UTC CNS", "MS Big5", "Mac Big5", "Yasuoka CNS",
 
 plane2 = (2, ("UTC Big5", "UTC CNS", "MS Big5", "Mac Big5", "Yasuoka CNS",
               "ICU CNS 1992", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
-          traditional.read_big5_planes("UTC/BIG5.TXT", plane=2),
+          traditional.read_big5_planes("UTC/BIG5.TXT", big5_to_cns_g2=traditional.big5_to_cns2, plane=2),
           parsers.read_main_plane("UTC/CNS11643.TXT", plane=2),
-          traditional.read_big5_planes("Vendor/CP950.TXT", plane=2),
-          macbig5[94*94:],
+          graphdata.gsets["ir172-ms"][2],
+          graphdata.gsets["ir172-mac"][2],
           parsers.read_main_plane("Other/Uni2CNS", plane=2),
           parsers.read_main_plane("ICU/cns-11643-1992.ucm", plane=2),
           parsers.read_main_plane("ICU/euc-tw-2014.ucm", plane=2),

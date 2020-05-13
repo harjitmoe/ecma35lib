@@ -347,7 +347,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
                 pointer = ((number - 1) * (94 * 94)) + ((row - 1) * 94) + (cell - 1)
                 cdisplayi = cdispmap.get((pointer, i), i)
                 #
-                print("<td>", file=outfile)
+                print("<td>", end="", file=outfile)
                 if (i != cdisplayi) and isinstance(cdisplayi, tuple) and (
                             cdisplayi[-1] not in list(range(0xF870, 0xF880))) and not (
                             0xE000 <= cdisplayi[0] < 0xF900):

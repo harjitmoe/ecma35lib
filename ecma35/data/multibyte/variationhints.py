@@ -39,6 +39,8 @@ applesinglehints = {
     (0x2193, 0xF874): (0x1F87B, 0xF87A),
     #
     # U+2190+F875 etc are white rounded-stroke arrows
+    # This is a hints-to-hints without any newer codepoints, purely for convenience.
+    (0x2192, 0xF875): (0x279C, 0xF87A),
     #
     # Bold kite-headed arrows:
     (0x2190, 0xF878): (0x1F878, 0xF87F),
@@ -68,7 +70,10 @@ applesinglehints = {
     #
     # U+2190+F87F etc are black rounded-stroke arrows like U+279C (no full set)
     # U+21E6+F870 is a bold black arrow with detached kite head and stem widening toward head
-    # U+21E6+F874 is a bold white arrow with triangular head and stem narrowing away from head
+    #
+    # Bold white arrow with almost triangular head and stem "pointing into" the page:
+    (0x21e6, 0xf874): (0x1F8A6,),
+    (0x21e8, 0xf874): (0x1F8A7,),
     #
     # Very heavy arrows:
     (0x21e6, 0xf875): (0x1F844,),
@@ -97,13 +102,27 @@ applesinglehints = {
     (0x21e8, 0xf87b): (0x1F80A,),
     (0x21e9, 0xf87b): (0x1F80B,),
     #
-    # U+21E6+F87C is a white large-headed triangle arrow
+    # White large-headed triangle arrow:
     (0x21e6, 0xf87C): (0x1F808, 0xF87A),
     (0x21e7, 0xf87C): (0x1F809, 0xF87A),
     (0x21e8, 0xf87C): (0x1F80A, 0xF87A),
     (0x21e9, 0xf87C): (0x1F80B, 0xF87A),
     #
-    # U+21E6+F87F is a bold triangle-headed arrow with detached head
+    # Bold triangle-headed arrow with detached head:
+    (0x21e6, 0xf87F): (0x2BC7, 0x1F89C),
+    (0x21e8, 0xf87F): (0x1F89C, 0x2BC8),
+    #
+    # White arrows in black circle (Zapf U+27B2):
+    (0x21e6, 0x20DD): (0x2B88,),
+    (0x21e7, 0x20DD): (0x2B89,),
+    (0x21e8, 0x20DD): (0x2B8A,),
+    (0x21e9, 0x20DD): (0x2B8B,),
+    #
+    # White arrows in black square (_de facto_ used in emoji variation for these codepoints):
+    (0x21e6, 0x20DE): (0x2b05, 0xFE0F),
+    (0x21e7, 0x20DE): (0x2b06, 0xFE0F),
+    (0x21e8, 0x20DE): (0x27a1, 0xFE0F),
+    (0x21e9, 0x20DE): (0x2b07, 0xFE0F),
     #
     # Right-angled bendy arrows (minus the five with standard mappings already):
     (0x21BB, 0xF87B): (0x2B11,), # Left then up
@@ -135,12 +154,6 @@ applesinglehints = {
     (0x2939, 0xF87A): (0x2BB6,), # Left then down
     (0x2935, 0xF87A): (0x2BB7,), # Right then down
     #
-    # White arrows in black circle (Zapf U+27B2):
-    (0x21e6, 0x20DD): (0x2B88,),
-    (0x21e7, 0x20DD): (0x2B89,),
-    (0x21e8, 0x20DD): (0x2B8A,),
-    (0x21e9, 0x20DD): (0x2B8B,),
-    #
     # Vertical forms not present when mappings written, but later added from GB 18030:
     (0x2026, 0xf87e): (0xfe19,), # Ellipsis
     (0x3001, 0xf87e): (0xfe11,), # Comma
@@ -159,19 +172,26 @@ applesinglehints = {
     (0x0038, 0x20DE, 0xF87B): (0x0038, 0x20E3),
     (0x0039, 0x20DE, 0xF87B): (0x0039, 0x20E3),
     #
+    # Typographical rockets (mapped direct to PUA by Apple):
+    (0xF848,): (0x1F66C, 0xF87A), # White leftward heavy rocket
+    (0xF849,): (0x1F66E, 0xF87A), # White rightward heavy rocket
+    (0xF84A,): (0x1F66C,), # Leftward lozenge-tipped rocket
+    (0xF84B,): (0x1F66E,), # Rightward lozenge-tipped rocket
+    #
+    # ==== NON-ARROWS: ====
+    #
     # Other MacKorean hint sequences which have since gotten unique codepoints:
     (0x534D, 0xF87F): (0x0FD6,), # Manji as a non-kanji
     (0x2394, 0xF876): (0x2B21,), # White hexagon
+    #
     # Some direct PUA mappings used by MacKorean but no longer needed
     (0xF80A,): (0x1F668,), # "Two interwoven eye shapes" (basically a variant quilt square)
     (0xF80B,): (0x1F66A,), # This one really close (narrow-leaf four-petal florette)
     (0xF80B, 0xF87F): (0x1F66B,), # Less so, but may as well commit to it
     (0xF83D,): (0x269C,), # Fleur de lis
     (0xF83D, 0xF87F): (0x269C, 0xF87F), # Alternate fleur de lis
-    (0xF842,): (0x2B5A,), # Downward wave arrow
+    (0xF842,): (0x2B5A,), # Downward wave arrow (not exactly, but better than PUA)
     (0xF844,): (0x2B9C,), # Leftward arrowhead
-    (0xF84A,): (0x1F66C,), # "Arrow with bow" but basically a typographical rocket tbh (leftward)
-    (0xF84B,): (0x1F66E,), # "Arrow with bow" but basically a typographical rocket tbh (rightward)
     (0xF84C,): (0x2B20,), # White pentagon
     (0xF84D,): (0x23E2,), # Trapezoid
 }
@@ -220,7 +240,7 @@ def print_hints_to_html5(i, outfile, *, lang="ja"):
     else:
         strep = "".join(chr(j) for j in i)
         firststrep = ucd.normalize("NFD", strep)[0] # Note: NOT NFKD.
-        if ord(firststrep) < 0x7F:
+        if (ord(firststrep) < 0x7F) and (strep[1:2] != "\u20E3"): # Don't include keycaps.
             print("<span class='codepicture roman'>", file=outfile)
         elif (ucd.category(firststrep)[0] == "M") and (ord(firststrep) < 0x3000):
             print("<span class='codepicture roman'>", file=outfile)
@@ -264,40 +284,47 @@ def print_hints_to_html5(i, outfile, *, lang="ja"):
             print(strep2[:-1], end="", file=outfile)
             print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
             print("</text></svg>", file=outfile)
-        elif strep2[-1] == "\u20DE":
+        elif strep2[-1] in "\u20DE\u20E3": # The regular inverse rules don't work on keycaps either.
             print("<svg viewBox='0 0 88 88' class='charwrapper darksquare'>", file=outfile)
             print("<text y='72px' x='44px' text-anchor='middle' class='wrappedtext inverse'>", file=outfile)
             print(strep2[:-1], end="", file=outfile)
             print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
             print("</text></svg>", file=outfile)
         elif (strep2[0] == "[") and (strep2[-1] == "]"):
-            hsf = 1 if (ucd.east_asian_width(strep[1]) not in ("W", "F")) else 1.618
-            print("<svg viewBox='0 0 {:d} 88' class='charwrapper darksquare'>".format(
-                  int(hsf * 48 * len(strep2[1:-1]))), file=outfile)
+            hsf = 0
+            for strepc in strep2[1:-1]:
+                if ucd.east_asian_width(strepc) not in ("W", "F"):
+                    hsf += 1
+                else:
+                    hsf += 1.618
+            sizeclass = " half" if hsf > 7.5 else ""
+            print("<svg viewBox='0 0 {1:d} 88' class='charwrapper darksquare{0}'>".format(sizeclass,
+                  int(hsf * 48 + 0.5)), file=outfile)
             print("<text y='72px' x='{:d}px' text-anchor='middle' class='wrappedtext inverse'>".format(
-                  int(hsf * 24 * len(strep2[1:-1]))), file=outfile)
+                  int(hsf * 24 + 0.5)), file=outfile)
             print("<tspan class='redundant'>{}</tspan>".format(strep2[0]), end="", file=outfile)
             print(strep2[1:-1], end="", file=outfile)
             print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
             print("</text></svg>", file=outfile)
-        elif (strep2[0] == "(") and (strep2[-1] == ")"):
-            print("<svg viewBox='0 0 {:d} 72' class='charwrapper circle darkcircle'>".format(
-                  36 * len(strep2[1:-1])), file=outfile)
-            print("<text y='54px' x='{:d}px' text-anchor='middle' class='wrappedtext inverse'>".format(
-                  18 * len(strep2[1:-1])), file=outfile)
-            print("<tspan class='redundant'>{}</tspan>".format(strep2[0]), end="", file=outfile)
-            print(strep2[1:-1], end="", file=outfile)
-            print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
-            print("</text></svg>", file=outfile)
+        elif strep2 == "\u262F":
+            print("<span class='taegeuk taegeuk180'>", file=outfile)
+            print(strep2, file=outfile)
+            print("</span>", file=outfile)
         else:
             print("<svg viewBox='0 0 {:d} 88' class='charwrapper'>".format(74 * len(i[1:])), file=outfile)
             print("<text y='72px' class='wrappedtext inverse'>", file=outfile)
             print(strep2, file=outfile)
             print("</text></svg>", file=outfile)
     elif strep[-1] == "\uF876": # Apple encoding hint for rotated form
-        print("<span class=rotated>", file=outfile)
-        print(strep.replace("\uF876", ""), file=outfile)
-        print("</span>", file=outfile)
+        strep2 = strep.replace("\uF876", "")
+        if strep2 == "\u262F":
+            print("<span class='taegeuk taegeuk90'>", file=outfile)
+            print(strep2, file=outfile)
+            print("</span>", file=outfile)
+        else:
+            print("<span class=rotated>", file=outfile)
+            print(strep2, file=outfile)
+            print("</span>", file=outfile)
     elif strep[-1] == "\uF877": # Apple encoding hint for superscript form
         print("<sup>", file=outfile)
         print(strep.replace("\uF877", ""), file=outfile)
@@ -328,25 +355,25 @@ def print_hints_to_html5(i, outfile, *, lang="ja"):
             print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
             print("</text></svg>", file=outfile)
         elif (strep2[0] == "[") and (strep2[-1] == "]"):
-            hsf = 1 if (ucd.east_asian_width(strep[1]) not in ("W", "F")) else 1.618
-            print("<svg viewBox='0 0 {:d} 88' class='charwrapper lightsquare'>".format(
-                  int(hsf * 48 * len(strep2[1:-1]))), file=outfile)
+            hsf = 0
+            for strepc in strep2[1:-1]:
+                if ucd.east_asian_width(strepc) not in ("W", "F"):
+                    hsf += 1
+                else:
+                    hsf += 1.618
+            sizeclass = " half" if hsf > 7.5 else ""
+            print("<svg viewBox='0 0 {1:d} 88' class='charwrapper lightsquare{0}'>".format(sizeclass,
+                  int(hsf * 48 + 0.5)), file=outfile)
             print("<text y='72px' x='{:d}px' text-anchor='middle' class='wrappedtext'>".format(
-                  int(hsf * 24 * len(strep2[1:-1]))), file=outfile)
+                  int(hsf * 24 + 0.5)), file=outfile)
             print("<tspan class='redundant'>{}</tspan>".format(strep2[0]), end="", file=outfile)
             print(strep2[1:-1], end="", file=outfile)
             print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
             print("</text></svg>", file=outfile)
-        elif (strep2[0] == "(") and (strep2[-1] == ")") and (
-                strep2 not in ["({:d})".format(i) for i in range(1, 31)]):
-            print("<svg viewBox='0 0 {:d} 72' class='charwrapper circle lightcircle'>".format(
-                  36 * len(strep2[1:-1])), file=outfile)
-            print("<text y='58px' x='{:d}px' text-anchor='middle' class='wrappedtext'>".format(
-                  18 * len(strep2[1:-1])), file=outfile)
-            print("<tspan class='redundant'>{}</tspan>".format(strep2[0]), end="", file=outfile)
-            print(strep2[1:-1], end="", file=outfile)
-            print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
-            print("</text></svg>", file=outfile)
+        elif strep2 == "\u262F":
+            print("<span class=taegeuk>", file=outfile)
+            print(strep2, file=outfile)
+            print("</span>", file=outfile)
         else:
             print(strep2, file=outfile)
     print("</span>", file=outfile)
