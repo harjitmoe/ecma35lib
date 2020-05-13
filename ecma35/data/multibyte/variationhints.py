@@ -109,8 +109,8 @@ applesinglehints = {
     (0x21e9, 0xf87C): (0x1F80B, 0xF87A),
     #
     # Bold triangle-headed arrow with detached head:
-    (0x21e6, 0xf87F): (0x2BC7, 0x1F89C),
-    (0x21e8, 0xf87F): (0x1F89C, 0x2BC8),
+    (0x21e6, 0xf87F): (0x1F780, 0x1F89C),
+    (0x21e8, 0xf87F): (0x1F89C, 0x1F782),
     #
     # White arrows in black circle (Zapf U+27B2):
     (0x21e6, 0x20DD): (0x2B88,),
@@ -180,9 +180,22 @@ applesinglehints = {
     #
     # ==== NON-ARROWS: ====
     #
-    # Other MacKorean hint sequences which have since gotten unique codepoints:
-    (0x534D, 0xF87F): (0x0FD6,), # Manji as a non-kanji
-    (0x2394, 0xF876): (0x2B21,), # White hexagon
+    # Kludgy unrenderable combining sequences with properly defined alternatives:
+    (0x25B3, 0x20DD): (0x1F7D5,), # White triangle in white circle
+    (0x25C7, 0x20DF): (0x1F79C,), # Two-ringed diamond target
+    (0x25C7, 0x20DF, 0x20DF): (0x1F79C, 0xF87F), # Three-ringed diamond target
+    (0x25C9, 0x20DD): (0x1F78B,), # Circular target (black bullseye)
+    (0x25CE, 0x20DD): (0x1F78B, 0xF87F), # Circular target (white bullseye)
+    (0x29C8, 0x20DE): (0x1F796,), # Square target
+    #
+    # MacKorean hint sequences which have since gotten unique representations:
+    (0x2394, 0xF876): (0x2B21,),  # White hexagon
+    (0x25C8, 0xF87F): (0x1F7A0,), # Outlined black lozenge
+    (0x25EF, 0xF87C): (0x1F785,), # Medium-bold white circle
+    (0x2610, 0xF87C): (0x1F78F,), # Medium-bold white square
+    (0x2610, 0xF87F): (0x2B1A,),  # Dotted square
+    (0x534D, 0xF87F): (0x0FD6,),  # Manji as a non-kanji
+    (0xFF0A, 0xF87F): (0x3000, 0x20F0), # High asterisk
     #
     # Some direct PUA mappings used by MacKorean but no longer needed
     (0xF80A,): (0x1F668,), # "Two interwoven eye shapes" (basically a variant quilt square)
