@@ -378,6 +378,46 @@ def dump_plane(outfile, planefunc, kutenfunc,
     if menuurl or lasturl or nexturl:
         _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname)
 
+def dump_preview(outfile, planename, number, array, *, lang="zh-TW", planeshift="",
+               css=None, part=None, menuurl=None, menuname="Up to menu",
+               lasturl=None, nexturl=None, lastname=None, nextname=None):
+    h = ", part {:d}".format(part) if part else ""
+    print("<!DOCTYPE html><title>{}{}</title>".format(planename, h), file=outfile)
+    if css:
+        print("<link rel='stylesheet' href='{}'>".format(css), file=outfile)
+    print("<h1>{}{}</h1>".format(planename, h), file=outfile)
+    if menuurl or lasturl or nexturl:
+        _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname)
+    print("<table class=chart><thead><tr><th></th>", file=outfile)
+    for row in range(max((part - 1) * 16, 1), min(part * 16, 95)) if part else range(1, 95):
+        print("".join("<th>_{:1X}</th>".format(i) for i in range(0x10)), file=outfile)
+        print("</tr></thead><tbody><tr>", file=outfile)
+        print("<th>0x{}{:03X}_</th>".format(planeshift, ((0xA0 + row) << 4) | 0xA), file=outfile)
+        print("<td class=undefined></th>", file=outfile)
+        for cell in range(1, 95):
+            if not (cell % 16):
+                print("</tr><tr>", file=outfile)
+                print("<th>0x{}{:03X}_</th>".format(planeshift, ((0xA0 + row) << 4) | 
+                                                    ((0xA0 + cell) >> 4)), file=outfile)
+            i = array[((row - 1) * 94) + (cell - 1)]
+            if i is None:
+                print("<td class=undefined></td>", file=outfile)
+                continue
+            pointer = ((number - 1) * (94 * 94)) + ((row - 1) * 94) + (cell - 1)
+            #
+            print("<td>", end="", file=outfile)
+            variationhints.print_hints_to_html5(i, outfile, lang=lang)
+            print("<br><span class=codepoint>", file=outfile)
+            print("U+" + "<wbr>+".join(_codepfmt(j, len(i)) for j in i), file=outfile)
+            if len(i) == 1:
+                _classify(i, outfile)
+            print("</span></td>", file=outfile)
+        print("<td class=undefined></td></tr>", file=outfile)
+        print("</tr></tbody><thead><tr><th></th>", file=outfile)
+    print("</table>", file=outfile)
+    if menuurl or lasturl or nexturl:
+        _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname)
+
 
 
 

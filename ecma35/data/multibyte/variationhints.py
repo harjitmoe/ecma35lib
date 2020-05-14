@@ -81,7 +81,7 @@ applesinglehints = {
     (0x21e8, 0xf875): (0x1F846,),
     (0x21e9, 0xf875): (0x1F847,),
     #
-    # U+21E6+F879 is a white very heavy arrow
+    # White very heavy arrows:
     (0x21e6, 0xf879): (0x1F844, 0xF87A),
     (0x21e7, 0xf879): (0x1F845, 0xF87A),
     (0x21e8, 0xf879): (0x1F846, 0xF87A),
@@ -178,6 +178,10 @@ applesinglehints = {
     (0xF84A,): (0x1F66C,), # Leftward lozenge-tipped rocket
     (0xF84B,): (0x1F66E,), # Rightward lozenge-tipped rocket
     #
+    # Broadcast (ripple) arrows (not exactly speakers but close enough darnit)
+    (0xF846,): (0x1F56A, 0xF87F), # Pointing and broadcasting to left
+    (0xF847,): (0x1F50A, 0xF87F), # Pointing and broadcasting to right
+    #
     # ==== NON-ARROWS: ====
     #
     # Kludgy unrenderable combining sequences with properly defined alternatives:
@@ -196,6 +200,11 @@ applesinglehints = {
     (0x2610, 0xF87F): (0x2B1A,),  # Dotted square
     (0x534D, 0xF87F): (0x0FD6,),  # Manji as a non-kanji
     (0xFF0A, 0xF87F): (0x3000, 0x20F0), # High asterisk
+    (0x2206, 0xF87F): (0x1D71F,), # Medium-bold oblique capital delta
+    #
+    # Special cases
+    # Record mark; combining sequence does not render; 0x29E7 already in v3.2.
+    (0x3D, 0x20D2): (0x29E7,), 
     #
     # Some direct PUA mappings used by MacKorean but no longer needed
     (0xF80A,): (0x1F668,), # "Two interwoven eye shapes" (basically a variant quilt square)
@@ -229,7 +238,7 @@ def ahmap(pointer, ucs):
     return ucs
 
 def print_hints_to_html5(i, outfile, *, lang="ja"):
-    sequence_inverse = False
+    sequence_inverse = sequence_big = False
     if i[0] >= 0xF0000:
         print("<span class='codepicture spua' lang={}>".format(lang), file=outfile)
         strep = "".join(chr(j) for j in i)
@@ -241,6 +250,10 @@ def print_hints_to_html5(i, outfile, *, lang="ja"):
         sequence_inverse = True
         print("<span class='codepicture' lang={}>".format(lang), file=outfile)
         strep = "".join(chr(j) for j in i[1:]).replace("\uF865", "").replace("\uF866", "")
+    elif (i[0] == 0xF867) and len(i) != 1:
+        sequence_big = True
+        print("<span class='codepicture' lang={}>".format(lang), file=outfile)
+        strep = "".join(chr(j) for j in i[1:]).replace("\uF867", "")
     elif 0xE000 <= i[0] < 0xF900:
         print("<span class='codepicture pua' lang={}>".format(lang), file=outfile)
         # Object Replacement Character (FFFD is already used by BIG5.TXT)
@@ -346,14 +359,12 @@ def print_hints_to_html5(i, outfile, *, lang="ja"):
         print("<small>", file=outfile)
         print(strep.rstrip("\uF878"), file=outfile)
         print("</small>", file=outfile)
-    elif strep[-1] == "\uF879": # Apple encoding hint for large form
+    elif (strep[-1] == "\uF879") or sequence_big: # Apple encoding hint for large form
         print("<span class=bigform>", file=outfile)
         print(strep.rstrip("\uF879"), file=outfile)
         print("</span>", file=outfile)
     else:
-        # Horizontal presentation form, alternative form.
-        # Neither of which we can really do anything with here.〾
-        strep2 = strep.rstrip("\uF87D\uF87F")
+        strep2 = strep.rstrip("\uF870\uF871\uF872\uF873\uF874\uF87D\uF87F")
         # Boxed / circled non-negative forms
         if strep2[-1] == "\u20DD":
             print("<svg viewBox='0 0 72 72' class='charwrapper circle lightcircle'>", file=outfile)

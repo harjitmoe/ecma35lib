@@ -15,6 +15,10 @@ th, td {
     min-width: 6rem;
     width: 7rem;
 }
+table.chart th, table.chart td {
+    min-width: 3rem;
+    width: 4rem;
+}
 td {
     vertical-align: top;
 }
@@ -42,7 +46,7 @@ thead:first-of-type th, thead:first-of-type td {
     font-size: 0.7rem;
 }
 .codepicture {
-    font-family: TakaoPMincho, IPAPMincho, Noto Serif CJK JP, Source Han Serif JP, TakaoPGothic, IPAPGothic, Noto Sans CJK JP, Source Han Sans JP, TW-Sung-Ext-B, TW-Kai-Ext-B, Yu Gothic, BabelStone Han, serif;
+    font-family: TakaoPMincho, IPAPMincho, Noto Serif CJK KR, Source Han Serif KR, TakaoPGothic, IPAPGothic, Noto Sans CJK KR, Source Han Sans KR, TW-Sung-Ext-B, TW-Kai-Ext-B, Yu Gothic, BabelStone Han, serif;
     font-size: 1.5rem;
     line-height: 2rem;
 }
@@ -107,6 +111,7 @@ thead:first-of-type th, thead:first-of-type td {
 
 .undefined {
     background: #999;
+	height: 3rem;
 }
 .collision {
     background: #f99;

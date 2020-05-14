@@ -58,7 +58,7 @@ for n, i in enumerate(korea.rawelex):
         cdispmap[(n + (94 * 94), j)] = i
 annots = {}
 
-for n, p in enumerate([plane1, plane2]):
+for n, p in enumerate([plane1]):
     for q in range(1, 7):
         bn = n + 1
         f = open("kscplane{:X}{}.html".format(bn, chr(0x60 + q)), "w", encoding="utf-8")
@@ -81,6 +81,12 @@ for n, p in enumerate([plane1, plane2]):
                              annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True)
         f.close()
 
+f = open("kscplane2a.html", "w", encoding="utf-8")
+showgraph.dump_preview(f, "HangulTalk additional plane", 2, graphdata.gsets["mac-elex-extras"][2],
+                       planeshift = "1B4F", lang="ko-KR", part=1, css="ksc.css",
+                       menuurl="/ksc-conc.html", menuname="Wansung code variant comparison",
+                       lasturl="kscplane1f.html", lastname="Wansung code, part 6")
+f.close()
 
 
 
