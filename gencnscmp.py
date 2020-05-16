@@ -21,6 +21,7 @@ inverse[(1, 2, 56)] = 0xA1F7
 def swap_arrows(t):
     return t[:148] + (t[149], t[148]) + t[150:]
 
+print("Loading 1")
 plane1 = (1, ("UTC Big5", "UTC CNS", "MS Big5", "Mac Big5", "Yasuoka CNS",
               "ICU CNS 1992", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
           swap_arrows(traditional.read_big5_planes("UTC/BIG5.TXT", big5_to_cns_g2=traditional.big5_to_cns2, plane=1)),
@@ -38,6 +39,7 @@ plane1 = (1, ("UTC Big5", "UTC CNS", "MS Big5", "Mac Big5", "Yasuoka CNS",
           graphdata.gsets["ir171"][2],
 ])
 
+print("Loading 2")
 plane2 = (2, ("UTC Big5", "UTC CNS", "MS Big5", "Mac Big5", "Yasuoka CNS",
               "ICU CNS 1992", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
           traditional.read_big5_planes("UTC/BIG5.TXT", big5_to_cns_g2=traditional.big5_to_cns2, plane=2),
@@ -55,6 +57,7 @@ plane2 = (2, ("UTC Big5", "UTC CNS", "MS Big5", "Mac Big5", "Yasuoka CNS",
           graphdata.gsets["ir172"][2],
 ])
 
+print("Loading 3")
 plane3 = (3, ("UTC CNS", "Yasuoka CNS", "ICU CNS 1992",
               "ICU EUC 2014", "GOV-TW CNS", "Output", "Output Alt"), [
           parsers.read_main_plane("UTC/CNS11643.TXT", plane=14), # yes, really.
@@ -70,6 +73,7 @@ plane3 = (3, ("UTC CNS", "Yasuoka CNS", "ICU CNS 1992",
           graphdata.gsets["ir183-1988plus"][2],
 ])
 
+print("Loading 4")
 plane4 = (4, ("Yasuoka CNS", "ICU CNS 1992", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
           parsers.read_main_plane("Other/Uni2CNS", plane=4),
           parsers.read_main_plane("ICU/cns-11643-1992.ucm", plane=4),
@@ -82,6 +86,7 @@ plane4 = (4, ("Yasuoka CNS", "ICU CNS 1992", "ICU EUC 2014", "GOV-TW CNS", "Outp
           graphdata.gsets["ir184"][2],
 ])
 
+print("Loading 5")
 plane5 = (5, ("Yasuoka CNS", "ICU CNS 1992", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
           parsers.read_main_plane("Other/Uni2CNS", plane=5),
           parsers.read_main_plane("ICU/cns-11643-1992.ucm", plane=5),
@@ -94,6 +99,7 @@ plane5 = (5, ("Yasuoka CNS", "ICU CNS 1992", "ICU EUC 2014", "GOV-TW CNS", "Outp
           graphdata.gsets["ir185"][2],
 ])
 
+print("Loading 6")
 plane6 = (6, ("Yasuoka CNS", "ICU CNS 1992", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
           parsers.read_main_plane("Other/Uni2CNS", plane=6),
           parsers.read_main_plane("ICU/cns-11643-1992.ucm", plane=6),
@@ -106,6 +112,7 @@ plane6 = (6, ("Yasuoka CNS", "ICU CNS 1992", "ICU EUC 2014", "GOV-TW CNS", "Outp
           graphdata.gsets["ir186"][2],
 ])
 
+print("Loading 7")
 plane7 = (7, ("Yasuoka CNS", "ICU CNS 1992", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
           parsers.read_main_plane("Other/Uni2CNS", plane=7),
           parsers.read_main_plane("ICU/cns-11643-1992.ucm", plane=7),
@@ -118,6 +125,73 @@ plane7 = (7, ("Yasuoka CNS", "ICU CNS 1992", "ICU EUC 2014", "GOV-TW CNS", "Outp
           graphdata.gsets["ir187"][2],
 ])
 
+print("Loading 8")
+plane8 = (8, ("GOV-TW CNS",), [
+          tuple(map(lambda a, b, c: a or b or c,
+              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode BMP.txt", plane=8),
+              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 2.txt", plane=8),
+              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 15.txt", plane=8)
+          )),
+])
+
+print("Loading 9")
+plane9 = (9, ("GOV-TW CNS",), [
+          tuple(map(lambda a, b, c: a or b or c,
+              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode BMP.txt", plane=9),
+              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 2.txt", plane=9),
+              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 15.txt", plane=9)
+          )),
+])
+
+print("Loading 10")
+planeA = (10, ("GOV-TW CNS",), [
+          tuple(map(lambda a, b, c: a or b or c,
+              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode BMP.txt", plane=10),
+              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 2.txt", plane=10),
+              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 15.txt", plane=10)
+          )),
+])
+
+print("Loading 11")
+planeB = (11, ("GOV-TW CNS",), [
+          tuple(map(lambda a, b, c: a or b or c,
+              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode BMP.txt", plane=11),
+              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 2.txt", plane=11),
+              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 15.txt", plane=11)
+          )),
+])
+
+print("Loading 12")
+planeC = (12, ("ICU EUC 2014", "GOV-TW CNS",), [
+          graphdata.gsets["cns-eucg2-ibm"][2][94*94*11:94*94*12],
+          tuple(map(lambda a, b, c: a or b or c,
+              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode BMP.txt", plane=12),
+              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 2.txt", plane=12),
+              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 15.txt", plane=12)
+          )),
+])
+
+print("Loading 13")
+planeD = (13, ("ICU EUC 2014", "GOV-TW CNS",), [
+          graphdata.gsets["cns-eucg2-ibm"][2][94*94*12:94*94*13],
+          tuple(map(lambda a, b, c: a or b or c,
+              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode BMP.txt", plane=13),
+              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 2.txt", plane=13),
+              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 15.txt", plane=13)
+          )),
+])
+
+print("Loading 14")
+planeE = (14, ("ICU EUC 2014", "GOV-TW CNS",), [
+          graphdata.gsets["cns-eucg2-ibm"][2][94*94*13:94*94*14],
+          tuple(map(lambda a, b, c: a or b or c,
+              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode BMP.txt", plane=14),
+              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 2.txt", plane=14),
+              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 15.txt", plane=14)
+          )),
+])
+
+print("Loading 15")
 planeF = (15, ("ICU CNS 1992", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
           parsers.read_main_plane("ICU/cns-11643-1992.ucm", plane=9), # yes, really.
           parsers.read_main_plane("ICU/euc-tw-2014.ucm", plane=15),
@@ -142,24 +216,33 @@ def planefunc(number, mapname=None):
         else:
             return "<br>Plane {}".format(number)
 
+def jlfunc(number, row, cell):
+    linknumber = (number * 0x10000) + ((0x20 + row) * 0x100) + (0x20 + cell)
+    return "https://www.cns11643.gov.tw/wordView.jsp?ID={:d}".format(linknumber)
+
 def kutenfunc(number, row, cell):
     if number == 1:
         euc = "{:02x}{:02x}".format(0xA0 + row, 0xA0 + cell)
+    elif cell < 0:
+        euc = "8e{:02x}{:x}_".format(0xa0 + row, (0xA0 - cell) >> 4)
     else:
         euc = "8e{:02x}{:02x}{:02x}".format(0xA0 + number, 0xA0 + row, 0xA0 + cell)
     big5 = ""
     if (number, row, cell) in inverse:
         big5 = "<br>(Big5 {:04x})".format(inverse[number, row, cell])
     plane_hex = "{:d}-{:02X}{:02X}".format(number, 0x20 + row, 0x20 + cell)
-    linknumber = (number * 0x10000) + ((0x20 + row) * 0x100) + (0x20 + cell)
-    wordview = "https://www.cns11643.gov.tw/wordView.jsp?ID={:d}".format(linknumber)
-    anchorlink = "<a href='#{:d}.{:d}.{:d}'>{:02d}-{:02d}-{:02d}</a>".format(
-                 number, row, cell, number, row, cell)
-    linkhtml = "(CNS <a href='{}'>{}</a>)".format(wordview, plane_hex)
-    if number == 1:
-        fmteuc = "(<abbr title='Extended Unix Code'>EUC</abbr> {})".format(euc)
+    wordview = jlfunc(number, row, cell)
+    if cell >= 0:
+        anchorlink = "<a href='#{:d}.{:d}.{:d}'>{:02d}-{:02d}-{:02d}</a>".format(
+                     number, row, cell, number, row, cell)
+        linkhtml = "(CNS <a href='{}'>{}</a>)".format(wordview, plane_hex)
     else:
-        fmteuc = "(<abbr title='Extended Unix Code'>EUC</abbr> {})".format(euc)
+        anchorlink = "<a href='#{:d}.{:d}.{:d}'>{:02d}-{:02d}-{}</a>".format(
+                     number, row, -cell, number, row, 
+                     "{:02d}+".format(-cell) if cell != -1 else "*")
+        plane_hex = "{:d}-{:02X}{:02X}".format(number, 0x20 + row, 0x20 - cell)
+        linkhtml = "(CNS {}_)".format(plane_hex[:-1])
+    fmteuc = "(<abbr title='Extended Unix Code'>EUC</abbr> {})".format(euc)
     return "{}<br>{}<br>{}{}".format(
            anchorlink, linkhtml, fmteuc, big5)
 
@@ -301,9 +384,10 @@ annots = {
  (15, 67, 74): "Compare 15-67-66",
 }
 
-for n, p in enumerate([plane1, plane2, plane3, plane4, plane5, plane6, plane7, planeF]):
+print("Writing HTML")
+for n, p in enumerate([plane1, plane2, plane3, plane4, plane5, plane6, plane7, plane8, plane9, planeA, planeB, planeC, planeD, planeE, planeF]):
     for q in range(1, 7):
-        bnx = (1, 2, 3, 4, 5, 6, 7, 15)
+        bnx = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)
         bn = bnx[n]
         f = open("cnsplane{:X}{}.html".format(bn, chr(0x60 + q)), "w", encoding="utf-8")
         lasturl = lastname = nexturl = nextname = None
@@ -322,7 +406,7 @@ for n, p in enumerate([plane1, plane2, plane3, plane4, plane5, plane6, plane7, p
         showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="zh-TW", part=q, css="/css/cns.css",
                              menuurl="/cns-conc.html", menuname="CNS 11643 and Big5 comparison tables",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
-                             annots=annots, selfhandledanchorlink=True)
+                             annots=annots, selfhandledanchorlink=True, jlfunc=jlfunc)
         f.close()
 
 

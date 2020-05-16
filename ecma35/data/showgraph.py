@@ -306,9 +306,23 @@ def _classify(cdisplayi, outfile):
 def dump_plane(outfile, planefunc, kutenfunc,
                number, setnames, plarray, *, selfhandledanchorlink=False,
                part=0, lang="zh-TW", css=None, annots={}, cdispmap={}, 
-               menuurl=None, menuname="Up to menu",
+               menuurl=None, menuname="Up to menu", jlfunc=None, 
                lasturl=None, nexturl=None, lastname=None, nextname=None):
-    zplarray = tuple(zip(*plarray))
+    if part:
+        stx, edx = max((part - 1) * 16, 1), min(part * 16, 95)
+    else:
+        stx, edx = 1, 95
+    stpt = (stx - 1) * 94
+    edpt = (edx - 1) * 94
+    spheniscus = [(i, j) for (i, j) in zip(setnames, plarray) if j[stpt:edpt] != (
+                  (None,) * len(j[stpt:edpt]))]
+    if len(spheniscus) == 1:
+        return dump_preview(outfile, planefunc(number), kutenfunc, number, 
+               spheniscus[0][1], lang=lang, css=css, part=part, jlfunc=jlfunc,
+               menuurl=menuurl, menuname=menuname, lasturl=lasturl, 
+               nexturl=nexturl, lastname=lastname, nextname=nextname)
+    setnames2 = tuple(zip(*spheniscus))[0] if spheniscus else ()
+    zplarray = tuple(zip(*tuple(zip(*spheniscus))[1])) if spheniscus else ()
     h = ", part {:d}".format(part) if part else ""
     print("<!DOCTYPE html><title>{}{}</title>".format(planefunc(number), h), file=outfile)
     if css:
@@ -316,10 +330,13 @@ def dump_plane(outfile, planefunc, kutenfunc,
     print("<h1>{}{}</h1>".format(planefunc(number), h), file=outfile)
     if menuurl or lasturl or nexturl:
         _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname)
+    if not spheniscus:
+        print("<p>There are no allocated codepoints in this range.</p>", file=outfile)
+        return
     print("<table>", file=outfile)
-    for row in range(max((part - 1) * 16, 1), min(part * 16, 95)) if part else range(1, 95):
+    for row in range(stx, edx):
         print("<thead><tr><th>Codepoint</th>", file=outfile)
-        for i in setnames:
+        for i in setnames2:
             print("<th>", i, planefunc(number, i), file=outfile)
         print("</tr></thead>", file=outfile)
         if annots.get((number, row, 0), None):
@@ -378,8 +395,8 @@ def dump_plane(outfile, planefunc, kutenfunc,
     if menuurl or lasturl or nexturl:
         _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname)
 
-def dump_preview(outfile, planename, number, array, *, lang="zh-TW", planeshift="",
-               css=None, part=None, menuurl=None, menuname="Up to menu",
+def dump_preview(outfile, planename, kutenfunc, number, array, *, lang="zh-TW", planeshift="",
+               css=None, part=None, menuurl=None, menuname="Up to menu", jlfunc=None, 
                lasturl=None, nexturl=None, lastname=None, nextname=None):
     h = ", part {:d}".format(part) if part else ""
     print("<!DOCTYPE html><title>{}{}</title>".format(planename, h), file=outfile)
@@ -388,17 +405,20 @@ def dump_preview(outfile, planename, number, array, *, lang="zh-TW", planeshift=
     print("<h1>{}{}</h1>".format(planename, h), file=outfile)
     if menuurl or lasturl or nexturl:
         _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname)
-    print("<table class=chart><thead><tr><th></th>", file=outfile)
+    print("<table class=chart><thead><tr><th>Code</th>", file=outfile)
     for row in range(max((part - 1) * 16, 1), min(part * 16, 95)) if part else range(1, 95):
         print("".join("<th>_{:1X}</th>".format(i) for i in range(0x10)), file=outfile)
-        print("</tr></thead><tbody><tr>", file=outfile)
-        print("<th>0x{}{:03X}_</th>".format(planeshift, ((0xA0 + row) << 4) | 0xA), file=outfile)
-        print("<td class=undefined></th>", file=outfile)
+        print("</tr></thead><tbody><tr><th class=codepoint>", file=outfile)
+        print("<a name='{:d}.{:d}.1' class=anchor></a>".format(number, row), file=outfile)
+        print(kutenfunc(number, row, -1), file=outfile)
+        print("</th><td class=undefined></td>", file=outfile)
         for cell in range(1, 95):
             if not (cell % 16):
-                print("</tr><tr>", file=outfile)
-                print("<th>0x{}{:03X}_</th>".format(planeshift, ((0xA0 + row) << 4) | 
-                                                    ((0xA0 + cell) >> 4)), file=outfile)
+                print("</tr><tr><th class=codepoint>", file=outfile)
+                print("<a name='{:d}.{:d}.{:d}' class=anchor></a>".format(number, 
+                            row, cell), file=outfile)
+                print(kutenfunc(number, row, -cell), file=outfile)
+                print("</th>", file=outfile)
             i = array[((row - 1) * 94) + (cell - 1)]
             if i is None:
                 print("<td class=undefined></td>", file=outfile)
@@ -408,12 +428,17 @@ def dump_preview(outfile, planename, number, array, *, lang="zh-TW", planeshift=
             print("<td>", end="", file=outfile)
             variationhints.print_hints_to_html5(i, outfile, lang=lang)
             print("<br><span class=codepoint>", file=outfile)
+            if jlfunc:
+                # Note: assumes the URL given won't contain apostrophe
+                print("<a href='{:s}'>".format(jlfunc(number, row, cell)), file=outfile)
             print("U+" + "<wbr>+".join(_codepfmt(j, len(i)) for j in i), file=outfile)
+            if jlfunc:
+                print("</a>", file=outfile)
             if len(i) == 1:
                 _classify(i, outfile)
             print("</span></td>", file=outfile)
         print("<td class=undefined></td></tr>", file=outfile)
-        print("</tr></tbody><thead><tr><th></th>", file=outfile)
+        print("</tr></tbody><thead><tr><th>Code</th>", file=outfile)
     print("</table>", file=outfile)
     if menuurl or lasturl or nexturl:
         _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname)

@@ -37,6 +37,11 @@ def kutenfunc(number, row, cell):
     if number == 1:
         euc = "{:02x}{:02x}".format(0xA0 + row, 0xA0 + cell)
         fmteuc = "(<abbr title='Extended Unix Code'>EUC</abbr> {})".format(euc)
+    elif cell < 0:
+        anchorlink = "<a href='#{:d}.{:d}.{:d}'>{:02d}-{:02d}-{}</a>".format(
+                     number, row, -cell, number, row, 
+                     "{:02d}+".format(-cell) if cell != -1 else "*")
+        fmteuc = "(1b4f{:02x}{:x}_)".format(0xa0 + row, (0xA0 - cell) >> 4)
     else:
         cellbyte = 0x40 + cell
         if cellbyte > 0x7D:
@@ -82,7 +87,8 @@ for n, p in enumerate([plane1]):
         f.close()
 
 f = open("kscplane2a.html", "w", encoding="utf-8")
-showgraph.dump_preview(f, "HangulTalk additional plane", 2, graphdata.gsets["mac-elex-extras"][2],
+showgraph.dump_preview(f, "HangulTalk additional plane", kutenfunc, 2, 
+                       graphdata.gsets["mac-elex-extras"][2],
                        planeshift = "1B4F", lang="ko-KR", part=1, css="ksc.css",
                        menuurl="/ksc-conc.html", menuname="Wansung code variant comparison",
                        lasturl="kscplane1f.html", lastname="Wansung code, part 6")

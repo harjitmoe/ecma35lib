@@ -298,8 +298,6 @@ for row in sets:
                             if not isinstance(hints2pua, list):
                                 hints2pua[key] = [hints2pua[key]]
                             hints2pua[key].append(tuple(ord(i) for i in puaunic))
-                if (group.name == "kddi") and (group.unic in rkddizodiacmap):
-                    hints2pua[(pointer, tuple(ord(i) for i in unic))] = tuple(ord(i) for i in rkddizodiacmap[unic])
                 if group.pua and (group.name == "softbank"):
                     puacode = int(group.pua, 16)
                     pageno = (puacode >> 8) - 0xE0
@@ -319,15 +317,18 @@ for row in sets:
                     if pointer > len(suboutmap):
                         suboutmap.extend([None] * (pointer - len(suboutmap)))
                     suboutmap.append(tuple(ord(i) for i in unic))
+                #
                 if group.name == "kddi":
                     # With zodiacs mapped to symbols (orthodox, but not faithful for pre-2012)
                     unic2 = rkddizodiacmap.get(unic, unic)
+                    if (len(unic2) == 1) and (ord(unic2) in wants_fe0f):
+                        unic2 += "\uFE0F"
                     if pointer < len(suboutmap2):
                         assert suboutmap2[pointer] in (None, tuple(ord(i) for i in unic2))
                         suboutmap2[pointer] = tuple(ord(i) for i in unic2)
                     else:
                         if pointer > len(suboutmap2):
-                            suboutmap2.extend([None] * (pointer - len(suboutmap)))
+                            suboutmap2.extend([None] * (pointer - len(suboutmap2)))
                         suboutmap2.append(tuple(ord(i) for i in unic2))
         # Try to end it on a natural plane boundary.
         suboutmap.extend([None] * (((94 * 94) - (len(suboutmap) % (94 * 94))) % (94 * 94)))

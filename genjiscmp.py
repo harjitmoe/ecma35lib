@@ -104,6 +104,14 @@ for n, i in enumerate(japan.rawmac):
     cdispmap[(n, j)] = i
     if n >= (84 * 94):
         cdispmap[(n - (74 * 94), j)] = i
+for n, i in enumerate(graphdata.gsets["ir168kddipict"][2]):
+    j = graphdata.gsets["ir168kddisym"][2][n]
+    if i != j and j:
+        cdispmap[(n, i)] = j
+for n, i in enumerate(graphdata.gsets["kddipictsjisext"][2]):
+    j = graphdata.gsets["kddisymsjisext"][2][n]
+    if i != j and j:
+        cdispmap[(n + (94 * 94), i)] = j
 
 annots = {
  (1, 1, 17): 'U+FFE3 (￣) is the fullwidth counterpart of both U+00AF (¯) and '
