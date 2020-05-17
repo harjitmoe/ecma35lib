@@ -15,37 +15,37 @@ graphdata.c0graphics["903"] = graphdata.c0graphics["897"]
 graphdata.c0graphics["904"] = graphdata.c0graphics["897"]
 
 # Windows-125x pages
-graphdata.rhses["1250"] = parsers.read_single_byte("index-windows-1250.txt")
-graphdata.rhses["1251"] = parsers.read_single_byte("index-windows-1251.txt")
-graphdata.rhses["1252"] = parsers.read_single_byte("index-windows-1252.txt") # ISO-8859-1 ext.
+graphdata.rhses["1250"] = parsers.read_single_byte("WHATWG/index-windows-1250.txt")
+graphdata.rhses["1251"] = parsers.read_single_byte("WHATWG/index-windows-1251.txt")
+graphdata.rhses["1252"] = parsers.read_single_byte("WHATWG/index-windows-1252.txt") # ISO-8859-1 ext.
 graphdata.defgsets["1252"] = ("ir006", "ir100", "nil", "nil")
-graphdata.rhses["1253"] = parsers.read_single_byte("index-windows-1253.txt")
-graphdata.rhses["1254"] = parsers.read_single_byte("index-windows-1254.txt") # ISO-8859-9 ext.
+graphdata.rhses["1253"] = parsers.read_single_byte("WHATWG/index-windows-1253.txt")
+graphdata.rhses["1254"] = parsers.read_single_byte("WHATWG/index-windows-1254.txt") # ISO-8859-9 ext.
 graphdata.defgsets["1254"] = ("ir006", "ir148", "nil", "nil")
-graphdata.rhses["1255"] = parsers.read_single_byte("index-windows-1255.txt")
-graphdata.rhses["1256"] = parsers.read_single_byte("index-windows-1256.txt")
-graphdata.rhses["1257"] = parsers.read_single_byte("index-windows-1257.txt")
-graphdata.rhses["1258"] = parsers.read_single_byte("index-windows-1258.txt")
+graphdata.rhses["1255"] = parsers.read_single_byte("WHATWG/index-windows-1255.txt")
+graphdata.rhses["1256"] = parsers.read_single_byte("WHATWG/index-windows-1256.txt")
+graphdata.rhses["1257"] = parsers.read_single_byte("WHATWG/index-windows-1257.txt")
+graphdata.rhses["1258"] = parsers.read_single_byte("WHATWG/index-windows-1258.txt")
 
 # OEM pages
-graphdata.rhses["437"] = parsers.read_single_byte("ibm-437_P100-1995.ucm")
+graphdata.rhses["437"] = parsers.read_single_byte("ICU/ibm-437_P100-1995.ucm")
 graphdata.defgsets["437"] = ("ir006", "nil", "nil", "nil")
-graphdata.rhses["720"] = parsers.read_single_byte("ibm-720_P100-1997.ucm")
-graphdata.rhses["737"] = parsers.read_single_byte("ibm-737_P100-1997.ucm")
-graphdata.rhses["775"] = parsers.read_single_byte("ibm-775_P100-1996.ucm")
-graphdata.rhses["850"] = parsers.read_single_byte("ibm-850_P100-1995.ucm")
-graphdata.rhses["852"] = parsers.read_single_byte("ibm-852_P100-1995.ucm")
-graphdata.rhses["855"] = parsers.read_single_byte("ibm-855_P100-1995.ucm")
-graphdata.rhses["857"] = parsers.read_single_byte("ibm-857_P100-1995.ucm")
-graphdata.rhses["858"] = parsers.read_single_byte("ibm-858_P100-1997.ucm")
-graphdata.rhses["860"] = parsers.read_single_byte("ibm-860_P100-1995.ucm")
-graphdata.rhses["861"] = parsers.read_single_byte("ibm-861_P100-1995.ucm")
-graphdata.rhses["862"] = parsers.read_single_byte("ibm-862_P100-1995.ucm")
-graphdata.rhses["863"] = parsers.read_single_byte("ibm-863_P100-1995.ucm")
-graphdata.rhses["864"] = parsers.read_single_byte("ibm-864_X110-1999.ucm")
-graphdata.rhses["865"] = parsers.read_single_byte("ibm-865_P100-1995.ucm")
-graphdata.rhses["866"] = parsers.read_single_byte("index-ibm866.txt")
-graphdata.rhses["869"] = parsers.read_single_byte("ibm-869_P100-1995.ucm")
+graphdata.rhses["720"] = parsers.read_single_byte("ICU/ibm-720_P100-1997.ucm")
+graphdata.rhses["737"] = parsers.read_single_byte("ICU/ibm-737_P100-1997.ucm")
+graphdata.rhses["775"] = parsers.read_single_byte("ICU/ibm-775_P100-1996.ucm")
+graphdata.rhses["850"] = parsers.read_single_byte("ICU/ibm-850_P100-1995.ucm")
+graphdata.rhses["852"] = parsers.read_single_byte("ICU/ibm-852_P100-1995.ucm")
+graphdata.rhses["855"] = parsers.read_single_byte("ICU/ibm-855_P100-1995.ucm")
+graphdata.rhses["857"] = parsers.read_single_byte("ICU/ibm-857_P100-1995.ucm")
+graphdata.rhses["858"] = parsers.read_single_byte("ICU/ibm-858_P100-1997.ucm")
+graphdata.rhses["860"] = parsers.read_single_byte("ICU/ibm-860_P100-1995.ucm")
+graphdata.rhses["861"] = parsers.read_single_byte("ICU/ibm-861_P100-1995.ucm")
+graphdata.rhses["862"] = parsers.read_single_byte("ICU/ibm-862_P100-1995.ucm")
+graphdata.rhses["863"] = parsers.read_single_byte("ICU/ibm-863_P100-1995.ucm")
+graphdata.rhses["864"] = parsers.read_single_byte("ICU/ibm-864_X110-1999.ucm")
+graphdata.rhses["865"] = parsers.read_single_byte("ICU/ibm-865_P100-1995.ucm")
+graphdata.rhses["866"] = parsers.read_single_byte("WHATWG/index-ibm866.txt")
+graphdata.rhses["869"] = parsers.read_single_byte("ICU/ibm-869_P100-1995.ucm")
 graphdata.rhses["897"] = ((None,) * 33) + tuple(range(0xFF61, 0xFFA0)) + ((None,) * 32)
 graphdata.defgsets["897"] = ("ir014", "ir013", "nil", "nil")
 graphdata.rhses["903"] = (None,) * 128
@@ -56,21 +56,22 @@ graphdata.defgsets["904"] = ("ir006", "nil", "nil", "nil")
 # Code pages 874 (ISO-8859-11 exts)
 # Per alias comments in ICU's convrtrs.txt, IBM's 874 is identical to IBM's 9066.
 # Microsoft's 874, on the other hand, matches the layout of IBM's 1162.
-graphdata.rhses["1162"] = parsers.read_single_byte("index-windows-874.txt")
-graphdata.rhses["9066"] = parsers.read_single_byte("ibm-874_P100-1995.ucm")
-# Since the two extensions collide in neither repertoire nor allocations, use both for "874":
+graphdata.rhses["1162"] = parsers.read_single_byte("WHATWG/index-windows-874.txt")
+graphdata.rhses["9066"] = parsers.read_single_byte("ICU/ibm-874_P100-1995.ucm")
+# The two only collide at 0xA0, which IBM uses for an alternate U+0E48 and which
+#   Microsoft uses for an NBSP. Favour the more-deployed Microsoft for "874".
 graphdata.rhses["874"] = tuple(a or b for a, b in zip(graphdata.rhses["1162"],
                                                       graphdata.rhses["9066"]))
 
 # Macintosh pages
-graphdata.rhses["10000"] = parsers.read_single_byte("index-macintosh.txt")
+graphdata.rhses["10000"] = parsers.read_single_byte("WHATWG/index-macintosh.txt")
 # 10007 is the original MacCyrillic; current MacCyrillic is a Euro update of 10017.
-graphdata.rhses["10017"] = parsers.read_single_byte("index-x-mac-cyrillic.txt")
+graphdata.rhses["10017"] = parsers.read_single_byte("WHATWG/index-x-mac-cyrillic.txt")
 
 # KOI-8 encodings
-graphdata.rhses["878"] = graphdata.rhses["20866"] = parsers.read_single_byte("index-koi8-r.txt")
+graphdata.rhses["878"] = graphdata.rhses["20866"] = parsers.read_single_byte("WHATWG/index-koi8-r.txt")
 # Note: 21866 is used for both KOI8-U and KOI8-RU.
-graphdata.rhses["1168"] = graphdata.rhses["21866"] = parsers.read_single_byte("index-koi8-u.txt")
+graphdata.rhses["1168"] = graphdata.rhses["21866"] = parsers.read_single_byte("WHATWG/index-koi8-u.txt")
 
 
 

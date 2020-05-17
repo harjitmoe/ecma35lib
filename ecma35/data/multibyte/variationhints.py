@@ -191,6 +191,8 @@ applesinglehints = {
     (0x25C9, 0x20DD): (0x1F78B,), # Circular target (black bullseye)
     (0x25CE, 0x20DD): (0x1F78B, 0xF87F), # Circular target (white bullseye)
     (0x29C8, 0x20DE): (0x1F796,), # Square target
+    # The group mark does now exist, although it's a recent (v10) addition:
+    (0x2261, 0x20D2): (0x2BD2,), # Group mark
     #
     # MacKorean hint sequences which have since gotten unique representations:
     (0x2394, 0xF876): (0x2B21,),  # White hexagon
@@ -203,8 +205,17 @@ applesinglehints = {
     (0x2206, 0xF87F): (0x1D71F,), # Medium-bold oblique capital delta
     #
     # Special cases
-    # Record mark; combining sequence does not render; 0x29E7 already in v3.2.
+    # Record mark; combining sequence does not render, U+29E7 was already in v3.2.
     (0x3D, 0x20D2): (0x29E7,), 
+    # White florette: 0xA67B corresponds to Adobe-Japan1 CID-12228, which maps
+    #   to U+2740. Apple maps it to U+273F+F87A since 0xA699 is already mapped to 
+    #   U+2740.
+    (0x273F, 0xF87A): (0x2740, 0xF87F),
+    # Telephone dial. None of the four encoded variants of the ☏ are at all close,
+    #   but U+260F is the most likely of the four to display a dial (U+1F57E and
+    #   U+1F57F are expressly keyed, while U+260E is often displayed as a keyed
+    #   variant).
+    (0xF807,): (0x260F, 0xF87F),
     #
     # Some direct PUA mappings used by MacKorean but no longer needed
     (0xF80A,): (0x1F668,), # "Two interwoven eye shapes" (basically a variant quilt square)
@@ -218,6 +229,31 @@ applesinglehints = {
     (0xF84D,): (0x23E2,), # Trapezoid
 }
 # Not sure where to put this observation, but MacKorean's U+25B4+20E4 is basically DPRK's mountain ahead.
+#
+# Adobe-Japan1 mappings of some of the MacKorean 0xA6xx dingbat characters:
+# 0xA656 is CID-12242 (Apple =U+25A0+20DF)
+# 0xA657 is CID-12244 (Apple =U+25C7+20DF, HarJIT =U+1F79C)
+# 0xA658 is CID-12243 (Apple =PUA+F805)
+# 0xA659 is CID-12245 (Apple =U+25A1+20DF)
+# 0xA65A is CID-12261 (Apple =U+2039)
+# 0xA65B is CID-12262 (Apple =U+203A)
+# 0xA65C is CID-12265 (Apple =U+00AB)
+# 0xA65D is CID-12266 (Apple =U+00BB)
+# 0xA660 is CID-12246 (Apple =PUA+F806+20DF)
+# 0xA662 is CID-12233 (Apple =U+25C7+20DE)
+# 0xA663 is CID-12231 (Apple =PUA+F806)
+# 0xA664 is CID-12232 (Apple =U+29C8)
+# 0xA665 is CID-12230 (Apple =U+25C6+20DE)
+# 0xA666 is CID-12234 (Apple =PUA+F805+20DE)
+# 0xA667 is CID-12235 (Apple =U+29C8+20DE, HarJIT =U+1F796)
+# 0xA66C is CID-12241 (Adobe =U+271A, Apple =U+271A)
+# 0xA672 is CID-12260 (Apple =U+2723, --a poor match tbh mais shouganai)
+# 0xA673 is CID-12259 (Adobe =U+2756, Apple =U+2756)
+# 0xA679 is CID-12258 (Apple =U+2723+F87A, --F87A is PUA, U+2723 is still a poor match)
+# 0xA67A is CID-12257 (Apple =U+2756+F87A, --F87A is PUA)
+# 0xA67B is CID-12228 (Adobe =U+2740, Apple =U+273F+F87A, --F87A is PUA and Apple uses U+2740 for 0xA699)
+# 0xA67C is CID-12229 (Adobe =U+273F, Apple =U+273F)
+# 0xA68F is CID-12220 (Apple =PUA+F808)
 
 def ahmap(pointer, ucs):
     if ucs in applesinglehints:

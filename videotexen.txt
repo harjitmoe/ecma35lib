@@ -1,0 +1,55 @@
+#############
+ ETS 300 706
+#############
+
+Bytes transmitted over a synchronous connection with least significant bit first, i.e.: bits in binary literals quoted in the standard are unless otherwise indicated reversed compared to convention; index 1 is the low bit, 8 is the high bit.
+
+A packet is 45 bytes, one-indexed.
+
+Bytes 1 and 2 are 10101010 (i.e. 0b01010101, 0x55), as a synchronisation code. Byte 3 is a framing code (i.e. format magic byte) for ETS 300 706 specifically, which is 11100100 (i.e. 0b00100111, 0x27).
+
+--
+
+Error correction codes in a byte (in general, a non-sync non-magic byte is expected to have an odd number of bits set):
+
+8/7: High bit is complement of xor of other bits. If an even number of bits are set, fail.
+
+8/4: Bits 1, 2, 3, 4, 5, 6, 7, 8 are P1, D1, P2, D2, P3, D3, P4, D4.
+
+Bits 2, 4, 6, 8 contain data. Bit 1 is complement of xor of bits 2, 6, 8. Bit 3 is complement of xor of bits 2, 4, 8. Bit 5 is complement of xor of bits 2, 4, 6.  Bit 7 is complement of xor of all other bits.
+
+Tests for oddness of count of set bits: Test A concerns bits 1, 2, 6, 8. Test B concerns bits 2, 3, 4, 8. Test C concerns bits 2, 4, 5, 6. Test D concerns all bits. In other words, they concern an individual protection bit and the bits it was calculated from. If test D passes but one or more others fail, then fail (since at least two bits are errant). Or if all fail, invert D1. Or if BCD fail, invert D2. Or if ACD fail, invert D3. Or if ABD fail, invert D4. Else, the corruption is assumed to be in the protection bits only and no action is taken.
+
+24/18: On three byte triplets. First byte contains P1, P2, D1, P3, D2, D3, D4, P4. Next two bytes are data but with high bit being protection.
+
+P1, P2 and P3 are complements of xors of certain bits, walking through the triplet in pattens. All start with themselves and end in D18, i.e. with their value being the complement of the xor of the other bits in the pattern, thus creating an odd number of bits in each pattern. P1 takes one and skips one, i.e. D18, D16, D14 etc. P2 takes two and skips two, i.e. D18, D17, D14, D13, D11 (remembering P5 is between D12 and D11) etc. P3 takes four and skips four, i.e. D18, D17, D16, D15, D11 etc.
+
+P4 (high bit of first byte) is complement of xor of data bits of second byte. P5 (high bit of second byte) is complement of xor of data bits of third byte.
+
+P6 (high bit of third byte) is complement of xor of all other bits, i.e. including other protection bits.
+
+Each test considers a protection bit and the bits it was the complement of the xor of. If the number of one-bits is not odd, that test fails. If the test for P6 succeeds but at least one other fails, fail the entire triplet (since this means at least two bits are errant). Otherwise, assume there's only one errant bit. If that errant bit isn't P6 itself (identified by only P6 failing), taking the bits P1 thru P5 and xoring the resulting integer with a recalculation of them based on the possibly-errant data bits will give the index of the errant bit.
+
+Although the standard does not explicitly state this, presumably the tests for P4 and P5 both failing (which would calculate an out-of-bounds index greater than 24, and actually denote both an error in bits 8 thru 15 and another in bits 16 thru 23) would also be grounds for failing the triplet.
+
+--
+
+Bytes 4 and 5 are 8/4 bytes. Byte 4's D1, D2, D3 give magazine number (referred to as X when discussing a packet for a page and M when discussing a packet for a magazine i.e. when Y=29, in either case it's a magazine number). Byte 4's D4 and byte 5's D1, D2, D3, D4 (listed in increasing significance) give the "packet number" (Y). Y=0 is the page header and some text, Y=1 thru Y=24 inclusive contain page text (8/7 coded), Y=25 is used for labels / tags / search keywords, Y=26 thru Y=29 contain non-textual data and are further specified by an 8/4 "designation" code in byte 6, with byte 7 onward being 24/18 triplets (thirteen of them). These pertain to the page started by the last header packet, and match its magazine number. Y=29 pertains to an entire magazine. Y=30 and Y=31 pertain even more generally; they use the "magazine" number to identify a channel/protocol.
+
+In a header packet, bytes 6 thru 13 are header data and the rest is normal text. All the header data is 8/4, the text is 8/7. Units for page number are in byte 6, "tens" for page number are in byte 7; technically, the page number is hexadecimal, but the user isn't supposed to be able to directly access the 156 page numbers which use non-decimal digits. Bytes 8 thru 11 code the page subcode, least significant bit first, except D4 of byte 9 (a flag to erase an existing copy of that page from memory) and D3 and D4 of byte 11 (which are flags for newsflashes and subtitles, respectively).
+
+Byte 12 contains flags for (in that order), hiding the text in the heading row (0), marking the page as an update to a previously transmitted copy, marking the page as transmitted out of order i.e. unsuitable for rolling display in order of receipt, and hiding the text in the body rows (1 thru 24).
+
+Byte 13's D1 bit is used as a flag for magazine serial (as opposed to parallel) mode. Serial mode means that only one page can be transmitted at a time. Parallel mode means that packets for pages from different magazines can be interleaved, with the magazine number serving to distinguish them. Only one such mode should be used by an entire transmission.
+
+The remainder of byte 13 is used to specify the G0 and G2 sets used by that page. This is a seven-bit code when included in Y=28 or Y=29 packets, but only the least significant three bits are included in the header (and also in the opposite order). If the national option bits in a Y=0 are different from the low three bits given in an accompanying Y=28, which one is given priority is implementation-defined. In lower / more basic levels of ETS 300 706, the charset may be specified only by the Y=0 packet, which results in an ambiguous designation, presumably disambiguated by the country of use?
+
+In a Y=26, the data may be device/VHS recorder control or character redefinition. Y=27 is used for page linking. Y=28 is used for page presentation, charset selection, DRCS downloading and encryption keys. Y=29 is the same as Y=28 but applies to the entire magazine rather than the page (obviously, page-specific definitions take priority).
+
+Y=29, Y=30 and Y=31 can be inserted at any point. If used, packets Y=27 and Y=28 should follow Y=0, in that order. In pages intended for direct display, Y=26 should immediately precede Y=1, otherwise it should be transmitted last. If transmission is paused and resumed, Y=27 and Y=28 should be re-sent, along with Y=26 if the page is for direct display.
+
+
+
+
+
+

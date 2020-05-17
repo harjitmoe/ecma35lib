@@ -250,17 +250,33 @@ annots = {
  (1, 1, 0): 'All of plane 1 has two possible EUC codes, a four-byte code prefixed with 0x8EA1 '
             'and a two-byte code without that prefix.&ensp;It is the two-byte codes that are '
             'listed in this chart.',
- (1, 1, 29): 'Compare 01-02-11.',
- (1, 2, 11): 'Compare 01-01-29.',
- (1, 2, 12): 'Big5 and CNS consider this character slightly bolder than the previous one, whereas '
-             'Unicode considers it doubled for some reason.\u2002Apple\'s mapping instead uses '
-             'an appended PUA variation hint for a bold form.',
+ (1, 1, 29): 'All four of these are underscores (horizontal versus vertical, straight versus '
+             'squiggly.\u2002For some reason, older CNS charts such as ISO-IR-171 showed them '
+             'aligned to the top and right of the box (possibly with the intention to use them for '
+             'underlining the previous line?), as opposed to to the bottom and left as in Big5, '
+             'current CNS charts, and typical rendering.\u2002This seems to have influenced UTC and '
+             'Yasuoka to consider most of them unmapped, except for Yasuoka mapping the horizontal '
+             'squiggly one to U+FE4B (which consequently means leaving 01-02-11 unmapped).\u2002The '
+             'non-EUC ICU mapping references Yasuoka and follows suit.</p><p>Note that the "normal" '
+             'underscore gets mapped to either 01-02-05 or 01-02-06.\u2002Microsoft\' mapping of '
+             'the horizontal, straight one here to U+2574 seems to be an arbitrary selection of a '
+             'similar character not already used, and current GOV-TW mappings simply follow '
+             'the Windows convention here, although CNS charts still display it as an '
+             'underscore.\u2002Apple uses a PUA variation hint for a duplicate or alternate form.',
  (1, 2, 6): 'Mapping of bold versus light overscore and underscore is sometimes difficult.\u2002'
             'The UTC Big5 mapping simply maps the bold ones to the replacement character, under '
             'the belief that no acceptable Unicode mapping exists.\u2002Apple uses a PUA variation '
-            'hint for a bold form.\u2002The other mappings in use seem to be a selection from '
-            'the possible mappings which aren\'t otherwise used, rather than following any semantic '
-            'motivation.',
+            'hint for a bold form.\u2002Yasuoka (and non-EUC ICU referencing Yasuoka) regards the '
+            'bolder of the two underscores as the "normal" underscore, and doesn\'t map the '
+            'others.\u2002Microsoft maps the bolder underscore to U+02CD, which appears to be an '
+            'arbitrary selection of a similar character not otherwise mapped to (compare '
+            '01-01-27 for Microsoft\'s other by-elimination underscore mapping).\u2002Current '
+            'GOV-TW mappings appear to follow the Windows convention here (for want of a better '
+            'option?).',
+ (1, 2, 11): 'Compare 01-01-29.\u2002This one may have fewer, larger peaks compared to that one.',
+ (1, 2, 12): 'Big5 and CNS consider this character slightly bolder than the previous one, whereas '
+             'Unicode considers it doubled for some reason.\u2002Apple\'s mapping instead uses '
+             'an appended PUA variation hint for a bold form.',
  (1, 2, 36): 'Various mappings of various legacy CJK sets map this character to either U+223C '
              '(tilde operator), U+301C (wave dash), or U+FF5E (fullwidth tilde).\u2002Of these: '
              'U+301C was allocated specifically for the character as it appears in JIS (at '
