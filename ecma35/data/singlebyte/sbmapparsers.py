@@ -12,7 +12,7 @@ directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "sbmaps")
 _temp = []
 identitymap = lambda pointer, ucs: ucs
 
-def read_single_byte(fil, *, mapper=identitymap): # Used for plainextascii, NOT for ecma-35.
+def read_single_byte(fil, *, mapper=identitymap, typ="plainext"):
     for _i in open(os.path.join(directory, fil), "r", encoding="utf-8"):
         if not _i.strip():
             continue
@@ -26,16 +26,46 @@ def read_single_byte(fil, *, mapper=identitymap): # Used for plainextascii, NOT 
             # Consortium-style format
             byts, ucs = _i.split("\t", 2)[:2]
             assert len(byts) == 4
-            pointer = int(byts[2:4], 16) - 0x80
-            if pointer < 0:
-                continue
+            if typ == "plainext":
+                pointer = int(byts[2:4], 16) - 0x80
+                if pointer < 0:
+                    continue
+            elif typ == "GL94":
+                pointer = int(byts[2:4], 16) - 0x21
+                if (pointer < 0) or (pointer > 93):
+                    continue
+            elif typ == "GR94":
+                pointer = int(byts[2:4], 16) - 0xA1
+                if (pointer < 0) or (pointer > 93):
+                    continue
+            elif typ == "GR96":
+                pointer = int(byts[2:4], 16) - 0xA0
+                if pointer < 0:
+                    continue
+            else:
+                raise ValueError("unknown type {!r}".format(typ))
         elif _i[:2] == "<U":
             # ICU-style format
             ucs, byts, direction = _i.split(" ", 2)
             assert byts[:2] == "\\x" and len(byts) == 4
-            pointer = int(byts[2:4], 16) - 0x80
-            if pointer < 0:
-                continue
+            if typ == "plainext":
+                pointer = int(byts[2:4], 16) - 0x80
+                if pointer < 0:
+                    continue
+            elif typ == "GL94":
+                pointer = int(byts[2:4], 16) - 0x21
+                if (pointer < 0) or (pointer > 93):
+                    continue
+            elif typ == "GR94":
+                pointer = int(byts[2:4], 16) - 0xA1
+                if (pointer < 0) or (pointer > 93):
+                    continue
+            elif typ == "GR96":
+                pointer = int(byts[2:4], 16) - 0xA0
+                if pointer < 0:
+                    continue
+            else:
+                raise ValueError("unknown type {!r}".format(typ))
             if direction.strip() == "|1":
                 # i.e. best-fit mapped by the encoder only
                 # Whereas, |3 means it's used only by the decoder (usually because duplicate)

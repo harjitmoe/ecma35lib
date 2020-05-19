@@ -166,11 +166,16 @@ ul.navbar li::after {
 .codepicture .charwrapper .wrappedtext {
     font-size: 72px;
 }
-.codepicture .charwrapper.circle .wrappedtext {
+.codepicture .charwrapper.circle .wrappedtext, .codepicture .charwrapper.lightdiamond .wrappedtext {
     font-size: 48px;
 }
 .codepicture .charwrapper.lightcircle .wrappedtext {
     font-size: 64px;
+}
+.codepicture .charwrapper.lightdiamond .enclosure {
+    fill: none;
+	stroke: black;
+	stroke-width: 3px;
 }
 .codepicture .charwrapper .wrappedtext .redundant {
     /* Don't `display: none;` (since that excludes it from copy-paste,

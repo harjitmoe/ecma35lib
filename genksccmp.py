@@ -41,14 +41,24 @@ def kutenfunc(number, row, cell):
         anchorlink = "<a href='#{:d}.{:d}.{:d}'>{:02d}-{:02d}-{}</a>".format(
                      number, row, -cell, number, row, 
                      "{:02d}+".format(-cell) if cell != -1 else "*")
-        fmteuc = "(1b4f{:02x}{:x}_)".format(0xa0 + row, (0xA0 - cell) >> 4)
+        cellbyte = 0x40 - cell
+        if cellbyte > 0x7D:
+            cellbyte += 3
+        euc = "{:02X}{:02X}".format(0xA0 + row, cellbyte)
+        if cellbyte < 0x70:
+            fmteuc = "<nobr>(Mac {}_)</nobr><br/>(EUC-ish ".format(euc[:-1])
+        elif cellbyte == 0x70:
+            fmteuc = "(Mac {}_, {}81-2)<br/>(EUC-ish ".format(euc[:-1], euc[:-2])
+        else:
+            fmteuc = "<nobr>(Mac {}+)</nobr><br/>(EUC-ish ".format(euc)
+        fmteuc += "1B4F{:02X}{:X}_)".format(0xa0 + row, (0xA0 - cell) >> 4)
     else:
         cellbyte = 0x40 + cell
         if cellbyte > 0x7D:
             cellbyte += 3
         if cellbyte == 0xA1: # not elif
             cellbyte = 0xFF
-        euc = "{:02x}{:02x}".format(0xA0 + row, cellbyte)
+        euc = "{:02X}{:02X}".format(0xA0 + row, cellbyte)
         fmteuc = "(MacKR {})".format(euc)
     return "{}<br>{}".format(anchorlink, fmteuc)
 

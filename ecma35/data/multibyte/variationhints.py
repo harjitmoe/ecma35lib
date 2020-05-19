@@ -414,6 +414,12 @@ def print_hints_to_html5(i, outfile, *, lang="ja"):
             print(strep2[:-1], end="", file=outfile)
             print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
             print("</text></svg>", file=outfile)
+        elif strep2[-1] == "\u20DF":
+            print("<svg viewBox='-2 -2 80 80' class='charwrapper lightdiamond'>", file=outfile)
+            print("<text y='54px' x='36px' text-anchor='middle' class='wrappedtext'>", file=outfile)
+            print(strep2[:-1], end="", file=outfile)
+            print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
+            print("</text><polygon points='0,36 36,72 72,36 36,0' class='enclosure' /></svg>", file=outfile)
         elif (strep2[0] == "[") and (strep2[-1] == "]"):
             hsf = 0
             for strepc in strep2[1:-1]:

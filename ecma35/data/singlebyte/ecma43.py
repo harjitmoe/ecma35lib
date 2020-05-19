@@ -7,9 +7,32 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 from ecma35.data import graphdata
+from ecma35.data.singlebyte import sbmapparsers as parsers
 
 # ISO/IEC 10367 G0 set (i.e. same as ECMA-6:US, current ECMA-6:IRV, US-ASCII)
 graphdata.gsets["ir006"] = (94, 1, tuple(range(0x21, 0x7F)))
+
+# ITU T.51 RHS, ETS 300 706 version
+_t51_bc = parsers.read_single_byte("UTC-L2-19-025/TELTXTG2.TXT", typ="GL94")
+_t51 = [_i if not (0x300 <= i <= 0x332) else -i for i in _t51_bc] # Mark combiners as prefix
+graphdata.gsets["ir090-ets-bettencourt"] = (94, 1, tuple(_t51))
+_t51 = list(t51_ets_bettencourt)
+# I'll be honest, the ETS glyph for so-called U+03B1 in the Latin G2 set does not match
+#   the U+03B1 in the Greek G0 set, so I'm VERY skeptical about whether ETS really treats
+#   them as the same character when their charts font clearly doesn't.
+# U+221D seems like a more appropriate mapping.
+_t51[55] = (0x221D,)
+graphdata.gsets["ir090-ets"] = (94, 1, tuple(_t51))
+
+# ITU T.51 RHS, vanilla old version
+_t51[31] = _t51[40] = _t51[53] = _t51[54] = _t51[55] = None
+graphdata.gsets["ir090"] = (94, 1, tuple(_t51))
+
+# ITU T.101 Data Syntax 2 G2 set
+_ir70 = _t51[:]
+_ir70[31] = (-0x0344,)
+_ir70[40] = (-0x0308,)
+graphdata.gsets["ir070"] = (94, 1, tuple(_ir70))
 
 # ECMA-94:L1 ISO-8859-1 Latin-1 Western European RHS
 graphdata.gsets["ir100"] = (96, 1, tuple(range(0xA0, 0x100)))
@@ -28,6 +51,14 @@ graphdata.gsets["ir101"] = (96, 1, (
              0x010D, 0x00E9, 0x0119, 0x00EB, 0x011B, 0x00ED, 0x00EE, 0x010F, 
              0x0111, 0x0144, 0x0148, 0x00F3, 0x00F4, 0x0151, 0x00F6, 0x00F7, 
              0x0159, 0x016F, 0x00FA, 0x0171, 0x00FC, 0x00FD, 0x0163, 0x02D9))
+
+# ITU T.61 RHS
+_t61 = _t51[:] # Make a copy
+_t61[8] = _t61[9] = _t61[11] = _t61[12] = _t61[13] = _t61[14] = \
+_t61[24] = _t61[25] = _t61[47] = _t61[48] = _t61[49] = _t61[50] = \
+_t61[51] = _t61[52] = _t61[59] = _t61[60] = _t61[61] = _t61[62] = None
+_t61[40] = (-0x0308,)
+graphdata.gsets["ir103"] = (96, 1, tuple(_t61))
 
 # ECMA-94:L3 ISO-8859-3 Latin-3 South European RHS
 graphdata.gsets["ir109"] = (96, 1, (
@@ -178,6 +209,13 @@ graphdata.gsets["ir148"] = (96, 1, (
              0x00E8, 0x00E9, 0x00EA, 0x00EB, 0x00EC, 0x00ED, 0x00EE, 0x00EF, 
              0x011F, 0x00F1, 0x00F2, 0x00F3, 0x00F4, 0x00F5, 0x00F6, 0x00F7, 
              0x00F8, 0x00F9, 0x00FA, 0x00FB, 0x00FC, 0x0131, 0x015F, 0x00FF))
+
+# ITU T.51 RHS, new version (with additions to fully support the Latin-1/7 repertoire)
+_t51.insert(0, (0xA0,))
+_t51.append((0xAD,))
+_t51[53] = ((0xAC,))
+_t51[54] = ((0xA6,))
+graphdata.gsets["ir156"] = (96, 1, tuple(_t51))
 
 # ECMA-144 ISO-8859-10 Latin-6 Nordic RHS
 graphdata.gsets["ir157"] = (96, 1, (
