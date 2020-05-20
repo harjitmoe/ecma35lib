@@ -88,6 +88,12 @@ def show(name, *, plane=None, wikitext=False, cdispmap={}, images={}, friendly=N
         if i is None:
             curchar = "\uFFFD"
             zenkaku = False
+        elif isinstance(i, tuple) and (len(i) == 1) and (i[0] < 0):
+            curchar = "\u25CC" + chr(-i[0])
+            zenkaku = False
+        elif (not isinstance(i, tuple)) and (i < 0):
+            curchar = "\u25CC" + chr(-i)
+            zenkaku = False
         elif isinstance(i, tuple) and (ucd.category(chr(i[0])) == "Co") and (not wikitext):
             if len(i) == 1:
                 curchar = "\x1B[35m\uFFFC\x1B[m"
@@ -307,20 +313,24 @@ def dump_plane(outfile, planefunc, kutenfunc,
                number, setnames, plarray, *, selfhandledanchorlink=False,
                part=0, lang="zh-TW", css=None, annots={}, cdispmap={}, 
                menuurl=None, menuname="Up to menu", jlfunc=None, 
-               lasturl=None, nexturl=None, lastname=None, nextname=None):
-    if part:
-        stx, edx = max((part - 1) * 16, 1), min(part * 16, 95)
-    else:
-        stx, edx = 1, 95
-    stpt = (stx - 1) * 94
-    edpt = (edx - 1) * 94
+               lasturl=None, nexturl=None, lastname=None, nextname=None,
+               is_96=False, is_sbcs=False):
+    stx, edx = (1, 95) if not is_96 else (0, 96)
+    if is_sbcs:
+        stx = 1 if not is_96 else 0
+        etx = 2 if not is_96 else 1
+    elif part:
+        stx, edx = max((part - 1) * 16, stx), min(part * 16, edx)
+    stpt = (stx - 1) * 94 if not is_96 else stx * 96
+    edpt = (edx - 1) * 94 if not is_96 else edx * 96
     spheniscus = [(i, j) for (i, j) in zip(setnames, plarray) if j[stpt:edpt] != (
                   (None,) * len(j[stpt:edpt]))]
     if len(spheniscus) == 1:
         return dump_preview(outfile, planefunc(number), kutenfunc, number, 
                spheniscus[0][1], lang=lang, css=css, part=part, jlfunc=jlfunc,
                menuurl=menuurl, menuname=menuname, lasturl=lasturl, 
-               nexturl=nexturl, lastname=lastname, nextname=nextname)
+               nexturl=nexturl, lastname=lastname, nextname=nextname,
+               is_96=is_96, is_sbcs=is_sbcs)
     setnames2 = tuple(zip(*spheniscus))[0] if spheniscus else ()
     zplarray = tuple(zip(*tuple(zip(*spheniscus))[1])) if spheniscus else ()
     h = ", part {:d}".format(part) if part else ""
@@ -343,8 +353,8 @@ def dump_plane(outfile, planefunc, kutenfunc,
             print("<tr class=annotation><td colspan={:d}><p>".format(len(plarray) + 1), file=outfile)
             print("Note:", annots[(number, row, 0)], file=outfile)
             print("</p></td></tr>", file=outfile)
-        for cell in range(1, 95):
-            st = zplarray[((row - 1) * 94) + (cell - 1)]
+        for cell in (range(1, 95) if not is_96 else range(0, 96)):
+            st = zplarray[((row - 1) * 94) + (cell - 1)] if not is_96 else zplarray[(row * 96) + cell]
             if len(set(i for i in st if (i is not None and not _isbmppua(i)))) > 1:
                 print("<tr class=collision>", file=outfile)
             else:
@@ -361,7 +371,11 @@ def dump_plane(outfile, planefunc, kutenfunc,
                 if i is None:
                     print("<td class=undefined></td>", file=outfile)
                     continue
-                pointer = ((number - 1) * (94 * 94)) + ((row - 1) * 94) + (cell - 1)
+                #
+                if not is_96:
+                    pointer = ((number - 1) * (94 * 94)) + ((row - 1) * 94) + (cell - 1)
+                else:
+                    pointer = ((number - 1) * (96 * 96)) + (row * 96) + cell
                 cdisplayi = cdispmap.get((pointer, i), i)
                 #
                 print("<td>", end="", file=outfile)
@@ -397,7 +411,16 @@ def dump_plane(outfile, planefunc, kutenfunc,
 
 def dump_preview(outfile, planename, kutenfunc, number, array, *, lang="zh-TW", planeshift="",
                css=None, part=None, menuurl=None, menuname="Up to menu", jlfunc=None, 
-               lasturl=None, nexturl=None, lastname=None, nextname=None):
+               lasturl=None, nexturl=None, lastname=None, nextname=None,
+               is_96=False, is_sbcs=False):
+    stx, edx = (1, 95) if not is_96 else (0, 96)
+    if is_sbcs:
+        stx = 1 if not is_96 else 0
+        etx = 2 if not is_96 else 1
+    elif part:
+        stx, edx = max((part - 1) * 16, stx), min(part * 16, edx)
+    stpt = (stx - 1) * 94 if not is_96 else stx * 96
+    edpt = (edx - 1) * 94 if not is_96 else edx * 96
     h = ", part {:d}".format(part) if part else ""
     print("<!DOCTYPE html><title>{}{}</title>".format(planename, h), file=outfile)
     if css:
@@ -406,24 +429,23 @@ def dump_preview(outfile, planename, kutenfunc, number, array, *, lang="zh-TW", 
     if menuurl or lasturl or nexturl:
         _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname)
     print("<table class=chart><thead><tr><th>Code</th>", file=outfile)
-    for row in range(max((part - 1) * 16, 1), min(part * 16, 95)) if part else range(1, 95):
+    for row in range(stx, edx):
         print("".join("<th>_{:1X}</th>".format(i) for i in range(0x10)), file=outfile)
         print("</tr></thead><tbody><tr><th class=codepoint>", file=outfile)
         print("<a name='{:d}.{:d}.1' class=anchor></a>".format(number, row), file=outfile)
         print(kutenfunc(number, row, -1), file=outfile)
         print("</th><td class=undefined></td>", file=outfile)
-        for cell in range(1, 95):
+        for cell in range(1, 95) if not is_96 else range(0, 96):
             if not (cell % 16):
                 print("</tr><tr><th class=codepoint>", file=outfile)
                 print("<a name='{:d}.{:d}.{:d}' class=anchor></a>".format(number, 
                             row, cell), file=outfile)
                 print(kutenfunc(number, row, -cell), file=outfile)
                 print("</th>", file=outfile)
-            i = array[((row - 1) * 94) + (cell - 1)]
+            i = array[((row - 1) * 94) + (cell - 1)] if not is_96 else array[(row * 96) + cell]
             if i is None:
                 print("<td class=undefined></td>", file=outfile)
                 continue
-            pointer = ((number - 1) * (94 * 94)) + ((row - 1) * 94) + (cell - 1)
             #
             print("<td>", end="", file=outfile)
             variationhints.print_hints_to_html5(i, outfile, lang=lang)
@@ -443,6 +465,30 @@ def dump_preview(outfile, planename, kutenfunc, number, array, *, lang="zh-TW", 
     if menuurl or lasturl or nexturl:
         _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname)
 
+def stat():
+    for name, i in graphdata.sumps.items():
+        print("Sump", name)
+        tot = atot = btot = 0
+        for esc, k in i.items():
+            if isinstance(k, tuple):
+                k = k[0]
+            if k not in graphdata.gsets:
+                tot += 1
+            elif esc[-1] < 0x40:
+                btot += 1
+            elif esc[-1] == 0x7E:
+                pass # The nil F-byte
+            else:
+                atot += 1
+        print("Missing:", tot)
+        print("Present:", atot)
+        print("Total standard:", tot + atot)
+        print("Custom (private use):", btot)
+        print("Total:", tot + atot + btot)
+        print()
+
+if __name__ == "__main__":
+    stat()
 
 
 
