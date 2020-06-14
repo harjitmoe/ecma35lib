@@ -19,8 +19,8 @@ def bully(fn, statesequence):
     stringdat = []
     with open(fn, "r", encoding="utf-8") as f:
         for line in f:
-            if line.strip() and not line.startswith("#"):
-                a, b = line.split(None, 3)[:2]
+            if line.strip() and not line.startswith("#") and (len(line.split(None, 1)) == 2):
+                a, b = line.split(None, 2)[:2]
                 if b[0] == "#": # i.e. "#UNDEFINED"
                     continue
                 assert a[:2] == "0x", (a, b)
@@ -34,7 +34,7 @@ def bully(fn, statesequence):
                     # Don't insert truncated Hangul fillers
                     continue
                 elif len(unic) > 1:
-                    continue # Nerfs test efficacy, but just can't test reliably otherwise.
+                    continue # Nukes test efficacy, but just can't compare reliably otherwise.
                 else:
                     if stuff1 < 256:
                         stuff2 = bytes([stuff1])
@@ -59,6 +59,8 @@ print("===", "KPS 9566:2011", "===")
 bully("ecma35/data/multibyte/mbmaps/Other/AppendixA_KPS9566-2011-to-Unicode.txt", b"\x1B%1\x1B$)N")
 print("===", "KPS 9566:2003", "===")
 bully("ecma35/data/multibyte/mbmaps/UTC/KPS9566.TXT", b"\x1B%1\x1B&0\x1B$)N")
+print("===", "Unified Hangul Code", "===")
+bully("ecma35/data/multibyte/mbmaps/UTC/KSC5601.TXT", b"\x1B%1")
 print("===", "Microsoft Big5", "===")
 bully("ecma35/data/multibyte/mbmaps/Vendor/CP950.TXT", b"\x1B%4\x1B&?\x1B$+!2")
 print("===", "KanjiTalk 7", "===")

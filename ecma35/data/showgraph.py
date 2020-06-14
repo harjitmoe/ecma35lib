@@ -314,7 +314,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
                part=0, lang="zh-TW", css=None, annots={}, cdispmap={}, 
                menuurl=None, menuname="Up to menu", jlfunc=None, 
                lasturl=None, nexturl=None, lastname=None, nextname=None,
-               is_96=False, is_sbcs=False):
+               is_96=False, is_sbcs=False, pua_collides=False):
     stx, edx = (1, 95) if not is_96 else (0, 96)
     if is_sbcs:
         stx = 1 if not is_96 else 0
@@ -356,6 +356,8 @@ def dump_plane(outfile, planefunc, kutenfunc,
         for cell in (range(1, 95) if not is_96 else range(0, 96)):
             st = zplarray[((row - 1) * 94) + (cell - 1)] if not is_96 else zplarray[(row * 96) + cell]
             if len(set(i for i in st if (i is not None and not _isbmppua(i)))) > 1:
+                print("<tr class=collision>", file=outfile)
+            elif pua_collides and (len(set(st) | {None}) > 2):
                 print("<tr class=collision>", file=outfile)
             else:
                 print("<tr>", file=outfile)

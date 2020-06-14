@@ -11,7 +11,7 @@
 # These are constrained to appear in their ASCII positions or not at all (whereäs other ASCII 
 # controls may not be moved around in the C0 set, but may be moved to the C1 set). Furthermore, 
 # they are the only transmission control characters permitted to appear in the C0 set.
-# The 1963 version lacked DLE and ETB (see below), and additionally had RU (Are You…).
+# The 1963 version lacked ETB (see below), and additionally had RU (Are You…).
 
 # Format effectors (aliases FE0 thru FE5):
 #    BS, HT, LF, VT, FF, CR
@@ -19,7 +19,8 @@
 
 # Device controls (aliases DC0 thru DC4):
 #    DC0, XON, DC2, XOFF, DC4
-# DC0 in the 1963 version was later removed in favour of DLE (TC7).
+# DC0 in the 1963 version was already defined as "device control reserved for data link escape"
+# DLE was later re-classified as a transmission control (TC7, rather than DC0).
 
 # Information separators (aliases IS8 thru IS1, or S0 thru S7):
 #    S0, S1, S2, S3, FS, GS, RS, US
@@ -65,14 +66,14 @@ c0sets = {# The ECMA-6 controls, i.e. originating from 1967 edition ASCII:
                     # I'm just using SO and SI as the mnemonics since otherwise is overcomplicated.
                     "SO", # Shift Out, Locking Shift One (LS1)
                     "SI", # Shift In, Locking Shift Two (LS0)
-                    # The 1963 ASCII had DC0 instead of TC7 (DLE).
-                    "DLE", # Data Link Escape, Transmission Control Seven (TC7)
+                    # The 1963 ASCII had DC0 instead of TC7, though it was still defined as DLE.
+                    "DLE", # Data Link Escape, Transmission Control Seven (TC7).
                     # The XON and XOFF mnemonics are conventional.
                     "XON", # Transmit On, Device Control One (DC1)
                     "DC2", # Device Control Two
                     "XOFF", # Transmit Off, Device Control Three (DC3)
                     "DC4", # Device Control Four
-                    "NAK", # Negative Acknowledgement, Transmission Control Eight (TC8)
+                    "NAK", # Negative Acknowledgement, Error (ERR), Transmission Control Eight (TC8)
                     "SYN", # Synchronous Idle (SYNC), Transmission Control Nine (TC9)
                     "ETB", # End of Transmission Block, Transmission Control Ten (TC10)
                     "CAN", # Cancel
@@ -87,6 +88,7 @@ c0sets = {# The ECMA-6 controls, i.e. originating from 1967 edition ASCII:
                     "US"), # Unit Separator, Information Separator One (IS1), Separator Seven (S7)
           # Alternative version with newline (NL) for linefeed. This is listed as a prior agreement
           # permitted alternative in ISO-IR-001. NL and LF are Unicode aliases for the same code.
+          # This arrangement is used in some versions of Re-mapped EBCDIC.
           "ir001nl": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
                       "BS", "HT", "NL", "VT", "FF", "CR", "SO", "SI", 
                       "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
@@ -136,6 +138,39 @@ c0sets = {# The ECMA-6 controls, i.e. originating from 1967 edition ASCII:
           # also subsets its controls to only GS, RS and (the mandatory) ESC.
           "ir048": (None,)*27 + ("ESC", None, "GS", "RS", None),
           #
+          # ETS 300 706 C0 set (almost the ITU T.101 Data Syntax 2 Serial Version C1 set)
+          "ir056c0": ("ABK", # Alpha Black
+                  "ANR", # Alpha Red
+                  "ANG", # Alpha Green
+                  "ANY", # Alpha Yellow
+                  "ANB", # Alpha Blue
+                  "ANM", # Alpha Magenta
+                  "ANC", # Alpha Cyan
+                  "ANW", # Alpha White
+                  "FSH", # Flashing
+                  "STD", # Steady
+                  "EBX", # End Box
+                  "SBX", # Start Box
+                  "NSZ", # Normal Size
+                  "DBH", # Double Height
+                  "DBW", # Double Width
+                  "DBS", # Double Size
+                  "MBK", # Mosaic Black
+                  "MSR", # Mosaic Red
+                  "MSG", # Mosaic Green
+                  "MSY", # Mosaic Yellow
+                  "MSB", # Mosaic Blue
+                  "MSM", # Mosaic Magenta
+                  "MSC", # Mosaic Cyan
+                  "MSW", # Mosaic White
+                  "CDY", # Conceal Display
+                  "SPL", # Stop Lining (Contiguous Mosaic Characters)
+                  "STL", # Start Lining (Separated Mosaic Characters)
+                  "ESC", # Escape or Switch (toggle between Teletext G0 sets)
+                  "BBD", # Black Background
+                  "NBD", # New Background
+                  "HMS", # Hold Mosaic
+                  "RMS"), # Release Mosaic
           # JIS C 6225's C0 set, differs by replacing IS4 (that is to say, FS) with CEX.
           "ir074": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
                     "BS", "HT", "LF", "VT", "FF", "CR", "SO", "SI",
@@ -243,6 +278,39 @@ c1sets = {# German bibliographic controls used in DIN 31626
                   "KWE", # Keyword End
                   "PSB", # Permutation String Beginning
                   "PSE"), # Permutation String End
+          # ITU T.101 Data Syntax 2 Serial Version
+          "ir056": ("ABK", # Alpha Black
+                  "ANR", # Alpha Red
+                  "ANG", # Alpha Green
+                  "ANY", # Alpha Yellow
+                  "ANB", # Alpha Blue
+                  "ANM", # Alpha Magenta
+                  "ANC", # Alpha Cyan
+                  "ANW", # Alpha White
+                  "FSH", # Flashing
+                  "STD", # Steady
+                  "EBX", # End Box
+                  "SBX", # Start Box
+                  "NSZ", # Normal Size
+                  "DBH", # Double Height
+                  "DBW", # Double Width
+                  "DBS", # Double Size
+                  "MBK", # Mosaic Black
+                  "MSR", # Mosaic Red
+                  "MSG", # Mosaic Green
+                  "MSY", # Mosaic Yellow
+                  "MSB", # Mosaic Blue
+                  "MSM", # Mosaic Magenta
+                  "MSC", # Mosaic Cyan
+                  "MSW", # Mosaic White
+                  "CDY", # Conceal Display
+                  "SPL", # Stop Lining
+                  "STL", # Start Lining
+                  "CSI", # Control Sequence Introducer (see definitions below)
+                  "BBD", # Black Background
+                  "NBD", # New Background
+                  "HMS", # Hold Mosaic
+                  "RMS"), # Release Mosaic
           # Bibliographic controls from pre-1985 ISO 6630; closely related to the DIN controls but 
           # omits several, and adds four more controls in space unused by the DIN controls.
           # As such doesn't collide with DIN at any point, unlike its IRR replacement ir124.
@@ -254,6 +322,39 @@ c1sets = {# German bibliographic controls used in DIN 31626
                   "SSB", # Secondary Sorting Value Beginning
                   "SSE", # Secondary Sorting Value End
                   None, None, None, "KWB", "KWE", "PSB", "PSE"),
+          # WIP ITU T.101 Data Syntax 2 Parallel Version
+          "ir073": ("BKF", # Black Foreground
+                  "RDF", # Red Foreground
+                  "GRF", # Green Foreground
+                  "YLF", # Yellow Foreground
+                  "BLF", # Blue Foreground
+                  "MGF", # Magenta Foreground
+                  "CNF", # Cyan Foreground
+                  "WHF", # White Foreground
+                  "FSH", # Flashing
+                  "STD", # Steady
+                  "EBX", # End Box
+                  "SBX", # Start Box
+                  "NSZ", # Normal Size
+                  "DBH", # Double Height
+                  "DBW", # Double Width
+                  "DBS", # Double Size
+                  "BKB", # Black Background
+                  "RDB", # Red Background
+                  "GRB", # Green Background
+                  "YLB", # Yellow Background
+                  "BLB", # Blue Background
+                  "MGB", # Magenta Background
+                  "CNB", # Cyan Background
+                  "WHB", # White Background
+                  "CDY", # Conceal Display
+                  "SPL", # Stop Lining
+                  "STL", # Start Lining
+                  "CSI", # Control Sequence Introducer (see definitions below)
+                  "NPO", # Normal Polarity
+                  "IPO", # Inverse Polarity
+                  "TRB", # Transparent Background
+                  "SCD"), # Stop Conceal
           # Those of the "ANSI escape" codes (ECMA-48) which occupy the C1 area:
           "ir077": (None, # Vacant
                   None, # Vacant
@@ -301,6 +402,72 @@ c1sets = {# German bibliographic controls used in DIN 31626
                   "NSB", "NSE", None, "PLD", "PLU", None, None, None,
                   None, "EAB", "EAE", None, None, "SIB", "SIE", "SSB",
                   "SSE", None, None, None, "KWB", "KWE", "PSB", "PSE"),
+          # ITU T.101 Data Syntax 1
+          "ir133": ("BKF", # Black Foreground
+                  "RDF", # Red Foreground
+                  "GRF", # Green Foreground
+                  "YLF", # Yellow Foreground
+                  "BLF", # Blue Foreground
+                  "MGF", # Magenta Foreground
+                  "CNF", # Cyan Foreground
+                  "WHF", # White Foreground
+                  "SSZ", # Small Size
+                  "MSZ", # Medium Size
+                  "NSZ", # Normal Size
+                  "SZX", # Size Control
+                  None, # Vacant
+                  None, # Vacant
+                  "CON", # Cursor On
+                  "COF", # Cursor Off
+                  "COL", # Background or Foreground Colour
+                  "FLC", # Flashing Control
+                  "CDC", # Concel Display Control
+                  None, # Vacant
+                  None, # Vacant
+                  "P-MACRO", # Photo Macro
+                  None, # Vacant
+                  None, # Vacant
+                  "RPC", # Repeat Control
+                  "SPL", # Stop Lining
+                  "STL", # Start Lining
+                  None, # Vacant
+                  None, # Vacant
+                  None, # Vacant
+                  "UNP", # Unprotected
+                  "PRT"), # Protected
+          # ITU T.101 Data Syntax 3
+          "ir136": ("DEFM", # Define Macro
+                  "DEFP", # Define P-Macro
+                  "DEFT", # Define Transmit-Macro
+                  "DEFD", # Define DRCS
+                  "DEFX", # Define Textrue
+                  "END", # End
+                  "REP", # Repeat
+                  "REPE", # Repeat to End of Line
+                  "REVV", # Reverse Video
+                  "NORV", # Normal Video
+                  "SMTX", # Small Text
+                  "METX", # Medium Text
+                  "NOTX", # Normal Text
+                  "DBH", # Double Height
+                  "BSTA", # Blink Start
+                  "DBS", # Double Size
+                  "PRO", # Protect
+                  None, # Vacant (EDC1)
+                  None, # Vacant (EDC2)
+                  None, # Vacant (EDC3)
+                  None, # Vacant (EDC4)
+                  "WWON", # Word Wrap On
+                  "WWOF", # Word Wrap Off
+                  "SCON", # Scroll On
+                  "SCOF", # Scroll Off
+                  "USTA", # Underline Start
+                  "USTO", # Underline Stop
+                  "FLC", # Flash Cursor
+                  "STC", # Steady Cursor
+                  "COF", # Cursor Off
+                  "BSTO", # Blink Stop
+                  "UNP"), # Unprotect
           # The C1 of the infamous RFC 1345 (IR-111 *cough*), whence Unicode's "figment" aliases:
           "RFC1345": ("PAD", # Padding Character
                   "HOP", # High Octet Preset

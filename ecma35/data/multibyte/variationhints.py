@@ -186,6 +186,7 @@ applesinglehints = {
     #
     # Kludgy unrenderable combining sequences with properly defined alternatives:
     (0x25B3, 0x20DD): (0x1F7D5,), # White triangle in white circle
+    (0x25C7, 0x20DE): (0x26CB,), # Diamond in square (added eventually from ARIB)
     (0x25C7, 0x20DF): (0x1F79C,), # Two-ringed diamond target
     (0x25C7, 0x20DF, 0x20DF): (0x1F79C, 0xF87F), # Three-ringed diamond target
     (0x25C9, 0x20DD): (0x1F78B,), # Circular target (black bullseye)
@@ -229,6 +230,11 @@ applesinglehints = {
     (0xF84D,): (0x23E2,), # Trapezoid
 }
 # Not sure where to put this observation, but MacKorean's U+25B4+20E4 is basically DPRK's mountain ahead.
+#
+# MacKorean characters in Nanum Gothic:
+#   0xA141 glyph8191
+#   (then increments by 1 for every non-unused character, including those
+#    overlapping the main plane - last is glyph9329)
 #
 # Adobe-Japan1 mappings of some of the MacKorean 0xA6xx dingbat characters:
 # 0xA656 is CID-12242 (Apple =U+25A0+20DF)
