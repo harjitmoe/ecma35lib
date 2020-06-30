@@ -49,6 +49,7 @@ plane1 = (1, ("1978 JIS",  "1983 JIS",  "1990 JIS",
           graphdata.gsets["ir042nec"][2],
           graphdata.gsets["ir042ibm"][2],
           graphdata.gsets["ir168ibm"][2],
+          #graphdata.gsets["ir168icueuc"][2], # same as web.
           graphdata.gsets["ir168web"][2],
           graphdata.gsets["ir168mackt6"][2],
           graphdata.gsets["ir168macps"][2],
@@ -62,7 +63,7 @@ plane1 = (1, ("1978 JIS",  "1983 JIS",  "1990 JIS",
 plane2 = (2, ("MS / HTML5<br>IBM SJIS Ext", "DoCoMo<br>SJIS Emoji",
               "au by KDDI<br>SJIS Emoji", "SoftBank<br>SJIS Emoji",
               "1990 JIS", "Va Extension", "OSF EUC<br>Plane 2M",
-              "IBM 90JIS", "2000/04 JIS"), [
+              "IBM 90JIS", "ICU EUC<br>Plane 2", "2000/04 JIS"), [
           graphdata.gsets["ibmsjisextpua"][2],
           graphdata.gsets["docomosjisext"][2],
           graphdata.gsets["kddipictsjisext"][2],
@@ -71,6 +72,7 @@ plane2 = (2, ("MS / HTML5<br>IBM SJIS Ext", "DoCoMo<br>SJIS Emoji",
           graphdata.gsets["ir159va"][2],
           graphdata.gsets["ir159osfm"][2],
           graphdata.gsets["ir159ibm"][2],
+          graphdata.gsets["ir159icueuc"][2],
           graphdata.gsets["ir229"][2],
 ])
 

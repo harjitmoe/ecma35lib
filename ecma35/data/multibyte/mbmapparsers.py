@@ -169,13 +169,14 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
                     men = 1
             mkts = ((men, ku, ten),)
         elif _i[:2] == "<U":
-            # ICU-style format, over GL (or EUC-TW) without transformation
+            # ICU-style format, over GL or as EUC
             ucs, byts, direction = _i.split(" ", 2)
             assert byts[:2] == "\\x"
             byts = [int(i, 16) for i in byts[2:].split("\\x")]
             if (direction.strip() == "|1") or (twoway and (direction.strip() == "|3")):
-                # i.e. best-fit mapped by the encoder only
-                # Whereas, |3 means it's used only by the decoder (usually because duplicate)
+                # |0 means a encoder/decoder two-way mapping
+                # |1 appears to mean an encoder-only mapping, e.g. fallback ("best fit")
+                # |3 appears to mean a decoder-only mapping (disfavoured duplicate)
                 continue
             if len(byts) == 4:
                 assert byts[0] == 0x8E

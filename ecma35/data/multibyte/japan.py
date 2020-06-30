@@ -107,6 +107,8 @@ graphdata.gsets["ir159va"] = jisx0212_extva = (94, 2,
         jisx0212[2][:462] + tuple((_i,) for _i in range(0x30F7, 0x30FB)) + jisx0212[2][466:])
 graphdata.gsets["ir159ibm"] = jisx0212ibm = (94, 2,
         parsers.read_main_plane("ICU/ibm-954_P101-2007.ucm", eucjp=1, plane=2))
+graphdata.gsets["ir159icueuc"] = jisx0208_ibm90 = (94, 2,
+        parsers.read_main_plane("ICU/euc-jp-2007.ucm", eucjp=1, plane=2))
 
 # JIS X 0208:1990 or 1997
 graphdata.gsets["ir168"] = jisx0208_1990 = (94, 2, 
@@ -114,6 +116,8 @@ graphdata.gsets["ir168"] = jisx0208_1990 = (94, 2,
 graphdata.gsets["ir168utc"] = jisx0208_utc = (94, 2, parsers.read_main_plane("UTC/JIS0208.TXT"))
 graphdata.gsets["ir168ibm"] = jisx0208_ibm90 = (94, 2,
         parsers.read_main_plane("ICU/ibm-954_P101-2007.ucm", eucjp=1, plane=1))
+#graphdata.gsets["ir168icueuc"] = jisx0208_ibm90 = (94, 2, # Same as web, basically
+#        parsers.read_main_plane("ICU/euc-jp-2007.ucm", eucjp=1, plane=1))
 # JIS X 0208, Microsoft and WHATWG version, as specified for use in HTML5
 graphdata.gsets["ir168web"] = jisx0208_html5 = (94, 2,
         parsers.read_main_plane("WHATWG/index-jis0208.txt"))
