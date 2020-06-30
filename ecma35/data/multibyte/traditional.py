@@ -190,14 +190,20 @@ def read_big5extras(fil):
                 continue
         elif _i.startswith("<U"):
             # ICU-style format
-            ucs, byts, direction = _i.split(" ", 2)
-            assert byts[:2] == "\\x"
-            byts = [int(i, 16) for i in byts[2:].split("\\x")]
-            if len(byts) < 2:
+            ucs, byts, direction = _i.split(None, 2)
+            if len(byts) >= 8:
+                assert (byts[:2] == "\\x") and (byts[4:6] == "\\x")
+                lead = int(byts[2:4], 16)
+                trail = int(byts[6:8], 16)
+                if 0x7F <= trail <= 0xA0:
+                    # IBM-950 includes expanded trail byte range similarly to Big5+ but with
+                    #   PUA assignments. They cannot currently be processed by this system.
+                    continue
+                first = lead - 0x81
+                last = (trail - 0xA1 + 63) if trail >= 0xA1 else (trail - 0x40)
+                extpointer = (157 * first) + last
+            else:
                 continue
-            first = byts[0] - 0x81
-            last = (byts[1] - 0xA1 + 63) if byts[1] >= 0xA1 else (byts[1] - 0x40)
-            extpointer = (157 * first) + last
         elif _i.lstrip()[0] in "0123456789":
             byts, ucs = _i.split("\t", 2)[:2]
             extpointer = int(byts.strip(), 10)
@@ -228,7 +234,7 @@ def read_big5extras(fil):
             ten = pseudoten - 63
         newpointer = ((ku - 1) * 94) + (ten - 1)
         if len(_temp) > newpointer:
-            assert _temp[newpointer] is None, (newpointer, int(ucs[2:], 16), _temp[newpointer])
+            assert _temp[newpointer] is None, (newpointer, int(ucs[2:].rstrip(">"), 16), _temp[newpointer])
             _temp[newpointer] = (int(ucs[2:].rstrip(">"), 16),)
         else:
             while len(_temp) < newpointer:
@@ -331,14 +337,6 @@ def read_big5_planes(fil, big5_to_cns_g2, *, plane=None, twoway=False, mapper=pa
             # Consortium-style format
             byts, ucs = _i.split("\t", 2)[:2]
             byts = int(byts[2:], 16)
-            if byts not in big5_to_cns_g2:
-                continue
-            men, ku, ten = big5_to_cns_g2[byts]
-            if plane is not None: # i.e. if we want a particular plane's two-byte mapping.
-                if men != plane:
-                    continue
-                else:
-                    men = 1
         elif _i[:2] == "<U":
             # ICU-style format
             ucs, byts, direction = _i.split(" ", 2)
@@ -350,16 +348,25 @@ def read_big5_planes(fil, big5_to_cns_g2, *, plane=None, twoway=False, mapper=pa
                 # |1 appears to mean an encoder-only mapping, e.g. fallback ("best fit")
                 # |3 appears to mean a decoder-only mapping (disfavoured duplicate)
                 continue
-            if byts not in big5_to_cns_g2:
-                continue
-            men, ku, ten = big5_to_cns_g2[byts]
-            if plane is not None: # i.e. if we want a particular plane's two-byte mapping.
-                if men != plane:
-                    continue
-                else:
-                    men = 1
+        elif _i.lstrip()[0] in "0123456789":
+            # WHATWG format
+            byts, ucs = _i.split("\t", 2)[:2]
+            extpointer = int(byts.strip(), 10)
+            first, last = extpointer // 157, extpointer % 157
+            lead = first + 0x81
+            trail = (last - 63 + 0xA1) if last >= 63 else (last + 0x40)
+            byts = int("{:02X}{:02X}".format(lead, trail), 16)
         else:
             continue
+        #
+        if byts not in big5_to_cns_g2:
+            continue
+        men, ku, ten = big5_to_cns_g2[byts]
+        if plane is not None: # i.e. if we want a particular plane's two-byte mapping.
+            if men != plane:
+                continue
+            else:
+                men = 1
         assert ucs[:2] in ("0x", "U+", "<U")
         ucs = ucs[2:]
         pointer = ((men - 1) * 94 * 94) + ((ku - 1) * 94) + (ten - 1)
@@ -405,6 +412,10 @@ big5_to_cns2[0xDDFC] = (2, 33, 86)
 
 for _i in big5_to_cns1:
     big5_to_cns2[_i] = (1,) + big5_to_cns1[_i]
+# Update for the Euro sign (which merely extends the existing range-mapping between the two of
+#   them, but postdates RFC 1922). This correspondance matches all three of Windows-950, WHATWG and
+#   the Big5E quoted on the CNS website itself, so is more or less entirely agreed upon.
+big5_to_cns2[0xA3E1] = (1, 34, 34)
 
 # IBM's plane 13 contains codes mainly for round-trip compatibility with Big5 variants.
 # It is not compatible with the standard plane 13 (introduced 2007).
@@ -414,14 +425,18 @@ big5_to_cns2_ibmvar[0xDDFC] = (13, 4, 42)
 
 # Now that big5_to_cns2 is defined, we can do this:
 graphdata.gsets["ir171-ms"] = (94, 2, read_big5_planes("ICU/windows-950-2000.ucm", big5_to_cns2, plane=1))
-graphdata.gsets["ir171-ibm"] = (94, 2, read_big5_planes("ICU/ibm-950_P110-1999.ucm", big5_to_cns2, plane=1))
-graphdata.gsets["ir171-ibmeuro"] = (94, 2, read_big5_planes("ICU/ibm-1373_P100-2002.ucm", big5_to_cns2, plane=1))
+# IBM-950 uses a considerably different mapping to Windows-950 (though the rough identity of the
+#   characters doesn't differ besides no euro and added control pictures, the mapping does differ).
+graphdata.gsets["ir171-ibm950"] = (94, 2, read_big5_planes("ICU/ibm-950_P110-1999.ucm", big5_to_cns2, plane=1))
+# IBM-1373 mapping differs from MS-950 in whether C255 (01-86-33, 1-7641) maps to U+5F5E or U+5F5D
+#   (differing only in the version of the snout radical used)
+graphdata.gsets["ir171-ibm1373"] = (94, 2, read_big5_planes("ICU/ibm-1373_P100-2002.ucm", big5_to_cns2, plane=1))
 graphdata.gsets["ir171-utcbig5"] = (94, 2, read_big5_planes("UTC/BIG5.TXT", big5_to_cns2, plane=1))
 graphdata.gsets["ir171-utc"] = (94, 2, parsers.read_main_plane("UTC/CNS11643.TXT", plane=1))
-graphdata.gsets["ir172-ms"] = (94, 2, read_big5_planes("ICU/windows-950-2000.ucm", big5_to_cns2, plane=2))
-graphdata.gsets["ir172-ibm"] = (94, 2, read_big5_planes("ICU/ibm-950_P110-1999.ucm", big5_to_cns2, plane=2))
-graphdata.gsets["ir172-ibmeuro"] = (94, 2, read_big5_planes("ICU/ibm-1373_P100-2002.ucm", big5_to_cns2, plane=2))
-graphdata.gsets["ir172-utcbig5"] = (94, 2, read_big5_planes("UTC/BIG5.TXT", big5_to_cns2, plane=2))
+# Basically the Windows one, but with the addition of the control pictures:
+graphdata.gsets["ir171-web"] = (94, 2, read_big5_planes("WHATWG/index-big5.txt", big5_to_cns2, plane=1))
+# For IR-172 (unlike IR-171), MS, Mac, Web and UTC-BIG5 actually match (while UTC-CNS differs)
+graphdata.gsets["ir172-big5"] = (94, 2, read_big5_planes("UTC/BIG5.TXT", big5_to_cns2, plane=2))
 graphdata.gsets["ir172-utc"] = (94, 2, parsers.read_main_plane("UTC/CNS11643.TXT", plane=2))
 
 # Macintosh-compatibility variants
@@ -429,7 +444,7 @@ maccnsdata = parsers.read_untracked_mbfile(read_big5_planes,
              "Vendor/CHINTRAD.TXT", "Vendor---CHINTRAD_mainplane_ahmap.json", "Vendor/macCNS.json", 
              big5_to_cns_g2 = big5_to_cns2_ibmvar, mapper = variationhints.ahmap)
 graphdata.gsets["ir171-mac"] = (94, 2, maccnsdata[:94*94])
-graphdata.gsets["ir172-mac"] = (94, 2, maccnsdata[94*94:94*94*2])
+#graphdata.gsets["ir172-mac"] = (94, 2, maccnsdata[94*94:94*94*2]) # same as ir172-big5
 
 # The most basic subset of EUC-TW supported is basically a transformation format of
 #   Big5. Anything more isn't really supported/used nearly as much. So using Big5
@@ -444,6 +459,9 @@ graphdata.gsets["hkscs"] = hkscs_extras = (94, 2, read_big5extras("WHATWG/index-
 graphdata.gsets["etenexts"] = eten_extras = (94, 2, 
     ((None,) * (32 * 188)) + hkscs_extras[2][(32 * 188):])
 graphdata.gsets["ms950exts"] = ms_big5_extras = (94, 2, read_big5extras("ICU/windows-950-2000.ucm"))
+graphdata.gsets["ibmbig5exts"] = ms_big5_extras = (94, 2, read_big5extras("ICU/ibm-950_P110-1999.ucm"))
+# IBM-1373 has the same Big5 exts mapping as MS-950. IBM-950 exts is also a subset of ETEN exts,
+#   but a different (and non-overlapping) one, for some reason.
 graphdata.gsets["utcbig5exts"] = utc_big5_extras = (94, 2, read_big5extras("UTC/BIG5.TXT"))
 graphdata.gsets["ms950utcexts"] = msutc_big5_extras = (94, 2,
     utc_big5_extras[2] + ms_big5_extras[2][len(utc_big5_extras[2]):])

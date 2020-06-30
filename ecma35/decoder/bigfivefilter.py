@@ -106,10 +106,6 @@ def decode_bigfive(stream, state):
                     for i in big5_to_cns2[number]:
                         yield ("G2", i, "Big5")
                         big5_lead = None
-                elif number == 0xA3E1:
-                    # Kludge but I can't really do anything about it...
-                    yield ('CHAR', 0x20AC, 'Big5EuroExt', (0xA5E1,), 'Big5EuroExt', 'Big5EuroExt')
-                    big5_lead = None
                 else:
                     yield ("ERROR", "BIG5NOEUCMAPPING")
                     big5_lead = None

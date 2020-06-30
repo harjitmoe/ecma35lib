@@ -159,11 +159,14 @@ Double-byte assignments:
 |`IRR 4 G*DM4 G`|CNS 11643 plane 1, mapped from Macintosh-compatible Big-5|
 |`IRR 5 G*DM4 G`|CNS 11643 plane 1, as officially defined in Taiwan|
 |`IRR 6 G*DM4 G`|CNS 11643 plane 1, an IBM-related variant|
+|`IRR 7 G*DM4 G`|CNS 11643 plane 1, mapped from IBM Big-5|
+|`IRR 8 G*DM4 G`|CNS 11643 plane 1, mapped from IBM's Microsoft-style Big-5|
+|`IRR 9 G*DM4 G`|CNS 11643 plane 1, mapped from WHATWG/HTML5 Big-5|
 |`IRR 0 G*DM4 H`|CNS 11643 plane 2, recommended version (default)|
-|`IRR 1 G*DM4 H`|CNS 11643 plane 2, mapped from Microsoft Big-5|
+|`IRR 1 G*DM4 H`|CNS 11643 plane 2, as mapped from whichever Big-5|
 |`IRR 2 G*DM4 H`|CNS 11643 plane 2, according to UTC mappings|
-|`IRR 3 G*DM4 H`|CNS 11643 plane 2, mapped from UTC Big-5|
-|`IRR 4 G*DM4 H`|CNS 11643 plane 2, mapped from Macintosh-compatible Big-5|
+|`IRR 3 G*DM4 H`|~~CNS 11643 plane 2, mapped from Big-5 (duplicated `IRR 1`, removed)~~|
+|`IRR 4 G*DM4 H`|~~CNS 11643 plane 2, mapped from Big-5 (duplicated `IRR 1`, removed)~~|
 |`IRR ? G*DM4 I`|CNS 11643-1992 plane 3|
 |`IRR 0 G*DM4 I`|CNS 11643-1988 plane 14|
 |`IRR 1 G*DM4 I`|CNS 11643-1988 plane 14 with extensions, as submitted to the IRG|

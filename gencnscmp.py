@@ -22,12 +22,14 @@ def swap_arrows(t):
     return t[:148] + (t[149], t[148]) + t[150:]
 
 print("Loading 1")
-plane1 = (1, ("UTC Big5", "UTC CNS", "MS Big5", "Mac Big5", "Yasuoka CNS",
-              "ICU CNS 1992", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
+plane1 = (1, ("UTC Big5", "UTC CNS", "MS Big5", "Mac Big5", "IBM Big5", "Web Big5", "Yasuoka CNS",
+              "ICU CNS'92", "ICU EUC'14", "GOV-TW CNS", "Output"), [
           swap_arrows(traditional.read_big5_planes("UTC/BIG5.TXT", big5_to_cns_g2=traditional.big5_to_cns2, plane=1)),
           parsers.read_main_plane("UTC/CNS11643.TXT", plane=1),
           swap_arrows(graphdata.gsets["ir171-ms"][2]),
           swap_arrows(graphdata.gsets["ir171-mac"][2]),
+          swap_arrows(graphdata.gsets["ir171-ibm950"][2]),
+          swap_arrows(graphdata.gsets["ir171-web"][2]),
           parsers.read_main_plane("Other/Uni2CNS", plane=1),
           parsers.read_main_plane("ICU/cns-11643-1992.ucm", plane=1),
           parsers.read_main_plane("ICU/euc-tw-2014.ucm", plane=1),
@@ -40,12 +42,10 @@ plane1 = (1, ("UTC Big5", "UTC CNS", "MS Big5", "Mac Big5", "Yasuoka CNS",
 ])
 
 print("Loading 2")
-plane2 = (2, ("UTC Big5", "UTC CNS", "MS Big5", "Mac Big5", "Yasuoka CNS",
-              "ICU CNS 1992", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
+plane2 = (2, ("UTC CNS", "Big5", "Yasuoka CNS", "ICU CNS 1992", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
           traditional.read_big5_planes("UTC/BIG5.TXT", big5_to_cns_g2=traditional.big5_to_cns2, plane=2),
           parsers.read_main_plane("UTC/CNS11643.TXT", plane=2),
-          graphdata.gsets["ir172-ms"][2],
-          graphdata.gsets["ir172-mac"][2],
+          graphdata.gsets["ir172-big5"][2],
           parsers.read_main_plane("Other/Uni2CNS", plane=2),
           parsers.read_main_plane("ICU/cns-11643-1992.ucm", plane=2),
           parsers.read_main_plane("ICU/euc-tw-2014.ucm", plane=2),
@@ -350,9 +350,16 @@ annots = {
              "section, which sections it frequently duplicates (besides being in brush-script "
              "even in mincho/songti style fonts for some reason).\u2002I do not know what they "
              "are intended to be used for.",
- (1, 34, 35): "The Euro sign and circle were added in 2007.",
+ (1, 34, 35): "The Euro sign and circle were added to CNS 11643 in 2007, although Microsoft had "
+              "added the Euro sign to Big5 in the corresponding location earlier.",
  (1, 34, 52): "Using private use assignments for grapheme clusters which have standard Unicode "
               "representations just (presumably) because they don't have single codepoints… why?",
+ (1, 86, 33): "These two differ in the form of the snout radical used, and are otherwise variants "
+              "of the same character.&ensp;Notably, the mappings directly related to CNS 11643 "
+              "as opposed to just Big5 use U+5F5E.&ensp;Although Windows-950 uses U+5F5D, IBM-1373 " 
+              "(otherwise identical to Windows-950 as far as the CNS-mapped part of Big5 is "
+              "concerned, hence it is not shown here) actually follows IBM-950 instead in this "
+              "specific location in mapping it to U+5F5E.",
  (2, 23, 79): "I'm following RFC 1922 mappings between CNS and Big5 here, even though the gov-tw "
               "mappings seem to differ.&ensp;Not sure if these two are consistently supposed "
               "to look different in all styles (their TW Kai reference glyphs seem to be the same, "
