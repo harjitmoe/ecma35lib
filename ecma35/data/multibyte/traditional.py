@@ -320,8 +320,8 @@ def read_big5_plainmap(fil, *, plane=None):
         cns, big5 = _i.strip().split(None, 1)
         men, sevenbit = cns.split("-", 1)
         men = int(men, 10)
-        ku = int(big5[:2], 16) - 0x20
-        ten = int(big5[2:], 16) - 0x20
+        ku = int(sevenbit[:2], 16) - 0x20
+        ten = int(sevenbit[2:], 16) - 0x20
         if plane not in (men, None):
             continue
         mapping[int(big5, 16)] = (men, ku, ten)
@@ -482,7 +482,7 @@ big5_to_cns2_ibmvar[0xDDFC] = (13, 4, 42)
 
 big5_to_cns2_E = big5_to_cns2_ibmvar.copy()
 big5_to_cns2_E.update(read_big5_plainmap("GOV-TW/CNS2BIG5_Big5E.txt"))
-graphdata.gsets["big5e-exts"] = big5e_extras = (94, 2, big5_extras_from_extmap(big5_to_cns2_E, euctw_g2_ibm[2]))
+graphdata.gsets["big5e-exts"] = big5e_extras = (94, 2, big5_extras_from_extmap(big5_to_cns2_E, euctw_g2[2]))
 
 # Now that big5_to_cns2 is defined, we can do this:
 graphdata.gsets["ir171-ms"] = (94, 2, read_big5_planes("ICU/windows-950-2000.ucm", big5_to_cns2, plane=1))
