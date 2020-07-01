@@ -312,6 +312,63 @@ def read_big5_rangemap(fil, appendix, *, plane=None):
         #
     return mapping
 
+def read_big5_plainmap(fil, *, plane=None):
+    # For the CNS 11643 open data
+    mapping = {}
+    reading = False
+    for _i in open(os.path.join(parsers.directory, fil), "r"):
+        cns, big5 = _i.strip().split(None, 1)
+        men, sevenbit = cns.split("-", 1)
+        men = int(men, 10)
+        ku = int(big5[:2], 16) - 0x20
+        ten = int(big5[2:], 16) - 0x20
+        if plane not in (men, None):
+            continue
+        mapping[int(big5, 16)] = (men, ku, ten)
+    return mapping
+
+def big5_extras_from_extmap(extmap, basis):
+    for big5code, (cmen, cku, cten) in extmap.items():
+        ucs = basis[((cmen - 1) * 94 * 94) + ((cku - 1) * 94) + cten - 1]
+        lead = big5code >> 8
+        trail = big5code & 0xFF
+        first = lead - 0x81
+        last = (trail - 0xA1 + 63) if trail >= 0xA1 else (trail - 0x40)
+        extpointer = (157 * first) + last
+        if extpointer >= corporate2_start:
+            newextpointer = extpointer
+            # Subtract a whole number of rows, but "empty" space at the start is fine.
+            newextpointer -= ((corporate2_start - kanji2_start) // 157) * 157
+            newextpointer -= ((corporate1_start - special_start) // 157) * 157
+        elif extpointer >= kanji2_start:
+            continue
+        elif extpointer >= corporate1_start:
+            newextpointer = extpointer
+            newextpointer -= ((corporate1_start - special_start) // 157) * 157
+        elif extpointer >= special_start:
+            continue
+        else:
+            newextpointer = extpointer
+        pseudoku = (newextpointer // 157) + 1
+        pseudoten = (newextpointer % 157) + 1
+        if pseudoten <= 63:
+            ku = (pseudoku * 2) - 1
+            ten = (pseudoten - 63) + 94
+        else:
+            ku = pseudoku * 2
+            ten = pseudoten - 63
+        newpointer = ((ku - 1) * 94) + (ten - 1)
+        if len(_temp) > newpointer:
+            assert _temp[newpointer] is None, (newpointer, ucs, _temp[newpointer])
+            _temp[newpointer] = ucs
+        else:
+            while len(_temp) < newpointer:
+                _temp.append(None)
+            _temp.append(ucs)
+    r = tuple(_temp) # Making a tuple makes a copy, of course.
+    del _temp[:]
+    return r
+
 def read_big5_planes(fil, big5_to_cns_g2, *, plane=None, twoway=False, mapper=parsers.identitymap):
     if mapper is parsers.identitymap:
         mappername = ""
@@ -423,6 +480,10 @@ big5_to_cns2_ibmvar = big5_to_cns2.copy()
 big5_to_cns2_ibmvar[0xC94A] = (13, 4, 40)
 big5_to_cns2_ibmvar[0xDDFC] = (13, 4, 42)
 
+big5_to_cns2_E = big5_to_cns2_ibmvar.copy()
+big5_to_cns2_E.update(read_big5_plainmap("GOV-TW/CNS2BIG5_Big5E.txt"))
+graphdata.gsets["big5e-exts"] = big5e_extras = (94, 2, big5_extras_from_extmap(big5_to_cns2_E, euctw_g2_ibm[2]))
+
 # Now that big5_to_cns2 is defined, we can do this:
 graphdata.gsets["ir171-ms"] = (94, 2, read_big5_planes("ICU/windows-950-2000.ucm", big5_to_cns2, plane=1))
 # IBM-950 uses a considerably different mapping to Windows-950 (though the rough identity of the
@@ -459,12 +520,14 @@ graphdata.gsets["hkscs"] = hkscs_extras = (94, 2, read_big5extras("WHATWG/index-
 graphdata.gsets["etenexts"] = eten_extras = (94, 2, 
     ((None,) * (32 * 188)) + hkscs_extras[2][(32 * 188):])
 graphdata.gsets["ms950exts"] = ms_big5_extras = (94, 2, read_big5extras("ICU/windows-950-2000.ucm"))
-graphdata.gsets["ibmbig5exts"] = ms_big5_extras = (94, 2, read_big5extras("ICU/ibm-950_P110-1999.ucm"))
+graphdata.gsets["ibmbig5exts"] = ibm_big5_extras = (94, 2, read_big5extras("ICU/ibm-950_P110-1999.ucm"))
 # IBM-1373 has the same Big5 exts mapping as MS-950. IBM-950 exts is also a subset of ETEN exts,
 #   but a different (and non-overlapping) one, for some reason.
 graphdata.gsets["utcbig5exts"] = utc_big5_extras = (94, 2, read_big5extras("UTC/BIG5.TXT"))
 graphdata.gsets["ms950utcexts"] = msutc_big5_extras = (94, 2,
-    utc_big5_extras[2] + ms_big5_extras[2][len(utc_big5_extras[2]):])
+    parsers.fuse([utc_big5_extras[2], ms_big5_extras[2]], "BIG5-MSUTC.json"))
+graphdata.gsets["big5emsexts"] = msutc_big5_extras = (94, 2,
+    parsers.fuse([big5e_extras[2], ms_big5_extras[2]], "BIG5-MSBIG5E.json"))
 
 
 

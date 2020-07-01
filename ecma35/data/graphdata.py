@@ -247,7 +247,7 @@ g94nbytes = {tuple(b"@"): ("ir042nec", ("ir042ibm", "ir042nec"), ("ir042",)),
              tuple(b"Q"): "ir233",
              # Traditional Chinese off doing its own thing, as you do... no standard escapes here.
              tuple(b"!1"): ("cns-eucg2", ("cns-eucg2-ibm", "cns-eucg2-ms", "cns-eucg2-mac"), ("cns-eucg2",)),
-             tuple(b"!2"): ("hkscs", (), ("ms950exts", "etenexts", "hkscs", "ibmbig5exts")),
+             tuple(b"!2"): ("hkscs", ("ibmbig5exts",), ("ms950exts", "etenexts", "hkscs",)),
              tuple(b"!3"): ("ms950utcexts", (), ("utcbig5exts", "ms950utcexts")),
              # Shift_JIS extensions for IBM/Windows/HTML5 and for cellular emoji
              tuple(b"!4"): ("ibmsjisextpua", (), ("ibmsjisext", "ibmsjisext")),
@@ -261,6 +261,7 @@ g94nbytes = {tuple(b"@"): ("ir042nec", ("ir042ibm", "ir042nec"), ("ir042",)),
                             ("mac-elex-extras", "mac-elex-extras-unicode4_0"),
                             ("mac-elex-extras-unicode3_2",)),
              tuple(b"!;"): "2011kpsextras",
+             tuple(b"!<"): ("big5e-exts", (), ("big5e-exts", "big5emsexts")),
              tuple(b"~"): "nil"}
 
 g96nbytes = {tuple(b"!0"):("gbk-nonuro-extras", ("gbk-nonuro-extras-web", "gbk-nonuro-extras-full"), ("gbk-nonuro-extras",)),
