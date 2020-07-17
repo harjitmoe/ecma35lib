@@ -157,23 +157,23 @@ graphdata.gsetflags["ir149-altutc"] |= {"UHC:IS_WANSUNG"}
 
 # Apple and Elex's (Illekseu's) Wansung version, and its secondary plane (collectively HangulTalk)
 macwansungdata = parsers.read_untracked_mbfile(
-                 parsers.read_main_plane, "Vendor/KOREAN.TXT", "Vendor---KOREAN_mainplane_ahmap.json", 
-                 "Vendor/macWansung.json", euckrlike=True, mapper=variationhints.ahmap)
+                 parsers.read_main_plane, "Mac/KOREAN.TXT", "Mac---KOREAN_mainplane_ahmap.json", 
+                 "Mac/macWansung.json", euckrlike=True, mapper=variationhints.ahmap)
 macelexdata =    parsers.read_untracked_mbfile(
-                 read_elexextras, "Vendor/KOREAN.TXT", "Vendor---KOREAN_elexextras_ahmap.json", 
-                 "Vendor/macElex.json", mapper=variationhints.ahmap)
+                 read_elexextras, "Mac/KOREAN.TXT", "Mac---KOREAN_elexextras_ahmap.json", 
+                 "Mac/macElex.json", mapper=variationhints.ahmap)
 rawmac =         parsers.read_untracked_mbfile(
-                 parsers.read_main_plane, "Vendor/KOREAN.TXT", "Vendor---KOREAN_mainplane.json", 
-                 "Vendor/macWansung-raw.json", euckrlike=True)
+                 parsers.read_main_plane, "Mac/KOREAN.TXT", "Mac---KOREAN_mainplane.json", 
+                 "Mac/macWansung-raw.json", euckrlike=True)
 rawelex =        parsers.read_untracked_mbfile(
-                 read_elexextras, "Vendor/KOREAN.TXT", "Vendor---KOREAN_elexextras.json", 
-                 "Vendor/macElex-raw.json")
+                 read_elexextras, "Mac/KOREAN.TXT", "Mac---KOREAN_elexextras.json", 
+                 "Mac/macElex-raw.json")
 rawmac4 =        parsers.read_untracked_mbfile(
-                 parsers.read_main_plane, "Vendor/KOREAN.TXT", "Vendor---KOREAN_mainplane_altcomments.json", 
-                 "Vendor/macWansung4.json", euckrlike=True, altcomments=True)
+                 parsers.read_main_plane, "Mac/KOREAN.TXT", "Mac---KOREAN_mainplane_altcomments.json", 
+                 "Mac/macWansung4.json", euckrlike=True, altcomments=True)
 rawelex4 =       parsers.read_untracked_mbfile(
-                 read_elexextras, "Vendor/KOREAN.TXT", "Vendor---KOREAN_elexextras_altcomments.json", 
-                 "Vendor/macElex4.json", altcomments=True)
+                 read_elexextras, "Mac/KOREAN.TXT", "Mac---KOREAN_elexextras_altcomments.json", 
+                 "Mac/macElex4.json", altcomments=True)
 macwansung = graphdata.gsets["ir149-mac"] = (94, 2, macwansungdata)
 graphdata.gsetflags["ir149-mac"] |= {"UHC:IS_WANSUNG"}
 macelexextras = graphdata.gsets["mac-elex-extras"] = (94, 2, macelexdata)

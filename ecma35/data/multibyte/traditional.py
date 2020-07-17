@@ -491,9 +491,9 @@ big5_to_cns2[0xDDFC] = (2, 33, 86)
 
 for _i in big5_to_cns1:
     big5_to_cns2[_i] = (1,) + big5_to_cns1[_i]
-# Update for the Euro sign (which merely extends the existing range-mapping between the two of
-#   them, but postdates RFC 1922). This correspondance matches all three of Windows-950, WHATWG and
-#   the Big5E quoted on the CNS website itself, so is more or less entirely agreed upon.
+# Update for the Euro sign (which merely extends one of the existing ranges mapping between the two
+#   of them, but postdates RFC 1922). This correspondance matches all three of Windows-950, WHATWG
+#   and the Big5E quoted on the CNS website itself, so it is more or less entirely agreed upon.
 big5_to_cns2[0xA3E1] = (1, 34, 34)
 
 # IBM's plane 13 contains codes mainly for round-trip compatibility with Big5 variants.
@@ -527,7 +527,7 @@ graphdata.gsets["ir172-utc"] = (94, 2, parsers.read_main_plane("UTC/CNS11643.TXT
 
 # Macintosh-compatibility variants
 maccnsdata = parsers.read_untracked_mbfile(read_big5_planes,
-             "Vendor/CHINTRAD.TXT", "Vendor---CHINTRAD_mainplane_ahmap.json", "Vendor/macCNS.json", 
+             "Mac/CHINTRAD.TXT", "Mac---CHINTRAD_mainplane_ahmap.json", "Mac/macCNS.json", 
              big5_to_cns_g2 = big5_to_cns2_ibmvar, mapper = variationhints.ahmap)
 graphdata.gsets["ir171-mac"] = (94, 2, maccnsdata[:94*94])
 #graphdata.gsets["ir172-mac"] = (94, 2, maccnsdata[94*94:94*94*2]) # same as ir172-big5
@@ -541,6 +541,8 @@ graphdata.gsetflags["cns-eucg2-mac"] |= {"BIG5:IBMCOMPATKANJI"}
 graphdata.gsets["cns-eucg2-ms"] = euctw_g2 = (94, 3, read_big5_planes("ICU/windows-950-2000.ucm", big5_to_cns2_ibmvar))
 graphdata.gsetflags["cns-eucg2-ms"] |= {"BIG5:IBMCOMPATKANJI"}
 
+graphdata.gsets["aton-exts"] = (94, 2, read_big5extras("Mozilla/uao241-b2u.txt"))
+graphdata.gsets["aton-exts2"] = (94, 2, read_big5extras("Mozilla/uao250-b2u.txt"))
 graphdata.gsets["big5e-exts"] = big5e_extras = (94, 2, read_big5extras("Mozilla/big5e.txt"))
 graphdata.gsets["hkscsweb"] = hkscsweb_extras = (94, 2, read_big5extras("WHATWG/index-big5.txt"))
 graphdata.gsets["hkscs"] = hkscs_extras = (94, 2, parsers.fuse([hkscsweb_extras[2], 
@@ -562,7 +564,11 @@ graphdata.gsets["utcbig5exts"] = utc_big5_extras = (94, 2, read_big5extras("UTC/
 graphdata.gsets["ms950utcexts"] = msutc_big5_extras = (94, 2,
     parsers.fuse([utc_big5_extras[2], ms_big5_extras[2]], "BIG5-MSUTC.json"))
 
-
+graphdata.gsets["eacc"] = (94, 3, parsers.fuse([
+    parsers.read_unihan_eacc("UCD/Unihan_OtherMappings.txt", "kEACC"),
+    parsers.read_main_plane("LoC/eacc2uni.txt", eacc=True),
+    parsers.read_unihan_eacc("UCD/Unihan_OtherMappings.txt", "kCCCII"),
+], "EACC-Full.json"))
 
 
 

@@ -191,18 +191,9 @@ graphdata.gsets["gb7590"] = gb7590 = (94, 2, tuple(resolve.get(i, (tradat.get(i,
 #   didn't. Not all exist as Unicode presentation forms.
 # It also includes the GB 6345.1-1986 letters (seeming to have "ɒ" instead of "ɑ" is an editorial
 #   error in CHINSIMP.TXT; the listed mapping (as opposed to name) is "ɑ").
-if os.path.exists(os.path.join(parsers.directory, "Vendor/CHINSIMP.TXT")):
-    macgbdata = parsers.read_main_plane("Vendor/CHINSIMP.TXT", euckrlike = 1, mapper = variationhints.ahmap)
-    try:
-        if os.path.exists(os.path.join(parsers.directory, "Vendor/macGB2312.json")):
-            os.unlink(os.path.join(parsers.directory, "Vendor/macGB2312.json"))
-        shutil.copy(os.path.join(parsers.cachedirectory, "Vendor---CHINSIMP_mainplane_ahmap.json"),
-                    os.path.join(parsers.directory, "Vendor/macGB2312.json"))
-    except EnvironmentError:
-        pass
-else:
-    macgbdata = tuple(tuple(i) if i is not None 
-        else None for i in json.load(open(os.path.join(parsers.directory, "Vendor/macGB2312.json"), "r")))
+macgbdata = parsers.read_untracked_mbfile(
+            parsers.read_main_plane, "Mac/CHINSIMP.TXT", "Mac---CHINSIMP_mainplane_ahmap.json", 
+            "Mac/macGB2312.json", euckrlike=True, mapper=variationhints.ahmap)
 graphdata.gsets["ir058-mac"] = gb2312_mac = (94, 2, macgbdata)
 
 # Amounting to the entirety of GBK/3 and most of GBK/4, minus the non-URO end part.

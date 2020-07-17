@@ -248,8 +248,10 @@ def kutenfunc(number, row, cell):
 
 annots = {
  (1, 1, 0): 'All of plane 1 has two possible EUC codes, a four-byte code prefixed with 0x8EA1 '
-            'and a two-byte code without that prefix.&ensp;It is the two-byte codes that are '
-            'listed in this chart.',
+            'and a two-byte code without that prefix.&ensp;The ICU mapping for EUC-TW-2014 treats '
+            'the four-byte plane 1 codes as unassigned, while the GOV-TW CNS 11643 Word View '
+            '(linked from the left column) lists only the four-byte codes.&ensp;It is the '
+            'two-byte codes that are listed in this chart.',
  (1, 1, 29): 'All four of these are underscores (horizontal versus vertical, straight versus '
              'squiggly.\u2002For some reason, older CNS charts such as ISO-IR-171 showed them '
              'aligned to the top and right of the box (possibly with the intention to use them for '

@@ -49,7 +49,7 @@ def _grok_sjis(byts):
         ku = ku + 78 - 104
     return men, ku, ten
 
-def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=False,
+def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=False, eacc=False,
                     skipstring=None, plane=None, altcomments=False, mapper=identitymap):
     """
     Read a mapping from a file in the directory given by mbmapparsers.directory.
@@ -101,6 +101,22 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
             continue
         elif _i[0] == "#":
             continue # is a comment.
+        elif eacc:
+            # CSV of (1) 3-byte GL, (2) UCS or PUA, (3) nothing or geta mark, (4) rubbish
+            byts, ucs, rubbish = _i.split(",", 2)
+            men = int(byts[:2], 16) - 0x20
+            ku = int(byts[2:4], 16) - 0x20
+            ten = int(byts[4:], 16) - 0x20
+            if ten == 0:
+                # Documented as deployed nonstandard code for ideographic space
+                #   (0x212320, i.e. kuten 01-03-00 — not valid in a 94^n-set)
+                continue
+            if plane is not None: # i.e. if we want a particular plane's two-byte mapping.
+                if men != plane:
+                    continue
+                else:
+                    men = 1
+            mkts = ((men, ku, ten),)
         elif _i[0] == "<" and _i[:2] != "<U":
             continue # is ICU metadata or state machine config which isn't relevant to us.
         elif _i.strip() in ("CHARMAP", "END CHARMAP"):
@@ -388,6 +404,54 @@ def read_unihan_kuten(fil, wantkey):
         pointer = ((ku - 1) * 94) + (ten - 1)
         if len(_temp) > pointer:
             assert _temp[pointer] is None, (i, ku, ten, pointer, _temp[pointer], (ucs,))
+            _temp[pointer] = (ucs,)
+        else:
+            while len(_temp) < pointer:
+                _temp.append(None)
+            _temp.append((ucs,))
+    # Try to end it on a natural plane boundary.
+    _temp.extend([None] * (((94 * 94) - (len(_temp) % (94 * 94))) % (94 * 94)))
+    if not _temp:
+        _temp.extend([None] * (94 * 94)) # Don't just return an empty tuple.
+    ret = tuple(_temp)
+    del _temp[:]
+    # Write output cache.
+    f = open(cachefn, "w")
+    f.write(json.dumps(ret))
+    f.close()
+    return ret
+
+def read_unihan_eacc(fil, wantkey):
+    cachebfn = os.path.splitext(fil)[0].replace("/", "---") + ("_{}".format(wantkey)) + ".json"
+    cachefn = os.path.join(cachedirectory, cachebfn)
+    if os.path.exists(cachefn):
+        f = open(cachefn, "r")
+        r = json.load(f)
+        f.close()
+        return tuple(tuple(i) if i is not None else None for i in r)
+    f = open(os.path.join(directory, fil), "r")
+    for i in f:
+        if i[0] == "#":
+            continue
+        elif not i.strip():
+            continue
+        ucs, prop, data = i.strip().split("\t", 2)
+        if prop != wantkey:
+            continue
+        assert ucs[:2] == "U+"
+        ucs = int(ucs[2:], 16)
+        assert (len(data) == 6), i
+        men = int(data[:2], 16) - 0x20
+        ku = int(data[2:4], 16) - 0x20
+        ten = int(data[4:], 16) - 0x20
+        pointer = ((men - 1) * 94 * 94) + ((ku - 1) * 94) + (ten - 1)
+        if len(_temp) > pointer:
+            if (ucs == 0x5166) and (wantkey == "kCCCII"):
+                # CCCII 0x2D305B is mapped to both U+4EBE 亾 (also EACC 0x2D305B) and U+5166 兦.
+                # Both are apparently y-variants of U+4EA1 (亡)
+                # Kludge to get this to work.
+                continue
+            assert _temp[pointer] is None, (i, men, ku, ten, pointer, _temp[pointer], (ucs,))
             _temp[pointer] = (ucs,)
         else:
             while len(_temp) < pointer:

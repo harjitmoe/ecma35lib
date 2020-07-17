@@ -309,6 +309,138 @@ def _classify(cdisplayi, outfile):
     elif cdisplayi[0] >= 0x100000:
         print("(<abbr title='Supplementary Private-Use Area B'>SPUB</abbr>)", file=outfile)
 
+def is_kanji(cdisplayi):
+    if not cdisplayi:
+        return None
+    elif (len(cdisplayi) > 1) and not ((len(cdisplay) == 2) and 
+                              ucd.name(chr(cdisplay[1]), "").startswith("VARIATION SELECTOR")):
+        return False
+    elif 0x3400 <= cdisplayi[0] < 0x4DC0:
+        return True
+    elif 0x4E00 <= cdisplayi[0] < 0xA000:
+        return True
+    elif 0xF900 <= cdisplayi[0] < 0xFB00:
+        return True
+    elif 0x20000 <= cdisplayi[0] < 0x30000:
+        return True
+    elif 0x30000 <= cdisplayi[0] < 0x40000:
+        return True
+    else:
+        return False
+
+def categorise(codept):
+    cat = ucd.category(codept)
+    if cat[0] == "L":
+        colour = "-letter"
+    elif cat[0] == "N":
+        colour = "-digit"
+    elif cat[0] == "P":
+        if ord(codept) < 0x7F:
+            colour = "-punct"
+        else:
+            colour = "-ext-punct"
+    elif cat[0] == "S":
+        colour = "-graph"
+    elif cat[0] == "C" and cat != "Co":
+        colour = "-ctrl"
+    else:
+        colour = "-misc"
+    return colour
+
+def _dump_wikitable_nonkanji_row(outfile, typ, array, name="", plane=-1, row=-1, euc=0):
+    prefix = rowdat = None
+    if plane>0 and row>0:
+        if euc == 0:
+            prefix = "0x{:02X}{:02X}".format(plane+0x20, row+0x20)
+        elif euc == 1:
+            prefix = "0x{:02X}{:02X}".format(plane+0xA0, row+0xA0)
+        else:
+            prefix = "0x{:02X}{:02X}/0x{:02X}{:02X}".format(plane+0x20, row+0x20, 
+                     plane+0xA0, row+0xA0)
+        rowdat = "plane {:d}, row {:d}".format(plane, row)
+    elif row>0:
+        if euc == 0:
+            prefix = "0x{:02X}".format(row+0x20)
+        elif euc == 1:
+            prefix = "0x{:02X}".format(row+0xA0)
+        else:
+            prefix = "0x{:02X}/0x{:02X}".format(row+0x20, row+0xA0)
+        rowdat = "row {:d}".format(row)
+    #
+    if False not in [is_kanji(i) for i in array]:
+        return
+    if array == ((None,) * len(array)):
+        return
+    #
+    if prefix:
+        print("=== {{anchor|%s}}Character set %s (%s) ===" % (
+              prefix, prefix, rowdat), file=outfile)
+    maybe_prefix = " (prefixed with {})".format(prefix) if prefix else ""
+    print("{| {{chset-tableformat}}", file=outfile)
+    print("{{chset-table-header|%s%s}}" % (name, maybe_prefix), file=outfile)
+    arr2 = array if typ == 96 else (None,) + array + (None,)
+    for n in range(6):
+        arr3 = arr2[n*16:(n+1)*16]
+        print("|-", file=outfile)
+        if euc == 0:
+            print("!{{chset-left|%X}}" % (n + 2), file=outfile)
+        elif euc == 1:
+            print("!{{chset-left|%X}}" % (n + 0xA), file=outfile)
+        else:
+            print("!{{chset-left|%X|%X}}" % (n + 2, n + 0xA), file=outfile)
+        for m, i in enumerate(arr3):
+            ten = (n * 16) + m
+            maybe_kuten = ""
+            if plane>0 and row>0:
+                maybe_kuten = "|kuten={:d}-{:d}-{:d}".format(plane, row, ten)
+            elif row>0:
+                maybe_kuten = "|kuten={:d}-{:d}".format(row, ten)
+            if (typ == 94) and ((n == 0 and m == 0) or (n == 5 and m == 15)):
+                print("|{{chset-color-undef}}|", file=outfile)
+                continue
+            elif not i:
+                if maybe_kuten:
+                    print("|{{chset-color-undef}}|{{chset-cell||%s}}" % maybe_kuten, file=outfile)
+                else:
+                    print("|{{chset-color-undef}}|", file=outfile)
+                continue
+            hexes = " ".join("{:04X}".format(j) for j in i)
+            strep = "".join(chr(j) for j in i)
+            cat = categorise(strep[0])
+            if ucd.category(strep[0]) == "Co":
+                print("|{{chset-color%s}}|{{chset-cell|%s|\uFFFD%s}}" % (
+                      cat, hexes, maybe_kuten), file=outfile)
+            else:
+                print("|{{chset-color%s}}|{{chset-cell|%s|[[%s]]%s}}" % (
+                      cat, hexes, strep, maybe_kuten), file=outfile)
+    print("|}", file=outfile)
+    print(file=outfile)
+
+def dump_wikitables_nonkanji(outfile, setname, name="", euc=0):
+    typ, byts, array = graphdata.gsets[setname]
+    assert typ in (94, 96), typ
+    if byts == 3:
+        for plane in range(1, 95) if typ == 94 else range(96):
+            for row in range(1, 95) if typ == 94 else range(96):
+                if typ == 94:
+                    start = ((plane - 1) * 94 * 94) + ((row - 1) * 94)
+                else:
+                    start = (plane * 96 * 96) + (row * 96)
+                subarray = array[start:start+typ]
+                _dump_wikitable_nonkanji_row(outfile, typ, subarray, name, plane, row, euc)
+    elif byts == 2:
+        for row in range(1, 95) if typ == 94 else range(96):
+            if typ == 94:
+                start = ((row - 1) * 94)
+            else:
+                start = (row * 96)
+            subarray = array[start:start+typ]
+            _dump_wikitable_nonkanji_row(outfile, typ, subarray, name, -1, row, euc)
+    elif byts == 1:
+        _dump_wikitable_nonkanji_row(outfile, typ, array, name, -1, -1, euc)
+    else:
+        raise AssertionError("unrecognised number of bytes: {!r}".format(byts))
+
 def dump_plane(outfile, planefunc, kutenfunc,
                number, setnames, plarray, *, selfhandledanchorlink=False,
                part=0, lang="zh-TW", css=None, annots={}, cdispmap={}, 

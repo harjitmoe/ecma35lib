@@ -123,25 +123,12 @@ graphdata.gsets["ir168web"] = jisx0208_html5 = (94, 2,
         parsers.read_main_plane("WHATWG/index-jis0208.txt"))
 
 # Apple's three versions (KanjiTalk 7, PostScript, KanjiTalk 6)
-if os.path.exists(os.path.join(parsers.directory, "Vendor/JAPANESE.TXT")):
-    rawmac = parsers.read_main_plane("Vendor/JAPANESE.TXT", sjis=1)
-    kanjitalk7data = parsers.read_main_plane("Vendor/JAPANESE.TXT", sjis=1, mapper = variationhints.ahmap)
-    try:
-        if os.path.exists(os.path.join(parsers.directory, "Vendor/macJIS.json")):
-            os.unlink(os.path.join(parsers.directory, "Vendor/macJIS.json"))
-        if os.path.exists(os.path.join(parsers.directory, "Vendor/macJIS-raw.json")):
-            os.unlink(os.path.join(parsers.directory, "Vendor/macJIS-raw.json"))
-        shutil.copy(os.path.join(parsers.cachedirectory, "Vendor---JAPANESE_mainplane_ahmap.json"),
-                    os.path.join(parsers.directory, "Vendor/macJIS.json"))
-        shutil.copy(os.path.join(parsers.cachedirectory, "Vendor---JAPANESE_mainplane.json"),
-                    os.path.join(parsers.directory, "Vendor/macJIS-raw.json"))
-    except EnvironmentError:
-        pass
-else:
-    rawmac = tuple(tuple(i) if i is not None 
-        else None for i in json.load(open(os.path.join(parsers.directory, "Vendor/macJIS-raw.json"), "r")))
-    kanjitalk7data = tuple(tuple(i) if i is not None 
-        else None for i in json.load(open(os.path.join(parsers.directory, "Vendor/macJIS.json"), "r")))
+kanjitalk7data = parsers.read_untracked_mbfile(
+                 parsers.read_main_plane, "Mac/JAPANESE.TXT", "Mac---JAPANESE_mainplane_ahmap.json", 
+                 "Mac/macJIS.json", euckrlike=True, mapper=variationhints.ahmap)
+rawmac = parsers.read_untracked_mbfile(
+         parsers.read_main_plane, "Mac/JAPANESE.TXT", "Mac---JAPANESE_mainplane.json", 
+         "Mac/macJIS-raw.json", euckrlike=True)
 graphdata.gsets["ir168mac"] = jisx0208_applekt7 = (94, 2, kanjitalk7data)
 graphdata.gsets["ir168macps"] = jisx0208_appleps = (94, 2,
         parsers.read_main_plane("Custom/JAPAN_PS.TXT", sjis=1, plane=1, mapper = variationhints.ahmap))
