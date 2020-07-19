@@ -125,10 +125,10 @@ graphdata.gsets["ir168web"] = jisx0208_html5 = (94, 2,
 # Apple's three versions (KanjiTalk 7, PostScript, KanjiTalk 6)
 kanjitalk7data = parsers.read_untracked_mbfile(
                  parsers.read_main_plane, "Mac/JAPANESE.TXT", "Mac---JAPANESE_mainplane_ahmap.json", 
-                 "Mac/macJIS.json", euckrlike=True, mapper=variationhints.ahmap)
+                 "Mac/macJIS.json", sjis=True, mapper=variationhints.ahmap)
 rawmac = parsers.read_untracked_mbfile(
          parsers.read_main_plane, "Mac/JAPANESE.TXT", "Mac---JAPANESE_mainplane.json", 
-         "Mac/macJIS-raw.json", euckrlike=True)
+         "Mac/macJIS-raw.json", sjis=True)
 graphdata.gsets["ir168mac"] = jisx0208_applekt7 = (94, 2, kanjitalk7data)
 graphdata.gsets["ir168macps"] = jisx0208_appleps = (94, 2,
         parsers.read_main_plane("Custom/JAPAN_PS.TXT", sjis=1, plane=1, mapper = variationhints.ahmap))
