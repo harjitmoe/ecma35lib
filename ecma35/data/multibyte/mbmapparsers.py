@@ -49,8 +49,9 @@ def _grok_sjis(byts):
         ku = ku + 78 - 104
     return men, ku, ten
 
-def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=False, eacc=False,
-                    skipstring=None, plane=None, altcomments=False, mapper=identitymap):
+def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=False,
+                    skipstring=None, plane=None, altcomments=False, mapper=identitymap,
+                    ignore_later_altucs=False, set96=False, libcongress=False):
     """
     Read a mapping from a file in the directory given by mbmapparsers.directory.
     Only positional argument is the name (including subdirectory) of that file.
@@ -71,6 +72,7 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
       annotate which mappings are also used by the encoder.
     - plane: isolate only one plane of a multi-plane mapping (e.g. CNS 11643).
     """
+    ST, ED, SZ = (1, 94, 94) if not set96 else (0, 95, 96)
     if mapper is identitymap:
         mappername = ""
     elif mapper.__name__ != "<lambda>":
@@ -101,16 +103,12 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
             continue
         elif _i[0] == "#":
             continue # is a comment.
-        elif eacc:
+        elif libcongress:
             # CSV of (1) 3-byte GL, (2) UCS or PUA, (3) nothing or geta mark, (4) rubbish
             byts, ucs, rubbish = _i.split(",", 2)
             men = int(byts[:2], 16) - 0x20
             ku = int(byts[2:4], 16) - 0x20
             ten = int(byts[4:], 16) - 0x20
-            if ten == 0:
-                # Documented as deployed nonstandard code for ideographic space
-                #   (0x212320, i.e. kuten 01-03-00 — not valid in a 94^n-set)
-                continue
             if plane is not None: # i.e. if we want a particular plane's two-byte mapping.
                 if men != plane:
                     continue
@@ -151,12 +149,18 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
                     men = 1
                     ku = int(byts[2:4], 16) - 0x20
                     ten = int(byts[4:6], 16) - 0x20
-                else:
+                elif len(byts) == 7:
                     # Like the Consortium supplied CNS 11643 mappings
-                    assert len(byts) == 7
                     men = int(byts[2], 16)
                     ku = int(byts[3:5], 16) - 0x20
                     ten = int(byts[5:7], 16) - 0x20
+                else:
+                    assert len(byts) == 8
+                    men = int(byts[2:4], 16) - 0x20
+                    ku = int(byts[4:6], 16) - 0x20
+                    ten = int(byts[6:8], 16) - 0x20
+                    if (not ST <= ten <= ED) or (not ku >= ST):
+                        continue
             else:
                 men = 1
                 if byts[2].upper() in "01234567": # ASCII
@@ -176,7 +180,7 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
                     continue
                 ku = int(byts[2:4], 16) - 0xA0
                 ten = int(byts[4:6], 16) - 0xA0
-                if euckrlike and ((ku < 1) or (ku > 94) or (ten < 1) or (ten > 94)):
+                if euckrlike and ((ku < ST) or (ku > ED) or (ten < ST) or (ten > ED)):
                     continue
             if plane is not None: # i.e. if we want a particular plane's two-byte mapping.
                 if men != plane:
@@ -215,11 +219,13 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
                 if eucjp:
                     ku = byts[1] - 0xA0
                     ten = byts[2] - 0xA0
-                    assert sjis or 1 <= ku <= 94, (_i, byts[1], byts[2])
-                    assert sjis or 1 <= ten <= 94, (_i, byts[1], byts[2])
+                    assert sjis or ST <= ku <= ED, (_i, byts[1], byts[2])
+                    assert sjis or ST <= ten <= ED, (_i, byts[1], byts[2])
                 else:
                     ku = byts[1] - 0x20
                     ten = byts[2] - 0x20
+                    if (not ST <= ten <= ED) or (not ku >= ST):
+                        continue
             elif len(byts) == 2:
                 if sjis:
                     men, ku, ten = _grok_sjis(byts)
@@ -233,8 +239,8 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
                     else:
                         ku = byts[0] - 0x20
                         ten = byts[1] - 0x20
-                    assert sjis or 1 <= ten <= 94, (_i, byts[0], byts[1])
-                    if euckrlike and ((ku < 1) or (ku > 94) or (ten < 1) or (ten > 94)):
+                    assert sjis or ST <= ten <= ED, (_i, byts[0], byts[1])
+                    if euckrlike and ((ku < ST) or (ku > ED) or (ten < ST) or (ten > ED)):
                         continue
             else:
                 assert len(byts) == 1
@@ -246,7 +252,7 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
                 else:
                     men = 1
             mkts = ((men, ku, ten),)
-        elif "-" in _i[:3]: # Maximum possible plane number is 94, so this will remain correct
+        elif "-" in _i[:3]: # Maximum possible plane number is 95, so this will remain correct
             # Format of the Taiwanese government supplied CNS 11643 mapping data
             cod, ucs = _i.split("\t", 2)[:2]
             men, byts = cod.split("-")
@@ -293,7 +299,7 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
                 else:
                     men = 1
             mkts = ((men, ku, ten),)
-            if ku > 94:
+            if ku > ED:
                 continue
         elif _i == "\x1a":
             # EOF on an older (MS-DOS) text file
@@ -306,25 +312,31 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
             ku = (extpointer // 190) - 31
             ten = (extpointer % 190) - 95
             mkts = ((men, ku, ten),)
-            if not ((1 <= ku <= 94) and (1 <= ten <= 94)):
+            if not ((ST <= ku <= ED) and (ST <= ten <= ED)):
                 continue
         if ucs[:2] in ("0x", "U+", "<U"):
             ucs = ucs[2:]
         for men, ku, ten in mkts:
-            assert (1 <= ten <= 94) and (ku >= 1), (men, ku, ten)
-            pointer = ((men - 1) * 94 * 94) + ((ku - 1) * 94) + (ten - 1)
+            assert (ST <= ten <= ED) and (ku >= ST), (men, ku, ten)
+            if not set96:
+                pointer = ((men - 1) * 94 * 94) + ((ku - 1) * 94) + (ten - 1)
+            else:
+                pointer = (men * 96 * 96) + (ku * 96) + ten
             iucs = mapper(pointer, tuple(int(j, 16) for j in ucs.rstrip(">").split("+")))
             if len(_temp) > pointer:
-                assert _temp[pointer] is None, (men, ku, ten, pointer, _temp[pointer], iucs)
+                if ignore_later_altucs and _temp[pointer] is not None:
+                    continue
+                else:
+                    assert _temp[pointer] is None, (men, ku, ten, pointer, _temp[pointer], iucs)
                 _temp[pointer] = iucs
             else:
                 while len(_temp) < pointer:
                     _temp.append(None)
                 _temp.append(iucs)
     # Try to end it on a natural plane boundary.
-    _temp.extend([None] * (((94 * 94) - (len(_temp) % (94 * 94))) % (94 * 94)))
+    _temp.extend([None] * (((SZ * SZ) - (len(_temp) % (SZ * SZ))) % (SZ * SZ)))
     if not _temp:
-        _temp.extend([None] * (94 * 94)) # Don't just return an empty tuple.
+        _temp.extend([None] * (SZ * SZ)) # Don't just return an empty tuple.
     r = tuple(_temp) # Making a tuple makes a copy, of course.
     del _temp[:]
     # Write output cache.
@@ -421,7 +433,7 @@ def read_unihan_kuten(fil, wantkey):
     f.close()
     return ret
 
-def read_unihan_eacc(fil, wantkey):
+def read_unihan_eacc(fil, wantkey, *, set96=False):
     cachebfn = os.path.splitext(fil)[0].replace("/", "---") + ("_{}".format(wantkey)) + ".json"
     cachefn = os.path.join(cachedirectory, cachebfn)
     if os.path.exists(cachefn):
@@ -444,11 +456,21 @@ def read_unihan_eacc(fil, wantkey):
         men = int(data[:2], 16) - 0x20
         ku = int(data[2:4], 16) - 0x20
         ten = int(data[4:], 16) - 0x20
-        pointer = ((men - 1) * 94 * 94) + ((ku - 1) * 94) + (ten - 1)
+        if not set96:
+            pointer = ((men - 1) * 94 * 94) + ((ku - 1) * 94) + (ten - 1)
+        else:
+            pointer = (men * 96 * 96) + (ku * 96) + ten
+        if not 0 <= ten <= 95:
+            # U+9C0C → kCCCII 2358CF
+            # U+9C0C → kEACC 2D6222
+            # Not sure when, why or how CCCII seems to have abandoned its notion of being a
+            #   ISO 2022 set altogether. These are odd exceptions though, not the rule.
+            continue
         if len(_temp) > pointer:
-            if (ucs == 0x5166) and (wantkey == "kCCCII"):
-                # CCCII 0x2D305B is mapped to both U+4EBE 亾 (also EACC 0x2D305B) and U+5166 兦.
-                # Both are apparently y-variants of U+4EA1 (亡)
+            if (ucs == 0x4EBE) and (wantkey == "kCCCII"):
+                # CCCII 0x2D305B is mapped to both U+4EBE 亾 (also EACC 0x2D305B) and
+                #   U+5166 兦 (which matches cccii.ucm, which uses CCCII 0x33305B for U+4EBE).
+                # Both are apparently y-variants of U+4EA1 (亡, CCCII 0x21305B)
                 # Kludge to get this to work.
                 continue
             assert _temp[pointer] is None, (i, men, ku, ten, pointer, _temp[pointer], (ucs,))
@@ -458,9 +480,10 @@ def read_unihan_eacc(fil, wantkey):
                 _temp.append(None)
             _temp.append((ucs,))
     # Try to end it on a natural plane boundary.
-    _temp.extend([None] * (((94 * 94) - (len(_temp) % (94 * 94))) % (94 * 94)))
+    SZ = 94 if not set96 else 96
+    _temp.extend([None] * (((SZ * SZ) - (len(_temp) % (SZ * SZ))) % (SZ * SZ)))
     if not _temp:
-        _temp.extend([None] * (94 * 94)) # Don't just return an empty tuple.
+        _temp.extend([None] * (SZ * SZ)) # Don't just return an empty tuple.
     ret = tuple(_temp)
     del _temp[:]
     # Write output cache.
@@ -523,6 +546,21 @@ def read_untracked_mbfile(reader, fn, cachefn, shippedfn, **kwargs):
                      open(os.path.join(directory, shippedfn), "r")))
     return data
 
+def to_96(dat):
+    """Convert a 94^n set array to a 96^n set array.
+    Note that this function will not prepend an empty plane."""
+    first = 0
+    outwrite = 0
+    out = [None] + ([None] * int(len(dat) * (96/94)**2))
+    while first < len(dat):
+        if not (first % (94 * 94)):
+            outwrite += 96 # Extra row at start of plane
+        out[outwrite + 1:outwrite+95] = dat[first:first+94]
+        first += 94
+        outwrite += 96
+        if not (first % (94 * 94)):
+            outwrite += 96 # Extra row at end of plane
+    return tuple(out[:outwrite])
 
 
 

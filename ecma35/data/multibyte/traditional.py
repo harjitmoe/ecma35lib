@@ -564,12 +564,33 @@ graphdata.gsets["utcbig5exts"] = utc_big5_extras = (94, 2, read_big5extras("UTC/
 graphdata.gsets["ms950utcexts"] = msutc_big5_extras = (94, 2,
     parsers.fuse([utc_big5_extras[2], ms_big5_extras[2]], "BIG5-MSUTC.json"))
 
-graphdata.gsets["eacc"] = (94, 3, parsers.fuse([
-    parsers.read_unihan_eacc("UCD/Unihan_OtherMappings.txt", "kEACC"),
-    parsers.read_main_plane("LoC/eacc2uni.txt", eacc=True),
-    parsers.read_unihan_eacc("UCD/Unihan_OtherMappings.txt", "kCCCII"),
-], "EACC-Full.json"))
+# # # # # # # # # #
+# CCCII and EACC
 
+# Note: kEACC does not add additional characters relative to or contradict the LoC mapping at any
+#   point and is therefore not referenced (the LoC mapping also includes non-kanji).
+# I'm treating kCCCII as the best source for CCCII insofar as it covers.
+
+cccii_unihan = parsers.read_unihan_eacc("UCD/Unihan_OtherMappings.txt", "kCCCII", set96=True)
+graphdata.gsets["eacc-pure"] = (96, 3, parsers.read_main_plane("LoC/eacc2uni.txt", 
+                                libcongress=True, set96=True))
+graphdata.gsets["cccii-koha"] = (96, 3,
+        parsers.read_main_plane("Perl/Encode-HanExtra/ucm/cccii.ucm", set96=True))
+graphdata.gsets["eacc-hongkong"] = (96, 3, parsers.read_main_plane("Other/eacc-hongkonguni.txt", 
+                                    ignore_later_altucs=True, set96=True))
+graphdata.gsets["cccii"] = (96, 3, parsers.fuse([
+    parsers.read_main_plane("Custom/cccii-nonkanji.txt", set96=True),
+    cccii_unihan,
+    graphdata.gsets["cccii-koha"][2],
+    graphdata.gsets["eacc-pure"][2],
+    ((None,) * (96 * 99)) + graphdata.gsets["eacc-hongkong"][2][96*99:],
+], "CCCII-Full.json"))
+graphdata.gsetflags["eacc-pure"] |= {"EACC:ONLY3PLANESPERLEVEL"}
+graphdata.gsets["eacc"] = (96, 3, parsers.fuse([
+    graphdata.gsets["eacc-pure"][2],
+    graphdata.gsets["eacc-hongkong"][2],
+    ((None,) * (96 * 99)) + graphdata.gsets["cccii"][2][96*99:],
+], "EACC-Full.json"))
 
 
 

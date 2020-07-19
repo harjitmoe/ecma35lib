@@ -64,9 +64,9 @@ bully("ecma35/data/multibyte/mbmaps/UTC/KSC5601.TXT", b"\x1B%1")
 print("===", "Microsoft Big5", "===")
 bully("attic/CP950.TXT", b"\x1B%4\x1B&?\x1B$+!2")
 print("===", "KanjiTalk 7", "===")
-bully("ecma35/data/multibyte/mbmaps/Vendor/JAPANESE.TXT", b"\x1B%0\x1B&0\x1B(J\x1B&1\x1B$)B\x1B&1\x1B*I")
+bully("ecma35/data/multibyte/mbmaps/Mac/JAPANESE.TXT", b"\x1B%0\x1B&0\x1B(J\x1B&1\x1B$)B\x1B&1\x1B*I")
 print("===", "HangulTalk", "===")
-bully("ecma35/data/multibyte/mbmaps/Vendor/KOREAN.TXT", b"\x1B%6\x1B&?\x1B$+!:")
+bully("ecma35/data/multibyte/mbmaps/Mac/KOREAN.TXT", b"\x1B%6\x1B&?\x1B$+!:")
 
 
 

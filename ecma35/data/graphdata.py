@@ -262,10 +262,10 @@ g94nbytes = {tuple(b"@"): ("ir042nec", ("ir042ibm", "ir042nec"), ("ir042",)),
                             ("mac-elex-extras-unicode3_2",)),
              tuple(b"!;"): "2011kpsextras",
              tuple(b"!<"): ("big5e-exts", (), ("big5e-exts", "big5emsexts")),
-             tuple(b"!="): ("eacc", (), ("eacc",)),
              tuple(b"~"): "nil"}
 
 g96nbytes = {tuple(b"!0"):("gbk-nonuro-extras", ("gbk-nonuro-extras-web", "gbk-nonuro-extras-full"), ("gbk-nonuro-extras",)),
+             tuple(b"!1"): ("cccii", ("cccii-koha", "eacc-hongkong", "cccii", "eacc",), ("eacc-pure",)),
              tuple(b"~"): "nil"}
 
 sumps = {"94": g94bytes, "96": g96bytes, "94n": g94nbytes, "96n": g96nbytes}

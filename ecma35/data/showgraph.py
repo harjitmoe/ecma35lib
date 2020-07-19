@@ -17,7 +17,7 @@ def formatcode(tpl):
     return "U+{} ({})".format("+".join("{:04X}".format(i) for i in tpl),
                               "".join(chr(i) if i < 0xF0000 else (chr(i) + " ") for i in tpl))
 
-def show(name, *, plane=None, wikitext=False, cdispmap={}, images={}, friendly=None):
+def show(name, *, plane=None):
     if isinstance(name, tuple):
         x = name
     elif name in graphdata.rhses:
@@ -65,22 +65,15 @@ def show(name, *, plane=None, wikitext=False, cdispmap={}, images={}, friendly=N
     else:
         raise ValueError("unsupported set byte length size")
     #
-    if wikitext:
-        print("{|{{chset-tableformat}}")
-        print("{{chset-table-header|%s}}" % (friendly or name))
     for (n, i) in enumerate(series):
         if not (n % hs):
-            if not wikitext:
-                print()
+            print()
             tplat = "{:2d}: "
-            if wikitext:
-                print("|-")
-                tplat = "!{{{{chset-left|{:d}}}}}\n" if not sz else "!rowspan=2|{:2d}\n"
             #
             if sz:
                 if not ((n // hs) % 2):
                     print(end = tplat.format((n // sz) + ofs))
-                elif not wikitext:
+                else:
                     print(end = " " * 4)
             else:
                 print(end = tplat.format((n // hs) + ofs))
@@ -94,21 +87,19 @@ def show(name, *, plane=None, wikitext=False, cdispmap={}, images={}, friendly=N
         elif (not isinstance(i, tuple)) and (i < 0):
             curchar = "\u25CC" + chr(-i)
             zenkaku = False
-        elif isinstance(i, tuple) and (ucd.category(chr(i[0])) == "Co") and (not wikitext):
+        elif isinstance(i, tuple) and (ucd.category(chr(i[0])) == "Co"):
             if len(i) == 1:
                 curchar = "\x1B[35m\uFFFC\x1B[m"
             else:
                 curchar = "\x1B[33m\uFFFC\x1B[m"
             zenkaku = False
-        elif isinstance(i, tuple) and (0x80 <= i[0] <= 0x9F) and (not wikitext):
+        elif isinstance(i, tuple) and (0x80 <= i[0] <= 0x9F):
             curchar = "\x1B[31m\uFFFC\x1B[m"
             zenkaku = False
         elif isinstance(i, tuple):
             curchar = "".join(chr(j) for j in i)
             if 0xF870 <= ord(curchar[-1]) <= 0xF87F:
-                if wikitext:
-                    pass
-                elif curchar[-1] == "\uF874":
+                if curchar[-1] == "\uF874":
                     # Left position (red).
                     curchar = "\x1B[91m" + curchar[:-1] + "\x1B[m"
                 elif curchar[-1] == "\uF875":
@@ -142,48 +133,19 @@ def show(name, *, plane=None, wikitext=False, cdispmap={}, images={}, friendly=N
                     curchar = "\x1B[33m" + curchar[:-1] + "\x1B[m"
             zenkaku = (ucd.east_asian_width(chr(i[0])) in ("W", "F"))
         elif ucd.category(chr(i)) == "Co":
-            curchar = "\x1B[32m\uFFFC\x1B[m" if not wikitext else "PUA"
+            curchar = "\x1B[32m\uFFFC\x1B[m"
             zenkaku = False
         elif 0x80 <= i <= 0x9F:
-            curchar = "\x1B[31m\uFFFC\x1B[m" if not wikitext else "PUA"
+            curchar = "\x1B[31m\uFFFC\x1B[m"
             zenkaku = False
         else:
             curchar = chr(i)
             zenkaku = (ucd.east_asian_width(chr(i)) in ("W", "F"))
         #
-        if not wikitext:
-            print(curchar, end = " " if not zenkaku else "")
-        elif curchar == "\uFFFD":
-            print("|{{chset-color-undef}}|", sep="")
-        elif curchar == " ":
-            print("|{{chset-color-misc}}|{{chset-ctrl|0020|{{control code link|SP}}}}", sep="")
-        else:
-            dispi = cdispmap.get((n, i), i)
-            points = " ".join("{:04X}".format(j) for j in dispi) if isinstance(dispi, tuple) \
-                                                                 else "{:04X}".format(dispi)
-            points = points.replace(" FE0F ", " ")
-            if points.endswith(" FE0F"):
-                points = points[:-5]
-            if images and (dispi in images):
-                curchar = "[[File:" + images[dispi] + "|14px|" + "".join(chr(i) for i in dispi) + "]]"
-            elif (len(i) == 1) and (0xE000 <= i[0] < 0xF900):
-                curchar = "&nbsp;"
-            else:
-                curchar = curchar.replace("\uF860", "").replace("\uF861", "").replace("\uF862", "")
-                curchar = curchar.replace("[", "&#x5B;").replace("]", "&#x5D;")
-                if (n, i) not in cdispmap:
-                    curchar = "[[" + curchar + "]]"
-            print("|{{chset-color-graph}}|{{chset-cell|", points, "|", curchar, "}}", sep="")
+        print(curchar, end = " " if not zenkaku else "")
     for i in range((hs - (n % hs) - 1) % hs):
-        if not wikitext:
-            print(end = "\uFFFD ")
-        else:
-            print("|{{chset-color-undef}}|")
-    if wikitext:
-        print("|-") # Symmetry
-        print("|}")
-    else:
-        print("")
+        print(end = "\uFFFD ")
+    print()
 
 def _isbmppua(tpl):
     assert not tpl or not isinstance(tpl[0], str), tpl
@@ -312,8 +274,8 @@ def _classify(cdisplayi, outfile):
 def is_kanji(cdisplayi):
     if not cdisplayi:
         return None
-    elif (len(cdisplayi) > 1) and not ((len(cdisplay) == 2) and 
-                              ucd.name(chr(cdisplay[1]), "").startswith("VARIATION SELECTOR")):
+    elif (len(cdisplayi) > 1) and not ((len(cdisplayi) == 2) and 
+                              ucd.name(chr(cdisplayi[1]), "").startswith("VARIATION SELECTOR")):
         return False
     elif 0x3400 <= cdisplayi[0] < 0x4DC0:
         return True
@@ -328,14 +290,14 @@ def is_kanji(cdisplayi):
     else:
         return False
 
-def categorise(codept):
+def categorise(codept, *, no_ext_punct = True):
     cat = ucd.category(codept)
     if cat[0] == "L":
         colour = "-letter"
     elif cat[0] == "N":
         colour = "-digit"
     elif cat[0] == "P":
-        if ord(codept) < 0x7F:
+        if (ord(codept) < 0x7F) or no_ext_punct:
             colour = "-punct"
         else:
             colour = "-ext-punct"
@@ -347,7 +309,7 @@ def categorise(codept):
         colour = "-misc"
     return colour
 
-def _dump_wikitable_nonkanji_row(outfile, typ, array, name="", plane=-1, row=-1, euc=0):
+def _dump_wikitable_row(outfile, typ, array, name="", plane=-1, row=-1, euc=0, nonkanji=False, cdispmap={}, images={}):
     prefix = rowdat = None
     if plane>0 and row>0:
         if euc == 0:
@@ -367,7 +329,7 @@ def _dump_wikitable_nonkanji_row(outfile, typ, array, name="", plane=-1, row=-1,
             prefix = "0x{:02X}/0x{:02X}".format(row+0x20, row+0xA0)
         rowdat = "row {:d}".format(row)
     #
-    if False not in [is_kanji(i) for i in array]:
+    if nonkanji and (False not in [is_kanji(i) for i in array]):
         return
     if array == ((None,) * len(array)):
         return
@@ -404,19 +366,29 @@ def _dump_wikitable_nonkanji_row(outfile, typ, array, name="", plane=-1, row=-1,
                 else:
                     print("|{{chset-color-undef}}|", file=outfile)
                 continue
-            hexes = " ".join("{:04X}".format(j) for j in i)
+            dispi = cdispmap.get((n, i), i)
+            hexes = " ".join("{:04X}".format(j) for j in dispi) if isinstance(dispi, tuple) \
+                                                                 else "{:04X}".format(dispi)
+            hexes = hexes.replace(" FE0F ", " ")
+            if hexes.endswith(" FE0F"):
+                hexes = points[:-5]
             strep = "".join(chr(j) for j in i)
             cat = categorise(strep[0])
-            if ucd.category(strep[0]) == "Co":
-                print("|{{chset-color%s}}|{{chset-cell|%s|\uFFFD%s}}" % (
-                      cat, hexes, maybe_kuten), file=outfile)
+            if images and (dispi in images):
+                strep = "[[File:" + images[dispi] + "|14px|" + "".join(chr(i) for i in dispi) + "]]"
+            elif ucd.category(strep[0]) == "Co":
+                strep = "\uFFFD"
             else:
-                print("|{{chset-color%s}}|{{chset-cell|%s|[[%s]]%s}}" % (
-                      cat, hexes, strep, maybe_kuten), file=outfile)
+                strep = strep.replace("\uF860", "").replace("\uF861", "").replace("\uF862", "")
+                strep = strep.replace("[", "&#x5B;").replace("]", "&#x5D;")
+                if (n, i) not in cdispmap:
+                    strep = "[[" + strep + "]]"
+            print("|{{chset-color%s}}|{{chset-cell|%s|%s%s}}" % (
+                  cat, hexes, strep, maybe_kuten), file=outfile)
     print("|}", file=outfile)
     print(file=outfile)
 
-def dump_wikitables_nonkanji(outfile, setname, name="", euc=0):
+def dump_wikitables(outfile, setname, name="", euc=0, nonkanji=False, cdispmap={}, images={}):
     typ, byts, array = graphdata.gsets[setname]
     assert typ in (94, 96), typ
     if byts == 3:
@@ -427,7 +399,7 @@ def dump_wikitables_nonkanji(outfile, setname, name="", euc=0):
                 else:
                     start = (plane * 96 * 96) + (row * 96)
                 subarray = array[start:start+typ]
-                _dump_wikitable_nonkanji_row(outfile, typ, subarray, name, plane, row, euc)
+                _dump_wikitable_row(outfile, typ, subarray, name, plane, row, euc, nonkanji, cdispmap, images)
     elif byts == 2:
         for row in range(1, 95) if typ == 94 else range(96):
             if typ == 94:
@@ -435,11 +407,61 @@ def dump_wikitables_nonkanji(outfile, setname, name="", euc=0):
             else:
                 start = (row * 96)
             subarray = array[start:start+typ]
-            _dump_wikitable_nonkanji_row(outfile, typ, subarray, name, -1, row, euc)
+            _dump_wikitable_row(outfile, typ, subarray, name, -1, row, euc)
     elif byts == 1:
-        _dump_wikitable_nonkanji_row(outfile, typ, array, name, -1, -1, euc)
+        _dump_wikitable_row(outfile, typ, array, name, -1, -1, euc)
     else:
         raise AssertionError("unrecognised number of bytes: {!r}".format(byts))
+
+def dump_cccii_wiktionary(outfile, setname="eacc"):
+    typ, byts, array = graphdata.gsets[setname]
+    print("__NOTOC__", file=outfile)
+    print("{{wikipedia|Chinese Character Code for Information Interchange}}", file=outfile)
+    print("{{-}}", file=outfile)
+    rplanes = [1, 2, 3, 4, 5, 6, 73, 79]
+    if "EACC:ONLY3PLANESPERLEVEL" in graphdata.gsetflags[setname]:
+        rplanes = [1, 2, 3, 73, 79]
+    for rplane in rplanes:
+        print("== Plane {:d} ==".format(rplane), file=outfile)
+        if rplane < 7:
+            planes = [rplane + ((layer - 1) * 6) for layer in range(1, 13)]
+        else:
+            planes = [rplane]
+        for row in range(1, 95):
+            starts = [((plane - 1) * 94 * 94) + ((row - 1) * 94) for plane in planes]
+            subarrays = [array[start:start+94] for start in starts]
+            occupied = len([i for i in zip(*subarrays) if [j for j in i if j]])
+            if not occupied:
+                continue
+            print("=== Plane {:d}, Row {:d} ===".format(rplane, row), file=outfile)
+            for redten, i in enumerate(zip(*subarrays)):
+                n = len(i)
+                while not i[n-1] and n > 1:
+                    n -= 1
+                i = i[:n]
+                streps = [("[[" + "".join(chr(k) for k in j) + "]]") if j else "\uFFFD" for j in i]
+                if not "".join(streps).strip("\uFFFD"):
+                    continue
+                print(end="{{nobr|", file=outfile)
+                print(end="{:d}: ".format(redten + 1), file=outfile)
+                if (streps[0] == "\uFFFD") or (ucd.category(streps[0][2]) == "Co"):
+                    print(end="(〓)", file=outfile)
+                else:
+                    print(end=streps[0], file=outfile)
+                alts = []
+                for m, j in enumerate(streps[1:]):
+                    if j in ("\uFFFD", streps[0]):
+                        continue
+                    alts.append("L{:d}:{}".format(m + 2, j))
+                if alts:
+                    print(end="<sup> (", file=outfile)
+                    print(*alts, sep="･", end=")</sup>", file=outfile)
+                print(end="}}", file=outfile) # nobr}}
+                if redten < 93:
+                    print(end=",\u3000", file=outfile)
+            print(file=outfile)
+            print(file=outfile)
+                
 
 def dump_plane(outfile, planefunc, kutenfunc,
                number, setnames, plarray, *, selfhandledanchorlink=False,

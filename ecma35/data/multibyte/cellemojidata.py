@@ -45,7 +45,7 @@ kddizodiacmap = {
 }
 rkddizodiacmap = dict(zip(kddizodiacmap.values(), kddizodiacmap.keys()))
 
-f = open(os.path.join(parsers.directory, "Encode-JP-Emoji/lib/Encode/JP/Emoji/Mapping.pm"), "rU", encoding="utf-8")
+f = open(os.path.join(parsers.directory, "Perl/Encode-JP-Emoji/lib/Encode/JP/Emoji/Mapping.pm"), "rU", encoding="utf-8")
 b = f.read()
 f.close()
 kddi_microsoft = range(0xE000, 0xE758)

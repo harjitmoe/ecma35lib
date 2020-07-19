@@ -1,3 +1,3 @@
 [submodule "Encode-JP-Emoji"]
-	path = ecma35/data/multibyte/mbmaps/Encode-JP-Emoji
+	path = ecma35/data/multibyte/mbmaps/Perl/Encode-JP-Emoji
 	url = https://github.com/kawanet/Encode-JP-Emoji.git

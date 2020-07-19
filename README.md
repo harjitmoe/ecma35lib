@@ -26,6 +26,9 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at https://mozilla.org/MPL/2.0/
 
+Individual files in `ecma35/data/singlebyte/sbmaps` and `ecma35/data/multibyte/mbmaps` may use 
+separate terms.
+
 # Structure
 
 The `ecma35` package contains the library itself. The `data` subpackage contains mapping data for
@@ -191,10 +194,14 @@ Double-byte assignments:
 |`G*DM4 ! :`|HangulTalk second plane (accepted by HangulTalk filter in G3 slot)|
 |`G*DM4 ! ;`|Non-syllable part of KPS 9566-2011 outside the main plane (accepted by UHC filter in G3 slot)|
 |`G*DM4 ! <`|Big5-E extensions (for Big-5 filter's G3 slot)|
-|`G*DM4 ! =`|East Asian Character Code / Chinese Character Code for Information Interchange (highly experimental)|
 |`IRR ? G*DM6 ! 0`|GBK extras (GB 18030, level 5 with associated UDC zone and non-URO part of level 4; accepted by GBK filter in G3 slot)|
 |`IRR 0 G*DM6 ! 0`|GBK extras, WHATWG/HTML5 variant|
 |`IRR 1 G*DM6 ! 0`|GBK extras, mapping all characters with defined glyphs to non-PUA|
+|`IRR ? G*DM6 ! 1`|EACC / CCCII, Library of Congress version|
+|`IRR 0 G*DM6 ! 1`|EACC / CCCII, Koha Taiwan version|
+|`IRR 1 G*DM6 ! 1`|EACC / CCCII, Hong Kong Innovative Users Group / Hong Kong University version|
+|`IRR 2 G*DM6 ! 1`|EACC / CCCII, aggregate version with Taiwan layout of row 2, favouring Unihan kCCCII for kanji mappings (default)|
+|`IRR 3 G*DM6 ! 1`|EACC / CCCII, aggregate version with Hong Kong layout of rows 0–2, favouring Library of Congress for kanji mappings|
 
 # Carried out
 
