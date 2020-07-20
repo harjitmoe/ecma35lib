@@ -469,24 +469,25 @@ def dump_plane(outfile, planefunc, kutenfunc,
                menuurl=None, menuname="Up to menu", jlfunc=None, 
                lasturl=None, nexturl=None, lastname=None, nextname=None,
                is_96=False, is_sbcs=False, pua_collides=False):
+    """Dump an HTML mapping comparison."""
     stx, edx = (1, 95) if not is_96 else (0, 96)
     if is_sbcs:
         stx = 1 if not is_96 else 0
-        etx = 2 if not is_96 else 1
+        edx = 2 if not is_96 else 1
     elif part:
         stx, edx = max((part - 1) * 16, stx), min(part * 16, edx)
     stpt = (stx - 1) * 94 if not is_96 else stx * 96
     edpt = (edx - 1) * 94 if not is_96 else edx * 96
-    spheniscus = [(i, j) for (i, j) in zip(setnames, plarray) if j[stpt:edpt] != (
+    nonvacant_sets = [(i, j) for (i, j) in zip(setnames, plarray) if j[stpt:edpt] != (
                   (None,) * len(j[stpt:edpt]))]
-    if len(spheniscus) == 1:
+    if len(nonvacant_sets) == 1:
         return dump_preview(outfile, planefunc(number), kutenfunc, number, 
-               spheniscus[0][1], lang=lang, css=css, part=part, jlfunc=jlfunc,
+               nonvacant_sets[0][1], lang=lang, css=css, part=part, jlfunc=jlfunc,
                menuurl=menuurl, menuname=menuname, lasturl=lasturl, 
                nexturl=nexturl, lastname=lastname, nextname=nextname,
                is_96=is_96, is_sbcs=is_sbcs)
-    setnames2 = tuple(zip(*spheniscus))[0] if spheniscus else ()
-    zplarray = tuple(zip(*tuple(zip(*spheniscus))[1])) if spheniscus else ()
+    setnames2 = tuple(zip(*nonvacant_sets))[0] if nonvacant_sets else ()
+    zplarray = tuple(zip(*tuple(zip(*nonvacant_sets))[1])) if nonvacant_sets else ()
     h = ", part {:d}".format(part) if part else ""
     print("<!DOCTYPE html><title>{}{}</title>".format(planefunc(number), h), file=outfile)
     if css:
@@ -494,22 +495,37 @@ def dump_plane(outfile, planefunc, kutenfunc,
     print("<h1>{}{}</h1>".format(planefunc(number), h), file=outfile)
     if menuurl or lasturl or nexturl:
         _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname)
-    if not spheniscus:
+    if not nonvacant_sets:
         print("<p>There are no allocated codepoints in this range.</p>", file=outfile)
         return
+    # Sparse mode is for large sections with barely any allocations, such as the higher planes
+    #   of CCCII. Including all the blank space to scroll makes the table barely usable.
+    allocated_slots = 0
+    sparse = False
+    for testpointer in range(stpt, edpt):
+        for i, j in nonvacant_sets:
+            if testpointer < len(j) and j[testpointer]:
+                allocated_slots += 1
+                break # break the inner loop
+    if allocated_slots < ((edx - stx) * 1.5):
+        sparse = True
     print("<table>", file=outfile)
     for row in range(stx, edx):
-        print("<thead><tr><th>Codepoint</th>", file=outfile)
-        for i in setnames2:
-            print("<th>", i, planefunc(number, i), file=outfile)
-        print("</tr></thead>", file=outfile)
+        if (not sparse) or (row == stx):
+            print("<thead><tr><th>Codepoint</th>", file=outfile)
+            for i in setnames2:
+                print("<th>", i, planefunc(number, i), file=outfile)
+            print("</tr></thead>", file=outfile)
         if annots.get((number, row, 0), None):
             print("<tr class=annotation><td colspan={:d}><p>".format(len(plarray) + 1), file=outfile)
             print("Note:", annots[(number, row, 0)], file=outfile)
             print("</p></td></tr>", file=outfile)
         for cell in (range(1, 95) if not is_96 else range(0, 96)):
             st = zplarray[((row - 1) * 94) + (cell - 1)] if not is_96 else zplarray[(row * 96) + cell]
-            if len(set(i for i in st if (i is not None and not _isbmppua(i)))) > 1:
+            if sparse and (len(set(i for i in st if i is not None)) == 0) \
+                      and not annots.get((number, row, cell), None):
+                continue
+            elif len(set(i for i in st if (i is not None and not _isbmppua(i)))) > 1:
                 print("<tr class=collision>", file=outfile)
             elif pua_collides and (len(set(st) | {None}) > 2):
                 print("<tr class=collision>", file=outfile)
@@ -569,6 +585,7 @@ def dump_preview(outfile, planename, kutenfunc, number, array, *, lang="zh-TW", 
                css=None, part=None, menuurl=None, menuname="Up to menu", jlfunc=None, 
                lasturl=None, nexturl=None, lastname=None, nextname=None,
                is_96=False, is_sbcs=False):
+    """Dump an HTML single-mapping table."""
     stx, edx = (1, 95) if not is_96 else (0, 96)
     if is_sbcs:
         stx = 1 if not is_96 else 0

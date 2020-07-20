@@ -578,19 +578,37 @@ graphdata.gsets["cccii-koha"] = (96, 3,
         parsers.read_main_plane("Perl/Encode-HanExtra/ucm/cccii.ucm", set96=True))
 graphdata.gsets["eacc-hongkong"] = (96, 3, parsers.read_main_plane("Other/eacc-hongkonguni.txt", 
                                     ignore_later_altucs=True, set96=True))
-graphdata.gsets["cccii"] = (96, 3, parsers.fuse([
+maxmat1 = parsers.read_main_plane("Custom/cccii-maxmat.txt", set96=True)
+maxmat2 = parsers.read_main_plane("Custom/eacc-maxmat.txt", set96=True)
+# The tilde sets (~cccii and ~eacc) are used in the process of (re)generating the maxmat files.
+graphdata.gsets["~cccii"] = (96, 3, parsers.fuse([
     parsers.read_main_plane("Custom/cccii-nonkanji.txt", set96=True),
     cccii_unihan,
     graphdata.gsets["cccii-koha"][2],
     graphdata.gsets["eacc-pure"][2],
     ((None,) * (96 * 99)) + graphdata.gsets["eacc-hongkong"][2][96*99:],
-], "CCCII-Full.json"))
+], "CCCII-Full-Raw.json"))
+graphdata.gsetflags["eacc-pure"] |= {"EACC:ONLY3PLANESPERLEVEL"}
+graphdata.gsets["~eacc"] = (96, 3, parsers.fuse([
+    graphdata.gsets["eacc-pure"][2],
+    graphdata.gsets["eacc-hongkong"][2],
+    ((None,) * (96 * 99)) + graphdata.gsets["~cccii"][2][96*99:],
+], "EACC-Full-Raw.json"))
+graphdata.gsets["cccii"] = (96, 3, parsers.fuse([
+    parsers.read_main_plane("Custom/cccii-nonkanji.txt", set96=True),
+    maxmat1,
+    cccii_unihan,
+    graphdata.gsets["cccii-koha"][2],
+    graphdata.gsets["eacc-pure"][2],
+    ((None,) * (96 * 99)) + graphdata.gsets["eacc-hongkong"][2][96*99:],
+], "CCCII-Full4.json"))
 graphdata.gsetflags["eacc-pure"] |= {"EACC:ONLY3PLANESPERLEVEL"}
 graphdata.gsets["eacc"] = (96, 3, parsers.fuse([
+    maxmat2,
     graphdata.gsets["eacc-pure"][2],
     graphdata.gsets["eacc-hongkong"][2],
     ((None,) * (96 * 99)) + graphdata.gsets["cccii"][2][96*99:],
-], "EACC-Full.json"))
+], "EACC-Full4.json"))
 
 
 
