@@ -2,10 +2,6 @@
 #   Interchange (CCCII), otherwise known as the East Asian Character Code (EACC).
 #   Those plane 73 mappings which can just be passed through to a JIS X 0208 table are omitted.
 #   (I am aware that the non-Kanji part includes duplicates of certain Kanji.)
-# The Hangul part is lengthy and probably best just referenced from the Library of Congress; the
-#   Kanji part is probably best referenced from the Unihan database. Bear in mind that if you can't
-#   map a Kanji in the first 12 layers, it can be best-fitted to a homologue in another one of
-#   those layers.
 #
 # Sources consulted (and referenced below):
 #   Koha Taiwan supplied Encode::HanExtra mappings:
@@ -282,7 +278,7 @@
 
 # Various symbols (currency, footnote, et cetera). Library of Congress and Hong Kong University
 #   include only the slash here, while Koha excludes the slash (which they assign in row 3).
-0x212B50	U+1F4B2	# HEAVY DOLLAR SIGN # double-barred; lighter, but less stylistically cohesive
+0x212B50	U+1F4B2	# HEAVY DOLLAR SIGN # Cifrão; stylistically different to 0x212324/0x212B51
 0x212B51	U+FF04	# FULLWIDTH DOLLAR SIGN # stylistically similar to 0x212324
 0x212B52	U+FFE0	# FULLWIDTH CENT SIGN
 0x212B53	U+20A1	# COLON SIGN
@@ -318,7 +314,7 @@
 # Classical radicals. This mapping was referenced from the BDF file alone. Most mappings omit this
 #   part, possibly due to predating or being unaware of the Kangxi Radicals block and seeing it as
 #   more duplicate kanji? Notably, the Hong Kong University mappings include three which have
-#   left-radical presentation forms in the URO, mapping to those ones.
+#   left-radical presentation forms in the URO, mapping to those ones (as does Unihan's kCCCII).
 0x212C22	U+2F00	# KANGXI RADICAL ONE
 0x212C23	U+2F01	# KANGXI RADICAL LINE
 0x212C24	U+2F02	# KANGXI RADICAL DOT
