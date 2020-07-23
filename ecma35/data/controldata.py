@@ -726,6 +726,7 @@ cexseq = {b"J"[0]: "SVP", # Select Vertical Printing
 
 # https://www.unicode.org/L2/L2020/20007-abbreviations.pdf
 # https://www.unicode.org/L2/L2020/20010-charts-text.pdf
+#   These are obviously provisional, but I do not expect them to be redefined for other uses.
 # Note: don't include C0s and C1s here. SP and DEL are not strictly C0s or C1s since ECMA-35 does 
 #   not delegate them to the C0 and C1 sets. Although ESC isn't delegated either.
 formats = { 0x0020: 'SP', # Space
@@ -747,9 +748,9 @@ formats = { 0x0020: 'SP', # Space
             0x2001: 'MQSP', # Em Quad Space, Em Quad
             0x2002: 'ENSP', # En Space
             0x2003: 'EMSP', # Em Space
-            0x2004: 'EMSP13', # 1/3 Em Space
-            0x2005: 'EMSP14', # 1/4 Em Space
-            0x2006: 'EMSP16', # 1/6 Em Space
+            0x2004: 'EMSP13', # 1/3 Em Space, Three Per Em Space (THPMSP)
+            0x2005: 'EMSP14', # 1/4 Em Space, Four Per Em Space (FPMSP)
+            0x2006: 'EMSP16', # 1/6 Em Space, Six Per Em Space (SPMSP)
             0x2007: 'FSP', # Figure Space, Numeric Space (NSP, NUMSP)
             0x2008: 'PSP', # Punctuation Space
             0x2009: 'THSP', # Thin Space
@@ -791,8 +792,55 @@ formats = { 0x0020: 'SP', # Space
             0xFFFA: 'IAS', # Interlinear Annotation Separator
             0xFFFB: 'IAT', # Interlinear Annotation Terminator
             0x110BD: 'KNS', # Kaithi Number Sign
-            # TODO U+1BCA0 thru U+1BCA3 inc
-            # TODO U+E0001 and U+E0020 thru U+E007F inc
+            0x13430: 'EHVJ', # Egyptian Hieroglyph Vertical Joiner
+            0x13431: 'EHHJ', # Egyptian Hieroglyph Horizontal Joiner
+            0x13432: 'EHITS', # Egyptian Hieroglyph Insert-at-Top Start
+            0x13433: 'EHIBS', # Egyptian Hieroglyph Insert-at-Bottom Start
+            0x13434: 'EHITE', # Egyptian Hieroglyph Insert-at-Top End (EHITJ is likely a typo)
+            0x13435: 'EHIBE', # Egyptian Hieroglyph Insert-at-Bottom ENd
+            0x13436: 'EHOM', # Egyptian Hieroglyph Overlay Middle
+            0x13437: 'EHBS', # Egyptian Hieroglyph Begin Segment
+            0x13438: 'EHES', # Egyptian Hieroglyph End Segment
+            0x1BCA0: 'SHLO', # Shorthand Format Letter Overlap
+            0x1BCA1: 'SHCO', # Shorthand Format Continuing Overlap
+            0x1BCA2: 'SHDS', # Shorthand Format Down Step
+            0x1BCA3: 'SHUS', # Shorthand Format Up Step
+            0x1D173: 'MNBB', # Musical Symbol Begin Beam
+            0x1D174: 'MNEB', # Musical Symbol End Beam
+            0x1D175: 'MNBT', # Musical Symbol Begin Tie
+            0x1D176: 'MNET', # Musical Symbol End Tie
+            0x1D177: 'MNBS', # Musical Symbol Begin Slur
+            0x1D178: 'MNES', # Musical Symbol End Slur
+            0x1D179: 'MNBP', # Musical Symbol Begin Phrase
+            0x1D17A: 'MNEP', # Musical Symbol End Phrase
+            # Tag characters
+            0xE0001: 'TAG{BEGIN}',
+            0xE0020: 'TAG{SP}', 0xE0021: 'TAG{EXCL}', 0xE0022: 'TAG{QUOT}', 0xE0023: 'TAG{NUM}',
+            0xE0024: 'TAG{DOLLAR}', 0xE0025: 'TAG{PERCNT}', 0xE0026: 'TAG{AMP}',
+            0xE0027: 'TAG{APOS}', 0xE0028: 'TAG{LPAR}', 0xE0029: 'TAG{RPAR}', 0xE002A: 'TAG{AST}',
+            0xE002B: 'TAG{PLUS}', 0xE002C: 'TAG{COMMA}', 0xE002D: 'TAG{-}', 0xE002E: 'TAG{PERIOD}',
+            0xE002F: 'TAG{SOL}', 0xE0030: 'TAG{0}', 0xE0031: 'TAG{1}', 0xE0032: 'TAG{2}',
+            0xE0033: 'TAG{3}', 0xE0034: 'TAG{4}', 0xE0035: 'TAG{5}', 0xE0036: 'TAG{6}',
+            0xE0037: 'TAG{7}', 0xE0038: 'TAG{8}', 0xE0039: 'TAG{9}', 0xE003A: 'TAG{COLON}',
+            0xE003B: 'TAG{SEMI}', 0xE003C: 'TAG{LT}', 0xE003D: 'TAG{EQUALS}', 0xE003E: 'TAG{GT}',
+            0xE003F: 'TAG{QUEST}', 0xE0040: 'TAG{COMMAT}', 0xE0041: 'TAG{A}', 0xE0042: 'TAG{B}',
+            0xE0043: 'TAG{C}', 0xE0044: 'TAG{D}', 0xE0045: 'TAG{E}', 0xE0046: 'TAG{F}',
+            0xE0047: 'TAG{G}', 0xE0048: 'TAG{H}', 0xE0049: 'TAG{I}', 0xE004A: 'TAG{J}',
+            0xE004B: 'TAG{K}', 0xE004C: 'TAG{L}', 0xE004D: 'TAG{M}', 0xE004E: 'TAG{N}',
+            0xE004F: 'TAG{O}', 0xE0050: 'TAG{P}', 0xE0051: 'TAG{Q}', 0xE0052: 'TAG{R}',
+            0xE0053: 'TAG{S}', 0xE0054: 'TAG{T}', 0xE0055: 'TAG{U}', 0xE0056: 'TAG{V}',
+            0xE0057: 'TAG{W}', 0xE0058: 'TAG{X}', 0xE0059: 'TAG{Y}', 0xE005A: 'TAG{Z}',
+            0xE005B: 'TAG{LSQB}', 0xE005C: 'TAG{BSOL}', 0xE005D: 'TAG{RSQB}', 0xE005E: 'TAG{HAT}',
+            0xE005F: 'TAG{UNDERBAR}', 0xE0060: 'TAG{GRAVE}', 0xE0061: 'TAG{a}',
+            0xE0062: 'TAG{b}', 0xE0063: 'TAG{c}', 0xE0064: 'TAG{d}', 0xE0065: 'TAG{e}',
+            0xE0066: 'TAG{f}', 0xE0067: 'TAG{g}', 0xE0068: 'TAG{h}', 0xE0069: 'TAG{i}',
+            0xE006A: 'TAG{j}', 0xE006B: 'TAG{k}', 0xE006C: 'TAG{l}', 0xE006D: 'TAG{m}',
+            0xE006E: 'TAG{n}', 0xE006F: 'TAG{o}', 0xE0070: 'TAG{p}', 0xE0071: 'TAG{q}',
+            0xE0072: 'TAG{r}', 0xE0073: 'TAG{s}', 0xE0074: 'TAG{t}', 0xE0075: 'TAG{u}',
+            0xE0076: 'TAG{v}', 0xE0077: 'TAG{w}', 0xE0078: 'TAG{x}', 0xE0079: 'TAG{y}',
+            0xE007A: 'TAG{z}', 0xE007B: 'TAG{LBRACE}', 0xE007C: 'TAG{VERT}',
+            0xE007D: 'TAG{RBRACE}', 0xE007E: 'TAG{~}',
+            0xE007F: 'TAG{END}',
 }
 rformats = dict(zip(formats.values(), formats.keys()))
 

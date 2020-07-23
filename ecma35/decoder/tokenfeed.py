@@ -38,7 +38,7 @@ def process_stream(stream, *, lastfilter=None, **kwargs): # The entry point.
     statedict.update(kwargs)
     state = types.SimpleNamespace(**statedict)
     from ecma35.decoder import utf8filter, utf16filter, utf32filter, formateffectors, \
-       controlsets, fixedcontrols, invocations, gccsequences, elexfilter, \
+       controlsets, fixedcontrols, invocations, gccsequences, elexfilter, prefixdiacritics, \
        designations, graphsets, simpleprinter, escsequences, csisequences, controlstrings, \
        rawfilter, unkdocsfilter, ecma35docsfilter, hangulfillers, utf1filter, shiftjisfilter, \
        scsufilter, uhcfilter, gbkfilter, gbhalfcodes, plainextasciifilter, bigfivefilter
@@ -52,9 +52,9 @@ def process_stream(stream, *, lastfilter=None, **kwargs): # The entry point.
               gbhalfcodes.decode_gbhalfcodes, controlsets.decode_control_sets, 
               fixedcontrols.decode_fixed_controls, escsequences.decode_esc_sequences, 
               csisequences.decode_csi_sequences, controlstrings.decode_control_strings, 
-              invocations.decode_invocations, graphsets.decode_graphical_sets,
-              hangulfillers.proc_hangul_fillers, gccsequences.proc_gcc_sequences,
-              formateffectors.format_effectors,
+              invocations.decode_invocations, graphsets.decode_graphical_sets, 
+              hangulfillers.proc_hangul_fillers, gccsequences.proc_gcc_sequences, 
+              formateffectors.format_effectors, prefixdiacritics.handle_prefix_diacritics, 
               lastfilter or simpleprinter.simple_print]:
         stream = f(stream, state)
     yield from stream
