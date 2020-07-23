@@ -152,8 +152,9 @@ graphdata.gsets["ir165std"] = isoir165 = (94, 2, tuple(ir165_std))
 #   the others being added as a couple of rows at the end)
 # Unlike GB2312.TXT, redistribution of GB12345.TXT itself is apparently not permitted, although
 #   using/incorporating the information is apparently fine.
-graphdata.gsets["ir058-hant"] = gb12345 = (94, 2, tuple(tuple(i) if i is not None else None for
-    i in json.load(open(os.path.join(parsers.directory, "UTC/GB_12345.json"), "r"))))
+graphdata.gsets["ir058-hant"] = gb12345 = (94, 2, parsers.read_untracked_mbfile(
+                 parsers.read_main_plane, "UTC/GB12345.TXT", None, 
+                 "UTC/GB_12345.json"))
 
 # Being as GB 7589, 13131, 7590, 13132 do not include non-Kanji, Unihan mappings theoretically can
 #   describe their entire mappings… in reality, the GB 13131 mapping contains more or less the

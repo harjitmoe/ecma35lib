@@ -170,11 +170,7 @@ def read_big5extras(fil, *, moz2004=False):
     cachefn = os.path.join(parsers.cachedirectory,
               os.path.splitext(fil)[0].replace("/", "---") + "_big5extras.json")
     if os.path.exists(cachefn):
-        # Cache output since otherwise several seconds are spent in here upon importing graphdata
-        f = open(cachefn, "r")
-        r = json.load(f)
-        f.close()
-        return tuple(tuple(i) if i is not None else None for i in r)
+        return parsers.LazyJSON(cachefn)
     for _i in open(os.path.join(parsers.directory, fil), "r", encoding="utf-8"):
         if (not _i.strip()) or (_i[0] == "#") or ("<reserved>" in _i):
             continue
@@ -402,11 +398,7 @@ def read_big5_planes(fil, big5_to_cns_g2, *, plane=None, twoway=False, mapper=pa
                if plane is not None else "_mainplane") + mappername + ".json"
     cachefn = os.path.join(parsers.cachedirectory, cachebfn)
     if os.path.exists(cachefn):
-        # Cache output since otherwise several seconds are spend in here upon importing graphdata
-        f = open(cachefn, "r")
-        r = json.load(f)
-        f.close()
-        return tuple(tuple(i) if i is not None else None for i in r)
+        return parsers.LazyJSON(cachefn)
     for _i in open(os.path.join(parsers.directory, fil), "r"):
         if not _i.strip():
             continue

@@ -19,6 +19,56 @@ if (os.environ.get("ECMA35LIBDECACHE", "") == "1") and os.path.exists(cachedirec
     shutil.rmtree(cachedirectory)
     os.makedirs(cachedirectory)
 
+class LazyJSON(list):
+    def __init__(self, filename):
+        self._filename = os.path.join(cachedirectory, filename)
+    def _load(self):
+        if not super().__len__():
+            f = open(self._filename)
+            super().extend(tuple(i) if i is not None else None for i in json.load(f))
+            f.close()
+    def __iter__(self):
+        self._load()
+        return super().__iter__()
+    def __len__(self):
+        self._load()
+        return super().__len__()
+    def __hash__(self):
+        self._load()
+        return hash(tuple())
+    def __eq__(self, i):
+        self._load()
+        return self == i
+    def __bool__(self, i):
+        self._load()
+        return super().__bool__()
+    def __add__(self, i):
+        self._load()
+        return tuple(self) + i
+    def __radd__(self, i):
+        self._load()
+        return i + tuple(self)
+    def __iadd__(self, i):
+        return NotImplemented
+    def __getitem__(self, i):
+        self._load()
+        if not isinstance(i, slice):
+            return super().__getitem__(i)
+        else:
+            return tuple(super().__getitem__(i))
+    def __setitem__(self, i, j):
+        raise TypeError("immutable")
+    def __delitem__(self, i):
+        raise TypeError("immutable")
+    def append(self, i):
+        raise TypeError("immutable")
+    def extend(self, i):
+        raise TypeError("immutable")
+    def insert(self, n, i):
+        raise TypeError("immutable")
+    def pop(self, n=None):
+        raise TypeError("immutable")
+
 def _grok_sjis(byts):
     if not isinstance(byts, int):
         pku = byts[0]
@@ -92,10 +142,7 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
     cachefn = os.path.join(cachedirectory, cachebfn)
     if os.path.exists(cachefn):
         # Cache output since otherwise several seconds are spend in here upon importing graphdata
-        f = open(cachefn, "r")
-        r = json.load(f)
-        f.close()
-        return tuple(tuple(i) if i is not None else None for i in r)
+        return LazyJSON(cachefn)
     for _i in open(os.path.join(directory, fil), "r", encoding="utf-8"):
         if not _i.strip():
             continue
@@ -350,10 +397,7 @@ def read_unihan_source(fil, region, source):
                ) + ".json"
     cachefn = os.path.join(cachedirectory, cachebfn)
     if os.path.exists(cachefn):
-        f = open(cachefn, "r")
-        r = json.load(f)
-        f.close()
-        return tuple(tuple(i) if i is not None else None for i in r)
+        return LazyJSON(cachefn)
     wantkey = "kIRG_" + region + "Source"
     wantsource = source + "-"
     f = open(os.path.join(directory, fil), "r")
@@ -395,10 +439,7 @@ def read_unihan_kuten(fil, wantkey):
     cachebfn = os.path.splitext(fil)[0].replace("/", "---") + ("_{}".format(wantkey)) + ".json"
     cachefn = os.path.join(cachedirectory, cachebfn)
     if os.path.exists(cachefn):
-        f = open(cachefn, "r")
-        r = json.load(f)
-        f.close()
-        return tuple(tuple(i) if i is not None else None for i in r)
+        return LazyJSON(cachefn)
     f = open(os.path.join(directory, fil), "r")
     for i in f:
         if i[0] == "#":
@@ -437,10 +478,7 @@ def read_unihan_eacc(fil, wantkey, *, set96=False):
     cachebfn = os.path.splitext(fil)[0].replace("/", "---") + ("_{}".format(wantkey)) + ".json"
     cachefn = os.path.join(cachedirectory, cachebfn)
     if os.path.exists(cachefn):
-        f = open(cachefn, "r")
-        r = json.load(f)
-        f.close()
-        return tuple(tuple(i) if i is not None else None for i in r)
+        return LazyJSON(cachefn)
     f = open(os.path.join(directory, fil), "r")
     for i in f:
         if i[0] == "#":
@@ -464,7 +502,7 @@ def read_unihan_eacc(fil, wantkey, *, set96=False):
             # U+9C0C → kCCCII 2358CF
             # U+9C0C → kEACC 2D6222
             # Not sure when, why or how CCCII seems to have abandoned its notion of being a
-            #   ISO 2022 set altogether. These are odd exceptions though, not the rule.
+            #   ISO 2022 set altogether. These are very odd exceptions though, not the rule.
             continue
         if len(_temp) > pointer:
             if (ucs == 0x4EBE) and (wantkey == "kCCCII"):
@@ -507,10 +545,7 @@ def fuse(arrays, filename):
         _f.close()
         return tuple(out)
     else:
-        _f = open(os.path.join(cachedirectory, filename), "r")
-        out = tuple(tuple(i) if i is not None else None for i in json.load(_f))
-        _f.close()
-        return out
+        return LazyJSON(filename)
 
 def parse_variants(fil):
     f = open(os.path.join(directory, fil), "r")
@@ -531,16 +566,16 @@ def parse_variants(fil):
     f.close()
     return cods
 
-def read_untracked_mbfile(reader, fn, cachefn, shippedfn, **kwargs):
+def read_untracked_mbfile(reader, fn, obsolete_argument, shippedfn, **kwargs):
     if os.path.exists(os.path.join(directory, fn)):
         data = reader(fn, **kwargs)
-        try:
-            if os.path.exists(os.path.join(directory, shippedfn)):
-                os.unlink(os.path.join(directory, shippedfn))
-            shutil.copy(os.path.join(cachedirectory, cachefn),
-                        os.path.join(directory, shippedfn))
-        except EnvironmentError:
-            pass
+        if not os.path.exists(os.path.join(directory, shippedfn)):
+            try:
+                _f = open(os.path.join(directory, shippedfn), "w")
+                _f.write(json.dumps(data))
+                _f.close()
+            except EnvironmentError:
+                pass
     else:
         data = tuple(tuple(i) if i is not None else None for i in json.load(
                      open(os.path.join(directory, shippedfn), "r")))

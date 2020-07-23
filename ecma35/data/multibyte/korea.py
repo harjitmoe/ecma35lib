@@ -19,10 +19,7 @@ def read_kps9566extras(fil):
     cachefn = os.path.join(parsers.cachedirectory,
               os.path.splitext(fil)[0].replace("/", "---") + "_kps9566extras2.json")
     if os.path.exists(cachefn):
-        f = open(cachefn, "r")
-        r = json.load(f)
-        f.close()
-        return tuple(tuple(i) if i is not None else None for i in r)
+        return parsers.LazyJSON(cachefn)
     for _i in open(os.path.join(parsers.directory, fil), "r", encoding="utf-8"):
         if (not _i.strip()) or _i[0] == "#":
             continue
@@ -71,10 +68,7 @@ def read_elexextras(fil, *, altcomments=False, mapper=parsers.identitymap):
     cachefn = os.path.join(parsers.cachedirectory, os.path.splitext(fil)[0].replace("/", "---") 
               + "_elexextras" + mappername + ".json")
     if os.path.exists(cachefn):
-        f = open(cachefn, "r")
-        r = json.load(f)
-        f.close()
-        return tuple(tuple(i) if i is not None else None for i in r)
+        return parsers.LazyJSON(cachefn)
     for _i in open(os.path.join(parsers.directory, fil), "r", encoding="utf-8"):
         if (not _i.strip()) or _i[0] == "#":
             continue
