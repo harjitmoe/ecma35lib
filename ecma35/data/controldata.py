@@ -26,7 +26,7 @@
 #    S0, S1, S2, S3, FS, GS, RS, US
 # The first four were in the 1963 version but later removed (see below).
 
-format_effectors = ["BS", "HT", "LF", "VT", "FF", "CR"]
+c0_format_effectors = ["BS", "HT", "LF", "VT", "FF", "CR"]
 
 fixed_controls = {(0x60,): "DMI", # Disable Manual Input, `
                   (0x61,): "INT", # Interrupt, a
@@ -402,6 +402,12 @@ c1sets = {# German bibliographic controls used in DIN 31626
                   "NSB", "NSE", None, "PLD", "PLU", None, None, None,
                   None, "EAB", "EAE", None, None, "SIB", "SIE", "SSB",
                   "SSE", None, None, None, "KWB", "KWE", "PSB", "PSE"),
+          # MARC-8 control codes. Or rather, NSB, NSE, ZWJ and ZWNJ are. The rest are just included
+          #   so that this can be validly be treated as an alternative for the ir124 escape seq.
+          "ir124-marc": (None, None, None, None, None, None, None, "CUS",
+                  "NSB", "NSE", None, "PLD", "PLU", "ZWJ", "ZWNJ", None,
+                  None, "EAB", "EAE", None, None, "SIB", "SIE", "SSB",
+                  "SSE", None, None, None, "KWB", "KWE", "PSB", "PSE"),
           # ITU T.101 Data Syntax 1
           "ir133": ("BKF", # Black Foreground
                   "RDF", # Red Foreground
@@ -531,8 +537,8 @@ c0bytes = {tuple(b"@"): ("ir001", ("ir001nl",), ("ir001",)),
 
 c1bytes = {tuple(b"@"): "ir056",
            tuple(b"A"): "ir073",
-           tuple(b"B"): ("ir124", # Preferred version
-                         (), # Private versions
+           tuple(b"B"): ("ir124-marc", # Preferred version
+                         ("ir124-marc",), # Private versions
                          ("ir067", "ir124")), # Original followed by any registered revisions
            tuple(b"C"): ("RFC1345", ("RFC1345",), ("ir077",)),
            tuple(b"D"): "ir133",
@@ -718,13 +724,77 @@ cexseq = {b"J"[0]: "SVP", # Select Vertical Printing
           b"t"[0]: "DSVP", # Disable DBCS ASCII [SBCS???] Vertical Printing Mode 
           b"u"[0]: "ESVP"} # Enable SBCS Vertical Printing Mode (i.e. puts them upright?)
 
-# Not supposed to be an exhaustive list _per se_, nor to follow any specific category:
-formats = {0x00AD: 'SHY', 0x061C: 'ALM', 0x180E: 'MVS', 0x200B: 'ZWSP', 0x200C: 'ZWNJ', 
-           0x200D: 'ZWJ', 0x200E: 'LRM', 0x200F: 'RLM', 0x2028: 'LSEP', 0x2029: 'PSEP', 
-           0x202A: 'LRE', 0x202B: 'RLE', 0x202C: 'PDF', 0x202D: 'LRO', 0x202E: 'RLO', 
-           0x2060: 'WJ', 0x2061: 'AF', 0x2062: 'IT', 0x2063: 'IC', 0x2064: 'IP', 
-           0x2066: 'LRI', 0x2067: 'RLI', 0x2068: 'FSI', 0x2069: 'PDI', 0x3164: 'HF', 
-           0xFEFF: 'ZWNBSP', 0xFFF9: 'IAA', 0xFFFA: 'IAS', 0xFFFB: 'IAT'}
+# https://www.unicode.org/L2/L2020/20007-abbreviations.pdf
+# https://www.unicode.org/L2/L2020/20010-charts-text.pdf
+# Note: don't include C0s and C1s here. SP and DEL are not strictly C0s or C1s since ECMA-35 does 
+#   not delegate them to the C0 and C1 sets. Although ESC isn't delegated either.
+formats = { 0x0020: 'SP', # Space
+            0x007F: 'DEL', # Delete
+            0x00A0: 'NBSP', # Non-Breaking Space, No-Break Space, Required Space (RSP)
+            0x00AD: 'SHY', # Soft Hyphen
+            0x034F: 'CGJ', # Combining Grapheme "Joiner"
+            # TODO: U+0601, U+0603, U+0604
+            0x0600: 'ANS', # Arabic Number Sign
+            0x0602: 'AFM', # Arabic Footnote Marker
+            0x0605: 'ANMA', # Arabic Number Mark Above
+            0x061C: 'ALM', # Arabic Letter Mark
+            0x06DD: 'AEOA', # Arabic End Of Ayah
+            0x070F: 'SAM', # Syriac Abbreviation Mark
+            0x08E2: 'ADEOA', # Arabic Disputed End Of Ayah
+            0x1680: 'OGSP', # Ogham Space Mark
+            0x180E: 'MVS', # Mongolian Vowel Separator
+            0x2000: 'NQSP', # En Quad Space, En Quad
+            0x2001: 'MQSP', # Em Quad Space, Em Quad
+            0x2002: 'ENSP', # En Space
+            0x2003: 'EMSP', # Em Space
+            0x2004: 'EMSP13', # 1/3 Em Space
+            0x2005: 'EMSP14', # 1/4 Em Space
+            0x2006: 'EMSP16', # 1/6 Em Space
+            0x2007: 'FSP', # Figure Space, Numeric Space (NSP, NUMSP)
+            0x2008: 'PSP', # Punctuation Space
+            0x2009: 'THSP', # Thin Space
+            0x200A: 'HSP', # Hair Space
+            0x200B: 'ZWSP', # Zero Width Space
+            0x200C: 'ZWNJ', # Zero Width Non Joiner
+            0x200D: 'ZWJ', # Zero Width Joiner
+            0x200E: 'LRM', # Left to Right Mark
+            0x200F: 'RLM', # Right to Left Mark
+            0x2028: 'LSEP', # Line Separator (also LS)
+            0x2029: 'PSEP', # Paragraph Separator (also PS)
+            0x202A: 'LRE', # Left to Right Embedding
+            0x202B: 'RLE', # Right to Left Embedding
+            0x202C: 'PDF', # Pop Directional Formatting
+            0x202D: 'LRO', # Left to Right Override
+            0x202E: 'RLO', # Right to Left Override
+            0x202F: 'NNBSP', # Narrow Non-Breaking Space, Narrow No-Break Space
+            0x205F: 'MMSP', # Medium Mathematical Space
+            0x2060: 'WJ', # Word Joiner
+            0x2061: 'FA', # Function Application
+            0x2062: 'IMS', # Invisible Times
+            0x2063: 'IS', # Invisible Separator
+            0x2064: 'IPS', # Invisible Plus
+            0x2066: 'LRI', # Left to Right Isolate
+            0x2067: 'RLI', # Right to Left Isolate
+            0x2068: 'FSI', # First Strong Isolate
+            0x2069: 'PDI', # Pop Directional Isolate 
+            0x206A: 'ISS', # Inhibit Symmetric Swapping
+            0x206B: 'ASS', # Activate Symmetric Swapping 
+            0x206C: 'IAFS', # Inhibit Arabic Form Shaping
+            0x206D: 'AAFS', # Activate Arabic Form Shaping
+            0x206E: 'NADS', # National Digit Shapes
+            0x206F: 'NODS', # Nominal Digit Shapes
+            0x3000: 'IDSP', # Ideographic Space
+            0x3164: 'HF', # Hangul Filler
+            0xFEFF: 'BOM', # Byte-Order Mark, Zero Width Non-Breaking Space (ZWNBSP)
+            0xFFA0: 'HWHF', # Halfwidth Hangul Filler
+            0xFFF9: 'IAA', # Interlinear Annotation Anchor
+            0xFFFA: 'IAS', # Interlinear Annotation Separator
+            0xFFFB: 'IAT', # Interlinear Annotation Terminator
+            0x110BD: 'KNS', # Kaithi Number Sign
+            # TODO U+1BCA0 thru U+1BCA3 inc
+            # TODO U+E0001 and U+E0020 thru U+E007F inc
+}
+rformats = dict(zip(formats.values(), formats.keys()))
 
 
 

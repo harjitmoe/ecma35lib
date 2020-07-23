@@ -147,7 +147,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"!B"): ("ir170", ("ir170dec", "ir170ets"), ("ir170",)),
             tuple(b"!C"): "ir207",
             tuple(b"!D"): "ir230",
-            tuple(b"!E"): "ir231",
+            tuple(b"!E"): ("ir231-full", ("ir231-marc", "ir231-full"), ("ir231",)),
             tuple(b"!F"): "ir232",
             # Other ETS sets
             tuple(b"#1"): "etsfrench",

@@ -183,8 +183,9 @@
 0x21237E	U+FF5E	# FULLWIDTH TILDE
 
 # Internal use extensions used by the proprietary IME of the RLG RLIN system used by the Library of
-#   Congress system. Only included in the Library of Congress variant.
-# They may all be mapped to the geta outside the RLIN IME, but 0x212A46 is specifically the geta.
+#   Congress system. Only included in the Library of Congress variant, although the distinctive
+#   mapping for the geta also finds its way into other mappings.
+# These may all be mapped to the geta outside the RLIN IME, but 0x212A46 is specifically the geta.
 0x212A21	U+E8D0	# (private use)
 0x212A22	U+E8D1	# (private use)
 0x212A23	U+E8D2	# (private use)

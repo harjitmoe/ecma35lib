@@ -37,7 +37,7 @@ def process_stream(stream, *, lastfilter=None, **kwargs): # The entry point.
     statedict = {"osc_bel_term": True, "default_endian": ">", "regard_bom": 1, "docsmode": None}
     statedict.update(kwargs)
     state = types.SimpleNamespace(**statedict)
-    from ecma35.decoder import utf8filter, utf16filter, utf32filter, \
+    from ecma35.decoder import utf8filter, utf16filter, utf32filter, formateffectors, \
        controlsets, fixedcontrols, invocations, gccsequences, elexfilter, \
        designations, graphsets, simpleprinter, escsequences, csisequences, controlstrings, \
        rawfilter, unkdocsfilter, ecma35docsfilter, hangulfillers, utf1filter, shiftjisfilter, \
@@ -54,6 +54,7 @@ def process_stream(stream, *, lastfilter=None, **kwargs): # The entry point.
               csisequences.decode_csi_sequences, controlstrings.decode_control_strings, 
               invocations.decode_invocations, graphsets.decode_graphical_sets,
               hangulfillers.proc_hangul_fillers, gccsequences.proc_gcc_sequences,
+              formateffectors.format_effectors,
               lastfilter or simpleprinter.simple_print]:
         stream = f(stream, state)
     yield from stream

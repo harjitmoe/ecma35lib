@@ -23,7 +23,7 @@ def swap_arrows(t):
 
 print("Loading 1")
 plane1 = (1, ("UTC Big5", "UTC CNS", "MS Big5", "Mac Big5", "IBM Big5", "Web Big5", "Yasuoka CNS",
-              "ICU CNS'92", "ICU EUC'14", "GOV-TW CNS", "Output"), [
+              "ICU '92CNS", "ICU EUC'14", "GOV-TW CNS", "Output"), [
           swap_arrows(traditional.read_big5_planes("UTC/BIG5.TXT", big5_to_cns_g2=traditional.big5_to_cns2, plane=1)),
           parsers.read_main_plane("UTC/CNS11643.TXT", plane=1),
           swap_arrows(graphdata.gsets["ir171-ms"][2]),
@@ -42,7 +42,7 @@ plane1 = (1, ("UTC Big5", "UTC CNS", "MS Big5", "Mac Big5", "IBM Big5", "Web Big
 ])
 
 print("Loading 2")
-plane2 = (2, ("UTC CNS", "Big5", "Yasuoka CNS", "ICU CNS 1992", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
+plane2 = (2, ("UTC CNS", "Big5", "Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
           traditional.read_big5_planes("UTC/BIG5.TXT", big5_to_cns_g2=traditional.big5_to_cns2, plane=2),
           parsers.read_main_plane("UTC/CNS11643.TXT", plane=2),
           graphdata.gsets["ir172-big5"][2],
@@ -58,7 +58,7 @@ plane2 = (2, ("UTC CNS", "Big5", "Yasuoka CNS", "ICU CNS 1992", "ICU EUC 2014", 
 ])
 
 print("Loading 3")
-plane3 = (3, ("UTC CNS", "Yasuoka CNS", "ICU CNS 1992",
+plane3 = (3, ("UTC CNS", "Yasuoka CNS", "ICU 1992 CNS",
               "ICU EUC 2014", "GOV-TW CNS", "Output", "Output Alt"), [
           parsers.read_main_plane("UTC/CNS11643.TXT", plane=14), # yes, really.
           parsers.read_main_plane("Other/Uni2CNS", plane=3),
@@ -74,7 +74,7 @@ plane3 = (3, ("UTC CNS", "Yasuoka CNS", "ICU CNS 1992",
 ])
 
 print("Loading 4")
-plane4 = (4, ("Yasuoka CNS", "ICU CNS 1992", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
+plane4 = (4, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
           parsers.read_main_plane("Other/Uni2CNS", plane=4),
           parsers.read_main_plane("ICU/cns-11643-1992.ucm", plane=4),
           parsers.read_main_plane("ICU/euc-tw-2014.ucm", plane=4),
@@ -87,7 +87,7 @@ plane4 = (4, ("Yasuoka CNS", "ICU CNS 1992", "ICU EUC 2014", "GOV-TW CNS", "Outp
 ])
 
 print("Loading 5")
-plane5 = (5, ("Yasuoka CNS", "ICU CNS 1992", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
+plane5 = (5, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
           parsers.read_main_plane("Other/Uni2CNS", plane=5),
           parsers.read_main_plane("ICU/cns-11643-1992.ucm", plane=5),
           parsers.read_main_plane("ICU/euc-tw-2014.ucm", plane=5),
@@ -100,7 +100,7 @@ plane5 = (5, ("Yasuoka CNS", "ICU CNS 1992", "ICU EUC 2014", "GOV-TW CNS", "Outp
 ])
 
 print("Loading 6")
-plane6 = (6, ("Yasuoka CNS", "ICU CNS 1992", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
+plane6 = (6, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
           parsers.read_main_plane("Other/Uni2CNS", plane=6),
           parsers.read_main_plane("ICU/cns-11643-1992.ucm", plane=6),
           parsers.read_main_plane("ICU/euc-tw-2014.ucm", plane=6),
@@ -113,7 +113,7 @@ plane6 = (6, ("Yasuoka CNS", "ICU CNS 1992", "ICU EUC 2014", "GOV-TW CNS", "Outp
 ])
 
 print("Loading 7")
-plane7 = (7, ("Yasuoka CNS", "ICU CNS 1992", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
+plane7 = (7, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
           parsers.read_main_plane("Other/Uni2CNS", plane=7),
           parsers.read_main_plane("ICU/cns-11643-1992.ucm", plane=7),
           parsers.read_main_plane("ICU/euc-tw-2014.ucm", plane=7),
@@ -192,7 +192,7 @@ planeE = (14, ("ICU EUC 2014", "GOV-TW CNS",), [
 ])
 
 print("Loading 15")
-planeF = (15, ("ICU CNS 1992", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
+planeF = (15, ("ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
           parsers.read_main_plane("ICU/cns-11643-1992.ucm", plane=9), # yes, really.
           parsers.read_main_plane("ICU/euc-tw-2014.ucm", plane=15),
           tuple(map(lambda a, b, c: a or b or c,
@@ -209,7 +209,7 @@ def planefunc(number, mapname=None):
     else:
         if (mapname == "UTC CNS") and (number == 3):
             return '<br>Plane "14"'
-        elif (mapname == "ICU CNS 1992") and (number == 15):
+        elif (mapname == "ICU 1992 CNS") and (number == 15):
             return '<br>Plane "9"'
         elif "Big5" in mapname:
             return "<br>Level {}".format(number) if number <= 2 else "(beyond)"
@@ -400,6 +400,7 @@ annots = {
  (4, 67, 25): 'Compare 03-70-87.',
  (4, 72, 47): "Compare 05-79-52",
  (5, 79, 52): "Compare 04-72-47",
+ (6, 1, 3): "U+3405 㐅 is the number five (also 𠄡, but much more commonly 五 or 伍, hence 㐅 is in the CJKA block).&ensp;U+4E44 乄, on the other hand, is a duplicate encoding in the URO (JIS X 0212's fault) of 〆 (U+3006 IDEOGRAPHIC CLOSING MARK), which is a Japanese abbreviation for words pronounced しめ (shi\u202Fme).&ensp;Both the current and 1992 CNS glyphs are very clearly 㐅, as in, the middle of 𠄡.</p><p>Yasuoka's mapping was published in March 1998, however, and hence predates the CJKA block (the 1992 in ICU's 1992 CNS mapping, unlike the 2014 in its EUC 2014 mapping, references the standard year, not the mapping timestamp, hence it is a shade newer than Yasuoka's, which it cites).",
  (15, 8, 82): "Compare 04-08-07",
  (15, 16, 80): "U+3DB7 and U+2420E (CJKB) are "
                "<a href='https://unicode.org/wg2/docs/n2644.pdf'>known exact duplicates</a>.",

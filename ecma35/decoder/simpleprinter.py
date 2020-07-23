@@ -6,6 +6,8 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+from ecma35.data import controldata
+
 def simple_print(stream, state):
     for token in stream:
         if token[0] == "CHAR" and token[1]:
@@ -24,8 +26,8 @@ def simple_print(stream, state):
             print(end = "[{:02X}]".format(token[1]))
         elif token[0] == "CTRL" and token[1] == "LF":
             print()
-        elif token[0] == "CTRL" and token[1] == "SP":
-            print(end = " ")
+        elif token[0] == "CTRL" and token[1] != "DEL" and token[1] in controldata.rformats:
+            print(end = chr(controldata.rformats[token[1]]))
         elif token[0] == "CTRL" and token[1] in ("SI", "SO", "LS0", "LS1", "LS2", "LS3",
                                                  "LS1R", "LS2R", "LS3R"):
             pass

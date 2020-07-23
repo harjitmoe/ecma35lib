@@ -83,9 +83,9 @@ def decode_invocations(stream, state):
             yield token
             state.is_96[token[1]] = (token[2] not in ("94", "94n"))
         elif token[0] == "UCS" and token[1] == 0x20:
-            yield ("CTRL", "SP", "UCS", token[1], token[2], token[3])
+            yield ("CTRL", "SP", "UCS", (token[1],), token[2], token[3])
         elif token[0] == "UCS" and token[1] == 0x7F:
-            yield ("CTRL", "DEL", "UCS", token[1], token[2], token[3])
+            yield ("CTRL", "DEL", "UCS", (token[1],), token[2], token[3])
         else:
             yield token
 

@@ -11,6 +11,7 @@ from ecma35.data.multibyte import traditional
 from ecma35.data import graphdata, showgraph
 import json, os
 
+manies = []
 lavail = []
 print("Scanning layer availability")
 for pointer in range(96*96*7): # Remember plane 0 exists in the array and is completely empty
@@ -19,6 +20,10 @@ for pointer in range(96*96*7): # Remember plane 0 exists in the array and is com
     for layer in range(1, 13):
         if graphdata.gsets["eacc"][2][pointer + (96*96*6*(layer - 1))]:
             avail.update({layer})
+    if len(avail) >= 5:
+        manies.append(((pointer // 96) // 96, (pointer // 96) % 96, 
+                                pointer % 96, len(avail)))
+print(manies)
 
 planes = []
 for number in range(1, 73):
@@ -115,6 +120,7 @@ for n, p in enumerate(planes):
                              annots=annots, selfhandledanchorlink=True, is_96=True)
         f.close()
 
+"""
 f = open("eacc-conc.txt", "w")
 for base_plane in range(1, 7):
     planes = list(range(base_plane, 73, 6))
@@ -132,7 +138,7 @@ for plane in range(73, 96):
         print("  * [Plane {:d}, rows {:d}–{:d}](/eacctables/ccciiplane{:02d}{}.html )".format(
               plane, 16 * part, 16 * (part + 1), plane, partletter), file=f) 
 f.close()
-
+"""
 
 
 
