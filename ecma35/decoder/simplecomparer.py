@@ -9,6 +9,8 @@
 # Must be at the end of the chain. Yields points of deviance for a
 # known test string.
 
+from ecma35.data import controldata
+
 def simple_comparator_maker(target_string):
     target = iter(target_string)
     def simple_comparator(stream, state):
@@ -35,9 +37,9 @@ def simple_comparator_maker(target_string):
                     yield (expected, token)
                 else:
                     yield (expected, "SUCCESS")
-            elif token[0] == "CTRL" and token[1] == "SP":
+            elif token[0] == "CTRL" and token[1] in controldata.rformats:
                 expected = next(target)
-                if expected != " ":
+                if expected != chr(controldata.rformats[token[1]]):
                     yield (expected, token)
                 else:
                     yield (expected, "SUCCESS")
