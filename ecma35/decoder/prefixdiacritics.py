@@ -9,6 +9,10 @@
 # Handles prefixed diacritics, à la T.51 (and friends), ANSEL etc.
 
 def handle_prefix_diacritics(stream, state):
+    # Note: half marks, like all others, preceed the characters in ANSEL; like single
+    #   diactritics, they follow them in Unicode (see TUS 13.0 § 7.9 p. 334).
+    # Their corresponding double diacritics are supposed to be infix, faulty implementations
+    #   in deployment notwithstanding.
     tseq = []
     cseq = []
     bank = []

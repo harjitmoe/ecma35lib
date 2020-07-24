@@ -54,7 +54,7 @@ FrançaisFrançaisÐðĐđ￼
 ?Foo￼???¥a~?????/?/???? ~¥?￼￼￼????㎏¥
 
 ?Foo￼???¥a~?????/?/??“? ~¥”￼￼￼????㎏¥
-Wenn ich nur nichts von Nachwelt hören sollte. Gesetzt daß ich von Nachwelt reden wollte, Wer machte denn der Mitwelt Spaß?[1B][25][40][48][41][48][41][5F][41][53][5F][49][46][A1]￼
+Wenn ich nur nichts von Nachwelt hören sollte. Gesetzt daß ich von Nachwelt reden wollte, Wer machte denn der Mitwelt Spaß? o︠o︡ o︢o︣[1B][25][40][48][41][48][41][5F][41][53][5F][49][46][A1]￼
 
 [('RDOCS', 'ECMA-35', False, (64,)),
  ('CSISEQ',
@@ -2402,6 +2402,24 @@ Wenn ich nur nichts von Nachwelt hören sollte. Gesetzt daß ich von Nachwelt r
  ('CHAR', 97, 'ir006', (65,), 'G0', 'GL'),
  ('CHAR', 223, 'ir231-full', (47,), 'G1', 'GR'),
  ('CHAR', 63, 'ir006', (31,), 'G0', 'GL'),
+ ('CTRL', 'SP', 'ECMA-35', 0, 'GL', 'G0'),
+ ('COMPCHAR',
+  (111, 65056),
+  (('CHAR', -65056, 'ir231-full', (75,), 'G1', 'GR'),
+   ('CHAR', 111, 'ir006', (79,), 'G0', 'GL'))),
+ ('COMPCHAR',
+  (111, 65057),
+  (('CHAR', -65057, 'ir231-full', (76,), 'G1', 'GR'),
+   ('CHAR', 111, 'ir006', (79,), 'G0', 'GL'))),
+ ('CTRL', 'SP', 'ECMA-35', 0, 'GL', 'G0'),
+ ('COMPCHAR',
+  (111, 65058),
+  (('CHAR', -65058, 'ir231-full', (90,), 'G1', 'GR'),
+   ('CHAR', 111, 'ir006', (79,), 'G0', 'GL'))),
+ ('COMPCHAR',
+  (111, 65059),
+  (('CHAR', -65059, 'ir231-full', (91,), 'G1', 'GR'),
+   ('CHAR', 111, 'ir006', (79,), 'G0', 'GL'))),
  ('RDOCS', 'RAW', True, (66,)),
  ('RAWBYTE', 27),
  ('RAWBYTE', 37),

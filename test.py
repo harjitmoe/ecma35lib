@@ -62,7 +62,7 @@ dat = (b"\x1B[m\x1B%G\x1B!F" + teststr.encode("utf-8-sig") + "\x1CJ염盐塩鹽\
        b"\x1B%3\x1B[437*p\x1B[4)p\n\x7f\v\x1B[2)p\f\x1B[)p" + 
        teststr.encode("cp437", errors="replace") + 
        b"\x1B[1252*p" + teststr.encode("cp1252", errors="replace") + 
-       b"\x1B%@\x1B)!EWenn ich nur nichts von Nachwelt h\xE8oren sollte. Gesetzt da\xC7 ich von Nachwelt reden wollte, Wer machte denn der Mitwelt Spa\xCF?" + 
+       b"\x1B%@\x1B)!EWenn ich nur nichts von Nachwelt h\xE8oren sollte. Gesetzt da\xC7 ich von Nachwelt reden wollte, Wer machte denn der Mitwelt Spa\xCF? \xEBo\xECo \xFAo\xFBo" + 
        b"\x1B%/B\x1B%@HAHA_AS_IF\xA1" # i.e. the last DOCS @ should not switch back.
 )
 

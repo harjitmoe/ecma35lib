@@ -103,8 +103,9 @@ graphdata.gsets["ir159"] = jisx0212 = (94, 2,
         parsers.read_main_plane("WHATWG/index-jis0212.txt"))
 # JIS X 0212 with allocated but not published (per Lunde) va/vi/ve/vo codepoints. Note that these
 # codepoints explicitly clash with (either plane of) JIS X 0213.
-graphdata.gsets["ir159va"] = jisx0212_extva = (94, 2,
-        jisx0212[2][:462] + tuple((_i,) for _i in range(0x30F7, 0x30FB)) + jisx0212[2][466:])
+graphdata.gsets["ir159va"] = jisx0212_extva = (94, 2, parsers.fuse([
+        ((None,) * 462) + tuple((_i,) for _i in range(0x30F7, 0x30FB)), 
+        jisx0212[2]], "JISX0212-VaExt.json"))
 graphdata.gsets["ir159ibm"] = jisx0212ibm = (94, 2,
         parsers.read_main_plane("ICU/ibm-954_P101-2007.ucm", eucjp=1, plane=2))
 graphdata.gsets["ir159icueuc"] = jisx0208_ibm90 = (94, 2,
@@ -124,38 +125,51 @@ graphdata.gsets["ir168web"] = jisx0208_html5 = (94, 2,
 
 # Apple's three versions (KanjiTalk 7, PostScript, KanjiTalk 6)
 kanjitalk7data = parsers.read_untracked_mbfile(
-                 parsers.read_main_plane, "Mac/JAPANESE.TXT", "Mac---JAPANESE_mainplane_ahmap.json", 
+                 parsers.read_main_plane, "Mac/JAPANESE.TXT", None, 
                  "Mac/macJIS.json", sjis=True, mapper=variationhints.ahmap)
 rawmac = parsers.read_untracked_mbfile(
-         parsers.read_main_plane, "Mac/JAPANESE.TXT", "Mac---JAPANESE_mainplane.json", 
+         parsers.read_main_plane, "Mac/JAPANESE.TXT", None, 
          "Mac/macJIS-raw.json", sjis=True)
 graphdata.gsets["ir168mac"] = jisx0208_applekt7 = (94, 2, kanjitalk7data)
 graphdata.gsets["ir168macps"] = jisx0208_appleps = (94, 2,
         parsers.read_main_plane("Custom/JAPAN_PS.TXT", sjis=1, plane=1, mapper = variationhints.ahmap))
-kanjitalk6 = (jisx0208_applekt7[2][:8 * 94] + ((None,) * 188) + # Normal non-Kanji rows
-              jisx0208_applekt7[2][84 * 94 : 86 * 94] +         # Vertical forms
-              jisx0208_appleps[2][12 * 94 : 13 * 94] +          # NEC Row Thirteen
-              jisx0208_applekt7[2][87 * 94 : 89 * 94] +         # Vertical forms
-              jisx0208_applekt7[2][15 * 94 : 84 * 94] + ((None,) * 940))
+_kt6fn = os.path.join(parsers.cachedirectory, "Mac-KanjiTalk6.json")
+if not os.path.exists(_kt6fn):
+    kanjitalk6 = (jisx0208_applekt7[2][:8 * 94] + ((None,) * 188) + # Normal non-Kanji rows
+                  jisx0208_applekt7[2][84 * 94 : 86 * 94] +         # Vertical forms
+                  jisx0208_appleps[2][12 * 94 : 13 * 94] +          # NEC Row Thirteen
+                  jisx0208_applekt7[2][87 * 94 : 89 * 94] +         # Vertical forms
+                  jisx0208_applekt7[2][15 * 94 : 84 * 94] + ((None,) * 940))
+    f = open(_kt6fn, "w")
+    f.write(json.dumps(kanjitalk6))
+    f.close()
+else:
+    kanjitalk6 = parsers.LazyJSON(os.path.basename(_kt6fn))
 graphdata.gsets["ir168mackt6"] = jisx0208_applekt6 = (94, 2, kanjitalk6)
 
 # Emoji
+_windows_noNECSel = parsers.fuse([
+        ((None,) * 7996) + (((1,),) * 840),
+        jisx0208_html5[2]], "WinJIS_noNECSel.json")
+_windows_noNECSel_au = parsers.fuse([
+        ((None,) * 7996) + (((1,),) * 840),
+        parsers.read_main_plane("ICU/kddi-sjis.ucm", sjis=1, plane=1)], "WinJIS_noNECSel_au.json")
 graphdata.gsets["ir168arib"] = jisx0208_arib = (94, 2, 
         parsers.fuse([parsers.read_main_plane("Custom/pict_arib.txt", sjis=1), jisx0208_1990[2]],
                      "Emoji--ARIB.json"))
 graphdata.gsets["ir168docomo"] = jisx0208_arib = (94, 2, 
-        parsers.fuse([cellemojidata.outmap["docomo"][:94*94], jisx0208_html5[2][:-840]],
+        parsers.fuse([cellemojidata.outmap["docomo"][:94*94], _windows_noNECSel],
                      "Emoji--DoCoMo-4.json"))
 graphdata.gsets["ir168kddipict"] = jisx0208_arib = (94, 2, 
         parsers.fuse([cellemojidata.outmap["kddi"][:94*94],
-                      parsers.read_main_plane("ICU/kddi-sjis.ucm", sjis=1, plane=1)[:-840]],
+                      _windows_noNECSel_au],
                      "Emoji--KDDI-5-pictzodiac.json"))
 graphdata.gsets["ir168kddisym"] = jisx0208_arib = (94, 2, 
         parsers.fuse([cellemojidata.outmap["kddi_symboliczodiac"][:94*94],
-                      parsers.read_main_plane("ICU/kddi-sjis.ucm", sjis=1, plane=1)[:-840]],
+                      _windows_noNECSel_au],
                      "Emoji--KDDI-5-symzodiac.json"))
 graphdata.gsets["ir168sbank"] = jisx0208_arib = (94, 2, 
-        parsers.fuse([cellemojidata.outmap["softbank"][:94*94], jisx0208_html5[2][:-840]],
+        parsers.fuse([cellemojidata.outmap["softbank"][:94*94], _windows_noNECSel],
                      "Emoji--Softbank-4.json"))
 graphdata.gsets["ibmsjisext"] = sjis_html5_g3 = (94, 2, 
         parsers.read_main_plane("WHATWG/index-jis0208.txt", sjis=1, plane=2))

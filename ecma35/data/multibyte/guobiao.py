@@ -132,21 +132,29 @@ graphdata.gsets["ir058-full"] = gb2312_full = (94, 2,
 #   to mention this discrepency, rather listing it as incorporating all modifications and additions
 #   in both GB 6345.1 and GB 8565.2… but keeping ICU mappings, in all respects besides adding the
 #   missing ones where possible, seems sensible.
-ir165 = list(parsers.read_main_plane("ICU/iso-ir-165.ucm"))
-ir165[688] = (0x01F9,) # in IR-165 but not mapped in UCM; added in Unicode 3.0.
-ir165[916] = ir165[258] + (0xF87F,)
+_ir165_raw = parsers.read_main_plane("ICU/iso-ir-165.ucm")
+_ir165_add = [None] * (94 * 94)
+_ir165_add[688] = (0x01F9,) # in IR-165 but not mapped in UCM; added in Unicode 3.0.
+_ir165_add[916] = (0x0261, 0xF87F)
+X = [0x0101, 0x00E1, 0x01CE, 0x00E0, 0x0113, 0x00E9, 0x011B, 
+     0x00E8, 0x012B, 0x00ED, 0x01D0, 0x00EC, 0x014D, 0x00F3, 
+     0x01D2, 0x00F2, 0x016B, 0x00FA, 0x01D4, 0x00F9, 0x01D6, 
+     0x01D8, 0x01DA, 0x01DC, 0x00FC, 0x00EA, 0x0251, 0x1E3F, 
+     0x0144, 0x0148, 0x01F9]
 for _i in range(658, 689): # Not 689/971 itself since that one gets equated to the ASCII characters.
     _j = _i + (3 * 94)
-    ir165[_j] = ir165[_i] + (0xF87F,)
+    _ir165_add[_j] = (X[_i - 658], 0xF87F)
 # The various pattern fill characters in the latter part of the Greek row are still unmapped,
 #   but shouganai. (The range also corresponds to GB 18030 and Macintosh vertical forms, and 
 #   appears to be original to ITU.)
-graphdata.gsets["ir165"] = isoir165 = (94, 2, tuple(ir165))
+ir165 = parsers.fuse([_ir165_add, _ir165_raw], "CCITT-Chinese-Full.json")
+graphdata.gsets["ir165"] = isoir165 = (94, 2, ir165)
 # Include one which actually conforms to standards in which way around the lowercase Gs are too…
-ir165_std = ir165[:]
-ir165_std[258], ir165_std[689] = ir165_std[689], ir165_std[258]
-ir165_std[916], ir165_std[971] = ir165_std[971], ir165_std[916]
-graphdata.gsets["ir165std"] = isoir165 = (94, 2, tuple(ir165_std))
+_ir165_std_add = _ir165_add[:]
+_ir165_std_add[258], _ir165_std_add[689] = (0xFF47,), (0x0261,)
+_ir165_std_add[916], _ir165_std_add[971] = (0x0067,), _ir165_std_add[916]
+ir165_std = parsers.fuse([_ir165_std_add, _ir165_raw], "CCITT-Chinese-Full-Std.json")
+graphdata.gsets["ir165std"] = isoir165 = (94, 2, ir165_std)
 
 # GB/T 12345 (Traditional Chinese in Mainland China, homologous to GB/T 2312 where possible, with
 #   the others being added as a couple of rows at the end)
@@ -182,8 +190,22 @@ graphdata.gsets["gb13132"] = gb13132 = (94, 2,
 #   0x9d82 鶂 → 0x2cdfc 𬷼, 0x31288 𱊈 (trad 鷁, simp 鹢 is today more common; favour SIP over TIP)
 resolve = {(0x8b78,): (0x8bea,), (0x8b32,): (0x2c904,), (0x9c44,): (0x2b68b,), (0x9c68,): (0x9cbf,), (0x9766,): (0x4a44,), (0x7060,): (0x30710,), (0x9d82,): (0x2cdfc,)}
 tradat = parsers.parse_variants("UCD/Unihan_Variants.txt")
-graphdata.gsets["gb7589"] = gb7589 = (94, 2, tuple(resolve.get(i, (tradat.get(i, [[],[]])[1] + [i])[0]) for i in gb13131[2]))
-graphdata.gsets["gb7590"] = gb7590 = (94, 2, tuple(resolve.get(i, (tradat.get(i, [[],[]])[1] + [i])[0]) for i in gb13132[2]))
+_gb7589fn = os.path.join(parsers.cachedirectory, "GB7589.json")
+_gb7590fn = os.path.join(parsers.cachedirectory, "GB7590.json")
+if (not os.path.exists(_gb7589fn)) or (not os.path.exists(_gb7590fn)):
+    _gb7589 = tuple(resolve.get(i, (tradat.get(i, [[],[]])[1] + [i])[0]) for i in gb13131[2])
+    _gb7590 = tuple(resolve.get(i, (tradat.get(i, [[],[]])[1] + [i])[0]) for i in gb13132[2])
+    f = open(_gb7589fn, "w")
+    f.write(json.dumps(_gb7589))
+    f.close()
+    f = open(_gb7590fn, "w")
+    f.write(json.dumps(_gb7590))
+    f.close()
+else:
+    _gb7589 = parsers.LazyJSON(os.path.basename(_gb7589fn))
+    _gb7590 = parsers.LazyJSON(os.path.basename(_gb7590fn))
+graphdata.gsets["gb7589"] = gb7589 = (94, 2, _gb7589)
+graphdata.gsets["gb7590"] = gb7590 = (94, 2, _gb7590)
 # Some traditional forms remain, but I guess this is good enough. They would presumably be forms
 #  where simplified counterparts do not exist in Unicode anyway.
 

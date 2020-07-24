@@ -134,19 +134,22 @@ graphdata.gsetflags["ir149-1998"] |= {"UHC:IS_WANSUNG"}
 graphdata.gsets["ir149"] = wansung87 = (94, 2, parsers.read_main_plane("UTC/KSC5601.TXT", euckrlike=True))
 graphdata.gsetflags["ir149"] |= {"UHC:IS_WANSUNG"}
 # Further updated (most recent?) version:
-_wansung_temp = list(wansung[2]) # Converting from tuple to list creates a copy
-_wansung_temp[165] = (0x327E,) # South Korean Postal Mark
-graphdata.gsets["ir149-2002"] = wansung02 = (94, 2, tuple(_wansung_temp)) # Converting to tuple creates a copy
+_wansung_temp = parsers.fuse([
+            ((None,) * 165) + ((0x327E,),), # South Korean Postal Mark
+            wansung[2]], "Wansung_KRPM.json")
+graphdata.gsets["ir149-2002"] = wansung02 = (94, 2, _wansung_temp)
 graphdata.gsetflags["ir149-2002"] |= {"UHC:IS_WANSUNG"}
 # Pre-Unicode-2.0 UTC mapping file: uses MS's greedy-zenkaku approach but is otherwise closer to Apple,
 #   plus its own ideosyncracies (unifying the Korean interpunct with the Japanese one rather than with the
 #   Catalan one, and using U+2236 rather than U+02D0 for the alternative colon)
 # Note that we basically have to dispose of its own hangul syllables section since they all correspond to
-#   codepoints now used for entirely different purposes (the one event which prompted the Stability Policy)
+#   codepoints now used for entirely different purposes (the event which prompted the Stability Policy)
 oldunicodeksc = parsers.read_main_plane("UTC/OLD5601.TXT")
-_wansung_temp = list(oldunicodeksc)
-_wansung_temp[1410:3760] = wansung[2][1410:3760]
-graphdata.gsets["ir149-altutc"] = wansung_utcalt = (94, 2, tuple(_wansung_temp))
+_wansung_syllables = parsers.fuse([
+            (((-1,),) * 1410) + ((None,) * 2350) + (((-1,),) * 5076),
+            wansung[2]], "Wansung_SyllablesOnly.json")
+_wansung_temp = parsers.fuse([_wansung_syllables, wansung[2]], "Wansung_AltUTC.json")
+graphdata.gsets["ir149-altutc"] = wansung_utcalt = (94, 2, _wansung_temp)
 graphdata.gsetflags["ir149-altutc"] |= {"UHC:IS_WANSUNG"}
 
 # Apple and Elex's (Illekseu's) Wansung version, and its secondary plane (collectively HangulTalk)
@@ -180,16 +183,18 @@ graphdata.gsetflags["ir202-2011"] |= {"UHC:IS_KPS"}
 graphdata.gsets["ir202-2003"] = kps9566_2003 = (94, 2, parsers.read_main_plane("UTC/KPS9566.TXT", euckrlike=True))
 graphdata.gsetflags["ir202-2003"] |= {"UHC:IS_KPS"}
 graphdata.gsetflags["ir202-2003"] |= {"UHC:Y_TREMA"}
-_kps_temp = list(parsers.fuse([kps9566_2011[2], kps9566_2003[2]], "KPS_2011and2003.json"))
-_kps_temp[1080] = (0x2B97,) # Finally exists in Unicode.
-graphdata.gsets["ir202-full"] = (94, 2, tuple(_kps_temp))
+_kps_temp = parsers.fuse([
+            ((None,) * 1080) + ((0x2B97,),), # Finally exists in Unicode.
+            kps9566_2011[2], kps9566_2003[2]], "KPS_2011and2003_PM.json")
+graphdata.gsets["ir202-full"] = (94, 2, _kps_temp)
 graphdata.gsetflags["ir202-full"] |= {"UHC:IS_KPS"}
 graphdata.gsetflags["ir202-full"] |= {"UHC:Y_TREMA"}
-_kps_temp = list(kps9566_2003[2])
-_kps_temp[1080] = (0x2B97,)
-_kps_temp[663] = (0x212A,) # Kelvin sign (versus Euro)
-_kps_temp[1222:1316] = (None,) * 94
-graphdata.gsets["ir202"] = kps9566_1997 = (94, 2, tuple(_kps_temp))
+_kps_temp = parsers.fuse([
+            ((None,) * 663) + ((0x212A,),), # Kelvin sign (versus Euro)
+            ((None,) * 416) + ((0x2B97,),), # Category A mark
+            ((None,) * 141) + (((-1,),) * 141), # Remove Latin-1 part
+            kps9566_2003[2]], "KPS_1997.json")
+graphdata.gsets["ir202"] = kps9566_1997 = (94, 2, _kps_temp)
 graphdata.gsetflags["ir202"] |= {"UHC:IS_KPS"}
 graphdata.gsets["2011kpsextras"] = (94, 2, read_kps9566extras("Other/AppendixA_KPS9566-2011-to-Unicode.txt"))
 # KPS 10721 doesn't appear to be ECMA-35 structured.

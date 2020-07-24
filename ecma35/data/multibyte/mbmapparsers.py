@@ -20,10 +20,14 @@ if (os.environ.get("ECMA35LIBDECACHE", "") == "1") and os.path.exists(cachedirec
     os.makedirs(cachedirectory)
 
 class LazyJSON(list):
-    def __init__(self, filename):
-        self._filename = os.path.join(cachedirectory, filename)
+    def __init__(self, filename, iscache=True):
+        if iscache:
+            self._filename = os.path.join(cachedirectory, filename)
+        else:
+            self._filename = os.path.join(directory, filename)
     def _load(self):
         if not super().__len__():
+            # print("Loading", self._filename)
             f = open(self._filename)
             super().extend(tuple(i) if i is not None else None for i in json.load(f))
             f.close()
@@ -498,11 +502,12 @@ def read_unihan_eacc(fil, wantkey, *, set96=False):
             pointer = ((men - 1) * 94 * 94) + ((ku - 1) * 94) + (ten - 1)
         else:
             pointer = (men * 96 * 96) + (ku * 96) + ten
-        if not 0 <= ten <= 95:
+        if (not 0 <= ten <= 95) and (ucs == 0x9C0C):
             # U+9C0C → kCCCII 2358CF
             # U+9C0C → kEACC 2D6222
             # Not sure when, why or how CCCII seems to have abandoned its notion of being a
             #   ISO 2022 set altogether. These are very odd exceptions though, not the rule.
+            #   In particular, this is the only such code listed in Unihan.
             continue
         if len(_temp) > pointer:
             if (ucs == 0x4EBE) and (wantkey == "kCCCII"):
@@ -536,7 +541,13 @@ def fuse(arrays, filename):
         for n in range(max(*tuple(len(i) for i in arrays))):
             for array in arrays:
                 if n < len(array) and (array[n] is not None):
-                    out.append(array[n])
+                    if array[n] == (-1,):
+                        # Allow an earlier listed array to override later ones in undefining a
+                        #   code point (e.g. when forming the mapping for 1998 KPS).
+                        # U+0001 (usually SOH) is not a combining mark so this special case is fine
+                        out.append(None)
+                    else:
+                        out.append(array[n])
                     break
             else: # for...else, i.e. if the loop finishes without encountering break
                 out.append(None)
@@ -577,8 +588,7 @@ def read_untracked_mbfile(reader, fn, obsolete_argument, shippedfn, **kwargs):
             except EnvironmentError:
                 pass
     else:
-        data = tuple(tuple(i) if i is not None else None for i in json.load(
-                     open(os.path.join(directory, shippedfn), "r")))
+        data = LazyJSON(shippedfn, iscache=False)
     return data
 
 def to_96(dat):
