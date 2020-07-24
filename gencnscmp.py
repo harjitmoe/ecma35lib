@@ -410,6 +410,10 @@ annots = {
  (15, 67, 74): "Compare 15-67-66",
 }
 
+blot = ""
+if os.path.exists("__analyt__"):
+    blot = open("__analyt__").read()
+
 print("Writing HTML")
 for n, p in enumerate([plane1, plane2, plane3, plane4, plane5, plane6, plane7, plane8, plane9, planeA, planeB, planeC, planeD, planeE, planeF]):
     for q in range(1, 7):
@@ -432,7 +436,7 @@ for n, p in enumerate([plane1, plane2, plane3, plane4, plane5, plane6, plane7, p
         showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="zh-TW", part=q, css="/css/cns.css",
                              menuurl="/cns-conc.html", menuname="CNS 11643 and Big5 comparison tables",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
-                             annots=annots, selfhandledanchorlink=True, jlfunc=jlfunc)
+                             annots=annots, selfhandledanchorlink=True, jlfunc=jlfunc, blot=blot)
         f.close()
 
 

@@ -468,7 +468,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
                part=0, lang="zh-TW", css=None, annots={}, cdispmap={}, 
                menuurl=None, menuname="Up to menu", jlfunc=None, 
                lasturl=None, nexturl=None, lastname=None, nextname=None,
-               is_96=False, is_sbcs=False, pua_collides=False):
+               is_96=False, is_sbcs=False, pua_collides=False, blot=""):
     """Dump an HTML mapping comparison."""
     stx, edx = (1, 95) if not is_96 else (0, 96)
     if is_sbcs:
@@ -485,13 +485,15 @@ def dump_plane(outfile, planefunc, kutenfunc,
                nonvacant_sets[0][1], lang=lang, css=css, part=part, jlfunc=jlfunc,
                menuurl=menuurl, menuname=menuname, lasturl=lasturl, 
                nexturl=nexturl, lastname=lastname, nextname=nextname,
-               is_96=is_96, is_sbcs=is_sbcs)
+               is_96=is_96, is_sbcs=is_sbcs, blot=blot)
     setnames2 = tuple(zip(*nonvacant_sets))[0] if nonvacant_sets else ()
     zplarray = tuple(zip(*tuple(zip(*nonvacant_sets))[1])) if nonvacant_sets else ()
     h = ", part {:d}".format(part) if part else ""
     print("<!DOCTYPE html><title>{}{}</title>".format(planefunc(number), h), file=outfile)
     if css:
         print("<link rel='stylesheet' href='{}'>".format(css), file=outfile)
+    if blot:
+        print(blot, file=outfile)
     print("<h1>{}{}</h1>".format(planefunc(number), h), file=outfile)
     if menuurl or lasturl or nexturl:
         _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname)
@@ -584,7 +586,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
 def dump_preview(outfile, planename, kutenfunc, number, array, *, lang="zh-TW", planeshift="",
                css=None, part=None, menuurl=None, menuname="Up to menu", jlfunc=None, 
                lasturl=None, nexturl=None, lastname=None, nextname=None,
-               is_96=False, is_sbcs=False):
+               is_96=False, is_sbcs=False, blot=""):
     """Dump an HTML single-mapping table."""
     stx, edx = (1, 95) if not is_96 else (0, 96)
     if is_sbcs:
@@ -598,6 +600,8 @@ def dump_preview(outfile, planename, kutenfunc, number, array, *, lang="zh-TW", 
     print("<!DOCTYPE html><title>{}{}</title>".format(planename, h), file=outfile)
     if css:
         print("<link rel='stylesheet' href='{}'>".format(css), file=outfile)
+    if blot:
+        print(blot, file=outfile)
     print("<h1>{}{}</h1>".format(planename, h), file=outfile)
     if menuurl or lasturl or nexturl:
         _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname)

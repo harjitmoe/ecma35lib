@@ -95,6 +95,10 @@ def kutenfunc(number, row, cell):
 
 annots = {}
 
+blot = ""
+if os.path.exists("__analyt__"):
+    blot = open("__analyt__").read()
+
 print("Writing HTML")
 for n, p in enumerate(planes):
     for q in range(1, 7):
@@ -117,7 +121,7 @@ for n, p in enumerate(planes):
         showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="zh-TW", part=q, css="/css/cns.css",
                              menuurl="/eacc-conc.html", menuname="CCCII and EACC comparison tables",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
-                             annots=annots, selfhandledanchorlink=True, is_96=True)
+                             annots=annots, selfhandledanchorlink=True, is_96=True, blot=blot)
         f.close()
 
 """

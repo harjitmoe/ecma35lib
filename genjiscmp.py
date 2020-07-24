@@ -479,6 +479,10 @@ annots = {
               '(U+9B1C) though.',
 }
 
+blot = ""
+if os.path.exists("__analyt__"):
+    blot = open("__analyt__").read()
+
 for n, p in enumerate([plane1, plane2]):
     for q in range(1, 7):
         bn = n + 1
@@ -502,7 +506,7 @@ for n, p in enumerate([plane1, plane2]):
         showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ja", part=q, css="/css/jis.css",
                              menuurl="/jis-conc.html", menuname="JIS character set variant comparison",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
-                             annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True)
+                             annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True, blot=blot)
         f.close()
 
 
