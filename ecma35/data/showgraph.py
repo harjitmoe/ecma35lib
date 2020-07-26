@@ -461,14 +461,36 @@ def dump_cccii_wiktionary(outfile, setname="eacc"):
                     print(end=",\u3000", file=outfile)
             print(file=outfile)
             print(file=outfile)
-                
+
+def _default_unicodefunc(cdisplayi, outfile, i=None, jlfunc=None, number=None, row=None, cell=None):
+    print("<br><span class=codepoint>", file=outfile)
+    if not isinstance(cdisplayi, list):
+        if jlfunc:
+            # Note: assumes the URL given won't contain apostrophe
+            print("<a href='{:s}'>".format(jlfunc(number, row, cell)), file=outfile)
+        print("U+" + "<wbr>+".join(_codepfmt(j, len(cdisplayi))
+                               for j in cdisplayi), file=outfile)
+        if jlfunc:
+            print("</a>", file=outfile)
+        if len(cdisplayi) == 1:
+            _classify(cdisplayi, outfile)
+    else:
+        print("???", file=outfile) # TODO work out what to do here.
+    #
+    if (i is not None) and (not (0xF860 <= i[0] < 0xF870)) and (i != cdisplayi):
+        # Single codepoint substituting for a PUA or hint sequence worth displaying
+        print("<br>→U+" + "<wbr>+".join(_codepfmt(j, len(i)) for j in i), file=outfile)
+        if len(i) == 1:
+            _classify(i, outfile)
+    print(end="</span>", file=outfile)
 
 def dump_plane(outfile, planefunc, kutenfunc,
                number, setnames, plarray, *, selfhandledanchorlink=False,
                part=0, lang="zh-TW", css=None, annots={}, cdispmap={}, 
                menuurl=None, menuname="Up to menu", jlfunc=None, 
                lasturl=None, nexturl=None, lastname=None, nextname=None,
-               is_96=False, is_sbcs=False, pua_collides=False, blot=""):
+               is_96=False, is_sbcs=False, pua_collides=False, blot="",
+               unicodefunc=_default_unicodefunc):
     """Dump an HTML mapping comparison."""
     stx, edx = (1, 95) if not is_96 else (0, 96)
     if is_sbcs:
@@ -559,21 +581,8 @@ def dump_plane(outfile, planefunc, kutenfunc,
                     variationhints.print_hints_to_html5(cdisplayi, outfile, lang=lang)
                     print(" / ", file=outfile)
                 variationhints.print_hints_to_html5(i, outfile, lang=lang)
-                print("<br><span class=codepoint>", file=outfile)
-                if not isinstance(cdisplayi, list):
-                    print("U+" + "<wbr>+".join(_codepfmt(j, len(cdisplayi))
-                                           for j in cdisplayi), file=outfile)
-                    if len(cdisplayi) == 1:
-                        _classify(cdisplayi, outfile)
-                else:
-                    print("???", file=outfile) # TODO work out what to do here.
-                #
-                if (not (0xF860 <= i[0] < 0xF870)) and (i != cdisplayi):
-                    # Single codepoint substituting for a PUA or hint sequence worth displaying
-                    print("<br>→U+" + "<wbr>+".join(_codepfmt(j, len(i)) for j in i), file=outfile)
-                    if len(i) == 1:
-                        _classify(i, outfile)
-                print("</span></td>", file=outfile)
+                unicodefunc(cdisplayi, outfile, i)
+                print("</td>", file=outfile)
             print("</tr>", file=outfile)
             if annots.get((number, row, cell), None):
                 print("<tr class=annotation><td colspan={:d}><p>".format(len(plarray) + 1), file=outfile)
@@ -586,7 +595,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
 def dump_preview(outfile, planename, kutenfunc, number, array, *, lang="zh-TW", planeshift="",
                css=None, part=None, menuurl=None, menuname="Up to menu", jlfunc=None, 
                lasturl=None, nexturl=None, lastname=None, nextname=None,
-               is_96=False, is_sbcs=False, blot=""):
+               is_96=False, is_sbcs=False, blot="", unicodefunc=_default_unicodefunc):
     """Dump an HTML single-mapping table."""
     stx, edx = (1, 95) if not is_96 else (0, 96)
     if is_sbcs:
@@ -626,16 +635,8 @@ def dump_preview(outfile, planename, kutenfunc, number, array, *, lang="zh-TW", 
             #
             print("<td>", end="", file=outfile)
             variationhints.print_hints_to_html5(i, outfile, lang=lang)
-            print("<br><span class=codepoint>", file=outfile)
-            if jlfunc:
-                # Note: assumes the URL given won't contain apostrophe
-                print("<a href='{:s}'>".format(jlfunc(number, row, cell)), file=outfile)
-            print("U+" + "<wbr>+".join(_codepfmt(j, len(i)) for j in i), file=outfile)
-            if jlfunc:
-                print("</a>", file=outfile)
-            if len(i) == 1:
-                _classify(i, outfile)
-            print("</span></td>", file=outfile)
+            unicodefunc(i, outfile, None, jlfunc, number, row, cell)
+            print("</td>", file=outfile)
         print("<td class=undefined></td></tr>", file=outfile)
         print("</tr></tbody><thead><tr><th>Code</th>", file=outfile)
     print("</table>", file=outfile)

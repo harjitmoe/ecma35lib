@@ -11,6 +11,13 @@ from ecma35.data.multibyte import traditional
 from ecma35.data import graphdata, showgraph
 import json, os
 
+print("Getting CNS coverage")
+cns_data = tuple(graphdata.gsets["cns-eucg2"][2])
+cns_rev = {}
+for n, i in enumerate(cns_data):
+    if i:
+        cns_rev[i] = n
+
 manies = []
 lavail = []
 print("Scanning layer availability")
@@ -93,7 +100,39 @@ def kutenfunc(number, row, cell):
         # Otherwise add nothing.
     return "{}{}{}".format(anchorlink, hex7, phase)
 
-annots = {}
+def unicodefunc(cdisplayi, outfile, i=None, jlfunc=None, number=None, row=None, cell=None):
+    # Adds CSIC cross references.
+    print("<br><span class=codepoint>", file=outfile)
+    assert not isinstance(cdisplayi, list)
+    print("U+" + "<wbr>+".join(showgraph._codepfmt(j, len(cdisplayi))
+                           for j in cdisplayi), file=outfile)
+    if len(cdisplayi) == 1:
+        showgraph._classify(cdisplayi, outfile)
+    assert i in (cdisplayi, None)
+    target = None
+    if cdisplayi in cns_rev:
+        target = cns_rev[cdisplayi]
+    elif cdisplayi + (0xF87F,) in cns_rev:
+        target = cns_rev[cdisplayi + (0xF87F,)]
+    #
+    if target:
+        plane = (target // (94 * 94)) + 1
+        row = ((target // 94) % 94) + 1
+        cell = (target % 94) + 1
+        cns_scalar = "{:d}-{:02X}{:02X}".format(plane, row+0x20, cell+0x20)
+        part = chr(0x61 + (row // 16))
+        target = "../cnstables/cnsplane{:X}{}.html#{:d}.{:d}.{:d}".format(
+                 plane, part, plane, row, cell)
+        print("<br><a href='{}'>CSIC {}</a>".format(target, cns_scalar), file=outfile)
+    print(end="</span>", file=outfile)
+
+annots = {
+    (1, 11, 48): "Mapping the escudo sign to U+1F4B2 is an absolute kludge, purely to prevent it "
+                 "from duplicating the dollar sign mapping.",
+    (1, 11, 60): "Honestly, I have no idea what this one is, and mapping to the Weierstrass is a "
+                 "total guess (it's supposed to look like <a href='/images/CCCCII-01-11-60.png'>"
+                 "this</a>, apparently).",
+}
 
 blot = ""
 if os.path.exists("__analyt__"):
@@ -121,7 +160,8 @@ for n, p in enumerate(planes):
         showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="zh-TW", part=q, css="/css/cns.css",
                              menuurl="/eacc-conc.html", menuname="CCCII and EACC comparison tables",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
-                             annots=annots, selfhandledanchorlink=True, is_96=True, blot=blot)
+                             annots=annots, selfhandledanchorlink=True, is_96=True, blot=blot,
+                             unicodefunc=unicodefunc)
         f.close()
 
 """

@@ -11,6 +11,18 @@ from ecma35.data.multibyte import traditional
 from ecma35.data import graphdata, showgraph
 import json, os
 
+print("Getting EACC coverage")
+eacc_data = tuple(graphdata.gsets["eacc"][2])
+eacc_rev = {}
+for n, i in enumerate(eacc_data):
+    if i and (i not in eacc_rev) and (n >= (96 * 99)):
+        eacc_rev[i] = n
+koha_data = tuple(graphdata.gsets["cccii-koha"][2])
+koha_rev = {}
+for n, i in enumerate(koha_data):
+    if i and (i not in koha_rev) and (n >= (96 * 99)):
+        koha_rev[i] = n
+
 inverse = dict(zip(traditional.big5_to_cns2.values(), traditional.big5_to_cns2.keys()))
 
 # Swap these over so (a) the Gov.TW mapping's way around for the left and right arrows and (b) the
@@ -246,6 +258,34 @@ def kutenfunc(number, row, cell):
     return "{}<br>{}<br>{}{}".format(
            anchorlink, linkhtml, fmteuc, big5)
 
+def unicodefunc(cdisplayi, outfile, i=None, jlfunc=None, number=None, row=None, cell=None):
+    # Adds EACC cross references.
+    print("<br><span class=codepoint>", file=outfile)
+    assert not isinstance(cdisplayi, list)
+    print("U+" + "<wbr>+".join(showgraph._codepfmt(j, len(cdisplayi))
+                           for j in cdisplayi), file=outfile)
+    if len(cdisplayi) == 1:
+        showgraph._classify(cdisplayi, outfile)
+    assert i in (cdisplayi, None)
+    target = None
+    if cdisplayi in eacc_rev:
+        target = eacc_rev[cdisplayi]
+    elif cdisplayi + (0xF87F,) in eacc_rev:
+        target = eacc_rev[cdisplayi + (0xF87F,)]
+    elif cdisplayi in koha_rev:
+        target = koha_rev[cdisplayi]
+    #
+    if target:
+        plane = (target // (96 * 96))
+        row = ((target // 96) % 96)
+        cell = (target % 96)
+        cccii_scalar = "{:d}-{:02X}{:02X}".format(plane, row+0x20, cell+0x20)
+        part = chr(0x61 + (row // 16))
+        target = "../eacctables/ccciiplane{:02d}{}.html#{:d}.{:d}.{:d}".format(
+                 plane, part, plane, row, cell)
+        print("<br><a href='{}'>EACC {}</a>".format(target, cccii_scalar), file=outfile)
+    print(end="</span>", file=outfile)
+
 annots = {
  (1, 1, 0): 'All of plane 1 has two possible EUC codes, a four-byte code prefixed with 0x8EA1 '
             'and a two-byte code without that prefix.&ensp;The ICU mapping for EUC-TW-2014 treats '
@@ -436,7 +476,8 @@ for n, p in enumerate([plane1, plane2, plane3, plane4, plane5, plane6, plane7, p
         showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="zh-TW", part=q, css="/css/cns.css",
                              menuurl="/cns-conc.html", menuname="CNS 11643 and Big5 comparison tables",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
-                             annots=annots, selfhandledanchorlink=True, jlfunc=jlfunc, blot=blot)
+                             annots=annots, selfhandledanchorlink=True, jlfunc=jlfunc, blot=blot,
+                             unicodefunc=unicodefunc)
         f.close()
 
 

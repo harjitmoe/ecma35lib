@@ -127,7 +127,8 @@ annots = {
              'U+2015, and Microsoft and consequently WHATWG (HTML5) follow '
              'this.\u2002JIS (JIS X 0221, JIS X 0213) consider it to be U+2014, '
              'and Apple follows suit.\u2002OSF maps it as U+2015 in their '
-             'MS-based version and as U+2014 otherwise.',
+             'MS-based version and as U+2014 otherwise.</p><p>The codepoint '
+             'selected to display in the NEC column is arbitrary.',
  (1, 1, 32): 'U+005C (backslash) is sometimes rendered the same as U+00A5 (¥), '
              "especially when it's used to map the 7-bit code 0x5C (backslash "
              'in ASCII, yen sign in JIS C 6220 / JIS X 0201).\u2002Generally '
@@ -150,11 +151,13 @@ annots = {
              'width, within a roughly 1em advance—although a wave dash is the '
              'most common by far (however, U+FF5E actually has a separate mapping '
              'at 02-02-23 in JIS X 0212 and 01-02-18 in JIS X 0213, which is shown '
-             'as a spacing accent in their respective charts).',
+             'as a spacing accent in their respective charts).</p>'
+             '<p>The codepoint selected to display in the NEC column is arbitrary.',
  (1, 1, 34): 'U+2225 is used by Microsoft-influenced mappings, U+2016 is used '
              'by others. U+2225 has a separate mapping in JIS X 0213 (01-02-52). '
              'U+2016 is necessarily straight vertical, whereas U+2225 is often '
-             'shown slanted.',
+             'shown slanted.</p><p>The codepoint '
+             'selected to display in the NEC column is arbitrary.',
  (1, 1, 61): 'Microsoft-influenced mappings use U+FF0D for the minus sign '
              '(making the JIS minus sign, as opposed to the JIS hyphen, the '
              'definitive fullwidth form of the ASCII hyphen-minus). Others use '
@@ -162,7 +165,9 @@ annots = {
              "WHATWG's (HTML5) encoders exceptionally treat "
              'U+2212 and U+FF0D the same (while its decoders use U+FF0D), '
              'since doing otherwise was breaking Japanese postcode forms on '
-             'Macintoshes. Note a JIS X 0213 mapping for U+FF0D at 01-02-17.',
+             'Macintoshes.\u2002Note a JIS X 0213 mapping for U+FF0D at '
+             '01-02-17.</p><p>The codepoint '
+             'selected to display in the NEC column is arbitrary.',
  (1, 1, 79): 'Mapping the double-byte character to U+00A5 is only done when '
              "that mapping isn't already used for 0x5C, e.g. JIS X 0213 (2000 "
              'JIS / 2004 JIS) does so for EUC but not Shift_JIS.\u2002OSF use '
@@ -216,6 +221,12 @@ annots = {
             'KanjiTalk 7 goes off doing its own thing here.',
  (1, 11, 0): 'KanjiTalk 6 encodes the vertical forms ten rows (instead of 84 '
              'rows) down.',
+ (1, 12, 23): 'I am not sure what is going on with au here (I am including these '
+              'only on the authority of the KDDI Shift JIS codec from earlier '
+              'versions of ICU, since these four alternative encodings are not '
+              'mentioned in EmojiSources.txt, gmojiraw.txt or the UTC documents).'
+              '</p><p>The alignment of the telephone with KanjiTalk 7 may or may '
+              'not be significant.',
  (1, 13, 0): "NEC's row 13 seems to have become somewhat of a <i>de facto</i> "
              'standard (also being included in the OSF definitions of EUC-JP)… '
              'until it became official standard with the 2000 release of '

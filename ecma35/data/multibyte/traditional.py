@@ -11,7 +11,8 @@ from ecma35.data import graphdata
 from ecma35.data.multibyte import mbmapparsers as parsers
 from ecma35.data.multibyte import variationhints
 
-# CNS 11643 and Big 5 (not gb12345; see guobiao.py for that one).
+# Charsets originating from Hong Kong or Taiwan (CCCII, CNS 11643, Big 5, HKSCS…).
+#   (GB12345 is traditional but Mainland Chinese: see guobiao.py for that one.)
 # Bumpy ride here, so brace yourselves.
 
 # ISO 10646:2017 Annex P says:
@@ -25,13 +26,13 @@ from ecma35.data.multibyte import variationhints
 _contraspua = {
     # Alternative mappings per Yasuoka/ICU for some of the ones that otherwise get mapped to SPUA.
     # On the basis that PUA mappings for defined characters are kinda a last resort… since there's
-    #   no guarantee it'll show up even legibly (and you can forget about aural rendering).
+    #   no guarantee it'll show up even legibly same (and you can forget about aural rendering).
     (0xFFF7A,): (0x5B90,), (0xFFF7B,): (0x8786,), (0xFFFEF,): (0x7E64,), (0xFFFF0,): (0x5900,),
     (0xFFFF1,): (0x5365,), (0xFFFF3,): (0x5324,), (0xFFFF5,): (0x5E71,), (0xFFFF6,): (0x7193,),
     (0xFFFF7,): (0x6E7C,), (0xFFFF8,): (0x98E4,), (0xFFFF9,): (0x79CC,), (0xFFFFA,): (0x5CD5,),
     (0xFFFFB,): (0x488C,), (0xFFFFC,): (0x80BB,), (0xFFFFD,): (0x5759,),
     # The Gov-TW mappings seem to insist on SPUA assignments for Roman characters which
-    # Unicode represents as combining sequences.
+    #   Unicode represents as combining sequences.
     (0xF91D1,): (0x6D, 0x0302), (0xF91D2,): (0x6E, 0x0302), (0xF91D3,): (0x6D, 0x030C),
     (0xF91D4,): (0x6D, 0x0304), (0xF91D5,): (0x6E, 0x0304), (0xF91D6,): (0x6D, 0x030D),
     (0xF91D7,): (0x6E, 0x030D), (0xF91D8,): (0x61, 0x030D), (0xF91D9,): (0x69, 0x030D),
@@ -70,28 +71,38 @@ ir184_to_old_ir183 = { 26554: 23820, 26564: 23821, 26588: 23822, 26590: 23823, 2
 
 # Since the gov.tw data disagrees with literally every other source I have on the matter
 # (ISO-IR-171, UTC mappings, ICU mappings, Yasuoka's mappings…; although not without
-# reason, see comments about the Big5 order above), change it to match.
+# reason, since it made it the same as Big5 order), change arrow order to match.
 def cnsmapper_swaparrows(pointer, ucs):
     if (pointer == 148) and (ucs == (0x2190,)):
         return (0x2192,)
     elif (pointer == 149) and (ucs == (0x2192,)):
         return (0x2190,)
     return ucs
+def cnsmapper_swaparrows_thrashscii2(pointer, ucs):
+    if (pointer == 148) and (ucs == (0x2190,)):
+        return (0x2192,)
+    elif (pointer == 149) and (ucs == (0x2192,)):
+        return (0x2190,)
+    elif (61852 <= pointer < 61947) and (len(ucs) == 1) and (ucs[0] < 0x7F):
+        # DBCS halfwidth ASCII (seemingly intended to be contrastive with plane 1 forms)
+        # Because of course there are.
+        return (ucs[0], 0xF87F)
+    return ucs
 
 def cnsmapper_contraredundantcjkb(pointer, ucs):
-    # 0x2420E arguably should never have been added: https://unicode.org/wg2/docs/n2644.pdf
+    # U+2420E arguably should never have been added: https://unicode.org/wg2/docs/n2644.pdf
     if ucs == (0x2420E,):
         return (0x3DB7,)
     return ucs
 
 planesize = 94 * 94
 cns_bmp = parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode BMP.txt",
-        mapper = cnsmapper_swaparrows)
+        mapper = cnsmapper_swaparrows_thrashscii2)
 cns_sip = parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 2.txt",
         mapper = cnsmapper_contraredundantcjkb)
 cns_spuaa = parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 15.txt",
         mapper = cnsmapper_contraspua)
-cns = parsers.fuse([cns_bmp, cns_sip, cns_spuaa], "GOV-TW---CNS2UNICODE_swar_cspua_crcb.json")
+cns = parsers.fuse([cns_bmp, cns_sip, cns_spuaa], "GOV-TW---CNS2UNICODE_swar_tsci_cspua_crcb.json")
 
 cns_govbmp = parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode BMP.txt")
 cns_govsip = parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 2.txt")
