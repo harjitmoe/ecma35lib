@@ -18,10 +18,13 @@ for n, i in enumerate(eacc_data):
     if i and (i not in eacc_rev) and (n >= (96 * 99)):
         eacc_rev[i] = n
 koha_data = tuple(graphdata.gsets["cccii-koha"][2])
-koha_rev = {}
 for n, i in enumerate(koha_data):
-    if i and (i not in koha_rev) and (n >= (96 * 99)):
-        koha_rev[i] = n
+    if i and (i not in eacc_rev) and (n >= (96 * 99)):
+        eacc_rev[i] = n
+cccii_data = tuple(graphdata.gsets["cccii"][2])
+for n, i in enumerate(cccii_data):
+    if i and (i not in eacc_rev) and (n >= (96 * 99)):
+        eacc_rev[i] = n
 
 inverse = dict(zip(traditional.big5_to_cns2.values(), traditional.big5_to_cns2.keys()))
 
@@ -138,12 +141,15 @@ plane7 = (7, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Outp
 ])
 
 print("Loading 8")
-plane8 = (8, ("GOV-TW CNS",), [
+plane8 = (8, ("GOV-TW CNS", "Output"), [
           tuple(map(lambda a, b, c: a or b or c,
               parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode BMP.txt", plane=8),
               parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 2.txt", plane=8),
               parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 15.txt", plane=8)
           )),
+          # Slight kludge to only show for the first part of the plane, and
+          #   use the compact chart format for the rest:
+          graphdata.gsets["cns-eucg2"][2][(94*94*7):(94*94*7)+(94*15)],
 ])
 
 print("Loading 9")
@@ -272,8 +278,6 @@ def unicodefunc(cdisplayi, outfile, i=None, jlfunc=None, number=None, row=None, 
         target = eacc_rev[cdisplayi]
     elif cdisplayi + (0xF87F,) in eacc_rev:
         target = eacc_rev[cdisplayi + (0xF87F,)]
-    elif cdisplayi in koha_rev:
-        target = koha_rev[cdisplayi]
     #
     if target:
         plane = (target // (96 * 96))

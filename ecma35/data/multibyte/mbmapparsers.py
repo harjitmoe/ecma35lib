@@ -600,11 +600,27 @@ def to_96(dat):
     while first < len(dat):
         if not (first % (94 * 94)):
             outwrite += 96 # Extra row at start of plane
-        out[outwrite + 1:outwrite+95] = dat[first:first+94]
+        out[outwrite+1:outwrite+95] = dat[first:first+94]
         first += 94
         outwrite += 96
         if not (first % (94 * 94)):
             outwrite += 96 # Extra row at end of plane
+    return tuple(out[:outwrite])
+
+def to_94(dat):
+    """Convert a 96^n set array to a 94^n set array.
+    Note that this function will not strip an initial plane."""
+    first = 0
+    outwrite = 0
+    out = [None] * len(dat)
+    while first < len(dat):
+        if not (outwrite % (94 * 94)):
+            first += 96 # Extra row at start of plane
+        out[outwrite:outwrite+94] = dat[first+1:first+95]
+        outwrite += 94
+        first += 96
+        if not (outwrite % (94 * 94)):
+            first += 96 # Extra row at end of plane
     return tuple(out[:outwrite])
 
 

@@ -33,6 +33,7 @@ for pointer in range(96*96*7): # Remember plane 0 exists in the array and is com
 print(manies)
 
 planes = []
+are_96 = []
 for number in range(1, 73):
     print("Loading {:d}".format(number))
     planes.append((number, ("Koha Taiwan", "Unihan DB", "Lib. of Cong.", "HKIUG", 
@@ -44,17 +45,25 @@ for number in range(1, 73):
               graphdata.gsets["cccii"][2][96*96*number:96*96*(number + 1)],
               graphdata.gsets["eacc"][2][96*96*number:96*96*(number + 1)],
     ]))
+    is_96 = False
+    if parsers.to_96(parsers.to_94(planes[-1][2][-1])) != planes[-1][2][-1]:
+        is_96 = True
+    are_96.append(is_96)
+    if not is_96:
+        for n, i in enumerate(planes[-1][2]):
+            planes[-1][2][n] = parsers.to_94(i)
 print("Loading 73")
 planes.append((73, ("Koha Taiwan", "Unihan DB", "Lib. of Cong.", "HKIUG", "1990 JIS<br>Plane 1", 
                     "CCCII Out", "EACC Out"), [
-          graphdata.gsets["cccii-koha"][2][96*96*73:96*96*74],
-          traditional.cccii_unihan[96*96*73:96*96*74],
-          graphdata.gsets["eacc-pure"][2][96*96*73:96*96*74],
-          graphdata.gsets["eacc-hongkong"][2][96*96*73:96*96*74],
-          parsers.to_96(graphdata.gsets["ir168"][2]),
-          graphdata.gsets["cccii"][2][96*96*73:96*96*74],
-          graphdata.gsets["eacc"][2][96*96*73:96*96*74],
+          parsers.to_94(graphdata.gsets["cccii-koha"][2][96*96*73:96*96*74]),
+          parsers.to_94(traditional.cccii_unihan[96*96*73:96*96*74]),
+          parsers.to_94(graphdata.gsets["eacc-pure"][2][96*96*73:96*96*74]),
+          parsers.to_94(graphdata.gsets["eacc-hongkong"][2][96*96*73:96*96*74]),
+          graphdata.gsets["ir168"][2],
+          parsers.to_94(graphdata.gsets["cccii"][2][96*96*73:96*96*74]),
+          parsers.to_94(graphdata.gsets["eacc"][2][96*96*73:96*96*74]),
 ]))
+are_96.append(False)
 for number in range(74, 96):
     print("Loading {:d}".format(number))
     planes.append((number, ("Koha Taiwan", "Unihan DB", "Lib. of Cong.", "HKIUG", 
@@ -66,6 +75,13 @@ for number in range(74, 96):
               graphdata.gsets["cccii"][2][96*96*number:96*96*(number + 1)],
               graphdata.gsets["eacc"][2][96*96*number:96*96*(number + 1)],
     ]))
+    is_96 = False
+    if parsers.to_96(parsers.to_94(planes[-1][2][-1])) != planes[-1][2][-1]:
+        is_96 = True
+    are_96.append(is_96)
+    if not is_96:
+        for n, i in enumerate(planes[-1][2]):
+            planes[-1][2][n] = parsers.to_94(i)
 
 def planefunc(number, mapname=None):
     if mapname is None:
@@ -74,9 +90,15 @@ def planefunc(number, mapname=None):
         return "<br>Plane {}".format(number) if "<br>" not in mapname else ""
 
 def kutenfunc(number, row, cell):
-    anchorlink = "<a href='#{:d}.{:d}.{:d}'>{:02d}-{:02d}-{:02d}</a>".format(
-                 number, row, cell, number, row, cell)
-    hex7 = "<br>0x{:02X}{:02X}{:02X}".format(0x20 + number, 0x20 + row, 0x20 + cell)
+    if (cell not in (0, 95)) and (row not in (0, 95)):
+        anchorlink = "<a href='#{:d}.{:d}.{:d}'>{:02d}-{:02d}-{:02d}</a>".format(
+                     number, row, cell, number, row, cell)
+        hex7 = "<br>0x{:02X}{:02X}{:02X}".format(0x20 + number, 0x20 + row, 0x20 + cell)
+    else:
+        # Don't give a kuten for parts outside the 94^n subset
+        anchorlink = "<a href='#{:d}.{:d}.{:d}'>0x{:02X}{:02X}{:02X}</a>".format(
+                     number, row, cell, 0x20 + number, 0x20 + row, 0x20 + cell)
+        hex7 = ""
     phase = ""
     templ = "<br>←<a href='ccciiplane{:02d}{}.html#{:d}.{:d}.{:d}'>L1</a>"
     templ2 = "<a href='ccciiplane{:02d}{}.html#{:d}.{:d}.{:d}'>L{:d}</a>"
@@ -139,7 +161,7 @@ if os.path.exists("__analyt__"):
     blot = open("__analyt__").read()
 
 print("Writing HTML")
-for n, p in enumerate(planes):
+for n, (p, is_96) in enumerate(zip(planes, are_96)):
     for q in range(1, 7):
         bnx = tuple(range(1, 96))
         bn = bnx[n]
@@ -160,7 +182,7 @@ for n, p in enumerate(planes):
         showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="zh-TW", part=q, css="/css/cns.css",
                              menuurl="/eacc-conc.html", menuname="CCCII and EACC comparison tables",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
-                             annots=annots, selfhandledanchorlink=True, is_96=True, blot=blot,
+                             annots=annots, selfhandledanchorlink=True, is_96=is_96, blot=blot,
                              unicodefunc=unicodefunc)
         f.close()
 
