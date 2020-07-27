@@ -531,7 +531,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
             if testpointer < len(j) and j[testpointer]:
                 allocated_slots += 1
                 break # break the inner loop
-    if allocated_slots < ((edx - stx) * 1.5):
+    if allocated_slots < 200:
         sparse = True
     print("<table>", file=outfile)
     for row in range(stx, edx):
@@ -546,7 +546,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
             print("</p></td></tr>", file=outfile)
         for cell in (range(1, 95) if not is_96 else range(0, 96)):
             st = zplarray[((row - 1) * 94) + (cell - 1)] if not is_96 else zplarray[(row * 96) + cell]
-            if sparse and (len(set(i for i in st if i is not None)) == 0) \
+            if (sparse or (cell in (0, 95))) and (len(set(i for i in st if i is not None)) == 0) \
                       and not annots.get((number, row, cell), None):
                 continue
             elif len(set(i for i in st if (i is not None and not _isbmppua(i)))) > 1:

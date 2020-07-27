@@ -608,7 +608,7 @@ def to_96(dat):
     return tuple(out[:outwrite])
 
 def to_94(dat):
-    """Convert a 96^n set array to a 94^n set array.
+    """Convert a 96^n set array to a 94^n set array. Of course, can be lossy.
     Note that this function will not strip an initial plane."""
     first = 0
     outwrite = 0

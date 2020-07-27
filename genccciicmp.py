@@ -64,7 +64,7 @@ planes.append((73, ("Koha Taiwan", "Unihan DB", "Lib. of Cong.", "HKIUG", "1990 
           parsers.to_94(graphdata.gsets["eacc"][2][96*96*73:96*96*74]),
 ]))
 are_96.append(False)
-for number in range(74, 96):
+for number in (79, 80, 91, 92, 95):
     print("Loading {:d}".format(number))
     planes.append((number, ("Koha Taiwan", "Unihan DB", "Lib. of Cong.", "HKIUG", 
                             "CCCII Out", "EACC Out"), [
@@ -163,7 +163,7 @@ if os.path.exists("__analyt__"):
 print("Writing HTML")
 for n, (p, is_96) in enumerate(zip(planes, are_96)):
     for q in range(1, 7):
-        bnx = tuple(range(1, 96))
+        bnx = tuple(range(1, 74)) + (79, 80, 91, 92, 95)
         bn = bnx[n]
         f = open("ccciiplane{:02d}{}.html".format(bn, chr(0x60 + q)), "w", encoding="utf-8")
         lasturl = lastname = nexturl = nextname = None
@@ -186,25 +186,7 @@ for n, (p, is_96) in enumerate(zip(planes, are_96)):
                              unicodefunc=unicodefunc)
         f.close()
 
-"""
-f = open("eacc-conc.txt", "w")
-for base_plane in range(1, 7):
-    planes = list(range(base_plane, 73, 6))
-    fplanes = "/".join("{:d}".format(i) for i in planes)
-    print("* Plane {}".format(fplanes), file=f)
-    for part in range(6):
-        print(end="  * Rows {:d}–{:d}: ".format(16 * part, 16 * (part + 1)), file=f)
-        partletter = chr(0x61 + part)
-        print(*["[plane {:d}](/eacctables/ccciiplane{:02d}{}.html )".format(i, i, partletter) 
-              for i in planes], sep=", ", file=f)
-for plane in range(73, 96):
-    print("* Plane {:d}".format(plane), file=f)
-    for part in range(6):
-        partletter = chr(0x61 + part)
-        print("  * [Plane {:d}, rows {:d}–{:d}](/eacctables/ccciiplane{:02d}{}.html )".format(
-              plane, 16 * part, 16 * (part + 1), plane, partletter), file=f) 
-f.close()
-"""
+
 
 
 
