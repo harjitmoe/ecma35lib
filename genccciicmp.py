@@ -34,7 +34,10 @@ print(manies)
 
 planes = []
 are_96 = []
+bnx = []
 for number in range(1, 73):
+    if set(graphdata.gsets["eacc"][2][96*96*number:96*96*(number + 1)]) == {None}:
+        continue
     print("Loading {:d}".format(number))
     planes.append((number, ("Koha Taiwan", "Unihan DB", "Lib. of Cong.", "HKIUG", 
                             "CCCII Out", "EACC Out"), [
@@ -45,6 +48,7 @@ for number in range(1, 73):
               graphdata.gsets["cccii"][2][96*96*number:96*96*(number + 1)],
               graphdata.gsets["eacc"][2][96*96*number:96*96*(number + 1)],
     ]))
+    bnx.append(number)
     is_96 = False
     if parsers.to_96(parsers.to_94(planes[-1][2][-1])) != planes[-1][2][-1]:
         is_96 = True
@@ -63,8 +67,11 @@ planes.append((73, ("Koha Taiwan", "Unihan DB", "Lib. of Cong.", "HKIUG", "1990 
           parsers.to_94(graphdata.gsets["cccii"][2][96*96*73:96*96*74]),
           parsers.to_94(graphdata.gsets["eacc"][2][96*96*73:96*96*74]),
 ]))
+bnx.append(73)
 are_96.append(False)
-for number in (79, 80, 91, 92, 95):
+for number in range(74, 96):
+    if set(graphdata.gsets["eacc"][2][96*96*number:96*96*(number + 1)]) == {None}:
+        continue
     print("Loading {:d}".format(number))
     planes.append((number, ("Koha Taiwan", "Unihan DB", "Lib. of Cong.", "HKIUG", 
                             "CCCII Out", "EACC Out"), [
@@ -75,6 +82,7 @@ for number in (79, 80, 91, 92, 95):
               graphdata.gsets["cccii"][2][96*96*number:96*96*(number + 1)],
               graphdata.gsets["eacc"][2][96*96*number:96*96*(number + 1)],
     ]))
+    bnx.append(number)
     is_96 = False
     if parsers.to_96(parsers.to_94(planes[-1][2][-1])) != planes[-1][2][-1]:
         is_96 = True
@@ -151,9 +159,7 @@ def unicodefunc(cdisplayi, outfile, i=None, jlfunc=None, number=None, row=None, 
 annots = {
     (1, 11, 48): "Mapping the escudo sign to U+1F4B2 is an absolute kludge, purely to prevent it "
                  "from duplicating the dollar sign mapping.",
-    (1, 11, 60): "Honestly, I have no idea what this one is, and mapping to the Weierstrass is a "
-                 "total guess (it's supposed to look like <a href='/images/CCCCII-01-11-60.png'>"
-                 "this</a>, apparently).",
+    (1, 11, 60): "Apparently, this is a scribal abbreviation of the word \"per\".",
 }
 
 blot = ""
@@ -163,7 +169,6 @@ if os.path.exists("__analyt__"):
 print("Writing HTML")
 for n, (p, is_96) in enumerate(zip(planes, are_96)):
     for q in range(1, 7):
-        bnx = tuple(range(1, 74)) + (79, 80, 91, 92, 95)
         bn = bnx[n]
         f = open("ccciiplane{:02d}{}.html".format(bn, chr(0x60 + q)), "w", encoding="utf-8")
         lasturl = lastname = nexturl = nextname = None

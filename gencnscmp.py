@@ -423,7 +423,15 @@ annots = {
               "and only standardised beyond the <i>de facto</i> level in 2007.",
  (3, 68, 63): 'Compare 04-03-65.',
  (3, 68, 77): 'Compare 04-08-93.',
- (3, 69, 26): "Compare 15-28-30.",
+ (3, 69, 26): "The <a href='https://www.unicode.org/cgi-bin/GetUnihanData.pl?codepoint=6BF6'>"
+              "Unihan database</a> (i.e. the up-to-date UCS source) regards this as U+6BF6, while "
+              "the <a href='https://www.cns11643.gov.tw/wordView.jsp?ID=222522'>CNS 11643 Word "
+              "View (i.e. the up-to-date CNS / GovTW source) regards this one as U+6BF5.&ensp;They "
+              "seem plausibly variants of the same character (they have the same reading and the "
+              "same <em>set</em> of components at any rate, but 毵 is more common).&ensp;In "
+              "whatever case, compare 15-28-28 (always mapped to U+6BF5 毵), 15-28-30 (always "
+              "U+6BF6 毶, although absent in non-GovTW mappings) and 02-49-32 (毿, the version "
+              "present in Big5, due to being the favoured version in zh-Hant).",
  (3, 69, 34): 'Compare 04-24-60.',
  (3, 69, 44): 'Compare 04-10-78.',
  (3, 69, 59): 'Compare 04-36-56.',
@@ -448,7 +456,8 @@ annots = {
  (15, 8, 82): "Compare 04-08-07",
  (15, 16, 80): "U+3DB7 and U+2420E (CJKB) are "
                "<a href='https://unicode.org/wg2/docs/n2644.pdf'>known exact duplicates</a>.",
- (15, 28, 30): "Compare 03-69-26.",
+ (15, 28, 28): "See comments at 03-69-26.",
+ (15, 28, 30): "See comments at 03-69-26.",
  (15, 49, 93): "Compare 04-51-28",
  (15, 67, 66): "Compare 15-67-74",
  (15, 67, 74): "Compare 15-67-66",
