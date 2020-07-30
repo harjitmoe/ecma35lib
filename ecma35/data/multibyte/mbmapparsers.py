@@ -507,7 +507,7 @@ def read_unihan_eacc(fil, wantkey, *, set96=False):
             # U+9C0C → kEACC 2D6222
             # Being as non-94^3 codes in other CCCII mapping sources are mostly either 
             #   (a) Non-kanji using 0x20 as a continuation byte, or
-            #   (b) Extra URO or CJKA kanji encoded using prefixed 0x7F to escape a UCS-2 code,
+            #   (b) Extra URO or CJKA kanji encoded using prefixed 0x7F to escape a UCS-2BE code,
             # I suspect this is an error in Unihan?
             continue
         if len(_temp) > pointer:
