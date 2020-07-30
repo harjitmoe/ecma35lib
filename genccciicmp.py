@@ -69,7 +69,7 @@ planes.append((73, ("Koha Taiwan", "Unihan DB", "Lib. of Cong.", "HKIUG", "1990 
 ]))
 bnx.append(73)
 are_96.append(False)
-for number in range(74, 96):
+for number in range(74, 95):
     if set(graphdata.gsets["eacc"][2][96*96*number:96*96*(number + 1)]) == {None}:
         continue
     print("Loading {:d}".format(number))
@@ -181,7 +181,7 @@ for n, (p, is_96) in enumerate(zip(planes, are_96)):
         if q < 6:
             nexturl = "ccciiplane{:02d}{}.html".format(bn, chr(0x60 + q + 1))
             nextname = "CCCII plane {:d}, part {:d}".format(bn, q + 1)
-        elif bn < 95:
+        elif bn < 92:
             nexturl = "ccciiplane{:02d}a.html".format(bnx[n + 1])
             nextname = "CCCII plane {:d}, part 1".format(bnx[n + 1])
         showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="zh-TW", part=q, css="/css/cns.css",

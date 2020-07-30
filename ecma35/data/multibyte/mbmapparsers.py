@@ -503,11 +503,12 @@ def read_unihan_eacc(fil, wantkey, *, set96=False):
         else:
             pointer = (men * 96 * 96) + (ku * 96) + ten
         if (not 0 <= ten <= 95) and (ucs == 0x9C0C):
-            # U+9C0C → kCCCII 2358CF
+            # U+9C0C → kCCCII 2358CF (not 94^n or even 7-bit)
             # U+9C0C → kEACC 2D6222
-            # Not sure when, why or how CCCII seems to have abandoned its notion of being a
-            #   ISO 2022 set altogether. These are very odd exceptions though, not the rule.
-            #   In particular, this is the only such code listed in Unihan.
+            # Being as non-94^3 codes in other CCCII mapping sources are mostly either 
+            #   (a) Non-kanji using 0x20 as a continuation byte, or
+            #   (b) Extra URO or CJKA kanji encoded using prefixed 0x7F to escape a UCS-2 code,
+            # I suspect this is an error in Unihan?
             continue
         if len(_temp) > pointer:
             if (ucs == 0x4EBE) and (wantkey == "kCCCII"):

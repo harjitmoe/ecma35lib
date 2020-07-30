@@ -15,15 +15,15 @@ print("Getting EACC coverage")
 eacc_data = tuple(graphdata.gsets["eacc"][2])
 eacc_rev = {}
 for n, i in enumerate(eacc_data):
-    if i and (i not in eacc_rev) and (n >= (96 * 99)):
+    if i and (i not in eacc_rev) and (n >= (96 * 99)) and (n < (95 * 96 * 96)):
         eacc_rev[i] = n
 koha_data = tuple(graphdata.gsets["cccii-koha"][2])
 for n, i in enumerate(koha_data):
-    if i and (i not in eacc_rev) and (n >= (96 * 99)):
+    if i and (i not in eacc_rev) and (n >= (96 * 99)) and (n < (95 * 96 * 96)):
         eacc_rev[i] = n
 cccii_data = tuple(graphdata.gsets["cccii"][2])
 for n, i in enumerate(cccii_data):
-    if i and (i not in eacc_rev) and (n >= (96 * 99)):
+    if i and (i not in eacc_rev) and (n >= (96 * 99)) and (n < (95 * 96 * 96)):
         eacc_rev[i] = n
 
 inverse = dict(zip(traditional.big5_to_cns2.values(), traditional.big5_to_cns2.keys()))
