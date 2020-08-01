@@ -729,6 +729,8 @@ cexseq = {b"J"[0]: "SVP", # Select Vertical Printing
 #   These are obviously provisional, but I do not expect them to be redefined for other uses.
 # Note: don't include C0s and C1s here. SP and DEL are not strictly C0s or C1s since ECMA-35 does 
 #   not delegate them to the C0 and C1 sets. Although ESC isn't delegated either.
+# These aren't all category Cf/Cc/Z: for example, HF is category Lo. Conversely, not all category
+#   Cf characters have established enough mnemonics in order to list them.
 formats = { 0x0020: 'SP', # Space
             0x007F: 'DEL', # Delete
             0x00A0: 'NBSP', # Non-Breaking Space, No-Break Space, Required Space (RSP)
@@ -801,6 +803,7 @@ formats = { 0x0020: 'SP', # Space
             0x13436: 'EHOM', # Egyptian Hieroglyph Overlay Middle
             0x13437: 'EHBS', # Egyptian Hieroglyph Begin Segment
             0x13438: 'EHES', # Egyptian Hieroglyph End Segment
+            0x16FE4: 'KSSF', # Khitan Small Script Filler
             0x1BCA0: 'SHLO', # Shorthand Format Letter Overlap
             0x1BCA1: 'SHCO', # Shorthand Format Continuing Overlap
             0x1BCA2: 'SHDS', # Shorthand Format Down Step
