@@ -27,7 +27,7 @@ graphdata.rhses["1256"] = parsers.read_single_byte("WHATWG/index-windows-1256.tx
 graphdata.rhses["1257"] = parsers.read_single_byte("WHATWG/index-windows-1257.txt")
 graphdata.rhses["1258"] = parsers.read_single_byte("WHATWG/index-windows-1258.txt")
 
-# OEM pages
+# OEM pages (TODO: 210 Greek and 220 Spanish are both listed by DEC)
 graphdata.rhses["437"] = parsers.read_single_byte("ICU/ibm-437_P100-1995.ucm")
 graphdata.defgsets["437"] = ("ir006", "nil", "nil", "nil")
 graphdata.rhses["720"] = parsers.read_single_byte("ICU/ibm-720_P100-1997.ucm")

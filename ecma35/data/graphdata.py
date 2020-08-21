@@ -71,7 +71,7 @@ defgsets = {}
 
 # Note: has to be imported after gsets &co are defined
 from ecma35.data.multibyte import korea, japan, guobiao, traditional
-from ecma35.data.singlebyte import ecma6, ecma43, plainext
+from ecma35.data.singlebyte import ecma6, ecma43, plainext, dingbats
 
 g94bytes = {tuple(b"@"): ("ir002", # Preferred version
                           ("ir002tilde",), # Private versions
@@ -164,6 +164,9 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"$2"): "decdutch", # Note: DEC itself uses b"="
             # Others
             tuple(b"#0"): ("ksroman", ("ksromantilde",), ("ksroman",)),
+            tuple(b"$3"): "marlett",
+            tuple(b"$4"): "zdings_g0",
+            tuple(b"$5"): "zdings_g1",
             tuple(b"~"): "nil"}
 
 g96bytes = {tuple(b"@"): "ir111",

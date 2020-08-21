@@ -61,7 +61,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 
 # Private assignments (incomplete)
 
-Separate coding systems:
+## Separate coding systems:
 
 |Private assignment|Meaning|
 |---|---|
@@ -73,6 +73,8 @@ Separate coding systems:
 |`DOCS 5`|Big Five (lead byte range `0xA1-0xFC`)|
 |`DOCS 6`|HangulTalk|
 |`DOCS / 0`|Standard Compression Scheme for Unicode (SCSU)|
+
+## Additional single-byte G-sets
 
 Regarding World System Teletext:
 
@@ -108,10 +110,13 @@ Miscellaneous single-byte assignments:
 |`IRR 0 G*D4 # 0`|KS X 1003 with tilde|
 |`G*D4 $ 1`|DEC NRCS for Switzerland (corresponding to DEC's (not ARIB's) `G*D4 4`)|
 |`G*D4 $ 2`|DEC NRCS for the Netherlands (corresponding to DEC's `G*D4 =`)|
+|`G*D4 $ 3`|Marlett|
+|`G*D4 $ 4`|Zapf Dingbats, G0 range|
+|`G*D4 $ 5`|Zapf Dingbats, G1 range|
 |``IRR 1 G*D4 ` ``|Danish equivalent to NS 4551 (IBM's 1017)|
 |`G*D6 ! 0`|RFC 1345's so-called ISO-IR-111/ECMA-Cyrillic (incompatible with ISO-IR-111 itself).|
 
-Double-byte assignments:
+## Additional multiple-byte G-sets
 
 |Private assignment|Meaning|
 |---|---|
@@ -202,6 +207,37 @@ Double-byte assignments:
 |`IRR 1 G*DM6 ! 1`|EACC / CCCII, Hong Kong Innovative Users Group / Hong Kong University version|
 |`IRR 2 G*DM6 ! 1`|EACC / CCCII, aggregate version with Taiwan layout of row 2, favouring Unihan kCCCII for kanji mappings (default)|
 |`IRR 3 G*DM6 ! 1`|EACC / CCCII, aggregate version with Hong Kong layout of rows 0–2, favouring Library of Congress for kanji mappings|
+
+## "Plain extended ASCII" mode
+
+Plain extended ASCII mode is switched to by `DOCS 3` as 
+mentioned above.&ensp;Once inside, the DEC-defined DECSPPCS control sequence (i.e. `CSI … * p`) is
+used for switching between numbered code pages (e.g. `CSI 1 2 5 2 * p`).&ensp;Numbers above 65535
+are used for custom purposes.&ensp;Specifically:
+
+|Private assignment|Meaning|
+|---|---|
+|`ESC [ 9 9 8 0 0 0 * p`|Switch to the Zapf Dingbats encoding.|
+|`ESC [ 9 9 9 0 0 0 * p`|Switch to the Webdings encoding.|
+|`ESC [ 9 9 9 0 0 1 * p`|Switch to the Wingdings encoding.|
+|`ESC [ 9 9 9 0 0 2 * p`|Switch to the Wingdings 2 encoding.|
+|`ESC [ 9 9 9 0 0 3 * p`|Switch to the Wingdings 3 encoding.|
+
+G-sets can still be used on the left-hand side of the code page (the mode is mostly business as
+usual as far as ECMA-35's 7-bit mechanisms are concerned, the only difference is the extra 128
+graphical codes which are not governed by ECMA-35, since it does not use ECMA-35's 8-bit
+mechanisms).&ensp;G-sets and the GL invocation are reset by the DECSPPCS sequence, however; the
+defaults can vary with code page (the default is usually GL=G0=ASCII, for example, whereas 1252
+also includes the GR of ISO-8859-1 as its G1 set for fairly obvious reasons).
+
+Hence, by default, all C0 control codes will continue to work as normal.&ensp;However, the 
+following sequences can be used to change this:
+
+|Private assignment|Meaning|
+|---|---|
+|`ESC [ 1 ) p`|C0 control codes work as normal.|
+|`ESC [ 2 ) p`|C0 codes are mostly interpreted as graphical characters, except for BEL, BS, HT, LF, CR and ESC.|
+|`ESC [ 4 ) p`|C0 codes are almost all graphical characters, the sole exception being ESC so that reversal is possible.|
 
 # Carried out
 

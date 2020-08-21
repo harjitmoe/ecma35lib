@@ -26,8 +26,8 @@ def show(name, *, plane=None):
         else:
             c0list = graphdata.c0graphics["437"]
         assert len(c0list) == 33
-        if name in defcsets:
-            g0set = defcsets[name][0]
+        if name in graphdata.defgsets:
+            g0set = graphdata.defgsets[name][0]
         else:
             g0set = "ir006"
         if graphdata.gsets[g0set][0] == 94:
