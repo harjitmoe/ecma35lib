@@ -27,7 +27,8 @@ graphdata.rhses["1256"] = parsers.read_single_byte("WHATWG/index-windows-1256.tx
 graphdata.rhses["1257"] = parsers.read_single_byte("WHATWG/index-windows-1257.txt")
 graphdata.rhses["1258"] = parsers.read_single_byte("WHATWG/index-windows-1258.txt")
 
-# OEM pages (TODO: 210 Greek and 220 Spanish are both listed by DEC)
+# OEM pages (TODO: 210 Greek and 220 Spanish are both listed by DEC in the very definition of the
+#   DECSPPCS CSI control. I do not have a source for their layout.)
 graphdata.rhses["437"] = parsers.read_single_byte("ICU/ibm-437_P100-1995.ucm")
 graphdata.defgsets["437"] = ("ir006", "nil", "nil", "nil")
 graphdata.rhses["720"] = parsers.read_single_byte("ICU/ibm-720_P100-1997.ucm")
@@ -72,8 +73,14 @@ graphdata.rhses["10005"] = parsers.read_mozilla_ut_file("Mozilla/machebrew.ut")
 graphdata.rhses["10006"] = graphdata.rhses["1280"] = parsers.read_mozilla_ut_file("Mozilla/macgreek.ut")
 graphdata.rhses["10081"] = graphdata.rhses["1281"] = parsers.read_mozilla_ut_file("Mozilla/macturki.ut")
 graphdata.rhses["10029"] = graphdata.rhses["1282"] = parsers.read_mozilla_ut_file("Mozilla/macce.ut")
-# 10007 (1283?) is the original MacCyrillic; current MacCyrillic is a Euro update of 10017.
+# 10007/1283 is the original MacCyrillic; current MacCyrillic is a Euro update of 10017.
+# Mappings to U+00A4 changed to U+20AC across the board, so number the current one 10017, and use
+#   a version with that change but not the others for 10007/1283.
 graphdata.rhses["10017"] = parsers.read_single_byte("WHATWG/index-x-mac-cyrillic.txt")
+maccy = list(graphdata.rhses["10017"])
+maccy[0x22] = (0x00A2,)
+maccy[0x36] = (0x2202,)
+graphdata.rhses["10007"] = graphdata.rhses["1283"] = tuple(maccy)
 graphdata.rhses["10082"] = graphdata.rhses["1284"] = parsers.read_mozilla_ut_file("Mozilla/maccroat.ut")
 graphdata.rhses["10010"] = graphdata.rhses["1285"] = parsers.read_mozilla_ut_file("Mozilla/macro.ut")
 graphdata.rhses["10079"] = graphdata.rhses["1286"] = parsers.read_mozilla_ut_file("Mozilla/macicela.ut")
