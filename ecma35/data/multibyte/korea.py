@@ -148,7 +148,7 @@ oldunicodeksc = parsers.read_main_plane("UTC/OLD5601.TXT")
 _wansung_syllables = parsers.fuse([
             (((-1,),) * 1410) + ((None,) * 2350) + (((-1,),) * 5076),
             wansung[2]], "Wansung_SyllablesOnly.json")
-_wansung_temp = parsers.fuse([_wansung_syllables, wansung[2]], "Wansung_AltUTC.json")
+_wansung_temp = parsers.fuse([_wansung_syllables, oldunicodeksc], "Wansung_AltUTC.json")
 graphdata.gsets["ir149-altutc"] = wansung_utcalt = (94, 2, _wansung_temp)
 graphdata.gsetflags["ir149-altutc"] |= {"UHC:IS_WANSUNG"}
 

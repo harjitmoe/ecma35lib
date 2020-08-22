@@ -205,6 +205,13 @@ applesinglehints = {
     (0xFF0A, 0xF87F): (0x3000, 0x20F0), # High asterisk
     (0x2206, 0xF87F): (0x1D71F,), # Medium-bold oblique capital delta
     #
+    # Avoid variation hints on the alternate versions of manicules by mapping to
+    #   backhand (even though they are usually just shown as bigger versions):
+    (0x261C, 0xF87F): (0x1F448,),  # White hexagon
+    (0x261D, 0xF87F): (0x1F446,), # Outlined black lozenge
+    (0x261E, 0xF87F): (0x1F449,), # Medium-bold white circle
+    (0x261F, 0xF87F): (0x1F447,), # Medium-bold white square
+    #
     # Special cases
     # Record mark; combining sequence does not render, U+29E7 was already in v3.2.
     (0x3D, 0x20D2): (0x29E7,), 

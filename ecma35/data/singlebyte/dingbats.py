@@ -14,7 +14,7 @@ from ecma35.data.singlebyte import sbmapparsers as parsers
 
 
 #####################################################################
-# WDings
+# WDings (the collective ESC term for Wingdings and Webdings)
 
 webdings = [None] * 256
 wingdings1 = [None] * 256
@@ -51,8 +51,14 @@ graphdata.defgsets["999003"] = ("wingdings3_g0", "nil", "nil", "nil")
 
 
 #####################################################################
-# Marlett
+# Marlett (does this rhyme with Charlotte?)
 
+# Many of the following mappings, arrows especially, might be questioned.
+# Not knowing any actual implementation trying to assign Unicode mappings
+#   to Marlett, my main concern is preserving "legibility" in a manner of
+#   speaking.
+# The twelve Marlett characters which were added to Webdings in the same
+#   locations retain their Webdings mappings, at any rate.
 graphdata.gsets["marlett"] = (94, 1, (
             None,       None,       None,       None,       None,       None,       None,
 None,       None,       None,       None,       None,       None,       None,       None,
