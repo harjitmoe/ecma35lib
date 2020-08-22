@@ -217,6 +217,9 @@ are used for custom purposes.&ensp;Specifically:
 
 |Private assignment|Meaning|
 |---|---|
+|`ESC [ 9 9 7 0 0 0 * p`|Switch to the VPS encoding.|
+|`ESC [ 9 9 7 0 0 1 * p`|Switch to the TCVN (ABC, .VN, VSCII; not VISCII) encoding.|
+|`ESC [ 9 9 7 0 0 2 * p`|Switch to the VISCII (not VSCII) encoding.|
 |`ESC [ 9 9 8 0 0 0 * p`|Switch to the Zapf Dingbats encoding.|
 |`ESC [ 9 9 9 0 0 0 * p`|Switch to the Webdings encoding.|
 |`ESC [ 9 9 9 0 0 1 * p`|Switch to the Wingdings encoding.|

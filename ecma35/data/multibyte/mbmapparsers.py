@@ -381,8 +381,7 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
                     assert _temp[pointer] is None, (men, ku, ten, pointer, _temp[pointer], iucs)
                 _temp[pointer] = iucs
             else:
-                while len(_temp) < pointer:
-                    _temp.append(None)
+                _temp.extend([None] * (pointer - len(_temp)))
                 _temp.append(iucs)
     # Try to end it on a natural plane boundary.
     _temp.extend([None] * (((SZ * SZ) - (len(_temp) % (SZ * SZ))) % (SZ * SZ)))

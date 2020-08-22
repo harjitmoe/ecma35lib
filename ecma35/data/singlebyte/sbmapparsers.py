@@ -6,7 +6,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import os, binascii
+import os, binascii, ast, re
 
 directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "sbmaps")
 _temp = []
@@ -22,6 +22,7 @@ def read_single_byte(fil, *, mapper=identitymap, typ="plainext"):
             continue # is ICU metadata or state machine config which isn't relevant to us.
         elif _i.strip() in ("CHARMAP", "END CHARMAP"):
             continue # ICU delimitors we don't care about.
+        # TODO fix repeated code here.
         elif _i[:2] == "<U":
             # ICU-style format
             ucs, byts, direction = _i.split(" ", 2)
@@ -41,6 +42,10 @@ def read_single_byte(fil, *, mapper=identitymap, typ="plainext"):
             elif typ == "GR96":
                 pointer = int(byts[2:4], 16) - 0xA0
                 if pointer < 0:
+                    continue
+            elif typ == "CL33":
+                pointer = int(byts[2:4], 16)
+                if pointer > 32:
                     continue
             else:
                 raise ValueError("unknown type {!r}".format(typ))
@@ -70,6 +75,10 @@ def read_single_byte(fil, *, mapper=identitymap, typ="plainext"):
                 pointer = int(byts[2:4], 16) - 0xA0
                 if pointer < 0:
                     continue
+            elif typ == "CL33":
+                pointer = int(byts[2:4], 16)
+                if pointer > 32:
+                    continue
             else:
                 raise ValueError("unknown type {!r}".format(typ))
         elif typ != "plainext":
@@ -92,6 +101,10 @@ def read_single_byte(fil, *, mapper=identitymap, typ="plainext"):
                 pointer = int(byts, 16) - 0xA0
                 if pointer < 0:
                     continue
+            elif typ == "CL33":
+                pointer = int(byts[2:4], 16)
+                if pointer > 32:
+                    continue
             else:
                 raise ValueError("unknown type {!r}".format(typ))
         else:
@@ -111,11 +124,88 @@ def read_single_byte(fil, *, mapper=identitymap, typ="plainext"):
             while len(_temp) < pointer:
                 _temp.append(None)
             _temp.append(ucs)
+    if typ == "CL33":
+        _temp.extend([None] * (33 - len(_temp)))
+    elif typ in ("GL94", "GR94"):
+        _temp.extend([None] * (94 - len(_temp)))
+    elif typ == "GR96":
+        _temp.extend([None] * (96 - len(_temp)))
     r = tuple(_temp) # Making a tuple makes a copy, of course.
     del _temp[:]
     return r
 
-
+comments89re = re.compile(r"\s+|\s*/\*(?:[^*]|\*[^/]|\*$)*\*/\s*")
+def read_mozilla_ut_file(fil, *, mapper=identitymap, typ="plainext"):
+    fd = open(os.path.join(directory, fil), "r", encoding="utf-8")
+    dat = fd.read()
+    fd.close()
+    array = [ast.literal_eval(i) for i in "".join(comments89re.split(dat)).strip(",").split(",")]
+    junk = array[0] # item of list
+    formoff = array[1] # format array offset
+    celloff = array[2] # mapping cells offset
+    taboff = array[3] # mapping tables offset
+    formats = []
+    for ptr in range(formoff, celloff):
+        pkd = array[ptr]
+        formats.extend([pkd & 0xF, (pkd >> 4) & 0xF, (pkd >> 8) & 0xF, (pkd >> 12) & 0xF])
+    formats = formats[:(taboff - celloff) // 3]
+    for n, fmt in enumerate(formats):
+        cptr = celloff + (n * 3)
+        if fmt == 0: # Range mapping
+            source_begin, source_end, dest_begin = array[cptr:cptr+3]
+            froms = list(range(source_begin, source_end + 1))
+            tos = list(range(dest_begin, dest_begin + 1 + (source_end - source_begin)))
+        elif fmt == 1: # Table mapping
+            source_begin, source_end, tableidx = array[cptr:cptr+3]
+            froms = list(range(source_begin, source_end + 1))
+            tos = array[taboff + tableidx : taboff + tableidx + 1 + (source_end - source_begin)]
+        elif fmt == 2: # Spot mapping
+            source, dummy_source_end, dest = array[cptr:cptr+3]
+            froms = [source]
+            tos = [dest]
+        elif fmt == 3:
+            raise NotImplementedError
+        else:
+            raise ValueError("unrecognised Moz UT file record type: {!r}".format(fmt))
+        for frm, ucs in zip(froms, tos):
+            if typ == "plainext":
+                optr = frm - 0x80
+                if optr > 127 or optr < 0:
+                    continue
+            elif typ == "GL94":
+                optr = frm - 0x21
+                if optr > 93 or optr < 0:
+                    continue
+            elif typ == "GR94":
+                optr = frm - 0xA1
+                if optr > 93 or optr < 0:
+                    continue
+            elif typ == "GR96":
+                optr = frm - 0xA0
+                if optr > 95 or optr < 0:
+                    continue
+            elif typ == "CL33":
+                optr = frm
+                if optr > 32 or ucs <= 32:
+                    continue
+            else:
+                raise ValueError("unknown type {!r}".format(typ))
+            if len(_temp) > optr:
+                if _temp[optr] is None: # earlier items trump later items (in e.g. vps.ut)
+                    _temp[optr] = (ucs,)
+            else:
+                _temp.extend([None] * (optr - len(_temp)))
+                _temp.append(ucs)
+    if typ == "CL33":
+        _temp.extend([None] * (33 - len(_temp)))
+    elif typ in ("GL94", "GR94"):
+        _temp.extend([None] * (94 - len(_temp)))
+    elif typ == "GR96":
+        _temp.extend([None] * (96 - len(_temp)))
+    r = tuple(_temp) # Making a tuple makes a copy, of course.
+    del _temp[:]
+    return r
+    
 
 
 

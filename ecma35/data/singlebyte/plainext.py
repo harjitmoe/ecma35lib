@@ -52,6 +52,8 @@ graphdata.rhses["903"] = (None,) * 128
 graphdata.defgsets["903"] = ("ir014", "nil", "nil", "nil")
 graphdata.rhses["904"] = (None,) * 128
 graphdata.defgsets["904"] = ("ir006", "nil", "nil", "nil")
+graphdata.rhses["1125"] = parsers.read_single_byte("ICU/ibm-1125_P100-1997.ucm")
+graphdata.rhses["1131"] = parsers.read_single_byte("ICU/ibm-1131_P100-1997.ucm")
 
 # Code pages 874 (ISO-8859-11 exts)
 # Per alias comments in ICU's convrtrs.txt, IBM's 874 is identical to IBM's 9066.
@@ -64,9 +66,18 @@ graphdata.rhses["874"] = tuple(a or b for a, b in zip(graphdata.rhses["1162"],
                                                       graphdata.rhses["9066"]))
 
 # Macintosh pages
-graphdata.rhses["10000"] = parsers.read_single_byte("WHATWG/index-macintosh.txt")
-# 10007 is the original MacCyrillic; current MacCyrillic is a Euro update of 10017.
+graphdata.rhses["10000"] = graphdata.rhses["1275"] = parsers.read_single_byte("WHATWG/index-macintosh.txt")
+graphdata.rhses["10004"] = parsers.read_mozilla_ut_file("Mozilla/macarabic.ut")
+graphdata.rhses["10005"] = parsers.read_mozilla_ut_file("Mozilla/machebrew.ut")
+graphdata.rhses["10006"] = graphdata.rhses["1280"] = parsers.read_mozilla_ut_file("Mozilla/macgreek.ut")
+graphdata.rhses["10081"] = graphdata.rhses["1281"] = parsers.read_mozilla_ut_file("Mozilla/macturki.ut")
+graphdata.rhses["10029"] = graphdata.rhses["1282"] = parsers.read_mozilla_ut_file("Mozilla/macce.ut")
+# 10007 (1283?) is the original MacCyrillic; current MacCyrillic is a Euro update of 10017.
 graphdata.rhses["10017"] = parsers.read_single_byte("WHATWG/index-x-mac-cyrillic.txt")
+graphdata.rhses["10082"] = graphdata.rhses["1284"] = parsers.read_mozilla_ut_file("Mozilla/maccroat.ut")
+graphdata.rhses["10010"] = graphdata.rhses["1285"] = parsers.read_mozilla_ut_file("Mozilla/macro.ut")
+graphdata.rhses["10079"] = graphdata.rhses["1286"] = parsers.read_mozilla_ut_file("Mozilla/macicela.ut")
+#graphdata.rhses["10021"] = parsers.read_mozilla_ut_file("Mozilla/macthai.ut")
 
 # KOI-8 encodings
 graphdata.rhses["878"] = graphdata.rhses["20866"] = parsers.read_single_byte("WHATWG/index-koi8-r.txt")
