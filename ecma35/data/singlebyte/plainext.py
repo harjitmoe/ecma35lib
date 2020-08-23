@@ -85,7 +85,7 @@ graphdata.rhses["10010"] = graphdata.rhses["1285"] = parsers.read_mozilla_ut_fil
 graphdata.rhses["10079"] = graphdata.rhses["1286"] = parsers.read_mozilla_ut_file("Mozilla/macicela.ut")
 #graphdata.rhses["10021"] = parsers.read_mozilla_ut_file("Mozilla/macthai.ut")
 # The replacement graphics for device controls are attested in IBM charts, while all of the below
-#   are attested in Chicago.ttf (not ChicagoFWF.ttf).
+#   are attested in Chicago.ttf (not ChicagoFLF.ttf).
 graphdata.c0graphics["1275"] = graphdata.c0graphics["1280"] = graphdata.c0graphics["1281"] = \
 graphdata.c0graphics["1282"] = graphdata.c0graphics["1283"] = graphdata.c0graphics["1284"] = \
 graphdata.c0graphics["1285"] = graphdata.c0graphics["1286"] = \

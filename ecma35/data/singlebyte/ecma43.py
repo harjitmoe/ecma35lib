@@ -14,37 +14,6 @@ from ecma35.data.singlebyte import sbmapparsers as parsers
 # ISO/IEC 10367 G0 set (i.e. same as ECMA-6:US, current ECMA-6:IRV, US-ASCII)
 graphdata.gsets["ir006"] = (94, 1, tuple(range(0x21, 0x7F)))
 
-# ITU T.51 RHS, ETS 300 706 version
-_t51 =  [  (0x00A1,), (0x00A2,), (0x00A3,), (0x0024,), (0x00A5,), (0x0023,), (0x00A7,), 
-(0x00A4,), (0x2018,), (0x201C,), (0x00AB,), (0x2190,), (0x2191,), (0x2192,), (0x2193,), 
-(0x00B0,), (0x00B1,), (0x00B2,), (0x00B3,), (0x00D7,), (0x00B5,), (0x00B6,), (0x00B7,), 
-(0x00F7,), (0x2019,), (0x201D,), (0x00BB,), (0x00BC,), (0x00BD,), (0x00BE,), (0x00BF,), 
-(0x00A0,), (-0x300,), (-0x301,), (-0x302,), (-0x303,), (-0x304,), (-0x306,), (-0x307,), 
-(-0x308,), (-0x323,), (-0x30A,), (-0x327,), (-0x332,), (-0x30B,), (-0x328,), (-0x30C,), 
-(0x2500,), (0x00B9,), (0x00AE,), (0x00A9,), (0x2122,), (0x266A,), (0x20A0,), (0x2030,),
-(0x03B1,), None,      None,      None,      (0x215B,), (0x215C,), (0x215D,), (0x215E,), 
-(0x03A9,), (0x00C6,), (0x00D0,), (0x00AA,), (0x0126,), None,      (0x0132,), (0x013F,), 
-(0x0141,), (0x00D8,), (0x0152,), (0x00BA,), (0x00DE,), (0x0166,), (0x014A,), (0x0149,), 
-(0x0138,), (0x00E6,), (0x0111,), (0x00F0,), (0x0127,), (0x0131,), (0x0133,), (0x0140,), 
-(0x0142,), (0x00F8,), (0x0153,), (0x00DF,), (0x00FE,), (0x0167,), (0x014B,)]
-graphdata.gsets["ir090-ets-alpha"] = (94, 1, tuple(_t51))
-# I'll be honest, the ETS glyph for so-called U+03B1 in the Latin G2 set does not match
-#   the U+03B1 in the Greek G0 set, so I'm VERY skeptical about whether ETS really treats
-#   them as the same character when their charts font clearly doesn't.
-# U+221D seems like a more appropriate mapping.
-_t51[55] = (0x221D,)
-graphdata.gsets["ir090-ets"] = (94, 1, tuple(_t51))
-
-# ITU T.51 RHS, vanilla old version
-_t51[31] = _t51[40] = _t51[53] = _t51[54] = _t51[55] = None
-graphdata.gsets["ir090"] = (94, 1, tuple(_t51))
-
-# ITU T.101 Data Syntax 2 G2 set
-_ir70 = _t51[:]
-_ir70[31] = (-0x0344,)
-_ir70[40] = (-0x0308,)
-graphdata.gsets["ir070"] = (94, 1, tuple(_ir70))
-
 # ECMA-94:L1 ISO-8859-1 Latin-1 Western European RHS
 graphdata.gsets["ir100"] = (96, 1, tuple(range(0xA0, 0x100)))
 
@@ -62,14 +31,6 @@ graphdata.gsets["ir101"] = (96, 1, (
              0x010D, 0x00E9, 0x0119, 0x00EB, 0x011B, 0x00ED, 0x00EE, 0x010F, 
              0x0111, 0x0144, 0x0148, 0x00F3, 0x00F4, 0x0151, 0x00F6, 0x00F7, 
              0x0159, 0x016F, 0x00FA, 0x0171, 0x00FC, 0x00FD, 0x0163, 0x02D9))
-
-# ITU T.61 RHS
-_t61 = _t51[:] # Make a copy
-_t61[8] = _t61[9] = _t61[11] = _t61[12] = _t61[13] = _t61[14] = \
-_t61[24] = _t61[25] = _t61[47] = _t61[48] = _t61[49] = _t61[50] = \
-_t61[51] = _t61[52] = _t61[59] = _t61[60] = _t61[61] = _t61[62] = None
-_t61[40] = (-0x0308,)
-graphdata.gsets["ir103"] = (94, 1, tuple(_t61))
 
 # ECMA-94:L3 ISO-8859-3 Latin-3 South European RHS
 graphdata.gsets["ir109"] = (96, 1, (
@@ -220,13 +181,6 @@ graphdata.gsets["ir148"] = (96, 1, (
              0x00E8, 0x00E9, 0x00EA, 0x00EB, 0x00EC, 0x00ED, 0x00EE, 0x00EF, 
              0x011F, 0x00F1, 0x00F2, 0x00F3, 0x00F4, 0x00F5, 0x00F6, 0x00F7, 
              0x00F8, 0x00F9, 0x00FA, 0x00FB, 0x00FC, 0x0131, 0x015F, 0x00FF))
-
-# ITU T.51 RHS, new version (with additions to fully support the Latin-1/7 repertoire)
-_t51.insert(0, (0xA0,))
-_t51.append((0xAD,))
-_t51[54] = ((0xAC,))
-_t51[55] = ((0xA6,))
-graphdata.gsets["ir156"] = (96, 1, tuple(_t51))
 
 # ECMA-144 ISO-8859-10 Latin-6 Nordic RHS
 graphdata.gsets["ir157"] = (96, 1, (
@@ -401,93 +355,6 @@ graphdata.gsets["ir227"] = (96, 1, (
              0x03B8, 0x03B9, 0x03BA, 0x03BB, 0x03BC, 0x03BD, 0x03BE, 0x03BF, 
              0x03C0, 0x03C1, 0x03C2, 0x03C3, 0x03C4, 0x03C5, 0x03C6, 0x03C7, 
              0x03C8, 0x03C9, 0x03CA, 0x03CB, 0x03CC, 0x03CD, 0x03CE, None))
-
-# ANSEL (ANSI/NISO Z39.47), vanilla (without an eszett)
-graphdata.gsets["ir231"] = (94, 1, (
-                         (0x0141,),  (0x00D8,),  (0x0110,), 
-             (0x00DE,),  (0x00C6,),  (0x0152,),  (0x02B9,),
-             (0x00B7,),  (0x266D,),  (0x00AE,),  (0x00B1,), 
-             (0x01A0,),  (0x01AF,),  (0x02BC,),  None, 
-             (0x02BB,),  (0x0142,),  (0x00F8,),  (0x0111,), 
-             (0x00FE,),  (0x00E6,),  (0x0153,),  (0x02BA,), 
-             (0x0131,),  (0x00A3,),  (0x00F0,),  None,      
-             (0x01A1,),  (0x01B0,),  None,       None, 
-             (0x00B0,),  (0x2113,),  (0x2117,),  (0x00A9,), 
-             (0x266F,),  (0x00BF,),  (0x00A1,),  None,
-             None,       None,       None,       None, 
-             None,       None,       None,       None,  
-             None,       None,       None,       None,      
-             None,       None,       None,       None, 
-             None,       None,       None,       None,      
-             None,       None,       None,       None, 
-             (-0x0309,), (-0x0300,), (-0x0301,), (-0x0302,), 
-             (-0x0303,), (-0x0304,), (-0x0306,), (-0x0307,), 
-             (-0x0308,), (-0x030C,), (-0x030A,), (-0xFE20,), 
-             (-0xFE21,), (-0x0315,), (-0x030B,), (-0x0310,), 
-             (-0x0327,), (-0x0328,), (-0x0323,), (-0x0324,), 
-             (-0x0325,), (-0x0333,), (-0x0332,), (-0x0326,), 
-             (-0x031C,), (-0x032E,), (-0xFE22,), (-0xFE23,), 
-             None,       None,       (-0x0313,) ))
-
-# ANSEL (ANSI/NISO Z39.47), with Library of Congress additions.
-# LoC still use the same escape sequence as assigned for the standard one though.
-graphdata.gsets["ir231-marc"] = (94, 1, (
-                         (0x0141,),  (0x00D8,),  (0x0110,), 
-             (0x00DE,),  (0x00C6,),  (0x0152,),  (0x02B9,),
-             (0x00B7,),  (0x266D,),  (0x00AE,),  (0x00B1,), 
-             (0x01A0,),  (0x01AF,),  (0x02BC,),  None, 
-             (0x02BB,),  (0x0142,),  (0x00F8,),  (0x0111,), 
-             (0x00FE,),  (0x00E6,),  (0x0153,),  (0x02BA,), 
-             (0x0131,),  (0x00A3,),  (0x00F0,),  None,      
-             (0x01A1,),  (0x01B0,),  None,       None, 
-             (0x00B0,),  (0x2113,),  (0x2117,),  (0x00A9,), 
-             (0x266F,),  (0x00BF,),  (0x00A1,),  (0x00DF,), 
-             (0x20AC,),  None,       None,       None, 
-             None,       None,       None,       None,  
-             None,       None,       None,       None,      
-             None,       None,       None,       None, 
-             None,       None,       None,       None,      
-             None,       None,       None,       None, 
-             (-0x0309,), (-0x0300,), (-0x0301,), (-0x0302,), 
-             (-0x0303,), (-0x0304,), (-0x0306,), (-0x0307,), 
-             (-0x0308,), (-0x030C,), (-0x030A,), (-0xFE20,), 
-             (-0xFE21,), (-0x0315,), (-0x030B,), (-0x0310,), 
-             (-0x0327,), (-0x0328,), (-0x0323,), (-0x0324,), 
-             (-0x0325,), (-0x0333,), (-0x0332,), (-0x0326,), 
-             (-0x031C,), (-0x032E,), (-0xFE22,), (-0xFE23,), 
-             None,       None,       (-0x0313,) ))
-
-# ANSEL (ANSI/NISO Z39.47), with Library of Congress and Genealogical Society of Utah additions.
-# The extensions do not collide and mostly co-exist, besides both adding the eszett (a conspicuous
-#   omission from the original ANSEL if I ever saw one). GSU's midline letters are not only mapped
-#   to their ASCII equivalents on Wikipedia, but also by GSU's now-discontinued PAF (arguably the
-#   only source of true wisdom in this respect). No idea what they were originally for. Mapping
-#   straight to their ASCII equivalents seems foolish here though, hence the zenkaku mappings.
-graphdata.gsets["ir231-full"] = (94, 1, (
-                         (0x0141,),  (0x00D8,),  (0x0110,), 
-             (0x00DE,),  (0x00C6,),  (0x0152,),  (0x02B9,),
-             (0x00B7,),  (0x266D,),  (0x00AE,),  (0x00B1,), 
-             (0x01A0,),  (0x01AF,),  (0x02BC,),  None, 
-             (0x02BB,),  (0x0142,),  (0x00F8,),  (0x0111,), 
-             (0x00FE,),  (0x00E6,),  (0x0153,),  (0x02BA,), 
-             (0x0131,),  (0x00A3,),  (0x00F0,),  None,      
-             (0x01A1,),  (0x01B0,),  (0x25A1,),  (0x25A0,), 
-             (0x00B0,),  (0x2113,),  (0x2117,),  (0x00A9,), 
-             (0x266F,),  (0x00BF,),  (0x00A1,),  (0x00DF,), 
-             (0x20AC,),  None,       None,       None, 
-             None,       (0xFF45,),  (0xFF4F,),  (0x00DF,), 
-             None,       None,       None,       None,      
-             None,       None,       None,       None, 
-             None,       None,       None,       None,      
-             None,       None,       None,       None, 
-             (-0x0309,), (-0x0300,), (-0x0301,), (-0x0302,), 
-             (-0x0303,), (-0x0304,), (-0x0306,), (-0x0307,), 
-             (-0x0308,), (-0x030C,), (-0x030A,), (-0xFE20,), 
-             (-0xFE21,), (-0x0315,), (-0x030B,), (-0x0310,), 
-             (-0x0327,), (-0x0328,), (-0x0323,), (-0x0324,), 
-             (-0x0325,), (-0x0333,), (-0x0332,), (-0x0326,), 
-             (-0x031C,), (-0x032E,), (-0xFE22,), (-0xFE23,), 
-             (-0x0338,), None,       (-0x0313,) ))
 
 # SI-1311:2002 Latin/Hebrew RHS
 graphdata.gsets["ir234"] = (96, 1, (
