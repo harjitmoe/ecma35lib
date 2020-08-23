@@ -14,7 +14,7 @@ graphdata.c0graphics["897"] = (None, 0x2554, 0x2557, 0x255A, 0x255D, 0x2551, 0x2
 graphdata.c0graphics["903"] = graphdata.c0graphics["897"]
 graphdata.c0graphics["904"] = graphdata.c0graphics["897"]
 
-# Windows-125x pages
+# Windows-125x pages, excluding Windows-1258 which is with the rest of the quo^'c ngu*~ encodings
 graphdata.rhses["1250"] = parsers.read_single_byte("WHATWG/index-windows-1250.txt")
 graphdata.rhses["1251"] = parsers.read_single_byte("WHATWG/index-windows-1251.txt")
 graphdata.rhses["1252"] = parsers.read_single_byte("WHATWG/index-windows-1252.txt") # ISO-8859-1 ext.
@@ -25,12 +25,11 @@ graphdata.defgsets["1254"] = ("ir006", "ir148", "nil", "nil")
 graphdata.rhses["1255"] = parsers.read_single_byte("WHATWG/index-windows-1255.txt")
 graphdata.rhses["1256"] = parsers.read_single_byte("WHATWG/index-windows-1256.txt")
 graphdata.rhses["1257"] = parsers.read_single_byte("WHATWG/index-windows-1257.txt")
-graphdata.rhses["1258"] = parsers.read_single_byte("WHATWG/index-windows-1258.txt")
 
 # OEM pages (TODO: 210 Greek and 220 Spanish are both listed by DEC in the very definition of the
-#   DECSPPCS CSI control. I do not have a source for their layout.)
+#   DECSPPCS CSI control, alongside some of the below. I do not have a source for their layout.)
 graphdata.rhses["437"] = parsers.read_single_byte("ICU/ibm-437_P100-1995.ucm")
-graphdata.defgsets["437"] = ("ir006", "nil", "nil", "nil")
+graphdata.defgsets["437"] = ("ir006", "nil", "nil", "nil") # Note: gets used as default.
 graphdata.rhses["720"] = parsers.read_single_byte("ICU/ibm-720_P100-1997.ucm")
 graphdata.rhses["737"] = parsers.read_single_byte("ICU/ibm-737_P100-1997.ucm")
 graphdata.rhses["775"] = parsers.read_single_byte("ICU/ibm-775_P100-1996.ucm")
@@ -56,13 +55,13 @@ graphdata.defgsets["904"] = ("ir006", "nil", "nil", "nil")
 graphdata.rhses["1125"] = parsers.read_single_byte("ICU/ibm-1125_P100-1997.ucm")
 graphdata.rhses["1131"] = parsers.read_single_byte("ICU/ibm-1131_P100-1997.ucm")
 
-# Code pages 874 (ISO-8859-11 exts)
+# Code pages 874 (TIS-620 exts)
 # Per alias comments in ICU's convrtrs.txt, IBM's 874 is identical to IBM's 9066.
 # Microsoft's 874, on the other hand, matches the layout of IBM's 1162.
 graphdata.rhses["1162"] = parsers.read_single_byte("WHATWG/index-windows-874.txt")
 graphdata.rhses["9066"] = parsers.read_single_byte("ICU/ibm-874_P100-1995.ucm")
-# The two only collide at 0xA0, which IBM uses for an alternate U+0E48 and which
-#   Microsoft uses for an NBSP. Favour the more-deployed Microsoft for "874".
+# The two only collide at 0xA0, which IBM uses for an alternate U+0E48 and which Microsoft
+#   uses for an NBSP. Favour the more-deployed Microsoft / ISO-8859-11 NBSP for "874".
 graphdata.rhses["874"] = tuple(a or b for a, b in zip(graphdata.rhses["1162"],
                                                       graphdata.rhses["9066"]))
 
@@ -85,6 +84,19 @@ graphdata.rhses["10082"] = graphdata.rhses["1284"] = parsers.read_mozilla_ut_fil
 graphdata.rhses["10010"] = graphdata.rhses["1285"] = parsers.read_mozilla_ut_file("Mozilla/macro.ut")
 graphdata.rhses["10079"] = graphdata.rhses["1286"] = parsers.read_mozilla_ut_file("Mozilla/macicela.ut")
 #graphdata.rhses["10021"] = parsers.read_mozilla_ut_file("Mozilla/macthai.ut")
+# The replacement graphics for device controls are attested in IBM charts, while all of the below
+#   are attested in Chicago.ttf (not ChicagoFWF.ttf).
+graphdata.c0graphics["1275"] = graphdata.c0graphics["1280"] = graphdata.c0graphics["1281"] = \
+graphdata.c0graphics["1282"] = graphdata.c0graphics["1283"] = graphdata.c0graphics["1284"] = \
+graphdata.c0graphics["1285"] = graphdata.c0graphics["1286"] = \
+graphdata.c0graphics["10000"] = graphdata.c0graphics["10004"] = graphdata.c0graphics["10005"] = \
+graphdata.c0graphics["10006"] = graphdata.c0graphics["10081"] = graphdata.c0graphics["10029"] = \
+graphdata.c0graphics["10017"] = graphdata.c0graphics["10007"] = graphdata.c0graphics["10082"] = \
+graphdata.c0graphics["10010"] = graphdata.c0graphics["10079"] = \
+  (None,             (0x2325,), (0x2303,), (0x2324,), (0x21E7,), (0x21EA,), (0x238B,), (0x2423,),
+   (0x232B,),        None,      (0x2B72,), (0x2B92,), (0x2398,), None,      (0x2B90,), (0x237D,),
+   (0xF8FF, 0xF87A), (0x2318,), (0x2713,), (0x2666,), (0xF8FF,), (0x2326,), (0x2B70,), (0x2B91,),
+   (0x2B93,)) + ((None,) * 8)
 
 # KOI-8 encodings
 graphdata.rhses["878"] = graphdata.rhses["20866"] = parsers.read_single_byte("WHATWG/index-koi8-r.txt")

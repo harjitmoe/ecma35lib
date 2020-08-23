@@ -116,6 +116,8 @@ Miscellaneous single-byte assignments:
 |``IRR 1 G*D4 ` ``|Danish equivalent to NS 4551 (IBM's 1017)|
 |`G*D6 ! 0`|RFC 1345's so-called ISO-IR-111/ECMA-Cyrillic (incompatible with ISO-IR-111 itself).|
 
+.. Pending is Symbol Font.
+
 ## Additional multiple-byte G-sets
 
 |Private assignment|Meaning|
@@ -226,6 +228,8 @@ are used for custom purposes.&ensp;Specifically:
 |`ESC [ 9 9 9 0 0 2 * p`|Switch to the Wingdings 2 encoding.|
 |`ESC [ 9 9 9 0 0 3 * p`|Switch to the Wingdings 3 encoding.|
 
+.. Pending are VNI-Mac, VNI-DOS, SP-Tiberian (modified Michigan-Claremont), Bee Fonts
+
 G-sets can still be used on the left-hand side of the code page (the mode is mostly business as
 usual as far as ECMA-35's 7-bit mechanisms are concerned, the only difference is the extra 128
 graphical codes which are not governed by ECMA-35, since it does not use ECMA-35's 8-bit
@@ -262,6 +266,11 @@ following sequences can be used to change this:
 - Support for general extended ASCII (i.e. only the LHS follows ECMA-35) as a DOCS set.
 - Support for Big5 as a DOCS set, including both incompatible maps of the Kana/Cyrillic.
 - Support for GCC CSI sequences
+- Proper handling of the T.51 / T.61 and ANSEL combining sequences. Not sticking to any hardcoded
+  repertoire though, since (a) we're not trying to implement ISO/IEC 6937, but rather T.51
+  (which confines the entire ISO 6937 repertoire definition (rather than just one of the charts
+  as in ISO/IEC 6937) to an annex which isn't referenced from the main text), and (b) we're 
+  mapping to ISO/IEC 10646, not to ISO/IEC 10367 or 8859, so combining marks aren't a problem.
 
 # Still to do
 
@@ -270,11 +279,6 @@ following sequences can be used to change this:
 - Support for JOHAB as a DOCS set.
 - Support for LMBCS as a DOCS set.
 - Dynamically allocating sets, IRR codes, DOCS codes (e.g. Shift_JIS) in some configurable way.
-- Proper handling of the T.51 / T.61 and ANSEL combining sequences. Probably don't need to stick to
-  any hardcoded repertoire though, since (a) we're not trying to implement ISO/IEC 6937, but rather
-  T.51 (which confines the entire ISO 6937 repertoire definition (rather than just one of the 
-  charts as in ISO/IEC 6937) to an annex which isn't referenced from the main text), and (b) we're 
-  mapping to ISO/IEC 10646, not to ISO/IEC 10367 or 8859, so combining marks aren't a problem.
 - Functionality of CSI, CEX, C1 _et cetera_ controls.
   - Rich or annotated output of some sort.
 - Backspace composition sequences.

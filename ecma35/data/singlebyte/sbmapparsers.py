@@ -14,6 +14,7 @@ identitymap = lambda pointer, ucs: ucs
 
 def read_single_byte(fil, *, mapper=identitymap, typ="plainext"):
     for _i in open(os.path.join(directory, fil), "r", encoding="utf-8"):
+        pointer = None
         if not _i.strip():
             continue
         elif _i[0] == "#":
@@ -27,28 +28,7 @@ def read_single_byte(fil, *, mapper=identitymap, typ="plainext"):
             # ICU-style format
             ucs, byts, direction = _i.split(" ", 2)
             assert byts[:2] == "\\x" and len(byts) == 4
-            if typ == "plainext":
-                pointer = int(byts[2:4], 16) - 0x80
-                if pointer < 0:
-                    continue
-            elif typ == "GL94":
-                pointer = int(byts[2:4], 16) - 0x21
-                if (pointer < 0) or (pointer > 93):
-                    continue
-            elif typ == "GR94":
-                pointer = int(byts[2:4], 16) - 0xA1
-                if (pointer < 0) or (pointer > 93):
-                    continue
-            elif typ == "GR96":
-                pointer = int(byts[2:4], 16) - 0xA0
-                if pointer < 0:
-                    continue
-            elif typ == "CL33":
-                pointer = int(byts[2:4], 16)
-                if pointer > 32:
-                    continue
-            else:
-                raise ValueError("unknown type {!r}".format(typ))
+            byts = byts[2:4]
             if direction.strip() == "|1":
                 # i.e. best-fit mapped by the encoder only
                 # Whereas, |3 means it's used only by the decoder (usually because duplicate)
@@ -56,35 +36,18 @@ def read_single_byte(fil, *, mapper=identitymap, typ="plainext"):
         elif _i[:2] == "0x":
             # Consortium-style format
             byts, ucs = _i.split("\t", 2)[:2]
-            if byts[:2] != "0x":
-                byts = "0x" + byts
             assert len(byts) == 4, byts
-            if typ == "plainext":
-                pointer = int(byts[2:4], 16) - 0x80
-                if pointer < 0:
-                    continue
-            elif typ == "GL94":
-                pointer = int(byts[2:4], 16) - 0x21
-                if (pointer < 0) or (pointer > 93):
-                    continue
-            elif typ == "GR94":
-                pointer = int(byts[2:4], 16) - 0xA1
-                if (pointer < 0) or (pointer > 93):
-                    continue
-            elif typ == "GR96":
-                pointer = int(byts[2:4], 16) - 0xA0
-                if pointer < 0:
-                    continue
-            elif typ == "CL33":
-                pointer = int(byts[2:4], 16)
-                if pointer > 32:
-                    continue
-            else:
-                raise ValueError("unknown type {!r}".format(typ))
+            byts = byts[2:4]
         elif typ != "plainext":
             # Adobe-via-UTC-style format
             ucs, byts = _i.split("\t", 2)[:2]
             assert len(byts) == 2, byts
+        else:
+            # Format of the WHATWG-supplied indices
+            byts, ucs = _i.split("\t", 2)[:2]
+            pointer = int(byts.strip(), 10)
+        #
+        if pointer is None:
             if typ == "plainext":
                 pointer = int(byts, 16) - 0x80
                 if pointer < 0:
@@ -102,15 +65,11 @@ def read_single_byte(fil, *, mapper=identitymap, typ="plainext"):
                 if pointer < 0:
                     continue
             elif typ == "CL33":
-                pointer = int(byts[2:4], 16)
+                pointer = int(byts, 16)
                 if pointer > 32:
                     continue
             else:
                 raise ValueError("unknown type {!r}".format(typ))
-        else:
-            # Format of the WHATWG-supplied indices
-            byts, ucs = _i.split("\t", 2)[:2]
-            pointer = int(byts.strip(), 10)
         #
         if ucs[:2] in ("0x", "U+", "<U"):
             ucs = mapper(pointer, tuple(int(j, 16) for j in ucs[2:].rstrip(">").split("+")))
@@ -163,10 +122,10 @@ def read_mozilla_ut_file(fil, *, mapper=identitymap, typ="plainext"):
             source, dummy_source_end, dest = array[cptr:cptr+3]
             froms = [source]
             tos = [dest]
-        elif fmt == 3:
+        elif fmt == 3: # No idea; I've encountered no examples though they supposedly exist.
             raise NotImplementedError
         else:
-            raise ValueError("unrecognised Moz UT file record type: {!r}".format(fmt))
+            raise ValueError("unrecognised Mozilla .ut file item type: {!r}".format(fmt))
         for frm, ucs in zip(froms, tos):
             if typ == "plainext":
                 optr = frm - 0x80

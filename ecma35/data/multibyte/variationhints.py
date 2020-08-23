@@ -235,6 +235,38 @@ applesinglehints = {
     (0xF844,): (0x2B9C,), # Leftward arrowhead
     (0xF84C,): (0x2B20,), # White pentagon
     (0xF84D,): (0x23E2,), # Trapezoid
+    #
+    # Adobe PUA assignments. Apple originally inherited these, though it mostly switched to hints.
+    # Hence, it is appropriate to treat these in the same PUA processor.
+    # Mapping to the hints alternatives or to standard, as appropriate:
+    (0xF8E6,): (0x23D0,), # Vertical arrow extender
+    (0xF8E7,): (0x23AF,), # Horizontal arrow extender
+    (0xF6DA,): (0x00AE,), # Registered Trademark, Roman
+    (0xF6D9,): (0x00A9,), # Copyright, Roman
+    (0xF6DB,): (0x2212,), # Trademark, Roman
+    (0xF8E8,): (0x00AE, 0xF87F), # Registered Trademark, Gothic
+    (0xF8E9,): (0x00A9, 0xF87F), # Copyright, Gothic
+    (0xF8EA,): (0x2212, 0xF87F), # Trademark, Gothic
+    (0xF8EB,): (0x239B,), # (1
+    (0xF8EC,): (0x239C,), # (2
+    (0xF8ED,): (0x239D,), # (3
+    (0xF8EE,): (0x23A1,), # [1
+    (0xF8EF,): (0x23A2,), # [2
+    (0xF8F0,): (0x23A3,), # [3
+    (0xF8F1,): (0x23A7,), # {1
+    (0xF8F2,): (0x23A8,), # {2
+    (0xF8F3,): (0x23A9,), # {3
+    (0xF8F4,): (0x23AA,), # Brace extender
+    (0xF8F5,): (0x23AE,), # Integral extender
+    (0xF8F6,): (0x239E,), # )1
+    (0xF8F7,): (0x239F,), # )2
+    (0xF8F8,): (0x23A0,), # )3
+    (0xF8F9,): (0x23A4,), # ]1
+    (0xF8FA,): (0x23A5,), # ]2
+    (0xF8FB,): (0x23A6,), # ]3
+    (0xF8FC,): (0x23AB,), # }1
+    (0xF8FD,): (0x23AC,), # }2
+    (0xF8FE,): (0x23AD,), # }3
 }
 # Not sure where to put this observation, but MacKorean's U+25B4+20E4 is basically DPRK's mountain ahead.
 #

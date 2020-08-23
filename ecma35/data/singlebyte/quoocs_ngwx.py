@@ -6,10 +6,13 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-# Vietnamese Roman encodings (Quo^'c ngu*~), besides Windows-1258 which is in plainext.py
+# Vietnamese Roman (quo^'c ngu*~) encodings
 
 from ecma35.data import graphdata
 from ecma35.data.singlebyte import sbmapparsers as parsers
+
+# Windows-1258
+graphdata.rhses["1258"] = parsers.read_single_byte("WHATWG/index-windows-1258.txt")
 
 # VPS
 graphdata.rhses["997000"] = parsers.read_mozilla_ut_file("Mozilla/vps.ut")
