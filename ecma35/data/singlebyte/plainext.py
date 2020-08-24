@@ -64,6 +64,7 @@ graphdata.rhses["9066"] = parsers.read_single_byte("ICU/ibm-874_P100-1995.ucm")
 #   uses for an NBSP. Favour the more-deployed Microsoft / ISO-8859-11 NBSP for "874".
 graphdata.rhses["874"] = tuple(a or b for a, b in zip(graphdata.rhses["1162"],
                                                       graphdata.rhses["9066"]))
+graphdata.defgsets["874"] = graphdata.defgsets["1162"] = ("ir006", "ir166", "nil", "nil")
 
 # Macintosh pages
 graphdata.rhses["10000"] = graphdata.rhses["1275"] = parsers.read_single_byte("WHATWG/index-macintosh.txt")
@@ -84,11 +85,17 @@ graphdata.rhses["10082"] = graphdata.rhses["1284"] = parsers.read_mozilla_ut_fil
 graphdata.rhses["10010"] = graphdata.rhses["1285"] = parsers.read_mozilla_ut_file("Mozilla/macro.ut")
 graphdata.rhses["10079"] = graphdata.rhses["1286"] = parsers.read_mozilla_ut_file("Mozilla/macicela.ut")
 #graphdata.rhses["10021"] = parsers.read_mozilla_ut_file("Mozilla/macthai.ut")
-# The replacement graphics for device controls are attested in IBM charts, while all of the below
-#   are attested in Chicago.ttf (not ChicagoFLF.ttf).
+# The common C0 replacements are the device controls. Others seem to vary with version.
+# Version attested in Chicago bitmaps from Mac OS 8.0. Note that the assignment of the escape
+#   key symbol to the escape character will not be accessible in ecma35lib as it currently works.
 graphdata.c0graphics["1275"] = graphdata.c0graphics["1280"] = graphdata.c0graphics["1281"] = \
 graphdata.c0graphics["1282"] = graphdata.c0graphics["1283"] = graphdata.c0graphics["1284"] = \
 graphdata.c0graphics["1285"] = graphdata.c0graphics["1286"] = \
+  (None,      None,      (0x2B72,), (0x2B70,), (0x2324,), (0x21E7,), (0x2303,), (0x2325,),
+   None,      None,      (0x2326,), (0x2B90,), (0x2B91,), None,      None,      None,
+   (0x2B6D,), (0x2318,), (0x2713,), (0x2666,), (0xF8FF,), None,      None,      (0x232B,),
+   (0x2B6A,), (0x2B6B,), (0x2B6C,), (0x238B,), (0x2327,),) + ((None,) * 4)
+# Version attested in Chicago.ttf (not ChicagoFLF.ttf). Though U+2398 is an approximate mapping.
 graphdata.c0graphics["10000"] = graphdata.c0graphics["10004"] = graphdata.c0graphics["10005"] = \
 graphdata.c0graphics["10006"] = graphdata.c0graphics["10081"] = graphdata.c0graphics["10029"] = \
 graphdata.c0graphics["10017"] = graphdata.c0graphics["10007"] = graphdata.c0graphics["10082"] = \
