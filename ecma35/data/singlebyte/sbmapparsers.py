@@ -7,6 +7,7 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import os, binascii, ast, re
+import unicodedata as ucd
 
 directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "sbmaps")
 _temp = []
@@ -77,7 +78,10 @@ def read_single_byte(fil, *, mapper=identitymap, typ="plainext"):
             ucs = mapper(pointer, (int(ucs, 16),))
         #
         if len(_temp) > pointer:
-            assert _temp[pointer] is None
+            if _temp[pointer]:
+                # Favour the earlier listed mapping unless it has a compatibility decomposition
+                if chr(_temp[pointer][0]) == ucd.normalize("NFKC", chr(_temp[pointer][0])):
+                    continue
             _temp[pointer] = ucs
         else:
             while len(_temp) < pointer:

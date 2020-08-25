@@ -163,6 +163,8 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"$3"): "marlett",
             tuple(b"$4"): "zdings_g0",
             tuple(b"$5"): "zdings_g1",
+            tuple(b"$6"): "symbolgl",
+            tuple(b"$7"): "symbolgr",
             tuple(b"~"): "nil"}
 
 g96bytes = {tuple(b"@"): "ir111",
@@ -208,6 +210,7 @@ g96bytes = {tuple(b"@"): "ir111",
             tuple(b"i"): "ir227",
             tuple(b"j"): "ir234",
             tuple(b"!0"): "ir111rfc1345", # Not even a private IRR: no practical compatibility.
+            tuple(b"$7"): ("symbolgr-euro", ("symbolgr-numsp",), ("symbolgr-euro",)),
             tuple(b"~"): "nil"}
 
 g94nbytes = {tuple(b"@"): ("ir042nec", ("ir042ibm", "ir042nec"), ("ir042",)),

@@ -243,10 +243,10 @@ applesinglehints = {
     (0xF8E7,): (0x23AF,), # Horizontal arrow extender
     (0xF6DA,): (0x00AE,), # Registered Trademark, Roman
     (0xF6D9,): (0x00A9,), # Copyright, Roman
-    (0xF6DB,): (0x2212,), # Trademark, Roman
+    (0xF6DB,): (0x2122,), # Trademark, Roman
     (0xF8E8,): (0x00AE, 0xF87F), # Registered Trademark, Gothic
     (0xF8E9,): (0x00A9, 0xF87F), # Copyright, Gothic
-    (0xF8EA,): (0x2212, 0xF87F), # Trademark, Gothic
+    (0xF8EA,): (0x2122, 0xF87F), # Trademark, Gothic
     (0xF8EB,): (0x239B,), # (1
     (0xF8EC,): (0x239C,), # (2
     (0xF8ED,): (0x239D,), # (3
