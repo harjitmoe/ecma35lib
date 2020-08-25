@@ -55,13 +55,9 @@ codepoint_coverages = CoveragesOnDemand()
 # Also, the individual characters may be:
 #  - None, meaning reserved encoding space.
 #  - An integer, giving an equivalent UCS codepoint.
-#  - A tuple of:
-#     - Positive integers, giving an equivalent UCS codepoint sequence.
-#     - The number -1 and one or more positive integers, giving one or more combining diacritics
-#       to be combined with the next (not previous) spacing character (e.g. those from ANSEL or
-#       from T.51), and would thus need to be moved after it in a Unicode representation.
-# The individual codepoints are put in individual CHAR tokens verbatim without re-ordering, and
-# may be processed further by downstream filters.
+#  - A tuple of integers, giving an equivalent UCS codepoint sequence.
+# Negative integers may also be used, denoting a combining character which requires translocation
+#   to after the next base character.
 gsets = {"nil": (94, 1, (None,)*94), "Unknown": (94, 1, (None,)*94)}
 gsetflags = collections.defaultdict(set)
 
