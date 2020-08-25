@@ -71,7 +71,7 @@ defgsets = {}
 
 # Note: has to be imported after gsets &co are defined
 from ecma35.data.multibyte import korea, japan, guobiao, traditional
-from ecma35.data.singlebyte import ecma6, ecma43, plainext, dingbats, quoocs_ngwx, marc, ccitt
+from ecma35.data.singlebyte import ecma6, extlatin, c0substs, dingbats, quoocs_ngwx, marc, ccitt, cyrillic, semitic, greek, indic, otherscript
 
 g94bytes = {tuple(b"@"): ("ir002", # Preferred version
                           ("ir002tilde",), # Private versions
