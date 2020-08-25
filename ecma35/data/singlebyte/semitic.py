@@ -11,6 +11,8 @@ import unicodedata as ucd
 from ecma35.data import graphdata
 from ecma35.data.singlebyte import sbmapparsers as parsers
 
+# TODO: ir059 (CODAR-U Arabic), ir089 (ASMO 449)
+
 # ASMO-708 ECMA-114 ISO-8859-6 Latin/Arabic RHS
 graphdata.gsets["ir127"] = (96, 1, (
              0x00A0, None,   None,   None,   0x00A4, None,   None,   None, 
@@ -56,6 +58,8 @@ graphdata.gsets["ir164"] = (96, 1, (
              0x05D8, 0x05D9, 0x05DA, 0x05DB, 0x05DC, 0x05DD, 0x05DE, 0x05DF, 
              0x05E0, 0x05E1, 0x05E2, 0x05E3, 0x05E4, 0x05E5, 0x05E6, 0x05E7, 
              0x05E8, 0x05E9, 0x05EA, None,   None,   None,   None,   None))
+
+# TODO: ir167 (ASMO-708 letters plus French and German extensions)
 
 # ECMA-121:2000 ISO-8859-8:1999 Latin/Hebrew RHS
 graphdata.gsets["ir198"] = (96, 1, (

@@ -643,15 +643,17 @@ def dump_preview(outfile, planename, kutenfunc, number, array, *, lang="zh-TW", 
     if menuurl or lasturl or nexturl:
         _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname)
 
-def stat():
+def stat(verbose=False):
     for name, i in graphdata.sumps.items():
         print("Sump", name)
         tot = atot = btot = 0
+        miss = []
         for esc, k in i.items():
             if isinstance(k, tuple):
                 k = k[0]
             if k not in graphdata.gsets:
                 tot += 1
+                miss.append(k)
             elif esc[-1] < 0x40:
                 btot += 1
             elif esc[-1] == 0x7E:
@@ -659,6 +661,8 @@ def stat():
             else:
                 atot += 1
         print("Missing:", tot)
+        if verbose:
+            print(miss)
         print("Present:", atot)
         print("Total standard:", tot + atot)
         print("Custom (private use):", btot)
@@ -666,7 +670,8 @@ def stat():
         print()
 
 if __name__ == "__main__":
-    stat()
+    import sys
+    stat("-v" in sys.argv[1:])
 
 
 

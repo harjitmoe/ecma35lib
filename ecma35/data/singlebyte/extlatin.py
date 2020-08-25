@@ -14,6 +14,9 @@ from ecma35.data.singlebyte import sbmapparsers as parsers
 # ISO/IEC 10367 G0 set (i.e. same as ECMA-6:US, current ECMA-6:IRV, US-ASCII)
 graphdata.gsets["ir006"] = (94, 1, tuple(range(0x21, 0x7F)))
 
+# TODO: ir008-2/ir009-2 (NATS supplement), ir038 (German Bibliographic), ir039 (African Latin),
+# ir053 (some derivative or ir038), 
+
 # ECMA-94:L1 ISO-8859-1 Latin-1 Western European RHS
 graphdata.gsets["ir100"] = (96, 1, tuple(range(0xA0, 0x100)))
 
@@ -62,6 +65,8 @@ graphdata.gsets["ir110"] = (96, 1, (
              0x0111, 0x0146, 0x014D, 0x0137, 0x00F4, 0x00F5, 0x00F6, 0x00F7, 
              0x00F8, 0x0173, 0x00FA, 0x00FB, 0x00FC, 0x0169, 0x016B, 0x02D9))
 
+# TODO: ir123 (Canadian extended characters)
+
 # ČSN 369103 (minor Latin-2 mod for RHS use with previous IRV, i.e. swapping ¤ and $)
 graphdata.gsets["ir139"] = (96, 1, (
              0x00A0, 0x0104, 0x02D8, 0x0141, 0x0024, 0x013D, 0x015A, 0x00A7, 
@@ -92,6 +97,8 @@ graphdata.gsets["ir148"] = (96, 1, (
              0x011F, 0x00F1, 0x00F2, 0x00F3, 0x00F4, 0x00F5, 0x00F6, 0x00F7, 
              0x00F8, 0x00F9, 0x00FA, 0x00FB, 0x00FC, 0x0131, 0x015F, 0x00FF))
 
+# TODO: ir154 (ISO 10367 supplementary set)
+
 # ECMA-144 ISO-8859-10 Latin-6 Nordic RHS
 graphdata.gsets["ir157"] = (96, 1, (
              0x00A0, 0x0104, 0x0112, 0x0122, 0x012A, 0x0128, 0x0136, 0x00A7, 
@@ -107,6 +114,8 @@ graphdata.gsets["ir157"] = (96, 1, (
              0x00F0, 0x0146, 0x014D, 0x00F3, 0x00F4, 0x00F5, 0x00F6, 0x0169, 
              0x00F8, 0x0173, 0x00FA, 0x00FB, 0x00FC, 0x00FD, 0x00FE, 0x0138))
 
+# TODO: ir158 (supplement to Latin-6 for Saami; the infamous "High Ogonek" set)
+
 # ISO-8859-13 Latin-7 Baltic Rim RHS
 graphdata.gsets["ir179"] = (96, 1, (
              0x00A0, 0x201D, 0x00A2, 0x00A3, 0x00A4, 0x201E, 0x00A6, 0x00A7, 
@@ -121,6 +130,8 @@ graphdata.gsets["ir179"] = (96, 1, (
              0x010D, 0x00E9, 0x017A, 0x0117, 0x0123, 0x0137, 0x012B, 0x013C, 
              0x0161, 0x0144, 0x0146, 0x00F3, 0x014D, 0x00F5, 0x00F6, 0x00F7, 
              0x0173, 0x0142, 0x015B, 0x016B, 0x00FC, 0x017C, 0x017E, 0x2019))
+
+# TODO: ir182 (Welsh), ir197 (Saami)
 
 # ISO-8859-14 Latin-8 Celtic RHS
 graphdata.gsets["ir199"] = (96, 1, (
@@ -184,6 +195,8 @@ graphdata.gsets["ir206"] = (96, 1, (
              0x010D, 0x00E9, 0x017A, 0x0117, 0x0123, 0x0137, 0x012B, 0x013C, 
              0x0161, 0x0144, 0x0146, 0x00F3, 0x014D, 0x00F5, 0x00F6, 0x00F7, 
              0x0173, 0x0142, 0x015B, 0x016B, 0x00FC, 0x017C, 0x017E, 0x2019))
+
+# TODO: ir209 (Saami and Romani)
 
 # SR-14111 ISO-8859-16 Latin-10 South-Eastern European RHS
 graphdata.gsets["ir226"] = (96, 1, (

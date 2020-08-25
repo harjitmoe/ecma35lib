@@ -11,6 +11,8 @@ import unicodedata as ucd
 from ecma35.data import graphdata
 from ecma35.data.singlebyte import sbmapparsers as parsers
 
+# TODO: ir037 (KOI-7 N1), ir051 (INIS Cyrillic), ir054 (non-Russian letters), 
+
 # ECMA-113:1986 ISO-DIS-8859-5:1987 KOI8-E RHS
 # Following the ISO-IR-111 reg and ECMA-113:1986 (not later, which would be 144):
 graphdata.gsets["ir111"] = (96, 1, (
@@ -55,6 +57,8 @@ graphdata.gsets["ir144"] = (96, 1, (
              0x0448, 0x0449, 0x044A, 0x044B, 0x044C, 0x044D, 0x044E, 0x044F, 
              0x2116, 0x0451, 0x0452, 0x0453, 0x0454, 0x0455, 0x0456, 0x0457, 
              0x0458, 0x0459, 0x045A, 0x045B, 0x045C, 0x00A7, 0x045E, 0x045F))
+
+# TODO: ir153 (Russian subset of ISO-8859-5), ir200 (Uralic Cyrillic), ir201 (Volgaic Cyrillic)
 
 # Other KOI-8 encodings
 graphdata.rhses["878"] = graphdata.rhses["20866"] = parsers.read_single_byte("WHATWG/index-koi8-r.txt")
