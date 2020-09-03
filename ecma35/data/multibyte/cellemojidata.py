@@ -97,7 +97,7 @@ NonKddiAllocation = collections.namedtuple("NonKddiAllocation", ["name", "substi
 
 sauces = {"docomo": {}, "kddi": {}, "softbank": {}}
 forced = {
-    "FE82B": "➿", # Not in the UCD data, but de-facto supported at 27BF, and 27BF used by ICU.
+    "FE82B": "➿", # Not in the UCD data, despite being added at 27BF, and 27BF used by ICU.
     "FEE12": "Ð\uF87F", # DoCoMo's stylised crossed D logo
     "FEE13": "Ð\u20E3\uF87F", # DoCoMo point
     "FEE14": "𝜶\uF87F", # i-Appli's bold italic alpha logo
@@ -106,8 +106,8 @@ forced = {
     "FEE26": "◪", # U+25EA is pretty much an exact match, but not in UCD/ICU deployed mapping.
     "FEE27": "⯀", # Later addition to Unicode from Wingdings 2 190(dec); probably closest one not already taken.
     "FEE28": "▿", # Closer match than the other-vendor substitutes.
-    "FEE32": "💳\u200D🚫",
-    "FEE33": "❎\uF87F", # or \u2612\uF87A; U+274E is U+FEB46 but what exactly is the difference?
+    "FEE32": "💳\u20E0", # See https://twitter.com/Emojipedia/status/1097962057071095809
+    "FEE33": "❎\uFE0E", # Matches text pres, whereas U+274E in emoji pres is U+FEB46. Yes, really.
     "FEE44": "C\uFE0F\u200D✉\uFE0F",
     "FEE47": "🎵\u200D🗨\uFE0F",
     "FEE70": "\uf861[Js",
@@ -274,8 +274,6 @@ for row in sets:
     if not row[1].sjis and not row[2].sjis and not row[3].sjis:
         all_for_this_one = {"UCS.PUA.Google": chr(int(google_spua, 16)),
                             "Name.Google": row[0].googlename,
-                            # Since this is the norm for all the non-JCarrier ones listed, it would
-                            #   not make much sense to balkanaise them all off as .Suggested
                             "UCS.Standard": forced[google_spua],
                             "UCS.Key": forced[google_spua]}
         _all_representations.append(all_for_this_one)
@@ -383,10 +381,14 @@ for row in sets:
                         suboutmap.extend([None] * (pointer - len(suboutmap)))
                     suboutmap.append(tuple(ord(i) for i in unic))
                 #
-                if group.unic or unic == "\u27BF": # See comments on U+27BF above.
+                if not re.compile("([\uf860-\uf87f\u200d])").search(unic):
+                    # i.e. contains no hints and no nonstandard ZWJ sequences
                     all_for_this_one["UCS.Standard"] = unic
-                else:
+                elif not re.compile("([\uf860-\uf87f])").search(unic):
+                    # Nonstandard ZWJ but no hints
                     all_for_this_one["UCS.Suggested"] = unic
+                else:
+                    all_for_this_one["UCS.Substitute"] = unic
                 all_for_this_one["UCS.Key"] = unic
                 #
                 if group.name == "kddi":
@@ -497,14 +499,7 @@ def get_all_representations():
         if "UCS.Key" in _i:
             del _i["UCS.Key"] # Has served its purpose now
         if "UCS.Standard" in _i:
-            if len(_i["UCS.Standard"].rstrip("\uFE0F")) == 1:
-                if ucd.name(_i["UCS.Standard"][0], ""):
-                    _i["Name.Unicode"] = ucd.name(_i["UCS.Standard"][0])
-                elif _i["UCS.Standard"] == "\U0001F92A":
-                    # U+1F92A is Unicode 10 (2017). Somehow, this means Python 3.6 cannot name it.
-                    _i["Name.Unicode"] = "GRINNING FACE WITH ONE LARGE AND ONE SMALL EYE"
-                else:
-                    print(_i)
+            if len(_i["UCS.Standard"].rstrip("\uFE0E\uFE0F")) == 1:
                 code = (ord(_i["UCS.Standard"][0]),)
                 if code in graphdata.gsets["zdings_g0"][2]:
                     _i["SBCS.ZapfDingbats"] = bytes([0x21 + graphdata.gsets["zdings_g0"][2].index(code)])
@@ -515,17 +510,34 @@ def get_all_representations():
                 if code in graphdata.rhses["999000"]:
                     _i["SBCS.Webdings"] = bytes([0x80 + graphdata.rhses["999000"].index(code)])
                 if code in graphdata.gsets["wingdings1_g0"][2]:
-                    _i["SBCS.Wingdings_1"] = bytes([0x21 + graphdata.gsets["wingdings1_g0"][2].index(code)])
+                    _i["SBCS.Wingdings_1"] = bytes([0x21 + 
+                        graphdata.gsets["wingdings1_g0"][2].index(code)])
                 if code in graphdata.rhses["999001"]:
                     _i["SBCS.Wingdings_1"] = bytes([0x80 + graphdata.rhses["999001"].index(code)])
                 if code in graphdata.gsets["wingdings2_g0"][2]:
-                    _i["SBCS.Wingdings_2"] = bytes([0x21 + graphdata.gsets["wingdings2_g0"][2].index(code)])
+                    _i["SBCS.Wingdings_2"] = bytes([0x21 + 
+                        graphdata.gsets["wingdings2_g0"][2].index(code)])
                 if code in graphdata.rhses["999002"]:
-                    _i["SBCS.Wingdings_2"] = bytes([0x80 + graphdata.rhses["999002"].index(code)])
+                    _i["SBCS.Wingdings_2"] = bytes([0x80 + 
+                        graphdata.rhses["999002"].index(code)])
                 if code in graphdata.gsets["wingdings3_g0"][2]:
-                    _i["SBCS.Wingdings_3"] = bytes([0x21 + graphdata.gsets["wingdings3_g0"][2].index(code)])
+                    _i["SBCS.Wingdings_3"] = bytes([0x21 + 
+                        graphdata.gsets["wingdings3_g0"][2].index(code)])
                 if code in graphdata.rhses["999003"]:
                     _i["SBCS.Wingdings_3"] = bytes([0x80 + graphdata.rhses["999003"].index(code)])
+                #
+                if ucd.name(_i["UCS.Standard"][0], ""):
+                    _i["Name.Unicode"] = ucd.name(_i["UCS.Standard"][0])
+                elif _i["UCS.Standard"] == "\U0001F92A":
+                    # U+1F92A is Unicode 10 (2017). Somehow, this means Python 3.6 cannot name it.
+                    _i["Name.Unicode"] = "GRINNING FACE WITH ONE LARGE AND ONE SMALL EYE"
+                elif _i["UCS.Standard"] == "\U0001FA90":
+                    # Similarly
+                    _i["Name.Unicode"] = "RINGED PLANET"
+                elif ucd.category(_i["UCS.Standard"]) == "Co": # i.e. PUA
+                    del _i["UCS.Standard"]
+                else:
+                    print(_i)
         if "ID.au" in _i and len(_i["ID.au"]) == 1:
             _i["HREF.au"] = "http://www001.upp.so-net.ne.jp/hdml/emoji/e/{:d}.gif".format(
                             _i["ID.au"][0])
