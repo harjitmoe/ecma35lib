@@ -10,9 +10,8 @@
 
 import os, json, shutil
 import unicodedata as ucd
-from ecma35.data import graphdata
+from ecma35.data import graphdata, variationhints
 from ecma35.data.multibyte import mbmapparsers as parsers
-from ecma35.data.multibyte import variationhints
 
 _temp = []
 def read_kps9566extras(fil):

@@ -8,9 +8,9 @@
 
 import os, json, shutil
 import unicodedata as ucd
-from ecma35.data import graphdata
+from ecma35.data import graphdata, variationhints
 from ecma35.data.multibyte import mbmapparsers as parsers
-from ecma35.data.multibyte import cellemojidata, variationhints
+from ecma35.data.multibyte import cellemojidata
 
 # Use of Zenkaku vs. Hankaku codepoints differs between the x0213.org mappings for EUC vs. SJIS.
 # If we don't know what SBCS it's being used with, best to just use Zenkaku consistently…

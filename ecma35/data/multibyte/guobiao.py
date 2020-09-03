@@ -7,9 +7,8 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import os, json, shutil
-from ecma35.data import graphdata
+from ecma35.data import graphdata, variationhints
 from ecma35.data.multibyte import mbmapparsers as parsers
-from ecma35.data.multibyte import variationhints
 
 # Layout of GBK (per GB 18030:2005):
 #   GB2312-inherited main EUC plane: [A1-FE][A1-FE], charted between:

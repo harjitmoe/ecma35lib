@@ -7,9 +7,8 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import os, ast, sys, json, pprint, shutil
-from ecma35.data import graphdata
+from ecma35.data import graphdata, variationhints
 from ecma35.data.multibyte import mbmapparsers as parsers
-from ecma35.data.multibyte import variationhints
 
 # Charsets originating from Hong Kong or Taiwan (CCCII, CNS 11643, Big 5, HKSCS…).
 #   (GB12345 is traditional but Mainland Chinese: see guobiao.py for that one.)

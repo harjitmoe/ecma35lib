@@ -8,9 +8,8 @@
 
 import unicodedata as ucd
 
-from ecma35.data import graphdata
+from ecma35.data import graphdata, variationhints
 from ecma35.data.singlebyte import sbmapparsers as parsers
-from ecma35.data.multibyte import variationhints
 
 # ELOT 927, also DEC Greek (7-bit)
 graphdata.gsets["ir088"] = (94, 1, tuple((i,) for i in range(0x21, 0x41)) + 

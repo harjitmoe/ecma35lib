@@ -98,7 +98,7 @@ def read_single_byte(fil, *, mapper=identitymap, typ="plainext"):
     return r
 
 comments89re = re.compile(r"\s+|\s*/\*(?:[^*]|\*[^/]|\*$)*\*/\s*")
-def read_mozilla_ut_file(fil, *, mapper=identitymap, typ="plainext"):
+def read_mozilla_ut_file(fil, *, mapper=identitymap, typ="plainext", is_uf=False):
     fd = open(os.path.join(directory, fil), "r", encoding="utf-8")
     dat = fd.read()
     fd.close()
@@ -130,6 +130,8 @@ def read_mozilla_ut_file(fil, *, mapper=identitymap, typ="plainext"):
             raise NotImplementedError
         else:
             raise ValueError("unrecognised Mozilla .ut file item type: {!r}".format(fmt))
+        if is_uf:
+            tos, froms = froms, tos
         for frm, ucs in zip(froms, tos):
             if typ == "plainext":
                 optr = frm - 0x80
