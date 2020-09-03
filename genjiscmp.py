@@ -445,9 +445,9 @@ annots = {
               "have considerably closer Unicode mappings than just the signs.&ensp;See <a href='https://www.au.com/content/dam/au-com/static/designs/extlib/pdf/mobile/service/featurephone/communication/emoji/taiohyo_03.pdf'>au's own chart</a> for the changes and cross-vendor issues.",
  (2, 81, 42): "The old au-by-KDDI glyph is two smiling faces (Castor and Pollux, presumably) pressed together.",
  (2, 81, 52): "The old au-by-KDDI glyph is a herculean figure wrestling a snake.",
- (2, 86, 0): 'This DoCoMo row is coded at 9-9120 through 9-917F by TRON.',
+ (2, 86, 0): 'This DoCoMo row is coded at 9-9121 through 9-917E by TRON.',
  (2, 86, 23): 'Despite its name FLAG IN HOLE, U+26F3 actually unifies two symbols, see 01-88-24 for details.',
- (2, 87, 0): 'RE DoCoMo: this row is coded at 9-9220 through 9-927F by TRON.</p><p>'
+ (2, 87, 0): 'RE DoCoMo: this row is coded at 9-9221 through 9-927E by TRON.</p><p>'
              'RE SoftBank: This row\'s content is invoked over GL (without re-designating G0) by '
              '<code>ESC $ G</code> in the 2G emoji encoding (which does not conform to JIS X 0202 / '
              'ECMA-35).\u2002It is positioned such that the first emoji (cell 2 here) is over 0x21 '
@@ -462,7 +462,7 @@ annots = {
  (2, 87, 47): 'DoCoMo\'s 02-87-44 through 02-87-47 appear as boxed letters I, M, E, VE with '
               'drop shadows.',
  (2, 87, 58): 'DoCoMo\'s 02-87-57 and 02-87-58 display a DoCoMo logo, which resembles a Ð.',
- (2, 88, 0): 'RE DoCoMo: this row is coded at 9-9320 through 9-937F by TRON.</p><p>'
+ (2, 88, 0): 'RE DoCoMo: this row is coded at 9-9321 through 9-937E by TRON.</p><p>'
              'RE SoftBank: This row\'s content is invoked over GL (without re-designating G0) by '
              '<code>ESC $ O</code> in the 2G emoji encoding (which does not conform to JIS X 0202 / '
              'ECMA-35).\u2002It is positioned such that the first emoji (cell 3 here) is over '

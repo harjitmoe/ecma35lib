@@ -274,7 +274,9 @@ for row in sets:
     if not row[1].sjis and not row[2].sjis and not row[3].sjis:
         all_for_this_one = {"UCS.PUA.Google": chr(int(google_spua, 16)),
                             "Name.Google": row[0].googlename,
-                            "UCS.Suggested": forced[google_spua],
+                            # Since this is the norm for all the non-JCarrier ones listed, it would
+                            #   not make much sense to balkanaise them all off as .Suggested
+                            "UCS.Standard": forced[google_spua],
                             "UCS.Key": forced[google_spua]}
         _all_representations.append(all_for_this_one)
         # Not a set yet, for reasons explained below.
@@ -294,17 +296,17 @@ for row in sets:
             all_for_this_one["Shift_JIS.au.withinjis"] = _multinonucs(group.jis_sjis)
             all_for_this_one["JIS.au"] = _multinonucs(group.jis)
         elif group.name == "docomo" and group.sjis:
-            all_for_this_one["ID.docomo"] = tuple(int(_i, 10) for _i in group.id.split("+"))
-            all_for_this_one["UCS.PUA.docomo"] = _multiucs(group.pua)
-            all_for_this_one["Shift_JIS.docomo"] = _multinonucs(group.sjis)
+            all_for_this_one["ID.DoCoMo"] = tuple(int(_i, 10) for _i in group.id.split("+"))
+            all_for_this_one["UCS.PUA.DoCoMo"] = _multiucs(group.pua)
+            all_for_this_one["Shift_JIS.DoCoMo"] = _multinonucs(group.sjis)
             if group.jis != "222E":
-                all_for_this_one["JIS.docomo"] = _multinonucs(group.jis)
+                all_for_this_one["JIS.DoCoMo"] = _multinonucs(group.jis)
         elif group.name == "softbank" and group.sjis:
-            all_for_this_one["ID.softbank"] = tuple(int(_i, 10) for _i in group.id.split("+"))
-            all_for_this_one["UCS.PUA.softbank"] = _multiucs(group.pua)
-            all_for_this_one["Shift_JIS.softbank"] = _multinonucs(group.sjis)
+            all_for_this_one["ID.SoftBank"] = tuple(int(_i, 10) for _i in group.id.split("+"))
+            all_for_this_one["UCS.PUA.SoftBank"] = _multiucs(group.pua)
+            all_for_this_one["Shift_JIS.SoftBank"] = _multinonucs(group.sjis)
             if group.jis != "222E":
-                all_for_this_one["JIS.softbank"] = _multinonucs(group.jis)
+                all_for_this_one["JIS.SoftBank"] = _multinonucs(group.jis)
         suboutmap = suboutmap2 = outmap.setdefault(group.name, [])
         if group.name == "kddi":
             suboutmap2 = outmap.setdefault("kddi_symboliczodiac", [])
@@ -363,7 +365,8 @@ for row in sets:
                     puacode = int(group.pua, 16)
                     pageno = (puacode >> 8) - 0xE0
                     cellno = puacode & 0xFF
-                    all_for_this_one["SBCS.SoftbankPage" + "GEFOPQ"[pageno]] = bytes([0x20 + cellno])
+                    all_for_this_one["SBCS.SoftBank_Page" + 
+                                     "GEFOPQ"[pageno]] = bytes([0x20 + cellno])
                     page = softbank_pages[pageno]
                     if not page:
                         page.extend([None] * 94)
@@ -457,10 +460,10 @@ def get_all_representations():
                 all_representations.setdefault(_i["UCS.PUA.Google"], {}).update(_i)
                 if "ID.au" in _i:
                     _by_kddiid[_i["ID.au"]] = _i
-                if "ID.docomo" in _i:
-                    _by_nttid[_i["ID.docomo"]] = _i
-                if "ID.softbank" in _i:
-                    _by_sbid[_i["ID.softbank"]] = _i
+                if "ID.DoCoMo" in _i:
+                    _by_nttid[_i["ID.DoCoMo"]] = _i
+                if "ID.SoftBank" in _i:
+                    _by_sbid[_i["ID.SoftBank"]] = _i
         else:
             # Multiple-character best fit.
             pass # for now
@@ -468,17 +471,17 @@ def get_all_representations():
         # To wit:
         #   I-MODE WITH FRAME: no standard Unicode, substitute is the same as frameless one.
         #   EZ NAVI: similarly (substitute is the same as EZ NAVIGATION).
-        #   HAPPY FACE 8: basically unified with HAPPY FACE 7 (U+263A), though it's a tad more
-        #     complicated than that…
+        #   HAPPY FACE 8: a Softbank emoji, which Unicode unifies with HAPPY FACE 7, which is an
+        #     au by KDDI emoji (both get mapped to OEM-437 smiley U+263A).
         #   The Softbank character at SJIS 0xF7BA (U+1F532): it gets mapped to several KDDI characters,
         #     none of which get mapped to the same Unicode character as it. Basically, Google unified
-        #     ◽ and 🔲 but Unicode didn't.
+        #     🔲 with (say) ◽, but Unicode didn't.
         _is_missing = False
         if "ID.au" in _i and len(_i["ID.au"]) == 1 and _i["ID.au"] not in _by_kddiid:
             _is_missing = True
-        elif "ID.docomo" in _i and len(_i["ID.docomo"]) == 1 and _i["ID.docomo"] not in _by_nttid:
+        elif "ID.DoCoMo" in _i and len(_i["ID.DoCoMo"]) == 1 and _i["ID.DoCoMo"] not in _by_nttid:
             _is_missing = True
-        elif "ID.softbank" in _i and len(_i["ID.softbank"]) == 1 and _i["ID.softbank"] not in _by_sbid:
+        elif "ID.SoftBank" in _i and len(_i["ID.SoftBank"]) == 1 and _i["ID.SoftBank"] not in _by_sbid:
             _is_missing = True
         #
         if _is_missing:
@@ -495,7 +498,60 @@ def get_all_representations():
             del _i["UCS.Key"] # Has served its purpose now
         if "UCS.Standard" in _i:
             if len(_i["UCS.Standard"].rstrip("\uFE0F")) == 1:
-                _i["Name.Unicode"] = ucd.name(_i["UCS.Standard"][0])
+                if ucd.name(_i["UCS.Standard"][0], ""):
+                    _i["Name.Unicode"] = ucd.name(_i["UCS.Standard"][0])
+                elif _i["UCS.Standard"] == "\U0001F92A":
+                    # U+1F92A is Unicode 10 (2017). Somehow, this means Python 3.6 cannot name it.
+                    _i["Name.Unicode"] = "GRINNING FACE WITH ONE LARGE AND ONE SMALL EYE"
+                else:
+                    print(_i)
+                code = (ord(_i["UCS.Standard"][0]),)
+                if code in graphdata.gsets["zdings_g0"][2]:
+                    _i["SBCS.ZapfDingbats"] = bytes([0x21 + graphdata.gsets["zdings_g0"][2].index(code)])
+                if code in graphdata.rhses["998000"]:
+                    _i["SBCS.ZapfDingbats"] = bytes([0x80 + graphdata.rhses["998000"].index(code)])
+                if code in graphdata.gsets["webdings_g0"][2]:
+                    _i["SBCS.Webdings"] = bytes([0x21 + graphdata.gsets["webdings_g0"][2].index(code)])
+                if code in graphdata.rhses["999000"]:
+                    _i["SBCS.Webdings"] = bytes([0x80 + graphdata.rhses["999000"].index(code)])
+                if code in graphdata.gsets["wingdings1_g0"][2]:
+                    _i["SBCS.Wingdings_1"] = bytes([0x21 + graphdata.gsets["wingdings1_g0"][2].index(code)])
+                if code in graphdata.rhses["999001"]:
+                    _i["SBCS.Wingdings_1"] = bytes([0x80 + graphdata.rhses["999001"].index(code)])
+                if code in graphdata.gsets["wingdings2_g0"][2]:
+                    _i["SBCS.Wingdings_2"] = bytes([0x21 + graphdata.gsets["wingdings2_g0"][2].index(code)])
+                if code in graphdata.rhses["999002"]:
+                    _i["SBCS.Wingdings_2"] = bytes([0x80 + graphdata.rhses["999002"].index(code)])
+                if code in graphdata.gsets["wingdings3_g0"][2]:
+                    _i["SBCS.Wingdings_3"] = bytes([0x21 + graphdata.gsets["wingdings3_g0"][2].index(code)])
+                if code in graphdata.rhses["999003"]:
+                    _i["SBCS.Wingdings_3"] = bytes([0x80 + graphdata.rhses["999003"].index(code)])
+        if "ID.au" in _i and len(_i["ID.au"]) == 1:
+            _i["HREF.au"] = "http://www001.upp.so-net.ne.jp/hdml/emoji/e/{:d}.gif".format(
+                            _i["ID.au"][0])
+        if "ID.DoCoMo" in _i and len(_i["ID.DoCoMo"]) == 1:
+            if _i["ID.DoCoMo"][0] < 300:
+                _i["HREF.DoCoMo"] = ("https://www.nttdocomo.co.jp/service/developer/make/" + 
+                      "content/pictograph/basic/images/{:d}.gif".format(_i["ID.DoCoMo"][0]))
+            else:
+                _i["HREF.DoCoMo"] = ("https://www.nttdocomo.co.jp/service/developer/make/" + 
+                  "content/pictograph/extention/images/{:d}.gif".format(_i["ID.DoCoMo"][0] - 300))
+            # Encoding of emoji under Multibyte-Plane 9, Zone B of TRON code. Supposedly.
+            pua = ord(_i["UCS.PUA.DoCoMo"])
+            offset = pua - 0xE63E
+            cell = (offset % 94) + 1
+            rowbyte = (offset // 94) + 0x91
+            tron = bytes([rowbyte, cell + 0x20])
+            _i["TRON_PlaneMB9.DoCoMo"] = tron # i.e. shifted to by 0xFE, 0x29
+        if "UCS.PUA.SoftBank" in _i and len(_i["UCS.PUA.SoftBank"]) == 1:
+            _i["HREF.SoftBank"] = ("http://creation.mb.SoftBank.jp/mc/tech/tech_pic/img/" + 
+                                   "{:04X}_20.gif".format(ord(_i["UCS.PUA.SoftBank"][0])))
+        if "UCS.PUA.Google" in _i and len(_i["UCS.PUA.Google"]) == 1:
+            # Google was collaborating more with au by KDDI than the others, so the kddi_ne_jp
+            #   versions of the URLs might rationally be seen as the "default" of the three.
+            # All three schemes fall back to other sets if there isn't a glyph in that one
+            _i["HREF.Google"] = "https://mail.google.com/mail/e/kddi_ne_jp/{:03X}".format(
+                                    ord(_i["UCS.PUA.Google"][0]) & 0xFFF)
     return all_representations
 
 outmap["docomo"] = tuple(outmap["docomo"])
