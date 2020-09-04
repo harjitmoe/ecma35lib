@@ -272,18 +272,18 @@ _hashintsre = re.compile("[\uf860-\uf87f]")
 for row in sets:
     google_spua = row[0].codepoint
     google_spua_char = chr(int(google_spua, 16))
-    # Each row is one GMoji SPUA. "others" is the other two vendors, for whose mappings Google's
-    #   substitutes for the emoji of the vendor under scrutiny might be listed.
     if not row[1].sjis and not row[2].sjis and not row[3].sjis:
         all_for_this_one = {"UCS.PUA.Google": google_spua_char,
                             "Name.Google": row[0].googlename,
                             "UCS.Standard": forced[google_spua],
                             "UCS.Key": forced[google_spua]}
         all_jcarrier_raw.append(all_for_this_one)
-        # Not a set yet, for reasons explained below.
+        # A list, not a set yet, for reasons explained below.
         gspua_to_ucs_possibs.setdefault(all_for_this_one["UCS.PUA.Google"], 
                                               []).append(all_for_this_one["UCS.Key"])
         continue
+    # Each row is one GMoji SPUA. "others" is the other two vendors, for whose mappings Google's
+    #   substitutes for the emoji of the vendor under scrutiny might be listed.
     for group, others in andothers_iter(row[1:]):
         # Need to do it separately for now, since one Google SPUA can map to multiple standard UCS
         #   characters depending which vendor it goes through, due to the best fit mappings.
@@ -327,6 +327,11 @@ for row in sets:
                         unic = chr(int(group.pua, 16))
                     else:
                         unic = chr(app2web[int(group.pua, 16)])
+        #
+        for other in others:
+            if other.substitute:
+                all_for_this_one["UCS.Substitute.Google"] = other.substitute
+                break
         #
         if (len(unic) == 1) and (ord(unic) in wants_fe0f):
             unic += "\uFE0F"

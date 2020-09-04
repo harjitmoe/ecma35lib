@@ -154,8 +154,9 @@ _windows_noNECSel = parsers.fuse([
 _windows_noNECSel_au = parsers.fuse([
         ((None,) * 7996) + (((1,),) * 840),
         parsers.read_main_plane("ICU/kddi-sjis.ucm", sjis=1, plane=1)], "WinJIS_noNECSel_au.json")
+arib_extonly = parsers.read_main_plane("Custom/pict_arib.txt", sjis=1)
 graphdata.gsets["ir168arib"] = jisx0208_arib = (94, 2, 
-        parsers.fuse([parsers.read_main_plane("Custom/pict_arib.txt", sjis=1), jisx0208_1990[2]],
+        parsers.fuse([arib_extonly, jisx0208_1990[2]],
                      "Emoji--ARIB.json"))
 graphdata.gsets["ir168docomo"] = jisx0208_arib = (94, 2, 
         parsers.fuse([cellemojidata.outmap["docomo"][:94*94], _windows_noNECSel],

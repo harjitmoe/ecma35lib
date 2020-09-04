@@ -81,8 +81,8 @@ None,       (0x2714,),  (0x2713,),  (0x1FB7D,), (0x1FB7F,), (0x23BE,),  (0x23CC,
 
 graphdata.gsets["zdings_g0"] = zdg0 = (94, 1, parsers.read_single_byte("UTC/zdingbat.txt", typ="GL94"))
 graphdata.gsets["zdings_g1"] = zdg1 = (94, 1, parsers.read_single_byte("UTC/zdingbat.txt", typ="GR94"))
-graphdata.rhses["998000"] = (tuple(range(0x2768, 0x2776)) + ((None,) * 19) + 
-                             tuple(i[0] if i else None for i in zdg1[2]) + (None,))
+graphdata.rhses["998000"] = (tuple((i,) for i in range(0x2768, 0x2776)) + ((None,) * 19) + 
+                             zdg1[2] + (None,))
 graphdata.defgsets["998000"] = ("zdings_g0", "zdings_g1", "nil", "nil")
 
 

@@ -6,10 +6,74 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+import os
 import unicodedata as ucd
 from ecma35.data import maxmat, graphdata
 from ecma35.data.multibyte import mbmapparsers as parsers
+from ecma35.data.multibyte import japan
 from ecma35.data.multibyte.cellemojidata import all_jcarrier_raw, gspua_to_ucs_possibs
+
+data = os.path.join(parsers.directory, "UCD", "emoji-sequences.txt")
+data2 = os.path.join(parsers.directory, "UCD", "emoji-sequences.txt")
+strictly_counts_as_emoji = set()
+add_fe0f = {}
+for dfile in (data, data2):
+    with open(dfile) as f:
+        for i in f:
+            if (not i.strip()) or (i[0] == "#"):
+                continue
+            i = i.split(";", 1)[0].strip()
+            if ".." in i:
+                frm, to = i.split("..")
+                frm = int(frm, 16)
+                to = int(to, 16)
+                strictly_counts_as_emoji |= set(chr(j) for j in range(frm, to + 1))
+            else:
+                # The ones we're testing from WDings / ZDings / ARIB won't have U+FE0F included
+                myst = "".join(chr(int(j, 16)) for j in i.split())
+                strictly_counts_as_emoji |= {myst.replace("\uFE0F", "")}
+                add_fe0f[myst.replace("\uFE0F", "")] = myst
+
+# Some emoji fonts expand to cover anything up to these entire blocks...
+counts_as_emoji = strictly_counts_as_emoji.copy()
+counts_as_emoji |= set(chr(i) for i in range(0x2600, 0x2700)) # Miscellaneous Symbols
+counts_as_emoji |= set(chr(i) for i in range(0x1F000, 0x1F02C)) # Mahjong Tiles
+counts_as_emoji |= set(chr(i) for i in range(0x1F300, 0x1F600)) # Misc. Sym. & Pictographs
+counts_as_emoji |= set(chr(i) for i in range(0x1F680, 0x1F6D8)) # Transport & Map Sym., range 1
+counts_as_emoji |= set(chr(i) for i in range(0x1F6E0, 0x1F6ED)) # Transp. & Map Sym., range 2
+counts_as_emoji |= set(chr(i) for i in range(0x1F6F0, 0x1F6FD)) # Transp. & Map Sym., range 3
+counts_as_emoji |= set(chr(i) for i in range(0x1F900, 0x1FA00)) # Supplemental Sym. & Pict.
+counts_as_emoji ^= {"\U0001F979", "\U0001F9CC"} # (not currently allocated in above range)
+counts_as_emoji |= {"✎", "✐", "❥"} # Scattered extras in Dingbats block (entire block not covered)
+
+def _get_ref(all_representations, scode):
+    scode2 = scode.rstrip("\uFE0F")
+    if scode2 in all_representations:
+        return all_representations[scode2]
+    elif (scode2 + "\uFE0F") in all_representations:
+        return all_representations[scode2 + "\uFE0F"]
+    else:
+        return all_representations.setdefault(scode, {"UCS.Standard": scode})
+
+special_ucsnames = {
+    # U+1F92A is Unicode 10 (2017). Somehow, this means Python 3.6 cannot name it.
+    "\U0001F92A": "GRINNING FACE WITH ONE LARGE AND ONE SMALL EYE",
+    # Similarly:
+    "\U0001FA90": "RINGED PLANET",
+    # Named Sequences: https://www.unicode.org/Public/UCD/latest/ucd/NamedSequences.txt
+    "#\uFE0F\u20E3": "KEYCAP NUMBER SIGN",
+    "*\uFE0F\u20E3": "KEYCAP ASTERISK",
+    "0\uFE0F\u20E3": "KEYCAP DIGIT ZERO",
+    "1\uFE0F\u20E3": "KEYCAP DIGIT ONE",
+    "2\uFE0F\u20E3": "KEYCAP DIGIT TWO",
+    "3\uFE0F\u20E3": "KEYCAP DIGIT THREE",
+    "4\uFE0F\u20E3": "KEYCAP DIGIT FOUR",
+    "5\uFE0F\u20E3": "KEYCAP DIGIT FIVE",
+    "6\uFE0F\u20E3": "KEYCAP DIGIT SIX",
+    "7\uFE0F\u20E3": "KEYCAP DIGIT SEVEN",
+    "8\uFE0F\u20E3": "KEYCAP DIGIT EIGHT",
+    "9\uFE0F\u20E3": "KEYCAP DIGIT NINE",
+}
 
 def get_all_representations():
     all_representations = {}
@@ -102,44 +166,6 @@ def get_all_representations():
     for _i in all_representations.copy().values():
         if "UCS.Key" in _i:
             del _i["UCS.Key"] # Has served its purpose now
-        if "UCS.Standard" in _i:
-            if len(_i["UCS.Standard"].rstrip("\uFE0E\uFE0F")) == 1:
-                code = (ord(_i["UCS.Standard"][0]),)
-                if code in graphdata.gsets["zdings_g0"][2]:
-                    _i["SBCS.ZapfDingbats"] = bytes([0x21 + graphdata.gsets["zdings_g0"][2].index(code)])
-                if code in graphdata.rhses["998000"]:
-                    _i["SBCS.ZapfDingbats"] = bytes([0x80 + graphdata.rhses["998000"].index(code)])
-                if code in graphdata.gsets["webdings_g0"][2]:
-                    _i["SBCS.Webdings"] = bytes([0x21 + graphdata.gsets["webdings_g0"][2].index(code)])
-                if code in graphdata.rhses["999000"]:
-                    _i["SBCS.Webdings"] = bytes([0x80 + graphdata.rhses["999000"].index(code)])
-                if code in graphdata.gsets["wingdings1_g0"][2]:
-                    _i["SBCS.Wingdings_1"] = bytes([0x21 + 
-                        graphdata.gsets["wingdings1_g0"][2].index(code)])
-                if code in graphdata.rhses["999001"]:
-                    _i["SBCS.Wingdings_1"] = bytes([0x80 + graphdata.rhses["999001"].index(code)])
-                if code in graphdata.gsets["wingdings2_g0"][2]:
-                    _i["SBCS.Wingdings_2"] = bytes([0x21 + 
-                        graphdata.gsets["wingdings2_g0"][2].index(code)])
-                if code in graphdata.rhses["999002"]:
-                    _i["SBCS.Wingdings_2"] = bytes([0x80 + 
-                        graphdata.rhses["999002"].index(code)])
-                if code in graphdata.gsets["wingdings3_g0"][2]:
-                    _i["SBCS.Wingdings_3"] = bytes([0x21 + 
-                        graphdata.gsets["wingdings3_g0"][2].index(code)])
-                if code in graphdata.rhses["999003"]:
-                    _i["SBCS.Wingdings_3"] = bytes([0x80 + graphdata.rhses["999003"].index(code)])
-                #
-                if ucd.name(_i["UCS.Standard"][0], ""):
-                    _i["Name.Unicode"] = ucd.name(_i["UCS.Standard"][0])
-                elif _i["UCS.Standard"] == "\U0001F92A":
-                    # U+1F92A is Unicode 10 (2017). Somehow, this means Python 3.6 cannot name it.
-                    _i["Name.Unicode"] = "GRINNING FACE WITH ONE LARGE AND ONE SMALL EYE"
-                elif _i["UCS.Standard"] == "\U0001FA90":
-                    # Similarly
-                    _i["Name.Unicode"] = "RINGED PLANET"
-                elif ucd.category(_i["UCS.Standard"]) == "Co": # i.e. PUA
-                    del _i["UCS.Standard"]
         if "ID.au" in _i and len(_i["ID.au"]) == 1:
             _i["HREF.au"] = "http://www001.upp.so-net.ne.jp/hdml/emoji/e/{:d}.gif".format(
                             _i["ID.au"][0])
@@ -180,5 +206,67 @@ def get_all_representations():
             arp["UCS.PUA.au.web"] = _i["UCS.PUA.au.web"]
             arp["UCS.Pictorial"] = _i["UCS.Pictorial"]
             arp["UCS.Symbolic"] = _i["UCS.Symbolic"]
-            arp["Name.Unicode"] = ucd.name(_i["UCS.Pictorial"][0])
+    for (myset, u) in ((graphdata.gsets["zdings_g0"][2], "SBCS.ZapfDingbats",),
+                       (graphdata.rhses["998000"], "SBCS.ZapfDingbats",),
+                       (graphdata.gsets["webdings_g0"][2], "SBCS.Webdings",),
+                       (graphdata.rhses["999000"], "SBCS.Webdings",),
+                       (graphdata.gsets["wingdings1_g0"][2], "SBCS.Wingdings_1",),
+                       (graphdata.rhses["999001"], "SBCS.Wingdings_1",),
+                       (graphdata.gsets["wingdings2_g0"][2], "SBCS.Wingdings_2",),
+                       (graphdata.rhses["999002"], "SBCS.Wingdings_2",),
+                       (graphdata.gsets["wingdings3_g0"][2], "SBCS.Wingdings_3",),
+                       (graphdata.rhses["999003"], "SBCS.Wingdings_3",)):
+        for code in myset:
+            if not code:
+                continue
+            scode = "".join(chr(i) for i in code)
+            if scode not in counts_as_emoji:
+                continue
+            scode = add_fe0f.get(scode, scode)
+            _get_ref(all_representations, scode)[u] = bytes([0x80 + myset.index(code)])
+    for (myset, u, ofst) in ((graphdata.gsets["ir233"][2], "JIS.2004", 0x20),
+                             (japan.arib_extonly, "JIS.ARIB", 0x20),
+                             (graphdata.gsets["ir149-2002"][2], "MBCS_EUC.Wansung", 0xA0),
+                             (graphdata.gsets["ir202-full"][2], "MBCS_EUC.KPS", 0xA0)):
+        for code in myset:
+            if not code:
+                continue
+            scode = "".join(chr(i) for i in code)
+            if scode not in counts_as_emoji:
+                continue
+            scode = add_fe0f.get(scode, scode)
+            pointer = myset.index(code)
+            ku = (pointer // 94) + 1
+            ten = (pointer % 94) + 1
+            _get_ref(all_representations, scode)[u] = bytes([ku + ofst, ten + ofst])
+    for (myset, u, ofst) in ((graphdata.gsets["ir168mac"][2], "Shift_JIS.KanjiTalk7", 0x20),
+                             (graphdata.gsets["ir233"][2], "Shift_JIS.2004", 0x20),
+                             (japan.arib_extonly, "Shift_JIS.ARIB", 0x20)):
+        for code in myset:
+            if not code:
+                continue
+            scode = "".join(chr(i) for i in code)
+            if scode not in counts_as_emoji:
+                continue
+            scode = add_fe0f.get(scode, scode)
+            pointer = myset.index(code)
+            lead = (pointer // 188)
+            lead += (0x81 if lead < 0x1F else 0xC1)
+            trail = (pointer % 188)
+            trail += (0x40 if trail < 0x3F else 0x41)
+            _get_ref(all_representations, scode)[u] = bytes([lead, trail])
+    for _i in all_representations.copy().values():
+        if "UCS.Standard" in _i:
+            if _i["UCS.Standard"] in special_ucsnames:
+                _i["Name.Unicode"] = special_ucsnames[_i["UCS.Standard"]]
+            elif len(_i["UCS.Standard"].rstrip("\uFE0E\uFE0F")) == 1:
+                if ucd.name(_i["UCS.Standard"][0], ""):
+                    _i["Name.Unicode"] = ucd.name(_i["UCS.Standard"][0])
     return all_representations
+
+if __name__ == "__main__":
+    from pprint import pformat, pprint
+    open("BlendedEmojiData.txt", "w").write(pformat(get_all_representations()))
+
+
+
