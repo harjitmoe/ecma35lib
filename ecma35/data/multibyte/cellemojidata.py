@@ -8,7 +8,6 @@
 
 import os, collections, re, sys, binascii
 import unicodedata as ucd
-from ecma35.data import maxmat
 from ecma35.data.multibyte import mbmapparsers as parsers
 
 # softbank (2, 84, 86) J-PHONE SHOP
@@ -102,6 +101,9 @@ forced = {
     "FEE13": "Ð\u20E3\uF87F", # DoCoMo point
     "FEE14": "𝜶\uF87F", # i-Appli's bold italic alpha logo
     "FEE15": "𝜶\u20E3\uF87F", # i-Appli in enclosure
+    "FEE18": "\uF865[チケ]", # Chike (abbreviating "Ticket"), inverse video
+    "FEE19": "\uF862[チケ]", # Chike (abbreviating "Ticket", shows チケ in one space)
+    "FEE1A": "\uF860[先\uF862tel]", # Reserve by Telephone abbreviation (displays 先<cr>tel in one space)
     "FEE1C": "🎥\uF87F", # Lacks own Unicode mapping, bestfitted to 1F3A5 for the other two
     "FEE26": "◪", # U+25EA is pretty much an exact match, but not in UCD/ICU deployed mapping.
     "FEE27": "⯀", # Later addition to Unicode from Wingdings 2 190(dec); probably closest one not already taken.
@@ -140,8 +142,8 @@ outmap = {}
 hints2pua = {}
 hints2pua_sb2g = {}
 softbank_pages = ([], [], [], [], [], [])
-_all_representations = []
-gspua_to_ucs_possibilities = {}
+all_jcarrier_raw = []
+gspua_to_ucs_possibs = {}
 
 def pull(line, row, name, *, iskddi = False):
     mystruct = NonKddiAllocation if not iskddi else KddiAllocation
@@ -269,22 +271,23 @@ def _multinonucs(hexstring):
 _hashintsre = re.compile("[\uf860-\uf87f]")
 for row in sets:
     google_spua = row[0].codepoint
+    google_spua_char = chr(int(google_spua, 16))
     # Each row is one GMoji SPUA. "others" is the other two vendors, for whose mappings Google's
     #   substitutes for the emoji of the vendor under scrutiny might be listed.
     if not row[1].sjis and not row[2].sjis and not row[3].sjis:
-        all_for_this_one = {"UCS.PUA.Google": chr(int(google_spua, 16)),
+        all_for_this_one = {"UCS.PUA.Google": google_spua_char,
                             "Name.Google": row[0].googlename,
                             "UCS.Standard": forced[google_spua],
                             "UCS.Key": forced[google_spua]}
-        _all_representations.append(all_for_this_one)
+        all_jcarrier_raw.append(all_for_this_one)
         # Not a set yet, for reasons explained below.
-        gspua_to_ucs_possibilities.setdefault(all_for_this_one["UCS.PUA.Google"], 
+        gspua_to_ucs_possibs.setdefault(all_for_this_one["UCS.PUA.Google"], 
                                               []).append(all_for_this_one["UCS.Key"])
         continue
     for group, others in andothers_iter(row[1:]):
         # Need to do it separately for now, since one Google SPUA can map to multiple standard UCS
         #   characters depending which vendor it goes through, due to the best fit mappings.
-        all_for_this_one = {"UCS.PUA.Google": chr(int(google_spua, 16)),
+        all_for_this_one = {"UCS.PUA.Google": google_spua_char,
                             "Name.Google": row[0].googlename}
         if group.name == "kddi" and group.sjis:
             all_for_this_one["ID.au"] = tuple(int(_i, 10) for _i in group.id.split("+"))
@@ -320,7 +323,7 @@ for row in sets:
                     break
             else: # for...else, i.e. never reached "break"
                 if group.pua:
-                    if group.name != kddi:
+                    if group.name != "kddi":
                         unic = chr(int(group.pua, 16))
                     else:
                         unic = chr(app2web[int(group.pua, 16)])
@@ -340,12 +343,13 @@ for row in sets:
                     ku = byts[0] - 0x20
                     ten = byts[1] - 0x20
                 pointer = ((men - 1) * (94 * 94)) + ((ku - 1) * 94) + (ten - 1)
+                if group.name != "kddi":
+                    puaunic = chr(int(group.pua, 16))
+                else:
+                    puaunic = chr(app2web[int(group.pua, 16)])
                 if not group.unic:
-                    if group.name != kddi:
-                        puaunic = chr(int(group.pua, 16))
-                    else:
-                        puaunic = chr(app2web[int(group.pua, 16)])
-                    # U+27BF being the only non-EmojiSources.txt non-PUA mapping deployed in codecs afaict.
+                    # U+27BF being the only non-EmojiSources.txt non-PUA mapping deployed in 
+                    #   codecs afaict.
                     # Afaict it was added with the other emoji, so dunno why it was missed out of
                     #   the sources data.
                     if (unic != puaunic) and (unic != "\u27BF"):
@@ -381,15 +385,21 @@ for row in sets:
                         suboutmap.extend([None] * (pointer - len(suboutmap)))
                     suboutmap.append(tuple(ord(i) for i in unic))
                 #
-                if not re.compile("([\uf860-\uf87f\u200d])").search(unic):
+                if unic == puaunic:
+                    all_for_this_one["UCS.Key"] = google_spua_char
+                elif not re.compile("[\uf860-\uf87f\u200d]").search(unic):
                     # i.e. contains no hints and no nonstandard ZWJ sequences
                     all_for_this_one["UCS.Standard"] = unic
-                elif not re.compile("([\uf860-\uf87f])").search(unic):
+                    all_for_this_one["UCS.Key"] = unic
+                elif not re.compile("[\uf860-\uf87f]").search(unic):
                     # Nonstandard ZWJ but no hints
                     all_for_this_one["UCS.Suggested"] = unic
+                    all_for_this_one["UCS.Key"] = google_spua_char
                 else:
-                    all_for_this_one["UCS.Substitute"] = unic
-                all_for_this_one["UCS.Key"] = unic
+                    # Don't actually include the hints, but include the rest as a substitute string
+                    all_for_this_one["UCS.Substitute"] = "".join(re.compile("[\uf860-\uf87f]"
+                                                         ).split(unic))
+                    all_for_this_one["UCS.Key"] = google_spua_char
                 #
                 if group.name == "kddi":
                     # With zodiacs mapped to symbols (orthodox, but not faithful for pre-2012)
@@ -412,159 +422,13 @@ for row in sets:
                             suboutmap2.extend([None] * (pointer - len(suboutmap2)))
                         suboutmap2.append(tuple(ord(i) for i in unic2))
                 # Not a set yet, for reasons explained below.
-                gspua_to_ucs_possibilities.setdefault(all_for_this_one["UCS.PUA.Google"], 
+                gspua_to_ucs_possibs.setdefault(all_for_this_one["UCS.PUA.Google"], 
                                                       []).append(all_for_this_one["UCS.Key"])
         if len(all_for_this_one) > 2: # i.e. not just the shared Google bits alone
-            _all_representations.append(all_for_this_one)
+            all_jcarrier_raw.append(all_for_this_one)
         # Try to end it on a natural plane boundary.
         suboutmap.extend([None] * (((94 * 94) - (len(suboutmap) % (94 * 94))) % (94 * 94)))
         suboutmap2.extend([None] * (((94 * 94) - (len(suboutmap2) % (94 * 94))) % (94 * 94)))
-
-def get_all_representations():
-    from ecma35.data import graphdata
-    all_representations = {}
-    ucs_possibilities_to_gspua = dict(zip([frozenset(i) for i in gspua_to_ucs_possibilities.values()],
-                                 gspua_to_ucs_possibilities.keys()))
-    for _i in gspua_to_ucs_possibilities:
-        # Due to both the KDDI and DoCoMo Shinkansen emoji mapping to both the Google ones (since the
-        #   SoftBank set has two and the other two have one), but them mapping to different Unicode
-        #   emoji, both Unicode ones finish up mapped to both Google ones. So to a maximum matching
-        #   between the Google and Unicode representations, which way around they go is essentially
-        #   arbitrary—not good, since they end up the wrong way around for the Softbank ones' mappings
-        #   not to become contradicted between the Google and Unicode mappings.
-        # So if any of these "both map to both" instances come up, limit one of them to the most
-        #   frequent mapping only (e.g. used by both DoCoMo *and* Softbank).
-        _froz = frozenset(gspua_to_ucs_possibilities[_i])
-        if len(_froz) == 2 and ucs_possibilities_to_gspua[_froz] != _i:
-            s = gspua_to_ucs_possibilities[_i]
-            s = sorted(s, key = s.count)
-            gspua_to_ucs_possibilities[_i] = [s[-1]]
-        gspua_to_ucs_possibilities[_i] = set(gspua_to_ucs_possibilities[_i])
-    # Sadly, these ones just have to be specified otherwise it assigns the Google codes the wrong way
-    #   around (the non-Google bits work fine).
-    # Since there's no reason by the mappings themselves that they shouldn't be the other way
-    #   around, and the "wrong way around" is solely in the semantics of the two Google codes:
-    gspua_to_ucs_possibilities['\U000FE4F7'] = {"🔮"} # Google name: FORTUNE TELLING
-    gspua_to_ucs_possibilities['\U000FE4F8'] = {"🔯"} # Google name: CONSTELLATION
-    gspua_to_ucs_possibilities['\U000FE027'] = {"🕙"} # Google name: 10 OCLOCK
-    gspua_to_ucs_possibilities['\U000FE02A'] = {"⏰"} # Google name: CLOCK SYMBOL
-    gspua_to_ucs = maxmat.maximum_matching(gspua_to_ucs_possibilities)
-    _by_kddiid = {}
-    _by_nttid = {}
-    _by_sbid = {}
-    for _i in _all_representations:
-        if "UCS.Key" in _i:
-            if _i["UCS.PUA.Google"] not in gspua_to_ucs:
-                # A handful of separate Google ones which cannot correspond to unique Unicode.
-                # Caught, amongst others, by the testing of IDs getting included below.
-                pass
-            elif _i["UCS.Key"] == gspua_to_ucs[_i["UCS.PUA.Google"]]: # i.e. if isn't merely bestfit
-                all_representations.setdefault(_i["UCS.PUA.Google"], {}).update(_i)
-                if "ID.au" in _i:
-                    _by_kddiid[_i["ID.au"]] = _i
-                if "ID.DoCoMo" in _i:
-                    _by_nttid[_i["ID.DoCoMo"]] = _i
-                if "ID.SoftBank" in _i:
-                    _by_sbid[_i["ID.SoftBank"]] = _i
-        else:
-            # Multiple-character best fit.
-            pass # for now
-    for _i in _all_representations:
-        # To wit:
-        #   I-MODE WITH FRAME: no standard Unicode, substitute is the same as frameless one.
-        #   EZ NAVI: similarly (substitute is the same as EZ NAVIGATION).
-        #   HAPPY FACE 8: a Softbank emoji, which Unicode unifies with HAPPY FACE 7, which is an
-        #     au by KDDI emoji (both get mapped to OEM-437 smiley U+263A).
-        #   The Softbank character at SJIS 0xF7BA (U+1F532): it gets mapped to several KDDI characters,
-        #     none of which get mapped to the same Unicode character as it. Basically, Google unified
-        #     🔲 with (say) ◽, but Unicode didn't.
-        _is_missing = False
-        if "ID.au" in _i and len(_i["ID.au"]) == 1 and _i["ID.au"] not in _by_kddiid:
-            _is_missing = True
-        elif "ID.DoCoMo" in _i and len(_i["ID.DoCoMo"]) == 1 and _i["ID.DoCoMo"] not in _by_nttid:
-            _is_missing = True
-        elif "ID.SoftBank" in _i and len(_i["ID.SoftBank"]) == 1 and _i["ID.SoftBank"] not in _by_sbid:
-            _is_missing = True
-        #
-        if _is_missing:
-            if _i["UCS.PUA.Google"] not in gspua_to_ucs:
-                # i.e. doesn't have a unique Unicode mapping but can be given a unique Google mapping
-                all_representations.setdefault(_i["UCS.PUA.Google"], {}).update(_i)
-            else:
-                # i.e. doesn't have a unique Google mapping but can be given a unique Unicode mapping
-                del _i["Name.Google"]
-                del _i["UCS.PUA.Google"]
-                all_representations.setdefault(_i["UCS.Key"], {}).update(_i)
-    for _i in all_representations.values():
-        if "UCS.Key" in _i:
-            del _i["UCS.Key"] # Has served its purpose now
-        if "UCS.Standard" in _i:
-            if len(_i["UCS.Standard"].rstrip("\uFE0E\uFE0F")) == 1:
-                code = (ord(_i["UCS.Standard"][0]),)
-                if code in graphdata.gsets["zdings_g0"][2]:
-                    _i["SBCS.ZapfDingbats"] = bytes([0x21 + graphdata.gsets["zdings_g0"][2].index(code)])
-                if code in graphdata.rhses["998000"]:
-                    _i["SBCS.ZapfDingbats"] = bytes([0x80 + graphdata.rhses["998000"].index(code)])
-                if code in graphdata.gsets["webdings_g0"][2]:
-                    _i["SBCS.Webdings"] = bytes([0x21 + graphdata.gsets["webdings_g0"][2].index(code)])
-                if code in graphdata.rhses["999000"]:
-                    _i["SBCS.Webdings"] = bytes([0x80 + graphdata.rhses["999000"].index(code)])
-                if code in graphdata.gsets["wingdings1_g0"][2]:
-                    _i["SBCS.Wingdings_1"] = bytes([0x21 + 
-                        graphdata.gsets["wingdings1_g0"][2].index(code)])
-                if code in graphdata.rhses["999001"]:
-                    _i["SBCS.Wingdings_1"] = bytes([0x80 + graphdata.rhses["999001"].index(code)])
-                if code in graphdata.gsets["wingdings2_g0"][2]:
-                    _i["SBCS.Wingdings_2"] = bytes([0x21 + 
-                        graphdata.gsets["wingdings2_g0"][2].index(code)])
-                if code in graphdata.rhses["999002"]:
-                    _i["SBCS.Wingdings_2"] = bytes([0x80 + 
-                        graphdata.rhses["999002"].index(code)])
-                if code in graphdata.gsets["wingdings3_g0"][2]:
-                    _i["SBCS.Wingdings_3"] = bytes([0x21 + 
-                        graphdata.gsets["wingdings3_g0"][2].index(code)])
-                if code in graphdata.rhses["999003"]:
-                    _i["SBCS.Wingdings_3"] = bytes([0x80 + graphdata.rhses["999003"].index(code)])
-                #
-                if ucd.name(_i["UCS.Standard"][0], ""):
-                    _i["Name.Unicode"] = ucd.name(_i["UCS.Standard"][0])
-                elif _i["UCS.Standard"] == "\U0001F92A":
-                    # U+1F92A is Unicode 10 (2017). Somehow, this means Python 3.6 cannot name it.
-                    _i["Name.Unicode"] = "GRINNING FACE WITH ONE LARGE AND ONE SMALL EYE"
-                elif _i["UCS.Standard"] == "\U0001FA90":
-                    # Similarly
-                    _i["Name.Unicode"] = "RINGED PLANET"
-                elif ucd.category(_i["UCS.Standard"]) == "Co": # i.e. PUA
-                    del _i["UCS.Standard"]
-                else:
-                    print(_i)
-        if "ID.au" in _i and len(_i["ID.au"]) == 1:
-            _i["HREF.au"] = "http://www001.upp.so-net.ne.jp/hdml/emoji/e/{:d}.gif".format(
-                            _i["ID.au"][0])
-        if "ID.DoCoMo" in _i and len(_i["ID.DoCoMo"]) == 1:
-            if _i["ID.DoCoMo"][0] < 300:
-                _i["HREF.DoCoMo"] = ("https://www.nttdocomo.co.jp/service/developer/make/" + 
-                      "content/pictograph/basic/images/{:d}.gif".format(_i["ID.DoCoMo"][0]))
-            else:
-                _i["HREF.DoCoMo"] = ("https://www.nttdocomo.co.jp/service/developer/make/" + 
-                  "content/pictograph/extention/images/{:d}.gif".format(_i["ID.DoCoMo"][0] - 300))
-            # Encoding of emoji under Multibyte-Plane 9, Zone B of TRON code. Supposedly.
-            pua = ord(_i["UCS.PUA.DoCoMo"])
-            offset = pua - 0xE63E
-            cell = (offset % 94) + 1
-            rowbyte = (offset // 94) + 0x91
-            tron = bytes([rowbyte, cell + 0x20])
-            _i["TRON_PlaneMB9.DoCoMo"] = tron # i.e. shifted to by 0xFE, 0x29
-        if "UCS.PUA.SoftBank" in _i and len(_i["UCS.PUA.SoftBank"]) == 1:
-            _i["HREF.SoftBank"] = ("http://creation.mb.SoftBank.jp/mc/tech/tech_pic/img/" + 
-                                   "{:04X}_20.gif".format(ord(_i["UCS.PUA.SoftBank"][0])))
-        if "UCS.PUA.Google" in _i and len(_i["UCS.PUA.Google"]) == 1:
-            # Google was collaborating more with au by KDDI than the others, so the kddi_ne_jp
-            #   versions of the URLs might rationally be seen as the "default" of the three.
-            # All three schemes fall back to other sets if there isn't a glyph in that one
-            _i["HREF.Google"] = "https://mail.google.com/mail/e/kddi_ne_jp/{:03X}".format(
-                                    ord(_i["UCS.PUA.Google"][0]) & 0xFFF)
-    return all_representations
 
 outmap["docomo"] = tuple(outmap["docomo"])
 outmap["kddi"] = tuple(outmap["kddi"])
