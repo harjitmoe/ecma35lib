@@ -264,9 +264,57 @@ def get_all_representations():
                     _i["Name.Unicode"] = ucd.name(_i["UCS.Standard"][0])
     return all_representations
 
+def tabulate_pua(all_representations, specific_pua, f):
+    by_pua = {}
+    for _i in all_representations.values():
+        if specific_pua in _i:
+            if "UCS.Standard" in _i:
+                by_pua[_i[specific_pua]] = _i["UCS.Standard"]
+            elif "UCS.Suggested" in _i:
+                by_pua[_i[specific_pua]] = _i["UCS.Suggested"]
+            elif "UCS.Substitute" in _i:
+                by_pua[_i[specific_pua]] = _i["UCS.Substitute"]
+            else:
+                by_pua[_i[specific_pua]] = _i[specific_pua]
+    lines = sorted(list(set(ord(i) >> 4 for i in by_pua.keys())))
+    f.write("<!DOCTYPE html>")
+    f.write("""\
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+th {
+    background: papayawhip;
+}
+td {
+    width: 5vw;
+}</style>""")
+    f.write("<table style=' border-collapse: collapse;'><tr><th></th>")
+    for cell in range(16):
+        f.write("<th>_{:X}</th>".format(cell))
+    last = lines[0] - 1
+    for line in lines:
+        if line != (last + 1):
+            f.write("<tr><td colspan=17 style='text-align: center; background: dimgray;'>. . .</td></tr>")
+        f.write("<tr><th>U+{:03X}_</th>".format(line))
+        for cell in range(16):
+            puapoint = chr((line << 4) | cell)
+            if puapoint in by_pua:
+                f.write("<td>{}</td>".format(by_pua[puapoint]))
+            else:
+                f.write("<td style='background: dimgray;'></td>")
+        last = line
+    f.write("</table>")
+
 if __name__ == "__main__":
     from pprint import pformat, pprint
-    open("BlendedEmojiData.txt", "w").write(pformat(get_all_representations()))
+    all_representations = get_all_representations()
+    open("BlendedEmojiData.txt", "w").write(pformat(all_representations))
+    tabulate_pua(all_representations, "UCS.PUA.au.app", open("KDDIapp.html", "w"))
+    tabulate_pua(all_representations, "UCS.PUA.au.web", open("KDDIweb.html", "w"))
+    tabulate_pua(all_representations, "UCS.PUA.DoCoMo", open("docomo.html", "w"))
+    tabulate_pua(all_representations, "UCS.PUA.SoftBank", open("softbank.html", "w"))
+    tabulate_pua(all_representations, "UCS.PUA.Google", open("google.html", "w"))
 
 
 

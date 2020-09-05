@@ -115,7 +115,7 @@ forced = {
     "FEE70": "\uf861[Js",
     "FEE71": "\uf861ky]",
     "FEE77": "🄹",
-    "FEE78": "🪐", # Newer emoji similar to this one.
+    "FEE78": "🪐\uf87f", # Newer emoji vaguely similar to this one.
     "FEE7A": "🎵\u200D🔊",
     "FEE7B": "\uf861[J-",
     "FEE7C": "\uf861PHO",
