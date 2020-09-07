@@ -206,16 +206,16 @@ def get_all_representations():
             arp["UCS.PUA.au.web"] = _i["UCS.PUA.au.web"]
             arp["UCS.Pictorial"] = _i["UCS.Pictorial"]
             arp["UCS.Symbolic"] = _i["UCS.Symbolic"]
-    for (myset, u) in ((graphdata.gsets["zdings_g0"][2], "SBCS.ZapfDingbats",),
-                       (graphdata.rhses["998000"], "SBCS.ZapfDingbats",),
-                       (graphdata.gsets["webdings_g0"][2], "SBCS.Webdings",),
-                       (graphdata.rhses["999000"], "SBCS.Webdings",),
-                       (graphdata.gsets["wingdings1_g0"][2], "SBCS.Wingdings_1",),
-                       (graphdata.rhses["999001"], "SBCS.Wingdings_1",),
-                       (graphdata.gsets["wingdings2_g0"][2], "SBCS.Wingdings_2",),
-                       (graphdata.rhses["999002"], "SBCS.Wingdings_2",),
-                       (graphdata.gsets["wingdings3_g0"][2], "SBCS.Wingdings_3",),
-                       (graphdata.rhses["999003"], "SBCS.Wingdings_3",)):
+    for (myset, u, ofst) in ((graphdata.gsets["zdings_g0"][2], "SBCS.ZapfDingbats", 0x21),
+                       (graphdata.rhses["998000"], "SBCS.ZapfDingbats", 0x80),
+                       (graphdata.gsets["webdings_g0"][2], "SBCS.Webdings", 0x21),
+                       (graphdata.rhses["999000"], "SBCS.Webdings", 0x80),
+                       (graphdata.gsets["wingdings1_g0"][2], "SBCS.Wingdings_1", 0x21),
+                       (graphdata.rhses["999001"], "SBCS.Wingdings_1", 0x80),
+                       (graphdata.gsets["wingdings2_g0"][2], "SBCS.Wingdings_2", 0x21),
+                       (graphdata.rhses["999002"], "SBCS.Wingdings_2", 0x80),
+                       (graphdata.gsets["wingdings3_g0"][2], "SBCS.Wingdings_3", 0x21),
+                       (graphdata.rhses["999003"], "SBCS.Wingdings_3", 0x80)):
         for code in myset:
             if not code:
                 continue
@@ -223,7 +223,7 @@ def get_all_representations():
             if scode not in counts_as_emoji:
                 continue
             scode = add_fe0f.get(scode, scode)
-            _get_ref(all_representations, scode)[u] = bytes([0x80 + myset.index(code)])
+            _get_ref(all_representations, scode)[u] = bytes([ofst + myset.index(code)])
     for (myset, u, ofst) in ((graphdata.gsets["ir233"][2], "JIS.2004", 0x20),
                              (japan.arib_extonly, "JIS.ARIB", 0x20),
                              (graphdata.gsets["ir149-2002"][2], "MBCS_EUC.Wansung", 0xA0),

@@ -8,8 +8,7 @@
 
 import unicodedata as ucd
 
-from ecma35.data import graphdata
-from ecma35.data.multibyte import variationhints
+from ecma35.data import graphdata, variationhints
 
 def formatcode(tpl):
     if tpl is None:
