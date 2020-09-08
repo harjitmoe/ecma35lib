@@ -149,10 +149,10 @@ graphdata.gsets["ir168mackt6"] = jisx0208_applekt6 = (94, 2, kanjitalk6)
 
 # Emoji
 _windows_noNECSel = parsers.fuse([
-        ((None,) * 7996) + (((1,),) * 840),
+        ((None,) * 7996) + (((-1,),) * 840),
         jisx0208_html5[2]], "WinJIS_noNECSel.json")
 _windows_noNECSel_au = parsers.fuse([
-        ((None,) * 7996) + (((1,),) * 840),
+        ((None,) * 7996) + (((-1,),) * 840),
         parsers.read_main_plane("ICU/kddi-sjis.ucm", sjis=1, plane=1)], "WinJIS_noNECSel_au.json")
 arib_extonly = parsers.read_main_plane("Custom/pict_arib.txt", sjis=1)
 graphdata.gsets["ir168arib"] = jisx0208_arib = (94, 2, 
