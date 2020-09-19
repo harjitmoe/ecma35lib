@@ -6,7 +6,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import os, collections, re, sys, binascii
+import os, collections, re, sys, binascii, xml.dom.minidom
 import unicodedata as ucd
 from ecma35.data.multibyte import mbmapparsers as parsers
 
@@ -262,6 +262,16 @@ with open(os.path.join(parsers.directory, "AOSP/gmojiraw.txt"), encoding="utf-8"
         pull(line, row, "softbank")
         assert [i.strip() for i in line] == ["", "", ""]
         sets.append(row)
+
+cldrnames = {}
+_document = xml.dom.minidom.parse(os.path.join(parsers.directory, "CLDR/annotations/en.xml"))
+for _i in _document.getElementsByTagName("annotation"):
+    if _i.hasAttribute("type") and _i.getAttribute("type") == "tts":
+        cldrnames[_i.getAttribute("cp")] = _i.firstChild.wholeText
+_document = xml.dom.minidom.parse(os.path.join(parsers.directory, "CLDR/annotationsDerived/en.xml"))
+for _i in _document.getElementsByTagName("annotation"):
+    if _i.hasAttribute("type") and _i.getAttribute("type") == "tts":
+        cldrnames[_i.getAttribute("cp")] = _i.firstChild.wholeText
 
 def _multiucs(hexstring):
     return "".join(chr(int(_i, 16)) for _i in hexstring.split("+"))

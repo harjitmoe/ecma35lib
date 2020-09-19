@@ -11,7 +11,7 @@ import unicodedata as ucd
 from ecma35.data import maxmat, graphdata
 from ecma35.data.multibyte import mbmapparsers as parsers
 from ecma35.data.multibyte import japan
-from ecma35.data.multibyte.cellemojidata import all_jcarrier_raw, gspua_to_ucs_possibs
+from ecma35.data.multibyte.cellemojidata import all_jcarrier_raw, gspua_to_ucs_possibs, cldrnames
 
 data = os.path.join(parsers.directory, "UCD", "emoji-sequences.txt")
 data2 = os.path.join(parsers.directory, "UCD", "emoji-sequences.txt")
@@ -262,6 +262,9 @@ def get_all_representations():
             elif len(_i["UCS.Standard"].rstrip("\uFE0E\uFE0F")) == 1:
                 if ucd.name(_i["UCS.Standard"][0], ""):
                     _i["Name.Unicode"] = ucd.name(_i["UCS.Standard"][0])
+            #
+            if _i["UCS.Standard"].replace("\uFE0F", "") in cldrnames:
+                _i["Name.CLDR"] = cldrnames[_i["UCS.Standard"].replace("\uFE0F", "")]
     return all_representations
 
 def tabulate_pua(all_representations, specific_pua, f):
@@ -310,6 +313,7 @@ if __name__ == "__main__":
     from pprint import pformat, pprint
     all_representations = get_all_representations()
     open("BlendedEmojiData.txt", "w").write(pformat(all_representations))
+    open("cldrnames.txt", "w").write(pformat(cldrnames))
     tabulate_pua(all_representations, "UCS.PUA.au.app", open("KDDIapp.html", "w"))
     tabulate_pua(all_representations, "UCS.PUA.au.web", open("KDDIweb.html", "w"))
     tabulate_pua(all_representations, "UCS.PUA.DoCoMo", open("docomo.html", "w"))
