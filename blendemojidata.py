@@ -11,7 +11,8 @@ import unicodedata as ucd
 from ecma35.data import maxmat, graphdata
 from ecma35.data.multibyte import mbmapparsers as parsers
 from ecma35.data.multibyte import japan
-from ecma35.data.multibyte.cellemojidata import all_jcarrier_raw, gspua_to_ucs_possibs, cldrnames
+from ecma35.data.multibyte.cellemojidata import all_jcarrier_raw, gspua_to_ucs_possibs
+from ecma35.data.names.namedata import cldrnames
 
 data = os.path.join(parsers.directory, "UCD", "emoji-sequences.txt")
 data2 = os.path.join(parsers.directory, "UCD", "emoji-sequences.txt")
