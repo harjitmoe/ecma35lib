@@ -11,7 +11,14 @@ import unicodedata as ucd
 
 directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "namemaps")
 _no_default = object() # need a unique featureless object which isn't used anywhere else.
-_nonword = re.compile(r"[^\w-]+")
+_nonword = re.compile(r"\W+", re.U)
+_nonword2 = re.compile(r"[^\w-]+", re.U)
+
+def _make_shortcode(cldrname, preshyph=False):
+    code = cldrname.replace("#", "number_sign").replace("*", "asterisk")
+    code = ":" + "_".join((_nonword2 if preshyph else _nonword).split(code.casefold())) + ":"
+    code = "".join(i for i in ucd.normalize("NFD", code) if ucd.category(i)[0] != "M")
+    return code
 
 cldrnames = {}
 _document = xml.dom.minidom.parse(os.path.join(directory, "CLDR/annotations/en.xml"))
@@ -24,16 +31,15 @@ for _i in _document.getElementsByTagName("annotation"):
         cldrnames[_i.getAttribute("cp")] = _i.firstChild.wholeText
 rcldrnames = dict(zip(cldrnames.values(), cldrnames.keys()))
 rcldrnamesi = dict(zip((_i.casefold() for _i in cldrnames.values()), cldrnames.keys()))
-rcldrnameseac = dict(zip(((":" + "_".join(_nonword.split(_i.casefold())) + ":"
-                           if ("#" not in _i) and ("*" not in _i) else None
-                          ) for _i in cldrnames.values()
-                         ), cldrnames.keys()))
+rcldrnameseac = dict(zip((_make_shortcode(_i, preshyph=False) for _i in cldrnames.values()),
+                         cldrnames.keys()))
 
 def get_cldrname(ucs, default=_no_default, *, fallback=True):
-    if ucs.replace("\uFE0F", "") in cldrnames:
-        return cldrnames[ucs.replace("\uFE0F", "")]
-    if fallback and (len(ucs) == 1):
-        altname = ucd.name(ucs, None)
+    ucss = ucs.replace("\uFE0F", "")
+    if ucss in cldrnames:
+        return cldrnames[ucss]
+    if fallback and (len(ucss) == 1):
+        altname = ucd.name(ucss, None)
         if altname:
             altname = altname.title()
             if altname.casefold() in rcldrnames:
@@ -55,9 +61,9 @@ def lookup_cldrname(name, default=_no_default, *, fallback=True, insensitive=Tru
             tryucs = ucd.lookup(name.casefold().upper().replace("UNICODE ", ""), None)
             if tryucs:
                 return tryucs
-        if default is _no_default:
-            raise KeyError("unrecognised CLDR name: {!r}".format(name))
-        return default
+    if default is _no_default:
+        raise KeyError("unrecognised CLDR name: {!r}".format(name))
+    return default
 
 with open(os.path.join(directory, "emoji-toolkit/extras/alpha-codes/eac.json"), "r") as f:
     _eacraw = json.load(f)
@@ -74,12 +80,16 @@ for _i, _js in eacs.items():
         reac[_j] = _i
 
 def get_shortcode(ucs, default=_no_default, *, fallback=True):
-    if ucs.replace("\uFE0F", "") in eac:
-        return eac[ucs.replace("\uFE0F", "")]
+    ucss = ucs.replace("\uFE0F", "")
+    if ucss in eac:
+        return eac[ucss]
     if fallback:
-        cldrname = get_cldrname(ucs, None, fallback=True, insensitive=True)
+        cldrname = get_cldrname(ucs, None, fallback=False)
         if cldrname:
-            return ":" + "_".join(_nonword.split(cldrname.casefold())) + ":"
+            return _make_shortcode(cldrname, preshyph=False)
+        ucsname = get_cldrname(ucs, None, fallback=True)
+        if ucsname:
+            return _make_shortcode(ucsname, preshyph=True)
     if default is _no_default:
         raise KeyError("no shortcode name: {!r}".format(ucs))
     return default
@@ -96,9 +106,9 @@ def lookup_shortcode(name, default=_no_default, *, fallback=True):
                 return ucd.lookup(name.casefold().upper().replace("_", " ").strip(":").replace("UNICODE ", ""))
             except KeyError:
                 pass
-        if default is _no_default:
-            raise KeyError("unrecognised shortcode: {!r}".format(name))
-        return default
+    if default is _no_default:
+        raise KeyError("unrecognised shortcode: {!r}".format(name))
+    return default
 
 
 
