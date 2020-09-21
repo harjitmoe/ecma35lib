@@ -14,10 +14,70 @@ _no_default = object() # need a unique featureless object which isn't used anywh
 _nonword = re.compile(r"\W+", re.U)
 _nonword2 = re.compile(r"[^\w-]+", re.U)
 
+ucsnames = {}
+rucsnames = {}
+ucscats = {}
+canonical_decomp = {} # TODO apparently excludes hangul, which are presumably algorithmic?
+compat_decomp = {}
+with open(os.path.join(directory, "UCD/UnicodeData.txt"), "r") as f:
+    for line in f:
+        if not line.strip() or (line[0] == "#"):
+            continue
+        _ucs, _ucsname, _ucscat, _carenot1, _carenot2, _decompos, _carenot3 = line.split(";", 6)
+        _ucs = chr(int(_ucs, 16))
+        if _ucsname[0] != "<":
+            ucsnames[_ucs] = _ucsname
+            rucsnames[_ucsname] = _ucs
+        if _decompos:
+            if _decompos[0] != "<": # i.e. if it exists and is of canonical type
+                _decompos = "".join(chr(int(_j, 16)) for _j in _decompos.split())
+                canonical_decomp[_ucs] = _decompos
+            else:
+                _dectype, _decompos = _decompos[1:].split("> ", 1)
+                _decompos = "".join(chr(int(_j, 16)) for _j in _decompos.split())
+                compat_decomp[_ucs] = (_dectype, _decompos)
+        ucscats[_ucs] = _ucscat
+with open(os.path.join(directory, "UCD/NamedSequences.txt"), "r") as f:
+    for line in f:
+        if not line.strip() or (line[0] == "#"):
+            continue
+        _ucsname, _ucs = line.split(";", 1)
+        _ucs = "".join(chr(int(_i, 16)) for _i in _ucs.split())
+        ucsnames[_ucs] = _ucsname
+        rucsnames[_ucsname] = _ucs
+
+def get_ucsname(ucs, default=_no_default):
+    if ucs in ucsnames:
+        return ucsnames[ucs]
+    elif default is _no_default:
+        raise KeyError("no known UCS name: {!r}".format(ucs))
+    else:
+        return default
+
+def lookup_ucsname(name, default=_no_default):
+    if name in rucsnames:
+        return rucsnames[name]
+    elif default is _no_default:
+        raise KeyError("unrecognised UCS name: {!r}".format(name))
+    else:
+        return default
+
+def get_ucscategory(ucs, default=_no_default):
+    if ucs in ucscats:
+        return ucscats[ucs]
+    elif default is _no_default:
+        raise KeyError("no known UCS category: {!r}".format(ucs))
+    else:
+        return default
+
 def _make_shortcode(cldrname, preshyph=False):
+    # Turn a CLDR name into what will usually match the so-called "Emojipedia" shortcodes, which
+    # are generated from CLDR names. The preshyph arg preserves hyphens rather than changing them
+    # to underscores, and is intended to be used in UCS name fallback cases, where parsing the
+    # resulting shortcode relies on re-obtaining the original UCS name.
     code = cldrname.replace("#", "number_sign").replace("*", "asterisk")
     code = ":" + "_".join((_nonword2 if preshyph else _nonword).split(code.casefold())) + ":"
-    code = "".join(i for i in ucd.normalize("NFD", code) if ucd.category(i)[0] != "M")
+    code = "".join(canonical_decomp.get(i, i)[0] for i in code) # strip diacritics
     return code
 
 cldrnames = {}
@@ -38,8 +98,8 @@ def get_cldrname(ucs, default=_no_default, *, fallback=True):
     ucss = ucs.replace("\uFE0F", "")
     if ucss in cldrnames:
         return cldrnames[ucss]
-    if fallback and (len(ucss) == 1):
-        altname = ucd.name(ucss, None)
+    if fallback:
+        altname = get_ucsname(ucss, None)
         if altname:
             altname = altname.title()
             if altname.casefold() in rcldrnames:
@@ -58,7 +118,7 @@ def lookup_cldrname(name, default=_no_default, *, fallback=True, insensitive=Tru
             return rcldrnames[name]
     except KeyError:
         if fallback:
-            tryucs = ucd.lookup(name.casefold().upper().replace("UNICODE ", ""), None)
+            tryucs = lookup_ucsname(name.casefold().upper().replace("UNICODE ", ""), None)
             if tryucs:
                 return tryucs
     if default is _no_default:
@@ -68,16 +128,13 @@ def lookup_cldrname(name, default=_no_default, *, fallback=True, insensitive=Tru
 with open(os.path.join(directory, "emoji-toolkit/extras/alpha-codes/eac.json"), "r") as f:
     _eacraw = json.load(f)
 eac = {}
-eacs = {}
 reac = {}
 for _i in _eacraw.values():
-    _ucs = _i["output"].replace("-fe0f", "")
-    _ucs = "".join(chr(int(_j, 16)) for _j in _ucs.split("-"))
-    eac[_ucs] = _i["alpha_code"]
-    eacs[_ucs] = (_i["alpha_code"],) + tuple(_i["aliases"].split("|"))
-for _i, _js in eacs.items():
-    for _j in _js:
-        reac[_j] = _i
+    _ucs = "".join(chr(int(_j, 16)) for _j in _i["output"].split("-"))
+    _ucss = _ucs.replace("\uFE0F", "")
+    eac[_ucss] = _i["alpha_code"]
+    for _j in (_i["alpha_code"],) + tuple(_i["aliases"].split("|")):
+        reac[_j] = _ucs
 
 def get_shortcode(ucs, default=_no_default, *, fallback=True):
     ucss = ucs.replace("\uFE0F", "")
@@ -102,10 +159,11 @@ def lookup_shortcode(name, default=_no_default, *, fallback=True):
             trycldr = rcldrnameseac.get(name.casefold(), None)
             if trycldr:
                 return trycldr
-            try:
-                return ucd.lookup(name.casefold().upper().replace("_", " ").strip(":").replace("UNICODE ", ""))
-            except KeyError:
-                pass
+            if name[0] == name[-1] == ":":
+                tryucs = lookup_ucsname(name.casefold().upper().replace("_", " ").strip(":"
+                                        ).replace("UNICODE ", ""), None)
+                if tryucs:
+                    return tryucs
     if default is _no_default:
         raise KeyError("unrecognised shortcode: {!r}".format(name))
     return default
