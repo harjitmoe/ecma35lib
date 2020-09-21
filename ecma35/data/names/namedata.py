@@ -44,9 +44,12 @@ def get_cldrname(ucs, default=_no_default, *, fallback=True):
         raise KeyError("no CLDR name: {!r}".format(ucs))
     return default
 
-def lookup_cldrname(name, default=_no_default, *, fallback=True):
+def lookup_cldrname(name, default=_no_default, *, fallback=True, insensitive=True):
     try:
-        return rcldrnames[name.casefold()]
+        if insensitive:
+            return rcldrnames.get(name, rcldrnamesi[name.casefold()])
+        else:
+            return rcldrnames[name]
     except KeyError:
         if fallback:
             tryucs = ucd.lookup(name.casefold().upper().replace("UNICODE ", ""), None)
@@ -74,7 +77,7 @@ def get_shortcode(ucs, default=_no_default, *, fallback=True):
     if ucs.replace("\uFE0F", "") in eac:
         return eac[ucs.replace("\uFE0F", "")]
     if fallback:
-        cldrname = get_cldrname(ucs, None, fallback=True)
+        cldrname = get_cldrname(ucs, None, fallback=True, insensitive=True)
         if cldrname:
             return ":" + "_".join(_nonword.split(cldrname.casefold())) + ":"
     if default is _no_default:
