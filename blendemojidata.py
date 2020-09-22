@@ -55,26 +55,6 @@ def _get_ref(all_representations, scode):
     else:
         return all_representations.setdefault(scode, {"UCS.Standard": scode})
 
-special_ucsnames = {
-    # U+1F92A is Unicode 10 (2017). Somehow, this means Python 3.6 cannot name it.
-    "\U0001F92A": "GRINNING FACE WITH ONE LARGE AND ONE SMALL EYE",
-    # Similarly:
-    "\U0001FA90": "RINGED PLANET",
-    # Named Sequences: https://www.unicode.org/Public/UCD/latest/ucd/NamedSequences.txt
-    "#\uFE0F\u20E3": "KEYCAP NUMBER SIGN",
-    "*\uFE0F\u20E3": "KEYCAP ASTERISK",
-    "0\uFE0F\u20E3": "KEYCAP DIGIT ZERO",
-    "1\uFE0F\u20E3": "KEYCAP DIGIT ONE",
-    "2\uFE0F\u20E3": "KEYCAP DIGIT TWO",
-    "3\uFE0F\u20E3": "KEYCAP DIGIT THREE",
-    "4\uFE0F\u20E3": "KEYCAP DIGIT FOUR",
-    "5\uFE0F\u20E3": "KEYCAP DIGIT FIVE",
-    "6\uFE0F\u20E3": "KEYCAP DIGIT SIX",
-    "7\uFE0F\u20E3": "KEYCAP DIGIT SEVEN",
-    "8\uFE0F\u20E3": "KEYCAP DIGIT EIGHT",
-    "9\uFE0F\u20E3": "KEYCAP DIGIT NINE",
-}
-
 def get_all_representations():
     all_representations = {}
     ucs_possibs_to_gspua = dict(zip([frozenset(i) for i in gspua_to_ucs_possibs.values()],

@@ -12,6 +12,7 @@ import os, json, shutil
 import unicodedata as ucd
 from ecma35.data import gccdata
 from ecma35.data.multibyte import mbmapparsers as parsers
+from ecma35.data.names import namedata
 
 applesinglehints = {
     # Some notes: these should be to Unicode characters postdating the mapping data.
@@ -311,9 +312,9 @@ def ahmap(pointer, ucs):
         else:
             # Extra-ordinary composition
             return tuple(ord(i) for i in gccdata.gcc_sequences.get(ucss, ucss))
-    elif (len(ucs) == 2) and ucd.name(chr(ucs[0]), None) and (ucs[1] == 0x20DE):
+    elif (len(ucs) == 2) and namedata.get_ucsname(chr(ucs[0]), None) and (ucs[1] == 0x20DE):
         try:
-            return (ord(ucd.lookup("SQUARED " + ucd.name(chr(ucs[0])))), )
+            return (ord(namedata.lookup_ucsname("SQUARED " + namedata.get_ucsname(chr(ucs[0])))), )
         except KeyError:
             return ucs
     return ucs
@@ -346,15 +347,15 @@ def print_hints_to_html5(i, outfile, *, lang="ja"):
         strep = "".join(chr(j) for j in i)
     else:
         strep = "".join(chr(j) for j in i)
-        firststrep = ucd.normalize("NFD", strep)[0] # Note: NOT NFKD.
+        firststrep = namedata.canonical_decomp.get(strep, strep)[0]
         if (ord(firststrep) < 0x7F) and (strep[1:2] != "\u20E3"): # Don't include keycaps.
             print("<span class='codepicture roman'>", file=outfile)
-        elif (ucd.category(firststrep)[0] == "M") and (ord(firststrep) < 0x3000):
+        elif (namedata.get_ucscategory(firststrep)[0] == "M") and (ord(firststrep) < 0x3000):
             print("<span class='codepicture roman'>", file=outfile)
         else:
             print("<span class=codepicture lang={}>".format(lang), file=outfile)
     strep = strep.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
-    if ucd.category(strep[0])[0] == "M":
+    if namedata.get_ucscategory(strep[0])[0] == "M":
         strep = "◌" + strep
     if strep[-1] == "\uF87B": # Apple encoding hint for usually medium bold form
         print("<b>", file=outfile)

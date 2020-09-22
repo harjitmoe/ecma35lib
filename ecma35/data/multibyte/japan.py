@@ -7,10 +7,10 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import os, json, shutil
-import unicodedata as ucd
 from ecma35.data import graphdata, variationhints
 from ecma35.data.multibyte import mbmapparsers as parsers
 from ecma35.data.multibyte import cellemojidata
+from ecma35.data.names import namedata
 
 # Use of Zenkaku vs. Hankaku codepoints differs between the x0213.org mappings for EUC vs. SJIS.
 # If we don't know what SBCS it's being used with, best to just use Zenkaku consistently…
@@ -20,12 +20,14 @@ def _flatten(u):
         # the formal name seems to suggest U+00AF (informal annotations identify U+203E as
         # another). In either case, the NFKC is actually U+0020+0304, which isn't suitable here.
         return "\u203e"
-    return ucd.normalize("NFKC", u)
+    decomp = namedata.compat_decomp.get(u, (None, u))
+    if decomp[0] == "wide":
+        return decomp[1]
+    return u
 _to_zenkaku = dict([
     (ord(_flatten(chr(i))), i)
     for i in range(0xFF00, 0xFFF0) 
-    if ucd.east_asian_width(chr(i)) == "F"
-       and i not in (0xFFE0, 0xFFE1, 0xFFE2) # Not affected by which out of EUC and SJIS is used.
+    if i not in (0xFFE0, 0xFFE1, 0xFFE2) # Not affected by which out of EUC and SJIS is used.
 ])
 def map_to_zenkaku(pointer, ucs):
     if len(ucs) == 1 and ucs[0] in _to_zenkaku:

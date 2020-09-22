@@ -6,8 +6,8 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import unicodedata as ucd
-import os, json
+import os, json, sys
+from ecma35.data.names import namedata
 
 # GCC invocation (per ECMA-48):
 #   CSI SP _ or CSI 0 SP _: combine next two characters.
@@ -29,8 +29,6 @@ if not os.path.exists(cachefile):
         # The basmala is included as a single codepoint but, unlike the SAW, doesn't have a
         # decomposition. So, including it manually (at the same level of pointing as with the SAW).
         "بسم الله الرحمن الرحيم": "﷽",
-        # For now, the Reiwa might not be present in the unicodedata module, so make sure it's there.
-        "令和": "㋿",
         # MacJapanese mapping uses a character combination of ↓ and ↑ for ⇵ (added to UCS later??).
         # Other adjacently stacked vertical arrow pairs are included for purpose of completeness.
         "↓↑": "⇵", "↑↓": "⇅", "↑↑": "⇈", "↓↓": "⇊",
@@ -54,25 +52,16 @@ if not os.path.exists(cachefile):
     #   associate with the following, not preceding, base character, due to visually being placed to 
     #   its left, an approach not taken for other Brahmi scripts. (This would presumably be why the 
     #   AM doesn't break apart on a mere NFD?)
-    for ii in (list(range(0x600)) + list(range(0x700, 0xE00)) + list(range(0xEDC, 0xFB4F)) + 
+    for i in (list(range(0x600)) + list(range(0x700, 0xE00)) + list(range(0xEDC, 0xFB4F)) + 
                list(range(0xFDF0, 0xFE00)) + list(range(0xFF00, 0x10FFFF))):
-        i = ucd.normalize("NFD", chr(ii))[0]
-        k = ucd.normalize("NFKC", ucd.normalize("NFKD", i))
-        if (len(k) > len(i)) and (ucd.category(k[1])[0] != "M"):
-            # Restore superscripting in the compatibility mappings which is included in the UCD data 
-            # but which gets wiped out by the idempotent version (NFKD).
-            if k[-1] == "2" and (ucd.category(k[0])[0] != "N"):
-                k = k[:-1] + "²"
-            elif k[-1] == "3" and (ucd.category(k[0])[0] != "N"):
-                k = k[:-1] + "³"
+        i = chr(i)
+        if i in namedata.canonical_decomp:
+            continue
+        k = namedata.compat_decomp.get(i, (None, i))[1]
+        if (len(k) > len(i)) and (namedata.get_ucscategory(k[1])[0] != "M"):
             gcc_sequences[k] = i
 
     gcc_sequences["pH"] = gcc_sequences["PH"] # Well, they messed that decomposition up, didn't they.
-
-    # The following both have the same NFKD (idempotent compatibility decomposition), so separate them.
-    # Incidentally, they don't have the same compatibility decomposition mapping (just that ſ further
-    # decomposes to s), but Python doesn't provide a convenient way to use those.
-    (gcc_sequences["ſt"], gcc_sequences["st"]) = ("ﬅ", "ﬆ")
 
     # Generally speaking, GCC sequences are expected to be of ISO 8859 characters where applicable.
     # Doesn't mean that their Unicode decompositions can't also be supported.
@@ -86,6 +75,9 @@ if not os.path.exists(cachefile):
     for i in gcc_sequences.copy():
         if "\u02BC" in i:
             gcc_sequences[i.replace("\u02BC", "'")] = gcc_sequences[i]
+    for i in gcc_sequences.copy():
+        if "ℓ" in i:
+            gcc_sequences[i.replace("ℓ", "l")] = gcc_sequences[i]
 
     # Micro-thing unit symbol blocks just as much sense in contexts with the ISO-8859-1 repertoire 
     # (including U+00B5) as in those with the ISO-8859-7 repertoire (including U+03BC). It's the 

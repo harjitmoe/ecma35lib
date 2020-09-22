@@ -9,6 +9,7 @@
 import os, collections, re, sys, binascii
 import unicodedata as ucd
 from ecma35.data.multibyte import mbmapparsers as parsers
+from ecma35.data.names import namedata
 
 # softbank (2, 84, 86) J-PHONE SHOP
 # softbank (2, 84, 87) SKY WEB
@@ -150,7 +151,7 @@ def pull(line, row, name, *, iskddi = False):
     if not line[0]:
         # i.e. a mapping given
         unic = "".join(sauces[name].get(i, "\uFFFD") for i in line[2].split("+"))
-        uniname = "+".join(ucd.name(i) for i in unic)
+        uniname = "+".join(namedata.get_ucsname(i) for i in unic)
         if unic == "\uFFFD":
             unic = uniname = ""
         group = line[:5] if not iskddi else line[:6]

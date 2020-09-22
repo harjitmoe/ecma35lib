@@ -6,6 +6,10 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+# Some of this functionality might be seen as duplicating the unicodedata module, but there are
+# notable differences (e.g. accepting Unicode 1 names or named sequence names). It also has the
+# advantage of not tying the supported Unicode version to the Python version.
+
 import os, json, xml.dom.minidom, re
 
 directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "namemaps")
@@ -51,7 +55,10 @@ def _is_pua(ucs):
 ucsnames = {}
 rucsnames = {}
 ucscats = {}
-canonical_decomp = {} # TODO apparently excludes hangul, which are presumably algorithmic?
+# Note: these differ from NFD and NFKD in not including diacritic re-ordering and in not being the
+#   idempotent versions (i.e. a compatibility decomposition can sometimes decompose further).
+#   Tags are also kept around with compatibility decompositions where applicable.
+canonical_decomp = {}
 compat_decomp = {}
 with open(os.path.join(directory, "UCD/UnicodeData.txt"), "r") as f:
     for line in f:

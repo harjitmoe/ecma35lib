@@ -9,9 +9,9 @@
 # Korea (both South and North)
 
 import os, json, shutil
-import unicodedata as ucd
 from ecma35.data import graphdata, variationhints
 from ecma35.data.multibyte import mbmapparsers as parsers
+from ecma35.data.names import namedata
 
 _temp = []
 def read_kps9566extras(fil):
@@ -211,7 +211,7 @@ non_wangsung_johab = [i for i in range(0xAC00, 0xD7A4)
 
 # Similarly for the KPS encoding:
 def _sort_by_kps(syll):
-    deco = ucd.normalize("NFD", chr(syll))
+    deco = namedata.canonical_decomp[chr(syll)]
     if len(deco) == 2:
         init, vow = deco
         fin = ""
