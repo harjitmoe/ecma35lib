@@ -7,7 +7,6 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import os, collections, re, sys, binascii
-import unicodedata as ucd
 from ecma35.data.multibyte import mbmapparsers as parsers
 from ecma35.data.names import namedata
 

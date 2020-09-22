@@ -6,8 +6,8 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import unicodedata as ucd
 from ecma35.data.multibyte.korea import initials, vowels, finals, compjamo
+from ecma35.data.names import namedata
 
 def proc_hangul_fillers(stream, state):
     first = second = third = fourth = None
@@ -43,7 +43,7 @@ def proc_hangul_fillers(stream, state):
                     yield first
                     first, second, third, fourth = second, third, fourth, None
                 else:
-                    cunic = ucd.normalize("NFC", unic)
+                    cunic = namedata.canonical_recomp.get(unic, unic)
                     sources = (first, second, third, fourth)
                     yield ("COMPCHAR", tuple(ord(i) for i in cunic), sources)
                     first = second = third = fourth = None

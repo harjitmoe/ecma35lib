@@ -59,6 +59,7 @@ ucscats = {}
 #   idempotent versions (i.e. a compatibility decomposition can sometimes decompose further).
 #   Tags are also kept around with compatibility decompositions where applicable.
 canonical_decomp = {}
+canonical_recomp = {}
 compat_decomp = {}
 with open(os.path.join(directory, "UCD/UnicodeData.txt"), "r") as f:
     for line in f:
@@ -74,6 +75,8 @@ with open(os.path.join(directory, "UCD/UnicodeData.txt"), "r") as f:
             if _decompos[0] != "<" and not _is_cjkci(_ucs):
                 _decompos = "".join(chr(int(_j, 16)) for _j in _decompos.split())
                 canonical_decomp[_ucs] = _decompos
+                if len(_decompos) > 1:
+                    canonical_recomp[_decompos] = _ucs
             elif _decompos[0] == "<":
                 _dectype, _decompos = _decompos[1:].split("> ", 1)
                 _decompos = "".join(chr(int(_j, 16)) for _j in _decompos.split())
@@ -122,8 +125,10 @@ for _initial in range(19):
             _finalcode = chr(0x11A7 + _final) if _final else None
             if _finalcode:
                 canonical_decomp[_syllcode] = _initcode + _medialcode + _finalcode
+                canonical_recomp[_initcode + _medialcode + _finalcode] = _syllcode
             else:
                 canonical_decomp[_syllcode] = _initcode + _medialcode
+                canonical_recomp[_initcode + _medialcode] = _syllcode
             _initname = ucsnames[_initcode].rsplit("CHOSEONG", 1)[1]
             _medialname = ucsnames[_medialcode].rsplit("JUNGSEONG", 1)[1]
             _finalname = ucsnames[_finalcode].rsplit("JONGSEONG", 1)[1] if _finalcode else ""

@@ -7,8 +7,8 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import unicodedata as ucd
-
 from ecma35.data import graphdata, variationhints
+from ecma35.data.names import namedata
 
 def formatcode(tpl):
     if tpl is None:
@@ -86,7 +86,7 @@ def show(name, *, plane=None):
         elif (not isinstance(i, tuple)) and (i < 0):
             curchar = "\u25CC" + chr(-i)
             zenkaku = False
-        elif isinstance(i, tuple) and (ucd.category(chr(i[0])) == "Co"):
+        elif isinstance(i, tuple) and (namedata.get_ucscategory(chr(i[0])) == "Co"):
             if len(i) == 1:
                 curchar = "\x1B[35m\uFFFC\x1B[m"
             else:
@@ -131,7 +131,7 @@ def show(name, *, plane=None):
                 else:
                     curchar = "\x1B[33m" + curchar[:-1] + "\x1B[m"
             zenkaku = (ucd.east_asian_width(chr(i[0])) in ("W", "F"))
-        elif ucd.category(chr(i)) == "Co":
+        elif namedata.get_ucscategory(chr(i)) == "Co":
             curchar = "\x1B[32m\uFFFC\x1B[m"
             zenkaku = False
         elif 0x80 <= i <= 0x9F:
@@ -274,7 +274,7 @@ def is_kanji(cdisplayi):
     if not cdisplayi:
         return None
     elif (len(cdisplayi) > 1) and not ((len(cdisplayi) == 2) and 
-                              ucd.name(chr(cdisplayi[1]), "").startswith("VARIATION SELECTOR")):
+                              namedata.get_ucsname(chr(cdisplayi[1]), "").startswith("VARIATION SELECTOR")):
         return False
     elif 0x3400 <= cdisplayi[0] < 0x4DC0:
         return True
@@ -290,7 +290,7 @@ def is_kanji(cdisplayi):
         return False
 
 def categorise(codept, *, no_ext_punct = True):
-    cat = ucd.category(codept)
+    cat = namedata.get_ucscategory(codept)
     if cat[0] == "L":
         colour = "-letter"
     elif cat[0] == "N":
@@ -375,7 +375,7 @@ def _dump_wikitable_row(outfile, typ, array, name="", plane=-1, row=-1, euc=0, n
             cat = categorise(strep[0])
             if images and (dispi in images):
                 strep = "[[File:" + images[dispi] + "|14px|" + "".join(chr(i) for i in dispi) + "]]"
-            elif ucd.category(strep[0]) == "Co":
+            elif namedata.get_ucscategory(strep[0]) == "Co":
                 strep = "\uFFFD"
             else:
                 strep = strep.replace("\uF860", "").replace("\uF861", "").replace("\uF862", "")
@@ -443,7 +443,7 @@ def dump_cccii_wiktionary(outfile, setname="eacc"):
                     continue
                 print(end="{{nobr|", file=outfile)
                 print(end="{:d}: ".format(redten + 1), file=outfile)
-                if (streps[0] == "\uFFFD") or (ucd.category(streps[0][2]) == "Co"):
+                if (streps[0] == "\uFFFD") or (namedata.get_ucscategory(streps[0][2]) == "Co"):
                     print(end="(〓)", file=outfile)
                 else:
                     print(end=streps[0], file=outfile)

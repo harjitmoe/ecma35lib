@@ -6,18 +6,18 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import unicodedata as ucd
+from ecma35.data.names import namedata
 
 initd = {}; voweld = {}; finald = {}
 # https://unicode.org/L2/L2017/17081-hangul-filler.pdf
-f = open("17081-hangul-filler.txt") # pdftotext -layout 17081-hangul-filler.pdf
+f = open("attic/17081-hangul-filler.txt") # pdftotext -layout 17081-hangul-filler.pdf
 
 for i in f:
     if "“" not in i or "\u3164" not in i:
         continue
     seq = i.split("“", 1)[1].split("”")[0]
     cod = i.rsplit("U+", 1)[0].rstrip().rsplit(None, 1)[1]
-    scod = ucd.normalize("NFD", cod)
+    scod = namedata.canonical_decomp[cod]
     assert seq[0] == "\u3164"
     initd.setdefault(seq[1], scod[0])
     assert initd[seq[1]] == scod[0]
@@ -28,23 +28,25 @@ for i in f:
 
 for i in range(0x3165, 0x318F):
     cod = chr(i)
-    ncod = ucd.normalize("NFKC", cod)
-    if "CHOSEONG" in ucd.name(ncod):
+    ncod = namedata.compat_decomp[cod][1]
+    if "CHOSEONG" in namedata.get_ucsname(ncod):
         initd.setdefault(cod, ncod)
         try:
-            finald.setdefault(cod, ucd.lookup(ucd.name(ncod).replace("CHOSEONG", "JONGSEONG")))
+            finald.setdefault(cod, namedata.lookup_ucsname(
+                namedata.get_ucsname(ncod).replace("CHOSEONG", "JONGSEONG")))
         except KeyError:
             pass
-    elif "JUNGSEONG" in ucd.name(ncod):
+    elif "JUNGSEONG" in namedata.get_ucsname(ncod):
         voweld.setdefault(cod, ncod)
-    elif "JONGSEONG" in ucd.name(ncod):
+    elif "JONGSEONG" in namedata.get_ucsname(ncod):
         finald.setdefault(cod, ncod)
         try:
-            initd.setdefault(cod, ucd.lookup(ucd.name(ncod).replace("JONGSEONG", "CHOSEONG")))
+            initd.setdefault(cod, namedata.lookup_ucsname(
+                namedata.get_ucsname(ncod).replace("JONGSEONG", "CHOSEONG")))
         except KeyError:
             pass
     else:
-        raise AssertionError(ucd.name(ncod))
+        raise AssertionError(namedata.get_ucsname(ncod))
 
 for i in (initd, voweld, finald):
     print(end = "{")

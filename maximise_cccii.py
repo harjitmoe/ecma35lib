@@ -14,7 +14,7 @@ layers for a given kanji's itaiji stack."""
 from ecma35.data import graphdata
 from ecma35.data.maxmat import maximum_matching # Split off from this script to use elsewhere.
 from ecma35.data.multibyte import traditional
-import unicodedata as ucd
+from ecma35.data.names import namedata
 
 sets = [((None,) * (96 * 112)) + graphdata.gsets["cccii-koha"][2][96*112:],
         ((None,) * (96 * 112)) + traditional.cccii_unihan[96*112:],
@@ -64,7 +64,7 @@ for (fn, oset) in (("cccii-maxmat.txt", out_set1), ("eacc-maxmat.txt", out_set2)
                 if (pointer < len(oset)) and oset[pointer]:
                     hexd = "0x{:02X}{:02X}{:02X}".format(plane + 0x20, row + 0x20, cell + 0x20)
                     ucs = "U+" + "+".join("{:04X}".format(i) for i in oset[pointer])
-                    names = "# " + " + ".join(ucd.name(chr(i), "(unnamed)") for i in oset[pointer])
+                    names = "# " + " + ".join(namedata.get_ucsname(chr(i), "(unnamed)") for i in oset[pointer])
                     print(hexd, ucs, names, sep="\t", file=f)
     f.close()
 
