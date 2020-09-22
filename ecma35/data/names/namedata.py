@@ -94,7 +94,8 @@ with open(os.path.join(directory, "UCD/NameAliases.txt"), "r") as f:
             ucsnames[_ucs] = _ucsname
 
 # Sort out the Korean syllables (which are not listed individually)
-# These romanisation tables match those used by the unicodedata module for syllables, see below.
+# These romanisation tables match those used by, for example, the unicodedata module for syllables,
+#   and are presumed to be normative for character names (see below).
 _koinit = ("G", "GG", "N", "D", "DD", "R", "M", "B", "BB", "S", "SS",
            "", "J", "JJ", "C", "K", "T", "P", "H")
 _komed = ("A", "AE", "YA", "YAE", "EO", "E", "YEO", "YE", "O", "WA", 
@@ -121,14 +122,11 @@ for _initial in range(19):
             _name2 = _name1.replace(" ", "-").replace("-SYLLABLE-", " SYLLABLE ")
             # Names used in OLD5601.TXT (though obviously the codepoints have changed):
             _name3 = "HANGUL SYLLABLE" + _initname + _medialname + _finalname
-            # For the sake thereof, since it fits the pattern of the other "generated" names:
-            _name4 = "HANGUL SYLLABLE-{:04X}".format(ord(_syllcode))
-            # unicodedata module compatible; presumably normative(?), but not in NamesList.txt:
+            # unicodedata module compatible; presumably normative, but not in NamesList.txt:
             _name5 = "HANGUL SYLLABLE " + _koinit[_initial] + _komed[_medial] + _kofin[_final]
             rucsnames[_name1] = _syllcode
             rucsnames[_name2] = _syllcode
             rucsnames[_name3] = _syllcode
-            rucsnames[_name4] = _syllcode
             rucsnames[_name5] = _syllcode
             ucsnames[_syllcode] = _name5
             ucscats[_syllcode] = "Lo"
