@@ -57,7 +57,8 @@ with open(os.path.join(directory, "UCD/UnicodeData.txt"), "r") as f:
     for line in f:
         if not line.strip() or (line[0] == "#"):
             continue
-        _ucs, _ucsname, _ucscat, _carenot1, _carenot2, _decompos, _carenot3 = line.split(";", 6)
+        _ucs, _ucsname, _ucscat, _carenot1, _carenot2, _decompos, _carenot3, _carenot4, \
+            _carenot5, _carenot6, _oldname, _carenot7 = line.split(";", 11)
         _ucs = chr(int(_ucs, 16))
         if _ucsname[0] != "<":
             ucsnames[_ucs] = _ucsname
@@ -73,6 +74,9 @@ with open(os.path.join(directory, "UCD/UnicodeData.txt"), "r") as f:
             else:
                 _decompos = "".join(chr(int(_j, 16)) for _j in _decompos.split())
                 compat_decomp[_ucs] = ("", _decompos)
+        if _oldname and (_oldname not in rucsnames): # be overwritten but don't overwrite.
+            # Unicode 1 names
+            rucsnames[_oldname] = _ucs
         ucscats[_ucs] = _ucscat
 with open(os.path.join(directory, "UCD/NamedSequences.txt"), "r") as f:
     for line in f:
@@ -120,7 +124,8 @@ for _initial in range(19):
             _name1 = "HANGUL SYLLABLE" + _initname + _medialname + _finalname.replace("-", "")
             # Names used in KSC5601.TXT:
             _name2 = _name1.replace(" ", "-").replace("-SYLLABLE-", " SYLLABLE ")
-            # Names used in OLD5601.TXT (though obviously the codepoints have changed):
+            # Names used in OLD5601.TXT (though obviously the codepoints have changed).
+            # These presumably amount to the Unicode 1 names.
             _name3 = "HANGUL SYLLABLE" + _initname + _medialname + _finalname
             # unicodedata module compatible; presumably normative, but not in NamesList.txt:
             _name5 = "HANGUL SYLLABLE " + _koinit[_initial] + _komed[_medial] + _kofin[_final]
