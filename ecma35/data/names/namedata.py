@@ -16,7 +16,7 @@ _nonword2 = re.compile(r"[^\w-]+", re.U)
 def _is_cjkui(ucs):
     # Note: excludes the Dirty Dozen
     if len(ucs) != 1:
-        return False
+        return False # i.e. not applicable to named sequences
     code = ord(ucs)
     if (0x4E00 <= code < 0xA000) or (0x3400 <= code < 0x4DC0) or (0x20000 <= code < 0x2F800) or (
                                      0x30000 <= code < 0x3FFFE):
@@ -26,7 +26,7 @@ def _is_cjkui(ucs):
 def _is_cjkci(ucs):
     # Note: includes the Dirty Dozen
     if len(ucs) != 1:
-        return False
+        return False # i.e. not applicable to named sequences
     code = ord(ucs)
     if (0xF900 <= code < 0xFB00) or (0x2F800 <= code < 0x2FFFE):
         return True
@@ -34,7 +34,7 @@ def _is_cjkci(ucs):
 
 def _is_tangut(ucs):
     if len(ucs) != 1:
-        return False
+        return False # i.e. not applicable to named sequences
     code = ord(ucs)
     if (0x17000 <= code < 0x18800) or (0x18D00 <= code < 0x18D90):
         return True
@@ -42,7 +42,7 @@ def _is_tangut(ucs):
 
 def _is_pua(ucs):
     if len(ucs) > 1:
-        return False
+        return False # i.e. not applicable to named sequences
     code = ord(ucs)
     if (0xE000 <= code < 0xF900) or (0xF0000 <= code < 0xFFFFE) or (0x100000 <= code < 0x10FFFE):
         return True
@@ -137,6 +137,7 @@ for _initial in range(19):
             ucscats[_syllcode] = "Lo"
 
 def get_ucsname(ucs, default=_no_default):
+    # Note: ucs may be a named sequence.
     if ucs in ucsnames:
         return ucsnames[ucs]
     elif _is_cjkui(ucs):

@@ -7,12 +7,11 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import os
-import unicodedata as ucd
 from ecma35.data import maxmat, graphdata
 from ecma35.data.multibyte import mbmapparsers as parsers
 from ecma35.data.multibyte import japan
 from ecma35.data.multibyte.cellemojidata import all_jcarrier_raw, gspua_to_ucs_possibs
-from ecma35.data.names.namedata import cldrnames
+from ecma35.data.names import namedata
 
 data = os.path.join(parsers.directory, "UCD", "emoji-sequences.txt")
 data2 = os.path.join(parsers.directory, "UCD", "emoji-sequences.txt")
@@ -258,14 +257,13 @@ def get_all_representations():
             _get_ref(all_representations, scode)[u] = bytes([lead, trail])
     for _i in all_representations.copy().values():
         if "UCS.Standard" in _i:
-            if _i["UCS.Standard"] in special_ucsnames:
-                _i["Name.Unicode"] = special_ucsnames[_i["UCS.Standard"]]
-            elif len(_i["UCS.Standard"].rstrip("\uFE0E\uFE0F")) == 1:
-                if ucd.name(_i["UCS.Standard"][0], ""):
-                    _i["Name.Unicode"] = ucd.name(_i["UCS.Standard"][0])
+            ucsname = namedata.get_ucsname(_i["UCS.Standard"].rstrip("\uFE0E\uFE0F"), None)
+            if ucsname:
+                _i["Name.Unicode"] = ucsname
             #
-            if _i["UCS.Standard"].replace("\uFE0F", "") in cldrnames:
-                _i["Name.CLDR"] = cldrnames[_i["UCS.Standard"].replace("\uFE0F", "")]
+            cldrname = namedata.get_cldrname(_i["UCS.Standard"], None, fallback=False)
+            if cldrname:
+                _i["Name.CLDR"] = cldrname
     return all_representations
 
 def tabulate_pua(all_representations, specific_pua, f):
@@ -314,7 +312,6 @@ if __name__ == "__main__":
     from pprint import pformat, pprint
     all_representations = get_all_representations()
     open("BlendedEmojiData.txt", "w").write(pformat(all_representations))
-    open("cldrnames.txt", "w").write(pformat(cldrnames))
     tabulate_pua(all_representations, "UCS.PUA.au.app", open("KDDIapp.html", "w"))
     tabulate_pua(all_representations, "UCS.PUA.au.web", open("KDDIweb.html", "w"))
     tabulate_pua(all_representations, "UCS.PUA.DoCoMo", open("docomo.html", "w"))
