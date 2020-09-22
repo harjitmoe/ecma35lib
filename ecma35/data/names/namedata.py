@@ -15,7 +15,7 @@ _nonword2 = re.compile(r"[^\w-]+", re.U)
 
 def _is_cjkui(ucs):
     # Note: excludes the Dirty Dozen
-    if len(ucs) > 1:
+    if len(ucs) != 1:
         return False
     code = ord(ucs)
     if (0x4E00 <= code < 0xA000) or (0x3400 <= code < 0x4DC0) or (0x20000 <= code < 0x2F800) or (
@@ -25,7 +25,7 @@ def _is_cjkui(ucs):
 
 def _is_cjkci(ucs):
     # Note: includes the Dirty Dozen
-    if len(ucs) > 1:
+    if len(ucs) != 1:
         return False
     code = ord(ucs)
     if (0xF900 <= code < 0xFB00) or (0x2F800 <= code < 0x2FFFE):
@@ -33,7 +33,7 @@ def _is_cjkci(ucs):
     return False
 
 def _is_tangut(ucs):
-    if len(ucs) > 1:
+    if len(ucs) != 1:
         return False
     code = ord(ucs)
     if (0x17000 <= code < 0x18800) or (0x18D00 <= code < 0x18D90):
@@ -170,16 +170,6 @@ def get_ucscategory(ucs, default=_no_default):
     else:
         return default
 
-def _make_shortcode(cldrname, preshyph=False):
-    # Turn a CLDR name into what will usually match the so-called "Emojipedia" shortcodes, which
-    # are generated from CLDR names. The preshyph arg preserves hyphens rather than changing them
-    # to underscores, and is intended to be used in UCS name fallback cases, where parsing the
-    # resulting shortcode relies on re-obtaining the original UCS name.
-    code = cldrname.replace("#", "number_sign").replace("*", "asterisk")
-    code = ":" + "_".join((_nonword2 if preshyph else _nonword).split(code.casefold())) + ":"
-    code = "".join(canonical_decomp.get(i, i)[0] for i in code) # strip diacritics
-    return code
-
 cldrnames = {}
 _document = xml.dom.minidom.parse(os.path.join(directory, "CLDR/annotations/en.xml"))
 for _i in _document.getElementsByTagName("annotation"):
@@ -191,8 +181,6 @@ for _i in _document.getElementsByTagName("annotation"):
         cldrnames[_i.getAttribute("cp")] = _i.firstChild.wholeText
 rcldrnames = dict(zip(cldrnames.values(), cldrnames.keys()))
 rcldrnamesi = dict(zip((_i.casefold() for _i in cldrnames.values()), cldrnames.keys()))
-rcldrnameseac = dict(zip((_make_shortcode(_i, preshyph=False) for _i in cldrnames.values()),
-                         cldrnames.keys()))
 
 def get_cldrname(ucs, default=_no_default, *, fallback=True):
     ucss = ucs.replace("\uFE0F", "")
@@ -229,12 +217,61 @@ with open(os.path.join(directory, "emoji-toolkit/extras/alpha-codes/eac.json"), 
     _eacraw = json.load(f)
 eac = {}
 reac = {}
+fe0f_decor = {}
 for _i in _eacraw.values():
     _ucs = "".join(chr(int(_j, 16)) for _j in _i["output"].split("-"))
     _ucss = _ucs.replace("\uFE0F", "")
-    eac[_ucss] = _i["alpha_code"]
+    _i["_ucs"] = _ucs
+    _i["_ucss"] = _ucss
+    if _ucss != _ucs:
+        fe0f_decor[_ucss] = _ucs
+    _shortcode = _i["alpha_code"]
+    if _ucss in cldrnames:
+        if (_i["name"] != cldrnames[_ucss]) and ("person" in cldrnames[_ucss]):
+            # Sort out gender-neutral naming that the emoji-toolkit data is too old to encorporate.
+            _shortcode = _shortcode.replace("bride_", "person_").replace("man_",
+                         "person_").replace("woman_", "person_")
+    eac[_ucss] = _shortcode
+    reac[_shortcode] = _ucs
+def _make_shortcode(cldrname, preshyph=False):
+    # Turn a CLDR name into what will usually match the so-called "Emojipedia" shortcodes, which
+    # are generated from CLDR names. The preshyph arg preserves hyphens rather than changing them
+    # to underscores, and is intended to be used in UCS name fallback cases, where parsing the
+    # resulting shortcode relies on re-obtaining the original UCS name.
+    # In cases where collisions occur with emoji-toolkit data, the prefix cldr_ or unicode_
+    # is prepended.
+    code = cldrname.replace("#", "number_sign").replace("*", "asterisk")
+    code = ":" + "_".join((_nonword2 if preshyph else _nonword).split(code.casefold())) + ":"
+    code = "".join(canonical_decomp.get(i, i)[0] for i in code) # strip diacritics
+    if cldrname in rcldrnames:
+        decor = fe0f_decor.get(rcldrnames[cldrname], rcldrnames[cldrname])
+        if code in reac and (reac[code] != decor):
+            newcode = ":cldr_" + code[1:]
+            #print(decor, code, "→", newcode)
+            code = newcode
+    else:
+        plain = cldrname.casefold().upper().replace("_", " ").strip(":")
+        if plain in rucsnames:
+            if code in reac and (reac[code].replace("\uFE0F", "") != rucsnames[plain]):
+                newcode = ":unicode_" + code[1:]
+                #print(rucsnames[plain], code, "→", newcode)
+                code = newcode
+    return code
+rcldrnameseac = dict(zip((_make_shortcode(_i, preshyph=False) for _i in cldrnames.values()),
+                         (fe0f_decor.get(_i, _i) for _i in cldrnames.keys())))
+for _i in _eacraw.values():
+    # This does a number of things:
+    # (1) emoji-toolkit seem to neglect to include the ZWJ characters in the "output" field of 
+    #     several (not all) of the handshakes, and this fixes it.
+    # (2) Fixes the "man_in_tuxedo" collision (emoji-toolkit names predate that ones gender marking).
     for _j in (_i["alpha_code"],) + tuple(_i["aliases"].split("|")):
-        reac[_j] = _ucs
+        if _j not in reac:
+            # We should just keep :om: as :flag_om:, not change it to :om_symbol:
+            if (_i["_ucs"] == rcldrnameseac.get(_j, _i["_ucs"])) or (_j == ":om:"):
+                reac[_j] = _i["_ucs"]
+            elif _j in rcldrnameseac:
+                #print("overriding", _j, repr(_i["_ucs"]), "→", repr(rcldrnameseac[_j]))
+                reac[_j] = rcldrnameseac[_j]
 
 def get_shortcode(ucs, default=_no_default, *, fallback=True):
     ucss = ucs.replace("\uFE0F", "")
@@ -268,5 +305,23 @@ def lookup_shortcode(name, default=_no_default, *, fallback=True):
         raise KeyError("unrecognised shortcode: {!r}".format(name))
     return default
 
+def test():
+    for i in range(0x30000):
+        c = chr(i)
+        sc = get_shortcode(c, None)
+        if sc:
+            rt = lookup_shortcode(sc)
+            if rt.strip("\uFE0F") != c:
+                print(c + "\uFE0F", "→", sc, "→", rt, "→", get_shortcode(rt, None))
+        cl = get_cldrname(c, None)
+        if cl:
+            rt = lookup_cldrname(cl)
+            if rt.strip("\uFE0F") != c:
+                print(c + "\uFE0F", "→", cl, "→", rt, "→", lookup_cldrname(rt, None))
+        uc = get_ucsname(c, None)
+        if uc:
+            rt = lookup_ucsname(uc)
+            if rt != c:
+                print(c + "\uFE0F", "→", uc, "→", rt, "→", lookup_ucsname(rt, None))
 
 
