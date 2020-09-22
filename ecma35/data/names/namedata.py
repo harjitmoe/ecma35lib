@@ -16,6 +16,9 @@ directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "namemaps")
 _no_default = object() # need a unique featureless object which isn't used anywhere else.
 _nonword = re.compile(r"\W+", re.U)
 _nonword2 = re.compile(r"[^\w-]+", re.U)
+# Per UAX44-LM2, spaces, hyphens and underscores are usually interchangeable, but hyphens are not
+#   in certain specific contexts. These are where it's interchangeable:
+_noncontrastive_hyphen = re.compile(r"(?<!\bO)\b-\b|\b-\b(?!E$)", re.U)
 
 def _is_cjkui(ucs):
     # Note: excludes the Dirty Dozen
@@ -138,6 +141,9 @@ for _initial in range(19):
             _name2 = _name1.replace(" ", "-").replace("-SYLLABLE-", " SYLLABLE ")
             # Names used in OLD5601.TXT (though obviously the codepoints have changed).
             # These presumably amount to the Unicode 1 names.
+            # The other two variants presumably arise from hyphens usually not being contrastive
+            #   in character names, as with spaces, though hyphens preceded or followed by spaces
+            #   are considered contrastive, as is / O-E$/ from / OE$/ as an exception.
             _name3 = "HANGUL SYLLABLE" + _initname + _medialname + _finalname
             # unicodedata module compatible; presumably normative, but not in NamesList.txt:
             _name5 = "HANGUL SYLLABLE " + _koinit[_initial] + _komed[_medial] + _kofin[_final]
@@ -249,23 +255,25 @@ for _i in _eacraw.values():
                          "person_").replace("woman_", "person_")
     eac[_ucss] = _shortcode
     reac[_shortcode] = _ucs
-def _make_shortcode(cldrname, preshyph=False):
+def _make_shortcode(cldrname, ucsmethod=False):
     # Turn a CLDR name into what will usually match the so-called "Emojipedia" shortcodes, which
-    # are generated from CLDR names. The preshyph arg preserves hyphens rather than changing them
-    # to underscores, and is intended to be used in UCS name fallback cases, where parsing the
-    # resulting shortcode relies on re-obtaining the original UCS name.
+    # are generated from CLDR names. Setting the ucsmethod arg to True preserves hyphens in 
+    # particular contexts, and is intended to be used on UCS names instead.
     # In cases where collisions occur with emoji-toolkit data, the prefix cldr_ or unicode_
     # is prepended.
     code = cldrname.replace("#", "number_sign").replace("*", "asterisk")
-    code = ":" + "_".join((_nonword2 if preshyph else _nonword).split(code.casefold())) + ":"
-    code = "".join(canonical_decomp.get(i, i)[0] for i in code) # strip diacritics
-    if cldrname in rcldrnames:
-        decor = fe0f_decor.get(rcldrnames[cldrname], rcldrnames[cldrname])
-        if code in reac and (reac[code] != decor):
-            newcode = ":cldr_" + code[1:]
-            #print(decor, code, "→", newcode)
-            code = newcode
-    else:
+    if not ucsmethod:
+        code = ":" + "_".join(_nonword.split(code.casefold())) + ":"
+        code = "".join(canonical_decomp.get(i, i)[0] for i in code) # strip diacritics
+        if cldrname in rcldrnames:
+            decor = fe0f_decor.get(rcldrnames[cldrname], rcldrnames[cldrname])
+            if code in reac and (reac[code] != decor):
+                newcode = ":cldr_" + code[1:]
+                #print(decor, code, "→", newcode)
+                code = newcode
+    elif ucsmethod:
+        code = " ".join(_noncontrastive_hyphen.split(code))
+        code = ":" + "_".join(_nonword2.split(code.casefold())) + ":"
         plain = cldrname.casefold().upper().replace("_", " ").strip(":")
         if plain in rucsnames:
             if code in reac and (reac[code].replace("\uFE0F", "") != rucsnames[plain]):
@@ -273,8 +281,10 @@ def _make_shortcode(cldrname, preshyph=False):
                 #print(rucsnames[plain], code, "→", newcode)
                 code = newcode
     return code
-rcldrnameseac = dict(zip((_make_shortcode(_i, preshyph=False) for _i in cldrnames.values()),
+rcldrnameseac = dict(zip((_make_shortcode(_i, ucsmethod=False) for _i in cldrnames.values()),
                          (fe0f_decor.get(_i, _i) for _i in cldrnames.keys())))
+rucsnameseac = dict(zip((_make_shortcode(_i, ucsmethod=True) for _i in ucsnames.values()),
+                         (fe0f_decor.get(_i, _i) for _i in ucsnames.keys())))
 for _i in _eacraw.values():
     # This does a number of things:
     # (1) emoji-toolkit seem to neglect to include the ZWJ characters in the "output" field of 
@@ -296,10 +306,10 @@ def get_shortcode(ucs, default=_no_default, *, fallback=True):
     if fallback:
         cldrname = get_cldrname(ucs, None, fallback=False)
         if cldrname:
-            return _make_shortcode(cldrname, preshyph=False)
+            return _make_shortcode(cldrname, ucsmethod=False)
         ucsname = get_cldrname(ucs, None, fallback=True)
         if ucsname:
-            return _make_shortcode(ucsname, preshyph=True)
+            return _make_shortcode(ucsname, ucsmethod=True)
     if default is _no_default:
         raise KeyError("no shortcode name: {!r}".format(ucs))
     return default
@@ -309,12 +319,22 @@ def lookup_shortcode(name, default=_no_default, *, fallback=True):
         return reac[name.casefold()]
     except KeyError:
         if fallback:
-            trycldr = rcldrnameseac.get(name.casefold(), None)
+            trycldr = rcldrnameseac.get(name.casefold().replace("-", "_"), None)
             if trycldr:
                 return trycldr
-            if name[0] == name[-1] == ":":
-                tryucs = lookup_ucsname(name.casefold().upper().replace("_", " ").strip(":"
-                                        ).replace("UNICODE ", ""), None)
+            if (name[0] == name[-1] == ":") and (":" not in name[1:-1]):
+                # Re-shortcodise the name to ensure all non-contrastive hyphens are underscores,
+                #   as they are in rucsnameseac
+                name2 = name.strip(":").replace("_", " ").casefold().upper()
+                name2 = _make_shortcode(name2, ucsmethod=True)
+                #
+                tryucs = rucsnameseac.get(name2, None)
+                if tryucs:
+                    return tryucs
+                # If the unicode_ bit is added in the CLDR fallback stage contra a CLDR collision
+                #   as opposed to an emoji-toolkit collision, it might not be present in
+                #   rucsnameseac itself.
+                tryucs = rucsnameseac.get(name2.replace(":unicode_", ":"), None)
                 if tryucs:
                     return tryucs
     if default is _no_default:
