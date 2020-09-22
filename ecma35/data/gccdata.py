@@ -37,6 +37,13 @@ if not os.path.exists(cachefile):
         # MacKorean's shadowed keycapped number 10
         "\uF864[10]": "\U0001F51F",
     }
+    from_1F18B = ["IC", "PA", "SA", "AB", "WC", "DJ",
+                  "CL", "COOL", "FREE", "ID", "NEW", "NG", "OK", "SOS", "UP!", "VS", "3D", 
+                  "2ndScr", "2K", "4K", "8K", "5.1", "7.1", "22.2", "60P", "120P", "d", 
+                  "HC", "HDR", "Hi-Res", "Lossless", "SHV", "UHD", "VOD"]
+    for n, i in enumerate(from_1F18B):
+        if len(i) > 1:
+            gcc_sequences[i] = chr(0x1F18B + n)
 
     # Exclude most Arabic composites, since they're just sequences of letters, and often one sequence 
     #   of normalised letters maps onto multiple presentation forms depending on position, making
