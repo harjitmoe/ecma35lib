@@ -88,7 +88,9 @@ with open(os.path.join(directory, "UCD/UnicodeData.txt"), "r") as f:
                 _decompos = "".join(chr(int(_j, 16)) for _j in _decompos.split())
                 compat_decomp[_ucs] = ("", _decompos)
         if _oldname and (_oldname not in rucsnames): # be overwritten but don't overwrite.
-            # Unicode 1 names
+            # Unicode 1 names. Disfavoured since they could be masked by a regular Unicode name at
+            #   any time afaik (though many are unlikely to be), and thus are not stable as aliases
+            #   unlike the modern formal aliases.
             rucsnames[_oldname] = _ucs
         ucscats[_ucs] = _ucscat
 with open(os.path.join(directory, "UCD/NamedSequences.txt"), "r") as f:
@@ -107,7 +109,9 @@ with open(os.path.join(directory, "UCD/NameAliases.txt"), "r") as f:
         _ucs = "".join(chr(int(_i, 16)) for _i in _ucs.split())
         rucsnames[_ucsname] = _ucs
         if status.strip() != "abbreviation":
-            # Generally prefer these ones.
+            # Generally prefer these ones (if an alias is assigned, there is usually good reason
+            #   for it, in terms of describing a more typical or corrected character function).
+            #   These are modern formal aliases, and therefore as stablised as the primary names.
             ucsnames[_ucs] = _ucsname
 
 # Sort out the Korean syllables (which are not listed individually)
