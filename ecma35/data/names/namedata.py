@@ -283,8 +283,8 @@ def _make_shortcode(cldrname, ucsmethod=False):
     return code
 rcldrnameseac = dict(zip((_make_shortcode(_i, ucsmethod=False) for _i in cldrnames.values()),
                          (fe0f_decor.get(_i, _i) for _i in cldrnames.keys())))
-rucsnameseac = dict(zip((_make_shortcode(_i, ucsmethod=True) for _i in ucsnames.values()),
-                         (fe0f_decor.get(_i, _i) for _i in ucsnames.keys())))
+rucsnameseac = dict(zip((_make_shortcode(_i, ucsmethod=True) for _i in rucsnames.keys()),
+                         (fe0f_decor.get(_i, _i) for _i in rucsnames.values())))
 for _i in _eacraw.values():
     # This does a number of things:
     # (1) emoji-toolkit seem to neglect to include the ZWJ characters in the "output" field of 
@@ -319,12 +319,17 @@ def lookup_shortcode(name, default=_no_default, *, fallback=True):
         return reac[name.casefold()]
     except KeyError:
         if fallback:
-            trycldr = rcldrnameseac.get(name.casefold().replace("-", "_"), None)
+            name2 = name.casefold().replace("-", "_")
+            trycldr = rcldrnameseac.get(name2, None)
+            if trycldr:
+                return trycldr
+            # Accept a cldr_ prefix even when not needed:
+            trycldr = rcldrnameseac.get(name2.replace(":cldr_", ":"), None)
             if trycldr:
                 return trycldr
             if (name[0] == name[-1] == ":") and (":" not in name[1:-1]):
                 # Re-shortcodise the name to ensure all non-contrastive hyphens are underscores,
-                #   as they are in rucsnameseac
+                #   as they are in rucsnameseac, without affecting contrastive ones.
                 name2 = name.strip(":").replace("_", " ").casefold().upper()
                 name2 = _make_shortcode(name2, ucsmethod=True)
                 #
