@@ -42,7 +42,7 @@ class LazyJSON(list):
         return hash(tuple())
     def __eq__(self, i):
         self._load()
-        return self == i
+        return tuple(self) == i
     def __bool__(self, i):
         self._load()
         return super().__bool__()
@@ -105,7 +105,8 @@ def _grok_sjis(byts):
 
 def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=False,
                     skipstring=None, plane=None, altcomments=False, mapper=identitymap,
-                    ignore_later_altucs=False, set96=False, libcongress=False):
+                    ignore_later_altucs=False, set96=False, libcongress=False, 
+                    utcl2_17_080=None):
     """
     Read a mapping from a file in the directory given by mbmapparsers.directory.
     Only positional argument is the name (including subdirectory) of that file.
@@ -141,6 +142,8 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
         mappername += "_skip" + urllib.parse.quote(skipstring)
     if twoway:
         mappername += "_twoway"
+    if utcl2_17_080:
+        mappername += "_" + utcl2_17_080
     cachebfn = os.path.splitext(fil)[0].replace("/", "---") + ("_plane{:02d}".format(plane)
                if plane is not None else "_mainplane") + mappername + ".json"
     cachefn = os.path.join(cachedirectory, cachebfn)
@@ -154,6 +157,35 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
             continue
         elif _i[0] == "#":
             continue # is a comment.
+        elif utcl2_17_080 is not None:
+            number, ducs, ucs, wansung, ksx1002, kps, gbko, olducs, decomp = _i.strip().split()
+            if utcl2_17_080 == "wansung":
+                if wansung == "-":
+                    continue
+                assert wansung[:2] == "0x"
+                ku = int(wansung[2:4], 16) - 0xA0
+                ten = int(wansung[4:], 16) - 0xA0
+            elif utcl2_17_080 == "1002":
+                if ksx1002 == "-":
+                    continue
+                assert ksx1002[:2] == "0x"
+                ku = int(ksx1002[2:4], 16) - 0x20
+                ten = int(ksx1002[4:], 16) - 0x20
+            elif utcl2_17_080 == "kps":
+                if kps == "-":
+                    continue
+                assert kps[:2] == "0x"
+                ku = int(kps[2:4], 16) - 0xA0
+                ten = int(kps[4:], 16) - 0xA0
+            elif utcl2_17_080 == "gbko":
+                if gbko == "-":
+                    continue
+                assert gbko[:2] == "0x"
+                ku = int(gbko[2:4], 16) - 0xA0
+                ten = int(gbko[4:], 16) - 0xA0
+            else:
+                raise ValueError("unrecognised utcl2_17_080 arg: {!r}".format(utcl2_17_080))
+            mkts = ((1, ku, ten),)
         elif libcongress:
             # CSV of (1) 3-byte GL, (2) UCS or PUA, (3) nothing or geta mark, (4) rubbish
             byts, ucs, rubbish = _i.split(",", 2)

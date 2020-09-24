@@ -1,5 +1,3 @@
-# The data file below is sourced from https://www.unicode.org/L2/L2012/12368-n4384.pdf#page=68
-# ------------------------------------- Snip here --------------------------------------------
 #
 # This file provides mappings between Unicode code points on one hand
 # and Webdings and Wingdings indexes on the other hand.

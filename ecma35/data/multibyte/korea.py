@@ -177,7 +177,7 @@ macelexextras32 = graphdata.gsets["mac-elex-extras-unicode3_2"] = (94, 2, rawele
 macelexextras40 = graphdata.gsets["mac-elex-extras-unicode4_0"] = (94, 2, rawelex4)
 
 # KPS 9566
-graphdata.gsets["ir202-2011"] = kps9566_2011 = (94, 2, parsers.read_main_plane("Other/AppendixA_KPS9566-2011-to-Unicode.txt", euckrlike=True))
+graphdata.gsets["ir202-2011"] = kps9566_2011 = (94, 2, parsers.read_main_plane("UTCDocs/AppendixA_KPS9566-2011-to-Unicode.txt", euckrlike=True))
 graphdata.gsetflags["ir202-2011"] |= {"UHC:IS_KPS"}
 graphdata.gsets["ir202-2003"] = kps9566_2003 = (94, 2, parsers.read_main_plane("UTC/KPS9566.TXT", euckrlike=True))
 graphdata.gsetflags["ir202-2003"] |= {"UHC:IS_KPS"}
@@ -195,11 +195,16 @@ _kps_temp = parsers.fuse([
             kps9566_2003[2]], "KPS_1997.json")
 graphdata.gsets["ir202"] = kps9566_1997 = (94, 2, _kps_temp)
 graphdata.gsetflags["ir202"] |= {"UHC:IS_KPS"}
-graphdata.gsets["2011kpsextras"] = (94, 2, read_kps9566extras("Other/AppendixA_KPS9566-2011-to-Unicode.txt"))
+graphdata.gsets["2011kpsextras"] = (94, 2, read_kps9566extras("UTCDocs/AppendixA_KPS9566-2011-to-Unicode.txt"))
 # KPS 10721 doesn't appear to be ECMA-35 structured.
 
-# KS X 1002. I can't find charts, leave alone mappings, which aren't restricted to hanja.
-graphdata.gsets["ksx1002-hanja"] = (94, 2, parsers.read_unihan_source("UCD/Unihan_IRGSources.txt", "K", "K1"))
+# KS X 1002. I can't find charts, leave alone mappings, for the
+#   special characters / symbols, only for the syllables and hanja.
+ksx1002_hanja = parsers.read_unihan_source("UCD/Unihan_IRGSources.txt", "K", "K1")
+ksx1002_syllables = parsers.read_main_plane(
+    "UTCDocs/AppendixB-4300modernhangulsyllablesfromvarious94by94nationalstandards.txt",
+    utcl2_17_080 = "1002")
+graphdata.gsets["ksx1002"] = (94, 2, parsers.fuse([ksx1002_hanja, ksx1002_syllables], "KSX1002-nosym.json"))
 
 # KS X 1027. Part 1 seems complete, part 2 has a lot of holes. Other parts are not ECMA-35 structured.
 graphdata.gsets["ksx1027_1"] = (94, 2, parsers.read_unihan_source("UCD/Unihan_IRGSources.txt", "K", "K2"))

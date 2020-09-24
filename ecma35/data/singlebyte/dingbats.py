@@ -21,7 +21,7 @@ wingdings2 = [None] * 256
 wingdings3 = [None] * 256
 wdings = (webdings, wingdings1, wingdings2, wingdings3)
 
-with open(os.path.join(parsers.directory, "UTC", "WDingsSources.txt"), "r") as _f:
+with open(os.path.join(parsers.directory, "UTCDocs", "WDingsSources.txt"), "r") as _f:
     for _line in _f:
         if not _line.strip() or _line[0] == "#":
             continue

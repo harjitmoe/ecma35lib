@@ -246,6 +246,7 @@ g94nbytes = {tuple(b"@"): ("ir042nec", ("ir042ibm", "ir042nec"), ("ir042",)),
              tuple(b"O"): "ir228",
              tuple(b"P"): "ir229",
              tuple(b"Q"): "ir233",
+             tuple(b"!0"): "gb12052",
              # Traditional Chinese off doing its own thing, as you do... no standard escapes here.
              tuple(b"!1"): ("cns-eucg2", ("cns-eucg2-ibm", "cns-eucg2-ms", "cns-eucg2-mac"), ("cns-eucg2",)),
              tuple(b"!2"): ("hkscs", ("ibmbig5exts", "etenextsplus"), ("ms950exts", "big5-2003-exts", "etenexts", "gccs", "hkscs1999", "hkscs2001", "hkscsweb", "hkscs",)),
@@ -263,6 +264,9 @@ g94nbytes = {tuple(b"@"): ("ir042nec", ("ir042ibm", "ir042nec"), ("ir042",)),
                             ("mac-elex-extras-unicode3_2",)),
              tuple(b"!;"): "2011kpsextras",
              tuple(b"!<"): ("big5e-exts", (), ("big5e-exts", "big5emsexts")),
+             tuple(b"!="): "ksx1002",
+             tuple(b"!>"): "ksx1027_1",
+             tuple(b"!?"): "ksx1027_2",
              tuple(b"~"): "nil"}
 
 g96nbytes = {tuple(b"!0"):("gbk-nonuro-extras", ("gbk-nonuro-extras-web", "gbk-nonuro-extras-full"), ("gbk-nonuro-extras",)),

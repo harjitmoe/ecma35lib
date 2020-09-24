@@ -1,0 +1,4 @@
+WDingsSources.txt
+→ from https://www.unicode.org/L2/L2012/12368-n4384.pdf#page=68
+→ included in proposal by Michel Suignard suggesting adding it as source data to the standard
+

@@ -94,9 +94,9 @@ def gb1986toregmap(pointer, ucs):
 # GB/T 2312 (EUC-CN RHS); note that the 2000 and 2005 "editions" refer to GB 18030 edition subsets.
 graphdata.gsets["ir058-1980"] = gb2312_1980 = (94, 2,
                             parsers.read_main_plane("UTC/GB2312.TXT", mapper = gb1986to1980map))
-graphdata.gsets["ir058"]      = gb2312_1980 = (94, 2,
+graphdata.gsets["ir058"]      = gb2312_1980reg = (94, 2,
                             parsers.read_main_plane("UTC/GB2312.TXT", mapper = gb1986toregmap))
-graphdata.gsets["ir058-1986"] = gb2312_1980 = (94, 2, # is this same as ibm-5478_P100-1995.ucm ?
+graphdata.gsets["ir058-1986"] = gb2312_1986 = (94, 2, # is this same as ibm-5478_P100-1995.ucm ?
                             parsers.read_main_plane("UTC/GB2312.TXT"))
 graphdata.gsets["ir058-2000"] = gb2312_2000 = (94, 2, 
             parsers.read_main_plane("WHATWG/index-gb18030.txt", euckrlike=True, mapper = gb2005to2000map))
@@ -144,8 +144,8 @@ for _i in range(658, 689): # Not 689/971 itself since that one gets equated to t
     _j = _i + (3 * 94)
     _ir165_add[_j] = (X[_i - 658], 0xF87F)
 # The various pattern fill characters in the latter part of the Greek row are still unmapped,
-#   but shouganai. (The range also corresponds to GB 18030 and Macintosh vertical forms, and 
-#   appears to be original to ITU.)
+#   but shouganai. (The range also is used in GB/T 12345, GB 18030 and Macintosh for vertical
+#   forms, and the use for fills appears to be original to ITU.)
 ir165 = parsers.fuse([_ir165_add, _ir165_raw], "CCITT-Chinese-Full.json")
 graphdata.gsets["ir165"] = isoir165 = (94, 2, ir165)
 # Include one which actually conforms to standards in which way around the lowercase Gs are too…
@@ -155,13 +155,41 @@ _ir165_std_add[916], _ir165_std_add[971] = (0x0067,), _ir165_std_add[916]
 ir165_std = parsers.fuse([_ir165_std_add, _ir165_raw], "CCITT-Chinese-Full-Std.json")
 graphdata.gsets["ir165std"] = isoir165 = (94, 2, ir165_std)
 
+# Apple's version. Note that it changes 0xFD and 0xFE to single-byte codes.
+# Includes the vertical form encodings from GB/T 12345 which would make it into GB 18030, but
+#   also without the benefit of the Vertical Forms block; unlike GB 18030, hint sequences are used
+#   rather than PUA assignments (and yes, that row maps both unassigned and some assigned to PUA).
+# It also includes the GB 6345.1-1986 letters (seeming to have "ɒ" instead of "ɑ" is an editorial
+#   error in CHINSIMP.TXT; the listed mapping (as opposed to name) is "ɑ").
+macgbdata = parsers.read_untracked_mbfile(
+            parsers.read_main_plane, "Mac/CHINSIMP.TXT", "Mac---CHINSIMP_mainplane_ahmap.json", 
+            "Mac/macGB2312.json", euckrlike=True, mapper=variationhints.ahmap)
+graphdata.gsets["ir058-mac"] = gb2312_macfull = (94, 2, parsers.fuse([
+    (None,) * 526 + gb2312_full[2][526:555],
+    macgbdata], "Mac---CHINSIMP_mainplane_ahmap_fullverts.json"))
+
 # GB/T 12345 (Traditional Chinese in Mainland China, homologous to GB/T 2312 where possible, with
 #   the others being added as a couple of rows at the end)
 # Unlike GB2312.TXT, redistribution of GB12345.TXT itself is apparently not permitted, although
 #   using/incorporating the information is apparently fine.
-graphdata.gsets["ir058-hant"] = gb12345 = (94, 2, parsers.read_untracked_mbfile(
+graphdata.gsets["ir058-hant"] = gb12345 = (94, 2, parsers.fuse([parsers.read_untracked_mbfile(
                  parsers.read_main_plane, "UTC/GB12345.TXT", None, 
-                 "UTC/GB_12345.json"))
+                 "UTC/GB_12345.json"), 
+    (None,) * 526 + gb2312_full[2][526:555],
+    (None,) * 684 + gb2312_full[2][684:690]], "GB12345.json"))
+
+# GB/T 12052 (Korean in Mainland China). I lack info for the level 2 hangul and
+#   for five of the hanja. Per Lunde, the non-Hangul non-kanji rows are basically
+#   the same as GB2312, but there is a dollar instead of a yuan sign. Nothing is
+#   mentioned about the row 1 dollar sign, so presumably that means two dollar
+#   signs and no yuan sign???
+gbkohanja = parsers.read_unihan_source("UCD/Unihan_IRGSources.txt", "G", "GK")
+gbhangul = parsers.read_main_plane(
+    "UTCDocs/AppendixB-4300modernhangulsyllablesfromvarious94by94nationalstandards.txt",
+    utcl2_17_080 = "gbko")
+graphdata.gsets["gb12052"] = gb12052 = (94, 2, parsers.fuse([
+                 ((2 * 94) + 3) * (None,) + (0xFF04,),
+                 gb2312_1986[2][:94*15], gbhangul, gbkohanja], "GB12052-bits.json"))
 
 # Being as GB 7589, 13131, 7590, 13132 do not include non-Kanji, Unihan mappings theoretically can
 #   describe their entire mappings… in reality, the GB 13131 mapping contains more or less the
@@ -207,16 +235,6 @@ graphdata.gsets["gb7589"] = gb7589 = (94, 2, _gb7589)
 graphdata.gsets["gb7590"] = gb7590 = (94, 2, _gb7590)
 # Some traditional forms remain, but I guess this is good enough. They would presumably be forms
 #  where simplified counterparts do not exist in Unicode anyway.
-
-# Apple's version. Note that it changes 0xFD and 0xFE to single-byte codes.
-# Includes the vertical form encodings which would make it into GB 18030, plus a few more which
-#   didn't. Not all exist as Unicode presentation forms.
-# It also includes the GB 6345.1-1986 letters (seeming to have "ɒ" instead of "ɑ" is an editorial
-#   error in CHINSIMP.TXT; the listed mapping (as opposed to name) is "ɑ").
-macgbdata = parsers.read_untracked_mbfile(
-            parsers.read_main_plane, "Mac/CHINSIMP.TXT", "Mac---CHINSIMP_mainplane_ahmap.json", 
-            "Mac/macGB2312.json", euckrlike=True, mapper=variationhints.ahmap)
-graphdata.gsets["ir058-mac"] = gb2312_mac = (94, 2, macgbdata)
 
 # Amounting to the entirety of GBK/3 and most of GBK/4, minus the non-URO end part.
 # And, yes, it would indeed be more straightforward to just read the GBK mappings for

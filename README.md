@@ -190,6 +190,7 @@ Miscellaneous single-byte assignments:
 |`IRR 0 G*DM4 N`|KPS 9566-2003 (only the main plane unless in the UHC DOCS)|
 |`IRR 1 G*DM4 N`|KPS 9566-2011 (only the main plane unless in the UHC DOCS)|
 |`IRR 2 G*DM4 N`|All KPS 9566 editions overlayed (but only the main plane unless in the UHC DOCS)|
+|`G*DM4 ! 0`|GB/T 12052 (Korean in Mainland China)|
 |`G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, as used in EUC-TW|
 |`G*DM4 ! 2`|Hong Kong Supplementary Character Set, including ETEN characters (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`G*DM4 ! 3`|Non-ETEN Big5 kana and Cyrillic (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
@@ -205,6 +206,9 @@ Miscellaneous single-byte assignments:
 |`G*DM4 ! :`|HangulTalk second plane (accepted by HangulTalk filter in G3 slot)|
 |`G*DM4 ! ;`|Non-syllable part of KPS 9566-2011 outside the main plane (accepted by UHC filter in G3 slot)|
 |`G*DM4 ! <`|Big5-E extensions (for Big-5 filter's G3 slot)|
+|`G*DM4 ! =`|KS X 1002 (South Korean first supplementary plane)|
+|`G*DM4 ! >`|KS X 1027-1 (South Korean second supplementary plane)|
+|`G*DM4 ! ?`|KS X 1027-2 (South Korean third supplementary plane)|
 |`IRR ? G*DM6 ! 0`|GBK extras (GB 18030, level 5 with associated UDC zone and non-URO part of level 4; accepted by GBK filter in G3 slot)|
 |`IRR 0 G*DM6 ! 0`|GBK extras, WHATWG/HTML5 variant|
 |`IRR 1 G*DM6 ! 0`|GBK extras, mapping all characters with defined glyphs to non-PUA|
