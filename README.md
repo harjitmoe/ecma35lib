@@ -26,8 +26,9 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at https://mozilla.org/MPL/2.0/
 
-Individual files in `ecma35/data/singlebyte/sbmaps` and `ecma35/data/multibyte/mbmaps` may use 
-separate terms.
+Individual files in `ecma35/data/singlebyte/sbmaps`, `ecma35/data/multibyte/mbmaps` and
+`ecma35/data/names/namemaps` are (except as otherwise noted) not original to this project and, as 
+such, the terms above do not apply. If and where elegible, they may use seperate terms.
 
 # Structure
 
@@ -191,7 +192,7 @@ Miscellaneous single-byte assignments:
 |`IRR 1 G*DM4 N`|KPS 9566-2011 (only the main plane unless in the UHC DOCS)|
 |`IRR 2 G*DM4 N`|All KPS 9566 editions overlayed (but only the main plane unless in the UHC DOCS)|
 |`G*DM4 ! 0`|GB/T 12052 (Korean in Mainland China)|
-|`G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, as used in EUC-TW|
+|`G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, as included by EUC-TW as its G2 set|
 |`G*DM4 ! 2`|Hong Kong Supplementary Character Set, including ETEN characters (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`G*DM4 ! 3`|Non-ETEN Big5 kana and Cyrillic (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`G*DM4 ! 4`|IBM extensions for Shift\_JIS (accepted by Shift\_JIS filter in G3 slot, mapped to/from Shift\_JIS by the same mapping scheme as JIS X 0213 plane 2)|
@@ -199,10 +200,10 @@ Miscellaneous single-byte assignments:
 |`IRR ? G*DM4 ! 6`|KDDI Emoji extensions for Shift\_JIS (as above), pictorial zodiac variant|
 |`IRR 0 G*DM4 ! 6`|KDDI Emoji extensions for Shift\_JIS (as above), symbolic zodiac variant|
 |`G*DM4 ! 7`|SoftBank Emoji extensions for Shift\_JIS (as above)|
-|`IRR ? G*DM4 ! 8`|GB 13131 (supplementary traditional)|
-|`IRR 0 G*DM4 ! 8`|GB 7589 (supplementary simplified)&mdash;hopefully|
-|`IRR ? G*DM4 ! 9`|GB 13132 (further supplementary traditional)|
-|`IRR 0 G*DM4 ! 9`|GB 7590 (further supplementary simplified)&mdash;hopefully|
+|`IRR ? G*DM4 ! 8`|GB 13131 (supplementary traditional).&ensp;This is based on Unihan source data, and has a small number of gaps.|
+|`IRR 0 G*DM4 ! 8`|GB 7589 (supplementary simplified)&mdash;This is generated from the GB 13131 mappings, and may be inaccurate in places.|
+|`IRR ? G*DM4 ! 9`|GB 13132 (further supplementary traditional)&ensp;This is based on Unihan source data, and has several gaps.|
+|`IRR 0 G*DM4 ! 9`|GB 7590 (further supplementary simplified)&mdash;This is generated from the GB 13132 mappings, and may be inaccurate in places.|
 |`G*DM4 ! :`|HangulTalk second plane (accepted by HangulTalk filter in G3 slot)|
 |`G*DM4 ! ;`|Non-syllable part of KPS 9566-2011 outside the main plane (accepted by UHC filter in G3 slot)|
 |`G*DM4 ! <`|Big5-E extensions (for Big-5 filter's G3 slot)|

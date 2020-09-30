@@ -66,7 +66,14 @@ def read_gbk_non_uro_extras(fil):
     del _temp[:]
     return r
 
-full2005dict = {(0xE78D,): (0xFE10,), (0xE78E,): (0xFE12,), (0xE78F,): (0xFE11,), (0xE790,): (0xFE13,), (0xE791,): (0xFE14,), (0xE792,): (0xFE15,), (0xE793,): (0xFE16,), (0xE794,): (0xFE17,), (0xE795,): (0xFE18,), (0xE796,): (0xFE19,), (0xE816,): (0x20087,), (0xE817,): (0x20089,), (0xE818,): (0x200CC,), (0xE81E,): (0x9FB4,), (0xE826,): (0x9FB5,), (0xE82B,): (0x9FB6,), (0xE82C,): (0x9FB7,), (0xE831,): (0x215D7,), (0xE832,): (0x9FB8,), (0xE83B,): (0x2298F,), (0xE843,): (0x9FB9,), (0xE854,): (0x9FBA,), (0xE855,): (0x241FE,), (0xE864,): (0x9FBB,)}
+full2005dict = {(0xE78D,): (0xFE10,), (0xE78E,): (0xFE12,), (0xE78F,): (0xFE11,), 
+                (0xE790,): (0xFE13,), (0xE791,): (0xFE14,), (0xE792,): (0xFE15,), 
+                (0xE793,): (0xFE16,), (0xE794,): (0xFE17,), (0xE795,): (0xFE18,), 
+                (0xE796,): (0xFE19,), (0xE816,): (0x20087,), (0xE817,): (0x20089,), 
+                (0xE818,): (0x200CC,), (0xE81E,): (0x9FB4,), (0xE826,): (0x9FB5,), 
+                (0xE82B,): (0x9FB6,), (0xE82C,): (0x9FB7,), (0xE831,): (0x215D7,), 
+                (0xE832,): (0x9FB8,), (0xE83B,): (0x2298F,), (0xE843,): (0x9FB9,), 
+                (0xE854,): (0x9FBA,), (0xE855,): (0x241FE,), (0xE864,): (0x9FBB,)}
 def gb2005tofullmap(pointer, ucs):
     return full2005dict.get(ucs, ucs)
 def gb2005to2000map(pointer, ucs):
@@ -178,18 +185,10 @@ graphdata.gsets["ir058-hant"] = gb12345 = (94, 2, parsers.fuse([parsers.read_unt
     (None,) * 526 + gb2312_full[2][526:555],
     (None,) * 684 + gb2312_full[2][684:690]], "GB12345.json"))
 
-# GB/T 12052 (Korean in Mainland China). I lack info for the level 2 hangul and
-#   for five of the hanja. Per Lunde, the non-Hangul non-kanji rows are basically
-#   the same as GB2312, but there is a dollar instead of a yuan sign. Nothing is
-#   mentioned about the row 1 dollar sign, so presumably that means two dollar
-#   signs and no yuan sign???
-gbkohanja = parsers.read_unihan_source("UCD/Unihan_IRGSources.txt", "G", "GK")
-gbhangul = parsers.read_main_plane(
-    "UTCDocs/AppendixB-4300modernhangulsyllablesfromvarious94by94nationalstandards.txt",
-    utcl2_17_080 = "gbko")
-graphdata.gsets["gb12052"] = gb12052 = (94, 2, parsers.fuse([
-                 ((2 * 94) + 3) * (None,) + (0xFF04,),
-                 gb2312_1986[2][:94*15], gbhangul, gbkohanja], "GB12052-bits.json"))
+# GB/T 12052 (Korean in Mainland China). The non-Hangul non-kanji rows are basically
+#   the same as GB2312, but there is a second dollar sign instead of a yuan sign.
+graphdata.gsets["gb12052"] = gb12052 = (94, 2,
+        parsers.read_main_plane("Other/gb12052-uni.txt", gb12052=True))
 
 # Being as GB 7589, 13131, 7590, 13132 do not include non-Kanji, Unihan mappings theoretically can
 #   describe their entire mappings… in reality, the GB 13131 mapping contains more or less the
@@ -215,7 +214,9 @@ graphdata.gsets["gb13132"] = gb13132 = (94, 2,
 #     GB 13132:
 #   0x7060 灠 → 0x6f24 漤,  0x30710 𰜐 (漤 is more common in both and in GB 2312; 𰜐 is simplified 灠)
 #   0x9d82 鶂 → 0x2cdfc 𬷼, 0x31288 𱊈 (trad 鷁, simp 鹢 is today more common; favour SIP over TIP)
-resolve = {(0x8b78,): (0x8bea,), (0x8b32,): (0x2c904,), (0x9c44,): (0x2b68b,), (0x9c68,): (0x9cbf,), (0x9766,): (0x4a44,), (0x7060,): (0x30710,), (0x9d82,): (0x2cdfc,)}
+resolve = {(0x8b78,): (0x8bea,), (0x8b32,): (0x2c904,), (0x9c44,): (0x2b68b,), 
+           (0x9c68,): (0x9cbf,), (0x9766,): (0x4a44,), (0x7060,): (0x30710,), 
+           (0x9d82,): (0x2cdfc,)}
 tradat = parsers.parse_variants("UCD/Unihan_Variants.txt")
 _gb7589fn = os.path.join(parsers.cachedirectory, "GB7589.json")
 _gb7590fn = os.path.join(parsers.cachedirectory, "GB7590.json")

@@ -406,7 +406,7 @@ def dump_wikitables(outfile, setname, name="", euc=0, nonkanji=False, cdispmap={
             else:
                 start = (row * 96)
             subarray = array[start:start+typ]
-            _dump_wikitable_row(outfile, typ, subarray, name, -1, row, euc)
+            _dump_wikitable_row(outfile, typ, subarray, name, -1, row, euc, nonkanji)
     elif byts == 1:
         _dump_wikitable_row(outfile, typ, array, name, -1, -1, euc)
     else:
@@ -460,6 +460,36 @@ def dump_cccii_wiktionary(outfile, setname="eacc"):
                     print(end=",\u3000", file=outfile)
             print(file=outfile)
             print(file=outfile)
+
+def dump_plane_wiktionary(outfile, setname="eacc"):
+    typ, byts, array = graphdata.gsets[setname]
+    print("__NOTOC__", file=outfile)
+    print("{{wikipedia|Chinese Character Code for Information Interchange}}", file=outfile)
+    print("{{-}}", file=outfile)
+    for row in range(1, 95):
+        start = ((row - 1) * 94)
+        subarray = array[start:start+94]
+        if not len(subarray):
+            continue
+        print("=== Row {:d} ===".format(row), file=outfile)
+        for redten, i in enumerate(zip(*subarrays)):
+            n = len(subarray)
+            while not subarray[n-1] and n > 1:
+                n -= 1
+            i = subarray[:n]
+            streps = [("[[" + "".join(chr(k) for k in j) + "]]") if j else "\uFFFD" for j in subarray]
+            if not "".join(streps).strip("\uFFFD"):
+                continue
+            print(end="{{nobr|", file=outfile)
+            print(end="{:d}: ".format(redten + 1), file=outfile)
+            if (streps[0] == "\uFFFD") or (namedata.get_ucscategory(streps[0][2]) == "Co"):
+                print(end="(〓)", file=outfile)
+            else:
+                print(end=streps[0], file=outfile)
+            if redten < 93:
+                print(end=",\u3000", file=outfile)
+        print(file=outfile)
+        print(file=outfile)
 
 def _default_unicodefunc(cdisplayi, outfile, i=None, jlfunc=None, number=None, row=None, cell=None):
     print("<br><span class=codepoint>", file=outfile)

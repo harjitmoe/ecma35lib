@@ -106,7 +106,7 @@ def _grok_sjis(byts):
 def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=False,
                     skipstring=None, plane=None, altcomments=False, mapper=identitymap,
                     ignore_later_altucs=False, set96=False, libcongress=False, 
-                    utcl2_17_080=None):
+                    utcl2_17_080=None, gb12052=False):
     """
     Read a mapping from a file in the directory given by mbmapparsers.directory.
     Only positional argument is the name (including subdirectory) of that file.
@@ -186,6 +186,16 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
             else:
                 raise ValueError("unrecognised utcl2_17_080 arg: {!r}".format(utcl2_17_080))
             mkts = ((1, ku, ten),)
+        elif gb12052:
+            kuten, bit7, euc, ucs = _i.split(None, 3)
+            ucs = ucs.split("#", 1)[0].strip()
+            ku, ten = kuten.split("-")
+            ku = int(ku, 10)
+            ten = int(ten, 10)
+            ucs = "+".join(ucs.replace("U+", "").split())
+            mkts = ((1, ku, ten),)
+            if "Hunminjeongeum Haerye style" in _i:
+                ucs += "+F87F"
         elif libcongress:
             # CSV of (1) 3-byte GL, (2) UCS or PUA, (3) nothing or geta mark, (4) rubbish
             byts, ucs, rubbish = _i.split(",", 2)
