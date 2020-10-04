@@ -112,16 +112,14 @@ Miscellaneous single-byte assignments:
 |`G*D4 $ 1`|DEC NRCS for Switzerland (corresponding to DEC's (not ARIB's) `G*D4 4`)|
 |`G*D4 $ 2`|DEC NRCS for the Netherlands (corresponding to DEC's `G*D4 =`)|
 |`G*D4 $ 3`|Marlett encoding|
-|`G*D4 $ 4`|Zapf Dingbats, G0 range|
-|`G*D4 $ 5`|Zapf Dingbats, G1 range|
-|`G*D4 $ 6`|Symbol font encoding, G0 range|
-|`G*D4 $ 7`|Symbol font encoding, G1 range (no euro)|
+|`G*D4 $ 4`|Zapf Dingbats, GL range|
+|`G*D4 $ 5`|Zapf Dingbats, GR range|
+|`G*D4 $ 6`|Symbol font encoding, GL range|
+|`G*D4 $ 7`|Symbol font encoding, GR range (no euro)|
 |``IRR 1 G*D4 ` ``|Danish equivalent to NS 4551 (IBM's 1017)|
 |`G*D6 ! 0`|RFC 1345's so-called ISO-IR-111/ECMA-Cyrillic (incompatible with ISO-IR-111 itself).|
-|`IRR ? G*D6 $ 7`|Symbol font encoding, G1 range (with euro)|
-|`IRR 0 G*D6 $ 7`|Symbol font encoding, G1 range (with figure space)|
-
-.. Pending is Symbol Font.
+|`IRR ? G*D6 $ 7`|Symbol font encoding, GR range (with euro)|
+|`IRR 0 G*D6 $ 7`|Symbol font encoding, GR range (with figure space)|
 
 ## Additional multiple-byte G-sets
 
