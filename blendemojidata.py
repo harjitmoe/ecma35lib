@@ -167,11 +167,19 @@ def get_all_representations():
             _i["HREF.SoftBank"] = ("http://creation.mb.SoftBank.jp/mc/tech/tech_pic/img/" + 
                                    "{:04X}_20.gif".format(ord(_i["UCS.PUA.SoftBank"][0])))
         if "UCS.PUA.Google" in _i and len(_i["UCS.PUA.Google"]) == 1:
-            # Google was collaborating more with au by KDDI than the others, so the kddi_ne_jp
-            #   versions of the URLs might rationally be seen as the "default" of the three.
             # All three schemes fall back to other sets if there isn't a glyph in that one
-            _i["HREF.Google"] = "https://mail.google.com/mail/e/kddi_ne_jp/{:03X}".format(
+            href_gmail_emoji = "https://mail.google.com/mail/e/"
+            _i["HREF.Google"] = href_gmail_emoji + "{:03X}".format(
                                     ord(_i["UCS.PUA.Google"][0]) & 0xFFF)
+            if "ID.au" in _i and len(_i["ID.au"]) == 1:
+                _i["HREF.Google.au"] = href_gmail_emoji +"kddi_ne_jp/{:03X}".format(
+                                        ord(_i["UCS.PUA.Google"][0]) & 0xFFF)
+            if "ID.DoCoMo" in _i and len(_i["ID.DoCoMo"]) == 1:
+                _i["HREF.Google.DoCoMo"] = href_gmail_emoji + "docomo_ne_jp/{:03X}".format(
+                                        ord(_i["UCS.PUA.Google"][0]) & 0xFFF)
+            if "UCS.PUA.SoftBank" in _i and len(_i["UCS.PUA.SoftBank"]) == 1:
+                _i["HREF.Google.SoftBank"] = href_gmail_emoji + "softbank_ne_jp/{:03X}".format(
+                                        ord(_i["UCS.PUA.Google"][0]) & 0xFFF)
         if "UCS.Pictorial" in _i:
             pictorial = _i["UCS.Pictorial"]
             if pictorial not in all_representations:
