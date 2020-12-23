@@ -19,14 +19,26 @@ graphdata.c0graphics["1252"] = (None, 0x1F7E5, 0x1F7E9, 0x2588, 0x3013, 0x1FB97,
 
 # Macintosh compatibility C0 graphics
 # The common C0 replacements are the device controls. Others seem to vary with version.
-# Version attested in Chicago bitmaps from Mac OS 8.0. Note that the assignment of the escape
-#   key symbol to the escape character will not be accessible in ecma35lib as it currently works.
+# Version attested in Chicago bitmaps from Mac OS 8.0 and also in KEYBOARD.TXT. Note that the 
+#   assignment of the escape key symbol to the escape character will not be accessible in 
+#   ecma35lib as it currently works.
+# Note that KEYBOARD.TXT includes several mappings which differ, due to predating the addition of
+#   the WDings repertoires (and with it, more closely matching characters) to Unicode:
+#     U+21E5 (⇥) where we have U+2B72 (⭲)
+#     U+21E4 (⇤) where we have U+2B70 (⭰)
+#     U+21A9 (↩) where we have U+2B90 (⮐)
+#     U+21AA (↪) where we have U+2B91 (⮑)
+#     U+F802 (PUA) where we have U+1F589 (🖉)
+#     U+21E3 (⇣) where we have U+2B6D (⭭)
+#     U+21E0 (⇠) where we have U+2B6A (⭪)
+#     U+21E1 (⇡) where we have U+2B6B (⭫)
+#     U+21E2 (⇢) where we have U+2B6C (⭬)
 graphdata.c0graphics["1275"] = graphdata.c0graphics["1280"] = graphdata.c0graphics["1281"] = \
 graphdata.c0graphics["1282"] = graphdata.c0graphics["1283"] = graphdata.c0graphics["1284"] = \
 graphdata.c0graphics["1285"] = graphdata.c0graphics["1286"] = \
   (None,      None,      (0x2B72,), (0x2B70,), (0x2324,), (0x21E7,), (0x2303,), (0x2325,),
-   None,      None,      (0x2326,), (0x2B90,), (0x2B91,), None,      None,      None,
-   (0x2B6D,), (0x2318,), (0x2713,), (0x2666,), (0xF8FF,), None,      None,      (0x232B,),
+   None,      (0x2423,), (0x2326,), (0x2B90,), (0x2B91,), None,      None,      (0x1F589,),
+   (0x2B6D,), (0x2318,), (0x2713,), (0x25C6,), (0xF8FF,), None,      None,      (0x232B,),
    (0x2B6A,), (0x2B6B,), (0x2B6C,), (0x238B,), (0x2327,),) + ((None,) * 4)
 # Version attested in Chicago.ttf (not ChicagoFLF.ttf). Though U+2398 is an approximate mapping.
 graphdata.c0graphics["10000"] = graphdata.c0graphics["10004"] = graphdata.c0graphics["10005"] = \
