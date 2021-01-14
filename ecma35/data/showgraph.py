@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020.
+# By HarJIT in 2020, 2021.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -519,7 +519,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
                menuurl=None, menuname="Up to menu", jlfunc=None, 
                lasturl=None, nexturl=None, lastname=None, nextname=None,
                is_96=False, is_sbcs=False, pua_collides=False, blot="",
-               unicodefunc=_default_unicodefunc):
+               unicodefunc=_default_unicodefunc, big5ext_mode=False):
     """Dump an HTML mapping comparison."""
     stx, edx = (1, 95) if not is_96 else (0, 96)
     if is_sbcs:
@@ -564,6 +564,9 @@ def dump_plane(outfile, planefunc, kutenfunc,
         sparse = True
     print("<table>", file=outfile)
     for row in range(stx, edx):
+        if big5ext_mode:
+            if row in (65, 71) or row > 82:
+                continue
         if (not sparse) or (row == stx):
             print("<thead><tr><th>Codepoint</th>", file=outfile)
             for i in setnames2:
@@ -574,6 +577,9 @@ def dump_plane(outfile, planefunc, kutenfunc,
             print("Note:", annots[(number, row, 0)], file=outfile)
             print("</p></td></tr>", file=outfile)
         for cell in (range(1, 95) if not is_96 else range(0, 96)):
+            if big5ext_mode:
+                if ((row % 2) and (cell < 32)) or ((row == 72) and (cell < 54)):
+                    continue
             st = zplarray[((row - 1) * 94) + (cell - 1)] if not is_96 else zplarray[(row * 96) + cell]
             if (sparse or (cell in (0, 95))) and (len(set(i for i in st if i is not None)) == 0) \
                       and not annots.get((number, row, cell), None):

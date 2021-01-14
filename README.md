@@ -208,6 +208,7 @@ Miscellaneous single-byte assignments:
 |`G*DM4 ! =`|KS X 1002 (South Korean first supplementary plane)|
 |`G*DM4 ! >`|KS X 1027-1 (South Korean second supplementary plane)|
 |`G*DM4 ! ?`|KS X 1027-2 (South Korean third supplementary plane)|
+|`G*DM4 " 0`|Big5 AtOn/ChinaSea extensions (for Big-5 filter's G3 slot)|
 |`IRR ? G*DM6 ! 0`|GBK extras (GB 18030, level 5 with associated UDC zone and non-URO part of level 4; accepted by GBK filter in G3 slot)|
 |`IRR 0 G*DM6 ! 0`|GBK extras, WHATWG/HTML5 variant|
 |`IRR 1 G*DM6 ! 0`|GBK extras, mapping all characters with defined glyphs to non-PUA|

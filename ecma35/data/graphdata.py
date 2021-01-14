@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020.
+# By HarJIT in 2019/2020/2021.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -249,7 +249,7 @@ g94nbytes = {tuple(b"@"): ("ir042nec", ("ir042ibm", "ir042nec"), ("ir042",)),
              tuple(b"!0"): "gb12052",
              # Traditional Chinese off doing its own thing, as you do... no standard escapes here.
              tuple(b"!1"): ("cns-eucg2", ("cns-eucg2-ibm", "cns-eucg2-ms", "cns-eucg2-mac"), ("cns-eucg2",)),
-             tuple(b"!2"): ("hkscs", ("ibmbig5exts", "etenextsplus"), ("ms950exts", "big5-2003-exts", "etenexts", "gccs", "hkscs1999", "hkscs2001", "hkscsweb", "hkscs",)),
+             tuple(b"!2"): ("hkscs", ("ibmbig5exts", "etenextsplus"), ("ms950exts", "big5-2003-exts", "etenexts", "gccs", "hkscs1999", "hkscs2001", "hkscs2004", "hkscsweb", "hkscs",)),
              tuple(b"!3"): ("ms950utcexts", (), ("utcbig5exts", "ms950utcexts")),
              # Shift_JIS extensions for IBM/Windows/HTML5 and for cellular emoji
              tuple(b"!4"): ("ibmsjisextpua", (), ("ibmsjisext", "ibmsjisext")),
@@ -267,6 +267,7 @@ g94nbytes = {tuple(b"@"): ("ir042nec", ("ir042ibm", "ir042nec"), ("ir042",)),
              tuple(b"!="): "ksx1002",
              tuple(b"!>"): "ksx1027_1",
              tuple(b"!?"): "ksx1027_2",
+             tuple(b"!\""): ("aton-exts", ("aton-exts2",), ("aton-exts",)),
              tuple(b"~"): "nil"}
 
 g96nbytes = {tuple(b"!0"):("gbk-nonuro-extras", ("gbk-nonuro-extras-web", "gbk-nonuro-extras-full"), ("gbk-nonuro-extras",)),

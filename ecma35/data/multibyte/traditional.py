@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020.
+# By HarJIT in 2020/2021.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -549,9 +549,13 @@ graphdata.gsets["big5e-exts"] = big5e_extras = (94, 2, read_big5extras("Mozilla/
 graphdata.gsets["hkscsweb"] = hkscsweb_extras = (94, 2, read_big5extras("WHATWG/index-big5.txt"))
 graphdata.gsets["hkscs"] = hkscs_extras = (94, 2, parsers.fuse([hkscsweb_extras[2], 
                   read_big5extras("Mozilla/hkscs2004.txt", moz2004=True)], "BIG5-HKSCS2004.json"))
+graphdata.gsets["hkscs2004"] = hkscs04_extras = (94, 2, read_big5extras("Mozilla/hkscs2004.txt", moz2004=True))
 graphdata.gsets["hkscs2001"] = hkscs01_extras = (94, 2, read_big5extras("Mozilla/hkscs2001.txt"))
+#hkscs99_extra_pua = read_big5extras("Mozilla/hkscs1999.txt")
+#hkscs99_extra_ucs = [j if i else i for i, j in zip(hkscs99_extra_pua, hkscs01_extras[2])]
 graphdata.gsets["hkscs1999"] = hkscs99_extras = (94, 2, read_big5extras("Mozilla/hkscs1999.txt"))
-graphdata.gsets["gccs"] = gccs_extras = (94, 2, read_big5extras("Mozilla/hkscs1999.txt"))
+#graphdata.gsets["hkscs1999pua"] = hkscs99_extras = (94, 2, hkscs99_extra_pua)
+graphdata.gsets["gccs"] = gccs_extras = (94, 2, read_big5extras("Mozilla/gccs.txt"))
 # ETEN exts, plus the handful of HKSCS ones which follow, rather than preceeding, the standard
 #   assignments. Used by WHATWG's encoder (as opposed to decoder, which is full HKSCS):
 graphdata.gsets["etenextsplus"] = eten_extras_plus = (94, 2, 

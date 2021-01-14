@@ -347,7 +347,7 @@ def print_hints_to_html5(i, outfile, *, lang="ja"):
         strep = "".join(chr(j) for j in i)
     else:
         strep = "".join(chr(j) for j in i)
-        firststrep = namedata.canonical_decomp.get(strep, strep)[0]
+        firststrep = namedata.canonical_decomp.get(strep[0], strep)[0]
         if (ord(firststrep) < 0x7F) and (strep[1:2] != "\u20E3"): # Don't include keycaps.
             print("<span class='codepicture roman'>", file=outfile)
         elif (namedata.get_ucscategory(firststrep)[0] == "M") and (ord(firststrep) < 0x3000):
