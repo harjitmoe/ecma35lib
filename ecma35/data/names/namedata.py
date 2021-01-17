@@ -187,10 +187,12 @@ def lookup_ucsname(name, default=_no_default):
 def get_ucscategory(ucs, default=_no_default):
     if ucs in ucscats:
         return ucscats[ucs]
-    elif _is_cjkui(ucs) or _is_cjkci(ucs) or  _is_tangut(ucs):
+    elif _is_cjkui(ucs) or _is_cjkci(ucs) or _is_tangut(ucs):
         return "Lo"
     elif _is_pua(ucs):
         return "Co"
+    elif 0xD800 <= ord(ucs) < 0xE000:
+        return "Cs"
     elif default is _no_default:
         raise KeyError("no known UCS category: {!r}".format(ucs))
     else:

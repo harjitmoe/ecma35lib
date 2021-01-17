@@ -489,7 +489,7 @@ def print_hints_to_html5(i, outfile, *, lang="ja"):
             print(strep2, file=outfile)
             print("</span>", file=outfile)
         else:
-            print(strep2, file=outfile)
+            print(strep2.encode("utf-8", errors="ignore").decode("utf-8"), file=outfile)
     print("</span>", file=outfile)
 
 

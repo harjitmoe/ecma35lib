@@ -11,7 +11,7 @@ from ecma35.data.multibyte import korea, cellemojidata
 from ecma35.data import graphdata, showgraph
 import json, os
 
-plane1 = (1, ("UTC <br/>BIG5.TXT", "Microsoft <br/>MS-950", "Python <br/>MS-950", "IBM <br/>IBM-950", "CNS <br/>Big5-2003", "CNS <br/>Big5-E", "ETEN", "HKSCS <br/>GCCS", "HKSCS <br/>1999", "HKSCS <br/>2001", "HKSCS <br/>2004", "WHATWG <br/>Encoder", "WHATWG <br/>Decoder", "ChinaSea <br/>At-On 2.41"), [
+plane1 = (1, ("UTC <br/>BIG5.TXT", "Microsoft <br/>MS-950", "Python <br/>\"MS-950\"", "IBM <br/>IBM-950", "CNS Big5 <br/>Big5-2003", "CNS Big5 <br/>Big5-E", "ETEN", "HKSCS <br/>GCCS", "HKSCS <br/>1999", "HKSCS <br/>2001", "HKSCS <br/>2004", "HKSCS <br/>WHATWG", "WHATWG <br/>Encoder", "ChinaSea <br/>At-On 2.41", "ChinaSea <br/>At-On 2.50"), [
           graphdata.gsets["utcbig5exts"][2],
           graphdata.gsets["ms950exts"][2],
           graphdata.gsets["ms950utcexts"][2],
@@ -23,9 +23,10 @@ plane1 = (1, ("UTC <br/>BIG5.TXT", "Microsoft <br/>MS-950", "Python <br/>MS-950"
           graphdata.gsets["hkscs1999"][2],
           graphdata.gsets["hkscs2001"][2],
           graphdata.gsets["hkscs2004"][2],
-          graphdata.gsets["etenextsplus"][2],
           graphdata.gsets["hkscsweb"][2],
+          graphdata.gsets["etenextsplus"][2],
           graphdata.gsets["aton-exts"][2],
+          graphdata.gsets["aton-exts2"][2],
 ])
 
 def planefunc(number, mapname=None):
