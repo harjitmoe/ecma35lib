@@ -653,10 +653,16 @@ def dump_preview(outfile, planename, kutenfunc, number, array, *, lang="zh-TW", 
     print("<h1>{}{}</h1>".format(planename, h), file=outfile)
     if menuurl or lasturl or nexturl:
         _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname)
-    print("<table class=chart><thead><tr><th>Code</th>", file=outfile)
+    print("<table class=chart>", file=outfile)
     for row in range(stx, edx):
+        if row == stx:
+            print("<thead>", file=outfile)
+        print("<tr><th>Code</th>", file=outfile)
         print("".join("<th>_{:1X}</th>".format(i) for i in range(0x10)), file=outfile)
-        print("</tr></thead><tbody><tr><th class=codepoint>", file=outfile)
+        print("</tr>", file=outfile)
+        if row == stx:
+            print("</thead><tbody>", file=outfile)
+        print("<tr><th class=codepoint>", file=outfile)
         print("<a id='{:d}.{:d}.1' class=anchor></a>".format(number, row), file=outfile)
         print(kutenfunc(number, row, -1), file=outfile)
         print("</th><td class=undefined></td>", file=outfile)
@@ -677,7 +683,6 @@ def dump_preview(outfile, planename, kutenfunc, number, array, *, lang="zh-TW", 
             unicodefunc(i, outfile, None, jlfunc, number, row, cell)
             print("</td>", file=outfile)
         print("<td class=undefined></td></tr>", file=outfile)
-        print("</tr></tbody><thead><tr><th>Code</th>", file=outfile)
     print("</table>", file=outfile)
     if menuurl or lasturl or nexturl:
         _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname)
