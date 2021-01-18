@@ -488,8 +488,11 @@ def print_hints_to_html5(i, outfile, *, lang="ja"):
             print("<span class=taegeuk>", file=outfile)
             print(strep2, file=outfile)
             print("</span>", file=outfile)
+        elif ucd.normalize("NFC", strep2) != strep2:
+            # Not strictly supposed to have non-NFC verbatim characters in HTML (escape them).
+            print(strep2.encode("ascii", errors="xmlcharrefreplace").decode("ascii"), file=outfile)
         else:
-            print(strep2.encode("utf-8", errors="ignore").decode("utf-8"), file=outfile)
+            print(strep2, file=outfile)
     print("</span>", file=outfile)
 
 

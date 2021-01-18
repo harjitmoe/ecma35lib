@@ -568,10 +568,14 @@ def dump_plane(outfile, planefunc, kutenfunc,
             if row in (65, 71) or row > 82:
                 continue
         if (not sparse) or (row == stx):
-            print("<thead><tr><th>Codepoint</th>", file=outfile)
+            if row == stx:
+                print("<thead>", file=outfile)
+            print("<tr><th>Codepoint</th>", file=outfile)
             for i in setnames2:
                 print("<th>", i, planefunc(number, i), file=outfile)
-            print("</tr></thead>", file=outfile)
+            print("</tr>", file=outfile)
+            if row == stx:
+                print("</thead>", file=outfile)
         if annots.get((number, row, 0), None):
             print("<tr class=annotation><td colspan={:d}><p>".format(len(plarray) + 1), file=outfile)
             print("Note:", annots[(number, row, 0)], file=outfile)
@@ -591,7 +595,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
             else:
                 print("<tr>", file=outfile)
             print("<th class=codepoint>", file=outfile)
-            print("<a name='{:d}.{:d}.{:d}' class=anchor></a>".format(number, row, cell), file=outfile)
+            print("<a id='{:d}.{:d}.{:d}' class=anchor></a>".format(number, row, cell), file=outfile)
             if selfhandledanchorlink:
                 print(kutenfunc(number, row, cell), file=outfile)
             else:
@@ -653,13 +657,13 @@ def dump_preview(outfile, planename, kutenfunc, number, array, *, lang="zh-TW", 
     for row in range(stx, edx):
         print("".join("<th>_{:1X}</th>".format(i) for i in range(0x10)), file=outfile)
         print("</tr></thead><tbody><tr><th class=codepoint>", file=outfile)
-        print("<a name='{:d}.{:d}.1' class=anchor></a>".format(number, row), file=outfile)
+        print("<a id='{:d}.{:d}.1' class=anchor></a>".format(number, row), file=outfile)
         print(kutenfunc(number, row, -1), file=outfile)
         print("</th><td class=undefined></td>", file=outfile)
         for cell in range(1, 95) if not is_96 else range(0, 96):
             if not (cell % 16):
                 print("</tr><tr><th class=codepoint>", file=outfile)
-                print("<a name='{:d}.{:d}.{:d}' class=anchor></a>".format(number, 
+                print("<a id='{:d}.{:d}.{:d}' class=anchor></a>".format(number, 
                             row, cell), file=outfile)
                 print(kutenfunc(number, row, -cell), file=outfile)
                 print("</th>", file=outfile)
