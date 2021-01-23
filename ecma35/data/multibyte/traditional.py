@@ -69,7 +69,7 @@ ir184_to_old_ir183 = { 26554: 23820, 26564: 23821, 26588: 23822, 26590: 23823, 2
          33547: 23987, 33674: 23988, 33768: 23989, 33804: 23990}
 
 # Since the gov.tw data disagrees with literally every other source I have on the matter
-# (ISO-IR-171, UTC mappings, ICU mappings, Yasuoka's mappings…; although not without
+# (ISO-IR-171, UTC mappings, ICU mappings, Yasuoka's mappings, RFC 1922…; although not without
 # reason, since it made it the same as Big5 order), change arrow order to match.
 def cnsmapper_swaparrows(pointer, ucs):
     if (pointer == 148) and (ucs == (0x2190,)):

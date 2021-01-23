@@ -10,11 +10,15 @@ from ecma35.data.multibyte import mbmapparsers as parsers
 from ecma35.data.multibyte import korea, cellemojidata
 from ecma35.data import graphdata, showgraph
 import json, os
+import unicodedata as ucd
+
+pseudomicrosoft = tuple(i if i and ucd.category(chr(i[0])) != "Co" else None
+                        for i in graphdata.gsets["ms950utcexts"][2])
 
 plane1 = (1, ("UTC <br/>BIG5.TXT", "Microsoft <br/>MS-950", "Python <br/>\"MS-950\"", "IBM <br/>IBM-950", "CNS Big5 <br/>Big5-2003", "CNS Big5 <br/>Big5-E", "ETEN", "HKSCS <br/>GCCS", "HKSCS <br/>1999", "HKSCS <br/>2001", "HKSCS <br/>2004", "HKSCS <br/>WHATWG", "WHATWG <br/>Encoder", "ChinaSea <br/>At-On 2.41", "ChinaSea <br/>At-On 2.50"), [
           graphdata.gsets["utcbig5exts"][2],
           graphdata.gsets["ms950exts"][2],
-          graphdata.gsets["ms950utcexts"][2],
+          pseudomicrosoft,
           graphdata.gsets["ibmbig5exts"][2],
           graphdata.gsets["big5-2003-exts"][2],
           graphdata.gsets["big5e-exts"][2],
