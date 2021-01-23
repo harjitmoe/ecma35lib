@@ -611,8 +611,6 @@ def dump_plane(outfile, planefunc, kutenfunc,
                     pointer = ((number - 1) * (94 * 94)) + ((row - 1) * 94) + (cell - 1)
                 else:
                     pointer = ((number - 1) * (96 * 96)) + (row * 96) + cell
-                if pointer == 6836:
-                    print((setnames2[colno], pointer, i))
                 cdisplayi = cdispmap.get((setnames2[colno], pointer, i), cdispmap.get((pointer, i), i))
                 #
                 print("<td>", end="", file=outfile)

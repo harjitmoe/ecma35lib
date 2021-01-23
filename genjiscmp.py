@@ -115,6 +115,9 @@ for n, i in enumerate(graphdata.gsets["kddipictsjisext"][2]):
     if i != j and j:
         cdispmap[(n + (94 * 94), i)] = j
 
+cdispmap[("au by KDDI<br>JIS Emoji", 8092, (0x1F140,))] = (0xF048,)
+cdispmap[("DoCoMo<br>JIS Emoji", 8092, (0x1F140,))] = (0xE6E1,)
+
 annots = {
  (1, 1, 17): 'U+FFE3 (￣) is the fullwidth counterpart of both U+00AF (¯) and '
              'U+203E (‾); the latter is the one typically used when mapping '
