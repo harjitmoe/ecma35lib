@@ -12,8 +12,23 @@ from ecma35.data import graphdata, showgraph
 import json, os
 import unicodedata as ucd
 
+cdispmap = {}
+annots = {}
+
+def _foo():
+    for n, (mebbepua, mebbenot) in enumerate(zip(graphdata.gsets["hkscs1999"][2], graphdata.gsets["gccs"][2])):
+        if mebbepua and mebbenot and (mebbepua != mebbenot) and ucd.category(chr(mebbepua[0])) == "Co":
+            if n == 6836:
+                print(("HKSCS <br/>1999", n, mebbenot), mebbepua)
+            cdispmap[("HKSCS <br/>1999", n, mebbenot)] = mebbepua
+            yield mebbenot
+        else:
+            yield mebbepua
+
 pseudomicrosoft = tuple(i if i and ucd.category(chr(i[0])) != "Co" else None
                         for i in graphdata.gsets["ms950utcexts"][2])
+hkscs99 = tuple(_foo())
+print(len(hkscs99))
 
 plane1 = (1, ("UTC <br/>BIG5.TXT", "Microsoft <br/>MS-950", "Python <br/>\"MS-950\"", "IBM <br/>IBM-950", "CNS Big5 <br/>Big5-2003", "CNS Big5 <br/>Big5-E", "ETEN", "HKSCS <br/>GCCS", "HKSCS <br/>1999", "HKSCS <br/>2001", "HKSCS <br/>2004", "HKSCS <br/>WHATWG", "WHATWG <br/>Encoder", "ChinaSea <br/>At-On 2.41", "ChinaSea <br/>At-On 2.50"), [
           graphdata.gsets["utcbig5exts"][2],
@@ -24,7 +39,7 @@ plane1 = (1, ("UTC <br/>BIG5.TXT", "Microsoft <br/>MS-950", "Python <br/>\"MS-95
           graphdata.gsets["big5e-exts"][2],
           graphdata.gsets["etenexts"][2],
           graphdata.gsets["gccs"][2],
-          graphdata.gsets["hkscs1999"][2],
+          hkscs99,
           graphdata.gsets["hkscs2001"][2],
           graphdata.gsets["hkscs2004"][2],
           graphdata.gsets["hkscsweb"][2],
@@ -53,9 +68,6 @@ def kutenfunc(number, row, cell):
                  number, row, cell, lead, trail)
     pseudokuten = "(Ψ-{:02d}-{:02d})".format(row, cell)
     return "{}<br>{}".format(anchorlink, pseudokuten)
-
-cdispmap = {}
-annots = {}
 
 for p in [plane1]:
     for q in range(1, 7):

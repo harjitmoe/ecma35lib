@@ -602,7 +602,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
                 print("<a href='#{:d}.{:d}.{:d}'>".format(number, row, cell), file=outfile)
                 print(kutenfunc(number, row, cell), "</a>", file=outfile)
             print("</th>", file=outfile)
-            for i in st:
+            for colno, i in enumerate(st):
                 if i is None:
                     print("<td class=undefined></td>", file=outfile)
                     continue
@@ -611,7 +611,9 @@ def dump_plane(outfile, planefunc, kutenfunc,
                     pointer = ((number - 1) * (94 * 94)) + ((row - 1) * 94) + (cell - 1)
                 else:
                     pointer = ((number - 1) * (96 * 96)) + (row * 96) + cell
-                cdisplayi = cdispmap.get((pointer, i), i)
+                if pointer == 6836:
+                    print((setnames2[colno], pointer, i))
+                cdisplayi = cdispmap.get((setnames2[colno], pointer, i), cdispmap.get((pointer, i), i))
                 #
                 print("<td>", end="", file=outfile)
                 if (i != cdisplayi) and isinstance(cdisplayi, tuple) and (
