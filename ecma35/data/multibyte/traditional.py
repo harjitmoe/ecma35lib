@@ -546,8 +546,7 @@ graphdata.gsetflags["cns-eucg2-ms"] |= {"BIG5:IBMCOMPATKANJI"}
 graphdata.gsets["aton-exts"] = (94, 2, read_big5extras("Mozilla/uao241-b2u.txt"))
 graphdata.gsets["aton-exts2"] = (94, 2, read_big5extras("Mozilla/uao250-b2u.txt"))
 graphdata.gsets["big5e-exts"] = big5e_extras = (94, 2, read_big5extras("Mozilla/big5e.txt"))
-graphdata.gsets["hkscsweb"] = hkscsweb_extras = (94, 2, read_big5extras("WHATWG/index-big5.txt"))
-graphdata.gsets["hkscs"] = hkscs_extras = (94, 2, parsers.fuse([hkscsweb_extras[2], 
+graphdata.gsets["hkscs"] = hkscs_extras = (94, 2, parsers.fuse([read_big5extras("WHATWG/index-big5.txt"), 
                   read_big5extras("Mozilla/hkscs2004.txt", moz2004=True)], "BIG5-HKSCS2004.json"))
 graphdata.gsets["hkscs2004"] = hkscs04_extras = (94, 2, read_big5extras("Mozilla/hkscs2004.txt", moz2004=True))
 graphdata.gsets["hkscs2001"] = hkscs01_extras = (94, 2, read_big5extras("Mozilla/hkscs2001.txt"))

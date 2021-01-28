@@ -16,7 +16,7 @@ cdispmap = {}
 annots = {}
 
 def _foo(label, inpt):
-    for n, (mebbepua, mebbenot) in enumerate(zip(inpt, graphdata.gsets["hkscsweb"][2])):
+    for n, (mebbepua, mebbenot) in enumerate(zip(inpt, graphdata.gsets["hkscs"][2])):
         if mebbepua and mebbenot and (mebbepua != mebbenot) and ucd.category(chr(mebbepua[0])) == "Co":
             cdispmap[(label, n, mebbenot)] = mebbepua
             yield mebbenot
@@ -38,7 +38,7 @@ plane1 = (1, ("UTC <br/>BIG5.TXT", "Microsoft <br/>MS-950", "Python <br/>\"MS-95
           tuple(_foo("HKSCS <br/>1999", graphdata.gsets["hkscs1999"][2])),
           tuple(_foo("HKSCS <br/>2001", graphdata.gsets["hkscs2001"][2])),
           graphdata.gsets["hkscs2004"][2],
-          graphdata.gsets["hkscsweb"][2],
+          graphdata.gsets["hkscs"][2],
           graphdata.gsets["etenextsplus"][2],
           graphdata.gsets["aton-exts"][2],
           graphdata.gsets["aton-exts2"][2],
