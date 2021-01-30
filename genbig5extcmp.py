@@ -26,6 +26,17 @@ def _foo(label, inpt):
 pseudomicrosoft = tuple(i if i and ucd.category(chr(i[0])) != "Co" else None
                         for i in graphdata.gsets["ms950utcexts"][2])
 
+_blendy = graphdata.gsets["etenextsplus"][2]
+lastcode = (0x2550, 0x255E, 0x2561, 0x256A, 0x5341, 0x5345)
+def _bar():
+    for i in _blendy:
+        if not i or (len(i) == 1 and i[0] in graphdata.codepoint_coverages["cns-eucg2-ms"]):
+            yield None
+        else:
+            assert i[0] not in lastcode
+            yield i
+blendy = tuple(_bar())
+
 plane1 = (1, ("UTC <br/>BIG5.TXT", "Microsoft <br/>MS-950", "Python <br/>\"MS-950\"", "IBM <br/>IBM-950", "CNS Big5 <br/>Big5-2003", "CNS Big5 <br/>Big5-E", "ETEN", "HKSCS <br/>GCCS", "HKSCS <br/>1999", "HKSCS <br/>2001", "HKSCS <br/>2004", "HKSCS <br/>WHATWG", "WHATWG <br/>Encoder", "ChinaSea <br/>At-On 2.41", "ChinaSea <br/>At-On 2.50"), [
           graphdata.gsets["utcbig5exts"][2],
           graphdata.gsets["ms950exts"][2],
@@ -39,7 +50,7 @@ plane1 = (1, ("UTC <br/>BIG5.TXT", "Microsoft <br/>MS-950", "Python <br/>\"MS-95
           tuple(_foo("HKSCS <br/>2001", graphdata.gsets["hkscs2001"][2])),
           graphdata.gsets["hkscs2004"][2],
           graphdata.gsets["hkscs"][2],
-          graphdata.gsets["etenextsplus"][2],
+          blendy,
           graphdata.gsets["aton-exts"][2],
           graphdata.gsets["aton-exts2"][2],
 ])
