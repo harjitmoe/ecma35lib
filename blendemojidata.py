@@ -205,7 +205,7 @@ def get_all_representations():
                        (graphdata.rhses["999002"], "SBCS.Wingdings_2", 0x80),
                        (graphdata.gsets["wingdings3_g0"][2], "SBCS.Wingdings_3", 0x21),
                        (graphdata.rhses["999003"], "SBCS.Wingdings_3", 0x80),
-                       (dingbats.wordperfect5, "SBCS.WordPerfect_Page5", 0)):
+                       (dingbats.wordperfect6_page5, "SBCS.ZapfDingbats.WordPerfect", 0)):
         for code in myset:
             if not code:
                 continue
