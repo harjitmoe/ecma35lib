@@ -11,6 +11,7 @@ from ecma35.data import maxmat, graphdata
 from ecma35.data.multibyte import mbmapparsers as parsers
 from ecma35.data.multibyte import japan
 from ecma35.data.multibyte.cellemojidata import all_jcarrier_raw, gspua_to_ucs_possibs
+from ecma35.data.singlebyte import dingbats
 from ecma35.data.names import namedata
 
 data = os.path.join(parsers.directory, "UCD", "emoji-sequences.txt")
@@ -203,7 +204,8 @@ def get_all_representations():
                        (graphdata.gsets["wingdings2_g0"][2], "SBCS.Wingdings_2", 0x21),
                        (graphdata.rhses["999002"], "SBCS.Wingdings_2", 0x80),
                        (graphdata.gsets["wingdings3_g0"][2], "SBCS.Wingdings_3", 0x21),
-                       (graphdata.rhses["999003"], "SBCS.Wingdings_3", 0x80)):
+                       (graphdata.rhses["999003"], "SBCS.Wingdings_3", 0x80),
+                       (dingbats.wordperfect5, "SBCS.WordPerfect_Page5", 0)):
         for code in myset:
             if not code:
                 continue

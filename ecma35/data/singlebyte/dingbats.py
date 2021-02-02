@@ -85,5 +85,19 @@ graphdata.rhses["998000"] = (tuple((i,) for i in range(0x2768, 0x2776)) + ((None
 graphdata.defgsets["998000"] = ("zdings_g0", "zdings_g1", "nil", "nil")
 
 
+#####################################################################
+# WordPerfect Iconic Symbols (not ECMA-35 structured)
+
+# This is the original source of U+231A and U+231B emoji (and U+2319).
+
+wordperfect5 = ((0x2665,), (0x2666,), (0x2663,), (0x2660,), (0x2642,), 
+                (0x2640,), (0x263C,), (0x263A,), (0x263B,), (0x266A,),
+                (0x266C,), (0x25AC,), (0x2302,), (0x203C,), (0x221A,),
+                (0x21A8,), (0x2310,), (0x2319,), (0x25D8,), (0x25D9,),
+                (0x21B5,), (0x261E,), (0x261C,), (0x2713,), (0x2610,),
+                (0x2612,), (0x2639,), (0x266F,), (0x266D,), (0x266E,),
+                (0x260E,), (0x231A,), (0x231B,), (0x2104,), (0x2423,))
+
+
 
 
