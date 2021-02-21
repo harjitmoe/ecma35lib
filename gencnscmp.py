@@ -140,55 +140,6 @@ plane7 = (7, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Outp
           graphdata.gsets["ir187"][2],
 ])
 
-print("Loading 8")
-plane8 = (8, ("GOV-TW CNS", "Output"), [
-          tuple(map(lambda a, b, c: a or b or c,
-              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode BMP.txt", plane=8),
-              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 2.txt", plane=8),
-              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 15.txt", plane=8)
-          )),
-          # Slight kludge to only show for the first part of the plane, and
-          #   use the compact chart format for the rest:
-          graphdata.gsets["cns-eucg2"][2][(94*94*7):(94*94*7)+(94*15)],
-])
-
-print("Loading 9")
-plane9 = (9, ("GOV-TW CNS",), [
-          tuple(map(lambda a, b, c: a or b or c,
-              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode BMP.txt", plane=9),
-              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 2.txt", plane=9),
-              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 15.txt", plane=9)
-          )),
-])
-
-print("Loading 10")
-planeA = (10, ("GOV-TW CNS",), [
-          tuple(map(lambda a, b, c: a or b or c,
-              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode BMP.txt", plane=10),
-              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 2.txt", plane=10),
-              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 15.txt", plane=10)
-          )),
-])
-
-print("Loading 11")
-planeB = (11, ("GOV-TW CNS",), [
-          tuple(map(lambda a, b, c: a or b or c,
-              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode BMP.txt", plane=11),
-              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 2.txt", plane=11),
-              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 15.txt", plane=11)
-          )),
-])
-
-print("Loading 12")
-planeC = (12, ("ICU EUC 2014", "GOV-TW CNS",), [
-          graphdata.gsets["cns-eucg2-ibm"][2][94*94*11:94*94*12],
-          tuple(map(lambda a, b, c: a or b or c,
-              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode BMP.txt", plane=12),
-              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 2.txt", plane=12),
-              parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 15.txt", plane=12)
-          )),
-])
-
 print("Loading 13")
 planeD = (13, ("ICU EUC 2014", "GOV-TW CNS",), [
           graphdata.gsets["cns-eucg2-ibm"][2][94*94*12:94*94*13],
@@ -426,9 +377,8 @@ annots = {
  (3, 69, 26): "The <a href='https://www.unicode.org/cgi-bin/GetUnihanData.pl?codepoint=6BF6'>"
               "Unihan database</a> (i.e. the up-to-date UCS source) regards this as U+6BF6, while "
               "the <a href='https://www.cns11643.gov.tw/wordView.jsp?ID=222522'>CNS 11643 Word "
-              "View (i.e. the up-to-date CNS / GovTW source) regards this one as U+6BF5.&ensp;They "
-              "seem plausibly variants of the same character (they have the same reading and the "
-              "same <em>set</em> of components at any rate, but 毵 is more common).&ensp;In "
+              "View</a> (i.e. the up-to-date CNS / GovTW source) regards this one as U+6BF5.&ensp;They "
+              "seem to be variants of the same character, but 毵 is more common.&ensp;In "
               "whatever case, compare 15-28-28 (always mapped to U+6BF5 毵), 15-28-30 (always "
               "U+6BF6 毶, although absent in non-GovTW mappings) and 02-49-32 (毿, the version "
               "present in Big5, due to being the favoured version in zh-Hant).",
@@ -468,9 +418,9 @@ if os.path.exists("__analyt__"):
     blot = open("__analyt__").read()
 
 print("Writing HTML")
-for n, p in enumerate([plane1, plane2, plane3, plane4, plane5, plane6, plane7, plane8, plane9, planeA, planeB, planeC, planeD, planeE, planeF]):
+for n, p in enumerate([plane1, plane2, plane3, plane4, plane5, plane6, plane7, planeD, planeE, planeF]):
     for q in range(1, 7):
-        bnx = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)
+        bnx = (1, 2, 3, 4, 5, 6, 7, 13, 14, 15)
         bn = bnx[n]
         f = open("cnsplane{:X}{}.html".format(bn, chr(0x60 + q)), "w", encoding="utf-8")
         lasturl = lastname = nexturl = nextname = None

@@ -133,12 +133,13 @@ graphdata.gsets["ir172"] = cns2 = (94, 2, cns[planesize * 1 : planesize * 2])
 # In 2007, 128 characters were added to plane 3, mostly corresponding to and at the same
 #   locations as those added to the IRG submission's plane 14 (comparing the mappings, and
 #   insofar as CNS11643.TXT has a lot more gaps for some reason, the only difference seems to
-#   be the current 毵 versus the CNS11643.TXT 毶 at 69-26). Note that an unrelated plane 14
-#   was added in 2007.
+#   be the current 毵 versus the CNS11643.TXT 毶 at 69-26, both being itaiji of 02-49-32 毿).
+#   Note that an unrelated plane 14 was added in 2007.
 graphdata.gsets["ir183"] = cns3 = (94, 2, cns[planesize * 2 : planesize * 3])
 _ir183oldirg = parsers.read_main_plane("UTC/CNS11643.TXT", plane=14)
-_ir183full = tuple(cns_fullplane3[planesize * 2 : planesize * 3])
-_ir183fullalt = parsers.fuse([_ir183oldirg, _ir183full], "ir183fullalt.json")
+_ir183nearfull = tuple(cns_fullplane3[planesize * 2 : planesize * 3])
+_ir183full = parsers.fuse([_ir183nearfull, _ir183oldirg], "ir183fullnew.json")
+_ir183fullalt = parsers.fuse([_ir183oldirg, _ir183nearfull], "ir183fullalt.json")
 graphdata.gsets["ir183-1988"] = cns3_1988 = (94, 2, tuple(_ir183fullalt)[:6319])
 graphdata.gsets["ir183-1988plus"] = cns3plus = (94, 2, tuple(_ir183fullalt))
 graphdata.gsets["ir183-1992"] = cns3_1988 = (94, 2, tuple(_ir183full)[:6148])

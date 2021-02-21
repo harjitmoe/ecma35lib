@@ -41,19 +41,19 @@ thead:first-of-type th, thead:first-of-type td {
     position: relative;
     top: -3rem;
 }
-.codepoint {
+.codepoint, .cpt {
     font-family: monospace;
     font-size: 0.7rem;
 }
-.codepicture {
+.codepicture, .cpc {
     font-family: TakaoPMincho, IPAPMincho, Noto Serif CJK KR, Source Han Serif KR, TakaoPGothic, IPAPGothic, Noto Sans CJK KR, Source Han Sans KR, TW-Sung-Ext-B, TW-Kai-Ext-B, Yu Gothic, BabelStone Han, serif;
     font-size: 1.5rem;
     line-height: 2rem;
 }
-.codepicture.roman {
+.codepicture.roman, .cpc.roman {
     font-family: Doulos SIL, DejaVu Serif, Segoe UI, DejaVu Sans, serif;
 }
-.codepicture.smp {
+.codepicture.smp, .cpc.smp {
     font-family: Twemoji Mozilla, Apple Color Emoji, Noto Color Emoji, Segoe UI Emoji, Noto Emoji, serif;
     /*font-family: unset;*/
 }
@@ -109,11 +109,11 @@ thead:first-of-type th, thead:first-of-type td {
     font-size: 0.75rem;
 }
 
-.undefined {
+.undefined, .udf {
     background: #999;
 	height: 3rem;
 }
-.collision {
+.collision, .cln {
     background: #f99;
 }
 
@@ -153,31 +153,31 @@ ul.navbar li::after {
 .darksquare .inverse, .darkcircle .inverse {
     stroke: white;
 }
-.codepicture .charwrapper {
+.cpc .charwrapper {
     height: 1.6rem;
     box-sizing: border-box;
     vertical-align: text-bottom;
 }
-.codepicture .charwrapper.circle, .codepicture .charwrapper.darksquare, .codepicture .charwrapper.lightsquare {
+.cpc .charwrapper.circle, .cpc .charwrapper.darksquare, .cpc .charwrapper.lightsquare {
     height: 1.4rem;
     margin: 0.1rem;
     box-sizing: border-box;
 }
-.codepicture .charwrapper .wrappedtext {
+.cpc .charwrapper .wrappedtext {
     font-size: 72px;
 }
-.codepicture .charwrapper.circle .wrappedtext, .codepicture .charwrapper.lightdiamond .wrappedtext {
+.cpc .charwrapper.circle .wrappedtext, .cpc .charwrapper.lightdiamond .wrappedtext {
     font-size: 48px;
 }
-.codepicture .charwrapper.lightcircle .wrappedtext {
+.cpc .charwrapper.lightcircle .wrappedtext {
     font-size: 64px;
 }
-.codepicture .charwrapper.lightdiamond .enclosure {
+.cpc .charwrapper.lightdiamond .enclosure {
     fill: none;
 	stroke: black;
 	stroke-width: 3px;
 }
-.codepicture .charwrapper .wrappedtext .redundant {
+.cpc .charwrapper .wrappedtext .redundant {
     /* Don't `display: none;` (since that excludes it from copy-paste,
        defeating much of the object of including it to begin with). */
     font-size: 0px;

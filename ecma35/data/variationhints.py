@@ -322,28 +322,28 @@ def ahmap(pointer, ucs):
 def print_hints_to_html5(i, outfile, *, lang="ja"):
     sequence_inverse = sequence_big = False
     if i[0] >= 0xF0000:
-        print("<span class='codepicture spua' lang={}>".format(lang), file=outfile)
+        print("<span class='cpc spua' lang={}>".format(lang), file=outfile)
         strep = "".join(chr(j) for j in i)
     elif 0xF860 <= i[0] < 0xF865 and len(i) != 1:
-        print("<span class='codepicture' lang={}>".format(lang), file=outfile)
+        print("<span class='cpc' lang={}>".format(lang), file=outfile)
         strep = "".join(chr(j) for j in i[1:]).replace("\uF860", "").replace("\uF861", 
                 "").replace("\uF862", "").replace("\uF863", "").replace("\uF864", "")
     elif 0xF865 <= i[0] < 0xF867 and len(i) != 1:
         sequence_inverse = True
-        print("<span class='codepicture' lang={}>".format(lang), file=outfile)
+        print("<span class='cpc' lang={}>".format(lang), file=outfile)
         strep = "".join(chr(j) for j in i[1:]).replace("\uF865", "").replace("\uF866", "")
     elif (i[0] == 0xF867) and len(i) != 1:
         sequence_big = True
-        print("<span class='codepicture' lang={}>".format(lang), file=outfile)
+        print("<span class='cpc' lang={}>".format(lang), file=outfile)
         strep = "".join(chr(j) for j in i[1:]).replace("\uF867", "")
     elif 0xE000 <= i[0] < 0xF900:
-        print("<span class='codepicture pua' lang={}>".format(lang), file=outfile)
+        print("<span class='cpc pua' lang={}>".format(lang), file=outfile)
         # Object Replacement Character (FFFD is already used by BIG5.TXT)
         strep = "\uFFFC"
     elif (0x10000 <= i[0] < 0x20000) or (0xFE0F in i):
         # SMP best to fall back to applicable emoji (or otherwise applicable) fonts,
         # and not try to push CJK fonts first.
-        print("<span class='codepicture smp' lang={}>".format(lang), file=outfile)
+        print("<span class='cpc smp' lang={}>".format(lang), file=outfile)
         strep = "".join(chr(j) for j in i)
     else:
         strep = "".join(chr(j) for j in i)
@@ -351,11 +351,11 @@ def print_hints_to_html5(i, outfile, *, lang="ja"):
         while firststrep in namedata.canonical_decomp:
             firststrep = namedata.canonical_decomp[firststrep][0]
         if (ord(firststrep) < 0x7F) and (strep[1:2] != "\u20E3"): # Don't include keycaps.
-            print("<span class='codepicture roman'>", file=outfile)
+            print("<span class='cpc roman'>", file=outfile)
         elif (namedata.get_ucscategory(firststrep)[0] == "M") and (ord(firststrep) < 0x3000):
-            print("<span class='codepicture roman'>", file=outfile)
+            print("<span class='cpc roman'>", file=outfile)
         else:
-            print("<span class=codepicture lang={}>".format(lang), file=outfile)
+            print("<span class=cpc lang={}>".format(lang), file=outfile)
     strep = strep.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
     if namedata.get_ucscategory(strep[0])[0] == "M":
         strep = "◌" + strep

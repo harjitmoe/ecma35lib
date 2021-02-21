@@ -286,9 +286,10 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
             ucs, byts, direction = _i.split(" ", 2)
             assert byts[:2] == "\\x"
             byts = [int(i, 16) for i in byts[2:].split("\\x")]
-            if (direction.strip() == "|1") or (twoway and (direction.strip() == "|3")):
+            if (direction.strip() == "|1") or (direction.strip() == "|2") or (twoway and (direction.strip() == "|3")):
                 # |0 means a encoder/decoder two-way mapping
                 # |1 appears to mean an encoder-only mapping, e.g. fallback ("best fit")
+                # |2 appears to mean a substitute mapping, e.g. to the SUB control.
                 # |3 appears to mean a decoder-only mapping (disfavoured duplicate)
                 continue
             if len(byts) == 4:

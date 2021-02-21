@@ -97,7 +97,7 @@ for p in [plane1]:
             nexturl = "b5xplane{:X}a.html".format(bn + 1)
             nextname = "Big-5 extension set, part 1".format(bn + 1)
         showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="zh-HK", part=q, css="/css/cns.css",
-                             menuurl="/cns-conc.html", menuname="Big-5 extension set comparison",
+                             menuurl="/cns-conc.html", menuname="CNS 11643 and Big5 comparison tables",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
                              annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True,
                              pua_collides=False, big5ext_mode=True)

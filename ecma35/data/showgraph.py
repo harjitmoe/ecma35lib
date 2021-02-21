@@ -7,6 +7,7 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import unicodedata as ucd
+import json
 from ecma35.data import graphdata, variationhints
 from ecma35.data.names import namedata
 
@@ -170,105 +171,164 @@ def _codepfmt(j, oflength):
     else:
         return "{:04X}".format(j)
 
+_abbreviations = {
+    "ASCII": "American Standard Code for Information Interchange",
+    "LAT1S": "Latin-1 Supplement",
+    "RAD": "Code-point for a radical",
+    "STRK": "Code-point for a stroke",
+    "CJKA": "Chinese/Japanese/Korean Extension A",  
+    "URO": "Unified Repertoire and Ordering",
+    "URO+": "Appendage to Unified Repertoire and Ordering", 
+    "PUA": "Private Use Area",
+    "DD": "Dirty Dozen (of unified ideographs in the Compatibility Ideographs block)",
+    "CI": "Compatibility Ideograph",
+    "VF": "Vertical Form",
+    "VCF": "Compatibility Form (Vertical)",
+    "CF": "Compatibility Form",
+    "SFV": "Small Form Variant",
+    "FWF": "Full-Width Form",
+    "REPL": "Replacement Character",
+    "BMP": "Miscellaneous Basic Multilingual Plane",
+    "SMP": "Supplementary Multilingual Plane",
+    "CJKB": "Chinese/Japanese/Korean Extension B",
+    "CJKB+": "Appendage to Chinese/Japanese/Korean Extension B",
+    "CJKC": "Chinese/Japanese/Korean Extension C",
+    "CJKD": "Chinese/Japanese/Korean Extension D",
+    "CJKE": "Chinese/Japanese/Korean Extension E",  
+    "CJKF": "Chinese/Japanese/Korean Extension F",  
+    "CIS": "Compatibility Ideographs Supplement",
+    "SIP": "Miscellaneous Supplementary Ideographic Plane",
+    "CJKG": "Chinese/Japanese/Korean Extension G",
+    "TIP": "Miscellaneous Tertiary Ideographic Plane", 
+    "SSP": "Supplementary Special-purpose Plane",
+    "SPUA": "Supplementary Private-Use Area A",
+    "SPUB": "Supplementary Private-Use Area B",
+}
+
+# Using an annoyingly old version of JS here for compatibility's sake
+_abbreviation_script = """\
+<script>
+var abbreviations = """ + json.dumps(_abbreviations) + """;
+window.onload = function () {
+    var abbrs = document.getElementsByTagName("abbr");
+    for (var i = 0; i < abbrs.length; i += 1) {
+        var e = abbrs[i];
+        var itx = (e.innerText || e.textContent).replace(/^\s+|\s+$/g, '');
+        if (typeof abbreviations[itx] != "undefined") {
+            e.setAttribute("title", abbreviations[itx]);
+        }
+    }
+};
+</script>
+"""
+
+# Would rather use this but less compatible
+_abbreviation_script_newbrowsers = """\
+<script>
+var abbreviations = """ + json.dumps(_abbreviations) + """;
+window.addEventListener("load", () =>
+    [...document.getElementsByTagName("abbr")].filter(e => 
+        typeof abbreviations[e.innerText.trim()] != "undefined" 
+    ).map(e =>
+        e.setAttribute("title", abbreviations[e.innerText.trim()])
+    )
+);
+</script>
+"""
+
 def _classify(cdisplayi, outfile):
     #####################################
     # BASIC MULTILINGUAL PLANE
     if cdisplayi[0] < 0x80:
-        print("(<abbr title='American Standard Code for " +
-              "Information Interchange'>ASCII</abbr>)", file=outfile)
+        print("(<abbr>ASCII</abbr>)", file=outfile)
     elif 0x80 <= cdisplayi[0] < 0x100:
-        print("(<abbr title='Latin-1 Supplement'>LAT1S</abbr>)", file=outfile)
+        print("(<abbr>LAT1S</abbr>)", file=outfile)
     elif 0x2E80 <= cdisplayi[0] < 0x2FE0:
-        print("(<abbr title='Code-point for a radical'>RAD</abbr>)", file=outfile)
+        print("(<abbr>RAD</abbr>)", file=outfile)
     elif 0x31C0 <= cdisplayi[0] < 0x31F0:
-        print("(<abbr title='Code-point for a stroke'>STRK</abbr>)", file=outfile)
+        print("(<abbr>STRK</abbr>)", file=outfile)
     elif 0x3400 <= cdisplayi[0] < 0x4DC0:
-        print("(<abbr title='Chinese/Japanese/Korean Extension A'>CJKA</abbr>)",  
+        print("(<abbr>CJKA</abbr>)",  
               file=outfile)
     elif 0x4E00 <= cdisplayi[0] < 0x9FA6:
-        print("(<abbr title='Unified Repertoire and Ordering'>URO</abbr>)", file=outfile)
+        print("(<abbr>URO</abbr>)", file=outfile)
     elif 0x9FA6 <= cdisplayi[0] < 0xA000:
-        print("(<abbr title='Appendage to Unified Repertoire and Ordering'>URO+</abbr>)", 
+        print("(<abbr>URO+</abbr>)", 
               file=outfile)
     elif 0xE000 <= cdisplayi[0] < 0xF900:
-        print("(<abbr title='Private Use Area'>PUA</abbr>)", file=outfile)
+        print("(<abbr>PUA</abbr>)", file=outfile)
     elif 0xF900 <= cdisplayi[0] < 0xFB00: # the BMP's Compatibility Ideographs block
         if cdisplayi[0] in (0xFA0E, 0xFA0F, 0xFA11, 0xFA13, 0xFA14, 0xFA1F,
                     0xFA21, 0xFA23, 0xFA24, 0xFA27, 0xFA28, 0xFA29):
-            print("(<abbr title='Dirty Dozen (of unified ideographs in the "
-                  "Compatibility Ideographs block)'>DD</abbr>)", file=outfile)
+            print("(<abbr>DD</abbr>)", file=outfile)
         else:
-            print("(<abbr title='Compatibility Ideograph'>CI</abbr>)", file=outfile)
+            print("(<abbr>CI</abbr>)", file=outfile)
     elif 0xFE10 <= cdisplayi[0] < 0xFE20:
-        print("(<abbr title='Vertical Form'>VF</abbr>)", file=outfile)
+        print("(<abbr>VF</abbr>)", file=outfile)
     elif 0xFE30 <= cdisplayi[0] < 0xFE50:
         if (cdisplayi[0] <= 0xFE44) or (cdisplayi[0] in (0xFE47, 0xFE48)):
-            print("(<abbr title='Compatibility Form (Vertical)'>VCF</abbr>)", file=outfile)
+            print("(<abbr>VCF</abbr>)", file=outfile)
         else:
-            print("(<abbr title='Compatibility Form'>CF</abbr>)", file=outfile)
+            print("(<abbr>CF</abbr>)", file=outfile)
     elif 0xFE50 <= cdisplayi[0] < 0xFE70:
-        print("(<abbr title='Small Form Variant'>SFV</abbr>)", file=outfile)
+        print("(<abbr>SFV</abbr>)", file=outfile)
     elif (0xFF01 <= cdisplayi[0] < 0xFF61) or (0xFFE0 <= cdisplayi[0] < 0xFFE7):
-        print("(<abbr title='Full-Width Form'>FWF</abbr>)", file=outfile)
+        print("(<abbr>FWF</abbr>)", file=outfile)
     elif cdisplayi[0] in (0xFFFC, 0xFFFD):
-        print("(<abbr title='Replacement Character'>REPL</abbr>)", file=outfile)
+        print("(<abbr>REPL</abbr>)", file=outfile)
     elif cdisplayi[0] < 0x10000:
-        print("(<abbr title='Miscellaneous Basic Multilingual Plane'>BMP</abbr>)", 
+        print("(<abbr>BMP</abbr>)", 
               file=outfile)
     #####################################
     # SUPPLEMENTARY MULTILINGUAL PLANE
     elif 0x10000 <= cdisplayi[0] < 0x20000:
-        print("(<abbr title='Supplementary Multilingual Plane'>SMP</abbr>)", 
+        print("(<abbr>SMP</abbr>)", 
               file=outfile)
     #####################################
     # SUPPLEMENTARY IDEOGRAPHIC PLANE
-    elif 0x20000 <= cdisplayi[0] < 0x2A6E0:
-        print("(<abbr title='Chinese/Japanese/Korean Extension B'>CJKB</abbr>)",  
-              file=outfile)
     elif 0x20000 <= cdisplayi[0] < 0x2A6D7:
-        print("(<abbr title='Chinese/Japanese/Korean Extension B'>CJKB</abbr>)",  
+        print("(<abbr>CJKB</abbr>)",  
               file=outfile)
     elif 0x2A6D7 <= cdisplayi[0] < 0x2A6E0:
-        print("(<abbr title='Appendage to Chinese/Japanese/Korean "
-              "Extension B'>CJKB+</abbr>)",  
+        print("(<abbr>CJKB+</abbr>)",  
               file=outfile)
     elif 0x2A700 <= cdisplayi[0] < 0x2B740:
-        print("(<abbr title='Chinese/Japanese/Korean Extension C'>CJKC</abbr>)",  
+        print("(<abbr>CJKC</abbr>)",  
               file=outfile)
     elif 0x2B740 <= cdisplayi[0] < 0x2B820:
-        print("(<abbr title='Chinese/Japanese/Korean Extension D'>CJKD</abbr>)",  
+        print("(<abbr>CJKD</abbr>)",  
               file=outfile)
     elif 0x2B820 <= cdisplayi[0] < 0x2CEB0:
-        print("(<abbr title='Chinese/Japanese/Korean Extension E'>CJKE</abbr>)",  
+        print("(<abbr>CJKE</abbr>)",  
               file=outfile)
     elif 0x2CEB0 <= cdisplayi[0] < 0x2EBF0:
-        print("(<abbr title='Chinese/Japanese/Korean Extension F'>CJKF</abbr>)",  
+        print("(<abbr>CJKF</abbr>)",  
               file=outfile)
     elif 0x2F800 <= cdisplayi[0] < 0x2FA20:
-        print("(<abbr title='Compatibility Ideographs Supplement'>CIS</abbr>)", 
+        print("(<abbr>CIS</abbr>)", 
               file=outfile)
     elif 0x20000 <= cdisplayi[0] < 0x30000:
-        print("(<abbr title='Miscellaneous Supplementary Ideographic Plane'>SIP</abbr>)", 
+        print("(<abbr>SIP</abbr>)", 
               file=outfile)
     #####################################
     # TERTIARY IDEOGRAPHIC PLANE
     elif 0x30000 <= cdisplayi[0] < 0x31350:
-        print("(<abbr title='Chinese/Japanese/Korean Extension G'>CJKG</abbr>)",  
+        print("(<abbr>CJKG</abbr>)",  
               file=outfile)
     elif 0x30000 <= cdisplayi[0] < 0x40000:
-        print("(<abbr title='Miscellaneous Tertiary Ideographic Plane'>TIP</abbr>)", 
+        print("(<abbr>TIP</abbr>)", 
               file=outfile)
     #####################################
     # SUPPLEMENTARY SPECIAL-PURPOSE PLANE
     elif 0xE0000 <= cdisplayi[0] < 0xF0000:
-        print("(<abbr title='Supplementary Special-purpose Plane'>SSP</abbr>)", 
+        print("(<abbr>SSP</abbr>)", 
               file=outfile)
     #####################################
     # SUPPLEMENTARY PRIVATE USE AREA
     elif 0xF0000 <= cdisplayi[0] < 0x100000:
-        print("(<abbr title='Supplementary Private-Use Area A'>SPUA</abbr>)", file=outfile)
+        print("(<abbr>SPUA</abbr>)", file=outfile)
     elif cdisplayi[0] >= 0x100000:
-        print("(<abbr title='Supplementary Private-Use Area B'>SPUB</abbr>)", file=outfile)
+        print("(<abbr>SPUB</abbr>)", file=outfile)
 
 def is_kanji(cdisplayi):
     if not cdisplayi:
@@ -492,7 +552,7 @@ def dump_plane_wiktionary(outfile, setname="eacc"):
         print(file=outfile)
 
 def _default_unicodefunc(cdisplayi, outfile, i=None, jlfunc=None, number=None, row=None, cell=None):
-    print("<br><span class=codepoint>", file=outfile)
+    print("<br><span class=cpt>", file=outfile)
     if not isinstance(cdisplayi, list):
         if jlfunc:
             # Note: assumes the URL given won't contain apostrophe
@@ -541,6 +601,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
     zplarray = tuple(zip(*tuple(zip(*nonvacant_sets))[1])) if nonvacant_sets else ()
     h = ", part {:d}".format(part) if part else ""
     print("<!DOCTYPE html><title>{}{}</title>".format(planefunc(number), h), file=outfile)
+    print(_abbreviation_script, file=outfile)
     if css:
         print("<link rel='stylesheet' href='{}'>".format(css), file=outfile)
     if blot:
@@ -570,16 +631,14 @@ def dump_plane(outfile, planefunc, kutenfunc,
         if (not sparse) or (row == stx):
             if row == stx:
                 print("<thead>", file=outfile)
-            print("<tr><th>Codepoint</th>", file=outfile)
+            print("<tr><th>Codepoint", file=outfile)
             for i in setnames2:
                 print("<th>", i, planefunc(number, i), file=outfile)
-            print("</tr>", file=outfile)
             if row == stx:
                 print("</thead>", file=outfile)
         if annots.get((number, row, 0), None):
             print("<tr class=annotation><td colspan={:d}><p>".format(len(plarray) + 1), file=outfile)
             print("Note:", annots[(number, row, 0)], file=outfile)
-            print("</p></td></tr>", file=outfile)
         for cell in (range(1, 95) if not is_96 else range(0, 96)):
             if big5ext_mode:
                 if ((row % 2) and (cell < 32)) or ((row == 72) and (cell < 54)):
@@ -589,22 +648,21 @@ def dump_plane(outfile, planefunc, kutenfunc,
                       and not annots.get((number, row, cell), None):
                 continue
             elif len(set(i for i in st if (i is not None and not _isbmppua(i)))) > 1:
-                print("<tr class=collision>", file=outfile)
+                print("<tr class=cln>", file=outfile)
             elif pua_collides and (len(set(st) | {None}) > 2):
-                print("<tr class=collision>", file=outfile)
+                print("<tr class=cln>", file=outfile)
             else:
                 print("<tr>", file=outfile)
-            print("<th class=codepoint>", file=outfile)
+            print("<th class=cpt>", file=outfile)
             print("<a id='{:d}.{:d}.{:d}' class=anchor></a>".format(number, row, cell), file=outfile)
             if selfhandledanchorlink:
                 print(kutenfunc(number, row, cell), file=outfile)
             else:
                 print("<a href='#{:d}.{:d}.{:d}'>".format(number, row, cell), file=outfile)
                 print(kutenfunc(number, row, cell), "</a>", file=outfile)
-            print("</th>", file=outfile)
             for colno, i in enumerate(st):
                 if i is None:
-                    print("<td class=undefined></td>", file=outfile)
+                    print("<td class=udf>", file=outfile)
                     continue
                 #
                 if not is_96:
@@ -621,12 +679,9 @@ def dump_plane(outfile, planefunc, kutenfunc,
                     print(" / ", file=outfile)
                 variationhints.print_hints_to_html5(i, outfile, lang=lang)
                 unicodefunc(cdisplayi, outfile, i)
-                print("</td>", file=outfile)
-            print("</tr>", file=outfile)
             if annots.get((number, row, cell), None):
                 print("<tr class=annotation><td colspan={:d}><p>".format(len(plarray) + 1), file=outfile)
                 print("Note:", annots[(number, row, cell)], file=outfile)
-                print("</p></td></tr>", file=outfile)
     print("</table>", file=outfile)
     if menuurl or lasturl or nexturl:
         _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname)
@@ -646,6 +701,7 @@ def dump_preview(outfile, planename, kutenfunc, number, array, *, lang="zh-TW", 
     edpt = (edx - 1) * 94 if not is_96 else edx * 96
     h = ", part {:d}".format(part) if part else ""
     print("<!DOCTYPE html><title>{}{}</title>".format(planename, h), file=outfile)
+    print(_abbreviation_script, file=outfile)
     if css:
         print("<link rel='stylesheet' href='{}'>".format(css), file=outfile)
     if blot:
@@ -657,32 +713,29 @@ def dump_preview(outfile, planename, kutenfunc, number, array, *, lang="zh-TW", 
     for row in range(stx, edx):
         if row == stx:
             print("<thead>", file=outfile)
-        print("<tr><th>Code</th>", file=outfile)
-        print("".join("<th>_{:1X}</th>".format(i) for i in range(0x10)), file=outfile)
-        print("</tr>", file=outfile)
+        print("<tr><th>Code", file=outfile)
+        print("".join("<th>_{:1X}".format(i) for i in range(0x10)), file=outfile)
         if row == stx:
-            print("</thead><tbody>", file=outfile)
-        print("<tr><th class=codepoint>", file=outfile)
+            print("</thead>", file=outfile)
+        print("<tr><th class=cpt>", file=outfile)
         print("<a id='{:d}.{:d}.1' class=anchor></a>".format(number, row), file=outfile)
         print(kutenfunc(number, row, -1), file=outfile)
-        print("</th><td class=undefined></td>", file=outfile)
+        print("<td class=udf>", file=outfile)
         for cell in range(1, 95) if not is_96 else range(0, 96):
             if not (cell % 16):
-                print("</tr><tr><th class=codepoint>", file=outfile)
+                print("<tr><th class=cpt>", file=outfile)
                 print("<a id='{:d}.{:d}.{:d}' class=anchor></a>".format(number, 
                             row, cell), file=outfile)
                 print(kutenfunc(number, row, -cell), file=outfile)
-                print("</th>", file=outfile)
             i = array[((row - 1) * 94) + (cell - 1)] if not is_96 else array[(row * 96) + cell]
             if i is None:
-                print("<td class=undefined></td>", file=outfile)
+                print("<td class=udf>", file=outfile)
                 continue
             #
             print("<td>", end="", file=outfile)
             variationhints.print_hints_to_html5(i, outfile, lang=lang)
             unicodefunc(i, outfile, None, jlfunc, number, row, cell)
-            print("</td>", file=outfile)
-        print("<td class=undefined></td></tr>", file=outfile)
+        print("<td class=udf>", file=outfile)
     print("</table>", file=outfile)
     if menuurl or lasturl or nexturl:
         _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname)
