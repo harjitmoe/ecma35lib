@@ -30,10 +30,9 @@ _blendy = graphdata.gsets["etenextsplus"][2]
 lastcode = (0x2550, 0x255E, 0x2561, 0x256A, 0x5341, 0x5345)
 def _bar():
     for i in _blendy:
-        if not i or (len(i) == 1 and i[0] in graphdata.codepoint_coverages["cns-eucg2-ms"]):
+        if not i or (len(i) == 1 and i[0] in graphdata.codepoint_coverages["cns-eucg2-ms"] and i[0] not in lastcode):
             yield None
         else:
-            assert i[0] not in lastcode
             yield i
 blendy = tuple(_bar())
 
