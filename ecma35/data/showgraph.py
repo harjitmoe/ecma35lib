@@ -586,7 +586,11 @@ def dump_plane(outfile, planefunc, kutenfunc,
         stx = 1 if not is_96 else 0
         edx = 2 if not is_96 else 1
     elif part:
-        stx, edx = max((part - 1) * 16, stx), min(part * 16, edx)
+        if big5ext_mode:
+            bounds = ((1, 17), (17, 33), (33, 49), (49, 65), (66, 73), (73, 83))
+            stx, edx = bounds[part - 1]
+        else:
+            stx, edx = max((part - 1) * 16, stx), min(part * 16, edx)
     stpt = (stx - 1) * 94 if not is_96 else stx * 96
     edpt = (edx - 1) * 94 if not is_96 else edx * 96
     nonvacant_sets = [(i, j) for (i, j) in zip(setnames, plarray) if j[stpt:edpt] != (

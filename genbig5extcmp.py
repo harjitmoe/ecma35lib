@@ -82,19 +82,22 @@ for p in [plane1]:
         lasturl = lastname = nexturl = nextname = None
         if q > 1:
             lasturl = "b5xplane{:X}{}.html".format(bn, chr(0x60 + q - 1))
-            lastname = "Big-5 extension set, part {1:d}".format(bn, q - 1)
+            lastname = "Big5 extension set, part {1:d}".format(bn, q - 1)
         elif bn > 1:
             lasturl = "b5xplane{:X}f.html".format(bn - 1)
-            lastname = "Big-5 extension set, part 6".format(bn - 1)
+            lastname = "Big5 extension set, part 6".format(bn - 1)
         else:
-            lasturl = "cnsplaneFf.html"
-            lastname = "CNS 11643 plane 15, part 6"
+            lasturl = "cnsplane2f.html"
+            lastname = "CNS 11643 plane 2, part 6"
         if q < 6:
             nexturl = "b5xplane{:X}{}.html".format(bn, chr(0x60 + q + 1))
-            nextname = "Big-5 extension set, part {1:d}".format(bn, q + 1)
+            nextname = "Big5 extension set, part {1:d}".format(bn, q + 1)
         elif bn < 1:
             nexturl = "b5xplane{:X}a.html".format(bn + 1)
-            nextname = "Big-5 extension set, part 1".format(bn + 1)
+            nextname = "Big5 extension set, part 1".format(bn + 1)
+        else:
+            nexturl = "cnsplane3a.html"
+            nextname = "CNS 11643 plane 3, part 1"
         showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="zh-HK", part=q, css="/css/cns.css",
                              menuurl="/cns-conc.html", menuname="CNS 11643 and Big5 comparison tables",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
