@@ -184,14 +184,17 @@ graphdata.gsetflags["ir202-2003"] |= {"UHC:IS_KPS"}
 graphdata.gsetflags["ir202-2003"] |= {"UHC:Y_TREMA"}
 _kps_temp = parsers.fuse([
             ((None,) * 1080) + ((0x2B97,),), # Finally exists in Unicode.
-            kps9566_2011[2], kps9566_2003[2]], "KPS_2011and2003_PM.json")
+            ((None,) * 1084) + ((0x1F449,),), # Correct but astral mapping.
+            ((None,) * 1085) + ((0x1F446, 0x20DD),), # As suggested by Andrew West.
+            ((None,) * 6400) + ((0x67FF,),), # Correct mapping per UTC L2/21-059 (IRG N2479), differs from deployed.
+            kps9566_2011[2], kps9566_2003[2]], "KPS_FullMapping.json")
 graphdata.gsets["ir202-full"] = (94, 2, _kps_temp)
 graphdata.gsetflags["ir202-full"] |= {"UHC:IS_KPS"}
 graphdata.gsetflags["ir202-full"] |= {"UHC:Y_TREMA"}
 _kps_temp = parsers.fuse([
             ((None,) * 663) + ((0x212A,),), # Kelvin sign (versus Euro)
-            ((None,) * 416) + ((0x2B97,),), # Category A mark
-            ((None,) * 141) + (((-1,),) * 141), # Remove Latin-1 part
+            ((None,) * 1080) + ((0x2B97,),), # Category A mark
+            ((None,) * 1222) + (((-1,),) * 141), # Remove Latin-1 part
             kps9566_2003[2]], "KPS_1997.json")
 graphdata.gsets["ir202"] = kps9566_1997 = (94, 2, _kps_temp)
 graphdata.gsetflags["ir202"] |= {"UHC:IS_KPS"}

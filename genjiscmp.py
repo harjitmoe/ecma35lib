@@ -129,7 +129,8 @@ annots = {
              "the same JIS character.\u2002UTC's mappings generally favoured "
              'U+2015, and Microsoft and consequently WHATWG (HTML5) follow '
              'this.\u2002JIS (JIS X 0221, JIS X 0213) consider it to be U+2014, '
-             'and Apple follows suit.\u2002OSF maps it as U+2015 in their '
+             'and Apple follows suit; Python apparently considers it to be U+2015 '
+             'even in its JIS X 0213 codecs.\u2002OSF maps it as U+2015 in their '
              'MS-based version and as U+2014 otherwise.</p><p>The codepoint '
              'selected to display in the NEC column is arbitrary.',
  (1, 1, 32): 'U+005C (backslash) is sometimes rendered the same as U+00A5 (¥), '
