@@ -8,7 +8,7 @@
 
 import unicodedata as ucd
 import json
-from ecma35.data import graphdata, variationhints
+from ecma35.data import graphdata, variationhints, charclass
 from ecma35.data.names import namedata
 
 def formatcode(tpl):
@@ -171,44 +171,10 @@ def _codepfmt(j, oflength):
     else:
         return "{:04X}".format(j)
 
-_abbreviations = {
-    "ASCII": "American Standard Code for Information Interchange",
-    "LAT1S": "Latin-1 Supplement",
-    "RAD": "Code-point for a radical",
-    "STRK": "Code-point for a stroke",
-    "CJKA": "Chinese/Japanese/Korean Extension A",  
-    "URO": "Unified Repertoire and Ordering",
-    "URO+": "Appendage to Unified Repertoire and Ordering", 
-    "PUA": "Private Use Area",
-    "DD": "Dirty Dozen (of unified ideographs in the Compatibility Ideographs block)",
-    "CI": "Compatibility Ideograph",
-    "VF": "Vertical Form",
-    "VCF": "Compatibility Form (Vertical)",
-    "CF": "Compatibility Form",
-    "SFV": "Small Form Variant",
-    "FWF": "Full-Width Form",
-    "REPL": "Replacement Character",
-    "BMP": "Miscellaneous Basic Multilingual Plane",
-    "SMP": "Supplementary Multilingual Plane",
-    "CJKB": "Chinese/Japanese/Korean Extension B",
-    "CJKB+": "Appendage to Chinese/Japanese/Korean Extension B",
-    "CJKC": "Chinese/Japanese/Korean Extension C",
-    "CJKD": "Chinese/Japanese/Korean Extension D",
-    "CJKE": "Chinese/Japanese/Korean Extension E",  
-    "CJKF": "Chinese/Japanese/Korean Extension F",  
-    "CIS": "Compatibility Ideographs Supplement",
-    "SIP": "Miscellaneous Supplementary Ideographic Plane",
-    "CJKG": "Chinese/Japanese/Korean Extension G",
-    "TIP": "Miscellaneous Tertiary Ideographic Plane", 
-    "SSP": "Supplementary Special-purpose Plane",
-    "SPUA": "Supplementary Private-Use Area A",
-    "SPUB": "Supplementary Private-Use Area B",
-}
-
 # Using an annoyingly old version of JS here for compatibility's sake
 _abbreviation_script = """\
 <script>
-var abbreviations = """ + json.dumps(_abbreviations) + """;
+var abbreviations = """ + json.dumps(charclass.abbreviations) + """;
 window.onload = function () {
     var abbrs = document.getElementsByTagName("abbr");
     for (var i = 0; i < abbrs.length; i += 1) {
@@ -225,7 +191,7 @@ window.onload = function () {
 # Would rather use this but less compatible
 _abbreviation_script_newbrowsers = """\
 <script>
-var abbreviations = """ + json.dumps(_abbreviations) + """;
+var abbreviations = """ + json.dumps(charclass.abbreviations) + """;
 window.addEventListener("load", () =>
     [...document.getElementsByTagName("abbr")].filter(e => 
         typeof abbreviations[e.innerText.trim()] != "undefined" 
@@ -237,98 +203,7 @@ window.addEventListener("load", () =>
 """
 
 def _classify(cdisplayi, outfile):
-    #####################################
-    # BASIC MULTILINGUAL PLANE
-    if cdisplayi[0] < 0x80:
-        print("(<abbr>ASCII</abbr>)", file=outfile)
-    elif 0x80 <= cdisplayi[0] < 0x100:
-        print("(<abbr>LAT1S</abbr>)", file=outfile)
-    elif 0x2E80 <= cdisplayi[0] < 0x2FE0:
-        print("(<abbr>RAD</abbr>)", file=outfile)
-    elif 0x31C0 <= cdisplayi[0] < 0x31F0:
-        print("(<abbr>STRK</abbr>)", file=outfile)
-    elif 0x3400 <= cdisplayi[0] < 0x4DC0:
-        print("(<abbr>CJKA</abbr>)",  
-              file=outfile)
-    elif 0x4E00 <= cdisplayi[0] < 0x9FA6:
-        print("(<abbr>URO</abbr>)", file=outfile)
-    elif 0x9FA6 <= cdisplayi[0] < 0xA000:
-        print("(<abbr>URO+</abbr>)", 
-              file=outfile)
-    elif 0xE000 <= cdisplayi[0] < 0xF900:
-        print("(<abbr>PUA</abbr>)", file=outfile)
-    elif 0xF900 <= cdisplayi[0] < 0xFB00: # the BMP's Compatibility Ideographs block
-        if cdisplayi[0] in (0xFA0E, 0xFA0F, 0xFA11, 0xFA13, 0xFA14, 0xFA1F,
-                    0xFA21, 0xFA23, 0xFA24, 0xFA27, 0xFA28, 0xFA29):
-            print("(<abbr>DD</abbr>)", file=outfile)
-        else:
-            print("(<abbr>CI</abbr>)", file=outfile)
-    elif 0xFE10 <= cdisplayi[0] < 0xFE20:
-        print("(<abbr>VF</abbr>)", file=outfile)
-    elif 0xFE30 <= cdisplayi[0] < 0xFE50:
-        if (cdisplayi[0] <= 0xFE44) or (cdisplayi[0] in (0xFE47, 0xFE48)):
-            print("(<abbr>VCF</abbr>)", file=outfile)
-        else:
-            print("(<abbr>CF</abbr>)", file=outfile)
-    elif 0xFE50 <= cdisplayi[0] < 0xFE70:
-        print("(<abbr>SFV</abbr>)", file=outfile)
-    elif (0xFF01 <= cdisplayi[0] < 0xFF61) or (0xFFE0 <= cdisplayi[0] < 0xFFE7):
-        print("(<abbr>FWF</abbr>)", file=outfile)
-    elif cdisplayi[0] in (0xFFFC, 0xFFFD):
-        print("(<abbr>REPL</abbr>)", file=outfile)
-    elif cdisplayi[0] < 0x10000:
-        print("(<abbr>BMP</abbr>)", 
-              file=outfile)
-    #####################################
-    # SUPPLEMENTARY MULTILINGUAL PLANE
-    elif 0x10000 <= cdisplayi[0] < 0x20000:
-        print("(<abbr>SMP</abbr>)", 
-              file=outfile)
-    #####################################
-    # SUPPLEMENTARY IDEOGRAPHIC PLANE
-    elif 0x20000 <= cdisplayi[0] < 0x2A6D7:
-        print("(<abbr>CJKB</abbr>)",  
-              file=outfile)
-    elif 0x2A6D7 <= cdisplayi[0] < 0x2A6E0:
-        print("(<abbr>CJKB+</abbr>)",  
-              file=outfile)
-    elif 0x2A700 <= cdisplayi[0] < 0x2B740:
-        print("(<abbr>CJKC</abbr>)",  
-              file=outfile)
-    elif 0x2B740 <= cdisplayi[0] < 0x2B820:
-        print("(<abbr>CJKD</abbr>)",  
-              file=outfile)
-    elif 0x2B820 <= cdisplayi[0] < 0x2CEB0:
-        print("(<abbr>CJKE</abbr>)",  
-              file=outfile)
-    elif 0x2CEB0 <= cdisplayi[0] < 0x2EBF0:
-        print("(<abbr>CJKF</abbr>)",  
-              file=outfile)
-    elif 0x2F800 <= cdisplayi[0] < 0x2FA20:
-        print("(<abbr>CIS</abbr>)", 
-              file=outfile)
-    elif 0x20000 <= cdisplayi[0] < 0x30000:
-        print("(<abbr>SIP</abbr>)", 
-              file=outfile)
-    #####################################
-    # TERTIARY IDEOGRAPHIC PLANE
-    elif 0x30000 <= cdisplayi[0] < 0x31350:
-        print("(<abbr>CJKG</abbr>)",  
-              file=outfile)
-    elif 0x30000 <= cdisplayi[0] < 0x40000:
-        print("(<abbr>TIP</abbr>)", 
-              file=outfile)
-    #####################################
-    # SUPPLEMENTARY SPECIAL-PURPOSE PLANE
-    elif 0xE0000 <= cdisplayi[0] < 0xF0000:
-        print("(<abbr>SSP</abbr>)", 
-              file=outfile)
-    #####################################
-    # SUPPLEMENTARY PRIVATE USE AREA
-    elif 0xF0000 <= cdisplayi[0] < 0x100000:
-        print("(<abbr>SPUA</abbr>)", file=outfile)
-    elif cdisplayi[0] >= 0x100000:
-        print("(<abbr>SPUB</abbr>)", file=outfile)
+    print("(<abbr>{}</abbr>)".format(charclass.initialism(cdisplayi[0])), file=outfile)
 
 def is_kanji(cdisplayi):
     if not cdisplayi:
