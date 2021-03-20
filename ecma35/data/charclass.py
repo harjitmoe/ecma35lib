@@ -135,11 +135,11 @@ def initialism(codepoint):
     # SUPPLEMENTARY PRIVATE USE AREA
     elif 0xF0000 <= codepoint < 0x100000:
         return "SPUA"
-    elif codepoint >= 0x100000:
+    elif 0x100000 <= codepoint < 0x110000:
         return "SPUB"
     #####################################
     # ANY OTHER PLANE WITHIN UNICODE
-    elif codepoint < 0x100000000:
+    elif codepoint < 0x110000:
         return "ASTR"
     #####################################
     # BEYOND-UNICODE PRIVATE USE AREA
