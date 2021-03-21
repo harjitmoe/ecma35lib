@@ -645,6 +645,20 @@ def stat(verbose=False):
         print("Total:", tot + atot + btot)
         print()
 
+def dump_maptable(name):
+    array = graphdata.gsets[name][2]
+    for n, ucses in enumerate(array):
+        if ucses == None:
+            continue
+        ku = (n // 94) + 1
+        ten = (n % 94) + 1
+        first = ku + 0x20
+        second = ten + 0x20
+        start = "0x{:02X}{:02X}".format(first, second)
+        middle = "U+" + "+".join("{:04X}".format(i) for i in ucses)
+        end = "# " + " + ".join(ucd.name(chr(i), "<{:04X}>".format(i)) for i in ucses)
+        print(start, middle, end, sep = "\t")
+
 if __name__ == "__main__":
     import sys
     stat("-v" in sys.argv[1:])
