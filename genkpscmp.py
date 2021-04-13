@@ -88,6 +88,7 @@ annots = {
                  "by contast, is backhand, i.e. U+1F449 (👉).&ensp;Resorting to changing this "
                  "one to PUA U+F13B might suggest poor astral character support.",
     (1, 12, 53): "Northwest-pointing scissors.",
+    (1, 14, 94): "The 2003 edition adds U+00FF (ÿ) as non-EUC code 0xAEFF immediately following.",
     (1, 69, 9): "U+67FF is a persimmon, while the rather less common U+676E refers to "
                 "wood shavings.&ensp;Since the characters are in phonetic order by North "
                 "Korean collation, it is apparent that the former is intended.&ensp;See "
