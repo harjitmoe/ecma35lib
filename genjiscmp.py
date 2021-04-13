@@ -521,7 +521,7 @@ for n, p in enumerate([plane1, plane2]):
         showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ja", part=q, css="/css/jis.css",
                              menuurl="/jis-conc.html", menuname="JIS character set variant comparison",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
-                             annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True, blot=blot)
+                             annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True, blot=blot, siglum="JIS")
         f.close()
 
 

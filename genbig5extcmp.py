@@ -104,7 +104,7 @@ for p in [plane1]:
                              menuurl="/cns-conc.html", menuname="CNS 11643 and Big5 comparison tables",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
                              annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True,
-                             pua_collides=False, big5ext_mode=True)
+                             pua_collides=False, big5ext_mode=True, siglum="CNS")
         f.close()
 
 

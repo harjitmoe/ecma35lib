@@ -491,7 +491,7 @@ for n, p in enumerate([plane1, plane2, plane3, plane4, plane5, plane6, plane7, p
                              menuurl="/cns-conc.html", menuname="CNS 11643 and Big5 comparison tables",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
                              annots=annots, selfhandledanchorlink=True, jlfunc=jlfunc, blot=blot,
-                             unicodefunc=unicodefunc)
+                             unicodefunc=unicodefunc, siglum="CNS")
         f.close()
 
 

@@ -7,9 +7,39 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import unicodedata as ucd
-import json
+import json, re
 from ecma35.data import graphdata, variationhints, charclass
 from ecma35.data.names import namedata
+
+def to_link(siglum, men, ku, ten):
+    basename = {"CNS": "../cnstables/cnsplane", "JIS": "../jistables2/jisplane",
+                "EACC": "../eacctables/ccciiplane", "CCCII": "../eacctables/ccciiplane"}[siglum]
+    omen, oku, oten = men, ku, ten
+    if siglum == "CNS" and men == "Ψ":
+        basename = "../cnstables/b5xplane"
+        if ku <= 65:
+            part_zi = (int(ku, 10) - 1) // 16
+        elif ku <= 72:
+            part_zi = 4
+        else:
+            part_zi = 5
+        men = "1"
+    else:
+        part_zi = int(ku, 10) // 16
+        men = men.lstrip("0")
+    ku = ku.lstrip("0")
+    ten = ten.lstrip("0")
+    part_letter = chr(0x61 + part_zi)
+    url = f"{basename}{men}{part_letter}.html#{men}.{ku}.{ten}"
+    return f'<a href="{url}">{omen}-{oku}-{oten}</a>'
+
+siglumre = re.compile("(?:(JIS|CNS|CCCII|EACC) )?(\d\d|Ψ)-(\d\d)-(\d\d)")
+def inject_links(text, default_siglum=None):
+    def callback(m):
+        if m.group(1) == None and default_siglum == None:
+            return m.group(0)
+        return to_link(m.group(1) or default_siglum, m.group(2), m.group(3), m.group(4))
+    return siglumre.sub(callback, text)
 
 def formatcode(tpl):
     if tpl is None:
@@ -454,7 +484,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
                menuurl=None, menuname="Up to menu", jlfunc=None, 
                lasturl=None, nexturl=None, lastname=None, nextname=None,
                is_96=False, is_sbcs=False, pua_collides=False, blot="",
-               unicodefunc=_default_unicodefunc, big5ext_mode=False):
+               unicodefunc=_default_unicodefunc, big5ext_mode=False, siglum=None):
     """Dump an HTML mapping comparison."""
     stx, edx = (1, 95) if not is_96 else (0, 96)
     if is_sbcs:
@@ -517,7 +547,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
                 print("</thead>", file=outfile)
         if annots.get((number, row, 0), None):
             print("<tr class=annotation><td colspan={:d}><p>".format(len(plarray) + 1), file=outfile)
-            print("Note:", annots[(number, row, 0)], file=outfile)
+            print("Note:", inject_links(annots[(number, row, 0)], siglum), file=outfile)
         for cell in (range(1, 95) if not is_96 else range(0, 96)):
             if big5ext_mode:
                 if ((row % 2) and (cell < 32)) or ((row == 72) and (cell < 54)):
@@ -560,7 +590,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
                 unicodefunc(cdisplayi, outfile, i)
             if annots.get((number, row, cell), None):
                 print("<tr class=annotation><td colspan={:d}><p>".format(len(plarray) + 1), file=outfile)
-                print("Note:", annots[(number, row, cell)], file=outfile)
+                print("Note:", inject_links(annots[(number, row, cell)], siglum), file=outfile)
     print("</table>", file=outfile)
     if menuurl or lasturl or nexturl:
         _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname)
