@@ -383,7 +383,7 @@ annots = {
  (1, 93, 87): "Softbank's 01-93-83 through 01-93-87 (or 02-92-60 through 02-92-64) "
               "are a Vodafone logo.",
  (1, 93, 90): 'RE 2000 JIS / 2004 JIS: compare 01-43-43 and 02-72-04.',
- (1, 93, 0): 'Row 94 contains DoCoMo emoji with neither au mappings nor off-by-one-SoftBank '
+ (1, 94, 0): 'Row 94 contains DoCoMo emoji with neither au mappings nor off-by-one-SoftBank '
              'mappings.\u2002Curiously, this doesn\'t include all the DoCoMo-specific emoji from '
              'the TRON and DoCoMo Shift JIS encodings.\u2002Those omitted tend to also be the '
              'ones without canonical Unicode representations, though not all those included have '
