@@ -79,7 +79,7 @@ plane2 = (2, ("MS / HTML5<br>IBM SJIS Ext", "DoCoMo<br>SJIS Emoji",
 def planefunc(number, mapname=None):
     if mapname is None:
         return "JIS plane {:d}".format(number)
-    elif mapname in ("1978 JIS", "1983 JIS", "Mac KT6", "Mac KT7", "Mac PS", "IBM 78JIS", "NEC 78JIS"):
+    elif mapname in ("1978 JIS", "1983 JIS", "Mac KT6", "Mac KT7", "Mac PS", "IBM 78JIS", "NEC 78JIS", "MS / HTML5"):
         return ""
     elif "<br>" in mapname:
         return ""
@@ -336,14 +336,23 @@ annots = {
  (1, 84, 6): 'Compare 01-63-70.',
  (1, 84, 86): 'Compare 01-33-63 and 02-32-43.',
  (1, 84, 89): 'Compare 01-36-47 and 02-32-59.',
- (1, 85, 6): 'Compare 01-58-25 and 02-33-34.',
- (1, 87, 9): 'Compare 01-40-14 and 02-40-53.',
- (1, 87, 29): 'Compare 01-38-34 and 02-41-12.',
- (1, 87, 49): 'Compare 01-17-75 and 02-41-79.',
- (1, 88, 24): 'Despite its name FLAG IN HOLE, U+26F3 actually unifies two symbols:</p><ul><li>a head of a golf '
-              'club with a ball used by pre-2013 DoCoMo, post-2012 au and Noto Jelly Bean and KitKat;</li> '
-              '<li>a flag in a golf hole, used by pre-2012 au, SoftBank, ARIB, DoCoMo since 2013, and '
-              'others.</li></ul><p><a href="https://emojipedia.org/flag-in-hole/">Details on Emojipedia.</a>',
+ (1, 85, 0): 'Rows 85 through 91 contain the bulk of the "JIS" representations of emoji, in a '
+             'layout defined by au by KDDI.\u2002In contrast to the beyond-JIS Shift_JIS '
+             'representations of the emoji, which make no '
+             'attempt to be compatible with one another (well, au avoids DoCoMo, but SoftBank '
+             'collides with both, and none of them line up), the JIS representations from DoCoMo '
+             'and SoftBank seem to endeavour to approximately match au where possible.',
+ (1, 85, 6): 'RE 2000 JIS / 2004 JIS: compare 01-58-25 and 02-33-34.',
+ (1, 87, 9): 'RE 2000 JIS / 2004 JIS: compare 01-40-14 and 02-40-53.',
+ (1, 87, 29): 'RE 2000 JIS / 2004 JIS: compare 01-38-34 and 02-41-12.',
+ (1, 87, 49): 'RE 2000 JIS / 2004 JIS: compare 01-17-75 and 02-41-79.',
+ (1, 88, 24): 'Despite its name FLAG IN HOLE, U+26F3 actually unifies two symbols: a head of a '
+              'golf club with a ball used by pre-2013 DoCoMo, post-2012 au and Noto Jelly Bean and '
+              'KitKat, and a flag in a golf hole, used by pre-2012 au, SoftBank, ARIB, DoCoMo since '
+              '2013, and others.\u2002See 01-91-26 for where ARIB encodes this character.\u2002'
+              'The UCS name (FLAG IN HOLE) reflects the ARIB glyph, due to having first '
+              'been added from the ARIB set (where it is a map symbol for a golf course).</p><p>'
+              '<a href="https://emojipedia.org/flag-in-hole/">Some glyph history on Emojipedia.</a>',
  (1, 89, 0): 'In the NEC and Windows / HTML5 versions, this is the start of '
              'the so-called NEC Selection (rows 89–92 inclusive): an '
              'alternative encoding within the JIS X 0208 bounds of all the '
@@ -353,28 +362,39 @@ annots = {
              'Encoders of that Shift_JIS variant (Windows-31J) vary as to '
              'whether they favour the IBM Extensions over the NEC Selection '
              '(Windows, WHATWG) or <i>vice versa</i> (Python).',
- (1, 89, 35): 'Compare 01-37-88 and 02-48-80.',
- (1, 90, 22): 'Compare 01-29-11 and 02-52-55.',
- (1, 91, 6): 'Compare 01-45-73 and 02-56-39.',
- (1, 91, 22): 'Compare 01-30-53 and 02-57-22.',
- (1, 91, 71): 'Compare 01-47-25 and 02-59-88.',
- (1, 92, 42): 'Compare 01-22-77 and 02-64-52.',
- (1, 92, 89): 'Compare 01-30-63 and 02-66-83.',
- (1, 92, 90): 'Compare 01-40-16 and 02-66-87.',
- (1, 92, 91): 'Compare 01-02-44.',
+ (1, 89, 35): 'RE 2000 JIS / 2004 JIS: compare 01-37-88 and 02-48-80.',
+ (1, 90, 22): 'RE 2000 JIS / 2004 JIS: compare 01-29-11 and 02-52-55.',
+ (1, 91, 6): 'RE 2000 JIS / 2004 JIS: compare 01-45-73 and 02-56-39.',
+ (1, 91, 22): 'RE 2000 JIS / 2004 JIS: compare 01-30-53 and 02-57-22.',
+ (1, 91, 71): 'RE 2000 JIS / 2004 JIS: compare 01-47-25 and 02-59-88.',
+ (1, 92, 42): 'RE 2000 JIS / 2004 JIS: compare 01-22-77 and 02-64-52.',
+ (1, 92, 89): 'RE 2000 JIS / 2004 JIS: compare 01-30-63 and 02-66-83.',
+ (1, 92, 90): 'RE 2000 JIS / 2004 JIS: compare 01-40-16 and 02-66-87.',
+ (1, 92, 91): 'RE 2000 JIS / 2004 JIS: compare 01-02-44.',
+ (1, 93, 0): 'Row 93 contains SoftBank emoji without au mappings (excluding the J-Phone logos but '
+             'including the Vodafone logo), in a layout defined by, presumably, Vodafone Japan '
+             '(which later became SoftBank).\u2002DoCoMo mostly doesn\'t use this range, but with '
+             'two inadventently-collisive exceptions noted below.',
+ (1, 93, 55): 'DoCoMo seems to try to match SoftBank\'s encoding here, but off-by-ones (oops).',
+ (1, 93, 61): 'DoCoMo seems to try to match SoftBank\'s encoding here, but off-by-ones (oops).',
  (1, 93, 70): "Softbank's 01-93-70 (or 02-92-12) is their Shibuya 109 emoji, U+E50A "
               'in the Unicode Private Use Area.\u2002See <a href='
               '"https://emojipedia.org/shibuya/">documentation on Emojipedia</a>.',
  (1, 93, 87): "Softbank's 01-93-83 through 01-93-87 (or 02-92-60 through 02-92-64) "
               "are a Vodafone logo.",
- (1, 93, 90): 'Compare 01-43-43 and 02-72-04.',
- (1, 94, 3): 'Compare 01-37-31 and 02-72-19.',
- (1, 94, 69): 'Compare 01-18-10 and 02-76-31.',
- (1, 94, 74): 'Compare 01-24-20 and 02-76-59.',
- (1, 94, 79): 'Compare 01-25-77 and 02-76-79.',
- (1, 94, 80): 'Compare 01-44-45 and 02-76-80.',
- (1, 94, 93): 'Compare 01-33-73 and 02-45-87.',
- (1, 94, 94): 'Compare 01-23-50 and 02-52-58.',
+ (1, 93, 90): 'RE 2000 JIS / 2004 JIS: compare 01-43-43 and 02-72-04.',
+ (1, 93, 0): 'Row 94 contains DoCoMo emoji with neither au mappings nor off-by-one-SoftBank '
+             'mappings.\u2002Curiously, this doesn\'t include all the DoCoMo-specific emoji from '
+             'the TRON and DoCoMo Shift JIS encodings.\u2002Those omitted tend to also be the '
+             'ones without canonical Unicode representations, though not all those included have '
+             'canonical Unicode representations either (since six are logos).',
+ (1, 94, 3): 'RE 2000 JIS / 2004 JIS: compare 01-37-31 and 02-72-19.',
+ (1, 94, 69): 'RE 2000 JIS / 2004 JIS: compare 01-18-10 and 02-76-31.',
+ (1, 94, 74): 'RE 2000 JIS / 2004 JIS: compare 01-24-20 and 02-76-59.',
+ (1, 94, 79): 'RE 2000 JIS / 2004 JIS: compare 01-25-77 and 02-76-79.',
+ (1, 94, 80): 'RE 2000 JIS / 2004 JIS: compare 01-44-45 and 02-76-80.',
+ (1, 94, 93): 'RE 2000 JIS / 2004 JIS: compare 01-33-73 and 02-45-87.',
+ (1, 94, 94): 'RE 2000 JIS / 2004 JIS: compare 01-23-50 and 02-52-58.',
  (2, 1, 0): "Regarding the codepoint column from here onwards: the plane 2 codepoints "
             "for the SJIS codes after the end of the JIS X 0208 section are "
             "defined by the requisite appendix of JIS X 0213.\u2002Of course, "

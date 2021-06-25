@@ -140,6 +140,8 @@ ul.navbar li::after {
 .annotation p {
     margin: 0.3em 0 0.3em 0;
     max-width: 98vw;
+    position: sticky;
+    left: 3px;
 }
 .annotation code {
     border: 0.1rem solid silver;
