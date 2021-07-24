@@ -485,6 +485,10 @@ annots = {
               'drop shadows (food, décor, service, cost and recommendation).',
  (2, 87, 47): 'DoCoMo\'s 02-87-44 through 02-87-47 appear as boxed letters I, M, E, VE with '
               'drop shadows (inexpensive, moderately priced, expensive and very expensive).',
+ (2, 87, 48): 'DoCoMo\'s 02-87-48 <a href="https://umihotaru.work/nishiki-teki_pua.pdf#page=60">is '
+              'a crescent-on-circle "open late" symbol</a>, yet it is a separate character from '
+              'their 02-87-04.\u2002Google misinterpreted it as a depth-shaded sphere, and gave '
+              'it the name SPHERE in their emoji PUA scheme.',
  (2, 87, 58): 'DoCoMo\'s 02-87-57 and 02-87-58 display a DoCoMo logo, which resembles a Ð.',
  (2, 88, 0): 'RE DoCoMo: this row is coded at 9-9321 through 9-937E by TRON.</p><p>'
              'RE SoftBank: This row\'s content is invoked over GL (without re-designating G0) by '
