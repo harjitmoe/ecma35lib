@@ -488,7 +488,7 @@ annots = {
  (2, 87, 48): 'DoCoMo\'s 02-87-48 <a href="https://umihotaru.work/nishiki-teki_pua.pdf#page=60">is '
               'a crescent-on-circle "open late" symbol</a>, yet it is a separate character from '
               'their 02-87-04.\u2002Google misinterpreted it as a depth-shaded sphere, and gave '
-              'it the name SPHERE in their emoji PUA scheme.',
+              'it the name SPHERE in their emoji PUA scheme, using just ● as the substitute.',
  (2, 87, 58): 'DoCoMo\'s 02-87-57 and 02-87-58 display a DoCoMo logo, which resembles a Ð.',
  (2, 88, 0): 'RE DoCoMo: this row is coded at 9-9321 through 9-937E by TRON.</p><p>'
              'RE SoftBank: This row\'s content is invoked over GL (without re-designating G0) by '
