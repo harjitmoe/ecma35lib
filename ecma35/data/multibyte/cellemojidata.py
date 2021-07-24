@@ -21,12 +21,8 @@ from ecma35.data.names import namedata
 # softbank (2, 92, 59) J-SKY2
 # 
 # softbank (1, 93, 70) BOUTIQUE 109
-# softbank (1, 93, 83) VODAFONE1
-# softbank (1, 93, 84) VODAFONE2
 # 
 # softbank (2, 92, 12) BOUTIQUE 109
-# softbank (2, 92, 60) VODAFONE1
-# softbank (2, 92, 61) VODAFONE2
 
 # Older KDDI zodiac signs showing pictures, not symbols
 kddizodiacmap = {
@@ -105,15 +101,18 @@ forced = {
     "FEE19": "\uF862[チケ]", # Chike (abbreviating "Ticket", shows チケ in one space)
     "FEE1A": "\uF860[先\uF862tel]", # Reserve by Telephone abbreviation (displays 先<cr>tel in one space)
     "FEE1C": "🎥\uF87F", # Lacks own Unicode mapping, bestfitted to 1F3A5 for the other two
-    "FEE26": "◪", # U+25EA is pretty much an exact match, but not in UCD/ICU deployed mapping.
-    "FEE27": "⯀", # Later addition to Unicode from Wingdings 2 190(dec); probably closest one not already taken.
-    "FEE28": "▿", # Closer match than the other-vendor substitutes.
+    "FEE26": "◪", # "Ratings in dispute"; U+25EA is pretty much an exact match, but not in UCD/ICU deployed mapping.
+    "FEE27": "⯀", # "Ratings in agreement"; U+2BC0 is from Wingdings 2 190(dec), and probably closest one not already taken.
+    "FEE28": "▿", # "Few ratings"; this is a closer symbol match than the other-vendor substitutes.
+    "FEE31": "🌙\u200D●\uFE0F", # Crescent-on-circle "open late" symbol, misinterpreted as a depth-shaded sphere by Google.
     "FEE32": "💳\u20E0", # See https://twitter.com/Emojipedia/status/1097962057071095809
     "FEE33": "❎\uFE0E", # Matches text pres, whereas U+274E in emoji pres is U+FEB46. Yes, really.
     "FEE44": "C\uFE0F\u200D✉\uFE0F",
     "FEE47": "🎵\u200D🗨\uFE0F",
     "FEE70": "\uf861[Js",
     "FEE71": "\uf861ky]",
+    "FEE72": "❛\uFE0F",
+    "FEE73": "❜\uFE0F",
     "FEE77": "🄹",
     "FEE78": "🪐\uf87f", # Newer emoji vaguely similar to this one.
     "FEE7A": "🎵\u200D🔊",

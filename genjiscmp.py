@@ -381,7 +381,7 @@ annots = {
               'in the Unicode Private Use Area.\u2002See <a href='
               '"https://emojipedia.org/shibuya/">documentation on Emojipedia</a>.',
  (1, 93, 87): "Softbank's 01-93-83 through 01-93-87 (or 02-92-60 through 02-92-64) "
-              "are a Vodafone logo.",
+              "are Vodafone logo variants, the latter three being slices of a single logo.",
  (1, 93, 90): 'RE 2000 JIS / 2004 JIS: compare 01-43-43 and 02-72-04.',
  (1, 94, 0): 'Row 94 contains DoCoMo emoji with neither au mappings nor off-by-one-SoftBank '
              'mappings.\u2002Curiously, this doesn\'t include all the DoCoMo-specific emoji from '
@@ -482,9 +482,9 @@ annots = {
               'has a featureless texture, without the dots / markings present in their 02-86-58 '
               '(<a href="https://emojipedia.org/docomo/2002/movie-camera/">for comparison</a>).',
  (2, 87, 36): 'DoCoMo\'s 02-87-32 through 02-87-36 appear as boxed letters F, D, S, C, R with '
-              'drop shadows.',
+              'drop shadows (food, décor, service, cost and recommendation).',
  (2, 87, 47): 'DoCoMo\'s 02-87-44 through 02-87-47 appear as boxed letters I, M, E, VE with '
-              'drop shadows.',
+              'drop shadows (inexpensive, moderately priced, expensive and very expensive).',
  (2, 87, 58): 'DoCoMo\'s 02-87-57 and 02-87-58 display a DoCoMo logo, which resembles a Ð.',
  (2, 88, 0): 'RE DoCoMo: this row is coded at 9-9321 through 9-937E by TRON.</p><p>'
              'RE SoftBank: This row\'s content is invoked over GL (without re-designating G0) by '
@@ -506,7 +506,7 @@ annots = {
               '"https://emojipedia.org/shibuya/">documentation on Emojipedia</a>.',
 # (2, 92, 59): 'Softbank\'s 02-92-58 through 02-92-59 is named "J-SKY".',
  (2, 92, 64): "Softbank's 02-92-60 through 02-92-64 (or 01-93-83 through 01-93-87) "
-              "are a Vodafone logo.",
+              "are Vodafone logo variants, the latter three being slices of a single logo.",
  (2, 93, 27): "For some reason, Python's 2000 JIS codecs (unlike its 2004 JIS "
               'codecs) map 02-93-27 to U+9B1D (鬝), not to U+9B1C. The '
               'ISO-IR-229 registration (registered for the second plane of '

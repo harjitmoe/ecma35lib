@@ -45,7 +45,7 @@ counts_as_emoji |= set(chr(i) for i in range(0x1F6E0, 0x1F6ED)) # Transp. & Map 
 counts_as_emoji |= set(chr(i) for i in range(0x1F6F0, 0x1F6FD)) # Transp. & Map Sym., range 3
 counts_as_emoji |= set(chr(i) for i in range(0x1F900, 0x1FA00)) # Supplemental Sym. & Pict.
 counts_as_emoji ^= {"\U0001F979", "\U0001F9CC"} # (not currently allocated in above range)
-counts_as_emoji |= {"✎", "✐", "❥"} # Scattered extras in Dingbats block (entire block not covered)
+counts_as_emoji |= {"✎", "✐", "❥", "❛", "❜"} # Scattered extras in Dingbats block (entire block not covered)
 
 def _get_ref(all_representations, scode):
     scode2 = scode.rstrip("\uFE0F")
