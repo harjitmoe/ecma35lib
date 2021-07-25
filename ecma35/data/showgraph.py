@@ -484,7 +484,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
                menuurl=None, menuname="Up to menu", jlfunc=None, 
                lasturl=None, nexturl=None, lastname=None, nextname=None,
                is_96=False, is_sbcs=False, pua_collides=False, blot="",
-               unicodefunc=_default_unicodefunc, big5ext_mode=False, siglum=None):
+               unicodefunc=_default_unicodefunc, big5ext_mode=False, siglum=None, showbmppua=False):
     """Dump an HTML mapping comparison."""
     stx, edx = (1, 95) if not is_96 else (0, 96)
     if is_sbcs:
@@ -584,9 +584,9 @@ def dump_plane(outfile, planefunc, kutenfunc,
                 if (i != cdisplayi) and isinstance(cdisplayi, tuple) and (
                             cdisplayi[-1] not in list(range(0xF870, 0xF880))) and not (
                             0xE000 <= cdisplayi[0] < 0xF900):
-                    variationhints.print_hints_to_html5(cdisplayi, outfile, lang=lang)
+                    variationhints.print_hints_to_html5(cdisplayi, outfile, lang=lang, showbmppua=showbmppua)
                     print(" / ", file=outfile)
-                variationhints.print_hints_to_html5(i, outfile, lang=lang)
+                variationhints.print_hints_to_html5(i, outfile, lang=lang, showbmppua=showbmppua)
                 unicodefunc(cdisplayi, outfile, i)
             if annots.get((number, row, cell), None):
                 print("<tr class=annotation><td colspan={:d}><p>".format(len(plarray) + 1), file=outfile)
@@ -597,7 +597,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
 
 def dump_preview(outfile, planename, kutenfunc, number, array, *, lang="zh-TW", planeshift="",
                css=None, part=None, menuurl=None, menuname="Up to menu", jlfunc=None, 
-               lasturl=None, nexturl=None, lastname=None, nextname=None,
+               lasturl=None, nexturl=None, lastname=None, nextname=None, showbmppua=False,
                is_96=False, is_sbcs=False, blot="", unicodefunc=_default_unicodefunc):
     """Dump an HTML single-mapping table."""
     stx, edx = (1, 95) if not is_96 else (0, 96)
@@ -642,7 +642,7 @@ def dump_preview(outfile, planename, kutenfunc, number, array, *, lang="zh-TW", 
                 continue
             #
             print("<td>", end="", file=outfile)
-            variationhints.print_hints_to_html5(i, outfile, lang=lang)
+            variationhints.print_hints_to_html5(i, outfile, lang=lang, showbmppua=showbmppua)
             unicodefunc(i, outfile, None, jlfunc, number, row, cell)
         print("<td class=udf>", file=outfile)
     print("</table>", file=outfile)

@@ -19,7 +19,7 @@ plane1 = (1, ("UTC<br>Ported old", "UTC<br>New files", "MS/HTML5", "Macintosh"),
 ])
 
 plane2 = (2, ("ELEX",), [
-          graphdata.gsets["mac-elex-extras"][2],
+          graphdata.gsets["mac-elex-extras-nishiki-teki"][2],
 ])
 
 def planefunc(number, mapname=None):
@@ -68,7 +68,7 @@ for n, i in enumerate(korea.rawmac):
     if j != i:
         cdispmap[(n, j)] = i
 for n, i in enumerate(korea.rawelex):
-    j = graphdata.gsets["mac-elex-extras"][2][n]
+    j = graphdata.gsets["mac-elex-extras-nishiki-teki"][2][n]
     if j != i:
         cdispmap[(n + (94 * 94), j)] = i
 annots = {}
@@ -98,10 +98,10 @@ for n, p in enumerate([plane1]):
 
 f = open("kscplane2a.html", "w", encoding="utf-8")
 showgraph.dump_preview(f, "HangulTalk additional plane", kutenfunc, 2, 
-                       graphdata.gsets["mac-elex-extras"][2],
+                       graphdata.gsets["mac-elex-extras-nishiki-teki"][2],
                        planeshift = "1B4F", lang="ko-KR", part=1, css="ksc.css",
                        menuurl="/ksc-conc.html", menuname="Wansung code variant comparison",
-                       lasturl="kscplane1f.html", lastname="Wansung code, part 6")
+                       lasturl="kscplane1f.html", lastname="Wansung code, part 6", showbmppua=True)
 f.close()
 
 

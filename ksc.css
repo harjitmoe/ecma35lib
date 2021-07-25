@@ -1,3 +1,19 @@
+@font-face {
+    font-family: 'TW-Sung-Plus';
+    font-style: normal;
+    font-weight: 400;
+    /* If only the other one is present, use the other one; only download if necessary. */
+    /* format() are "woff", "woff2", "truetype" (not "ttf"), "opentype", "embedded-opentype", "svg" */
+    src: local('TW-Sung-Plus'), local('TW-Kai-Plus'), url('https://harjit.moe/fonts/TW-Sung-Plus-98_1.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'HanaMinB';
+    font-style: normal;
+    font-weight: 400;
+    /* If only the other one is present, use the other one; only download if necessary. */
+    /* format() are "woff", "woff2", "truetype" (not "ttf"), "opentype", "embedded-opentype", "svg" */
+    src: local('HanaMinB'), local('HanaMinB-Regular'), url('https://harjit.moe/fonts/hanazono/HanaMinB.woff2') format('woff2');
+}
 /* Sadly border-collapse: collapse; borks the borders on the position: sticky; */
 table {
     border-spacing: 0;
@@ -14,15 +30,16 @@ th, td {
     box-sizing: content-box;
     min-width: 6rem;
     width: 7rem;
+    background: white;
 }
 table.chart th, table.chart td {
     min-width: 3rem;
-    width: 4rem;
+    width: 5rem;
 }
 td {
     vertical-align: top;
 }
-th a {
+th a:nth-of-type(2) {
     text-decoration: unset;
     color: inherit;
 }
@@ -30,12 +47,23 @@ th:first-child, td:first-child {
     border-left: 1px solid black;
     border-left: 0.1rem solid black;
 }
+th:first-child {
+    border-right: 2px solid black;
+    border-right: 0.2rem solid black;
+    position: sticky;
+    left: 0;
+    z-index: 10;
+}
 thead:first-of-type th, thead:first-of-type td {
     border-top: 1px solid black;
     border-top: 0.1rem solid black;
     position: sticky;
     top: 0;
     background: white;
+    z-index: 10;
+}
+thead:first-of-type th:first-child {
+    z-index: 11;
 }
 .anchor {
     position: relative;
@@ -45,24 +73,77 @@ thead:first-of-type th, thead:first-of-type td {
     font-family: monospace;
     font-size: 0.7rem;
 }
-.codepicture, .cpc {
-    font-family: TakaoPMincho, IPAPMincho, Noto Serif CJK KR, Source Han Serif KR, TakaoPGothic, IPAPGothic, Noto Sans CJK KR, Source Han Sans KR, TW-Sung-Ext-B, TW-Kai-Ext-B, Yu Gothic, BabelStone Han, serif;
+.codepicture[lang|="zh"], .cpc[lang|="zh"] {
+    font-family: Noto Serif CJK TC, Source Han Serif TC, Noto Sans CJK TC, Source Han Sans TC, TW-Sung-Ext-B, TW-Kai-Ext-B, HanaMinB, BabelStone Han, serif;
     font-size: 1.5rem;
     line-height: 2rem;
 }
-.codepicture.roman, .cpc.roman {
+.codepicture[lang|="ja"], .cpc[lang|="ja"] {
+    font-family: TakaoPMincho, IPAPMincho, Noto Serif CJK JP, Source Han Serif JP, TakaoPGothic, IPAPGothic, Noto Sans CJK JP, Source Han Sans JP, TW-Sung-Ext-B, TW-Kai-Ext-B, Yu Gothic, BabelStone Han, serif;
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
+.codepicture[lang|="ko"], .cpc[lang|="ko"] {
+    font-family: Noto Serif CJK KR, Source Han Serif KR, Noto Sans CJK KR, Source Han Sans KR, TakaoPMincho, IPAPMincho, TakaoPGothic, IPAPGothic, TW-Sung-Ext-B, TW-Kai-Ext-B, Yu Gothic, BabelStone Han, serif;
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
+.codepicture.roman, .codepicture[lang|="en"], .codepicture span[lang|="en"], .cpc.roman, .cpc[lang|="en"], .cpc span[lang|="en"] {
+    /* Noto Sans CJK TC renders the combining hacek as a large glyph to the letter's right,
+     * for some reason (i.e. as if it were the spacing character). So don't list it.
+     * Doulos SIL, Segoe UI and the DejaVus are good for LCG combining sequences. */
     font-family: Doulos SIL, DejaVu Serif, Segoe UI, DejaVu Sans, serif;
+    font-size: 1.5rem;
+    line-height: 2rem;
 }
 .codepicture.smp, .cpc.smp {
-    font-family: Twemoji Mozilla, Apple Color Emoji, Noto Color Emoji, Segoe UI Emoji, Noto Emoji, serif;
-    /*font-family: unset;*/
+    font-family: Apple Color Emoji, Noto Color Emoji, Twemoji Mozilla, Segoe UI Emoji, EmojiOne Mozilla, Twitter Color Emoji, EmojiOne Color, Segoe UI Symbol, Noto Emoji, Android Emoji, EmojiSymbols, serif;
+}
+@-moz-document url-prefix() {
+    /* Don't disfavour the SVGinOTF as much for Mozilla browsers. */
+    .codepicture.smp, .cpc.smp {
+        font-family: Twitter Color Emoji, Apple Color Emoji, Noto Color Emoji, EmojiOne Color, Twemoji Mozilla, Segoe UI Emoji, EmojiOne Mozilla, Segoe UI Symbol, Noto Emoji, Android Emoji, EmojiSymbols, serif;
+    }
+}
+.codepicture[lang|="zh"]::after, .cpc[lang|="zh"]::after {
+    /* Ensure more-or-less even vertical position of codepoint */
+    content: "　";
+    font-family: Noto Serif CJK TC, Source Han Serif TC, Noto Sans CJK TC, Source Han Sans TC, BabelStone Han, serif;
+    font-size: 1.5rem;
+}
+.codepicture[lang|="ja"]:not(.smp)::after, .cpc[lang|="ja"]:not(.smp)::after {
+    /* Ensure more-or-less even vertical position of codepoint */
+    content: "　";
+    font-family: TakaoPMincho, IPAPMincho, Noto Serif CJK JP, Source Han Serif JP, TakaoPGothic, IPAPGothic, Noto Sans CJK JP, Source Han Sans JP, Yu Gothic, BabelStone Han, serif;
+    font-size: 1.5rem;
+}
+.codepicture[lang|="ko"]::after, .cpc[lang|="ko"]::after {
+    /* Ensure more-or-less even vertical position of codepoint */
+    content: "　";
+    font-family: Noto Serif CJK KR, Source Han Serif KR, Noto Sans CJK KR, Source Han Sans KR, TakaoPMincho, IPAPMincho, TakaoPGothic, IPAPGothic, Yu Gothic, BabelStone Han, serif;
+    font-size: 1.5rem;
 }
 .pua {
     color: dimgray;
 }
-.spua {
+.control { /* For the JIS X 0201 chart. */
+    color: #060;
+}
+.bestfit { /* For the JIS X 0201 chart. */
+    color: #009; 
+}
+.pua.bestfit {  /* For the JIS X 0201 chart. */
+    color: #66f; 
+}
+.cpc.spua[lang|="zh"], .codepicture.spua[lang|="zh"] {
     /* TW-Sung-Plus and TW-Kai-Plus are the Gov-TW-supplied SPUA fonts for CNS */
     font-family: TW-Sung-Plus, TW-Kai-Plus;
+    font-display: block;
+    font-size: 1.5rem;
+}
+.cpc.spua[lang|="ko"], .codepicture.spua[lang|="ko"], .cpc.spua[lang|="jp"], .codepicture.spua[lang|="jp"] {
+    font-family: Nishiki-teki;
+    font-display: block;
     font-size: 1.5rem;
 }
 .vertical {
@@ -72,6 +153,8 @@ thead:first-of-type th, thead:first-of-type td {
     writing-mode: vertical-rl;
     display: inline-block;
     width: 1em;
+}
+[lang|="ja"] .vertical {
     /* Noto Serif CJK seems not actually to use vertical glyphs here for some reason?
      * Noto Sans CJK and TakaoP both do. */
     font-family: TakaoPMincho, IPAPMincho, TakaoPGothic, IPAPGothic, Noto Sans CJK JP, Source Han Sans JP, Yu Gothic, serif;
@@ -83,7 +166,7 @@ thead:first-of-type th, thead:first-of-type td {
 }
 
 .taegeuk {
-	/*
+    /*
      * The MacKorean mappings' variation hint sequences for the taeguek assume that the Unicode character is
      * rendered as in its code charts (yang above yin, like MacKorean 0xA693) as opposed to being rendered
      * with yin to the left of yang (Source Han; MacKorean 0xA698), or yang to left of yin (BabelStone Han).
@@ -109,12 +192,12 @@ thead:first-of-type th, thead:first-of-type td {
     font-size: 0.75rem;
 }
 
-.undefined, .udf {
+.collision, .collision th, .collision td, .cln, .cln th, .cln td {
+    background: #f99;
+}
+.undefined, .udf, .collision .undefined, .cln .udf {
     background: #999;
 	height: 3rem;
-}
-.collision, .cln {
-    background: #f99;
 }
 
 ul.navbar {
@@ -134,14 +217,19 @@ ul.navbar li::after {
     font-weight: bold;
 }
 
-.annotation {
+.annotation, .annotation th, .annotation td {
     background: beige;
+}
+.annotation td {
+    padding-left: 2px;
+    padding-left: 0.2rem;
 }
 .annotation p {
     margin: 0.3em 0 0.3em 0;
     max-width: 98vw;
     position: sticky;
     left: 3px;
+    left: 0.3rem;
 }
 .annotation code {
     border: 0.1rem solid silver;
@@ -162,6 +250,7 @@ ul.navbar li::after {
 }
 .cpc .charwrapper.circle, .cpc .charwrapper.darksquare, .cpc .charwrapper.lightsquare {
     height: 1.4rem;
+    max-width: 6rem;
     margin: 0.1rem;
     box-sizing: border-box;
 }

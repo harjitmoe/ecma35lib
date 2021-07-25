@@ -176,7 +176,8 @@ def get_ucsname(ucs, default=_no_default):
 def lookup_ucsname(name, default=_no_default):
     if name in rucsnames:
         return rucsnames[name]
-    elif "IDEOGRAPH-" in name:
+    # Need to check the start so "SQUARED CJK UNIFIED IDEOGRAPH…" only succeeds if a squared exists
+    elif name.startswith(("CJK ", "TANGUT ")) and "IDEOGRAPH-" in name:
         carenot, ucs = name.rsplit("IDEOGRAPH-", 1)
         return chr(int(ucs, 16))
     elif default is _no_default:
