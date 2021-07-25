@@ -135,6 +135,10 @@ thead:first-of-type th:first-child {
 .pua.bestfit {  /* For the JIS X 0201 chart. */
     color: #66f; 
 }
+abbr[title*="Private"] {
+    color: #900;
+    font-weight: 600;
+}
 .cpc.spua[lang|="zh"], .codepicture.spua[lang|="zh"] {
     /* TW-Sung-Plus and TW-Kai-Plus are the Gov-TW-supplied SPUA fonts for CNS */
     font-family: TW-Sung-Plus, TW-Kai-Plus;
