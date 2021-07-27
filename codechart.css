@@ -145,7 +145,7 @@ abbr[title*="Private"] {
     font-display: block;
     font-size: 1.5rem;
 }
-.cpc.spua[lang|="ko"], .codepicture.spua[lang|="ko"], .cpc.spua[lang|="jp"], .codepicture.spua[lang|="jp"] {
+.cpc.spua[lang|="ko"], .codepicture.spua[lang|="ko"], .cpc.spua[lang|="jp"], .codepicture.spua[lang|="jp"], .cpc.nishiki, .codepicture.nishiki {
     font-family: Nishiki-teki;
     font-display: block;
     font-size: 1.5rem;
@@ -261,13 +261,23 @@ ul.navbar li::after {
 .cpc .charwrapper .wrappedtext {
     font-size: 72px;
 }
+.cpc .charwrapper .wrappedtext.nishiki {
+    font-family: Nishiki-teki;
+    font-size: 118px;
+}
 .cpc .charwrapper.circle .wrappedtext, .cpc .charwrapper.lightdiamond .wrappedtext {
     font-size: 48px;
 }
 .cpc .charwrapper.lightcircle .wrappedtext {
     font-size: 64px;
 }
-.cpc .charwrapper.lightdiamond .enclosure {
+.cpc .charwrapper.circle .wrappedtext.nishiki {
+    font-size: 96px;
+}
+.cpc .charwrapper.lighttriangle .wrappedtext {
+    font-size: 42px;
+}
+.cpc .charwrapper.lightdiamond .enclosure, .cpc .charwrapper.lighttriangle .enclosure {
     fill: none;
 	stroke: black;
 	stroke-width: 3px;

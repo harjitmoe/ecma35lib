@@ -225,6 +225,7 @@ applesinglehints = {
     #   U+1F57F are expressly keyed, while U+260E is often displayed as a keyed
     #   variant).
     (0xF807,): (0x260F, 0xF87F),
+    (0x27E1, 0x20DD): (0x2BCE, 0x20DD), # The newer ⯎ is a more appropriate relative size than ⟡
     #
     # Some direct PUA mappings used by MacKorean but no longer needed
     (0xF80A,): (0x1F668,), # "Two interwoven eye shapes" (basically a variant quilt square)
@@ -282,10 +283,9 @@ applesinglehints_nishikiteki.update({
     (0x25B4, 0x20E4): (0xF6E8,), # Black triangle in triangle
     (0x25B2, 0x20DD): (0xF6ED,), # Black triangle in circle
     #
-    # Apple PUA actually included in Nishiki-teki (override approximations in the other dict)
+    # Apple PUA actually included in Nishiki-teki (override inferior approximations in the other dict)
     (0xF807,): (0xF807,), # Telephone dial
     (0xF80A,): (0xF80A,), # Two interwoven eye shapes
-    (0xF80B,): (0xF80B,), # Narrow-leaf four-petal florette
     (0xF842,): (0xF842,), # Downward wave arrow
     (0xF846,): (0xF846,), # Pointing and broadcasting to left
     (0xF847,): (0xF847,), # Pointing and broadcasting to right
@@ -303,24 +303,61 @@ applesinglehints_nishikiteki.update({
     (0x2192, 0xF875): (0xF00CA,),
     (0x2193, 0xF875): (0xF00CF,),
     #
-    # Boxed Chinese numerals
-    (0x56DB, 0x20DE): (0xF07C9,),
-    (0x4E94, 0x20DE): (0xF07CA,),
-    (0x516D, 0x20DE): (0xF07CB,),
-    (0x4E03, 0x20DE): (0xF07CC,),
-    (0x516B, 0x20DE): (0xF07CD,),
-    (0x4E5D, 0x20DE): (0xF07CE,),
-    (0x5341, 0x20DE): (0xF07CF,),
+    # Boxed West-Arabic Numerals
+    (0x0030, 0x20DE): (0xF06E0,),
+    (0x0030, 0x20DE, 0xF87F): (0x0030, 0x20DE,),
+    (0x0031, 0x20DE): (0xF06E1,),
+    (0x0031, 0x20DE, 0xF87F): (0x0031, 0x20DE,),
+    (0x0032, 0x20DE): (0xF06E2,),
+    (0x0032, 0x20DE, 0xF87F): (0x0032, 0x20DE,),
+    (0x0033, 0x20DE): (0xF06E3,),
+    (0x0033, 0x20DE, 0xF87F): (0x0033, 0x20DE,),
+    (0x0034, 0x20DE): (0xF06E4,),
+    (0x0034, 0x20DE, 0xF87F): (0x0034, 0x20DE,),
+    (0x0035, 0x20DE): (0xF06E5,),
+    (0x0035, 0x20DE, 0xF87F): (0x0035, 0x20DE,),
+    (0x0036, 0x20DE): (0xF06E6,),
+    (0x0036, 0x20DE, 0xF87F): (0x0036, 0x20DE,),
+    (0x0037, 0x20DE): (0xF06E7,),
+    (0x0037, 0x20DE, 0xF87F): (0x0037, 0x20DE,),
+    (0x0038, 0x20DE): (0xF06E8,),
+    (0x0038, 0x20DE, 0xF87F): (0x0038, 0x20DE,),
+    (0x0039, 0x20DE): (0xF06E9,),
+    (0x0039, 0x20DE, 0xF87F): (0x0039, 0x20DE,),
+    #
+    # Boxed West-Arabic Numerals (negative)
+    (0x0030, 0x20DE, 0xF87A): (0xF0740,),
+    (0x0031, 0x20DE, 0xF87A): (0xF0741,),
+    (0x0032, 0x20DE, 0xF87A): (0xF0742,),
+    (0x0033, 0x20DE, 0xF87A): (0xF0743,),
+    (0x0034, 0x20DE, 0xF87A): (0xF0744,),
+    (0x0035, 0x20DE, 0xF87A): (0xF0745,),
+    (0x0036, 0x20DE, 0xF87A): (0xF0746,),
+    (0x0037, 0x20DE, 0xF87A): (0xF0747,),
+    (0x0038, 0x20DE, 0xF87A): (0xF0748,),
+    (0x0039, 0x20DE, 0xF87A): (0xF0749,),
+    #
+    # Boxed Chinese numerals with more than one character (so combining square not possible)
     (0xF862, 0x005B, 0x5341, 0x4E00, 0x005D): (0xF07D0,),
+    (0xF863, 0x005B, 0x5341, 0x4E00, 0x005D): (0xF07D0, 0xF87A),
     (0xF862, 0x005B, 0x5341, 0x4E8C, 0x005D): (0xF07D1,),
+    (0xF863, 0x005B, 0x5341, 0x4E8C, 0x005D): (0xF07D1, 0xF87A),
     (0xF862, 0x005B, 0x5341, 0x4E09, 0x005D): (0xF07D2,),
+    (0xF863, 0x005B, 0x5341, 0x4E09, 0x005D): (0xF07D2, 0xF87A),
     (0xF862, 0x005B, 0x5341, 0x56DB, 0x005D): (0xF07D3,),
+    (0xF863, 0x005B, 0x5341, 0x56DB, 0x005D): (0xF07D3, 0xF87A),
     (0xF862, 0x005B, 0x5341, 0x4E94, 0x005D): (0xF07D4,),
+    (0xF863, 0x005B, 0x5341, 0x4E94, 0x005D): (0xF07D4, 0xF87A),
     (0xF862, 0x005B, 0x5341, 0x516D, 0x005D): (0xF07D5,),
+    (0xF863, 0x005B, 0x5341, 0x516D, 0x005D): (0xF07D5, 0xF87A),
     (0xF862, 0x005B, 0x5341, 0x4E03, 0x005D): (0xF07D6,),
+    (0xF863, 0x005B, 0x5341, 0x4E03, 0x005D): (0xF07D6, 0xF87A),
     (0xF862, 0x005B, 0x5341, 0x516B, 0x005D): (0xF07D7,),
+    (0xF863, 0x005B, 0x5341, 0x516B, 0x005D): (0xF07D7, 0xF87A),
     (0xF862, 0x005B, 0x5341, 0x4E5D, 0x005D): (0xF07D8,),
+    (0xF863, 0x005B, 0x5341, 0x4E5D, 0x005D): (0xF07D8, 0xF87A),
     (0xF862, 0x005B, 0x4E8C, 0x5341, 0x005D): (0xF07D9,),
+    (0xF863, 0x005B, 0x4E8C, 0x5341, 0x005D): (0xF07D9, 0xF87A),
     #
     # Encircled hanzi
     (0x5927, 0x20DD): (0xF0A32,),
@@ -360,6 +397,9 @@ applesinglehints_nishikiteki.update({
     (0x570B, 0x20DD): (0xF0A54,),
     (0x4ED6, 0x20DD): (0xF0A55,),
     (0x329E, 0xF87F): (0xF0A56,),
+    #
+    (0xF861, 0x2020, 0x2020, 0x2020): (0xFEE2A,), # Three daggers
+    (0xF860, 0x2020, 0x2020): (0xFEE2B,), # Two daggers
 })
 
 # Not sure where to put this observation, but MacKorean's U+25B4+20E4 is basically DPRK's mountain ahead.
@@ -415,6 +455,19 @@ def ahmap(pointer, ucs, applesinglehints=applesinglehints):
 def ahmap_nt(pointer, ucs):
     return ahmap(pointer, ucs, applesinglehints_nishikiteki)
 
+def is_filled_character(ucs):
+    name = namedata.get_ucsname(ucs, "")
+    if "BLACK" in name or "NEGATIVE" in name:
+        return True
+    elif "WHITE" in name or "RIBBON" in name:
+        return False
+    elif "SQUARED" in name or "CIRCLED" in name:
+        return False
+    elif 0xF0620 <= ord(ucs) <= 0xF067F or 0xF06E0 <= ord(ucs) <= 0xF06E9 or 0xF06F0 <= ord(ucs) <= 0xF073F or 0xF07A2 <= ord(ucs) <= 0xF07D9 or 0xF07E7 <= ord(ucs) <= 0xF07FE or 0xF0A00 <= ord(ucs) <= 0xF0A55:
+        return False
+    else:
+        return True
+
 def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
     sequence_inverse = sequence_big = False
     if i[0] >= 0xF0000:
@@ -454,6 +507,8 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
             print("<span class='cpc roman'>", file=outfile)
         elif (namedata.get_ucscategory(firststrep)[0] == "M") and (ord(firststrep) < 0x3000):
             print("<span class='cpc roman'>", file=outfile)
+        elif strep.endswith("\u20E3"): # i.e. without a VS16 after
+            print("<span class='cpc nishiki' lang={}>".format(lang), file=outfile)
         else:
             print("<span class=cpc lang={}>".format(lang), file=outfile)
     strep = strep.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
@@ -520,9 +575,25 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
             print("<span class='taegeuk taegeuk180'>", file=outfile)
             print(strep2, file=outfile)
             print("</span>", file=outfile)
-        else:
+        elif is_filled_character(strep2[0]):
             print("<svg viewBox='0 0 {:d} 88' class='charwrapper'>".format(74 * len(i[1:])), file=outfile)
             print("<text y='72px' class='wrappedtext inverse'>", file=outfile)
+            print(strep2, file=outfile)
+            print("</text></svg>", file=outfile)
+        else:
+            cpts = "".join(f"u{ord(jj):04X}" for jj in strep2)
+            print("<svg viewBox='0 0 {:d} 88' class='charwrapper'>".format(74 * len(i[1:])), file=outfile)
+            print(f"<filter id='silhouette{cpts}'>", file=outfile)
+            print("<feMorphology operator='dilate' radius='8'/>", file=outfile)
+            print("<feMorphology operator='erode' radius='7'/>", file=outfile)
+            print("</filter>", file=outfile)
+            print(f"<mask id='letter{cpts}'>", file=outfile)
+            print("<polygon points='0,0 0,88 74,88 74,0' fill='white'/>", file=outfile)
+            print("<text y='72px' fill='black' style='user-select: none;' class='wrappedtext'>", file=outfile)
+            print(strep2, file=outfile)
+            print("</text>", file=outfile)
+            print("</mask>", file=outfile)
+            print(f"<text y='72px' filter='url(#silhouette{cpts})' mask='url(#letter{cpts})' class='wrappedtext'>", file=outfile)
             print(strep2, file=outfile)
             print("</text></svg>", file=outfile)
     elif strep[-1] == "\uF876": # Apple encoding hint for rotated form
@@ -552,13 +623,19 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
         # Boxed / circled non-negative forms
         if strep2[-1] == "\u20DD":
             print("<svg viewBox='0 0 72 72' class='charwrapper circle lightcircle'>", file=outfile)
-            print("<text y='58px' x='36px' text-anchor='middle' class='wrappedtext'>", file=outfile)
+            if strep2[0] not in "\u2BCE\u25C6\uF805":
+                print("<text y='58px' x='36px' text-anchor='middle' class='wrappedtext'>", file=outfile)
+            else:
+                print("<text y='69px' x='35px' text-anchor='middle' class='wrappedtext nishiki'>", file=outfile)
             print(strep2[:-1], end="", file=outfile)
             print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
             print("</text></svg>", file=outfile)
         elif strep2[-1] == "\u20DE":
             print("<svg viewBox='0 0 88 88' class='charwrapper lightsquare'>", file=outfile)
-            print("<text y='72px' x='42px' text-anchor='middle' class='wrappedtext'>", file=outfile)
+            if strep2[0] not in "\u27E1\u25C6\uF805":
+                print("<text y='72px' x='36px' text-anchor='middle' class='wrappedtext'>", file=outfile)
+            else:
+                print("<text y='86px' x='42px' text-anchor='middle' class='wrappedtext nishiki'>", file=outfile)
             print(strep2[:-1], end="", file=outfile)
             print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
             print("</text></svg>", file=outfile)
@@ -568,6 +645,12 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
             print(strep2[:-1], end="", file=outfile)
             print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
             print("</text><polygon points='0,36 36,72 72,36 36,0' class='enclosure' /></svg>", file=outfile)
+        elif strep2[-1] == "\u20E4":
+            print("<svg viewBox='0 0 88 88' class='charwrapper lighttriangle'>", file=outfile)
+            print("<text y='76px' x='42px' text-anchor='middle' class='wrappedtext'>", file=outfile)
+            print(strep2[:-1], end="", file=outfile)
+            print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
+            print("</text><polygon points='2,82 86,82 44,6' class='enclosure' /></svg>", file=outfile)
         elif (strep2[0] == "[") and (strep2[-1] == "]"):
             hsf = 0
             for strepc in strep2[1:-1]:

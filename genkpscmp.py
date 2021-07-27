@@ -113,7 +113,7 @@ for n, p in enumerate([plane1]):
         elif bn < 1:
             nexturl = "kpsplane{:X}a.html".format(bn + 1)
             nextname = "KPS 9566, part 1".format(bn + 1)
-        showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ko-KP", part=q, css="ksc.css",
+        showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ko-KP", part=q, css="codechart.css",
                              menuurl="/kps-conc.html", menuname="KPS character set variant comparison",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
                              annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True,

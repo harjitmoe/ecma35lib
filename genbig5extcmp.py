@@ -100,7 +100,7 @@ for p in [plane1]:
         else:
             nexturl = "cnsplane3a.html"
             nextname = "CNS 11643 plane 3, part 1"
-        showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="zh-HK", part=q, css="/css/cns.css",
+        showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="zh-HK", part=q, css="/css/codechart.css",
                              menuurl="/cns-conc.html", menuname="CNS 11643 and Big5 comparison tables",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
                              annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True,

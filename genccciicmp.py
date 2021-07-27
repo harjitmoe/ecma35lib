@@ -184,7 +184,7 @@ for n, (p, is_96) in enumerate(zip(planes, are_96)):
         elif bn < 92:
             nexturl = "ccciiplane{:02d}a.html".format(bnx[n + 1])
             nextname = "CCCII plane {:d}, part 1".format(bnx[n + 1])
-        showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="zh-TW", part=q, css="/css/cns.css",
+        showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="zh-TW", part=q, css="/css/codechart.css",
                              menuurl="/eacc-conc.html", menuname="CCCII and EACC comparison tables",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
                              annots=annots, selfhandledanchorlink=True, is_96=is_96, blot=blot,

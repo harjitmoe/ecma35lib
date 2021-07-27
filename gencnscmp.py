@@ -487,7 +487,7 @@ for n, p in enumerate([plane1, plane2, plane3, plane4, plane5, plane6, plane7, p
         elif bn < 15:
             nexturl = "cnsplane{:X}a.html".format(bnx[n + 1])
             nextname = "CNS 11643 plane {:d}, part 1".format(bnx[n + 1])
-        showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="zh-TW", part=q, css="/css/cns.css",
+        showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="zh-TW", part=q, css="/css/codechart.css",
                              menuurl="/cns-conc.html", menuname="CNS 11643 and Big5 comparison tables",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
                              annots=annots, selfhandledanchorlink=True, jlfunc=jlfunc, blot=blot,

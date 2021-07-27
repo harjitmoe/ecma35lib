@@ -90,7 +90,7 @@ for n, p in enumerate([plane1]):
         elif bn < 2:
             nexturl = "kscplane{:X}a.html".format(bn + 1)
             nextname = "HangulTalk additional plane, part 1"
-        showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ko-KR", part=q, css="ksc.css",
+        showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ko-KR", part=q, css="codechart.css",
                              menuurl="/ksc-conc.html", menuname="Wansung code variant comparison",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
                              annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True)
@@ -99,7 +99,7 @@ for n, p in enumerate([plane1]):
 f = open("kscplane2a.html", "w", encoding="utf-8")
 showgraph.dump_preview(f, "HangulTalk additional plane", kutenfunc, 2, 
                        graphdata.gsets["mac-elex-extras-nishiki-teki"][2],
-                       planeshift = "1B4F", lang="ko-KR", part=1, css="ksc.css",
+                       planeshift = "1B4F", lang="ko-KR", part=1, css="codechart.css",
                        menuurl="/ksc-conc.html", menuname="Wansung code variant comparison",
                        lasturl="kscplane1f.html", lastname="Wansung code, part 6", showbmppua=True)
 f.close()
