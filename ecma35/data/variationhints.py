@@ -293,12 +293,6 @@ applesinglehints_nishikiteki.update({
     #
     (0xF8FF, 0xF87F): (0xF89E,), # White Apple logo
     #
-    # White rounded-stroke arrows
-    (0x2190, 0xF875): (0xF00CD,),
-    (0x2191, 0xF875): (0xF00CE,),
-    (0x2192, 0xF875): (0xF00CA,),
-    (0x2193, 0xF875): (0xF00CF,),
-    #
     # Boxed Chinese numerals with more than one character (so combining square not possible)
     (0xF862, 0x005B, 0x5341, 0x4E00, 0x005D): (0xF07D0,),
     (0xF863, 0x005B, 0x5341, 0x4E00, 0x005D): (0xF07D0, 0xF87A),
@@ -388,6 +382,67 @@ def is_filled_character(ucs):
     else:
         return True
 
+def invert_rotate(display_string, rotate_by, flip, selectable_string, invert, outfile):
+    assert len(display_string) == 1 or not (rotate_by or flip)
+    xforms = []
+    if rotate_by:
+        xforms.append(f"rotate({rotate_by} 38 44)")
+    if flip:
+        xforms.append("translate(72)")
+        xforms.append("scale(-1 1)")
+    rot = " transform='{}'".format(" ".join(xforms)) if xforms else ""
+    separate_sel = display_string != selectable_string 
+    maybe_nosel = " aria-hidden='true'" if separate_sel else ""
+    print("<svg viewBox='0 0 {:d} 88' class='charwrapper{}'>".format(
+        74 * len(display_string),
+        " taegeuk" if display_string == "\u262F" else ""
+    ), file=outfile)
+    if not invert:
+        print(f"<text y='72px' font-size='72px'{rot}{maybe_nosel}>", file=outfile)
+        print(display_string, file=outfile)
+        print("</text>", file=outfile)
+        if separate_sel:
+            print(f"<text y='72px' fill='none' stroke='none'>", file=outfile)
+            print(selectable_string, file=outfile)
+            print("</text>", file=outfile)
+    elif is_filled_character(display_string[0]):
+        print(f"<text y='72px' class='inverse' font-size='72px'{rot}{maybe_nosel}>", file=outfile)
+        print(display_string, file=outfile)
+        print("</text>", file=outfile)
+        if separate_sel:
+            print(f"<text y='72px' fill='none' stroke='none'>", file=outfile)
+            print(selectable_string, file=outfile)
+            print("</text>", file=outfile)
+    else:
+        cpts = "".join(f"u{ord(jj):04X}" for jj in display_string)
+        print(f"<filter id='silhouette{cpts}'>", file=outfile)
+        print("<feMorphology operator='dilate' radius='8'/>", file=outfile)
+        print("<feMorphology operator='erode' radius='7'/>", file=outfile)
+        print("</filter>", file=outfile)
+        print(f"<mask id='letter{cpts}'>", file=outfile)
+        print("<polygon points='0,0 0,88 74,88 74,0' fill='white'/>", file=outfile)
+        print(f"<text y='72px' fill='black' aria-hidden='true' font-size='72px'{rot}>", file=outfile)
+        print(display_string, file=outfile)
+        print("</text>", file=outfile)
+        print("</mask>", file=outfile)
+        print(f"<text y='72px' filter='url(#silhouette{cpts})' mask='url(#letter{cpts})' font-size='72px'{rot}{maybe_nosel}>", file=outfile)
+        print(display_string, file=outfile)
+        print("</text>", file=outfile)
+        if separate_sel:
+            print(f"<text y='72px' font-size='72px' fill='none' stroke='none'>", file=outfile)
+            print(selectable_string, file=outfile)
+            print("</text>", file=outfile)
+    print("</svg>", file=outfile)
+
+def arrow_to_angle(arrow):
+    if arrow in "\u2190\u21e6":
+        return 0, True
+    elif arrow in "\u2191\u21e7":
+        return 90, True
+    elif arrow in "\u2193\u21e9":
+        return 90, False
+    return 0, False
+
 def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
     sequence_inverse = sequence_big = False
     if i[0] >= 0xF0000:
@@ -437,7 +492,22 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
     strep = strep.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
     if namedata.get_ucscategory(strep[0])[0] == "M":
         strep = "◌" + strep
-    if strep[-1] == "\uF87B": # Apple encoding hint for usually medium bold form
+    # Arrow styles (don't always use transcoding hints for their usual meanings)
+    if len(strep) == 2 and 0x2190 <= ord(strep[0]) <= 0x2193 and strep[1] == "\uF871":
+        rot, flip = arrow_to_angle(strep[0])
+        invert_rotate("\u279B", rot, flip, strep[0], False, outfile) 
+    elif len(strep) == 2 and 0x2190 <= ord(strep[0]) <= 0x2193 and strep[1] == "\uF875":
+        rot, flip = arrow_to_angle(strep[0])
+        invert_rotate("\u279C", rot, flip, strep[0], True, outfile) 
+    elif len(strep) == 2 and 0x2190 <= ord(strep[0]) <= 0x2193 and strep[1] == "\uF87F":
+        rot, flip = arrow_to_angle(strep[0])
+        invert_rotate("\u279C", rot, flip, strep[0], False, outfile) 
+    elif strep == "\uF843":
+        invert_rotate("\u21F0", 0, True, "←", False, outfile) 
+    elif strep == "\uF845":
+        invert_rotate("\u27B5", 0, True, "←", False, outfile) 
+    # Other uses
+    elif strep[-1] == "\uF87B": # Apple encoding hint for usually medium bold form
         print("<b>", file=outfile)
         print(strep.rstrip("\uF87B"), file=outfile)
         print("</b>", file=outfile)
@@ -447,15 +517,15 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
         # Boxed / circled versions
         if strep2[-1] == "\u20DD":
             print("<svg viewBox='0 0 72 72' class='charwrapper circle lightcircle'>", file=outfile)
-            print("<text y='54px' x='36px' text-anchor='middle' class='wrappedtext'>", file=outfile)
+            print("<text y='54px' x='36px' text-anchor='middle' font-size='64px'>", file=outfile)
             print(strep2[:-1], end="", file=outfile)
-            print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
+            print("<tspan font-size='0px'>{}</tspan>".format(strep2[-1]), file=outfile)
             print("</text></svg>", file=outfile)
         elif strep2[-1] == "\u20DE":
             print("<svg viewBox='0 0 88 88' class='charwrapper lightsquare'>", file=outfile)
-            print("<text y='72px' x='42px' text-anchor='middle' class='wrappedtext'>", file=outfile)
+            print("<text y='72px' x='42px' text-anchor='middle' font-size='72px'>", file=outfile)
             print(strep2[:-1], end="", file=outfile)
-            print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
+            print("<tspan font-size='0px'>{}</tspan>".format(strep2[-1]), file=outfile)
             print("</text></svg>", file=outfile)
         else:
             print(strep2, file=outfile)
@@ -468,15 +538,15 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
         strep2 = strep.replace("\uF87A", "").replace("\uF875", "")
         if strep2[-1] == "\u20DD":
             print("<svg viewBox='0 0 72 72' class='charwrapper circle darkcircle'>", file=outfile)
-            print("<text y='54px' x='36px' text-anchor='middle' class='wrappedtext inverse'>", file=outfile)
+            print("<text y='54px' x='36px' text-anchor='middle' class='inverse' font-size='48px'>", file=outfile)
             print(strep2[:-1], end="", file=outfile)
-            print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
+            print("<tspan font-size='0px'>{}</tspan>".format(strep2[-1]), file=outfile)
             print("</text></svg>", file=outfile)
         elif strep2[-1] in "\u20DE\u20E3": # The regular inverse rules don't work on keycaps either.
             print("<svg viewBox='0 0 88 88' class='charwrapper darksquare'>", file=outfile)
-            print("<text y='72px' x='44px' text-anchor='middle' class='wrappedtext inverse'>", file=outfile)
+            print("<text y='72px' x='44px' text-anchor='middle' class='inverse' font-size='72px'>", file=outfile)
             print(strep2[:-1], end="", file=outfile)
-            print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
+            print("<tspan font-size='0px'>{}</tspan>".format(strep2[-1]), file=outfile)
             print("</text></svg>", file=outfile)
         elif (strep2[0] == "[") and (strep2[-1] == "]"):
             hsf = 0
@@ -488,47 +558,22 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
             sizeclass = " half" if hsf > 7.5 else ""
             print("<svg viewBox='0 0 {1:d} 88' class='charwrapper darksquare{0}'>".format(sizeclass,
                   int(hsf * 48 + 0.5)), file=outfile)
-            print("<text y='72px' x='{:d}px' text-anchor='middle' class='wrappedtext inverse'>".format(
+            print("<text y='72px' x='{:d}px' text-anchor='middle' class='inverse' font-size='72px'>".format(
                   int(hsf * 24 + 0.5)), file=outfile)
-            print("<tspan class='redundant'>{}</tspan>".format(strep2[0]), end="", file=outfile)
+            print("<tspan font-size='0px'>{}</tspan>".format(strep2[0]), end="", file=outfile)
             print(strep2[1:-1], end="", file=outfile)
-            print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
+            print("<tspan font-size='0px'>{}</tspan>".format(strep2[-1]), file=outfile)
             print("</text></svg>", file=outfile)
         elif strep2 == "\u262F":
-            print("<span class='taegeuk taegeuk180'>", file=outfile)
-            print(strep2, file=outfile)
-            print("</span>", file=outfile)
-        elif is_filled_character(strep2[0]):
-            print("<svg viewBox='0 0 {:d} 88' class='charwrapper'>".format(74 * len(i[1:])), file=outfile)
-            print("<text y='72px' class='wrappedtext inverse'>", file=outfile)
-            print(strep2, file=outfile)
-            print("</text></svg>", file=outfile)
+            invert_rotate(strep2, 180, True, strep2, False, outfile)
         else:
-            cpts = "".join(f"u{ord(jj):04X}" for jj in strep2)
-            print("<svg viewBox='0 0 {:d} 88' class='charwrapper'>".format(74 * len(i[1:])), file=outfile)
-            print(f"<filter id='silhouette{cpts}'>", file=outfile)
-            print("<feMorphology operator='dilate' radius='8'/>", file=outfile)
-            print("<feMorphology operator='erode' radius='7'/>", file=outfile)
-            print("</filter>", file=outfile)
-            print(f"<mask id='letter{cpts}'>", file=outfile)
-            print("<polygon points='0,0 0,88 74,88 74,0' fill='white'/>", file=outfile)
-            print("<text y='72px' fill='black' style='user-select: none;' class='wrappedtext'>", file=outfile)
-            print(strep2, file=outfile)
-            print("</text>", file=outfile)
-            print("</mask>", file=outfile)
-            print(f"<text y='72px' filter='url(#silhouette{cpts})' mask='url(#letter{cpts})' class='wrappedtext'>", file=outfile)
-            print(strep2, file=outfile)
-            print("</text></svg>", file=outfile)
+            invert_rotate(strep2, 0, False, strep2, True, outfile)
     elif strep[-1] == "\uF876": # Apple encoding hint for rotated form
         strep2 = strep.replace("\uF876", "")
         if strep2 == "\u262F":
-            print("<span class='taegeuk taegeuk90'>", file=outfile)
-            print(strep2, file=outfile)
-            print("</span>", file=outfile)
+            invert_rotate(strep2, 90, True, strep2, False, outfile)
         else:
-            print("<span class=rotated>", file=outfile)
-            print(strep2, file=outfile)
-            print("</span>", file=outfile)
+            invert_rotate(strep2, -90, False, strep2, False, outfile)
     elif strep[-1] == "\uF877": # Apple encoding hint for superscript form
         print("<sup>", file=outfile)
         print(strep.replace("\uF877", ""), file=outfile)
@@ -547,32 +592,32 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
         if strep2[-1] == "\u20DD":
             print("<svg viewBox='0 0 72 72' class='charwrapper circle lightcircle'>", file=outfile)
             if strep2[0] not in "\u2BCE\u25C6\uF805":
-                print("<text y='58px' x='36px' text-anchor='middle' class='wrappedtext'>", file=outfile)
+                print("<text y='58px' x='36px' text-anchor='middle' font-size='64px'>", file=outfile)
             else:
-                print("<text y='69px' x='35px' text-anchor='middle' class='wrappedtext nishiki'>", file=outfile)
+                print("<text y='69px' x='35px' text-anchor='middle' font-family='Nishiki-teki' font-size='96px'>", file=outfile)
             print(strep2[:-1], end="", file=outfile)
-            print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
+            print("<tspan font-size='0px'>{}</tspan>".format(strep2[-1]), file=outfile)
             print("</text></svg>", file=outfile)
         elif strep2[-1] == "\u20DE":
             print("<svg viewBox='0 0 88 88' class='charwrapper lightsquare'>", file=outfile)
             if strep2[0] not in "\u27E1\u25C6\uF805":
-                print("<text y='72px' x='36px' text-anchor='middle' class='wrappedtext'>", file=outfile)
+                print("<text y='72px' x='36px' text-anchor='middle' font-size='72px'>", file=outfile)
             else:
-                print("<text y='86px' x='42px' text-anchor='middle' class='wrappedtext nishiki'>", file=outfile)
+                print("<text y='86px' x='42px' text-anchor='middle' font-family='Nishiki-teki' font-size='118px'>", file=outfile)
             print(strep2[:-1], end="", file=outfile)
-            print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
+            print("<tspan font-size='0px'>{}</tspan>".format(strep2[-1]), file=outfile)
             print("</text></svg>", file=outfile)
         elif strep2[-1] == "\u20DF":
             print("<svg viewBox='-2 -2 80 80' class='charwrapper lightdiamond'>", file=outfile)
-            print("<text y='54px' x='36px' text-anchor='middle' class='wrappedtext'>", file=outfile)
+            print("<text y='54px' x='36px' text-anchor='middle' font-size='48px'>", file=outfile)
             print(strep2[:-1], end="", file=outfile)
-            print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
+            print("<tspan font-size='0px'>{}</tspan>".format(strep2[-1]), file=outfile)
             print("</text><polygon points='0,36 36,72 72,36 36,0' class='enclosure' /></svg>", file=outfile)
         elif strep2[-1] == "\u20E4":
             print("<svg viewBox='0 0 88 88' class='charwrapper lighttriangle'>", file=outfile)
-            print("<text y='76px' x='42px' text-anchor='middle' class='wrappedtext'>", file=outfile)
+            print("<text y='76px' x='42px' text-anchor='middle' font-size='42px'>", file=outfile)
             print(strep2[:-1], end="", file=outfile)
-            print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
+            print("<tspan font-size='0px'>{}</tspan>".format(strep2[-1]), file=outfile)
             print("</text><polygon points='2,82 86,82 44,6' class='enclosure' /></svg>", file=outfile)
         elif (strep2[0] == "[") and (strep2[-1] == "]"):
             hsf = 0
@@ -584,16 +629,14 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
             sizeclass = " half" if hsf > 7.5 else ""
             print("<svg viewBox='0 0 {1:d} 88' class='charwrapper lightsquare{0}'>".format(sizeclass,
                   int(hsf * 48 + 0.5)), file=outfile)
-            print("<text y='72px' x='{:d}px' text-anchor='middle' class='wrappedtext'>".format(
+            print("<text y='72px' x='{:d}px' text-anchor='middle' font-size='72px'>".format(
                   int(hsf * 24 + 0.5)), file=outfile)
-            print("<tspan class='redundant'>{}</tspan>".format(strep2[0]), end="", file=outfile)
+            print("<tspan font-size='0px'>{}</tspan>".format(strep2[0]), end="", file=outfile)
             print(strep2[1:-1], end="", file=outfile)
-            print("<tspan class='redundant'>{}</tspan>".format(strep2[-1]), file=outfile)
+            print("<tspan font-size='0px'>{}</tspan>".format(strep2[-1]), file=outfile)
             print("</text></svg>", file=outfile)
         elif strep2 == "\u262F":
-            print("<span class=taegeuk>", file=outfile)
-            print(strep2, file=outfile)
-            print("</span>", file=outfile)
+            invert_rotate(strep2, 0, True, strep2, False, outfile)
         elif ucd.normalize("NFC", strep2) != strep2:
             # Not strictly supposed to have non-NFC verbatim characters in HTML (escape them).
             print(strep2.encode("ascii", errors="xmlcharrefreplace").decode("ascii"), file=outfile)

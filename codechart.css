@@ -174,19 +174,14 @@ abbr[title*="Private"] {
      * The MacKorean mappings' variation hint sequences for the taeguek assume that the Unicode character is
      * rendered as in its code charts (yang above yin, like MacKorean 0xA693) as opposed to being rendered
      * with yin to the left of yang (Source Han; MacKorean 0xA698), or yang to left of yin (BabelStone Han).
-     * Although the Unicode character effectively unifies all orientations, the following fonts use the first:
+     * Although the Unicode character effectively unifies all orientations, the following fonts use the first.
+     * Note that Noto Sans CJK (i.e. Source Han) and Noto Sans Symbols orient it differently from each other.
      */
-    font-family: "DejaVu Sans", "Segoe UI Symbol", "Linux Libertine", "Linux Libertine G", "Arial Unicode MS";
+    font-family: "DejaVu Sans", "Segoe UI Symbol", "Noto Sans Symbols", "Linux Libertine", "Linux Libertine G", "Arial Unicode MS";
     display: inline-block;
     width: 1.5rem;
 	line-height: 1.5rem;
 	text-align: center;
-}
-.taegeuk.taegeuk90 {
-    transform: rotate(90deg);
-}
-.taegeuk.taegeuk180 {
-    transform: rotate(180deg);
 }
 
 .bigform {
@@ -251,6 +246,10 @@ ul.navbar li::after {
     height: 1.6rem;
     box-sizing: border-box;
     vertical-align: text-bottom;
+    user-select: all;
+}
+[aria-hidden="true"] {
+    user-select: none;
 }
 .cpc .charwrapper.circle, .cpc .charwrapper.darksquare, .cpc .charwrapper.lightsquare {
     height: 1.4rem;
@@ -258,34 +257,10 @@ ul.navbar li::after {
     margin: 0.1rem;
     box-sizing: border-box;
 }
-.cpc .charwrapper .wrappedtext {
-    font-size: 72px;
-}
-.cpc .charwrapper .wrappedtext.nishiki {
-    font-family: Nishiki-teki;
-    font-size: 118px;
-}
-.cpc .charwrapper.circle .wrappedtext, .cpc .charwrapper.lightdiamond .wrappedtext {
-    font-size: 48px;
-}
-.cpc .charwrapper.lightcircle .wrappedtext {
-    font-size: 64px;
-}
-.cpc .charwrapper.circle .wrappedtext.nishiki {
-    font-size: 96px;
-}
-.cpc .charwrapper.lighttriangle .wrappedtext {
-    font-size: 42px;
-}
 .cpc .charwrapper.lightdiamond .enclosure, .cpc .charwrapper.lighttriangle .enclosure {
     fill: none;
 	stroke: black;
 	stroke-width: 3px;
-}
-.cpc .charwrapper .wrappedtext .redundant {
-    /* Don't `display: none;` (since that excludes it from copy-paste,
-       defeating much of the object of including it to begin with). */
-    font-size: 0px;
 }
 .darksquare {
     background: black;
