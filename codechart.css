@@ -105,7 +105,7 @@ thead:first-of-type th:first-child {
         font-family: Twitter Color Emoji, Apple Color Emoji, Noto Color Emoji, EmojiOne Color, Twemoji Mozilla, Segoe UI Emoji, EmojiOne Mozilla, Segoe UI Symbol, Noto Emoji, Android Emoji, EmojiSymbols, serif;
     }
 }
-.codepicture[lang|="zh"]::after, .cpc[lang|="zh"]::after {
+.codepicture[lang|="zh"]:not(.nosuff)::after, .cpc[lang|="zh"]:not(.nosuff)::after {
     /* Ensure more-or-less even vertical position of codepoint */
     content: "　";
     font-family: Noto Serif CJK TC, Source Han Serif TC, Noto Sans CJK TC, Source Han Sans TC, BabelStone Han, serif;
@@ -117,7 +117,7 @@ thead:first-of-type th:first-child {
     font-family: TakaoPMincho, IPAPMincho, Noto Serif CJK JP, Source Han Serif JP, TakaoPGothic, IPAPGothic, Noto Sans CJK JP, Source Han Sans JP, Yu Gothic, BabelStone Han, serif;
     font-size: 1.5rem;
 }
-.codepicture[lang|="ko"]::after, .cpc[lang|="ko"]::after {
+.codepicture[lang|="ko"]:not(.nosuff)::after, .cpc[lang|="ko"]:not(.nosuff)::after {
     /* Ensure more-or-less even vertical position of codepoint */
     content: "　";
     font-family: Noto Serif CJK KR, Source Han Serif KR, Noto Sans CJK KR, Source Han Sans KR, TakaoPMincho, IPAPMincho, TakaoPGothic, IPAPGothic, Yu Gothic, BabelStone Han, serif;

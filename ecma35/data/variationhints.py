@@ -176,12 +176,15 @@ applesinglehints = {
     # Typographical rockets (mapped direct to PUA by Apple):
     (0xF848,): (0x1F66C, 0xF87A), # White leftward heavy rocket
     (0xF849,): (0x1F66E, 0xF87A), # White rightward heavy rocket
-    (0xF84A,): (0x1F66C,), # Leftward lozenge-tipped rocket
-    (0xF84B,): (0x1F66E,), # Rightward lozenge-tipped rocket
+    (0xF84A,): (0x1F66C,), # Leftward lozenge-tipped rocket or bowed arrow
+    (0xF84B,): (0x1F66E,), # Rightward lozenge-tipped rocket or bowed arrow
     #
     # Broadcast (ripple) arrows (not exactly speakers but close enough darnit)
     (0xF846,): (0x1F56A, 0xF87F), # Pointing and broadcasting to left
     (0xF847,): (0x1F50A, 0xF87F), # Pointing and broadcasting to right
+    #
+    # White left-right arrow (is blatantly U+2B04, though not commented as a Unicode 4.0 alt)
+    (0x21D4, 0xF879): (0x2B04,),
     #
     # ==== NON-ARROWS: ====
     #
@@ -206,12 +209,12 @@ applesinglehints = {
     (0xFF0A, 0xF87F): (0x3000, 0x20F0), # High asterisk
     (0x2206, 0xF87F): (0x1D71F,), # Medium-bold oblique capital delta
     #
-    # Avoid variation hints on the alternate versions of manicules by mapping to
+    # Avoid transcoding hints on the alternate versions of manicules by mapping to
     #   backhand (even though they are usually just shown as bigger versions):
-    (0x261C, 0xF87F): (0x1F448,),  # White hexagon
-    (0x261D, 0xF87F): (0x1F446,), # Outlined black lozenge
-    (0x261E, 0xF87F): (0x1F449,), # Medium-bold white circle
-    (0x261F, 0xF87F): (0x1F447,), # Medium-bold white square
+    (0x261C, 0xF87F): (0x1F448, 0xFE0E),
+    (0x261D, 0xF87F): (0x1F446, 0xFE0E),
+    (0x261E, 0xF87F): (0x1F449, 0xFE0E),
+    (0x261F, 0xF87F): (0x1F447, 0xFE0E),
     #
     # Special cases
     # Record mark; combining sequence does not render, U+29E7 was already in v3.2.
@@ -226,6 +229,7 @@ applesinglehints = {
     #   variant).
     (0xF807,): (0x260F, 0xF87F),
     (0x27E1, 0x20DD): (0x2BCE, 0x20DD), # The newer ⯎ is a more appropriate relative size than ⟡
+    (0x203C, 0xF87F): (0x203C, 0xFE0F), # Honestly that's good enough.
     #
     # Some direct PUA mappings used by MacKorean but no longer needed
     (0xF80A,): (0x1F668,), # "Two interwoven eye shapes" (basically a variant quilt square)
@@ -274,14 +278,7 @@ applesinglehints = {
 applesinglehints_nishikiteki = applesinglehints.copy()
 applesinglehints_nishikiteki.update({
     #
-    # White arrows in black square:
-    (0x21e6, 0x20DE): (0xE3F5,),
-    (0x21e7, 0x20DE): (0xE3F6,),
-    (0x21e8, 0x20DE): (0xE3F7,),
-    (0x21e9, 0x20DE): (0xE3F8,),
-    #
     (0x25B4, 0x20E4): (0xF6E8,), # Black triangle in triangle
-    (0x25B2, 0x20DD): (0xF6ED,), # Black triangle in circle
     #
     # Apple PUA actually included in Nishiki-teki (override inferior approximations in the other dict)
     (0xF807,): (0xF807,), # Telephone dial
@@ -291,51 +288,16 @@ applesinglehints_nishikiteki.update({
     (0xF847,): (0xF847,), # Pointing and broadcasting to right
     (0xF848,): (0xF848,), # White leftward heavy rocket
     (0xF849,): (0xF849,), # White rightward heavy rocket
-    (0xF84A,): (0xF84A,), # Leftward lozenge-tipped rocket
-    (0xF84B,): (0xF84B,), # Rightward lozenge-tipped rocket
+    (0xF84A,): (0xF84A,), # Leftward lozenge-tipped rocket or bowed arrow
+    (0xF84B,): (0xF84B,), # Rightward lozenge-tipped rocket or bowed arrow
     #
     (0xF8FF, 0xF87F): (0xF89E,), # White Apple logo
-    (0x203C, 0xF87F): (0xF007B,),
     #
     # White rounded-stroke arrows
     (0x2190, 0xF875): (0xF00CD,),
     (0x2191, 0xF875): (0xF00CE,),
     (0x2192, 0xF875): (0xF00CA,),
     (0x2193, 0xF875): (0xF00CF,),
-    #
-    # Boxed West-Arabic Numerals
-    (0x0030, 0x20DE): (0xF06E0,),
-    (0x0030, 0x20DE, 0xF87F): (0x0030, 0x20DE,),
-    (0x0031, 0x20DE): (0xF06E1,),
-    (0x0031, 0x20DE, 0xF87F): (0x0031, 0x20DE,),
-    (0x0032, 0x20DE): (0xF06E2,),
-    (0x0032, 0x20DE, 0xF87F): (0x0032, 0x20DE,),
-    (0x0033, 0x20DE): (0xF06E3,),
-    (0x0033, 0x20DE, 0xF87F): (0x0033, 0x20DE,),
-    (0x0034, 0x20DE): (0xF06E4,),
-    (0x0034, 0x20DE, 0xF87F): (0x0034, 0x20DE,),
-    (0x0035, 0x20DE): (0xF06E5,),
-    (0x0035, 0x20DE, 0xF87F): (0x0035, 0x20DE,),
-    (0x0036, 0x20DE): (0xF06E6,),
-    (0x0036, 0x20DE, 0xF87F): (0x0036, 0x20DE,),
-    (0x0037, 0x20DE): (0xF06E7,),
-    (0x0037, 0x20DE, 0xF87F): (0x0037, 0x20DE,),
-    (0x0038, 0x20DE): (0xF06E8,),
-    (0x0038, 0x20DE, 0xF87F): (0x0038, 0x20DE,),
-    (0x0039, 0x20DE): (0xF06E9,),
-    (0x0039, 0x20DE, 0xF87F): (0x0039, 0x20DE,),
-    #
-    # Boxed West-Arabic Numerals (negative)
-    (0x0030, 0x20DE, 0xF87A): (0xF0740,),
-    (0x0031, 0x20DE, 0xF87A): (0xF0741,),
-    (0x0032, 0x20DE, 0xF87A): (0xF0742,),
-    (0x0033, 0x20DE, 0xF87A): (0xF0743,),
-    (0x0034, 0x20DE, 0xF87A): (0xF0744,),
-    (0x0035, 0x20DE, 0xF87A): (0xF0745,),
-    (0x0036, 0x20DE, 0xF87A): (0xF0746,),
-    (0x0037, 0x20DE, 0xF87A): (0xF0747,),
-    (0x0038, 0x20DE, 0xF87A): (0xF0748,),
-    (0x0039, 0x20DE, 0xF87A): (0xF0749,),
     #
     # Boxed Chinese numerals with more than one character (so combining square not possible)
     (0xF862, 0x005B, 0x5341, 0x4E00, 0x005D): (0xF07D0,),
@@ -358,48 +320,6 @@ applesinglehints_nishikiteki.update({
     (0xF863, 0x005B, 0x5341, 0x4E5D, 0x005D): (0xF07D8, 0xF87A),
     (0xF862, 0x005B, 0x4E8C, 0x5341, 0x005D): (0xF07D9,),
     (0xF863, 0x005B, 0x4E8C, 0x5341, 0x005D): (0xF07D9, 0xF87A),
-    #
-    # Encircled hanzi
-    (0x5927, 0x20DD): (0xF0A32,),
-    (0x5C0F, 0x20DD): (0xF0A33,),
-    (0x63A7, 0x20DD): (0xF0A34,),
-    (0x8ABF, 0x20DD): (0xF0A35,),
-    (0x526F, 0x20DD): (0xF0A36,),
-    (0x6E1B, 0x20DD): (0xF0A37,),
-    (0x6A19, 0x20DD): (0xF0A38,),
-    (0x6B20, 0x20DD): (0xF0A39,),
-    (0x57FA, 0x20DD): (0xF0A3A,),
-    (0x51FA, 0x20DD): (0xF0A3B,),
-    (0x6E08, 0x20DD): (0xF0A3C,),
-    (0x5897, 0x20DD): (0xF0A3D,),
-    (0x7B54, 0x20DD): (0xF0A3E,),
-    (0x4F8B, 0x20DD): (0xF0A3F,),
-    (0x96FB, 0x20DD): (0xF0A40,),
-    (0x5E74, 0x20DD): (0xF0A41,),
-    (0x51A0, 0x20DD): (0xF0A42,),
-    (0x8863, 0x20DD): (0xF0A43,),
-    (0x672B, 0x20DD): (0xF0A44,),
-    (0x611F, 0x20DD): (0xF0A45,),
-    (0x6163, 0x20DD): (0xF0A46,),
-    (0x4EE3, 0x20DD): (0xF0A47,),
-    (0x52D5, 0x20DD): (0xF0A48,),
-    (0x53CD, 0x20DD): (0xF0A49,),
-    (0x81EA, 0x20DD): (0xF0A4A,),
-    (0x524D, 0x20DD): (0xF0A4B,),
-    (0x63A5, 0x20DD): (0xF0A4C,),
-    (0x52A9, 0x20DD): (0xF0A4D,),
-    (0x53C3, 0x20DD): (0xF0A4E,),
-    (0x672C, 0x20DD): (0xF0A4F,),
-    (0x65B0, 0x20DD): (0xF0A50,),
-    (0x73FE, 0x20DD): (0xF0A51,),
-    (0x5F62, 0x20DD): (0xF0A52,),
-    (0x9593, 0x20DD): (0xF0A53,),
-    (0x570B, 0x20DD): (0xF0A54,),
-    (0x4ED6, 0x20DD): (0xF0A55,),
-    (0x329E, 0xF87F): (0xF0A56,),
-    #
-    (0xF861, 0x2020, 0x2020, 0x2020): (0xFEE2A,), # Three daggers
-    (0xF860, 0x2020, 0x2020): (0xFEE2B,), # Two daggers
 })
 
 # Not sure where to put this observation, but MacKorean's U+25B4+20E4 is basically DPRK's mountain ahead.
@@ -474,9 +394,12 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
         print("<span class='cpc spua' lang={}>".format(lang), file=outfile)
         strep = "".join(chr(j) for j in i)
     elif 0xF860 <= i[0] < 0xF865 and len(i) != 1:
-        print("<span class='cpc' lang={}>".format(lang), file=outfile)
         strep = "".join(chr(j) for j in i[1:]).replace("\uF860", "").replace("\uF861", 
                 "").replace("\uF862", "").replace("\uF863", "").replace("\uF864", "")
+        classes = "cpc"
+        if len(strep) > 2:
+            classes += " nosuff"
+        print("<span class='{}' lang={}>".format(classes, lang), file=outfile)
     elif 0xF865 <= i[0] < 0xF867 and len(i) != 1:
         sequence_inverse = True
         print("<span class='cpc' lang={}>".format(lang), file=outfile)
