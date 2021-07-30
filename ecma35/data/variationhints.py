@@ -208,7 +208,6 @@ applesinglehints = {
     (0x534D, 0xF87F): (0x0FD6,),  # Manji as a non-kanji
     (0xFF0A, 0xF87F): (0x3000, 0x20F0), # High asterisk
     (0x2206, 0xF87F): (0x1D71F,), # Medium-bold oblique capital delta
-    (0x2314, 0xF87F): (0x29A1,), # Angle or sector opening upward
     #
     # Avoid transcoding hints on the alternate versions of manicules by mapping to
     #   backhand (even though they are usually just shown as bigger versions):
@@ -237,6 +236,7 @@ applesinglehints = {
     (0xF80B, 0xF87F): (0x1F66B,), # Less so, but may as well commit to it
     (0xF83D,): (0x269C,), # Fleur de lis
     (0xF83D, 0xF87F): (0x269C, 0xF87F), # Alternate fleur de lis
+    (0xF840,): (0x2051, 0x20F0), # Three vertical asterisks
     (0xF842,): (0x2B4D,), # Downward wave arrow (not exactly, but better than PUA)
     (0xF844,): (0x2B9C,), # Leftward arrowhead
     (0xF84C,): (0x2B20,), # White pentagon
@@ -289,8 +289,6 @@ applesinglehints_mackorean.update({
     (0x2794,): (0x1F872,),
     (0x27A1,): (0x2B95,),
     (0x27A4,): (0x2B9E,),
-    # Record mark; combining sequence does not render, U+29E7 was already in v3.2.
-    (0x3D, 0x20D2): (0x29E7,), 
     # The newer ⯎ is a more appropriate relative size than ⟡
     (0x27E1, 0x20DD): (0x2BCE, 0x20DD),
     #
@@ -304,6 +302,14 @@ applesinglehints_mackorean.update({
     (0x29C8, 0x20DE): (0x1F796,), # Square target
     # The group mark does now exist, although it's a recent (v10) addition:
     (0x2261, 0x20D2): (0x2BD2,), # Group mark
+    #
+    # (0x5370, 0x20DD) vs (0x329E,) are a special case (used for different duplicates)
+    # (0x329E, 0xF87F) is already used for the dotted one.
+    #
+    # Special cases of characters that were *already in Unicode 3.2 as it transpires*
+    (0x3D, 0x20D2): (0x29E7,), # Record mark (⧧)
+    (0x6CE8, 0x20DD): (0x329F,), # ㊟
+    (0x2314, 0xF87F): (0x29A1,), # Angle or sector opening upward, not a white closed sector shape
 })
 
 applesinglehints_mackorean_nishikiteki = applesinglehints_mackorean.copy()
@@ -320,7 +326,9 @@ applesinglehints_mackorean_nishikiteki.update({
     #
     # Apple PUA actually included in Nishiki-teki (override inferior approximations in the other dict)
     (0xF807,): (0xF807,), # Telephone dial
+    (0xF80B,): (0xF80B,), # Four pointed flower or quilt square
     (0xF80A,): (0xF80A,), # Two interwoven eye shapes
+    (0xF840,): (0xF840,), # Three vertical asterisks
     (0xF842,): (0xF842,), # Downward wave arrow
     (0xF846,): (0xF846,), # Pointing and broadcasting to left
     (0xF847,): (0xF847,), # Pointing and broadcasting to right

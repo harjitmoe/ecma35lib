@@ -484,8 +484,11 @@ def dump_plane(outfile, planefunc, kutenfunc,
                menuurl=None, menuname="Up to menu", jlfunc=None, 
                lasturl=None, nexturl=None, lastname=None, nextname=None,
                is_96=False, is_sbcs=False, pua_collides=False, blot="",
-               unicodefunc=_default_unicodefunc, big5ext_mode=False, siglum=None, showbmppua=False):
+               unicodefunc=_default_unicodefunc, big5ext_mode=False,
+               siglum=None, showbmppuas=None):
     """Dump an HTML mapping comparison."""
+    if showbmppuas == None:
+        showbmppuas = (False,) * len(plarray)
     stx, edx = (1, 95) if not is_96 else (0, 96)
     if is_sbcs:
         stx = 1 if not is_96 else 0
@@ -502,10 +505,10 @@ def dump_plane(outfile, planefunc, kutenfunc,
                   (None,) * len(j[stpt:edpt]))]
     if len(nonvacant_sets) == 1:
         return dump_preview(outfile, planefunc(number), kutenfunc, number, 
-               nonvacant_sets[0][1], lang=lang, css=css, part=part, jlfunc=jlfunc,
-               menuurl=menuurl, menuname=menuname, lasturl=lasturl, 
-               nexturl=nexturl, lastname=lastname, nextname=nextname,
-               is_96=is_96, is_sbcs=is_sbcs, blot=blot)
+               nonvacant_sets[0][1], lang = lang, css = css, part = part, jlfunc = jlfunc,
+               menuurl = menuurl, menuname = menuname, lasturl = lasturl, 
+               nexturl = nexturl, lastname = lastname, nextname = nextname,
+               is_96 = is_96, is_sbcs = is_sbcs, blot = blot, showbmppua = showbmppuas[0])
     setnames2 = tuple(zip(*nonvacant_sets))[0] if nonvacant_sets else ()
     zplarray = tuple(zip(*tuple(zip(*nonvacant_sets))[1])) if nonvacant_sets else ()
     h = ", part {:d}".format(part) if part else ""
@@ -570,6 +573,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
                 print("<a href='#{:d}.{:d}.{:d}'>".format(number, row, cell), file=outfile)
                 print(kutenfunc(number, row, cell), "</a>", file=outfile)
             for colno, i in enumerate(st):
+                showbmppua = showbmppuas[colno]
                 if i is None:
                     print("<td class=udf>", file=outfile)
                     continue

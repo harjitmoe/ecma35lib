@@ -11,11 +11,12 @@ from ecma35.data.multibyte import korea, cellemojidata
 from ecma35.data import graphdata, showgraph
 import json, os
 
-plane1 = (1, ("UTC<br>Ported old", "UTC<br>New files", "MS/HTML5", "Macintosh"), [
+plane1 = (1, ("Old UTC<br>Ported to 2.0", "Macintosh", "MS/New UTC<br>Unicode 2.0", "MS/HTML5<br>Euro Update", "2002"), [
           graphdata.gsets["ir149-altutc"][2],
+          graphdata.gsets["ir149-mac"][2],
           graphdata.gsets["ir149"][2],
           graphdata.gsets["ir149-1998"][2],
-          graphdata.gsets["ir149-mac"][2],
+          graphdata.gsets["ir149-2002"][2],
 ])
 
 plane2 = (2, ("Apple<br>Unicode 3.2", "Apple<br>Unicode 4.0", "Updated", "Updated<br>Nishiki-teki"), [
@@ -97,7 +98,7 @@ for n, p in enumerate([plane1, plane2]):
                              menuurl="/ksc-conc.html", menuname="Wansung code variant comparison",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
                              annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True,
-                             pua_collides=True, showbmppua=(bn == 2))
+                             pua_collides=True, showbmppuas=None if (bn != 2) else (0, 0, 0, 1))
         f.close()
 
 
