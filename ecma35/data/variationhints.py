@@ -43,11 +43,11 @@ applesinglehints = {
     # This is a hints-to-hints without any newer codepoints, purely for convenience.
     (0x2192, 0xF875): (0x279C, 0xF87A),
     #
-    # Bold kite-headed arrows:
-    (0x2190, 0xF878): (0x1F878, 0xF87F),
-    (0x2191, 0xF878): (0x1F879, 0xF87F),
-    (0x2192, 0xF878): (0x1F87A, 0xF87F),
-    (0x2193, 0xF878): (0x1F87B, 0xF87F),
+    # Bold kite-headed arrows (closer approximation):
+    (0x2190, 0xF878): (0x1F878,),
+    (0x2191, 0xF878): (0x1F879,),
+    (0x2192, 0xF878): (0x1F87A,),
+    (0x2193, 0xF878): (0x1F87B,),
     #
     # Heavy barbed arrows:
     (0x2190, 0xF879): (0x1F880,),
@@ -89,9 +89,6 @@ applesinglehints = {
     (0x21e9, 0xf879): (0x1F847, 0xF87A),
     #
     # Bold triangle-headed arrows (Zapf U+27A1):
-    # Note: MacKorean (HangulTalk) uses U+27A1 to map the right arrow.
-    #   MacJapanese (KanjiTalk 7) doen't by default (so, map it to U+2B95).
-    #   Don't map the sequence to U+27A1: it already existed (v1.x).
     (0x21e6, 0xf87a): (0x2b05,), # ⬅
     (0x21e7, 0xf87a): (0x2b06,), # ⬆
     (0x21e8, 0xf87a): (0x2b95,), # ⮕
@@ -188,23 +185,15 @@ applesinglehints = {
     #
     # ==== NON-ARROWS: ====
     #
-    # Kludgy unrenderable combining sequences with properly defined alternatives:
-    (0x25B3, 0x20DD): (0x1F7D5,), # White triangle in white circle
-    (0x25C7, 0x20DE): (0x26CB,), # Diamond in square (added eventually from ARIB)
-    (0x25C7, 0x20DF): (0x1F79C,), # Two-ringed diamond target
-    (0x25C7, 0x20DF, 0x20DF): (0x1F79C, 0xF87F), # Three-ringed diamond target
-    (0x25C9, 0x20DD): (0x1F78B,), # Circular target (black bullseye)
-    (0x25CE, 0x20DD): (0x1F78B, 0xF87F), # Circular target (white bullseye)
-    (0x29C8, 0x20DE): (0x1F796,), # Square target
-    # The group mark does now exist, although it's a recent (v10) addition:
-    (0x2261, 0x20D2): (0x2BD2,), # Group mark
-    #
     # MacKorean hint sequences which have since gotten unique representations:
     (0x2394, 0xF876): (0x2B21,),  # White hexagon
     # Lozenges
-    (0x25C8, 0xF87F): (0x1F7A0,), # Outlined black lozenge
+    (0x25C6, 0xF879): (0x2BC1,), # Another black diamond besides the Wansung one
+    (0x25C7, 0xF879): (0x2B28,), # Another white diamond besides the Wansung one
+    (0x25C7, 0xF87B): (0x2B26,), # Yet another white diamond; not a great match, but by elimination
     (0x25C7, 0xF87C): (0x1F754,), # Small diamond
     (0x25C7, 0xF87F): (0x2B2B,), # Lozenge as a member of a series of small-ish geometry icons
+    (0x25C8, 0xF87F): (0x1F7A0,), # Outlined black lozenge
     # Circles
     (0x25EF, 0xF87C): (0x1F785,), # Medium-bold white circle
     (0x25CB, 0xF87B): (0x1F786,), # Bold white circle
@@ -219,6 +208,7 @@ applesinglehints = {
     (0x534D, 0xF87F): (0x0FD6,),  # Manji as a non-kanji
     (0xFF0A, 0xF87F): (0x3000, 0x20F0), # High asterisk
     (0x2206, 0xF87F): (0x1D71F,), # Medium-bold oblique capital delta
+    (0x2314, 0xF87F): (0x29A1,), # Angle or sector opening upward
     #
     # Avoid transcoding hints on the alternate versions of manicules by mapping to
     #   backhand (even though they are usually just shown as bigger versions):
@@ -228,8 +218,6 @@ applesinglehints = {
     (0x261F, 0xF87F): (0x1F447, 0xFE0E),
     #
     # Special cases
-    # Record mark; combining sequence does not render, U+29E7 was already in v3.2.
-    (0x3D, 0x20D2): (0x29E7,), 
     # Small white square: was already present so unclear why it wasn't used anywhere in the mapping
     (0x25A1, 0xF87C): (0x25AB,),
     # White florette: 0xA67B corresponds to Adobe-Japan1 CID-12228, which maps
@@ -241,7 +229,6 @@ applesinglehints = {
     #   U+1F57F are expressly keyed, while U+260E is often displayed as a keyed
     #   variant).
     (0xF807,): (0x260F, 0xF87F),
-    (0x27E1, 0x20DD): (0x2BCE, 0x20DD), # The newer ⯎ is a more appropriate relative size than ⟡
     (0x203C, 0xF87F): (0x203C, 0xFE0F), # Honestly that's good enough.
     #
     # Some direct PUA mappings used by MacKorean but no longer needed
@@ -250,7 +237,7 @@ applesinglehints = {
     (0xF80B, 0xF87F): (0x1F66B,), # Less so, but may as well commit to it
     (0xF83D,): (0x269C,), # Fleur de lis
     (0xF83D, 0xF87F): (0x269C, 0xF87F), # Alternate fleur de lis
-    (0xF842,): (0x2B5A,), # Downward wave arrow (not exactly, but better than PUA)
+    (0xF842,): (0x2B4D,), # Downward wave arrow (not exactly, but better than PUA)
     (0xF844,): (0x2B9C,), # Leftward arrowhead
     (0xF84C,): (0x2B20,), # White pentagon
     (0xF84D,): (0x23E2,), # Trapezoid
@@ -288,8 +275,39 @@ applesinglehints = {
     (0xF8FE,): (0x23AD,), # }3
 }
 
-applesinglehints_nishikiteki = applesinglehints.copy()
-applesinglehints_nishikiteki.update({
+# Contains updating changes to sequences without hints, hence it is specific
+#   to the intention of MacKorean rather than for all things with hints.
+applesinglehints_mackorean = applesinglehints.copy()
+applesinglehints_mackorean.update({
+    # U+2939 is rarely shown pointing in the intended direction (per FileFormat, PragmataPro is an
+    #   exception to this). Usually it transitions from SW to point SE, not the intended W to S.
+    (0x2939,): (0x2BAE, 0xF87F),
+    # Rightward arrows where the rightward member of the later-added full set is disunified from
+    #   rightward-only Zapf arrow that Apple maps to:
+    (0x279E,): (0x1F80A,),
+    (0x27B2,): (0x2B8A,),
+    (0x2794,): (0x1F872,),
+    (0x27A1,): (0x2B95,),
+    (0x27A4,): (0x2B9E,),
+    # Record mark; combining sequence does not render, U+29E7 was already in v3.2.
+    (0x3D, 0x20D2): (0x29E7,), 
+    # The newer ⯎ is a more appropriate relative size than ⟡
+    (0x27E1, 0x20DD): (0x2BCE, 0x20DD),
+    #
+    # Kludgy unrenderable combining sequences with properly defined alternatives:
+    (0x25B3, 0x20DD): (0x1F7D5,), # White triangle in white circle
+    (0x25C7, 0x20DE): (0x26CB,), # Diamond in square (added eventually from ARIB)
+    (0x25C7, 0x20DF): (0x1F79C,), # Two-ringed diamond target
+    (0x25C7, 0x20DF, 0x20DF): (0x1F79C, 0xF87F), # Three-ringed diamond target
+    (0x25C9, 0x20DD): (0x1F78B,), # Circular target (black bullseye)
+    (0x25CE, 0x20DD): (0x1F78B, 0xF87F), # Circular target (white bullseye)
+    (0x29C8, 0x20DE): (0x1F796,), # Square target
+    # The group mark does now exist, although it's a recent (v10) addition:
+    (0x2261, 0x20D2): (0x2BD2,), # Group mark
+})
+
+applesinglehints_mackorean_nishikiteki = applesinglehints_mackorean.copy()
+applesinglehints_mackorean_nishikiteki.update({
     #
     (0x25B4, 0x20E4): (0xF6E8,), # Black triangle in triangle
     #
@@ -304,7 +322,7 @@ applesinglehints_nishikiteki.update({
     (0xF84A,): (0xF84A,), # Leftward lozenge-tipped rocket or bowed arrow
     (0xF84B,): (0xF84B,), # Rightward lozenge-tipped rocket or bowed arrow
     #
-    (0xF8FF, 0xF87F): (0xF89E,), # White Apple logo
+    (0x329E, 0xF87F): (0xF0A56,), # Dotted circled "print" kanji
     #
     # Boxed Chinese numerals with more than one character (so combining square not possible)
     (0xF862, 0x005B, 0x5341, 0x4E00, 0x005D): (0xF07D0,),
@@ -378,9 +396,6 @@ def ahmap(pointer, ucs, applesinglehints=applesinglehints):
         except KeyError:
             return ucs
     return ucs
-
-def ahmap_nt(pointer, ucs):
-    return ahmap(pointer, ucs, applesinglehints_nishikiteki)
 
 def is_filled_character(ucs):
     name = namedata.get_ucsname(ucs, "")
@@ -661,6 +676,8 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
             print(f"<span class='fourwideliga{maybe_vertical}' style='font-size: {1.5 / halflen}rem;'>", file=outfile)
             print(strep2[:halflen] + "<br aria-hidden=true>" + strep2[halflen:], file=outfile)
             print("</span>", file=outfile)
+        elif strep != strep2 and len(strep2) == 1:
+            print(f"〾{strep2}", file=outfile)
         else:
             print(strep2, file=outfile)
     print("</span>", file=outfile)

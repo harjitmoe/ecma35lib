@@ -18,7 +18,10 @@ plane1 = (1, ("UTC<br>Ported old", "UTC<br>New files", "MS/HTML5", "Macintosh"),
           graphdata.gsets["ir149-mac"][2],
 ])
 
-plane2 = (2, ("ELEX",), [
+plane2 = (2, ("Apple<br>Unicode 3.2", "Apple<br>Unicode 4.0", "Updated", "Updated<br>Nishiki-teki"), [
+          graphdata.gsets["mac-elex-extras-unicode3_2"][2],
+          graphdata.gsets["mac-elex-extras-unicode4_0"][2],
+          graphdata.gsets["mac-elex-extras"][2],
           graphdata.gsets["mac-elex-extras-nishiki-teki"][2],
 ])
 
@@ -67,14 +70,14 @@ for n, i in enumerate(korea.rawmac):
     j = graphdata.gsets["ir149-mac"][2][n]
     if j != i:
         cdispmap[(n, j)] = i
-for n, i in enumerate(korea.rawelex):
+"""for n, i in enumerate(korea.rawelex):
     j = graphdata.gsets["mac-elex-extras-nishiki-teki"][2][n]
     if j != i:
-        cdispmap[(n + (94 * 94), j)] = i
+        cdispmap[(n + (94 * 94), j)] = i"""
 annots = {}
 
-for n, p in enumerate([plane1]):
-    for q in range(1, 7):
+for n, p in enumerate([plane1, plane2]):
+    for q in range(1, (7 if n != 1 else 2)):
         bn = n + 1
         f = open("kscplane{:X}{}.html".format(bn, chr(0x60 + q)), "w", encoding="utf-8")
         lasturl = lastname = nexturl = nextname = None
@@ -84,7 +87,7 @@ for n, p in enumerate([plane1]):
         elif bn > 1:
             lasturl = "kscplane{:X}f.html".format(bn - 1)
             lastname = "Wansung code, part 6"
-        if q < 6:
+        if q < (6 if bn != 2 else 1):
             nexturl = "kscplane{:X}{}.html".format(bn, chr(0x60 + q + 1))
             nextname = "{}, part {:d}".format("Wansung code" if (bn == 1) else "HangulTalk additional plane", q + 1)
         elif bn < 2:
@@ -93,16 +96,10 @@ for n, p in enumerate([plane1]):
         showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ko-KR", part=q, css="codechart.css",
                              menuurl="/ksc-conc.html", menuname="Wansung code variant comparison",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
-                             annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True)
+                             annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True,
+                             pua_collides=True, showbmppua=(bn == 2))
         f.close()
 
-f = open("kscplane2a.html", "w", encoding="utf-8")
-showgraph.dump_preview(f, "HangulTalk additional plane", kutenfunc, 2, 
-                       graphdata.gsets["mac-elex-extras-nishiki-teki"][2],
-                       planeshift = "1B4F", lang="ko-KR", part=1, css="codechart.css",
-                       menuurl="/ksc-conc.html", menuname="Wansung code variant comparison",
-                       lasturl="kscplane1f.html", lastname="Wansung code, part 6", showbmppua=True)
-f.close()
 
 
 

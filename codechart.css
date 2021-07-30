@@ -89,10 +89,8 @@ thead:first-of-type th:first-child {
     line-height: 2rem;
 }
 .codepicture[lang|="ko"].nobast, .cpc[lang|="ko"].nobast {
-    /* For hexagons (BabelStone Han/Shapes get two of them the wrong way around) */
+    /* For hexagons (BabelStone Han/Shapes got U+2B21 and U+2B22 the wrong way around) */
     font-family: Noto Serif CJK KR, Source Han Serif KR, Noto Sans CJK KR, Source Han Sans KR, TakaoPMincho, IPAPMincho, TakaoPGothic, IPAPGothic, TW-Sung-Ext-B, TW-Kai-Ext-B, Yu Gothic, DejaVu Sans, Quivira, FreeSerif, Noto Sans Symbols, Symbola, serif;
-    font-size: 1.5rem;
-    line-height: 2rem;
 }
 .codepicture.roman, .codepicture[lang|="en"], .codepicture span[lang|="en"], .cpc.roman, .cpc[lang|="en"], .cpc span[lang|="en"] {
     /* Noto Sans CJK TC renders the combining hacek as a large glyph to the letter's right,
@@ -247,11 +245,12 @@ ul.navbar li::after {
 }
 
 .inverse {
-    fill: white;
+    fill: none;
     stroke: black;
     stroke-width: 3px;
 }
 .darksquare .inverse, .darkcircle .inverse {
+    fill: white;
     stroke: white;
 }
 .cpc .charwrapper {
