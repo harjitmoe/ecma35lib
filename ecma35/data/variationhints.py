@@ -8,7 +8,7 @@
 
 # Detail regarding Apple-compatible versus up-to-date mappings
 
-import os, json, shutil
+import os, json, shutil, math
 import unicodedata as ucd
 from ecma35.data import gccdata
 from ecma35.data.multibyte import mbmapparsers as parsers
@@ -201,10 +201,21 @@ applesinglehints = {
     #
     # MacKorean hint sequences which have since gotten unique representations:
     (0x2394, 0xF876): (0x2B21,),  # White hexagon
+    # Lozenges
     (0x25C8, 0xF87F): (0x1F7A0,), # Outlined black lozenge
+    (0x25C7, 0xF87C): (0x1F754,), # Small diamond
+    (0x25C7, 0xF87F): (0x2B2B,), # Lozenge as a member of a series of small-ish geometry icons
+    # Circles
     (0x25EF, 0xF87C): (0x1F785,), # Medium-bold white circle
+    (0x25CB, 0xF87B): (0x1F786,), # Bold white circle
+    (0x25CF, 0xF879): (0x2B24,), # Black large circle
+    (0x25CB, 0xF879): (0x2B55, 0xFE0E),
+    # Squares
     (0x2610, 0xF87C): (0x1F78F,), # Medium-bold white square
+    (0x25A1, 0xF879): (0x2B1C, 0xFE0E), # Big white square
+    (0x25A1, 0xF87B): (0x1F790,), # Bold white square
     (0x2610, 0xF87F): (0x2B1A,),  # Dotted square
+    # Others
     (0x534D, 0xF87F): (0x0FD6,),  # Manji as a non-kanji
     (0xFF0A, 0xF87F): (0x3000, 0x20F0), # High asterisk
     (0x2206, 0xF87F): (0x1D71F,), # Medium-bold oblique capital delta
@@ -219,6 +230,8 @@ applesinglehints = {
     # Special cases
     # Record mark; combining sequence does not render, U+29E7 was already in v3.2.
     (0x3D, 0x20D2): (0x29E7,), 
+    # Small white square: was already present so unclear why it wasn't used anywhere in the mapping
+    (0x25A1, 0xF87C): (0x25AB,),
     # White florette: 0xA67B corresponds to Adobe-Japan1 CID-12228, which maps
     #   to U+2740. Apple maps it to U+273F+F87A since 0xA699 is already mapped to 
     #   U+2740.
@@ -487,6 +500,8 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
             print("<span class='cpc roman'>", file=outfile)
         elif strep.endswith("\u20E3"): # i.e. without a VS16 after
             print("<span class='cpc nishiki' lang={}>".format(lang), file=outfile)
+        elif strep == "\u2B21":
+            print("<span class='cpc nobast' lang={}>".format(lang), file=outfile)
         else:
             print("<span class=cpc lang={}>".format(lang), file=outfile)
     strep = strep.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
@@ -640,6 +655,12 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
         elif ucd.normalize("NFC", strep2) != strep2:
             # Not strictly supposed to have non-NFC verbatim characters in HTML (escape them).
             print(strep2.encode("ascii", errors="xmlcharrefreplace").decode("ascii"), file=outfile)
+        elif len(strep2) >= 3 and all(namedata.east_asian_width(ii) == "W" for ii in strep2):
+            halflen = math.ceil(len(strep2) / 2)
+            maybe_vertical = " vertical" if i[0] == 0xF863 else ""
+            print(f"<span class='fourwideliga{maybe_vertical}' style='font-size: {1.5 / halflen}rem;'>", file=outfile)
+            print(strep2[:halflen] + "<br aria-hidden=true>" + strep2[halflen:], file=outfile)
+            print("</span>", file=outfile)
         else:
             print(strep2, file=outfile)
     print("</span>", file=outfile)

@@ -353,6 +353,27 @@ def lookup_shortcode(name, default=_no_default, *, fallback=True):
         raise KeyError("unrecognised shortcode: {!r}".format(name))
     return default
 
+eaw_ranges = dict()
+with open(os.path.join(directory, "UCD/DerivedEastAsianWidth.txt"), "r") as f:
+    for _row in f:
+        if _row.strip() and _row[0] != "#":
+            _rang, _status = _row.split("#", 1)[0].strip().split(";")
+            _rang = _rang.strip()
+            _status = _status.strip()
+            if ".." in _rang:
+                _first, _last = [int(i, 16) for i in _rang.split("..")]
+            else:
+                _first = _last = int(_rang, 16)
+            eaw_ranges[_first] = _status
+            if (_last + 1) not in eaw_ranges: # i.e. can be overwritten but will not overwrite
+                eaw_ranges[_last + 1] = "N" # default to neutral (N)
+eaw_starts = sorted(eaw_ranges.keys())
+def east_asian_width(ucs):
+    for n, i in enumerate(eaw_starts):
+        if i > ord(ucs):
+            return eaw_ranges[eaw_starts[n - 1]]
+    return eaw_ranges[eaw_starts[-1]]
+
 def test():
     for i in range(0x30000):
         c = chr(i)

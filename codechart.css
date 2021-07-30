@@ -88,6 +88,12 @@ thead:first-of-type th:first-child {
     font-size: 1.5rem;
     line-height: 2rem;
 }
+.codepicture[lang|="ko"].nobast, .cpc[lang|="ko"].nobast {
+    /* For hexagons (BabelStone Han/Shapes get two of them the wrong way around) */
+    font-family: Noto Serif CJK KR, Source Han Serif KR, Noto Sans CJK KR, Source Han Sans KR, TakaoPMincho, IPAPMincho, TakaoPGothic, IPAPGothic, TW-Sung-Ext-B, TW-Kai-Ext-B, Yu Gothic, DejaVu Sans, Quivira, FreeSerif, Noto Sans Symbols, Symbola, serif;
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
 .codepicture.roman, .codepicture[lang|="en"], .codepicture span[lang|="en"], .cpc.roman, .cpc[lang|="en"], .cpc span[lang|="en"] {
     /* Noto Sans CJK TC renders the combining hacek as a large glyph to the letter's right,
      * for some reason (i.e. as if it were the spacing character). So don't list it.
@@ -156,7 +162,13 @@ abbr[title*="Private"] {
     writing-mode: tb-rl;
     writing-mode: vertical-rl;
     display: inline-block;
-    width: 1em;
+    width: 1.5rem;
+}
+.fourwideliga {
+    line-height: 1em;
+    display: inline-block;
+    user-select: all;
+    font-weight: 600;
 }
 [lang|="ja"] .vertical {
     /* Noto Serif CJK seems not actually to use vertical glyphs here for some reason?
@@ -169,7 +181,7 @@ abbr[title*="Private"] {
     width: 1em;
 }
 
-.taegeuk {
+[lang|="ko"] .taegeuk {
     /*
      * The MacKorean mappings' variation hint sequences for the taeguek assume that the Unicode character is
      * rendered as in its code charts (yang above yin, like MacKorean 0xA693) as opposed to being rendered
