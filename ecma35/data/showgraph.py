@@ -13,24 +13,24 @@ from ecma35.data.names import namedata
 
 def to_link(maybe_siglum, default_siglum, men, ku, ten):
     siglum = maybe_siglum or default_siglum
-    basename = {"CNS": "../cnstables/cnsplane", "JIS": "../jistables2/jisplane",
-                "EACC": "../eacctables/ccciiplane", "CCCII": "../eacctables/ccciiplane",
-                "KSC": "../wansungtables/kscplane"}[siglum]
     omen, oku, oten = men, ku, ten
+    part_zi = int(ku, 10) // 16
     if siglum == "CNS" and men == "Ψ":
         basename = "../cnstables/b5xplane"
+        men = "1"
         if ku <= 65:
             part_zi = (int(ku, 10) - 1) // 16
         elif ku <= 72:
             part_zi = 4
         else:
             part_zi = 5
-        men = "1"
     elif siglum == "KSC" and men == "Ψ":
-        part_zi = int(ku, 10) // 16
-        men = "5"
+        basename = "../wansungtables/htxplane"
+        men = "1"
     else:
-        part_zi = int(ku, 10) // 16
+        basename = {"CNS": "../cnstables/cnsplane", "JIS": "../jistables2/jisplane",
+                    "EACC": "../eacctables/ccciiplane", "CCCII": "../eacctables/ccciiplane",
+                    "KSC": "../wansungtables/kscplane"}[siglum]
         men = men.lstrip("0")
     ku = ku.lstrip("0")
     ten = ten.lstrip("0")

@@ -14,13 +14,12 @@
     /* format() are "woff", "woff2", "truetype" (not "ttf"), "opentype", "embedded-opentype", "svg" */
     src: local('HanaMinB'), local('HanaMinB-Regular'), url('https://harjit.moe/fonts/hanazono/HanaMinB.woff2') format('woff2');
 }
+
 /* Sadly border-collapse: collapse; borks the borders on the position: sticky; */
 table {
     border-spacing: 0;
     margin-left: auto;
     margin-right: auto;
-    background: white;
-    color: black;
 }
 th, td {
     border-right: 1px solid black;
@@ -53,6 +52,9 @@ th:first-child {
     position: sticky;
     left: 0;
     z-index: 10;
+}
+.undefined, .udf {
+	height: 3rem;
 }
 thead:first-of-type th, thead:first-of-type td {
     border-top: 1px solid black;
@@ -127,6 +129,11 @@ thead:first-of-type th:first-child {
     font-family: Noto Serif CJK KR, Source Han Serif KR, Noto Sans CJK KR, Source Han Sans KR, TakaoPMincho, IPAPMincho, TakaoPGothic, IPAPGothic, Yu Gothic, BabelStone Han, serif;
     font-size: 1.5rem;
 }
+
+table {
+    background: white;
+    color: black;
+}
 .pua, .ivind {
     color: dimgray;
 }
@@ -143,6 +150,126 @@ thead:first-of-type th:first-child {
     color: #900;
     font-weight: 600;
 }
+.collision, .collision th, .collision td, .cln, .cln th, .cln td {
+    background: #f99;
+}
+.undefined, .udf, .collision .undefined, .cln .udf {
+    background: #999;
+	height: 3rem;
+}
+.annotation, .annotation th, .annotation td {
+    background: beige;
+}
+.inverse {
+    fill: none;
+    stroke: black;
+    stroke-width: 3px;
+}
+.darksquare .inverse, .darkcircle .inverse {
+    fill: white;
+    stroke: white;
+}
+.collision .darksquare .inverse, .collision .darkcircle .inverse, .cln .darksquare .inverse, .cln .darkcircle .inverse {
+    fill: #f99;
+    stroke: #f99;
+}
+.lightsquare {
+    border-color: black;
+}
+.lightcircle {
+    border-color: black;
+}
+.cpc .charwrapper.lightdiamond .enclosure, .cpc .charwrapper.lighttriangle .enclosure {
+    stroke: black;
+}
+.darksquare {
+    background: black;
+}
+.darkcircle {
+    background: black;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: black;
+        color: silver;
+    }
+    table {
+        color: #eee;
+    }
+    table, th, td, thead:first-of-type th, th:first-child, td:first-child {
+        border-color: white;
+        background: dimgray;
+    }
+    .pua, .ivind {
+        color: silver;
+    }
+    .control { /* For the JIS X 0201 chart. */
+        color: #060;
+    }
+    .bestfit { /* For the JIS X 0201 chart. */
+        color: #009; 
+    }
+    .pua.bestfit {  /* For the JIS X 0201 chart. */
+        color: #66f; 
+    }
+    .puacdpt {
+        color: #f99;
+        font-weight: 600;
+    }
+    .collision, .collision th, .collision td, .cln, .cln th, .cln td {
+        background: #966;
+    }
+    .undefined, .udf, .collision .undefined, .cln .udf {
+        background: black;
+	    height: 3rem;
+    }
+    .annotation, .annotation th, .annotation td {
+        background: #540;
+    }
+    a:link {
+        color: #66c;
+    }
+    a:visited {
+        color: #c6c;
+    }
+    a:hover {
+        color: #99f;
+    }
+    a:active {
+        color: #f99;
+    }
+    .inverse {
+        stroke: #eee;
+    }
+    .darksquare .inverse, .darkcircle .inverse {
+        fill: dimgray;
+        stroke: dimgray;
+    }
+    .collision .darksquare .inverse, .collision .darkcircle .inverse, .cln .darksquare .inverse, .cln .darkcircle .inverse {
+        fill: #966;
+        stroke: #966;
+    }
+    .lightsquare {
+        border-color: #eee;
+    }
+    .lightcircle {
+        border-color: #eee;
+    }
+    :not(*|mask, *|clipPath)>*|text {
+        fill: #eee;
+    }
+    .cpc .charwrapper.lightdiamond .enclosure, .cpc .charwrapper.lighttriangle .enclosure {
+	    stroke: white;
+    }
+    .darksquare {
+        background: white;
+    }
+    .darkcircle {
+        background: white;
+    }
+}
+
 .cpc.spua[lang|="zh"], .codepicture.spua[lang|="zh"] {
     /* TW-Sung-Plus and TW-Kai-Plus are the Gov-TW-supplied SPUA fonts for CNS */
     font-family: TW-Sung-Plus, TW-Kai-Plus;
@@ -201,14 +328,6 @@ thead:first-of-type th:first-child {
     font-size: 0.75rem;
 }
 
-.collision, .collision th, .collision td, .cln, .cln th, .cln td {
-    background: #f99;
-}
-.undefined, .udf, .collision .undefined, .cln .udf {
-    background: #999;
-	height: 3rem;
-}
-
 ul.navbar {
     margin: 0;
     padding: 0;
@@ -226,9 +345,6 @@ ul.navbar li::after {
     font-weight: bold;
 }
 
-.annotation, .annotation th, .annotation td {
-    background: beige;
-}
 .annotation td {
     padding-left: 2px;
     padding-left: 0.2rem;
@@ -246,12 +362,7 @@ ul.navbar li::after {
 
 .inverse {
     fill: none;
-    stroke: black;
     stroke-width: 3px;
-}
-.darksquare .inverse, .darkcircle .inverse {
-    fill: white;
-    stroke: white;
 }
 .cpc .charwrapper {
     height: 1.6rem;
@@ -270,25 +381,22 @@ ul.navbar li::after {
 }
 .cpc .charwrapper.lightdiamond .enclosure, .cpc .charwrapper.lighttriangle .enclosure {
     fill: none;
-	stroke: black;
 	stroke-width: 3px;
 }
 .darksquare {
-    background: black;
     border-radius: 0.2rem;
 }
 .darkcircle {
-    background: black;
     border-radius: 0.75rem;
 }
 .lightsquare {
-    border: 0.1rem solid black;
+    border: 0.1rem solid;
 }
 b .lightsquare {
-    border: 0.1rem solid black;
+    border: 0.1rem solid;
     border-radius: 0.2rem;
 }
 .lightcircle {
-    border: 0.1rem solid black;
+    border: 0.1rem solid;
     border-radius: 0.75rem;
 }
