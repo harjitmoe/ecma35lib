@@ -455,6 +455,8 @@ applesinglehints_mackorean_nishikiteki.update({
     (0x4ED6, 0x20DD): (0xF0A55,),
     (0x329E, 0xF87F): (0xF0A56,), # Dotted circled "print" kanji
     #
+    (0x2741,): (0xFEFB4,), # Eight-petalled white flower (Nishiki-teki chart notes correspondance)
+    (0x2748, 0x20D8): (0xFEFCF,), # Starburst/rayburst with central ring
     (0xF861, 0x2020, 0x2020, 0x2020): (0xFEE2A,), # Three daggers
     (0xF860, 0x2020, 0x2020): (0xFEE2B,), # Two daggers
 })
@@ -634,6 +636,11 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
     strep = strep.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
     if namedata.get_ucscategory(strep[0])[0] == "M":
         strep = "◌" + strep
+    not_in_unicode3pt2_arrows_blocks = (
+        ord(strep[0]) not in range(0x2190, 0x2200) and
+        ord(strep[0]) not in range(0x27F0, 0x2800) and
+        ord(strep[0]) not in range(0x2900, 0x2980)
+    )
     # Arrow styles (don't always use transcoding hints for their usual meanings)
     if len(strep) == 2 and 0x2190 <= ord(strep[0]) <= 0x2193 and strep[1] == "\uF871":
         rot, flip = arrow_to_angle(strep[0])
@@ -649,11 +656,13 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
     elif strep == "\uF845":
         invert_rotate("\u27B5", 0, True, "←", False, outfile) 
     # Other uses
-    elif strep[-1] == "\uF87B": # Apple encoding hint for usually medium bold form
+    elif strep[-1] == "\uF87B" and not_in_unicode3pt2_arrows_blocks:
+        # Apple encoding hint for usually medium bold form
         print("<b>", file=outfile)
         print(strep.rstrip("\uF87B"), file=outfile)
         print("</b>", file=outfile)
-    elif strep[-1] == "\uF87C": # Apple encoding hint for usually bold form
+    elif strep[-1] == "\uF87C" and not_in_unicode3pt2_arrows_blocks:
+        # Apple encoding hint for usually bold form
         print("<b>", file=outfile)
         strep2 = strep.rstrip("\uF87C")
         # Boxed / circled versions
@@ -729,7 +738,7 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
         print(strep.rstrip("\uF879"), file=outfile)
         print("</span>", file=outfile)
     else:
-        strep2 = strep.rstrip("\uF870\uF871\uF872\uF873\uF874\uF87D\uF87F")
+        strep2 = strep.rstrip("\uF870\uF871\uF872\uF873\uF874\uF87B\uF87C\uF87D\uF87F")
         # Boxed / circled non-negative forms
         if strep2[-1] == "\u20DD":
             print("<svg viewBox='0 0 72 72' class='charwrapper circle lightcircle'>", file=outfile)
@@ -789,7 +798,7 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
             print(strep2[:halflen] + "<br aria-hidden=true>" + strep2[halflen:], file=outfile)
             print("</span>", file=outfile)
         elif strep != strep2 and len(strep2) == 1:
-            print(f"〾{strep2}", file=outfile)
+            print(f"<span class=ivind>〾</span>{strep2}", file=outfile)
         else:
             print(strep2, file=outfile)
     print("</span>", file=outfile)

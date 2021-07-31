@@ -333,7 +333,7 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
                     else:
                         ku = byts[0] - 0x20
                         ten = byts[1] - 0x20
-                    assert sjis or ST <= ten <= ED, (_i, byts[0], byts[1])
+                    assert sjis or euckrlike or ST <= ten <= ED, (_i, byts[0], byts[1])
                     if euckrlike and ((ku < ST) or (ku > ED) or (ten < ST) or (ten > ED)):
                         continue
             else:

@@ -7,13 +7,17 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import unicodedata as ucd
-import json, re
+import json, re, posixpath
 from ecma35.data import graphdata, variationhints, charclass
 from ecma35.data.names import namedata
 
-def to_link(siglum, men, ku, ten):
+def to_link(maybe_siglum, default_siglum, men, ku, ten):
+    siglum = maybe_siglum or default_siglum
     basename = {"CNS": "../cnstables/cnsplane", "JIS": "../jistables2/jisplane",
-                "EACC": "../eacctables/ccciiplane", "CCCII": "../eacctables/ccciiplane"}[siglum]
+                "EACC": "../eacctables/ccciiplane", "CCCII": "../eacctables/ccciiplane",
+                "KSC": "../wansungtables/kscplane"}[siglum]
+    if not maybe_siglum:
+        basename = posixpath.basename(basename)
     omen, oku, oten = men, ku, ten
     if siglum == "CNS" and men == "Ψ":
         basename = "../cnstables/b5xplane"
@@ -24,6 +28,9 @@ def to_link(siglum, men, ku, ten):
         else:
             part_zi = 5
         men = "1"
+    elif siglum == "KSC" and men == "Ψ":
+        part_zi = int(ku, 10) // 16
+        men = "5"
     else:
         part_zi = int(ku, 10) // 16
         men = men.lstrip("0")
@@ -38,7 +45,7 @@ def inject_links(text, default_siglum=None):
     def callback(m):
         if m.group(1) == None and default_siglum == None:
             return m.group(0)
-        return to_link(m.group(1) or default_siglum, m.group(2), m.group(3), m.group(4))
+        return to_link(m.group(1), default_siglum, m.group(2), m.group(3), m.group(4))
     return siglumre.sub(callback, text)
 
 def formatcode(tpl):
@@ -195,11 +202,13 @@ def _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname):
     print("</ul></nav><hr>", file=outfile)
 
 def _codepfmt(j, oflength):
+    ret = f"{j:04X}"
     if (0xFE00 <= j < 0xFE10) or (0xE0100 <= j < 0xE01F0) or (
                                   (oflength > 1) and (0xF850 <= j < 0xF880) ):
-        return "({:04X})".format(j)
-    else:
-        return "{:04X}".format(j)
+        ret = f"({ret})"
+    if (0xE000 <= j < 0xF900) or (0xF0000 <= j):
+        ret = f"<span class=puacdpt>{ret}</span>"
+    return ret
 
 # Using an annoyingly old version of JS here for compatibility's sake
 _abbreviation_script = """\
@@ -484,8 +493,8 @@ def dump_plane(outfile, planefunc, kutenfunc,
                menuurl=None, menuname="Up to menu", jlfunc=None, 
                lasturl=None, nexturl=None, lastname=None, nextname=None,
                is_96=False, is_sbcs=False, pua_collides=False, blot="",
-               unicodefunc=_default_unicodefunc, big5ext_mode=False,
-               siglum=None, showbmppuas=None):
+               unicodefunc=_default_unicodefunc, big5ext_mode=False, skiprows=None,
+               siglum=None, showbmppuas=None, noallocatenotice=None, planewarn=None):
     """Dump an HTML mapping comparison."""
     if showbmppuas == None:
         showbmppuas = (False,) * len(plarray)
@@ -508,7 +517,8 @@ def dump_plane(outfile, planefunc, kutenfunc,
                nonvacant_sets[0][1], lang = lang, css = css, part = part, jlfunc = jlfunc,
                menuurl = menuurl, menuname = menuname, lasturl = lasturl, 
                nexturl = nexturl, lastname = lastname, nextname = nextname,
-               is_96 = is_96, is_sbcs = is_sbcs, blot = blot, showbmppua = showbmppuas[0])
+               is_96 = is_96, is_sbcs = is_sbcs, blot = blot, showbmppua = showbmppuas[0],
+               planewarn = planewarn, skiprows = skiprows)
     setnames2 = tuple(zip(*nonvacant_sets))[0] if nonvacant_sets else ()
     zplarray = tuple(zip(*tuple(zip(*nonvacant_sets))[1])) if nonvacant_sets else ()
     h = ", part {:d}".format(part) if part else ""
@@ -522,8 +532,11 @@ def dump_plane(outfile, planefunc, kutenfunc,
     if menuurl or lasturl or nexturl:
         _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname)
     if not nonvacant_sets:
-        print("<p>There are no allocated codepoints in this range.</p>", file=outfile)
+        notice = noallocatenotice or "There are no allocated codepoints in this range."
+        print(f"<p>{notice}</p>", file=outfile)
         return
+    if planewarn:
+        print(f"<p>Warning: {planewarn}</p>", file=outfile)
     # Sparse mode is for large sections with barely any allocations, such as the higher planes
     #   of CCCII. Including all the blank space to scroll makes the table barely usable.
     allocated_slots = 0
@@ -536,10 +549,15 @@ def dump_plane(outfile, planefunc, kutenfunc,
     if allocated_slots < 200:
         sparse = True
     print("<table>", file=outfile)
+    if skiprows:
+        while stx < edx and stx in skiprows:
+            stx += 1
     for row in range(stx, edx):
         if big5ext_mode:
             if row in (65, 71) or row > 82:
                 continue
+        elif skiprows and row in skiprows:
+            continue
         if (not sparse) or (row == stx):
             if row == stx:
                 print("<thead>", file=outfile)
@@ -586,7 +604,8 @@ def dump_plane(outfile, planefunc, kutenfunc,
                 #
                 print("<td>", end="", file=outfile)
                 if (i != cdisplayi) and isinstance(cdisplayi, tuple) and (
-                            cdisplayi[-1] not in list(range(0xF870, 0xF880))) and not (
+                            cdisplayi[-1] not in range(0xF870, 0xF880)) and (
+                            i[0] not in range(0xAC00, 0xD7B0)) and not (
                             0xE000 <= cdisplayi[0] < 0xF900):
                     variationhints.print_hints_to_html5(cdisplayi, outfile, lang=lang, showbmppua=showbmppua)
                     print(" / ", file=outfile)
@@ -602,7 +621,8 @@ def dump_plane(outfile, planefunc, kutenfunc,
 def dump_preview(outfile, planename, kutenfunc, number, array, *, lang="zh-TW", planeshift="",
                css=None, part=None, menuurl=None, menuname="Up to menu", jlfunc=None, 
                lasturl=None, nexturl=None, lastname=None, nextname=None, showbmppua=False,
-               is_96=False, is_sbcs=False, blot="", unicodefunc=_default_unicodefunc):
+               is_96=False, is_sbcs=False, blot="", unicodefunc=_default_unicodefunc,
+               planewarn=None, skiprows=None):
     """Dump an HTML single-mapping table."""
     stx, edx = (1, 95) if not is_96 else (0, 96)
     if is_sbcs:
@@ -622,8 +642,15 @@ def dump_preview(outfile, planename, kutenfunc, number, array, *, lang="zh-TW", 
     print("<h1>{}{}</h1>".format(planename, h), file=outfile)
     if menuurl or lasturl or nexturl:
         _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname)
+    if planewarn:
+        print(f"<p>Warning: {planewarn}</p>", file=outfile)
     print("<table class=chart>", file=outfile)
+    if skiprows:
+        while stx < edx and stx in skiprows:
+            stx += 1
     for row in range(stx, edx):
+        if skiprows and row in skiprows:
+            continue
         if row == stx:
             print("<thead>", file=outfile)
         print("<tr><th>Code", file=outfile)

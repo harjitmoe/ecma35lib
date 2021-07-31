@@ -127,7 +127,7 @@ thead:first-of-type th:first-child {
     font-family: Noto Serif CJK KR, Source Han Serif KR, Noto Sans CJK KR, Source Han Sans KR, TakaoPMincho, IPAPMincho, TakaoPGothic, IPAPGothic, Yu Gothic, BabelStone Han, serif;
     font-size: 1.5rem;
 }
-.pua {
+.pua, .ivind {
     color: dimgray;
 }
 .control { /* For the JIS X 0201 chart. */
@@ -139,7 +139,7 @@ thead:first-of-type th:first-child {
 .pua.bestfit {  /* For the JIS X 0201 chart. */
     color: #66f; 
 }
-abbr[title*="Private"] {
+.puacdpt {
     color: #900;
     font-weight: 600;
 }

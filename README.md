@@ -156,7 +156,8 @@ Miscellaneous single-byte assignments:
 |`IRR 0 G*DM4 C`|KS C 5601-1987, but using old-UTC mappings for the non-syllables|
 |`IRR 1 G*DM4 C`|KS X 1001-1998 Wansung code. The Euro sign update, also adding the registered trademark sign, and matching the WHATWG mapping.|
 |`IRR 2 G*DM4 C`|KS X 1001-2002 (adding the South Korean postal mark)|
-|`IRR 3 G*DM4 C`|KS X 1001, main plane of Apple/Elex extension (HangulTalk)|
+|`IRR 3 G*DM4 C`|KS X 1001-1987 extended, main plane of Apple/Elex extension (HangulTalk)|
+|`IRR 4 G*DM4 C`|KS X 1001-1987, using IBM mappings|
 |`IRR ? G*DM4 D`|JIS X 0212:1990|
 |`IRR 0 G*DM4 D`|JIS X 0212 with va/vi/ve/vo|
 |`IRR 1 G*DM4 D`|JIS X 0212, Open Group version for JIS-Roman based EUC-JP|

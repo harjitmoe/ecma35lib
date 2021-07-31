@@ -126,6 +126,8 @@ finals = {'\u3132': '\u11a9', '\u3133': '\u11aa', '\u3135': '\u11ac', '\u3136': 
 compjamo = set(finals.keys()) | set(vowels.keys()) | set(initials.keys())
 
 # KS C 5601 / KS X 1001 EUC-KR Wansung RHS
+graphdata.gsets["ir149-ibm"] = wansung = (94, 2, parsers.read_main_plane("ICU/ibm-949_P110-1999.ucm", euckrlike=True))
+graphdata.gsetflags["ir149-ibm"] |= {"UHC:IS_WANSUNG"}
 graphdata.gsets["ir149-1998"] = wansung = (94, 2, parsers.read_main_plane("WHATWG/index-euc-kr.txt", euckrlike=True))
 graphdata.gsetflags["ir149-1998"] |= {"UHC:IS_WANSUNG"}
 # Pre Euro-sign update (also lacking the registered trademark sign)
