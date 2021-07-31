@@ -101,6 +101,10 @@ annots = {
     (1, 6, 86): 'Contrast with Ψ-06-59 above.&ensp;Unlike that one, this one is expected to have '
                 'four petals rather than five, and five central dots (one anther per petal, and a '
                 'stigma) rather than being purely an outline.',
+    (1, 7, 37): 'U+29E7 was added in Unicode 3.2, hence it is unclear why Apple didn\'t use it.&ensp;'
+                'It is named THERMODYNAMIC, but has been given the informative alias "record mark" '
+                'at some point.&ensp;Compare the group mark (Ψ-07-46), which was added in Unicode '
+                '10.',
     (1, 7, 62): 'These two are respectively the horizontal and vertical forms of jusikhoesa, i.e. '
                 'are a direct hangul transcription of the ㍿ ligature (Korean reading jusikhoesa, '
                 'Japanese reading kabushikikaisha, English UCS name SQUARE CORPORATION).',
@@ -114,11 +118,20 @@ annots = {
                 'or a symbol of Nazism or white supremacy, amongst other uses.',
     (1, 11, 4): 'Duplicate of Ψ-07-63; the version with affixed PUA FE7F is already used for '
                 'Ψ-07-64, so Apple maps to the combining sequence for round tripping.',
+    (1, 11, 36): 'U+329F has existed since Unicode 1.x and is not already mapped elsewhere, so it '
+                 'is exceedingly unclear why Apple did not map to it.',
     (1, 12, 77): 'The latter two are not backhand <em>per se</em>, but have their palms drawn '
                  'larger.&ensp;Compare with Ψ-06-30 and Ψ-06-31, which match the latter two\'s '
                  'proportions, and where my by-elimination mappings assign the other two backhand '
                  'manicules.',
 }
+
+warning = """\
+All HangulTalk extension characters with trail bytes in the range 0x41–0x5A, 0x61–0x7A or \
+0x81–0xA0 (i.e. all except those with trail bytes 0x5B–0x60 or 0x7B–0x7D) collide with \
+Unified Hangul Code extended syllables.&ensp;This is not shown below since it is regular, \
+affects most of the table, would make the areas of the table which are actually of note harder \
+to spot, and would misrepresent Unified Hangul Code since their ranges only partly overlap."""
 
 for q in range(1, 7):
     f = open("htxplane1{}.html".format(chr(0x60 + q)), "w", encoding="utf-8")
@@ -135,7 +148,7 @@ for q in range(1, 7):
     showgraph.dump_plane(f, planefunc, kutenfunc, *plane, lang="ko-KR", part=q, css="codechart.css",
                          menuurl="/ksc-conc.html", menuname="Wansung code variant comparison",
                          lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
-                         annots=annots, selfhandledanchorlink=True,
+                         annots=annots, selfhandledanchorlink=True, planewarn=warning,
                          pua_collides=True, showbmppuas=(0, 0, 0, 0, 1), siglum="KSC")
     f.close()
 
