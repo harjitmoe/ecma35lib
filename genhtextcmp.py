@@ -11,7 +11,7 @@ from ecma35.data.multibyte import korea, cellemojidata
 from ecma35.data import graphdata, showgraph
 import json, os
 
-plane = (1, ("Apple<br>Unicode 2.1", "Apple<br>Unicode 3.2", "Apple<br>Unicode 4.0", "Output", "PUA Scheme<br>Nishiki-teki"), [
+plane = (1, ("Apple<br>Unicode 2.1", "Apple<br>Unicode 3.2", "Apple<br>Unicode 4.0", "Output<br>My choices", "PUA Scheme<br>Nishiki-teki"), [
           graphdata.gsets["mac-elex-extras-unicode2_1"][2],
           graphdata.gsets["mac-elex-extras-unicode3_2"][2],
           graphdata.gsets["mac-elex-extras-unicode4_0"][2],
@@ -36,6 +36,9 @@ def kutenfunc(number, row, cell):
     return "{}<br>{}".format(anchorlink, pseudokuten)
 
 annots = {
+    (1, 4, 85): 'Unlike Ψ-07-40, the radii are not supposed to extend beyond the arc.&ensp;However, '
+                'the arc is still supposed to extend beyond the radii.&ensp;Unlike Ψ-07-58, this '
+                'is supposed to open rightward, i.e. with the arc due right of the radii.',
     (1, 6, 22): 'This is CID-12242 in Adobe-Japan1.',
     (1, 6, 23): 'This is CID-12244 in Adobe-Japan1.',
     (1, 6, 24): 'This is CID-12243 in Adobe-Japan1.',
@@ -99,15 +102,27 @@ annots = {
     (1, 6, 85): 'Nominally this has the BG colour on the right, and the bulbs due anticlockwise of '
                 'their tails.&ensp;Dots are nominally omitted.&ensp;See Ψ-06-80 above.',
     (1, 6, 86): 'Contrast with Ψ-06-59 above.&ensp;Unlike that one, this one is expected to have '
-                'four petals rather than five, and five central dots (one anther per petal, and a '
-                'stigma) rather than being purely an outline.',
+                'four petals rather than five, and five central dots (four anthers, one on each '
+                'petal, and a stigma) rather than being purely an outline.',
+    (1, 7, 33): 'This differs from Ψ-07-58, in that it is merely a sector as an outlined plane '
+                'shape, with neither the radii nor the arc crossing or extending beyond one '
+                'another.',
     (1, 7, 37): 'U+29E7 was added in Unicode 3.2, hence it is unclear why Apple didn\'t use it.&ensp;'
                 'It is named THERMODYNAMIC, but has been given the informative alias "record mark" '
                 'at some point.&ensp;Compare the group mark (Ψ-07-46), which was added in Unicode '
                 '10.',
+    (1, 7, 40): 'This differs from Ψ-04-85, in that the radii extend beyond the arc.',
+    (1, 7, 58): 'Unlike Ψ-07-33, this is supposed to have the arc extending beyond the radii.&ensp;'
+                'Unlike Ψ-04-85, it is supposed to open upward (i.e. with the arc above the '
+                'radii).&ensp;U+29A1 isn\'t exactly the same (its radii usually extend beyond the '
+                'arc, while the arc may or may not cross the radii, depending on font) but it '
+                'avoids a lossy mapping—although it was added in Unicode 3.2 and so that raises '
+                'the question of why Apple didn\'t switch to it.&ensp;Compare the issue with '
+                'Ψ-07-40 versus Ψ-04-85.',
     (1, 7, 62): 'These two are respectively the horizontal and vertical forms of jusikhoesa, i.e. '
                 'are a direct hangul transcription of the ㍿ ligature (Korean reading jusikhoesa, '
-                'Japanese reading kabushikikaisha, English UCS name SQUARE CORPORATION).',
+                'Japanese reading kabushikikaisha, English UCS name SQUARE CORPORATION).&ensp;'
+                'Hence, compare KanjiTalk 7\'s JIS 01-14-92.',
     (1, 7, 63): 'Duplicate of Ψ-11-04.&ensp;Means "print".',
     (1, 7, 64): 'Differs from Ψ-07-63 (and Ψ-11-04) in its circle being dashed not solid.',
     (1, 7, 67): 'Emphasised (nominally italicised) version of Ψ-07-65.',
@@ -118,8 +133,9 @@ annots = {
                 'or a symbol of Nazism or white supremacy, amongst other uses.',
     (1, 11, 4): 'Duplicate of Ψ-07-63; the version with affixed PUA FE7F is already used for '
                 'Ψ-07-64, so Apple maps to the combining sequence for round tripping.',
-    (1, 11, 36): 'U+329F has existed since Unicode 1.x and is not already mapped elsewhere, so it '
-                 'is exceedingly unclear why Apple did not map to it.',
+    (1, 11, 36): 'U+329F has existed since Unicode 1.x and is not mapped elsewhere, so it is '
+                 'thoroughly unclear why Apple did not map to it.&ensp;It already existing is why '
+                 'it is absent from the Nishiki-teki PUA range covering the others.',
     (1, 12, 77): 'The latter two are not backhand <em>per se</em>, but have their palms drawn '
                  'larger.&ensp;Compare with Ψ-06-30 and Ψ-06-31, which match the latter two\'s '
                  'proportions, and where my by-elimination mappings assign the other two backhand '

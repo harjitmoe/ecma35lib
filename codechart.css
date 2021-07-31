@@ -76,17 +76,17 @@ thead:first-of-type th:first-child {
     font-size: 0.7rem;
 }
 .codepicture[lang|="zh"], .cpc[lang|="zh"] {
-    font-family: Noto Serif CJK TC, Source Han Serif TC, Noto Sans CJK TC, Source Han Sans TC, TW-Sung-Ext-B, TW-Kai-Ext-B, HanaMinB, BabelStone Han, serif;
+    font-family: Noto Serif CJK TC, Source Han Serif TC, Noto Sans CJK TC, Source Han Sans TC, TW-Sung-Ext-B, TW-Kai-Ext-B, HanaMinB, BabelStone Han, Noto Sans Symbols, Quivira, Symbola, serif;
     font-size: 1.5rem;
     line-height: 2rem;
 }
 .codepicture[lang|="ja"], .cpc[lang|="ja"] {
-    font-family: TakaoPMincho, IPAPMincho, Noto Serif CJK JP, Source Han Serif JP, TakaoPGothic, IPAPGothic, Noto Sans CJK JP, Source Han Sans JP, TW-Sung-Ext-B, TW-Kai-Ext-B, Yu Gothic, BabelStone Han, serif;
+    font-family: TakaoPMincho, IPAPMincho, Noto Serif CJK JP, Source Han Serif JP, TakaoPGothic, IPAPGothic, Noto Sans CJK JP, Source Han Sans JP, TW-Sung-Ext-B, TW-Kai-Ext-B, Yu Gothic, BabelStone Han, Noto Sans Symbols, Quivira, Symbola, serif;
     font-size: 1.5rem;
     line-height: 2rem;
 }
 .codepicture[lang|="ko"], .cpc[lang|="ko"] {
-    font-family: Noto Serif CJK KR, Source Han Serif KR, Noto Sans CJK KR, Source Han Sans KR, TakaoPMincho, IPAPMincho, TakaoPGothic, IPAPGothic, TW-Sung-Ext-B, TW-Kai-Ext-B, Yu Gothic, BabelStone Han, serif;
+    font-family: Noto Serif CJK KR, Source Han Serif KR, Noto Sans CJK KR, Source Han Sans KR, TakaoPMincho, IPAPMincho, TakaoPGothic, IPAPGothic, TW-Sung-Ext-B, TW-Kai-Ext-B, Yu Gothic, BabelStone Han, Noto Sans Symbols, Quivira, Symbola, serif;
     font-size: 1.5rem;
     line-height: 2rem;
 }
@@ -228,13 +228,16 @@ table {
         background: #540;
     }
     a:link {
-        color: #66c;
+        color: #88e;
     }
     a:visited {
         color: #c6c;
     }
     a:hover {
-        color: #99f;
+        color: #aaf;
+    }
+    a:hover:visited {
+        color: #d7d;
     }
     a:active {
         color: #f99;
@@ -256,7 +259,7 @@ table {
     .lightcircle {
         border-color: #eee;
     }
-    :not(*|mask, *|clipPath)>*|text {
+    :not(*|mask, *|clipPath)>*|text:not([fill], .inverse) {
         fill: #eee;
     }
     .cpc .charwrapper.lightdiamond .enclosure, .cpc .charwrapper.lighttriangle .enclosure {

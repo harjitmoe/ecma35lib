@@ -38,7 +38,8 @@ def to_link(maybe_siglum, default_siglum, men, ku, ten):
     if not maybe_siglum:
         basename = posixpath.basename(basename)
     url = f"{basename}{men}{part_letter}.html#{men}.{ku}.{ten}"
-    return f'<a href="{url}">{omen}-{oku}-{oten}</a>'
+    display_siglum = f"{maybe_siglum} " if maybe_siglum else ""
+    return f'<a href="{url}">{display_siglum}{omen}-{oku}-{oten}</a>'
 
 siglumre = re.compile("(?:(JIS|CNS|CCCII|EACC) )?(\d\d|Ψ)-(\d\d)-(\d\d)")
 def inject_links(text, default_siglum=None):
