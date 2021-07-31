@@ -16,8 +16,6 @@ def to_link(maybe_siglum, default_siglum, men, ku, ten):
     basename = {"CNS": "../cnstables/cnsplane", "JIS": "../jistables2/jisplane",
                 "EACC": "../eacctables/ccciiplane", "CCCII": "../eacctables/ccciiplane",
                 "KSC": "../wansungtables/kscplane"}[siglum]
-    if not maybe_siglum:
-        basename = posixpath.basename(basename)
     omen, oku, oten = men, ku, ten
     if siglum == "CNS" and men == "Ψ":
         basename = "../cnstables/b5xplane"
@@ -37,6 +35,8 @@ def to_link(maybe_siglum, default_siglum, men, ku, ten):
     ku = ku.lstrip("0")
     ten = ten.lstrip("0")
     part_letter = chr(0x61 + part_zi)
+    if not maybe_siglum:
+        basename = posixpath.basename(basename)
     url = f"{basename}{men}{part_letter}.html#{men}.{ku}.{ten}"
     return f'<a href="{url}">{omen}-{oku}-{oten}</a>'
 
