@@ -296,9 +296,8 @@ applesinglehints_mackorean.update({
     (0x25B3, 0x20DD): (0x1F7D5,), # White triangle in white circle
     (0x25C7, 0x20DE): (0x26CB,), # Diamond in square (added eventually from ARIB)
     (0x25C7, 0x20DF): (0x1F79C,), # Two-ringed diamond target
-    (0x25C7, 0x20DF, 0x20DF): (0x1F79C, 0xF87F), # Three-ringed diamond target
+    (0x25C7, 0x20DF, 0x20DF): (0x1F79C, 0x20DF), # Three-ringed diamond target
     (0x25C9, 0x20DD): (0x1F78B,), # Circular target (black bullseye)
-    (0x25CE, 0x20DD): (0x1F78B, 0xF87F), # Circular target (white bullseye)
     (0x29C8, 0x20DE): (0x1F796,), # Square target
     # The group mark does now exist, although it's a recent (v10) addition:
     (0x2261, 0x20D2): (0x2BD2,), # Group mark
@@ -586,7 +585,7 @@ def arrow_to_angle(arrow):
     return 0, False
 
 def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
-    sequence_inverse = sequence_big = False
+    sequence_inverse = sequence_big = sequence_small = sequence_bold = False
     if i[0] >= 0xF0000:
         print("<span class='cpc spua' lang={}>".format(lang), file=outfile)
         strep = "".join(chr(j) for j in i)
@@ -605,6 +604,14 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
         sequence_big = True
         print("<span class='cpc' lang={}>".format(lang), file=outfile)
         strep = "".join(chr(j) for j in i[1:]).replace("\uF867", "")
+    elif (i[0] == 0xF868) and len(i) != 1:
+        sequence_small = True
+        print("<span class='cpc' lang={}>".format(lang), file=outfile)
+        strep = "".join(chr(j) for j in i[1:]).replace("\uF868", "")
+    elif (i[0] == 0xF869) and len(i) != 1:
+        sequence_small = sequence_bold = True
+        print("<span class='cpc' lang={}>".format(lang), file=outfile)
+        strep = "".join(chr(j) for j in i[1:]).replace("\uF869", "")
     elif 0xE000 <= i[0] < 0xF900:
         # Object Replacement Character (FFFD is already used by BIG5.TXT)
         if not showbmppua:
@@ -729,9 +736,13 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
         print("<sup>", file=outfile)
         print(strep.replace("\uF877", ""), file=outfile)
         print("</sup>", file=outfile)
-    elif strep[-1] == "\uF878": # Apple encoding hint for small form
+    elif strep[-1] == "\uF878" or sequence_small: # Apple encoding hint for small form
         print("<small>", file=outfile)
+        if sequence_bold:
+            print("<b>", file=outfile)
         print(strep.rstrip("\uF878"), file=outfile)
+        if sequence_bold:
+            print("</b>", file=outfile)
         print("</small>", file=outfile)
     elif (strep[-1] == "\uF879") or sequence_big: # Apple encoding hint for large form
         print("<span class=bigform>", file=outfile)

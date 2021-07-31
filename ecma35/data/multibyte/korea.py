@@ -160,14 +160,19 @@ def ahmap_nt(pointer, ucs):
     return variationhints.ahmap(pointer, ucs, variationhints.applesinglehints_mackorean_nishikiteki)
 
 # Apple and Elex's (Illekseu's) HangulTalk Wansung version
+rawmac2 =        parsers.read_untracked_mbfile(
+                 parsers.read_main_plane, "Mac/KOREAN_b02.TXT", "Mac---KOREAN_mainplane_b02.json", 
+                 "Mac/macWansung21.json", euckrlike=True)
+macwansung21 = graphdata.gsets["ir149-mac-unicode2_1"] = (94, 2, rawmac2)
+graphdata.gsetflags["ir149-mac-unicode3_2"] |= {"UHC:IS_WANSUNG"}
 rawmac =         parsers.read_untracked_mbfile(
                  parsers.read_main_plane, "Mac/KOREAN.TXT", "Mac---KOREAN_mainplane.json", 
-                 "Mac/macWansung-raw.json", euckrlike=True)
+                 "Mac/macWansung32.json", euckrlike=True)
 macwansung32 = graphdata.gsets["ir149-mac-unicode3_2"] = (94, 2, rawmac)
 graphdata.gsetflags["ir149-mac-unicode3_2"] |= {"UHC:IS_WANSUNG"}
 rawmac4 =        parsers.read_untracked_mbfile(
                  parsers.read_main_plane, "Mac/KOREAN.TXT", "Mac---KOREAN_mainplane_altcomments.json", 
-                 "Mac/macWansung4.json", euckrlike=True, altcomments=True)
+                 "Mac/macWansung40.json", euckrlike=True, altcomments=True)
 macwansung40 = graphdata.gsets["ir149-mac-unicode4_0"] = (94, 2, rawmac4)
 graphdata.gsetflags["ir149-mac-unicode4_0"] |= {"UHC:IS_WANSUNG"}
 macwansungdata = parsers.read_untracked_mbfile(
@@ -177,18 +182,22 @@ macwansung = graphdata.gsets["ir149-mac"] = (94, 2, macwansungdata)
 graphdata.gsetflags["ir149-mac"] |= {"UHC:IS_WANSUNG"}
 macwansungdata_nt = parsers.read_untracked_mbfile(
                  parsers.read_main_plane, "Mac/KOREAN.TXT", "Mac---KOREAN_mainplane_ahmapnt.json", 
-                 "Mac/macWansung.json", euckrlike=True, mapper=ahmap_nt)
+                 "Mac/macWansungNT.json", euckrlike=True, mapper=ahmap_nt)
 macwansung = graphdata.gsets["ir149-mac-nishiki-teki"] = (94, 2, macwansungdata_nt)
 graphdata.gsetflags["ir149-mac-nishiki-teki"] |= {"UHC:IS_WANSUNG"}
 
 # Apple and Elex's (Illekseu's) secondary HangulTalk plane
+rawelex21 =      parsers.read_untracked_mbfile(
+                 read_elexextras, "Mac/KOREAN_b02.TXT", "Mac---KOREAN_elexextras_b02.json", 
+                 "Mac/macElex21.json")
+macelexextras21 = graphdata.gsets["mac-elex-extras-unicode2_1"] = (94, 2, rawelex21)
 rawelex =        parsers.read_untracked_mbfile(
                  read_elexextras, "Mac/KOREAN.TXT", "Mac---KOREAN_elexextras.json", 
-                 "Mac/macElex-raw.json")
+                 "Mac/macElex32.json")
 macelexextras32 = graphdata.gsets["mac-elex-extras-unicode3_2"] = (94, 2, rawelex)
 rawelex4 =       parsers.read_untracked_mbfile(
                  read_elexextras, "Mac/KOREAN.TXT", "Mac---KOREAN_elexextras_altcomments.json", 
-                 "Mac/macElex4.json", altcomments=True)
+                 "Mac/macElex40.json", altcomments=True)
 macelexextras40 = graphdata.gsets["mac-elex-extras-unicode4_0"] = (94, 2, rawelex4)
 macelexdata =    parsers.read_untracked_mbfile(
                  read_elexextras, "Mac/KOREAN.TXT", "Mac---KOREAN_elexextras_ahmap.json", 
@@ -196,7 +205,7 @@ macelexdata =    parsers.read_untracked_mbfile(
 macelexextras = graphdata.gsets["mac-elex-extras"] = (94, 2, macelexdata)
 macelexdata_nt = parsers.read_untracked_mbfile(
                  read_elexextras, "Mac/KOREAN.TXT", "Mac---KOREAN_elexextras_ahmapnt.json", 
-                 "Mac/macElex.json", mapper=ahmap_nt)
+                 "Mac/macElexNT.json", mapper=ahmap_nt)
 macelexextrasnt = graphdata.gsets["mac-elex-extras-nishiki-teki"] = (94, 2, macelexdata_nt)
 
 # KPS 9566
