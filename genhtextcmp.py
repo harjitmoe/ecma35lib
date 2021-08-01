@@ -34,7 +34,13 @@ def kutenfunc(number, row, cell):
     euc = "0x{:02X}{:02X}".format(0xA0 + row, cellbyte)
     anchorlink = "<a href='#{:d}.{:d}.{:d}'>{}</a>".format(number, row, cell, euc)
     pseudokuten = "(Ψ-{:02d}-{:02d})".format(row, cell)
-    return "{}<br>{}".format(anchorlink, pseudokuten)
+    pointer = (row - 1) * 94 + cell - 1
+    cid = korea.elex2cid[pointer]
+    print(cid, korea.macelexdata[pointer], korea.macelexdata_adobe[pointer])
+    ciddisplay = ""
+    if cid:
+        ciddisplay = f"<br>CID-{cid}"
+    return f"{anchorlink}<br>{pseudokuten}{ciddisplay}"
 
 annots = {
     (1, 4, 85): 'Unlike Ψ-07-40, the radii are not supposed to extend beyond the arc.&ensp;However, '

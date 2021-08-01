@@ -29,7 +29,7 @@ class LazyJSON(list):
         if not super().__len__():
             # print("Loading", self._filename)
             f = open(self._filename)
-            super().extend(tuple(i) if i is not None else None for i in json.load(f))
+            super().extend(tuple(i) if isinstance(i, list) else i for i in json.load(f))
             f.close()
     def __iter__(self):
         self._load()
@@ -39,7 +39,7 @@ class LazyJSON(list):
         return super().__len__()
     def __hash__(self):
         self._load()
-        return hash(tuple())
+        return hash(tuple(self))
     def __eq__(self, i):
         self._load()
         return tuple(self) == i
@@ -106,7 +106,7 @@ def _grok_sjis(byts):
 def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=False,
                     skipstring=None, plane=None, altcomments=False, mapper=identitymap,
                     ignore_later_altucs=False, set96=False, libcongress=False, 
-                    utcl2_17_080=None, gb12052=False):
+                    utcl2_17_080=None, cidmap=None, gb12052=False):
     """
     Read a mapping from a file in the directory given by mbmapparsers.directory.
     Only positional argument is the name (including subdirectory) of that file.
@@ -142,14 +142,15 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
         mappername += "_skip" + urllib.parse.quote(skipstring)
     if twoway:
         mappername += "_twoway"
-    if utcl2_17_080:
-        mappername += "_" + utcl2_17_080
+    if utcl2_17_080 or cidmap:
+        mappername += "_" + (utcl2_17_080 or cidmap[0])
     cachebfn = os.path.splitext(fil)[0].replace("/", "---") + ("_plane{:02d}".format(plane)
                if plane is not None else "_mainplane") + mappername + ".json"
     cachefn = os.path.join(cachedirectory, cachebfn)
     if os.path.exists(cachefn):
         # Cache output since otherwise several seconds are spend in here upon importing graphdata
         return LazyJSON(cachefn)
+    cidmapnames = None
     for _i in open(os.path.join(directory, fil), "r", encoding="utf-8"):
         if not _i.strip():
             continue
@@ -186,6 +187,14 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
             else:
                 raise ValueError("unrecognised utcl2_17_080 arg: {!r}".format(utcl2_17_080))
             mkts = ((1, ku, ten),)
+        elif cidmap:
+            frm, to = cidmap
+            if not cidmapnames:
+                cidmapnames = _i.rstrip().split("\t")
+                continue
+            values = _i.rstrip().split("\t")
+            byts = values[cidmapnames.index(frm)]
+            ucs = values[cidmapnames.index(frm)].split(",", 1)[0]
         elif gb12052:
             kuten, bit7, euc, ucs = _i.split(None, 3)
             ucs = ucs.split("#", 1)[0].strip()
