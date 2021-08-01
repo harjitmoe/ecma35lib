@@ -11,7 +11,7 @@ from ecma35.data.multibyte import korea, cellemojidata
 from ecma35.data import graphdata, showgraph
 import json, os
 
-plane = (1, ("Apple<br>Unicode 2.1", "Apple<br>Unicode 3.2", "Apple<br>Unicode 4.0", "Output<br>My choices", "PUA Scheme<br>Nishiki-teki"), [
+plane = (1, ("Apple<br>Unicode 2.1", "Apple<br>Unicode 3.2", "Apple<br>Unicode 4.0", "Up to date<br>My choices", "PUA Scheme<br>Nishiki-teki"), [
           graphdata.gsets["mac-elex-extras-unicode2_1"][2],
           graphdata.gsets["mac-elex-extras-unicode3_2"][2],
           graphdata.gsets["mac-elex-extras-unicode4_0"][2],
@@ -161,7 +161,7 @@ for q in range(1, 7):
     if q < 6:
         nexturl = "htxplane1{}.html".format(chr(0x60 + q + 1))
         nextname = f"HangulTalk additional plane, part {q+1:d}"
-    showgraph.dump_plane(f, planefunc, kutenfunc, *plane, lang="ko-KR", part=q, css="codechart.css",
+    showgraph.dump_plane(f, planefunc, kutenfunc, *plane, lang="ko-KR", part=q, css="/css/codechart.css",
                          menuurl="/ksc-conc.html", menuname="Wansung code variant comparison",
                          lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
                          annots=annots, selfhandledanchorlink=True, planewarn=warning,

@@ -119,7 +119,7 @@ for n, p in enumerate([plane1, plane2, plane3, plane4]):
                          "which are either absent from Unicode, or where KS X 1027-2 is not "
                          "listed as their South Korean source mapping.")
         #
-        showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ko-KR", part=q, css="codechart.css",
+        showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ko-KR", part=q, css="/css/codechart.css",
                              menuurl="/ksc-conc.html", menuname="Wansung code variant comparison",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
                              annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True,
