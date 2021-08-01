@@ -11,7 +11,8 @@ from ecma35.data.multibyte import korea, cellemojidata
 from ecma35.data import graphdata, showgraph
 import json, os
 
-plane = (1, ("Apple<br>Unicode 2.1", "Apple<br>Unicode 3.2", "Apple<br>Unicode 4.0", "Up to date<br>My choices", "PUA Scheme<br>Nishiki-teki"), [
+plane = (1, ("Adobe-Korea1<br>KSCpc-EUC", "Apple for<br>Unicode 2.1", "Apple for<br>Unicode 3.2", "Apple for<br>Unicode 4.0", "Suggested<br>My choices", "PUA Scheme<br>Nishiki-teki"), [
+          graphdata.gsets["mac-elex-extras-adobe"][2],
           graphdata.gsets["mac-elex-extras-unicode2_1"][2],
           graphdata.gsets["mac-elex-extras-unicode3_2"][2],
           graphdata.gsets["mac-elex-extras-unicode4_0"][2],
@@ -39,37 +40,40 @@ annots = {
     (1, 4, 85): 'Unlike Ψ-07-40, the radii are not supposed to extend beyond the arc.&ensp;However, '
                 'the arc is still supposed to extend beyond the radii.&ensp;Unlike Ψ-07-58, this '
                 'is supposed to open rightward, i.e. with the arc due right of the radii.',
-    (1, 6, 22): 'This is CID-12242 in Adobe-Japan1.',
-    (1, 6, 23): 'This is CID-12244 in Adobe-Japan1.',
-    (1, 6, 24): 'This is CID-12243 in Adobe-Japan1.',
-    (1, 6, 25): 'This is CID-12245 in Adobe-Japan1.',
-    (1, 6, 29): 'These four are CIDs 12261, 12262, 12265 and 12266 in Adobe-Japan1 which, in '
-                'spite of their Apple mappings, nominally fill the em square and so are much '
+    (1, 6, 22): 'This is also included in Adobe-Japan1 as CID-12242.',
+    (1, 6, 23): 'This is also included in Adobe-Japan1 as CID-12244.',
+    (1, 6, 24): 'This is also included in Adobe-Japan1 as CID-12243.',
+    (1, 6, 25): 'This is also included in Adobe-Japan1 as CID-12245.',
+    (1, 6, 29): 'These four are also in Adobe-Japan1 as CIDs 12261, 12262, 12265 and 12266; in'
+                'spite of their Apple mappings, they nominally fill the em square and so are much '
                 'larger than a typical guillemet.&ensp;Compare 01-01-76 and 01-01-77.',
     (1, 6, 31): 'These two are not backhand <em>per se</em>, but they are otherwise duplicates of '
                 '01-02-48 and 01-02-49 in the Wansung plane so this is a mapping by '
                 'elimination.&ensp;See also the four manicules starting Ψ-12-74 (these ones\' '
                 'proportions match the second pair).',
-    (1, 6, 32): 'This is CID-12246 in Adobe-Japan1.',
-    (1, 6, 34): 'This is CID-12233 in Adobe-Japan1.',
-    (1, 6, 35): 'This is CID-12231 in Adobe-Japan1.',
-    (1, 6, 36): 'This is CID-12232 in Adobe-Japan1.',
-    (1, 6, 37): 'This is CID-12230 in Adobe-Japan1.',
-    (1, 6, 38): 'This is CID-12234 in Adobe-Japan1.',
-    (1, 6, 39): 'This is CID-12235 in Adobe-Japan1.',
-    (1, 6, 44): 'This is CID-12241 in Adobe-Japan1.&ensp;Adobe concords with Apple\'s mapping.',
-    (1, 6, 50): 'This is CID-12260 in Adobe-Japan1.&ensp;Apple\'s mapping is an approximation, '
+    (1, 6, 32): 'This is also included in Adobe-Japan1 as CID-12246.',
+    (1, 6, 34): 'This is also included in Adobe-Japan1 as CID-12233.',
+    (1, 6, 35): 'This is also included in Adobe-Japan1 as CID-12231.',
+    (1, 6, 36): 'This is also included in Adobe-Japan1 as CID-12232.',
+    (1, 6, 37): 'This is also included in Adobe-Japan1 as CID-12230.',
+    (1, 6, 38): 'This is also included in Adobe-Japan1 as CID-12234.',
+    (1, 6, 39): 'This is also included in Adobe-Japan1 as CID-12235.',
+    (1, 6, 44): 'This is also included in Adobe-Japan1 as CID-12241.&ensp;'
+                'Adobe concords with Apple\'s mapping.',
+    (1, 6, 50): 'This is also in Adobe-Japan1 as CID-12260.&ensp;Apple\'s mapping is an approximation, '
                 'albeit one where no superior alternative has since arisen&mdash;it is supposed '
                 'to be a rotated 3×3 chequerboard; like ❖, but with a fifth, central lozenge.',
-    (1, 6, 51): 'This is CID-12259 in Adobe-Japan1.&ensp;Adobe concords with Apple\'s mapping.',
-    (1, 6, 57): 'This is CID-12258 in Adobe-Japan1 and is an outline of Ψ-06-50—see there for '
-                'comments on mapping and intended appearance.',
-    (1, 6, 58): 'This is CID-12257 in Adobe-Japan1 and is an outline of Ψ-06-51.',
-    (1, 6, 60): 'The previous two characters are five-petal florettes which correspond to CID-12228 '
-                'and CID-12229 in Adobe-Japan1 respectively.&ensp;The former is nominally an '
-                'outline of the latter.&ensp;Adobe maps them to U+2740 and U+273F, respectively, '
-                'and the Source Han (Noto CJK) glyphs for those codepoints correspond closely to '
-                'the HangulTalk and Adobe-Japan1 characters.</p><p>Apple uses U+2740 for Ψ-06-86, '
+    (1, 6, 51): 'This is also included in Adobe-Japan1 as CID-12259.&ensp;'
+                'Adobe concords with Apple\'s mapping.',
+    (1, 6, 57): 'This is also in Adobe-Japan1 as CID-12258 and is an outline of Ψ-06-50—see there '
+                'for comments on mapping and intended appearance.',
+    (1, 6, 58): 'This is also in Adobe-Japan1 as CID-12257 and is an outline of Ψ-06-51.',
+    (1, 6, 60): 'The previous two characters are five-petal florettes which are also in '
+                'Adobe-Japan1, as CID-12228 and CID-12229 respectively.&ensp;The former is nominally '
+                'an outline of the latter.&ensp;Adobe does not map them in Adobe-Korea1, but maps '
+                'them in Adobe-Japan1 to U+2740 and U+273F, respectively; the Source Han (Noto '
+                'CJK) glyphs for those codepoints correspond well with to the Adobe-Korea1 and '
+                'Adobe-Japan1 reference glyphs.</p><p>Apple uses U+2740 for Ψ-06-86, '
                 'however.&ensp;Rendering of U+2740 and U+273F '
                 'varies across fonts; however, both are usually shown with five petals, as '
                 'opposed to Ψ-06-86\'s four.&ensp;U+2740\'s reference glyph isn\'t purely an '
@@ -88,7 +92,7 @@ annots = {
                 'Caslon one (with two petals up), not the Bodoni and Zapf ones (one petal up).',
     (1, 6, 75): 'The top and bottom squares should be filled (like Ψ-06-51), and the left and '
                 'right ones should be outlined (like Ψ-06-58).',
-    (1, 6, 76): 'This is CID-12220 in Adobe-Japan1, and consists of five vertical lines.',
+    (1, 6, 76): 'This is also in Adobe-Japan1 as CID-12220, and consists of five vertical lines.',
     (1, 6, 79): 'Apple notes this one to be "Buddhist swastika, duplicate of 0xD8B3".&ensp;The '
                 'religious symbol and the hanja have since been disunified by Unicode, so it is '
                 'no longer a duplicate mapping as such.',
@@ -165,7 +169,7 @@ for q in range(1, 7):
                          menuurl="/ksc-conc.html", menuname="Wansung code variant comparison",
                          lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
                          annots=annots, selfhandledanchorlink=True, planewarn=warning,
-                         pua_collides=True, showbmppuas=(0, 0, 0, 0, 1), siglum="KSC")
+                         pua_collides=True, showbmppuas=(0, 0, 0, 0, 0, 1), siglum="KSC")
     f.close()
 
 
