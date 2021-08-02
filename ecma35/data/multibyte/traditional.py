@@ -95,17 +95,29 @@ def cnsmapper_contraredundantcjkb(pointer, ucs):
     return ucs
 
 planesize = 94 * 94
-cns_bmp = parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode BMP.txt",
-        mapper = cnsmapper_swaparrows_thrashscii2)
-cns_sip = parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 2.txt",
-        mapper = cnsmapper_contraredundantcjkb)
-cns_spuaa = parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 15.txt",
-        mapper = cnsmapper_contraspua)
+cns_bmp = parsers.decode_main_plane_gl(
+    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode BMP.txt"),
+    "CNS2UNICODE_Unicode BMP.txt",
+    mapper = cnsmapper_swaparrows_thrashscii2)
+cns_sip = parsers.decode_main_plane_gl(
+    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 2.txt"),
+    "CNS2UNICODE_Unicode 2.txt",
+    mapper = cnsmapper_contraredundantcjkb)
+cns_spuaa = parsers.decode_main_plane_gl(
+    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
+    "CNS2UNICODE_Unicode 15.txt",
+    mapper = cnsmapper_contraspua)
 cns = parsers.fuse([cns_bmp, cns_sip, cns_spuaa], "GOV-TW---CNS2UNICODE_swar_tsci_cspua_crcb.json")
 
-cns_govbmp = parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode BMP.txt")
-cns_govsip = parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 2.txt")
-cns_govspuaa = parsers.read_main_plane("GOV-TW/CNS2UNICODE_Unicode 15.txt")
+cns_govbmp = parsers.decode_main_plane_gl(
+    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode BMP.txt"),
+    "CNS2UNICODE_Unicode BMP.txt")
+cns_govsip = parsers.decode_main_plane_gl(
+    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 2.txt"),
+    "CNS2UNICODE_Unicode 2.txt")
+cns_govspuaa = parsers.decode_main_plane_gl(
+    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
+    "CNS2UNICODE_Unicode 15.txt")
 cns_gov = parsers.fuse([cns_govbmp, cns_govsip, cns_govspuaa], "GOV-TW---CNS2UNICODE.json")
 
 cns_fullplane3 = list(cns) # Conversion from tuple creates a copy
@@ -117,8 +129,10 @@ for index in ir184_to_old_ir183:
 # ir171 was mostly kept the same until 2007, then extended a bit, due to being the non-kanji plane.
 graphdata.gsets["ir171"] = cns1 = (94, 2, cns[planesize * 0 : planesize * 1])
 graphdata.gsets["ir171-govtw"] = cns1_gov = (94, 2, cns_gov[planesize * 0 : planesize * 1])
-graphdata.gsets["ir171-ibm"] = euctw_g1_ibm = (94, 3,
-        parsers.read_main_plane("ICU/euc-tw-2014.ucm", plane=1))
+graphdata.gsets["ir171-ibm"] = euctw_g1_ibm = (94, 3, parsers.decode_main_plane_euc(
+    parsers.parse_file_format("ICU/euc-tw-2014.ucm"),
+    "euc-tw-2014.ucm",
+    plane = 1))
 graphdata.gsets["ir172"] = cns2 = (94, 2, cns[planesize * 1 : planesize * 2])
 
 # ISO-IR-183 deserves particular mention.
@@ -136,7 +150,10 @@ graphdata.gsets["ir172"] = cns2 = (94, 2, cns[planesize * 1 : planesize * 2])
 #   be the current 毵 versus the CNS11643.TXT 毶 at 69-26, both being itaiji of 02-49-32 毿).
 #   Note that an unrelated plane 14 was added in 2007.
 graphdata.gsets["ir183"] = cns3 = (94, 2, cns[planesize * 2 : planesize * 3])
-_ir183oldirg = parsers.read_main_plane("UTC/CNS11643.TXT", plane=14)
+_ir183oldirg = parsers.decode_main_plane_gl(
+    parsers.parse_file_format("UTC/CNS11643.TXT"),
+    "CNS11643.TXT",
+    plane = 14)
 _ir183nearfull = tuple(cns_fullplane3[planesize * 2 : planesize * 3])
 _ir183full = parsers.fuse([_ir183nearfull, _ir183oldirg], "ir183fullnew.json")
 _ir183fullalt = parsers.fuse([_ir183oldirg, _ir183nearfull], "ir183fullalt.json")
@@ -161,8 +178,9 @@ graphdata.gsets["cns-eucg2"] = euctw_g2 = (94, 3, cns)
 #   assignments were redundant and were skipped. Actually, the early full versions of
 #   cns-11643-1992.ucm include it as plane 9 for some reason (later versions remove
 #   it due to limiting that mapping's scope to ISO-2022-CN-EXT, then to ISO-2022-CN).
-graphdata.gsets["cns-eucg2-ibm"] = euctw_g2_ibm = (94, 3,
-        parsers.read_main_plane("ICU/euc-tw-2014.ucm"))
+graphdata.gsets["cns-eucg2-ibm"] = euctw_g2_ibm = (94, 3, parsers.decode_main_plane_euc(
+    parsers.parse_file_format("ICU/euc-tw-2014.ucm"),
+    "euc-tw-2014.ucm"))
 graphdata.gsetflags["cns-eucg2-ibm"] |= {"BIG5:IBMCOMPATKANJI"}
 
 # # # # # # # # # #
@@ -518,7 +536,10 @@ graphdata.gsets["ir171-ibm950"] = (94, 2, read_big5_planes("ICU/ibm-950_P110-199
 #   (differing only in the version of the snout radical used)
 graphdata.gsets["ir171-ibm1373"] = (94, 2, read_big5_planes("ICU/ibm-1373_P100-2002.ucm", big5_to_cns2, plane=1))
 graphdata.gsets["ir171-utcbig5"] = (94, 2, read_big5_planes("UTC/BIG5.TXT", big5_to_cns2, plane=1))
-graphdata.gsets["ir171-utc"] = (94, 2, parsers.read_main_plane("UTC/CNS11643.TXT", plane=1))
+graphdata.gsets["ir171-utc"] = (94, 2, parsers.decode_main_plane_gl(
+    parsers.parse_file_format("UTC/CNS11643.TXT"),
+    "CNS11643.TXT",
+    plane = 1))
 graphdata.gsets["ir171-1984moz"] = (94, 2, read_big5_planes("Mozilla/big5_1984.txt", big5_to_cns2, plane=1))
 # Basically the Windows one, but with the addition of the control pictures:
 graphdata.gsets["ir171-web"] = (94, 2, read_big5_planes("WHATWG/index-big5.txt", big5_to_cns2, plane=1))
@@ -526,12 +547,19 @@ graphdata.gsets["ir171-web"] = (94, 2, read_big5_planes("WHATWG/index-big5.txt",
 #
 # For IR-172 (unlike IR-171), MS, Mac, Web, Moz1984 and UTC-BIG5 actually match (while UTC-CNS differs)
 graphdata.gsets["ir172-big5"] = (94, 2, read_big5_planes("UTC/BIG5.TXT", big5_to_cns2, plane=2))
-graphdata.gsets["ir172-utc"] = (94, 2, parsers.read_main_plane("UTC/CNS11643.TXT", plane=2))
+graphdata.gsets["ir172-utc"] = (94, 2, parsers.decode_main_plane_gl(
+    parsers.parse_file_format("UTC/CNS11643.TXT"),
+    "CNS11643.TXT",
+    plane = 2))
 
 # Macintosh-compatibility variants
-maccnsdata = parsers.read_untracked_mbfile(read_big5_planes,
-             "Mac/CHINTRAD.TXT", "Mac---CHINTRAD_mainplane_ahmap.json", "Mac/macCNS.json", 
-             big5_to_cns_g2 = big5_to_cns2_ibmvar, mapper = variationhints.ahmap)
+maccnsdata = parsers.read_untracked(
+    "Mac/macCNS.json",
+    "Mac/CHINTRAD.TXT",
+    read_big5_planes,
+    "Mac/CHINTRAD.TXT",
+    big5_to_cns_g2 = big5_to_cns2_ibmvar,
+    mapper = variationhints.ahmap)
 graphdata.gsets["ir171-mac"] = (94, 2, maccnsdata[:94*94])
 #graphdata.gsets["ir172-mac"] = (94, 2, maccnsdata[94*94:94*94*2]) # same as ir172-big5
 
@@ -577,18 +605,36 @@ graphdata.gsets["ms950utcexts"] = msutc_big5_extras = (94, 2,
 #   point and is therefore not referenced (the LoC mapping also includes non-kanji).
 # I'm treating kCCCII as the best source for CCCII insofar as it covers.
 
-cccii_unihan = parsers.read_unihan_eacc("UCD/Unihan_OtherMappings.txt", "kCCCII", set96=True)
-graphdata.gsets["eacc-pure"] = (96, 3, parsers.read_main_plane("LoC/eacc2uni.txt", 
-                                libcongress=True, set96=True))
-graphdata.gsets["cccii-koha"] = (96, 3,
-        parsers.read_main_plane("Perl/Encode-HanExtra/ucm/cccii.ucm", set96=True))
-graphdata.gsets["eacc-hongkong"] = (96, 3, parsers.read_main_plane("Other/eacc-hongkonguni.txt", 
-                                    ignore_later_altucs=True, set96=True))
-maxmat1 = parsers.read_main_plane("Custom/cccii-maxmat.txt", set96=True)
-maxmat2 = parsers.read_main_plane("Custom/eacc-maxmat.txt", set96=True)
+cccii_unihan = parsers.read_unihan_planes("UCD/Unihan_OtherMappings.txt", "kCCCII", set96=True)
+graphdata.gsets["eacc-pure"] = (96, 3, parsers.decode_main_plane_gl(
+    parsers.parse_file_format("LoC/eacc2uni.txt", libcongress=True),
+    "eacc2uni.txt",
+    set96=True))
+graphdata.gsets["cccii-koha"] = (96, 3, parsers.decode_main_plane_gl(
+    parsers.parse_file_format("Perl/Encode-HanExtra/ucm/cccii.ucm"),
+    "cccii.ucm",
+    set96=True,
+    skip_invalid_kuten=True))
+graphdata.gsets["eacc-hongkong"] = (96, 3, parsers.decode_main_plane_gl(
+    parsers.parse_file_format("Other/eacc-hongkonguni.txt"),
+    "eacc-hongkonguni.txt",
+    set96=True, 
+    ignore_later_altucs=True,
+    skip_invalid_kuten=True))
+maxmat1 = parsers.decode_main_plane_gl(
+    parsers.parse_file_format("Custom/cccii-maxmat.txt"),
+    "cccii-maxmat.txt",
+    set96=True)
+maxmat2 = parsers.decode_main_plane_gl(
+    parsers.parse_file_format("Custom/eacc-maxmat.txt"),
+    "eacc-maxmat.txt",
+    set96=True)
 # The tilde sets (~cccii and ~eacc) are used in the process of (re)generating the maxmat files.
 graphdata.gsets["~cccii"] = (96, 3, parsers.fuse([
-    parsers.read_main_plane("Custom/cccii-nonkanji.txt", set96=True),
+    parsers.decode_main_plane_gl(
+        parsers.parse_file_format("Custom/cccii-nonkanji.txt"),
+        "cccii-nonkanji.txt",
+        set96=True),
     cccii_unihan,
     graphdata.gsets["cccii-koha"][2],
     graphdata.gsets["eacc-pure"][2],
@@ -601,7 +647,10 @@ graphdata.gsets["~eacc"] = (96, 3, parsers.fuse([
     ((None,) * (96 * 99)) + graphdata.gsets["~cccii"][2][96*99:],
 ], "EACC-Full-Raw.json"))
 graphdata.gsets["cccii"] = (96, 3, parsers.fuse([
-    parsers.read_main_plane("Custom/cccii-nonkanji.txt", set96=True),
+    parsers.decode_main_plane_gl(
+        parsers.parse_file_format("Custom/cccii-nonkanji.txt"),
+        "cccii-nonkanji.txt",
+        set96=True),
     maxmat1,
     cccii_unihan,
     graphdata.gsets["cccii-koha"][2],

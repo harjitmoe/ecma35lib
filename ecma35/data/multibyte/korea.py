@@ -196,13 +196,22 @@ finals = {'\u3132': '\u11a9', '\u3133': '\u11aa', '\u3135': '\u11ac', '\u3136': 
 compjamo = set(finals.keys()) | set(vowels.keys()) | set(initials.keys())
 
 # KS C 5601 / KS X 1001 EUC-KR Wansung RHS
-graphdata.gsets["ir149-ibm"] = wansung = (94, 2, parsers.read_main_plane("ICU/ibm-949_P110-1999.ucm", euckrlike=True))
+graphdata.gsets["ir149-ibm"] = wansung = (94, 2, parsers.decode_main_plane_euc(
+    parsers.parse_file_format("ICU/ibm-949_P110-1999.ucm"),
+    "ibm-949_P110-1999.ucm",
+    gbklike=True))
 graphdata.gsetflags["ir149-ibm"] |= {"UHC:IS_WANSUNG"}
-graphdata.gsets["ir149-1998"] = wansung = (94, 2, parsers.read_main_plane("WHATWG/index-euc-kr.txt", euckrlike=True))
+graphdata.gsets["ir149-1998"] = wansung = (94, 2, parsers.decode_main_plane_whatwg(
+    parsers.parse_file_format("WHATWG/index-euc-kr.txt"),
+    "index-euc-kr.txt", 
+    gbklike=True))
 graphdata.gsetflags["ir149-1998"] |= {"UHC:IS_WANSUNG"}
 # Pre Euro-sign update (also lacking the registered trademark sign)
 # Note that the post-Unicode-2.0 UTC mappings are harmonious with MS/HTML5 besides those characters:
-graphdata.gsets["ir149"] = wansung87 = (94, 2, parsers.read_main_plane("UTC/KSC5601.TXT", euckrlike=True))
+graphdata.gsets["ir149"] = wansung87 = (94, 2, parsers.decode_main_plane_euc(
+    parsers.parse_file_format("UTC/KSC5601.TXT"),
+    "KSC5601.TXT",
+    gbklike=True))
 graphdata.gsetflags["ir149"] |= {"UHC:IS_WANSUNG"}
 # Further updated (most recent?) version:
 _wansung_temp = parsers.fuse([
@@ -215,7 +224,9 @@ graphdata.gsetflags["ir149-2002"] |= {"UHC:IS_WANSUNG"}
 #   Catalan one, and using U+2236 rather than U+02D0 for the alternative colon)
 # Note that we basically have to dispose of its own hangul syllables section since they all correspond to
 #   codepoints now used for entirely different purposes (the event which prompted the Stability Policy)
-oldunicodeksc = parsers.read_main_plane("UTC/OLD5601.TXT")
+oldunicodeksc = parsers.decode_main_plane_gl(
+    parsers.parse_file_format("UTC/OLD5601.TXT"),
+    "OLD5601.TXT")
 _wansung_syllables = parsers.fuse([
             (((-1,),) * 1410) + ((None,) * 2350) + (((-1,),) * 5076),
             wansung[2]], "Wansung_SyllablesOnly.json")
@@ -230,64 +241,105 @@ def ahmap_nt(pointer, ucs):
     return variationhints.ahmap(pointer, ucs, variationhints.applesinglehints_mackorean_nishikiteki)
 
 # Apple and Elex's (Illekseu's) HangulTalk Wansung version
-rawmac2 =        parsers.read_untracked_mbfile(
-                 parsers.read_main_plane, "Mac/KOREAN_b02.TXT", "Mac---KOREAN_mainplane_b02.json", 
-                 "Mac/macWansung21.json", euckrlike=True)
+rawmac2 = parsers.read_untracked(
+    "Mac/macWansung21.json",
+    "Mac/KOREAN_b02.TXT",
+    parsers.decode_main_plane_euc,
+    parsers.parse_file_format("Mac/KOREAN_b02.TXT"),
+    "KOREAN_b02.TXT",
+    gbklike=True)
 macwansung21 = graphdata.gsets["ir149-mac-unicode2_1"] = (94, 2, rawmac2)
 graphdata.gsetflags["ir149-mac-unicode3_2"] |= {"UHC:IS_WANSUNG"}
-rawmac =         parsers.read_untracked_mbfile(
-                 parsers.read_main_plane, "Mac/KOREAN.TXT", "Mac---KOREAN_mainplane.json", 
-                 "Mac/macWansung32.json", euckrlike=True)
+rawmac = parsers.read_untracked(
+    "Mac/macWansung32.json",
+    "Mac/KOREAN.TXT",
+    parsers.decode_main_plane_euc,
+    parsers.parse_file_format("Mac/KOREAN.TXT"),
+    "KOREAN.TXT",
+    gbklike=True)
 macwansung32 = graphdata.gsets["ir149-mac-unicode3_2"] = (94, 2, rawmac)
 graphdata.gsetflags["ir149-mac-unicode3_2"] |= {"UHC:IS_WANSUNG"}
-rawmac4 =        parsers.read_untracked_mbfile(
-                 parsers.read_main_plane, "Mac/KOREAN.TXT", "Mac---KOREAN_mainplane_altcomments.json", 
-                 "Mac/macWansung40.json", euckrlike=True, altcomments=True)
+rawmac4 = parsers.read_untracked(
+    "Mac/macWansung40.json",
+    "Mac/KOREAN.TXT",
+    parsers.decode_main_plane_euc,
+    parsers.parse_file_format("Mac/KOREAN.TXT", altcomments=True),
+    "KOREAN.TXT",
+    gbklike=True)
 macwansung40 = graphdata.gsets["ir149-mac-unicode4_0"] = (94, 2, rawmac4)
 graphdata.gsetflags["ir149-mac-unicode4_0"] |= {"UHC:IS_WANSUNG"}
-macwansungdata = parsers.read_untracked_mbfile(
-                 parsers.read_main_plane, "Mac/KOREAN.TXT", "Mac---KOREAN_mainplane_ahmap.json", 
-                 "Mac/macWansung.json", euckrlike=True, mapper=ahmap_mk)
+macwansungdata = parsers.read_untracked(
+    "Mac/macWansung.json",
+    "Mac/KOREAN.TXT",
+    parsers.decode_main_plane_euc,
+    parsers.parse_file_format("Mac/KOREAN.TXT"),
+    "KOREAN.TXT",
+    gbklike=True,
+    mapper=ahmap_mk)
 macwansung = graphdata.gsets["ir149-mac"] = (94, 2, macwansungdata)
 graphdata.gsetflags["ir149-mac"] |= {"UHC:IS_WANSUNG"}
-macwansungdata_nt = parsers.read_untracked_mbfile(
-                 parsers.read_main_plane, "Mac/KOREAN.TXT", "Mac---KOREAN_mainplane_ahmapnt.json", 
-                 "Mac/macWansungNT.json", euckrlike=True, mapper=ahmap_nt)
+macwansungdata_nt = parsers.read_untracked(
+    "Mac/macWansungNT.json",
+    "Mac/KOREAN.TXT",
+    parsers.decode_main_plane_euc,
+    parsers.parse_file_format("Mac/KOREAN.TXT"),
+    "KOREAN.TXT",
+    gbklike=True,
+    mapper=ahmap_nt)
 macwansung = graphdata.gsets["ir149-mac-nishiki-teki"] = (94, 2, macwansungdata_nt)
 graphdata.gsetflags["ir149-mac-nishiki-teki"] |= {"UHC:IS_WANSUNG"}
 
 # Apple and Elex's (Illekseu's) secondary HangulTalk plane
-rawelex21 =      parsers.read_untracked_mbfile(
-                 read_elexextras, "Mac/KOREAN_b02.TXT", "Mac---KOREAN_elexextras_b02.json", 
-                 "Mac/macElex21.json")
+rawelex21 = parsers.read_untracked(
+    "Mac/macElex21.json",
+    "Mac/KOREAN_b02.TXT",
+    read_elexextras,
+    "Mac/KOREAN_b02.TXT")
 macelexextras21 = graphdata.gsets["mac-elex-extras-unicode2_1"] = (94, 2, rawelex21)
-rawelex =        parsers.read_untracked_mbfile(
-                 read_elexextras, "Mac/KOREAN.TXT", "Mac---KOREAN_elexextras.json", 
-                 "Mac/macElex32.json")
+rawelex = parsers.read_untracked(
+    "Mac/macElex32.json",
+    "Mac/KOREAN.TXT",
+    read_elexextras,
+    "Mac/KOREAN.TXT")
 macelexextras32 = graphdata.gsets["mac-elex-extras-unicode3_2"] = (94, 2, rawelex)
-rawelex4 =       parsers.read_untracked_mbfile(
-                 read_elexextras, "Mac/KOREAN.TXT", "Mac---KOREAN_elexextras_altcomments.json", 
-                 "Mac/macElex40.json", altcomments=True)
+rawelex4 = parsers.read_untracked(
+    "Mac/macElex40.json",
+    "Mac/KOREAN.TXT",
+    read_elexextras,
+    "Mac/KOREAN.TXT",
+    altcomments=True)
 macelexextras40 = graphdata.gsets["mac-elex-extras-unicode4_0"] = (94, 2, rawelex4)
-macelexdata =    parsers.read_untracked_mbfile(
-                 read_elexextras, "Mac/KOREAN.TXT", "Mac---KOREAN_elexextras_ahmap.json", 
-                 "Mac/macElex.json", mapper=ahmap_mk)
+macelexdata = parsers.read_untracked(
+    "Mac/macElex.json",
+    "Mac/KOREAN.TXT",
+    read_elexextras,
+    "Mac/KOREAN.TXT",
+    mapper=ahmap_mk)
 macelexextras = graphdata.gsets["mac-elex-extras"] = (94, 2, macelexdata)
-macelexdata_nt = parsers.read_untracked_mbfile(
-                 read_elexextras, "Mac/KOREAN.TXT", "Mac---KOREAN_elexextras_ahmapnt.json", 
-                 "Mac/macElexNT.json", mapper=ahmap_nt)
+macelexdata_nt = parsers.read_untracked(
+    "Mac/macElexNT.json",
+    "Mac/KOREAN.TXT",
+    read_elexextras,
+    "Mac/KOREAN.TXT",
+    mapper=ahmap_nt)
 macelexextrasnt = graphdata.gsets["mac-elex-extras-nishiki-teki"] = (94, 2, macelexdata_nt)
 macelexdata_adobe, elex2cid = read_elexextras_adobe("Adobe/AdobeKorea.txt")
 macelexextrasadobe = graphdata.gsets["mac-elex-extras-adobe"] = (94, 2, macelexdata_adobe)
 
 # KPS 9566
-graphdata.gsets["ir202-2011"] = kps9566_2011 = (94, 2, parsers.read_main_plane("UTCDocs/AppendixA_KPS9566-2011-to-Unicode.txt", euckrlike=True))
+graphdata.gsets["ir202-2011"] = kps9566_2011 = (94, 2, parsers.decode_main_plane_euc(
+    parsers.parse_file_format("UTCDocs/AppendixA_KPS9566-2011-to-Unicode.txt"),
+    "AppendixA_KPS9566-2011-to-Unicode.txt",
+    gbklike=True))
 graphdata.gsetflags["ir202-2011"] |= {"UHC:IS_KPS"}
-graphdata.gsets["ir202-2003"] = kps9566_2003 = (94, 2, parsers.read_main_plane("UTC/KPS9566.TXT", euckrlike=True))
+graphdata.gsets["ir202-2003"] = kps9566_2003 = (94, 2, parsers.decode_main_plane_euc(
+    parsers.parse_file_format("UTC/KPS9566.TXT"),
+    "KPS9566.TXT",
+    gbklike=True))
 graphdata.gsetflags["ir202-2003"] |= {"UHC:IS_KPS"}
 graphdata.gsetflags["ir202-2003"] |= {"UHC:Y_TREMA"}
 _kps_temp = parsers.fuse([
-            parsers.read_main_plane("Custom/kps-override.txt"),
+            parsers.decode_main_plane_gl(parsers.parse_file_format("Custom/kps-override.txt"), "kps-override.txt"),
             ((None,) * 6400) + ((0x67FF,),), # Correct mapping per UTC L2/21-059 (IRG N2479), differs from deployed.
             kps9566_2011[2], kps9566_2003[2]], "KPS_FullMapping.json")
 graphdata.gsets["ir202-full"] = (94, 2, _kps_temp)
@@ -305,15 +357,16 @@ graphdata.gsets["2011kpsextras"] = (94, 2, read_kps9566extras("UTCDocs/AppendixA
 
 # KS X 1002. I can't find charts, leave alone mappings, for the
 #   special characters / symbols, only for the syllables and hanja.
-ksx1002_hanja = parsers.read_unihan_source("UCD/Unihan_IRGSources.txt", "K", "K1")
-ksx1002_syllables = parsers.read_main_plane(
-    "UTCDocs/AppendixB-4300modernhangulsyllablesfromvarious94by94nationalstandards.txt",
-    utcl2_17_080 = "1002")
+ksx1002_hanja = parsers.read_unihan_planes("UCD/Unihan_IRGSources.txt", "kIRG_KSource", "K1")
+ksx1002_syllables = parsers.decode_main_plane_gl(
+    parsers.parse_file_format("UTCDocs/AppendixB-4300modernhangulsyllablesfromvarious94by94nationalstandards.txt",
+        utcl2_17_080 = "1002"),
+    "AppendixB-4300modernhangulsyllablesfromvarious94by94nationalstandards.txt")
 graphdata.gsets["ksx1002"] = (94, 2, parsers.fuse([ksx1002_hanja, ksx1002_syllables], "KSX1002-nosym.json"))
 
 # KS X 1027. Part 1 seems complete, part 2 has a lot of holes. Other parts are not ECMA-35 structured.
-graphdata.gsets["ksx1027_1"] = (94, 2, parsers.read_unihan_source("UCD/Unihan_IRGSources.txt", "K", "K2"))
-graphdata.gsets["ksx1027_2"] = (94, 2, parsers.read_unihan_source("UCD/Unihan_IRGSources.txt", "K", "K3"))
+graphdata.gsets["ksx1027_1"] = (94, 2, parsers.read_unihan_planes("UCD/Unihan_IRGSources.txt", "kIRG_KSource", "K2"))
+graphdata.gsets["ksx1027_2"] = (94, 2, parsers.read_unihan_planes("UCD/Unihan_IRGSources.txt", "kIRG_KSource", "K3"))
 
 # Amounting to the entirety of the UHC extensions, in order:
 non_wangsung_johab = [i for i in range(0xAC00, 0xD7A4) 

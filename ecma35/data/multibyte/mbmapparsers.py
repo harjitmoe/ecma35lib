@@ -1,36 +1,84 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020.
+# By HarJIT in 2019/2020/2021.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import os, binascii, json, urllib.parse, shutil
+import sys, os, binascii, json, urllib.parse, shutil, itertools, dbm.dumb, collections.abc
 from ecma35.data import gccdata
 
 directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mbmaps")
-cachedirectory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mbmapscache")
-_temp = []
+cachedirectory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mbmapscache.d")
+cachedbmfn = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mbmapscache")
+
 def identitymap(pointer, ucs):
     return ucs
 
 if (os.environ.get("ECMA35LIBDECACHE", "") == "1") and os.path.exists(cachedirectory):
     shutil.rmtree(cachedirectory)
-    os.makedirs(cachedirectory)
+    os.unlink(cachedbmfn + ".dir")
+    os.unlink(cachedbmfn + ".dat")
+    os.unlink(cachedbmfn + ".bak")
+
+os.makedirs(cachedirectory, exist_ok=True)
+try:
+    cachedbm = dbm.dumb.open(cachedbmfn, "c")
+except EnvironmentError:
+    cachedbm = {}
+
+def return_to_list(f):
+    def inner(*args, **kwargs):
+        return list(f(*args, **kwargs))
+    return inner
+
+def return_to_tuple(f):
+    def inner(*args, **kwargs):
+        return tuple(f(*args, **kwargs))
+    return inner
+
+def with_caching(f):
+    def inner(*args, **kwargs):
+        filtargs = [i for i in args if not isinstance(i, collections.abc.Generator)]
+        filtkwargs = {}
+        for key in kwargs:
+            if hasattr(kwargs[key], "__call__"):
+                filtkwargs[key] = kwargs[key].__name__
+            else:
+                filtkwargs[key] = kwargs[key]
+        token = json.dumps([f.__name__, filtargs, filtkwargs])
+        if token in cachedbm:
+            return LazyJSON(token, isfilecache=False)
+        ret = f(*args, **kwargs)
+        try:
+            cachedbm[token] = json.dumps(ret)
+        except EnvironmentError:
+            pass
+        return ret
+    return inner
 
 class LazyJSON(list):
-    def __init__(self, filename, iscache=True):
-        if iscache:
+    def __init__(self, filename, iscache=True, isfilecache=True):
+        if iscache and not isfilecache:
+            assert filename[0] != "/"
+            self._key = filename
+            self._filename = None
+        elif iscache and isfilecache:
             self._filename = os.path.join(cachedirectory, filename)
+            self._key = None
         else:
             self._filename = os.path.join(directory, filename)
+            self._key = None
     def _load(self):
         if not super().__len__():
-            # print("Loading", self._filename)
-            f = open(self._filename)
-            super().extend(tuple(i) if isinstance(i, list) else i for i in json.load(f))
-            f.close()
+            if self._filename:
+                f = open(self._filename)
+                super().extend(tuple(i) if isinstance(i, list) else i for i in json.load(f))
+                f.close()
+            else:
+                super().extend(tuple(i) if isinstance(i, list) else i
+                    for i in json.loads(cachedbm[self._key]))
     def __iter__(self):
         self._load()
         return super().__iter__()
@@ -73,83 +121,28 @@ class LazyJSON(list):
     def pop(self, n=None):
         raise TypeError("immutable")
 
-def _grok_sjis(byts):
-    if not isinstance(byts, int):
-        pku = byts[0]
-        if pku > 0xA0:
-            pku -= 0x40
-        pku -= 0x81
-        pten = byts[1]
-        if pten > 0x7F:
-            pten -= 1
-        pten -= 0x40
-        if pten >= 94:
-            ku = (pku * 2) + 2
-            ten = pten - 93
-        else:
-            ku = (pku * 2) + 1
-            ten = pten + 1
-    else: # i.e. it's a pointer from a WHATWG file (still needs this, to process the SJIS trailer)
-        ku = (byts // 94) + 1
-        ten = (byts % 94) + 1
-    #
-    if ku <= 94:
-        men = 1
-    elif ku <= 103:
-        men = 2
-        ku = (1, 8, 3, 4, 5, 12, 13, 14, 15)[ku - 95]
+@return_to_tuple
+def parse_ucs_codepoints(string):
+    for point in string.lstrip("<U+").rstrip(">").split(
+            None if " " in string.strip()
+            else "><" if "><" in string
+            else "+"):
+        yield int(point.lstrip("0xU+") or "0", 16)
+
+@return_to_list
+def readhexbytes(byt):
+    if "\\x" in byt:
+        for i in byt.lstrip("x\\").split("\\x"):
+            yield int(i, 16)
     else:
-        men = 2
-        ku = ku + 78 - 104
-    return men, ku, ten
+        if byt[:2] == "0x":
+            byt = byt[2:]
+        while byt:
+            yield int(byt[:2], 16)
+            byt = byt[2:]
 
-def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=False,
-                    skipstring=None, plane=None, altcomments=False, mapper=identitymap,
-                    ignore_later_altucs=False, set96=False, libcongress=False, 
-                    utcl2_17_080=None, cidmap=None, gb12052=False):
-    """
-    Read a mapping from a file in the directory given by mbmapparsers.directory.
-    Only positional argument is the name (including subdirectory) of that file.
-
-    Keyword arguments are as follows:
-
-    - eucjp: interpret as EUC format, with planes 01 and 02 invoked with GR and
-      SS3-over-GR respectively. (If neither this nor euckrlike is passed, UTC
-      format is interpreted as one plane over GL, and ICU format is interpreted
-      as the format used for ICU's CNS 11643 mappings.)
-    - euckrlike: interpret as an EUC format with non-EUC extensions; read only
-      the main plane.
-    - altcomments: prefer mappings in "# or" comments over nominal.
-    - sjis: interpret (a UTC or ICU format mapping) as Shift_JIS encoded.
-    - skipstring: particular substring denoting a line must be skipped.
-    - twoway: (if the file is in ICU format) ignore one-way decoder mappings.
-      This is ignored for the other supported formats, since they do not
-      annotate which mappings are also used by the encoder.
-    - plane: isolate only one plane of a multi-plane mapping (e.g. CNS 11643).
-    """
-    ST, ED, SZ = (1, 94, 94) if not set96 else (0, 95, 96)
-    if mapper is identitymap:
-        mappername = ""
-    elif mapper.__name__ != "<lambda>":
-        mappername = "_" + mapper.__name__
-    else:
-        mappername = "_FIXME"
-    #
-    if altcomments:
-        mappername += "_altcomments"
-    #
-    if skipstring:
-        mappername += "_skip" + urllib.parse.quote(skipstring)
-    if twoway:
-        mappername += "_twoway"
-    if utcl2_17_080 or cidmap:
-        mappername += "_" + (utcl2_17_080 or cidmap[0])
-    cachebfn = os.path.splitext(fil)[0].replace("/", "---") + ("_plane{:02d}".format(plane)
-               if plane is not None else "_mainplane") + mappername + ".json"
-    cachefn = os.path.join(cachedirectory, cachebfn)
-    if os.path.exists(cachefn):
-        # Cache output since otherwise several seconds are spend in here upon importing graphdata
-        return LazyJSON(cachefn)
+def parse_file_format(fil, *, twoway=False, prefer_sjis=False, skipstring=None, altcomments=False, 
+                      libcongress=False, utcl2_17_080=None, cidmap=None, gb12052=False):
     cidmapnames = None
     for _i in open(os.path.join(directory, fil), "r", encoding="utf-8"):
         if not _i.strip():
@@ -163,69 +156,50 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
             if utcl2_17_080 == "wansung":
                 if wansung == "-":
                     continue
-                assert wansung[:2] == "0x"
-                ku = int(wansung[2:4], 16) - 0xA0
-                ten = int(wansung[4:], 16) - 0xA0
+                yield readhexbytes(wansung), parse_ucs_codepoints(ucs)
             elif utcl2_17_080 == "1002":
                 if ksx1002 == "-":
                     continue
-                assert ksx1002[:2] == "0x"
-                ku = int(ksx1002[2:4], 16) - 0x20
-                ten = int(ksx1002[4:], 16) - 0x20
+                yield readhexbytes(ksx1002), parse_ucs_codepoints(ucs)
             elif utcl2_17_080 == "kps":
                 if kps == "-":
                     continue
-                assert kps[:2] == "0x"
-                ku = int(kps[2:4], 16) - 0xA0
-                ten = int(kps[4:], 16) - 0xA0
+                yield readhexbytes(kps), parse_ucs_codepoints(ucs)
             elif utcl2_17_080 == "gbko":
                 if gbko == "-":
                     continue
-                assert gbko[:2] == "0x"
-                ku = int(gbko[2:4], 16) - 0xA0
-                ten = int(gbko[4:], 16) - 0xA0
+                yield readhexbytes(gbko), parse_ucs_codepoints(ucs)
             else:
                 raise ValueError("unrecognised utcl2_17_080 arg: {!r}".format(utcl2_17_080))
-            mkts = ((1, ku, ten),)
         elif cidmap:
             frm, to = cidmap
             if not cidmapnames:
                 cidmapnames = _i.rstrip().split("\t")
                 continue
             values = _i.rstrip().split("\t")
-            byts = values[cidmapnames.index(frm)]
-            ucs = values[cidmapnames.index(frm)].split(",", 1)[0]
+            if cidmapnames.index(frm) > 0:
+                yield readhexbytes(values[cidmapnames.index(frm)]), parse_ucs_codepoints(values[cidmapnames.index(to)])
+            else:
+                yield int(values[cidmapnames.index(frm)], 10), parse_ucs_codepoints(values[cidmapnames.index(to)])
         elif gb12052:
             kuten, bit7, euc, ucs = _i.split(None, 3)
             ucs = ucs.split("#", 1)[0].strip()
-            ku, ten = kuten.split("-")
-            ku = int(ku, 10)
-            ten = int(ten, 10)
-            ucs = "+".join(ucs.replace("U+", "").split())
-            mkts = ((1, ku, ten),)
             if "Hunminjeongeum Haerye style" in _i:
-                ucs += "+F87F"
+                ucs += " U+F87F"
+            yield readhexbytes(euc), parse_ucs_codepoints(ucs)
         elif libcongress:
             # CSV of (1) 3-byte GL, (2) UCS or PUA, (3) nothing or geta mark, (4) rubbish
             byts, ucs, rubbish = _i.split(",", 2)
-            men = int(byts[:2], 16) - 0x20
-            ku = int(byts[2:4], 16) - 0x20
-            ten = int(byts[4:], 16) - 0x20
-            if plane is not None: # i.e. if we want a particular plane's two-byte mapping.
-                if men != plane:
-                    continue
-                else:
-                    men = 1
-            mkts = ((men, ku, ten),)
+            yield readhexbytes(byts), parse_ucs_codepoints(ucs)
         elif _i[0] == "<" and _i[:2] != "<U":
             continue # is ICU metadata or state machine config which isn't relevant to us.
         elif _i.strip() in ("CHARMAP", "END CHARMAP"):
             continue # ICU delimitors we don't care about.
         elif _i[:2] == "0x":
-            # Consortium-style format, over GL (or GR with eucjp=1) without transformation.
+            # Consortium-style format
             if _i.split("#", 1)[0].replace("+0x", "+").count("0x") == 3:
-                # Consortium-style format for JIS X 0208 (just skip the SJIS column)
-                if not sjis:
+                # Consortium-style format for JIS X 0208 (just skip the other column)
+                if not prefer_sjis:
                     _i = _i.split("\t", 1)[1]
                 else:
                     _i = "\t".join(_i.split("\t", 2)[1::2])
@@ -240,135 +214,30 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
                 ucs = ucs.lstrip().split(None, 1)[0].rstrip(",")
             else:
                 byts, ucs = _i.split("\t", 2)[:2]
-            #
-            if sjis:
-                if len(byts) == 6:
-                    men, ku, ten = _grok_sjis([int(byts[2:4], 16), int(byts[4:], 16)])
-                else:
-                    continue
-            elif not (eucjp or euckrlike):
-                if len(byts) == 6:
-                    men = 1
-                    ku = int(byts[2:4], 16) - 0x20
-                    ten = int(byts[4:6], 16) - 0x20
-                elif len(byts) == 7:
-                    # Like the Consortium supplied CNS 11643 mappings
-                    men = int(byts[2], 16)
-                    ku = int(byts[3:5], 16) - 0x20
-                    ten = int(byts[5:7], 16) - 0x20
-                else:
-                    assert len(byts) == 8
-                    men = int(byts[2:4], 16) - 0x20
-                    ku = int(byts[4:6], 16) - 0x20
-                    ten = int(byts[6:8], 16) - 0x20
-                    if (not ST <= ten <= ED) or (not ku >= ST):
-                        continue
+            if not ucs.strip():
+                continue
+            if byts.startswith("0x") and len(byts) == 7:
+                # Format of UTC mappings of CNS 11643
+                yield itertools.chain([int(byts[2], 16)], readhexbytes(byts[3:])), parse_ucs_codepoints(ucs)
             else:
-                men = 1
-                if byts[2].upper() in "01234567": # ASCII
-                    continue
-                elif eucjp and byts[2:4].upper() == "8E": # Half-width Katakana (via SS2)
-                    continue
-                elif eucjp and byts[2:4].upper() == "8F":
-                    if len(byts) == 4: # i.e. SS3 itself rather than an SS3 sequence
-                        continue
-                    byts = byts[2:]
-                    men = 2
-                elif byts[2].upper() in ("8", "9"): # Remaining CR C1 controls
-                    continue
-                elif not ucs.strip(): # i.e. code not used
-                    continue
-                elif len(byts) == 4:
-                    continue
-                ku = int(byts[2:4], 16) - 0xA0
-                ten = int(byts[4:6], 16) - 0xA0
-                if euckrlike and ((ku < ST) or (ku > ED) or (ten < ST) or (ten > ED)):
-                    continue
-            if plane is not None: # i.e. if we want a particular plane's two-byte mapping.
-                if men != plane:
-                    continue
-                else:
-                    men = 1
-            mkts = ((men, ku, ten),)
+                yield readhexbytes(byts), parse_ucs_codepoints(ucs)
         elif _i[:2] == "<U":
-            # ICU-style format, over GL or as EUC
+            # ICU-style format
             ucs, byts, direction = _i.split(" ", 2)
-            assert byts[:2] == "\\x"
-            byts = [int(i, 16) for i in byts[2:].split("\\x")]
             if (direction.strip() == "|1") or (direction.strip() == "|2") or (twoway and (direction.strip() == "|3")):
                 # |0 means a encoder/decoder two-way mapping
                 # |1 appears to mean an encoder-only mapping, e.g. fallback ("best fit")
                 # |2 appears to mean a substitute mapping, e.g. to the SUB control.
                 # |3 appears to mean a decoder-only mapping (disfavoured duplicate)
                 continue
-            if len(byts) == 4:
-                assert byts[0] == 0x8E
-                assert not eucjp
-                men = byts[1] - 0xA0
-                ku = byts[2] - 0xA0
-                ten = byts[3] - 0xA0
-            elif len(byts) == 3:
-                if eucjp:
-                    if byts[0] == 0x8F: # SS3
-                        men = 2
-                    else:
-                        continue
-                else:
-                    if 0x80 < byts[0] < 0xA0: # cns-11643-1992.ucm does this for some reason.
-                        men = byts[0] - 0x80
-                    else:
-                        men = byts[0] - 0x20
-                #
-                if eucjp:
-                    ku = byts[1] - 0xA0
-                    ten = byts[2] - 0xA0
-                    assert sjis or ST <= ku <= ED, (_i, byts[1], byts[2])
-                    assert sjis or ST <= ten <= ED, (_i, byts[1], byts[2])
-                else:
-                    ku = byts[1] - 0x20
-                    ten = byts[2] - 0x20
-                    if (not ST <= ten <= ED) or (not ku >= ST):
-                        continue
-            elif len(byts) == 2:
-                if sjis:
-                    men, ku, ten = _grok_sjis(byts)
-                else:
-                    men = 1
-                    if byts[0] >= 0xA0:
-                        ku = byts[0] - 0xA0
-                        ten = byts[1] - 0xA0
-                    elif eucjp and byts[0] == 0x8E: # SS2
-                        continue
-                    else:
-                        ku = byts[0] - 0x20
-                        ten = byts[1] - 0x20
-                    assert sjis or euckrlike or ST <= ten <= ED, (_i, byts[0], byts[1])
-                    if euckrlike and ((ku < ST) or (ku > ED) or (ten < ST) or (ten > ED)):
-                        continue
-            else:
-                assert len(byts) == 1
-                continue
-            #
-            if plane is not None: # i.e. if we want a particular plane's two-byte mapping.
-                if men != plane:
-                    continue
-                else:
-                    men = 1
-            mkts = ((men, ku, ten),)
+            assert byts[:2] == "\\x"
+            yield readhexbytes(byts), parse_ucs_codepoints(ucs)
         elif "-" in _i[:3]: # Maximum possible plane number is 95, so this will remain correct
             # Format of the Taiwanese government supplied CNS 11643 mapping data
             cod, ucs = _i.split("\t", 2)[:2]
             men, byts = cod.split("-")
             men = int(men, 10)
-            assert len(byts) == 4
-            ku = int(byts[:2], 16) - 0x20
-            ten = int(byts[2:], 16) - 0x20
-            if plane is not None: # i.e. if we want a particular plane's two-byte mapping.
-                if men != plane:
-                    continue
-                else:
-                    men = 1
-            mkts = ((men, ku, ten),)
+            yield itertools.chain([men], readhexbytes(byts)), parse_ucs_codepoints(ucs)
         elif ("\t" in _i) and ("-" in _i.split("\t", 1)[1][:3]):
             # Format of Koichi Yasuoka's CNS 11643 mapping data
             while _i.count("\t") < 4:
@@ -380,212 +249,284 @@ def read_main_plane(fil, *, eucjp=False, euckrlike=False, twoway=False, sjis=Fal
                     continue
                 men, byts = cod.rstrip().split("-")
                 men = int(men, 10)
-                assert len(byts) == 4, repr(byts)
-                ku = int(byts[:2], 16) - 0x20
-                ten = int(byts[2:], 16) - 0x20
-                if plane is not None: # i.e. if we want a particular plane's two-byte mapping.
-                    if men != plane:
-                        continue
-                    else:
-                        men = 1
-                mkts += ((men, ku, ten),)
-        elif not euckrlike:
-            # Format of the WHATWG-supplied indices for Windows-31J and JIS X 0212.
-            byts, ucs = _i.split("\t", 2)[:2]
-            pointer = int(byts.strip(), 10)
-            men, ku, ten = _grok_sjis(pointer)
-            if men != 1 and not sjis:
-                continue
-            if plane is not None: # i.e. if we want a particular plane's two-byte mapping.
-                if men != plane:
-                    continue
-                else:
-                    men = 1
-            mkts = ((men, ku, ten),)
-            if ku > ED:
-                continue
+                yield itertools.chain([men], readhexbytes(byts)), parse_ucs_codepoints(ucs)
         elif _i == "\x1a":
             # EOF on an older (MS-DOS) text file
             continue
         else:
-            # Format of the WHATWG-supplied indices for UHC and GBK.
+            # Format of the WHATWG-supplied indices
             byts, ucs = _i.split("\t", 2)[:2]
-            extpointer = int(byts.strip(), 10)
+            pointer = int(byts.strip(), 10)
+            yield pointer, parse_ucs_codepoints(ucs)
+
+def _sjis_xkt_to_mkt(ku, ten):
+    if ku <= 94:
+        men = 1
+    elif ku <= 103:
+        men = 2
+        ku = (1, 8, 3, 4, 5, 12, 13, 14, 15)[ku - 95]
+    else:
+        men = 2
+        ku = ku + 78 - 104
+    return men, ku, ten
+
+def _parse_sjis(byts):
+    pku = byts[0]
+    if pku > 0xA0:
+        pku -= 0x40
+    pku -= 0x81
+    pten = byts[1]
+    if pten > 0x7F:
+        pten -= 1
+    pten -= 0x40
+    if pten >= 94:
+        ku = (pku * 2) + 2
+        ten = pten - 93
+    else:
+        ku = (pku * 2) + 1
+        ten = pten + 1
+    return _sjis_xkt_to_mkt(ku, ten)
+
+def _parse_whatwg_jispointer(pointer):
+    ku = (pointer // 94) + 1
+    ten = (pointer % 94) + 1
+    return _sjis_xkt_to_mkt(ku, ten)
+
+def _fill_to_plane_boundary(planelist, SZ):
+    planelist.extend([None] * (((SZ * SZ) - (len(planelist) % (SZ * SZ))) % (SZ * SZ)))
+    if not planelist:
+        planelist.extend([None] * (SZ * SZ))
+
+def _put_at(planelist, pointer, iucs, ignore_later_altucs):
+    if len(planelist) > pointer:
+        if ignore_later_altucs and planelist[pointer] is not None:
+            return
+        assert planelist[pointer] is None, (pointer, planelist[pointer], iucs)
+        planelist[pointer] = iucs
+    else:
+        planelist.extend([None] * (pointer - len(planelist)))
+        planelist.append(iucs)
+
+def _limits(set96):
+    return (1, 94, 94) if not set96 else (0, 95, 96)
+
+def _main_plane_pointer(men, ku, ten, plane_wanted, set96):
+    ST, ED, SZ = _limits(set96)
+    if plane_wanted is not None: # i.e. if we want a particular plane's two-byte mapping.
+        if men != plane_wanted:
+            return None
+        else:
             men = 1
-            ku = (extpointer // 190) - 31
-            ten = (extpointer % 190) - 95
-            mkts = ((men, ku, ten),)
+    assert (ST <= ten <= ED) and (ku >= ST), (men, ku, ten)
+    pointer = ((men - ST) * SZ * SZ) + ((ku - ST) * SZ) + (ten - ST)
+    assert pointer >= 0, (men, ku, ten, plane_wanted, ST, ED, SZ, set96)
+    return pointer
+
+@with_caching
+def decode_main_plane_euc(parsed_stream, filenamekey, *, eucjp=False, gbklike=False, plane=None, 
+                          mapper=identitymap, ignore_later_altucs=False, set96=False):
+    # The filenamekey argument is absolutely needed for the @with_caching since the parsed_stream
+    #   is not incorporated into the memo key for obvious reasons—it is otherwise unused.
+    ST, ED, SZ = _limits(set96)
+    _temp = []
+    for coded, ucs in parsed_stream:
+        if len(coded) == 4:
+            # EUC-TW four-byte codes
+            assert coded[0] == 0x8E
+            assert not eucjp
+            men = coded[1] - 0xA0
+            ku = coded[2] - 0xA0
+            ten = coded[3] - 0xA0
+        else:
+            men = 1
+            if coded[0] < 0x80: # ASCII
+                continue
+            elif eucjp and coded[0] == 0x8E: # Half-width Katakana (via SS2)
+                continue
+            elif eucjp and coded[0] == 0x8F:
+                if len(coded) == 1: # i.e. SS3 itself rather than an SS3 sequence
+                    continue
+                coded = coded[1:]
+                men = 2
+            elif 0x80 <= coded[0] < 0xA0: # Remaining CR C1 controls
+                continue
+            elif len(coded) == 1:
+                continue
+            ku = coded[0] - 0xA0
+            ten = coded[1] - 0xA0
+            if gbklike and ((ku < ST) or (ku > ED) or (ten < ST) or (ten > ED)):
+                continue # Not in the main plane
+        pointer = _main_plane_pointer(men, ku, ten, plane, set96)
+        if pointer == None:
+            continue
+        iucs = mapper(pointer, ucs)
+        _put_at(_temp, pointer, iucs, ignore_later_altucs)
+    _fill_to_plane_boundary(_temp, SZ)
+    return tuple(_temp)
+
+@with_caching
+def decode_main_plane_gl(parsed_stream, filenamekey, *, plane=None, mapper=identitymap,
+                         ignore_later_altucs=False, set96=False, skip_invalid_kuten=True):
+    # The filenamekey argument is absolutely needed for the @with_caching since the parsed_stream
+    #   is not incorporated into the memo key for obvious reasons—it is otherwise unused.
+    ST, ED, SZ = _limits(set96)
+    _temp = []
+    for coded, ucs in parsed_stream:
+        coded = list(coded)
+        if len(coded) == 2:
+            # 7-bit two-byte codes
+            men = 1
+            ku = coded[0] - 0x20
+            ten = coded[1] - 0x20
+        elif len(coded) == 3 and coded[0] < 0x1B:
+            # Like the Consortium supplied CNS 11643 mappings
+            men = coded[0]
+            ku = coded[1] - 0x20
+            ten = coded[2] - 0x20
+        elif len(coded) == 3 and 0x80 < coded[0] < 0xA0:
+            # cns-11643-1992.ucm does this for some reason.
+            men = coded[0] - 0x80
+            ku = coded[1] - 0x20
+            ten = coded[2] - 0x20
+        else:
+            # 7-bit three-byte codes
+            assert len(coded) == 3
+            men = coded[0] - 0x20
+            ku = coded[1] - 0x20
+            ten = coded[2] - 0x20
+        if skip_invalid_kuten and (not (ST <= ku <= ED) or not (ST <= ten <= ED)):
+            continue
+        pointer = _main_plane_pointer(men, ku, ten, plane, set96)
+        if pointer == None:
+            continue
+        iucs = mapper(pointer, ucs)
+        _put_at(_temp, pointer, iucs, ignore_later_altucs)
+    _fill_to_plane_boundary(_temp, SZ)
+    return tuple(_temp)
+
+@with_caching
+def decode_main_plane_sjis(parsed_stream, filenamekey, *, plane=None, mapper=identitymap,
+                           ignore_later_altucs=False):
+    # The filenamekey argument is absolutely needed for the @with_caching since the parsed_stream
+    #   is not incorporated into the memo key for obvious reasons—it is otherwise unused.
+    _temp = []
+    for coded, ucs in parsed_stream:
+        if len(coded) == 2:
+            men, ku, ten = _parse_sjis(coded)
+        else:
+            continue
+        pointer = _main_plane_pointer(men, ku, ten, plane, False)
+        if pointer == None:
+            continue
+        iucs = mapper(pointer, ucs)
+        _put_at(_temp, pointer, iucs, ignore_later_altucs)
+    _fill_to_plane_boundary(_temp, 94)
+    return tuple(_temp)
+
+@with_caching
+def decode_main_plane_whatwg(parsed_stream, filenamekey, *, gbklike=False, plane=None, 
+                             mapper=identitymap, ignore_later_altucs=False, set96=False):
+    # The filenamekey argument is absolutely needed for the @with_caching since the parsed_stream
+    #   is not incorporated into the memo key for obvious reasons—it is otherwise unused.
+    ST, ED, SZ = (1, 94, 94) if not set96 else (0, 95, 96)
+    _temp = []
+    for coded, ucs in parsed_stream:
+        if gbklike:
+            # Like WHATWG-supplied indices for UHC and GBK.
+            men = 1
+            ku = (coded // 190) - 31
+            ten = (coded % 190) - 95
             if not ((ST <= ku <= ED) and (ST <= ten <= ED)):
                 continue
-        if ucs[:2] in ("0x", "U+", "<U"):
-            ucs = ucs[2:]
-        for men, ku, ten in mkts:
-            assert (ST <= ten <= ED) and (ku >= ST), (men, ku, ten)
-            if not set96:
-                pointer = ((men - 1) * 94 * 94) + ((ku - 1) * 94) + (ten - 1)
-            else:
-                pointer = (men * 96 * 96) + (ku * 96) + ten
-            iucs = mapper(pointer, tuple(int(j, 16) for j in ucs.rstrip(">").split("+")))
-            if len(_temp) > pointer:
-                if ignore_later_altucs and _temp[pointer] is not None:
-                    continue
-                else:
-                    assert _temp[pointer] is None, (men, ku, ten, pointer, _temp[pointer], iucs)
-                _temp[pointer] = iucs
-            else:
-                _temp.extend([None] * (pointer - len(_temp)))
-                _temp.append(iucs)
-    # Try to end it on a natural plane boundary.
-    _temp.extend([None] * (((SZ * SZ) - (len(_temp) % (SZ * SZ))) % (SZ * SZ)))
-    if not _temp:
-        _temp.extend([None] * (SZ * SZ)) # Don't just return an empty tuple.
-    r = tuple(_temp) # Making a tuple makes a copy, of course.
-    del _temp[:]
-    # Write output cache.
-    f = open(cachefn, "w")
-    f.write(json.dumps(r))
-    f.close()
-    return r
+        else:
+            # Like WHATWG-supplied indices for Windows-31J and JIS X 0212.
+            men, ku, ten = _parse_whatwg_jispointer(coded)
+        pointer = _main_plane_pointer(men, ku, ten, plane, set96)
+        if pointer == None:
+            continue
+        iucs = mapper(pointer, ucs)
+        _put_at(_temp, pointer, iucs, ignore_later_altucs)
+    _fill_to_plane_boundary(_temp, SZ)
+    return tuple(_temp)
 
-def read_unihan_source(fil, region, source):
-    cachebfn = os.path.splitext(fil)[0].replace("/", "---") + ("_{}_{}".format(region, source)
-               ) + ".json"
-    cachefn = os.path.join(cachedirectory, cachebfn)
-    if os.path.exists(cachefn):
-        return LazyJSON(cachefn)
-    wantkey = "kIRG_" + region + "Source"
-    wantsource = source + "-"
+@with_caching
+def decode_gbk_non_uro_extras(parsed_stream, filenamekey):
+    # The filenamekey argument is absolutely needed for the @with_caching since the parsed_stream
+    #   is not incorporated into the memo key for obvious reasons—it is otherwise unused.
+    #
+    # Read GBK/5 and the non-URO part of GBK/4 to an array. Since this part of the
+    # mapping cannot be generated automatically from the GB 2312 mapping.
+    _temp = []
+    for coded, ucs in parsed_stream:
+        if not isinstance(coded, int):
+            byts = list(coded)
+            if len(byts) == 1:
+                continue
+            assert len(byts) == 2
+            pseudoku = byts[0] - 0x81
+            pseudoten = byts[1] - 0x40
+            if byts[1] >= 0x7F:
+                assert byts[1] != 0x7F
+                pseudoten -= 1
+        else:
+            pseudoku = (coded // 190)
+            pseudoten = (coded % 190)
+        if pseudoku <= 0x1F or ((pseudoku == 0x7C) and (pseudoten <= 90)) or (0x29 <= pseudoku < 0x7C):
+            continue
+        elif pseudoten > 95:
+            continue
+        pseudoku2 = pseudoku - 0x1F
+        _put_at(_temp, (pseudoku2 * 96) + pseudoten, ucs, False)
+    _fill_to_plane_boundary(_temp, 96)
+    return tuple(_temp)
+
+@with_caching
+def read_unihan_planes(fil, wantkey, wantsource=None, set96=False):
+    #wantkey = "kIRG_" + region + "Source"
+    ST, ED, SZ = (1, 94, 94) if not set96 else (0, 95, 96)
     f = open(os.path.join(directory, fil), "r")
+    if wantsource:
+        wantsource += "-"
+    _temp = []
     for i in f:
         if i[0] == "#":
             continue
         elif not i.strip():
             continue
         ucs, prop, data = i.strip().split("\t", 2)
-        if (prop != wantkey) or (not data.startswith(wantsource)):
+        if (prop != wantkey) or (wantsource and not data.startswith(wantsource)):
             continue
         assert ucs[:2] == "U+"
         ucs = int(ucs[2:], 16)
-        dat = data[len(wantsource):]
-        assert (len(dat) == 4)
-        ku = int(dat[:2], 16) - 0x20
-        ten = int(dat[2:], 16) - 0x20
-        pointer = ((ku - 1) * 94) + (ten - 1)
-        if len(_temp) > pointer:
-            assert _temp[pointer] is None, (i, ku, ten, pointer, _temp[pointer], (ucs,))
-            _temp[pointer] = (ucs,)
+        if (ucs == 0x4EBE) and (wantkey == "kCCCII"):
+            # CCCII 0x2D305B is mapped to both U+4EBE 亾 (also EACC 0x2D305B) and
+            #   U+5166 兦 (which matches cccii.ucm, which uses CCCII 0x33305B for U+4EBE).
+            # Both are apparently y-variants of U+4EA1 (亡, CCCII 0x21305B)
+            # Kludge to get this to work.
+            continue
+        if wantsource:
+            data = data[len(wantsource):]
+        if len(data) == 6:
+            men = int(data[:2], 16) - 0x20
+            ku = int(data[2:4], 16) - 0x20
+            ten = int(data[4:], 16) - 0x20
         else:
-            while len(_temp) < pointer:
-                _temp.append(None)
-            _temp.append((ucs,))
-    # Try to end it on a natural plane boundary.
-    _temp.extend([None] * (((94 * 94) - (len(_temp) % (94 * 94))) % (94 * 94)))
-    if not _temp:
-        _temp.extend([None] * (94 * 94)) # Don't just return an empty tuple.
-    ret = tuple(_temp)
-    del _temp[:]
-    # Write output cache.
-    f = open(cachefn, "w")
-    f.write(json.dumps(ret))
-    f.close()
-    return ret
-
-def read_unihan_kuten(fil, wantkey):
-    cachebfn = os.path.splitext(fil)[0].replace("/", "---") + ("_{}".format(wantkey)) + ".json"
-    cachefn = os.path.join(cachedirectory, cachebfn)
-    if os.path.exists(cachefn):
-        return LazyJSON(cachefn)
-    f = open(os.path.join(directory, fil), "r")
-    for i in f:
-        if i[0] == "#":
-            continue
-        elif not i.strip():
-            continue
-        ucs, prop, data = i.strip().split("\t", 2)
-        if prop != wantkey:
-            continue
-        assert ucs[:2] == "U+"
-        ucs = int(ucs[2:], 16)
-        assert (len(data) == 4), i
-        ku = int(data[:2], 10)
-        ten = int(data[2:], 10)
-        pointer = ((ku - 1) * 94) + (ten - 1)
-        if len(_temp) > pointer:
-            assert _temp[pointer] is None, (i, ku, ten, pointer, _temp[pointer], (ucs,))
-            _temp[pointer] = (ucs,)
-        else:
-            while len(_temp) < pointer:
-                _temp.append(None)
-            _temp.append((ucs,))
-    # Try to end it on a natural plane boundary.
-    _temp.extend([None] * (((94 * 94) - (len(_temp) % (94 * 94))) % (94 * 94)))
-    if not _temp:
-        _temp.extend([None] * (94 * 94)) # Don't just return an empty tuple.
-    ret = tuple(_temp)
-    del _temp[:]
-    # Write output cache.
-    f = open(cachefn, "w")
-    f.write(json.dumps(ret))
-    f.close()
-    return ret
-
-def read_unihan_eacc(fil, wantkey, *, set96=False):
-    cachebfn = os.path.splitext(fil)[0].replace("/", "---") + ("_{}".format(wantkey)) + ".json"
-    cachefn = os.path.join(cachedirectory, cachebfn)
-    if os.path.exists(cachefn):
-        return LazyJSON(cachefn)
-    f = open(os.path.join(directory, fil), "r")
-    for i in f:
-        if i[0] == "#":
-            continue
-        elif not i.strip():
-            continue
-        ucs, prop, data = i.strip().split("\t", 2)
-        if prop != wantkey:
-            continue
-        assert ucs[:2] == "U+"
-        ucs = int(ucs[2:], 16)
-        assert (len(data) == 6), i
-        men = int(data[:2], 16) - 0x20
-        ku = int(data[2:4], 16) - 0x20
-        ten = int(data[4:], 16) - 0x20
-        if not set96:
-            pointer = ((men - 1) * 94 * 94) + ((ku - 1) * 94) + (ten - 1)
-        else:
-            pointer = (men * 96 * 96) + (ku * 96) + ten
+            assert len(data) == 4
+            men = 1
+            ku = int(data[:2], 16) - 0x20
+            ten = int(data[2:], 16) - 0x20
         if (not 0 <= ten <= 95) and (ucs == 0x9C0C):
             # U+9C0C → kCCCII 2358CF (not 94^n or even 7-bit)
             # U+9C0C → kEACC 2D6222
             # Being as non-94^3 codes in other CCCII mapping sources are mostly either 
-            #   (a) Non-kanji using 0x20 as a continuation byte, or
+            #   (a) Non-kanji using 0x20 as a lead or continuation byte, or
             #   (b) Extra URO or CJKA kanji encoded using prefixed 0x7F to escape a UCS-2BE code,
             # I suspect this is an error in Unihan?
             continue
-        if len(_temp) > pointer:
-            if (ucs == 0x4EBE) and (wantkey == "kCCCII"):
-                # CCCII 0x2D305B is mapped to both U+4EBE 亾 (also EACC 0x2D305B) and
-                #   U+5166 兦 (which matches cccii.ucm, which uses CCCII 0x33305B for U+4EBE).
-                # Both are apparently y-variants of U+4EA1 (亡, CCCII 0x21305B)
-                # Kludge to get this to work.
-                continue
-            assert _temp[pointer] is None, (i, men, ku, ten, pointer, _temp[pointer], (ucs,))
-            _temp[pointer] = (ucs,)
-        else:
-            while len(_temp) < pointer:
-                _temp.append(None)
-            _temp.append((ucs,))
-    # Try to end it on a natural plane boundary.
-    SZ = 94 if not set96 else 96
-    _temp.extend([None] * (((SZ * SZ) - (len(_temp) % (SZ * SZ))) % (SZ * SZ)))
-    if not _temp:
-        _temp.extend([None] * (SZ * SZ)) # Don't just return an empty tuple.
-    ret = tuple(_temp)
-    del _temp[:]
-    # Write output cache.
-    f = open(cachefn, "w")
-    f.write(json.dumps(ret))
-    f.close()
-    return ret
+        pointer = _main_plane_pointer(men, ku, ten, None, set96)
+        _put_at(_temp, pointer, (ucs,), False)
+    _fill_to_plane_boundary(_temp, SZ)
+    return tuple(_temp)
 
 def fuse(arrays, filename):
     if not os.path.exists(os.path.join(cachedirectory, filename)):
@@ -629,9 +570,9 @@ def parse_variants(fil):
     f.close()
     return cods
 
-def read_untracked_mbfile(reader, fn, obsolete_argument, shippedfn, **kwargs):
+def read_untracked(shippedfn, fn, reader, *args, **kwargs):
     if os.path.exists(os.path.join(directory, fn)):
-        data = reader(fn, **kwargs)
+        data = reader(*args, **kwargs)
         if not os.path.exists(os.path.join(directory, shippedfn)):
             try:
                 _f = open(os.path.join(directory, shippedfn), "w")
@@ -674,6 +615,7 @@ def to_94(dat):
         if not (outwrite % (94 * 94)):
             first += 96 # Extra row at end of plane
     return tuple(out[:outwrite])
+
 
 
 

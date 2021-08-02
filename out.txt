@@ -1121,7 +1121,7 @@ Wenn ich nur nichts von Nachwelt hören sollte. Gesetzt daß ich von Nachwelt r
  ('RDESIG',
   'G1',
   ('ir149-2002',
-   ('ir149-altutc', 'ir149-1998', 'ir149-2002', 'ir149-mac'),
+   ('ir149-altutc', 'ir149-1998', 'ir149-2002', 'ir149-mac', 'ir149-ibm'),
    ('ir149',)),
   '94n',
   (67,),

@@ -36,35 +36,6 @@ from ecma35.data.multibyte import mbmapparsers as parsers
 # row-and-a-bit is used for non-URO non-GB2312 kanji which are allocated two-byte
 # codes, and are somewhat chaotic, with a mixture of mappings to PUA, CJKA, CJKCI.
 
-_temp = []
-def read_gbk_non_uro_extras(fil):
-    # Read GBK/5 and the non-URO part of GBK/4 to an array. Since this part of the
-    # mapping cannot be generated automatically from the GB 2312 mapping.
-    for _i in open(os.path.join(parsers.directory, fil), "r", encoding="utf-8"):
-        if (not _i.strip()) or _i[0] == "#":
-            continue
-        byts, ucs = _i.split("\t", 2)[:2]
-        extpointer = int(byts.strip(), 10)
-        pseudoku = (extpointer // 190)
-        pseudoten = (extpointer % 190)
-        if pseudoku < 0x1F:
-            pass
-        elif (pseudoten > 95): # Must be before any of the non-pass elifs.
-            pass # ignore codes from the main plane
-        elif (pseudoku == 0x1F) or (0x29 <= pseudoku < 0x7C):
-            _temp.append(None)
-        elif (pseudoku == 0x7C) and (pseudoten <= 90):
-            # Still in the tail end of the URO section; not the superposed part.
-            _temp.append(None)
-        else:
-            # Actually part of the non-URO GBK extras part.
-            assert ucs[:2] == "0x"
-            _temp.append( (int(ucs[2:], 16),) )
-    # Try to end it on a natural plane boundary.
-    _temp.extend([None] * (((96 * 96) - (len(_temp) % (96 * 96))) % (96 * 96)))
-    r = tuple(_temp) # Making a tuple makes a copy, of course.
-    del _temp[:]
-    return r
 
 full2005dict = {(0xE78D,): (0xFE10,), (0xE78E,): (0xFE12,), (0xE78F,): (0xFE11,), 
                 (0xE790,): (0xFE13,), (0xE791,): (0xFE14,), (0xE792,): (0xFE15,), 
@@ -100,15 +71,30 @@ def gb1986toregmap(pointer, ucs):
 
 # GB/T 2312 (EUC-CN RHS); note that the 2000 and 2005 "editions" refer to GB 18030 edition subsets.
 graphdata.gsets["ir058-1980"] = gb2312_1980 = (94, 2,
-                            parsers.read_main_plane("UTC/GB2312.TXT", mapper = gb1986to1980map))
-graphdata.gsets["ir058"]      = gb2312_1980reg = (94, 2,
-                            parsers.read_main_plane("UTC/GB2312.TXT", mapper = gb1986toregmap))
+    parsers.decode_main_plane_euc(
+        parsers.parse_file_format("UTC/GB2312.TXT"),
+        "GB2312.TXT",
+        mapper = gb1986to1980map))
+graphdata.gsets["ir058"] = gb2312_1980reg = (94, 2,
+    parsers.decode_main_plane_euc(
+        parsers.parse_file_format("UTC/GB2312.TXT"),
+        "GB2312.TXT",
+        mapper = gb1986toregmap))
 graphdata.gsets["ir058-1986"] = gb2312_1986 = (94, 2, # is this same as ibm-5478_P100-1995.ucm ?
-                            parsers.read_main_plane("UTC/GB2312.TXT"))
+    parsers.decode_main_plane_euc(
+        parsers.parse_file_format("UTC/GB2312.TXT"),
+        "GB2312.TXT"))
 graphdata.gsets["ir058-2000"] = gb2312_2000 = (94, 2, 
-            parsers.read_main_plane("WHATWG/index-gb18030.txt", euckrlike=True, mapper = gb2005to2000map))
+    parsers.decode_main_plane_whatwg(
+        parsers.parse_file_format("WHATWG/index-gb18030.txt"),
+        "index-gb18030.txt",
+        gbklike = True,
+        mapper = gb2005to2000map))
 graphdata.gsets["ir058-2005"] = gb2312_2005 = (94, 2, 
-                            parsers.read_main_plane("WHATWG/index-gb18030.txt", euckrlike=True))
+    parsers.decode_main_plane_whatwg(
+        parsers.parse_file_format("WHATWG/index-gb18030.txt"),
+        "index-gb18030.txt",
+        gbklike = True))
 graphdata.gsetflags["ir058-2005"] |= {"GBK:ALT_4BYTE_CODES"}
 # ir058-full differs from ir058-2005 in (a) ACTUALLY USING the Vertical Forms block that was added
 #   for the precise purpose of GB18030 compatibility, and (b) not setting the GBK:ALT_4BYTE_CODES
@@ -116,7 +102,11 @@ graphdata.gsetflags["ir058-2005"] |= {"GBK:ALT_4BYTE_CODES"}
 #   Since there are necessarily unencoded PUA codes and four-byte codes duplicating two-byte codes
 #   anyway. And since the whole point of "-full" is to use the non-PUA codepoints where applicable.
 graphdata.gsets["ir058-full"] = gb2312_full = (94, 2,
-            parsers.read_main_plane("WHATWG/index-gb18030.txt", euckrlike=True, mapper = gb2005tofullmap))
+    parsers.decode_main_plane_whatwg(
+        parsers.parse_file_format("WHATWG/index-gb18030.txt"),
+        "index-gb18030.txt",
+        gbklike = True,
+        mapper = gb2005tofullmap))
 
 # ITU's extension of ir058, i.e. with 6763 GB 2312 chars, 705 GB 8565.2 chars and 139 others.
 # Basically sticks a load of stuff (both hankaku and zenkaku) in what GBK would consider the
@@ -138,7 +128,9 @@ graphdata.gsets["ir058-full"] = gb2312_full = (94, 2,
 #   to mention this discrepency, rather listing it as incorporating all modifications and additions
 #   in both GB 6345.1 and GB 8565.2… but keeping ICU mappings, in all respects besides adding the
 #   missing ones where possible, seems sensible.
-_ir165_raw = parsers.read_main_plane("ICU/iso-ir-165.ucm")
+_ir165_raw = parsers.decode_main_plane_gl(
+    parsers.parse_file_format("ICU/iso-ir-165.ucm"),
+    "iso-ir-165.ucm")
 _ir165_add = [None] * (94 * 94)
 _ir165_add[688] = (0x01F9,) # in IR-165 but not mapped in UCM; added in Unicode 3.0.
 _ir165_add[916] = (0x0261, 0xF87F)
@@ -168,9 +160,14 @@ graphdata.gsets["ir165std"] = isoir165 = (94, 2, ir165_std)
 #   rather than PUA assignments (and yes, that row maps both unassigned and some assigned to PUA).
 # It also includes the GB 6345.1-1986 letters (seeming to have "ɒ" instead of "ɑ" is an editorial
 #   error in CHINSIMP.TXT; the listed mapping (as opposed to name) is "ɑ").
-macgbdata = parsers.read_untracked_mbfile(
-            parsers.read_main_plane, "Mac/CHINSIMP.TXT", "Mac---CHINSIMP_mainplane_ahmap.json", 
-            "Mac/macGB2312.json", euckrlike=True, mapper=variationhints.ahmap)
+macgbdata = parsers.read_untracked(
+    "Mac/macGB2312.json",
+    "Mac/CHINSIMP.TXT",
+    parsers.decode_main_plane_euc,
+    parsers.parse_file_format("Mac/CHINSIMP.TXT"),
+    "Mac/CHINSIMP.TXT",
+    gbklike = True,
+    mapper = variationhints.ahmap)
 graphdata.gsets["ir058-mac"] = gb2312_macfull = (94, 2, parsers.fuse([
     (None,) * 526 + gb2312_full[2][526:555],
     macgbdata], "Mac---CHINSIMP_mainplane_ahmap_fullverts.json"))
@@ -179,16 +176,21 @@ graphdata.gsets["ir058-mac"] = gb2312_macfull = (94, 2, parsers.fuse([
 #   the others being added as a couple of rows at the end)
 # Unlike GB2312.TXT, redistribution of GB12345.TXT itself is apparently not permitted, although
 #   using/incorporating the information is apparently fine.
-graphdata.gsets["ir058-hant"] = gb12345 = (94, 2, parsers.fuse([parsers.read_untracked_mbfile(
-                 parsers.read_main_plane, "UTC/GB12345.TXT", None, 
-                 "UTC/GB_12345.json"), 
+graphdata.gsets["ir058-hant"] = gb12345 = (94, 2, parsers.fuse([parsers.read_untracked(
+        "UTC/GB_12345.json",
+        "UTC/GB12345.TXT",
+        parsers.decode_main_plane_euc,
+        parsers.parse_file_format("UTC/GB12345.TXT"),
+        "UTC/GB12345.TXT",
+        gbklike = True), 
     (None,) * 526 + gb2312_full[2][526:555],
     (None,) * 684 + gb2312_full[2][684:690]], "GB12345.json"))
 
 # GB/T 12052 (Korean in Mainland China). The non-Hangul non-kanji rows are basically
 #   the same as GB2312, but there is a second dollar sign instead of a yuan sign.
-graphdata.gsets["gb12052"] = gb12052 = (94, 2,
-        parsers.read_main_plane("Other/gb12052-uni.txt", gb12052=True))
+graphdata.gsets["gb12052"] = gb12052 = (94, 2, parsers.decode_main_plane_euc(
+    parsers.parse_file_format("Other/gb12052-uni.txt", gb12052 = True),
+    "gb12052-uni.txt"))
 
 # Being as GB 7589, 13131, 7590, 13132 do not include non-Kanji, Unihan mappings theoretically can
 #   describe their entire mappings… in reality, the GB 13131 mapping contains more or less the
@@ -197,9 +199,9 @@ graphdata.gsets["gb12052"] = gb12052 = (94, 2,
 #   citing 13131/13132 and the former citing 7589/7590), except for that kGB3 and kGB5 have many
 #   more gaps (they seem to only cover the URO).
 graphdata.gsets["gb13131"] = gb13131 = (94, 2, 
-        parsers.read_unihan_source("UCD/Unihan_IRGSources.txt", "G", "G3"))
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources.txt", "kIRG_GSource", "G3"))
 graphdata.gsets["gb13132"] = gb13132 = (94, 2, 
-        parsers.read_unihan_source("UCD/Unihan_IRGSources.txt", "G", "G5"))
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources.txt", "kIRG_GSource", "G5"))
 
 # GB 7589 and GB 7590 are just the simplified versions, right?
 # (Contrary to docs, kGB3 and kGB5 seem to be a subset of the G3 and G5 in kIRG_GSource, i.e. they
@@ -245,7 +247,9 @@ non_euccn_uro101 = [i for i in range(0x4E00, 0x9FA6)
                       if i not in graphdata.codepoint_coverages["ir058-2005"]]
 
 # GBK/5, and the non-URO part of GBK/4.
-_gbk_exceptions_web = read_gbk_non_uro_extras("WHATWG/index-gb18030.txt")
+_gbk_exceptions_web = parsers.decode_gbk_non_uro_extras(
+    parsers.parse_file_format("WHATWG/index-gb18030.txt"),
+    "index-gb18030.txt")
 _gbk_exceptions_full = tuple(full2005dict.get(_i, _i) for _i in _gbk_exceptions_web)
 _gbk_exceptions = tuple({(0x3000,): (0xE5E5,)}.get(_i, _i) for _i in _gbk_exceptions_web)
 graphdata.gsets["gbk-nonuro-extras"] = (96, 2, _gbk_exceptions)

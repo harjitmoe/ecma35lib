@@ -36,7 +36,6 @@ def kutenfunc(number, row, cell):
     pseudokuten = "(Ψ-{:02d}-{:02d})".format(row, cell)
     pointer = (row - 1) * 94 + cell - 1
     cid = korea.elex2cid[pointer]
-    print(cid, korea.macelexdata[pointer], korea.macelexdata_adobe[pointer])
     ciddisplay = ""
     if cid:
         ciddisplay = f"<br>CID-{cid}"
@@ -141,7 +140,7 @@ annots = {
                 'PragmataPro is apparently one exception.</a>',
     (1, 8, 81): 'This is a cross barby, which has meanings as diverse as a "move window" cursor, '
                 'or a symbol of Nazism or white supremacy, amongst other uses.',
-    (1, 11, 4): 'Duplicate of Ψ-07-63; the version with affixed PUA FE7F is already used for '
+    (1, 11, 4): 'Duplicate of Ψ-07-63; the version with affixed PUA F87F is already used for '
                 'Ψ-07-64, so Apple maps to the combining sequence for round tripping.',
     (1, 11, 36): 'U+329F has existed since Unicode 1.x and is not mapped elsewhere, so it is '
                  'thoroughly unclear why Apple did not map to it.&ensp;It already existing is why '

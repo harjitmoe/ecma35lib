@@ -341,7 +341,7 @@ for row in sets:
                 assert len(byts) == 4
                 byts = bytes([int(byts[:2], 16), int(byts[2:], 16)])
                 if typ == "sjis":
-                    men, ku, ten = parsers._grok_sjis(byts)
+                    men, ku, ten = parsers._parse_sjis(byts)
                 else:
                     men = 1
                     ku = byts[0] - 0x20
