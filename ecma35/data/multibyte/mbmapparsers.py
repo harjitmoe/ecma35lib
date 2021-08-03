@@ -177,10 +177,20 @@ def parse_file_format(fil, *, twoway=False, prefer_sjis=False, skipstring=None, 
                 cidmapnames = _i.rstrip().split("\t")
                 continue
             values = _i.rstrip().split("\t")
-            if cidmapnames.index(frm) > 0:
-                yield readhexbytes(values[cidmapnames.index(frm)]), parse_ucs_codepoints(values[cidmapnames.index(to)])
-            else:
-                yield int(values[cidmapnames.index(frm)], 10), parse_ucs_codepoints(values[cidmapnames.index(to)])
+            if values[cidmapnames.index(frm)] == "*" or values[cidmapnames.index(to)] == "*":
+                continue
+            froms = values[cidmapnames.index(frm)].split(",")
+            tos = values[cidmapnames.index(to)].split(",")
+            while len(tos) < len(froms):
+                tos.append(tos[0])
+            tos = tos[:len(froms)]
+            for (frmv, tov) in zip(froms, tos):
+                if "v" in frmv:
+                    continue
+                elif cidmapnames.index(to) > 0:
+                    yield readhexbytes(frmv), parse_ucs_codepoints(tov.replace("v", "+F87E"))
+                else:
+                    yield readhexbytes(frmv), int(tov, 10)
         elif gb12052:
             kuten, bit7, euc, ucs = _i.split(None, 3)
             ucs = ucs.split("#", 1)[0].strip()
@@ -327,6 +337,8 @@ def decode_main_plane_euc(parsed_stream, filenamekey, *, eucjp=False, gbklike=Fa
                           mapper=identitymap, ignore_later_altucs=False, set96=False):
     # The filenamekey argument is absolutely needed for the @with_caching since the parsed_stream
     #   is not incorporated into the memo key for obvious reasons—it is otherwise unused.
+    # It does not have to be a filename, but must be unique for every different parse_file_format invocation
+    #   even for the same filename.
     ST, ED, SZ = _limits(set96)
     _temp = []
     for coded, ucs in parsed_stream:
@@ -369,6 +381,8 @@ def decode_main_plane_gl(parsed_stream, filenamekey, *, plane=None, mapper=ident
                          ignore_later_altucs=False, set96=False, skip_invalid_kuten=True):
     # The filenamekey argument is absolutely needed for the @with_caching since the parsed_stream
     #   is not incorporated into the memo key for obvious reasons—it is otherwise unused.
+    # It does not have to be a filename, but must be unique for every different parse_file_format invocation
+    #   even for the same filename.
     ST, ED, SZ = _limits(set96)
     _temp = []
     for coded, ucs in parsed_stream:
@@ -409,6 +423,8 @@ def decode_main_plane_sjis(parsed_stream, filenamekey, *, plane=None, mapper=ide
                            ignore_later_altucs=False):
     # The filenamekey argument is absolutely needed for the @with_caching since the parsed_stream
     #   is not incorporated into the memo key for obvious reasons—it is otherwise unused.
+    # It does not have to be a filename, but must be unique for every different parse_file_format invocation
+    #   even for the same filename.
     _temp = []
     for coded, ucs in parsed_stream:
         if len(coded) == 2:
@@ -424,10 +440,36 @@ def decode_main_plane_sjis(parsed_stream, filenamekey, *, plane=None, mapper=ide
     return tuple(_temp)
 
 @with_caching
+def decode_extra_plane_elex(parsed_stream, filenamekey, *, mapper=identitymap, ignore_later_altucs=False):
+    # The filenamekey argument is absolutely needed for the @with_caching since the parsed_stream
+    #   is not incorporated into the memo key for obvious reasons—it is otherwise unused.
+    # It does not have to be a filename, but must be unique for every different parse_file_format invocation
+    #   even for the same filename.
+    _temp = []
+    for coded, ucs in parsed_stream:
+        if len(coded) != 2:
+            continue
+        lead, trail = coded
+        if trail >= 0xA1:
+            continue
+        first = lead - 0xA1
+        if trail >= 0x81:
+            last = trail - 0x41 - 3
+        else:
+            last = trail - 0x41
+        pointer = (94 * first) + last
+        iucs = mapper(pointer, ucs)
+        _put_at(_temp, pointer, iucs, ignore_later_altucs)
+    _fill_to_plane_boundary(_temp, 94)
+    return tuple(_temp)
+
+@with_caching
 def decode_main_plane_whatwg(parsed_stream, filenamekey, *, gbklike=False, plane=None, 
                              mapper=identitymap, ignore_later_altucs=False, set96=False):
     # The filenamekey argument is absolutely needed for the @with_caching since the parsed_stream
     #   is not incorporated into the memo key for obvious reasons—it is otherwise unused.
+    # It does not have to be a filename, but must be unique for every different parse_file_format invocation
+    #   even for the same filename.
     ST, ED, SZ = (1, 94, 94) if not set96 else (0, 95, 96)
     _temp = []
     for coded, ucs in parsed_stream:
@@ -453,6 +495,8 @@ def decode_main_plane_whatwg(parsed_stream, filenamekey, *, gbklike=False, plane
 def decode_gbk_non_uro_extras(parsed_stream, filenamekey):
     # The filenamekey argument is absolutely needed for the @with_caching since the parsed_stream
     #   is not incorporated into the memo key for obvious reasons—it is otherwise unused.
+    # It does not have to be a filename, but must be unique for every different parse_file_format invocation
+    #   even for the same filename.
     #
     # Read GBK/5 and the non-URO part of GBK/4 to an array. Since this part of the
     # mapping cannot be generated automatically from the GB 2312 mapping.

@@ -54,139 +54,6 @@ def read_kps9566extras(fil):
     f.close()
     return r
 
-def read_elexextras(fil, *, altcomments=False, mapper=parsers.identitymap):
-    if mapper is parsers.identitymap:
-        mappername = ""
-    elif mapper.__name__ != "<lambda>":
-        mappername = "_" + mapper.__name__
-    else:
-        mappername = "_FIXME"
-    #
-    if altcomments:
-        mappername += "_altcomments"
-    cachefn = os.path.join(parsers.cachedirectory, os.path.splitext(fil)[0].replace("/", "---") 
-              + "_elexextras" + mappername + ".json")
-    if os.path.exists(cachefn):
-        return parsers.LazyJSON(cachefn)
-    for _i in open(os.path.join(parsers.directory, fil), "r", encoding="utf-8"):
-        if (not _i.strip()) or _i[0] == "#":
-            continue
-        #
-        if altcomments and ("# or for Unicode 4.0," in _i):
-            byts, ucs = _i.split("# or for Unicode 4.0,", 1)
-            byts = byts.split("\t", 1)[0]
-            ucs = ucs.lstrip().split(None, 1)[0].rstrip(",")
-        elif altcomments and ("# or" in _i):
-            byts, ucs = _i.split("# or", 1)
-            byts = byts.split("\t", 1)[0]
-            ucs = ucs.lstrip().split(None, 1)[0].rstrip(",")
-        else:
-            byts, ucs = _i.split("\t", 2)[:2]
-        #
-        if len(byts) >= 6:
-            lead = int(byts[2:4], 16)
-            trail = int(byts[4:6], 16)
-            if trail >= 0xA1:
-                continue
-            first = lead - 0xA1
-            if trail >= 0x81:
-                last = trail - 0x41 - 3
-            else:
-                last = trail - 0x41
-            newpointer = (94 * first) + last
-        else:
-            continue
-        #
-        iucs = mapper(newpointer, tuple(int(j, 16) for j in ucs.replace("0x", "").split("+")))
-        if len(_temp) > newpointer:
-            assert _temp[newpointer] is None, (newpointer, iucs, _temp[newpointer])
-            _temp[newpointer] = iucs
-        else:
-            while len(_temp) < newpointer:
-                _temp.append(None)
-            _temp.append(iucs)
-    # Try to end it on a natural plane boundary.
-    _temp.extend([None] * (((94 * 94) - (len(_temp) % (94 * 94))) % (94 * 94)))
-    if not _temp:
-        _temp.extend([None] * (94 * 94)) # Don't just return an empty tuple.
-    r = tuple(_temp) # Making a tuple makes a copy, of course.
-    del _temp[:]
-    # Write output cache.
-    f = open(cachefn, "w")
-    f.write(json.dumps(r))
-    f.close()
-    return r
-
-def read_elexextras_adobe(fil):
-    cachefn = os.path.join(parsers.cachedirectory, os.path.splitext(fil)[0].replace("/", "---") 
-              + "_elexextras" + ".json")
-    cachefn2 = os.path.join(parsers.cachedirectory, os.path.splitext(fil)[0].replace("/", "---") 
-              + "_elexextras_cids" + ".json")
-    if os.path.exists(cachefn) and os.path.exists(cachefn2):
-        return parsers.LazyJSON(cachefn), parsers.LazyJSON(cachefn2)
-    _temp2 = []
-    for _i in open(os.path.join(parsers.directory, fil), "r", encoding="utf-8"):
-        if (not _i.strip()) or _i[0] not in "0123456789":
-            continue
-        values = _i.rstrip().split("\t")
-        byts = values[3]
-        if values[3] == "*":
-            continue
-        if values[10] == "*":
-            ucs = None
-        else:
-            ucscdp = values[10].split(",", 1)[0]
-            ucs = (int(ucscdp, 16),) if ucscdp[-1] != "v" else (int(ucscdp[:-1], 16), 0xF87E)
-        cid = int(values[0], 10)
-        #
-        if len(byts) >= 4:
-            lead = int(byts[0:2], 16)
-            trail = int(byts[2:4], 16)
-            if trail >= 0xA1:
-                continue
-            first = lead - 0xA1
-            if trail >= 0x81:
-                last = trail - 0x41 - 3
-            else:
-                last = trail - 0x41
-            newpointer = (94 * first) + last
-        else:
-            continue
-        #
-        if len(_temp) > newpointer:
-            assert _temp[newpointer] is None, (newpointer, ucs, _temp[newpointer])
-            _temp[newpointer] = ucs
-        else:
-            while len(_temp) < newpointer:
-                _temp.append(None)
-            _temp.append(ucs)
-        #
-        if len(_temp2) > newpointer:
-            assert _temp2[newpointer] is None, (newpointer, cid, _temp2[newpointer])
-            _temp2[newpointer] = cid
-        else:
-            while len(_temp2) < newpointer:
-                _temp2.append(None)
-            _temp2.append(cid)
-    # Try to end it on a natural plane boundary.
-    _temp.extend([None] * (((94 * 94) - (len(_temp) % (94 * 94))) % (94 * 94)))
-    _temp2.extend([None] * (((94 * 94) - (len(_temp2) % (94 * 94))) % (94 * 94)))
-    if not _temp:
-        _temp.extend([None] * (94 * 94)) # Don't just return an empty tuple.
-    if not _temp2:
-        _temp2.extend([None] * (94 * 94)) # Don't just return an empty tuple.
-    r = tuple(_temp) # Making a tuple makes a copy, of course.
-    r2 = tuple(_temp2) # Making a tuple makes a copy, of course.
-    del _temp[:]
-    # Write output cache.
-    f = open(cachefn, "w")
-    f.write(json.dumps(r))
-    f.close()
-    f = open(cachefn2, "w")
-    f.write(json.dumps(r2))
-    f.close()
-    return r, r2
-
 initials = {'\u3131': '\u1100', '\u3132': '\u1101', '\u3134': '\u1102', '\u3137': '\u1103', '\u3138': '\u1104', '\u3139': '\u1105', '\u3141': '\u1106', '\u3142': '\u1107', '\u3143': '\u1108', '\u3145': '\u1109', '\u3146': '\u110a', '\u3147': '\u110b', '\u3148': '\u110c', '\u3149': '\u110d', '\u314a': '\u110e', '\u314b': '\u110f', '\u314c': '\u1110', '\u314d': '\u1111', '\u314e': '\u1112', '\u3165': '\u1114', '\u3166': '\u1115', '\u3167': '\u115b', '\u316a': '\ua966', '\u316e': '\u111c', '\u316f': '\ua971', '\u3171': '\u111d', '\u3172': '\u111e', '\u3173': '\u1120', '\u3174': '\u1122', '\u3175': '\u1123', '\u3176': '\u1127', '\u3177': '\u1129', '\u3178': '\u112b', '\u3179': '\u112c', '\u317a': '\u112d', '\u317b': '\u112e', '\u317c': '\u112f', '\u317d': '\u1132', '\u317e': '\u1136', '\u317f': '\u1140', '\u3180': '\u1147', '\u3181': '\u114c', '\u3184': '\u1157', '\u3185': '\u1158', '\u3186': '\u1159', '\u3164': '\u115f'}
 
 vowels = {'\u314f': '\u1161', '\u3150': '\u1162', '\u3151': '\u1163', '\u3152': '\u1164', '\u3153': '\u1165', '\u3154': '\u1166', '\u3155': '\u1167', '\u3156': '\u1168', '\u3157': '\u1169', '\u3158': '\u116a', '\u3159': '\u116b', '\u315a': '\u116c', '\u315b': '\u116d', '\u315c': '\u116e', '\u315d': '\u116f', '\u315e': '\u1170', '\u315f': '\u1171', '\u3160': '\u1172', '\u3161': '\u1173', '\u3162': '\u1174', '\u3163': '\u1175', '\u3187': '\u1184', '\u3188': '\u1185', '\u3189': '\u1188', '\u318a': '\u1191', '\u318b': '\u1192', '\u318c': '\u1194', '\u318d': '\u119e', '\u318e': '\u11a1', '\u3164': '\u1160'}
@@ -264,7 +131,7 @@ rawmac4 = parsers.read_untracked(
     "Mac/KOREAN.TXT",
     parsers.decode_main_plane_euc,
     parsers.parse_file_format("Mac/KOREAN.TXT", altcomments=True),
-    "KOREAN.TXT",
+    "KOREAN.TXT-altcomments-True",
     gbklike=True)
 macwansung40 = graphdata.gsets["ir149-mac-unicode4_0"] = (94, 2, rawmac4)
 graphdata.gsetflags["ir149-mac-unicode4_0"] |= {"UHC:IS_WANSUNG"}
@@ -293,37 +160,48 @@ graphdata.gsetflags["ir149-mac-nishiki-teki"] |= {"UHC:IS_WANSUNG"}
 rawelex21 = parsers.read_untracked(
     "Mac/macElex21.json",
     "Mac/KOREAN_b02.TXT",
-    read_elexextras,
-    "Mac/KOREAN_b02.TXT")
+    parsers.decode_extra_plane_elex,
+    parsers.parse_file_format("Mac/KOREAN_b02.TXT"),
+    "KOREAN_b02.TXT")
 macelexextras21 = graphdata.gsets["mac-elex-extras-unicode2_1"] = (94, 2, rawelex21)
 rawelex = parsers.read_untracked(
     "Mac/macElex32.json",
     "Mac/KOREAN.TXT",
-    read_elexextras,
-    "Mac/KOREAN.TXT")
+    parsers.decode_extra_plane_elex,
+    parsers.parse_file_format("Mac/KOREAN.TXT"),
+    "KOREAN.TXT")
 macelexextras32 = graphdata.gsets["mac-elex-extras-unicode3_2"] = (94, 2, rawelex)
 rawelex4 = parsers.read_untracked(
     "Mac/macElex40.json",
     "Mac/KOREAN.TXT",
-    read_elexextras,
-    "Mac/KOREAN.TXT",
-    altcomments=True)
+    parsers.decode_extra_plane_elex,
+    parsers.parse_file_format("Mac/KOREAN.TXT", altcomments=True),
+    "KOREAN.TXT-altcomments-True")
 macelexextras40 = graphdata.gsets["mac-elex-extras-unicode4_0"] = (94, 2, rawelex4)
 macelexdata = parsers.read_untracked(
     "Mac/macElex.json",
     "Mac/KOREAN.TXT",
-    read_elexextras,
-    "Mac/KOREAN.TXT",
+    parsers.decode_extra_plane_elex,
+    parsers.parse_file_format("Mac/KOREAN.TXT"),
+    "KOREAN.TXT",
     mapper=ahmap_mk)
 macelexextras = graphdata.gsets["mac-elex-extras"] = (94, 2, macelexdata)
 macelexdata_nt = parsers.read_untracked(
     "Mac/macElexNT.json",
     "Mac/KOREAN.TXT",
-    read_elexextras,
-    "Mac/KOREAN.TXT",
+    parsers.decode_extra_plane_elex,
+    parsers.parse_file_format("Mac/KOREAN.TXT"),
+    "KOREAN.TXT",
     mapper=ahmap_nt)
 macelexextrasnt = graphdata.gsets["mac-elex-extras-nishiki-teki"] = (94, 2, macelexdata_nt)
-macelexdata_adobe, elex2cid = read_elexextras_adobe("Adobe/AdobeKorea.txt")
+macelexdata_adobe = parsers.decode_extra_plane_elex(
+    parsers.parse_file_format("Adobe/AdobeKorea.txt", cidmap=("KSCpc-EUC", "UniKS-UTF32")),
+    "AdobeKorea.txt-KSCpc-EUC-UniKS-UTF32"
+)
+elex2cid = parsers.decode_extra_plane_elex(
+    parsers.parse_file_format("Adobe/AdobeKorea.txt", cidmap=("KSCpc-EUC", "CID")),
+    "AdobeKorea.txt-KSCpc-EUC-CID"
+)
 macelexextrasadobe = graphdata.gsets["mac-elex-extras-adobe"] = (94, 2, macelexdata_adobe)
 
 # KPS 9566
