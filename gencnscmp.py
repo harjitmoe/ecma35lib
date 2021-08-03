@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020.
+# By HarJIT in 2020, 2021.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -39,7 +39,11 @@ def swap_arrows(t):
 print("Loading 1")
 plane1 = (1, ("UTC Big5", "UTC CNS", "MS Big5", "Mac Big5", "IBM Big5", "Web Big5", "Yasuoka CNS",
               "ICU '92CNS", "ICU EUC'14", "GOV-TW CNS", "Output"), [
-          swap_arrows(traditional.read_big5_planes("UTC/BIG5.TXT", big5_to_cns_g2=traditional.big5_to_cns2, plane=1)),
+          swap_arrows(parsers.decode_main_plane_big5(
+                parsers.parse_file_format("UTC/BIG5.TXT"), 
+                "BIG5.TXT",
+                "big5_to_cns2",
+                plane=1)),
           parsers.decode_main_plane_gl(
                 parsers.parse_file_format("UTC/CNS11643.TXT"), 
                 "CNS11643.TXT", 
@@ -79,7 +83,11 @@ plane1 = (1, ("UTC Big5", "UTC CNS", "MS Big5", "Mac Big5", "IBM Big5", "Web Big
 
 print("Loading 2")
 plane2 = (2, ("UTC CNS", "Big5", "Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
-          traditional.read_big5_planes("UTC/BIG5.TXT", big5_to_cns_g2=traditional.big5_to_cns2, plane=2),
+          parsers.decode_main_plane_big5(
+                parsers.parse_file_format("UTC/BIG5.TXT"), 
+                "BIG5.TXT",
+                "big5_to_cns2",
+                plane=2),
           parsers.decode_main_plane_gl(
                 parsers.parse_file_format("UTC/CNS11643.TXT"), 
                 "CNS11643.TXT", 

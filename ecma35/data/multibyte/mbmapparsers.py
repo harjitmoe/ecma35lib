@@ -126,6 +126,7 @@ def parse_ucs_codepoints(string):
     for point in string.lstrip("<U+").rstrip(">").split(
             None if " " in string.strip()
             else "><" if "><" in string
+            else "," if "," in string
             else "+"):
         yield int(point.lstrip("0xU+") or "0", 16)
 
@@ -142,7 +143,7 @@ def readhexbytes(byt):
             byt = byt[2:]
 
 def parse_file_format(fil, *, twoway=False, prefer_sjis=False, skipstring=None, altcomments=False, 
-                      libcongress=False, utcl2_17_080=None, cidmap=None, gb12052=False):
+                      libcongress=False, utcl2_17_080=None, cidmap=None, gb12052=False, moz2004=False):
     cidmapnames = None
     for _i in open(os.path.join(directory, fil), "r", encoding="utf-8"):
         if not _i.strip():
@@ -151,6 +152,12 @@ def parse_file_format(fil, *, twoway=False, prefer_sjis=False, skipstring=None, 
             continue
         elif _i[0] == "#":
             continue # is a comment.
+        elif moz2004:
+            if _i[0] in "Hi=":
+                continue
+            _ilist = _i.split()
+            byts, ucs = _ilist[0], _ilist[-1]
+            yield readhexbytes(byts), parse_ucs_codepoints(ucs)
         elif utcl2_17_080 is not None:
             number, ducs, ucs, wansung, ksx1002, kps, gbko, olducs, decomp = _i.strip().split()
             if utcl2_17_080 == "wansung":
@@ -207,13 +214,14 @@ def parse_file_format(fil, *, twoway=False, prefer_sjis=False, skipstring=None, 
             continue # ICU delimitors we don't care about.
         elif _i[:2] == "0x":
             # Consortium-style format
-            if _i.split("#", 1)[0].replace("+0x", "+").count("0x") == 3:
+            if "\t" not in _i and " " in _i.strip():
+                _i = _i.strip().replace(" ", "\t")
+            if _i.split("#", 1)[0].replace("+0x", "+").count("0x") == 3: # Note: not U+ (because Mozilla HKSCS)
                 # Consortium-style format for JIS X 0208 (just skip the other column)
                 if not prefer_sjis:
                     _i = _i.split("\t", 1)[1]
                 else:
                     _i = "\t".join(_i.split("\t", 2)[1::2])
-            assert "\t" in _i, _i
             if altcomments and ("# or for Unicode 4.0," in _i):
                 byts, ucs = _i.split("# or for Unicode 4.0,", 1)
                 byts = byts.split("\t", 1)[0]
@@ -460,6 +468,97 @@ def decode_extra_plane_elex(parsed_stream, filenamekey, *, mapper=identitymap, i
         pointer = (94 * first) + last
         iucs = mapper(pointer, ucs)
         _put_at(_temp, pointer, iucs, ignore_later_altucs)
+    _fill_to_plane_boundary(_temp, 94)
+    return tuple(_temp)
+
+big5_to_cns_maps = {}
+
+@with_caching
+def decode_main_plane_big5(parsed_stream, filenamekey, map_key, *, plane=None, mapper=identitymap):
+    # The filenamekey argument is absolutely needed for the @with_caching since the parsed_stream
+    #   is not incorporated into the memo key for obvious reasons—it is otherwise unused.
+    # It does not have to be a filename, but must be unique for every different parse_file_format invocation
+    #   even for the same filename.
+    _temp = []
+    for coded, ucs in parsed_stream:
+        if isinstance(coded, int):
+            # WHATWG format
+            first, last = coded // 157, coded % 157
+            lead = first + 0x81
+            trail = (last - 63 + 0xA1) if last >= 63 else (last + 0x40)
+        elif len(coded) != 1:
+            assert len(coded) == 2
+            lead, trail = coded
+        else:
+            continue
+        #
+        key = (lead << 8) | trail
+        if key not in big5_to_cns_maps[map_key]:
+            continue
+        men, ku, ten = big5_to_cns_maps[map_key][key]
+        pointer = _main_plane_pointer(men, ku, ten, plane, False)
+        if pointer == None:
+            continue
+        iucs = mapper(pointer, ucs)
+        _put_at(_temp, pointer, iucs, ignore_later_altucs=True)
+    _fill_to_plane_boundary(_temp, 94)
+    return tuple(_temp)
+
+# Origin is at 0x8140. Trail bytes are 0x40-0x7E (63) and 0xA1-0xFE (94) fairly seamlessly.
+hkscs_start = 942
+special_start = 5024
+kanji1_start = 5495
+corporate1_start = 10896
+kanji2_start = 11304
+corporate2_start = 18956
+
+@with_caching
+def decode_extra_plane_big5(parsed_stream, filenamekey, *, mapper=identitymap):
+    # The filenamekey argument is absolutely needed for the @with_caching since the parsed_stream
+    #   is not incorporated into the memo key for obvious reasons—it is otherwise unused.
+    # It does not have to be a filename, but must be unique for every different parse_file_format invocation
+    #   even for the same filename.
+    _temp = []
+    for coded, ucs in parsed_stream:
+        if isinstance(coded, int):
+            extpointer = coded
+        elif len(coded) >= 2:
+            assert len(coded) == 2
+            if 0x7F <= coded[1] <= 0xA0:
+                # IBM-950 includes expanded trail byte range similarly to Big5+ but with
+                #   PUA assignments. They cannot currently be processed by this system.
+                continue
+            first = coded[0] - 0x81
+            last = (coded[1] - 0xA1 + 63) if coded[1] >= 0xA1 else (coded[1] - 0x40)
+            extpointer = (157 * first) + last
+        else:
+            continue
+        #
+        if extpointer >= corporate2_start:
+            newextpointer = extpointer
+            # Subtract a whole number of rows, but "empty" space at the start is fine.
+            newextpointer -= ((corporate2_start - kanji2_start) // 157) * 157
+            newextpointer -= ((corporate1_start - special_start) // 157) * 157
+        elif extpointer >= kanji2_start:
+            continue
+        elif extpointer >= corporate1_start:
+            newextpointer = extpointer
+            newextpointer -= ((corporate1_start - special_start) // 157) * 157
+        elif extpointer >= special_start:
+            continue
+        else:
+            newextpointer = extpointer
+        pseudoku = (newextpointer // 157) + 1
+        pseudoten = (newextpointer % 157) + 1
+        if pseudoten <= 63:
+            ku = (pseudoku * 2) - 1
+            ten = (pseudoten - 63) + 94
+        else:
+            ku = pseudoku * 2
+            ten = pseudoten - 63
+        newpointer = ((ku - 1) * 94) + (ten - 1)
+        iucs = mapper(newpointer, ucs)
+        _put_at(_temp, newpointer, iucs, ignore_later_altucs=False)
     _fill_to_plane_boundary(_temp, 94)
     return tuple(_temp)
 

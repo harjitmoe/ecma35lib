@@ -186,115 +186,6 @@ graphdata.gsetflags["cns-eucg2-ibm"] |= {"BIG5:IBMCOMPATKANJI"}
 # # # # # # # # # #
 # Big Five
 
-# Origin is at 0x8140. Trail bytes are 0x40-0x7E (63) and 0xA1-0xFE (94) fairly seamlessly.
-hkscs_start = 942
-special_start = 5024
-kanji1_start = 5495
-corporate1_start = 10896
-kanji2_start = 11304
-corporate2_start = 18956
-
-_temp = []
-def read_big5extras(fil, *, moz2004=False):
-    cachefn = os.path.join(parsers.cachedirectory,
-              os.path.splitext(fil)[0].replace("/", "---") + "_big5extras.json")
-    if os.path.exists(cachefn):
-        return parsers.LazyJSON(cachefn)
-    for _i in open(os.path.join(parsers.directory, fil), "r", encoding="utf-8"):
-        if (not _i.strip()) or (_i[0] == "#") or ("<reserved>" in _i):
-            continue
-        if moz2004:
-            if _i[0] in "Hi=":
-                continue
-            _ilist = _i.split()
-            byts, ucs = _ilist[0], _ilist[-1]
-            if len(byts) >= 4:
-                lead = int(byts[:2], 16)
-                trail = int(byts[2:], 16)
-                first = lead - 0x81
-                last = (trail - 0xA1 + 63) if trail >= 0xA1 else (trail - 0x40)
-                extpointer = (157 * first) + last
-                iucs = tuple(int(_j, 16) for _j in ucs.strip("<>").split(","))
-            else:
-                continue
-        elif _i.startswith("0x"):
-            byts, ucs = _i.split(None, 2)[:2]
-            if len(byts) >= 6:
-                lead = int(byts[2:4], 16)
-                trail = int(byts[4:6], 16)
-                first = lead - 0x81
-                last = (trail - 0xA1 + 63) if trail >= 0xA1 else (trail - 0x40)
-                extpointer = (157 * first) + last
-                iucs = (int(ucs[2:], 16),)
-            else:
-                continue
-        elif _i.startswith("<U"):
-            # ICU-style format
-            ucs, byts, direction = _i.split(None, 2)
-            if len(byts) >= 8:
-                assert (byts[:2] == "\\x") and (byts[4:6] == "\\x")
-                lead = int(byts[2:4], 16)
-                trail = int(byts[6:8], 16)
-                if 0x7F <= trail <= 0xA0:
-                    # IBM-950 includes expanded trail byte range similarly to Big5+ but with
-                    #   PUA assignments. They cannot currently be processed by this system.
-                    continue
-                first = lead - 0x81
-                last = (trail - 0xA1 + 63) if trail >= 0xA1 else (trail - 0x40)
-                extpointer = (157 * first) + last
-                iucs = (int(ucs[2:].rstrip(">"), 16),)
-            else:
-                continue
-        elif _i.lstrip()[0] in "0123456789":
-            byts, ucs = _i.split("\t", 2)[:2]
-            extpointer = int(byts.strip(), 10)
-            iucs = (int(ucs[2:], 16),)
-        else:
-            continue
-        #
-        if extpointer >= corporate2_start:
-            newextpointer = extpointer
-            # Subtract a whole number of rows, but "empty" space at the start is fine.
-            newextpointer -= ((corporate2_start - kanji2_start) // 157) * 157
-            newextpointer -= ((corporate1_start - special_start) // 157) * 157
-        elif extpointer >= kanji2_start:
-            continue
-        elif extpointer >= corporate1_start:
-            newextpointer = extpointer
-            newextpointer -= ((corporate1_start - special_start) // 157) * 157
-        elif extpointer >= special_start:
-            continue
-        else:
-            newextpointer = extpointer
-        pseudoku = (newextpointer // 157) + 1
-        pseudoten = (newextpointer % 157) + 1
-        if pseudoten <= 63:
-            ku = (pseudoku * 2) - 1
-            ten = (pseudoten - 63) + 94
-        else:
-            ku = pseudoku * 2
-            ten = pseudoten - 63
-        newpointer = ((ku - 1) * 94) + (ten - 1)
-        assert ucs, _i
-        if len(_temp) > newpointer:
-            assert _temp[newpointer] is None, (newpointer, iucs, _temp[newpointer])
-            _temp[newpointer] = iucs
-        else:
-            while len(_temp) < newpointer:
-                _temp.append(None)
-            _temp.append(iucs)
-    # Try to end it on a natural plane boundary.
-    _temp.extend([None] * (((94 * 94) - (len(_temp) % (94 * 94))) % (94 * 94)))
-    if not _temp:
-        _temp.extend([None] * (94 * 94)) # Don't just return an empty tuple.
-    r = tuple(_temp) # Making a tuple makes a copy, of course.
-    del _temp[:]
-    # Write output cache.
-    f = open(cachefn, "w")
-    f.write(json.dumps(r))
-    f.close()
-    return r
-
 def read_big5_rangemap(fil, appendix, *, plane=None):
     # For RFC 1922
     mapping = {}
@@ -374,123 +265,6 @@ def read_big5_plainmap(fil, *, plane=None):
         mapping[int(big5, 16)] = (men, ku, ten)
     return mapping
 
-def big5_extras_from_extmap(extmap, basis):
-    for big5code, (cmen, cku, cten) in extmap.items():
-        ucs = basis[((cmen - 1) * 94 * 94) + ((cku - 1) * 94) + cten - 1]
-        lead = big5code >> 8
-        trail = big5code & 0xFF
-        first = lead - 0x81
-        last = (trail - 0xA1 + 63) if trail >= 0xA1 else (trail - 0x40)
-        extpointer = (157 * first) + last
-        if extpointer >= corporate2_start:
-            newextpointer = extpointer
-            # Subtract a whole number of rows, but "empty" space at the start is fine.
-            newextpointer -= ((corporate2_start - kanji2_start) // 157) * 157
-            newextpointer -= ((corporate1_start - special_start) // 157) * 157
-        elif extpointer >= kanji2_start:
-            continue
-        elif extpointer >= corporate1_start:
-            newextpointer = extpointer
-            newextpointer -= ((corporate1_start - special_start) // 157) * 157
-        elif extpointer >= special_start:
-            continue
-        else:
-            newextpointer = extpointer
-        pseudoku = (newextpointer // 157) + 1
-        pseudoten = (newextpointer % 157) + 1
-        if pseudoten <= 63:
-            ku = (pseudoku * 2) - 1
-            ten = (pseudoten - 63) + 94
-        else:
-            ku = pseudoku * 2
-            ten = pseudoten - 63
-        newpointer = ((ku - 1) * 94) + (ten - 1)
-        if len(_temp) > newpointer:
-            assert _temp[newpointer] is None, (newpointer, ucs, _temp[newpointer])
-            _temp[newpointer] = ucs
-        else:
-            while len(_temp) < newpointer:
-                _temp.append(None)
-            _temp.append(ucs)
-    r = tuple(_temp) # Making a tuple makes a copy, of course.
-    del _temp[:]
-    return r
-
-def read_big5_planes(fil, big5_to_cns_g2, *, plane=None, twoway=False, mapper=parsers.identitymap):
-    if mapper is parsers.identitymap:
-        mappername = ""
-    elif mapper.__name__ != "<lambda>":
-        mappername = "_" + mapper.__name__
-    else:
-        mappername = "_FIXME"
-    cachebfn = os.path.splitext(fil)[0].replace("/", "---") + ("_plane{:02d}".format(plane)
-               if plane is not None else "_mainplane") + mappername + ".json"
-    cachefn = os.path.join(parsers.cachedirectory, cachebfn)
-    if os.path.exists(cachefn):
-        return parsers.LazyJSON(cachefn)
-    for _i in open(os.path.join(parsers.directory, fil), "r"):
-        if not _i.strip():
-            continue
-        elif _i[0] == "#":
-            continue # is a comment..
-        elif _i[:2] == "0x":
-            # Consortium-style format
-            byts, ucs = _i.split(None, 2)[:2]
-            byts = int(byts[2:], 16)
-        elif _i[:2] == "<U":
-            # ICU-style format
-            ucs, byts, direction = _i.split(" ", 2)
-            assert byts[:2] == "\\x"
-            byts = [int(i, 16) for i in byts[2:].split("\\x")]
-            byts = int("".join("{:02X}".format(_j) for _j in byts), 16)
-            if (direction.strip() == "|1") or (twoway and (direction.strip() == "|3")):
-                # |0 means a encoder/decoder two-way mapping
-                # |1 appears to mean an encoder-only mapping, e.g. fallback ("best fit")
-                # |3 appears to mean a decoder-only mapping (disfavoured duplicate)
-                continue
-        elif _i.lstrip()[0] in "0123456789":
-            # WHATWG format
-            byts, ucs = _i.split("\t", 2)[:2]
-            extpointer = int(byts.strip(), 10)
-            first, last = extpointer // 157, extpointer % 157
-            lead = first + 0x81
-            trail = (last - 63 + 0xA1) if last >= 63 else (last + 0x40)
-            byts = int("{:02X}{:02X}".format(lead, trail), 16)
-        else:
-            continue
-        #
-        if byts not in big5_to_cns_g2:
-            continue
-        men, ku, ten = big5_to_cns_g2[byts]
-        if plane is not None: # i.e. if we want a particular plane's two-byte mapping.
-            if men != plane:
-                continue
-            else:
-                men = 1
-        assert ucs[:2] in ("0x", "U+", "<U")
-        ucs = ucs[2:]
-        pointer = ((men - 1) * 94 * 94) + ((ku - 1) * 94) + (ten - 1)
-        iucs = mapper(pointer, tuple(int(j, 16) for j in ucs.rstrip(">").split("+")))
-        if len(_temp) > pointer:
-            if _temp[pointer] == None:
-                _temp[pointer] = iucs
-            # In cases of Big5 duplicates, prefer the first mapping
-        else:
-            while len(_temp) < pointer:
-                _temp.append(None)
-            _temp.append(iucs)
-    # Try to end it on a natural plane boundary.
-    _temp.extend([None] * (((94 * 94) - (len(_temp) % (94 * 94))) % (94 * 94)))
-    if not _temp:
-        _temp.extend([None] * (94 * 94)) # Don't just return an empty tuple.
-    r = tuple(_temp) # Making a tuple makes a copy, of course.
-    del _temp[:]
-    # Write output cache.
-    f = open(cachefn, "w")
-    f.write(json.dumps(r))
-    f.close()
-    return r
-
 # Comments: the Kana correspondance of RFC 1922 matches the Big5 Kana encoding in the WHATWG Big5
 # mappings, but not the Big5 Kana encoding in the Python Big5 codec (although it does match the
 # Python Big5-HKSCS codec). Since there exist at least two ways of encoding kana in the same 
@@ -504,6 +278,7 @@ def read_big5_planes(fil, big5_to_cns_g2, *, plane=None, twoway=False, mapper=pa
 # Moral: don't encode Kana and Cyrillic in Big5. Pretty much.
 big5_to_cns1 = read_big5_rangemap("Other/rfc1922.txt", 1)
 big5_to_cns1.update(read_big5_rangemap("Other/rfc1922.txt", 2))
+parsers.big5_to_cns_maps["big5_to_cns1"] = big5_to_cns1
 big5_to_cns2 = read_big5_rangemap("Other/rfc1922.txt", 3, plane=2)
 # The two duplicate kanji. RFC 1922 includes mappings to the same CNS codepoints as the other ones,
 # (and confusingly lists a single plane 1 mapping in the appendix which maps to plane 2, hmm…).
@@ -516,49 +291,76 @@ for _i in big5_to_cns1:
 #   of them, but postdates RFC 1922). This correspondance matches all three of Windows-950, WHATWG
 #   and the Big5E quoted on the CNS website itself, so it is more or less entirely agreed upon.
 big5_to_cns2[0xA3E1] = (1, 34, 34)
+parsers.big5_to_cns_maps["big5_to_cns2"] = big5_to_cns2
 
 # IBM's plane 13 contains codes mainly for round-trip compatibility with Big5 variants.
 # It is not compatible with the standard plane 13 (introduced 2007).
 big5_to_cns2_ibmvar = big5_to_cns2.copy()
 big5_to_cns2_ibmvar[0xC94A] = (13, 4, 40)
 big5_to_cns2_ibmvar[0xDDFC] = (13, 4, 42)
-
-#big5_to_cns2_E = big5_to_cns2_ibmvar.copy()
-#big5_to_cns2_E.update(read_big5_plainmap("GOV-TW/CNS2BIG5_Big5E.txt"))
-#graphdata.gsets["big5e-exts2"] = big5e_extras2 = (94, 2, big5_extras_from_extmap(big5_to_cns2_E, euctw_g2[2]))
+parsers.big5_to_cns_maps["big5_to_cns2_ibmvar"] = big5_to_cns2_ibmvar
 
 # Now that big5_to_cns2 is defined, we can do this:
-graphdata.gsets["ir171-ms"] = (94, 2, read_big5_planes("ICU/windows-950-2000.ucm", big5_to_cns2, plane=1))
+graphdata.gsets["ir171-ms"] = (94, 2, parsers.decode_main_plane_big5(
+    parsers.parse_file_format("ICU/windows-950-2000.ucm"),
+    "windows-950-2000.ucm",
+    "big5_to_cns2",
+    plane=1))
 # IBM-950 uses a considerably different mapping to Windows-950 (though the rough identity of the
 #   characters doesn't differ besides no euro and added control pictures, the mapping does differ).
-graphdata.gsets["ir171-ibm950"] = (94, 2, read_big5_planes("ICU/ibm-950_P110-1999.ucm", big5_to_cns2, plane=1))
+graphdata.gsets["ir171-ibm950"] = (94, 2, parsers.decode_main_plane_big5(
+    parsers.parse_file_format("ICU/ibm-950_P110-1999.ucm"),
+    "ibm-950_P110-1999.ucm",
+    "big5_to_cns2",
+    plane=1))
 # IBM-1373 mapping differs from MS-950 in whether C255 (01-86-33, 1-7641) maps to U+5F5E or U+5F5D
 #   (differing only in the version of the snout radical used)
-graphdata.gsets["ir171-ibm1373"] = (94, 2, read_big5_planes("ICU/ibm-1373_P100-2002.ucm", big5_to_cns2, plane=1))
-graphdata.gsets["ir171-utcbig5"] = (94, 2, read_big5_planes("UTC/BIG5.TXT", big5_to_cns2, plane=1))
+graphdata.gsets["ir171-ibm1373"] = (94, 2, parsers.decode_main_plane_big5(
+    parsers.parse_file_format("ICU/ibm-1373_P100-2002.ucm"),
+    "ibm-1373_P100-2002.ucm",
+    "big5_to_cns2",
+    plane=1))
+graphdata.gsets["ir171-utcbig5"] = (94, 2, parsers.decode_main_plane_big5(
+    parsers.parse_file_format("UTC/BIG5.TXT"),
+    "BIG5.TXT",
+    "big5_to_cns2",
+    plane=1))
 graphdata.gsets["ir171-utc"] = (94, 2, parsers.decode_main_plane_gl(
     parsers.parse_file_format("UTC/CNS11643.TXT"),
     "CNS11643.TXT",
-    plane = 1))
-graphdata.gsets["ir171-1984moz"] = (94, 2, read_big5_planes("Mozilla/big5_1984.txt", big5_to_cns2, plane=1))
+    plane=1))
+graphdata.gsets["ir171-1984moz"] = (94, 2, parsers.decode_main_plane_big5(
+    parsers.parse_file_format("Mozilla/big5_1984.txt"),
+    "big5_1984.txt",
+    "big5_to_cns2",
+    plane=1))
 # Basically the Windows one, but with the addition of the control pictures:
-graphdata.gsets["ir171-web"] = (94, 2, read_big5_planes("WHATWG/index-big5.txt", big5_to_cns2, plane=1))
+graphdata.gsets["ir171-web"] = (94, 2, parsers.decode_main_plane_big5(
+    parsers.parse_file_format("WHATWG/index-big5.txt"),
+    "index-big5.txt",
+    "big5_to_cns2",
+    plane=1))
 # "Mozilla 1.5" one's main plane matches Microsoft, while the "Mozilla 1.8" one's matches WHATWG.
 #
 # For IR-172 (unlike IR-171), MS, Mac, Web, Moz1984 and UTC-BIG5 actually match (while UTC-CNS differs)
-graphdata.gsets["ir172-big5"] = (94, 2, read_big5_planes("UTC/BIG5.TXT", big5_to_cns2, plane=2))
+graphdata.gsets["ir172-big5"] = (94, 2, parsers.decode_main_plane_big5(
+    parsers.parse_file_format("UTC/BIG5.TXT"),
+    "BIG5.TXT",
+    "big5_to_cns2",
+    plane=2))
 graphdata.gsets["ir172-utc"] = (94, 2, parsers.decode_main_plane_gl(
     parsers.parse_file_format("UTC/CNS11643.TXT"),
     "CNS11643.TXT",
-    plane = 2))
+    plane=2))
 
 # Macintosh-compatibility variants
 maccnsdata = parsers.read_untracked(
     "Mac/macCNS.json",
     "Mac/CHINTRAD.TXT",
-    read_big5_planes,
-    "Mac/CHINTRAD.TXT",
-    big5_to_cns_g2 = big5_to_cns2_ibmvar,
+    parsers.decode_main_plane_big5,
+    parsers.parse_file_format("Mac/CHINTRAD.TXT"),
+    "CHINTRAD.TXT",
+    "big5_to_cns2_ibmvar",
     mapper = variationhints.ahmap)
 graphdata.gsets["ir171-mac"] = (94, 2, maccnsdata[:94*94])
 #graphdata.gsets["ir172-mac"] = (94, 2, maccnsdata[94*94:94*94*2]) # same as ir172-big5
@@ -569,32 +371,62 @@ graphdata.gsets["ir171-mac"] = (94, 2, maccnsdata[:94*94])
 #   EUC-TW to underpin the Big5 filter.
 graphdata.gsets["cns-eucg2-mac"] = euctw_g2 = (94, 3, maccnsdata)
 graphdata.gsetflags["cns-eucg2-mac"] |= {"BIG5:IBMCOMPATKANJI"}
-graphdata.gsets["cns-eucg2-ms"] = euctw_g2 = (94, 3, read_big5_planes("ICU/windows-950-2000.ucm", big5_to_cns2_ibmvar))
+graphdata.gsets["cns-eucg2-ms"] = euctw_g2 = (94, 3, parsers.decode_main_plane_big5(
+    parsers.parse_file_format("ICU/windows-950-2000.ucm"),
+    "windows-950-2000.ucm",
+    "big5_to_cns2_ibmvar"))
 graphdata.gsetflags["cns-eucg2-ms"] |= {"BIG5:IBMCOMPATKANJI"}
 
-graphdata.gsets["aton-exts"] = (94, 2, read_big5extras("Mozilla/uao241-b2u.txt"))
-graphdata.gsets["aton-exts2"] = (94, 2, read_big5extras("Mozilla/uao250-b2u.txt"))
-graphdata.gsets["big5e-exts"] = big5e_extras = (94, 2, read_big5extras("Mozilla/big5e.txt"))
-graphdata.gsets["hkscs"] = hkscs_extras = (94, 2, parsers.fuse([read_big5extras("WHATWG/index-big5.txt"), 
-                  read_big5extras("Mozilla/hkscs2004.txt", moz2004=True)], "BIG5-HKSCS2004.json"))
-graphdata.gsets["hkscs2004"] = hkscs04_extras = (94, 2, read_big5extras("Mozilla/hkscs2004.txt", moz2004=True))
-graphdata.gsets["hkscs2001"] = hkscs01_extras = (94, 2, read_big5extras("Mozilla/hkscs2001.txt"))
-#hkscs99_extra_pua = read_big5extras("Mozilla/hkscs1999.txt")
-#hkscs99_extra_ucs = [j if i else i for i, j in zip(hkscs99_extra_pua, hkscs01_extras[2])]
-graphdata.gsets["hkscs1999"] = hkscs99_extras = (94, 2, read_big5extras("Mozilla/hkscs1999.txt"))
-#graphdata.gsets["hkscs1999pua"] = hkscs99_extras = (94, 2, hkscs99_extra_pua)
-graphdata.gsets["gccs"] = gccs_extras = (94, 2, read_big5extras("Mozilla/gccs.txt"))
+graphdata.gsets["aton-exts"] = (94, 2, parsers.decode_extra_plane_big5(
+    parsers.parse_file_format("Mozilla/uao241-b2u.txt"),
+    "uao241-b2u.txt"))
+graphdata.gsets["aton-exts2"] = (94, 2, parsers.decode_extra_plane_big5(
+    parsers.parse_file_format("Mozilla/uao250-b2u.txt"),
+    "uao250-b2u.txt"))
+graphdata.gsets["big5e-exts"] = big5e_extras = (94, 2, parsers.decode_extra_plane_big5(
+    parsers.parse_file_format("Mozilla/big5e.txt"),
+    "big5e.txt"))
+graphdata.gsets["hkscs"] = hkscs_extras = (94, 2, parsers.fuse([
+    parsers.decode_extra_plane_big5(
+        parsers.parse_file_format("WHATWG/index-big5.txt"),
+        "index-big5.txt"), 
+    parsers.decode_extra_plane_big5(
+        parsers.parse_file_format("Mozilla/hkscs2004.txt", moz2004=True),
+        "hkscs2004.txt"),
+], "BIG5-HKSCS2004.json"))
+graphdata.gsets["hkscs2004"] = hkscs04_extras = (94, 2, parsers.decode_extra_plane_big5(
+        parsers.parse_file_format("Mozilla/hkscs2004.txt", moz2004=True),
+        "hkscs2004.txt"))
+graphdata.gsets["hkscs2001"] = hkscs01_extras = (94, 2, parsers.decode_extra_plane_big5(
+        parsers.parse_file_format("Mozilla/hkscs2001.txt", skipstring="<reserved>"),
+        "hkscs2001.txt-skipreserved"))
+graphdata.gsets["hkscs1999"] = hkscs99_extras = (94, 2, parsers.decode_extra_plane_big5(
+        parsers.parse_file_format("Mozilla/hkscs1999.txt", skipstring="<reserved>"),
+        "hkscs1999.txt-skipreserved"))
+graphdata.gsets["gccs"] = gccs_extras = (94, 2, parsers.decode_extra_plane_big5(
+        parsers.parse_file_format("Mozilla/gccs.txt"),
+        "gccs.txt"))
 # ETEN exts, plus the handful of HKSCS ones which follow, rather than preceeding, the standard
 #   assignments. Used by WHATWG's encoder (as opposed to decoder, which is full HKSCS):
 graphdata.gsets["etenextsplus"] = eten_extras_plus = (94, 2, 
     ((None,) * (32 * 188)) + hkscs_extras[2][(32 * 188):])
-graphdata.gsets["etenexts"] = eten_extras = (94, 2, read_big5extras("Mozilla/eten.txt"))
-graphdata.gsets["big5-2003-exts"] = big5e_extras = (94, 2, read_big5extras("Mozilla/big5_2003-b2u.txt"))
-graphdata.gsets["ms950exts"] = ms_big5_extras = (94, 2, read_big5extras("ICU/windows-950-2000.ucm"))
-graphdata.gsets["ibmbig5exts"] = ibm_big5_extras = (94, 2, read_big5extras("ICU/ibm-950_P110-1999.ucm"))
+graphdata.gsets["etenexts"] = eten_extras = (94, 2, parsers.decode_extra_plane_big5(
+        parsers.parse_file_format("Mozilla/eten.txt"),
+        "eten.txt"))
+graphdata.gsets["big5-2003-exts"] = big5e_extras = (94, 2, parsers.decode_extra_plane_big5(
+        parsers.parse_file_format("Mozilla/big5_2003-b2u.txt"),
+        "big5_2003-b2u.txt"))
+graphdata.gsets["ms950exts"] = ms_big5_extras = (94, 2, parsers.decode_extra_plane_big5(
+        parsers.parse_file_format("ICU/windows-950-2000.ucm"),
+        "windows-950-2000.ucm"))
+graphdata.gsets["ibmbig5exts"] = ibm_big5_extras = (94, 2, parsers.decode_extra_plane_big5(
+        parsers.parse_file_format("ICU/ibm-950_P110-1999.ucm"),
+        "ibm-950_P110-1999.ucm"))
 # IBM-1373 has the same Big5 exts mapping as MS-950. IBM-950 exts is also a subset of ETEN exts,
 #   but a different (and non-overlapping) one, for some reason.
-graphdata.gsets["utcbig5exts"] = utc_big5_extras = (94, 2, read_big5extras("UTC/BIG5.TXT"))
+graphdata.gsets["utcbig5exts"] = utc_big5_extras = (94, 2, parsers.decode_extra_plane_big5(
+        parsers.parse_file_format("UTC/BIG5.TXT"),
+        "BIG5.TXT"))
 graphdata.gsets["ms950utcexts"] = msutc_big5_extras = (94, 2,
     parsers.fuse([utc_big5_extras[2], ms_big5_extras[2]], "BIG5-MSUTC.json"))
 
