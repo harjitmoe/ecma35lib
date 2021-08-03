@@ -38,7 +38,7 @@ def _bar():
             yield i
 blendy = tuple(_bar())
 
-plane1 = (1, ("UTC <br/>BIG5.TXT", "Microsoft <br/>MS-950", "Python <br/>\"MS-950\"", "IBM <br/>IBM-950", "CNS Big5 <br/>Big5-2003", "CNS Big5 <br/>Big5-E", "ETEN", "HKSCS <br/>GCCS", "HKSCS <br/>1999", "HKSCS <br/>2001", "HKSCS <br/>2004", "HKSCS <br/>WHATWG", "WHATWG <br/>Encoder", "ChinaSea <br/>At-On 2.41", "ChinaSea <br/>At-On 2.50"), [
+plane1 = (1, ("UTC <br/>BIG5.TXT", "Microsoft <br/>MS-950", "Python <br/>\"MS-950\"", "IBM <br/>IBM-950", "CNS Big5 <br/>Big5-2003", "CNS Big5 <br/>Big5-E", "ETEN", "HKSCS <br/>GCCS", "HKSCS <br/>1999", "HKSCS <br/>2001", "HKSCS <br/>2004", "HKSCS <br/>WHATWG", "WHATWG <br/>Encoder", "ChinaSea <br/>At-On 2.41", "ChinaSea <br/>At-On 2.50", "Dynalab <br/>Ext. A", "Dynalab <br/>Ext. B", "Monotype <br/>314 Ext.", "Monotype <br/>471 Ext."), [
           graphdata.gsets["utcbig5exts"][2],
           graphdata.gsets["ms950exts"][2],
           pseudomicrosoft,
@@ -54,6 +54,10 @@ plane1 = (1, ("UTC <br/>BIG5.TXT", "Microsoft <br/>MS-950", "Python <br/>\"MS-95
           blendy,
           graphdata.gsets["aton-exts"][2],
           graphdata.gsets["aton-exts2"][2],
+          graphdata.gsets["dynalabexts-a"][2],
+          graphdata.gsets["dynalabexts-b"][2],
+          graphdata.gsets["monotypeexts-314"][2],
+          graphdata.gsets["monotypeexts-471"][2],
 ])
 
 def planefunc(number, mapname=None):

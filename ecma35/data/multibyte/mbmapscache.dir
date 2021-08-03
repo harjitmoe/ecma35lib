@@ -171,3 +171,7 @@
 '["decode_extra_plane_big5", ["windows-950-2000.ucm"], {}]', (48804352, 71756)
 '["decode_extra_plane_big5", ["ibm-950_P110-1999.ucm"], {}]', (48876544, 71406)
 '["decode_extra_plane_big5", ["BIG5.TXT"], {}]', (48948224, 53687)
+'["decode_extra_plane_big5", ["AdobeCNS.txt-HKdla-B5-UniCNS-UTF32"], {}]', (49001984, 55345)
+'["decode_extra_plane_big5", ["AdobeCNS.txt-HKdlb-B5-UniCNS-UTF32"], {}]', (49057792, 54979)
+'["decode_extra_plane_big5", ["AdobeCNS.txt-HKm314-B5-UniCNS-UTF32"], {}]', (49113088, 53948)
+'["decode_extra_plane_big5", ["AdobeCNS.txt-HKm471-B5-UniCNS-UTF32"], {}]', (49167360, 54401)
