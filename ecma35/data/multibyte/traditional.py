@@ -430,18 +430,25 @@ graphdata.gsets["utcbig5exts"] = utc_big5_extras = (94, 2, parsers.decode_extra_
 graphdata.gsets["ms950utcexts"] = msutc_big5_extras = (94, 2,
     parsers.fuse([utc_big5_extras[2], ms_big5_extras[2]], "BIG5-MSUTC.json"))
 #
-graphdata.gsets["dynalabexts-a"] = dynalab_big5_extras_a = (94, 2, parsers.decode_extra_plane_big5(
+dynalab_a = parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Adobe/AdobeCNS.txt", cidmap=("HKdla-B5", "UniCNS-UTF32")),
-        "AdobeCNS.txt-HKdla-B5-UniCNS-UTF32"))
-graphdata.gsets["dynalabexts-b"] = dynalab_big5_extras_b = (94, 2, parsers.decode_extra_plane_big5(
+        "AdobeCNS.txt-HKdla-B5-UniCNS-UTF32")
+dynalab_b = parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Adobe/AdobeCNS.txt", cidmap=("HKdlb-B5", "UniCNS-UTF32")),
-        "AdobeCNS.txt-HKdlb-B5-UniCNS-UTF32"))
-graphdata.gsets["monotypeexts-314"] = monotype_big5_extras_314 = (94, 2, parsers.decode_extra_plane_big5(
+        "AdobeCNS.txt-HKdlb-B5-UniCNS-UTF32")
+graphdata.gsets["dynalabexts"] = dynalab_big5_extras = (94, 2, parsers.fuse([
+    dynalab_a,
+    dynalab_b,
+], "Big5-Dynalab-Exts.json"))
+graphdata.gsets["monotypeexts"] = dynalab_big5_extras = (94, 2, parsers.fuse([
+    parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Adobe/AdobeCNS.txt", cidmap=("HKm314-B5", "UniCNS-UTF32")),
-        "AdobeCNS.txt-HKm314-B5-UniCNS-UTF32"))
-graphdata.gsets["monotypeexts-471"] = monotype_big5_extras_471 = (94, 2, parsers.decode_extra_plane_big5(
+        "AdobeCNS.txt-HKm314-B5-UniCNS-UTF32"),
+    parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Adobe/AdobeCNS.txt", cidmap=("HKm471-B5", "UniCNS-UTF32")),
-        "AdobeCNS.txt-HKm471-B5-UniCNS-UTF32"))
+        "AdobeCNS.txt-HKm471-B5-UniCNS-UTF32"),
+], "Big5-Monotype-Exts.json"))
+
 
 # # # # # # # # # #
 # CCCII and EACC
