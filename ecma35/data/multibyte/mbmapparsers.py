@@ -713,6 +713,21 @@ def without_compat(array, filename):
     else:
         return LazyJSON(filename)
 
+def without_ideocompat(array, filename):
+    if not os.path.exists(os.path.join(cachedirectory, filename)):
+        out = []
+        for n, i in enumerate(array):
+            if (not i) or len(i) != 1 or not (namedata._is_cjkci(chr(i[0])) or (0x2E80 <= i[0] < 0x2FE0)) or chr(i[0]) not in namedata.compat_decomp:
+                out.append(i)
+            else:
+                out.append(tuple(ord(j) for j in namedata.compat_decomp[chr(i[0])][1]))
+        _f = open(os.path.join(cachedirectory, filename), "w")
+        _f.write(json.dumps(out))
+        _f.close()
+        return tuple(out)
+    else:
+        return LazyJSON(filename)
+
 def parse_variants(fil):
     f = open(os.path.join(directory, fil), "r")
     cods = {}

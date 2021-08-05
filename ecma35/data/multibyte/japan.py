@@ -131,14 +131,14 @@ graphdata.gsets["ir087"] = jisx0208_1983 = (94, 2, parsers.decode_main_plane_gl(
     "JIS0208.TXT",
     mapper = utcto83jis))
 graphdata.gsets["ir087fujitsu"] = (94, 2, parsers.fuse([
-    parsers.without_compat(
+    parsers.without_ideocompat(
         parsers.decode_main_plane_gl(
             parsers.parse_file_format("Adobe/AdobeJapan.txt", cidmap=("Add", "UniJIS-UTF32")),
             "AdobeJapan.txt-Add-UniJIS-UTF32"),
-        "JIS-FujitsuCIDNorm.json",
+        "JIS-FujitsuCIDIdeoNorm.json",
     ),
     jisx0208_1978[2],
-], "JIS-Fujitsu2.json"))
+], "JIS-Fujitsu3.json"))
 
 # JIS X 0212:1990 (i.e. the 1990 supplementary plane)
 graphdata.gsets["ir159"] = jisx0212 = (94, 2, parsers.decode_main_plane_whatwg(
