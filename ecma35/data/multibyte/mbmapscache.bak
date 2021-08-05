@@ -175,3 +175,7 @@
 '["decode_extra_plane_big5", ["AdobeCNS.txt-HKdlb-B5-UniCNS-UTF32"], {}]', (49057792, 54979)
 '["decode_extra_plane_big5", ["AdobeCNS.txt-HKm314-B5-UniCNS-UTF32"], {}]', (49113088, 53948)
 '["decode_extra_plane_big5", ["AdobeCNS.txt-HKm471-B5-UniCNS-UTF32"], {}]', (49167360, 54401)
+'["decode_main_plane_gl", ["JIS0208.TXT"], {"mapper": "utcto78jisstricter"}]', (49222144, 73202)
+'["decode_main_plane_gl", ["NEC-C-6226-visual2.txt"], {}]', (49295360, 76035)
+'["decode_main_plane_gl", ["AdobeJapan.txt-78-UniJIS-UTF32"], {}]', (49371648, 72635)
+'["decode_main_plane_gl", ["AdobeJapan.txt-Add-UniJIS-UTF32"], {}]', (49444352, 73813)

@@ -8,6 +8,7 @@
 
 import sys, os, binascii, json, urllib.parse, shutil, itertools, dbm.dumb, collections.abc
 from ecma35.data import gccdata
+from ecma35.data.names import namedata
 
 directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mbmaps")
 cachedirectory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mbmapscache.d")
@@ -190,7 +191,10 @@ def parse_file_format(fil, *, twoway=False, prefer_sjis=False, skipstring=None, 
             tos = values[cidmapnames.index(to)].split(",")
             while len(tos) < len(froms):
                 tos.append(tos[0])
-            tos = tos[:len(froms)]
+            while len(tos) > len(froms):
+                if "v" not in tos[0] and (0x2E80 <= int(tos[0], 16) < 0x2FE0):
+                    tos = tos[1:]
+                tos = tos[:len(froms)]
             for (frmv, tov) in zip(froms, tos):
                 if "v" in frmv:
                     continue
@@ -687,6 +691,21 @@ def fuse(arrays, filename):
                     break
             else: # for...else, i.e. if the loop finishes without encountering break
                 out.append(None)
+        _f = open(os.path.join(cachedirectory, filename), "w")
+        _f.write(json.dumps(out))
+        _f.close()
+        return tuple(out)
+    else:
+        return LazyJSON(filename)
+
+def without_compat(array, filename):
+    if not os.path.exists(os.path.join(cachedirectory, filename)):
+        out = []
+        for n, i in enumerate(array):
+            if (not i) or len(i) != 1 or chr(i[0]) not in namedata.compat_decomp:
+                out.append(i)
+            else:
+                out.append(tuple(ord(j) for j in namedata.compat_decomp[chr(i[0])][1]))
         _f = open(os.path.join(cachedirectory, filename), "w")
         _f.write(json.dumps(out))
         _f.close()

@@ -36,11 +36,12 @@ def to_sjis(men, ku, ten):
     else:
         return "<br>(<abbr title='Shift JIS'>SJIS</abbr> {:02x}{:02x})".format(lead, trail)
 
-plane1 = (1, ("1978 JIS",  "1983 JIS",  "1990 JIS",
-              "2000 JIS",  "2004 JIS",  "NEC 78JIS",
-              "IBM 78JIS", "IBM 90JIS", "MS / HTML5", 
+plane1 = (1, ("1978 JIS<br>Illustrative",  "1978 JIS<br>90JIS Pivot",  "1983 JIS",  "1990 JIS",
+              "2000 JIS",  "2004 JIS",  "NEC 78JIS<br>Illustrative",
+              "IBM 78JIS", "IBM 90JIS", "Fujitsu", "MS / HTML5", 
               "Mac KT6",   "Mac PS",    "Mac KT7", 
               "ARIB<br>JIS Emoji", "DoCoMo<br>JIS Emoji", "au by KDDI<br>JIS Emoji", "SoftBank<br>JIS Emoji"), [
+          graphdata.gsets["ir042stricter"][2],
           graphdata.gsets["ir042"][2],
           graphdata.gsets["ir087"][2],
           graphdata.gsets["ir168"][2],
@@ -49,6 +50,7 @@ plane1 = (1, ("1978 JIS",  "1983 JIS",  "1990 JIS",
           graphdata.gsets["ir042nec"][2],
           graphdata.gsets["ir042ibm"][2],
           graphdata.gsets["ir168ibm"][2],
+          graphdata.gsets["ir087fujitsu"][2],
           #graphdata.gsets["ir168icueuc"][2], # same as web.
           graphdata.gsets["ir168web"][2],
           graphdata.gsets["ir168mackt6"][2],
@@ -79,7 +81,7 @@ plane2 = (2, ("MS / HTML5<br>IBM SJIS Ext", "DoCoMo<br>SJIS Emoji",
 def planefunc(number, mapname=None):
     if mapname is None:
         return "JIS plane {:d}".format(number)
-    elif mapname in ("1978 JIS", "1983 JIS", "Mac KT6", "Mac KT7", "Mac PS", "IBM 78JIS", "NEC 78JIS", "MS / HTML5"):
+    elif mapname in ("1978 JIS", "1983 JIS", "Mac KT6", "Mac KT7", "Mac PS", "IBM 78JIS", "NEC 78JIS", "MS / HTML5", "Adobe 78JIS", "Fujitsu"):
         return ""
     elif "<br>" in mapname:
         return ""
@@ -249,6 +251,7 @@ annots = {
  (1, 15, 26): 'Compare 01-19-90 and 02-22-58.',
  (1, 15, 32): 'Compare 01-39-25 and 02-22-76.',
  (1, 15, 56): 'Compare 01-37-22 and 02-24-20.',
+ (1, 15, 94): 'Compare 01-39-77.',
  (1, 16, 2): 'Compare 01-15-08 and 02-21-64.',
  (1, 16, 19): 'Compare 01-82-45.',
  (1, 17, 75): 'Compare 01-87-49 and 02-41-79.',
@@ -274,9 +277,12 @@ annots = {
  (1, 30, 53): 'Compare 01-91-22 and 02-57-22.',
  (1, 30, 63): 'Compare 01-92-89 and 02-66-83.',
  (1, 31, 57): 'Compare 01-80-55.',
+ (1, 32, 70): 'Compare 01-91-66.',
  (1, 33, 8): 'Compare 01-76-45.',
  (1, 33, 63): 'Compare 01-84-86 and 02-32-43.',
  (1, 33, 73): 'Compare 01-94-93 and 02-45-87.',
+ (1, 34, 45): 'Compare 01-94-20.',
+ (1, 35, 29): 'Compare 01-89-73.',
  (1, 36, 47): 'Compare 01-84-89 and 02-32-59.',
  (1, 36, 59): 'Compare 01-52-68.',
  (1, 37, 22): 'Compare 01-15-56 and 02-24-20.',
@@ -289,6 +295,7 @@ annots = {
  (1, 38, 86): 'Compare 01-77-78.',
  (1, 39, 25): 'Compare 01-15-32 and 02-22-76.',
  (1, 39, 72): 'Compare 01-74-04.',
+ (1, 39, 77): 'Compare 01-15-94.',
  (1, 40, 14): 'Compare 01-87-09 and 02-40-53.',
  (1, 40, 16): 'Compare 01-92-90 and 02-66-87.',
  (1, 41, 16): 'Compare 01-59-56.',
@@ -305,6 +312,7 @@ annots = {
  (1, 48, 54): 'Compare 01-43-89.',
 # (1, 49, 59): 'Compare 01-84-05.',
  (1, 52, 68): 'Compare 01-36-59.',
+ (1, 54, 2): 'Compare 01-94-91.',
  (1, 57, 88): 'Compare 01-19-41.',
  (1, 58, 25): 'Compare 01-85-06 and 02-33-34.',
  (1, 59, 56): 'Compare 01-41-16.',
@@ -363,9 +371,11 @@ annots = {
              'whether they favour the IBM Extensions over the NEC Selection '
              '(Windows, WHATWG) or <i>vice versa</i> (Python).',
  (1, 89, 35): 'RE 2000 JIS / 2004 JIS: compare 01-37-88 and 02-48-80.',
+ (1, 89, 73): 'RE 2000 JIS / 2004 JIS: compare 01-35-29.',
  (1, 90, 22): 'RE 2000 JIS / 2004 JIS: compare 01-29-11 and 02-52-55.',
  (1, 91, 6): 'RE 2000 JIS / 2004 JIS: compare 01-45-73 and 02-56-39.',
  (1, 91, 22): 'RE 2000 JIS / 2004 JIS: compare 01-30-53 and 02-57-22.',
+ (1, 91, 66): 'RE 2000 JIS / 2004 JIS: compare 01-32-70.',
  (1, 91, 71): 'RE 2000 JIS / 2004 JIS: compare 01-47-25 and 02-59-88.',
  (1, 92, 42): 'RE 2000 JIS / 2004 JIS: compare 01-22-77 and 02-64-52.',
  (1, 92, 89): 'RE 2000 JIS / 2004 JIS: compare 01-30-63 and 02-66-83.',
@@ -389,10 +399,12 @@ annots = {
              'ones without canonical Unicode representations, though not all those included have '
              'canonical Unicode representations either (since six are logos).',
  (1, 94, 3): 'RE 2000 JIS / 2004 JIS: compare 01-37-31 and 02-72-19.',
+ (1, 94, 20): 'RE 2000 JIS / 2004 JIS: compare 01-34-45.',
  (1, 94, 69): 'RE 2000 JIS / 2004 JIS: compare 01-18-10 and 02-76-31.',
  (1, 94, 74): 'RE 2000 JIS / 2004 JIS: compare 01-24-20 and 02-76-59.',
  (1, 94, 79): 'RE 2000 JIS / 2004 JIS: compare 01-25-77 and 02-76-79.',
  (1, 94, 80): 'RE 2000 JIS / 2004 JIS: compare 01-44-45 and 02-76-80.',
+ (1, 94, 91): 'RE 2000 JIS / 2004 JIS: compare 01-54-02.',
  (1, 94, 93): 'RE 2000 JIS / 2004 JIS: compare 01-33-73 and 02-45-87.',
  (1, 94, 94): 'RE 2000 JIS / 2004 JIS: compare 01-23-50 and 02-52-58.',
  (2, 1, 0): "Regarding the codepoint column from here onwards: the plane 2 codepoints "

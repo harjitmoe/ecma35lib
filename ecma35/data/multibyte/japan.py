@@ -34,7 +34,7 @@ def map_to_zenkaku(pointer, ucs):
         return (_to_zenkaku[ucs[0]],)
     return ucs
 
-to_1978 = {
+to_1978_1990pivot = {
     '―': '—',
     #
     '∈': None, '∋': None, '⊆': None, '⊇': None, '⊂': None, '⊃': None, '∪': None, '∩': None, 
@@ -61,6 +61,18 @@ to_1978 = {
     #
     '堯': None, '槇': None, '遙': None, '瑤': None, '凜': None, '熙': None, 
 }
+to_1978 = to_1978_1990pivot.copy()
+to_1978.update({
+    '澗': '㵎',
+    '昂': '昻',
+    '柵': '栅',
+    '蝉': '蟬',
+    '騨': '驒',
+    '箪': '簞',
+    '剥': '剝',
+    '寃': '𡨚',
+    '屏': '屛',
+})
 to_1983 = {'―': '—', '凜': None, '熙': None}
 to_1990 = {'―': '—'}
 to_2000_from_2004 = {(0xFF5F,): (0x2985,), (0xFF60,): (0x2986,)}
@@ -71,6 +83,12 @@ def map_to_2000(pointer, ucs):
     return map_to_zenkaku(pointer, ucs)
 
 def utcto78jis(pointer, ucs):
+    sucs = "".join(chr(i) for i in ucs)
+    if sucs in to_1978_1990pivot:
+        ret = to_1978_1990pivot[sucs]
+        return tuple(ord(i) for i in ret) if ret else ret
+    return ucs
+def utcto78jisstricter(pointer, ucs):
     sucs = "".join(chr(i) for i in ucs)
     if sucs in to_1978:
         ret = to_1978[sucs]
@@ -94,17 +112,33 @@ graphdata.gsets["ir042"] = jisx0208_1978 = (94, 2, parsers.decode_main_plane_gl(
     parsers.parse_file_format("UTC/JIS0208.TXT"),
     "JIS0208.TXT",
     mapper = utcto78jis))
+graphdata.gsets["ir042stricter"] = jisx0208_1978_stricter = (94, 2, parsers.decode_main_plane_gl(
+    parsers.parse_file_format("UTC/JIS0208.TXT"),
+    "JIS0208.TXT",
+    mapper = utcto78jisstricter))
 graphdata.gsets["ir042ibm"] = jisx0208_ibm78 = (94, 2, parsers.decode_main_plane_sjis(
     parsers.parse_file_format("ICU/ibm-942_P12A-1999.ucm"),
     "ibm-942_P12A-1999.ucm"))
 graphdata.gsets["ir042nec"] = jisx0208_nec = (94, 2, parsers.decode_main_plane_gl(
-    parsers.parse_file_format("Custom/NEC-C-6226-visual.txt"),
-    "NEC-C-6226-visual.txt"))
+    parsers.parse_file_format("Custom/NEC-C-6226-visual2.txt"),
+    "NEC-C-6226-visual2.txt"))
+graphdata.gsets["ir042adobe"] = jisx0208_adobe = (94, 2, parsers.decode_main_plane_gl(
+    parsers.parse_file_format("Adobe/AdobeJapan.txt", cidmap=("78", "UniJIS-UTF32")),
+    "AdobeJapan.txt-78-UniJIS-UTF32"))
 # JIS C 6226:1983 / JIS X 0208:1983
 graphdata.gsets["ir087"] = jisx0208_1983 = (94, 2, parsers.decode_main_plane_gl(
     parsers.parse_file_format("UTC/JIS0208.TXT"),
     "JIS0208.TXT",
     mapper = utcto83jis))
+graphdata.gsets["ir087fujitsu"] = (94, 2, parsers.fuse([
+    parsers.without_compat(
+        parsers.decode_main_plane_gl(
+            parsers.parse_file_format("Adobe/AdobeJapan.txt", cidmap=("Add", "UniJIS-UTF32")),
+            "AdobeJapan.txt-Add-UniJIS-UTF32"),
+        "JIS-FujitsuCIDNorm.json",
+    ),
+    jisx0208_1978[2],
+], "JIS-Fujitsu2.json"))
 
 # JIS X 0212:1990 (i.e. the 1990 supplementary plane)
 graphdata.gsets["ir159"] = jisx0212 = (94, 2, parsers.decode_main_plane_whatwg(
