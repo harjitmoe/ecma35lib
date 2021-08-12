@@ -192,8 +192,10 @@ def parse_file_format(fil, *, twoway=False, prefer_sjis=False, skipstring=None, 
             while len(tos) < len(froms):
                 tos.append(tos[0])
             while len(tos) > len(froms):
-                if "v" not in tos[0] and (0x2E80 <= int(tos[0], 16) < 0x2FE0):
-                    tos = tos[1:]
+                if "v" not in tos[0]:
+                    toscp = int(tos[0], 16)
+                    if (0x2E80 <= toscp < 0x2FE0) or toscp in (0x2003, 0x2329, 0x232A):
+                        tos = tos[1:]
                 tos = tos[:len(froms)]
             for (frmv, tov) in zip(froms, tos):
                 if "v" in frmv:

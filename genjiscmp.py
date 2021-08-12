@@ -36,10 +36,10 @@ def to_sjis(men, ku, ten):
     else:
         return "<br>(<abbr title='Shift JIS'>SJIS</abbr> {:02x}{:02x})".format(lead, trail)
 
-plane1 = (1, ("1978 JIS<br>Illustrative",  "1978 JIS<br>90JIS Pivot",  "1983 JIS",  "1990 JIS",
-              "2000 JIS",  "2004 JIS",  "NEC 78JIS<br>Illustrative",
-              "IBM 78JIS", "IBM 90JIS", "Fujitsu", "MS / HTML5", 
-              "Mac KT6",   "Mac PS",    "Mac KT7", 
+plane1 = (1, ("1978 JIS<br>Illustrative",  "1978 JIS<br>90JIS Pivot",  "1983 JIS",  "1990 JIS<br>Plane 1",
+              "2000 JIS<br>Plane 1",  "2004 JIS<br>Plane 1",  "NEC 78JIS<br>Illustrative", "NEC 78JIS<br>CID",
+              "IBM 78JIS", "IBM 90JIS<br>Plane 1", "Fujitsu", "MS / HTML5", 
+              "Mac KT6<br>Row + 10", "Mac KT6 PS<br>Row + 84", "Mac KT7<br>Row + 84", 
               "ARIB<br>JIS Emoji", "DoCoMo<br>JIS Emoji", "au by KDDI<br>JIS Emoji", "SoftBank<br>JIS Emoji"), [
           graphdata.gsets["ir042stricter"][2],
           graphdata.gsets["ir042"][2],
@@ -48,6 +48,7 @@ plane1 = (1, ("1978 JIS<br>Illustrative",  "1978 JIS<br>90JIS Pivot",  "1983 JIS
           graphdata.gsets["ir228"][2],
           graphdata.gsets["ir233"][2],
           graphdata.gsets["ir042nec"][2],
+          graphdata.gsets["ir042neca"][2],
           graphdata.gsets["ir042ibm"][2],
           graphdata.gsets["ir168ibm"][2],
           graphdata.gsets["ir087fujitsu"][2],
@@ -62,10 +63,11 @@ plane1 = (1, ("1978 JIS<br>Illustrative",  "1978 JIS<br>90JIS Pivot",  "1983 JIS
           graphdata.gsets["ir168sbank"][2],
 ])
 
-plane2 = (2, ("MS / HTML5<br>IBM SJIS Ext", "DoCoMo<br>SJIS Emoji",
+plane2 = (2, ("IBM SJIS Ext<br>78JIS Ver.", "IBM SJIS Ext<br>MS / HTML5", "DoCoMo<br>SJIS Emoji",
               "au by KDDI<br>SJIS Emoji", "SoftBank<br>SJIS Emoji",
-              "1990 JIS", "Va Extension", "OSF EUC<br>Plane 2M",
-              "IBM 90JIS", "ICU EUC<br>Plane 2", "2000/04 JIS"), [
+              "1990 JIS<br>Plane 2", "Va Extension<br>Plane 2", "OSF EUC<br>Plane 2M",
+              "IBM 90JIS<br>Plane 2", "ICU EUC<br>Plane 2", "2000/04 JIS<br>Plane 2"), [
+          graphdata.gsets["ibmsjisextold"][2],
           graphdata.gsets["ibmsjisextpua"][2],
           graphdata.gsets["docomosjisext"][2],
           graphdata.gsets["kddipictsjisext"][2],
@@ -81,12 +83,7 @@ plane2 = (2, ("MS / HTML5<br>IBM SJIS Ext", "DoCoMo<br>SJIS Emoji",
 def planefunc(number, mapname=None):
     if mapname is None:
         return "JIS plane {:d}".format(number)
-    elif mapname in ("1978 JIS", "1983 JIS", "Mac KT6", "Mac KT7", "Mac PS", "IBM 78JIS", "NEC 78JIS", "MS / HTML5", "Adobe 78JIS", "Fujitsu"):
-        return ""
-    elif "<br>" in mapname:
-        return ""
-    else:
-        return "<br>Plane {}".format(number)
+    return ""
 
 def kutenfunc(number, row, cell):
     if number == 1:
@@ -225,6 +222,8 @@ annots = {
             '(i.e. rows 12 and 13 only) is the subset which can be handled by '
             "Apple's ConvertFromTextToUnicode in response to either flag.\u2002"
             'KanjiTalk 7 goes off doing its own thing here.',
+ (1, 9, 92): 'Adobe\'s CID maps, while not mapping most of the NEC characters in this row (they '
+             'after all duplicate single-byte characters), maps the pipe to U+FFE8.',
  (1, 11, 0): 'KanjiTalk 6 encodes the vertical forms ten rows (instead of 84 '
              'rows) down.',
  (1, 12, 23): 'I am not sure what is going on with au here (I am including these '
@@ -269,6 +268,7 @@ annots = {
  (1, 23, 50): 'Compare 01-94-94 and 02-52-58.',
  (1, 23, 59): 'Compare 01-80-84.',
  (1, 24, 20): 'Compare 01-94-74 and 02-76-59.',
+ (1, 25, 23): 'Compare 01-90-22 and 02-90-50.',
  (1, 25, 60): 'Compare 01-66-72.',
  (1, 25, 77): 'Compare 01-94-79 and 02-76-79.',
  (1, 28, 40): 'Compare 01-47-64 and 02-26-90.',
@@ -372,7 +372,7 @@ annots = {
              '(Windows, WHATWG) or <i>vice versa</i> (Python).',
  (1, 89, 35): 'RE 2000 JIS / 2004 JIS: compare 01-37-88 and 02-48-80.',
  (1, 89, 73): 'RE 2000 JIS / 2004 JIS: compare 01-35-29.',
- (1, 90, 22): 'RE 2000 JIS / 2004 JIS: compare 01-29-11 and 02-52-55.',
+ (1, 90, 22): 'RE 2000 JIS / 2004 JIS: compare 01-29-11 and 02-52-55.\u2002RE NEC, compare 01-25-23 and 02-90-50.',
  (1, 91, 6): 'RE 2000 JIS / 2004 JIS: compare 01-45-73 and 02-56-39.',
  (1, 91, 22): 'RE 2000 JIS / 2004 JIS: compare 01-30-53 and 02-57-22.',
  (1, 91, 66): 'RE 2000 JIS / 2004 JIS: compare 01-32-70.',
@@ -509,6 +509,7 @@ annots = {
              '0x21 (<code>!</code>).',
  (2, 89, 21): 'Compare 01-02-44.',
  (2, 89, 28): 'Compare 01-02-72.',
+ (2, 90, 50): 'Compare 01-25-23 and 01-90-22.',
  (2, 91, 0): 'This row\'s content is invoked over GL (without re-designating G0) by <code>ESC $ P'
              '</code> in Softbank\'s 2G emoji encoding (which does not conform to JIS X 0202 / '
              'ECMA-35).\u2002It is positioned such that the first emoji (cell 2 here) is over '
@@ -554,8 +555,8 @@ for n, p in enumerate([plane1, plane2]):
         elif bn < 2:
             nexturl = "jisplane{:X}a.html".format(bn + 1)
             nextname = "JIS plane {:d}, part 1".format(bn + 1)
-        showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ja", part=q, css="/css/codechart.css",
-                             menuurl="/jis-conc.html", menuname="JIS character set variant comparison",
+        showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ja", part=q, css="../css/codechart.css",
+                             menuurl="../jis-conc.html", menuname="JIS character set variant comparison",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
                              annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True, blot=blot, siglum="JIS")
         f.close()
