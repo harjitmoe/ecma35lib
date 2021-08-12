@@ -120,17 +120,8 @@ graphdata.gsets["ir042ibm"] = jisx0208_ibm78 = (94, 2, parsers.decode_main_plane
     parsers.parse_file_format("ICU/ibm-942_P12A-1999.ucm"),
     "ibm-942_P12A-1999.ucm"))
 graphdata.gsets["ir042nec"] = jisx0208_nec = (94, 2, parsers.decode_main_plane_gl(
-    parsers.parse_file_format("Custom/NEC-C-6226-visual2.txt"),
-    "NEC-C-6226-visual2.txt"))
-graphdata.gsets["ir042neca"] = (94, 2, parsers.fuse([
-    parsers.without_ideocompat(
-        parsers.decode_main_plane_sjis(
-            parsers.parse_file_format("Adobe/AdobeJapan.txt", cidmap=("Ext-RKSJ", "UniJIS-UTF32")),
-            "AdobeJapan.txt-Ext-RKSJ-UniJIS-UTF32"),
-        "JIS-NECCIDIdeoNorm.json",
-    ),
-    jisx0208_1978[2],
-], "JIS-NECa.json"))
+    parsers.parse_file_format("Custom/NEC-C-6226-visual3.txt"),
+    "NEC-C-6226-visual3.txt"))
 graphdata.gsets["ir042adobe"] = jisx0208_adobe = (94, 2, parsers.decode_main_plane_gl(
     parsers.parse_file_format("Adobe/AdobeJapan.txt", cidmap=("78", "UniJIS-UTF32")),
     "AdobeJapan.txt-78-UniJIS-UTF32"))

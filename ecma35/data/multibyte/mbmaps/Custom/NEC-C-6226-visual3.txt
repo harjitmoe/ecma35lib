@@ -3,7 +3,7 @@
 # Amended 2019-02 with additional deviations from modern mappings to fully use the closest matches
 #   in the 1990-JIS (including JIS X 0212) repertoire (although U+663B/U+6602 were still their
 #   Microsoft way around, as an oversight on my part).
-# Further amended 2021-08 to swap U+663B/U+6602 and use some closer 2004-JIS and other characters:
+# Further amended 2021-08-05 to swap U+663B/U+6602 and use some closer 2004-JIS and other characters:
 #   20-34: now U+3D4E, was U+6F97
 #   25-23: now U+663B, was U+6602 (compare 90-22)
 #   26-84: now U+6805 (GB 2312), was U+67F5
@@ -14,6 +14,16 @@
 #   53-67: now U+21A1A, was U+5BC3
 #   54-02: now U+5C5B (2004-JIS level 3), was U+5C4F
 #   90-22: now U+6602, was U+663B (compare 25-23)
+# Further amended 2021-08-12 referencing NEC-specific CIDs, double-checked against bitmap font:
+#   17-28: kept as U+958F; changing to U+28CDD per CID map is not justified by bitmap font
+#   23-46: now U+25874, was U+7A3D
+#   23-53: now U+8346, was U+834A
+#   23-68: now U+28EF6, was U+9699
+#   59-42: now U+67FA, was U+67B4
+#   59-84: now U+688E, was U+688D
+#   63-83: kept as U+71D7; changing to U+243D0 per CID map is not justified by bitmap font
+#   73-28: kept as U+85DC; changing to U+853E per CID map is not justified by bitmap font
+#   80-19: kept as U+96CE; changing to U+7762 per CID map is not justified by bitmap font
 #
 # NEC's double byte character set makes substantial use of halfwidth-fullwidth distinctions which
 # cannot be represented in Unicode. Following a convention established by Apple, W (naturally wide)
@@ -1616,14 +1626,14 @@
 0x374b	U+6842	# 23-43, CJK UNIFIED IDEOGRAPH-6842
 0x374c	U+6e13	# 23-44, CJK UNIFIED IDEOGRAPH-6E13
 0x374d	U+7566	# 23-45, CJK UNIFIED IDEOGRAPH-7566
-0x374e	U+7a3d	# 23-46, CJK UNIFIED IDEOGRAPH-7A3D
+0x374e	U+25874	# 23-46, CJK UNIFIED IDEOGRAPH-25874
 0x374f	U+7cfb	# 23-47, CJK UNIFIED IDEOGRAPH-7CFB
 0x3750	U+7d4c	# 23-48, CJK UNIFIED IDEOGRAPH-7D4C
 0x3751	U+7d99	# 23-49, CJK UNIFIED IDEOGRAPH-7D99
 0x3752	U+7e6b	# 23-50, CJK UNIFIED IDEOGRAPH-7E6B
 0x3753	U+7f6b	# 23-51, CJK UNIFIED IDEOGRAPH-7F6B
 0x3754	U+830e	# 23-52, CJK UNIFIED IDEOGRAPH-830E
-0x3755	U+834a	# 23-53, CJK UNIFIED IDEOGRAPH-834A
+0x3755	U+8346	# 23-53, CJK UNIFIED IDEOGRAPH-8346
 0x3756	U+86cd	# 23-54, CJK UNIFIED IDEOGRAPH-86CD
 0x3757	U+8a08	# 23-55, CJK UNIFIED IDEOGRAPH-8A08
 0x3758	U+8a63	# 23-56, CJK UNIFIED IDEOGRAPH-8A63
@@ -1638,7 +1648,7 @@
 0x3761	U+621f	# 23-65, CJK UNIFIED IDEOGRAPH-621F
 0x3762	U+6483	# 23-66, CJK UNIFIED IDEOGRAPH-6483
 0x3763	U+6fc0	# 23-67, CJK UNIFIED IDEOGRAPH-6FC0
-0x3764	U+9699	# 23-68, CJK UNIFIED IDEOGRAPH-9699
+0x3764	U+28EF6	# 23-68, CJK UNIFIED IDEOGRAPH-28EF6
 0x3765	U+6841	# 23-69, CJK UNIFIED IDEOGRAPH-6841
 0x3766	U+5091	# 23-70, CJK UNIFIED IDEOGRAPH-5091
 0x3767	U+6b20	# 23-71, CJK UNIFIED IDEOGRAPH-6B20
@@ -4953,7 +4963,7 @@
 0x5b47	U+6785	# 59-39, CJK UNIFIED IDEOGRAPH-6785
 0x5b48	U+67b7	# 59-40, CJK UNIFIED IDEOGRAPH-67B7
 0x5b49	U+67ef	# 59-41, CJK UNIFIED IDEOGRAPH-67EF
-0x5b4a	U+67b4	# 59-42, CJK UNIFIED IDEOGRAPH-67B4
+0x5b4a	U+67FA	# 59-42, CJK UNIFIED IDEOGRAPH-67FA
 0x5b4b	U+67ec	# 59-43, CJK UNIFIED IDEOGRAPH-67EC
 0x5b4c	U+67b3	# 59-44, CJK UNIFIED IDEOGRAPH-67B3
 0x5b4d	U+67e9	# 59-45, CJK UNIFIED IDEOGRAPH-67E9
@@ -4995,7 +5005,7 @@
 0x5b71	U+68a0	# 59-81, CJK UNIFIED IDEOGRAPH-68A0
 0x5b72	U+68ba	# 59-82, CJK UNIFIED IDEOGRAPH-68BA
 0x5b73	U+690f	# 59-83, CJK UNIFIED IDEOGRAPH-690F
-0x5b74	U+688d	# 59-84, CJK UNIFIED IDEOGRAPH-688D
+0x5b74	U+688E	# 59-84, CJK UNIFIED IDEOGRAPH-688E
 0x5b75	U+687e	# 59-85, CJK UNIFIED IDEOGRAPH-687E
 0x5b76	U+6901	# 59-86, CJK UNIFIED IDEOGRAPH-6901
 0x5b77	U+68ca	# 59-87, CJK UNIFIED IDEOGRAPH-68CA

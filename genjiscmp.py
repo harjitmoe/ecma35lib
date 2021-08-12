@@ -37,7 +37,7 @@ def to_sjis(men, ku, ten):
         return "<br>(<abbr title='Shift JIS'>SJIS</abbr> {:02x}{:02x})".format(lead, trail)
 
 plane1 = (1, ("1978 JIS<br>Illustrative",  "1978 JIS<br>90JIS Pivot",  "1983 JIS",  "1990 JIS<br>Plane 1",
-              "2000 JIS<br>Plane 1",  "2004 JIS<br>Plane 1",  "NEC 78JIS<br>Illustrative", "NEC 78JIS<br>CID",
+              "2000 JIS<br>Plane 1",  "2004 JIS<br>Plane 1",  "NEC 78JIS<br>Illustrative", 
               "IBM 78JIS", "IBM 90JIS<br>Plane 1", "Fujitsu", "MS / HTML5", 
               "Mac KT6<br>Row + 10", "Mac KT6 PS<br>Row + 84", "Mac KT7<br>Row + 84", 
               "ARIB<br>JIS Emoji", "DoCoMo<br>JIS Emoji", "au by KDDI<br>JIS Emoji", "SoftBank<br>JIS Emoji"), [
@@ -48,7 +48,6 @@ plane1 = (1, ("1978 JIS<br>Illustrative",  "1978 JIS<br>90JIS Pivot",  "1983 JIS
           graphdata.gsets["ir228"][2],
           graphdata.gsets["ir233"][2],
           graphdata.gsets["ir042nec"][2],
-          graphdata.gsets["ir042neca"][2],
           graphdata.gsets["ir042ibm"][2],
           graphdata.gsets["ir168ibm"][2],
           graphdata.gsets["ir087fujitsu"][2],
@@ -253,6 +252,10 @@ annots = {
  (1, 15, 94): 'Compare 01-39-77.',
  (1, 16, 2): 'Compare 01-15-08 and 02-21-64.',
  (1, 16, 19): 'Compare 01-82-45.',
+ (1, 17, 28): 'For some reason, Adobe\'s CID map lists NEC as having U+28CDD 𨳝 rather than U+958F '
+              'here.&ensp;They differ in which end the upper stroke of the inner component '
+              'is drawn from.&ensp;The PC98 font is not nearly high resolution enough '
+              'for this detail to actually be distinguishable.',
  (1, 17, 75): 'Compare 01-87-49 and 02-41-79.',
  (1, 18, 9): 'Compare 01-82-84.',
  (1, 18, 10): 'Compare 01-94-69 and 02-76-31.',
@@ -320,6 +323,10 @@ annots = {
  (1, 62, 25): 'Compare 01-37-83.',
  (1, 62, 85): 'Compare 01-20-35.',
  (1, 63, 70): 'Compare 01-84-06.',
+ (1, 63, 83): 'For some reason, Adobe\'s CID map lists NEC as having U+243D0 rather than U+71D7 '
+              'here.&ensp;It differs in having a sun component rather than a moon component in the '
+              'enclosure.&ensp;The PC98 font I\'m double-checking against does not do this, '
+              'however.&ensp;I\'m taking the CID map\'s word for it for Fujitsu for the time being.',
  (1, 64, 86): 'Compare 01-84-04.',
  (1, 66, 72): 'Compare 01-25-60.',
  (1, 66, 74): 'Compare 01-37-55.',
@@ -327,11 +334,17 @@ annots = {
  (1, 68, 38): 'Compare 01-47-22.',
  (1, 73, 2): 'Compare 01-28-41.',
  (1, 73, 14): 'Compare 01-44-89.',
+ (1, 73, 28): 'For some reason, Adobe\'s CID map lists NEC as having U+853E 蔾 rather than U+85DC '
+              'here.&ensp;It differs in replacing the lower component with a tree.&ensp;The PC98 '
+              'font I\'m double-checking against does not do this, however.',
  (1, 73, 58): 'Compare 01-19-34.',
  (1, 74, 4): 'Compare 01-39-72.',
  (1, 75, 61): 'Compare 01-20-50.',
  (1, 76, 45): 'Compare 01-33-08.',
  (1, 77, 78): 'Compare 01-38-86.',
+ (1, 80, 19): 'For some reason, Adobe\'s CID map lists NEC as having U+7762 睢 rather than U+96Ce '
+              'here.&ensp;It differs in that it has a 目, not a 且.&ensp;The PC98 '
+              'font I\'m double-checking against does not do this, however.',
  (1, 80, 55): 'Compare 01-31-57.',
  (1, 80, 84): 'Compare 01-23-59.',
  (1, 82, 45): 'Compare 01-16-19.',
