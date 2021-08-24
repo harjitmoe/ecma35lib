@@ -113,3 +113,4 @@
 '["decode_main_plane_euc", ["eucJP-udc.txt"], {"eucjp": true, "plane": 1}]', (45013504, 55836)
 '["decode_main_plane_euc", ["eucJP-udc.txt"], {"eucjp": true, "plane": 2}]', (45069824, 55836)
 '["decode_main_plane_gl", ["NEC-C-6226-visual3.txt"], {}]', (45126144, 76037)
+'["decode_main_plane_sjis", ["AdobeJapan.txt-83pv-RKSJ-UniJIS-UTF32"], {}]', (45202432, 75649)
