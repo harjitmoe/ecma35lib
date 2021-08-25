@@ -158,6 +158,9 @@ annots = {
     (1, 7, 63): 'Duplicate of Ψ-11-04.&ensp;Means "print".',
     (1, 7, 64): 'Differs from Ψ-07-63 (and Ψ-11-04) in its circle being dashed not solid.',
     (1, 7, 67): 'Emphasised (nominally italicised) version of Ψ-07-65.',
+    (1, 7, 73): 'U+25AB dates from Unicode 1.x.&ensp;It is not mapped from elsewhere in MacKorean, '
+                'hence it is unclear why it was not used as the mapping for the small outlined '
+                'square here (avoiding the hint sequence).',
     (1, 8, 73): 'Most fonts show U+2939\'s head pointing SE rather than the south intended here.&ensp;'
                 '<a href="https://www.fileformat.info/info/unicode/char/2939/fontsupport.htm">'
                 'PragmataPro is apparently one exception.</a>',
