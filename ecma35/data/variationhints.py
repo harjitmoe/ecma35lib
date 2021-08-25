@@ -219,10 +219,6 @@ applesinglehints = {
     # Special cases
     # Small white square: was already present so unclear why it wasn't used anywhere in the mapping
     (0x25A1, 0xF87C): (0x25AB,),
-    # White florette: 0xA67B corresponds to Adobe-Japan1 CID-12228, which maps
-    #   to U+2740. Apple maps it to U+273F+F87A since 0xA699 is already mapped to 
-    #   U+2740.
-    (0x273F, 0xF87A): (0x2740, 0xF87F),
     # Telephone dial. None of the four encoded variants of the ☏ are at all close,
     #   but U+260F is the most likely of the four to display a dial (U+1F57E and
     #   U+1F57F are expressly keyed, while U+260E is often displayed as a keyed
@@ -304,6 +300,20 @@ applesinglehints_mackorean.update({
     #
     # (0x5370, 0x20DD) vs (0x329E,) are a special case (used for different duplicates)
     # (0x329E, 0xF87F) is already used for the dotted one.
+    #
+    # Special case for flowers: 0xA67B corresponds to Adobe-Japan1 CID-12228, which maps to U+2740.
+    #   As such, U+2740 in Adobe-Japan1-based fonts (like Source Han/Noto CJK) corresponds closely
+    #   to 0xA67B's glyph.
+    # Apple maps 0xA67B to U+273F+F87A since 0xA699 is already mapped to U+2740. However, 0xA699
+    #   is a four-petalled flower, while both 0xA699 and U+2740 (either when in its Unicode
+    #   reference glyph, or in its Adobe glyph) have five petals, as a pair with U+273F or 0xA67C.
+    # Worth noting though is that Adobe-Korea1 does not map 0xA67B and 0xA67C to Unicode, despite
+    #   very closely matching the Adobe-Japan1 characters mapped to U+2740 and U+273F.
+    # U+1F33C (which postdates Apple's mapping) does not have a fixed number of petals, (it can
+    #   show up with anywhere between 5 and 28 rayflorets or petals depending on font), so it is
+    #   a more suitable updated mapping for 0xA699 methinks.
+    (0x273F, 0xF87A): (0x2740,),
+    (0x2740,): (0x1F33C,),
     #
     # Special cases of characters that were *already in Unicode 3.2 as it transpires*
     (0x3D, 0x20D2): (0x29E7,), # Record mark (⧧)

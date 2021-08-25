@@ -92,9 +92,11 @@ annots = {
     (1, 6, 61): 'This is nominally like an elongated bold equals sign stretching across the mid '
                 'line of the whole em square, bolder than the nominal 01-01-75, but still '
                 'nominally much less bold/tall than U+3013 is typically shown in fonts.',
-    (1, 6, 67): 'This is supposed to have four outlined petals partly obscuring a filled square '
-                'in lozenge alignment.&ensp;No closer mapping exists that I know of.&ensp;Compare '
-                'Ψ-06-52 and Ψ-06-83.',
+    (1, 6, 67): 'This is supposed to have four outlined narrow diagonal petals partly obscuring a '
+                'filled square in lozenge alignment.&ensp;No closer mapping exists that I know '
+                'of.&ensp;Compare Ψ-06-52 and Ψ-06-83.',
+    (1, 6, 70): 'The outer lozenge is nominally supposed to be pinched, similarly to ⯎.&ensp;'
+                'Mapping to the newer U+1F7A0 is by elimination.',
     (1, 6, 74): 'This is Caslon Ornament Pica-7, which is a white (i.e. outlined) eight-petal '
                 'florette.&ensp;U+2741 (from Zapf Dingbats) is also an eight-petal florette, '
                 'but is an "outlined black" one (i.e. filled in, plus a padded outline around '
@@ -116,9 +118,14 @@ annots = {
                 'of their tails.&ensp;Dots are nominally omitted.&ensp;See Ψ-06-80 above.',
     (1, 6, 85): 'Nominally this has the BG colour on the right, and the bulbs due anticlockwise of '
                 'their tails.&ensp;Dots are nominally omitted.&ensp;See Ψ-06-80 above.',
-    (1, 6, 86): 'Contrast with Ψ-06-59 above.&ensp;Unlike that one, this one is expected to have '
-                'four petals rather than five, and five central dots (four anthers, one on each '
-                'petal, and a stigma) rather than being purely an outline.',
+    (1, 6, 86): 'Compare the mappings for Ψ-06-59 above.&ensp;Unlike that one, this one\'s nominal '
+                'glyph is shown with four petals rather than five, and five central dots (four '
+                'anthers, one on each petal, and a stigma) rather than being purely an '
+                'outline.</p><p>U+2740 usually has five petals, and some Adobe-Japan1-influenced '
+                'glyphs for it correspond closely to Ψ-06-59 (see commentary there).&ensp;By '
+                'contrast, the newer U+1F33C has an unspecified number of petals (or ray florets), '
+                'with the number varying widely between fonts, making it a better match on that '
+                'basis alone.',
     (1, 6, 88): 'Ψ-06-88 can best be described as a starburst effect, though it also bears a certain '
                 'resemblence to the helm wheel (U+2388 ⎈).&ensp;Two concentric rings, four broad '
                 'triangular rays in cardinal directions, and four narrower teardrop-shaped rays '
@@ -151,7 +158,7 @@ annots = {
     (1, 7, 63): 'Duplicate of Ψ-11-04.&ensp;Means "print".',
     (1, 7, 64): 'Differs from Ψ-07-63 (and Ψ-11-04) in its circle being dashed not solid.',
     (1, 7, 67): 'Emphasised (nominally italicised) version of Ψ-07-65.',
-    (1, 8, 73): 'Most fonts show U+2939\'s head pointing SW rather than the south intended here.&ensp;'
+    (1, 8, 73): 'Most fonts show U+2939\'s head pointing SE rather than the south intended here.&ensp;'
                 '<a href="https://www.fileformat.info/info/unicode/char/2939/fontsupport.htm">'
                 'PragmataPro is apparently one exception.</a>',
     (1, 8, 81): 'This is a cross barby, which has meanings as diverse as '
@@ -178,7 +185,7 @@ annots = {
                  '"wave arrows", and they point toward the same corner of the character cell.',
     (1, 12, 20): 'Ψ-12-20 points downward toward the bottom-right corner of the character cell, '
                  'after following a curvature resembling a ∿.&ensp;No especially close Unicode '
-                 'character exists; U+2B4D is probably the closest, although the similar U+21AF ↯'
+                 'character exists; U+2B4D is probably the closest, although the similar U+21AF ↯ '
                  'was presumably passed over by Apple\'s mapping, since the latter dates to '
                  'Unicode 1.x.&ensp;U+2B5A ⭚ and U+2B5B ⭛ were added as signs used for transcribing '
                  'intonation in Lithuanian dialects, and neither is especially close (actually, '
