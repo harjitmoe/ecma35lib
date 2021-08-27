@@ -330,8 +330,16 @@ applesinglehints_mackorean_nishikiteki.update({
     (0x21e8, 0x20DE): (0xE3F5,),
     (0x21e9, 0x20DE): (0xE3F8,),
     #
+    # White arrows in black circle:
+    (0x21e6, 0x20DD): (0xE3F2,),
+    (0x21e7, 0x20DD): (0xE3F3,),
+    (0x27B2,): (0xE3F1,),
+    (0x21e9, 0x20DD): (0xE3F4,),
+    #
     (0x25B4, 0x20E4): (0xF6E8,), # Black triangle in triangle
     (0x25B2, 0x20DD): (0xF6ED,), # Black triangle in circle
+    (0x29C8, 0x20DE): (0xE3D9,), # Square target (better than U+1F796 since latter has black bullseye)
+    (0x25C6, 0x20DE): (0xE3D4,), # Black lozenge in square
     #
     # Apple PUA actually included in Nishiki-teki (override inferior approximations in the other dict)
     (0xF807,): (0xF807,), # Telephone dial
@@ -785,7 +793,7 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
             print(strep2[:-1], end="", file=outfile)
             print("<tspan font-size='0px'>{}</tspan>".format(strep2[-1]), file=outfile)
             print("</text><polygon points='0,36 36,72 72,36 36,0' class='enclosure' /></svg>", file=outfile)
-        elif strep2[-1] == "\u20E4":
+        elif strep2[-1] == "\u20E4" and strep2[0] != "\u25B4":
             print("<svg viewBox='0 0 88 88' class='charwrapper lighttriangle'>", file=outfile)
             print("<text y='76px' x='42px' text-anchor='middle' font-size='42px'>", file=outfile)
             print(strep2[:-1], end="", file=outfile)

@@ -186,7 +186,7 @@ annots = {
                  'leftward respectively.&ensp;Their Unicode mappings, rather, nominally have the '
                  'form of a tilde and reversed tilde respectively&mdash;though they are likewise '
                  '"wave arrows", and they point toward the same corner of the character cell.',
-    (1, 12, 20): 'Ψ-12-20 points downward toward the bottom-right corner of the character cell, '
+    (1, 12, 20): 'Ψ-12-20 points downward toward the bottom-left corner of the character cell, '
                  'after following a curvature resembling a ∿.&ensp;No especially close Unicode '
                  'character exists; U+2B4D is probably the closest, although the similar U+21AF ↯ '
                  'was presumably passed over by Apple\'s mapping, since the latter dates to '
