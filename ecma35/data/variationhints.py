@@ -106,9 +106,11 @@ applesinglehints = {
     (0x21e8, 0xf87C): (0x1F80A, 0xF87A),
     (0x21e9, 0xf87C): (0x1F80B, 0xF87A),
     #
-    # Bold triangle-headed arrow with detached head:
+    # Bold triangle-headed arrow, with detached head IFF vertical:
     (0x21e6, 0xf87F): (0x1F780, 0x1F89C),
+    (0x21e7, 0xf87F): (0x1F829,),
     (0x21e8, 0xf87F): (0x1F89C, 0x1F782),
+    (0x21e9, 0xf87F): (0x1F82B,),
     #
     # White arrows in black circle (Zapf U+27B2):
     (0x21e6, 0x20DD): (0x2B88,),
@@ -189,8 +191,8 @@ applesinglehints = {
     (0x2394, 0xF876): (0x2B21,),  # White hexagon
     # Lozenges
     (0x25C6, 0xF879): (0x2BC1,), # Another black diamond besides the Wansung one
-    (0x25C7, 0xF879): (0x2B28,), # Another white diamond besides the Wansung one
-    (0x25C7, 0xF87B): (0x2B26,), # Yet another white diamond; not a great match, but by elimination
+    (0x25C7, 0xF879): (0x2B26,), # Another white diamond besides the Wansung one
+    (0x25C7, 0xF87B): (0x1FBAE,), # Yet another white diamond, bolder
     (0x25C7, 0xF87C): (0x1F754,), # Small diamond
     (0x25C7, 0xF87F): (0x2B2B,), # Lozenge as a member of a series of small-ish geometry icons
     (0x25C8, 0xF87F): (0x1F7A0,), # Outlined black lozenge
@@ -225,6 +227,8 @@ applesinglehints = {
     #   variant).
     (0xF807,): (0x260F, 0xF87F),
     (0x203C, 0xF87F): (0x203C, 0xFE0F), # Honestly that's good enough.
+    (0xFF01, 0xF874): (0xFF01, 0xFE00), # Later gained an SVS
+    (0x3002, 0xF87D): (0x3002, 0xFE00), # Later gained an SVS
     #
     # Some direct PUA mappings used by MacKorean but no longer needed
     (0xF80A,): (0x1F668,), # "Two interwoven eye shapes" (basically a variant quilt square)

@@ -162,7 +162,10 @@ def unicodefunc(cdisplayi, outfile, i=None, jlfunc=None, number=None, row=None, 
 annots = {
     (1, 11, 48): "Mapping the escudo sign to U+1F4B2 is an absolute kludge, purely to prevent it "
                  "from duplicating the dollar sign mapping.",
-    (1, 11, 60): "Apparently, this is a scribal abbreviation of the word \"per\".",
+    (1, 11, 60): "Apparently, this is a scribal abbreviation of the word \"per\", at least per "
+                 "its name in Unicode—although it is substantially the same symbol as the \"Old "
+                 "English Libra\" sign encoded at PUA F52D in Aletheia and PUA F5F0 in "
+                 "Nishiki-teki.",
 }
 
 blot = ""

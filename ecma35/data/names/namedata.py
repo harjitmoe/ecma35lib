@@ -369,10 +369,21 @@ with open(os.path.join(directory, "UCD/DerivedEastAsianWidth.txt"), "r") as f:
                 eaw_ranges[_last + 1] = "N" # default to neutral (N)
 eaw_starts = sorted(eaw_ranges.keys())
 def east_asian_width(ucs):
-    for n, i in enumerate(eaw_starts):
-        if i > ord(ucs):
-            return eaw_ranges[eaw_starts[n - 1]]
-    return eaw_ranges[eaw_starts[-1]]
+    firstidx = 0
+    lastidx = len(eaw_starts) - 1
+    codept = ord(ucs)
+    while firstidx != lastidx:
+        if lastidx == firstidx + 1:
+            if eaw_starts[lastidx] <= codept:
+                firstidx = lastidx
+            else:
+                lastidx = firstidx
+        mididx = (firstidx + lastidx) // 2
+        if eaw_starts[mididx] <= codept:
+            firstidx = mididx
+        else:
+            lastidx = mididx
+    return eaw_ranges[eaw_starts[firstidx]]
 
 def test():
     for i in range(0x30000):

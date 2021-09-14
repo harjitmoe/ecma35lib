@@ -48,11 +48,16 @@ annots = {
     (1, 4, 85): 'Unlike Ψ-07-40, the radii are not supposed to extend beyond the arc.&ensp;However, '
                 'the arc is still supposed to extend beyond the radii.&ensp;Unlike Ψ-07-58, this '
                 'is supposed to open rightward, i.e. with the arc due right of the radii.',
+    (1, 6, 20): 'This one\'s Adobe reference glyph has eight spokes, but which extend to an '
+                'invisible bounding square rather than being equal length.&ensp;This is well '
+                'within <a href="https://www.fileformat.info/info/unicode/char/2747/fontsupport.htm">'
+                'the established glyph variation for U+2747</a>, which is usually but not always '
+                'shown with eight spokes.&ensp;Contrast Ψ-06-88.',
     (1, 6, 22): 'This is also included in Adobe-Japan1 as CID-12242.',
     (1, 6, 23): 'This is also included in Adobe-Japan1 as CID-12244.',
     (1, 6, 24): 'This is also included in Adobe-Japan1 as CID-12243.',
     (1, 6, 25): 'This is also included in Adobe-Japan1 as CID-12245.',
-    (1, 6, 29): 'These four are also in Adobe-Japan1 as CIDs 12261, 12262, 12265 and 12266; in'
+    (1, 6, 29): 'These four are also in Adobe-Japan1 as CIDs 12261, 12262, 12265 and 12266; in '
                 'spite of their Apple mappings, they nominally fill the em square and so are much '
                 'larger than a typical guillemet.&ensp;Compare 01-01-76 and 01-01-77.',
     (1, 6, 31): 'These two are not backhand <em>per se</em>, but they are otherwise duplicates of '
@@ -79,15 +84,18 @@ annots = {
     (1, 6, 57): 'This is also in Adobe-Japan1 as CID-12258 and is an outline of Ψ-06-50—see there '
                 'for comments on mapping and intended appearance.',
     (1, 6, 58): 'This is also in Adobe-Japan1 as CID-12257 and is an outline of Ψ-06-51.',
-    (1, 6, 60): 'The previous two characters are five-petal florettes which are also in '
-                'Adobe-Japan1, as CID-12228 and CID-12229 respectively.&ensp;The former is nominally '
-                'an outline of the latter.&ensp;Adobe does not map them in Adobe-Korea1, but maps '
-                'them in Adobe-Japan1 to U+2740 and U+273F, respectively; the Source Han (Noto '
-                'CJK) glyphs for those codepoints correspond well with the Adobe-Korea1 and '
-                'Adobe-Japan1 reference glyphs.</p><p>Apple uses U+2740 for Ψ-06-86, '
-                'however.&ensp;Rendering of U+2740 and U+273F '
-                'varies across fonts; however, both are usually shown with five petals, as '
-                'opposed to Ψ-06-86\'s four.&ensp;U+2740\'s reference glyph isn\'t purely an '
+    (1, 6, 60): 'These two characters\' reference glyphs are flowers drawn as five separated '
+                'heart-shaped petals, the former outlined, the latter filled.&ensp;Besides '
+                'Adobe-Korea1, they are also included in Adobe-Japan1, as CID-12228 and CID-12229 '
+                'respectively.&ensp;Adobe does not map them in Adobe-Korea1, but maps them in '
+                'Adobe-Japan1 to U+2740 and U+273F, respectively; consequently, the Source Han '
+                '(Noto CJK) glyphs for those codepoints correspond to the intended appearance of '
+                'these characters.</p><p>Apple uses U+2740 for Ψ-06-86, however.&ensp;'
+                'Rendering of U+2740 and U+273F varies across fonts; however, both are usually '
+                'shown with five petals even in fonts that aren\'t influenced by Adobe-Japan1 '
+                '(<a href="https://www.fileformat.info/info/unicode/char/2740/fontsupport.htm">'
+                'though a small minority of fonts show U+2740 with ten, in two sets of five</a>), '
+                'as opposed to Ψ-06-86\'s four.&ensp;U+2740\'s reference glyph isn\'t purely an '
                 'outline, but both reference glyphs have five petals.',
     (1, 6, 61): 'This is nominally like an elongated bold equals sign stretching across the mid '
                 'line of the whole em square, bolder than the nominal 01-01-75, but still '
@@ -126,14 +134,21 @@ annots = {
                 'contrast, the newer U+1F33C has an unspecified number of petals (or ray florets), '
                 'with the number varying widely between fonts, making it a better match on that '
                 'basis alone.',
-    (1, 6, 88): 'Ψ-06-88 can best be described as a starburst effect, though it also bears a certain '
-                'resemblence to the helm wheel (U+2388 ⎈).&ensp;Two concentric rings, four broad '
-                'triangular rays in cardinal directions, and four narrower teardrop-shaped rays '
-                'toward the corners of the character cell, radiate from the centre of the '
-                'character.&ensp;No exact match exists in either Unicode or Nishiki-Teki; the '
-                'Nishiki-Teki mapping shown is to a similar Caslon ornament (Long Primer 3), while '
-                'the established Unicode mapping takes a sparkle character with a similar pattern '
-                'of spoke widths and superimposes a combining ring.',
+    (1, 6, 88): 'Ψ-06-88 can best be described as a starburst effect, though it also bears a '
+                'certain resemblence to the helm wheel (U+2388 ⎈).&ensp;In its Adobe reference '
+                'glyph, two concentric rings, four broad triangular rays in cardinal directions, '
+                'and four narrower teardrop-shaped rays toward the corners of the character cell, '
+                'radiate from the centre of the character.</p></p>Apple\'s Unicode mapping takes '
+                'a sparkle character with a similar pattern of spoke widths, and superimposes one '
+                'combining ring.&ensp;However, U+2748 is not mapped anywhere else (the character '
+                'mapped at Ψ-06-20 is the related but distinct sparkle at U+2747) and, similarly '
+                'to U+2747, glyphs for U+2748 '
+                '<a href="https://www.fileformat.info/info/unicode/char/2748/fontsupport.htm">can '
+                'and do vary</a>, so rendering U+2748 itself with concentric rings is not out of '
+                'the question for a reasonable font.</p><p>The Nishiki-teki mapping shown is '
+                'to a similar Caslon ornament (Long Primer 3), which shows the concentric rings '
+                'but uses only one type of ray (and doesn\'t show the rays within the rings '
+                'themselves).&ensp;No exact match exists in the Nishiki-teki PUA.',
     (1, 6, 92): 'Ψ-06-92 is supposed to be a classic rotary telephone dial, without the rest of '
                 'the telephone.',
     (1, 7, 33): 'This differs from Ψ-07-58, in that it is merely a sector as an outlined plane '
@@ -164,7 +179,7 @@ annots = {
     (1, 8, 73): 'Most fonts show U+2939\'s head pointing SE rather than the south intended here.&ensp;'
                 '<a href="https://www.fileformat.info/info/unicode/char/2939/fontsupport.htm">'
                 'PragmataPro is apparently one exception.</a>',
-    (1, 8, 81): 'This is a cross barby, which has meanings as diverse as '
+    (1, 8, 81): 'This is a cross barby (arrowheads in all cardinals), which has meanings as diverse as '
                 '<a href="https://docs.microsoft.com/en-us/dotnet/api/system.windows.input.cursors.sizeall">'
                 'a "move window" cursor</a>, or a symbol of Nazism or white supremacy, amongst '
                 'other uses.',
@@ -190,7 +205,7 @@ annots = {
                  'after following a curvature resembling a ∿.&ensp;No especially close Unicode '
                  'character exists; U+2B4D is probably the closest, although the similar U+21AF ↯ '
                  'was presumably passed over by Apple\'s mapping, since the latter dates to '
-                 'Unicode 1.x.&ensp;U+2B5A ⭚ and U+2B5B ⭛ were added as signs used for transcribing '
+                 'Unicode 1.x.</p><p>U+2B5A ⭚ and U+2B5B ⭛ are specialised signs for transcribing '
                  'intonation in Lithuanian dialects, and neither is especially close (actually, '
                  'U+2B5A resembles an oblique version of Ψ-12-17).',
     (1, 12, 77): 'The latter two are not backhand <em>per se</em>, but have their palms drawn '
