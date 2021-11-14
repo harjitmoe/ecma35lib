@@ -85,12 +85,14 @@ annots = {
     (1, 1, 45): 'KS X 1001 temporarily decouples after here.',
     (1, 1, 54): 'KS X 1001 temporarily recouples after here.',
     (1, 1, 75): 'KS X 1001 permanently decouples after here.',
-    (1, 1, 77): 'Ω-01-76 and Ω-01-78 are changed to fullwidth square brackets in IBM-933 (since '
+    (1, 1, 77): 'Ω-01-76 and Ω-01-77 are changed to fullwidth square brackets in IBM-933 (since '
                 'its row 2 EBCDIC has a broken bar and not-sign, but not square brackets).</p><p>'
                 'The characters following this point are infilled from the subset of the '
                 'repertoire of KS X 1001 row 1, in KS X 1001 order, which isn\'t included in this '
-                'row before this point.&ensp;The existing not-equals sign was evidently not '
-                'considered a match.',
+                'row before this point.&ensp;However, Ω-01-78, Ω-01-79 and Ω-01-80 are doublets of '
+                'Ω-01-33, Ω-01-34 and Ω-01-35, since the latter three evidently weren\'t seen as '
+                'close enough matches to the KS X 1001 characters, despite being in a range where '
+                'KS X 1001 is actually following this row.',
     (1, 1, 78): 'Mapping notwithstanding, Ω-01-78 is a not-equals sign with a backslash; contrast '
                 'Ω-01-33.',
     (1, 2, 0): 'Row 2 is fullwidth KS X 1003, thus the same as KS X 1001\'s row 3 '
