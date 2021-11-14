@@ -101,6 +101,20 @@ _wansung_temp = parsers.fuse([_wansung_syllables, oldunicodeksc], "Wansung_AltUT
 graphdata.gsets["ir149-altutc"] = wansung_utcalt = (94, 2, _wansung_temp)
 graphdata.gsetflags["ir149-altutc"] |= {"UHC:IS_WANSUNG"}
 
+# The non-KS 94×94 plane encoded by the old IBM code page 944
+graphdata.gsets["oldibmkorea-withcorppua"] = oldibmkorea_wcp = (94, 2, parsers.decode_main_plane_whatwg(
+    parsers.parse_file_format("Custom/index-oldibmkorea-withcorppua.txt"),
+    "index-oldibmkorea-withcorppua.txt",
+    plane = 1))
+graphdata.gsets["oldibmkorea"] = oldibmkorea = (94, 2, parsers.decode_main_plane_whatwg(
+    parsers.parse_file_format("Custom/index-oldibmkorea.txt"),
+    "index-oldibmkorea.txt",
+    plane = 1))
+graphdata.gsets["oldibmkorea-excavated"] = oldibmkorea_excavated = (94, 2, parsers.decode_main_plane_whatwg(
+    parsers.parse_file_format("Custom/index-oldibmkorea-cleaned.txt"),
+    "index-oldibmkorea-cleaned.txt",
+    plane = 1))
+
 def ahmap_mk(pointer, ucs):
     return variationhints.ahmap(pointer, ucs, variationhints.applesinglehints_mackorean)
 

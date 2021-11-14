@@ -252,7 +252,7 @@ g94nbytes = {tuple(b"@"): ("ir042nec", ("ir042ibm", "ir042nec"), ("ir042",)),
              tuple(b"!2"): ("hkscs", ("ibmbig5exts", "etenextsplus"), ("ms950exts", "big5-2003-exts", "etenexts", "gccs", "hkscs1999", "hkscs2001", "hkscs2004", "hkscs", "hkscs",)),
              tuple(b"!3"): ("ms950utcexts", (), ("utcbig5exts", "ms950utcexts")),
              # Shift_JIS extensions for IBM/Windows/HTML5 and for cellular emoji
-             tuple(b"!4"): ("ibmsjisextpua", (), ("ibmsjisext", "ibmsjisext")),
+             tuple(b"!4"): ("ibmsjisextpua", (), ("ibmsjisext", "ibmsjisextpua")),
              tuple(b"!5"): "docomosjisext",
              tuple(b"!6"): ("kddipictsjisext", ("kddisymsjisext",), ("kddipictsjisext",)),
              tuple(b"!7"): "sbanksjisext",
@@ -267,7 +267,8 @@ g94nbytes = {tuple(b"@"): ("ir042nec", ("ir042ibm", "ir042nec"), ("ir042",)),
              tuple(b"!="): "ksx1002",
              tuple(b"!>"): "ksx1027_1",
              tuple(b"!?"): "ksx1027_2",
-             tuple(b"!\""): ("aton-exts", ("aton-exts2",), ("aton-exts",)),
+             tuple(b"\"0"): ("aton-exts", ("aton-exts2",), ("aton-exts",)),
+             tuple(b"\"1"): ("oldibmkorea", (), ("oldibmkorea-excavated", "oldibmkorea")),
              tuple(b"~"): "nil"}
 
 g96nbytes = {tuple(b"!0"):("gbk-nonuro-extras", ("gbk-nonuro-extras-web", "gbk-nonuro-extras-full"), ("gbk-nonuro-extras",)),

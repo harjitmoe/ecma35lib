@@ -233,6 +233,9 @@ for q in range(1, 7):
     if q < 6:
         nexturl = "htxplane1{}.html".format(chr(0x60 + q + 1))
         nextname = f"HangulTalk additional plane, part {q+1:d}"
+    else:
+        nexturl = "ibkplane1a.html"
+        nextname = "Old IBM Korea PC-Data Main Plane, part 1"
     showgraph.dump_plane(f, planefunc, kutenfunc, *plane, lang="ko-KR", part=q, css="../css/codechart.css",
                          menuurl="/ksc-conc.html", menuname="Wansung code variant comparison",
                          lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
