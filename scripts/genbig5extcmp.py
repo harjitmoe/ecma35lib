@@ -41,12 +41,13 @@ def _bar():
             yield i
 blendy = tuple(_bar())
 
-plane1 = (1, ("UTC <br/>BIG5.TXT", "Microsoft <br/>MS-950", "Python <br/>\"MS-950\"", "IBM <br/>IBM-950", "CNS Big5 <br/>Big5-2003", "CNS Big5 <br/>Big5-E", "ETEN", "HKSCS <br/>GCCS", "HKSCS <br/>1999", "HKSCS <br/>2001", "HKSCS <br/>2004", "HKSCS <br/>WHATWG", "WHATWG <br/>Encoder", "ChinaSea <br/>At-On 2.41", "ChinaSea <br/>At-On 2.50", "Dynalab <br/>Ext. A", "Dynalab <br/>Ext. B", "Monotype <br/>Extensions"), [
+plane1 = (1, ("UTC <br/>BIG5.TXT", "Microsoft <br/>MS-950", "Python <br/>\"MS-950\"", "IBM <br/>IBM-950", "CNS Big5 <br/>Big5-2003", "CNS Big5 <br/>Big5-Plus", "CNS Big5 <br/>Big5-E", "ETEN", "HKSCS <br/>GCCS", "HKSCS <br/>1999", "HKSCS <br/>2001", "HKSCS <br/>2004", "HKSCS <br/>WHATWG", "WHATWG <br/>Encoder", "ChinaSea <br/>At-On 2.41", "ChinaSea <br/>At-On 2.50", "Dynalab <br/>Ext. A", "Dynalab <br/>Ext. B", "Monotype <br/>Extensions"), [
           graphdata.gsets["utcbig5exts"][2],
           graphdata.gsets["ms950exts"][2],
           pseudomicrosoft,
           graphdata.gsets["ibmbig5exts"][2],
           graphdata.gsets["big5-2003-exts"][2],
+          graphdata.gsets["big5-plus-exts1"][2],
           graphdata.gsets["big5e-exts"][2],
           tuple(_foo("ETEN", graphdata.gsets["etenexts"][2])),
           graphdata.gsets["gccs"][2],
@@ -62,47 +63,75 @@ plane1 = (1, ("UTC <br/>BIG5.TXT", "Microsoft <br/>MS-950", "Python <br/>\"MS-95
           graphdata.gsets["monotypeexts"][2],
 ])
 
+plane2 = (2, ("IBM <br/>IBM-950", "CNS Big5 <br/>Big5-Plus"), [
+          graphdata.gsets["ibmbig5exts2"][2],
+          graphdata.gsets["big5-plus-exts2"][2],
+])
+
 def planefunc(number, mapname=None):
     if mapname is None:
-        return "Big5 extension set"
+        return "Big5 extension set number {0:d}".format(number)
     else:
         return ""
 
 def kutenfunc(number, row, cell):
-    lead = ((row + 1) // 2) + 0x80
-    if lead >= 164:
-        lead += 85
-    elif lead >= 161:
-        lead += 37
-    if row % 2:
-        trail = cell + 0x20
+    if number == 1:
+        lead = ((row + 1) // 2) + 0x80
+        if lead >= 164:
+            lead += 85
+        elif lead >= 161:
+            lead += 37
+        if row % 2:
+            trail = abs(cell) + 0x20
+        else:
+            trail = abs(cell) + 0xA0
+    elif number == 2:
+        lead = ((row - 1) * 2) + 0x81
+        if abs(cell) >= 47:
+            lead += 1
+        trail = 0x80 + ((abs(cell) - 1) % 47)
     else:
-        trail = cell + 0xA0
-    anchorlink = "<a href='#{:d}.{:d}.{:d}'>0x{:02X}{:02X}</a>".format(
-                 number, row, cell, lead, trail)
-    pseudokuten = "(Ψ-{:02d}-{:02d})".format(row, cell)
-    return "{}<br>{}".format(anchorlink, pseudokuten)
+        raise ValueError("plane not 1 or 2")
+    if cell >= 0:
+        pseudokuten = "({}-{:02d}-{:02d})".format("¿ΨΩ"[number], row, cell)
+        big5code = "0x{:02X}{:02X}".format(lead, trail)
+    else:
+        pseudokuten = "({}-{:02d}-{})".format("¿ΨΩ"[number], row,
+            "{:02d}+".format(-cell) if cell != -1 else "*")
+        if abs(cell) >= 47:
+            big5code = "0x{:02X}{:X}_".format(lead, trail >> 4)
+        elif abs(cell) > 1:
+            big5code = "0x{:02X}{:02X}+".format(lead, trail)
+        else:
+            big5code = "0x{:02X}{:02X}+".format(lead, trail - 1)
+    if number == 2 and ((abs(cell) - 1) % 47) >= 33:
+        return "<a href='#{:d}.{:d}.{:d}'>{}</a>".format(
+                     number, row, cell, pseudokuten)
+    else:
+        anchorlink = "<a href='#{:d}.{:d}.{:d}'>{}</a>".format(
+                     number, row, cell, big5code)
+        return "{}<br>{}".format(anchorlink, pseudokuten)
 
-for p in [plane1]:
+for p in [plane1, plane2]:
     for q in range(1, 7):
         bn = p[0]
         f = open("b5xplane{:X}{}.html".format(bn, chr(0x60 + q)), "w", encoding="utf-8")
         lasturl = lastname = nexturl = nextname = None
         if q > 1:
             lasturl = "b5xplane{:X}{}.html".format(bn, chr(0x60 + q - 1))
-            lastname = "Big5 extension set, part {1:d}".format(bn, q - 1)
+            lastname = "Big5 extension set number {0:d}, part {1:d}".format(bn, q - 1)
         elif bn > 1:
             lasturl = "b5xplane{:X}f.html".format(bn - 1)
-            lastname = "Big5 extension set, part 6".format(bn - 1)
+            lastname = "Big5 extension set number {0:d}, part 6".format(bn - 1)
         else:
             lasturl = "cnsplane2f.html"
             lastname = "CNS 11643 plane 2, part 6"
         if q < 6:
             nexturl = "b5xplane{:X}{}.html".format(bn, chr(0x60 + q + 1))
-            nextname = "Big5 extension set, part {1:d}".format(bn, q + 1)
-        elif bn < 1:
+            nextname = "Big5 extension set number {0:d}, part {1:d}".format(bn, q + 1)
+        elif bn < 2:
             nexturl = "b5xplane{:X}a.html".format(bn + 1)
-            nextname = "Big5 extension set, part 1".format(bn + 1)
+            nextname = "Big5 extension set number {0:d}, part 1".format(bn + 1)
         else:
             nexturl = "cnsplane3a.html"
             nextname = "CNS 11643 plane 3, part 1"
@@ -110,7 +139,7 @@ for p in [plane1]:
                              menuurl="/cns-conc.html", menuname="CNS 11643 and Big5 comparison tables",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
                              annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True,
-                             pua_collides=False, big5ext_mode=True, siglum="CNS")
+                             pua_collides=False, big5ext_mode=(bn == 1), siglum="CNS")
         f.close()
 
 

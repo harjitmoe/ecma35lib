@@ -181,3 +181,6 @@
 '["decode_main_plane_gl", ["CNS2UNICODE_Unicode BMP.txt"], {"plane": 15}]', (49482752, 53769)
 '["decode_main_plane_gl", ["CNS2UNICODE_Unicode 2.txt"], {"plane": 15}]', (49537024, 85308)
 '["decode_main_plane_gl", ["CNS2UNICODE_Unicode 15.txt"], {"plane": 15}]', (49622528, 53886)
+'["decode_extra_plane_big5", ["big5plus-obsolete.txt"], {}]', (49676800, 64655)
+'["decode_second_extra_plane_big5", ["big5plus-obsolete.txt"], {}]', (49741824, 65490)
+'["decode_second_extra_plane_big5", ["ibm-950_P110-1999.ucm"], {}]', (49807360, 54776)

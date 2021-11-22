@@ -413,13 +413,22 @@ graphdata.gsets["etenextsplus"] = eten_extras_plus = (94, 2,
 graphdata.gsets["etenexts"] = eten_extras = (94, 2, parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Mozilla/eten.txt"),
         "eten.txt"))
-graphdata.gsets["big5-2003-exts"] = big5e_extras = (94, 2, parsers.decode_extra_plane_big5(
+graphdata.gsets["big5-2003-exts"] = big5_2003_extras = (94, 2, parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Mozilla/big5_2003-b2u.txt"),
         "big5_2003-b2u.txt"))
+graphdata.gsets["big5-plus-exts1"] = big5_plus_extras1 = (94, 2, parsers.decode_extra_plane_big5(
+        parsers.parse_file_format("Mozilla/big5plus-obsolete.txt"),
+        "big5plus-obsolete.txt"))
+graphdata.gsets["big5-plus-exts2"] = big5_plus_extras2 = (94, 2, parsers.decode_second_extra_plane_big5(
+        parsers.parse_file_format("Mozilla/big5plus-obsolete.txt"),
+        "big5plus-obsolete.txt"))
 graphdata.gsets["ms950exts"] = ms_big5_extras = (94, 2, parsers.decode_extra_plane_big5(
         parsers.parse_file_format("ICU/windows-950-2000.ucm"),
         "windows-950-2000.ucm"))
 graphdata.gsets["ibmbig5exts"] = ibm_big5_extras = (94, 2, parsers.decode_extra_plane_big5(
+        parsers.parse_file_format("ICU/ibm-950_P110-1999.ucm"),
+        "ibm-950_P110-1999.ucm"))
+graphdata.gsets["ibmbig5exts2"] = ibm_big5_extras2 = (94, 2, parsers.decode_second_extra_plane_big5(
         parsers.parse_file_format("ICU/ibm-950_P110-1999.ucm"),
         "ibm-950_P110-1999.ucm"))
 # IBM-1373 has the same Big5 exts mapping as MS-950. IBM-950 exts is also a subset of ETEN exts,

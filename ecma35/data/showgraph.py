@@ -15,15 +15,20 @@ def to_link(maybe_siglum, default_siglum, men, ku, ten):
     siglum = maybe_siglum or default_siglum
     omen, oku, oten = men, ku, ten
     part_zi = int(ku, 10) // 16
-    if siglum == "CNS" and men == "Ψ":
+    if siglum == "CNS" and men in "ΨΩ":
         basename = "../cnstables/b5xplane"
-        men = "1"
-        if ku <= 65:
-            part_zi = (int(ku, 10) - 1) // 16
-        elif ku <= 72:
-            part_zi = 4
+        if men == "Ψ":
+            men = "1"
+            if ku <= 65:
+                part_zi = (int(ku, 10) - 1) // 16
+            elif ku <= 72:
+                part_zi = 4
+            else:
+                part_zi = 5
+        if men == "Ψ":
+            men = "2"
         else:
-            part_zi = 5
+            raise AssertionError()
     elif siglum == "KSC" and men == "Ψ":
         basename = "../wansungtables/htxplane"
         men = "1"

@@ -520,6 +520,7 @@ corporate2_start = 18956
 
 @with_caching
 def decode_extra_plane_big5(parsed_stream, filenamekey, *, mapper=identitymap):
+    """This is for the extension regions within the normal trail byte range."""
     # The filenamekey argument is absolutely needed for the @with_caching since the parsed_stream
     #   is not incorporated into the memo key for obvious reasons—it is otherwise unused.
     # It does not have to be a filename, but must be unique for every different parse_file_format invocation
@@ -565,6 +566,33 @@ def decode_extra_plane_big5(parsed_stream, filenamekey, *, mapper=identitymap):
         newpointer = ((ku - 1) * 94) + (ten - 1)
         iucs = mapper(newpointer, ucs)
         _put_at(_temp, newpointer, iucs, ignore_later_altucs=False)
+    _fill_to_plane_boundary(_temp, 94)
+    return tuple(_temp)
+
+@with_caching
+def decode_second_extra_plane_big5(parsed_stream, filenamekey, *, mapper=identitymap):
+    """This is for the extension regions outside the normal trail byte range (that is,
+    much of Big5+, as well as areas 5 and 9 of IBM-950."""
+    # The filenamekey argument is absolutely needed for the @with_caching since the parsed_stream
+    #   is not incorporated into the memo key for obvious reasons—it is otherwise unused.
+    # It does not have to be a filename, but must be unique for every different parse_file_format invocation
+    #   even for the same filename.
+    _temp = []
+    for coded, ucs in parsed_stream:
+        if isinstance(coded, int):
+            extpointer = coded
+        elif len(coded) >= 2:
+            assert len(coded) == 2
+            if not (0x80 <= coded[1] <= 0xA0): # Big5+ uses 0x80 although IBM-950 does not.
+                continue
+            first = coded[0] - 0x81
+            last = coded[1] - 0x80
+            pointer = (47 * first) + last # 47, not 33, so the rows line up nicely.
+        else:
+            continue
+        #
+        iucs = mapper(pointer, ucs)
+        _put_at(_temp, pointer, iucs, ignore_later_altucs=False)
     _fill_to_plane_boundary(_temp, 94)
     return tuple(_temp)
 
