@@ -372,6 +372,8 @@ ul.navbar li::after {
     position: sticky;
     left: 3px;
     left: 0.3rem;
+}
+.annotation p:not(:only-of-type) {
     text-indent: 1em;
 }
 .annotation code {
