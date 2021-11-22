@@ -16,7 +16,9 @@ import json
 import unicodedata as ucd
 
 cdispmap = {}
-annots = {}
+annots = {
+ (2, 61, 33): "In IBM's private use area fallback scheme (code pages 1445 and 1449, 1449 in this case) which is being used here, U+F83F through U+F842 are basically duplicates of U+FE33 ︳, U+2574 ╴, U+FE34 ︴ and U+FE4F ﹏ respectively.&ensp;These also appear in IBM CSIC, at 13-04-25 through 13-04-28.&ensp;Compare 01-01-26 through 01-01-29.",
+}
 
 def _foo(label, inpt):
     for n, (mebbepua, mebbenot) in enumerate(zip(inpt, graphdata.gsets["hkscs"][2])):

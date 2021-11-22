@@ -529,7 +529,8 @@ annots = {
              'similar character not already used, and current GOV-TW mappings simply follow '
              'the Windows convention here, although CNS charts still display it as an '
              'underscore.\u2002Apple uses a PUA variation hint for a duplicate or alternate form.'
-             '</p><p>Also compare 13-04-25 through 13-04-28 as used by IBM and consequently ICU.',
+             '</p><p>Also compare 13-04-25 through 13-04-28 as used by IBM and consequently ICU, '
+             'or Ω-61-30 through Ω-61-33 in IBM-950.',
  (1, 2, 6): 'Mapping of bold versus light overscore and underscore is sometimes difficult.\u2002'
             'The UTC Big5 mapping simply maps the bold ones to the replacement character, under '
             'the belief that no acceptable Unicode mapping exists.\u2002Apple uses a PUA variation '
@@ -673,7 +674,7 @@ annots = {
  (4, 72, 47): "Compare 05-79-52",
  (5, 79, 52): "Compare 04-72-47",
  (6, 1, 3): "U+3405 㐅 is the number five (also 𠄡, but much more commonly 五 or 伍, hence 㐅 is in the CJKA block).&ensp;U+4E44 乄, on the other hand, is a duplicate encoding in the URO (JIS X 0212's fault) of 〆 (U+3006 IDEOGRAPHIC CLOSING MARK), which is a Japanese abbreviation for words pronounced しめ (shi\u202Fme).&ensp;Both the current and 1992 CNS glyphs are very clearly 㐅, as in, the middle of 𠄡.</p><p>Yasuoka's mapping was published in March 1998, however, and hence predates the CJKA block (the 1992 in ICU's 1992 CNS mapping, unlike the 2014 in its EUC 2014 mapping, references the standard year, not the mapping timestamp, hence it is a shade newer than Yasuoka's, which it cites).",
- (13, 4, 28): "In IBM's private use area fallback scheme (code pages 1445 and 1449, 1449 in this case) which is being used here, U+F83F through U+F842 are basically duplicates of U+FE33 ︳, U+2574 ╴, U+FE34 ︴ and U+FE4F ﹏ respectively.&ensp;Compare 01-01-26 through 01-01-29.",
+ (13, 4, 28): "In IBM's private use area fallback scheme (code pages 1445 and 1449, 1449 in this case) which is being used here, U+F83F through U+F842 are basically duplicates of U+FE33 ︳, U+2574 ╴, U+FE34 ︴ and U+FE4F ﹏ respectively.&ensp;These also appear in IBM Big5, at Ω-61-30 through Ω-61-33.&ensp;Compare 01-01-26 through 01-01-29.",
  (15, 8, 82): "Compare 04-08-07",
  (15, 16, 80): "U+3DB7 and U+2420E (CJKB) are "
                "<a href='https://unicode.org/wg2/docs/n2644.pdf'>known exact duplicates</a>.",
