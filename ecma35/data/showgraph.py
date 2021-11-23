@@ -502,7 +502,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
                menuurl=None, menuname="Up to menu", jlfunc=None, 
                lasturl=None, nexturl=None, lastname=None, nextname=None,
                is_96=False, is_sbcs=False, pua_collides=False, blot="",
-               unicodefunc=_default_unicodefunc, big5ext_mode=False, skiprows=None,
+               unicodefunc=_default_unicodefunc, big5ext_mode=0, skiprows=None,
                siglum=None, showbmppuas=None, noallocatenotice=None, planewarn=None):
     """Dump an HTML mapping comparison."""
     if showbmppuas == None:
@@ -512,9 +512,11 @@ def dump_plane(outfile, planefunc, kutenfunc,
         stx = 1 if not is_96 else 0
         edx = 2 if not is_96 else 1
     elif part:
-        if big5ext_mode:
+        if big5ext_mode == 1:
             bounds = ((1, 17), (17, 33), (33, 49), (49, 65), (66, 73), (73, 83))
             stx, edx = bounds[part - 1]
+        elif big5ext_mode == 2:
+            stx, edx = max((part - 1) * 11, stx), min(part * 11, edx)
         else:
             stx, edx = max((part - 1) * 16, stx), min(part * 16, edx)
     stpt = (stx - 1) * 94 if not is_96 else stx * 96
@@ -527,7 +529,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
                menuurl = menuurl, menuname = menuname, lasturl = lasturl, 
                nexturl = nexturl, lastname = lastname, nextname = nextname,
                is_96 = is_96, is_sbcs = is_sbcs, blot = blot, showbmppua = showbmppuas[0],
-               planewarn = planewarn, skiprows = skiprows)
+               planewarn = planewarn, skiprows = skiprows, big5ext_mode = big5ext_mode)
     setnames2 = tuple(zip(*nonvacant_sets))[0] if nonvacant_sets else ()
     zplarray = tuple(zip(*tuple(zip(*nonvacant_sets))[1])) if nonvacant_sets else ()
     h = ", part {:d}".format(part) if part else ""
@@ -562,8 +564,11 @@ def dump_plane(outfile, planefunc, kutenfunc,
         while stx < edx and stx in skiprows:
             stx += 1
     for row in range(stx, edx):
-        if big5ext_mode:
+        if big5ext_mode == 1:
             if row in (65, 71) or row > 82:
+                continue
+        if big5ext_mode == 2:
+            if row > 63:
                 continue
         elif skiprows and row in skiprows:
             continue
@@ -579,8 +584,11 @@ def dump_plane(outfile, planefunc, kutenfunc,
             print("<tr class=annotation><td colspan={:d}><p>".format(len(plarray) + 1), file=outfile)
             print("Note:", inject_links(annots[(number, row, 0)], siglum), file=outfile)
         for cell in (range(1, 95) if not is_96 else range(0, 96)):
-            if big5ext_mode:
+            if big5ext_mode == 1:
                 if ((row % 2) and (cell < 32)) or ((row == 72) and (cell < 54)):
+                    continue
+            if big5ext_mode == 2:
+                if ((cell - 1) % 47) >= 33:
                     continue
             st = zplarray[((row - 1) * 94) + (cell - 1)] if not is_96 else zplarray[(row * 96) + cell]
             if (sparse or (cell in (0, 95))) and (len(set(i for i in st if i is not None)) == 0) \
@@ -631,14 +639,20 @@ def dump_preview(outfile, planename, kutenfunc, number, array, *, lang="zh-TW", 
                css=None, part=None, menuurl=None, menuname="Up to menu", jlfunc=None, 
                lasturl=None, nexturl=None, lastname=None, nextname=None, showbmppua=False,
                is_96=False, is_sbcs=False, blot="", unicodefunc=_default_unicodefunc,
-               planewarn=None, skiprows=None):
+               planewarn=None, skiprows=None, big5ext_mode=0):
     """Dump an HTML single-mapping table."""
     stx, edx = (1, 95) if not is_96 else (0, 96)
     if is_sbcs:
         stx = 1 if not is_96 else 0
         etx = 2 if not is_96 else 1
     elif part:
-        stx, edx = max((part - 1) * 16, stx), min(part * 16, edx)
+        if big5ext_mode == 1:
+            bounds = ((1, 17), (17, 33), (33, 49), (49, 65), (66, 73), (73, 83))
+            stx, edx = bounds[part - 1]
+        elif big5ext_mode == 2:
+            stx, edx = max((part - 1) * 11, stx), min(part * 11, edx)
+        else:
+            stx, edx = max((part - 1) * 16, stx), min(part * 16, edx)
     stpt = (stx - 1) * 94 if not is_96 else stx * 96
     edpt = (edx - 1) * 94 if not is_96 else edx * 96
     h = ", part {:d}".format(part) if part else ""
@@ -669,9 +683,13 @@ def dump_preview(outfile, planename, kutenfunc, number, array, *, lang="zh-TW", 
         print("<tr><th class=cpt>", file=outfile)
         print("<a id='{:d}.{:d}.1' class=anchor></a>".format(number, row), file=outfile)
         print(kutenfunc(number, row, -1), file=outfile)
-        print("<td class=udf>", file=outfile)
+        if big5ext_mode != 2:
+            print("<td class=udf>", file=outfile)
         for cell in range(1, 95) if not is_96 else range(0, 96):
-            if not (cell % 16):
+            has_break = (not (cell % 16)) if big5ext_mode != 2 else (cell > 1 and not ((cell - 1) % 16))
+            if big5ext_mode == 2 and cell >= 47:
+                cell -= 1
+            if has_break:
                 print("<tr><th class=cpt>", file=outfile)
                 print("<a id='{:d}.{:d}.{:d}' class=anchor></a>".format(number, 
                             row, cell), file=outfile)
@@ -684,6 +702,8 @@ def dump_preview(outfile, planename, kutenfunc, number, array, *, lang="zh-TW", 
             print("<td>", end="", file=outfile)
             variationhints.print_hints_to_html5(i, outfile, lang=lang, showbmppua=showbmppua)
             unicodefunc(i, outfile, None, jlfunc, number, row, cell)
+        if big5ext_mode == 2:
+            print("<td class=udf>", file=outfile)
         print("<td class=udf>", file=outfile)
     print("</table>", file=outfile)
     if menuurl or lasturl or nexturl:

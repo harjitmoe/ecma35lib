@@ -99,8 +99,8 @@ def kutenfunc(number, row, cell):
         big5code = "0x{:02X}{:02X}".format(lead, trail)
     else:
         pseudokuten = "({}-{:02d}-{})".format("¿ΨΩ"[number], row,
-            "{:02d}+".format(-cell) if cell != -1 else "*")
-        if abs(cell) >= 47:
+            "{:02d}+".format(-cell) if cell != -1 or number == 2 else "*")
+        if not trail & 0xF:
             big5code = "0x{:02X}{:X}_".format(lead, trail >> 4)
         elif abs(cell) > 1:
             big5code = "0x{:02X}{:02X}+".format(lead, trail)
@@ -141,7 +141,7 @@ for p in [plane1, plane2]:
                              menuurl="/cns-conc.html", menuname="CNS 11643 and Big5 comparison tables",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
                              annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True,
-                             pua_collides=False, big5ext_mode=(bn == 1), siglum="CNS")
+                             pua_collides=False, big5ext_mode=bn, siglum="CNS")
         f.close()
 
 
