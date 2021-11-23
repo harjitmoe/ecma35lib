@@ -45,7 +45,7 @@ def to_link(maybe_siglum, default_siglum, men, ku, ten):
     part_letter = chr(0x61 + part_zi)
     if not maybe_siglum:
         basename = posixpath.basename(basename)
-    url = f"{basename}{men}{part_letter}.html#{men}.{ku}.{ten}"
+    url = f"{basename}{int(men, 10):X}{part_letter}.html#{men}.{ku}.{ten}"
     display_siglum = f"{maybe_siglum} " if maybe_siglum else ""
     return f'<a href="{url}">{display_siglum}{omen}-{oku}-{oten}</a>'
 
