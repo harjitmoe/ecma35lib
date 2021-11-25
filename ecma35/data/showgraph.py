@@ -19,9 +19,9 @@ def to_link(maybe_siglum, default_siglum, men, ku, ten):
         basename = "../cnstables/b5xplane"
         if men == "Ψ":
             men = "1"
-            if ku <= 65:
+            if int(ku, 10) <= 65:
                 part_zi = (int(ku, 10) - 1) // 16
-            elif ku <= 72:
+            elif int(ku, 10) <= 72:
                 part_zi = 4
             else:
                 part_zi = 5

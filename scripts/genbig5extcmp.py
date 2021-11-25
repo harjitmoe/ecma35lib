@@ -17,7 +17,8 @@ import unicodedata as ucd
 
 cdispmap = {}
 annots = {
- (2, 61, 33): "In IBM's private use area fallback scheme (code pages 1445 and 1449, 1449 in this case) which is being used here, U+F83F through U+F842 are basically duplicates of U+FE33 ︳, U+2574 ╴, U+FE34 ︴ and U+FE4F ﹏ respectively.&ensp;These also appear in IBM CSIC, at 13-04-25 through 13-04-28.&ensp;Compare 01-01-26 through 01-01-29.",
+ (1, 66, 63): "This is a duplicate 仝 (duplicating 02-01-41) in the IBM version also; U+F83E is mapped via IBM's private use area fallback scheme (code pages 1445 and 1449, 1449 in this case).&ensp;A reasonable fallback mapping for the double-prime ditto (duplicating 01-01-81) existed, from IBM's perspective, however.&ensp;These two dittoes are 13-01-09 and 13-01-10 in IBM's EUC-TW.",
+ (2, 61, 33): "In IBM's private use area fallback scheme (code pages 1445 and 1449, 1449 in this case) which is being used here, U+F83F through U+F842 are basically duplicates of U+FE33 ︳, U+2574 ╴, U+FE34 ︴ and U+FE4F ﹏ respectively.&ensp;These also appear in IBM's EUC-TW, at 13-04-25 through 13-04-28.&ensp;Compare 01-01-26 through 01-01-29.",
 }
 
 def _foo(label, inpt):
