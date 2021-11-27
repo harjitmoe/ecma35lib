@@ -231,7 +231,8 @@ applesinglehints = {
     (0x3002, 0xF87D): (0x3002, 0xFE00), # Later gained an SVS
     #
     # Some direct PUA mappings used by MacKorean but no longer needed
-    (0xF809,): (0x169B2,), # Like a filled version of U+169B2 (in turn looks like a MOT Test symbol)
+    (0xF809, 0xF87A): (0x169B2, 0xF87F), # Like a flipped version of U+169B2 (itself like an MOT sign)
+    (0xF809,): (0x169B2, 0xF87A), # Like a filled and flipped version of U+169B2
     (0xF80A,): (0x1F668,), # "Two interwoven eye shapes" (basically a variant quilt square)
     (0xF80B,): (0x1F66A,), # This one really close (narrow-leaf four-petal florette)
     (0xF80B, 0xF87F): (0x1F66B,), # Less so, but may as well commit to it
@@ -348,7 +349,8 @@ applesinglehints_mackorean_nishikiteki.update({
     #
     # Apple PUA actually included in Nishiki-teki (override inferior approximations in the other dict)
     (0xF807,): (0xF807,), # Telephone dial
-    (0xF809,): (0xF809,), # Like a filled version of the MOT Test symbol
+    (0xF809, 0xF87A): (0xF809, 0xF87A), # Like a flipped version of the MOT Test symbol
+    (0xF809,): (0xF809,), # Like a filled and flipped version of the MOT Test symbol
     (0xF80B,): (0xF80B,), # Four pointed flower or quilt square
     (0xF80A,): (0xF80A,), # Two interwoven eye shapes
     (0xF840,): (0xF840,), # Three vertical asterisks
