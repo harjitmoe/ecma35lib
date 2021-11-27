@@ -481,6 +481,8 @@ def kutenfunc(number, row, cell):
         plane_hex = "{:d}-{:02X}{:02X}".format(number, 0x20 + row, 0x20 - cell)
         linkhtml = "(CNS {}_)".format(plane_hex[:-1])
     fmteuc = "(<abbr title='Extended Unix Code'>EUC</abbr> {})".format(euc)
+    if number == 2:
+        fmteuc += "<br>(<abbr title='Microsoft Extended Unix Code'>MSEUC</abbr> {:02x}{:02x})".format(0xA0 + row, 0x20 + cell)
     return "{}<br>{}<br>{}{}".format(
            anchorlink, linkhtml, fmteuc, big5)
 

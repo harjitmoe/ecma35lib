@@ -96,6 +96,8 @@ def kutenfunc(number, row, cell):
         euc = "8f{:02x}{:02x}".format(0xA0 + row, 0xA0 + cell)
         jis = ""
     fmteuc = "(<abbr title='Extended Unix Code'>EUC</abbr> {})".format(euc)
+    if number == 2:
+        fmteuc += "<br>(<abbr title='Microsoft Extended Unix Code'>MSEUC</abbr> {:02x}{:02x})".format(0xA0 + row, 0x20 + cell)
     sjis = to_sjis(number, row, cell)
     anchorlink = "<a href='#{:d}.{:d}.{:d}'>{:02d}-{:02d}-{:02d}</a>".format(
                  number, row, cell, number, row, cell)
