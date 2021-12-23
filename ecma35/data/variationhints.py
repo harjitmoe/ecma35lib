@@ -349,7 +349,6 @@ applesinglehints_mackorean_nishikiteki.update({
     #
     # Apple PUA actually included in Nishiki-teki (override inferior approximations in the other dict)
     (0xF807,): (0xF807,), # Telephone dial
-    (0xF809, 0xF87A): (0xF809, 0xF87A), # Like a flipped version of the MOT Test symbol
     (0xF809,): (0xF809,), # Like a filled and flipped version of the MOT Test symbol
     (0xF80B,): (0xF80B,), # Four pointed flower or quilt square
     (0xF80A,): (0xF80A,), # Two interwoven eye shapes
@@ -480,10 +479,11 @@ applesinglehints_mackorean_nishikiteki.update({
     (0x4ED6, 0x20DD): (0xF0A55,),
     (0x329E, 0xF87F): (0xF0A56,), # Dotted circled "print" kanji
     #
-    (0x2741,): (0xFEFB4,), # Eight-petalled white flower (Nishiki-teki chart notes correspondance)
-    (0x2748, 0x20D8): (0xFEFCF,), # Starburst/rayburst with central ring
     (0xF861, 0x2020, 0x2020, 0x2020): (0xFEE2A,), # Three daggers
     (0xF860, 0x2020, 0x2020): (0xFEE2B,), # Two daggers
+    (0x2741,): (0xFEFB4,), # Eight-petalled white flower (Nishiki-teki chart notes correspondance)
+    (0x2748, 0x20D8): (0xFEFCF,), # Starburst/rayburst with central ring
+    (0xF809, 0xF87A): (0xFF0D3,), # "Symbol for the Fates", like a flipped MOT Test symbol; Chrysanthi apparently encodes it over ♼
 })
 
 # Not sure where to put this observation, but MacKorean's U+25B4+20E4 is basically DPRK's mountain ahead.

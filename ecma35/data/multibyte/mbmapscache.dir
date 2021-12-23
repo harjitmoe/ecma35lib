@@ -107,7 +107,7 @@
 '["decode_extra_plane_elex", ["KOREAN.TXT"], {}]', (44642304, 62170)
 '["decode_extra_plane_elex", ["KOREAN.TXT-altcomments-True"], {}]', (44704768, 62159)
 '["decode_extra_plane_elex", ["KOREAN.TXT"], {"mapper": "ahmap_mk"}]', (44767232, 61468)
-'["decode_extra_plane_elex", ["KOREAN.TXT"], {"mapper": "ahmap_nt"}]', (44829184, 60616)
+'["decode_extra_plane_elex", ["KOREAN.TXT"], {"mapper": "ahmap_nt"}]', (44829184, 60611)
 '["decode_extra_plane_elex", ["AdobeKorea.txt-KSCpc-EUC-UniKS-UTF32"], {}]', (44890112, 53361)
 '["decode_extra_plane_elex", ["AdobeKorea.txt-KSCpc-EUC-CID"], {}]', (44943872, 53016)
 '["decode_main_plane_euc", ["AppendixA_KPS9566-2011-to-Unicode.txt"], {"gbklike": true}]', (44997120, 77335)
