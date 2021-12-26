@@ -138,7 +138,7 @@ annots = {
                 'certain resemblence to the helm wheel (U+2388 ⎈).&ensp;In its Adobe reference '
                 'glyph, two concentric rings, four broad triangular rays in cardinal directions, '
                 'and four narrower teardrop-shaped rays toward the corners of the character cell, '
-                'radiate from the centre of the character.</p></p>Apple\'s Unicode mapping takes '
+                'radiate from the centre of the character.</p><p>Apple\'s Unicode mapping takes '
                 'a sparkle character with a similar pattern of spoke widths, and superimposes one '
                 'combining ring.&ensp;However, U+2748 is not mapped anywhere else (the character '
                 'mapped at Ψ-06-20 is the related but distinct sparkle at U+2747) and, similarly '

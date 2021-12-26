@@ -250,7 +250,7 @@ def parse_file_format(fil, *, twoway=False, prefer_sjis=False, skipstring=None, 
             ucs, byts, direction = _i.split(" ", 2)
             if (direction.strip() == "|1") or (direction.strip() == "|2") or (twoway and (direction.strip() == "|3")):
                 # |0 means a encoder/decoder two-way mapping
-                # |1 appears to mean an encoder-only mapping, e.g. fallback ("best fit")
+                # |1 appears to mean an encoder-only mapping, e.g. fallback ("best fit"), graphical mapping for control codes, compatibility with what other vendors decode something to, etc
                 # |2 appears to mean a substitute mapping, e.g. to the SUB control.
                 # |3 appears to mean a decoder-only mapping (disfavoured duplicate)
                 continue
