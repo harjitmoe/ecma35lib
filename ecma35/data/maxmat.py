@@ -12,7 +12,7 @@
 
 import collections
 
-def _improve_matching(alpha, alpha_to_possible, assignments, rassignments):
+def _improve_matching(alpha, alpha_to_possible, assignments, rassignments, betas_considered=()):
     pairs = []
     betas = alpha_to_possible[alpha]
     for beta in betas:
@@ -21,9 +21,10 @@ def _improve_matching(alpha, alpha_to_possible, assignments, rassignments):
         elif beta not in rassignments:
             pairs.append((alpha, beta))
             return pairs
-        else:
+        elif beta not in betas_considered: # avoid infinite recursion back and forth between two alphas
             nextalpha = rassignments[beta]
-            result = _improve_matching(nextalpha, alpha_to_possible, assignments, rassignments)
+            result = _improve_matching(nextalpha, alpha_to_possible, assignments, rassignments,
+                                       betas_considered + (beta,))
             if result:
                 pairs.append((alpha, beta))
                 pairs.extend(result)
