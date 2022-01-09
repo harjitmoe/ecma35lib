@@ -27,6 +27,7 @@ def to_link(maybe_siglum, default_siglum, men, ku, ten):
                 part_zi = 5
         elif men == "Ω":
             men = "2"
+            part_zi = int(ku, 10) // 11
         else:
             raise AssertionError()
     elif siglum == "KSC" and men == "Ψ":
