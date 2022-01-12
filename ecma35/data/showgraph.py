@@ -534,7 +534,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
     setnames2 = tuple(zip(*nonvacant_sets))[0] if nonvacant_sets else ()
     zplarray = tuple(zip(*tuple(zip(*nonvacant_sets))[1])) if nonvacant_sets else ()
     h = ", part {:d}".format(part) if part else ""
-    print("<!DOCTYPE html><title>{}{}</title>".format(planefunc(number), h), file=outfile)
+    print("<!DOCTYPE html><meta charset='utf-8'/><title>{}{}</title>".format(planefunc(number), h), file=outfile)
     print(_abbreviation_script, file=outfile)
     if css:
         print("<link rel='stylesheet' href='{}'>".format(css), file=outfile)
@@ -657,7 +657,7 @@ def dump_preview(outfile, planename, kutenfunc, number, array, *, lang="zh-TW", 
     stpt = (stx - 1) * 94 if not is_96 else stx * 96
     edpt = (edx - 1) * 94 if not is_96 else edx * 96
     h = ", part {:d}".format(part) if part else ""
-    print("<!DOCTYPE html><title>{}{}</title>".format(planename, h), file=outfile)
+    print("<!DOCTYPE html><meta charset='utf-8'/><title>{}{}</title>".format(planename, h), file=outfile)
     print(_abbreviation_script, file=outfile)
     if css:
         print("<link rel='stylesheet' href='{}'>".format(css), file=outfile)
