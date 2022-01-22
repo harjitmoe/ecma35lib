@@ -1,18 +1,157 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
-<!-- Copyright © 1991-2020 Unicode, Inc.
+<!-- Copyright © 1991-2021 Unicode, Inc.
 For terms of use, see http://www.unicode.org/copyright.html
-Unicode and the Unicode Logo are registered trademarks of Unicode, Inc. in the U.S. and other countries.
+SPDX-License-Identifier: Unicode-DFS-2016
 CLDR data files are interpreted according to the LDML specification (http://unicode.org/reports/tr35/)
-
-Derived short names and annotations, using GenerateDerivedAnnotations.java. See warnings in /annotations/ file.
 -->
+<!-- Derived short names and annotations, using GenerateDerivedAnnotations.java. See warnings in /annotations/ file. -->
 <ldml>
 	<identity>
 		<version number="$Revision$"/>
 		<language type="fil"/>
 	</identity>
 	<annotations>
+		<annotation cp="🫃🏻">lalaking buntis | light na kulay ng balat</annotation>
+		<annotation cp="🫃🏻" type="tts">lalaking buntis: light na kulay ng balat</annotation>
+		<annotation cp="🫃🏼">katamtamang light na kulay ng balat | lalaking buntis</annotation>
+		<annotation cp="🫃🏼" type="tts">lalaking buntis: katamtamang light na kulay ng balat</annotation>
+		<annotation cp="🫃🏽">katamtamang kulay ng balat | lalaking buntis</annotation>
+		<annotation cp="🫃🏽" type="tts">lalaking buntis: katamtamang kulay ng balat</annotation>
+		<annotation cp="🫃🏾">katamtamang dark na kulay ng balat | lalaking buntis</annotation>
+		<annotation cp="🫃🏾" type="tts">lalaking buntis: katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="🫃🏿">dark na kulay ng balat | lalaking buntis</annotation>
+		<annotation cp="🫃🏿" type="tts">lalaking buntis: dark na kulay ng balat</annotation>
+		<annotation cp="🫄🏻">light na kulay ng balat | taong buntis</annotation>
+		<annotation cp="🫄🏻" type="tts">taong buntis: light na kulay ng balat</annotation>
+		<annotation cp="🫄🏼">katamtamang light na kulay ng balat | taong buntis</annotation>
+		<annotation cp="🫄🏼" type="tts">taong buntis: katamtamang light na kulay ng balat</annotation>
+		<annotation cp="🫄🏽">katamtamang kulay ng balat | taong buntis</annotation>
+		<annotation cp="🫄🏽" type="tts">taong buntis: katamtamang kulay ng balat</annotation>
+		<annotation cp="🫄🏾">katamtamang dark na kulay ng balat | taong buntis</annotation>
+		<annotation cp="🫄🏾" type="tts">taong buntis: katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="🫄🏿">dark na kulay ng balat | taong buntis</annotation>
+		<annotation cp="🫄🏿" type="tts">taong buntis: dark na kulay ng balat</annotation>
+		<annotation cp="🫅🏻">light na kulay ng balat | taong may korona</annotation>
+		<annotation cp="🫅🏻" type="tts">taong may korona: light na kulay ng balat</annotation>
+		<annotation cp="🫅🏼">katamtamang light na kulay ng balat | taong may korona</annotation>
+		<annotation cp="🫅🏼" type="tts">taong may korona: katamtamang light na kulay ng balat</annotation>
+		<annotation cp="🫅🏽">katamtamang kulay ng balat | taong may korona</annotation>
+		<annotation cp="🫅🏽" type="tts">taong may korona: katamtamang kulay ng balat</annotation>
+		<annotation cp="🫅🏾">katamtamang dark na kulay ng balat | taong may korona</annotation>
+		<annotation cp="🫅🏾" type="tts">taong may korona: katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="🫅🏿">dark na kulay ng balat | taong may korona</annotation>
+		<annotation cp="🫅🏿" type="tts">taong may korona: dark na kulay ng balat</annotation>
+		<annotation cp="🫰🏻">kamay na magkakrus ang hintuturo at hinlalaki | light na kulay ng balat | mahal | pag-ibig | pera | pitik | puso</annotation>
+		<annotation cp="🫰🏻" type="tts">kamay na magkakrus ang hintuturo at hinlalaki: light na kulay ng balat</annotation>
+		<annotation cp="🫰🏼">kamay na magkakrus ang hintuturo at hinlalaki | katamtamang light na kulay ng balat | mahal | pag-ibig | pera | pitik | puso</annotation>
+		<annotation cp="🫰🏼" type="tts">kamay na magkakrus ang hintuturo at hinlalaki: katamtamang light na kulay ng balat</annotation>
+		<annotation cp="🫰🏽">kamay na magkakrus ang hintuturo at hinlalaki | katamtamang kulay ng balat | mahal | pag-ibig | pera | pitik | puso</annotation>
+		<annotation cp="🫰🏽" type="tts">kamay na magkakrus ang hintuturo at hinlalaki: katamtamang kulay ng balat</annotation>
+		<annotation cp="🫰🏾">kamay na magkakrus ang hintuturo at hinlalaki | katamtamang dark na kulay ng balat | mahal | pag-ibig | pera | pitik | puso</annotation>
+		<annotation cp="🫰🏾" type="tts">kamay na magkakrus ang hintuturo at hinlalaki: katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="🫰🏿">dark na kulay ng balat | kamay na magkakrus ang hintuturo at hinlalaki | mahal | pag-ibig | pera | pitik | puso</annotation>
+		<annotation cp="🫰🏿" type="tts">kamay na magkakrus ang hintuturo at hinlalaki: dark na kulay ng balat</annotation>
+		<annotation cp="🫱🏻">light na kulay ng balat | pakanang kamay</annotation>
+		<annotation cp="🫱🏻" type="tts">pakanang kamay: light na kulay ng balat</annotation>
+		<annotation cp="🫱🏼">katamtamang light na kulay ng balat | pakanang kamay</annotation>
+		<annotation cp="🫱🏼" type="tts">pakanang kamay: katamtamang light na kulay ng balat</annotation>
+		<annotation cp="🫱🏽">katamtamang kulay ng balat | pakanang kamay</annotation>
+		<annotation cp="🫱🏽" type="tts">pakanang kamay: katamtamang kulay ng balat</annotation>
+		<annotation cp="🫱🏾">katamtamang dark na kulay ng balat | pakanang kamay</annotation>
+		<annotation cp="🫱🏾" type="tts">pakanang kamay: katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="🫱🏿">dark na kulay ng balat | pakanang kamay</annotation>
+		<annotation cp="🫱🏿" type="tts">pakanang kamay: dark na kulay ng balat</annotation>
+		<annotation cp="🫱🏻‍🫲🏼">kamay | kasunduan | katamtamang light na kulay ng balat | light na kulay ng balat | meeting | pagkakamay</annotation>
+		<annotation cp="🫱🏻‍🫲🏼" type="tts">pagkakamay: light na kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="🫱🏻‍🫲🏽">kamay | kasunduan | katamtamang kulay ng balat | light na kulay ng balat | meeting | pagkakamay</annotation>
+		<annotation cp="🫱🏻‍🫲🏽" type="tts">pagkakamay: light na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="🫱🏻‍🫲🏾">kamay | kasunduan | katamtamang dark na kulay ng balat | light na kulay ng balat | meeting | pagkakamay</annotation>
+		<annotation cp="🫱🏻‍🫲🏾" type="tts">pagkakamay: light na kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="🫱🏻‍🫲🏿">dark na kulay ng balat | kamay | kasunduan | light na kulay ng balat | meeting | pagkakamay</annotation>
+		<annotation cp="🫱🏻‍🫲🏿" type="tts">pagkakamay: light na kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="🫱🏼‍🫲🏻">kamay | kasunduan | katamtamang light na kulay ng balat | light na kulay ng balat | meeting | pagkakamay</annotation>
+		<annotation cp="🫱🏼‍🫲🏻" type="tts">pagkakamay: katamtamang light na kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="🫱🏼‍🫲🏽">kamay | kasunduan | katamtamang kulay ng balat | katamtamang light na kulay ng balat | meeting | pagkakamay</annotation>
+		<annotation cp="🫱🏼‍🫲🏽" type="tts">pagkakamay: katamtamang light na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="🫱🏼‍🫲🏾">kamay | kasunduan | katamtamang dark na kulay ng balat | katamtamang light na kulay ng balat | meeting | pagkakamay</annotation>
+		<annotation cp="🫱🏼‍🫲🏾" type="tts">pagkakamay: katamtamang light na kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="🫱🏼‍🫲🏿">dark na kulay ng balat | kamay | kasunduan | katamtamang light na kulay ng balat | meeting | pagkakamay</annotation>
+		<annotation cp="🫱🏼‍🫲🏿" type="tts">pagkakamay: katamtamang light na kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="🫱🏽‍🫲🏻">kamay | kasunduan | katamtamang kulay ng balat | light na kulay ng balat | meeting | pagkakamay</annotation>
+		<annotation cp="🫱🏽‍🫲🏻" type="tts">pagkakamay: katamtamang kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="🫱🏽‍🫲🏼">kamay | kasunduan | katamtamang kulay ng balat | katamtamang light na kulay ng balat | meeting | pagkakamay</annotation>
+		<annotation cp="🫱🏽‍🫲🏼" type="tts">pagkakamay: katamtamang kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="🫱🏽‍🫲🏾">kamay | kasunduan | katamtamang dark na kulay ng balat | katamtamang kulay ng balat | meeting | pagkakamay</annotation>
+		<annotation cp="🫱🏽‍🫲🏾" type="tts">pagkakamay: katamtamang kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="🫱🏽‍🫲🏿">dark na kulay ng balat | kamay | kasunduan | katamtamang kulay ng balat | meeting | pagkakamay</annotation>
+		<annotation cp="🫱🏽‍🫲🏿" type="tts">pagkakamay: katamtamang kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="🫱🏾‍🫲🏻">kamay | kasunduan | katamtamang dark na kulay ng balat | light na kulay ng balat | meeting | pagkakamay</annotation>
+		<annotation cp="🫱🏾‍🫲🏻" type="tts">pagkakamay: katamtamang dark na kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="🫱🏾‍🫲🏼">kamay | kasunduan | katamtamang dark na kulay ng balat | katamtamang light na kulay ng balat | meeting | pagkakamay</annotation>
+		<annotation cp="🫱🏾‍🫲🏼" type="tts">pagkakamay: katamtamang dark na kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="🫱🏾‍🫲🏽">kamay | kasunduan | katamtamang dark na kulay ng balat | katamtamang kulay ng balat | meeting | pagkakamay</annotation>
+		<annotation cp="🫱🏾‍🫲🏽" type="tts">pagkakamay: katamtamang dark na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="🫱🏾‍🫲🏿">dark na kulay ng balat | kamay | kasunduan | katamtamang dark na kulay ng balat | meeting | pagkakamay</annotation>
+		<annotation cp="🫱🏾‍🫲🏿" type="tts">pagkakamay: katamtamang dark na kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="🫱🏿‍🫲🏻">dark na kulay ng balat | kamay | kasunduan | light na kulay ng balat | meeting | pagkakamay</annotation>
+		<annotation cp="🫱🏿‍🫲🏻" type="tts">pagkakamay: dark na kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="🫱🏿‍🫲🏼">dark na kulay ng balat | kamay | kasunduan | katamtamang light na kulay ng balat | meeting | pagkakamay</annotation>
+		<annotation cp="🫱🏿‍🫲🏼" type="tts">pagkakamay: dark na kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="🫱🏿‍🫲🏽">dark na kulay ng balat | kamay | kasunduan | katamtamang kulay ng balat | meeting | pagkakamay</annotation>
+		<annotation cp="🫱🏿‍🫲🏽" type="tts">pagkakamay: dark na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="🫱🏿‍🫲🏾">dark na kulay ng balat | kamay | kasunduan | katamtamang dark na kulay ng balat | meeting | pagkakamay</annotation>
+		<annotation cp="🫱🏿‍🫲🏾" type="tts">pagkakamay: dark na kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="🫲🏻">light na kulay ng balat | pakaliwang kamay</annotation>
+		<annotation cp="🫲🏻" type="tts">pakaliwang kamay: light na kulay ng balat</annotation>
+		<annotation cp="🫲🏼">katamtamang light na kulay ng balat | pakaliwang kamay</annotation>
+		<annotation cp="🫲🏼" type="tts">pakaliwang kamay: katamtamang light na kulay ng balat</annotation>
+		<annotation cp="🫲🏽">katamtamang kulay ng balat | pakaliwang kamay</annotation>
+		<annotation cp="🫲🏽" type="tts">pakaliwang kamay: katamtamang kulay ng balat</annotation>
+		<annotation cp="🫲🏾">katamtamang dark na kulay ng balat | pakaliwang kamay</annotation>
+		<annotation cp="🫲🏾" type="tts">pakaliwang kamay: katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="🫲🏿">dark na kulay ng balat | pakaliwang kamay</annotation>
+		<annotation cp="🫲🏿" type="tts">pakaliwang kamay: dark na kulay ng balat</annotation>
+		<annotation cp="🫳🏻">light na kulay ng balat | nakataob na palad</annotation>
+		<annotation cp="🫳🏻" type="tts">nakataob na palad: light na kulay ng balat</annotation>
+		<annotation cp="🫳🏼">katamtamang light na kulay ng balat | nakataob na palad</annotation>
+		<annotation cp="🫳🏼" type="tts">nakataob na palad: katamtamang light na kulay ng balat</annotation>
+		<annotation cp="🫳🏽">katamtamang kulay ng balat | nakataob na palad</annotation>
+		<annotation cp="🫳🏽" type="tts">nakataob na palad: katamtamang kulay ng balat</annotation>
+		<annotation cp="🫳🏾">katamtamang dark na kulay ng balat | nakataob na palad</annotation>
+		<annotation cp="🫳🏾" type="tts">nakataob na palad: katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="🫳🏿">dark na kulay ng balat | nakataob na palad</annotation>
+		<annotation cp="🫳🏿" type="tts">nakataob na palad: dark na kulay ng balat</annotation>
+		<annotation cp="🫴🏻">light na kulay ng balat | nakasalong palad</annotation>
+		<annotation cp="🫴🏻" type="tts">nakasalong palad: light na kulay ng balat</annotation>
+		<annotation cp="🫴🏼">katamtamang light na kulay ng balat | nakasalong palad</annotation>
+		<annotation cp="🫴🏼" type="tts">nakasalong palad: katamtamang light na kulay ng balat</annotation>
+		<annotation cp="🫴🏽">katamtamang kulay ng balat | nakasalong palad</annotation>
+		<annotation cp="🫴🏽" type="tts">nakasalong palad: katamtamang kulay ng balat</annotation>
+		<annotation cp="🫴🏾">katamtamang dark na kulay ng balat | nakasalong palad</annotation>
+		<annotation cp="🫴🏾" type="tts">nakasalong palad: katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="🫴🏿">dark na kulay ng balat | nakasalong palad</annotation>
+		<annotation cp="🫴🏿" type="tts">nakasalong palad: dark na kulay ng balat</annotation>
+		<annotation cp="🫵🏻">hintuturong nakaturo sa tumitingin | light na kulay ng balat</annotation>
+		<annotation cp="🫵🏻" type="tts">hintuturong nakaturo sa tumitingin: light na kulay ng balat</annotation>
+		<annotation cp="🫵🏼">hintuturong nakaturo sa tumitingin | katamtamang light na kulay ng balat</annotation>
+		<annotation cp="🫵🏼" type="tts">hintuturong nakaturo sa tumitingin: katamtamang light na kulay ng balat</annotation>
+		<annotation cp="🫵🏽">hintuturong nakaturo sa tumitingin | katamtamang kulay ng balat</annotation>
+		<annotation cp="🫵🏽" type="tts">hintuturong nakaturo sa tumitingin: katamtamang kulay ng balat</annotation>
+		<annotation cp="🫵🏾">hintuturong nakaturo sa tumitingin | katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="🫵🏾" type="tts">hintuturong nakaturo sa tumitingin: katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="🫵🏿">dark na kulay ng balat | hintuturong nakaturo sa tumitingin</annotation>
+		<annotation cp="🫵🏿" type="tts">hintuturong nakaturo sa tumitingin: dark na kulay ng balat</annotation>
+		<annotation cp="🫶🏻">light na kulay ng balat | nakapusong kamay</annotation>
+		<annotation cp="🫶🏻" type="tts">nakapusong kamay: light na kulay ng balat</annotation>
+		<annotation cp="🫶🏼">katamtamang light na kulay ng balat | nakapusong kamay</annotation>
+		<annotation cp="🫶🏼" type="tts">nakapusong kamay: katamtamang light na kulay ng balat</annotation>
+		<annotation cp="🫶🏽">katamtamang kulay ng balat | nakapusong kamay</annotation>
+		<annotation cp="🫶🏽" type="tts">nakapusong kamay: katamtamang kulay ng balat</annotation>
+		<annotation cp="🫶🏾">katamtamang dark na kulay ng balat | nakapusong kamay</annotation>
+		<annotation cp="🫶🏾" type="tts">nakapusong kamay: katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="🫶🏿">dark na kulay ng balat | nakapusong kamay</annotation>
+		<annotation cp="🫶🏿" type="tts">nakapusong kamay: dark na kulay ng balat</annotation>
 		<annotation cp="👋🏻">bumabati | kamay | kumakaway | kumakaway na kamay | light na kulay ng balat</annotation>
 		<annotation cp="👋🏻" type="tts">kumakaway na kamay: light na kulay ng balat</annotation>
 		<annotation cp="👋🏼">bumabati | kamay | katamtamang light na kulay ng balat | kumakaway | kumakaway na kamay</annotation>
@@ -303,6 +442,16 @@ Derived short names and annotations, using GenerateDerivedAnnotations.java. See 
 		<annotation cp="🤲🏾" type="tts">nakataas na magkadikit na palad: katamtamang dark na kulay ng balat</annotation>
 		<annotation cp="🤲🏿">dark na kulay ng balat | dasal | nakataas na magkadikit na palad</annotation>
 		<annotation cp="🤲🏿" type="tts">nakataas na magkadikit na palad: dark na kulay ng balat</annotation>
+		<annotation cp="🤝🏻">kamay | kasunduan | light na kulay ng balat | meeting | pagkakamay</annotation>
+		<annotation cp="🤝🏻" type="tts">pagkakamay: light na kulay ng balat</annotation>
+		<annotation cp="🤝🏼">kamay | kasunduan | katamtamang light na kulay ng balat | meeting | pagkakamay</annotation>
+		<annotation cp="🤝🏼" type="tts">pagkakamay: katamtamang light na kulay ng balat</annotation>
+		<annotation cp="🤝🏽">kamay | kasunduan | katamtamang kulay ng balat | meeting | pagkakamay</annotation>
+		<annotation cp="🤝🏽" type="tts">pagkakamay: katamtamang kulay ng balat</annotation>
+		<annotation cp="🤝🏾">kamay | kasunduan | katamtamang dark na kulay ng balat | meeting | pagkakamay</annotation>
+		<annotation cp="🤝🏾" type="tts">pagkakamay: katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="🤝🏿">dark na kulay ng balat | kamay | kasunduan | meeting | pagkakamay</annotation>
+		<annotation cp="🤝🏿" type="tts">pagkakamay: dark na kulay ng balat</annotation>
 		<annotation cp="🙏🏻">humihiling | kamay | light na kulay ng balat | magkalapat na mga palad | nagdarasal | nagpapasalamat | nakikisuyo | yuko</annotation>
 		<annotation cp="🙏🏻" type="tts">magkalapat na mga palad: light na kulay ng balat</annotation>
 		<annotation cp="🙏🏼">humihiling | kamay | katamtamang light na kulay ng balat | magkalapat na mga palad | nagdarasal | nagpapasalamat | nakikisuyo | yuko</annotation>
@@ -463,6 +612,86 @@ Derived short names and annotations, using GenerateDerivedAnnotations.java. See 
 		<annotation cp="👱🏾" type="tts">taong may blond na buhok: katamtamang dark na kulay ng balat</annotation>
 		<annotation cp="👱🏿">blond | buhok | dark na kulay ng balat | lalaki | tao | taong may blond na buhok</annotation>
 		<annotation cp="👱🏿" type="tts">taong may blond na buhok: dark na kulay ng balat</annotation>
+		<annotation cp="🧑🏻‍❤‍💋‍🧑🏼">couple | halik | katamtamang light na kulay ng balat | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏻‍❤‍💋‍🧑🏼" type="tts">maghahalikan: tao, tao, light na kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="🧑🏻‍❤‍💋‍🧑🏽">couple | halik | katamtamang kulay ng balat | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏻‍❤‍💋‍🧑🏽" type="tts">maghahalikan: tao, tao, light na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="🧑🏻‍❤‍💋‍🧑🏾">couple | halik | katamtamang dark na kulay ng balat | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏻‍❤‍💋‍🧑🏾" type="tts">maghahalikan: tao, tao, light na kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="🧑🏻‍❤‍💋‍🧑🏿">couple | dark na kulay ng balat | halik | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏻‍❤‍💋‍🧑🏿" type="tts">maghahalikan: tao, tao, light na kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="🧑🏼‍❤‍💋‍🧑🏻">couple | halik | katamtamang light na kulay ng balat | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏼‍❤‍💋‍🧑🏻" type="tts">maghahalikan: tao, tao, katamtamang light na kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="🧑🏼‍❤‍💋‍🧑🏽">couple | halik | katamtamang kulay ng balat | katamtamang light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏼‍❤‍💋‍🧑🏽" type="tts">maghahalikan: tao, tao, katamtamang light na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="🧑🏼‍❤‍💋‍🧑🏾">couple | halik | katamtamang dark na kulay ng balat | katamtamang light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏼‍❤‍💋‍🧑🏾" type="tts">maghahalikan: tao, tao, katamtamang light na kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="🧑🏼‍❤‍💋‍🧑🏿">couple | dark na kulay ng balat | halik | katamtamang light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏼‍❤‍💋‍🧑🏿" type="tts">maghahalikan: tao, tao, katamtamang light na kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="🧑🏽‍❤‍💋‍🧑🏻">couple | halik | katamtamang kulay ng balat | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏽‍❤‍💋‍🧑🏻" type="tts">maghahalikan: tao, tao, katamtamang kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="🧑🏽‍❤‍💋‍🧑🏼">couple | halik | katamtamang kulay ng balat | katamtamang light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏽‍❤‍💋‍🧑🏼" type="tts">maghahalikan: tao, tao, katamtamang kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="🧑🏽‍❤‍💋‍🧑🏾">couple | halik | katamtamang dark na kulay ng balat | katamtamang kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏽‍❤‍💋‍🧑🏾" type="tts">maghahalikan: tao, tao, katamtamang kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="🧑🏽‍❤‍💋‍🧑🏿">couple | dark na kulay ng balat | halik | katamtamang kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏽‍❤‍💋‍🧑🏿" type="tts">maghahalikan: tao, tao, katamtamang kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="🧑🏾‍❤‍💋‍🧑🏻">couple | halik | katamtamang dark na kulay ng balat | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏾‍❤‍💋‍🧑🏻" type="tts">maghahalikan: tao, tao, katamtamang dark na kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="🧑🏾‍❤‍💋‍🧑🏼">couple | halik | katamtamang dark na kulay ng balat | katamtamang light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏾‍❤‍💋‍🧑🏼" type="tts">maghahalikan: tao, tao, katamtamang dark na kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="🧑🏾‍❤‍💋‍🧑🏽">couple | halik | katamtamang dark na kulay ng balat | katamtamang kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏾‍❤‍💋‍🧑🏽" type="tts">maghahalikan: tao, tao, katamtamang dark na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="🧑🏾‍❤‍💋‍🧑🏿">couple | dark na kulay ng balat | halik | katamtamang dark na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏾‍❤‍💋‍🧑🏿" type="tts">maghahalikan: tao, tao, katamtamang dark na kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="🧑🏿‍❤‍💋‍🧑🏻">couple | dark na kulay ng balat | halik | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏿‍❤‍💋‍🧑🏻" type="tts">maghahalikan: tao, tao, dark na kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="🧑🏿‍❤‍💋‍🧑🏼">couple | dark na kulay ng balat | halik | katamtamang light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏿‍❤‍💋‍🧑🏼" type="tts">maghahalikan: tao, tao, dark na kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="🧑🏿‍❤‍💋‍🧑🏽">couple | dark na kulay ng balat | halik | katamtamang kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏿‍❤‍💋‍🧑🏽" type="tts">maghahalikan: tao, tao, dark na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="🧑🏿‍❤‍💋‍🧑🏾">couple | dark na kulay ng balat | halik | katamtamang dark na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏿‍❤‍💋‍🧑🏾" type="tts">maghahalikan: tao, tao, dark na kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="🧑🏻‍❤‍🧑🏼">couple | katamtamang light na kulay ng balat | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏻‍❤‍🧑🏼" type="tts">magkapareha na may puso: tao, tao, light na kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="🧑🏻‍❤‍🧑🏽">couple | katamtamang kulay ng balat | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏻‍❤‍🧑🏽" type="tts">magkapareha na may puso: tao, tao, light na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="🧑🏻‍❤‍🧑🏾">couple | katamtamang dark na kulay ng balat | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏻‍❤‍🧑🏾" type="tts">magkapareha na may puso: tao, tao, light na kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="🧑🏻‍❤‍🧑🏿">couple | dark na kulay ng balat | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏻‍❤‍🧑🏿" type="tts">magkapareha na may puso: tao, tao, light na kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="🧑🏼‍❤‍🧑🏻">couple | katamtamang light na kulay ng balat | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏼‍❤‍🧑🏻" type="tts">magkapareha na may puso: tao, tao, katamtamang light na kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="🧑🏼‍❤‍🧑🏽">couple | katamtamang kulay ng balat | katamtamang light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏼‍❤‍🧑🏽" type="tts">magkapareha na may puso: tao, tao, katamtamang light na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="🧑🏼‍❤‍🧑🏾">couple | katamtamang dark na kulay ng balat | katamtamang light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏼‍❤‍🧑🏾" type="tts">magkapareha na may puso: tao, tao, katamtamang light na kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="🧑🏼‍❤‍🧑🏿">couple | dark na kulay ng balat | katamtamang light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏼‍❤‍🧑🏿" type="tts">magkapareha na may puso: tao, tao, katamtamang light na kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="🧑🏽‍❤‍🧑🏻">couple | katamtamang kulay ng balat | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏽‍❤‍🧑🏻" type="tts">magkapareha na may puso: tao, tao, katamtamang kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="🧑🏽‍❤‍🧑🏼">couple | katamtamang kulay ng balat | katamtamang light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏽‍❤‍🧑🏼" type="tts">magkapareha na may puso: tao, tao, katamtamang kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="🧑🏽‍❤‍🧑🏾">couple | katamtamang dark na kulay ng balat | katamtamang kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏽‍❤‍🧑🏾" type="tts">magkapareha na may puso: tao, tao, katamtamang kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="🧑🏽‍❤‍🧑🏿">couple | dark na kulay ng balat | katamtamang kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏽‍❤‍🧑🏿" type="tts">magkapareha na may puso: tao, tao, katamtamang kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="🧑🏾‍❤‍🧑🏻">couple | katamtamang dark na kulay ng balat | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏾‍❤‍🧑🏻" type="tts">magkapareha na may puso: tao, tao, katamtamang dark na kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="🧑🏾‍❤‍🧑🏼">couple | katamtamang dark na kulay ng balat | katamtamang light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏾‍❤‍🧑🏼" type="tts">magkapareha na may puso: tao, tao, katamtamang dark na kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="🧑🏾‍❤‍🧑🏽">couple | katamtamang dark na kulay ng balat | katamtamang kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏾‍❤‍🧑🏽" type="tts">magkapareha na may puso: tao, tao, katamtamang dark na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="🧑🏾‍❤‍🧑🏿">couple | dark na kulay ng balat | katamtamang dark na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏾‍❤‍🧑🏿" type="tts">magkapareha na may puso: tao, tao, katamtamang dark na kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="🧑🏿‍❤‍🧑🏻">couple | dark na kulay ng balat | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏿‍❤‍🧑🏻" type="tts">magkapareha na may puso: tao, tao, dark na kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="🧑🏿‍❤‍🧑🏼">couple | dark na kulay ng balat | katamtamang light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏿‍❤‍🧑🏼" type="tts">magkapareha na may puso: tao, tao, dark na kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="🧑🏿‍❤‍🧑🏽">couple | dark na kulay ng balat | katamtamang kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏿‍❤‍🧑🏽" type="tts">magkapareha na may puso: tao, tao, dark na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="🧑🏿‍❤‍🧑🏾">couple | dark na kulay ng balat | katamtamang dark na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa | tao</annotation>
+		<annotation cp="🧑🏿‍❤‍🧑🏾" type="tts">magkapareha na may puso: tao, tao, dark na kulay ng balat, katamtamang dark na kulay ng balat</annotation>
 		<annotation cp="🧑‍🦰">hindi hindi tinukoy na kasarian | kasarian-neutral | matanda | pulang buhok | tao</annotation>
 		<annotation cp="🧑‍🦰" type="tts">tao: pulang buhok</annotation>
 		<annotation cp="🧑🏻‍🦰">hindi hindi tinukoy na kasarian | kasarian-neutral | light na kulay ng balat | matanda | pulang buhok | tao</annotation>
@@ -531,6 +760,16 @@ Derived short names and annotations, using GenerateDerivedAnnotations.java. See 
 		<annotation cp="🧔🏾" type="tts">taong may balbas: katamtamang dark na kulay ng balat</annotation>
 		<annotation cp="🧔🏿">balbas | dark na kulay ng balat | lalaki: balbas | tao | taong may balbas</annotation>
 		<annotation cp="🧔🏿" type="tts">taong may balbas: dark na kulay ng balat</annotation>
+		<annotation cp="🧔🏻‍♂">balbas | lalaki | lalaki: balbas | light na kulay ng balat</annotation>
+		<annotation cp="🧔🏻‍♂" type="tts">lalaki: light na kulay ng balat, balbas</annotation>
+		<annotation cp="🧔🏼‍♂">balbas | katamtamang light na kulay ng balat | lalaki | lalaki: balbas</annotation>
+		<annotation cp="🧔🏼‍♂" type="tts">lalaki: katamtamang light na kulay ng balat, balbas</annotation>
+		<annotation cp="🧔🏽‍♂">balbas | katamtamang kulay ng balat | lalaki | lalaki: balbas</annotation>
+		<annotation cp="🧔🏽‍♂" type="tts">lalaki: katamtamang kulay ng balat, balbas</annotation>
+		<annotation cp="🧔🏾‍♂">balbas | katamtamang dark na kulay ng balat | lalaki | lalaki: balbas</annotation>
+		<annotation cp="🧔🏾‍♂" type="tts">lalaki: katamtamang dark na kulay ng balat, balbas</annotation>
+		<annotation cp="🧔🏿‍♂">balbas | dark na kulay ng balat | lalaki | lalaki: balbas</annotation>
+		<annotation cp="🧔🏿‍♂" type="tts">lalaki: dark na kulay ng balat, balbas</annotation>
 		<annotation cp="👱🏻‍♂">blonde | lalaki | lalaking blonde | light na kulay ng balat</annotation>
 		<annotation cp="👱🏻‍♂" type="tts">lalaking blonde: light na kulay ng balat</annotation>
 		<annotation cp="👱🏼‍♂">blonde | katamtamang light na kulay ng balat | lalaki | lalaking blonde</annotation>
@@ -541,6 +780,106 @@ Derived short names and annotations, using GenerateDerivedAnnotations.java. See 
 		<annotation cp="👱🏾‍♂" type="tts">lalaking blonde: katamtamang dark na kulay ng balat</annotation>
 		<annotation cp="👱🏿‍♂">blonde | dark na kulay ng balat | lalaki | lalaking blonde</annotation>
 		<annotation cp="👱🏿‍♂" type="tts">lalaking blonde: dark na kulay ng balat</annotation>
+		<annotation cp="👨🏻‍❤‍💋‍👨🏻">couple | halik | lalaki | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏻‍❤‍💋‍👨🏻" type="tts">maghahalikan: lalaki, lalaki, light na kulay ng balat</annotation>
+		<annotation cp="👨🏻‍❤‍💋‍👨🏼">couple | halik | katamtamang light na kulay ng balat | lalaki | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏻‍❤‍💋‍👨🏼" type="tts">maghahalikan: lalaki, lalaki, light na kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="👨🏻‍❤‍💋‍👨🏽">couple | halik | katamtamang kulay ng balat | lalaki | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏻‍❤‍💋‍👨🏽" type="tts">maghahalikan: lalaki, lalaki, light na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="👨🏻‍❤‍💋‍👨🏾">couple | halik | katamtamang dark na kulay ng balat | lalaki | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏻‍❤‍💋‍👨🏾" type="tts">maghahalikan: lalaki, lalaki, light na kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="👨🏻‍❤‍💋‍👨🏿">couple | dark na kulay ng balat | halik | lalaki | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏻‍❤‍💋‍👨🏿" type="tts">maghahalikan: lalaki, lalaki, light na kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="👨🏼‍❤‍💋‍👨🏻">couple | halik | katamtamang light na kulay ng balat | lalaki | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏼‍❤‍💋‍👨🏻" type="tts">maghahalikan: lalaki, lalaki, katamtamang light na kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="👨🏼‍❤‍💋‍👨🏼">couple | halik | katamtamang light na kulay ng balat | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏼‍❤‍💋‍👨🏼" type="tts">maghahalikan: lalaki, lalaki, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="👨🏼‍❤‍💋‍👨🏽">couple | halik | katamtamang kulay ng balat | katamtamang light na kulay ng balat | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏼‍❤‍💋‍👨🏽" type="tts">maghahalikan: lalaki, lalaki, katamtamang light na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="👨🏼‍❤‍💋‍👨🏾">couple | halik | katamtamang dark na kulay ng balat | katamtamang light na kulay ng balat | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏼‍❤‍💋‍👨🏾" type="tts">maghahalikan: lalaki, lalaki, katamtamang light na kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="👨🏼‍❤‍💋‍👨🏿">couple | dark na kulay ng balat | halik | katamtamang light na kulay ng balat | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏼‍❤‍💋‍👨🏿" type="tts">maghahalikan: lalaki, lalaki, katamtamang light na kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="👨🏽‍❤‍💋‍👨🏻">couple | halik | katamtamang kulay ng balat | lalaki | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏽‍❤‍💋‍👨🏻" type="tts">maghahalikan: lalaki, lalaki, katamtamang kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="👨🏽‍❤‍💋‍👨🏼">couple | halik | katamtamang kulay ng balat | katamtamang light na kulay ng balat | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏽‍❤‍💋‍👨🏼" type="tts">maghahalikan: lalaki, lalaki, katamtamang kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="👨🏽‍❤‍💋‍👨🏽">couple | halik | katamtamang kulay ng balat | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏽‍❤‍💋‍👨🏽" type="tts">maghahalikan: lalaki, lalaki, katamtamang kulay ng balat</annotation>
+		<annotation cp="👨🏽‍❤‍💋‍👨🏾">couple | halik | katamtamang dark na kulay ng balat | katamtamang kulay ng balat | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏽‍❤‍💋‍👨🏾" type="tts">maghahalikan: lalaki, lalaki, katamtamang kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="👨🏽‍❤‍💋‍👨🏿">couple | dark na kulay ng balat | halik | katamtamang kulay ng balat | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏽‍❤‍💋‍👨🏿" type="tts">maghahalikan: lalaki, lalaki, katamtamang kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="👨🏾‍❤‍💋‍👨🏻">couple | halik | katamtamang dark na kulay ng balat | lalaki | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏾‍❤‍💋‍👨🏻" type="tts">maghahalikan: lalaki, lalaki, katamtamang dark na kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="👨🏾‍❤‍💋‍👨🏼">couple | halik | katamtamang dark na kulay ng balat | katamtamang light na kulay ng balat | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏾‍❤‍💋‍👨🏼" type="tts">maghahalikan: lalaki, lalaki, katamtamang dark na kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="👨🏾‍❤‍💋‍👨🏽">couple | halik | katamtamang dark na kulay ng balat | katamtamang kulay ng balat | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏾‍❤‍💋‍👨🏽" type="tts">maghahalikan: lalaki, lalaki, katamtamang dark na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="👨🏾‍❤‍💋‍👨🏾">couple | halik | katamtamang dark na kulay ng balat | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏾‍❤‍💋‍👨🏾" type="tts">maghahalikan: lalaki, lalaki, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="👨🏾‍❤‍💋‍👨🏿">couple | dark na kulay ng balat | halik | katamtamang dark na kulay ng balat | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏾‍❤‍💋‍👨🏿" type="tts">maghahalikan: lalaki, lalaki, katamtamang dark na kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="👨🏿‍❤‍💋‍👨🏻">couple | dark na kulay ng balat | halik | lalaki | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏿‍❤‍💋‍👨🏻" type="tts">maghahalikan: lalaki, lalaki, dark na kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="👨🏿‍❤‍💋‍👨🏼">couple | dark na kulay ng balat | halik | katamtamang light na kulay ng balat | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏿‍❤‍💋‍👨🏼" type="tts">maghahalikan: lalaki, lalaki, dark na kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="👨🏿‍❤‍💋‍👨🏽">couple | dark na kulay ng balat | halik | katamtamang kulay ng balat | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏿‍❤‍💋‍👨🏽" type="tts">maghahalikan: lalaki, lalaki, dark na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="👨🏿‍❤‍💋‍👨🏾">couple | dark na kulay ng balat | halik | katamtamang dark na kulay ng balat | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏿‍❤‍💋‍👨🏾" type="tts">maghahalikan: lalaki, lalaki, dark na kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="👨🏿‍❤‍💋‍👨🏿">couple | dark na kulay ng balat | halik | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏿‍❤‍💋‍👨🏿" type="tts">maghahalikan: lalaki, lalaki, dark na kulay ng balat</annotation>
+		<annotation cp="👨🏻‍❤‍👨🏻">couple | lalaki | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏻‍❤‍👨🏻" type="tts">magkapareha na may puso: lalaki, lalaki, light na kulay ng balat</annotation>
+		<annotation cp="👨🏻‍❤‍👨🏼">couple | katamtamang light na kulay ng balat | lalaki | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏻‍❤‍👨🏼" type="tts">magkapareha na may puso: lalaki, lalaki, light na kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="👨🏻‍❤‍👨🏽">couple | katamtamang kulay ng balat | lalaki | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏻‍❤‍👨🏽" type="tts">magkapareha na may puso: lalaki, lalaki, light na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="👨🏻‍❤‍👨🏾">couple | katamtamang dark na kulay ng balat | lalaki | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏻‍❤‍👨🏾" type="tts">magkapareha na may puso: lalaki, lalaki, light na kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="👨🏻‍❤‍👨🏿">couple | dark na kulay ng balat | lalaki | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏻‍❤‍👨🏿" type="tts">magkapareha na may puso: lalaki, lalaki, light na kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="👨🏼‍❤‍👨🏻">couple | katamtamang light na kulay ng balat | lalaki | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏼‍❤‍👨🏻" type="tts">magkapareha na may puso: lalaki, lalaki, katamtamang light na kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="👨🏼‍❤‍👨🏼">couple | katamtamang light na kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏼‍❤‍👨🏼" type="tts">magkapareha na may puso: lalaki, lalaki, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="👨🏼‍❤‍👨🏽">couple | katamtamang kulay ng balat | katamtamang light na kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏼‍❤‍👨🏽" type="tts">magkapareha na may puso: lalaki, lalaki, katamtamang light na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="👨🏼‍❤‍👨🏾">couple | katamtamang dark na kulay ng balat | katamtamang light na kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏼‍❤‍👨🏾" type="tts">magkapareha na may puso: lalaki, lalaki, katamtamang light na kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="👨🏼‍❤‍👨🏿">couple | dark na kulay ng balat | katamtamang light na kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏼‍❤‍👨🏿" type="tts">magkapareha na may puso: lalaki, lalaki, katamtamang light na kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="👨🏽‍❤‍👨🏻">couple | katamtamang kulay ng balat | lalaki | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏽‍❤‍👨🏻" type="tts">magkapareha na may puso: lalaki, lalaki, katamtamang kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="👨🏽‍❤‍👨🏼">couple | katamtamang kulay ng balat | katamtamang light na kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏽‍❤‍👨🏼" type="tts">magkapareha na may puso: lalaki, lalaki, katamtamang kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="👨🏽‍❤‍👨🏽">couple | katamtamang kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏽‍❤‍👨🏽" type="tts">magkapareha na may puso: lalaki, lalaki, katamtamang kulay ng balat</annotation>
+		<annotation cp="👨🏽‍❤‍👨🏾">couple | katamtamang dark na kulay ng balat | katamtamang kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏽‍❤‍👨🏾" type="tts">magkapareha na may puso: lalaki, lalaki, katamtamang kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="👨🏽‍❤‍👨🏿">couple | dark na kulay ng balat | katamtamang kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏽‍❤‍👨🏿" type="tts">magkapareha na may puso: lalaki, lalaki, katamtamang kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="👨🏾‍❤‍👨🏻">couple | katamtamang dark na kulay ng balat | lalaki | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏾‍❤‍👨🏻" type="tts">magkapareha na may puso: lalaki, lalaki, katamtamang dark na kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="👨🏾‍❤‍👨🏼">couple | katamtamang dark na kulay ng balat | katamtamang light na kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏾‍❤‍👨🏼" type="tts">magkapareha na may puso: lalaki, lalaki, katamtamang dark na kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="👨🏾‍❤‍👨🏽">couple | katamtamang dark na kulay ng balat | katamtamang kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏾‍❤‍👨🏽" type="tts">magkapareha na may puso: lalaki, lalaki, katamtamang dark na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="👨🏾‍❤‍👨🏾">couple | katamtamang dark na kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏾‍❤‍👨🏾" type="tts">magkapareha na may puso: lalaki, lalaki, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="👨🏾‍❤‍👨🏿">couple | dark na kulay ng balat | katamtamang dark na kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏾‍❤‍👨🏿" type="tts">magkapareha na may puso: lalaki, lalaki, katamtamang dark na kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="👨🏿‍❤‍👨🏻">couple | dark na kulay ng balat | lalaki | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏿‍❤‍👨🏻" type="tts">magkapareha na may puso: lalaki, lalaki, dark na kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="👨🏿‍❤‍👨🏼">couple | dark na kulay ng balat | katamtamang light na kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏿‍❤‍👨🏼" type="tts">magkapareha na may puso: lalaki, lalaki, dark na kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="👨🏿‍❤‍👨🏽">couple | dark na kulay ng balat | katamtamang kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏿‍❤‍👨🏽" type="tts">magkapareha na may puso: lalaki, lalaki, dark na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="👨🏿‍❤‍👨🏾">couple | dark na kulay ng balat | katamtamang dark na kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏿‍❤‍👨🏾" type="tts">magkapareha na may puso: lalaki, lalaki, dark na kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="👨🏿‍❤‍👨🏿">couple | dark na kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👨🏿‍❤‍👨🏿" type="tts">magkapareha na may puso: lalaki, lalaki, dark na kulay ng balat</annotation>
 		<annotation cp="👨‍🦰">lalaki | matanda | pulang buhok</annotation>
 		<annotation cp="👨‍🦰" type="tts">lalaki: pulang buhok</annotation>
 		<annotation cp="👨🏻‍🦰">lalaki | light na kulay ng balat | matanda | pulang buhok</annotation>
@@ -599,6 +938,16 @@ Derived short names and annotations, using GenerateDerivedAnnotations.java. See 
 		<annotation cp="👩🏾" type="tts">babae: katamtamang dark na kulay ng balat</annotation>
 		<annotation cp="👩🏿">babae | dark na kulay ng balat | matanda</annotation>
 		<annotation cp="👩🏿" type="tts">babae: dark na kulay ng balat</annotation>
+		<annotation cp="🧔🏻‍♀">babae | babae: balbas | balbas | light na kulay ng balat</annotation>
+		<annotation cp="🧔🏻‍♀" type="tts">babae: light na kulay ng balat, balbas</annotation>
+		<annotation cp="🧔🏼‍♀">babae | babae: balbas | balbas | katamtamang light na kulay ng balat</annotation>
+		<annotation cp="🧔🏼‍♀" type="tts">babae: katamtamang light na kulay ng balat, balbas</annotation>
+		<annotation cp="🧔🏽‍♀">babae | babae: balbas | balbas | katamtamang kulay ng balat</annotation>
+		<annotation cp="🧔🏽‍♀" type="tts">babae: katamtamang kulay ng balat, balbas</annotation>
+		<annotation cp="🧔🏾‍♀">babae | babae: balbas | balbas | katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="🧔🏾‍♀" type="tts">babae: katamtamang dark na kulay ng balat, balbas</annotation>
+		<annotation cp="🧔🏿‍♀">babae | babae: balbas | balbas | dark na kulay ng balat</annotation>
+		<annotation cp="🧔🏿‍♀" type="tts">babae: dark na kulay ng balat, balbas</annotation>
 		<annotation cp="👱🏻‍♀">babae | babae: blond na buhok | babaeng blond ang buhok | blond na buhok | blonde | light na kulay ng balat</annotation>
 		<annotation cp="👱🏻‍♀" type="tts">babae: light na kulay ng balat, blond na buhok</annotation>
 		<annotation cp="👱🏼‍♀">babae | babae: blond na buhok | babaeng blond ang buhok | blond na buhok | blonde | katamtamang light na kulay ng balat</annotation>
@@ -609,6 +958,206 @@ Derived short names and annotations, using GenerateDerivedAnnotations.java. See 
 		<annotation cp="👱🏾‍♀" type="tts">babae: katamtamang dark na kulay ng balat, blond na buhok</annotation>
 		<annotation cp="👱🏿‍♀">babae | babae: blond na buhok | babaeng blond ang buhok | blond na buhok | blonde | dark na kulay ng balat</annotation>
 		<annotation cp="👱🏿‍♀" type="tts">babae: dark na kulay ng balat, blond na buhok</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👨🏻">babae | couple | halik | lalaki | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👨🏻" type="tts">maghahalikan: babae, lalaki, light na kulay ng balat</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👨🏼">babae | couple | halik | katamtamang light na kulay ng balat | lalaki | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👨🏼" type="tts">maghahalikan: babae, lalaki, light na kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👨🏽">babae | couple | halik | katamtamang kulay ng balat | lalaki | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👨🏽" type="tts">maghahalikan: babae, lalaki, light na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👨🏾">babae | couple | halik | katamtamang dark na kulay ng balat | lalaki | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👨🏾" type="tts">maghahalikan: babae, lalaki, light na kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👨🏿">babae | couple | dark na kulay ng balat | halik | lalaki | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👨🏿" type="tts">maghahalikan: babae, lalaki, light na kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👨🏻">babae | couple | halik | katamtamang light na kulay ng balat | lalaki | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👨🏻" type="tts">maghahalikan: babae, lalaki, katamtamang light na kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👨🏼">babae | couple | halik | katamtamang light na kulay ng balat | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👨🏼" type="tts">maghahalikan: babae, lalaki, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👨🏽">babae | couple | halik | katamtamang kulay ng balat | katamtamang light na kulay ng balat | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👨🏽" type="tts">maghahalikan: babae, lalaki, katamtamang light na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👨🏾">babae | couple | halik | katamtamang dark na kulay ng balat | katamtamang light na kulay ng balat | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👨🏾" type="tts">maghahalikan: babae, lalaki, katamtamang light na kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👨🏿">babae | couple | dark na kulay ng balat | halik | katamtamang light na kulay ng balat | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👨🏿" type="tts">maghahalikan: babae, lalaki, katamtamang light na kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👨🏻">babae | couple | halik | katamtamang kulay ng balat | lalaki | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👨🏻" type="tts">maghahalikan: babae, lalaki, katamtamang kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👨🏼">babae | couple | halik | katamtamang kulay ng balat | katamtamang light na kulay ng balat | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👨🏼" type="tts">maghahalikan: babae, lalaki, katamtamang kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👨🏽">babae | couple | halik | katamtamang kulay ng balat | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👨🏽" type="tts">maghahalikan: babae, lalaki, katamtamang kulay ng balat</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👨🏾">babae | couple | halik | katamtamang dark na kulay ng balat | katamtamang kulay ng balat | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👨🏾" type="tts">maghahalikan: babae, lalaki, katamtamang kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👨🏿">babae | couple | dark na kulay ng balat | halik | katamtamang kulay ng balat | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👨🏿" type="tts">maghahalikan: babae, lalaki, katamtamang kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👨🏻">babae | couple | halik | katamtamang dark na kulay ng balat | lalaki | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👨🏻" type="tts">maghahalikan: babae, lalaki, katamtamang dark na kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👨🏼">babae | couple | halik | katamtamang dark na kulay ng balat | katamtamang light na kulay ng balat | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👨🏼" type="tts">maghahalikan: babae, lalaki, katamtamang dark na kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👨🏽">babae | couple | halik | katamtamang dark na kulay ng balat | katamtamang kulay ng balat | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👨🏽" type="tts">maghahalikan: babae, lalaki, katamtamang dark na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👨🏾">babae | couple | halik | katamtamang dark na kulay ng balat | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👨🏾" type="tts">maghahalikan: babae, lalaki, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👨🏿">babae | couple | dark na kulay ng balat | halik | katamtamang dark na kulay ng balat | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👨🏿" type="tts">maghahalikan: babae, lalaki, katamtamang dark na kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👨🏻">babae | couple | dark na kulay ng balat | halik | lalaki | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👨🏻" type="tts">maghahalikan: babae, lalaki, dark na kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👨🏼">babae | couple | dark na kulay ng balat | halik | katamtamang light na kulay ng balat | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👨🏼" type="tts">maghahalikan: babae, lalaki, dark na kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👨🏽">babae | couple | dark na kulay ng balat | halik | katamtamang kulay ng balat | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👨🏽" type="tts">maghahalikan: babae, lalaki, dark na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👨🏾">babae | couple | dark na kulay ng balat | halik | katamtamang dark na kulay ng balat | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👨🏾" type="tts">maghahalikan: babae, lalaki, dark na kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👨🏿">babae | couple | dark na kulay ng balat | halik | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👨🏿" type="tts">maghahalikan: babae, lalaki, dark na kulay ng balat</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👩🏻">babae | couple | halik | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👩🏻" type="tts">maghahalikan: babae, babae, light na kulay ng balat</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👩🏼">babae | couple | halik | katamtamang light na kulay ng balat | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👩🏼" type="tts">maghahalikan: babae, babae, light na kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👩🏽">babae | couple | halik | katamtamang kulay ng balat | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👩🏽" type="tts">maghahalikan: babae, babae, light na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👩🏾">babae | couple | halik | katamtamang dark na kulay ng balat | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👩🏾" type="tts">maghahalikan: babae, babae, light na kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👩🏿">babae | couple | dark na kulay ng balat | halik | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👩🏿" type="tts">maghahalikan: babae, babae, light na kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👩🏻">babae | couple | halik | katamtamang light na kulay ng balat | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👩🏻" type="tts">maghahalikan: babae, babae, katamtamang light na kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👩🏼">babae | couple | halik | katamtamang light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👩🏼" type="tts">maghahalikan: babae, babae, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👩🏽">babae | couple | halik | katamtamang kulay ng balat | katamtamang light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👩🏽" type="tts">maghahalikan: babae, babae, katamtamang light na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👩🏾">babae | couple | halik | katamtamang dark na kulay ng balat | katamtamang light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👩🏾" type="tts">maghahalikan: babae, babae, katamtamang light na kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👩🏿">babae | couple | dark na kulay ng balat | halik | katamtamang light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👩🏿" type="tts">maghahalikan: babae, babae, katamtamang light na kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👩🏻">babae | couple | halik | katamtamang kulay ng balat | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👩🏻" type="tts">maghahalikan: babae, babae, katamtamang kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👩🏼">babae | couple | halik | katamtamang kulay ng balat | katamtamang light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👩🏼" type="tts">maghahalikan: babae, babae, katamtamang kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👩🏽">babae | couple | halik | katamtamang kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👩🏽" type="tts">maghahalikan: babae, babae, katamtamang kulay ng balat</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👩🏾">babae | couple | halik | katamtamang dark na kulay ng balat | katamtamang kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👩🏾" type="tts">maghahalikan: babae, babae, katamtamang kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👩🏿">babae | couple | dark na kulay ng balat | halik | katamtamang kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👩🏿" type="tts">maghahalikan: babae, babae, katamtamang kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👩🏻">babae | couple | halik | katamtamang dark na kulay ng balat | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👩🏻" type="tts">maghahalikan: babae, babae, katamtamang dark na kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👩🏼">babae | couple | halik | katamtamang dark na kulay ng balat | katamtamang light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👩🏼" type="tts">maghahalikan: babae, babae, katamtamang dark na kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👩🏽">babae | couple | halik | katamtamang dark na kulay ng balat | katamtamang kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👩🏽" type="tts">maghahalikan: babae, babae, katamtamang dark na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👩🏾">babae | couple | halik | katamtamang dark na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👩🏾" type="tts">maghahalikan: babae, babae, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👩🏿">babae | couple | dark na kulay ng balat | halik | katamtamang dark na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👩🏿" type="tts">maghahalikan: babae, babae, katamtamang dark na kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👩🏻">babae | couple | dark na kulay ng balat | halik | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👩🏻" type="tts">maghahalikan: babae, babae, dark na kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👩🏼">babae | couple | dark na kulay ng balat | halik | katamtamang light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👩🏼" type="tts">maghahalikan: babae, babae, dark na kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👩🏽">babae | couple | dark na kulay ng balat | halik | katamtamang kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👩🏽" type="tts">maghahalikan: babae, babae, dark na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👩🏾">babae | couple | dark na kulay ng balat | halik | katamtamang dark na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👩🏾" type="tts">maghahalikan: babae, babae, dark na kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👩🏿">babae | couple | dark na kulay ng balat | halik | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👩🏿" type="tts">maghahalikan: babae, babae, dark na kulay ng balat</annotation>
+		<annotation cp="👩🏻‍❤‍👨🏻">babae | couple | lalaki | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏻‍❤‍👨🏻" type="tts">magkapareha na may puso: babae, lalaki, light na kulay ng balat</annotation>
+		<annotation cp="👩🏻‍❤‍👨🏼">babae | couple | katamtamang light na kulay ng balat | lalaki | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏻‍❤‍👨🏼" type="tts">magkapareha na may puso: babae, lalaki, light na kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="👩🏻‍❤‍👨🏽">babae | couple | katamtamang kulay ng balat | lalaki | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏻‍❤‍👨🏽" type="tts">magkapareha na may puso: babae, lalaki, light na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="👩🏻‍❤‍👨🏾">babae | couple | katamtamang dark na kulay ng balat | lalaki | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏻‍❤‍👨🏾" type="tts">magkapareha na may puso: babae, lalaki, light na kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="👩🏻‍❤‍👨🏿">babae | couple | dark na kulay ng balat | lalaki | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏻‍❤‍👨🏿" type="tts">magkapareha na may puso: babae, lalaki, light na kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="👩🏼‍❤‍👨🏻">babae | couple | katamtamang light na kulay ng balat | lalaki | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏼‍❤‍👨🏻" type="tts">magkapareha na may puso: babae, lalaki, katamtamang light na kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="👩🏼‍❤‍👨🏼">babae | couple | katamtamang light na kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏼‍❤‍👨🏼" type="tts">magkapareha na may puso: babae, lalaki, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="👩🏼‍❤‍👨🏽">babae | couple | katamtamang kulay ng balat | katamtamang light na kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏼‍❤‍👨🏽" type="tts">magkapareha na may puso: babae, lalaki, katamtamang light na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="👩🏼‍❤‍👨🏾">babae | couple | katamtamang dark na kulay ng balat | katamtamang light na kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏼‍❤‍👨🏾" type="tts">magkapareha na may puso: babae, lalaki, katamtamang light na kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="👩🏼‍❤‍👨🏿">babae | couple | dark na kulay ng balat | katamtamang light na kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏼‍❤‍👨🏿" type="tts">magkapareha na may puso: babae, lalaki, katamtamang light na kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="👩🏽‍❤‍👨🏻">babae | couple | katamtamang kulay ng balat | lalaki | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏽‍❤‍👨🏻" type="tts">magkapareha na may puso: babae, lalaki, katamtamang kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="👩🏽‍❤‍👨🏼">babae | couple | katamtamang kulay ng balat | katamtamang light na kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏽‍❤‍👨🏼" type="tts">magkapareha na may puso: babae, lalaki, katamtamang kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="👩🏽‍❤‍👨🏽">babae | couple | katamtamang kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏽‍❤‍👨🏽" type="tts">magkapareha na may puso: babae, lalaki, katamtamang kulay ng balat</annotation>
+		<annotation cp="👩🏽‍❤‍👨🏾">babae | couple | katamtamang dark na kulay ng balat | katamtamang kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏽‍❤‍👨🏾" type="tts">magkapareha na may puso: babae, lalaki, katamtamang kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="👩🏽‍❤‍👨🏿">babae | couple | dark na kulay ng balat | katamtamang kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏽‍❤‍👨🏿" type="tts">magkapareha na may puso: babae, lalaki, katamtamang kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="👩🏾‍❤‍👨🏻">babae | couple | katamtamang dark na kulay ng balat | lalaki | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏾‍❤‍👨🏻" type="tts">magkapareha na may puso: babae, lalaki, katamtamang dark na kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="👩🏾‍❤‍👨🏼">babae | couple | katamtamang dark na kulay ng balat | katamtamang light na kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏾‍❤‍👨🏼" type="tts">magkapareha na may puso: babae, lalaki, katamtamang dark na kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="👩🏾‍❤‍👨🏽">babae | couple | katamtamang dark na kulay ng balat | katamtamang kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏾‍❤‍👨🏽" type="tts">magkapareha na may puso: babae, lalaki, katamtamang dark na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="👩🏾‍❤‍👨🏾">babae | couple | katamtamang dark na kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏾‍❤‍👨🏾" type="tts">magkapareha na may puso: babae, lalaki, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="👩🏾‍❤‍👨🏿">babae | couple | dark na kulay ng balat | katamtamang dark na kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏾‍❤‍👨🏿" type="tts">magkapareha na may puso: babae, lalaki, katamtamang dark na kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="👩🏿‍❤‍👨🏻">babae | couple | dark na kulay ng balat | lalaki | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏿‍❤‍👨🏻" type="tts">magkapareha na may puso: babae, lalaki, dark na kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="👩🏿‍❤‍👨🏼">babae | couple | dark na kulay ng balat | katamtamang light na kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏿‍❤‍👨🏼" type="tts">magkapareha na may puso: babae, lalaki, dark na kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="👩🏿‍❤‍👨🏽">babae | couple | dark na kulay ng balat | katamtamang kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏿‍❤‍👨🏽" type="tts">magkapareha na may puso: babae, lalaki, dark na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="👩🏿‍❤‍👨🏾">babae | couple | dark na kulay ng balat | katamtamang dark na kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏿‍❤‍👨🏾" type="tts">magkapareha na may puso: babae, lalaki, dark na kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="👩🏿‍❤‍👨🏿">babae | couple | dark na kulay ng balat | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏿‍❤‍👨🏿" type="tts">magkapareha na may puso: babae, lalaki, dark na kulay ng balat</annotation>
+		<annotation cp="👩🏻‍❤‍👩🏻">babae | couple | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏻‍❤‍👩🏻" type="tts">magkapareha na may puso: babae, babae, light na kulay ng balat</annotation>
+		<annotation cp="👩🏻‍❤‍👩🏼">babae | couple | katamtamang light na kulay ng balat | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏻‍❤‍👩🏼" type="tts">magkapareha na may puso: babae, babae, light na kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="👩🏻‍❤‍👩🏽">babae | couple | katamtamang kulay ng balat | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏻‍❤‍👩🏽" type="tts">magkapareha na may puso: babae, babae, light na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="👩🏻‍❤‍👩🏾">babae | couple | katamtamang dark na kulay ng balat | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏻‍❤‍👩🏾" type="tts">magkapareha na may puso: babae, babae, light na kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="👩🏻‍❤‍👩🏿">babae | couple | dark na kulay ng balat | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏻‍❤‍👩🏿" type="tts">magkapareha na may puso: babae, babae, light na kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="👩🏼‍❤‍👩🏻">babae | couple | katamtamang light na kulay ng balat | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏼‍❤‍👩🏻" type="tts">magkapareha na may puso: babae, babae, katamtamang light na kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="👩🏼‍❤‍👩🏼">babae | couple | katamtamang light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏼‍❤‍👩🏼" type="tts">magkapareha na may puso: babae, babae, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="👩🏼‍❤‍👩🏽">babae | couple | katamtamang kulay ng balat | katamtamang light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏼‍❤‍👩🏽" type="tts">magkapareha na may puso: babae, babae, katamtamang light na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="👩🏼‍❤‍👩🏾">babae | couple | katamtamang dark na kulay ng balat | katamtamang light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏼‍❤‍👩🏾" type="tts">magkapareha na may puso: babae, babae, katamtamang light na kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="👩🏼‍❤‍👩🏿">babae | couple | dark na kulay ng balat | katamtamang light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏼‍❤‍👩🏿" type="tts">magkapareha na may puso: babae, babae, katamtamang light na kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="👩🏽‍❤‍👩🏻">babae | couple | katamtamang kulay ng balat | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏽‍❤‍👩🏻" type="tts">magkapareha na may puso: babae, babae, katamtamang kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="👩🏽‍❤‍👩🏼">babae | couple | katamtamang kulay ng balat | katamtamang light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏽‍❤‍👩🏼" type="tts">magkapareha na may puso: babae, babae, katamtamang kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="👩🏽‍❤‍👩🏽">babae | couple | katamtamang kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏽‍❤‍👩🏽" type="tts">magkapareha na may puso: babae, babae, katamtamang kulay ng balat</annotation>
+		<annotation cp="👩🏽‍❤‍👩🏾">babae | couple | katamtamang dark na kulay ng balat | katamtamang kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏽‍❤‍👩🏾" type="tts">magkapareha na may puso: babae, babae, katamtamang kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="👩🏽‍❤‍👩🏿">babae | couple | dark na kulay ng balat | katamtamang kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏽‍❤‍👩🏿" type="tts">magkapareha na may puso: babae, babae, katamtamang kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="👩🏾‍❤‍👩🏻">babae | couple | katamtamang dark na kulay ng balat | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏾‍❤‍👩🏻" type="tts">magkapareha na may puso: babae, babae, katamtamang dark na kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="👩🏾‍❤‍👩🏼">babae | couple | katamtamang dark na kulay ng balat | katamtamang light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏾‍❤‍👩🏼" type="tts">magkapareha na may puso: babae, babae, katamtamang dark na kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="👩🏾‍❤‍👩🏽">babae | couple | katamtamang dark na kulay ng balat | katamtamang kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏾‍❤‍👩🏽" type="tts">magkapareha na may puso: babae, babae, katamtamang dark na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="👩🏾‍❤‍👩🏾">babae | couple | katamtamang dark na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏾‍❤‍👩🏾" type="tts">magkapareha na may puso: babae, babae, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="👩🏾‍❤‍👩🏿">babae | couple | dark na kulay ng balat | katamtamang dark na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏾‍❤‍👩🏿" type="tts">magkapareha na may puso: babae, babae, katamtamang dark na kulay ng balat, dark na kulay ng balat</annotation>
+		<annotation cp="👩🏿‍❤‍👩🏻">babae | couple | dark na kulay ng balat | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏿‍❤‍👩🏻" type="tts">magkapareha na may puso: babae, babae, dark na kulay ng balat, light na kulay ng balat</annotation>
+		<annotation cp="👩🏿‍❤‍👩🏼">babae | couple | dark na kulay ng balat | katamtamang light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏿‍❤‍👩🏼" type="tts">magkapareha na may puso: babae, babae, dark na kulay ng balat, katamtamang light na kulay ng balat</annotation>
+		<annotation cp="👩🏿‍❤‍👩🏽">babae | couple | dark na kulay ng balat | katamtamang kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏿‍❤‍👩🏽" type="tts">magkapareha na may puso: babae, babae, dark na kulay ng balat, katamtamang kulay ng balat</annotation>
+		<annotation cp="👩🏿‍❤‍👩🏾">babae | couple | dark na kulay ng balat | katamtamang dark na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏿‍❤‍👩🏾" type="tts">magkapareha na may puso: babae, babae, dark na kulay ng balat, katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="👩🏿‍❤‍👩🏿">babae | couple | dark na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="👩🏿‍❤‍👩🏿" type="tts">magkapareha na may puso: babae, babae, dark na kulay ng balat</annotation>
 		<annotation cp="👩‍🦰">babae | matanda | pulang buhok</annotation>
 		<annotation cp="👩‍🦰" type="tts">babae: pulang buhok</annotation>
 		<annotation cp="👩🏻‍🦰">babae | light na kulay ng balat | matanda | pulang buhok</annotation>
@@ -1668,15 +2217,15 @@ Derived short names and annotations, using GenerateDerivedAnnotations.java. See 
 		<annotation cp="🧕🏿">babae na may headscarf | dark na kulay ng balat | headscarf | hijab | mantilla | tichel</annotation>
 		<annotation cp="🧕🏿" type="tts">babae na may headscarf: dark na kulay ng balat</annotation>
 		<annotation cp="🤵🏻">groom | light na kulay ng balat | naka-tuxedo | tao | taong naka-tuxedo | tuxedo</annotation>
-		<annotation cp="🤵🏻" type="tts">naka-tuxedo: light na kulay ng balat</annotation>
+		<annotation cp="🤵🏻" type="tts">taong naka-tuxedo: light na kulay ng balat</annotation>
 		<annotation cp="🤵🏼">groom | katamtamang light na kulay ng balat | naka-tuxedo | tao | taong naka-tuxedo | tuxedo</annotation>
-		<annotation cp="🤵🏼" type="tts">naka-tuxedo: katamtamang light na kulay ng balat</annotation>
+		<annotation cp="🤵🏼" type="tts">taong naka-tuxedo: katamtamang light na kulay ng balat</annotation>
 		<annotation cp="🤵🏽">groom | katamtamang kulay ng balat | naka-tuxedo | tao | taong naka-tuxedo | tuxedo</annotation>
-		<annotation cp="🤵🏽" type="tts">naka-tuxedo: katamtamang kulay ng balat</annotation>
+		<annotation cp="🤵🏽" type="tts">taong naka-tuxedo: katamtamang kulay ng balat</annotation>
 		<annotation cp="🤵🏾">groom | katamtamang dark na kulay ng balat | naka-tuxedo | tao | taong naka-tuxedo | tuxedo</annotation>
-		<annotation cp="🤵🏾" type="tts">naka-tuxedo: katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="🤵🏾" type="tts">taong naka-tuxedo: katamtamang dark na kulay ng balat</annotation>
 		<annotation cp="🤵🏿">dark na kulay ng balat | groom | naka-tuxedo | tao | taong naka-tuxedo | tuxedo</annotation>
-		<annotation cp="🤵🏿" type="tts">naka-tuxedo: dark na kulay ng balat</annotation>
+		<annotation cp="🤵🏿" type="tts">taong naka-tuxedo: dark na kulay ng balat</annotation>
 		<annotation cp="🤵🏻‍♂">lalaki | lalaking naka-tuxedo | light na kulay ng balat | tuxedo</annotation>
 		<annotation cp="🤵🏻‍♂" type="tts">lalaking naka-tuxedo: light na kulay ng balat</annotation>
 		<annotation cp="🤵🏼‍♂">katamtamang light na kulay ng balat | lalaki | lalaking naka-tuxedo | tuxedo</annotation>
@@ -3017,12 +3566,32 @@ Derived short names and annotations, using GenerateDerivedAnnotations.java. See 
 		<annotation cp="👨🏿‍🤝‍👨🏾" type="tts">dalawang lalaking magkahawak-kamay: dark na kulay ng balat, katamtamang dark na kulay ng balat</annotation>
 		<annotation cp="👬🏿">dalawang lalaking magkahawak-kamay | dark na kulay ng balat | Gemini | hawak-kamay | kambal | magkapareha | mga lalaki | zodiac</annotation>
 		<annotation cp="👬🏿" type="tts">dalawang lalaking magkahawak-kamay: dark na kulay ng balat</annotation>
+		<annotation cp="💏🏻">couple | halik | light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="💏🏻" type="tts">maghahalikan: light na kulay ng balat</annotation>
+		<annotation cp="💏🏼">couple | halik | katamtamang light na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="💏🏼" type="tts">maghahalikan: katamtamang light na kulay ng balat</annotation>
+		<annotation cp="💏🏽">couple | halik | katamtamang kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="💏🏽" type="tts">maghahalikan: katamtamang kulay ng balat</annotation>
+		<annotation cp="💏🏾">couple | halik | katamtamang dark na kulay ng balat | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="💏🏾" type="tts">maghahalikan: katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="💏🏿">couple | dark na kulay ng balat | halik | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="💏🏿" type="tts">maghahalikan: dark na kulay ng balat</annotation>
 		<annotation cp="👩‍❤‍💋‍👨">babae | couple | halik | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
 		<annotation cp="👩‍❤‍💋‍👨" type="tts">maghahalikan: babae, lalaki</annotation>
 		<annotation cp="👨‍❤‍💋‍👨">couple | halik | lalaki | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
 		<annotation cp="👨‍❤‍💋‍👨" type="tts">maghahalikan: lalaki, lalaki</annotation>
 		<annotation cp="👩‍❤‍💋‍👩">babae | couple | halik | maghahalikan | magkasintahan | pag-ibig | puso | romansa</annotation>
 		<annotation cp="👩‍❤‍💋‍👩" type="tts">maghahalikan: babae, babae</annotation>
+		<annotation cp="💑🏻">couple | light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="💑🏻" type="tts">magkapareha na may puso: light na kulay ng balat</annotation>
+		<annotation cp="💑🏼">couple | katamtamang light na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="💑🏼" type="tts">magkapareha na may puso: katamtamang light na kulay ng balat</annotation>
+		<annotation cp="💑🏽">couple | katamtamang kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="💑🏽" type="tts">magkapareha na may puso: katamtamang kulay ng balat</annotation>
+		<annotation cp="💑🏾">couple | katamtamang dark na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="💑🏾" type="tts">magkapareha na may puso: katamtamang dark na kulay ng balat</annotation>
+		<annotation cp="💑🏿">couple | dark na kulay ng balat | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
+		<annotation cp="💑🏿" type="tts">magkapareha na may puso: dark na kulay ng balat</annotation>
 		<annotation cp="👩‍❤‍👨">babae | couple | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
 		<annotation cp="👩‍❤‍👨" type="tts">magkapareha na may puso: babae, lalaki</annotation>
 		<annotation cp="👨‍❤‍👨">couple | lalaki | magkapareha | magkapareha na may puso | magkasintahan | pag-ibig | puso | romansa</annotation>
@@ -3607,6 +4176,25 @@ Derived short names and annotations, using GenerateDerivedAnnotations.java. See 
 		<annotation cp="🏴󠁧󠁢󠁳󠁣󠁴󠁿" type="tts">bandila: Scotland</annotation>
 		<annotation cp="🏴󠁧󠁢󠁷󠁬󠁳󠁿">bandila</annotation>
 		<annotation cp="🏴󠁧󠁢󠁷󠁬󠁳󠁿" type="tts">bandila: Wales</annotation>
+		<annotation cp="¤" type="tts">Hindi Kilalang Pera</annotation>
+		<annotation cp="֏" type="tts">Armenian Dram</annotation>
+		<annotation cp="؋" type="tts">Afghan Afghani</annotation>
+		<annotation cp="৳" type="tts">Bangladeshi Taka</annotation>
+		<annotation cp="฿" type="tts">Thai Baht</annotation>
+		<annotation cp="៛" type="tts">Cambodian Riel</annotation>
+		<annotation cp="₡" type="tts">Colón ng Costa Rica</annotation>
+		<annotation cp="₦" type="tts">Nigerian Naira</annotation>
+		<annotation cp="₪" type="tts">Israeli New Sheqel</annotation>
+		<annotation cp="₫" type="tts">Vietnamese Dong</annotation>
+		<annotation cp="₭" type="tts">Laotian Kip</annotation>
+		<annotation cp="₮" type="tts">Mongolian Tugrik</annotation>
+		<annotation cp="₲" type="tts">Paraguayan Guarani</annotation>
+		<annotation cp="₴" type="tts">Ukrainian Hryvnia</annotation>
+		<annotation cp="₵" type="tts">Ghanaian Cedi</annotation>
+		<annotation cp="₸" type="tts">Kazakhstani Tenge</annotation>
+		<annotation cp="₺" type="tts">Turkish Lira</annotation>
+		<annotation cp="₼" type="tts">Azerbaijani Manat</annotation>
+		<annotation cp="₾" type="tts">Georgian Lari</annotation>
 		<annotation cp="0⃣">keycap</annotation>
 		<annotation cp="0⃣" type="tts">keycap: 0</annotation>
 		<annotation cp="1⃣">keycap</annotation>

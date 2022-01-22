@@ -1,18 +1,157 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
-<!-- Copyright © 1991-2020 Unicode, Inc.
+<!-- Copyright © 1991-2021 Unicode, Inc.
 For terms of use, see http://www.unicode.org/copyright.html
-Unicode and the Unicode Logo are registered trademarks of Unicode, Inc. in the U.S. and other countries.
+SPDX-License-Identifier: Unicode-DFS-2016
 CLDR data files are interpreted according to the LDML specification (http://unicode.org/reports/tr35/)
-
-Derived short names and annotations, using GenerateDerivedAnnotations.java. See warnings in /annotations/ file.
 -->
+<!-- Derived short names and annotations, using GenerateDerivedAnnotations.java. See warnings in /annotations/ file. -->
 <ldml>
 	<identity>
 		<version number="$Revision$"/>
 		<language type="ja"/>
 	</identity>
 	<annotations>
+		<annotation cp="🫃🏻">妊夫 | 妊娠 | 男 | 男性 | 薄い肌色</annotation>
+		<annotation cp="🫃🏻" type="tts">妊夫: 薄い肌色</annotation>
+		<annotation cp="🫃🏼">やや薄い肌色 | 妊夫 | 妊娠 | 男 | 男性</annotation>
+		<annotation cp="🫃🏼" type="tts">妊夫: やや薄い肌色</annotation>
+		<annotation cp="🫃🏽">中間の肌色 | 妊夫 | 妊娠 | 男 | 男性</annotation>
+		<annotation cp="🫃🏽" type="tts">妊夫: 中間の肌色</annotation>
+		<annotation cp="🫃🏾">やや濃い肌色 | 妊夫 | 妊娠 | 男 | 男性</annotation>
+		<annotation cp="🫃🏾" type="tts">妊夫: やや濃い肌色</annotation>
+		<annotation cp="🫃🏿">妊夫 | 妊娠 | 濃い肌色 | 男 | 男性</annotation>
+		<annotation cp="🫃🏿" type="tts">妊夫: 濃い肌色</annotation>
+		<annotation cp="🫄🏻">お腹 | 妊夫 | 妊娠 | 妊娠した人 | 妊婦 | 薄い肌色</annotation>
+		<annotation cp="🫄🏻" type="tts">妊娠した人: 薄い肌色</annotation>
+		<annotation cp="🫄🏼">お腹 | やや薄い肌色 | 妊夫 | 妊娠 | 妊娠した人 | 妊婦</annotation>
+		<annotation cp="🫄🏼" type="tts">妊娠した人: やや薄い肌色</annotation>
+		<annotation cp="🫄🏽">お腹 | 中間の肌色 | 妊夫 | 妊娠 | 妊娠した人 | 妊婦</annotation>
+		<annotation cp="🫄🏽" type="tts">妊娠した人: 中間の肌色</annotation>
+		<annotation cp="🫄🏾">お腹 | やや濃い肌色 | 妊夫 | 妊娠 | 妊娠した人 | 妊婦</annotation>
+		<annotation cp="🫄🏾" type="tts">妊娠した人: やや濃い肌色</annotation>
+		<annotation cp="🫄🏿">お腹 | 妊夫 | 妊娠 | 妊娠した人 | 妊婦 | 濃い肌色</annotation>
+		<annotation cp="🫄🏿" type="tts">妊娠した人: 濃い肌色</annotation>
+		<annotation cp="🫅🏻">君主 | 王冠をかぶった人 | 王家 | 王族 | 王様 | 薄い肌色</annotation>
+		<annotation cp="🫅🏻" type="tts">王冠をかぶった人: 薄い肌色</annotation>
+		<annotation cp="🫅🏼">やや薄い肌色 | 君主 | 王冠をかぶった人 | 王家 | 王族 | 王様</annotation>
+		<annotation cp="🫅🏼" type="tts">王冠をかぶった人: やや薄い肌色</annotation>
+		<annotation cp="🫅🏽">中間の肌色 | 君主 | 王冠をかぶった人 | 王家 | 王族 | 王様</annotation>
+		<annotation cp="🫅🏽" type="tts">王冠をかぶった人: 中間の肌色</annotation>
+		<annotation cp="🫅🏾">やや濃い肌色 | 君主 | 王冠をかぶった人 | 王家 | 王族 | 王様</annotation>
+		<annotation cp="🫅🏾" type="tts">王冠をかぶった人: やや濃い肌色</annotation>
+		<annotation cp="🫅🏿">君主 | 濃い肌色 | 王冠をかぶった人 | 王家 | 王族 | 王様</annotation>
+		<annotation cp="🫅🏿" type="tts">王冠をかぶった人: 濃い肌色</annotation>
+		<annotation cp="🫰🏻">手 | 指 | 指をクロス | 薄い肌色 | 親指と人差し指をクロス</annotation>
+		<annotation cp="🫰🏻" type="tts">親指と人差し指をクロス: 薄い肌色</annotation>
+		<annotation cp="🫰🏼">やや薄い肌色 | 手 | 指 | 指をクロス | 親指と人差し指をクロス</annotation>
+		<annotation cp="🫰🏼" type="tts">親指と人差し指をクロス: やや薄い肌色</annotation>
+		<annotation cp="🫰🏽">中間の肌色 | 手 | 指 | 指をクロス | 親指と人差し指をクロス</annotation>
+		<annotation cp="🫰🏽" type="tts">親指と人差し指をクロス: 中間の肌色</annotation>
+		<annotation cp="🫰🏾">やや濃い肌色 | 手 | 指 | 指をクロス | 親指と人差し指をクロス</annotation>
+		<annotation cp="🫰🏾" type="tts">親指と人差し指をクロス: やや濃い肌色</annotation>
+		<annotation cp="🫰🏿">手 | 指 | 指をクロス | 濃い肌色 | 親指と人差し指をクロス</annotation>
+		<annotation cp="🫰🏿" type="tts">親指と人差し指をクロス: 濃い肌色</annotation>
+		<annotation cp="🫱🏻">右に向けた手 | 右側 | 手 | 方向 | 薄い肌色</annotation>
+		<annotation cp="🫱🏻" type="tts">右に向けた手: 薄い肌色</annotation>
+		<annotation cp="🫱🏼">やや薄い肌色 | 右に向けた手 | 右側 | 手 | 方向</annotation>
+		<annotation cp="🫱🏼" type="tts">右に向けた手: やや薄い肌色</annotation>
+		<annotation cp="🫱🏽">中間の肌色 | 右に向けた手 | 右側 | 手 | 方向</annotation>
+		<annotation cp="🫱🏽" type="tts">右に向けた手: 中間の肌色</annotation>
+		<annotation cp="🫱🏾">やや濃い肌色 | 右に向けた手 | 右側 | 手 | 方向</annotation>
+		<annotation cp="🫱🏾" type="tts">右に向けた手: やや濃い肌色</annotation>
+		<annotation cp="🫱🏿">右に向けた手 | 右側 | 手 | 方向 | 濃い肌色</annotation>
+		<annotation cp="🫱🏿" type="tts">右に向けた手: 濃い肌色</annotation>
+		<annotation cp="🫱🏻‍🫲🏼">やや薄い肌色 | よろしく | 合意 | 手 | 握手 | 薄い肌色</annotation>
+		<annotation cp="🫱🏻‍🫲🏼" type="tts">握手: 薄い肌色 やや薄い肌色</annotation>
+		<annotation cp="🫱🏻‍🫲🏽">よろしく | 中間の肌色 | 合意 | 手 | 握手 | 薄い肌色</annotation>
+		<annotation cp="🫱🏻‍🫲🏽" type="tts">握手: 薄い肌色 中間の肌色</annotation>
+		<annotation cp="🫱🏻‍🫲🏾">やや濃い肌色 | よろしく | 合意 | 手 | 握手 | 薄い肌色</annotation>
+		<annotation cp="🫱🏻‍🫲🏾" type="tts">握手: 薄い肌色 やや濃い肌色</annotation>
+		<annotation cp="🫱🏻‍🫲🏿">よろしく | 合意 | 手 | 握手 | 濃い肌色 | 薄い肌色</annotation>
+		<annotation cp="🫱🏻‍🫲🏿" type="tts">握手: 薄い肌色 濃い肌色</annotation>
+		<annotation cp="🫱🏼‍🫲🏻">やや薄い肌色 | よろしく | 合意 | 手 | 握手 | 薄い肌色</annotation>
+		<annotation cp="🫱🏼‍🫲🏻" type="tts">握手: やや薄い肌色 薄い肌色</annotation>
+		<annotation cp="🫱🏼‍🫲🏽">やや薄い肌色 | よろしく | 中間の肌色 | 合意 | 手 | 握手</annotation>
+		<annotation cp="🫱🏼‍🫲🏽" type="tts">握手: やや薄い肌色 中間の肌色</annotation>
+		<annotation cp="🫱🏼‍🫲🏾">やや濃い肌色 | やや薄い肌色 | よろしく | 合意 | 手 | 握手</annotation>
+		<annotation cp="🫱🏼‍🫲🏾" type="tts">握手: やや薄い肌色 やや濃い肌色</annotation>
+		<annotation cp="🫱🏼‍🫲🏿">やや薄い肌色 | よろしく | 合意 | 手 | 握手 | 濃い肌色</annotation>
+		<annotation cp="🫱🏼‍🫲🏿" type="tts">握手: やや薄い肌色 濃い肌色</annotation>
+		<annotation cp="🫱🏽‍🫲🏻">よろしく | 中間の肌色 | 合意 | 手 | 握手 | 薄い肌色</annotation>
+		<annotation cp="🫱🏽‍🫲🏻" type="tts">握手: 中間の肌色 薄い肌色</annotation>
+		<annotation cp="🫱🏽‍🫲🏼">やや薄い肌色 | よろしく | 中間の肌色 | 合意 | 手 | 握手</annotation>
+		<annotation cp="🫱🏽‍🫲🏼" type="tts">握手: 中間の肌色 やや薄い肌色</annotation>
+		<annotation cp="🫱🏽‍🫲🏾">やや濃い肌色 | よろしく | 中間の肌色 | 合意 | 手 | 握手</annotation>
+		<annotation cp="🫱🏽‍🫲🏾" type="tts">握手: 中間の肌色 やや濃い肌色</annotation>
+		<annotation cp="🫱🏽‍🫲🏿">よろしく | 中間の肌色 | 合意 | 手 | 握手 | 濃い肌色</annotation>
+		<annotation cp="🫱🏽‍🫲🏿" type="tts">握手: 中間の肌色 濃い肌色</annotation>
+		<annotation cp="🫱🏾‍🫲🏻">やや濃い肌色 | よろしく | 合意 | 手 | 握手 | 薄い肌色</annotation>
+		<annotation cp="🫱🏾‍🫲🏻" type="tts">握手: やや濃い肌色 薄い肌色</annotation>
+		<annotation cp="🫱🏾‍🫲🏼">やや濃い肌色 | やや薄い肌色 | よろしく | 合意 | 手 | 握手</annotation>
+		<annotation cp="🫱🏾‍🫲🏼" type="tts">握手: やや濃い肌色 やや薄い肌色</annotation>
+		<annotation cp="🫱🏾‍🫲🏽">やや濃い肌色 | よろしく | 中間の肌色 | 合意 | 手 | 握手</annotation>
+		<annotation cp="🫱🏾‍🫲🏽" type="tts">握手: やや濃い肌色 中間の肌色</annotation>
+		<annotation cp="🫱🏾‍🫲🏿">やや濃い肌色 | よろしく | 合意 | 手 | 握手 | 濃い肌色</annotation>
+		<annotation cp="🫱🏾‍🫲🏿" type="tts">握手: やや濃い肌色 濃い肌色</annotation>
+		<annotation cp="🫱🏿‍🫲🏻">よろしく | 合意 | 手 | 握手 | 濃い肌色 | 薄い肌色</annotation>
+		<annotation cp="🫱🏿‍🫲🏻" type="tts">握手: 濃い肌色 薄い肌色</annotation>
+		<annotation cp="🫱🏿‍🫲🏼">やや薄い肌色 | よろしく | 合意 | 手 | 握手 | 濃い肌色</annotation>
+		<annotation cp="🫱🏿‍🫲🏼" type="tts">握手: 濃い肌色 やや薄い肌色</annotation>
+		<annotation cp="🫱🏿‍🫲🏽">よろしく | 中間の肌色 | 合意 | 手 | 握手 | 濃い肌色</annotation>
+		<annotation cp="🫱🏿‍🫲🏽" type="tts">握手: 濃い肌色 中間の肌色</annotation>
+		<annotation cp="🫱🏿‍🫲🏾">やや濃い肌色 | よろしく | 合意 | 手 | 握手 | 濃い肌色</annotation>
+		<annotation cp="🫱🏿‍🫲🏾" type="tts">握手: 濃い肌色 やや濃い肌色</annotation>
+		<annotation cp="🫲🏻">左に向けた手 | 左側 | 手 | 方向 | 薄い肌色</annotation>
+		<annotation cp="🫲🏻" type="tts">左に向けた手: 薄い肌色</annotation>
+		<annotation cp="🫲🏼">やや薄い肌色 | 左に向けた手 | 左側 | 手 | 方向</annotation>
+		<annotation cp="🫲🏼" type="tts">左に向けた手: やや薄い肌色</annotation>
+		<annotation cp="🫲🏽">中間の肌色 | 左に向けた手 | 左側 | 手 | 方向</annotation>
+		<annotation cp="🫲🏽" type="tts">左に向けた手: 中間の肌色</annotation>
+		<annotation cp="🫲🏾">やや濃い肌色 | 左に向けた手 | 左側 | 手 | 方向</annotation>
+		<annotation cp="🫲🏾" type="tts">左に向けた手: やや濃い肌色</annotation>
+		<annotation cp="🫲🏿">左に向けた手 | 左側 | 手 | 方向 | 濃い肌色</annotation>
+		<annotation cp="🫲🏿" type="tts">左に向けた手: 濃い肌色</annotation>
+		<annotation cp="🫳🏻">下 | 下に向けた手 | 手 | 落とす | 薄い肌色</annotation>
+		<annotation cp="🫳🏻" type="tts">下に向けた手: 薄い肌色</annotation>
+		<annotation cp="🫳🏼">やや薄い肌色 | 下 | 下に向けた手 | 手 | 落とす</annotation>
+		<annotation cp="🫳🏼" type="tts">下に向けた手: やや薄い肌色</annotation>
+		<annotation cp="🫳🏽">下 | 下に向けた手 | 中間の肌色 | 手 | 落とす</annotation>
+		<annotation cp="🫳🏽" type="tts">下に向けた手: 中間の肌色</annotation>
+		<annotation cp="🫳🏾">やや濃い肌色 | 下 | 下に向けた手 | 手 | 落とす</annotation>
+		<annotation cp="🫳🏾" type="tts">下に向けた手: やや濃い肌色</annotation>
+		<annotation cp="🫳🏿">下 | 下に向けた手 | 手 | 濃い肌色 | 落とす</annotation>
+		<annotation cp="🫳🏿" type="tts">下に向けた手: 濃い肌色</annotation>
+		<annotation cp="🫴🏻">上 | 上に向けた手 | 受ける | 手 | 薄い肌色</annotation>
+		<annotation cp="🫴🏻" type="tts">上に向けた手: 薄い肌色</annotation>
+		<annotation cp="🫴🏼">やや薄い肌色 | 上 | 上に向けた手 | 受ける | 手</annotation>
+		<annotation cp="🫴🏼" type="tts">上に向けた手: やや薄い肌色</annotation>
+		<annotation cp="🫴🏽">上 | 上に向けた手 | 中間の肌色 | 受ける | 手</annotation>
+		<annotation cp="🫴🏽" type="tts">上に向けた手: 中間の肌色</annotation>
+		<annotation cp="🫴🏾">やや濃い肌色 | 上 | 上に向けた手 | 受ける | 手</annotation>
+		<annotation cp="🫴🏾" type="tts">上に向けた手: やや濃い肌色</annotation>
+		<annotation cp="🫴🏿">上 | 上に向けた手 | 受ける | 手 | 濃い肌色</annotation>
+		<annotation cp="🫴🏿" type="tts">上に向けた手: 濃い肌色</annotation>
+		<annotation cp="🫵🏻">おまえだ | 人を指差している手 | 手 | 指差し | 薄い肌色</annotation>
+		<annotation cp="🫵🏻" type="tts">人を指差している手: 薄い肌色</annotation>
+		<annotation cp="🫵🏼">おまえだ | やや薄い肌色 | 人を指差している手 | 手 | 指差し</annotation>
+		<annotation cp="🫵🏼" type="tts">人を指差している手: やや薄い肌色</annotation>
+		<annotation cp="🫵🏽">おまえだ | 中間の肌色 | 人を指差している手 | 手 | 指差し</annotation>
+		<annotation cp="🫵🏽" type="tts">人を指差している手: 中間の肌色</annotation>
+		<annotation cp="🫵🏾">おまえだ | やや濃い肌色 | 人を指差している手 | 手 | 指差し</annotation>
+		<annotation cp="🫵🏾" type="tts">人を指差している手: やや濃い肌色</annotation>
+		<annotation cp="🫵🏿">おまえだ | 人を指差している手 | 手 | 指差し | 濃い肌色</annotation>
+		<annotation cp="🫵🏿" type="tts">人を指差している手: 濃い肌色</annotation>
+		<annotation cp="🫶🏻">ハート形の手 | ラブ | 愛 | 手 | 薄い肌色</annotation>
+		<annotation cp="🫶🏻" type="tts">ハート形の手: 薄い肌色</annotation>
+		<annotation cp="🫶🏼">ハート形の手 | やや薄い肌色 | ラブ | 愛 | 手</annotation>
+		<annotation cp="🫶🏼" type="tts">ハート形の手: やや薄い肌色</annotation>
+		<annotation cp="🫶🏽">ハート形の手 | ラブ | 中間の肌色 | 愛 | 手</annotation>
+		<annotation cp="🫶🏽" type="tts">ハート形の手: 中間の肌色</annotation>
+		<annotation cp="🫶🏾">ハート形の手 | やや濃い肌色 | ラブ | 愛 | 手</annotation>
+		<annotation cp="🫶🏾" type="tts">ハート形の手: やや濃い肌色</annotation>
+		<annotation cp="🫶🏿">ハート形の手 | ラブ | 愛 | 手 | 濃い肌色</annotation>
+		<annotation cp="🫶🏿" type="tts">ハート形の手: 濃い肌色</annotation>
 		<annotation cp="👋🏻">バイバイ | 手 | 手を振る | 薄い肌色</annotation>
 		<annotation cp="👋🏻" type="tts">手を振る: 薄い肌色</annotation>
 		<annotation cp="👋🏼">バイバイ | やや薄い肌色 | 手 | 手を振る</annotation>
@@ -303,6 +442,16 @@ Derived short names and annotations, using GenerateDerivedAnnotations.java. See 
 		<annotation cp="🤲🏾" type="tts">手のひらを揃えた両手: やや濃い肌色</annotation>
 		<annotation cp="🤲🏿">両手 | 手 | 手のひらを揃えた両手 | 濃い肌色 | 祈り</annotation>
 		<annotation cp="🤲🏿" type="tts">手のひらを揃えた両手: 濃い肌色</annotation>
+		<annotation cp="🤝🏻">よろしく | 合意 | 手 | 握手 | 薄い肌色</annotation>
+		<annotation cp="🤝🏻" type="tts">握手: 薄い肌色</annotation>
+		<annotation cp="🤝🏼">やや薄い肌色 | よろしく | 合意 | 手 | 握手</annotation>
+		<annotation cp="🤝🏼" type="tts">握手: やや薄い肌色</annotation>
+		<annotation cp="🤝🏽">よろしく | 中間の肌色 | 合意 | 手 | 握手</annotation>
+		<annotation cp="🤝🏽" type="tts">握手: 中間の肌色</annotation>
+		<annotation cp="🤝🏾">やや濃い肌色 | よろしく | 合意 | 手 | 握手</annotation>
+		<annotation cp="🤝🏾" type="tts">握手: やや濃い肌色</annotation>
+		<annotation cp="🤝🏿">よろしく | 合意 | 手 | 握手 | 濃い肌色</annotation>
+		<annotation cp="🤝🏿" type="tts">握手: 濃い肌色</annotation>
 		<annotation cp="🙏🏻">お願い | ごめんなさい | 合掌 | 祈り | 薄い肌色</annotation>
 		<annotation cp="🙏🏻" type="tts">祈り: 薄い肌色</annotation>
 		<annotation cp="🙏🏼">お願い | ごめんなさい | やや薄い肌色 | 合掌 | 祈り</annotation>
@@ -463,6 +612,86 @@ Derived short names and annotations, using GenerateDerivedAnnotations.java. See 
 		<annotation cp="👱🏾" type="tts">金髪の人: やや濃い肌色</annotation>
 		<annotation cp="👱🏿">ブロンド | 人 | 濃い肌色 | 金髪 | 金髪の人 | 顔</annotation>
 		<annotation cp="👱🏿" type="tts">金髪の人: 濃い肌色</annotation>
+		<annotation cp="🧑🏻‍❤‍💋‍🧑🏼">2人でキス | カップル | キス | ちゅっ | ハート | やや薄い肌色 | 大人 | 薄い肌色</annotation>
+		<annotation cp="🧑🏻‍❤‍💋‍🧑🏼" type="tts">2人でキス: 大人 大人 薄い肌色 やや薄い肌色</annotation>
+		<annotation cp="🧑🏻‍❤‍💋‍🧑🏽">2人でキス | カップル | キス | ちゅっ | ハート | 中間の肌色 | 大人 | 薄い肌色</annotation>
+		<annotation cp="🧑🏻‍❤‍💋‍🧑🏽" type="tts">2人でキス: 大人 大人 薄い肌色 中間の肌色</annotation>
+		<annotation cp="🧑🏻‍❤‍💋‍🧑🏾">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | 大人 | 薄い肌色</annotation>
+		<annotation cp="🧑🏻‍❤‍💋‍🧑🏾" type="tts">2人でキス: 大人 大人 薄い肌色 やや濃い肌色</annotation>
+		<annotation cp="🧑🏻‍❤‍💋‍🧑🏿">2人でキス | カップル | キス | ちゅっ | ハート | 大人 | 濃い肌色 | 薄い肌色</annotation>
+		<annotation cp="🧑🏻‍❤‍💋‍🧑🏿" type="tts">2人でキス: 大人 大人 薄い肌色 濃い肌色</annotation>
+		<annotation cp="🧑🏼‍❤‍💋‍🧑🏻">2人でキス | カップル | キス | ちゅっ | ハート | やや薄い肌色 | 大人 | 薄い肌色</annotation>
+		<annotation cp="🧑🏼‍❤‍💋‍🧑🏻" type="tts">2人でキス: 大人 大人 やや薄い肌色 薄い肌色</annotation>
+		<annotation cp="🧑🏼‍❤‍💋‍🧑🏽">2人でキス | カップル | キス | ちゅっ | ハート | やや薄い肌色 | 中間の肌色 | 大人</annotation>
+		<annotation cp="🧑🏼‍❤‍💋‍🧑🏽" type="tts">2人でキス: 大人 大人 やや薄い肌色 中間の肌色</annotation>
+		<annotation cp="🧑🏼‍❤‍💋‍🧑🏾">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | やや薄い肌色 | 大人</annotation>
+		<annotation cp="🧑🏼‍❤‍💋‍🧑🏾" type="tts">2人でキス: 大人 大人 やや薄い肌色 やや濃い肌色</annotation>
+		<annotation cp="🧑🏼‍❤‍💋‍🧑🏿">2人でキス | カップル | キス | ちゅっ | ハート | やや薄い肌色 | 大人 | 濃い肌色</annotation>
+		<annotation cp="🧑🏼‍❤‍💋‍🧑🏿" type="tts">2人でキス: 大人 大人 やや薄い肌色 濃い肌色</annotation>
+		<annotation cp="🧑🏽‍❤‍💋‍🧑🏻">2人でキス | カップル | キス | ちゅっ | ハート | 中間の肌色 | 大人 | 薄い肌色</annotation>
+		<annotation cp="🧑🏽‍❤‍💋‍🧑🏻" type="tts">2人でキス: 大人 大人 中間の肌色 薄い肌色</annotation>
+		<annotation cp="🧑🏽‍❤‍💋‍🧑🏼">2人でキス | カップル | キス | ちゅっ | ハート | やや薄い肌色 | 中間の肌色 | 大人</annotation>
+		<annotation cp="🧑🏽‍❤‍💋‍🧑🏼" type="tts">2人でキス: 大人 大人 中間の肌色 やや薄い肌色</annotation>
+		<annotation cp="🧑🏽‍❤‍💋‍🧑🏾">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | 中間の肌色 | 大人</annotation>
+		<annotation cp="🧑🏽‍❤‍💋‍🧑🏾" type="tts">2人でキス: 大人 大人 中間の肌色 やや濃い肌色</annotation>
+		<annotation cp="🧑🏽‍❤‍💋‍🧑🏿">2人でキス | カップル | キス | ちゅっ | ハート | 中間の肌色 | 大人 | 濃い肌色</annotation>
+		<annotation cp="🧑🏽‍❤‍💋‍🧑🏿" type="tts">2人でキス: 大人 大人 中間の肌色 濃い肌色</annotation>
+		<annotation cp="🧑🏾‍❤‍💋‍🧑🏻">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | 大人 | 薄い肌色</annotation>
+		<annotation cp="🧑🏾‍❤‍💋‍🧑🏻" type="tts">2人でキス: 大人 大人 やや濃い肌色 薄い肌色</annotation>
+		<annotation cp="🧑🏾‍❤‍💋‍🧑🏼">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | やや薄い肌色 | 大人</annotation>
+		<annotation cp="🧑🏾‍❤‍💋‍🧑🏼" type="tts">2人でキス: 大人 大人 やや濃い肌色 やや薄い肌色</annotation>
+		<annotation cp="🧑🏾‍❤‍💋‍🧑🏽">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | 中間の肌色 | 大人</annotation>
+		<annotation cp="🧑🏾‍❤‍💋‍🧑🏽" type="tts">2人でキス: 大人 大人 やや濃い肌色 中間の肌色</annotation>
+		<annotation cp="🧑🏾‍❤‍💋‍🧑🏿">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | 大人 | 濃い肌色</annotation>
+		<annotation cp="🧑🏾‍❤‍💋‍🧑🏿" type="tts">2人でキス: 大人 大人 やや濃い肌色 濃い肌色</annotation>
+		<annotation cp="🧑🏿‍❤‍💋‍🧑🏻">2人でキス | カップル | キス | ちゅっ | ハート | 大人 | 濃い肌色 | 薄い肌色</annotation>
+		<annotation cp="🧑🏿‍❤‍💋‍🧑🏻" type="tts">2人でキス: 大人 大人 濃い肌色 薄い肌色</annotation>
+		<annotation cp="🧑🏿‍❤‍💋‍🧑🏼">2人でキス | カップル | キス | ちゅっ | ハート | やや薄い肌色 | 大人 | 濃い肌色</annotation>
+		<annotation cp="🧑🏿‍❤‍💋‍🧑🏼" type="tts">2人でキス: 大人 大人 濃い肌色 やや薄い肌色</annotation>
+		<annotation cp="🧑🏿‍❤‍💋‍🧑🏽">2人でキス | カップル | キス | ちゅっ | ハート | 中間の肌色 | 大人 | 濃い肌色</annotation>
+		<annotation cp="🧑🏿‍❤‍💋‍🧑🏽" type="tts">2人でキス: 大人 大人 濃い肌色 中間の肌色</annotation>
+		<annotation cp="🧑🏿‍❤‍💋‍🧑🏾">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | 大人 | 濃い肌色</annotation>
+		<annotation cp="🧑🏿‍❤‍💋‍🧑🏾" type="tts">2人でキス: 大人 大人 濃い肌色 やや濃い肌色</annotation>
+		<annotation cp="🧑🏻‍❤‍🧑🏼">カップル | カップルとハート | ハート | やや薄い肌色 | 大人 | 恋人 | 熱々 | 薄い肌色</annotation>
+		<annotation cp="🧑🏻‍❤‍🧑🏼" type="tts">カップルとハート: 大人 大人 薄い肌色 やや薄い肌色</annotation>
+		<annotation cp="🧑🏻‍❤‍🧑🏽">カップル | カップルとハート | ハート | 中間の肌色 | 大人 | 恋人 | 熱々 | 薄い肌色</annotation>
+		<annotation cp="🧑🏻‍❤‍🧑🏽" type="tts">カップルとハート: 大人 大人 薄い肌色 中間の肌色</annotation>
+		<annotation cp="🧑🏻‍❤‍🧑🏾">カップル | カップルとハート | ハート | やや濃い肌色 | 大人 | 恋人 | 熱々 | 薄い肌色</annotation>
+		<annotation cp="🧑🏻‍❤‍🧑🏾" type="tts">カップルとハート: 大人 大人 薄い肌色 やや濃い肌色</annotation>
+		<annotation cp="🧑🏻‍❤‍🧑🏿">カップル | カップルとハート | ハート | 大人 | 恋人 | 濃い肌色 | 熱々 | 薄い肌色</annotation>
+		<annotation cp="🧑🏻‍❤‍🧑🏿" type="tts">カップルとハート: 大人 大人 薄い肌色 濃い肌色</annotation>
+		<annotation cp="🧑🏼‍❤‍🧑🏻">カップル | カップルとハート | ハート | やや薄い肌色 | 大人 | 恋人 | 熱々 | 薄い肌色</annotation>
+		<annotation cp="🧑🏼‍❤‍🧑🏻" type="tts">カップルとハート: 大人 大人 やや薄い肌色 薄い肌色</annotation>
+		<annotation cp="🧑🏼‍❤‍🧑🏽">カップル | カップルとハート | ハート | やや薄い肌色 | 中間の肌色 | 大人 | 恋人 | 熱々</annotation>
+		<annotation cp="🧑🏼‍❤‍🧑🏽" type="tts">カップルとハート: 大人 大人 やや薄い肌色 中間の肌色</annotation>
+		<annotation cp="🧑🏼‍❤‍🧑🏾">カップル | カップルとハート | ハート | やや濃い肌色 | やや薄い肌色 | 大人 | 恋人 | 熱々</annotation>
+		<annotation cp="🧑🏼‍❤‍🧑🏾" type="tts">カップルとハート: 大人 大人 やや薄い肌色 やや濃い肌色</annotation>
+		<annotation cp="🧑🏼‍❤‍🧑🏿">カップル | カップルとハート | ハート | やや薄い肌色 | 大人 | 恋人 | 濃い肌色 | 熱々</annotation>
+		<annotation cp="🧑🏼‍❤‍🧑🏿" type="tts">カップルとハート: 大人 大人 やや薄い肌色 濃い肌色</annotation>
+		<annotation cp="🧑🏽‍❤‍🧑🏻">カップル | カップルとハート | ハート | 中間の肌色 | 大人 | 恋人 | 熱々 | 薄い肌色</annotation>
+		<annotation cp="🧑🏽‍❤‍🧑🏻" type="tts">カップルとハート: 大人 大人 中間の肌色 薄い肌色</annotation>
+		<annotation cp="🧑🏽‍❤‍🧑🏼">カップル | カップルとハート | ハート | やや薄い肌色 | 中間の肌色 | 大人 | 恋人 | 熱々</annotation>
+		<annotation cp="🧑🏽‍❤‍🧑🏼" type="tts">カップルとハート: 大人 大人 中間の肌色 やや薄い肌色</annotation>
+		<annotation cp="🧑🏽‍❤‍🧑🏾">カップル | カップルとハート | ハート | やや濃い肌色 | 中間の肌色 | 大人 | 恋人 | 熱々</annotation>
+		<annotation cp="🧑🏽‍❤‍🧑🏾" type="tts">カップルとハート: 大人 大人 中間の肌色 やや濃い肌色</annotation>
+		<annotation cp="🧑🏽‍❤‍🧑🏿">カップル | カップルとハート | ハート | 中間の肌色 | 大人 | 恋人 | 濃い肌色 | 熱々</annotation>
+		<annotation cp="🧑🏽‍❤‍🧑🏿" type="tts">カップルとハート: 大人 大人 中間の肌色 濃い肌色</annotation>
+		<annotation cp="🧑🏾‍❤‍🧑🏻">カップル | カップルとハート | ハート | やや濃い肌色 | 大人 | 恋人 | 熱々 | 薄い肌色</annotation>
+		<annotation cp="🧑🏾‍❤‍🧑🏻" type="tts">カップルとハート: 大人 大人 やや濃い肌色 薄い肌色</annotation>
+		<annotation cp="🧑🏾‍❤‍🧑🏼">カップル | カップルとハート | ハート | やや濃い肌色 | やや薄い肌色 | 大人 | 恋人 | 熱々</annotation>
+		<annotation cp="🧑🏾‍❤‍🧑🏼" type="tts">カップルとハート: 大人 大人 やや濃い肌色 やや薄い肌色</annotation>
+		<annotation cp="🧑🏾‍❤‍🧑🏽">カップル | カップルとハート | ハート | やや濃い肌色 | 中間の肌色 | 大人 | 恋人 | 熱々</annotation>
+		<annotation cp="🧑🏾‍❤‍🧑🏽" type="tts">カップルとハート: 大人 大人 やや濃い肌色 中間の肌色</annotation>
+		<annotation cp="🧑🏾‍❤‍🧑🏿">カップル | カップルとハート | ハート | やや濃い肌色 | 大人 | 恋人 | 濃い肌色 | 熱々</annotation>
+		<annotation cp="🧑🏾‍❤‍🧑🏿" type="tts">カップルとハート: 大人 大人 やや濃い肌色 濃い肌色</annotation>
+		<annotation cp="🧑🏿‍❤‍🧑🏻">カップル | カップルとハート | ハート | 大人 | 恋人 | 濃い肌色 | 熱々 | 薄い肌色</annotation>
+		<annotation cp="🧑🏿‍❤‍🧑🏻" type="tts">カップルとハート: 大人 大人 濃い肌色 薄い肌色</annotation>
+		<annotation cp="🧑🏿‍❤‍🧑🏼">カップル | カップルとハート | ハート | やや薄い肌色 | 大人 | 恋人 | 濃い肌色 | 熱々</annotation>
+		<annotation cp="🧑🏿‍❤‍🧑🏼" type="tts">カップルとハート: 大人 大人 濃い肌色 やや薄い肌色</annotation>
+		<annotation cp="🧑🏿‍❤‍🧑🏽">カップル | カップルとハート | ハート | 中間の肌色 | 大人 | 恋人 | 濃い肌色 | 熱々</annotation>
+		<annotation cp="🧑🏿‍❤‍🧑🏽" type="tts">カップルとハート: 大人 大人 濃い肌色 中間の肌色</annotation>
+		<annotation cp="🧑🏿‍❤‍🧑🏾">カップル | カップルとハート | ハート | やや濃い肌色 | 大人 | 恋人 | 濃い肌色 | 熱々</annotation>
+		<annotation cp="🧑🏿‍❤‍🧑🏾" type="tts">カップルとハート: 大人 大人 濃い肌色 やや濃い肌色</annotation>
 		<annotation cp="🧑‍🦰">大人 | 成人 | 赤毛 | 顔</annotation>
 		<annotation cp="🧑‍🦰" type="tts">大人: 赤毛</annotation>
 		<annotation cp="🧑🏻‍🦰">大人 | 成人 | 薄い肌色 | 赤毛 | 顔</annotation>
@@ -521,16 +750,26 @@ Derived short names and annotations, using GenerateDerivedAnnotations.java. See 
 		<annotation cp="👨🏾" type="tts">男性: やや濃い肌色</annotation>
 		<annotation cp="👨🏿">大人 | 濃い肌色 | 男 | 男性 | 顔</annotation>
 		<annotation cp="👨🏿" type="tts">男性: 濃い肌色</annotation>
-		<annotation cp="🧔🏻">あごひげ | あごひげの男性 | ひげ | 男 | 薄い肌色 | 顔</annotation>
-		<annotation cp="🧔🏻" type="tts">あごひげの男性: 薄い肌色</annotation>
-		<annotation cp="🧔🏼">あごひげ | あごひげの男性 | ひげ | やや薄い肌色 | 男 | 顔</annotation>
-		<annotation cp="🧔🏼" type="tts">あごひげの男性: やや薄い肌色</annotation>
-		<annotation cp="🧔🏽">あごひげ | あごひげの男性 | ひげ | 中間の肌色 | 男 | 顔</annotation>
-		<annotation cp="🧔🏽" type="tts">あごひげの男性: 中間の肌色</annotation>
-		<annotation cp="🧔🏾">あごひげ | あごひげの男性 | ひげ | やや濃い肌色 | 男 | 顔</annotation>
-		<annotation cp="🧔🏾" type="tts">あごひげの男性: やや濃い肌色</annotation>
-		<annotation cp="🧔🏿">あごひげ | あごひげの男性 | ひげ | 濃い肌色 | 男 | 顔</annotation>
-		<annotation cp="🧔🏿" type="tts">あごひげの男性: 濃い肌色</annotation>
+		<annotation cp="🧔🏻">あごひげ | あごひげの人 | ひげ | 人 | 薄い肌色 | 顔</annotation>
+		<annotation cp="🧔🏻" type="tts">あごひげの人: 薄い肌色</annotation>
+		<annotation cp="🧔🏼">あごひげ | あごひげの人 | ひげ | やや薄い肌色 | 人 | 顔</annotation>
+		<annotation cp="🧔🏼" type="tts">あごひげの人: やや薄い肌色</annotation>
+		<annotation cp="🧔🏽">あごひげ | あごひげの人 | ひげ | 中間の肌色 | 人 | 顔</annotation>
+		<annotation cp="🧔🏽" type="tts">あごひげの人: 中間の肌色</annotation>
+		<annotation cp="🧔🏾">あごひげ | あごひげの人 | ひげ | やや濃い肌色 | 人 | 顔</annotation>
+		<annotation cp="🧔🏾" type="tts">あごひげの人: やや濃い肌色</annotation>
+		<annotation cp="🧔🏿">あごひげ | あごひげの人 | ひげ | 人 | 濃い肌色 | 顔</annotation>
+		<annotation cp="🧔🏿" type="tts">あごひげの人: 濃い肌色</annotation>
+		<annotation cp="🧔🏻‍♂">あごひげ | あごひげの男性 | ひげ | 男 | 薄い肌色 | 顔</annotation>
+		<annotation cp="🧔🏻‍♂" type="tts">あごひげの男性: 薄い肌色</annotation>
+		<annotation cp="🧔🏼‍♂">あごひげ | あごひげの男性 | ひげ | やや薄い肌色 | 男 | 顔</annotation>
+		<annotation cp="🧔🏼‍♂" type="tts">あごひげの男性: やや薄い肌色</annotation>
+		<annotation cp="🧔🏽‍♂">あごひげ | あごひげの男性 | ひげ | 中間の肌色 | 男 | 顔</annotation>
+		<annotation cp="🧔🏽‍♂" type="tts">あごひげの男性: 中間の肌色</annotation>
+		<annotation cp="🧔🏾‍♂">あごひげ | あごひげの男性 | ひげ | やや濃い肌色 | 男 | 顔</annotation>
+		<annotation cp="🧔🏾‍♂" type="tts">あごひげの男性: やや濃い肌色</annotation>
+		<annotation cp="🧔🏿‍♂">あごひげ | あごひげの男性 | ひげ | 濃い肌色 | 男 | 顔</annotation>
+		<annotation cp="🧔🏿‍♂" type="tts">あごひげの男性: 濃い肌色</annotation>
 		<annotation cp="👱🏻‍♂">ブロンド | 男 | 男性 | 薄い肌色 | 金髪 | 金髪の男性</annotation>
 		<annotation cp="👱🏻‍♂" type="tts">金髪の男性: 薄い肌色</annotation>
 		<annotation cp="👱🏼‍♂">ブロンド | やや薄い肌色 | 男 | 男性 | 金髪 | 金髪の男性</annotation>
@@ -541,6 +780,106 @@ Derived short names and annotations, using GenerateDerivedAnnotations.java. See 
 		<annotation cp="👱🏾‍♂" type="tts">金髪の男性: やや濃い肌色</annotation>
 		<annotation cp="👱🏿‍♂">ブロンド | 濃い肌色 | 男 | 男性 | 金髪 | 金髪の男性</annotation>
 		<annotation cp="👱🏿‍♂" type="tts">金髪の男性: 濃い肌色</annotation>
+		<annotation cp="👨🏻‍❤‍💋‍👨🏻">2人でキス | カップル | キス | ちゅっ | ハート | 男性 | 薄い肌色</annotation>
+		<annotation cp="👨🏻‍❤‍💋‍👨🏻" type="tts">2人でキス: 男性 男性 薄い肌色</annotation>
+		<annotation cp="👨🏻‍❤‍💋‍👨🏼">2人でキス | カップル | キス | ちゅっ | ハート | やや薄い肌色 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👨🏻‍❤‍💋‍👨🏼" type="tts">2人でキス: 男性 男性 薄い肌色 やや薄い肌色</annotation>
+		<annotation cp="👨🏻‍❤‍💋‍👨🏽">2人でキス | カップル | キス | ちゅっ | ハート | 中間の肌色 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👨🏻‍❤‍💋‍👨🏽" type="tts">2人でキス: 男性 男性 薄い肌色 中間の肌色</annotation>
+		<annotation cp="👨🏻‍❤‍💋‍👨🏾">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👨🏻‍❤‍💋‍👨🏾" type="tts">2人でキス: 男性 男性 薄い肌色 やや濃い肌色</annotation>
+		<annotation cp="👨🏻‍❤‍💋‍👨🏿">2人でキス | カップル | キス | ちゅっ | ハート | 濃い肌色 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👨🏻‍❤‍💋‍👨🏿" type="tts">2人でキス: 男性 男性 薄い肌色 濃い肌色</annotation>
+		<annotation cp="👨🏼‍❤‍💋‍👨🏻">2人でキス | カップル | キス | ちゅっ | ハート | やや薄い肌色 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👨🏼‍❤‍💋‍👨🏻" type="tts">2人でキス: 男性 男性 やや薄い肌色 薄い肌色</annotation>
+		<annotation cp="👨🏼‍❤‍💋‍👨🏼">2人でキス | カップル | キス | ちゅっ | ハート | やや薄い肌色 | 男性</annotation>
+		<annotation cp="👨🏼‍❤‍💋‍👨🏼" type="tts">2人でキス: 男性 男性 やや薄い肌色</annotation>
+		<annotation cp="👨🏼‍❤‍💋‍👨🏽">2人でキス | カップル | キス | ちゅっ | ハート | やや薄い肌色 | 中間の肌色 | 男性</annotation>
+		<annotation cp="👨🏼‍❤‍💋‍👨🏽" type="tts">2人でキス: 男性 男性 やや薄い肌色 中間の肌色</annotation>
+		<annotation cp="👨🏼‍❤‍💋‍👨🏾">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | やや薄い肌色 | 男性</annotation>
+		<annotation cp="👨🏼‍❤‍💋‍👨🏾" type="tts">2人でキス: 男性 男性 やや薄い肌色 やや濃い肌色</annotation>
+		<annotation cp="👨🏼‍❤‍💋‍👨🏿">2人でキス | カップル | キス | ちゅっ | ハート | やや薄い肌色 | 濃い肌色 | 男性</annotation>
+		<annotation cp="👨🏼‍❤‍💋‍👨🏿" type="tts">2人でキス: 男性 男性 やや薄い肌色 濃い肌色</annotation>
+		<annotation cp="👨🏽‍❤‍💋‍👨🏻">2人でキス | カップル | キス | ちゅっ | ハート | 中間の肌色 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👨🏽‍❤‍💋‍👨🏻" type="tts">2人でキス: 男性 男性 中間の肌色 薄い肌色</annotation>
+		<annotation cp="👨🏽‍❤‍💋‍👨🏼">2人でキス | カップル | キス | ちゅっ | ハート | やや薄い肌色 | 中間の肌色 | 男性</annotation>
+		<annotation cp="👨🏽‍❤‍💋‍👨🏼" type="tts">2人でキス: 男性 男性 中間の肌色 やや薄い肌色</annotation>
+		<annotation cp="👨🏽‍❤‍💋‍👨🏽">2人でキス | カップル | キス | ちゅっ | ハート | 中間の肌色 | 男性</annotation>
+		<annotation cp="👨🏽‍❤‍💋‍👨🏽" type="tts">2人でキス: 男性 男性 中間の肌色</annotation>
+		<annotation cp="👨🏽‍❤‍💋‍👨🏾">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | 中間の肌色 | 男性</annotation>
+		<annotation cp="👨🏽‍❤‍💋‍👨🏾" type="tts">2人でキス: 男性 男性 中間の肌色 やや濃い肌色</annotation>
+		<annotation cp="👨🏽‍❤‍💋‍👨🏿">2人でキス | カップル | キス | ちゅっ | ハート | 中間の肌色 | 濃い肌色 | 男性</annotation>
+		<annotation cp="👨🏽‍❤‍💋‍👨🏿" type="tts">2人でキス: 男性 男性 中間の肌色 濃い肌色</annotation>
+		<annotation cp="👨🏾‍❤‍💋‍👨🏻">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👨🏾‍❤‍💋‍👨🏻" type="tts">2人でキス: 男性 男性 やや濃い肌色 薄い肌色</annotation>
+		<annotation cp="👨🏾‍❤‍💋‍👨🏼">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | やや薄い肌色 | 男性</annotation>
+		<annotation cp="👨🏾‍❤‍💋‍👨🏼" type="tts">2人でキス: 男性 男性 やや濃い肌色 やや薄い肌色</annotation>
+		<annotation cp="👨🏾‍❤‍💋‍👨🏽">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | 中間の肌色 | 男性</annotation>
+		<annotation cp="👨🏾‍❤‍💋‍👨🏽" type="tts">2人でキス: 男性 男性 やや濃い肌色 中間の肌色</annotation>
+		<annotation cp="👨🏾‍❤‍💋‍👨🏾">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | 男性</annotation>
+		<annotation cp="👨🏾‍❤‍💋‍👨🏾" type="tts">2人でキス: 男性 男性 やや濃い肌色</annotation>
+		<annotation cp="👨🏾‍❤‍💋‍👨🏿">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | 濃い肌色 | 男性</annotation>
+		<annotation cp="👨🏾‍❤‍💋‍👨🏿" type="tts">2人でキス: 男性 男性 やや濃い肌色 濃い肌色</annotation>
+		<annotation cp="👨🏿‍❤‍💋‍👨🏻">2人でキス | カップル | キス | ちゅっ | ハート | 濃い肌色 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👨🏿‍❤‍💋‍👨🏻" type="tts">2人でキス: 男性 男性 濃い肌色 薄い肌色</annotation>
+		<annotation cp="👨🏿‍❤‍💋‍👨🏼">2人でキス | カップル | キス | ちゅっ | ハート | やや薄い肌色 | 濃い肌色 | 男性</annotation>
+		<annotation cp="👨🏿‍❤‍💋‍👨🏼" type="tts">2人でキス: 男性 男性 濃い肌色 やや薄い肌色</annotation>
+		<annotation cp="👨🏿‍❤‍💋‍👨🏽">2人でキス | カップル | キス | ちゅっ | ハート | 中間の肌色 | 濃い肌色 | 男性</annotation>
+		<annotation cp="👨🏿‍❤‍💋‍👨🏽" type="tts">2人でキス: 男性 男性 濃い肌色 中間の肌色</annotation>
+		<annotation cp="👨🏿‍❤‍💋‍👨🏾">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | 濃い肌色 | 男性</annotation>
+		<annotation cp="👨🏿‍❤‍💋‍👨🏾" type="tts">2人でキス: 男性 男性 濃い肌色 やや濃い肌色</annotation>
+		<annotation cp="👨🏿‍❤‍💋‍👨🏿">2人でキス | カップル | キス | ちゅっ | ハート | 濃い肌色 | 男性</annotation>
+		<annotation cp="👨🏿‍❤‍💋‍👨🏿" type="tts">2人でキス: 男性 男性 濃い肌色</annotation>
+		<annotation cp="👨🏻‍❤‍👨🏻">カップル | カップルとハート | ハート | 恋人 | 熱々 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👨🏻‍❤‍👨🏻" type="tts">カップルとハート: 男性 男性 薄い肌色</annotation>
+		<annotation cp="👨🏻‍❤‍👨🏼">カップル | カップルとハート | ハート | やや薄い肌色 | 恋人 | 熱々 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👨🏻‍❤‍👨🏼" type="tts">カップルとハート: 男性 男性 薄い肌色 やや薄い肌色</annotation>
+		<annotation cp="👨🏻‍❤‍👨🏽">カップル | カップルとハート | ハート | 中間の肌色 | 恋人 | 熱々 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👨🏻‍❤‍👨🏽" type="tts">カップルとハート: 男性 男性 薄い肌色 中間の肌色</annotation>
+		<annotation cp="👨🏻‍❤‍👨🏾">カップル | カップルとハート | ハート | やや濃い肌色 | 恋人 | 熱々 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👨🏻‍❤‍👨🏾" type="tts">カップルとハート: 男性 男性 薄い肌色 やや濃い肌色</annotation>
+		<annotation cp="👨🏻‍❤‍👨🏿">カップル | カップルとハート | ハート | 恋人 | 濃い肌色 | 熱々 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👨🏻‍❤‍👨🏿" type="tts">カップルとハート: 男性 男性 薄い肌色 濃い肌色</annotation>
+		<annotation cp="👨🏼‍❤‍👨🏻">カップル | カップルとハート | ハート | やや薄い肌色 | 恋人 | 熱々 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👨🏼‍❤‍👨🏻" type="tts">カップルとハート: 男性 男性 やや薄い肌色 薄い肌色</annotation>
+		<annotation cp="👨🏼‍❤‍👨🏼">カップル | カップルとハート | ハート | やや薄い肌色 | 恋人 | 熱々 | 男性</annotation>
+		<annotation cp="👨🏼‍❤‍👨🏼" type="tts">カップルとハート: 男性 男性 やや薄い肌色</annotation>
+		<annotation cp="👨🏼‍❤‍👨🏽">カップル | カップルとハート | ハート | やや薄い肌色 | 中間の肌色 | 恋人 | 熱々 | 男性</annotation>
+		<annotation cp="👨🏼‍❤‍👨🏽" type="tts">カップルとハート: 男性 男性 やや薄い肌色 中間の肌色</annotation>
+		<annotation cp="👨🏼‍❤‍👨🏾">カップル | カップルとハート | ハート | やや濃い肌色 | やや薄い肌色 | 恋人 | 熱々 | 男性</annotation>
+		<annotation cp="👨🏼‍❤‍👨🏾" type="tts">カップルとハート: 男性 男性 やや薄い肌色 やや濃い肌色</annotation>
+		<annotation cp="👨🏼‍❤‍👨🏿">カップル | カップルとハート | ハート | やや薄い肌色 | 恋人 | 濃い肌色 | 熱々 | 男性</annotation>
+		<annotation cp="👨🏼‍❤‍👨🏿" type="tts">カップルとハート: 男性 男性 やや薄い肌色 濃い肌色</annotation>
+		<annotation cp="👨🏽‍❤‍👨🏻">カップル | カップルとハート | ハート | 中間の肌色 | 恋人 | 熱々 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👨🏽‍❤‍👨🏻" type="tts">カップルとハート: 男性 男性 中間の肌色 薄い肌色</annotation>
+		<annotation cp="👨🏽‍❤‍👨🏼">カップル | カップルとハート | ハート | やや薄い肌色 | 中間の肌色 | 恋人 | 熱々 | 男性</annotation>
+		<annotation cp="👨🏽‍❤‍👨🏼" type="tts">カップルとハート: 男性 男性 中間の肌色 やや薄い肌色</annotation>
+		<annotation cp="👨🏽‍❤‍👨🏽">カップル | カップルとハート | ハート | 中間の肌色 | 恋人 | 熱々 | 男性</annotation>
+		<annotation cp="👨🏽‍❤‍👨🏽" type="tts">カップルとハート: 男性 男性 中間の肌色</annotation>
+		<annotation cp="👨🏽‍❤‍👨🏾">カップル | カップルとハート | ハート | やや濃い肌色 | 中間の肌色 | 恋人 | 熱々 | 男性</annotation>
+		<annotation cp="👨🏽‍❤‍👨🏾" type="tts">カップルとハート: 男性 男性 中間の肌色 やや濃い肌色</annotation>
+		<annotation cp="👨🏽‍❤‍👨🏿">カップル | カップルとハート | ハート | 中間の肌色 | 恋人 | 濃い肌色 | 熱々 | 男性</annotation>
+		<annotation cp="👨🏽‍❤‍👨🏿" type="tts">カップルとハート: 男性 男性 中間の肌色 濃い肌色</annotation>
+		<annotation cp="👨🏾‍❤‍👨🏻">カップル | カップルとハート | ハート | やや濃い肌色 | 恋人 | 熱々 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👨🏾‍❤‍👨🏻" type="tts">カップルとハート: 男性 男性 やや濃い肌色 薄い肌色</annotation>
+		<annotation cp="👨🏾‍❤‍👨🏼">カップル | カップルとハート | ハート | やや濃い肌色 | やや薄い肌色 | 恋人 | 熱々 | 男性</annotation>
+		<annotation cp="👨🏾‍❤‍👨🏼" type="tts">カップルとハート: 男性 男性 やや濃い肌色 やや薄い肌色</annotation>
+		<annotation cp="👨🏾‍❤‍👨🏽">カップル | カップルとハート | ハート | やや濃い肌色 | 中間の肌色 | 恋人 | 熱々 | 男性</annotation>
+		<annotation cp="👨🏾‍❤‍👨🏽" type="tts">カップルとハート: 男性 男性 やや濃い肌色 中間の肌色</annotation>
+		<annotation cp="👨🏾‍❤‍👨🏾">カップル | カップルとハート | ハート | やや濃い肌色 | 恋人 | 熱々 | 男性</annotation>
+		<annotation cp="👨🏾‍❤‍👨🏾" type="tts">カップルとハート: 男性 男性 やや濃い肌色</annotation>
+		<annotation cp="👨🏾‍❤‍👨🏿">カップル | カップルとハート | ハート | やや濃い肌色 | 恋人 | 濃い肌色 | 熱々 | 男性</annotation>
+		<annotation cp="👨🏾‍❤‍👨🏿" type="tts">カップルとハート: 男性 男性 やや濃い肌色 濃い肌色</annotation>
+		<annotation cp="👨🏿‍❤‍👨🏻">カップル | カップルとハート | ハート | 恋人 | 濃い肌色 | 熱々 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👨🏿‍❤‍👨🏻" type="tts">カップルとハート: 男性 男性 濃い肌色 薄い肌色</annotation>
+		<annotation cp="👨🏿‍❤‍👨🏼">カップル | カップルとハート | ハート | やや薄い肌色 | 恋人 | 濃い肌色 | 熱々 | 男性</annotation>
+		<annotation cp="👨🏿‍❤‍👨🏼" type="tts">カップルとハート: 男性 男性 濃い肌色 やや薄い肌色</annotation>
+		<annotation cp="👨🏿‍❤‍👨🏽">カップル | カップルとハート | ハート | 中間の肌色 | 恋人 | 濃い肌色 | 熱々 | 男性</annotation>
+		<annotation cp="👨🏿‍❤‍👨🏽" type="tts">カップルとハート: 男性 男性 濃い肌色 中間の肌色</annotation>
+		<annotation cp="👨🏿‍❤‍👨🏾">カップル | カップルとハート | ハート | やや濃い肌色 | 恋人 | 濃い肌色 | 熱々 | 男性</annotation>
+		<annotation cp="👨🏿‍❤‍👨🏾" type="tts">カップルとハート: 男性 男性 濃い肌色 やや濃い肌色</annotation>
+		<annotation cp="👨🏿‍❤‍👨🏿">カップル | カップルとハート | ハート | 恋人 | 濃い肌色 | 熱々 | 男性</annotation>
+		<annotation cp="👨🏿‍❤‍👨🏿" type="tts">カップルとハート: 男性 男性 濃い肌色</annotation>
 		<annotation cp="👨‍🦰">大人 | 男 | 男性 | 赤毛 | 顔</annotation>
 		<annotation cp="👨‍🦰" type="tts">男性: 赤毛</annotation>
 		<annotation cp="👨🏻‍🦰">大人 | 男 | 男性 | 薄い肌色 | 赤毛 | 顔</annotation>
@@ -599,6 +938,16 @@ Derived short names and annotations, using GenerateDerivedAnnotations.java. See 
 		<annotation cp="👩🏾" type="tts">女性: やや濃い肌色</annotation>
 		<annotation cp="👩🏿">大人 | 女 | 女性 | 濃い肌色 | 顔</annotation>
 		<annotation cp="👩🏿" type="tts">女性: 濃い肌色</annotation>
+		<annotation cp="🧔🏻‍♀">あごひげ | あごひげの女性 | ひげ | 女 | 薄い肌色 | 顔</annotation>
+		<annotation cp="🧔🏻‍♀" type="tts">あごひげの女性: 薄い肌色</annotation>
+		<annotation cp="🧔🏼‍♀">あごひげ | あごひげの女性 | ひげ | やや薄い肌色 | 女 | 顔</annotation>
+		<annotation cp="🧔🏼‍♀" type="tts">あごひげの女性: やや薄い肌色</annotation>
+		<annotation cp="🧔🏽‍♀">あごひげ | あごひげの女性 | ひげ | 中間の肌色 | 女 | 顔</annotation>
+		<annotation cp="🧔🏽‍♀" type="tts">あごひげの女性: 中間の肌色</annotation>
+		<annotation cp="🧔🏾‍♀">あごひげ | あごひげの女性 | ひげ | やや濃い肌色 | 女 | 顔</annotation>
+		<annotation cp="🧔🏾‍♀" type="tts">あごひげの女性: やや濃い肌色</annotation>
+		<annotation cp="🧔🏿‍♀">あごひげ | あごひげの女性 | ひげ | 女 | 濃い肌色 | 顔</annotation>
+		<annotation cp="🧔🏿‍♀" type="tts">あごひげの女性: 濃い肌色</annotation>
 		<annotation cp="👱🏻‍♀">ブロンド | 女 | 女性 | 薄い肌色 | 金髪 | 金髪の女性</annotation>
 		<annotation cp="👱🏻‍♀" type="tts">金髪の女性: 薄い肌色</annotation>
 		<annotation cp="👱🏼‍♀">ブロンド | やや薄い肌色 | 女 | 女性 | 金髪 | 金髪の女性</annotation>
@@ -609,6 +958,206 @@ Derived short names and annotations, using GenerateDerivedAnnotations.java. See 
 		<annotation cp="👱🏾‍♀" type="tts">金髪の女性: やや濃い肌色</annotation>
 		<annotation cp="👱🏿‍♀">ブロンド | 女 | 女性 | 濃い肌色 | 金髪 | 金髪の女性</annotation>
 		<annotation cp="👱🏿‍♀" type="tts">金髪の女性: 濃い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👨🏻">2人でキス | カップル | キス | ちゅっ | ハート | 女性 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👨🏻" type="tts">2人でキス: 女性 男性 薄い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👨🏼">2人でキス | カップル | キス | ちゅっ | ハート | やや薄い肌色 | 女性 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👨🏼" type="tts">2人でキス: 女性 男性 薄い肌色 やや薄い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👨🏽">2人でキス | カップル | キス | ちゅっ | ハート | 中間の肌色 | 女性 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👨🏽" type="tts">2人でキス: 女性 男性 薄い肌色 中間の肌色</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👨🏾">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | 女性 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👨🏾" type="tts">2人でキス: 女性 男性 薄い肌色 やや濃い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👨🏿">2人でキス | カップル | キス | ちゅっ | ハート | 女性 | 濃い肌色 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👨🏿" type="tts">2人でキス: 女性 男性 薄い肌色 濃い肌色</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👨🏻">2人でキス | カップル | キス | ちゅっ | ハート | やや薄い肌色 | 女性 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👨🏻" type="tts">2人でキス: 女性 男性 やや薄い肌色 薄い肌色</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👨🏼">2人でキス | カップル | キス | ちゅっ | ハート | やや薄い肌色 | 女性 | 男性</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👨🏼" type="tts">2人でキス: 女性 男性 やや薄い肌色</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👨🏽">2人でキス | カップル | キス | ちゅっ | ハート | やや薄い肌色 | 中間の肌色 | 女性 | 男性</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👨🏽" type="tts">2人でキス: 女性 男性 やや薄い肌色 中間の肌色</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👨🏾">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | やや薄い肌色 | 女性 | 男性</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👨🏾" type="tts">2人でキス: 女性 男性 やや薄い肌色 やや濃い肌色</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👨🏿">2人でキス | カップル | キス | ちゅっ | ハート | やや薄い肌色 | 女性 | 濃い肌色 | 男性</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👨🏿" type="tts">2人でキス: 女性 男性 やや薄い肌色 濃い肌色</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👨🏻">2人でキス | カップル | キス | ちゅっ | ハート | 中間の肌色 | 女性 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👨🏻" type="tts">2人でキス: 女性 男性 中間の肌色 薄い肌色</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👨🏼">2人でキス | カップル | キス | ちゅっ | ハート | やや薄い肌色 | 中間の肌色 | 女性 | 男性</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👨🏼" type="tts">2人でキス: 女性 男性 中間の肌色 やや薄い肌色</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👨🏽">2人でキス | カップル | キス | ちゅっ | ハート | 中間の肌色 | 女性 | 男性</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👨🏽" type="tts">2人でキス: 女性 男性 中間の肌色</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👨🏾">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | 中間の肌色 | 女性 | 男性</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👨🏾" type="tts">2人でキス: 女性 男性 中間の肌色 やや濃い肌色</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👨🏿">2人でキス | カップル | キス | ちゅっ | ハート | 中間の肌色 | 女性 | 濃い肌色 | 男性</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👨🏿" type="tts">2人でキス: 女性 男性 中間の肌色 濃い肌色</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👨🏻">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | 女性 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👨🏻" type="tts">2人でキス: 女性 男性 やや濃い肌色 薄い肌色</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👨🏼">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | やや薄い肌色 | 女性 | 男性</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👨🏼" type="tts">2人でキス: 女性 男性 やや濃い肌色 やや薄い肌色</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👨🏽">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | 中間の肌色 | 女性 | 男性</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👨🏽" type="tts">2人でキス: 女性 男性 やや濃い肌色 中間の肌色</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👨🏾">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | 女性 | 男性</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👨🏾" type="tts">2人でキス: 女性 男性 やや濃い肌色</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👨🏿">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | 女性 | 濃い肌色 | 男性</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👨🏿" type="tts">2人でキス: 女性 男性 やや濃い肌色 濃い肌色</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👨🏻">2人でキス | カップル | キス | ちゅっ | ハート | 女性 | 濃い肌色 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👨🏻" type="tts">2人でキス: 女性 男性 濃い肌色 薄い肌色</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👨🏼">2人でキス | カップル | キス | ちゅっ | ハート | やや薄い肌色 | 女性 | 濃い肌色 | 男性</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👨🏼" type="tts">2人でキス: 女性 男性 濃い肌色 やや薄い肌色</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👨🏽">2人でキス | カップル | キス | ちゅっ | ハート | 中間の肌色 | 女性 | 濃い肌色 | 男性</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👨🏽" type="tts">2人でキス: 女性 男性 濃い肌色 中間の肌色</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👨🏾">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | 女性 | 濃い肌色 | 男性</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👨🏾" type="tts">2人でキス: 女性 男性 濃い肌色 やや濃い肌色</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👨🏿">2人でキス | カップル | キス | ちゅっ | ハート | 女性 | 濃い肌色 | 男性</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👨🏿" type="tts">2人でキス: 女性 男性 濃い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👩🏻">2人でキス | カップル | キス | ちゅっ | ハート | 女性 | 薄い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👩🏻" type="tts">2人でキス: 女性 女性 薄い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👩🏼">2人でキス | カップル | キス | ちゅっ | ハート | やや薄い肌色 | 女性 | 薄い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👩🏼" type="tts">2人でキス: 女性 女性 薄い肌色 やや薄い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👩🏽">2人でキス | カップル | キス | ちゅっ | ハート | 中間の肌色 | 女性 | 薄い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👩🏽" type="tts">2人でキス: 女性 女性 薄い肌色 中間の肌色</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👩🏾">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | 女性 | 薄い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👩🏾" type="tts">2人でキス: 女性 女性 薄い肌色 やや濃い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👩🏿">2人でキス | カップル | キス | ちゅっ | ハート | 女性 | 濃い肌色 | 薄い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👩🏿" type="tts">2人でキス: 女性 女性 薄い肌色 濃い肌色</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👩🏻">2人でキス | カップル | キス | ちゅっ | ハート | やや薄い肌色 | 女性 | 薄い肌色</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👩🏻" type="tts">2人でキス: 女性 女性 やや薄い肌色 薄い肌色</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👩🏼">2人でキス | カップル | キス | ちゅっ | ハート | やや薄い肌色 | 女性</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👩🏼" type="tts">2人でキス: 女性 女性 やや薄い肌色</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👩🏽">2人でキス | カップル | キス | ちゅっ | ハート | やや薄い肌色 | 中間の肌色 | 女性</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👩🏽" type="tts">2人でキス: 女性 女性 やや薄い肌色 中間の肌色</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👩🏾">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | やや薄い肌色 | 女性</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👩🏾" type="tts">2人でキス: 女性 女性 やや薄い肌色 やや濃い肌色</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👩🏿">2人でキス | カップル | キス | ちゅっ | ハート | やや薄い肌色 | 女性 | 濃い肌色</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👩🏿" type="tts">2人でキス: 女性 女性 やや薄い肌色 濃い肌色</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👩🏻">2人でキス | カップル | キス | ちゅっ | ハート | 中間の肌色 | 女性 | 薄い肌色</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👩🏻" type="tts">2人でキス: 女性 女性 中間の肌色 薄い肌色</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👩🏼">2人でキス | カップル | キス | ちゅっ | ハート | やや薄い肌色 | 中間の肌色 | 女性</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👩🏼" type="tts">2人でキス: 女性 女性 中間の肌色 やや薄い肌色</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👩🏽">2人でキス | カップル | キス | ちゅっ | ハート | 中間の肌色 | 女性</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👩🏽" type="tts">2人でキス: 女性 女性 中間の肌色</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👩🏾">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | 中間の肌色 | 女性</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👩🏾" type="tts">2人でキス: 女性 女性 中間の肌色 やや濃い肌色</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👩🏿">2人でキス | カップル | キス | ちゅっ | ハート | 中間の肌色 | 女性 | 濃い肌色</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👩🏿" type="tts">2人でキス: 女性 女性 中間の肌色 濃い肌色</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👩🏻">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | 女性 | 薄い肌色</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👩🏻" type="tts">2人でキス: 女性 女性 やや濃い肌色 薄い肌色</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👩🏼">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | やや薄い肌色 | 女性</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👩🏼" type="tts">2人でキス: 女性 女性 やや濃い肌色 やや薄い肌色</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👩🏽">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | 中間の肌色 | 女性</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👩🏽" type="tts">2人でキス: 女性 女性 やや濃い肌色 中間の肌色</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👩🏾">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | 女性</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👩🏾" type="tts">2人でキス: 女性 女性 やや濃い肌色</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👩🏿">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | 女性 | 濃い肌色</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👩🏿" type="tts">2人でキス: 女性 女性 やや濃い肌色 濃い肌色</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👩🏻">2人でキス | カップル | キス | ちゅっ | ハート | 女性 | 濃い肌色 | 薄い肌色</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👩🏻" type="tts">2人でキス: 女性 女性 濃い肌色 薄い肌色</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👩🏼">2人でキス | カップル | キス | ちゅっ | ハート | やや薄い肌色 | 女性 | 濃い肌色</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👩🏼" type="tts">2人でキス: 女性 女性 濃い肌色 やや薄い肌色</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👩🏽">2人でキス | カップル | キス | ちゅっ | ハート | 中間の肌色 | 女性 | 濃い肌色</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👩🏽" type="tts">2人でキス: 女性 女性 濃い肌色 中間の肌色</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👩🏾">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色 | 女性 | 濃い肌色</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👩🏾" type="tts">2人でキス: 女性 女性 濃い肌色 やや濃い肌色</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👩🏿">2人でキス | カップル | キス | ちゅっ | ハート | 女性 | 濃い肌色</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👩🏿" type="tts">2人でキス: 女性 女性 濃い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍👨🏻">カップル | カップルとハート | ハート | 女性 | 恋人 | 熱々 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍👨🏻" type="tts">カップルとハート: 女性 男性 薄い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍👨🏼">カップル | カップルとハート | ハート | やや薄い肌色 | 女性 | 恋人 | 熱々 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍👨🏼" type="tts">カップルとハート: 女性 男性 薄い肌色 やや薄い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍👨🏽">カップル | カップルとハート | ハート | 中間の肌色 | 女性 | 恋人 | 熱々 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍👨🏽" type="tts">カップルとハート: 女性 男性 薄い肌色 中間の肌色</annotation>
+		<annotation cp="👩🏻‍❤‍👨🏾">カップル | カップルとハート | ハート | やや濃い肌色 | 女性 | 恋人 | 熱々 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍👨🏾" type="tts">カップルとハート: 女性 男性 薄い肌色 やや濃い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍👨🏿">カップル | カップルとハート | ハート | 女性 | 恋人 | 濃い肌色 | 熱々 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍👨🏿" type="tts">カップルとハート: 女性 男性 薄い肌色 濃い肌色</annotation>
+		<annotation cp="👩🏼‍❤‍👨🏻">カップル | カップルとハート | ハート | やや薄い肌色 | 女性 | 恋人 | 熱々 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👩🏼‍❤‍👨🏻" type="tts">カップルとハート: 女性 男性 やや薄い肌色 薄い肌色</annotation>
+		<annotation cp="👩🏼‍❤‍👨🏼">カップル | カップルとハート | ハート | やや薄い肌色 | 女性 | 恋人 | 熱々 | 男性</annotation>
+		<annotation cp="👩🏼‍❤‍👨🏼" type="tts">カップルとハート: 女性 男性 やや薄い肌色</annotation>
+		<annotation cp="👩🏼‍❤‍👨🏽">カップル | カップルとハート | ハート | やや薄い肌色 | 中間の肌色 | 女性 | 恋人 | 熱々 | 男性</annotation>
+		<annotation cp="👩🏼‍❤‍👨🏽" type="tts">カップルとハート: 女性 男性 やや薄い肌色 中間の肌色</annotation>
+		<annotation cp="👩🏼‍❤‍👨🏾">カップル | カップルとハート | ハート | やや濃い肌色 | やや薄い肌色 | 女性 | 恋人 | 熱々 | 男性</annotation>
+		<annotation cp="👩🏼‍❤‍👨🏾" type="tts">カップルとハート: 女性 男性 やや薄い肌色 やや濃い肌色</annotation>
+		<annotation cp="👩🏼‍❤‍👨🏿">カップル | カップルとハート | ハート | やや薄い肌色 | 女性 | 恋人 | 濃い肌色 | 熱々 | 男性</annotation>
+		<annotation cp="👩🏼‍❤‍👨🏿" type="tts">カップルとハート: 女性 男性 やや薄い肌色 濃い肌色</annotation>
+		<annotation cp="👩🏽‍❤‍👨🏻">カップル | カップルとハート | ハート | 中間の肌色 | 女性 | 恋人 | 熱々 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👩🏽‍❤‍👨🏻" type="tts">カップルとハート: 女性 男性 中間の肌色 薄い肌色</annotation>
+		<annotation cp="👩🏽‍❤‍👨🏼">カップル | カップルとハート | ハート | やや薄い肌色 | 中間の肌色 | 女性 | 恋人 | 熱々 | 男性</annotation>
+		<annotation cp="👩🏽‍❤‍👨🏼" type="tts">カップルとハート: 女性 男性 中間の肌色 やや薄い肌色</annotation>
+		<annotation cp="👩🏽‍❤‍👨🏽">カップル | カップルとハート | ハート | 中間の肌色 | 女性 | 恋人 | 熱々 | 男性</annotation>
+		<annotation cp="👩🏽‍❤‍👨🏽" type="tts">カップルとハート: 女性 男性 中間の肌色</annotation>
+		<annotation cp="👩🏽‍❤‍👨🏾">カップル | カップルとハート | ハート | やや濃い肌色 | 中間の肌色 | 女性 | 恋人 | 熱々 | 男性</annotation>
+		<annotation cp="👩🏽‍❤‍👨🏾" type="tts">カップルとハート: 女性 男性 中間の肌色 やや濃い肌色</annotation>
+		<annotation cp="👩🏽‍❤‍👨🏿">カップル | カップルとハート | ハート | 中間の肌色 | 女性 | 恋人 | 濃い肌色 | 熱々 | 男性</annotation>
+		<annotation cp="👩🏽‍❤‍👨🏿" type="tts">カップルとハート: 女性 男性 中間の肌色 濃い肌色</annotation>
+		<annotation cp="👩🏾‍❤‍👨🏻">カップル | カップルとハート | ハート | やや濃い肌色 | 女性 | 恋人 | 熱々 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👩🏾‍❤‍👨🏻" type="tts">カップルとハート: 女性 男性 やや濃い肌色 薄い肌色</annotation>
+		<annotation cp="👩🏾‍❤‍👨🏼">カップル | カップルとハート | ハート | やや濃い肌色 | やや薄い肌色 | 女性 | 恋人 | 熱々 | 男性</annotation>
+		<annotation cp="👩🏾‍❤‍👨🏼" type="tts">カップルとハート: 女性 男性 やや濃い肌色 やや薄い肌色</annotation>
+		<annotation cp="👩🏾‍❤‍👨🏽">カップル | カップルとハート | ハート | やや濃い肌色 | 中間の肌色 | 女性 | 恋人 | 熱々 | 男性</annotation>
+		<annotation cp="👩🏾‍❤‍👨🏽" type="tts">カップルとハート: 女性 男性 やや濃い肌色 中間の肌色</annotation>
+		<annotation cp="👩🏾‍❤‍👨🏾">カップル | カップルとハート | ハート | やや濃い肌色 | 女性 | 恋人 | 熱々 | 男性</annotation>
+		<annotation cp="👩🏾‍❤‍👨🏾" type="tts">カップルとハート: 女性 男性 やや濃い肌色</annotation>
+		<annotation cp="👩🏾‍❤‍👨🏿">カップル | カップルとハート | ハート | やや濃い肌色 | 女性 | 恋人 | 濃い肌色 | 熱々 | 男性</annotation>
+		<annotation cp="👩🏾‍❤‍👨🏿" type="tts">カップルとハート: 女性 男性 やや濃い肌色 濃い肌色</annotation>
+		<annotation cp="👩🏿‍❤‍👨🏻">カップル | カップルとハート | ハート | 女性 | 恋人 | 濃い肌色 | 熱々 | 男性 | 薄い肌色</annotation>
+		<annotation cp="👩🏿‍❤‍👨🏻" type="tts">カップルとハート: 女性 男性 濃い肌色 薄い肌色</annotation>
+		<annotation cp="👩🏿‍❤‍👨🏼">カップル | カップルとハート | ハート | やや薄い肌色 | 女性 | 恋人 | 濃い肌色 | 熱々 | 男性</annotation>
+		<annotation cp="👩🏿‍❤‍👨🏼" type="tts">カップルとハート: 女性 男性 濃い肌色 やや薄い肌色</annotation>
+		<annotation cp="👩🏿‍❤‍👨🏽">カップル | カップルとハート | ハート | 中間の肌色 | 女性 | 恋人 | 濃い肌色 | 熱々 | 男性</annotation>
+		<annotation cp="👩🏿‍❤‍👨🏽" type="tts">カップルとハート: 女性 男性 濃い肌色 中間の肌色</annotation>
+		<annotation cp="👩🏿‍❤‍👨🏾">カップル | カップルとハート | ハート | やや濃い肌色 | 女性 | 恋人 | 濃い肌色 | 熱々 | 男性</annotation>
+		<annotation cp="👩🏿‍❤‍👨🏾" type="tts">カップルとハート: 女性 男性 濃い肌色 やや濃い肌色</annotation>
+		<annotation cp="👩🏿‍❤‍👨🏿">カップル | カップルとハート | ハート | 女性 | 恋人 | 濃い肌色 | 熱々 | 男性</annotation>
+		<annotation cp="👩🏿‍❤‍👨🏿" type="tts">カップルとハート: 女性 男性 濃い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍👩🏻">カップル | カップルとハート | ハート | 女性 | 恋人 | 熱々 | 薄い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍👩🏻" type="tts">カップルとハート: 女性 女性 薄い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍👩🏼">カップル | カップルとハート | ハート | やや薄い肌色 | 女性 | 恋人 | 熱々 | 薄い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍👩🏼" type="tts">カップルとハート: 女性 女性 薄い肌色 やや薄い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍👩🏽">カップル | カップルとハート | ハート | 中間の肌色 | 女性 | 恋人 | 熱々 | 薄い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍👩🏽" type="tts">カップルとハート: 女性 女性 薄い肌色 中間の肌色</annotation>
+		<annotation cp="👩🏻‍❤‍👩🏾">カップル | カップルとハート | ハート | やや濃い肌色 | 女性 | 恋人 | 熱々 | 薄い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍👩🏾" type="tts">カップルとハート: 女性 女性 薄い肌色 やや濃い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍👩🏿">カップル | カップルとハート | ハート | 女性 | 恋人 | 濃い肌色 | 熱々 | 薄い肌色</annotation>
+		<annotation cp="👩🏻‍❤‍👩🏿" type="tts">カップルとハート: 女性 女性 薄い肌色 濃い肌色</annotation>
+		<annotation cp="👩🏼‍❤‍👩🏻">カップル | カップルとハート | ハート | やや薄い肌色 | 女性 | 恋人 | 熱々 | 薄い肌色</annotation>
+		<annotation cp="👩🏼‍❤‍👩🏻" type="tts">カップルとハート: 女性 女性 やや薄い肌色 薄い肌色</annotation>
+		<annotation cp="👩🏼‍❤‍👩🏼">カップル | カップルとハート | ハート | やや薄い肌色 | 女性 | 恋人 | 熱々</annotation>
+		<annotation cp="👩🏼‍❤‍👩🏼" type="tts">カップルとハート: 女性 女性 やや薄い肌色</annotation>
+		<annotation cp="👩🏼‍❤‍👩🏽">カップル | カップルとハート | ハート | やや薄い肌色 | 中間の肌色 | 女性 | 恋人 | 熱々</annotation>
+		<annotation cp="👩🏼‍❤‍👩🏽" type="tts">カップルとハート: 女性 女性 やや薄い肌色 中間の肌色</annotation>
+		<annotation cp="👩🏼‍❤‍👩🏾">カップル | カップルとハート | ハート | やや濃い肌色 | やや薄い肌色 | 女性 | 恋人 | 熱々</annotation>
+		<annotation cp="👩🏼‍❤‍👩🏾" type="tts">カップルとハート: 女性 女性 やや薄い肌色 やや濃い肌色</annotation>
+		<annotation cp="👩🏼‍❤‍👩🏿">カップル | カップルとハート | ハート | やや薄い肌色 | 女性 | 恋人 | 濃い肌色 | 熱々</annotation>
+		<annotation cp="👩🏼‍❤‍👩🏿" type="tts">カップルとハート: 女性 女性 やや薄い肌色 濃い肌色</annotation>
+		<annotation cp="👩🏽‍❤‍👩🏻">カップル | カップルとハート | ハート | 中間の肌色 | 女性 | 恋人 | 熱々 | 薄い肌色</annotation>
+		<annotation cp="👩🏽‍❤‍👩🏻" type="tts">カップルとハート: 女性 女性 中間の肌色 薄い肌色</annotation>
+		<annotation cp="👩🏽‍❤‍👩🏼">カップル | カップルとハート | ハート | やや薄い肌色 | 中間の肌色 | 女性 | 恋人 | 熱々</annotation>
+		<annotation cp="👩🏽‍❤‍👩🏼" type="tts">カップルとハート: 女性 女性 中間の肌色 やや薄い肌色</annotation>
+		<annotation cp="👩🏽‍❤‍👩🏽">カップル | カップルとハート | ハート | 中間の肌色 | 女性 | 恋人 | 熱々</annotation>
+		<annotation cp="👩🏽‍❤‍👩🏽" type="tts">カップルとハート: 女性 女性 中間の肌色</annotation>
+		<annotation cp="👩🏽‍❤‍👩🏾">カップル | カップルとハート | ハート | やや濃い肌色 | 中間の肌色 | 女性 | 恋人 | 熱々</annotation>
+		<annotation cp="👩🏽‍❤‍👩🏾" type="tts">カップルとハート: 女性 女性 中間の肌色 やや濃い肌色</annotation>
+		<annotation cp="👩🏽‍❤‍👩🏿">カップル | カップルとハート | ハート | 中間の肌色 | 女性 | 恋人 | 濃い肌色 | 熱々</annotation>
+		<annotation cp="👩🏽‍❤‍👩🏿" type="tts">カップルとハート: 女性 女性 中間の肌色 濃い肌色</annotation>
+		<annotation cp="👩🏾‍❤‍👩🏻">カップル | カップルとハート | ハート | やや濃い肌色 | 女性 | 恋人 | 熱々 | 薄い肌色</annotation>
+		<annotation cp="👩🏾‍❤‍👩🏻" type="tts">カップルとハート: 女性 女性 やや濃い肌色 薄い肌色</annotation>
+		<annotation cp="👩🏾‍❤‍👩🏼">カップル | カップルとハート | ハート | やや濃い肌色 | やや薄い肌色 | 女性 | 恋人 | 熱々</annotation>
+		<annotation cp="👩🏾‍❤‍👩🏼" type="tts">カップルとハート: 女性 女性 やや濃い肌色 やや薄い肌色</annotation>
+		<annotation cp="👩🏾‍❤‍👩🏽">カップル | カップルとハート | ハート | やや濃い肌色 | 中間の肌色 | 女性 | 恋人 | 熱々</annotation>
+		<annotation cp="👩🏾‍❤‍👩🏽" type="tts">カップルとハート: 女性 女性 やや濃い肌色 中間の肌色</annotation>
+		<annotation cp="👩🏾‍❤‍👩🏾">カップル | カップルとハート | ハート | やや濃い肌色 | 女性 | 恋人 | 熱々</annotation>
+		<annotation cp="👩🏾‍❤‍👩🏾" type="tts">カップルとハート: 女性 女性 やや濃い肌色</annotation>
+		<annotation cp="👩🏾‍❤‍👩🏿">カップル | カップルとハート | ハート | やや濃い肌色 | 女性 | 恋人 | 濃い肌色 | 熱々</annotation>
+		<annotation cp="👩🏾‍❤‍👩🏿" type="tts">カップルとハート: 女性 女性 やや濃い肌色 濃い肌色</annotation>
+		<annotation cp="👩🏿‍❤‍👩🏻">カップル | カップルとハート | ハート | 女性 | 恋人 | 濃い肌色 | 熱々 | 薄い肌色</annotation>
+		<annotation cp="👩🏿‍❤‍👩🏻" type="tts">カップルとハート: 女性 女性 濃い肌色 薄い肌色</annotation>
+		<annotation cp="👩🏿‍❤‍👩🏼">カップル | カップルとハート | ハート | やや薄い肌色 | 女性 | 恋人 | 濃い肌色 | 熱々</annotation>
+		<annotation cp="👩🏿‍❤‍👩🏼" type="tts">カップルとハート: 女性 女性 濃い肌色 やや薄い肌色</annotation>
+		<annotation cp="👩🏿‍❤‍👩🏽">カップル | カップルとハート | ハート | 中間の肌色 | 女性 | 恋人 | 濃い肌色 | 熱々</annotation>
+		<annotation cp="👩🏿‍❤‍👩🏽" type="tts">カップルとハート: 女性 女性 濃い肌色 中間の肌色</annotation>
+		<annotation cp="👩🏿‍❤‍👩🏾">カップル | カップルとハート | ハート | やや濃い肌色 | 女性 | 恋人 | 濃い肌色 | 熱々</annotation>
+		<annotation cp="👩🏿‍❤‍👩🏾" type="tts">カップルとハート: 女性 女性 濃い肌色 やや濃い肌色</annotation>
+		<annotation cp="👩🏿‍❤‍👩🏿">カップル | カップルとハート | ハート | 女性 | 恋人 | 濃い肌色 | 熱々</annotation>
+		<annotation cp="👩🏿‍❤‍👩🏿" type="tts">カップルとハート: 女性 女性 濃い肌色</annotation>
 		<annotation cp="👩‍🦰">大人 | 女 | 女性 | 赤毛 | 顔</annotation>
 		<annotation cp="👩‍🦰" type="tts">女性: 赤毛</annotation>
 		<annotation cp="👩🏻‍🦰">大人 | 女 | 女性 | 薄い肌色 | 赤毛 | 顔</annotation>
@@ -1287,35 +1836,35 @@ Derived short names and annotations, using GenerateDerivedAnnotations.java. See 
 		<annotation cp="👩🏾‍🔬" type="tts">女性科学者: やや濃い肌色</annotation>
 		<annotation cp="👩🏿‍🔬">女 | 女性 | 女性科学者 | 濃い肌色 | 科学者</annotation>
 		<annotation cp="👩🏿‍🔬" type="tts">女性科学者: 濃い肌色</annotation>
-		<annotation cp="🧑🏻‍💻">コンピュータ | デベロッパ | パソコン | プログラマ | 技術者 | 薄い肌色</annotation>
+		<annotation cp="🧑🏻‍💻">コンピュータ | パソコン | プログラマ | 技術者 | 薄い肌色 | 開発者</annotation>
 		<annotation cp="🧑🏻‍💻" type="tts">技術者: 薄い肌色</annotation>
-		<annotation cp="🧑🏼‍💻">コンピュータ | デベロッパ | パソコン | プログラマ | やや薄い肌色 | 技術者</annotation>
+		<annotation cp="🧑🏼‍💻">コンピュータ | パソコン | プログラマ | やや薄い肌色 | 技術者 | 開発者</annotation>
 		<annotation cp="🧑🏼‍💻" type="tts">技術者: やや薄い肌色</annotation>
-		<annotation cp="🧑🏽‍💻">コンピュータ | デベロッパ | パソコン | プログラマ | 中間の肌色 | 技術者</annotation>
+		<annotation cp="🧑🏽‍💻">コンピュータ | パソコン | プログラマ | 中間の肌色 | 技術者 | 開発者</annotation>
 		<annotation cp="🧑🏽‍💻" type="tts">技術者: 中間の肌色</annotation>
-		<annotation cp="🧑🏾‍💻">コンピュータ | デベロッパ | パソコン | プログラマ | やや濃い肌色 | 技術者</annotation>
+		<annotation cp="🧑🏾‍💻">コンピュータ | パソコン | プログラマ | やや濃い肌色 | 技術者 | 開発者</annotation>
 		<annotation cp="🧑🏾‍💻" type="tts">技術者: やや濃い肌色</annotation>
-		<annotation cp="🧑🏿‍💻">コンピュータ | デベロッパ | パソコン | プログラマ | 技術者 | 濃い肌色</annotation>
+		<annotation cp="🧑🏿‍💻">コンピュータ | パソコン | プログラマ | 技術者 | 濃い肌色 | 開発者</annotation>
 		<annotation cp="🧑🏿‍💻" type="tts">技術者: 濃い肌色</annotation>
-		<annotation cp="👨🏻‍💻">コンピュータ | デベロッパ | パソコン | プログラマ | 男性 | 男性技術者 | 薄い肌色</annotation>
+		<annotation cp="👨🏻‍💻">コンピュータ | パソコン | プログラマ | 男性 | 男性技術者 | 薄い肌色 | 開発者</annotation>
 		<annotation cp="👨🏻‍💻" type="tts">男性技術者: 薄い肌色</annotation>
-		<annotation cp="👨🏼‍💻">コンピュータ | デベロッパ | パソコン | プログラマ | やや薄い肌色 | 男性 | 男性技術者</annotation>
+		<annotation cp="👨🏼‍💻">コンピュータ | パソコン | プログラマ | やや薄い肌色 | 男性 | 男性技術者 | 開発者</annotation>
 		<annotation cp="👨🏼‍💻" type="tts">男性技術者: やや薄い肌色</annotation>
-		<annotation cp="👨🏽‍💻">コンピュータ | デベロッパ | パソコン | プログラマ | 中間の肌色 | 男性 | 男性技術者</annotation>
+		<annotation cp="👨🏽‍💻">コンピュータ | パソコン | プログラマ | 中間の肌色 | 男性 | 男性技術者 | 開発者</annotation>
 		<annotation cp="👨🏽‍💻" type="tts">男性技術者: 中間の肌色</annotation>
-		<annotation cp="👨🏾‍💻">コンピュータ | デベロッパ | パソコン | プログラマ | やや濃い肌色 | 男性 | 男性技術者</annotation>
+		<annotation cp="👨🏾‍💻">コンピュータ | パソコン | プログラマ | やや濃い肌色 | 男性 | 男性技術者 | 開発者</annotation>
 		<annotation cp="👨🏾‍💻" type="tts">男性技術者: やや濃い肌色</annotation>
-		<annotation cp="👨🏿‍💻">コンピュータ | デベロッパ | パソコン | プログラマ | 濃い肌色 | 男性 | 男性技術者</annotation>
+		<annotation cp="👨🏿‍💻">コンピュータ | パソコン | プログラマ | 濃い肌色 | 男性 | 男性技術者 | 開発者</annotation>
 		<annotation cp="👨🏿‍💻" type="tts">男性技術者: 濃い肌色</annotation>
-		<annotation cp="👩🏻‍💻">コンピュータ | デベロッパ | パソコン | プログラマ | 女性 | 女性技術者 | 薄い肌色</annotation>
+		<annotation cp="👩🏻‍💻">コンピュータ | パソコン | プログラマ | 女性 | 女性技術者 | 薄い肌色 | 開発者</annotation>
 		<annotation cp="👩🏻‍💻" type="tts">女性技術者: 薄い肌色</annotation>
-		<annotation cp="👩🏼‍💻">コンピュータ | デベロッパ | パソコン | プログラマ | やや薄い肌色 | 女性 | 女性技術者</annotation>
+		<annotation cp="👩🏼‍💻">コンピュータ | パソコン | プログラマ | やや薄い肌色 | 女性 | 女性技術者 | 開発者</annotation>
 		<annotation cp="👩🏼‍💻" type="tts">女性技術者: やや薄い肌色</annotation>
-		<annotation cp="👩🏽‍💻">コンピュータ | デベロッパ | パソコン | プログラマ | 中間の肌色 | 女性 | 女性技術者</annotation>
+		<annotation cp="👩🏽‍💻">コンピュータ | パソコン | プログラマ | 中間の肌色 | 女性 | 女性技術者 | 開発者</annotation>
 		<annotation cp="👩🏽‍💻" type="tts">女性技術者: 中間の肌色</annotation>
-		<annotation cp="👩🏾‍💻">コンピュータ | デベロッパ | パソコン | プログラマ | やや濃い肌色 | 女性 | 女性技術者</annotation>
+		<annotation cp="👩🏾‍💻">コンピュータ | パソコン | プログラマ | やや濃い肌色 | 女性 | 女性技術者 | 開発者</annotation>
 		<annotation cp="👩🏾‍💻" type="tts">女性技術者: やや濃い肌色</annotation>
-		<annotation cp="👩🏿‍💻">コンピュータ | デベロッパ | パソコン | プログラマ | 女性 | 女性技術者 | 濃い肌色</annotation>
+		<annotation cp="👩🏿‍💻">コンピュータ | パソコン | プログラマ | 女性 | 女性技術者 | 濃い肌色 | 開発者</annotation>
 		<annotation cp="👩🏿‍💻" type="tts">女性技術者: 濃い肌色</annotation>
 		<annotation cp="🧑🏻‍🎤">アーティスト | シンガー | スター | ロッカー | 歌手 | 薄い肌色</annotation>
 		<annotation cp="🧑🏻‍🎤" type="tts">歌手: 薄い肌色</annotation>
@@ -1667,15 +2216,15 @@ Derived short names and annotations, using GenerateDerivedAnnotations.java. See 
 		<annotation cp="🧕🏾" type="tts">スカーフの女性: やや濃い肌色</annotation>
 		<annotation cp="🧕🏿">スカーフ | スカーフの女性 | ヒジャブ | ベール | 女 | 女性 | 濃い肌色</annotation>
 		<annotation cp="🧕🏿" type="tts">スカーフの女性: 濃い肌色</annotation>
-		<annotation cp="🤵🏻">タキシード | タキシードの人 | 男 | 男性 | 結婚 | 花婿 | 薄い肌色</annotation>
+		<annotation cp="🤵🏻">タキシード | タキシードの人 | 結婚 | 花婿 | 薄い肌色</annotation>
 		<annotation cp="🤵🏻" type="tts">タキシードの人: 薄い肌色</annotation>
-		<annotation cp="🤵🏼">タキシード | タキシードの人 | やや薄い肌色 | 男 | 男性 | 結婚 | 花婿</annotation>
+		<annotation cp="🤵🏼">タキシード | タキシードの人 | やや薄い肌色 | 結婚 | 花婿</annotation>
 		<annotation cp="🤵🏼" type="tts">タキシードの人: やや薄い肌色</annotation>
-		<annotation cp="🤵🏽">タキシード | タキシードの人 | 中間の肌色 | 男 | 男性 | 結婚 | 花婿</annotation>
+		<annotation cp="🤵🏽">タキシード | タキシードの人 | 中間の肌色 | 結婚 | 花婿</annotation>
 		<annotation cp="🤵🏽" type="tts">タキシードの人: 中間の肌色</annotation>
-		<annotation cp="🤵🏾">タキシード | タキシードの人 | やや濃い肌色 | 男 | 男性 | 結婚 | 花婿</annotation>
+		<annotation cp="🤵🏾">タキシード | タキシードの人 | やや濃い肌色 | 結婚 | 花婿</annotation>
 		<annotation cp="🤵🏾" type="tts">タキシードの人: やや濃い肌色</annotation>
-		<annotation cp="🤵🏿">タキシード | タキシードの人 | 濃い肌色 | 男 | 男性 | 結婚 | 花婿</annotation>
+		<annotation cp="🤵🏿">タキシード | タキシードの人 | 濃い肌色 | 結婚 | 花婿</annotation>
 		<annotation cp="🤵🏿" type="tts">タキシードの人: 濃い肌色</annotation>
 		<annotation cp="🤵🏻‍♂">タキシード | タキシードの男 | タキシードの男性 | 男 | 男性 | 薄い肌色</annotation>
 		<annotation cp="🤵🏻‍♂" type="tts">タキシードの男性: 薄い肌色</annotation>
@@ -1697,15 +2246,15 @@ Derived short names and annotations, using GenerateDerivedAnnotations.java. See 
 		<annotation cp="🤵🏾‍♀" type="tts">タキシードの女性: やや濃い肌色</annotation>
 		<annotation cp="🤵🏿‍♀">タキシード | タキシードの女 | タキシードの女性 | 女 | 女性 | 濃い肌色</annotation>
 		<annotation cp="🤵🏿‍♀" type="tts">タキシードの女性: 濃い肌色</annotation>
-		<annotation cp="👰🏻">ベールの人 | 女 | 女性 | 結婚 | 花嫁 | 薄い肌色 | 顔</annotation>
+		<annotation cp="👰🏻">ベールの人 | 結婚 | 花嫁 | 薄い肌色 | 顔</annotation>
 		<annotation cp="👰🏻" type="tts">ベールの人: 薄い肌色</annotation>
-		<annotation cp="👰🏼">ベールの人 | やや薄い肌色 | 女 | 女性 | 結婚 | 花嫁 | 顔</annotation>
+		<annotation cp="👰🏼">ベールの人 | やや薄い肌色 | 結婚 | 花嫁 | 顔</annotation>
 		<annotation cp="👰🏼" type="tts">ベールの人: やや薄い肌色</annotation>
-		<annotation cp="👰🏽">ベールの人 | 中間の肌色 | 女 | 女性 | 結婚 | 花嫁 | 顔</annotation>
+		<annotation cp="👰🏽">ベールの人 | 中間の肌色 | 結婚 | 花嫁 | 顔</annotation>
 		<annotation cp="👰🏽" type="tts">ベールの人: 中間の肌色</annotation>
-		<annotation cp="👰🏾">ベールの人 | やや濃い肌色 | 女 | 女性 | 結婚 | 花嫁 | 顔</annotation>
+		<annotation cp="👰🏾">ベールの人 | やや濃い肌色 | 結婚 | 花嫁 | 顔</annotation>
 		<annotation cp="👰🏾" type="tts">ベールの人: やや濃い肌色</annotation>
-		<annotation cp="👰🏿">ベールの人 | 女 | 女性 | 濃い肌色 | 結婚 | 花嫁 | 顔</annotation>
+		<annotation cp="👰🏿">ベールの人 | 濃い肌色 | 結婚 | 花嫁 | 顔</annotation>
 		<annotation cp="👰🏿" type="tts">ベールの人: 濃い肌色</annotation>
 		<annotation cp="👰🏻‍♂">ベール | ベールの男性 | 男 | 男性 | 薄い肌色</annotation>
 		<annotation cp="👰🏻‍♂" type="tts">ベールの男性: 薄い肌色</annotation>
@@ -2817,55 +3366,55 @@ Derived short names and annotations, using GenerateDerivedAnnotations.java. See 
 		<annotation cp="🛌🏾" type="tts">ベッドに寝る人: やや濃い肌色</annotation>
 		<annotation cp="🛌🏿">ベッド | ベッドに寝る人 | ホテル | 寝る | 濃い肌色</annotation>
 		<annotation cp="🛌🏿" type="tts">ベッドに寝る人: 濃い肌色</annotation>
-		<annotation cp="🧑🏻‍🤝‍🧑🏻">カップル | つなぐ | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 薄い肌色</annotation>
+		<annotation cp="🧑🏻‍🤝‍🧑🏻">カップル | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 薄い肌色</annotation>
 		<annotation cp="🧑🏻‍🤝‍🧑🏻" type="tts">手をつなぐ2人: 薄い肌色</annotation>
-		<annotation cp="🧑🏻‍🤝‍🧑🏼">カップル | つなぐ | やや薄い肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 薄い肌色</annotation>
+		<annotation cp="🧑🏻‍🤝‍🧑🏼">カップル | やや薄い肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 薄い肌色</annotation>
 		<annotation cp="🧑🏻‍🤝‍🧑🏼" type="tts">手をつなぐ2人: 薄い肌色 やや薄い肌色</annotation>
-		<annotation cp="🧑🏻‍🤝‍🧑🏽">カップル | つなぐ | 中間の肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 薄い肌色</annotation>
+		<annotation cp="🧑🏻‍🤝‍🧑🏽">カップル | 中間の肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 薄い肌色</annotation>
 		<annotation cp="🧑🏻‍🤝‍🧑🏽" type="tts">手をつなぐ2人: 薄い肌色 中間の肌色</annotation>
-		<annotation cp="🧑🏻‍🤝‍🧑🏾">カップル | つなぐ | やや濃い肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 薄い肌色</annotation>
+		<annotation cp="🧑🏻‍🤝‍🧑🏾">カップル | やや濃い肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 薄い肌色</annotation>
 		<annotation cp="🧑🏻‍🤝‍🧑🏾" type="tts">手をつなぐ2人: 薄い肌色 やや濃い肌色</annotation>
-		<annotation cp="🧑🏻‍🤝‍🧑🏿">カップル | つなぐ | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 濃い肌色 | 薄い肌色</annotation>
+		<annotation cp="🧑🏻‍🤝‍🧑🏿">カップル | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 濃い肌色 | 薄い肌色</annotation>
 		<annotation cp="🧑🏻‍🤝‍🧑🏿" type="tts">手をつなぐ2人: 薄い肌色 濃い肌色</annotation>
-		<annotation cp="🧑🏼‍🤝‍🧑🏻">カップル | つなぐ | やや薄い肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 薄い肌色</annotation>
+		<annotation cp="🧑🏼‍🤝‍🧑🏻">カップル | やや薄い肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 薄い肌色</annotation>
 		<annotation cp="🧑🏼‍🤝‍🧑🏻" type="tts">手をつなぐ2人: やや薄い肌色 薄い肌色</annotation>
-		<annotation cp="🧑🏼‍🤝‍🧑🏼">カップル | つなぐ | やや薄い肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人</annotation>
+		<annotation cp="🧑🏼‍🤝‍🧑🏼">カップル | やや薄い肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人</annotation>
 		<annotation cp="🧑🏼‍🤝‍🧑🏼" type="tts">手をつなぐ2人: やや薄い肌色</annotation>
-		<annotation cp="🧑🏼‍🤝‍🧑🏽">カップル | つなぐ | やや薄い肌色 | 中間の肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人</annotation>
+		<annotation cp="🧑🏼‍🤝‍🧑🏽">カップル | やや薄い肌色 | 中間の肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人</annotation>
 		<annotation cp="🧑🏼‍🤝‍🧑🏽" type="tts">手をつなぐ2人: やや薄い肌色 中間の肌色</annotation>
-		<annotation cp="🧑🏼‍🤝‍🧑🏾">カップル | つなぐ | やや濃い肌色 | やや薄い肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人</annotation>
+		<annotation cp="🧑🏼‍🤝‍🧑🏾">カップル | やや濃い肌色 | やや薄い肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人</annotation>
 		<annotation cp="🧑🏼‍🤝‍🧑🏾" type="tts">手をつなぐ2人: やや薄い肌色 やや濃い肌色</annotation>
-		<annotation cp="🧑🏼‍🤝‍🧑🏿">カップル | つなぐ | やや薄い肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 濃い肌色</annotation>
+		<annotation cp="🧑🏼‍🤝‍🧑🏿">カップル | やや薄い肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 濃い肌色</annotation>
 		<annotation cp="🧑🏼‍🤝‍🧑🏿" type="tts">手をつなぐ2人: やや薄い肌色 濃い肌色</annotation>
-		<annotation cp="🧑🏽‍🤝‍🧑🏻">カップル | つなぐ | 中間の肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 薄い肌色</annotation>
+		<annotation cp="🧑🏽‍🤝‍🧑🏻">カップル | 中間の肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 薄い肌色</annotation>
 		<annotation cp="🧑🏽‍🤝‍🧑🏻" type="tts">手をつなぐ2人: 中間の肌色 薄い肌色</annotation>
-		<annotation cp="🧑🏽‍🤝‍🧑🏼">カップル | つなぐ | やや薄い肌色 | 中間の肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人</annotation>
+		<annotation cp="🧑🏽‍🤝‍🧑🏼">カップル | やや薄い肌色 | 中間の肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人</annotation>
 		<annotation cp="🧑🏽‍🤝‍🧑🏼" type="tts">手をつなぐ2人: 中間の肌色 やや薄い肌色</annotation>
-		<annotation cp="🧑🏽‍🤝‍🧑🏽">カップル | つなぐ | 中間の肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人</annotation>
+		<annotation cp="🧑🏽‍🤝‍🧑🏽">カップル | 中間の肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人</annotation>
 		<annotation cp="🧑🏽‍🤝‍🧑🏽" type="tts">手をつなぐ2人: 中間の肌色</annotation>
-		<annotation cp="🧑🏽‍🤝‍🧑🏾">カップル | つなぐ | やや濃い肌色 | 中間の肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人</annotation>
+		<annotation cp="🧑🏽‍🤝‍🧑🏾">カップル | やや濃い肌色 | 中間の肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人</annotation>
 		<annotation cp="🧑🏽‍🤝‍🧑🏾" type="tts">手をつなぐ2人: 中間の肌色 やや濃い肌色</annotation>
-		<annotation cp="🧑🏽‍🤝‍🧑🏿">カップル | つなぐ | 中間の肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 濃い肌色</annotation>
+		<annotation cp="🧑🏽‍🤝‍🧑🏿">カップル | 中間の肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 濃い肌色</annotation>
 		<annotation cp="🧑🏽‍🤝‍🧑🏿" type="tts">手をつなぐ2人: 中間の肌色 濃い肌色</annotation>
-		<annotation cp="🧑🏾‍🤝‍🧑🏻">カップル | つなぐ | やや濃い肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 薄い肌色</annotation>
+		<annotation cp="🧑🏾‍🤝‍🧑🏻">カップル | やや濃い肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 薄い肌色</annotation>
 		<annotation cp="🧑🏾‍🤝‍🧑🏻" type="tts">手をつなぐ2人: やや濃い肌色 薄い肌色</annotation>
-		<annotation cp="🧑🏾‍🤝‍🧑🏼">カップル | つなぐ | やや濃い肌色 | やや薄い肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人</annotation>
+		<annotation cp="🧑🏾‍🤝‍🧑🏼">カップル | やや濃い肌色 | やや薄い肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人</annotation>
 		<annotation cp="🧑🏾‍🤝‍🧑🏼" type="tts">手をつなぐ2人: やや濃い肌色 やや薄い肌色</annotation>
-		<annotation cp="🧑🏾‍🤝‍🧑🏽">カップル | つなぐ | やや濃い肌色 | 中間の肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人</annotation>
+		<annotation cp="🧑🏾‍🤝‍🧑🏽">カップル | やや濃い肌色 | 中間の肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人</annotation>
 		<annotation cp="🧑🏾‍🤝‍🧑🏽" type="tts">手をつなぐ2人: やや濃い肌色 中間の肌色</annotation>
-		<annotation cp="🧑🏾‍🤝‍🧑🏾">カップル | つなぐ | やや濃い肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人</annotation>
+		<annotation cp="🧑🏾‍🤝‍🧑🏾">カップル | やや濃い肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人</annotation>
 		<annotation cp="🧑🏾‍🤝‍🧑🏾" type="tts">手をつなぐ2人: やや濃い肌色</annotation>
-		<annotation cp="🧑🏾‍🤝‍🧑🏿">カップル | つなぐ | やや濃い肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 濃い肌色</annotation>
+		<annotation cp="🧑🏾‍🤝‍🧑🏿">カップル | やや濃い肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 濃い肌色</annotation>
 		<annotation cp="🧑🏾‍🤝‍🧑🏿" type="tts">手をつなぐ2人: やや濃い肌色 濃い肌色</annotation>
-		<annotation cp="🧑🏿‍🤝‍🧑🏻">カップル | つなぐ | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 濃い肌色 | 薄い肌色</annotation>
+		<annotation cp="🧑🏿‍🤝‍🧑🏻">カップル | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 濃い肌色 | 薄い肌色</annotation>
 		<annotation cp="🧑🏿‍🤝‍🧑🏻" type="tts">手をつなぐ2人: 濃い肌色 薄い肌色</annotation>
-		<annotation cp="🧑🏿‍🤝‍🧑🏼">カップル | つなぐ | やや薄い肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 濃い肌色</annotation>
+		<annotation cp="🧑🏿‍🤝‍🧑🏼">カップル | やや薄い肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 濃い肌色</annotation>
 		<annotation cp="🧑🏿‍🤝‍🧑🏼" type="tts">手をつなぐ2人: 濃い肌色 やや薄い肌色</annotation>
-		<annotation cp="🧑🏿‍🤝‍🧑🏽">カップル | つなぐ | 中間の肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 濃い肌色</annotation>
+		<annotation cp="🧑🏿‍🤝‍🧑🏽">カップル | 中間の肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 濃い肌色</annotation>
 		<annotation cp="🧑🏿‍🤝‍🧑🏽" type="tts">手をつなぐ2人: 濃い肌色 中間の肌色</annotation>
-		<annotation cp="🧑🏿‍🤝‍🧑🏾">カップル | つなぐ | やや濃い肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 濃い肌色</annotation>
+		<annotation cp="🧑🏿‍🤝‍🧑🏾">カップル | やや濃い肌色 | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 濃い肌色</annotation>
 		<annotation cp="🧑🏿‍🤝‍🧑🏾" type="tts">手をつなぐ2人: 濃い肌色 やや濃い肌色</annotation>
-		<annotation cp="🧑🏿‍🤝‍🧑🏿">カップル | つなぐ | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 濃い肌色</annotation>
+		<annotation cp="🧑🏿‍🤝‍🧑🏿">カップル | 人 | 友達 | 恋人 | 手 | 手をつなぐ | 手をつなぐ2人 | 濃い肌色</annotation>
 		<annotation cp="🧑🏿‍🤝‍🧑🏿" type="tts">手をつなぐ2人: 濃い肌色</annotation>
 		<annotation cp="👭🏻">カップル | 友達 | 同性 | 女 | 恋人 | 手をつなぐ女性 | 薄い肌色</annotation>
 		<annotation cp="👭🏻" type="tts">手をつなぐ女性: 薄い肌色</annotation>
@@ -3017,12 +3566,32 @@ Derived short names and annotations, using GenerateDerivedAnnotations.java. See 
 		<annotation cp="👨🏿‍🤝‍👨🏾" type="tts">手をつなぐ男性: 濃い肌色 やや濃い肌色</annotation>
 		<annotation cp="👬🏿">カップル | 友達 | 同性 | 恋人 | 手をつなぐ男性 | 濃い肌色 | 男</annotation>
 		<annotation cp="👬🏿" type="tts">手をつなぐ男性: 濃い肌色</annotation>
+		<annotation cp="💏🏻">2人でキス | カップル | キス | ちゅっ | ハート | 薄い肌色</annotation>
+		<annotation cp="💏🏻" type="tts">2人でキス: 薄い肌色</annotation>
+		<annotation cp="💏🏼">2人でキス | カップル | キス | ちゅっ | ハート | やや薄い肌色</annotation>
+		<annotation cp="💏🏼" type="tts">2人でキス: やや薄い肌色</annotation>
+		<annotation cp="💏🏽">2人でキス | カップル | キス | ちゅっ | ハート | 中間の肌色</annotation>
+		<annotation cp="💏🏽" type="tts">2人でキス: 中間の肌色</annotation>
+		<annotation cp="💏🏾">2人でキス | カップル | キス | ちゅっ | ハート | やや濃い肌色</annotation>
+		<annotation cp="💏🏾" type="tts">2人でキス: やや濃い肌色</annotation>
+		<annotation cp="💏🏿">2人でキス | カップル | キス | ちゅっ | ハート | 濃い肌色</annotation>
+		<annotation cp="💏🏿" type="tts">2人でキス: 濃い肌色</annotation>
 		<annotation cp="👩‍❤‍💋‍👨">2人でキス | カップル | キス | ちゅっ | ハート | 女性 | 男性</annotation>
 		<annotation cp="👩‍❤‍💋‍👨" type="tts">2人でキス: 女性 男性</annotation>
 		<annotation cp="👨‍❤‍💋‍👨">2人でキス | カップル | キス | ちゅっ | ハート | 男性</annotation>
 		<annotation cp="👨‍❤‍💋‍👨" type="tts">2人でキス: 男性 男性</annotation>
 		<annotation cp="👩‍❤‍💋‍👩">2人でキス | カップル | キス | ちゅっ | ハート | 女性</annotation>
 		<annotation cp="👩‍❤‍💋‍👩" type="tts">2人でキス: 女性 女性</annotation>
+		<annotation cp="💑🏻">カップル | カップルとハート | ハート | 恋人 | 熱々 | 薄い肌色</annotation>
+		<annotation cp="💑🏻" type="tts">カップルとハート: 薄い肌色</annotation>
+		<annotation cp="💑🏼">カップル | カップルとハート | ハート | やや薄い肌色 | 恋人 | 熱々</annotation>
+		<annotation cp="💑🏼" type="tts">カップルとハート: やや薄い肌色</annotation>
+		<annotation cp="💑🏽">カップル | カップルとハート | ハート | 中間の肌色 | 恋人 | 熱々</annotation>
+		<annotation cp="💑🏽" type="tts">カップルとハート: 中間の肌色</annotation>
+		<annotation cp="💑🏾">カップル | カップルとハート | ハート | やや濃い肌色 | 恋人 | 熱々</annotation>
+		<annotation cp="💑🏾" type="tts">カップルとハート: やや濃い肌色</annotation>
+		<annotation cp="💑🏿">カップル | カップルとハート | ハート | 恋人 | 濃い肌色 | 熱々</annotation>
+		<annotation cp="💑🏿" type="tts">カップルとハート: 濃い肌色</annotation>
 		<annotation cp="👩‍❤‍👨">カップル | カップルとハート | ハート | 女性 | 恋人 | 熱々 | 男性</annotation>
 		<annotation cp="👩‍❤‍👨" type="tts">カップルとハート: 女性 男性</annotation>
 		<annotation cp="👨‍❤‍👨">カップル | カップルとハート | ハート | 恋人 | 熱々 | 男性</annotation>
@@ -3607,6 +4176,26 @@ Derived short names and annotations, using GenerateDerivedAnnotations.java. See 
 		<annotation cp="🏴󠁧󠁢󠁳󠁣󠁴󠁿" type="tts">旗: スコットランド</annotation>
 		<annotation cp="🏴󠁧󠁢󠁷󠁬󠁳󠁿">旗</annotation>
 		<annotation cp="🏴󠁧󠁢󠁷󠁬󠁳󠁿" type="tts">旗: ウェールズ</annotation>
+		<annotation cp="¤" type="tts">不明または無効な通貨</annotation>
+		<annotation cp="֏" type="tts">アルメニア ドラム</annotation>
+		<annotation cp="؋" type="tts">アフガニスタン アフガニー</annotation>
+		<annotation cp="৳" type="tts">バングラデシュ タカ</annotation>
+		<annotation cp="฿" type="tts">タイ バーツ</annotation>
+		<annotation cp="៛" type="tts">カンボジア リエル</annotation>
+		<annotation cp="₡" type="tts">コスタリカ コロン</annotation>
+		<annotation cp="₦" type="tts">ナイジェリア ナイラ</annotation>
+		<annotation cp="₧" type="tts">スペイン ペセタ</annotation>
+		<annotation cp="₪" type="tts">イスラエル新シェケル</annotation>
+		<annotation cp="₫" type="tts">ベトナム ドン</annotation>
+		<annotation cp="₭" type="tts">ラオス キープ</annotation>
+		<annotation cp="₮" type="tts">モンゴル トグログ</annotation>
+		<annotation cp="₲" type="tts">パラグアイ グアラニ</annotation>
+		<annotation cp="₴" type="tts">ウクライナ グリブナ</annotation>
+		<annotation cp="₵" type="tts">ガーナ セディ</annotation>
+		<annotation cp="₸" type="tts">カザフスタン テンゲ</annotation>
+		<annotation cp="₺" type="tts">新トルコリラ</annotation>
+		<annotation cp="₼" type="tts">アゼルバイジャン マナト</annotation>
+		<annotation cp="₾" type="tts">ジョージア ラリ</annotation>
 		<annotation cp="0⃣">囲み数字</annotation>
 		<annotation cp="0⃣" type="tts">囲み数字: 0</annotation>
 		<annotation cp="1⃣">囲み数字</annotation>

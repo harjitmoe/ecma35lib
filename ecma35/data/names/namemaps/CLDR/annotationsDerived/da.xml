@@ -1,18 +1,157 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
-<!-- Copyright © 1991-2020 Unicode, Inc.
+<!-- Copyright © 1991-2021 Unicode, Inc.
 For terms of use, see http://www.unicode.org/copyright.html
-Unicode and the Unicode Logo are registered trademarks of Unicode, Inc. in the U.S. and other countries.
+SPDX-License-Identifier: Unicode-DFS-2016
 CLDR data files are interpreted according to the LDML specification (http://unicode.org/reports/tr35/)
-
-Derived short names and annotations, using GenerateDerivedAnnotations.java. See warnings in /annotations/ file.
 -->
+<!-- Derived short names and annotations, using GenerateDerivedAnnotations.java. See warnings in /annotations/ file. -->
 <ldml>
 	<identity>
 		<version number="$Revision$"/>
 		<language type="da"/>
 	</identity>
 	<annotations>
+		<annotation cp="🫃🏻">gravid | gravid mand | lys teint | mæt | mave | oppustet</annotation>
+		<annotation cp="🫃🏻" type="tts">gravid mand: lys teint</annotation>
+		<annotation cp="🫃🏼">gravid | gravid mand | mæt | mave | medium til lys teint | oppustet</annotation>
+		<annotation cp="🫃🏼" type="tts">gravid mand: medium til lys teint</annotation>
+		<annotation cp="🫃🏽">gravid | gravid mand | mæt | mave | medium teint | oppustet</annotation>
+		<annotation cp="🫃🏽" type="tts">gravid mand: medium teint</annotation>
+		<annotation cp="🫃🏾">gravid | gravid mand | mæt | mave | medium til mørk teint | oppustet</annotation>
+		<annotation cp="🫃🏾" type="tts">gravid mand: medium til mørk teint</annotation>
+		<annotation cp="🫃🏿">gravid | gravid mand | mæt | mave | mørk teint | oppustet</annotation>
+		<annotation cp="🫃🏿" type="tts">gravid mand: mørk teint</annotation>
+		<annotation cp="🫄🏻">gravid | gravid person | lys teint | mæt | mave | oppustet</annotation>
+		<annotation cp="🫄🏻" type="tts">gravid person: lys teint</annotation>
+		<annotation cp="🫄🏼">gravid | gravid person | mæt | mave | medium til lys teint | oppustet</annotation>
+		<annotation cp="🫄🏼" type="tts">gravid person: medium til lys teint</annotation>
+		<annotation cp="🫄🏽">gravid | gravid person | mæt | mave | medium teint | oppustet</annotation>
+		<annotation cp="🫄🏽" type="tts">gravid person: medium teint</annotation>
+		<annotation cp="🫄🏾">gravid | gravid person | mæt | mave | medium til mørk teint | oppustet</annotation>
+		<annotation cp="🫄🏾" type="tts">gravid person: medium til mørk teint</annotation>
+		<annotation cp="🫄🏿">gravid | gravid person | mæt | mave | mørk teint | oppustet</annotation>
+		<annotation cp="🫄🏿" type="tts">gravid person: mørk teint</annotation>
+		<annotation cp="🫅🏻">adelig | kongelig | lys teint | monark | person med krone | royal</annotation>
+		<annotation cp="🫅🏻" type="tts">person med krone: lys teint</annotation>
+		<annotation cp="🫅🏼">adelig | kongelig | medium til lys teint | monark | person med krone | royal</annotation>
+		<annotation cp="🫅🏼" type="tts">person med krone: medium til lys teint</annotation>
+		<annotation cp="🫅🏽">adelig | kongelig | medium teint | monark | person med krone | royal</annotation>
+		<annotation cp="🫅🏽" type="tts">person med krone: medium teint</annotation>
+		<annotation cp="🫅🏾">adelig | kongelig | medium til mørk teint | monark | person med krone | royal</annotation>
+		<annotation cp="🫅🏾" type="tts">person med krone: medium til mørk teint</annotation>
+		<annotation cp="🫅🏿">adelig | kongelig | monark | mørk teint | person med krone | royal</annotation>
+		<annotation cp="🫅🏿" type="tts">person med krone: mørk teint</annotation>
+		<annotation cp="🫰🏻">dyrt | hjerte | kærlighed | knips | krydset pegefinger og tommelfinger | lys teint | penge</annotation>
+		<annotation cp="🫰🏻" type="tts">krydset pegefinger og tommelfinger: lys teint</annotation>
+		<annotation cp="🫰🏼">dyrt | hjerte | kærlighed | knips | krydset pegefinger og tommelfinger | medium til lys teint | penge</annotation>
+		<annotation cp="🫰🏼" type="tts">krydset pegefinger og tommelfinger: medium til lys teint</annotation>
+		<annotation cp="🫰🏽">dyrt | hjerte | kærlighed | knips | krydset pegefinger og tommelfinger | medium teint | penge</annotation>
+		<annotation cp="🫰🏽" type="tts">krydset pegefinger og tommelfinger: medium teint</annotation>
+		<annotation cp="🫰🏾">dyrt | hjerte | kærlighed | knips | krydset pegefinger og tommelfinger | medium til mørk teint | penge</annotation>
+		<annotation cp="🫰🏾" type="tts">krydset pegefinger og tommelfinger: medium til mørk teint</annotation>
+		<annotation cp="🫰🏿">dyrt | hjerte | kærlighed | knips | krydset pegefinger og tommelfinger | mørk teint | penge</annotation>
+		<annotation cp="🫰🏿" type="tts">krydset pegefinger og tommelfinger: mørk teint</annotation>
+		<annotation cp="🫱🏻">hånd | hånd til højre | højre | lys teint</annotation>
+		<annotation cp="🫱🏻" type="tts">hånd til højre: lys teint</annotation>
+		<annotation cp="🫱🏼">hånd | hånd til højre | højre | medium til lys teint</annotation>
+		<annotation cp="🫱🏼" type="tts">hånd til højre: medium til lys teint</annotation>
+		<annotation cp="🫱🏽">hånd | hånd til højre | højre | medium teint</annotation>
+		<annotation cp="🫱🏽" type="tts">hånd til højre: medium teint</annotation>
+		<annotation cp="🫱🏾">hånd | hånd til højre | højre | medium til mørk teint</annotation>
+		<annotation cp="🫱🏾" type="tts">hånd til højre: medium til mørk teint</annotation>
+		<annotation cp="🫱🏿">hånd | hånd til højre | højre | mørk teint</annotation>
+		<annotation cp="🫱🏿" type="tts">hånd til højre: mørk teint</annotation>
+		<annotation cp="🫱🏻‍🫲🏼">aftale | enighed | hænder | håndtryk | hilsen | lys teint | medium til lys teint | mødes</annotation>
+		<annotation cp="🫱🏻‍🫲🏼" type="tts">håndtryk: lys teint og medium til lys teint</annotation>
+		<annotation cp="🫱🏻‍🫲🏽">aftale | enighed | hænder | håndtryk | hilsen | lys teint | medium teint | mødes</annotation>
+		<annotation cp="🫱🏻‍🫲🏽" type="tts">håndtryk: lys teint og medium teint</annotation>
+		<annotation cp="🫱🏻‍🫲🏾">aftale | enighed | hænder | håndtryk | hilsen | lys teint | medium til mørk teint | mødes</annotation>
+		<annotation cp="🫱🏻‍🫲🏾" type="tts">håndtryk: lys teint og medium til mørk teint</annotation>
+		<annotation cp="🫱🏻‍🫲🏿">aftale | enighed | hænder | håndtryk | hilsen | lys teint | mødes | mørk teint</annotation>
+		<annotation cp="🫱🏻‍🫲🏿" type="tts">håndtryk: lys teint og mørk teint</annotation>
+		<annotation cp="🫱🏼‍🫲🏻">aftale | enighed | hænder | håndtryk | hilsen | lys teint | medium til lys teint | mødes</annotation>
+		<annotation cp="🫱🏼‍🫲🏻" type="tts">håndtryk: medium til lys teint og lys teint</annotation>
+		<annotation cp="🫱🏼‍🫲🏽">aftale | enighed | hænder | håndtryk | hilsen | medium teint | medium til lys teint | mødes</annotation>
+		<annotation cp="🫱🏼‍🫲🏽" type="tts">håndtryk: medium til lys teint og medium teint</annotation>
+		<annotation cp="🫱🏼‍🫲🏾">aftale | enighed | hænder | håndtryk | hilsen | medium til lys teint | medium til mørk teint | mødes</annotation>
+		<annotation cp="🫱🏼‍🫲🏾" type="tts">håndtryk: medium til lys teint og medium til mørk teint</annotation>
+		<annotation cp="🫱🏼‍🫲🏿">aftale | enighed | hænder | håndtryk | hilsen | medium til lys teint | mødes | mørk teint</annotation>
+		<annotation cp="🫱🏼‍🫲🏿" type="tts">håndtryk: medium til lys teint og mørk teint</annotation>
+		<annotation cp="🫱🏽‍🫲🏻">aftale | enighed | hænder | håndtryk | hilsen | lys teint | medium teint | mødes</annotation>
+		<annotation cp="🫱🏽‍🫲🏻" type="tts">håndtryk: medium teint og lys teint</annotation>
+		<annotation cp="🫱🏽‍🫲🏼">aftale | enighed | hænder | håndtryk | hilsen | medium teint | medium til lys teint | mødes</annotation>
+		<annotation cp="🫱🏽‍🫲🏼" type="tts">håndtryk: medium teint og medium til lys teint</annotation>
+		<annotation cp="🫱🏽‍🫲🏾">aftale | enighed | hænder | håndtryk | hilsen | medium teint | medium til mørk teint | mødes</annotation>
+		<annotation cp="🫱🏽‍🫲🏾" type="tts">håndtryk: medium teint og medium til mørk teint</annotation>
+		<annotation cp="🫱🏽‍🫲🏿">aftale | enighed | hænder | håndtryk | hilsen | medium teint | mødes | mørk teint</annotation>
+		<annotation cp="🫱🏽‍🫲🏿" type="tts">håndtryk: medium teint og mørk teint</annotation>
+		<annotation cp="🫱🏾‍🫲🏻">aftale | enighed | hænder | håndtryk | hilsen | lys teint | medium til mørk teint | mødes</annotation>
+		<annotation cp="🫱🏾‍🫲🏻" type="tts">håndtryk: medium til mørk teint og lys teint</annotation>
+		<annotation cp="🫱🏾‍🫲🏼">aftale | enighed | hænder | håndtryk | hilsen | medium til lys teint | medium til mørk teint | mødes</annotation>
+		<annotation cp="🫱🏾‍🫲🏼" type="tts">håndtryk: medium til mørk teint og medium til lys teint</annotation>
+		<annotation cp="🫱🏾‍🫲🏽">aftale | enighed | hænder | håndtryk | hilsen | medium teint | medium til mørk teint | mødes</annotation>
+		<annotation cp="🫱🏾‍🫲🏽" type="tts">håndtryk: medium til mørk teint og medium teint</annotation>
+		<annotation cp="🫱🏾‍🫲🏿">aftale | enighed | hænder | håndtryk | hilsen | medium til mørk teint | mødes | mørk teint</annotation>
+		<annotation cp="🫱🏾‍🫲🏿" type="tts">håndtryk: medium til mørk teint og mørk teint</annotation>
+		<annotation cp="🫱🏿‍🫲🏻">aftale | enighed | hænder | håndtryk | hilsen | lys teint | mødes | mørk teint</annotation>
+		<annotation cp="🫱🏿‍🫲🏻" type="tts">håndtryk: mørk teint og lys teint</annotation>
+		<annotation cp="🫱🏿‍🫲🏼">aftale | enighed | hænder | håndtryk | hilsen | medium til lys teint | mødes | mørk teint</annotation>
+		<annotation cp="🫱🏿‍🫲🏼" type="tts">håndtryk: mørk teint og medium til lys teint</annotation>
+		<annotation cp="🫱🏿‍🫲🏽">aftale | enighed | hænder | håndtryk | hilsen | medium teint | mødes | mørk teint</annotation>
+		<annotation cp="🫱🏿‍🫲🏽" type="tts">håndtryk: mørk teint og medium teint</annotation>
+		<annotation cp="🫱🏿‍🫲🏾">aftale | enighed | hænder | håndtryk | hilsen | medium til mørk teint | mødes | mørk teint</annotation>
+		<annotation cp="🫱🏿‍🫲🏾" type="tts">håndtryk: mørk teint og medium til mørk teint</annotation>
+		<annotation cp="🫲🏻">hånd | hånd til venstre | lys teint | venstre</annotation>
+		<annotation cp="🫲🏻" type="tts">hånd til venstre: lys teint</annotation>
+		<annotation cp="🫲🏼">hånd | hånd til venstre | medium til lys teint | venstre</annotation>
+		<annotation cp="🫲🏼" type="tts">hånd til venstre: medium til lys teint</annotation>
+		<annotation cp="🫲🏽">hånd | hånd til venstre | medium teint | venstre</annotation>
+		<annotation cp="🫲🏽" type="tts">hånd til venstre: medium teint</annotation>
+		<annotation cp="🫲🏾">hånd | hånd til venstre | medium til mørk teint | venstre</annotation>
+		<annotation cp="🫲🏾" type="tts">hånd til venstre: medium til mørk teint</annotation>
+		<annotation cp="🫲🏿">hånd | hånd til venstre | mørk teint | venstre</annotation>
+		<annotation cp="🫲🏿" type="tts">hånd til venstre: mørk teint</annotation>
+		<annotation cp="🫳🏻">afslå | afvise | genne væk | håndflade nedad | lys teint | tabe</annotation>
+		<annotation cp="🫳🏻" type="tts">håndflade nedad: lys teint</annotation>
+		<annotation cp="🫳🏼">afslå | afvise | genne væk | håndflade nedad | medium til lys teint | tabe</annotation>
+		<annotation cp="🫳🏼" type="tts">håndflade nedad: medium til lys teint</annotation>
+		<annotation cp="🫳🏽">afslå | afvise | genne væk | håndflade nedad | medium teint | tabe</annotation>
+		<annotation cp="🫳🏽" type="tts">håndflade nedad: medium teint</annotation>
+		<annotation cp="🫳🏾">afslå | afvise | genne væk | håndflade nedad | medium til mørk teint | tabe</annotation>
+		<annotation cp="🫳🏾" type="tts">håndflade nedad: medium til mørk teint</annotation>
+		<annotation cp="🫳🏿">afslå | afvise | genne væk | håndflade nedad | mørk teint | tabe</annotation>
+		<annotation cp="🫳🏿" type="tts">håndflade nedad: mørk teint</annotation>
+		<annotation cp="🫴🏻">gribe | håndflade opad | kom | lokke | lys teint | tilbyde | vinke hen</annotation>
+		<annotation cp="🫴🏻" type="tts">håndflade opad: lys teint</annotation>
+		<annotation cp="🫴🏼">gribe | håndflade opad | kom | lokke | medium til lys teint | tilbyde | vinke hen</annotation>
+		<annotation cp="🫴🏼" type="tts">håndflade opad: medium til lys teint</annotation>
+		<annotation cp="🫴🏽">gribe | håndflade opad | kom | lokke | medium teint | tilbyde | vinke hen</annotation>
+		<annotation cp="🫴🏽" type="tts">håndflade opad: medium teint</annotation>
+		<annotation cp="🫴🏾">gribe | håndflade opad | kom | lokke | medium til mørk teint | tilbyde | vinke hen</annotation>
+		<annotation cp="🫴🏾" type="tts">håndflade opad: medium til mørk teint</annotation>
+		<annotation cp="🫴🏿">gribe | håndflade opad | kom | lokke | mørk teint | tilbyde | vinke hen</annotation>
+		<annotation cp="🫴🏿" type="tts">håndflade opad: mørk teint</annotation>
+		<annotation cp="🫵🏻">dig | lys teint | pegefinger | peger på seeren</annotation>
+		<annotation cp="🫵🏻" type="tts">peger på seeren: lys teint</annotation>
+		<annotation cp="🫵🏼">dig | medium til lys teint | pegefinger | peger på seeren</annotation>
+		<annotation cp="🫵🏼" type="tts">peger på seeren: medium til lys teint</annotation>
+		<annotation cp="🫵🏽">dig | medium teint | pegefinger | peger på seeren</annotation>
+		<annotation cp="🫵🏽" type="tts">peger på seeren: medium teint</annotation>
+		<annotation cp="🫵🏾">dig | medium til mørk teint | pegefinger | peger på seeren</annotation>
+		<annotation cp="🫵🏾" type="tts">peger på seeren: medium til mørk teint</annotation>
+		<annotation cp="🫵🏿">dig | mørk teint | pegefinger | peger på seeren</annotation>
+		<annotation cp="🫵🏿" type="tts">peger på seeren: mørk teint</annotation>
+		<annotation cp="🫶🏻">hjertehænder | kærlighed | lys teint</annotation>
+		<annotation cp="🫶🏻" type="tts">hjertehænder: lys teint</annotation>
+		<annotation cp="🫶🏼">hjertehænder | kærlighed | medium til lys teint</annotation>
+		<annotation cp="🫶🏼" type="tts">hjertehænder: medium til lys teint</annotation>
+		<annotation cp="🫶🏽">hjertehænder | kærlighed | medium teint</annotation>
+		<annotation cp="🫶🏽" type="tts">hjertehænder: medium teint</annotation>
+		<annotation cp="🫶🏾">hjertehænder | kærlighed | medium til mørk teint</annotation>
+		<annotation cp="🫶🏾" type="tts">hjertehænder: medium til mørk teint</annotation>
+		<annotation cp="🫶🏿">hjertehænder | kærlighed | mørk teint</annotation>
+		<annotation cp="🫶🏿" type="tts">hjertehænder: mørk teint</annotation>
 		<annotation cp="👋🏻">hånd | lys teint | vinker</annotation>
 		<annotation cp="👋🏻" type="tts">vinker: lys teint</annotation>
 		<annotation cp="👋🏼">hånd | medium til lys teint | vinker</annotation>
@@ -303,6 +442,16 @@ Derived short names and annotations, using GenerateDerivedAnnotations.java. See 
 		<annotation cp="🤲🏾" type="tts">håndflader samlet og løftet: medium til mørk teint</annotation>
 		<annotation cp="🤲🏿">bøn | håndflader samlet og løftet | mørk teint</annotation>
 		<annotation cp="🤲🏿" type="tts">håndflader samlet og løftet: mørk teint</annotation>
+		<annotation cp="🤝🏻">aftale | enighed | hænder | håndtryk | hilsen | lys teint | mødes</annotation>
+		<annotation cp="🤝🏻" type="tts">håndtryk: lys teint</annotation>
+		<annotation cp="🤝🏼">aftale | enighed | hænder | håndtryk | hilsen | medium til lys teint | mødes</annotation>
+		<annotation cp="🤝🏼" type="tts">håndtryk: medium til lys teint</annotation>
+		<annotation cp="🤝🏽">aftale | enighed | hænder | håndtryk | hilsen | medium teint | mødes</annotation>
+		<annotation cp="🤝🏽" type="tts">håndtryk: medium teint</annotation>
+		<annotation cp="🤝🏾">aftale | enighed | hænder | håndtryk | hilsen | medium til mørk teint | mødes</annotation>
+		<annotation cp="🤝🏾" type="tts">håndtryk: medium til mørk teint</annotation>
+		<annotation cp="🤝🏿">aftale | enighed | hænder | håndtryk | hilsen | mødes | mørk teint</annotation>
+		<annotation cp="🤝🏿" type="tts">håndtryk: mørk teint</annotation>
 		<annotation cp="🙏🏻">bøn | foldede hænder | lys teint | namaste | namasté</annotation>
 		<annotation cp="🙏🏻" type="tts">foldede hænder: lys teint</annotation>
 		<annotation cp="🙏🏼">bøn | foldede hænder | medium til lys teint | namaste | namasté</annotation>
@@ -463,6 +612,86 @@ Derived short names and annotations, using GenerateDerivedAnnotations.java. See 
 		<annotation cp="👱🏾" type="tts">blond person: medium til mørk teint</annotation>
 		<annotation cp="👱🏿">blond | blond person | hår | mørk teint</annotation>
 		<annotation cp="👱🏿" type="tts">blond person: mørk teint</annotation>
+		<annotation cp="🧑🏻‍❤‍💋‍🧑🏼">kærlighed | kys | lys teint | medium til lys teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏻‍❤‍💋‍🧑🏼" type="tts">kys: voksen, voksen, lys teint og medium til lys teint</annotation>
+		<annotation cp="🧑🏻‍❤‍💋‍🧑🏽">kærlighed | kys | lys teint | medium teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏻‍❤‍💋‍🧑🏽" type="tts">kys: voksen, voksen, lys teint og medium teint</annotation>
+		<annotation cp="🧑🏻‍❤‍💋‍🧑🏾">kærlighed | kys | lys teint | medium til mørk teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏻‍❤‍💋‍🧑🏾" type="tts">kys: voksen, voksen, lys teint og medium til mørk teint</annotation>
+		<annotation cp="🧑🏻‍❤‍💋‍🧑🏿">kærlighed | kys | lys teint | mørk teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏻‍❤‍💋‍🧑🏿" type="tts">kys: voksen, voksen, lys teint og mørk teint</annotation>
+		<annotation cp="🧑🏼‍❤‍💋‍🧑🏻">kærlighed | kys | lys teint | medium til lys teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏼‍❤‍💋‍🧑🏻" type="tts">kys: voksen, voksen, medium til lys teint og lys teint</annotation>
+		<annotation cp="🧑🏼‍❤‍💋‍🧑🏽">kærlighed | kys | medium teint | medium til lys teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏼‍❤‍💋‍🧑🏽" type="tts">kys: voksen, voksen, medium til lys teint og medium teint</annotation>
+		<annotation cp="🧑🏼‍❤‍💋‍🧑🏾">kærlighed | kys | medium til lys teint | medium til mørk teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏼‍❤‍💋‍🧑🏾" type="tts">kys: voksen, voksen, medium til lys teint og medium til mørk teint</annotation>
+		<annotation cp="🧑🏼‍❤‍💋‍🧑🏿">kærlighed | kys | medium til lys teint | mørk teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏼‍❤‍💋‍🧑🏿" type="tts">kys: voksen, voksen, medium til lys teint og mørk teint</annotation>
+		<annotation cp="🧑🏽‍❤‍💋‍🧑🏻">kærlighed | kys | lys teint | medium teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏽‍❤‍💋‍🧑🏻" type="tts">kys: voksen, voksen, medium teint og lys teint</annotation>
+		<annotation cp="🧑🏽‍❤‍💋‍🧑🏼">kærlighed | kys | medium teint | medium til lys teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏽‍❤‍💋‍🧑🏼" type="tts">kys: voksen, voksen, medium teint og medium til lys teint</annotation>
+		<annotation cp="🧑🏽‍❤‍💋‍🧑🏾">kærlighed | kys | medium teint | medium til mørk teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏽‍❤‍💋‍🧑🏾" type="tts">kys: voksen, voksen, medium teint og medium til mørk teint</annotation>
+		<annotation cp="🧑🏽‍❤‍💋‍🧑🏿">kærlighed | kys | medium teint | mørk teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏽‍❤‍💋‍🧑🏿" type="tts">kys: voksen, voksen, medium teint og mørk teint</annotation>
+		<annotation cp="🧑🏾‍❤‍💋‍🧑🏻">kærlighed | kys | lys teint | medium til mørk teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏾‍❤‍💋‍🧑🏻" type="tts">kys: voksen, voksen, medium til mørk teint og lys teint</annotation>
+		<annotation cp="🧑🏾‍❤‍💋‍🧑🏼">kærlighed | kys | medium til lys teint | medium til mørk teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏾‍❤‍💋‍🧑🏼" type="tts">kys: voksen, voksen, medium til mørk teint og medium til lys teint</annotation>
+		<annotation cp="🧑🏾‍❤‍💋‍🧑🏽">kærlighed | kys | medium teint | medium til mørk teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏾‍❤‍💋‍🧑🏽" type="tts">kys: voksen, voksen, medium til mørk teint og medium teint</annotation>
+		<annotation cp="🧑🏾‍❤‍💋‍🧑🏿">kærlighed | kys | medium til mørk teint | mørk teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏾‍❤‍💋‍🧑🏿" type="tts">kys: voksen, voksen, medium til mørk teint og mørk teint</annotation>
+		<annotation cp="🧑🏿‍❤‍💋‍🧑🏻">kærlighed | kys | lys teint | mørk teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏿‍❤‍💋‍🧑🏻" type="tts">kys: voksen, voksen, mørk teint og lys teint</annotation>
+		<annotation cp="🧑🏿‍❤‍💋‍🧑🏼">kærlighed | kys | medium til lys teint | mørk teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏿‍❤‍💋‍🧑🏼" type="tts">kys: voksen, voksen, mørk teint og medium til lys teint</annotation>
+		<annotation cp="🧑🏿‍❤‍💋‍🧑🏽">kærlighed | kys | medium teint | mørk teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏿‍❤‍💋‍🧑🏽" type="tts">kys: voksen, voksen, mørk teint og medium teint</annotation>
+		<annotation cp="🧑🏿‍❤‍💋‍🧑🏾">kærlighed | kys | medium til mørk teint | mørk teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏿‍❤‍💋‍🧑🏾" type="tts">kys: voksen, voksen, mørk teint og medium til mørk teint</annotation>
+		<annotation cp="🧑🏻‍❤‍🧑🏼">kærlighed | lys teint | medium til lys teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏻‍❤‍🧑🏼" type="tts">par med hjerte: voksen, voksen, lys teint og medium til lys teint</annotation>
+		<annotation cp="🧑🏻‍❤‍🧑🏽">kærlighed | lys teint | medium teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏻‍❤‍🧑🏽" type="tts">par med hjerte: voksen, voksen, lys teint og medium teint</annotation>
+		<annotation cp="🧑🏻‍❤‍🧑🏾">kærlighed | lys teint | medium til mørk teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏻‍❤‍🧑🏾" type="tts">par med hjerte: voksen, voksen, lys teint og medium til mørk teint</annotation>
+		<annotation cp="🧑🏻‍❤‍🧑🏿">kærlighed | lys teint | mørk teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏻‍❤‍🧑🏿" type="tts">par med hjerte: voksen, voksen, lys teint og mørk teint</annotation>
+		<annotation cp="🧑🏼‍❤‍🧑🏻">kærlighed | lys teint | medium til lys teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏼‍❤‍🧑🏻" type="tts">par med hjerte: voksen, voksen, medium til lys teint og lys teint</annotation>
+		<annotation cp="🧑🏼‍❤‍🧑🏽">kærlighed | medium teint | medium til lys teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏼‍❤‍🧑🏽" type="tts">par med hjerte: voksen, voksen, medium til lys teint og medium teint</annotation>
+		<annotation cp="🧑🏼‍❤‍🧑🏾">kærlighed | medium til lys teint | medium til mørk teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏼‍❤‍🧑🏾" type="tts">par med hjerte: voksen, voksen, medium til lys teint og medium til mørk teint</annotation>
+		<annotation cp="🧑🏼‍❤‍🧑🏿">kærlighed | medium til lys teint | mørk teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏼‍❤‍🧑🏿" type="tts">par med hjerte: voksen, voksen, medium til lys teint og mørk teint</annotation>
+		<annotation cp="🧑🏽‍❤‍🧑🏻">kærlighed | lys teint | medium teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏽‍❤‍🧑🏻" type="tts">par med hjerte: voksen, voksen, medium teint og lys teint</annotation>
+		<annotation cp="🧑🏽‍❤‍🧑🏼">kærlighed | medium teint | medium til lys teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏽‍❤‍🧑🏼" type="tts">par med hjerte: voksen, voksen, medium teint og medium til lys teint</annotation>
+		<annotation cp="🧑🏽‍❤‍🧑🏾">kærlighed | medium teint | medium til mørk teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏽‍❤‍🧑🏾" type="tts">par med hjerte: voksen, voksen, medium teint og medium til mørk teint</annotation>
+		<annotation cp="🧑🏽‍❤‍🧑🏿">kærlighed | medium teint | mørk teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏽‍❤‍🧑🏿" type="tts">par med hjerte: voksen, voksen, medium teint og mørk teint</annotation>
+		<annotation cp="🧑🏾‍❤‍🧑🏻">kærlighed | lys teint | medium til mørk teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏾‍❤‍🧑🏻" type="tts">par med hjerte: voksen, voksen, medium til mørk teint og lys teint</annotation>
+		<annotation cp="🧑🏾‍❤‍🧑🏼">kærlighed | medium til lys teint | medium til mørk teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏾‍❤‍🧑🏼" type="tts">par med hjerte: voksen, voksen, medium til mørk teint og medium til lys teint</annotation>
+		<annotation cp="🧑🏾‍❤‍🧑🏽">kærlighed | medium teint | medium til mørk teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏾‍❤‍🧑🏽" type="tts">par med hjerte: voksen, voksen, medium til mørk teint og medium teint</annotation>
+		<annotation cp="🧑🏾‍❤‍🧑🏿">kærlighed | medium til mørk teint | mørk teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏾‍❤‍🧑🏿" type="tts">par med hjerte: voksen, voksen, medium til mørk teint og mørk teint</annotation>
+		<annotation cp="🧑🏿‍❤‍🧑🏻">kærlighed | lys teint | mørk teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏿‍❤‍🧑🏻" type="tts">par med hjerte: voksen, voksen, mørk teint og lys teint</annotation>
+		<annotation cp="🧑🏿‍❤‍🧑🏼">kærlighed | medium til lys teint | mørk teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏿‍❤‍🧑🏼" type="tts">par med hjerte: voksen, voksen, mørk teint og medium til lys teint</annotation>
+		<annotation cp="🧑🏿‍❤‍🧑🏽">kærlighed | medium teint | mørk teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏿‍❤‍🧑🏽" type="tts">par med hjerte: voksen, voksen, mørk teint og medium teint</annotation>
+		<annotation cp="🧑🏿‍❤‍🧑🏾">kærlighed | medium til mørk teint | mørk teint | par med hjerte | romantik | voksen</annotation>
+		<annotation cp="🧑🏿‍❤‍🧑🏾" type="tts">par med hjerte: voksen, voksen, mørk teint og medium til mørk teint</annotation>
 		<annotation cp="🧑‍🦰">person | rødt hår | voksen</annotation>
 		<annotation cp="🧑‍🦰" type="tts">voksen: rødt hår</annotation>
 		<annotation cp="🧑🏻‍🦰">lys teint | person | rødt hår | voksen</annotation>
@@ -521,16 +750,26 @@ Derived short names and annotations, using GenerateDerivedAnnotations.java. See 
 		<annotation cp="👨🏾" type="tts">mand: medium til mørk teint</annotation>
 		<annotation cp="👨🏿">mand | menneske | mørk teint | person</annotation>
 		<annotation cp="👨🏿" type="tts">mand: mørk teint</annotation>
-		<annotation cp="🧔🏻">fuldskæg | lys teint | mand | mand med skæg | person | skæg</annotation>
-		<annotation cp="🧔🏻" type="tts">mand med skæg: lys teint</annotation>
-		<annotation cp="🧔🏼">fuldskæg | mand | mand med skæg | medium til lys teint | person | skæg</annotation>
-		<annotation cp="🧔🏼" type="tts">mand med skæg: medium til lys teint</annotation>
-		<annotation cp="🧔🏽">fuldskæg | mand | mand med skæg | medium teint | person | skæg</annotation>
-		<annotation cp="🧔🏽" type="tts">mand med skæg: medium teint</annotation>
-		<annotation cp="🧔🏾">fuldskæg | mand | mand med skæg | medium til mørk teint | person | skæg</annotation>
-		<annotation cp="🧔🏾" type="tts">mand med skæg: medium til mørk teint</annotation>
-		<annotation cp="🧔🏿">fuldskæg | mand | mand med skæg | mørk teint | person | skæg</annotation>
-		<annotation cp="🧔🏿" type="tts">mand med skæg: mørk teint</annotation>
+		<annotation cp="🧔🏻">fuldskæg | lys teint | person | person med skæg | skæg</annotation>
+		<annotation cp="🧔🏻" type="tts">person med skæg: lys teint</annotation>
+		<annotation cp="🧔🏼">fuldskæg | medium til lys teint | person | person med skæg | skæg</annotation>
+		<annotation cp="🧔🏼" type="tts">person med skæg: medium til lys teint</annotation>
+		<annotation cp="🧔🏽">fuldskæg | medium teint | person | person med skæg | skæg</annotation>
+		<annotation cp="🧔🏽" type="tts">person med skæg: medium teint</annotation>
+		<annotation cp="🧔🏾">fuldskæg | medium til mørk teint | person | person med skæg | skæg</annotation>
+		<annotation cp="🧔🏾" type="tts">person med skæg: medium til mørk teint</annotation>
+		<annotation cp="🧔🏿">fuldskæg | mørk teint | person | person med skæg | skæg</annotation>
+		<annotation cp="🧔🏿" type="tts">person med skæg: mørk teint</annotation>
+		<annotation cp="🧔🏻‍♂">fuldskæg | lys teint | mand | mand med skæg | skæg</annotation>
+		<annotation cp="🧔🏻‍♂" type="tts">mand med skæg: lys teint</annotation>
+		<annotation cp="🧔🏼‍♂">fuldskæg | mand | mand med skæg | medium til lys teint | skæg</annotation>
+		<annotation cp="🧔🏼‍♂" type="tts">mand med skæg: medium til lys teint</annotation>
+		<annotation cp="🧔🏽‍♂">fuldskæg | mand | mand med skæg | medium teint | skæg</annotation>
+		<annotation cp="🧔🏽‍♂" type="tts">mand med skæg: medium teint</annotation>
+		<annotation cp="🧔🏾‍♂">fuldskæg | mand | mand med skæg | medium til mørk teint | skæg</annotation>
+		<annotation cp="🧔🏾‍♂" type="tts">mand med skæg: medium til mørk teint</annotation>
+		<annotation cp="🧔🏿‍♂">fuldskæg | mand | mand med skæg | mørk teint | skæg</annotation>
+		<annotation cp="🧔🏿‍♂" type="tts">mand med skæg: mørk teint</annotation>
 		<annotation cp="👱🏻‍♂">blond | lys teint | lyshåret | mand</annotation>
 		<annotation cp="👱🏻‍♂" type="tts">blond mand: lys teint</annotation>
 		<annotation cp="👱🏼‍♂">blond | lyshåret | mand | medium til lys teint</annotation>
@@ -541,6 +780,106 @@ Derived short names and annotations, using GenerateDerivedAnnotations.java. See 
 		<annotation cp="👱🏾‍♂" type="tts">blond mand: medium til mørk teint</annotation>
 		<annotation cp="👱🏿‍♂">blond | lyshåret | mand | mørk teint</annotation>
 		<annotation cp="👱🏿‍♂" type="tts">blond mand: mørk teint</annotation>
+		<annotation cp="👨🏻‍❤‍💋‍👨🏻">kærlighed | kys | lys teint | mand | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏻‍❤‍💋‍👨🏻" type="tts">kys: mand, mand og lys teint</annotation>
+		<annotation cp="👨🏻‍❤‍💋‍👨🏼">kærlighed | kys | lys teint | mand | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏻‍❤‍💋‍👨🏼" type="tts">kys: mand, mand, lys teint og medium til lys teint</annotation>
+		<annotation cp="👨🏻‍❤‍💋‍👨🏽">kærlighed | kys | lys teint | mand | medium teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏻‍❤‍💋‍👨🏽" type="tts">kys: mand, mand, lys teint og medium teint</annotation>
+		<annotation cp="👨🏻‍❤‍💋‍👨🏾">kærlighed | kys | lys teint | mand | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏻‍❤‍💋‍👨🏾" type="tts">kys: mand, mand, lys teint og medium til mørk teint</annotation>
+		<annotation cp="👨🏻‍❤‍💋‍👨🏿">kærlighed | kys | lys teint | mand | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏻‍❤‍💋‍👨🏿" type="tts">kys: mand, mand, lys teint og mørk teint</annotation>
+		<annotation cp="👨🏼‍❤‍💋‍👨🏻">kærlighed | kys | lys teint | mand | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏼‍❤‍💋‍👨🏻" type="tts">kys: mand, mand, medium til lys teint og lys teint</annotation>
+		<annotation cp="👨🏼‍❤‍💋‍👨🏼">kærlighed | kys | mand | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏼‍❤‍💋‍👨🏼" type="tts">kys: mand, mand og medium til lys teint</annotation>
+		<annotation cp="👨🏼‍❤‍💋‍👨🏽">kærlighed | kys | mand | medium teint | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏼‍❤‍💋‍👨🏽" type="tts">kys: mand, mand, medium til lys teint og medium teint</annotation>
+		<annotation cp="👨🏼‍❤‍💋‍👨🏾">kærlighed | kys | mand | medium til lys teint | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏼‍❤‍💋‍👨🏾" type="tts">kys: mand, mand, medium til lys teint og medium til mørk teint</annotation>
+		<annotation cp="👨🏼‍❤‍💋‍👨🏿">kærlighed | kys | mand | medium til lys teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏼‍❤‍💋‍👨🏿" type="tts">kys: mand, mand, medium til lys teint og mørk teint</annotation>
+		<annotation cp="👨🏽‍❤‍💋‍👨🏻">kærlighed | kys | lys teint | mand | medium teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏽‍❤‍💋‍👨🏻" type="tts">kys: mand, mand, medium teint og lys teint</annotation>
+		<annotation cp="👨🏽‍❤‍💋‍👨🏼">kærlighed | kys | mand | medium teint | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏽‍❤‍💋‍👨🏼" type="tts">kys: mand, mand, medium teint og medium til lys teint</annotation>
+		<annotation cp="👨🏽‍❤‍💋‍👨🏽">kærlighed | kys | mand | medium teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏽‍❤‍💋‍👨🏽" type="tts">kys: mand, mand og medium teint</annotation>
+		<annotation cp="👨🏽‍❤‍💋‍👨🏾">kærlighed | kys | mand | medium teint | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏽‍❤‍💋‍👨🏾" type="tts">kys: mand, mand, medium teint og medium til mørk teint</annotation>
+		<annotation cp="👨🏽‍❤‍💋‍👨🏿">kærlighed | kys | mand | medium teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏽‍❤‍💋‍👨🏿" type="tts">kys: mand, mand, medium teint og mørk teint</annotation>
+		<annotation cp="👨🏾‍❤‍💋‍👨🏻">kærlighed | kys | lys teint | mand | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏾‍❤‍💋‍👨🏻" type="tts">kys: mand, mand, medium til mørk teint og lys teint</annotation>
+		<annotation cp="👨🏾‍❤‍💋‍👨🏼">kærlighed | kys | mand | medium til lys teint | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏾‍❤‍💋‍👨🏼" type="tts">kys: mand, mand, medium til mørk teint og medium til lys teint</annotation>
+		<annotation cp="👨🏾‍❤‍💋‍👨🏽">kærlighed | kys | mand | medium teint | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏾‍❤‍💋‍👨🏽" type="tts">kys: mand, mand, medium til mørk teint og medium teint</annotation>
+		<annotation cp="👨🏾‍❤‍💋‍👨🏾">kærlighed | kys | mand | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏾‍❤‍💋‍👨🏾" type="tts">kys: mand, mand og medium til mørk teint</annotation>
+		<annotation cp="👨🏾‍❤‍💋‍👨🏿">kærlighed | kys | mand | medium til mørk teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏾‍❤‍💋‍👨🏿" type="tts">kys: mand, mand, medium til mørk teint og mørk teint</annotation>
+		<annotation cp="👨🏿‍❤‍💋‍👨🏻">kærlighed | kys | lys teint | mand | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏿‍❤‍💋‍👨🏻" type="tts">kys: mand, mand, mørk teint og lys teint</annotation>
+		<annotation cp="👨🏿‍❤‍💋‍👨🏼">kærlighed | kys | mand | medium til lys teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏿‍❤‍💋‍👨🏼" type="tts">kys: mand, mand, mørk teint og medium til lys teint</annotation>
+		<annotation cp="👨🏿‍❤‍💋‍👨🏽">kærlighed | kys | mand | medium teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏿‍❤‍💋‍👨🏽" type="tts">kys: mand, mand, mørk teint og medium teint</annotation>
+		<annotation cp="👨🏿‍❤‍💋‍👨🏾">kærlighed | kys | mand | medium til mørk teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏿‍❤‍💋‍👨🏾" type="tts">kys: mand, mand, mørk teint og medium til mørk teint</annotation>
+		<annotation cp="👨🏿‍❤‍💋‍👨🏿">kærlighed | kys | mand | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏿‍❤‍💋‍👨🏿" type="tts">kys: mand, mand og mørk teint</annotation>
+		<annotation cp="👨🏻‍❤‍👨🏻">kærlighed | lys teint | mand | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏻‍❤‍👨🏻" type="tts">par med hjerte: mand, mand og lys teint</annotation>
+		<annotation cp="👨🏻‍❤‍👨🏼">kærlighed | lys teint | mand | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏻‍❤‍👨🏼" type="tts">par med hjerte: mand, mand, lys teint og medium til lys teint</annotation>
+		<annotation cp="👨🏻‍❤‍👨🏽">kærlighed | lys teint | mand | medium teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏻‍❤‍👨🏽" type="tts">par med hjerte: mand, mand, lys teint og medium teint</annotation>
+		<annotation cp="👨🏻‍❤‍👨🏾">kærlighed | lys teint | mand | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏻‍❤‍👨🏾" type="tts">par med hjerte: mand, mand, lys teint og medium til mørk teint</annotation>
+		<annotation cp="👨🏻‍❤‍👨🏿">kærlighed | lys teint | mand | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏻‍❤‍👨🏿" type="tts">par med hjerte: mand, mand, lys teint og mørk teint</annotation>
+		<annotation cp="👨🏼‍❤‍👨🏻">kærlighed | lys teint | mand | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏼‍❤‍👨🏻" type="tts">par med hjerte: mand, mand, medium til lys teint og lys teint</annotation>
+		<annotation cp="👨🏼‍❤‍👨🏼">kærlighed | mand | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏼‍❤‍👨🏼" type="tts">par med hjerte: mand, mand og medium til lys teint</annotation>
+		<annotation cp="👨🏼‍❤‍👨🏽">kærlighed | mand | medium teint | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏼‍❤‍👨🏽" type="tts">par med hjerte: mand, mand, medium til lys teint og medium teint</annotation>
+		<annotation cp="👨🏼‍❤‍👨🏾">kærlighed | mand | medium til lys teint | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏼‍❤‍👨🏾" type="tts">par med hjerte: mand, mand, medium til lys teint og medium til mørk teint</annotation>
+		<annotation cp="👨🏼‍❤‍👨🏿">kærlighed | mand | medium til lys teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏼‍❤‍👨🏿" type="tts">par med hjerte: mand, mand, medium til lys teint og mørk teint</annotation>
+		<annotation cp="👨🏽‍❤‍👨🏻">kærlighed | lys teint | mand | medium teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏽‍❤‍👨🏻" type="tts">par med hjerte: mand, mand, medium teint og lys teint</annotation>
+		<annotation cp="👨🏽‍❤‍👨🏼">kærlighed | mand | medium teint | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏽‍❤‍👨🏼" type="tts">par med hjerte: mand, mand, medium teint og medium til lys teint</annotation>
+		<annotation cp="👨🏽‍❤‍👨🏽">kærlighed | mand | medium teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏽‍❤‍👨🏽" type="tts">par med hjerte: mand, mand og medium teint</annotation>
+		<annotation cp="👨🏽‍❤‍👨🏾">kærlighed | mand | medium teint | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏽‍❤‍👨🏾" type="tts">par med hjerte: mand, mand, medium teint og medium til mørk teint</annotation>
+		<annotation cp="👨🏽‍❤‍👨🏿">kærlighed | mand | medium teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏽‍❤‍👨🏿" type="tts">par med hjerte: mand, mand, medium teint og mørk teint</annotation>
+		<annotation cp="👨🏾‍❤‍👨🏻">kærlighed | lys teint | mand | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏾‍❤‍👨🏻" type="tts">par med hjerte: mand, mand, medium til mørk teint og lys teint</annotation>
+		<annotation cp="👨🏾‍❤‍👨🏼">kærlighed | mand | medium til lys teint | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏾‍❤‍👨🏼" type="tts">par med hjerte: mand, mand, medium til mørk teint og medium til lys teint</annotation>
+		<annotation cp="👨🏾‍❤‍👨🏽">kærlighed | mand | medium teint | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏾‍❤‍👨🏽" type="tts">par med hjerte: mand, mand, medium til mørk teint og medium teint</annotation>
+		<annotation cp="👨🏾‍❤‍👨🏾">kærlighed | mand | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏾‍❤‍👨🏾" type="tts">par med hjerte: mand, mand og medium til mørk teint</annotation>
+		<annotation cp="👨🏾‍❤‍👨🏿">kærlighed | mand | medium til mørk teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏾‍❤‍👨🏿" type="tts">par med hjerte: mand, mand, medium til mørk teint og mørk teint</annotation>
+		<annotation cp="👨🏿‍❤‍👨🏻">kærlighed | lys teint | mand | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏿‍❤‍👨🏻" type="tts">par med hjerte: mand, mand, mørk teint og lys teint</annotation>
+		<annotation cp="👨🏿‍❤‍👨🏼">kærlighed | mand | medium til lys teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏿‍❤‍👨🏼" type="tts">par med hjerte: mand, mand, mørk teint og medium til lys teint</annotation>
+		<annotation cp="👨🏿‍❤‍👨🏽">kærlighed | mand | medium teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏿‍❤‍👨🏽" type="tts">par med hjerte: mand, mand, mørk teint og medium teint</annotation>
+		<annotation cp="👨🏿‍❤‍👨🏾">kærlighed | mand | medium til mørk teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏿‍❤‍👨🏾" type="tts">par med hjerte: mand, mand, mørk teint og medium til mørk teint</annotation>
+		<annotation cp="👨🏿‍❤‍👨🏿">kærlighed | mand | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👨🏿‍❤‍👨🏿" type="tts">par med hjerte: mand, mand og mørk teint</annotation>
 		<annotation cp="👨‍🦰">mand | menneske | person | rødt hår</annotation>
 		<annotation cp="👨‍🦰" type="tts">mand: rødt hår</annotation>
 		<annotation cp="👨🏻‍🦰">lys teint | mand | menneske | person | rødt hår</annotation>
@@ -599,6 +938,16 @@ Derived short names and annotations, using GenerateDerivedAnnotations.java. See 
 		<annotation cp="👩🏾" type="tts">kvinde: medium til mørk teint</annotation>
 		<annotation cp="👩🏿">kvinde | menneske | mørk teint | person</annotation>
 		<annotation cp="👩🏿" type="tts">kvinde: mørk teint</annotation>
+		<annotation cp="🧔🏻‍♀">fuldskæg | kvinde | kvinde med skæg | lys teint | skæg</annotation>
+		<annotation cp="🧔🏻‍♀" type="tts">kvinde med skæg: lys teint</annotation>
+		<annotation cp="🧔🏼‍♀">fuldskæg | kvinde | kvinde med skæg | medium til lys teint | skæg</annotation>
+		<annotation cp="🧔🏼‍♀" type="tts">kvinde med skæg: medium til lys teint</annotation>
+		<annotation cp="🧔🏽‍♀">fuldskæg | kvinde | kvinde med skæg | medium teint | skæg</annotation>
+		<annotation cp="🧔🏽‍♀" type="tts">kvinde med skæg: medium teint</annotation>
+		<annotation cp="🧔🏾‍♀">fuldskæg | kvinde | kvinde med skæg | medium til mørk teint | skæg</annotation>
+		<annotation cp="🧔🏾‍♀" type="tts">kvinde med skæg: medium til mørk teint</annotation>
+		<annotation cp="🧔🏿‍♀">fuldskæg | kvinde | kvinde med skæg | mørk teint | skæg</annotation>
+		<annotation cp="🧔🏿‍♀" type="tts">kvinde med skæg: mørk teint</annotation>
 		<annotation cp="👱🏻‍♀">blond kvinde | blondine | kvinde | lys teint | lyshåret</annotation>
 		<annotation cp="👱🏻‍♀" type="tts">blond kvinde: lys teint</annotation>
 		<annotation cp="👱🏼‍♀">blond kvinde | blondine | kvinde | lyshåret | medium til lys teint</annotation>
@@ -609,6 +958,206 @@ Derived short names and annotations, using GenerateDerivedAnnotations.java. See 
 		<annotation cp="👱🏾‍♀" type="tts">blond kvinde: medium til mørk teint</annotation>
 		<annotation cp="👱🏿‍♀">blond kvinde | blondine | kvinde | lyshåret | mørk teint</annotation>
 		<annotation cp="👱🏿‍♀" type="tts">blond kvinde: mørk teint</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👨🏻">kærlighed | kvinde | kys | lys teint | mand | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👨🏻" type="tts">kys: kvinde, mand og lys teint</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👨🏼">kærlighed | kvinde | kys | lys teint | mand | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👨🏼" type="tts">kys: kvinde, mand, lys teint og medium til lys teint</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👨🏽">kærlighed | kvinde | kys | lys teint | mand | medium teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👨🏽" type="tts">kys: kvinde, mand, lys teint og medium teint</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👨🏾">kærlighed | kvinde | kys | lys teint | mand | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👨🏾" type="tts">kys: kvinde, mand, lys teint og medium til mørk teint</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👨🏿">kærlighed | kvinde | kys | lys teint | mand | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👨🏿" type="tts">kys: kvinde, mand, lys teint og mørk teint</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👨🏻">kærlighed | kvinde | kys | lys teint | mand | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👨🏻" type="tts">kys: kvinde, mand, medium til lys teint og lys teint</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👨🏼">kærlighed | kvinde | kys | mand | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👨🏼" type="tts">kys: kvinde, mand og medium til lys teint</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👨🏽">kærlighed | kvinde | kys | mand | medium teint | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👨🏽" type="tts">kys: kvinde, mand, medium til lys teint og medium teint</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👨🏾">kærlighed | kvinde | kys | mand | medium til lys teint | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👨🏾" type="tts">kys: kvinde, mand, medium til lys teint og medium til mørk teint</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👨🏿">kærlighed | kvinde | kys | mand | medium til lys teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👨🏿" type="tts">kys: kvinde, mand, medium til lys teint og mørk teint</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👨🏻">kærlighed | kvinde | kys | lys teint | mand | medium teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👨🏻" type="tts">kys: kvinde, mand, medium teint og lys teint</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👨🏼">kærlighed | kvinde | kys | mand | medium teint | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👨🏼" type="tts">kys: kvinde, mand, medium teint og medium til lys teint</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👨🏽">kærlighed | kvinde | kys | mand | medium teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👨🏽" type="tts">kys: kvinde, mand og medium teint</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👨🏾">kærlighed | kvinde | kys | mand | medium teint | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👨🏾" type="tts">kys: kvinde, mand, medium teint og medium til mørk teint</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👨🏿">kærlighed | kvinde | kys | mand | medium teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👨🏿" type="tts">kys: kvinde, mand, medium teint og mørk teint</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👨🏻">kærlighed | kvinde | kys | lys teint | mand | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👨🏻" type="tts">kys: kvinde, mand, medium til mørk teint og lys teint</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👨🏼">kærlighed | kvinde | kys | mand | medium til lys teint | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👨🏼" type="tts">kys: kvinde, mand, medium til mørk teint og medium til lys teint</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👨🏽">kærlighed | kvinde | kys | mand | medium teint | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👨🏽" type="tts">kys: kvinde, mand, medium til mørk teint og medium teint</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👨🏾">kærlighed | kvinde | kys | mand | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👨🏾" type="tts">kys: kvinde, mand og medium til mørk teint</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👨🏿">kærlighed | kvinde | kys | mand | medium til mørk teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👨🏿" type="tts">kys: kvinde, mand, medium til mørk teint og mørk teint</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👨🏻">kærlighed | kvinde | kys | lys teint | mand | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👨🏻" type="tts">kys: kvinde, mand, mørk teint og lys teint</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👨🏼">kærlighed | kvinde | kys | mand | medium til lys teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👨🏼" type="tts">kys: kvinde, mand, mørk teint og medium til lys teint</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👨🏽">kærlighed | kvinde | kys | mand | medium teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👨🏽" type="tts">kys: kvinde, mand, mørk teint og medium teint</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👨🏾">kærlighed | kvinde | kys | mand | medium til mørk teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👨🏾" type="tts">kys: kvinde, mand, mørk teint og medium til mørk teint</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👨🏿">kærlighed | kvinde | kys | mand | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👨🏿" type="tts">kys: kvinde, mand og mørk teint</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👩🏻">kærlighed | kvinde | kys | lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👩🏻" type="tts">kys: kvinde, kvinde og lys teint</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👩🏼">kærlighed | kvinde | kys | lys teint | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👩🏼" type="tts">kys: kvinde, kvinde, lys teint og medium til lys teint</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👩🏽">kærlighed | kvinde | kys | lys teint | medium teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👩🏽" type="tts">kys: kvinde, kvinde, lys teint og medium teint</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👩🏾">kærlighed | kvinde | kys | lys teint | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👩🏾" type="tts">kys: kvinde, kvinde, lys teint og medium til mørk teint</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👩🏿">kærlighed | kvinde | kys | lys teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏻‍❤‍💋‍👩🏿" type="tts">kys: kvinde, kvinde, lys teint og mørk teint</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👩🏻">kærlighed | kvinde | kys | lys teint | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👩🏻" type="tts">kys: kvinde, kvinde, medium til lys teint og lys teint</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👩🏼">kærlighed | kvinde | kys | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👩🏼" type="tts">kys: kvinde, kvinde og medium til lys teint</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👩🏽">kærlighed | kvinde | kys | medium teint | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👩🏽" type="tts">kys: kvinde, kvinde, medium til lys teint og medium teint</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👩🏾">kærlighed | kvinde | kys | medium til lys teint | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👩🏾" type="tts">kys: kvinde, kvinde, medium til lys teint og medium til mørk teint</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👩🏿">kærlighed | kvinde | kys | medium til lys teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏼‍❤‍💋‍👩🏿" type="tts">kys: kvinde, kvinde, medium til lys teint og mørk teint</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👩🏻">kærlighed | kvinde | kys | lys teint | medium teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👩🏻" type="tts">kys: kvinde, kvinde, medium teint og lys teint</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👩🏼">kærlighed | kvinde | kys | medium teint | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👩🏼" type="tts">kys: kvinde, kvinde, medium teint og medium til lys teint</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👩🏽">kærlighed | kvinde | kys | medium teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👩🏽" type="tts">kys: kvinde, kvinde og medium teint</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👩🏾">kærlighed | kvinde | kys | medium teint | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👩🏾" type="tts">kys: kvinde, kvinde, medium teint og medium til mørk teint</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👩🏿">kærlighed | kvinde | kys | medium teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏽‍❤‍💋‍👩🏿" type="tts">kys: kvinde, kvinde, medium teint og mørk teint</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👩🏻">kærlighed | kvinde | kys | lys teint | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👩🏻" type="tts">kys: kvinde, kvinde, medium til mørk teint og lys teint</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👩🏼">kærlighed | kvinde | kys | medium til lys teint | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👩🏼" type="tts">kys: kvinde, kvinde, medium til mørk teint og medium til lys teint</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👩🏽">kærlighed | kvinde | kys | medium teint | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👩🏽" type="tts">kys: kvinde, kvinde, medium til mørk teint og medium teint</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👩🏾">kærlighed | kvinde | kys | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👩🏾" type="tts">kys: kvinde, kvinde og medium til mørk teint</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👩🏿">kærlighed | kvinde | kys | medium til mørk teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏾‍❤‍💋‍👩🏿" type="tts">kys: kvinde, kvinde, medium til mørk teint og mørk teint</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👩🏻">kærlighed | kvinde | kys | lys teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👩🏻" type="tts">kys: kvinde, kvinde, mørk teint og lys teint</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👩🏼">kærlighed | kvinde | kys | medium til lys teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👩🏼" type="tts">kys: kvinde, kvinde, mørk teint og medium til lys teint</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👩🏽">kærlighed | kvinde | kys | medium teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👩🏽" type="tts">kys: kvinde, kvinde, mørk teint og medium teint</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👩🏾">kærlighed | kvinde | kys | medium til mørk teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👩🏾" type="tts">kys: kvinde, kvinde, mørk teint og medium til mørk teint</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👩🏿">kærlighed | kvinde | kys | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏿‍❤‍💋‍👩🏿" type="tts">kys: kvinde, kvinde og mørk teint</annotation>
+		<annotation cp="👩🏻‍❤‍👨🏻">kærlighed | kvinde | lys teint | mand | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏻‍❤‍👨🏻" type="tts">par med hjerte: kvinde, mand og lys teint</annotation>
+		<annotation cp="👩🏻‍❤‍👨🏼">kærlighed | kvinde | lys teint | mand | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏻‍❤‍👨🏼" type="tts">par med hjerte: kvinde, mand, lys teint og medium til lys teint</annotation>
+		<annotation cp="👩🏻‍❤‍👨🏽">kærlighed | kvinde | lys teint | mand | medium teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏻‍❤‍👨🏽" type="tts">par med hjerte: kvinde, mand, lys teint og medium teint</annotation>
+		<annotation cp="👩🏻‍❤‍👨🏾">kærlighed | kvinde | lys teint | mand | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏻‍❤‍👨🏾" type="tts">par med hjerte: kvinde, mand, lys teint og medium til mørk teint</annotation>
+		<annotation cp="👩🏻‍❤‍👨🏿">kærlighed | kvinde | lys teint | mand | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏻‍❤‍👨🏿" type="tts">par med hjerte: kvinde, mand, lys teint og mørk teint</annotation>
+		<annotation cp="👩🏼‍❤‍👨🏻">kærlighed | kvinde | lys teint | mand | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏼‍❤‍👨🏻" type="tts">par med hjerte: kvinde, mand, medium til lys teint og lys teint</annotation>
+		<annotation cp="👩🏼‍❤‍👨🏼">kærlighed | kvinde | mand | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏼‍❤‍👨🏼" type="tts">par med hjerte: kvinde, mand og medium til lys teint</annotation>
+		<annotation cp="👩🏼‍❤‍👨🏽">kærlighed | kvinde | mand | medium teint | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏼‍❤‍👨🏽" type="tts">par med hjerte: kvinde, mand, medium til lys teint og medium teint</annotation>
+		<annotation cp="👩🏼‍❤‍👨🏾">kærlighed | kvinde | mand | medium til lys teint | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏼‍❤‍👨🏾" type="tts">par med hjerte: kvinde, mand, medium til lys teint og medium til mørk teint</annotation>
+		<annotation cp="👩🏼‍❤‍👨🏿">kærlighed | kvinde | mand | medium til lys teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏼‍❤‍👨🏿" type="tts">par med hjerte: kvinde, mand, medium til lys teint og mørk teint</annotation>
+		<annotation cp="👩🏽‍❤‍👨🏻">kærlighed | kvinde | lys teint | mand | medium teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏽‍❤‍👨🏻" type="tts">par med hjerte: kvinde, mand, medium teint og lys teint</annotation>
+		<annotation cp="👩🏽‍❤‍👨🏼">kærlighed | kvinde | mand | medium teint | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏽‍❤‍👨🏼" type="tts">par med hjerte: kvinde, mand, medium teint og medium til lys teint</annotation>
+		<annotation cp="👩🏽‍❤‍👨🏽">kærlighed | kvinde | mand | medium teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏽‍❤‍👨🏽" type="tts">par med hjerte: kvinde, mand og medium teint</annotation>
+		<annotation cp="👩🏽‍❤‍👨🏾">kærlighed | kvinde | mand | medium teint | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏽‍❤‍👨🏾" type="tts">par med hjerte: kvinde, mand, medium teint og medium til mørk teint</annotation>
+		<annotation cp="👩🏽‍❤‍👨🏿">kærlighed | kvinde | mand | medium teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏽‍❤‍👨🏿" type="tts">par med hjerte: kvinde, mand, medium teint og mørk teint</annotation>
+		<annotation cp="👩🏾‍❤‍👨🏻">kærlighed | kvinde | lys teint | mand | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏾‍❤‍👨🏻" type="tts">par med hjerte: kvinde, mand, medium til mørk teint og lys teint</annotation>
+		<annotation cp="👩🏾‍❤‍👨🏼">kærlighed | kvinde | mand | medium til lys teint | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏾‍❤‍👨🏼" type="tts">par med hjerte: kvinde, mand, medium til mørk teint og medium til lys teint</annotation>
+		<annotation cp="👩🏾‍❤‍👨🏽">kærlighed | kvinde | mand | medium teint | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏾‍❤‍👨🏽" type="tts">par med hjerte: kvinde, mand, medium til mørk teint og medium teint</annotation>
+		<annotation cp="👩🏾‍❤‍👨🏾">kærlighed | kvinde | mand | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏾‍❤‍👨🏾" type="tts">par med hjerte: kvinde, mand og medium til mørk teint</annotation>
+		<annotation cp="👩🏾‍❤‍👨🏿">kærlighed | kvinde | mand | medium til mørk teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏾‍❤‍👨🏿" type="tts">par med hjerte: kvinde, mand, medium til mørk teint og mørk teint</annotation>
+		<annotation cp="👩🏿‍❤‍👨🏻">kærlighed | kvinde | lys teint | mand | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏿‍❤‍👨🏻" type="tts">par med hjerte: kvinde, mand, mørk teint og lys teint</annotation>
+		<annotation cp="👩🏿‍❤‍👨🏼">kærlighed | kvinde | mand | medium til lys teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏿‍❤‍👨🏼" type="tts">par med hjerte: kvinde, mand, mørk teint og medium til lys teint</annotation>
+		<annotation cp="👩🏿‍❤‍👨🏽">kærlighed | kvinde | mand | medium teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏿‍❤‍👨🏽" type="tts">par med hjerte: kvinde, mand, mørk teint og medium teint</annotation>
+		<annotation cp="👩🏿‍❤‍👨🏾">kærlighed | kvinde | mand | medium til mørk teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏿‍❤‍👨🏾" type="tts">par med hjerte: kvinde, mand, mørk teint og medium til mørk teint</annotation>
+		<annotation cp="👩🏿‍❤‍👨🏿">kærlighed | kvinde | mand | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏿‍❤‍👨🏿" type="tts">par med hjerte: kvinde, mand og mørk teint</annotation>
+		<annotation cp="👩🏻‍❤‍👩🏻">kærlighed | kvinde | lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏻‍❤‍👩🏻" type="tts">par med hjerte: kvinde, kvinde og lys teint</annotation>
+		<annotation cp="👩🏻‍❤‍👩🏼">kærlighed | kvinde | lys teint | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏻‍❤‍👩🏼" type="tts">par med hjerte: kvinde, kvinde, lys teint og medium til lys teint</annotation>
+		<annotation cp="👩🏻‍❤‍👩🏽">kærlighed | kvinde | lys teint | medium teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏻‍❤‍👩🏽" type="tts">par med hjerte: kvinde, kvinde, lys teint og medium teint</annotation>
+		<annotation cp="👩🏻‍❤‍👩🏾">kærlighed | kvinde | lys teint | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏻‍❤‍👩🏾" type="tts">par med hjerte: kvinde, kvinde, lys teint og medium til mørk teint</annotation>
+		<annotation cp="👩🏻‍❤‍👩🏿">kærlighed | kvinde | lys teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏻‍❤‍👩🏿" type="tts">par med hjerte: kvinde, kvinde, lys teint og mørk teint</annotation>
+		<annotation cp="👩🏼‍❤‍👩🏻">kærlighed | kvinde | lys teint | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏼‍❤‍👩🏻" type="tts">par med hjerte: kvinde, kvinde, medium til lys teint og lys teint</annotation>
+		<annotation cp="👩🏼‍❤‍👩🏼">kærlighed | kvinde | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏼‍❤‍👩🏼" type="tts">par med hjerte: kvinde, kvinde og medium til lys teint</annotation>
+		<annotation cp="👩🏼‍❤‍👩🏽">kærlighed | kvinde | medium teint | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏼‍❤‍👩🏽" type="tts">par med hjerte: kvinde, kvinde, medium til lys teint og medium teint</annotation>
+		<annotation cp="👩🏼‍❤‍👩🏾">kærlighed | kvinde | medium til lys teint | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏼‍❤‍👩🏾" type="tts">par med hjerte: kvinde, kvinde, medium til lys teint og medium til mørk teint</annotation>
+		<annotation cp="👩🏼‍❤‍👩🏿">kærlighed | kvinde | medium til lys teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏼‍❤‍👩🏿" type="tts">par med hjerte: kvinde, kvinde, medium til lys teint og mørk teint</annotation>
+		<annotation cp="👩🏽‍❤‍👩🏻">kærlighed | kvinde | lys teint | medium teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏽‍❤‍👩🏻" type="tts">par med hjerte: kvinde, kvinde, medium teint og lys teint</annotation>
+		<annotation cp="👩🏽‍❤‍👩🏼">kærlighed | kvinde | medium teint | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏽‍❤‍👩🏼" type="tts">par med hjerte: kvinde, kvinde, medium teint og medium til lys teint</annotation>
+		<annotation cp="👩🏽‍❤‍👩🏽">kærlighed | kvinde | medium teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏽‍❤‍👩🏽" type="tts">par med hjerte: kvinde, kvinde og medium teint</annotation>
+		<annotation cp="👩🏽‍❤‍👩🏾">kærlighed | kvinde | medium teint | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏽‍❤‍👩🏾" type="tts">par med hjerte: kvinde, kvinde, medium teint og medium til mørk teint</annotation>
+		<annotation cp="👩🏽‍❤‍👩🏿">kærlighed | kvinde | medium teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏽‍❤‍👩🏿" type="tts">par med hjerte: kvinde, kvinde, medium teint og mørk teint</annotation>
+		<annotation cp="👩🏾‍❤‍👩🏻">kærlighed | kvinde | lys teint | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏾‍❤‍👩🏻" type="tts">par med hjerte: kvinde, kvinde, medium til mørk teint og lys teint</annotation>
+		<annotation cp="👩🏾‍❤‍👩🏼">kærlighed | kvinde | medium til lys teint | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏾‍❤‍👩🏼" type="tts">par med hjerte: kvinde, kvinde, medium til mørk teint og medium til lys teint</annotation>
+		<annotation cp="👩🏾‍❤‍👩🏽">kærlighed | kvinde | medium teint | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏾‍❤‍👩🏽" type="tts">par med hjerte: kvinde, kvinde, medium til mørk teint og medium teint</annotation>
+		<annotation cp="👩🏾‍❤‍👩🏾">kærlighed | kvinde | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏾‍❤‍👩🏾" type="tts">par med hjerte: kvinde, kvinde og medium til mørk teint</annotation>
+		<annotation cp="👩🏾‍❤‍👩🏿">kærlighed | kvinde | medium til mørk teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏾‍❤‍👩🏿" type="tts">par med hjerte: kvinde, kvinde, medium til mørk teint og mørk teint</annotation>
+		<annotation cp="👩🏿‍❤‍👩🏻">kærlighed | kvinde | lys teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏿‍❤‍👩🏻" type="tts">par med hjerte: kvinde, kvinde, mørk teint og lys teint</annotation>
+		<annotation cp="👩🏿‍❤‍👩🏼">kærlighed | kvinde | medium til lys teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏿‍❤‍👩🏼" type="tts">par med hjerte: kvinde, kvinde, mørk teint og medium til lys teint</annotation>
+		<annotation cp="👩🏿‍❤‍👩🏽">kærlighed | kvinde | medium teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏿‍❤‍👩🏽" type="tts">par med hjerte: kvinde, kvinde, mørk teint og medium teint</annotation>
+		<annotation cp="👩🏿‍❤‍👩🏾">kærlighed | kvinde | medium til mørk teint | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏿‍❤‍👩🏾" type="tts">par med hjerte: kvinde, kvinde, mørk teint og medium til mørk teint</annotation>
+		<annotation cp="👩🏿‍❤‍👩🏿">kærlighed | kvinde | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="👩🏿‍❤‍👩🏿" type="tts">par med hjerte: kvinde, kvinde og mørk teint</annotation>
 		<annotation cp="👩‍🦰">kvinde | menneske | person | rødt hår</annotation>
 		<annotation cp="👩‍🦰" type="tts">kvinde: rødt hår</annotation>
 		<annotation cp="👩🏻‍🦰">kvinde | lys teint | menneske | person | rødt hår</annotation>
@@ -867,15 +1416,15 @@ Derived short names and annotations, using GenerateDerivedAnnotations.java. See 
 		<annotation cp="🙋🏾‍♀" type="tts">kvinde med løftet hånd: medium til mørk teint</annotation>
 		<annotation cp="🙋🏿‍♀">gestus | hej | hilsen | kvinde | kvinde med løftet hånd | løftet hånd | mørk teint</annotation>
 		<annotation cp="🙋🏿‍♀" type="tts">kvinde med løftet hånd: mørk teint</annotation>
-		<annotation cp="🧏🏻">døv person | lys teint</annotation>
+		<annotation cp="🧏🏻">døv | døv person | høre | lys teint | øre | tilgængelighed</annotation>
 		<annotation cp="🧏🏻" type="tts">døv person: lys teint</annotation>
-		<annotation cp="🧏🏼">døv person | medium til lys teint</annotation>
+		<annotation cp="🧏🏼">døv | døv person | høre | medium til lys teint | øre | tilgængelighed</annotation>
 		<annotation cp="🧏🏼" type="tts">døv person: medium til lys teint</annotation>
-		<annotation cp="🧏🏽">døv person | medium teint</annotation>
+		<annotation cp="🧏🏽">døv | døv person | høre | medium teint | øre | tilgængelighed</annotation>
 		<annotation cp="🧏🏽" type="tts">døv person: medium teint</annotation>
-		<annotation cp="🧏🏾">døv person | medium til mørk teint</annotation>
+		<annotation cp="🧏🏾">døv | døv person | høre | medium til mørk teint | øre | tilgængelighed</annotation>
 		<annotation cp="🧏🏾" type="tts">døv person: medium til mørk teint</annotation>
-		<annotation cp="🧏🏿">døv person | mørk teint</annotation>
+		<annotation cp="🧏🏿">døv | døv person | høre | mørk teint | øre | tilgængelighed</annotation>
 		<annotation cp="🧏🏿" type="tts">døv person: mørk teint</annotation>
 		<annotation cp="🧏🏻‍♂">døv mand | lys teint</annotation>
 		<annotation cp="🧏🏻‍♂" type="tts">døv mand: lys teint</annotation>
@@ -3017,12 +3566,32 @@ Derived short names and annotations, using GenerateDerivedAnnotations.java. See 
 		<annotation cp="👨🏿‍🤝‍👨🏾" type="tts">to mænd hånd i hånd: mørk teint og medium til mørk teint</annotation>
 		<annotation cp="👬🏿">hånd i hånd | mænd | mørk teint | par | stjernetegn | to mænd hånd i hånd | tvillingen | tvillinger</annotation>
 		<annotation cp="👬🏿" type="tts">to mænd hånd i hånd: mørk teint</annotation>
+		<annotation cp="💏🏻">kærlighed | kys | lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="💏🏻" type="tts">kys: lys teint</annotation>
+		<annotation cp="💏🏼">kærlighed | kys | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="💏🏼" type="tts">kys: medium til lys teint</annotation>
+		<annotation cp="💏🏽">kærlighed | kys | medium teint | par med hjerte | romantik</annotation>
+		<annotation cp="💏🏽" type="tts">kys: medium teint</annotation>
+		<annotation cp="💏🏾">kærlighed | kys | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="💏🏾" type="tts">kys: medium til mørk teint</annotation>
+		<annotation cp="💏🏿">kærlighed | kys | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="💏🏿" type="tts">kys: mørk teint</annotation>
 		<annotation cp="👩‍❤‍💋‍👨">kærlighed | kvinde | kys | mand | par med hjerte | romantik</annotation>
 		<annotation cp="👩‍❤‍💋‍👨" type="tts">kys: kvinde og mand</annotation>
 		<annotation cp="👨‍❤‍💋‍👨">kærlighed | kys | mand | par med hjerte | romantik</annotation>
 		<annotation cp="👨‍❤‍💋‍👨" type="tts">kys: mand og mand</annotation>
 		<annotation cp="👩‍❤‍💋‍👩">kærlighed | kvinde | kys | par med hjerte | romantik</annotation>
 		<annotation cp="👩‍❤‍💋‍👩" type="tts">kys: kvinde og kvinde</annotation>
+		<annotation cp="💑🏻">kærlighed | lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="💑🏻" type="tts">par med hjerte: lys teint</annotation>
+		<annotation cp="💑🏼">kærlighed | medium til lys teint | par med hjerte | romantik</annotation>
+		<annotation cp="💑🏼" type="tts">par med hjerte: medium til lys teint</annotation>
+		<annotation cp="💑🏽">kærlighed | medium teint | par med hjerte | romantik</annotation>
+		<annotation cp="💑🏽" type="tts">par med hjerte: medium teint</annotation>
+		<annotation cp="💑🏾">kærlighed | medium til mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="💑🏾" type="tts">par med hjerte: medium til mørk teint</annotation>
+		<annotation cp="💑🏿">kærlighed | mørk teint | par med hjerte | romantik</annotation>
+		<annotation cp="💑🏿" type="tts">par med hjerte: mørk teint</annotation>
 		<annotation cp="👩‍❤‍👨">kærlighed | kvinde | mand | par med hjerte | romantik</annotation>
 		<annotation cp="👩‍❤‍👨" type="tts">par med hjerte: kvinde og mand</annotation>
 		<annotation cp="👨‍❤‍👨">kærlighed | mand | par med hjerte | romantik</annotation>
@@ -3607,6 +4176,26 @@ Derived short names and annotations, using GenerateDerivedAnnotations.java. See 
 		<annotation cp="🏴󠁧󠁢󠁳󠁣󠁴󠁿" type="tts">flag: Skotland</annotation>
 		<annotation cp="🏴󠁧󠁢󠁷󠁬󠁳󠁿">flag</annotation>
 		<annotation cp="🏴󠁧󠁢󠁷󠁬󠁳󠁿" type="tts">flag: Wales</annotation>
+		<annotation cp="¤" type="tts">ukendt valuta</annotation>
+		<annotation cp="֏" type="tts">armensk dram</annotation>
+		<annotation cp="؋" type="tts">afghansk afghani</annotation>
+		<annotation cp="৳" type="tts">bangladeshisk taka</annotation>
+		<annotation cp="฿" type="tts">thailandsk baht</annotation>
+		<annotation cp="៛" type="tts">cambodjansk riel</annotation>
+		<annotation cp="₡" type="tts">costaricansk colón</annotation>
+		<annotation cp="₦" type="tts">nigeriansk naira</annotation>
+		<annotation cp="₧" type="tts">Spansk peseta</annotation>
+		<annotation cp="₪" type="tts">ny israelsk shekel</annotation>
+		<annotation cp="₫" type="tts">vietnamesisk dong</annotation>
+		<annotation cp="₭" type="tts">laotisk kip</annotation>
+		<annotation cp="₮" type="tts">mongolsk tugrik</annotation>
+		<annotation cp="₲" type="tts">paraguaysk guarani</annotation>
+		<annotation cp="₴" type="tts">ukrainsk grynia</annotation>
+		<annotation cp="₵" type="tts">ghanesisk cedi</annotation>
+		<annotation cp="₸" type="tts">kasakhisk tenge</annotation>
+		<annotation cp="₺" type="tts">tyrkisk lira</annotation>
+		<annotation cp="₼" type="tts">aserbajdsjansk manat</annotation>
+		<annotation cp="₾" type="tts">georgisk lari</annotation>
 		<annotation cp="0⃣">keycap</annotation>
 		<annotation cp="0⃣" type="tts">keycap: 0</annotation>
 		<annotation cp="1⃣">keycap</annotation>

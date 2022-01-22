@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
-<!-- Copyright © 1991-2020 Unicode, Inc.
+<!-- Copyright © 1991-2022 Unicode, Inc.
 For terms of use, see http://www.unicode.org/copyright.html
-Unicode and the Unicode Logo are registered trademarks of Unicode, Inc. in the U.S. and other countries.
+SPDX-License-Identifier: Unicode-DFS-2016
 CLDR data files are interpreted according to the LDML specification (http://unicode.org/reports/tr35/)
 
 Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/ for derived annotations.
@@ -13,6 +13,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<language type="vi"/>
 	</identity>
 	<annotations>
+		<annotation cp="{">dấu ngoặc | dấu ngoặc nhọn | dấu ngoặc nhọn mở</annotation>
+		<annotation cp="{" type="tts">dấu ngoặc nhọn mở</annotation>
 		<annotation cp="🏻">loại 1–2 | màu da | màu da sáng</annotation>
 		<annotation cp="🏻" type="tts">màu da sáng</annotation>
 		<annotation cp="🏼">loại 3 | màu da | màu da sáng trung bình</annotation>
@@ -23,76 +25,766 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🏾" type="tts">màu da tối trung bình</annotation>
 		<annotation cp="🏿">loại 6 | màu da | màu da tối</annotation>
 		<annotation cp="🏿" type="tts">màu da tối</annotation>
+		<annotation cp="‾" draft="contributed">đường trên đầu</annotation>
+		<annotation cp="‾" type="tts" draft="contributed">đường trên đầu</annotation>
+		<annotation cp="_">dấu gạch dưới | dòng | gạch chân | gạch dưới</annotation>
+		<annotation cp="_" type="tts">dấu gạch dưới</annotation>
+		<annotation cp="-">dấu gạch ngang | dấu gạch nối | dấu gạch nối-dấu trừ | dấu trừ</annotation>
+		<annotation cp="-" type="tts">dấu gạch nối-dấu trừ</annotation>
+		<annotation cp="‐">dấu gạch ngang | dấu gạch nối</annotation>
+		<annotation cp="‐" type="tts">dấu gạch nối</annotation>
 		<annotation cp="–">dấu gạch ngắn | dấu gạch ngang | ngắn</annotation>
 		<annotation cp="–" type="tts">dấu gạch ngắn</annotation>
 		<annotation cp="—">dài | dấu gạch dài | dấu gạch ngang</annotation>
 		<annotation cp="—" type="tts">dấu gạch dài</annotation>
+		<annotation cp="―">dấu gạch ngang dài | dòng | gạch ngang | gạch ngang dài | thanh</annotation>
+		<annotation cp="―" type="tts">dấu gạch ngang dài</annotation>
+		<annotation cp="・">chấm | dấu chấm giữa | dấu chấm giữa katakana | dấu chấm ở giữa | điểm trung gian | katakana</annotation>
+		<annotation cp="・" type="tts">dấu chấm giữa katakana</annotation>
+		<annotation cp=",">dấu phẩy</annotation>
+		<annotation cp="," type="tts">dấu phẩy</annotation>
+		<annotation cp="،">ả rập | dấu phẩy | dấu phẩy ả rập</annotation>
+		<annotation cp="،" type="tts">dấu phẩy ả rập</annotation>
+		<annotation cp="、">dấu phẩy | dấu phẩy tượng hình | tượng hình</annotation>
+		<annotation cp="、" type="tts">dấu phẩy tượng hình</annotation>
+		<annotation cp=";">dấu chấm phẩy</annotation>
+		<annotation cp=";" type="tts">dấu chấm phẩy</annotation>
+		<annotation cp="؛">ả rập | dấu chấm phẩy | dấu chấm phẩy ả rập</annotation>
+		<annotation cp="؛" type="tts">dấu chấm phẩy ả rập</annotation>
+		<annotation cp=":">dấu hai chấm</annotation>
+		<annotation cp=":" type="tts">dấu hai chấm</annotation>
+		<annotation cp="!">chấm than | dấu cảm | dấu chấm than</annotation>
+		<annotation cp="!" type="tts">dấu chấm than</annotation>
+		<annotation cp="¡">chấm than | dấu cảm | dấu chấm than | dấu chấm than ngược | ngược</annotation>
+		<annotation cp="¡" type="tts">dấu chấm than ngược</annotation>
+		<annotation cp="?">dấu hỏi</annotation>
+		<annotation cp="?" type="tts">dấu hỏi</annotation>
+		<annotation cp="¿">dấu hỏi | dấu hỏi ngược | ngược</annotation>
+		<annotation cp="¿" type="tts">dấu hỏi ngược</annotation>
+		<annotation cp="؟">ả rập | dấu hỏi | dấu hỏi ả rập</annotation>
+		<annotation cp="؟" type="tts">dấu hỏi ả rập</annotation>
+		<annotation cp="‽" draft="contributed">dấu hỏi than</annotation>
+		<annotation cp="‽" type="tts" draft="contributed">dấu hỏi than</annotation>
+		<annotation cp=".">chấm câu | chấm hết | dấu chấm</annotation>
+		<annotation cp="." type="tts">dấu chấm</annotation>
+		<annotation cp="…">chấm chấm | dấu ba chấm | dấu chấm lửng | dấu lửng</annotation>
+		<annotation cp="…" type="tts">dấu ba chấm</annotation>
+		<annotation cp="。">chấm câu | chấm hết | dấu chấm | dấu chấm tượng hình | tượng hình</annotation>
+		<annotation cp="。" type="tts">dấu chấm tượng hình</annotation>
 		<annotation cp="·">chấm | dấu chấm giữa | dấu chấm giữa dòng | dấu chấm ở giữa dòng | giữa</annotation>
 		<annotation cp="·" type="tts">dấu chấm giữa dòng</annotation>
+		<annotation cp="'">dấu móc lửng | dấu móc lửng máy chữ | dấu nháy | dấu nháy đơn</annotation>
+		<annotation cp="'" type="tts">dấu móc lửng máy chữ</annotation>
+		<annotation cp="‘">dấu móc lửng | dấu móc lửng trái | dấu nháy | dấu nháy đơn | dấu nháy thông minh</annotation>
+		<annotation cp="‘" type="tts">dấu móc lửng trái</annotation>
+		<annotation cp="’">dấu móc lửng | dấu móc lửng phải | dấu nháy | dấu nháy đơn | dấu nháy thông minh</annotation>
+		<annotation cp="’" type="tts">dấu móc lửng phải</annotation>
+		<annotation cp="‚">dấu móc dưới | dấu móc dưới phải | dấu nháy | dấu nháy dưới</annotation>
+		<annotation cp="‚" type="tts">dấu móc dưới phải</annotation>
+		<annotation cp="“">dấu nháy | dấu nháy kép | dấu nháy kép trái | dấu nháy thông minh</annotation>
+		<annotation cp="“" type="tts">dấu nháy kép trái</annotation>
+		<annotation cp="”">dấu nháy | dấu nháy kép | dấu nháy kép phải | dấu nháy thông minh</annotation>
+		<annotation cp="”" type="tts">dấu nháy kép phải</annotation>
+		<annotation cp="„">dấu nháy | dấu nháy dưới | dấu nháy kép | dấu nháy kép dưới phải | dấu nháy thông minh</annotation>
+		<annotation cp="„" type="tts">dấu nháy kép dưới phải</annotation>
 		<annotation cp="«">dấu chữ V | dấu ngoặc đơn | dấu ngoặc góc | dấu ngoặc kép | dấu ngoặc kép trái | dấu sót | trái</annotation>
 		<annotation cp="«" type="tts">dấu ngoặc kép trái</annotation>
 		<annotation cp="»">dấu chữ V | dấu ngoặc đơn | dấu ngoặc góc | dấu ngoặc kép | dấu ngoặc kép phải | dấu sót | phải</annotation>
 		<annotation cp="»" type="tts">dấu ngoặc kép phải</annotation>
+		<annotation cp=")">dấu ngoặc | dấu ngoặc đơn | dấu ngoặc đơn đóng | ngoặc tròn</annotation>
+		<annotation cp=")" type="tts">dấu ngoặc đơn đóng</annotation>
+		<annotation cp="[">dấu móc | dấu ngoặc | dấu ngoặc vuông | dấu ngoặc vuông mở</annotation>
+		<annotation cp="[" type="tts">dấu ngoặc vuông mở</annotation>
+		<annotation cp="]">dấu móc | dấu ngoặc | dấu ngoặc vuông | dấu ngoặc vuông đóng</annotation>
+		<annotation cp="]" type="tts">dấu ngoặc vuông đóng</annotation>
+		<annotation cp="}">dấu ngoặc | dấu ngoặc nhọn | dấu ngoặc nhọn đóng</annotation>
+		<annotation cp="}" type="tts">dấu ngoặc nhọn đóng</annotation>
+		<annotation cp="〈">dấu ngoặc | dấu ngoặc góc | dấu ngoặc góc mở | dấu ngoặc kim cương | dấu ngoặc nhọn</annotation>
+		<annotation cp="〈" type="tts">dấu ngoặc góc mở</annotation>
+		<annotation cp="〉">dấu ngoặc | dấu ngoặc góc | dấu ngoặc góc đóng | dấu ngoặc kim cương | dấu ngoặc nhọn</annotation>
+		<annotation cp="〉" type="tts">dấu ngoặc góc đóng</annotation>
+		<annotation cp="《">dấu ngoặc | dấu ngoặc góc kép | dấu ngoặc góc kép mở</annotation>
+		<annotation cp="《" type="tts">dấu ngoặc góc kép mở</annotation>
+		<annotation cp="》">dấu ngoặc | dấu ngoặc góc kép | dấu ngoặc góc kép đóng</annotation>
+		<annotation cp="》" type="tts">dấu ngoặc góc kép đóng</annotation>
+		<annotation cp="「">dấu ngoặc | dấu ngoặc chữ L | dấu ngoặc chữ L mở</annotation>
+		<annotation cp="「" type="tts">dấu ngoặc chữ L mở</annotation>
+		<annotation cp="」">dấu ngoặc | dấu ngoặc chữ L | dấu ngoặc chữ L đóng</annotation>
+		<annotation cp="」" type="tts">dấu ngoặc chữ L đóng</annotation>
+		<annotation cp="『">dấu ngoặc | dấu ngoặc chữ L rỗng | dấu ngoặc chữ L rỗng mở</annotation>
+		<annotation cp="『" type="tts">dấu ngoặc chữ L rỗng mở</annotation>
+		<annotation cp="』">dấu ngoặc | dấu ngoặc chữ L rỗng | dấu ngoặc chữ L rỗng đóng</annotation>
+		<annotation cp="』" type="tts">dấu ngoặc chữ L rỗng đóng</annotation>
+		<annotation cp="【">dấu ngoặc | dấu ngoặc thấu kính | dấu ngoặc thấu kính đen mở</annotation>
+		<annotation cp="【" type="tts">dấu ngoặc thấu kính đen mở</annotation>
+		<annotation cp="】">dấu ngoặc | dấu ngoặc thấu kính | dấu ngoặc thấu kính đen đóng</annotation>
+		<annotation cp="】" type="tts">dấu ngoặc thấu kính đen đóng</annotation>
+		<annotation cp="〔">dấu ngoặc | dấu ngoặc hình mai rùa | dấu ngoặc mai rùa | dấu ngoặc mai rùa mở</annotation>
+		<annotation cp="〔" type="tts">dấu ngoặc mai rùa mở</annotation>
+		<annotation cp="〕">dấu ngoặc | dấu ngoặc hình mai rùa | dấu ngoặc mai rùa | dấu ngoặc mai rùa đóng</annotation>
+		<annotation cp="〕" type="tts">dấu ngoặc mai rùa đóng</annotation>
+		<annotation cp="〖">dấu ngoặc | dấu ngoặc thấu kính rỗng | dấu ngoặc thấu kính rỗng mở</annotation>
+		<annotation cp="〖" type="tts">dấu ngoặc thấu kính rỗng mở</annotation>
+		<annotation cp="〗">dấu ngoặc | dấu ngoặc thấu kính rỗng | dấu ngoặc thấu kính rỗng đóng</annotation>
+		<annotation cp="〗" type="tts">dấu ngoặc thấu kính rỗng đóng</annotation>
 		<annotation cp="§">biểu tượng chương mục | đoạn | mục | phần</annotation>
 		<annotation cp="§" type="tts">mục</annotation>
+		<annotation cp="¶">dấu ngắt đoạn | đoạn | đoạn văn | ký hiệu</annotation>
+		<annotation cp="¶" type="tts">dấu ngắt đoạn</annotation>
+		<annotation cp="@">a còng | ký hiệu a còng | ký hiệu a móc</annotation>
+		<annotation cp="@" type="tts">a còng</annotation>
+		<annotation cp="*">dấu hoa thị | dấu sao | ký tự đại diện</annotation>
+		<annotation cp="*" type="tts">dấu hoa thị</annotation>
+		<annotation cp="/">chéo | dấu sổ chéo | gạch chéo | xiên</annotation>
+		<annotation cp="/" type="tts">dấu sổ chéo</annotation>
+		<annotation cp="\">dấu sổ ngược | gạch chéo ngược | xiên ngược</annotation>
+		<annotation cp="\" type="tts">dấu sổ ngược</annotation>
+		<annotation cp="&amp;">dấu và | và</annotation>
+		<annotation cp="&amp;" type="tts">dấu và</annotation>
+		<annotation cp="#">dấu thăng | hashtag | số | thăng</annotation>
+		<annotation cp="#" type="tts">dấu thăng</annotation>
+		<annotation cp="%">dấu phần trăm | phần trăm</annotation>
+		<annotation cp="%" type="tts">phần trăm</annotation>
+		<annotation cp="‰">dấu phần nghìn | phần nghìn</annotation>
+		<annotation cp="‰" type="tts">phần nghìn</annotation>
 		<annotation cp="†">biểu tượng kiếm ngược | dao găm | dấu thập giá | kiếm ngược</annotation>
 		<annotation cp="†" type="tts">biểu tượng kiếm ngược</annotation>
 		<annotation cp="‡">biểu tượng song kiếm | dao găm | dấu thập giá | kiếm ngược | song</annotation>
 		<annotation cp="‡" type="tts">biểu tượng song kiếm</annotation>
 		<annotation cp="•">chấm | dấu đầu câu</annotation>
 		<annotation cp="•" type="tts">dấu đầu câu</annotation>
+		<annotation cp="‧">chấm | dấu chấm nối | nối</annotation>
+		<annotation cp="‧" type="tts">dấu chấm nối</annotation>
+		<annotation cp="′">dấu nháy</annotation>
+		<annotation cp="′" type="tts">dấu nháy</annotation>
+		<annotation cp="″">dấu nháy | dấu nháy kép | nháy</annotation>
+		<annotation cp="″" type="tts">dấu nháy kép</annotation>
+		<annotation cp="‴">dấu nháy | dấu nháy ba</annotation>
+		<annotation cp="‴" type="tts">dấu nháy ba</annotation>
+		<annotation cp="‸" draft="contributed">dấu sót</annotation>
+		<annotation cp="‸" type="tts" draft="contributed">dấu sót</annotation>
+		<annotation cp="※">dấu tham chiếu | ký hiệu tham chiếu</annotation>
+		<annotation cp="※" type="tts">dấu tham chiếu</annotation>
+		<annotation cp="⁂" draft="contributed">dấu chia văn bản</annotation>
+		<annotation cp="⁂" type="tts" draft="contributed">dấu chia văn bản</annotation>
+		<annotation cp="`">dấu | huyền | nốt</annotation>
+		<annotation cp="`" type="tts">dấu huyền</annotation>
+		<annotation cp="´">dấu | nốt | sắc</annotation>
+		<annotation cp="´" type="tts">dấu sắc</annotation>
+		<annotation cp="^">con trỏ | dấu | dấu tuyển loại trừ | điều khiển | lũy thừa | mũ | nêm | nón</annotation>
+		<annotation cp="^" type="tts">dấu mũ</annotation>
+		<annotation cp="¨">dấu tách đôi</annotation>
+		<annotation cp="¨" type="tts">dấu tách đôi</annotation>
 		<annotation cp="°">chứng minh | độ | giờ</annotation>
 		<annotation cp="°" type="tts">độ</annotation>
 		<annotation cp="℗">âm thanh | bản quyền | bản quyền ghi âm | ghi</annotation>
 		<annotation cp="℗" type="tts">bản quyền ghi âm</annotation>
 		<annotation cp="←">bên trái | mũi tên | mũi tên hướng trái</annotation>
 		<annotation cp="←" type="tts">mũi tên hướng trái</annotation>
+		<annotation cp="↚" draft="contributed">mũi tên trái có dấu gạch chéo</annotation>
+		<annotation cp="↚" type="tts" draft="contributed">mũi tên trái có dấu gạch chéo</annotation>
 		<annotation cp="→">bên phải | mũi tên | mũi tên hướng phải</annotation>
 		<annotation cp="→" type="tts">mũi tên hướng phải</annotation>
+		<annotation cp="↛" draft="contributed">mũi tên phải có dấu gạch chéo</annotation>
+		<annotation cp="↛" type="tts" draft="contributed">mũi tên phải có dấu gạch chéo</annotation>
 		<annotation cp="↑">lên | mũi tên | mũi tên hướng lên</annotation>
 		<annotation cp="↑" type="tts">mũi tên hướng lên</annotation>
 		<annotation cp="↓">mũi tên | mũi tên hướng xuống | xuống</annotation>
 		<annotation cp="↓" type="tts">mũi tên hướng xuống</annotation>
+		<annotation cp="↜" draft="contributed">mũi tên sóng trái</annotation>
+		<annotation cp="↜" type="tts" draft="contributed">mũi tên sóng trái</annotation>
+		<annotation cp="↝" draft="contributed">mũi tên sóng phải</annotation>
+		<annotation cp="↝" type="tts" draft="contributed">mũi tên sóng phải</annotation>
+		<annotation cp="↞" draft="contributed">mũi tên trái hai đầu</annotation>
+		<annotation cp="↞" type="tts" draft="contributed">mũi tên trái hai đầu</annotation>
+		<annotation cp="↟" draft="contributed">mũi tên hướng lên hai đầu</annotation>
+		<annotation cp="↟" type="tts" draft="contributed">mũi tên hướng lên hai đầu</annotation>
+		<annotation cp="↠" draft="contributed">mũi tên phải hai đầu</annotation>
+		<annotation cp="↠" type="tts" draft="contributed">mũi tên phải hai đầu</annotation>
+		<annotation cp="↡" draft="contributed">mũi tên hướng xuống hai đầu</annotation>
+		<annotation cp="↡" type="tts" draft="contributed">mũi tên hướng xuống hai đầu</annotation>
+		<annotation cp="↢" draft="contributed">mũi tên trái có đuôi</annotation>
+		<annotation cp="↢" type="tts" draft="contributed">mũi tên trái có đuôi</annotation>
+		<annotation cp="↣" draft="contributed">mũi tên phải có đuôi</annotation>
+		<annotation cp="↣" type="tts" draft="contributed">mũi tên phải có đuôi</annotation>
+		<annotation cp="↤" draft="contributed">mũi tên trái từ thanh</annotation>
+		<annotation cp="↤" type="tts" draft="contributed">mũi tên trái từ thanh</annotation>
+		<annotation cp="↥" draft="contributed">mũi tên hướng lên từ thanh</annotation>
+		<annotation cp="↥" type="tts" draft="contributed">mũi tên hướng lên từ thanh</annotation>
+		<annotation cp="↦" draft="contributed">mũi tên phải từ thanh</annotation>
+		<annotation cp="↦" type="tts" draft="contributed">mũi tên phải từ thanh</annotation>
+		<annotation cp="↧" draft="contributed">mũi tên hướng xuống từ thanh</annotation>
+		<annotation cp="↧" type="tts" draft="contributed">mũi tên hướng xuống từ thanh</annotation>
+		<annotation cp="↨" draft="contributed">mũi tên lên xuống có nét ngang</annotation>
+		<annotation cp="↨" type="tts" draft="contributed">mũi tên lên xuống có nét ngang</annotation>
+		<annotation cp="↫" draft="contributed">mũi tên trái có vòng tròn nhỏ</annotation>
+		<annotation cp="↫" type="tts" draft="contributed">mũi tên trái có vòng tròn nhỏ</annotation>
+		<annotation cp="↬" draft="contributed">mũi tên phải có vòng tròn nhỏ</annotation>
+		<annotation cp="↬" type="tts" draft="contributed">mũi tên phải có vòng tròn nhỏ</annotation>
+		<annotation cp="↭" draft="contributed">mũi tên sóng trái phải</annotation>
+		<annotation cp="↭" type="tts" draft="contributed">mũi tên sóng trái phải</annotation>
+		<annotation cp="↯" draft="contributed">mũi tên xuống hình dích dắc</annotation>
+		<annotation cp="↯" type="tts" draft="contributed">mũi tên xuống hình dích dắc</annotation>
+		<annotation cp="↰" draft="contributed">mũi tên hướng lên có đầu sang trái</annotation>
+		<annotation cp="↰" type="tts" draft="contributed">mũi tên hướng lên có đầu sang trái</annotation>
+		<annotation cp="↱" draft="contributed">mũi tên hướng lên có đầu sang phải</annotation>
+		<annotation cp="↱" type="tts" draft="contributed">mũi tên hướng lên có đầu sang phải</annotation>
+		<annotation cp="↲" draft="contributed">mũi tên hướng xuống có đầu sang trái</annotation>
+		<annotation cp="↲" type="tts" draft="contributed">mũi tên hướng xuống có đầu sang trái</annotation>
+		<annotation cp="↳" draft="contributed">mũi tên hướng xuống có đầu sang phải</annotation>
+		<annotation cp="↳" type="tts" draft="contributed">mũi tên hướng xuống có đầu sang phải</annotation>
+		<annotation cp="↴" draft="contributed">mũi tên phải có góc hướng xuống</annotation>
+		<annotation cp="↴" type="tts" draft="contributed">mũi tên phải có góc hướng xuống</annotation>
+		<annotation cp="↵" draft="contributed">mũi tên hướng xuống có góc sang trái</annotation>
+		<annotation cp="↵" type="tts" draft="contributed">mũi tên hướng xuống có góc sang trái</annotation>
+		<annotation cp="↶" draft="contributed">mũi tên hình bán nguyệt đầu ngược chiều kim đồng hồ</annotation>
+		<annotation cp="↶" type="tts" draft="contributed">mũi tên hình bán nguyệt đầu ngược chiều kim đồng hồ</annotation>
+		<annotation cp="↷" draft="contributed">mũi tên hình bán nguyệt đầu theo chiều kim đồng hồ</annotation>
+		<annotation cp="↷" type="tts" draft="contributed">mũi tên hình bán nguyệt đầu theo chiều kim đồng hồ</annotation>
+		<annotation cp="↸" draft="contributed">mũi tên tây bắc đến thanh dài</annotation>
+		<annotation cp="↸" type="tts" draft="contributed">mũi tên tây bắc đến thanh dài</annotation>
+		<annotation cp="↹" draft="contributed">mũi tên trái đến thanh trên mũi tên phải đến thanh</annotation>
+		<annotation cp="↹" type="tts" draft="contributed">mũi tên trái đến thanh trên mũi tên phải đến thanh</annotation>
+		<annotation cp="↺" draft="contributed">mũi tên mở tròn ngược chiều kim đồng hồ</annotation>
+		<annotation cp="↺" type="tts" draft="contributed">mũi tên mở tròn ngược chiều kim đồng hồ</annotation>
+		<annotation cp="↻" draft="contributed">mũi tên mở tròn theo chiều kim đồng hồ</annotation>
+		<annotation cp="↻" type="tts" draft="contributed">mũi tên mở tròn theo chiều kim đồng hồ</annotation>
+		<annotation cp="↼" draft="contributed">nét thẳng trái có ngạnh hướng lên</annotation>
+		<annotation cp="↼" type="tts" draft="contributed">nét thẳng trái có ngạnh hướng lên</annotation>
+		<annotation cp="↽" draft="contributed">nét thẳng trái có ngạnh hướng xuống</annotation>
+		<annotation cp="↽" type="tts" draft="contributed">nét thẳng trái có ngạnh hướng xuống</annotation>
+		<annotation cp="↾" draft="contributed">nét thẳng hướng lên có ngạnh sang phải</annotation>
+		<annotation cp="↾" type="tts" draft="contributed">nét thẳng hướng lên có ngạnh sang phải</annotation>
+		<annotation cp="↿" draft="contributed">nét thẳng hướng lên có ngạnh sang trái</annotation>
+		<annotation cp="↿" type="tts" draft="contributed">nét thẳng hướng lên có ngạnh sang trái</annotation>
+		<annotation cp="⇀" draft="contributed">nét thẳng phải có ngạnh hướng lên</annotation>
+		<annotation cp="⇀" type="tts" draft="contributed">nét thẳng phải có ngạnh hướng lên</annotation>
+		<annotation cp="⇁" draft="contributed">nét thẳng phải có ngạnh hướng xuống</annotation>
+		<annotation cp="⇁" type="tts" draft="contributed">nét thẳng phải có ngạnh hướng xuống</annotation>
+		<annotation cp="⇂" draft="contributed">nét thẳng hướng xuống có ngạnh sang phải</annotation>
+		<annotation cp="⇂" type="tts" draft="contributed">nét thẳng hướng xuống có ngạnh sang phải</annotation>
+		<annotation cp="⇃" draft="contributed">nét thẳng hướng xuống có ngạnh sang trái</annotation>
+		<annotation cp="⇃" type="tts" draft="contributed">nét thẳng hướng xuống có ngạnh sang trái</annotation>
+		<annotation cp="⇄" draft="contributed">mũi tên phải trên mũi tên trái</annotation>
+		<annotation cp="⇄" type="tts" draft="contributed">mũi tên phải trên mũi tên trái</annotation>
 		<annotation cp="⇅">lên | mũi tên | mũi tên lên/xuống | xuống</annotation>
 		<annotation cp="⇅" type="tts">mũi tên lên/xuống</annotation>
 		<annotation cp="⇆">mũi tên | mũi tên trái/phải | phải | trái</annotation>
 		<annotation cp="⇆" type="tts">mũi tên trái/phải</annotation>
+		<annotation cp="⇇" draft="contributed">mũi tên ghép trái</annotation>
+		<annotation cp="⇇" type="tts" draft="contributed">mũi tên ghép trái</annotation>
+		<annotation cp="⇈" draft="contributed">mũi tên ghép hướng lên</annotation>
+		<annotation cp="⇈" type="tts" draft="contributed">mũi tên ghép hướng lên</annotation>
+		<annotation cp="⇉" draft="contributed">mũi tên ghép phải</annotation>
+		<annotation cp="⇉" type="tts" draft="contributed">mũi tên ghép phải</annotation>
+		<annotation cp="⇊" draft="contributed">mũi tên ghép hướng xuống</annotation>
+		<annotation cp="⇊" type="tts" draft="contributed">mũi tên ghép hướng xuống</annotation>
+		<annotation cp="⇋" draft="contributed">nét thẳng có ngạnh trái trên nét thẳng có ngạnh phải</annotation>
+		<annotation cp="⇋" type="tts" draft="contributed">nét thẳng có ngạnh trái trên nét thẳng có ngạnh phải</annotation>
+		<annotation cp="⇌" draft="contributed">nét thẳng có ngạnh phải trên nét thẳng có ngạnh trái</annotation>
+		<annotation cp="⇌" type="tts" draft="contributed">nét thẳng có ngạnh phải trên nét thẳng có ngạnh trái</annotation>
+		<annotation cp="⇐" draft="contributed">mũi tên kép trái</annotation>
+		<annotation cp="⇐" type="tts" draft="contributed">mũi tên kép trái</annotation>
+		<annotation cp="⇍" draft="contributed">mũi tên kép trái có dấu gạch chéo</annotation>
+		<annotation cp="⇍" type="tts" draft="contributed">mũi tên kép trái có dấu gạch chéo</annotation>
+		<annotation cp="⇑" draft="contributed">mũi tên kép hướng lên</annotation>
+		<annotation cp="⇑" type="tts" draft="contributed">mũi tên kép hướng lên</annotation>
+		<annotation cp="⇒" draft="contributed">mũi tên kép phải</annotation>
+		<annotation cp="⇒" type="tts" draft="contributed">mũi tên kép phải</annotation>
+		<annotation cp="⇏" draft="contributed">mũi tên kép phải có dấu gạch chéo</annotation>
+		<annotation cp="⇏" type="tts" draft="contributed">mũi tên kép phải có dấu gạch chéo</annotation>
+		<annotation cp="⇓" draft="contributed">mũi tên kép xuống</annotation>
+		<annotation cp="⇓" type="tts" draft="contributed">mũi tên kép xuống</annotation>
+		<annotation cp="⇔" draft="contributed">mũi tên kép trái phải</annotation>
+		<annotation cp="⇔" type="tts" draft="contributed">mũi tên kép trái phải</annotation>
+		<annotation cp="⇎" draft="contributed">mũi tên kép trái phải có dấu gạch chéo</annotation>
+		<annotation cp="⇎" type="tts" draft="contributed">mũi tên kép trái phải có dấu gạch chéo</annotation>
+		<annotation cp="⇖" draft="contributed">mũi tên kép tây bắc</annotation>
+		<annotation cp="⇖" type="tts" draft="contributed">mũi tên kép tây bắc</annotation>
+		<annotation cp="⇗" draft="contributed">mũi tên kép đông bắc</annotation>
+		<annotation cp="⇗" type="tts" draft="contributed">mũi tên kép đông bắc</annotation>
+		<annotation cp="⇘" draft="contributed">mũi tên kép đông nam</annotation>
+		<annotation cp="⇘" type="tts" draft="contributed">mũi tên kép đông nam</annotation>
+		<annotation cp="⇙" draft="contributed">mũi tên kép tây nam</annotation>
+		<annotation cp="⇙" type="tts" draft="contributed">mũi tên kép tây nam</annotation>
+		<annotation cp="⇚" draft="contributed">mũi tên ba trái</annotation>
+		<annotation cp="⇚" type="tts" draft="contributed">mũi tên ba trái</annotation>
+		<annotation cp="⇛" draft="contributed">mũi tên ba phải</annotation>
+		<annotation cp="⇛" type="tts" draft="contributed">mũi tên ba phải</annotation>
+		<annotation cp="⇜" draft="contributed">mũi tên ngoằn ngoèo trái</annotation>
+		<annotation cp="⇜" type="tts" draft="contributed">mũi tên ngoằn ngoèo trái</annotation>
+		<annotation cp="⇝" draft="contributed">mũi tên ngoằn ngoèo phải</annotation>
+		<annotation cp="⇝" type="tts" draft="contributed">mũi tên ngoằn ngoèo phải</annotation>
+		<annotation cp="⇞" draft="contributed">mũi tên hướng lên có hai nét gạch</annotation>
+		<annotation cp="⇞" type="tts" draft="contributed">mũi tên hướng lên có hai nét gạch</annotation>
+		<annotation cp="⇟" draft="contributed">mũi tên hướng xuống có hai nét gạch</annotation>
+		<annotation cp="⇟" type="tts" draft="contributed">mũi tên hướng xuống có hai nét gạch</annotation>
+		<annotation cp="⇠" draft="contributed">mũi tên trái nét đứt</annotation>
+		<annotation cp="⇠" type="tts" draft="contributed">mũi tên trái nét đứt</annotation>
+		<annotation cp="⇡" draft="contributed">mũi tên hướng lên nét đứt</annotation>
+		<annotation cp="⇡" type="tts" draft="contributed">mũi tên hướng lên nét đứt</annotation>
+		<annotation cp="⇢" draft="contributed">mũi tên phải nét đứt</annotation>
+		<annotation cp="⇢" type="tts" draft="contributed">mũi tên phải nét đứt</annotation>
+		<annotation cp="⇣" draft="contributed">mũi tên hướng xuống nét đứt</annotation>
+		<annotation cp="⇣" type="tts" draft="contributed">mũi tên hướng xuống nét đứt</annotation>
+		<annotation cp="⇤" draft="contributed">mũi tên trái đến thanh</annotation>
+		<annotation cp="⇤" type="tts" draft="contributed">mũi tên trái đến thanh</annotation>
+		<annotation cp="⇥" draft="contributed">mũi tên phải đến thanh</annotation>
+		<annotation cp="⇥" type="tts" draft="contributed">mũi tên phải đến thanh</annotation>
+		<annotation cp="⇦" draft="contributed">mũi tên rỗng trái</annotation>
+		<annotation cp="⇦" type="tts" draft="contributed">mũi tên rỗng trái</annotation>
+		<annotation cp="⇧" draft="contributed">mũi tên rỗng hướng lên</annotation>
+		<annotation cp="⇧" type="tts" draft="contributed">mũi tên rỗng hướng lên</annotation>
+		<annotation cp="⇨" draft="contributed">mũi tên rỗng phải</annotation>
+		<annotation cp="⇨" type="tts" draft="contributed">mũi tên rỗng phải</annotation>
+		<annotation cp="⇩" draft="contributed">mũi tên rỗng hướng xuống</annotation>
+		<annotation cp="⇩" type="tts" draft="contributed">mũi tên rỗng hướng xuống</annotation>
+		<annotation cp="⇪" draft="contributed">mũi tên rỗng hướng lên từ thanh</annotation>
+		<annotation cp="⇪" type="tts" draft="contributed">mũi tên rỗng hướng lên từ thanh</annotation>
+		<annotation cp="⇵" draft="contributed">mũi tên hướng xuống bên trái mũi tên hướng lên</annotation>
+		<annotation cp="⇵" type="tts" draft="contributed">mũi tên hướng xuống bên trái mũi tên hướng lên</annotation>
+		<annotation cp="∀" draft="contributed">với mọi</annotation>
+		<annotation cp="∀" type="tts" draft="contributed">với mọi</annotation>
+		<annotation cp="∂" draft="contributed">vi phân riêng phần</annotation>
+		<annotation cp="∂" type="tts" draft="contributed">vi phân riêng phần</annotation>
+		<annotation cp="∃" draft="contributed">tồn tại</annotation>
+		<annotation cp="∃" type="tts" draft="contributed">tồn tại</annotation>
+		<annotation cp="∅" draft="contributed">tập hợp rỗng</annotation>
+		<annotation cp="∅" type="tts" draft="contributed">tập hợp rỗng</annotation>
 		<annotation cp="∆">hình tam giác | số gia</annotation>
 		<annotation cp="∆" type="tts">số gia</annotation>
 		<annotation cp="∇">hình tam giác | nabla</annotation>
 		<annotation cp="∇" type="tts">nabla</annotation>
 		<annotation cp="∈">chứa | phần tử | phần tử của | tập hợp | thuộc</annotation>
 		<annotation cp="∈" type="tts">phần tử của</annotation>
+		<annotation cp="∉" draft="contributed">không thuộc</annotation>
+		<annotation cp="∉" type="tts" draft="contributed">không thuộc</annotation>
+		<annotation cp="∋" draft="contributed">chứa</annotation>
+		<annotation cp="∋" type="tts" draft="contributed">chứa</annotation>
+		<annotation cp="∎" draft="contributed">chứng minh kết thúc</annotation>
+		<annotation cp="∎" type="tts" draft="contributed">chứng minh kết thúc</annotation>
+		<annotation cp="∏" draft="contributed">tích đa phân</annotation>
+		<annotation cp="∏" type="tts" draft="contributed">tích đa phân</annotation>
+		<annotation cp="∑" draft="contributed">tổng đa phân</annotation>
+		<annotation cp="∑" type="tts" draft="contributed">tổng đa phân</annotation>
+		<annotation cp="+">cộng | dấu cộng | thêm</annotation>
+		<annotation cp="+" type="tts">dấu cộng</annotation>
+		<annotation cp="±">dấu cộng trừ</annotation>
+		<annotation cp="±" type="tts">dấu cộng trừ</annotation>
 		<annotation cp="÷">biểu tượng dấu chia | chia | dấu chia | phép chia</annotation>
 		<annotation cp="÷" type="tts">biểu tượng dấu chia</annotation>
 		<annotation cp="×">biểu tượng dấu nhân | dấu nhân | lần | nhân | phép nhân</annotation>
 		<annotation cp="×" type="tts">biểu tượng dấu nhân</annotation>
+		<annotation cp="&lt;">dấu nhỏ hơn | nhỏ hơn | thẻ | thẻ mở</annotation>
+		<annotation cp="&lt;" type="tts">dấu nhỏ hơn</annotation>
+		<annotation cp="≮" draft="contributed">không nhỏ hơn</annotation>
+		<annotation cp="≮" type="tts" draft="contributed">không nhỏ hơn</annotation>
+		<annotation cp="=">dấu bằng</annotation>
+		<annotation cp="=" type="tts">dấu bằng</annotation>
+		<annotation cp="≠">dấu khác | khác | không bằng | không giống</annotation>
+		<annotation cp="≠" type="tts">dấu khác</annotation>
+		<annotation cp="&gt;">dấu lớn hơn | lớn hơn | thẻ | thẻ đóng</annotation>
+		<annotation cp="&gt;" type="tts">dấu lớn hơn</annotation>
+		<annotation cp="≯" draft="contributed">không lớn hơn</annotation>
+		<annotation cp="≯" type="tts" draft="contributed">không lớn hơn</annotation>
+		<annotation cp="¬">dấu phủ định | không | phủ định</annotation>
+		<annotation cp="¬" type="tts">dấu phủ định</annotation>
+		<annotation cp="|">dấu sổ dọc | dấu sổ thẳng | ống | thanh</annotation>
+		<annotation cp="|" type="tts">dấu sổ thẳng</annotation>
+		<annotation cp="~">dấu ngã</annotation>
+		<annotation cp="~" type="tts">dấu ngã</annotation>
+		<annotation cp="−">dấu trừ | trừ</annotation>
+		<annotation cp="−" type="tts">dấu trừ</annotation>
 		<annotation cp="⁻">chỉ số trên | dấu trừ | dấu trừ trên</annotation>
 		<annotation cp="⁻" type="tts">dấu trừ trên</annotation>
+		<annotation cp="∓" draft="contributed">trừ hoặc cộng</annotation>
+		<annotation cp="∓" type="tts" draft="contributed">trừ hoặc cộng</annotation>
+		<annotation cp="∕" draft="contributed">dấu gạch chéo phân chia</annotation>
+		<annotation cp="∕" type="tts" draft="contributed">dấu gạch chéo phân chia</annotation>
+		<annotation cp="⁄" draft="contributed">dấu gạch chéo phân số</annotation>
+		<annotation cp="⁄" type="tts" draft="contributed">dấu gạch chéo phân số</annotation>
+		<annotation cp="∗" draft="contributed">toán tử dấu hoa thị</annotation>
+		<annotation cp="∗" type="tts" draft="contributed">toán tử dấu hoa thị</annotation>
+		<annotation cp="∘" draft="contributed">vòng toán tử</annotation>
+		<annotation cp="∘" type="tts" draft="contributed">vòng toán tử</annotation>
+		<annotation cp="∙" draft="contributed">toán tử dấu đầu dòng</annotation>
+		<annotation cp="∙" type="tts" draft="contributed">toán tử dấu đầu dòng</annotation>
 		<annotation cp="√">bậc hai | căn | căn bậc hai | căn số | cơ số | vô tỷ</annotation>
 		<annotation cp="√" type="tts">căn bậc hai</annotation>
+		<annotation cp="∝" draft="contributed">tỷ lệ</annotation>
+		<annotation cp="∝" type="tts" draft="contributed">tỷ lệ</annotation>
 		<annotation cp="∞">biểu tượng vô cực | vô cực</annotation>
 		<annotation cp="∞" type="tts">biểu tượng vô cực</annotation>
+		<annotation cp="∟" draft="contributed">góc vuông</annotation>
+		<annotation cp="∟" type="tts" draft="contributed">góc vuông</annotation>
+		<annotation cp="∠" draft="contributed">góc</annotation>
+		<annotation cp="∠" type="tts" draft="contributed">góc</annotation>
+		<annotation cp="∣" draft="contributed">chia ra</annotation>
+		<annotation cp="∣" type="tts" draft="contributed">chia ra</annotation>
+		<annotation cp="∥" draft="contributed">song song</annotation>
+		<annotation cp="∥" type="tts" draft="contributed">song song</annotation>
+		<annotation cp="∧" draft="contributed">logic và</annotation>
+		<annotation cp="∧" type="tts" draft="contributed">logic và</annotation>
 		<annotation cp="∩">giao | tập hợp</annotation>
 		<annotation cp="∩" type="tts">giao</annotation>
 		<annotation cp="∪">hợp | sự tụ tập | tập hợp</annotation>
 		<annotation cp="∪" type="tts">hợp</annotation>
+		<annotation cp="∫" draft="contributed">tích phân</annotation>
+		<annotation cp="∫" type="tts" draft="contributed">tích phân</annotation>
+		<annotation cp="∬" draft="contributed">tích phân kép</annotation>
+		<annotation cp="∬" type="tts" draft="contributed">tích phân kép</annotation>
+		<annotation cp="∮" draft="contributed">tích phân theo chu tuyến</annotation>
+		<annotation cp="∮" type="tts" draft="contributed">tích phân theo chu tuyến</annotation>
+		<annotation cp="∴" draft="contributed">do đó</annotation>
+		<annotation cp="∴" type="tts" draft="contributed">do đó</annotation>
+		<annotation cp="∵" draft="contributed">vì</annotation>
+		<annotation cp="∵" type="tts" draft="contributed">vì</annotation>
+		<annotation cp="∶" draft="contributed">tỉ số</annotation>
+		<annotation cp="∶" type="tts" draft="contributed">tỉ số</annotation>
+		<annotation cp="∷" draft="contributed">tỷ lệ thức</annotation>
+		<annotation cp="∷" type="tts" draft="contributed">tỷ lệ thức</annotation>
+		<annotation cp="∼" draft="contributed">toán tử tương ứng</annotation>
+		<annotation cp="∼" type="tts" draft="contributed">toán tử tương ứng</annotation>
+		<annotation cp="∽" draft="contributed">dấu ngã ngược</annotation>
+		<annotation cp="∽" type="tts" draft="contributed">dấu ngã ngược</annotation>
+		<annotation cp="∾" draft="contributed">cực thuận</annotation>
+		<annotation cp="∾" type="tts" draft="contributed">cực thuận</annotation>
+		<annotation cp="≃" draft="contributed">gần bằng</annotation>
+		<annotation cp="≃" type="tts" draft="contributed">gần bằng</annotation>
+		<annotation cp="≅" draft="contributed">xấp xỉ bằng</annotation>
+		<annotation cp="≅" type="tts" draft="contributed">xấp xỉ bằng</annotation>
+		<annotation cp="≈">dấu xấp xỉ | gần bằng | khoảng | xấp xỉ</annotation>
+		<annotation cp="≈" type="tts">dấu xấp xỉ</annotation>
+		<annotation cp="≌" draft="contributed">như nhau</annotation>
+		<annotation cp="≌" type="tts" draft="contributed">như nhau</annotation>
+		<annotation cp="≒" draft="contributed">xấp xỉ</annotation>
+		<annotation cp="≒" type="tts" draft="contributed">xấp xỉ</annotation>
+		<annotation cp="≖" draft="contributed">tương đương</annotation>
+		<annotation cp="≖" type="tts" draft="contributed">tương đương</annotation>
 		<annotation cp="≡">bằng | bằng nhau | dấu bằng | gấp ba | giống</annotation>
-		<annotation cp="≡" type="tts">dấu bằng</annotation>
+		<annotation cp="≡" type="tts">bằng</annotation>
+		<annotation cp="≣" draft="contributed">tương đồng</annotation>
+		<annotation cp="≣" type="tts" draft="contributed">tương đồng</annotation>
+		<annotation cp="≤">bằng | dấu nhỏ hơn hoặc bằng | không bằng | nhỏ hơn hoặc bằng</annotation>
+		<annotation cp="≤" type="tts">dấu nhỏ hơn hoặc bằng</annotation>
+		<annotation cp="≥">bằng | dấu lớn hơn hoặc bằng | không bằng | lớn hơn</annotation>
+		<annotation cp="≥" type="tts">dấu lớn hơn hoặc bằng</annotation>
+		<annotation cp="≦" draft="contributed">nhỏ hơn bằng</annotation>
+		<annotation cp="≦" type="tts" draft="contributed">nhỏ hơn bằng</annotation>
+		<annotation cp="≧" draft="contributed">lớn hơn bằng</annotation>
+		<annotation cp="≧" type="tts" draft="contributed">lớn hơn bằng</annotation>
+		<annotation cp="≪" draft="contributed">ít hơn rất nhiều so với</annotation>
+		<annotation cp="≪" type="tts" draft="contributed">ít hơn rất nhiều so với</annotation>
+		<annotation cp="≫" draft="contributed">lớn hơn nhiều</annotation>
+		<annotation cp="≫" type="tts" draft="contributed">lớn hơn nhiều</annotation>
+		<annotation cp="≬" draft="contributed">trong khoảng</annotation>
+		<annotation cp="≬" type="tts" draft="contributed">trong khoảng</annotation>
+		<annotation cp="≳" draft="contributed">lớn hơn tương đương</annotation>
+		<annotation cp="≳" type="tts" draft="contributed">lớn hơn tương đương</annotation>
+		<annotation cp="≺" draft="contributed">đứng trước</annotation>
+		<annotation cp="≺" type="tts" draft="contributed">đứng trước</annotation>
+		<annotation cp="≻" draft="contributed">đứng sau</annotation>
+		<annotation cp="≻" type="tts" draft="contributed">đứng sau</annotation>
+		<annotation cp="⊁" draft="contributed">không đứng saau</annotation>
+		<annotation cp="⊁" type="tts" draft="contributed">không đứng saau</annotation>
 		<annotation cp="⊂">tập hợp | tập hợp con | tập hợp con của</annotation>
 		<annotation cp="⊂" type="tts">tập hợp con của</annotation>
+		<annotation cp="⊃" draft="contributed">tập cha</annotation>
+		<annotation cp="⊃" type="tts" draft="contributed">tập cha</annotation>
+		<annotation cp="⊆" draft="contributed">tập con bằng</annotation>
+		<annotation cp="⊆" type="tts" draft="contributed">tập con bằng</annotation>
+		<annotation cp="⊇" draft="contributed">tập cha bằng</annotation>
+		<annotation cp="⊇" type="tts" draft="contributed">tập cha bằng</annotation>
+		<annotation cp="⊕" draft="contributed">tổng trực tiếp</annotation>
+		<annotation cp="⊕" type="tts" draft="contributed">tổng trực tiếp</annotation>
+		<annotation cp="⊖" draft="contributed">hiệu số đối xứng</annotation>
+		<annotation cp="⊖" type="tts" draft="contributed">hiệu số đối xứng</annotation>
+		<annotation cp="⊗" draft="contributed">tích tenxơ</annotation>
+		<annotation cp="⊗" type="tts" draft="contributed">tích tenxơ</annotation>
+		<annotation cp="⊘">dấu chia | dấu chia trong vòng tròn | giống phép chia | toán học</annotation>
+		<annotation cp="⊘" type="tts">dấu chia trong vòng tròn</annotation>
+		<annotation cp="⊙" draft="contributed">toán tử chấm tròn</annotation>
+		<annotation cp="⊙" type="tts" draft="contributed">toán tử chấm tròn</annotation>
+		<annotation cp="⊚" draft="contributed">toán tử vòng tròn</annotation>
+		<annotation cp="⊚" type="tts" draft="contributed">toán tử vòng tròn</annotation>
+		<annotation cp="⊛" draft="contributed">toán tử hoa thị tròn</annotation>
+		<annotation cp="⊛" type="tts" draft="contributed">toán tử hoa thị tròn</annotation>
+		<annotation cp="⊞" draft="contributed">phép cộng</annotation>
+		<annotation cp="⊞" type="tts" draft="contributed">phép cộng</annotation>
+		<annotation cp="⊟" draft="contributed">phép trừ</annotation>
+		<annotation cp="⊟" type="tts" draft="contributed">phép trừ</annotation>
+		<annotation cp="⊥" draft="contributed">chữ T lộn ngược</annotation>
+		<annotation cp="⊥" type="tts" draft="contributed">chữ T lộn ngược</annotation>
+		<annotation cp="⊮" draft="contributed">không bắt buộc</annotation>
+		<annotation cp="⊮" type="tts" draft="contributed">không bắt buộc</annotation>
+		<annotation cp="⊰" draft="contributed">đứng trước trong hệ thức</annotation>
+		<annotation cp="⊰" type="tts" draft="contributed">đứng trước trong hệ thức</annotation>
+		<annotation cp="⊱" draft="contributed">đứng sau trong hệ thức</annotation>
+		<annotation cp="⊱" type="tts" draft="contributed">đứng sau trong hệ thức</annotation>
+		<annotation cp="⋭" draft="contributed">không chứa như nhóm con bình thường bằng</annotation>
+		<annotation cp="⋭" type="tts" draft="contributed">không chứa như nhóm con bình thường bằng</annotation>
+		<annotation cp="⊶" draft="contributed">gốc</annotation>
+		<annotation cp="⊶" type="tts" draft="contributed">gốc</annotation>
+		<annotation cp="⊹" draft="contributed">ma trận liên hợp hermitian</annotation>
+		<annotation cp="⊹" type="tts" draft="contributed">ma trận liên hợp hermitian</annotation>
+		<annotation cp="⊿" draft="contributed">tam giác vuông</annotation>
+		<annotation cp="⊿" type="tts" draft="contributed">tam giác vuông</annotation>
+		<annotation cp="⋁" draft="contributed">logic hoặc đa phân</annotation>
+		<annotation cp="⋁" type="tts" draft="contributed">logic hoặc đa phân</annotation>
+		<annotation cp="⋂" draft="contributed">giao đa phân</annotation>
+		<annotation cp="⋂" type="tts" draft="contributed">giao đa phân</annotation>
+		<annotation cp="⋃" draft="contributed">hợp đa phân</annotation>
+		<annotation cp="⋃" type="tts" draft="contributed">hợp đa phân</annotation>
+		<annotation cp="⋅" draft="contributed">toán tử dấu chấm</annotation>
+		<annotation cp="⋅" type="tts" draft="contributed">toán tử dấu chấm</annotation>
+		<annotation cp="⋆" draft="contributed">toán tử nhân</annotation>
+		<annotation cp="⋆" type="tts" draft="contributed">toán tử nhân</annotation>
+		<annotation cp="⋈" draft="contributed">phép nối tự nhiên</annotation>
+		<annotation cp="⋈" type="tts" draft="contributed">phép nối tự nhiên</annotation>
+		<annotation cp="⋒" draft="contributed">giao kép</annotation>
+		<annotation cp="⋒" type="tts" draft="contributed">giao kép</annotation>
+		<annotation cp="⋘" draft="contributed">ít hơn rất nhiều</annotation>
+		<annotation cp="⋘" type="tts" draft="contributed">ít hơn rất nhiều</annotation>
+		<annotation cp="⋙" draft="contributed">lớn hơn rất nhiều</annotation>
+		<annotation cp="⋙" type="tts" draft="contributed">lớn hơn rất nhiều</annotation>
+		<annotation cp="⋮" draft="contributed">dấu ba chấm dọc</annotation>
+		<annotation cp="⋮" type="tts" draft="contributed">dấu ba chấm dọc</annotation>
+		<annotation cp="⋯" draft="contributed">dấu ba chấm ngang đường trung tuyến</annotation>
+		<annotation cp="⋯" type="tts" draft="contributed">dấu ba chấm ngang đường trung tuyến</annotation>
+		<annotation cp="⋰" draft="contributed">dấu ba chấm chéo phải trên</annotation>
+		<annotation cp="⋰" type="tts" draft="contributed">dấu ba chấm chéo phải trên</annotation>
+		<annotation cp="⋱" draft="contributed">dấu ba chấm chéo phải xuống</annotation>
+		<annotation cp="⋱" type="tts" draft="contributed">dấu ba chấm chéo phải xuống</annotation>
+		<annotation cp="■" draft="contributed">hình vuông đặc</annotation>
+		<annotation cp="■" type="tts" draft="contributed">hình vuông đặc</annotation>
+		<annotation cp="□" draft="contributed">hình vuông rỗng</annotation>
+		<annotation cp="□" type="tts" draft="contributed">hình vuông rỗng</annotation>
+		<annotation cp="▢" draft="contributed">hình vuông rỗng có góc bo tròn</annotation>
+		<annotation cp="▢" type="tts" draft="contributed">hình vuông rỗng có góc bo tròn</annotation>
+		<annotation cp="▣" draft="contributed">hình vuông rỗng chứa hình vuông đặc</annotation>
+		<annotation cp="▣" type="tts" draft="contributed">hình vuông rỗng chứa hình vuông đặc</annotation>
+		<annotation cp="▤" draft="contributed">hình vuông có sọc ngang</annotation>
+		<annotation cp="▤" type="tts" draft="contributed">hình vuông có sọc ngang</annotation>
+		<annotation cp="▥" draft="contributed">hình vuông có sọc dọc</annotation>
+		<annotation cp="▥" type="tts" draft="contributed">hình vuông có sọc dọc</annotation>
+		<annotation cp="▦" draft="contributed">hình vuông có sọc ngang dọc thẳng góc</annotation>
+		<annotation cp="▦" type="tts" draft="contributed">hình vuông có sọc ngang dọc thẳng góc</annotation>
+		<annotation cp="▧" draft="contributed">hình vuông có sọc chéo từ trái trên xuống phải dưới</annotation>
+		<annotation cp="▧" type="tts" draft="contributed">hình vuông có sọc chéo từ trái trên xuống phải dưới</annotation>
+		<annotation cp="▨" draft="contributed">hình vuông có sọc chéo từ phải trên xuống trái dưới</annotation>
+		<annotation cp="▨" type="tts" draft="contributed">hình vuông có sọc chéo từ phải trên xuống trái dưới</annotation>
+		<annotation cp="▩" draft="contributed">hình vuông có sọc chéo song song</annotation>
+		<annotation cp="▩" type="tts" draft="contributed">hình vuông có sọc chéo song song</annotation>
+		<annotation cp="▬" draft="contributed">hình chữ nhật đặc</annotation>
+		<annotation cp="▬" type="tts" draft="contributed">hình chữ nhật đặc</annotation>
+		<annotation cp="▭" draft="contributed">hình chữ nhật rỗng</annotation>
+		<annotation cp="▭" type="tts" draft="contributed">hình chữ nhật rỗng</annotation>
+		<annotation cp="▮" draft="contributed">hình chữ nhật dọc đặc</annotation>
+		<annotation cp="▮" type="tts" draft="contributed">hình chữ nhật dọc đặc</annotation>
+		<annotation cp="▰" draft="contributed">hình bình hành đặc</annotation>
+		<annotation cp="▰" type="tts" draft="contributed">hình bình hành đặc</annotation>
 		<annotation cp="▲">kín | lên | mũi tên | tam giác | tam giác hướng lên</annotation>
 		<annotation cp="▲" type="tts">tam giác hướng lên</annotation>
+		<annotation cp="△" draft="contributed">hình tam giác rỗng hướng lên</annotation>
+		<annotation cp="△" type="tts" draft="contributed">hình tam giác rỗng hướng lên</annotation>
+		<annotation cp="▴" draft="contributed">hình tam giác nhỏ đặc hướng lên</annotation>
+		<annotation cp="▴" type="tts" draft="contributed">hình tam giác nhỏ đặc hướng lên</annotation>
+		<annotation cp="▵" draft="contributed">hình tam giác nhỏ rỗng hướng lên</annotation>
+		<annotation cp="▵" type="tts" draft="contributed">hình tam giác nhỏ rỗng hướng lên</annotation>
+		<annotation cp="▷" draft="contributed">hình tam giác rỗng hướng sang phải</annotation>
+		<annotation cp="▷" type="tts" draft="contributed">hình tam giác rỗng hướng sang phải</annotation>
+		<annotation cp="▸" draft="contributed">hình tam giác nhỏ đặc hướng sang phải</annotation>
+		<annotation cp="▸" type="tts" draft="contributed">hình tam giác nhỏ đặc hướng sang phải</annotation>
+		<annotation cp="▹" draft="contributed">hình tam giác nhỏ rỗng hướng sang phải</annotation>
+		<annotation cp="▹" type="tts" draft="contributed">hình tam giác nhỏ rỗng hướng sang phải</annotation>
+		<annotation cp="►" draft="contributed">con trỏ đặc hướng sang phải</annotation>
+		<annotation cp="►" type="tts" draft="contributed">con trỏ đặc hướng sang phải</annotation>
+		<annotation cp="▻" draft="contributed">con trỏ rỗng hướng sang phải</annotation>
+		<annotation cp="▻" type="tts" draft="contributed">con trỏ rỗng hướng sang phải</annotation>
 		<annotation cp="▼">kín | mũi tên | tam giác | tam giác hướng xuống | xuống</annotation>
 		<annotation cp="▼" type="tts">tam giác hướng xuống</annotation>
+		<annotation cp="▽" draft="contributed">hình tam giác rỗng hướng xuống</annotation>
+		<annotation cp="▽" type="tts" draft="contributed">hình tam giác rỗng hướng xuống</annotation>
+		<annotation cp="▾" draft="contributed">hình tam giác nhỏ đặc hướng xuống</annotation>
+		<annotation cp="▾" type="tts" draft="contributed">hình tam giác nhỏ đặc hướng xuống</annotation>
+		<annotation cp="▿" draft="contributed">hình tam giác nhỏ rỗng hướng xuống</annotation>
+		<annotation cp="▿" type="tts" draft="contributed">hình tam giác nhỏ rỗng hướng xuống</annotation>
+		<annotation cp="◁" draft="contributed">hình tam giác rỗng hướng sang trái</annotation>
+		<annotation cp="◁" type="tts" draft="contributed">hình tam giác rỗng hướng sang trái</annotation>
+		<annotation cp="◂" draft="contributed">hình tam giác nhỏ đặc hướng sang trái</annotation>
+		<annotation cp="◂" type="tts" draft="contributed">hình tam giác nhỏ đặc hướng sang trái</annotation>
+		<annotation cp="◃" draft="contributed">hình tam giác nhỏ rỗng hướng sang trái</annotation>
+		<annotation cp="◃" type="tts" draft="contributed">hình tam giác nhỏ rỗng hướng sang trái</annotation>
+		<annotation cp="◄" draft="contributed">con trỏ đặc hướng sang trái</annotation>
+		<annotation cp="◄" type="tts" draft="contributed">con trỏ đặc hướng sang trái</annotation>
+		<annotation cp="◅" draft="contributed">con trỏ rỗng hướng sang trái</annotation>
+		<annotation cp="◅" type="tts" draft="contributed">con trỏ rỗng hướng sang trái</annotation>
+		<annotation cp="◆" draft="contributed">hình kim cương đặc</annotation>
+		<annotation cp="◆" type="tts" draft="contributed">hình kim cương đặc</annotation>
+		<annotation cp="◇" draft="contributed">hình kim cương rỗng</annotation>
+		<annotation cp="◇" type="tts" draft="contributed">hình kim cương rỗng</annotation>
+		<annotation cp="◈" draft="contributed">hình kim cương rỗng chứa hình kim cương đặc</annotation>
+		<annotation cp="◈" type="tts" draft="contributed">hình kim cương rỗng chứa hình kim cương đặc</annotation>
+		<annotation cp="◉" draft="contributed">hình tròn rỗng chứa hình tròn đặc</annotation>
+		<annotation cp="◉" type="tts" draft="contributed">hình tròn rỗng chứa hình tròn đặc</annotation>
 		<annotation cp="◊">hình quả trám | hình thoi | kim cương</annotation>
 		<annotation cp="◊" type="tts">hình thoi</annotation>
 		<annotation cp="○">chấm rỗng | hình tròn | vòng tròn</annotation>
 		<annotation cp="○" type="tts">chấm rỗng</annotation>
+		<annotation cp="◌" draft="contributed">hình tròn chấm chấm</annotation>
+		<annotation cp="◌" type="tts" draft="contributed">hình tròn chấm chấm</annotation>
+		<annotation cp="◍" draft="contributed">hình tròn có sọc dọc</annotation>
+		<annotation cp="◍" type="tts" draft="contributed">hình tròn có sọc dọc</annotation>
+		<annotation cp="◎" draft="contributed">hình tròn đồng tâm</annotation>
+		<annotation cp="◎" type="tts" draft="contributed">hình tròn đồng tâm</annotation>
 		<annotation cp="●">chấm tròn | hình tròn</annotation>
 		<annotation cp="●" type="tts">chấm tròn</annotation>
+		<annotation cp="◐" draft="contributed">hình tròn nửa trái đặc</annotation>
+		<annotation cp="◐" type="tts" draft="contributed">hình tròn nửa trái đặc</annotation>
+		<annotation cp="◑" draft="contributed">hình tròn nửa phải đặc</annotation>
+		<annotation cp="◑" type="tts" draft="contributed">hình tròn nửa phải đặc</annotation>
+		<annotation cp="◒" draft="contributed">hình tròn nửa dưới đặc</annotation>
+		<annotation cp="◒" type="tts" draft="contributed">hình tròn nửa dưới đặc</annotation>
+		<annotation cp="◓" draft="contributed">hình tròn nửa trên đặc</annotation>
+		<annotation cp="◓" type="tts" draft="contributed">hình tròn nửa trên đặc</annotation>
+		<annotation cp="◔" draft="contributed">hình tròn góc phần tư phía trên bên phải đặc</annotation>
+		<annotation cp="◔" type="tts" draft="contributed">hình tròn góc phần tư phía trên bên phải đặc</annotation>
+		<annotation cp="◕" draft="contributed">hình tròn góc phần tư phía trên bên trái rỗng</annotation>
+		<annotation cp="◕" type="tts" draft="contributed">hình tròn góc phần tư phía trên bên trái rỗng</annotation>
+		<annotation cp="◖" draft="contributed">nửa hình tròn bên trái đặc</annotation>
+		<annotation cp="◖" type="tts" draft="contributed">nửa hình tròn bên trái đặc</annotation>
+		<annotation cp="◗" draft="contributed">nửa hình tròn bên phải đặc</annotation>
+		<annotation cp="◗" type="tts" draft="contributed">nửa hình tròn bên phải đặc</annotation>
+		<annotation cp="◘" draft="contributed">dấu đầu dòng ngược</annotation>
+		<annotation cp="◘" type="tts" draft="contributed">dấu đầu dòng ngược</annotation>
+		<annotation cp="◙" draft="contributed">hình vuông đặc chứa hình tròn rỗng</annotation>
+		<annotation cp="◙" type="tts" draft="contributed">hình vuông đặc chứa hình tròn rỗng</annotation>
+		<annotation cp="◜" draft="contributed">cung tròn góc phần tư phía trên bên trái</annotation>
+		<annotation cp="◜" type="tts" draft="contributed">cung tròn góc phần tư phía trên bên trái</annotation>
+		<annotation cp="◝" draft="contributed">cung tròn góc phần tư phía trên bên phải</annotation>
+		<annotation cp="◝" type="tts" draft="contributed">cung tròn góc phần tư phía trên bên phải</annotation>
+		<annotation cp="◞" draft="contributed">cung tròn góc phần tư phía dưới bên phải</annotation>
+		<annotation cp="◞" type="tts" draft="contributed">cung tròn góc phần tư phía dưới bên phải</annotation>
+		<annotation cp="◟" draft="contributed">cung tròn góc phần tư phía dưới bên trái</annotation>
+		<annotation cp="◟" type="tts" draft="contributed">cung tròn góc phần tư phía dưới bên trái</annotation>
+		<annotation cp="◠" draft="contributed">nửa hình tròn trên</annotation>
+		<annotation cp="◠" type="tts" draft="contributed">nửa hình tròn trên</annotation>
+		<annotation cp="◡" draft="contributed">nửa hình tròn dưới</annotation>
+		<annotation cp="◡" type="tts" draft="contributed">nửa hình tròn dưới</annotation>
+		<annotation cp="◢" draft="contributed">hình tam giác phia dưới bên phải đặc</annotation>
+		<annotation cp="◢" type="tts" draft="contributed">hình tam giác phia dưới bên phải đặc</annotation>
+		<annotation cp="◣" draft="contributed">hình tam giác phia dưới bên trái đặc</annotation>
+		<annotation cp="◣" type="tts" draft="contributed">hình tam giác phia dưới bên trái đặc</annotation>
+		<annotation cp="◤" draft="contributed">hình tam giác phía trên bên trái đặc</annotation>
+		<annotation cp="◤" type="tts" draft="contributed">hình tam giác phía trên bên trái đặc</annotation>
+		<annotation cp="◥" draft="contributed">hình tam giác phía trên bên phải đặc</annotation>
+		<annotation cp="◥" type="tts" draft="contributed">hình tam giác phía trên bên phải đặc</annotation>
+		<annotation cp="◦" draft="contributed">dấu đầu dòng rỗng</annotation>
+		<annotation cp="◦" type="tts" draft="contributed">dấu đầu dòng rỗng</annotation>
 		<annotation cp="◯">chấm rỗng lớn | hình tròn | vòng tròn</annotation>
 		<annotation cp="◯" type="tts">chấm rỗng lớn</annotation>
+		<annotation cp="◳" draft="contributed">hình vuông rỗng góc phần tư phía trên bên phải</annotation>
+		<annotation cp="◳" type="tts" draft="contributed">hình vuông rỗng góc phần tư phía trên bên phải</annotation>
+		<annotation cp="◷" draft="contributed">hình tròn rỗng với góc phần tư phía trên bên phải</annotation>
+		<annotation cp="◷" type="tts" draft="contributed">hình tròn rỗng với góc phần tư phía trên bên phải</annotation>
+		<annotation cp="◿" draft="contributed">hình tam giác dưới bên phải</annotation>
+		<annotation cp="◿" type="tts" draft="contributed">hình tam giác dưới bên phải</annotation>
+		<annotation cp="♪">âm nhạc | móc đơn | nốt | nốt móc đơn | phần tám</annotation>
+		<annotation cp="♪" type="tts">nốt móc đơn</annotation>
+		<annotation cp="⨧" draft="contributed">dấu cộng với chỉ số dưới hai</annotation>
+		<annotation cp="⨧" type="tts" draft="contributed">dấu cộng với chỉ số dưới hai</annotation>
+		<annotation cp="⨯" draft="contributed">tích vectơ hữu hướng</annotation>
+		<annotation cp="⨯" type="tts" draft="contributed">tích vectơ hữu hướng</annotation>
+		<annotation cp="⨼" draft="contributed">tích tự đẳng cấu trong</annotation>
+		<annotation cp="⨼" type="tts" draft="contributed">tích tự đẳng cấu trong</annotation>
+		<annotation cp="⩣" draft="contributed">logic hoặc gạch dưới kép</annotation>
+		<annotation cp="⩣" type="tts" draft="contributed">logic hoặc gạch dưới kép</annotation>
+		<annotation cp="⩽" draft="contributed">nhỏ hơn hoặc nghiêng bằng</annotation>
+		<annotation cp="⩽" type="tts" draft="contributed">nhỏ hơn hoặc nghiêng bằng</annotation>
+		<annotation cp="⪍" draft="contributed">nhỏ hơn hoặc đồng dạng bằng</annotation>
+		<annotation cp="⪍" type="tts" draft="contributed">nhỏ hơn hoặc đồng dạng bằng</annotation>
+		<annotation cp="⪚" draft="contributed">dấu bằng kép hoặc lớn hơn</annotation>
+		<annotation cp="⪚" type="tts" draft="contributed">dấu bằng kép hoặc lớn hơn</annotation>
+		<annotation cp="⪺" draft="contributed">đứng sau hoặc gần như không bằng</annotation>
+		<annotation cp="⪺" type="tts" draft="contributed">đứng sau hoặc gần như không bằng</annotation>
+		<annotation cp="♭">âm nhạc | giáng | nốt</annotation>
+		<annotation cp="♭" type="tts">nốt giáng</annotation>
+		<annotation cp="♯">âm nhạc | cao | nốt | thăng</annotation>
+		<annotation cp="♯" type="tts">nốt thăng</annotation>
+		<annotation cp="🥹">buồn | chịu đựng | giận giữ | khóc | mặt kìm nén nước mắt | tự hào</annotation>
+		<annotation cp="🥹" type="tts">mặt kìm nén nước mắt</annotation>
+		<annotation cp="🧌">giả tưởng | người khổng lồ độc ác | quái vật | truyện cổ tích</annotation>
+		<annotation cp="🧌" type="tts">người khổng lồ độc ác</annotation>
+		<annotation cp="🩻">bác sĩ | bộ xương | x-quang | xương | y tế</annotation>
+		<annotation cp="🩻" type="tts">x-quang</annotation>
+		<annotation cp="🩼">đau | gậy | gậy chống | hỗ trợ di chuyển | khuyết tật | nạng</annotation>
+		<annotation cp="🩼" type="tts">nạng</annotation>
+		<annotation cp="🪩">buổi tiệc | disco | khiêu vũ | long lanh | quả cầu gương | sàn nhảy</annotation>
+		<annotation cp="🪩" type="tts">quả cầu gương</annotation>
+		<annotation cp="🪪">bảo mật | căn cước công dân | cccd | chứng minh nhân dân | cmnd | giấy phép | thẻ nhận dạng</annotation>
+		<annotation cp="🪪" type="tts">thẻ nhận dạng</annotation>
+		<annotation cp="🪫">điện tử | năng lượng thấp | pin yếu</annotation>
+		<annotation cp="🪫" type="tts">pin yếu</annotation>
+		<annotation cp="🪬">bùa hộ mệnh | Fatima | hamsa | Mary | Miriam | sự bảo vệ | tay</annotation>
+		<annotation cp="🪬" type="tts">hamsa</annotation>
+		<annotation cp="🪷">Ấn Độ | Ấn Độ giáo | hoa | hoa sen | Phật giáo | sự tinh khiết | Việt Nam</annotation>
+		<annotation cp="🪷" type="tts">hoa sen</annotation>
+		<annotation cp="🪸">đại dương | rặng | san hô</annotation>
+		<annotation cp="🪸" type="tts">san hô</annotation>
+		<annotation cp="🪹">làm tổ | tổ trống rỗng</annotation>
+		<annotation cp="🪹" type="tts">tổ trống rỗng</annotation>
+		<annotation cp="🪺">làm tổ | tổ có trứng</annotation>
+		<annotation cp="🪺" type="tts">tổ có trứng</annotation>
+		<annotation cp="🫃">bụng bầu | căng phồng | có thai | người đàn ông mang bầu | no đủ</annotation>
+		<annotation cp="🫃" type="tts">người đàn ông mang bầu</annotation>
+		<annotation cp="🫄">bụng bầu | căng phồng | có thai | người mang bầu | no đủ</annotation>
+		<annotation cp="🫄" type="tts">người mang bầu</annotation>
+		<annotation cp="🫅">cao quý | hoàng gia | người đội vương miện | quân vương | vương giả</annotation>
+		<annotation cp="🫅" type="tts">người đội vương miện</annotation>
+		<annotation cp="🫗">đổ chất lỏng | đồ uống | ly thủy tinh | tràn | trống rỗng</annotation>
+		<annotation cp="🫗" type="tts">đổ chất lỏng</annotation>
+		<annotation cp="🫘">cây họ đậu | hạt đậu | thận | thức ăn</annotation>
+		<annotation cp="🫘" type="tts">hạt đậu</annotation>
+		<annotation cp="🫙">bình đựng | cửa hàng | gia vị | nước sốt | thùng chứa | trống rỗng</annotation>
+		<annotation cp="🫙" type="tts">bình đựng</annotation>
+		<annotation cp="🫠">biến mất | chất lỏng | hòa tan | mặt tan chảy | tan chảy</annotation>
+		<annotation cp="🫠" type="tts">mặt tan chảy</annotation>
+		<annotation cp="🫡">chào | mặt chào | nắng | nhà binh | ok | quân đội | vâng</annotation>
+		<annotation cp="🫡" type="tts">mặt chào</annotation>
+		<annotation cp="🫢">hoài nghi | kính nể | kinh ngạc | mặt với cặp mắt mở to và tay che miệng | ngạc nhiên | sợ hãi | xấu hổ</annotation>
+		<annotation cp="🫢" type="tts">mặt với cặp mắt mở to và tay che miệng</annotation>
+		<annotation cp="🫣">mặt hé mắt nhìn trộm | nhìn chằm chằm | nhìn lén | nhìn trộm | quyến rũ</annotation>
+		<annotation cp="🫣" type="tts">mặt hé mắt nhìn trộm</annotation>
+		<annotation cp="🫤">buồn chán | hoài nghi | không chắc chắn | mặt có miệng xiên | thất vọng</annotation>
+		<annotation cp="🫤" type="tts">mặt có miệng xiên</annotation>
+		<annotation cp="🫥">ẩn | biến mất | chán nản | hướng nội | mặt có đường viền chấm chấm | thất vọng | vô hình</annotation>
+		<annotation cp="🫥" type="tts">mặt có đường viền chấm chấm</annotation>
+		<annotation cp="🫦">cắn môi | hồi hộp | khó chịu | lo âu | lo lắng | sợ hãi | tán tỉnh</annotation>
+		<annotation cp="🫦" type="tts">cắn môi</annotation>
+		<annotation cp="🫧">bong bóng | dưới nước | ợ hơi | sạch sẽ | xà phòng</annotation>
+		<annotation cp="🫧" type="tts">bong bóng</annotation>
+		<annotation cp="🫰">bàn tay với ngón trỏ và ngón cái bắt chéo | búng tay | đắt tiền | tiền bạc | tình yêu | trái tim</annotation>
+		<annotation cp="🫰" type="tts">bàn tay với ngón trỏ và ngón cái bắt chéo</annotation>
+		<annotation cp="🫱">bàn tay | bàn tay hướng sang bên phải | bên phải | sang phải</annotation>
+		<annotation cp="🫱" type="tts">bàn tay hướng sang bên phải</annotation>
+		<annotation cp="🫲">bàn tay | bàn tay hướng sang bên trái | bên trái | sang trái</annotation>
+		<annotation cp="🫲" type="tts">bàn tay hướng sang bên trái</annotation>
+		<annotation cp="🫳">bàn tay có lòng bàn tay hướng xuống | đuổi | thả | xua | xuỵt</annotation>
+		<annotation cp="🫳" type="tts">bàn tay có lòng bàn tay hướng xuống</annotation>
+		<annotation cp="🫴">bàn tay có lòng bàn tay hướng lên | bắt | đến | mời gọi | vẫy gọi</annotation>
+		<annotation cp="🫴" type="tts">bàn tay có lòng bàn tay hướng lên</annotation>
+		<annotation cp="🫵">bạn | ngón trỏ chỉ vào người xem | trỏ</annotation>
+		<annotation cp="🫵" type="tts">ngón trỏ chỉ vào người xem</annotation>
+		<annotation cp="🫶">hai bàn tay tạo hình trái tim | yêu</annotation>
+		<annotation cp="🫶" type="tts">hai bàn tay tạo hình trái tim</annotation>
+		<annotation cp="🛝">cầu trượt | chơi | khu vui chơi</annotation>
+		<annotation cp="🛝" type="tts">cầu trượt</annotation>
+		<annotation cp="🛞">bánh xe | hình tròn | lốp xe | xoay</annotation>
+		<annotation cp="🛞" type="tts">bánh xe</annotation>
+		<annotation cp="🛟">an toàn | cấp cứu | cứu hộ | phao cứu sinh | phao nổi | phương tiện cứu hộ</annotation>
+		<annotation cp="🛟" type="tts">phao cứu sinh</annotation>
+		<annotation cp="🟰">bằng | dấu bằng đậm | toán</annotation>
+		<annotation cp="🟰" type="tts">dấu bằng đậm</annotation>
 		<annotation cp="😀">mặt | mặt cười toét | toe toét</annotation>
 		<annotation cp="😀" type="tts">mặt cười toét</annotation>
 		<annotation cp="😃">cười | mặt | mặt cười miệng há với mắt to | mặt cười tươi với hai mắt mở to | miệng | mở</annotation>
@@ -167,6 +859,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="😑" type="tts">mặt vô cảm</annotation>
 		<annotation cp="😶">ít nói | mặt | mặt không có miệng | miệng | yên lặng</annotation>
 		<annotation cp="😶" type="tts">mặt không có miệng</annotation>
+		<annotation cp="😶‍🌫">đãng trí | đầu trong đám mây | mặt trong đám mây | mặt trong sương mù</annotation>
+		<annotation cp="😶‍🌫" type="tts">mặt trong đám mây</annotation>
 		<annotation cp="😏">cười khẩy | mặt | mặt cười khẩy</annotation>
 		<annotation cp="😏" type="tts">mặt cười khẩy</annotation>
 		<annotation cp="😒">buồn | không vui | mặt</annotation>
@@ -175,6 +869,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🙄" type="tts">mặt có mắt đu đưa</annotation>
 		<annotation cp="😬">mặt | mặt nhăn nhó | nhăn nhó</annotation>
 		<annotation cp="😬" type="tts">mặt nhăn nhó</annotation>
+		<annotation cp="😮‍💨">huýt sáo | mặt thở ra | rên rỉ | thì thầm | thở hổn hển | thở ra</annotation>
+		<annotation cp="😮‍💨" type="tts">mặt thở ra</annotation>
 		<annotation cp="🤥">mặt | mặt nói dối | nói dối | pinocchio</annotation>
 		<annotation cp="🤥" type="tts">mặt nói dối</annotation>
 		<annotation cp="😌">mặt | mặt nhẹ nhõm | nhẹ nhõm</annotation>
@@ -207,6 +903,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🥴" type="tts">mặt choáng váng</annotation>
 		<annotation cp="😵">chóng mặt | mặt | mặt chóng mặt</annotation>
 		<annotation cp="😵" type="tts">mặt chóng mặt</annotation>
+		<annotation cp="😵‍💫">chóng mặt | mặt có đôi mắt xoắn ốc | rắc rối | thôi miên | xoắn ốc</annotation>
+		<annotation cp="😵‍💫" type="tts">mặt có đôi mắt xoắn ốc</annotation>
 		<annotation cp="🤯">bị sốc | đầu nổ tung</annotation>
 		<annotation cp="🤯" type="tts">đầu nổ tung</annotation>
 		<annotation cp="🤠">cao bồi | mặt | mặt đội mũ cao bồi | mũ | nữ cao bồi</annotation>
@@ -349,6 +1047,10 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="❣" type="tts">dấu chấm than hình trái tim đậm</annotation>
 		<annotation cp="💔">bị vỡ | trái tim tan vỡ | vỡ</annotation>
 		<annotation cp="💔" type="tts">trái tim tan vỡ</annotation>
+		<annotation cp="❤‍🔥">bốc lửa | cháy | thèm khát | tình yêu | trái tim | trái tim bốc lửa | trái tim linh thiêng</annotation>
+		<annotation cp="❤‍🔥" type="tts">trái tim bốc lửa</annotation>
+		<annotation cp="❤‍🩹">cải thiện | đang lành | hồi phục | khỏe mạnh hơn | phục hồi | trái tim đang lành</annotation>
+		<annotation cp="❤‍🩹" type="tts">trái tim đang lành</annotation>
 		<annotation cp="❤">trái tim | trái tim màu đỏ</annotation>
 		<annotation cp="❤" type="tts">trái tim màu đỏ</annotation>
 		<annotation cp="🧡">màu cam | trái tim màu cam</annotation>
@@ -511,12 +1213,16 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="👱" type="tts">người tóc vàng hoe</annotation>
 		<annotation cp="👨">đàn ông | người lớn</annotation>
 		<annotation cp="👨" type="tts">đàn ông</annotation>
-		<annotation cp="🧔">người | người đàn ông có râu | râu</annotation>
-		<annotation cp="🧔" type="tts">người đàn ông có râu</annotation>
+		<annotation cp="🧔">người | người có râu | người: râu | râu</annotation>
+		<annotation cp="🧔" type="tts">người có râu</annotation>
+		<annotation cp="🧔‍♂">người đàn ông | người đàn ông có râu | râu</annotation>
+		<annotation cp="🧔‍♂" type="tts">người đàn ông có râu</annotation>
 		<annotation cp="👱‍♂">đàn ông | đàn ông: tóc vàng hoe | người đàn ông tóc vàng hoe | tóc vàng hoe</annotation>
 		<annotation cp="👱‍♂" type="tts">người đàn ông tóc vàng hoe</annotation>
 		<annotation cp="👩">người lớn | phụ nữ</annotation>
 		<annotation cp="👩" type="tts">phụ nữ</annotation>
+		<annotation cp="🧔‍♀">người phụ nữ | người phụ nữ có râu | râu</annotation>
+		<annotation cp="🧔‍♀" type="tts">người phụ nữ có râu</annotation>
 		<annotation cp="👱‍♀">người phụ nữ tóc vàng hoe | nữ | phụ nữ | tóc vàng hoe</annotation>
 		<annotation cp="👱‍♀" type="tts">người phụ nữ tóc vàng hoe</annotation>
 		<annotation cp="🧓">già | giới tính không xác định | giới tính trung lập | người lớn tuổi</annotation>
@@ -633,7 +1339,7 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="👨‍🏭" type="tts">công nhân nhà máy nam</annotation>
 		<annotation cp="👩‍🏭">công nghiệp | công nhân | công nhân nhà máy nữ | lắp ráp | nhà máy | nữ</annotation>
 		<annotation cp="👩‍🏭" type="tts">công nhân nhà máy nữ</annotation>
-		<annotation cp="🧑‍💼">kiến trúc sư | kinh doanh | người quản lý | nhân viên văn phòng | ông việc văn phòng</annotation>
+		<annotation cp="🧑‍💼">công việc văn phòng | kiến trúc sư | kinh doanh | người quản lý | nhân viên văn phòng</annotation>
 		<annotation cp="🧑‍💼" type="tts">nhân viên văn phòng</annotation>
 		<annotation cp="👨‍💼">công việc văn phòng | kiến trúc sư | kinh doanh | người đàn ông | người quản lý | nhân viên văn phòng nam</annotation>
 		<annotation cp="👨‍💼" type="tts">nhân viên văn phòng nam</annotation>
@@ -721,18 +1427,18 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="👲" type="tts">người đàn ông đội mũ Trung Quốc</annotation>
 		<annotation cp="🧕">hijab | khăn trùm đầu | khăn vuông | người phụ nữ quàng khăn trùm đầu | tichel</annotation>
 		<annotation cp="🧕" type="tts">người phụ nữ quàng khăn trùm đầu</annotation>
-		<annotation cp="🤵">bộ vest | chú rể | người đàn ông | người đàn ông mặc bộ vest</annotation>
-		<annotation cp="🤵" type="tts">người đàn ông mặc bộ vest</annotation>
-		<annotation cp="🤵‍♂">người đàn ông | người đàn ông mặc tuxedo | tuxedo</annotation>
-		<annotation cp="🤵‍♂" type="tts">người đàn ông mặc tuxedo</annotation>
+		<annotation cp="🤵">bộ vest | chú rể | người | người mặc bộ vest</annotation>
+		<annotation cp="🤵" type="tts">người mặc bộ vest</annotation>
+		<annotation cp="🤵‍♂">bộ vest | người đàn ông | người đàn ông mặc bộ vest</annotation>
+		<annotation cp="🤵‍♂" type="tts">người đàn ông mặc bộ vest</annotation>
 		<annotation cp="🤵‍♀">người phụ nữ | người phụ nữ mặc tuxedo | tuxedo</annotation>
 		<annotation cp="🤵‍♀" type="tts">người phụ nữ mặc tuxedo</annotation>
-		<annotation cp="👰">cô dâu | cô dâu với khăn voan | cưới | mạng che mặt</annotation>
-		<annotation cp="👰" type="tts">cô dâu với khăn voan</annotation>
-		<annotation cp="👰‍♂">lúp cưới | người đàn ông | người đàn ông đội lúp cưới</annotation>
-		<annotation cp="👰‍♂" type="tts">người đàn ông đội lúp cưới</annotation>
-		<annotation cp="👰‍♀">lúp cưới | người phụ nữ | người phụ nữ đội lúp cưới</annotation>
-		<annotation cp="👰‍♀" type="tts">người phụ nữ đội lúp cưới</annotation>
+		<annotation cp="👰">cô dâu | cưới | khăn voan | người | người đội khăn voan</annotation>
+		<annotation cp="👰" type="tts">người đội khăn voan</annotation>
+		<annotation cp="👰‍♂">khăn voan | người đàn ông | người đàn ông đội khăn voan</annotation>
+		<annotation cp="👰‍♂" type="tts">người đàn ông đội khăn voan</annotation>
+		<annotation cp="👰‍♀">khăn voan | người phụ nữ | người phụ nữ đội khăn voan</annotation>
+		<annotation cp="👰‍♀" type="tts">người phụ nữ đội khăn voan</annotation>
 		<annotation cp="🤰">mang thai | người phụ nữ có thai | phụ nữ</annotation>
 		<annotation cp="🤰" type="tts">người phụ nữ có thai</annotation>
 		<annotation cp="🤱">cho bú | cho con bú | em bé | vú</annotation>
@@ -1315,7 +2021,7 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🍐" type="tts">lê</annotation>
 		<annotation cp="🍑">đào | hoa quả</annotation>
 		<annotation cp="🍑" type="tts">đào</annotation>
-		<annotation cp="🍒">anh đào | hoa quả | thực vật</annotation>
+		<annotation cp="🍒">anh đào | màu đỏ | quả mọng | trái cây</annotation>
 		<annotation cp="🍒" type="tts">anh đào</annotation>
 		<annotation cp="🍓">dâu tây | quả mọng | trái cây</annotation>
 		<annotation cp="🍓" type="tts">dâu tây</annotation>
@@ -1369,7 +2075,7 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🫓" type="tts">bánh mỳ cắt lát</annotation>
 		<annotation cp="🥨">bánh quy xoắn | xoắn</annotation>
 		<annotation cp="🥨" type="tts">bánh quy xoắn</annotation>
-		<annotation cp="🥯">bánh mỳ vòng | bánh vòng | phết | tiệm bánh</annotation>
+		<annotation cp="🥯">bánh mỳ vòng | bánh vòng | bữa sáng | phết | tiệm bánh</annotation>
 		<annotation cp="🥯" type="tts">bánh mỳ vòng</annotation>
 		<annotation cp="🥞">bánh kếp | thức ăn</annotation>
 		<annotation cp="🥞" type="tts">bánh kếp</annotation>
@@ -1401,7 +2107,7 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🌯" type="tts">bánh burrito</annotation>
 		<annotation cp="🫔">bánh tamale | cuốn | Mexico</annotation>
 		<annotation cp="🫔" type="tts">bánh tamale</annotation>
-		<annotation cp="🥙">bánh mì kẹp thịt | bánh mỳ dẹt | bánh mỳ gyro | bánh mỳ kẹp thịt nướng | nhồi | viên bột đậu rán</annotation>
+		<annotation cp="🥙">bánh mì kẹp thịt | bánh mỳ dẹt | bánh mỳ gyro | bánh mỳ kẹp thịt nướng | đồ ăn | nhồi | viên bột đậu rán</annotation>
 		<annotation cp="🥙" type="tts">bánh mì kẹp thịt</annotation>
 		<annotation cp="🧆">bánh rán nhân gà | đậu gà | thịt viên</annotation>
 		<annotation cp="🧆" type="tts">bánh rán nhân gà</annotation>
@@ -1549,14 +2255,14 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🔪" type="tts">dao làm bếp</annotation>
 		<annotation cp="🏺">Bảo Bình | bình | hoàng đạo | nấu ăn | uống | vò hai quai</annotation>
 		<annotation cp="🏺" type="tts">vò hai quai</annotation>
-		<annotation cp="🌍">Châu Âu | Châu Phi | địa cầu | địa cầu hiển thị Châu Âu-Châu Phi | thế giới | trái đất</annotation>
-		<annotation cp="🌍" type="tts">địa cầu hiển thị Châu Âu-Châu Phi</annotation>
-		<annotation cp="🌎">Châu Mỹ | địa cầu | địa cầu hiển thị Châu Mỹ | thế giới | trái đất</annotation>
-		<annotation cp="🌎" type="tts">địa cầu hiển thị Châu Mỹ</annotation>
-		<annotation cp="🌏">Châu Á | Châu Úc | địa cầu | địa cầu hiển thị Châu Á-Châu Úc | thế giới | trái đất</annotation>
-		<annotation cp="🌏" type="tts">địa cầu hiển thị Châu Á-Châu Úc</annotation>
-		<annotation cp="🌐">địa cầu với kinh tuyến | kinh tuyến | quả địa cầu | thế giới | trái đất</annotation>
-		<annotation cp="🌐" type="tts">địa cầu với kinh tuyến</annotation>
+		<annotation cp="🌍">Châu Âu | Châu Phi | địa cầu | địa cầu thể hiện Châu Âu-Châu Phi | thế giới | trái đất</annotation>
+		<annotation cp="🌍" type="tts">địa cầu thể hiện Châu Âu-Châu Phi</annotation>
+		<annotation cp="🌎">Châu Mỹ | địa cầu | địa cầu thể hiện Châu Mỹ | thế giới | trái đất</annotation>
+		<annotation cp="🌎" type="tts">địa cầu thể hiện Châu Mỹ</annotation>
+		<annotation cp="🌏">Châu Á | Châu Úc | địa cầu | địa cầu thể hiện Châu Á-Châu Úc | thế giới | trái đất</annotation>
+		<annotation cp="🌏" type="tts">địa cầu thể hiện Châu Á-Châu Úc</annotation>
+		<annotation cp="🌐">địa cầu có đường kinh tuyến | kinh tuyến | quả địa cầu | thế giới | trái đất</annotation>
+		<annotation cp="🌐" type="tts">địa cầu có đường kinh tuyến</annotation>
 		<annotation cp="🗺">bản đồ | bản đồ thế giới | thế giới</annotation>
 		<annotation cp="🗺" type="tts">bản đồ thế giới</annotation>
 		<annotation cp="🗾">bản đồ | bản đồ Nhật Bản | nhật bản</annotation>
@@ -1617,8 +2323,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🏨" type="tts">khách sạn</annotation>
 		<annotation cp="🏩">khách sạn | khách sạn tình yêu | tình yêu</annotation>
 		<annotation cp="🏩" type="tts">khách sạn tình yêu</annotation>
-		<annotation cp="🏪">cửa hàng | cửa hàng tiện dụng | tiện lợi</annotation>
-		<annotation cp="🏪" type="tts">cửa hàng tiện dụng</annotation>
+		<annotation cp="🏪">cửa hàng | cửa hàng tiện lợi | tiện lợi</annotation>
+		<annotation cp="🏪" type="tts">cửa hàng tiện lợi</annotation>
 		<annotation cp="🏫">tòa nhà | trường học</annotation>
 		<annotation cp="🏫" type="tts">trường học</annotation>
 		<annotation cp="🏬">cửa hàng | cửa hàng bách hóa</annotation>
@@ -1633,9 +2339,9 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="💒" type="tts">đám cưới</annotation>
 		<annotation cp="🗼">tháp | Tokyo</annotation>
 		<annotation cp="🗼" type="tts">tháp Tokyo</annotation>
-		<annotation cp="🗽">bức tượng | tự do | Tượng nữ thần Tự do</annotation>
-		<annotation cp="🗽" type="tts">Tượng nữ thần Tự do</annotation>
-		<annotation cp="⛪">chữ thập | đạo cơ đốc | nhà thờ | tôn giáo</annotation>
+		<annotation cp="🗽">bức tượng | tự do | Tượng Nữ thần Tự do</annotation>
+		<annotation cp="🗽" type="tts">Tượng Nữ thần Tự do</annotation>
+		<annotation cp="⛪">cây thánh giá | Đạo cơ đốc | nhà thờ | tôn giáo</annotation>
 		<annotation cp="⛪" type="tts">nhà thờ</annotation>
 		<annotation cp="🕌">hồi giáo | nhà thờ hồi giáo | thuộc hồi giáo | tôn giáo</annotation>
 		<annotation cp="🕌" type="tts">nhà thờ hồi giáo</annotation>
@@ -1689,7 +2395,7 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🚅" type="tts">tàu viên đạn</annotation>
 		<annotation cp="🚆">đường sắt | tàu hỏa</annotation>
 		<annotation cp="🚆" type="tts">tàu hỏa</annotation>
-		<annotation cp="🚇">tàu điện ngầm | xe cộ</annotation>
+		<annotation cp="🚇">tàu điện ngầm | xe điện ngầm</annotation>
 		<annotation cp="🚇" type="tts">tàu điện ngầm</annotation>
 		<annotation cp="🚈">đường sắt | tàu điện nhẹ | xe cộ</annotation>
 		<annotation cp="🚈" type="tts">tàu điện nhẹ</annotation>
@@ -1761,8 +2467,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🚏" type="tts">điểm dừng xe buýt</annotation>
 		<annotation cp="🛣">đường | đường cao tốc</annotation>
 		<annotation cp="🛣" type="tts">đường cao tốc</annotation>
-		<annotation cp="🛤">đường sắt | tàu hỏa</annotation>
-		<annotation cp="🛤" type="tts">đường sắt</annotation>
+		<annotation cp="🛤">đường ray | tàu hỏa</annotation>
+		<annotation cp="🛤" type="tts">đường ray</annotation>
 		<annotation cp="🛢">dầu | thùng</annotation>
 		<annotation cp="🛢" type="tts">thùng dầu</annotation>
 		<annotation cp="⛽">bơm | bơm nhiên liệu | khí | nhiên liệu | trạm</annotation>
@@ -1797,7 +2503,7 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="✈" type="tts">máy bay</annotation>
 		<annotation cp="🛩">máy bay | máy bay nhỏ | xe cộ</annotation>
 		<annotation cp="🛩" type="tts">máy bay nhỏ</annotation>
-		<annotation cp="🛫">đăng ký | điểm khởi hành | khởi hành | máy bay | máy bay khởi hành | tàu bay</annotation>
+		<annotation cp="🛫">điểm khởi hành | khởi hành | làm thủ tục | máy bay | máy bay khởi hành | tàu bay</annotation>
 		<annotation cp="🛫" type="tts">máy bay khởi hành</annotation>
 		<annotation cp="🛬">đến | điểm đến | hạ cánh | máy bay | máy bay đến nơi</annotation>
 		<annotation cp="🛬" type="tts">máy bay đến nơi</annotation>
@@ -1917,8 +2623,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🌝" type="tts">khuôn mặt trăng tròn</annotation>
 		<annotation cp="🌞">mặt | mặt trời | mặt trời có hình mặt người | sáng</annotation>
 		<annotation cp="🌞" type="tts">mặt trời có hình mặt người</annotation>
-		<annotation cp="🪐">hành tính có vành đai bao quanh | sao thổ | thần nông | thổ tinh</annotation>
-		<annotation cp="🪐" type="tts">hành tính có vành đai bao quanh</annotation>
+		<annotation cp="🪐">hành tinh có vành đai bao quanh | sao thổ | thần nông | thổ tinh</annotation>
+		<annotation cp="🪐" type="tts">hành tinh có vành đai bao quanh</annotation>
 		<annotation cp="⭐">ngôi sao</annotation>
 		<annotation cp="⭐" type="tts">ngôi sao</annotation>
 		<annotation cp="🌟">chiếu sáng | lấp lánh | ngôi sao | ngôi sao lấp lánh | phát sáng</annotation>
@@ -1931,8 +2637,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="☁" type="tts">đám mây</annotation>
 		<annotation cp="⛅">mặt trời | mặt trời sau đám mây | mây</annotation>
 		<annotation cp="⛅" type="tts">mặt trời sau đám mây</annotation>
-		<annotation cp="⛈">đám mây với tia chớp và mưa | mây | mưa | sấm</annotation>
-		<annotation cp="⛈" type="tts">đám mây với tia chớp và mưa</annotation>
+		<annotation cp="⛈">đám mây kèm chớp và mưa | mây | mưa | sấm</annotation>
+		<annotation cp="⛈" type="tts">đám mây kèm chớp và mưa</annotation>
 		<annotation cp="🌤">mặt trời | mặt trời sau đám mây nhỏ | mây</annotation>
 		<annotation cp="🌤" type="tts">mặt trời sau đám mây nhỏ</annotation>
 		<annotation cp="🌥">mặt trời | mặt trời sau đám mây lớn | mây</annotation>
@@ -1979,7 +2685,7 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="💧" type="tts">giọt nước</annotation>
 		<annotation cp="🌊">đại dương | nước | sóng</annotation>
 		<annotation cp="🌊" type="tts">sóng nước</annotation>
-		<annotation cp="🎃">đèn lồng | đèn lồng bí ngô | halloween | lễ kỷ niệm | lồng | lồng đèn bí ngô</annotation>
+		<annotation cp="🎃">đèn lồng | đèn lồng bí ngô | halloween | lễ hội | lồng | lồng đèn bí ngô</annotation>
 		<annotation cp="🎃" type="tts">đèn lồng bí ngô</annotation>
 		<annotation cp="🎄">cây | cây thông noel | giáng sinh | lễ kỷ niệm</annotation>
 		<annotation cp="🎄" type="tts">cây thông noel</annotation>
@@ -2101,7 +2807,7 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🪄" type="tts">gậy thần</annotation>
 		<annotation cp="🧿">bùa | bùa may mắn nazar | hạt | mắt ác | mê hoặc | nhìn</annotation>
 		<annotation cp="🧿" type="tts">bùa may mắn nazar</annotation>
-		<annotation cp="🎮">thiết bị điều khiển | trò chơi | trò chơi điện tử</annotation>
+		<annotation cp="🎮">tay điều khiển | trò chơi | trò chơi điện tử</annotation>
 		<annotation cp="🎮" type="tts">trò chơi điện tử</annotation>
 		<annotation cp="🕹">cần điều khiển | trò chơi | trò chơi điện tử</annotation>
 		<annotation cp="🕹" type="tts">cần điều khiển</annotation>
@@ -2125,7 +2831,7 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="♦" type="tts">bộ rô</annotation>
 		<annotation cp="♣">bài | bộ bài nhép | bộ nhép | trò chơi</annotation>
 		<annotation cp="♣" type="tts">bộ nhép</annotation>
-		<annotation cp="♟">bịp | cờ | có thể mở rộng | quân tốt | tốt</annotation>
+		<annotation cp="♟">bịp | cờ | quân tốt | thí tốt | tốt</annotation>
 		<annotation cp="♟" type="tts">quân tốt</annotation>
 		<annotation cp="🃏">lá bài | quân phăng teo | trò chơi</annotation>
 		<annotation cp="🃏" type="tts">quân phăng teo</annotation>
@@ -2527,8 +3233,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🗡" type="tts">dao găm</annotation>
 		<annotation cp="⚔">bắt chéo | kiếm | kiếm bắt chéo | vũ khí</annotation>
 		<annotation cp="⚔" type="tts">kiếm bắt chéo</annotation>
-		<annotation cp="🔫">dụng cụ | súng | súng gắn | súng lục | súng lục ổ quay | vũ khí</annotation>
-		<annotation cp="🔫" type="tts">súng lục</annotation>
+		<annotation cp="🔫">dụng cụ | súng | súng gắn | súng lục | súng lục ổ quay | súng nước | vũ khí</annotation>
+		<annotation cp="🔫" type="tts">súng nước</annotation>
 		<annotation cp="🪃">australia | bật lại | bumơrang | dội lại</annotation>
 		<annotation cp="🪃" type="tts">bumơrang</annotation>
 		<annotation cp="🏹">cung | cung hoàng đạo | cung tên | cung thủ | mũi tên | Nhân Mã</annotation>
@@ -2719,6 +3425,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="↕" type="tts">mũi tên lên xuống</annotation>
 		<annotation cp="↔">mũi tên | mũi tên trái phải</annotation>
 		<annotation cp="↔" type="tts">mũi tên trái phải</annotation>
+		<annotation cp="↮" draft="contributed">mũi tên trái phải có dấu gạch chéo</annotation>
+		<annotation cp="↮" type="tts" draft="contributed">mũi tên trái phải có dấu gạch chéo</annotation>
 		<annotation cp="↩">mũi tên | mũi tên phải cong sang trái</annotation>
 		<annotation cp="↩" type="tts">mũi tên phải cong sang trái</annotation>
 		<annotation cp="↪">mũi tên | mũi tên trái cong sang phải</annotation>
@@ -2779,16 +3487,16 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="♍" type="tts">Xử Nữ</annotation>
 		<annotation cp="♎">cân | cân đối | công bằng | cung hoàng đạo | Thiên Bình</annotation>
 		<annotation cp="♎" type="tts">Thiên Bình</annotation>
-		<annotation cp="♏">bọ cạp | cung bọ cạp | cung hoàng đạo</annotation>
-		<annotation cp="♏" type="tts">cung bọ cạp</annotation>
+		<annotation cp="♏">bọ cạp | cung bọ cạp | cung hoàng đạo | Thiên Yết</annotation>
+		<annotation cp="♏" type="tts">Thiên Yết</annotation>
 		<annotation cp="♐">cung hoàng đạo | người bắn cung | Nhân Mã</annotation>
 		<annotation cp="♐" type="tts">Nhân Mã</annotation>
 		<annotation cp="♑">con dê | cung hoàng đạo | Ma Kết</annotation>
 		<annotation cp="♑" type="tts">Ma Kết</annotation>
 		<annotation cp="♒">Bảo Bình | cung hoàng đạo | người mang | nước</annotation>
 		<annotation cp="♒" type="tts">Bảo Bình</annotation>
-		<annotation cp="♓">con cá | cung hoàng đạo | song ngư</annotation>
-		<annotation cp="♓" type="tts">song ngư</annotation>
+		<annotation cp="♓">con cá | cung hoàng đạo | song ngư | Song Ngư</annotation>
+		<annotation cp="♓" type="tts">Song Ngư</annotation>
 		<annotation cp="⛎">con rắn | cung hoàng đạo | người mang | rắn | Xà Phu</annotation>
 		<annotation cp="⛎" type="tts">Xà Phu</annotation>
 		<annotation cp="🔀">bắt chéo | mũi tên | nút xáo trộn bài</annotation>
@@ -2847,11 +3555,11 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="⚧" type="tts">biểu tượng chuyển giới</annotation>
 		<annotation cp="✖">× | dấu | hủy | nhân | x</annotation>
 		<annotation cp="✖" type="tts">dấu nhân</annotation>
-		<annotation cp="➕">cộng | dấu | toán</annotation>
-		<annotation cp="➕" type="tts">dấu cộng</annotation>
-		<annotation cp="➖">dấu | toán | trừ</annotation>
-		<annotation cp="➖" type="tts">dấu trừ</annotation>
-		<annotation cp="➗">chia | dấu | toán</annotation>
+		<annotation cp="➕">+ | cộng | dấu | toán</annotation>
+		<annotation cp="➕" type="tts">cộng</annotation>
+		<annotation cp="➖">- | − | dấu | toán | trừ</annotation>
+		<annotation cp="➖" type="tts">trừ</annotation>
+		<annotation cp="➗">÷ | chia | dấu | toán</annotation>
 		<annotation cp="➗" type="tts">dấu chia</annotation>
 		<annotation cp="♾">mãi mãi | toàn cầu | vô cực | vô tận</annotation>
 		<annotation cp="♾" type="tts">vô cực</annotation>
@@ -2865,8 +3573,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="❔" type="tts">dấu chấm hỏi màu trắng</annotation>
 		<annotation cp="❕">cảm thán | chấm | dấu | dấu chấm than màu trắng | mờ</annotation>
 		<annotation cp="❕" type="tts">dấu chấm than màu trắng</annotation>
-		<annotation cp="❗">cảm thán | chấm | dấu | dấu chấm than</annotation>
-		<annotation cp="❗" type="tts">dấu chấm than</annotation>
+		<annotation cp="❗">! | cảm thán | chấm | dấu | dấu chấm than | dấu chấm than đỏ</annotation>
+		<annotation cp="❗" type="tts">dấu chấm than đỏ</annotation>
 		<annotation cp="〰">dấu | dấu gạch ngang | dấu gạch ngang lượn sóng | lượn sóng</annotation>
 		<annotation cp="〰" type="tts">dấu gạch ngang lượn sóng</annotation>
 		<annotation cp="💱">đổi tiền | ngân hàng | tiền | tiền tệ</annotation>
@@ -3077,16 +3785,46 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🏳‍⚧" type="tts">cờ màu xanh, hồng và trắng</annotation>
 		<annotation cp="🏴‍☠">cờ cướp biển | cướp biển | cướp bóc | hải tặc | Jolly Roger | kho báu</annotation>
 		<annotation cp="🏴‍☠" type="tts">cờ cướp biển</annotation>
+		<annotation cp="¢">cent | xu</annotation>
+		<annotation cp="¢" type="tts">xu</annotation>
+		<annotation cp="$">đô la | peso | tiền | USD</annotation>
+		<annotation cp="$" type="tts">đô la</annotation>
 		<annotation cp="£">bảng Anh | EGP | GBP | tiền tệ</annotation>
 		<annotation cp="£" type="tts">bảng Anh</annotation>
 		<annotation cp="¥">CNY | JPY | tiền tệ | Yên Nhật | yuan</annotation>
 		<annotation cp="¥" type="tts">Yên Nhật</annotation>
+		<annotation cp="₢" draft="contributed">cruzeiro</annotation>
+		<annotation cp="₢" type="tts" draft="contributed">cruzeiro</annotation>
+		<annotation cp="₣" draft="contributed">đồng franc Pháp</annotation>
+		<annotation cp="₣" type="tts" draft="contributed">đồng franc Pháp</annotation>
+		<annotation cp="₤" draft="contributed">lia</annotation>
+		<annotation cp="₤" type="tts" draft="contributed">lia</annotation>
+		<annotation cp="₥">mil | mill</annotation>
+		<annotation cp="₥" type="tts">mill</annotation>
+		<annotation cp="₩">KPW | KRW | won</annotation>
+		<annotation cp="₩" type="tts">won</annotation>
 		<annotation cp="€">EUR | euro | tiền tệ</annotation>
 		<annotation cp="€" type="tts">euro</annotation>
+		<annotation cp="₰" draft="contributed">xu Đức</annotation>
+		<annotation cp="₰" type="tts" draft="contributed">xu Đức</annotation>
+		<annotation cp="₱">peso</annotation>
+		<annotation cp="₱" type="tts">peso</annotation>
+		<annotation cp="₳" draft="contributed">austral</annotation>
+		<annotation cp="₳" type="tts" draft="contributed">austral</annotation>
+		<annotation cp="₶" draft="contributed">đồng livre</annotation>
+		<annotation cp="₶" type="tts" draft="contributed">đồng livre</annotation>
+		<annotation cp="₷" draft="contributed">đồng spesmilo</annotation>
+		<annotation cp="₷" type="tts" draft="contributed">đồng spesmilo</annotation>
 		<annotation cp="₹">rupee | rupee Ấn Độ | tiền tệ</annotation>
 		<annotation cp="₹" type="tts">rupee Ấn Độ</annotation>
 		<annotation cp="₽">rúp | tiền tệ</annotation>
 		<annotation cp="₽" type="tts">rúp</annotation>
+		<annotation cp="₿">bitcoin | BTC</annotation>
+		<annotation cp="₿" type="tts">bitcoin</annotation>
+		<annotation cp="₨" draft="contributed">rupee</annotation>
+		<annotation cp="₨" type="tts" draft="contributed">rupee</annotation>
+		<annotation cp="﷼" draft="contributed">rial</annotation>
+		<annotation cp="﷼" type="tts" draft="contributed">rial</annotation>
 		<annotation cp="¹">một | mũ</annotation>
 		<annotation cp="¹" type="tts">mũ một</annotation>
 		<annotation cp="²">bình phương | hai | mũ hai | số mũ</annotation>
