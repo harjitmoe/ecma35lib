@@ -184,3 +184,5 @@
 '["decode_main_plane_gl", ["CNS2UNICODE_Unicode BMP.txt"], {"plane": 15}]', (49668096, 53769)
 '["decode_main_plane_gl", ["CNS2UNICODE_Unicode 2.txt"], {"plane": 15}]', (49722368, 85308)
 '["decode_main_plane_gl", ["CNS2UNICODE_Unicode 15.txt"], {"plane": 15}]', (49807872, 53886)
+'["decode_main_plane_sjis", ["JAPANESE.TXT-noahmap"], {}]', (49862144, 74643)
+'["decode_main_plane_sjis", ["JAPAN_PS.TXT-noahmap"], {"plane": 1}]', (49936896, 74576)

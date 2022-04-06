@@ -194,13 +194,18 @@ rawmac = parsers.read_untracked(
     "Mac/JAPANESE.TXT",
     parsers.decode_main_plane_sjis,
     parsers.parse_file_format("Mac/JAPANESE.TXT"),
-    "JAPANESE.TXT")
+    "JAPANESE.TXT-noahmap")
 graphdata.gsets["ir168mac"] = jisx0208_applekt7 = (94, 2, kanjitalk7data)
+graphdata.gsets["ir168mac-raw"] = (94, 2, rawmac)
 graphdata.gsets["ir168macps"] = jisx0208_appleps = (94, 2, parsers.decode_main_plane_sjis(
     parsers.parse_file_format("Custom/JAPAN_PS.TXT"),
     "JAPAN_PS.TXT",
     plane = 1,
     mapper = variationhints.ahmap))
+graphdata.gsets["ir168macps-raw"] = (94, 2, parsers.decode_main_plane_sjis(
+    parsers.parse_file_format("Custom/JAPAN_PS.TXT"),
+    "JAPAN_PS.TXT-noahmap",
+    plane = 1))
 _kt6fn = os.path.join(parsers.cachedirectory, "Mac-KanjiTalk6.json")
 if not os.path.exists(_kt6fn):
     kanjitalk6 = (jisx0208_applekt7[2][:8 * 94] + ((None,) * 188) + # Normal non-Kanji rows

@@ -85,7 +85,7 @@ graphdata.gsets["symbolgl"] = (94, 1, parsers.read_single_byte("UTC/symbol.txt",
 # TODO: symbolgl-swapphi
 graphdata.gsets["symbolgr"] = (94, 1, parsers.read_single_byte("UTC/symbol.txt", typ="GR94", mapper=variationhints.ahmap))
 graphdata.gsets["symbolgr-euro"] = (96, 1, parsers.read_single_byte("UTC/symbol.txt", typ="GR96", mapper=variationhints.ahmap))
-graphdata.gsets["symbolgr-numsp"] = (96, 1, ((0x2007,),) + graphdata.gsets["symbolgr"] + (None,))
+graphdata.gsets["symbolgr-numsp"] = (96, 1, ((0x2007,),) + graphdata.gsets["symbolgr"][2] + (None,))
 
 
 
