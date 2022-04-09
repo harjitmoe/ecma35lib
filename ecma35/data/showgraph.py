@@ -39,7 +39,7 @@ def to_link(maybe_siglum, default_siglum, men, ku, ten):
     else:
         basename = {"CNS": "../cnstables/cnsplane", "JIS": "../jistables2/jisplane",
                     "EACC": "../eacctables/ccciiplane", "CCCII": "../eacctables/ccciiplane",
-                    "KSC": "../wansungtables/kscplane"}[siglum]
+                    "KSC": "../wansungtables/kscplane", "GB": "../guobiaotables/gbplane"}[siglum]
         men = men.lstrip("0")
     ku = ku.lstrip("0")
     ten = ten.lstrip("0")
@@ -50,7 +50,7 @@ def to_link(maybe_siglum, default_siglum, men, ku, ten):
     display_siglum = f"{maybe_siglum} " if maybe_siglum else ""
     return f'<a href="{url}">{display_siglum}{omen}-{oku}-{oten}</a>'
 
-siglumre = re.compile("(?:(JIS|CNS|CCCII|EACC|KSC) )?(\d\d|Ψ|Ω)-(\d\d)-(\d\d)")
+siglumre = re.compile("(?:(JIS|CNS|CCCII|EACC|KSC|GB) )?(\d\d|Ψ|Ω)-(\d\d)-(\d\d)")
 def inject_links(text, default_siglum=None):
     def callback(m):
         if m.group(1) == None and default_siglum == None:

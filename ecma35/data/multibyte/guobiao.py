@@ -71,17 +71,17 @@ def gb1986toregmap(pointer, ucs):
 
 # GB/T 2312 (EUC-CN RHS); note that the 2000 and 2005 "editions" refer to GB 18030 edition subsets.
 graphdata.gsets["ir058-1980"] = gb2312_1980 = (94, 2,
-    parsers.decode_main_plane_euc(
+    parsers.decode_main_plane_gl(
         parsers.parse_file_format("UTC/GB2312.TXT"),
         "GB2312.TXT",
         mapper = gb1986to1980map))
 graphdata.gsets["ir058"] = gb2312_1980reg = (94, 2,
-    parsers.decode_main_plane_euc(
+    parsers.decode_main_plane_gl(
         parsers.parse_file_format("UTC/GB2312.TXT"),
         "GB2312.TXT",
         mapper = gb1986toregmap))
 graphdata.gsets["ir058-1986"] = gb2312_1986 = (94, 2, # is this same as ibm-5478_P100-1995.ucm ?
-    parsers.decode_main_plane_euc(
+    parsers.decode_main_plane_gl(
         parsers.parse_file_format("UTC/GB2312.TXT"),
         "GB2312.TXT"))
 graphdata.gsets["ir058-2000"] = gb2312_2000 = (94, 2, 
