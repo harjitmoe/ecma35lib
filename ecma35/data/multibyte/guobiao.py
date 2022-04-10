@@ -209,18 +209,43 @@ graphdata.gsets["ir058-hant"] = gb12345 = (94, 2, parsers.fuse([parsers.read_unt
 graphdata.gsets["gb12052"] = gb12052 = (94, 2, parsers.decode_main_plane_euc(
     parsers.parse_file_format("Other/gb12052-uni.txt", gb12052 = True),
     "gb12052-uni.txt"))
-
+#
 # Being as GB 7589, 13131, 7590, 13132、16500 do not include non-Kanji, Unihan mappings theoretically
-#   can describe their entire mappings… in reality, the GB 13131 and 16500 mappings contain more or
-#   less the entire set with only a few gaps, whereas the GB 13132 mapping is full of holes.
+#   can describe their entire mappings… in reality, the GB 13131 and 16500 mappings contain almost
+#   everything with only a few gaps (listed below), whereas the GB 13132 mapping is full of holes.
 # kGB3 and kGB5 actually provide the same data as the G3 and G5 in kIRG_GSource (despite the later
 #   citing 13131/13132 and the former citing 7589/7590), except for that kGB3 and kGB5 have many
 #   more gaps (they seem to only cover the URO).
-graphdata.gsets["gb13131"] = gb13131 = (94, 2, 
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources.txt", "kIRG_GSource", "G3"))
+#
+# Handful of GB 7589 / 13131 not mapped to Unicode in Unihan:
+#     U+72AE at 19-57 (traditional / simplified)
+#     U+5829 at 20-53 (traditional; simplified not in Unicode)
+#     U+22341 at 21-05 (traditional / simplified)
+#     U+7D94 at 21-25 (traditional / simplified)
+#     U+5570/U+56C9 at 22-51 (simplified: U+5570; traditional: U+56C9)
+#     U+625C at 41-53 (traditional / simplified)
+#     U+781E at 55-58 (traditional / simplified)
+#     ??? at 58-43
+#     U+79C4 at 59-51 (traditional / simplified)
+#     U+8226 at 69-53 (traditional / simplified)
+#     U+84C3 at 73-83 (traditional / simplified)
+graphdata.gsets["gb13131"] = gb13131 = (94, 2, parsers.fuse([
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources.txt", "kIRG_GSource", "G3"),
+        (None,) * ((94 * 18) + 56) + ((0x72AE,),),
+        (None,) * ((94 * 19) + 52) + ((0x5829,),),
+        (None,) * ((94 * 20) + 4) + ((0x22341,),),
+        (None,) * ((94 * 20) + 24) + ((0x7D94,),),
+        (None,) * ((94 * 21) + 50) + ((0x56C9,),),
+        (None,) * ((94 * 40) + 52) + ((0x625C,),),
+        (None,) * ((94 * 54) + 57) + ((0x781E,),),
+        (None,) * ((94 * 58) + 50) + ((0x79C4,),),
+        (None,) * ((94 * 68) + 52) + ((0x8226,),),
+        (None,) * ((94 * 72) + 82) + ((0x84C3,),),
+    ], "GB13131.json"))
 graphdata.gsets["gb13132"] = gb13132 = (94, 2, 
         parsers.read_unihan_planes("UCD/Unihan_IRGSources.txt", "kIRG_GSource", "G5"))
-# Small handful of GB16500 not mapped to it in Unihan:
+#
+# Small handful of GB16500 not mapped to Unicode in Unihan:
 #     U+6FF9 at 32-29
 #     U+809E at 40-50
 #     U+891D at 44-23
