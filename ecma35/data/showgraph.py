@@ -54,12 +54,13 @@ def to_link(maybe_siglum, default_siglum, maybe_plane, default_plane, ku, ten):
     part_letter = chr(0x61 + part_zi)
     if not maybe_siglum:
         basename = posixpath.basename(basename)
-    url = f"{basename}{int(men, 10):X}{part_letter}.html#{men}.{ku}.{ten}"
+    menelement = f"{int(men, 10):X}" if not men.strip("0123456789") else men
+    url = f"{basename}{menelement}{part_letter}.html#{men}.{ku}.{ten}"
     display_siglum = f"{maybe_siglum} " if maybe_siglum else ""
     display_plane = f"{omen}-" if maybe_plane else ""
     return f'<a href="{url}">{display_siglum}{display_plane}{oku}-{oten}</a>'
 
-siglumre = re.compile("(?:(JIS|CNS|CCCII|EACC|KSC|GB) )?(?:(\d\d|Ψ|Ω|K)-)?(\d\d)-(\d\d)")
+siglumre = re.compile("(?:(JIS|CNS|CCCII|EACC|KSC|GB) )?(?:(\d\d|Ψ|Ω|K)-)?(\d\d)-(\d\d)(?!-)")
 def inject_links(text, default_siglum=None, default_plane=None):
     def callback(m):
         if m.group(1) == None and default_siglum == None:

@@ -90,7 +90,7 @@ def planefunc2(number, mapname=None):
 def kutenfunc(number, row, cell):
     if cell >= 0:
         if number == KPLANE:
-            anchorlink = "<a href='#{:d}.{:d}.{:d}'>K-{:02d}-{:02d}</a>".format(
+            anchorlink = "<a href='#K.{:d}.{:d}'>K-{:02d}-{:02d}</a>".format(
                          number, row, cell, row, cell)
         elif number == 0 and row < 16:
             anchorlink = "<a href='#{:d}.{:d}.{:d}'>{:02d}-{:02d}</a>".format(
@@ -100,7 +100,7 @@ def kutenfunc(number, row, cell):
                          number, row, cell, number, row, cell)
     else:
         if number == KPLANE:
-            anchorlink = "<a href='#{:d}.{:d}.{:d}'>K-{:02d}-{}</a>".format(
+            anchorlink = "<a href='#K.{:d}.{:d}'>K-{:02d}-{}</a>".format(
                          number, row, -cell, row, 
                          "{:02d}+".format(-cell) if cell != -1 else "*")
         else:

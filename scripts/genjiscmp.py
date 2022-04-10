@@ -444,8 +444,8 @@ annots = {
             "by EUC-JP, but this means that any extensions for EUC-JP before JIS X 0213 will "
             "collide with any extensions for SJIS from the same period.</p>"
             "<p>JIS X 0212 rows are represented in EUC-JP only.\u2002The orders of the remaining "
-            "rows aren't entirely identical: row 96 (02-08) gets put between rows 99 (02-05) and "
-            "100 (02-12), preserving the alternating odd/even rows, and meaning that "
+            "rows aren't entirely identical: row 96 (02-08-*) gets put between rows 99 (02-05-*) and "
+            "100 (02-12-*), preserving the alternating odd/even rows, and meaning that "
             "the trail byte range can still be correctly identified from whether "
             "the row number is even.",
  (2, 2, 23): 'Compare 01-01-33 and 01-02-18.\u2002'
