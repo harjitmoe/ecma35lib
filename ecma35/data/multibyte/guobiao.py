@@ -225,7 +225,7 @@ graphdata.gsets["gb12052"] = gb12052 = (94, 2, parsers.decode_main_plane_euc(
 #     U+5570/U+56C9 at 22-51 (simplified: U+5570; traditional: U+56C9)
 #     U+625C at 41-53 (traditional / simplified)
 #     U+781E at 55-58 (traditional / simplified)
-#     ??? at 58-43
+#     U+77AD at 58-43 (traditional; included in GB 7589 since simplified converges to 了)
 #     U+79C4 at 59-51 (traditional / simplified)
 #     U+8226 at 69-53 (traditional / simplified)
 #     U+84C3 at 73-83 (traditional / simplified)
@@ -238,6 +238,7 @@ graphdata.gsets["gb13131"] = gb13131 = (94, 2, parsers.fuse([
         (None,) * ((94 * 21) + 50) + ((0x56C9,),),
         (None,) * ((94 * 40) + 52) + ((0x625C,),),
         (None,) * ((94 * 54) + 57) + ((0x781E,),),
+        (None,) * ((94 * 57) + 42) + ((0x77AD,),),
         (None,) * ((94 * 58) + 50) + ((0x79C4,),),
         (None,) * ((94 * 68) + 52) + ((0x8226,),),
         (None,) * ((94 * 72) + 82) + ((0x84C3,),),
