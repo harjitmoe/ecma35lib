@@ -70,6 +70,7 @@ for n, i in enumerate(korea.oldunicodeksc):
     if j != i:
         cdispmap[(plane1[1][0], n, j)] = i
 annots = {
+    (1, 1, 13): 'Compare behaviour of JIS 01-01-33.',
     (1, 1, 75): 'This KS C 6501 character is a "bad character mark", i.e. geta mark, although its '
                 'rendition in the code chart is significantly less bold than fonts tend to show '
                 'it, being closer to an elongated equals sign.&ensp;Compare the nominally bolder, '

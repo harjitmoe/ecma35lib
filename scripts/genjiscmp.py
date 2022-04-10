@@ -162,7 +162,7 @@ annots = {
              'most common by far (however, U+FF5E actually has a separate mapping '
              'at 02-02-23 in JIS X 0212 and 01-02-18 in JIS X 0213, which is shown '
              'as a spacing accent in their respective charts).</p>'
-             '<p>Compare, and especially contrast, the behaviour of GB 01-11.</p>'
+             '<p>Compare, and especially contrast, the behaviour of GB 01-11 and KSC 01-01-13.</p>'
              '<p>The codepoint selected to display in the NEC column is arbitrary.',
  (1, 1, 34): 'U+2225 is used by Microsoft-influenced mappings, U+2016 is used '
              'by others.\u2002U+2225 has a separate mapping in JIS X 0213 (01-02-52). '

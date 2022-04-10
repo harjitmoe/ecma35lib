@@ -249,7 +249,7 @@ graphdata.gsets["2011kpsextras"] = (94, 2, read_kps9566extras("UTCDocs/AppendixA
 
 # KS X 1002. I can't find charts, leave alone mappings, for the
 #   special characters / symbols, only for the syllables and hanja.
-ksx1002_hanja = parsers.read_unihan_planes("UCD/Unihan_IRGSources.txt", "kIRG_KSource", "K1")
+ksx1002_hanja = parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_KSource", "K1")
 ksx1002_syllables = parsers.decode_main_plane_gl(
     parsers.parse_file_format("UTCDocs/AppendixB-4300modernhangulsyllablesfromvarious94by94nationalstandards.txt",
         utcl2_17_080 = "1002"),
@@ -257,8 +257,8 @@ ksx1002_syllables = parsers.decode_main_plane_gl(
 graphdata.gsets["ksx1002"] = (94, 2, parsers.fuse([ksx1002_hanja, ksx1002_syllables], "KSX1002-nosym.json"))
 
 # KS X 1027. Part 1 seems complete, part 2 has a lot of holes. Other parts are not ECMA-35 structured.
-graphdata.gsets["ksx1027_1"] = (94, 2, parsers.read_unihan_planes("UCD/Unihan_IRGSources.txt", "kIRG_KSource", "K2"))
-graphdata.gsets["ksx1027_2"] = (94, 2, parsers.read_unihan_planes("UCD/Unihan_IRGSources.txt", "kIRG_KSource", "K3"))
+graphdata.gsets["ksx1027_1"] = (94, 2, parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_KSource", "K2"))
+graphdata.gsets["ksx1027_2"] = (94, 2, parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_KSource", "K3"))
 
 # Amounting to the entirety of the UHC extensions, in order:
 non_wangsung_johab = [i for i in range(0xAC00, 0xD7A4) 

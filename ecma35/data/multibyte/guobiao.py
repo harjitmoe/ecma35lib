@@ -225,12 +225,13 @@ graphdata.gsets["gb12052"] = gb12052 = (94, 2, parsers.decode_main_plane_euc(
 #     U+5570/U+56C9 at 22-51 (simplified: U+5570; traditional: U+56C9)
 #     U+625C at 41-53 (traditional / simplified)
 #     U+781E at 55-58 (traditional / simplified)
-#     U+77AD at 58-43 (traditional; included in GB 7589 since simplified converges to 了)
+#     U+77AD at 58-43 (traditional; traditional even in GB 7589 since simplified converges to 了)
 #     U+79C4 at 59-51 (traditional / simplified)
 #     U+8226 at 69-53 (traditional / simplified)
 #     U+84C3 at 73-83 (traditional / simplified)
 graphdata.gsets["gb13131"] = gb13131 = (94, 2, parsers.fuse([
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources.txt", "kIRG_GSource", "G3"),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G3"),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "G3"),
         (None,) * ((94 * 18) + 56) + ((0x72AE,),),
         (None,) * ((94 * 19) + 52) + ((0x5829,),),
         (None,) * ((94 * 20) + 4) + ((0x22341,),),
@@ -243,15 +244,18 @@ graphdata.gsets["gb13131"] = gb13131 = (94, 2, parsers.fuse([
         (None,) * ((94 * 68) + 52) + ((0x8226,),),
         (None,) * ((94 * 72) + 82) + ((0x84C3,),),
     ], "GB13131.json"))
-graphdata.gsets["gb13132"] = gb13132 = (94, 2, 
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources.txt", "kIRG_GSource", "G5"))
+graphdata.gsets["gb13132"] = gb13132 = (94, 2, parsers.fuse([
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G5"),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "G5"),
+    ], "GB13132.json"))
 #
-# Small handful of GB16500 not mapped to Unicode in Unihan:
+# Small handful of GB16500 not mapped to Unicode in Unihan 13.0 (Unihan 14.0 unmaps a few more):
 #     U+6FF9 at 32-29
 #     U+809E at 40-50
 #     U+891D at 44-23
 graphdata.gsets["gb16500"] = gb16500 = (94, 2, parsers.fuse([
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources.txt", "kIRG_GSource", "GE"),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "GE"),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "GE"),
         (None,) * ((94 * 31) + 28) + ((0x6FF9,),),
         (None,) * ((94 * 39) + 49) + ((0x809E,),),
         (None,) * ((94 * 43) + 22) + ((0x891D,),),
@@ -276,9 +280,14 @@ resolve = {(0x8b78,): (0x8bea,), (0x8b32,): (0x2c904,), (0x9c44,): (0x2b68b,),
 tradat = parsers.parse_variants("UCD/Unihan_Variants.txt")
 _gb7589fn = os.path.join(parsers.cachedirectory, "GB7589.json")
 _gb7590fn = os.path.join(parsers.cachedirectory, "GB7590.json")
+def blonkit(i):
+    ret = resolve.get(i, (tradat.get(i, [[],[]])[1] + [i])[0])
+    if ret in gb2312_1986[2]:
+        return i
+    return ret
 if (not os.path.exists(_gb7589fn)) or (not os.path.exists(_gb7590fn)):
-    _gb7589 = tuple(resolve.get(i, (tradat.get(i, [[],[]])[1] + [i])[0]) for i in gb13131[2])
-    _gb7590 = tuple(resolve.get(i, (tradat.get(i, [[],[]])[1] + [i])[0]) for i in gb13132[2])
+    _gb7589 = tuple(blonkit(i) for i in gb13131[2])
+    _gb7590 = tuple(blonkit(i) for i in gb13132[2])
     f = open(_gb7589fn, "w")
     f.write(json.dumps(_gb7589))
     f.close()

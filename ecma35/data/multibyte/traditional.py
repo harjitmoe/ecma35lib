@@ -466,7 +466,7 @@ graphdata.gsets["monotypeexts"] = dynalab_big5_extras = (94, 2, parsers.fuse([
 #   point and is therefore not referenced (the LoC mapping also includes non-kanji).
 # I'm treating kCCCII as the best source for CCCII insofar as it covers.
 
-cccii_unihan = parsers.read_unihan_planes("UCD/Unihan_OtherMappings.txt", "kCCCII", set96=True)
+cccii_unihan = parsers.read_unihan_planes("UCD/Unihan_OtherMappings-14.txt", "kCCCII", set96=True)
 graphdata.gsets["eacc-pure"] = (96, 3, parsers.decode_main_plane_gl(
     parsers.parse_file_format("LoC/eacc2uni.txt", libcongress=True),
     "eacc2uni.txt",
