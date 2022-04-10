@@ -80,10 +80,19 @@ graphdata.gsets["ir058"] = gb2312_1980reg = (94, 2,
         parsers.parse_file_format("UTC/GB2312.TXT"),
         "GB2312.TXT",
         mapper = gb1986toregmap))
-graphdata.gsets["ir058-1986"] = gb2312_1986 = (94, 2, # is this same as ibm-5478_P100-1995.ucm ?
+graphdata.gsets["ir058-1986"] = gb2312_1986 = (94, 2,
     parsers.decode_main_plane_gl(
         parsers.parse_file_format("UTC/GB2312.TXT"),
         "GB2312.TXT"))
+graphdata.gsets["ir058-ms"] = gb2312_ms = (94, 2,
+    parsers.decode_main_plane_euc(
+        parsers.parse_file_format("ICU/windows-936-2000.ucm"),
+        "windows-936-2000.ucm",
+        gbklike = True))
+graphdata.gsets["ir058-ibm"] = gb2312_ibm = (94, 2,
+    parsers.decode_main_plane_euc(
+        parsers.parse_file_format("ICU/ibm-1383_P110-1999.ucm"),
+        "ibm-1383_P110-1999.ucm"))
 graphdata.gsets["ir058-2000"] = gb2312_2000 = (94, 2, 
     parsers.decode_main_plane_whatwg(
         parsers.parse_file_format("WHATWG/index-gb18030.txt"),
@@ -160,6 +169,13 @@ graphdata.gsets["ir165std"] = isoir165 = (94, 2, ir165_std)
 #   rather than PUA assignments (and yes, that row maps both unassigned and some assigned to PUA).
 # It also includes the GB 6345.1-1986 letters (seeming to have "ɒ" instead of "ɑ" is an editorial
 #   error in CHINSIMP.TXT; the listed mapping (as opposed to name) is "ɑ").
+macrawgbdata = parsers.read_untracked(
+    "Mac/macGB2312.json",
+    "Mac/CHINSIMP.TXT",
+    parsers.decode_main_plane_euc,
+    parsers.parse_file_format("Mac/CHINSIMP.TXT"),
+    "Mac/CHINSIMP.TXT-raw",
+    gbklike = True)
 macgbdata = parsers.read_untracked(
     "Mac/macGB2312.json",
     "Mac/CHINSIMP.TXT",
@@ -168,6 +184,8 @@ macgbdata = parsers.read_untracked(
     "Mac/CHINSIMP.TXT",
     gbklike = True,
     mapper = variationhints.ahmap)
+graphdata.gsets["ir058-macraw"] = (94, 2, macrawgbdata)
+graphdata.gsets["ir058-macsemiraw"] = (94, 2, macgbdata)
 graphdata.gsets["ir058-mac"] = gb2312_macfull = (94, 2, parsers.fuse([
     (None,) * 526 + gb2312_full[2][526:555],
     macgbdata], "Mac---CHINSIMP_mainplane_ahmap_fullverts.json"))
@@ -192,9 +210,9 @@ graphdata.gsets["gb12052"] = gb12052 = (94, 2, parsers.decode_main_plane_euc(
     parsers.parse_file_format("Other/gb12052-uni.txt", gb12052 = True),
     "gb12052-uni.txt"))
 
-# Being as GB 7589, 13131, 7590, 13132 do not include non-Kanji, Unihan mappings theoretically can
-#   describe their entire mappings… in reality, the GB 13131 mapping contains more or less the
-#   entire set with only a few gaps, whereas the GB 13132 mapping is full of holes.
+# Being as GB 7589, 13131, 7590, 13132、16500 do not include non-Kanji, Unihan mappings theoretically
+#   can describe their entire mappings… in reality, the GB 13131 and 16500 mappings contain more or
+#   less the entire set with only a few gaps, whereas the GB 13132 mapping is full of holes.
 # kGB3 and kGB5 actually provide the same data as the G3 and G5 in kIRG_GSource (despite the later
 #   citing 13131/13132 and the former citing 7589/7590), except for that kGB3 and kGB5 have many
 #   more gaps (they seem to only cover the URO).
@@ -202,6 +220,16 @@ graphdata.gsets["gb13131"] = gb13131 = (94, 2,
         parsers.read_unihan_planes("UCD/Unihan_IRGSources.txt", "kIRG_GSource", "G3"))
 graphdata.gsets["gb13132"] = gb13132 = (94, 2, 
         parsers.read_unihan_planes("UCD/Unihan_IRGSources.txt", "kIRG_GSource", "G5"))
+# Small handful of GB16500 not mapped to it in Unihan:
+#     U+6FF9 at 32-29
+#     U+809E at 40-50
+#     U+891D at 44-23
+graphdata.gsets["gb16500"] = gb16500 = (94, 2, parsers.fuse([
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources.txt", "kIRG_GSource", "GE"),
+        (None,) * ((94 * 31) + 28) + ((0x6FF9,),),
+        (None,) * ((94 * 39) + 49) + ((0x809E,),),
+        (None,) * ((94 * 43) + 22) + ((0x891D,),),
+    ], "GB16500.json"))
 
 # GB 7589 and GB 7590 are just the simplified versions, right?
 # (Contrary to docs, kGB3 and kGB5 seem to be a subset of the G3 and G5 in kIRG_GSource, i.e. they

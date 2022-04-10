@@ -122,20 +122,23 @@ cdispmap[("au by KDDI<br>JIS Emoji", 8092, (0x1F140,))] = (0xF048,)
 cdispmap[("DoCoMo<br>JIS Emoji", 8092, (0x1F140,))] = (0xE6E1,)
 
 annots = {
+ (1, 1, 6): 'Compare behaviour of GB 01-04.',
  (1, 1, 17): 'U+FFE3 (￣) is the fullwidth counterpart of both U+00AF (¯) and '
              'U+203E (‾); the latter is the one typically used when mapping '
-             'JIS C 6220 / JIS X 0201. Mapping the double-byte character to '
+             'JIS C 6220 / JIS X 0201.\u2002Mapping the double-byte character to '
              'U+203E in contexts where 0x7E is mapped to U+007E (~) is done by '
              'OSF in ASCII-based EUC-JP only, and by JIS X 0213 (2000 JIS / '
-             '2004 JIS) in EUC-JP only (and then not by all encoders).',
+             '2004 JIS) in EUC-JP only (and then not by all encoders).\u2002Compare '
+             'GB 00-03-94.',
  (1, 1, 29): 'U+2014 (em dash) and U+2015 (horizontal bar) both correspond to '
              "the same JIS character.\u2002UTC's mappings generally favoured "
              'U+2015, and Microsoft and consequently WHATWG (HTML5) follow '
              'this.\u2002JIS (JIS X 0221, JIS X 0213) consider it to be U+2014, '
              'and Apple follows suit; Python apparently considers it to be U+2015 '
              'even in its JIS X 0213 codecs.\u2002OSF maps it as U+2015 in their '
-             'MS-based version and as U+2014 otherwise.</p><p>The codepoint '
-             'selected to display in the NEC column is arbitrary.',
+             'MS-based version and as U+2014 otherwise.\u2002Compare behaviour of '
+             'GB 00-01-10.</p><p>The codepoint selected to display in the NEC '
+             'column is arbitrary.',
  (1, 1, 32): 'U+005C (backslash) is sometimes rendered the same as U+00A5 (¥), '
              "especially when it's used to map the 7-bit code 0x5C (backslash "
              'in ASCII, yen sign in JIS C 6220 / JIS X 0201).\u2002Generally '
@@ -159,12 +162,18 @@ annots = {
              'most common by far (however, U+FF5E actually has a separate mapping '
              'at 02-02-23 in JIS X 0212 and 01-02-18 in JIS X 0213, which is shown '
              'as a spacing accent in their respective charts).</p>'
+             '<p>Compare, and especially contrast, the behaviour of GB 01-11.</p>'
              '<p>The codepoint selected to display in the NEC column is arbitrary.',
  (1, 1, 34): 'U+2225 is used by Microsoft-influenced mappings, U+2016 is used '
-             'by others. U+2225 has a separate mapping in JIS X 0213 (01-02-52). '
+             'by others.\u2002U+2225 has a separate mapping in JIS X 0213 (01-02-52). '
              'U+2016 is necessarily straight vertical, whereas U+2225 is often '
-             'shown slanted.</p><p>The codepoint '
+             'shown slanted.\u2002Compare GB 01-12 and GB 01-46.</p><p>The codepoint '
              'selected to display in the NEC column is arbitrary.',
+ (1, 1, 36): 'Apple initially mapped this to U+22EF and the single-byte Shift JIS 0xFF '
+             'to U+2026.\u2002Since this apparently created interoperability issues, '
+             'they (Apple) revised these mapping to U+2026 and U+2026+(F87F) respectively, '
+             'where U+F87F is a private use character used for round tripping.\u2002Compare '
+             'GB 00-01-13, for which Apple apparently retained the U+22EF mapping.',
  (1, 1, 61): 'Microsoft-influenced mappings use U+FF0D for the minus sign '
              '(making the JIS minus sign, as opposed to the JIS hyphen, the '
              'definitive fullwidth form of the ASCII hyphen-minus). Others use '
@@ -173,7 +182,7 @@ annots = {
              'U+2212 and U+FF0D the same (while its decoders use U+FF0D), '
              'since doing otherwise was breaking Japanese postcode forms on '
              'Macintoshes.\u2002Note a JIS X 0213 mapping for U+FF0D at '
-             '01-02-17.</p><p>The codepoint '
+             '01-02-17.\u2002Compare/contrast GB 03-13.</p><p>The codepoint '
              'selected to display in the NEC column is arbitrary.',
  (1, 1, 79): 'Mapping the double-byte character to U+00A5 is only done when '
              "that mapping isn't already used for 0x5C, e.g. JIS X 0213 (2000 "
@@ -187,7 +196,7 @@ annots = {
              "for the regular variants don't exist).",
  (1, 2, 15): "Compare 01-92-93 (NEC Selection) and 02-89-23 (IBM SJIS Extensions).",
  (1, 2, 16): "Compare 01-92-94 (NEC Selection) and 02-89-24 (IBM SJIS Extensions).",
- (1, 2, 17): "Compare 01-01-61.",
+ (1, 2, 17): "Compare 01-01-61 and GB 03-13.",
  (1, 2, 18): "Compare 01-01-33 and 02-02-23.\u2002Mapped to U+007E in Shift_JIS "
              "if 0x7E is mapped to U+203E (refer to notes at 01-01-17).\u2002"
              'Shown as a spacing accent in the code chart; however, I know of no '
@@ -205,7 +214,7 @@ annots = {
              'predating the allocation of the standard codepoint in 1983.\u2002'
              "Accordingly, this codepoint is not allocated in IBM's extended "
              '78JIS (unlike most of the 1983 additions).',
- (1, 2, 52): 'Compare 01-01-34.',
+ (1, 2, 52): 'Compare 01-01-34 and GB 01-46.',
  (1, 2, 55): 'Some codecs map 01-02-54 to U+2985 and 01-02-55 to U+2986.\u2002'
              'Python, for example, does that in both its 2000 JIS and 2004 JIS '
              'codecs.\u2002The Unicode codepoints U+FF5F and U+FF60 were added '

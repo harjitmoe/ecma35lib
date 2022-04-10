@@ -11,8 +11,14 @@ import json, re, posixpath
 from ecma35.data import graphdata, variationhints, charclass
 from ecma35.data.names import namedata
 
-def to_link(maybe_siglum, default_siglum, men, ku, ten):
+def to_link(maybe_siglum, default_siglum, maybe_plane, default_plane, ku, ten):
     siglum = maybe_siglum or default_siglum
+    if maybe_plane:
+        men = maybe_plane
+    elif siglum != default_siglum:
+        men = "1" if siglum not in ("GB",) else "0"
+    else:
+        men = default_plane
     omen, oku, oten = men, ku, ten
     part_zi = int(ku, 10) // 16
     if siglum == "CNS" and men in "ΨΩ":
@@ -30,6 +36,8 @@ def to_link(maybe_siglum, default_siglum, men, ku, ten):
             part_zi = int(ku, 10) // 11
         else:
             raise AssertionError()
+    elif siglum == "GB" and men == "K":
+        men = "8"
     elif siglum == "KSC" and men == "Ψ":
         basename = "../wansungtables/htxplane"
         men = "1"
@@ -40,7 +48,7 @@ def to_link(maybe_siglum, default_siglum, men, ku, ten):
         basename = {"CNS": "../cnstables/cnsplane", "JIS": "../jistables2/jisplane",
                     "EACC": "../eacctables/ccciiplane", "CCCII": "../eacctables/ccciiplane",
                     "KSC": "../wansungtables/kscplane", "GB": "../guobiaotables/gbplane"}[siglum]
-        men = men.lstrip("0")
+        men = men.lstrip("0") or "0"
     ku = ku.lstrip("0")
     ten = ten.lstrip("0")
     part_letter = chr(0x61 + part_zi)
@@ -48,14 +56,19 @@ def to_link(maybe_siglum, default_siglum, men, ku, ten):
         basename = posixpath.basename(basename)
     url = f"{basename}{int(men, 10):X}{part_letter}.html#{men}.{ku}.{ten}"
     display_siglum = f"{maybe_siglum} " if maybe_siglum else ""
-    return f'<a href="{url}">{display_siglum}{omen}-{oku}-{oten}</a>'
+    display_plane = f"{omen}-" if maybe_plane else ""
+    return f'<a href="{url}">{display_siglum}{display_plane}{oku}-{oten}</a>'
 
-siglumre = re.compile("(?:(JIS|CNS|CCCII|EACC|KSC|GB) )?(\d\d|Ψ|Ω)-(\d\d)-(\d\d)")
-def inject_links(text, default_siglum=None):
+siglumre = re.compile("(?:(JIS|CNS|CCCII|EACC|KSC|GB) )?(?:(\d\d|Ψ|Ω|K)-)?(\d\d)-(\d\d)")
+def inject_links(text, default_siglum=None, default_plane=None):
     def callback(m):
         if m.group(1) == None and default_siglum == None:
             return m.group(0)
-        return to_link(m.group(1), default_siglum, m.group(2), m.group(3), m.group(4))
+        if m.group(2) == None and m.group(1) in (None, default_siglum) and default_plane == None:
+            return m.group(0)
+        else:
+            plane = m.group(2)
+        return to_link(m.group(1), default_siglum, plane, str(default_plane), m.group(3), m.group(4))
     return siglumre.sub(callback, text)
 
 def formatcode(tpl):
@@ -583,7 +596,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
                 print("</thead>", file=outfile)
         if annots.get((number, row, 0), None):
             print("<tr class=annotation><td colspan={:d}><p>".format(len(plarray) + 1), file=outfile)
-            print("Note:", inject_links(annots[(number, row, 0)], siglum), file=outfile)
+            print("Note:", inject_links(annots[(number, row, 0)], siglum, number), file=outfile)
         for cell in (range(1, 95) if not is_96 else range(0, 96)):
             if big5ext_mode == 1:
                 if ((row % 2) and (cell < 32)) or ((row == 72) and (cell < 54)):
@@ -631,7 +644,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
                 unicodefunc(cdisplayi, outfile, i)
             if annots.get((number, row, cell), None):
                 print("<tr class=annotation><td colspan={:d}><p>".format(len(plarray) + 1), file=outfile)
-                print("Note:", inject_links(annots[(number, row, cell)], siglum), file=outfile)
+                print("Note:", inject_links(annots[(number, row, cell)], siglum, number), file=outfile)
     print("</table>", file=outfile)
     if menuurl or lasturl or nexturl:
         _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname)
@@ -695,7 +708,10 @@ def dump_preview(outfile, planename, kutenfunc, number, array, *, lang="zh-TW", 
                 print("<a id='{:d}.{:d}.{:d}' class=anchor></a>".format(number, 
                             row, cell), file=outfile)
                 print(kutenfunc(number, row, -cell), file=outfile)
-            i = array[((row - 1) * 94) + (cell - 1)] if not is_96 else array[(row * 96) + cell]
+            try:
+                i = array[((row - 1) * 94) + (cell - 1)] if not is_96 else array[(row * 96) + cell]
+            except IndexError:
+                i = None
             if i is None:
                 print("<td class=udf>", file=outfile)
                 continue
