@@ -151,10 +151,33 @@ X = [0x0101, 0x00E1, 0x01CE, 0x00E0, 0x0113, 0x00E9, 0x011B,
 for _i in range(658, 689): # Not 689/971 itself since that one gets equated to the ASCII characters.
     _j = _i + (3 * 94)
     _ir165_add[_j] = (X[_i - 658], 0xF87F)
-# The various pattern fill characters in the latter part of the Greek row are still unmapped,
-#   but shouganai. (The range also is used in GB/T 12345, GB 18030 and Macintosh for vertical
-#   forms, and the use for fills appears to be original to ITU.)
-ir165 = parsers.fuse([_ir165_add, _ir165_raw], "CCITT-Chinese-Full.json")
+# The range also is used in GB/T 12345, GB 18030 and Macintosh for vertical forms, and the
+#   use for fills appears to be original to ITU. Exact mappings don't exist, use approximate ones.
+# Consulting both T.101-C and IR-165, since both are imperfect scans, and starting at 06-60:
+#   six verticals (U+25A5 is five), 
+#   eight verticals (red/gules hatch U+1F7E5), 
+#   eight horizontals (blue/azure hatch U+1F7E6), 
+#   six horizontals (U+25A4 is five), 
+#   8x8 dots (U+2593 closest), 
+#   6x6 orthogonal hash (verticals almost invisible in IR-165, visible in T.101-C) (U+25A6 is 5x5), 
+#   8x8 orthogonal hash (verticals almost invisible in IR-165, visible in T.101-C) (black/sable hatch) (U+1FB90 for want of a better option), 
+#   three verticals (U+1D36B), 
+#   four verticals (U+1D36C), 
+#   three horizontals (U+2630), 
+#   four horizontals (U+1FB81), 
+#   3x3 orthogonal hash (U+2A69), 
+#   orthogonal hash with four verticals and three horizontals (U+1699 closest), 
+#   6x6 dots (U+2592 closest), 
+#   dots in 4 rows and 6 columns (U+2591 closest), 
+#   repeated horizontal dashes in rows with staggered x-offsets (aqua hatch, DoCoMo variant U+1F301), 
+#   jagged backslash diagonal (U+25A7 closest, proper hatch), 
+#   fine backslash diagonal (green/vert hatch U+1F7E9, closer to U+1FB98 though), 
+#   chequer (U+1FB95), 
+#   brick (Noto variant U+1F9F1), 
+#   Electric album cover ripples (closest I can find is U+224B sadly), 
+#   diamond tesselation (U+25A9 closest).
+patterns = (None,) * (5*94 + 59) + ((0x25A5,), (0x1F7E5,), (0x1F7E6,), (0x25A4,), (0x2593,), (0x25A6,), (0x1FB90,), (0x1D36B,), (0x1D36C,), (0x2630,), (0x1FB81,), (0x2A69,), (0x1699,), (0x2592,), (0x2591,), (0x1F301,), (0x25A7,), (0x1FB98,), (0x1FB95,), (0x1F9F1,), (0x224B,), (0x25A9,), )
+ir165 = parsers.fuse([_ir165_add, _ir165_raw, patterns], "CCITT-Chinese-Full.json")
 graphdata.gsets["ir165"] = isoir165 = (94, 2, ir165)
 #
 # Include one which actually conforms to standards in which way around the lowercase Gs are too…
@@ -174,15 +197,17 @@ ir165_engorged = parsers.fuse([
     ], "CCITT-Chinese-Extended.json")
 graphdata.gsets["ir165ext"] = (94, 2, ir165_engorged)
 #
-# For GB 6345: knock out rows 12 thru 15, 90 thru 94.
+# For GB 6345: knock out 06-60 thru 06-81, rows 12 thru 15, 90 thru 94.
 graphdata.gsets["gb6345"] = (94, 2, parsers.fuse([
+        (None,) * (5*94 + 60) + ((-1,),) * (22),
         (None,) * (11*94) + ((-1,),) * (4*94),
         (None,) * (89*94) + ((-1,),) * (5*94),
         ir165_std,
     ], "GB6345.json"))
 #
-# For GB 8565: knock out 08-27 thru 08-32, rows 10 thru 12, kuten 13-51 thru 13-94, and kuten 15-94.
+# For GB 8565: knock out 06-60 thru 06-94, 08-27 thru 08-32, rows 10 thru 12, 13-51 thru 13-94, and 15-94.
 graphdata.gsets["gb8565"] = (94, 2, parsers.fuse([
+        (None,) * (5*94 + 60) + ((-1,),) * (22),
         (None,) * (7*94 + 26) + ((-1,),) * 6,
         (None,) * (9*94) + ((-1,),) * (3*94),
         (None,) * (12*94 + 50) + ((-1,),) * 44,

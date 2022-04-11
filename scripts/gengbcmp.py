@@ -130,7 +130,8 @@ annots = {
     (0, 3, 13): "Compare both JIS 01-01-61 and JIS 01-02-17.",
     (0, 3, 71): "Compare 08-32.",
     (0, 3, 94): "Compare JIS 01-01-17.",
-    (0, 6, 56): "Some explanation is in order for the following characters.&ensp;The Unicode Vertical Forms block (containing the vertical forms from GB 18030) apparently postdates GB 18030, hence the Apple mappings using PUA hints and the GB18030 and Windows mappings to the Private Use Area.&ensp;This doesn't affect the vertical presentation forms with correspondances to Big5, which were already included in the CJK Compatibility Forms block.</p><p>ITU T.101-C instead includes pattern characters in this range; they are largely unmappable and are not shown here.",
+    (0, 6, 56): "Some explanation is in order for the following characters.&ensp;The Unicode Vertical Forms block (containing the vertical forms from GB 18030) apparently postdates GB 18030, hence the Apple mappings using PUA hints and the GB18030 and Windows mappings to the Private Use Area.&ensp;This doesn't affect the vertical presentation forms with correspondances to Big5, which were already included in the CJK Compatibility Forms block.",
+    (0, 6, 59): "ITU T.101-C instead includes pattern characters in the following range; they are largely unmappable.&ensp;<em>Extremely</em> approximate mappings that I essentially made up (although not without justifications) are used below so that the collision with the vertical forms is visible.",
     (0, 8, 32): "Compare 03-71.",
 }
 cdispmap = {}
