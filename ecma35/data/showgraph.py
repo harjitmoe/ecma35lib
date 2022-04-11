@@ -605,7 +605,10 @@ def dump_plane(outfile, planefunc, kutenfunc,
             if big5ext_mode == 2:
                 if ((cell - 1) % 47) >= 33:
                     continue
-            st = zplarray[((row - 1) * 94) + (cell - 1)] if not is_96 else zplarray[(row * 96) + cell]
+            try:
+                st = zplarray[((row - 1) * 94) + (cell - 1)] if not is_96 else zplarray[(row * 96) + cell]
+            except IndexError:
+                st = [None] * len(zplarray[0])
             if (sparse or (cell in (0, 95))) and (len(set(i for i in st if i is not None)) == 0) \
                       and not annots.get((number, row, cell), None):
                 continue

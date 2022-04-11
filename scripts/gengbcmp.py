@@ -26,24 +26,28 @@ import json
 # GB-8565.2: Information Processing - Coded Character Sets for Text Communication - Part 2: Graphic Characters (Unihan calls it G8; it is an expansion of GB-2312 though, not a plane in its own right.)
 # GB-12052: Korean Coded Character Set for Information Interchange (Unihan's GK)
 
+# ITU T.101-C is 1994 (2nd ed; 1st ed didn't include this one afaict); IR-165 reg is 1992.
 MACSET = "Apple"
-plane0 = (0, ("GB 2312<br>1980", "Registration<br>IR-058", "UTC", "IBM-1382", "GB12345", MACSET, "Windows", "GB18030<br>2000", "GB18030<br>2005", "GB18030<br>Full", "CCITT<br>Specified", "CCITT<br>Base Stds", "GB12052"), [
+plane0 = (0, ("GB 2312<br>1980", "GB 2312<br>IR-058", "GB 6345.1<br>1986", "GB 8565.2<br>1988", "GB 12052<br>1989", "GB 12345<br>1990", "ITU T.101-C<br>IR-165", "\"Pseudo-G8\"", "GB 2312<br>UTC", "IBM-1382", MACSET, "Windows", "GB 18030<br>2000", "GB 18030<br>2005", "GB 18030<br>Full"), [
           graphdata.gsets["ir058-1980"][2],
           graphdata.gsets["ir058"][2],
+          graphdata.gsets["gb6345"][2],
+          graphdata.gsets["gb8565"][2],
+          graphdata.gsets["gb12052"][2][:94*15] + ((None,) * (94*78)),
+          graphdata.gsets["ir058-hant"][2][:94*15] + ((None,) * (94*78)),
+          graphdata.gsets["ir165"][2],
+          graphdata.gsets["ir165ext"][2],
           graphdata.gsets["ir058-1986"][2],
           graphdata.gsets["ir058-ibm"][2],
-          graphdata.gsets["ir058-hant"][2][:94*15] + ((None,) * (94*78)),
           graphdata.gsets["ir058-mac"][2],
           graphdata.gsets["ir058-ms"][2],
           graphdata.gsets["ir058-2000"][2],
           graphdata.gsets["ir058-2005"][2],
           graphdata.gsets["ir058-full"][2],
-          graphdata.gsets["ir165"][2],
-          graphdata.gsets["ir165std"][2],
-          graphdata.gsets["gb12052"][2][:94*15] + ((None,) * (94*78)),
 ])
-plane1 = (1, ("GB12345",), [
-          graphdata.gsets["ir058-hant"][2],
+plane1 = (1, ("GB 12345<br>1990", "GB 12345<br>UTC"), [
+          graphdata.gsets["ir058-hant-strict"][2],
+          graphdata.gsets["ir058-hant-utc"][2],
 ])
 plane2 = (2, ("GB7589",), [
           graphdata.gsets["gb7589"][2],
@@ -126,7 +130,7 @@ annots = {
     (0, 3, 13): "Compare both JIS 01-01-61 and JIS 01-02-17.",
     (0, 3, 71): "Compare 08-32.",
     (0, 3, 94): "Compare JIS 01-01-17.",
-    (0, 6, 56): "Some explanation is in order for the following characters.&ensp;The Unicode Vertical Forms block (containing the vertical forms from GB 18030) apparently postdates GB 18030, hence the Apple mappings using PUA hints and the GB18030 and Windows mappings to the Private Use Area.&ensp;This doesn't affect the vertical presentation forms with correspondances to Big5, which were already included in the CJK Compatibility Forms block.",
+    (0, 6, 56): "Some explanation is in order for the following characters.&ensp;The Unicode Vertical Forms block (containing the vertical forms from GB 18030) apparently postdates GB 18030, hence the Apple mappings using PUA hints and the GB18030 and Windows mappings to the Private Use Area.&ensp;This doesn't affect the vertical presentation forms with correspondances to Big5, which were already included in the CJK Compatibility Forms block.</p><p>ITU T.101-C instead includes pattern characters in this range; they are largely unmappable and are not shown here.",
     (0, 8, 32): "Compare 03-71.",
 }
 cdispmap = {}

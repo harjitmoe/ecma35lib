@@ -156,12 +156,39 @@ for _i in range(658, 689): # Not 689/971 itself since that one gets equated to t
 #   forms, and the use for fills appears to be original to ITU.)
 ir165 = parsers.fuse([_ir165_add, _ir165_raw], "CCITT-Chinese-Full.json")
 graphdata.gsets["ir165"] = isoir165 = (94, 2, ir165)
+#
 # Include one which actually conforms to standards in which way around the lowercase Gs are too…
 _ir165_std_add = _ir165_add[:]
 _ir165_std_add[258], _ir165_std_add[689] = (0xFF47,), (0x0261,)
 _ir165_std_add[916], _ir165_std_add[971] = (0x0067,), _ir165_std_add[916]
 ir165_std = parsers.fuse([_ir165_std_add, _ir165_raw], "CCITT-Chinese-Full-Std.json")
-graphdata.gsets["ir165std"] = isoir165 = (94, 2, ir165_std)
+graphdata.gsets["ir165std"] = (94, 2, ir165_std)
+#
+# Further extended version of IR-165 with additional hanzi in the end of row 8, after the Zhuyin
+#   (i.e. kuten 08-83 thru 08-94).
+# This, along with the CCITT additions, were two extensions to GB 8565 which formerly left imprints
+#   on the Unihan database: https://appsrv.cse.cuhk.edu.hk/~irg/irg/irg50/IRGN2276.pdf
+ir165_engorged = parsers.fuse([
+        ir165,
+        (None,) * (7*94 + 82) + ((0x540B,), (0x544E,), (0x5521,), (0x6D6C,), (0x74E9,), (0x96BB,), (0x6E96,), (0x5338,), (0x590A,), (0x897E,), (0x9B25,), (0x9B31,)),
+    ], "CCITT-Chinese-Extended.json")
+graphdata.gsets["ir165ext"] = (94, 2, ir165_engorged)
+#
+# For GB 6345: knock out rows 12 thru 15, 90 thru 94.
+graphdata.gsets["gb6345"] = (94, 2, parsers.fuse([
+        (None,) * (11*94) + ((-1,),) * (4*94),
+        (None,) * (89*94) + ((-1,),) * (5*94),
+        ir165_std,
+    ], "GB6345.json"))
+#
+# For GB 8565: knock out 08-27 thru 08-32, rows 10 thru 12, kuten 13-51 thru 13-94, and kuten 15-94.
+graphdata.gsets["gb8565"] = (94, 2, parsers.fuse([
+        (None,) * (7*94 + 26) + ((-1,),) * 6,
+        (None,) * (9*94) + ((-1,),) * (3*94),
+        (None,) * (12*94 + 50) + ((-1,),) * 44,
+        (None,) * (14*94 + 93) + ((-1,),),
+        ir165_std,
+    ], "GB8565.json"))
 
 # Apple's version. Note that it changes 0xFD and 0xFE to single-byte codes.
 # Includes the vertical form encodings from GB/T 12345 which would make it into GB 18030, but
@@ -194,15 +221,49 @@ graphdata.gsets["ir058-mac"] = gb2312_macfull = (94, 2, parsers.fuse([
 #   the others being added as a couple of rows at the end)
 # Unlike GB2312.TXT, redistribution of GB12345.TXT itself is apparently not permitted, although
 #   using/incorporating the information is apparently fine.
-graphdata.gsets["ir058-hant"] = gb12345 = (94, 2, parsers.fuse([parsers.read_untracked(
+graphdata.gsets["ir058-hant-utc"] = gb12345_utc = (94, 2, parsers.read_untracked(
         "UTC/GB_12345.json",
         "UTC/GB12345.TXT",
         parsers.decode_main_plane_euc,
         parsers.parse_file_format("UTC/GB12345.TXT"),
         "UTC/GB12345.TXT",
-        gbklike = True), 
-    (None,) * 526 + gb2312_full[2][526:555],
-    (None,) * 684 + gb2312_full[2][684:690]], "GB12345.json"))
+        gbklike = True))
+graphdata.gsets["ir058-hant"] = gb12345 = (94, 2, parsers.fuse([
+        gb12345_utc[2], 
+        (None,) * 526 + gb2312_full[2][526:555],
+        (None,) * 684 + gb2312_full[2][684:690],
+    ], "GB12345.json"))
+#
+# Certain characters are still simplified in GB 12345 proper, but were replaced with traditional
+#   characters in the version of GB 12345 supplied to the UTC. Source: Lunde 2009, p.102.
+gb1_strict_chars = tuple(((i - 1) * 94) + (j - 1) for i, j in (
+    (21, 94),
+    (27, 27),
+    (27, 29),
+    (27, 30),
+    (27, 32),
+    (27, 33),
+    (29, 90),
+    (30, 18),
+    (30, 27),
+    (38, 60),
+    (38, 90),
+    (39, 17),
+    (53, 85),
+    (53, 86),
+    (53, 88),
+    (53, 89),
+    (56, 89),
+    (58, 77),
+    (59, 28),
+    (65, 31),
+    (74, 15),
+    (83, 61),
+))
+graphdata.gsets["ir058-hant-strict"] = gb12345_strict = (94, 2, parsers.fuse([
+        [i if n in gb1_strict_chars else None for n, i in enumerate(gb2312_full[2])],
+        gb12345[2],
+    ], "GB12345strict.json"))
 
 # GB/T 12052 (Korean in Mainland China). The non-Hangul non-kanji rows are basically
 #   the same as GB2312, but there is a second dollar sign instead of a yuan sign.
