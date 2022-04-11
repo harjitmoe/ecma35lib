@@ -658,7 +658,7 @@ def decode_gbk_non_uro_extras(parsed_stream, filenamekey):
     return tuple(_temp)
 
 @with_caching
-def read_unihan_planes(fil, wantkey, wantsource=None, set96=False):
+def read_unihan_planes(fil, wantkey, wantsource=None, set96=False, kutenform=False):
     #wantkey = "kIRG_" + region + "Source"
     ST, ED, SZ = (1, 94, 94) if not set96 else (0, 95, 96)
     f = open(os.path.join(directory, fil), "r")
@@ -683,7 +683,12 @@ def read_unihan_planes(fil, wantkey, wantsource=None, set96=False):
             continue
         if wantsource:
             data = data[len(wantsource):]
-        if len(data) == 6:
+        if kutenform:
+            assert len(data) == 4
+            men = 1
+            ku = int(data[:2], 10)
+            ten = int(data[2:], 10)
+        elif len(data) == 6:
             men = int(data[:2], 16) - 0x20
             ku = int(data[2:4], 16) - 0x20
             ten = int(data[4:], 16) - 0x20

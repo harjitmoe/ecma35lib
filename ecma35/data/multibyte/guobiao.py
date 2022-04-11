@@ -217,7 +217,7 @@ graphdata.gsets["gb12052"] = gb12052 = (94, 2, parsers.decode_main_plane_euc(
 #   citing 13131/13132 and the former citing 7589/7590), except for that kGB3 and kGB5 have many
 #   more gaps (they seem to only cover the URO).
 #
-# Handful of GB 7589 / 13131 not mapped to Unicode in Unihan:
+# Handful of GB 7589 / 13131 not mapped to Unicode in kIRG_GSource:
 #     U+72AE at 19-57 (traditional / simplified)
 #     U+5829 at 20-53 (traditional; simplified not in Unicode)
 #     U+22341 at 21-05 (traditional / simplified)
@@ -247,9 +247,11 @@ graphdata.gsets["gb13131"] = gb13131 = (94, 2, parsers.fuse([
 graphdata.gsets["gb13132"] = gb13132 = (94, 2, parsers.fuse([
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G5"),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "G5"),
+        parsers.read_unihan_planes("UCD/Unihan_OtherMappings-14.txt", "kGB5", kutenform=True),
+        parsers.read_unihan_planes("UCD/Unihan_OtherMappings-13.txt", "kGB5", kutenform=True),
     ], "GB13132.json"))
 #
-# Small handful of GB16500 not mapped to Unicode in Unihan 13.0 (Unihan 14.0 unmaps a few more):
+# Small handful of GB16500 not in kIRG_GSource in Unihan 13.0 (Unihan 14.0 unmaps a few more):
 #     U+6FF9 at 32-29
 #     U+809E at 40-50
 #     U+891D at 44-23
@@ -261,9 +263,17 @@ graphdata.gsets["gb16500"] = gb16500 = (94, 2, parsers.fuse([
         (None,) * ((94 * 43) + 22) + ((0x891D,),),
     ], "GB16500.json"))
 
+graphdata.gsets["the-other-gb7"] = (94, 2, parsers.fuse([
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G7"),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "G7"),
+        parsers.read_unihan_planes("UCD/Unihan_OtherMappings-14.txt", "kGB7", kutenform=True),
+        parsers.read_unihan_planes("UCD/Unihan_OtherMappings-13.txt", "kGB7", kutenform=True),
+    ], "the-other-GB7.json"))
+
 # GB 7589 and GB 7590 are just the simplified versions, right?
-# (Contrary to docs, kGB3 and kGB5 seem to be a subset of the G3 and G5 in kIRG_GSource, i.e. they
-#  are the traditional GB 13131/13132 forms. Notably, GB 13131/13132 appear never published.)
+# (Contrary to docs, kGB3 and kGB5 seem to be less complete mappings to the same G3 and G5
+#  in kIRG_GSource, i.e. they are the traditional GB 13131/13132 forms.
+#  Notably, GB 13131/13132 appear never published.)
 # Cases of multiple Simplified mappings though:
 #     GB 13131:
 #   0x8b78 譸 → 0x8bea 诪,  0x2c8aa 𬢪 (0x2c8aa is a hybrid; favour BMP over SIP)
