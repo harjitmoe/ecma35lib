@@ -199,7 +199,7 @@ Miscellaneous single-byte assignments:
 |`IRR ? G*DM4 ! 6`|KDDI Emoji extensions for Shift\_JIS (as above), pictorial zodiac variant|
 |`IRR 0 G*DM4 ! 6`|KDDI Emoji extensions for Shift\_JIS (as above), symbolic zodiac variant|
 |`G*DM4 ! 7`|SoftBank Emoji extensions for Shift\_JIS (as above)|
-|`IRR ? G*DM4 ! 8`|GB 13131 (supplementary traditional).&ensp;This is based on Unihan source data, and has a small number of gaps.|
+|`IRR ? G*DM4 ! 8`|GB 13131 (supplementary traditional).|
 |`IRR 0 G*DM4 ! 8`|GB 7589 (supplementary simplified)&mdash;This is generated from the GB 13131 mappings, and may be inaccurate in places.|
 |`IRR ? G*DM4 ! 9`|GB 13132 (further supplementary traditional)&ensp;This is based on Unihan source data, and has several gaps.|
 |`IRR 0 G*DM4 ! 9`|GB 7590 (further supplementary simplified)&mdash;This is generated from the GB 13132 mappings, and may be inaccurate in places.|

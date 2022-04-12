@@ -185,13 +185,17 @@ graphdata.gsets["ir165"] = isoir165 = (94, 2, ir165)
 _ir165_std_add = _ir165_add[:]
 _ir165_std_add[258], _ir165_std_add[689] = (0xFF47,), (0x0261,)
 _ir165_std_add[916], _ir165_std_add[971] = (0x0067,), _ir165_std_add[916]
-ir165_std = parsers.fuse([_ir165_std_add, _ir165_raw], "CCITT-Chinese-Full-Std.json")
+ir165_std = parsers.fuse([_ir165_std_add, _ir165_raw, patterns], "CCITT-Chinese-Full-Std.json")
 graphdata.gsets["ir165std"] = (94, 2, ir165_std)
 #
 # Further extended version of IR-165 with additional hanzi in the end of row 8, after the Zhuyin
 #   (i.e. kuten 08-83 thru 08-94).
 # This, along with the CCITT additions, were two extensions to GB 8565 which formerly left imprints
 #   on the Unihan database: https://appsrv.cse.cuhk.edu.hk/~irg/irg/irg50/IRGN2276.pdf
+# That this resulted in a duplicate encoding of U+9B25 (between GB 8565 and this unnamed extension)
+#   apparently created confusion resulting in four characters (覀粦亅啰) being encoded off by one. The
+#   "ir165ext" table probably shouldn't recreate that, since it's merely a combination of extensions,
+#   but see "gb8565-oldwrongunihan" below.
 ir165_engorged = parsers.fuse([
         ir165,
         (None,) * (7*94 + 82) + ((0x540B,), (0x544E,), (0x5521,), (0x6D6C,), (0x74E9,), (0x96BB,), (0x6E96,), (0x5338,), (0x590A,), (0x897E,), (0x9B25,), (0x9B31,)),
@@ -200,21 +204,31 @@ graphdata.gsets["ir165ext"] = (94, 2, ir165_engorged)
 #
 # For GB 6345: knock out 06-60 thru 06-81, rows 12 thru 15, 90 thru 94.
 graphdata.gsets["gb6345"] = (94, 2, parsers.fuse([
-        (None,) * (5*94 + 60) + ((-1,),) * (22),
+        (None,) * (5*94 + 59) + ((-1,),) * (22),
         (None,) * (11*94) + ((-1,),) * (4*94),
         (None,) * (89*94) + ((-1,),) * (5*94),
         ir165_std,
     ], "GB6345.json"))
 #
-# For GB 8565: knock out 06-60 thru 06-94, 08-27 thru 08-32, rows 10 thru 12, 13-51 thru 13-94, and 15-94.
+# For GB 8565: knock out 06-60 thru 06-81, 08-27 thru 08-32, rows 10 thru 12, 13-51 thru 13-94, and 15-94.
 graphdata.gsets["gb8565"] = (94, 2, parsers.fuse([
-        (None,) * (5*94 + 60) + ((-1,),) * (22),
+        (None,) * (5*94 + 59) + ((-1,),) * (22),
         (None,) * (7*94 + 26) + ((-1,),) * 6,
         (None,) * (9*94) + ((-1,),) * (3*94),
         (None,) * (12*94 + 50) + ((-1,),) * 44,
         (None,) * (14*94 + 93) + ((-1,),),
         ir165_std,
     ], "GB8565.json"))
+#
+# Reconstruction of the pre-IRGN2276 pseudo-G8 source, complete with erroneous mappings for 覀粦亅啰.
+#   See comments above.
+graphdata.gsets["gb8565-oldwrongunihan"] = (94, 2, parsers.fuse([
+        (None,) * (5*94 + 59) + ((-1,),) * (22),
+        (None,) * (7*94 + 26) + ((-1,),) * 6,
+        (None,) * (9*94) + ((-1,),) * (2*94),
+        (None,) * (14*94 + 88) + ir165_engorged[14*94 + 89:14*94 + 93] + ((-1,), (-1,)),
+        ir165_engorged,
+    ], "GB8565-OldWrongUnihan.json"))
 
 # Apple's version. Note that it changes 0xFD and 0xFE to single-byte codes.
 # Includes the vertical form encodings from GB/T 12345 which would make it into GB 18030, but
