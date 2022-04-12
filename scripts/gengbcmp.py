@@ -28,16 +28,17 @@ import json
 
 # ITU T.101-C is 1994 (2nd ed; 1st ed didn't include this one afaict); IR-165 reg is 1992.
 MACSET = "Apple"
-plane0 = (0, ("GB 2312<br>1980", "GB 2312<br>IR-058", "GB 6345.1<br>1986", "GB 8565.2<br>1988", "GB 12052<br>1989", "GB 12345<br>1990", "ITU T.101-C<br>IR-165", "\"Pseudo-G8\"", "GB 2312<br>UTC", "IBM-1382", MACSET, "Windows", "GB 18030<br>2000", "GB 18030<br>2005", "GB 18030<br>Full"), [
+plane0 = (0, ("GB 2312<br>1980", "GB 2312<br>IR-058", "GB 2312<br>UTC", "GB 6345.1<br>1986", "GB 8565.2<br>1988", "GB 12052<br>1989", "GB 12345<br>1990", "GB 12345<br>UTC", "ITU T.101-C<br>IR-165", "\"Pseudo-G8\"", "IBM-1382", MACSET, "Windows", "GB 18030<br>2000", "GB 18030<br>2005", "GB 18030<br>Full"), [
           graphdata.gsets["ir058-1980"][2],
           graphdata.gsets["ir058"][2],
+          graphdata.gsets["ir058-1986"][2],
           graphdata.gsets["gb6345"][2],
           graphdata.gsets["gb8565"][2],
           graphdata.gsets["gb12052"][2][:94*15] + ((None,) * (94*78)),
-          graphdata.gsets["ir058-hant"][2][:94*15] + ((None,) * (94*78)),
+          graphdata.gsets["ir058-hant-strict"][2][:94*15] + ((None,) * (94*78)),
+          graphdata.gsets["ir058-hant-utc"][2][:94*15] + ((None,) * (94*78)),
           graphdata.gsets["ir165"][2],
           graphdata.gsets["ir165ext"][2],
-          graphdata.gsets["ir058-1986"][2],
           graphdata.gsets["ir058-ibm"][2],
           graphdata.gsets["ir058-mac"][2],
           graphdata.gsets["ir058-ms"][2],
