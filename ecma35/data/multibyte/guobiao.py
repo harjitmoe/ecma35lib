@@ -158,9 +158,9 @@ for _i in range(658, 689): # Not 689/971 itself since that one gets equated to t
 #   eight verticals (red/gules hatch U+1F7E5), 
 #   eight horizontals (blue/azure hatch U+1F7E6), 
 #   six horizontals (U+25A4 is five), 
-#   8x8 dots (U+2593 closest), 
+#   8x8 dots (U+1FB90 closest), 
 #   6x6 orthogonal hash (verticals almost invisible in IR-165, visible in T.101-C) (U+25A6 is 5x5), 
-#   8x8 orthogonal hash (verticals almost invisible in IR-165, visible in T.101-C) (black/sable hatch) (U+1FB90 for want of a better option), 
+#   8x8 orthogonal hash (verticals almost invisible in IR-165, visible in T.101-C) (black/sable hatch) (U+2593 closest), 
 #   three verticals (U+1D36B), 
 #   four verticals (U+1D36C), 
 #   three horizontals (U+2630), 
@@ -173,10 +173,11 @@ for _i in range(658, 689): # Not 689/971 itself since that one gets equated to t
 #   jagged backslash diagonal (U+25A7 closest, proper hatch), 
 #   fine backslash diagonal (green/vert hatch U+1F7E9, closer to U+1FB98 though), 
 #   chequer (U+1FB95), 
-#   brick (Noto variant U+1F9F1), 
+#   bricks (Noto variant U+1F9F1), 
 #   Electric album cover ripples (closest I can find is U+224B sadly), 
 #   diamond tesselation (U+25A9 closest).
-patterns = (None,) * (5*94 + 59) + ((0x25A5,), (0x1F7E5,), (0x1F7E6,), (0x25A4,), (0x2593,), (0x25A6,), (0x1FB90,), (0x1D36B,), (0x1D36C,), (0x2630,), (0x1FB81,), (0x2A69,), (0x1699,), (0x2592,), (0x2591,), (0x1F301,), (0x25A7,), (0x1FB98,), (0x1FB95,), (0x1F9F1,), (0x224B,), (0x25A9,), )
+# 0xFE0E here is partly appropriate, partly kludges related to the CSS fontstacks I'm using.
+patterns = (None,) * (5*94 + 59) + ((0x25A5,), (0x1F7E5, 0xFE0E), (0x1F7E6, 0xFE0E), (0x25A4,), (0x1FB90, 0xFE0E), (0x25A6,), (0x2593, 0xFE0E), (0x1D36B,), (0x1D36C,), (0x2630,), (0x1FB81,), (0x2A69,), (0x1699,), (0x2592, 0xFE0E), (0x2591, 0xFE0E), (0x1F301, 0xFE0E), (0x25A7,), (0x1FB98,), (0x1FB95,), (0x1F9F1, 0xFE0E), (0x224B,), (0x25A9,), )
 ir165 = parsers.fuse([_ir165_add, _ir165_raw, patterns], "CCITT-Chinese-Full.json")
 graphdata.gsets["ir165"] = isoir165 = (94, 2, ir165)
 #

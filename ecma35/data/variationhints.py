@@ -646,10 +646,13 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
         else:
             print("<span class='cpc spua' lang={}>".format(lang), file=outfile)
             strep = "".join(chr(j) for j in i)
-    elif (0x10000 <= i[0] < 0x20000) or (0xFE0F in i):
+    elif ((0x10000 <= i[0] < 0x20000) or (0xFE0F in i)) and (0xFE0E not in i):
         # SMP best to fall back to applicable emoji (or otherwise applicable) fonts,
         # and not try to push CJK fonts first.
         print("<span class='cpc smp' lang={}>".format(lang), file=outfile)
+        strep = "".join(chr(j) for j in i)
+    elif 0xFE0E in i:
+        print("<span class='cpc fe0e' lang={}>".format(lang), file=outfile)
         strep = "".join(chr(j) for j in i)
     else:
         strep = "".join(chr(j) for j in i)
