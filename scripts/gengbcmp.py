@@ -122,7 +122,7 @@ annots = {
     (0, 1, 4): "U+30FB's name KATAKANA MIDDLE DOT and U+00B7's name MIDDLE DOT might have led implementers to map 01-04 to the latter instead in Chinese, rather than Japanese contexts.&ensp;Typographically, however, 01-04 would be rather closer to the Japanese interpunct than the Catalan interpunct.&ensp;Compare JIS 01-01-06.",
     (0, 1, 10): "Compare behaviour of JIS 01-01-29.",
     (0, 1, 11): "Compare, and in particular contrast, the behaviour of JIS 01-01-33.",
-    (0, 1, 12): "Compare 01-46 and JIS 01-01-34.",
+    (0, 1, 12): "Compare 01-46 and JIS 01-01-34.&ensp;UTC initially mapped this to U+2225 (duplicating 01-46), but corrected this in their GB 2312 (but not GB 12345) mapping in 1999.",
     (0, 1, 13): "Compare JIS 01-01-36.&ensp;Unlike the JIS character, Apple seem not to have altered this one from the initial mapping to U+22EF.",
     (0, 1, 46): "Compare 01-12, JIS 01-01-34, and JIS 01-02-52.",
     (0, 1, 71): "Compare 03-04.",

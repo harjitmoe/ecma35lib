@@ -255,6 +255,8 @@ graphdata.gsets["ir058-hant-utc"] = gb12345_utc = (94, 2, parsers.read_untracked
         "UTC/GB12345.TXT",
         gbklike = True))
 graphdata.gsets["ir058-hant"] = gb12345 = (94, 2, parsers.fuse([
+        # U+2225 is already used elsewhere; UTC corrected GB2312 in 1999 but didn't change GB12345.
+        (None,) * 11 + ((0x2016,),),
         gb12345_utc[2], 
         (None,) * 526 + gb2312_full[2][526:555],
         (None,) * 684 + gb2312_full[2][684:690],
