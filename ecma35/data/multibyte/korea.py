@@ -140,15 +140,7 @@ rawmac = parsers.read_untracked(
     gbklike=True)
 macwansung32 = graphdata.gsets["ir149-mac-unicode3_2"] = (94, 2, rawmac)
 graphdata.gsetflags["ir149-mac-unicode3_2"] |= {"UHC:IS_WANSUNG"}
-rawmac4 = parsers.read_untracked(
-    "Mac/macWansung40.json",
-    "Mac/KOREAN.TXT",
-    parsers.decode_main_plane_euc,
-    parsers.parse_file_format("Mac/KOREAN.TXT", altcomments=True),
-    "KOREAN.TXT-altcomments-True",
-    gbklike=True)
-macwansung40 = graphdata.gsets["ir149-mac-unicode4_0"] = (94, 2, rawmac4)
-graphdata.gsetflags["ir149-mac-unicode4_0"] |= {"UHC:IS_WANSUNG"}
+# No ir149-mac-unicode4_0 (same as ir149-mac-unicode3_2; altcomments only in sidecarriage then?)
 macwansungdata = parsers.read_untracked(
     "Mac/macWansung.json",
     "Mac/KOREAN.TXT",
@@ -159,16 +151,6 @@ macwansungdata = parsers.read_untracked(
     mapper=ahmap_mk)
 macwansung = graphdata.gsets["ir149-mac"] = (94, 2, macwansungdata)
 graphdata.gsetflags["ir149-mac"] |= {"UHC:IS_WANSUNG"}
-macwansungdata_nt = parsers.read_untracked(
-    "Mac/macWansungNT.json",
-    "Mac/KOREAN.TXT",
-    parsers.decode_main_plane_euc,
-    parsers.parse_file_format("Mac/KOREAN.TXT"),
-    "KOREAN.TXT",
-    gbklike=True,
-    mapper=ahmap_nt)
-macwansung = graphdata.gsets["ir149-mac-nishiki-teki"] = (94, 2, macwansungdata_nt)
-graphdata.gsetflags["ir149-mac-nishiki-teki"] |= {"UHC:IS_WANSUNG"}
 
 # Apple and Elex's (Illekseu's) secondary HangulTalk plane
 rawelex21 = parsers.read_untracked(

@@ -9,7 +9,7 @@
 import sys, os, pprint
 sys.path.append(os.path.abspath(os.pardir))
 
-from ecma35.data.graphdata import gsets, g94bytes, g96bytes, g94nbytes, g96nbytes
+from ecma35.data.graphdata import gsets, g94bytes, g96bytes, g94nbytes, g96nbytes, defgsets
 used = set()
 for (idbytes, bit) in [*g94bytes.items(), *g96bytes.items(), *g94nbytes.items(), *g96nbytes.items()]:
     if isinstance(bit, tuple):
@@ -18,6 +18,9 @@ for (idbytes, bit) in [*g94bytes.items(), *g96bytes.items(), *g94nbytes.items(),
             used.add(i)
     else:
         used.add(bit)
+for sets in defgsets.values():
+    for i in sets:
+        used.add(i)
 
 complaints = set()
 for (setcode, (kind, bytecount, entries)) in gsets.items():

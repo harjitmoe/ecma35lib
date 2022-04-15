@@ -70,7 +70,7 @@ from ecma35.data.singlebyte import ecma6, extlatin, c0substs, dingbats, quoocs_n
 
 g94bytes = {tuple(b"@"): ("ir002", # Preferred version
                           ("ir002tilde",), # Private versions
-                          ("ir002",)), # Original followed by any registered revisions
+                          ("ir002",)), # Original followed by any registered revisions, each of which must be superset of the previous
             tuple(b"A"): ("ir004", ("ir004dec",), ("ir004",)),
             tuple(b"B"): ("ir006", ("ir006overline",), ("ir006",)),
             tuple(b"C"): ("ir008-1", ("ir008-1dec",), ("ir008-1",)),
@@ -109,7 +109,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"c"): "ir071",
             tuple(b"d"): ("ir173", # Preferred version
                           (), # Private versions
-                          ("ir072", "ir173")), # Original followed by any registered revisions
+                          ("ir072", "ir173")), # Original followed by any registered revisions, each of which must be superset of the previous
             tuple(b"e"): "ir068",
             tuple(b"f"): "ir069",
             tuple(b"g"): ("ir084", ("ir084dec",), ("ir084",)),
@@ -164,6 +164,9 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"$5"): "zdings_g1",
             tuple(b"$6"): "symbolgl",
             tuple(b"$7"): "symbolgr",
+            tuple(b"$8"): "maltese",
+            tuple(b"$9"): "icelandic",
+            tuple(b"$:"): "polish",
             tuple(b"~"): "nil"}
 
 g96bytes = {tuple(b"@"): "ir111",
@@ -216,18 +219,21 @@ g94nbytes = {tuple(b"@"): ("ir042nec", ("ir042ibm", "ir042nec"), ("ir042",)),
              tuple(b"A"): ("ir058-2005", # Preferred version
                            # Private versions
                            ("ir058-hant", "ir058-2000", "ir058-2005", None, "ir058-full",
-                            "ir058-mac", "ir058-1980", "ir058-1986"),
+                            "ir058-mac", "ir058-1980", "ir058-1986", "ir058-hant-strict",
+                            "ir058-hant-utc", "ir058-ibm", "ir058-macraw", "ir058-macsemiraw",
+                            "ir058-ms"),
                            ("ir058",)), # Original followed by any registered revisions
              tuple(b"B"): ("ir168web",
                            ("ir168web", "ir168mac", "ir168macps", "ir168mackt6", "ir168utc",
                             "ir168osf", "ir168osfa", "ir168osfm", "ir168ibm",
-                            "ir168docomo", "ir168kddisym", "ir168sbank", "ir168kddipict"),
+                            "ir168docomo", "ir168kddisym", "ir168sbank", "ir168kddipict",
+                            "ir087fujitsu", "ir168arib"),
                            ("ir087", "ir168")),
-             tuple(b"C"): ("ir149-2002", ("ir149-altutc", "ir149-1998", "ir149-2002", "ir149-mac", "ir149-ibm"), ("ir149",)),
+             tuple(b"C"): ("ir149-2002", ("ir149-altutc", "ir149-1998", "ir149-2002", "ir149-mac", "ir149-ibm", "ir149-mac-unicode2_1", "ir149-mac-unicode3_2"), ("ir149",)),
              tuple(b"D"): ("ir159",
                            ("ir159va", "ir159osf", "ir159osfa", "ir159osfm", "ir159ibm"),
                            ("ir159",)),
-             tuple(b"E"): ("ir165", ("ir165std",), ("ir165",)),
+             tuple(b"E"): ("ir165", ("ir165std", "ir165ext", "gb6345", "gb8565", "gb8565-oldwrongunihan"), ("ir165",)),
              tuple(b"F"): "ir169",
              tuple(b"G"): ("ir171",
                            ("ir171", "ir171-ms", "ir171-utc", "ir171-utcbig5", "ir171-mac", "ir171-govtw", "ir171-ibm", "ir171-ibm950", "ir171-ibm1373", "ir171-web"),
@@ -252,7 +258,7 @@ g94nbytes = {tuple(b"@"): ("ir042nec", ("ir042ibm", "ir042nec"), ("ir042",)),
              tuple(b"!2"): ("hkscs", ("ibmbig5exts", "etenextsplus"), ("ms950exts", "big5-2003-exts", "etenexts", "gccs", "hkscs1999", "hkscs2001", "hkscs2004", "hkscs", "hkscs",)),
              tuple(b"!3"): ("ms950utcexts", (), ("utcbig5exts", "ms950utcexts")),
              # Shift_JIS extensions for IBM/Windows/HTML5 and for cellular emoji
-             tuple(b"!4"): ("ibmsjisextpua", (), ("ibmsjisext", "ibmsjisextpua")),
+             tuple(b"!4"): ("ibmsjisextpua", ("ibmsjisextold",), ("ibmsjisext", "ibmsjisextpua")),
              tuple(b"!5"): "docomosjisext",
              tuple(b"!6"): ("kddipictsjisext", ("kddisymsjisext",), ("kddipictsjisext",)),
              tuple(b"!7"): "sbanksjisext",
@@ -260,7 +266,7 @@ g94nbytes = {tuple(b"@"): ("ir042nec", ("ir042ibm", "ir042nec"), ("ir042",)),
              tuple(b"!8"): ("gb13131", ("gb7589",), ("gb13131",)),
              tuple(b"!9"): ("gb13132", ("gb7590",), ("gb13132",)),
              tuple(b"!:"): ("mac-elex-extras", 
-                            ("mac-elex-extras", "mac-elex-extras-unicode4_0"),
+                            ("mac-elex-extras", "mac-elex-extras-unicode4_0", "mac-elex-extras-unicode2_1", "mac-elex-extras-adobe", "mac-elex-extras-nishiki-teki"),
                             ("mac-elex-extras-unicode3_2",)),
              tuple(b"!;"): "2011kpsextras",
              tuple(b"!<"): ("big5e-exts", (), ("big5e-exts", "big5emsexts")),
@@ -268,7 +274,9 @@ g94nbytes = {tuple(b"@"): ("ir042nec", ("ir042ibm", "ir042nec"), ("ir042",)),
              tuple(b"!>"): "ksx1027_1",
              tuple(b"!?"): "ksx1027_2",
              tuple(b"\"0"): ("aton-exts", ("aton-exts2",), ("aton-exts",)),
-             tuple(b"\"1"): ("oldibmkorea", (), ("oldibmkorea-excavated", "oldibmkorea")),
+             tuple(b"\"1"): ("oldibmkorea", ("oldibmkorea-withcorppua",), ("oldibmkorea-excavated", "oldibmkorea")),
+             tuple(b"\"2"): ("gb16500", (), ("gb16500",)),
+             tuple(b"\"3"): ("dynalabexts", (), ("dynalabexts",)),
              tuple(b"~"): "nil"}
 
 g96nbytes = {tuple(b"!0"):("gbk-nonuro-extras", ("gbk-nonuro-extras-web", "gbk-nonuro-extras-full"), ("gbk-nonuro-extras",)),

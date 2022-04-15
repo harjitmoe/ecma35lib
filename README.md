@@ -116,6 +116,9 @@ Miscellaneous single-byte assignments:
 |`G*D4 $ 5`|Zapf Dingbats, GR range|
 |`G*D4 $ 6`|Symbol font encoding, GL range|
 |`G*D4 $ 7`|Symbol font encoding, GR range (no euro)|
+|`G*D4 $ 8`|7-bit Maltese|
+|`G*D4 $ 9`|7-bit Icelandic|
+|`G*D4 $ :`|7-bit Polish|
 |``IRR 1 G*D4 ` ``|Danish equivalent to NS 4551 (IBM's 1017)|
 |`G*D6 ! 0`|RFC 1345's so-called ISO-IR-111/ECMA-Cyrillic (incompatible with ISO-IR-111 itself).|
 |`IRR ? G*D6 $ 7`|Symbol font encoding, GR range (with euro)|
@@ -134,9 +137,15 @@ Miscellaneous single-byte assignments:
 |`IRR 2 G*DM4 A`|GB 18030-2005 levels 1 and 2 (default)|
 |`IRR 3 G*DM4 A`|~~GB 18030, WHATWG variant, same as 2005 unless in GBK DOCS (obsolete in favour of changing the G3 set and no longer affects GBK DOCS)~~|
 |`IRR 4 G*DM4 A`|GB 18030, favouring duplicate mappings over PUA mappings for standard characters|
-|`IRR 5 G*DM4 A`|GB/T 2312, variant used on classic Mac OS|
+|`IRR 5 G*DM4 A`|GB/T 2312, variant used on classic Mac OS, updated mappings|
 |`IRR 6 G*DM4 A`|GB/T 2312-1980, without GB 6345.1-1986 corrigienda (including script g, rather than fullwidth or standard g). Otherwise leans toward UTC mappings.|
 |`IRR 7 G*DM4 A`|GB/T 2312-1980, with corrigienda but not extensions from GB 6345.1-1986 (matching UTC mappings)|
+|`IRR 8 G*DM4 A`|GB/T 12345 (strict compliance, including retaining certain simplified characters from GB/T 2312 which are often implemented replaced by traditional versions)|
+|`IRR 9 G*DM4 A`|GB/T 12345 (UTC mapping, including additional replacements by traditional versions, and lacking non‑hanzi not present in GB/T 2312)|
+|`IRR : G*DM4 A`|GB/T 2312, IBM version with PUA filling empty space and extensions in row 94|
+|`IRR ; G*DM4 A`|GB/T 2312, variant used on classic Mac OS, as specified by Apple|
+|`IRR < G*DM4 A`|GB/T 2312, variant used on classic Mac OS, mixed mappings|
+|`IRR = G*DM4 A`|GB/T 2312, Microsoft version|
 |`IRR ? G*DM4 B`|JIS C 6226 / X 0208-1983|
 |`IRR @ G*DM4 B`|JIS X 0208-1990 (standard sequence, listed here for completeness)|
 |`IRR 0 G*DM4 B`|JIS X 0208, WHATWG variant (default; synchronised with Windows-31J)|
@@ -152,20 +161,28 @@ Miscellaneous single-byte assignments:
 |`IRR : G*DM4 B`|JIS X 0208, KDDI JIS emoji, symbolic zodiac variant|
 |`IRR ; G*DM4 B`|JIS X 0208, SoftBank JIS emoji|
 |`IRR < G*DM4 B`|JIS X 0208, KDDI JIS emoji, pictorial zodiac variant|
+|`IRR = G*DM4 B`|JIS X 0208, Fujitsu version|
+|`IRR > G*DM4 B`|JIS X 0208, ARIB STD-B.24 version|
 |`IRR ? G*DM4 C`|KS C 5601-1987 Wansung code, using new-UTC mappings (harmonious with Microsoft and WHATWG)|
 |`IRR 0 G*DM4 C`|KS C 5601-1987, but using old-UTC mappings for the non-syllables|
 |`IRR 1 G*DM4 C`|KS X 1001-1998 Wansung code. The Euro sign update, also adding the registered trademark sign, and matching the WHATWG mapping.|
 |`IRR 2 G*DM4 C`|KS X 1001-2002 (adding the South Korean postal mark)|
-|`IRR 3 G*DM4 C`|KS X 1001-1987 extended, main plane of Apple/Elex extension (HangulTalk)|
+|`IRR 3 G*DM4 C`|KS X 1001-1987 extended, main plane of Apple/Elex extension (HangulTalk), updated mappings|
 |`IRR 4 G*DM4 C`|KS X 1001-1987, using IBM mappings|
+|`IRR 5 G*DM4 C`|KS X 1001-1987 extended, main plane of Apple/Elex extension (HangulTalk), old Apple mappings|
+|`IRR 6 G*DM4 C`|KS X 1001-1987 extended, main plane of Apple/Elex extension (HangulTalk), Apple mappings|
 |`IRR ? G*DM4 D`|JIS X 0212:1990|
 |`IRR 0 G*DM4 D`|JIS X 0212 with va/vi/ve/vo|
 |`IRR 1 G*DM4 D`|JIS X 0212, Open Group version for JIS-Roman based EUC-JP|
 |`IRR 2 G*DM4 D`|JIS X 0212, Open Group version for ASCII-based EUC-JP|
 |`IRR 3 G*DM4 D`|JIS X 0212, Open Group version for Microsoft-style EUC-JP|
 |`IRR 4 G*DM4 D`|JIS X 0212, version encoded by IBM-954|
-|`IRR ? G*DM4 E`|CCITT Hanzi Code (GB 2312 variant), as shown in ISO-IR-165 itself|
-|`IRR 0 G*DM4 E`|CCITT Hanzi Code (GB 2312 variant), amended to follow GB 6345.1-1986 where applicable|
+|`IRR ? G*DM4 E`|CCITT Hanzi Code (GB 2312 variant) from ITU T.101-C, which bases it on GB 6345.1-1986 and GB 8565.2-1988 with further adjustments and expansions|
+|`IRR 0 G*DM4 E`|CCITT Hanzi Code, amended to strictly follow GB 6345.1-1986 where applicable|
+|`IRR 1 G*DM4 E`|CCITT Hanzi Code, combined with an additional hanzi extension in row 8|
+|`IRR 2 G*DM4 E`|GB 6345.1-1986|
+|`IRR 3 G*DM4 E`|GB 8565.2-1988|
+|`IRR 4 G*DM4 E`|Pseudo-G8, an incorrect version of GB 8565.2-1988 which had been referenced by older versions of the Unihan database (incorrectly shifts the actual GB 8565.2 characters 15-90 through 15-93 back by one code point over 15-89, and also includes the row 8 hanzi extensions and most of the CCITT hanzi extensions).|
 |`IRR 0 G*DM4 G`|CNS 11643 plane 1, recommended version (default)|
 |`IRR 1 G*DM4 G`|CNS 11643 plane 1, mapped from Microsoft Big-5|
 |`IRR 2 G*DM4 G`|CNS 11643 plane 1, according to UTC mappings|
@@ -211,6 +228,8 @@ Miscellaneous single-byte assignments:
 |`G*DM4 ! ?`|KS X 1027-2 (South Korean third supplementary plane)|
 |`G*DM4 " 0`|Big5 AtOn/ChinaSea extensions (for Big-5 filter's G3 slot)|
 |`G*DM4 " 1`|IBM-926 (IBM-944)'s 94×94 plane (not KS X 1001 compatible for the most part).&ensp;No DOCS filter exists for it yet though.|
+|`G*DM4 " 2`|GB 16500 (yet another supplementary set).|
+|`G*DM4 " 3`|Big5 DynaLab extensions (for Big-5 filter's G3 slot)|
 |`IRR ? G*DM6 ! 0`|GBK extras (GB 18030, level 5 with associated UDC zone and non-URO part of level 4; accepted by GBK filter in G3 slot)|
 |`IRR 0 G*DM6 ! 0`|GBK extras, WHATWG/HTML5 variant|
 |`IRR 1 G*DM6 ! 0`|GBK extras, mapping all characters with defined glyphs to non-PUA|
