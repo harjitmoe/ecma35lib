@@ -12,7 +12,7 @@ from ecma35.data.singlebyte import sbmapparsers as parsers
 # TODO: ir059 (CODAR-U Arabic), ir089 (ASMO 449)
 
 # ASMO-708 ECMA-114 ISO-8859-6 Latin/Arabic RHS
-graphdata.gsets["ir127"] = (96, 1, (
+graphdata.gsets["ir127"] = (96, 1, tuple((i,) if i else None for i in (
              0x00A0, None,   None,   None,   0x00A4, None,   None,   None, 
              None,   None,   None,   None,   0x060C, 0x00AD, None,   None, 
              None,   None,   None,   None,   None,   None,   None,   None, 
@@ -24,10 +24,10 @@ graphdata.gsets["ir127"] = (96, 1, (
              0x0640, 0x0641, 0x0642, 0x0643, 0x0644, 0x0645, 0x0646, 0x0647, 
              0x0648, 0x0649, 0x064A, 0x064B, 0x064C, 0x064D, 0x064E, 0x064F, 
              0x0650, 0x0651, 0x0652, None,   None,   None,   None,   None, 
-             None,   None,   None,   None,   None,   None,   None,   None))
+             None,   None,   None,   None,   None,   None,   None,   None)))
 
 # ECMA-121:1987 ISO-8859-8:1988 Latin/Hebrew RHS
-graphdata.gsets["ir138"] = (96, 1, (
+graphdata.gsets["ir138"] = (96, 1, tuple((i,) if i else None for i in (
              0x00A0, None,   0x00A2, 0x00A3, 0x00A4, 0x00A5, 0x00A6, 0x00A7, 
              0x00A8, 0x00A9, 0x00D7, 0x00AB, 0x00AC, 0x00AD, 0x00AE, 0x00AF, 
              0x00B0, 0x00B1, 0x00B2, 0x00B3, 0x00B4, 0x00B5, 0x00B6, 0x00B7, 
@@ -39,11 +39,11 @@ graphdata.gsets["ir138"] = (96, 1, (
              0x05D0, 0x05D1, 0x05D2, 0x05D3, 0x05D4, 0x05D5, 0x05D6, 0x05D7, 
              0x05D8, 0x05D9, 0x05DA, 0x05DB, 0x05DC, 0x05DD, 0x05DE, 0x05DF, 
              0x05E0, 0x05E1, 0x05E2, 0x05E3, 0x05E4, 0x05E5, 0x05E6, 0x05E7, 
-             0x05E8, 0x05E9, 0x05EA, None,   None,   None,   None,   None))
+             0x05E8, 0x05E9, 0x05EA, None,   None,   None,   None,   None)))
 
 # CCITT Hebrew (pretty much ISO-8859-8 RHS but letters only)
 # Registered as a 96-set for some reason but doesn't actually allocate the corners.
-graphdata.gsets["ir164"] = (96, 1, (
+graphdata.gsets["ir164"] = (96, 1, tuple((i,) if i else None for i in (
              None,   None,   None,   None,   None,   None,   None,   None, 
              None,   None,   None,   None,   None,   None,   None,   None, 
              None,   None,   None,   None,   None,   None,   None,   None, 
@@ -55,12 +55,12 @@ graphdata.gsets["ir164"] = (96, 1, (
              0x05D0, 0x05D1, 0x05D2, 0x05D3, 0x05D4, 0x05D5, 0x05D6, 0x05D7, 
              0x05D8, 0x05D9, 0x05DA, 0x05DB, 0x05DC, 0x05DD, 0x05DE, 0x05DF, 
              0x05E0, 0x05E1, 0x05E2, 0x05E3, 0x05E4, 0x05E5, 0x05E6, 0x05E7, 
-             0x05E8, 0x05E9, 0x05EA, None,   None,   None,   None,   None))
+             0x05E8, 0x05E9, 0x05EA, None,   None,   None,   None,   None)))
 
 # TODO: ir167 (ASMO-708 letters plus French and German extensions)
 
 # ECMA-121:2000 ISO-8859-8:1999 Latin/Hebrew RHS
-graphdata.gsets["ir198"] = (96, 1, (
+graphdata.gsets["ir198"] = (96, 1, tuple((i,) if i else None for i in (
              0x00A0, None,   0x00A2, 0x00A3, 0x00A4, 0x00A5, 0x00A6, 0x00A7, 
              0x00A8, 0x00A9, 0x00D7, 0x00AB, 0x00AC, 0x00AD, 0x00AE, 0x00AF, 
              0x00B0, 0x00B1, 0x00B2, 0x00B3, 0x00B4, 0x00B5, 0x00B6, 0x00B7, 
@@ -72,10 +72,10 @@ graphdata.gsets["ir198"] = (96, 1, (
              0x05D0, 0x05D1, 0x05D2, 0x05D3, 0x05D4, 0x05D5, 0x05D6, 0x05D7, 
              0x05D8, 0x05D9, 0x05DA, 0x05DB, 0x05DC, 0x05DD, 0x05DE, 0x05DF, 
              0x05E0, 0x05E1, 0x05E2, 0x05E3, 0x05E4, 0x05E5, 0x05E6, 0x05E7, 
-             0x05E8, 0x05E9, 0x05EA, None,   None,   0x200E, 0x200F, None))
+             0x05E8, 0x05E9, 0x05EA, None,   None,   0x200E, 0x200F, None)))
 
 # SI-1311:2002 Latin/Hebrew RHS
-graphdata.gsets["ir234"] = (96, 1, (
+graphdata.gsets["ir234"] = (96, 1, tuple((i,) if i else None for i in (
              0x00A0, None,   0x00A2, 0x00A3, 0x00A4, 0x00A5, 0x00A6, 0x00A7, 
              0x00A8, 0x00A9, 0x00D7, 0x00AB, 0x00AC, 0x00AD, 0x00AE, 0x00AF, 
              0x00B0, 0x00B1, 0x00B2, 0x00B3, 0x00B4, 0x00B5, 0x00B6, 0x00B7, 
@@ -87,7 +87,7 @@ graphdata.gsets["ir234"] = (96, 1, (
              0x05D0, 0x05D1, 0x05D2, 0x05D3, 0x05D4, 0x05D5, 0x05D6, 0x05D7, 
              0x05D8, 0x05D9, 0x05DA, 0x05DB, 0x05DC, 0x05DD, 0x05DE, 0x05DF, 
              0x05E0, 0x05E1, 0x05E2, 0x05E3, 0x05E4, 0x05E5, 0x05E6, 0x05E7, 
-             0x05E8, 0x05E9, 0x05EA, None,   None,   0x200E, 0x200F, None))
+             0x05E8, 0x05E9, 0x05EA, None,   None,   0x200E, 0x200F, None)))
 
 # Windows code pages
 graphdata.rhses["1255"] = parsers.read_single_byte("WHATWG/index-windows-1255.txt") # Hebrew

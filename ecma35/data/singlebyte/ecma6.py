@@ -243,11 +243,11 @@ raw_variants = {
 }
 
 for (name, (myvars, override)) in raw_variants.items():
-    myset = list(range(0x21, 0x7F))
+    myset = list((i,) for i in range(0x21, 0x7F))
     for frm, to in list(zip(variants, myvars)) + list(override.items()):
         if to is not None:
             if to != -1:
-                myset[frm - 0x21] = to
+                myset[frm - 0x21] = to if isinstance(to, tuple) else (to,)
             else:
                 myset[frm - 0x21] = None
     graphdata.gsets[name] = (94, 1, tuple(myset))

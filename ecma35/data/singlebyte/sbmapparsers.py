@@ -162,7 +162,7 @@ def read_mozilla_ut_file(fil, *, mapper=identitymap, typ="plainext", is_uf=False
                     _temp[optr] = (ucs,)
             else:
                 _temp.extend([None] * (optr - len(_temp)))
-                _temp.append(ucs)
+                _temp.append((ucs,))
     if typ == "CL33":
         _temp.extend([None] * (33 - len(_temp)))
     elif typ in ("GL94", "GR94"):

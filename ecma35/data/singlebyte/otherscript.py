@@ -12,7 +12,7 @@ from ecma35.data.singlebyte import sbmapparsers as parsers
 # I.S. 434 Latin/Ogham RHS
 # Registered as a 96-set for some reason but doesn't actually allocate the corners.
 graphdata.gsets["ir208"] = (96, 1, 
-             ((None,) * 64) + tuple(range(0x1680, 0x169D)) + (None, None, None))
+             ((None,) * 64) + tuple((i,) for i in range(0x1680, 0x169D)) + (None, None, None))
 
 # Hankaku Katakana
 # Windows mappings:
@@ -57,19 +57,20 @@ graphdata.gsets["ir208"] = (96, 1,
 # I can't use this mechanism for Big5, at least for the time being.
 
 # JIS C 6220 / JIS X 0201 Katakana set
-graphdata.gsets["ir013"] = (94, 1, tuple(range(0xFF61, 0xFFA0)) + ((None,) * 31))
-graphdata.rhses["897"] = ((None,) * 33) + tuple(range(0xFF61, 0xFFA0)) + ((None,) * 32)
+_the_mother = tuple((i,) for i in range(0xFF61, 0xFFA0))
+graphdata.gsets["ir013"] = (94, 1, _the_mother + ((None,) * 31))
+graphdata.rhses["897"] = ((None,) * 33) + _the_mother + ((None,) * 32)
 graphdata.defgsets["897"] = ("ir014", "ir013", "nil", "nil")
 # IBM's 4992 (or unrestricted 896)
-graphdata.gsets["ir013ibm"] = (94, 1, tuple(range(0xFF61, 0xFFA0)) + (
-                0xA2, 0xA3, 0xAC, 0x5C, 0x7E, 0x203E, 0xA6) + ((None,) * 24))
+graphdata.gsets["ir013ibm"] = (94, 1, _the_mother + (
+                (0xA2,), (0xA3,), (0xAC,), (0x5C,), (0x7E,), (0x203E,), (0xA6,)) + ((None,) * 24))
 # 1-byte MacJapanese
-graphdata.gsets["ir013mac"] = (94, 1, tuple(range(0xFF61, 0xFFA0)) + (
-                0x5C, 0xA0, 0xA9, 0x2122, 0x2026, 
-                0xFC, 0xF880, 0xF881, 0x20A9, 0x2013, 0xFF3F) + ((None,) * 21))
+graphdata.gsets["ir013mac"] = (94, 1, _the_mother + (
+                (0x5C,), (0xA0,), (0xA9,), (0x2122,), (0x2026,), 
+                (0xFC,), (0xF880,), (0xF881,), (0x20A9,), (0x2013,), (0xFF3F,)) + ((None,) * 21))
 # For Windows code pages
-graphdata.gsets["ir013win"] = (94, 1, tuple(range(0xFF61, 0xFFA0)) + (
-                0x20AC,) + tuple(range(0xF8F0, 0xF8F9)) + ((None,) * 21))
+graphdata.gsets["ir013win"] = (94, 1, _the_mother + (
+                (0x20AC,),) + tuple((i,) for i in range(0xF8F0, 0xF8F9)) + ((None,) * 21))
 graphdata.gsetflags["ir013win"] |= {"GBK:NO_EURO"}
 graphdata.gsets["ir013euro"] = graphdata.gsets["ir013win"]
 
