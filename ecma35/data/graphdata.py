@@ -215,7 +215,7 @@ g96bytes = {tuple(b"@"): "ir111",
             tuple(b"$7"): ("symbolgr-euro", ("symbolgr-numsp",), ("symbolgr-euro",)),
             tuple(b"~"): "nil"}
 
-g94nbytes = {tuple(b"@"): ("ir042nec", ("ir042ibm", "ir042nec"), ("ir042",)),
+g94nbytes = {tuple(b"@"): ("ir042nec", ("ir042ibm", "ir042nec", "ir042", "ir042adobe"), ("ir042stricter",)),
              tuple(b"A"): ("ir058-2005", # Preferred version
                            # Private versions
                            ("ir058-hant", "ir058-2000", "ir058-2005", None, "ir058-full",
@@ -231,7 +231,7 @@ g94nbytes = {tuple(b"@"): ("ir042nec", ("ir042ibm", "ir042nec"), ("ir042",)),
                            ("ir087", "ir168")),
              tuple(b"C"): ("ir149-2002", ("ir149-altutc", "ir149-1998", "ir149-2002", "ir149-mac", "ir149-ibm", "ir149-mac-unicode2_1", "ir149-mac-unicode3_2"), ("ir149",)),
              tuple(b"D"): ("ir159",
-                           ("ir159va", "ir159osf", "ir159osfa", "ir159osfm", "ir159ibm"),
+                           ("ir159va", "ir159osf", "ir159osfa", "ir159osfm", "ir159ibm", "ir159icueuc"),
                            ("ir159",)),
              tuple(b"E"): ("ir165", ("ir165std", "ir165ext", "gb6345", "gb8565", "gb8565-oldwrongunihan"), ("ir165",)),
              tuple(b"F"): "ir169",
@@ -277,6 +277,7 @@ g94nbytes = {tuple(b"@"): ("ir042nec", ("ir042ibm", "ir042nec"), ("ir042",)),
              tuple(b"\"1"): ("oldibmkorea", ("oldibmkorea-withcorppua",), ("oldibmkorea-excavated", "oldibmkorea")),
              tuple(b"\"2"): ("gb16500", (), ("gb16500",)),
              tuple(b"\"3"): ("dynalabexts", (), ("dynalabexts",)),
+             tuple(b"\"4"): ("monotypeexts", (), ("monotypeexts",)),
              tuple(b"~"): "nil"}
 
 g96nbytes = {tuple(b"!0"):("gbk-nonuro-extras", ("gbk-nonuro-extras-web", "gbk-nonuro-extras-full"), ("gbk-nonuro-extras",)),

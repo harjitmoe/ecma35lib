@@ -449,7 +449,7 @@ graphdata.gsets["dynalabexts"] = dynalab_big5_extras = (94, 2, parsers.fuse([
     dynalab_a,
     dynalab_b,
 ], "Big5-Dynalab-Exts.json"))
-graphdata.gsets["monotypeexts"] = dynalab_big5_extras = (94, 2, parsers.fuse([
+graphdata.gsets["monotypeexts"] = monotype_big5_extras = (94, 2, parsers.fuse([
     parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Adobe/AdobeCNS.txt", cidmap=("HKm314-B5", "UniCNS-UTF32")),
         "AdobeCNS.txt-HKm314-B5-UniCNS-UTF32"),

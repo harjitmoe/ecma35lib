@@ -128,9 +128,11 @@ Miscellaneous single-byte assignments:
 
 |Private assignment|Meaning|
 |---|---|
-|`IRR ? G*DM4 @`|JIS C 6226-1978|
+|`IRR ? G*DM4 @`|JIS C 6226-1978, with mappings for characters changed to those suitable for the 1978 edition|
 |`IRR 0 G*DM4 @`|JIS C 6226, version encoded by IBM-932 and IBM-942|
 |`IRR 1 G*DM4 @`|JIS C 6226, version used by NEC PC98 (default for this F-byte)|
+|`IRR 2 G*DM4 @`|JIS C 6226-1978, character mapping changes by 90JIS pivot only|
+|`IRR 3 G*DM4 @`|JIS C 6226-1978, character mappings by CID map only, resulting in some gaps|
 |`IRR ? G*DM4 A`|GB/T 2312-1980, with half of the GB 6345.1-1986 corrigienda, as shown in the ISO-IR-58 registration itself. Elsewhere, leans toward UTC mappings rather than GB 18030 mappings, e.g. unifying with the Japanese rather than Catalan interpunct.|
 |`IRR 0 G*DM4 A`|GB/T 12345|
 |`IRR 1 G*DM4 A`|GB 18030-2000 levels 1 and 2|
@@ -177,6 +179,7 @@ Miscellaneous single-byte assignments:
 |`IRR 2 G*DM4 D`|JIS X 0212, Open Group version for ASCII-based EUC-JP|
 |`IRR 3 G*DM4 D`|JIS X 0212, Open Group version for Microsoft-style EUC-JP|
 |`IRR 4 G*DM4 D`|JIS X 0212, version encoded by IBM-954|
+|`IRR 5 G*DM4 D`|JIS X 0212, version encoded by ICU's EUC-JP|
 |`IRR ? G*DM4 E`|CCITT Hanzi Code (GB 2312 variant) from ITU T.101-C, which bases it on GB 6345.1-1986 and GB 8565.2-1988 with further adjustments and expansions|
 |`IRR 0 G*DM4 E`|CCITT Hanzi Code, amended to strictly follow GB 6345.1-1986 where applicable|
 |`IRR 1 G*DM4 E`|CCITT Hanzi Code, combined with an additional hanzi extension in row 8|
@@ -230,6 +233,7 @@ Miscellaneous single-byte assignments:
 |`G*DM4 " 1`|IBM-926 (IBM-944)'s 94×94 plane (not KS X 1001 compatible for the most part).&ensp;No DOCS filter exists for it yet though.|
 |`G*DM4 " 2`|GB 16500 (yet another supplementary set).|
 |`G*DM4 " 3`|Big5 DynaLab extensions (for Big-5 filter's G3 slot)|
+|`G*DM4 " 4`|Big5 Monotype extensions (for Big-5 filter's G3 slot)|
 |`IRR ? G*DM6 ! 0`|GBK extras (GB 18030, level 5 with associated UDC zone and non-URO part of level 4; accepted by GBK filter in G3 slot)|
 |`IRR 0 G*DM6 ! 0`|GBK extras, WHATWG/HTML5 variant|
 |`IRR 1 G*DM6 ! 0`|GBK extras, mapping all characters with defined glyphs to non-PUA|
