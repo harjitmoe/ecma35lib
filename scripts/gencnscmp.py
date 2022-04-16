@@ -48,21 +48,16 @@ plane1 = (1, ("UTC Big5", "UTC CNS", "MS Big5", "Mac Big5", "IBM Big5", "Web Big
           swap_arrows(graphdata.gsets["ir171-mac"][2]),
           swap_arrows(graphdata.gsets["ir171-ibm950"][2]),
           swap_arrows(graphdata.gsets["ir171-web"][2]),
-          graphdata.gsets["cns-eucg2-yasuoka"][2][:94*94],
-          graphdata.gsets["cns-eucg2-icu-old"][2][:94*94],
-          graphdata.gsets["cns-eucg2-icu-2014"][2][:94*94],
+          graphdata.gsets["ir171-yasuoka"][2],
+          graphdata.gsets["ir171-icu"][2],
+          graphdata.gsets["ir171-icu-2014"][2],
           graphdata.gsets["ir171-govtw"][2],
           graphdata.gsets["ir171"][2],
 ])
 
 print("Loading 2")
-plane2 = (2, ("UTC CNS", "Big5", "Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
-          graphdata.gsets["ir172-utc"][2],
+plane2 = (2, ("Big5", "CNS 11643"), [
           graphdata.gsets["ir172-big5"][2],
-          graphdata.gsets["cns-eucg2-yasuoka"][2][94*94*1 : 94*94*2],
-          graphdata.gsets["cns-eucg2-icu-old"][2][94*94*1 : 94*94*2],
-          graphdata.gsets["cns-eucg2-icu-2014"][2][94*94*1 : 94*94*2],
-          graphdata.gsets["ir172-govtw"][2],
           graphdata.gsets["ir172"][2],
 ])
 
@@ -70,46 +65,46 @@ print("Loading 3")
 plane3 = (3, ("UTC CNS", "Yasuoka CNS", "ICU 1992 CNS",
               "ICU EUC 2014", "GOV-TW CNS", "Output", "Output Alt"), [
           graphdata.gsets["ir183-utc"][2],
-          graphdata.gsets["cns-eucg2-yasuoka"][2][94*94*2 : 94*94*3],
-          graphdata.gsets["cns-eucg2-icu-old"][2][94*94*2 : 94*94*3],
-          graphdata.gsets["cns-eucg2-icu-2014"][2][94*94*2 : 94*94*3],
-          graphdata.gsets["ir183-govtw"][2],
+          graphdata.gsets["ir183-yasuoka"][2],
+          graphdata.gsets["ir183-icu"][2],
+          graphdata.gsets["ir183-icu-2014"][2],
+          graphdata.gsets["ir183"][2],
           graphdata.gsets["ir183-full"][2],
           graphdata.gsets["ir183-1988plus"][2],
 ])
 
 print("Loading 4")
 plane4 = (4, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
-          graphdata.gsets["cns-eucg2-yasuoka"][2][94*94*3 : 94*94*4],
-          graphdata.gsets["cns-eucg2-icu-old"][2][94*94*3 : 94*94*4],
-          graphdata.gsets["cns-eucg2-icu-2014"][2][94*94*3 : 94*94*4],
+          graphdata.gsets["ir184-yasuoka"][2],
+          graphdata.gsets["ir184-icu"][2],
+          graphdata.gsets["ir184-icu-2014"][2],
           graphdata.gsets["ir184-govtw"][2],
           graphdata.gsets["ir184"][2],
 ])
 
 print("Loading 5")
 plane5 = (5, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
-          graphdata.gsets["cns-eucg2-yasuoka"][2][94*94*4 : 94*94*5],
-          graphdata.gsets["cns-eucg2-icu-old"][2][94*94*4 : 94*94*5],
-          graphdata.gsets["cns-eucg2-icu-2014"][2][94*94*4 : 94*94*5],
+          graphdata.gsets["ir185-yasuoka"][2],
+          graphdata.gsets["ir185-icu"][2],
+          graphdata.gsets["ir185-icu-2014"][2],
           graphdata.gsets["ir185-govtw"][2],
           graphdata.gsets["ir185"][2],
 ])
 
 print("Loading 6")
 plane6 = (6, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
-          graphdata.gsets["cns-eucg2-yasuoka"][2][94*94*5 : 94*94*6],
-          graphdata.gsets["cns-eucg2-icu-old"][2][94*94*5 : 94*94*6],
-          graphdata.gsets["cns-eucg2-icu-2014"][2][94*94*5 : 94*94*6],
+          graphdata.gsets["ir186-yasuoka"][2],
+          graphdata.gsets["ir186-icu"][2],
+          graphdata.gsets["ir186-icu-2014"][2],
           graphdata.gsets["ir186-govtw"][2],
           graphdata.gsets["ir186"][2],
 ])
 
 print("Loading 7")
 plane7 = (7, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
-          graphdata.gsets["cns-eucg2-yasuoka"][2][94*94*6 : 94*94*7],
-          graphdata.gsets["cns-eucg2-icu-old"][2][94*94*6 : 94*94*7],
-          graphdata.gsets["cns-eucg2-icu-2014"][2][94*94*6 : 94*94*7],
+          graphdata.gsets["ir187-yasuoka"][2],
+          graphdata.gsets["ir187-icu"][2],
+          graphdata.gsets["ir187-icu-2014"][2],
           graphdata.gsets["ir187-govtw"][2],
           graphdata.gsets["ir187"][2],
 ])

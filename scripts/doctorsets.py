@@ -9,8 +9,9 @@
 import sys, os, pprint
 sys.path.append(os.path.abspath(os.pardir))
 
-from ecma35.data.graphdata import gsets, g94bytes, g96bytes, g94nbytes, g96nbytes, defgsets
+from ecma35.data.graphdata import gsets, g94bytes, g96bytes, g94nbytes, g96nbytes, defgsets, gsetflags
 used = set()
+complaints = set()
 for (idbytes, bit) in [*g94bytes.items(), *g96bytes.items(), *g94nbytes.items(), *g96nbytes.items()]:
     if isinstance(bit, tuple):
         preferred, private, formal = bit
@@ -21,8 +22,29 @@ for (idbytes, bit) in [*g94bytes.items(), *g96bytes.items(), *g94nbytes.items(),
 for sets in defgsets.values():
     for i in sets:
         used.add(i)
+used.remove(None)
+for i in used:
+    assert isinstance(i, str), i
+    if i not in gsets:
+        complaints.add((i, "DoesNotExist"))
 
-complaints = set()
+checksums = {}
+for (setcode, (kind, bytecount, entries)) in sorted(gsets.items()):
+    running_hash = 0
+    for n, entry in enumerate(entries):
+        if entry:
+            if not hasattr(entry, "__iter__"):
+                entry = (entry,)
+            element = sum(i or 0 for i in entry)
+            running_hash += (element * n)
+            running_hash %= 0x40000000
+    if running_hash in checksums:
+        edoctes = checksums[running_hash]
+        if gsets[setcode] == gsets[edoctes] and gsetflags[setcode] == gsetflags[edoctes]:
+            complaints.add((setcode, "Duplicates", checksums[running_hash]))
+    else:
+        checksums[running_hash] = setcode
+
 for (setcode, (kind, bytecount, entries)) in gsets.items():
     assert kind==94 or kind==96
     if setcode not in used:
