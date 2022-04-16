@@ -196,16 +196,41 @@ Miscellaneous single-byte assignments:
 |`IRR 7 G*DM4 G`|CNS 11643 plane 1, mapped from IBM Big-5|
 |`IRR 8 G*DM4 G`|CNS 11643 plane 1, mapped from IBM's Microsoft-style Big-5|
 |`IRR 9 G*DM4 G`|CNS 11643 plane 1, mapped from WHATWG/HTML5 Big-5|
-|`IRR 0 G*DM4 H`|CNS 11643 plane 2, recommended version (default)|
-|`IRR 1 G*DM4 H`|CNS 11643 plane 2, as mapped from whichever Big-5|
-|`IRR 2 G*DM4 H`|CNS 11643 plane 2, according to UTC mappings|
-|`IRR 3 G*DM4 H`|~~CNS 11643 plane 2, mapped from Big-5 (duplicated `IRR 1`, removed)~~|
-|`IRR 4 G*DM4 H`|~~CNS 11643 plane 2, mapped from Big-5 (duplicated `IRR 1`, removed)~~|
+|`IRR : G*DM4 G`|CNS 11643 plane 1, mapped from Mozilla Big-5|
+|`IRR ; G*DM4 G`|CNS 11643 plane 1, per ICU ISO-2022-CN mappings|
+|`IRR < G*DM4 G`|CNS 11643 plane 1, per ICU EUC-TW 2014 mappings|
+|`IRR = G*DM4 G`|CNS 11643 plane 1, per Yasuoka's mappings|
+|`IRR ? G*DM4 H`|CNS 11643 plane 2|
+|`IRR 1 G*DM4 H`|CNS 11643 plane 2, ICU mappings|
 |`IRR ? G*DM4 I`|CNS 11643-1992 plane 3|
 |`IRR 0 G*DM4 I`|CNS 11643-1988 plane 14|
 |`IRR 1 G*DM4 I`|CNS 11643-1988 plane 14 with extensions, as submitted to the IRG|
 |`IRR 2 G*DM4 I`|CNS 11643-2007 plane 3|
 |`IRR 3 G*DM4 I`|CNS 11643-2007 plane 3, plus the additional assignments from CNS 11643-1988 plane 14 (default)|
+|`IRR 4 G*DM4 I`|CNS 11643-1988 plane 14, UTC mappings (partial, with extensions)|
+|`IRR 5 G*DM4 I`|CNS 11643-1992 plane 3, per former ICU ISO-2022-CN-EXT mappings|
+|`IRR 6 G*DM4 I`|CNS 11643-1992 plane 3, per ICU EUC-TW 2014 mappings|
+|`IRR 7 G*DM4 I`|CNS 11643-1992 plane 3, per Yasuoka's mappings|
+|`IRR ? G*DM4 J`|CNS 11643-1992 plane 4|
+|`IRR 0 G*DM4 J`|CNS 11643-1992 plane 4, as officially defined in Taiwan|
+|`IRR 1 G*DM4 J`|CNS 11643-1992 plane 4, per former ICU ISO-2022-CN-EXT mappings|
+|`IRR 2 G*DM4 J`|CNS 11643-1992 plane 4, per ICU EUC-TW 2014 mappings|
+|`IRR 3 G*DM4 J`|CNS 11643-1992 plane 4, per Yasuoka's mappings|
+|`IRR ? G*DM4 K`|CNS 11643-1992 plane 5|
+|`IRR 0 G*DM4 K`|CNS 11643-1992 plane 5, as officially defined in Taiwan|
+|`IRR 1 G*DM4 K`|CNS 11643-1992 plane 5, per former ICU ISO-2022-CN-EXT mappings|
+|`IRR 2 G*DM4 K`|CNS 11643-1992 plane 5, per ICU EUC-TW 2014 mappings|
+|`IRR 3 G*DM4 K`|CNS 11643-1992 plane 5, per Yasuoka's mappings|
+|`IRR ? G*DM4 L`|CNS 11643-1992 plane 6|
+|`IRR 0 G*DM4 L`|CNS 11643-1992 plane 6, as officially defined in Taiwan|
+|`IRR 1 G*DM4 L`|CNS 11643-1992 plane 6, per former ICU ISO-2022-CN-EXT mappings|
+|`IRR 2 G*DM4 L`|CNS 11643-1992 plane 6, per ICU EUC-TW 2014 mappings|
+|`IRR 3 G*DM4 L`|CNS 11643-1992 plane 6, per Yasuoka's mappings|
+|`IRR ? G*DM4 M`|CNS 11643-1992 plane 7|
+|`IRR 0 G*DM4 M`|CNS 11643-1992 plane 7, as officially defined in Taiwan|
+|`IRR 1 G*DM4 M`|CNS 11643-1992 plane 7, per former ICU ISO-2022-CN-EXT mappings|
+|`IRR 2 G*DM4 M`|CNS 11643-1992 plane 7, per ICU EUC-TW 2014 mappings|
+|`IRR 3 G*DM4 M`|CNS 11643-1992 plane 7, per Yasuoka's mappings|
 |`IRR ? G*DM4 N`|KPS 9566-97|
 |`IRR 0 G*DM4 N`|KPS 9566-2003 (only the main plane unless in the UHC DOCS)|
 |`IRR 1 G*DM4 N`|KPS 9566-2011 (only the main plane unless in the UHC DOCS)|
