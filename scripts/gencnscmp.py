@@ -67,34 +67,13 @@ plane1 = (1, ("UTC Big5", "UTC CNS", "MS Big5", "Mac Big5", "IBM Big5", "Web Big
                 parsers.parse_file_format("ICU/euc-tw-2014.ucm"), 
                 "euc-tw-2014.ucm", 
                 plane=1),
-          tuple(map(lambda a, b, c: a or b or c,
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode BMP.txt"),
-                    "CNS2UNICODE_Unicode BMP.txt", 
-                    plane=1),
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 2.txt"),
-                    "CNS2UNICODE_Unicode 2.txt", 
-                    plane=1),
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
-                    "CNS2UNICODE_Unicode 15.txt", 
-                    plane=1)
-          )),
+          graphdata.gsets["ir171-govtw"][2],
           graphdata.gsets["ir171"][2],
 ])
 
 print("Loading 2")
 plane2 = (2, ("UTC CNS", "Big5", "Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
-          parsers.decode_main_plane_big5(
-                parsers.parse_file_format("UTC/BIG5.TXT"), 
-                "BIG5.TXT",
-                "big5_to_cns2",
-                plane=2),
-          parsers.decode_main_plane_gl(
-                parsers.parse_file_format("UTC/CNS11643.TXT"), 
-                "CNS11643.TXT", 
-                plane=2),
+          graphdata.gsets["ir172-utc"][2],
           graphdata.gsets["ir172-big5"][2],
           parsers.decode_main_plane_gl(
                 parsers.parse_file_format("Other/Uni2CNS"), 
@@ -108,30 +87,14 @@ plane2 = (2, ("UTC CNS", "Big5", "Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", 
                 parsers.parse_file_format("ICU/euc-tw-2014.ucm"), 
                 "euc-tw-2014.ucm", 
                 plane=2),
-          tuple(map(lambda a, b, c: a or b or c,
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode BMP.txt"),
-                    "CNS2UNICODE_Unicode BMP.txt", 
-                    plane=2),
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 2.txt"),
-                    "CNS2UNICODE_Unicode 2.txt", 
-                    plane=2),
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
-                    "CNS2UNICODE_Unicode 15.txt", 
-                    plane=2)
-          )),
+          graphdata.gsets["ir172-govtw"][2],
           graphdata.gsets["ir172"][2],
 ])
 
 print("Loading 3")
 plane3 = (3, ("UTC CNS", "Yasuoka CNS", "ICU 1992 CNS",
               "ICU EUC 2014", "GOV-TW CNS", "Output", "Output Alt"), [
-          parsers.decode_main_plane_gl(
-                parsers.parse_file_format("UTC/CNS11643.TXT"), 
-                "CNS11643.TXT", 
-                plane=14), # yes, really.
+          graphdata.gsets["ir183-utc"][2],
           parsers.decode_main_plane_gl(
                 parsers.parse_file_format("Other/Uni2CNS"), 
                 "Uni2CNS", 
@@ -144,20 +107,7 @@ plane3 = (3, ("UTC CNS", "Yasuoka CNS", "ICU 1992 CNS",
                 parsers.parse_file_format("ICU/euc-tw-2014.ucm"), 
                 "euc-tw-2014.ucm", 
                 plane=3),
-          tuple(map(lambda a, b, c: a or b or c,
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode BMP.txt"),
-                    "CNS2UNICODE_Unicode BMP.txt", 
-                    plane=3),
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 2.txt"),
-                    "CNS2UNICODE_Unicode 2.txt", 
-                    plane=3),
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
-                    "CNS2UNICODE_Unicode 15.txt", 
-                    plane=3)
-          )),
+          graphdata.gsets["ir183-govtw"][2],
           graphdata.gsets["ir183-full"][2],
           graphdata.gsets["ir183-1988plus"][2],
 ])
@@ -176,20 +126,7 @@ plane4 = (4, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Outp
                 parsers.parse_file_format("ICU/euc-tw-2014.ucm"), 
                 "euc-tw-2014.ucm", 
                 plane=4),
-          tuple(map(lambda a, b, c: a or b or c,
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode BMP.txt"),
-                    "CNS2UNICODE_Unicode BMP.txt", 
-                    plane=4),
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 2.txt"),
-                    "CNS2UNICODE_Unicode 2.txt", 
-                    plane=4),
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
-                    "CNS2UNICODE_Unicode 15.txt", 
-                    plane=4)
-          )),
+          graphdata.gsets["ir184-govtw"][2],
           graphdata.gsets["ir184"][2],
 ])
 
@@ -207,20 +144,7 @@ plane5 = (5, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Outp
                 parsers.parse_file_format("ICU/euc-tw-2014.ucm"), 
                 "euc-tw-2014.ucm", 
                 plane=5),
-          tuple(map(lambda a, b, c: a or b or c,
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode BMP.txt"),
-                    "CNS2UNICODE_Unicode BMP.txt", 
-                    plane=5),
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 2.txt"),
-                    "CNS2UNICODE_Unicode 2.txt", 
-                    plane=5),
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
-                    "CNS2UNICODE_Unicode 15.txt", 
-                    plane=5)
-          )),
+          graphdata.gsets["ir185-govtw"][2],
           graphdata.gsets["ir185"][2],
 ])
 
@@ -238,20 +162,7 @@ plane6 = (6, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Outp
                 parsers.parse_file_format("ICU/euc-tw-2014.ucm"), 
                 "euc-tw-2014.ucm", 
                 plane=6),
-          tuple(map(lambda a, b, c: a or b or c,
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode BMP.txt"),
-                    "CNS2UNICODE_Unicode BMP.txt", 
-                    plane=6),
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 2.txt"),
-                    "CNS2UNICODE_Unicode 2.txt", 
-                    plane=6),
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
-                    "CNS2UNICODE_Unicode 15.txt", 
-                    plane=6)
-          )),
+          graphdata.gsets["ir186-govtw"][2],
           graphdata.gsets["ir186"][2],
 ])
 
@@ -269,149 +180,45 @@ plane7 = (7, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Outp
                 parsers.parse_file_format("ICU/euc-tw-2014.ucm"), 
                 "euc-tw-2014.ucm", 
                 plane=7),
-          tuple(map(lambda a, b, c: a or b or c,
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode BMP.txt"),
-                    "CNS2UNICODE_Unicode BMP.txt", 
-                    plane=7),
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 2.txt"),
-                    "CNS2UNICODE_Unicode 2.txt", 
-                    plane=7),
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
-                    "CNS2UNICODE_Unicode 15.txt", 
-                    plane=7)
-          )),
+          graphdata.gsets["ir187-govtw"][2],
           graphdata.gsets["ir187"][2],
 ])
 
 print("Loading 8")
 plane8 = (8, ("GOV-TW CNS",), [
-          tuple(map(lambda a, b, c: a or b or c,
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode BMP.txt"),
-                    "CNS2UNICODE_Unicode BMP.txt", 
-                    plane=8),
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 2.txt"),
-                    "CNS2UNICODE_Unicode 2.txt", 
-                    plane=8),
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
-                    "CNS2UNICODE_Unicode 15.txt", 
-                    plane=8)
-          )),
+          graphdata.gsets["cns-eucg2-govtw"][2][94*94*7 : 94*94*8],
 ])
 
 print("Loading 9")
 plane9 = (9, ("GOV-TW CNS",), [
-          tuple(map(lambda a, b, c: a or b or c,
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode BMP.txt"),
-                    "CNS2UNICODE_Unicode BMP.txt", 
-                    plane=9),
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 2.txt"),
-                    "CNS2UNICODE_Unicode 2.txt", 
-                    plane=9),
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
-                    "CNS2UNICODE_Unicode 15.txt", 
-                    plane=9)
-          )),
+          graphdata.gsets["cns-eucg2-govtw"][2][94*94*8 : 94*94*9],
 ])
 
 print("Loading 10")
 planeA = (10, ("GOV-TW CNS",), [
-          tuple(map(lambda a, b, c: a or b or c,
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode BMP.txt"),
-                    "CNS2UNICODE_Unicode BMP.txt", 
-                    plane=10),
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 2.txt"),
-                    "CNS2UNICODE_Unicode 2.txt", 
-                    plane=10),
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
-                    "CNS2UNICODE_Unicode 15.txt", 
-                    plane=10)
-          )),
+          graphdata.gsets["cns-eucg2-govtw"][2][94*94*9 : 94*94*10],
 ])
 
 print("Loading 11")
 planeB = (11, ("GOV-TW CNS",), [
-          tuple(map(lambda a, b, c: a or b or c,
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode BMP.txt"),
-                    "CNS2UNICODE_Unicode BMP.txt", 
-                    plane=11),
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 2.txt"),
-                    "CNS2UNICODE_Unicode 2.txt", 
-                    plane=11),
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
-                    "CNS2UNICODE_Unicode 15.txt", 
-                    plane=11)
-          )),
+          graphdata.gsets["cns-eucg2-govtw"][2][94*94*10 : 94*94*11],
 ])
 
 print("Loading 12")
 planeC = (12, ("ICU EUC 2014", "GOV-TW CNS",), [
-          graphdata.gsets["cns-eucg2-ibm"][2][94*94*11:94*94*12],
-          tuple(map(lambda a, b, c: a or b or c,
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode BMP.txt"),
-                    "CNS2UNICODE_Unicode BMP.txt", 
-                    plane=12),
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 2.txt"),
-                    "CNS2UNICODE_Unicode 2.txt", 
-                    plane=12),
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
-                    "CNS2UNICODE_Unicode 15.txt", 
-                    plane=12)
-          )),
+          graphdata.gsets["cns-eucg2-ibm"][2][94*94*11 : 94*94*12],
+          graphdata.gsets["cns-eucg2-govtw"][2][94*94*11 : 94*94*12],
 ])
 
 print("Loading 13")
 planeD = (13, ("ICU EUC 2014", "GOV-TW CNS",), [
-          graphdata.gsets["cns-eucg2-ibm"][2][94*94*12:94*94*13],
-          tuple(map(lambda a, b, c: a or b or c,
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode BMP.txt"),
-                    "CNS2UNICODE_Unicode BMP.txt", 
-                    plane=13),
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 2.txt"),
-                    "CNS2UNICODE_Unicode 2.txt", 
-                    plane=13),
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
-                    "CNS2UNICODE_Unicode 15.txt", 
-                    plane=13)
-          )),
+          graphdata.gsets["cns-eucg2-ibm"][2][94*94*12 : 94*94*13],
+          graphdata.gsets["cns-eucg2-govtw"][2][94*94*12 : 94*94*13],
 ])
 
 print("Loading 14")
 planeE = (14, ("GOV-TW CNS",), [
-          tuple(map(lambda a, b, c: a or b or c,
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode BMP.txt"),
-                    "CNS2UNICODE_Unicode BMP.txt", 
-                    plane=14),
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 2.txt"),
-                    "CNS2UNICODE_Unicode 2.txt", 
-                    plane=14),
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
-                    "CNS2UNICODE_Unicode 15.txt", 
-                    plane=14)
-          )),
+          graphdata.gsets["cns-eucg2-govtw"][2][94*94*13 : 94*94*14],
 ])
 
 print("Loading 15")
@@ -424,21 +231,8 @@ planeF = (15, ("ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
                 parsers.parse_file_format("ICU/euc-tw-2014.ucm"), 
                 "euc-tw-2014.ucm", 
                 plane=15),
-          tuple(map(lambda a, b, c: a or b or c,
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode BMP.txt"),
-                    "CNS2UNICODE_Unicode BMP.txt", 
-                    plane=15),
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 2.txt"),
-                    "CNS2UNICODE_Unicode 2.txt", 
-                    plane=15),
-              parsers.decode_main_plane_gl(
-                    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
-                    "CNS2UNICODE_Unicode 15.txt", 
-                    plane=15)
-          )),
-          graphdata.gsets["cns-eucg2"][2][94*94*14:94*94*15],
+          graphdata.gsets["cns-eucg2-govtw"][2][94*94*14 : 94*94*15],
+          graphdata.gsets["cns-eucg2"][2][94*94*14 : 94*94*15],
 ])
 
 def planefunc(number, mapname=None):

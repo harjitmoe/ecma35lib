@@ -133,7 +133,16 @@ graphdata.gsets["ir171-ibm"] = euctw_g1_ibm = (94, 3, parsers.decode_main_plane_
     parsers.parse_file_format("ICU/euc-tw-2014.ucm"),
     "euc-tw-2014.ucm",
     plane = 1))
+graphdata.gsets["ir171-utc"] = (94, 3, parsers.decode_main_plane_gl(
+    parsers.parse_file_format("UTC/CNS11643.TXT"), 
+    "CNS11643.TXT", 
+    plane = 1))
 graphdata.gsets["ir172"] = cns2 = (94, 2, cns[planesize * 1 : planesize * 2])
+graphdata.gsets["ir172-govtw"] = cns2_gov = (94, 2, cns_gov[planesize * 1 : planesize * 2])
+graphdata.gsets["ir172-utc"] = (94, 3, parsers.decode_main_plane_gl(
+    parsers.parse_file_format("UTC/CNS11643.TXT"), 
+    "CNS11643.TXT", 
+    plane = 2))
 
 # ISO-IR-183 deserves particular mention.
 # It was first published in 1988, containing 6319 characters, as an extension to CNS 11643
@@ -150,6 +159,7 @@ graphdata.gsets["ir172"] = cns2 = (94, 2, cns[planesize * 1 : planesize * 2])
 #   be the current 毵 versus the CNS11643.TXT 毶 at 69-26, both being itaiji of 02-49-32 毿).
 #   Note that an unrelated plane 14 was added in 2007.
 graphdata.gsets["ir183"] = cns3 = (94, 2, cns[planesize * 2 : planesize * 3])
+graphdata.gsets["ir183-govtw"] = cns3_gov = (94, 2, cns_gov[planesize * 2 : planesize * 3])
 _ir183oldirg = parsers.decode_main_plane_gl(
     parsers.parse_file_format("UTC/CNS11643.TXT"),
     "CNS11643.TXT",
@@ -161,15 +171,24 @@ graphdata.gsets["ir183-1988"] = cns3_1988 = (94, 2, tuple(_ir183fullalt)[:6319])
 graphdata.gsets["ir183-1988plus"] = cns3plus = (94, 2, tuple(_ir183fullalt))
 graphdata.gsets["ir183-1992"] = cns3_1988 = (94, 2, tuple(_ir183full)[:6148])
 graphdata.gsets["ir183-full"] = cns3_1988 = (94, 2, tuple(_ir183full))
+graphdata.gsets["ir183-utc"] = (94, 3, parsers.decode_main_plane_gl(
+    parsers.parse_file_format("UTC/CNS11643.TXT"), 
+    "CNS11643.TXT", 
+    plane = 14)) # yes, this is correct.
 
 graphdata.gsets["ir184"] = cns4 = (94, 2, cns[planesize * 3 : planesize * 4])
+graphdata.gsets["ir184-govtw"] = cns4_gov = (94, 2, cns_gov[planesize * 3 : planesize * 4])
 graphdata.gsets["ir185"] = cns5 = (94, 2, cns[planesize * 4 : planesize * 5])
+graphdata.gsets["ir185-govtw"] = cns5_gov = (94, 2, cns_gov[planesize * 4 : planesize * 5])
 graphdata.gsets["ir186"] = cns6 = (94, 2, cns[planesize * 5 : planesize * 6])
+graphdata.gsets["ir186-govtw"] = cns6_gov = (94, 2, cns_gov[planesize * 5 : planesize * 6])
 graphdata.gsets["ir187"] = cns7 = (94, 2, cns[planesize * 6 : planesize * 7])
+graphdata.gsets["ir187-govtw"] = cns7_gov = (94, 2, cns_gov[planesize * 6 : planesize * 7])
 # Plane 7 is the last one to be registered with ISO-IR.
 
 # The entirety does also exist as an unregistered 94^n set, used by EUC-TW:
 graphdata.gsets["cns-eucg2"] = euctw_g2 = (94, 3, cns)
+graphdata.gsets["cns-eucg2-govtw"] = euctw_g2_gov = (94, 3, cns_gov)
 # The version of EUC-TW used by ICU, with standard assignments in planes 1-7 and 15,
 #   a user-defined area in plane 12, and IBM corporate assignments in plane 13.
 #   Note that this is incompatible with the current standard's use of planes 12 and 13.
