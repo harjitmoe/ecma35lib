@@ -49,15 +49,21 @@ _t61[40] = (-0x0308,)
 graphdata.gsets["ir103"] = (94, 1, tuple(_t61))
 
 # ITU T.51 RHS, new version (with additions to fully support the Latin-1/7 repertoire)
-# TODO: Strictly speaking, 142 includes the dollar but not the universal currency, 156 includes the
-#   universal currency but not the dollar, and neither includes the hash. All are included in T.51
-#   itself, but the dollar and hash are deprecated in favour of the ASCII characters except for
-#   existing services.
 _t51.insert(0, (0xA0,))
 _t51.append((0xAD,))
 _t51[54] = ((0xAC,))
 _t51[55] = ((0xA6,))
-graphdata.gsets["ir142"] = graphdata.gsets["ir156"] = (96, 1, tuple(_t51))
+# 142 includes the dollar but not the universal currency, 156 includes the universal currency
+#   but not the dollar, and neither includes the hash. All are included in T.51 itself, but
+#   the dollar and hash are deprecated in favour of the ASCII characters except for
+#   existing services.
+_t51_142 = _t51[:]
+_t51_142[6] = _t51_142[8] = None
+_t51_156 = _t51[:]
+_t51_156[4] = _t51_156[6] = None
+graphdata.gsets["ir142"] = (96, 1, tuple(_t51_142))
+graphdata.gsets["ir156"] = (96, 1, tuple(_t51_156))
+graphdata.gsets["ir142-ir156"] = (96, 1, tuple(_t51))
 
 # TODO: ir152 (T.51 minus Latin-1 thru Latin-9 repertoires, which exists for some reason)
 # TODO: ir099, 
