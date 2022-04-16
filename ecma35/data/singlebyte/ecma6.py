@@ -40,7 +40,7 @@ raw_variants = {
     "ir008-1": ([None, None, 0x3000, 0xC4, 0xD6, 0xC5, 0x25A0, None, 
                              0x2007, 0xE4, 0xF6, 0xE5, 0x2013], {}),
     # DEC NRCS for Finland (apparently used in response to ir008-1 escape)
-    "ir008-1dec": ([None, 0xA4, None, 0xC4, 0xD6, 0xC5, 0xDC, None, 
+    "ir008-1dec": ([None, None, None, 0xC4, 0xD6, 0xC5, 0xDC, None, 
                                 0xE9, 0xE4, 0xF6, 0xE5, 0xFC], {}),
     # NATS-DANO (Danish and Norwegian Journalism)
     # Violation of ECMA-6:1991: 0x22 is not ".
@@ -54,7 +54,7 @@ raw_variants = {
     "ir010": ([None, None, 0xC9, 0xC4, 0xD6, 0xC5, None, None, 
                            None, 0xE4, 0xF6, 0xE5, 0x203E], {}),
     # SEN 85 02 00 ax C (Swedish names), ETS for Sweden and Finland
-    "ir011": ([None, 0xA4, None, 0xC4, 0xD6, 0xC5, 0xDC, None, 
+    "ir011": ([None, 0xA4, 0xC9, 0xC4, 0xD6, 0xC5, 0xDC, None, 
                            0xE9, 0xE4, 0xF6, 0xE5, 0xFC], {}),
     # DEC NRCS for Sweden
     "ir011dec": ([None, None, None, 0xC4, 0xD6, 0xC5, 0xDC, None, 
