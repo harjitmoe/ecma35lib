@@ -42,31 +42,15 @@ def swap_arrows(t):
 print("Loading 1")
 plane1 = (1, ("UTC Big5", "UTC CNS", "MS Big5", "Mac Big5", "IBM Big5", "Web Big5", "Yasuoka CNS",
               "ICU '92CNS", "ICU EUC'14", "GOV-TW CNS", "Output"), [
-          swap_arrows(parsers.decode_main_plane_big5(
-                parsers.parse_file_format("UTC/BIG5.TXT"), 
-                "BIG5.TXT",
-                "big5_to_cns2",
-                plane=1)),
-          parsers.decode_main_plane_gl(
-                parsers.parse_file_format("UTC/CNS11643.TXT"), 
-                "CNS11643.TXT", 
-                plane=1),
+          swap_arrows(graphdata.gsets["ir171-utcbig5"][2]),
+          graphdata.gsets["ir171-utc"][2],
           swap_arrows(graphdata.gsets["ir171-ms"][2]),
           swap_arrows(graphdata.gsets["ir171-mac"][2]),
           swap_arrows(graphdata.gsets["ir171-ibm950"][2]),
           swap_arrows(graphdata.gsets["ir171-web"][2]),
-          parsers.decode_main_plane_gl(
-                parsers.parse_file_format("Other/Uni2CNS"), 
-                "Uni2CNS", 
-                plane=1),
-          parsers.decode_main_plane_gl(
-                parsers.parse_file_format("ICU/cns-11643-1992.ucm"), 
-                "cns-11643-1992.ucm", 
-                plane=1),
-          parsers.decode_main_plane_euc(
-                parsers.parse_file_format("ICU/euc-tw-2014.ucm"), 
-                "euc-tw-2014.ucm", 
-                plane=1),
+          graphdata.gsets["cns-eucg2-yasuoka"][2][:94*94],
+          graphdata.gsets["cns-eucg2-icu-old"][2][:94*94],
+          graphdata.gsets["cns-eucg2-icu-2014"][2][:94*94],
           graphdata.gsets["ir171-govtw"][2],
           graphdata.gsets["ir171"][2],
 ])
@@ -75,18 +59,9 @@ print("Loading 2")
 plane2 = (2, ("UTC CNS", "Big5", "Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
           graphdata.gsets["ir172-utc"][2],
           graphdata.gsets["ir172-big5"][2],
-          parsers.decode_main_plane_gl(
-                parsers.parse_file_format("Other/Uni2CNS"), 
-                "Uni2CNS", 
-                plane=2),
-          parsers.decode_main_plane_gl(
-                parsers.parse_file_format("ICU/cns-11643-1992.ucm"), 
-                "cns-11643-1992.ucm", 
-                plane=2),
-          parsers.decode_main_plane_euc(
-                parsers.parse_file_format("ICU/euc-tw-2014.ucm"), 
-                "euc-tw-2014.ucm", 
-                plane=2),
+          graphdata.gsets["cns-eucg2-yasuoka"][2][94*94*1 : 94*94*2],
+          graphdata.gsets["cns-eucg2-icu-old"][2][94*94*1 : 94*94*2],
+          graphdata.gsets["cns-eucg2-icu-2014"][2][94*94*1 : 94*94*2],
           graphdata.gsets["ir172-govtw"][2],
           graphdata.gsets["ir172"][2],
 ])
@@ -95,18 +70,9 @@ print("Loading 3")
 plane3 = (3, ("UTC CNS", "Yasuoka CNS", "ICU 1992 CNS",
               "ICU EUC 2014", "GOV-TW CNS", "Output", "Output Alt"), [
           graphdata.gsets["ir183-utc"][2],
-          parsers.decode_main_plane_gl(
-                parsers.parse_file_format("Other/Uni2CNS"), 
-                "Uni2CNS", 
-                plane=3),
-          parsers.decode_main_plane_gl(
-                parsers.parse_file_format("ICU/cns-11643-1992.ucm"), 
-                "cns-11643-1992.ucm", 
-                plane=3),
-          parsers.decode_main_plane_euc(
-                parsers.parse_file_format("ICU/euc-tw-2014.ucm"), 
-                "euc-tw-2014.ucm", 
-                plane=3),
+          graphdata.gsets["cns-eucg2-yasuoka"][2][94*94*2 : 94*94*3],
+          graphdata.gsets["cns-eucg2-icu-old"][2][94*94*2 : 94*94*3],
+          graphdata.gsets["cns-eucg2-icu-2014"][2][94*94*2 : 94*94*3],
           graphdata.gsets["ir183-govtw"][2],
           graphdata.gsets["ir183-full"][2],
           graphdata.gsets["ir183-1988plus"][2],
@@ -114,72 +80,36 @@ plane3 = (3, ("UTC CNS", "Yasuoka CNS", "ICU 1992 CNS",
 
 print("Loading 4")
 plane4 = (4, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
-          parsers.decode_main_plane_gl(
-                parsers.parse_file_format("Other/Uni2CNS"), 
-                "Uni2CNS", 
-                plane=4),
-          parsers.decode_main_plane_gl(
-                parsers.parse_file_format("ICU/cns-11643-1992.ucm"), 
-                "cns-11643-1992.ucm", 
-                plane=4),
-          parsers.decode_main_plane_euc(
-                parsers.parse_file_format("ICU/euc-tw-2014.ucm"), 
-                "euc-tw-2014.ucm", 
-                plane=4),
+          graphdata.gsets["cns-eucg2-yasuoka"][2][94*94*3 : 94*94*4],
+          graphdata.gsets["cns-eucg2-icu-old"][2][94*94*3 : 94*94*4],
+          graphdata.gsets["cns-eucg2-icu-2014"][2][94*94*3 : 94*94*4],
           graphdata.gsets["ir184-govtw"][2],
           graphdata.gsets["ir184"][2],
 ])
 
 print("Loading 5")
 plane5 = (5, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
-          parsers.decode_main_plane_gl(
-                parsers.parse_file_format("Other/Uni2CNS"), 
-                "Uni2CNS", 
-                plane=5),
-          parsers.decode_main_plane_gl(
-                parsers.parse_file_format("ICU/cns-11643-1992.ucm"), 
-                "cns-11643-1992.ucm", 
-                plane=5),
-          parsers.decode_main_plane_euc(
-                parsers.parse_file_format("ICU/euc-tw-2014.ucm"), 
-                "euc-tw-2014.ucm", 
-                plane=5),
+          graphdata.gsets["cns-eucg2-yasuoka"][2][94*94*4 : 94*94*5],
+          graphdata.gsets["cns-eucg2-icu-old"][2][94*94*4 : 94*94*5],
+          graphdata.gsets["cns-eucg2-icu-2014"][2][94*94*4 : 94*94*5],
           graphdata.gsets["ir185-govtw"][2],
           graphdata.gsets["ir185"][2],
 ])
 
 print("Loading 6")
 plane6 = (6, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
-          parsers.decode_main_plane_gl(
-                parsers.parse_file_format("Other/Uni2CNS"), 
-                "Uni2CNS", 
-                plane=6),
-          parsers.decode_main_plane_gl(
-                parsers.parse_file_format("ICU/cns-11643-1992.ucm"), 
-                "cns-11643-1992.ucm", 
-                plane=6),
-          parsers.decode_main_plane_euc(
-                parsers.parse_file_format("ICU/euc-tw-2014.ucm"), 
-                "euc-tw-2014.ucm", 
-                plane=6),
+          graphdata.gsets["cns-eucg2-yasuoka"][2][94*94*5 : 94*94*6],
+          graphdata.gsets["cns-eucg2-icu-old"][2][94*94*5 : 94*94*6],
+          graphdata.gsets["cns-eucg2-icu-2014"][2][94*94*5 : 94*94*6],
           graphdata.gsets["ir186-govtw"][2],
           graphdata.gsets["ir186"][2],
 ])
 
 print("Loading 7")
 plane7 = (7, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
-          parsers.decode_main_plane_gl(
-                parsers.parse_file_format("Other/Uni2CNS"), 
-                "Uni2CNS", 
-                plane=7),
-          parsers.decode_main_plane_gl(
-                parsers.parse_file_format("ICU/cns-11643-1992.ucm"), 
-                "cns-11643-1992.ucm", 
-                plane=7),
-          parsers.decode_main_plane_euc(
-                parsers.parse_file_format("ICU/euc-tw-2014.ucm"), 
-                "euc-tw-2014.ucm", 
-                plane=7),
+          graphdata.gsets["cns-eucg2-yasuoka"][2][94*94*6 : 94*94*7],
+          graphdata.gsets["cns-eucg2-icu-old"][2][94*94*6 : 94*94*7],
+          graphdata.gsets["cns-eucg2-icu-2014"][2][94*94*6 : 94*94*7],
           graphdata.gsets["ir187-govtw"][2],
           graphdata.gsets["ir187"][2],
 ])
@@ -223,14 +153,8 @@ planeE = (14, ("GOV-TW CNS",), [
 
 print("Loading 15")
 planeF = (15, ("ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
-          parsers.decode_main_plane_gl(
-                parsers.parse_file_format("ICU/cns-11643-1992.ucm"), 
-                "cns-11643-1992.ucm", 
-                plane=9), # yes, really.
-          parsers.decode_main_plane_euc(
-                parsers.parse_file_format("ICU/euc-tw-2014.ucm"), 
-                "euc-tw-2014.ucm", 
-                plane=15),
+          graphdata.gsets["cns-eucg2-icu-old"][2][94*94*8 : 94*94*9], # yes, this is correct.
+          graphdata.gsets["cns-eucg2-icu-2014"][2][94*94*14 : 94*94*15],
           graphdata.gsets["cns-eucg2-govtw"][2][94*94*14 : 94*94*15],
           graphdata.gsets["cns-eucg2"][2][94*94*14 : 94*94*15],
 ])

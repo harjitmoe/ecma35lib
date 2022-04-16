@@ -653,7 +653,7 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
         # and not try to push CJK fonts first.
         print("<span class='cpc smp' lang={}>".format(lang), file=outfile)
         strep = "".join(chr(j) for j in i)
-    elif 0xFE0E in i:
+    elif len(i) > 1 and 0xFE0E in i:
         print("<span class='cpc fe0e' lang={}>".format(lang), file=outfile)
         strep = "".join(chr(j) for j in i)
     else:
