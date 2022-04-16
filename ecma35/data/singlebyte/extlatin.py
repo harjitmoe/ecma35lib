@@ -9,8 +9,32 @@
 from ecma35.data import graphdata
 from ecma35.data.singlebyte import sbmapparsers as parsers
 
-# TODO: ir008-2/ir009-2 (NATS supplement), ir038 (German Bibliographic), ir039 (African Latin),
-# ir053 (some derivative or ir038), 
+# TODO: ir038 (German Bibliographic), ir039 (African Latin), ir053 (some derivative of ir038), 
+
+# NATS Supplement, for Nordic languages when the primary set is NATS Sweden/Finland
+# Allocations rather clever: if interpreted as the primary set (i.e. single-shift not recognised),
+#   - The Danish aesh and oethel (Æ, Ø) become the Swedish aesh and oethel (Ä, Ö).
+#   - The A-grave, E-acute and U-umlaut lose their diacritics but keep their base letters.
+#   - The D-stroke (in the reg never called an eth nor shown curly) becomes a regular D.
+#   - The thorn becomes a P. This is the least clever of the seven (Y would have been cleverer).
+graphdata.gsets["ir008-2"] = (94, 1,
+    (None,) * 32 +
+    ((0xC0,), None, None, (0x0110,), (0xC9,)) + (None,) * 10 + ((0xDE,), None, None, None, None, 
+        (0xDC,), None, None, None, None, None, (0xC6,), (0xD8,), None, None) +
+    (None, None) +
+    ((0xE0,), None, None, (0x0111,), (0xE9,)) + (None,) * 10 + ((0xFE,), None, None, None, None, 
+        (0xFC,), None, None, None, None, None, (0xE6,), (0xF8,), None, None))
+
+# NATS Supplement, for Nordic languages when the primary set is NATS Denmark/Norway
+# Same as the other one, but with Swedish aesh/oethel (and the Danish ones in the primary set), as
+#   opposed to _vice versa_.
+graphdata.gsets["ir009-2"] = (94, 1,
+    (None,) * 32 +
+    ((0xC0,), None, None, (0x0110,), (0xC9,)) + (None,) * 10 + ((0xDE,), None, None, None, None, 
+        (0xDC,), None, None, None, None, None, (0xC4,), (0xD6,), None, None) +
+    (None, None) +
+    ((0xE0,), None, None, (0x0111,), (0xE9,)) + (None,) * 10 + ((0xFE,), None, None, None, None, 
+        (0xFC,), None, None, None, None, None, (0xE4,), (0xF6,), None, None))
 
 # ECMA-94:L1 ISO-8859-1 Latin-1 Western European RHS
 graphdata.gsets["ir100"] = (96, 1, tuple((i,) for i in range(0xA0, 0x100)))
