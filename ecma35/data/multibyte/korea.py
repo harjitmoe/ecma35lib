@@ -226,7 +226,8 @@ _kps_temp = parsers.fuse([
             kps9566_2003[2]], "KPS_1997.json")
 graphdata.gsets["ir202"] = kps9566_1997 = (94, 2, _kps_temp)
 graphdata.gsetflags["ir202"] |= {"UHC:IS_KPS"}
-graphdata.gsets["2011kpsextras"] = (94, 2, read_kps9566extras("UTCDocs/AppendixA_KPS9566-2011-to-Unicode.txt"))
+kpsext = read_kps9566extras("UTCDocs/AppendixA_KPS9566-2011-to-Unicode.txt")
+graphdata.gsets["2011kpsextras"] = (94, 2, kpsext + (None,) * (94*94 - len(kpsext)))
 # KPS 10721 doesn't appear to be ECMA-35 structured.
 
 # KS X 1002. I can't find charts, leave alone mappings, for the

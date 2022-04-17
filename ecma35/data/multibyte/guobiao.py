@@ -261,13 +261,14 @@ graphdata.gsets["ir058-mac"] = gb2312_macfull = (94, 2, parsers.fuse([
 #   the others being added as a couple of rows at the end)
 # Unlike GB2312.TXT, redistribution of GB12345.TXT itself is apparently not permitted, although
 #   using/incorporating the information is apparently fine.
-graphdata.gsets["ir058-hant-utc"] = gb12345_utc = (94, 2, parsers.read_untracked(
+gbtrad = parsers.read_untracked(
         "UTC/GB_12345.json",
         "UTC/GB12345.TXT",
         parsers.decode_main_plane_euc,
         parsers.parse_file_format("UTC/GB12345.TXT"),
         "UTC/GB12345.TXT",
-        gbklike = True))
+        gbklike = True)
+graphdata.gsets["ir058-hant-utc"] = gb12345_utc = (94, 2, gbtrad + (None,) * (94*94 - len(gbtrad)))
 graphdata.gsets["ir058-hant"] = gb12345 = (94, 2, parsers.fuse([
         # U+2225 is already used elsewhere; UTC corrected GB2312 in 1999 but didn't change GB12345.
         (None,) * 11 + ((0x2016,),),

@@ -176,10 +176,12 @@ _ir183oldirg = parsers.decode_main_plane_gl(
 _ir183nearfull = tuple(cns_fullplane3[planesize * 2 : planesize * 3])
 _ir183full = parsers.fuse([_ir183nearfull, _ir183oldirg], "ir183fullnew.json")
 _ir183fullalt = parsers.fuse([_ir183oldirg, _ir183nearfull], "ir183fullalt.json")
-graphdata.gsets["ir183-1988"] = cns3_1988 = (94, 2, tuple(_ir183fullalt)[:6319])
+cns3_1988_array = tuple(_ir183fullalt)[:6319] + (None,) * (len(_ir183fullalt) - 6319)
+graphdata.gsets["ir183-1988"] = cns3_1988 = (94, 2, cns3_1988_array)
 graphdata.gsets["ir183-1988plus"] = cns3plus = (94, 2, tuple(_ir183fullalt))
-graphdata.gsets["ir183-1992"] = cns3_1988 = (94, 2, tuple(_ir183full)[:6148])
-graphdata.gsets["ir183-full"] = cns3_1988 = (94, 2, tuple(_ir183full))
+cns3_1992_array = tuple(_ir183fullalt)[:6148] + (None,) * (len(_ir183fullalt) - 6148)
+graphdata.gsets["ir183-1992"] = cns3_1992 = (94, 2, cns3_1992_array)
+graphdata.gsets["ir183-full"] = cns3_full = (94, 2, tuple(_ir183full))
 graphdata.gsets["ir183-utc"] = (94, 3, parsers.decode_main_plane_gl(
     parsers.parse_file_format("UTC/CNS11643.TXT"), 
     "CNS11643.TXT", 

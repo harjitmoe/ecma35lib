@@ -49,8 +49,11 @@ for (setcode, (kind, bytecount, entries)) in gsets.items():
     assert kind==94 or kind==96
     if setcode not in used:
         complaints.add((setcode, "NotDesignable"))
-    if bytecount < 3 and len(entries) < (kind ** bytecount):
-        complaints.add((setcode, "ShortArray"))
+    if len(entries) < (kind ** bytecount):
+        if bytecount < 3:
+            complaints.add((setcode, "ShortArray"))
+        elif len(entries) % (kind * kind):
+            complaints.add((setcode, "LastPlaneShort"))
     if len(entries) > (kind ** bytecount):
         complaints.add((setcode, "OverlongArray"))
     for pointer, entry in enumerate(entries):
