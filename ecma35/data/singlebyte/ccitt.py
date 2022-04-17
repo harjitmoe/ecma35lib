@@ -9,6 +9,8 @@
 from ecma35.data import graphdata
 from ecma35.data.singlebyte import sbmapparsers as parsers
 
+# Scope of this file is the closely interrelated ITU T.51, ITU T.61, ITU T.101, ISO 5426, ISO 6937
+
 # ITU T.51 RHS, ETS 300 706 version
 _t51 =  [  (0x00A1,), (0x00A2,), (0x00A3,), (0x0024,), (0x00A5,), (0x0023,), (0x00A7,), 
 (0x00A4,), (0x2018,), (0x201C,), (0x00AB,), (0x2190,), (0x2191,), (0x2192,), (0x2193,), 
@@ -64,6 +66,48 @@ _t51_156[4] = _t51_156[6] = None
 graphdata.gsets["ir142"] = (96, 1, tuple(_t51_142))
 graphdata.gsets["ir156"] = (96, 1, tuple(_t51_156))
 graphdata.gsets["ir142-ir156"] = (96, 1, tuple(_t51))
+
+# ISO 5426-1, bibliographic extended Latin, related to T.51 but moves a few diacritics, has much more diacritics, fewer base letters, different non-letters
+_bibliot51 = _t51[1:-1]
+_bibliot51[1] = (0x201E,)
+_bibliot51[5] = (0x2020,)
+_bibliot51[7] = (0x2032,)
+_bibliot51[11] = (0x266D,)
+_bibliot51[12] = (0x00A9,)
+_bibliot51[13] = (0x2117,)
+_bibliot51[14] = (0x00AE,)
+_bibliot51[15] = (0x02BD,)
+_bibliot51[16] = (0x02BE,)
+_bibliot51[17] = (0x201A,)
+_bibliot51[21] = (0x2021,)
+_bibliot51[23] = (0x2033,)
+_bibliot51[27] = (0x266F,)
+_bibliot51[28] = (0x02B9,)
+_bibliot51[29] = (0x02BA,)
+_bibliot51[31] = (-0x0309,)
+_bibliot51[40] = _t61[40]
+_bibliot51[42] = (-0x0315,)
+_bibliot51[43] = (-0x0312,)
+_bibliot51[45] = (-0x031B,)
+_bibliot51[47] = (-0x0327,)
+_bibliot51[48] = (-0x031C,)
+_bibliot51[49] = (-0x0326,)
+_bibliot51[50] = (-0x0328,)
+_bibliot51[51] = (-0x0325,)
+_bibliot51[52] = (-0x032E,)
+_bibliot51[53] = (-0x0323,)
+_bibliot51[54] = (-0x0324,)
+_bibliot51[55] = (-0x0332,)
+_bibliot51[56] = (-0x0333,)
+_bibliot51[57] = (-0x0329,)
+_bibliot51[58] = (-0x032D,)
+_bibliot51[60] = (-0xFE20,)
+_bibliot51[61] = (-0xFE21,)
+_bibliot51[62] = (-0xFE23,)
+_megabibliot51 = _bibliot51[:]
+_bibliot51[18] = _bibliot51[19] = _bibliot51[20] = _bibliot51[59] = _bibliot51[63] = _bibliot51[66] = _bibliot51[67] = _bibliot51[68] = _bibliot51[70] = _bibliot51[74] = _bibliot51[76] = _bibliot51[77] = _bibliot51[78] = _bibliot51[79] = _bibliot51[83] = _bibliot51[86] = _bibliot51[92] = _bibliot51[93] = None
+graphdata.gsets["ir053"] = (94, 1, tuple(_bibliot51))
+graphdata.gsets["ir053ext"] = (94, 1, tuple(_megabibliot51))
 
 # TODO: ir152 (T.51 minus Latin-1 thru Latin-9 repertoires, which exists for some reason)
 # TODO: ir099, 
