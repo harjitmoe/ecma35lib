@@ -374,6 +374,11 @@ graphdata.gsets["the-other-gb7"] = (94, 2, parsers.fuse([
         parsers.read_unihan_planes("UCD/Unihan_OtherMappings-13.txt", "kGB7", kutenform=True),
     ], "the-other-GB7.json"))
 
+graphdata.gsets["gb16500-ext"] = (94, 2, parsers.fuse([
+        graphdata.gsets["gb16500"][2],
+        graphdata.gsets["the-other-gb7"][2],
+    ], "GB16500-with-the-other-GB7.json"))
+
 # GB 7589 and GB 7590 are just the simplified versions, right?
 # (Contrary to docs, kGB3 and kGB5 seem to be less complete mappings to the same G3 and G5
 #  in kIRG_GSource, i.e. they are the traditional GB 13131/13132 forms.

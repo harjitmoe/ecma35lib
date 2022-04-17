@@ -151,9 +151,9 @@ Miscellaneous single-byte assignments:
 |`IRR ? G*DM4 B`|JIS C 6226 / X 0208-1983|
 |`IRR @ G*DM4 B`|JIS X 0208-1990 (standard sequence, listed here for completeness)|
 |`IRR 0 G*DM4 B`|JIS X 0208, WHATWG variant (default; synchronised with Windows-31J)|
-|`IRR 1 G*DM4 B`|JIS X 0208, "KanjiTalk 7" variant used on classic Mac OS|
-|`IRR 2 G*DM4 B`|JIS X 0208, "PostScript" variant used on classic Mac OS|
-|`IRR 3 G*DM4 B`|JIS X 0208, "KanjiTalk 6" variant used on classic Mac OS|
+|`IRR 1 G*DM4 B`|JIS X 0208, "KanjiTalk 7" (row+84 verticals, non-NEC gaiji) variant used on classic Mac OS, updated mappingsS|
+|`IRR 2 G*DM4 B`|JIS X 0208, "PostScript" / "KanjiTalk 6 PostScript" (row+84 verticals, NEC gaiji) variant used on classic Mac OS, updated mappings|
+|`IRR 3 G*DM4 B`|JIS X 0208, "KanjiTalk 6 non-PostScript" (row+10 verticals, NEC gaiji) variant used on classic Mac OS|
 |`IRR 4 G*DM4 B`|JIS X 0208, with UTC-style mapping of em dash / horizontal bar character|
 |`IRR 5 G*DM4 B`|JIS X 0208, Open Group version for JIS-Roman based EUC-JP|
 |`IRR 6 G*DM4 B`|JIS X 0208, Open Group version for ASCII-based EUC-JP|
@@ -165,6 +165,8 @@ Miscellaneous single-byte assignments:
 |`IRR < G*DM4 B`|JIS X 0208, KDDI JIS emoji, pictorial zodiac variant|
 |`IRR = G*DM4 B`|JIS X 0208, Fujitsu version|
 |`IRR > G*DM4 B`|JIS X 0208, ARIB STD-B.24 version|
+|`IRR SP 0 G*DM4 B`|"KanjiTalk 7" variant (row+84 verticals, non-NEC gaiji) used on classic Mac OS, Apple mappings|
+|`IRR SP 1 G*DM4 B`|"PostScript" / "KanjiTalk 6 PostScript" variant (row+84 verticals, NEC gaiji) used on classic Mac OS, Apple mappings|
 |`IRR ? G*DM4 C`|KS C 5601-1987 Wansung code, using new-UTC mappings (harmonious with Microsoft and WHATWG)|
 |`IRR 0 G*DM4 C`|KS C 5601-1987, but using old-UTC mappings for the non-syllables|
 |`IRR 1 G*DM4 C`|KS X 1001-1998 Wansung code. The Euro sign update, also adding the registered trademark sign, and matching the WHATWG mapping.|
@@ -259,6 +261,9 @@ Miscellaneous single-byte assignments:
 |`G*DM4 " 2`|GB 16500 (yet another supplementary set).|
 |`G*DM4 " 3`|Big5 DynaLab extensions (for Big-5 filter's G3 slot)|
 |`G*DM4 " 4`|Big5 Monotype extensions (for Big-5 filter's G3 slot)|
+|`G*DM4 " 5`|Big5-Plus in-plane extensions (for Big-5 filter's G3 slot)|
+|`G*DM4 " 6`|Big5-Plus out-of-plane extensions (not currently usable as such)|
+|`G*DM4 " 7`|IBM Big5 non-ETEN out-of-plane extensions (not currently usable as such)|
 |`IRR ? G*DM6 ! 0`|GBK extras (GB 18030, level 5 with associated UDC zone and non-URO part of level 4; accepted by GBK filter in G3 slot)|
 |`IRR 0 G*DM6 ! 0`|GBK extras, WHATWG/HTML5 variant|
 |`IRR 1 G*DM6 ! 0`|GBK extras, mapping all characters with defined glyphs to non-PUA|
