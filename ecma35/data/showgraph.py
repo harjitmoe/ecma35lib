@@ -78,6 +78,32 @@ def formatcode(tpl):
     return "U+{} ({})".format("+".join("{:04X}".format(i) for i in tpl),
                               "".join(chr(i) if i < 0xF0000 else (chr(i) + " ") for i in tpl))
 
+def reptuple(tpl):
+    out = ["("]
+    for m, i in enumerate(tpl):
+        if i is None:
+            out.append("None")
+        elif isinstance(i, tuple):
+            out.append("(")
+            for n, j in enumerate(i):
+                if j < 0x100:
+                    out.append(f"0x{j:02X}")
+                else:
+                    out.append(f"0x{j:04X}")
+                if n < (len(i) - 1):
+                    out.append(", ")
+                elif len(i) == 1:
+                    out.append(",")
+            out.append(")")
+        else:
+            out.append(repr(i))
+        if m < (len(tpl) - 1):
+            out.append(", ")
+        elif len(tpl) == 1:
+            out.append(",")
+    out.append(")")
+    return "".join(out)
+
 def show(name, *, plane=None):
     if isinstance(name, tuple):
         x = name
