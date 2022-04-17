@@ -118,7 +118,8 @@ graphdata.gsets["ir042stricter"] = jisx0208_1978_stricter = (94, 2, parsers.deco
     mapper = utcto78jisstricter))
 graphdata.gsets["ir042ibm"] = jisx0208_ibm78 = (94, 2, parsers.decode_main_plane_sjis(
     parsers.parse_file_format("ICU/ibm-942_P12A-1999.ucm"),
-    "ibm-942_P12A-1999.ucm"))
+    "ibm-942_P12A-1999.ucm",
+    plane = 1))
 graphdata.gsets["ir042nec"] = jisx0208_nec = (94, 2, parsers.decode_main_plane_gl(
     parsers.parse_file_format("Custom/NEC-C-6226-visual3.txt"),
     "NEC-C-6226-visual3.txt"))

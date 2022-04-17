@@ -130,3 +130,4 @@
 '["decode_main_plane_gl", ["cccii-maxmat.txt"], {"set96": true}]', (35393024, 3912488)
 '["decode_main_plane_gl", ["eacc-maxmat.txt"], {"set96": true}]', (39305728, 3912479)
 '["decode_main_plane_gl", ["cccii-nonkanji.txt"], {"set96": true}]', (43218432, 4093937)
+'["decode_main_plane_sjis", ["ibm-942_P12A-1999.ucm"], {"plane": 1}]', (47312384, 73364)

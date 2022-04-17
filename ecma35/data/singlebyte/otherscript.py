@@ -67,7 +67,7 @@ graphdata.gsets["ir013ibm"] = (94, 1, _the_mother + (
 # 1-byte MacJapanese
 graphdata.gsets["ir013mac"] = (94, 1, _the_mother + (
                 (0x5C,), (0xA0,), (0xA9,), (0x2122,), (0x2026,), 
-                (0xFC,), (0xF880,), (0xF881,), (0x20A9,), (0x2013,), (0xFF3F,)) + ((None,) * 21))
+                (0xFC,), (0xF880,), (0xF881,), (0x20A9,), (0x2013,), (0xFF3F,)) + ((None,) * 20))
 # For Windows code pages
 graphdata.gsets["ir013win"] = (94, 1, _the_mother + (
                 (0x20AC,),) + tuple((i,) for i in range(0xF8F0, 0xF8F9)) + ((None,) * 21))
