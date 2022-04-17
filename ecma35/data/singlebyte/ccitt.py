@@ -9,7 +9,8 @@
 from ecma35.data import graphdata
 from ecma35.data.singlebyte import sbmapparsers as parsers
 
-# Scope of this file is the closely interrelated ITU T.51, ITU T.61, ITU T.101, ISO 5426, ISO 6937
+# Scope of this file is the "tee-sixty-one-ic" sets and their supplements, i.e. the closely
+#   interrelated ITU T.51, ITU T.61, ITU T.101, DIN 31624, ISO 5426, ISO 6937
 
 # ITU T.51 RHS, ETS 300 706 version
 _t51 =  [  (0x00A1,), (0x00A2,), (0x00A3,), (0x0024,), (0x00A5,), (0x0023,), (0x00A7,), 
@@ -76,7 +77,7 @@ _bibliot51[11] = (0x266D,)
 _bibliot51[12] = (0x00A9,)
 _bibliot51[13] = (0x2117,)
 _bibliot51[14] = (0x00AE,)
-_bibliot51[15] = (0x02BD,)
+_bibliot51[15] = (0x02BF,)
 _bibliot51[16] = (0x02BE,)
 _bibliot51[17] = (0x201A,)
 _bibliot51[21] = (0x2021,)
@@ -108,6 +109,25 @@ _megabibliot51 = _bibliot51[:]
 _bibliot51[18] = _bibliot51[19] = _bibliot51[20] = _bibliot51[59] = _bibliot51[63] = _bibliot51[66] = _bibliot51[67] = _bibliot51[68] = _bibliot51[70] = _bibliot51[74] = _bibliot51[76] = _bibliot51[77] = _bibliot51[78] = _bibliot51[79] = _bibliot51[83] = _bibliot51[86] = _bibliot51[92] = _bibliot51[93] = None
 graphdata.gsets["ir053"] = (94, 1, tuple(_bibliot51))
 graphdata.gsets["ir053ext"] = (94, 1, tuple(_megabibliot51))
+
+# DIN 31624, related to ISO 5426-1 but avoids duplicating DIN 66003, lacks some chars that ISO 5426-1 has (adds?), and includes ASCII chars that DIN 66003 lacks.
+_germanyt51 = _bibliot51[:]
+_germanyt51[3] = (0x00A4,)
+_germanyt51[4] = (0x2030,)
+_germanyt51[6] = (0x0040,)
+_germanyt51[7] = (0x00B0,)
+_germanyt51[8] = (0x005B,)
+_germanyt51[9] = (0x007B,)
+_germanyt51[19] = (0x005C,)
+_germanyt51[20] = (0x007C,)
+_germanyt51[23] = (0x2192,)
+_germanyt51[24] = (0x005D,)
+_germanyt51[25] = (0x007D,)
+_germanyt51[40] = (-0x0336,)
+_germanyt51[90] = (0x01A6,)
+_germanyt51[69] = _germanyt51[85] = None
+graphdata.gsets["ir038"] = (94, 1, tuple(_germanyt51))
+graphdata.gsets["ir038ext"] = (94, 1, tuple(map(lambda a, b: a or b, _germanyt51, _megabibliot51)))
 
 # TODO: ir152 (T.51 minus Latin-1 thru Latin-9 repertoires, which exists for some reason)
 # TODO: ir099, 
