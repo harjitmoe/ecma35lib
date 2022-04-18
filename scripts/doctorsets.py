@@ -81,15 +81,18 @@ for (setcode, (kind, bytecount, entries)) in gsets.items():
     for pointer, entry in enumerate(entries):
         if not isinstance(entry, (tuple, type(None))):
             complaints.add((setcode, "NotNullOrTuple"))
-        if entry:
+        if entry is not None:
             if not hasattr(entry, "__iter__"):
                 entry = (entry,)
-            if entry == (-1,):
-                complaints.add((setcode, "ExpiredMinusOne"))
-            elif None in entry:
-                complaints.add((setcode, "NullInTuple"))
-            elif any((abs(i) < 0x20 or 0x7F <= abs(i) < 0xA0) for i in entry):
-                complaints.add((setcode, "MapToCcCharacter"))
+            if len(entry) == 0:
+                complaints.add((setcode, "EmptyMappingTarget"))
+            elif entry == (-1,):
+                complaints.add((setcode, "ExposedMinusOne"))
+            else:
+                if None in entry:
+                    complaints.add((setcode, "NullInTuple"))
+                if any((abs(i) < 0x20 or 0x7F <= abs(i) < 0xA0) for i in entry):
+                    complaints.add((setcode, "MapToCcCharacter"))
 
 
 pprint.pprint([*sorted(complaints)])
