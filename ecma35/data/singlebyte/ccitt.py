@@ -9,8 +9,8 @@
 from ecma35.data import graphdata
 from ecma35.data.singlebyte import sbmapparsers as parsers
 
-# Scope of this file is the "tee-sixty-one-ic" sets and their supplements, i.e. the closely
-#   interrelated ITU T.51, ITU T.61, ITU T.101, DIN 31624, ISO 5426, ISO 6937
+# Scope of this file is the "tee-sixty-one-ic" supplements and their further supplements, i.e. the
+#   closely interrelated ITU T.51, ITU T.61, ITU T.101, DIN 31624, ISO 5426, ISO 6937, ETS 300 706
 
 # ITU T.51 RHS, ETS 300 706 version
 _t51 =  [  (0x00A1,), (0x00A2,), (0x00A3,), (0x0024,), (0x00A5,), (0x0023,), (0x00A7,), 
@@ -130,7 +130,7 @@ graphdata.gsets["ir038"] = (94, 1, tuple(_germanyt51))
 graphdata.gsets["ir038ext"] = (94, 1, tuple(map(lambda a, b: a or b, _germanyt51, _megabibliot51)))
 
 # TODO: ir152 (T.51 minus Latin-1 thru Latin-9 repertoires, which exists for some reason)
-# TODO: ir099, 
+# TODO: ir099 (ANSI X3.110:1983 and Canadian CSA T500:1983) / ir128 (identical from ITU T.101-D) 
 # TODO: ir071/173 (Mosaics)
 
 
