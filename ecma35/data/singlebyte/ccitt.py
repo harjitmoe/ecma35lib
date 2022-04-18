@@ -10,7 +10,8 @@ from ecma35.data import graphdata
 from ecma35.data.singlebyte import sbmapparsers as parsers
 
 # Scope of this file is the "tee-sixty-one-ic" supplements and their further supplements, i.e. the
-#   closely interrelated ITU T.51, ITU T.61, ITU T.101, DIN 31624, ISO 5426, ISO 6937, ETS 300 706
+#   closely interrelated ITU T.51, ITU T.61, ITU T.101, DIN 31624, ISO 5426, ISO 6937, ETS 300 706,
+#   excluding the sets in the scope of ecma6.py, greek.py, cyrillic.py or semitic.py
 
 # ITU T.51 RHS, ETS 300 706 version
 _t51 =  [  (0x00A1,), (0x00A2,), (0x00A3,), (0x0024,), (0x00A5,), (0x0023,), (0x00A7,), 
@@ -37,7 +38,7 @@ graphdata.gsets["ir090-ets"] = (94, 1, tuple(_t51))
 _t51[31] = _t51[40] = _t51[53] = _t51[54] = _t51[55] = None
 graphdata.gsets["ir090"] = (94, 1, tuple(_t51))
 
-# ITU T.101 Data Syntax 2 G2 set
+# ITU T.101-C (Videotex Data Syntax 2) G2 set
 _ir70 = _t51[:]
 _ir70[31] = (-0x0344,)
 _ir70[40] = (-0x0308,)
@@ -129,7 +130,8 @@ _germanyt51[69] = _germanyt51[85] = None
 graphdata.gsets["ir038"] = (94, 1, tuple(_germanyt51))
 graphdata.gsets["ir038ext"] = (94, 1, tuple(map(lambda a, b: a or b, _germanyt51, _megabibliot51)))
 
-# ANSI X3.110:1983, CSA T500:1983, ITU T.101-D. IR-099 is identical to IR-128; IR-128 is preferred.
+# ANSI X3.110:1983, CSA T500:1983, ITU T.101-D, Videotex Data Syntax 3.
+#   IR-099 is identical to IR-128; IR-128 is preferred.
 _t51videotex3 = _t51[1:-1]
 _t51videotex3[31] = (-0x20D1,)
 _t51videotex3[40] = (-0x0338,)
@@ -144,15 +146,23 @@ graphdata.gsets["ir099"] = graphdata.gsets["ir128"] = (94, 1, tuple(_t51videotex
 
 # TODO: ir152 (T.51 minus Latin-1 thru Latin-9 repertoires, which exists for some reason)
 
-# ITU T.101-B (Data Syntax 1) Mosaic Set 1
+# ITU T.101-B (Videotex Data Syntax 1) Mosaic Set 1
 graphdata.gsets["ir137"] = (94, 1, ((0x2596,), (0x25AA,), (0x257B,), (0x259F,), (0x259C, 0xF87F), (0x1FB63, 0xF87F), (0x25B6,), (0x1FB3D, 0xF87F), (0x1F837,), (0x25C0, 0xF87A), (0x1F835, 0xF87A), (0x1FB9B,), (0x25D7, 0xF875), (0x25D7,), (0x25D7, 0xF87A), 
 (0x2584,), (0x2597,), (0x25AC,), (0x2579,), (0x2599,), (0x259B, 0xF87F), (0x1FB58, 0xF87F), (0x25C0,), (0x1FB48, 0xF87F), (0x1F835,), (0x25B6, 0xF87A), (0x1F837, 0xF87A), (0x1FB9A,), (0x25D6, 0xF875), (0x25D6,), (0x25D6, 0xF87A),
 None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (0x1FB52,), (0x1FB53,), (0x1FB54,), (0x1FB55,), (0x1FB56,), (0x25E5,), (0x1FB57,), (0x1FB58,), (0x1FB59,), (0x1FB5A,), (0x1FB5B,), (0x1FB5C,), (0x1FB6C,), (0x1FB6D,), None, None, (0x1FB5D,), (0x1FB5E,), (0x1FB5F,), (0x1FB60,), (0x1FB61,), (0x25E4,), (0x1FB62,), (0x1FB63,), (0x1FB64,), (0x1FB65,), (0x1FB66,), (0x1FB67,), (0x1FB6E,), (0x1FB6F,), None))
 
-# ITU T.101-B (Data Syntax 1) Mosaic Set 2
+# ITU T.101-B (Videotex Data Syntax 1) Mosaic Set 2
 graphdata.gsets["ir071"] = (94, 1, ((0x1FB00,), (0x1FB01,), (0x1FB02,), (0x1FB03,), (0x1FB04,), (0x1FB05,), (0x1FB06,), (0x1FB07,), (0x1FB08,), (0x1FB09,), (0x1FB0A,), (0x1FB0B,), (0x1FB0C,), (0x1FB0D,), (0x1FB0E,), (0x1FB0F,), (0x1FB10,), (0x1FB11,), (0x1FB12,), (0x1FB13,), (0x258C,), (0x1FB14,), (0x1FB15,), (0x1FB16,), (0x1FB17,), (0x1FB18,), (0x1FB19,), (0x1FB1A,), (0x1FB1B,), (0x1FB1C,), (0x1FB1D,), (0x1FB3C,), (0x1FB3D,), (0x1FB3E,), (0x1FB3F,), (0x1FB40,), (0x25E3,), (0x1FB41,), (0x1FB42,), (0x1FB43,), (0x1FB44,), (0x1FB45,), (0x1FB46,), (0x1FB68,), (0x1FB69,), (0x1FB70,), (0x1FB95,), (0x1FB47,), (0x1FB48,), (0x1FB49,), (0x1FB4A,), (0x1FB4B,), (0x25E2,), (0x1FB4C,), (0x1FB4D,), (0x1FB4E,), (0x1FB4F,), (0x1FB50,), (0x1FB51,), (0x1FB6A,), (0x1FB6B,), (0x1FB75,), (0x2588,), (0x1FB1E,), (0x1FB1F,), (0x1FB20,), (0x1FB21,), (0x1FB22,), (0x1FB23,), (0x1FB24,), (0x1FB25,), (0x1FB26,), (0x1FB27,), (0x2590,), (0x1FB28,), (0x1FB29,), (0x1FB2A,), (0x1FB2B,), (0x1FB2C,), (0x1FB2D,), (0x1FB2E,), (0x1FB2F,), (0x1FB30,), (0x1FB31,), (0x1FB32,), (0x1FB33,), (0x1FB34,), (0x1FB35,), (0x1FB36,), (0x1FB37,), (0x1FB38,), (0x1FB39,), (0x1FB3A,), (0x1FB3B,)))
 
-# TODO: ir072/173 (other mosaics)
+# TODO: ITU T.101-C Mosaic Set 1
+
+# ITU T.101-C (Videotex Data Syntax 2) Mosaic Set 3
+_ir173 = [(0x2528,), (0x2512,), (0x2511,), (0x251A,), (0x2519,), (0x2520,), (0x2538,), (0x2530,), (0x2516,), (0x2515,), (0x250D,), (0x250E,), (0x2542,), (0x25A6,), (0x258C,), (0x2503,), (0x2501,), (0x250F,), (0x2513,), (0x2517,), (0x251B,), (0x2523,), (0x252B,), (0x2533,), (0x253B,), (0x254B,), (0x2580,), (0x2584,), (0x2588,), (0x25AA,), (0x2590,), (0x2537,), (0x252F,), (0x251D,), (0x2525,), (0x1FBA4,), (0x1FBA5,), (0x1FBA6,), (0x1FBA7,), (0x1FBA0,), (0x1FBA1,), (0x1FBA2,), (0x1FBA3,), (0x253F,), (0x2022,), (0x25CF,), (0x25CB,), (0x2502,), (0x2500,), (0x250C,), (0x2510,), (0x2514,), (0x2518,), (0x251C,), (0x2524,), (0x252C,), (0x2534,), (0x253C,), (0x2192,), (0x2190,), (0x2191,), (0x2193,), (0x2591,), (0x1FB52,), (0x1FB53,), (0x1FB54,), (0x1FB55,), (0x1FB56,), (0x25E5,), (0x1FB57,), (0x1FB58,), (0x1FB59,), (0x1FB5A,), (0x1FB5B,), (0x1FB5C,), (0x1FB6C,), (0x1FB6D,), (0x2592,), (0x2593,), (0x1FB5D,), (0x1FB5E,), (0x1FB5F,), (0x1FB60,), (0x1FB61,), (0x25E4,), (0x1FB62,), (0x1FB63,), (0x1FB64,), (0x1FB65,), (0x1FB66,), (0x1FB67,), (0x1FB6E,), (0x1FB6F,), (0x25A6, 0xF87F)]
+graphdata.gsets["ir173"] = (94, 1, tuple(_ir173))
+_ir072 = _ir173[:]
+_ir072[:31] = (None,) * 31
+_ir072[62] = _ir072[77] = _ir072[78] = _ir072[93] = None
+graphdata.gsets["ir072"] = (94, 1, tuple(_ir072))
 
 
 
