@@ -9,8 +9,6 @@
 from ecma35.data import graphdata
 from ecma35.data.singlebyte import sbmapparsers as parsers
 
-# TODO: ir038 (German Bibliographic), ir039 (African Latin), ir053 (some derivative of ir038), 
-
 # NATS Supplement, for Nordic languages when the primary set is NATS Sweden/Finland
 # Allocations rather clever: if interpreted as the primary set (i.e. single-shift not recognised),
 #   - The Danish aesh and oethel (Æ, Ø) become the Swedish aesh and oethel (Ä, Ö).
@@ -37,8 +35,8 @@ graphdata.gsets["ir009-2"] = (94, 1,
         (0xFC,), None, None, None, None, None, (0xE4,), (0xF6,), None, None))
 
 # DIN-31625 ISO-6438 African Latin supplement
-graphdata.gsets["ir039"] = (96, 1, (
-    None,      None,      (0x0181,), (0x0187,), (0x018A,), (0x0189,), None,      (0x0190,),
+graphdata.gsets["ir039"] = (94, 1, (
+               None,      (0x0181,), (0x0187,), (0x018A,), (0x0189,), None,      (0x0190,),
     (0x018E,), None,      (0x0191,), (0x0193,), (0x0194,), (0x0126,), None,      (0x0197,),
     None,      None,      (0x0253,), (0x0188,), (0x0257,), (0x0256,), None,      (0x025B,),
     (0x0259,), None,      (0x0192,), (0x0260,), (0x0263,), (0x0127,), None,      (0x026A,),
@@ -49,7 +47,7 @@ graphdata.gsets["ir039"] = (96, 1, (
     (0x01AC,), (0x01AE,), None,      (0x01B1,), (0x01B2,), (0x03A7,), (0x01B3,), (0x01B7,),
     None,      None,      None,      None,      None,      None,      None,      None,
     (0x01AD,), (0x0288,), None,      (0x028A,), (0x028B,), (0x03C7,), (0x01B4,), (0x0292,),
-    (0x0295,), (0x0294,), (0x0298,), (0x01C0,), (0x01C2,), (0x01C3,), (0x01C1,), None,
+    (0x0295,), (0x0294,), (0x0298,), (0x01C0,), (0x01C2,), (0x01C3,), (0x01C1,),
 ))
 
 # ECMA-94:L1 ISO-8859-1 Latin-1 Western European RHS
