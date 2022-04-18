@@ -70,8 +70,9 @@ graphdata.gsets["ir013win"] = (94, 1, _the_mother + (
 graphdata.gsetflags["ir013win"] |= {"GBK:NO_EURO"}
 graphdata.gsets["ir013euro"] = graphdata.gsets["ir013win"]
 
-# TODO: ir155 (ISO 10367 box drawing set), ir068 (APL)
+# TODO: ir068 (APL)
 
+# ISO-10367's box drawing set
 graphdata.gsets["ir155"] = (96, 1, (
     None,      None,      None,      None,      None,      None,      None,      None,      
     None,      None,      None,      None,      None,      None,      None,      None,      
