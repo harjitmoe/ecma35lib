@@ -72,6 +72,38 @@ graphdata.gsets["ir013euro"] = graphdata.gsets["ir013win"]
 
 # TODO: ir068 (APL)
 
+# JIS X 9010 code for OCR-B font characters absent from JIS-Roman, basically a very small subset of
+#   ISO-8859-1's RHS where the backslash is substituted for the yen sign (compare the derivation of
+#   DRV from DIN 66003 and ISO-8859-1).
+graphdata.gsets["ir093"] = (94, 1, (None, None, (0xA3,), (0xA4,), (0x5C,), None, (0xA7,)) + (None,) * 87)
+graphdata.gsets["ir093-ext"] = (94, 1, tuple((i,) if i != 0xA5 else (0x5C,) for i in range(0xA1, 0xFF)))
+
+# JIS X 9010 code for JIS X 9008 font characters absent from JIS X 0201 (i.e. the backslash only),
+#   a single-character subset of IR-093.
+# Awkwardly, the sole character here is probably U+244A's character source, despite being evidently
+#   intended to be U+005C (if one reads the reg's rubric).
+graphdata.gsets["ir095"] = (94, 1, (None, None, None, None, (0x5C,), None, None) + (None,) * 87)
+graphdata.gsets["ir095-double"] = (94, 1, (None, None, None, None, (0x244A,), None, None) + (None,) * 87)
+
+# JIS X 9010 Kana set for JIS X 9008 font (which supports large katakana only)
+graphdata.gsets["ir096"] = (94, 1, (None,) + _the_mother[1:3] + (None, None) + _the_mother[5:6] + (None,)*9 + _the_mother[15:] + (None,)*31)
+
+# ISO 2033 / JIS X 9010 code for E-13B font (machine-readable lines on cheques)
+graphdata.gsets["ir098"] = (94, 1, (
+               None,      None,      None,      None,      None,      None,      None,      
+    None,      None,      None,      None,      None,      None,      None,      None,  
+    (0x0030,), (0x0031,), (0x0032,), (0x0033,), (0x0034,), (0x0035,), (0x0036,), (0x0037,), 
+    (0x0038,), (0x0039,), (0x2446,), (0x2447,), (0x2448,), (0x2449,), None,      None,
+    None,      None,      None,      None,      None,      None,      None,      None,  
+    None,      None,      None,      None,      None,      None,      None,      None, 
+    None,      None,      None,      None,      None,      None,      None,      None,  
+    None,      None,      None,      None,      None,      None,      None,      None, 
+    None,      None,      None,      None,      None,      None,      None,      None,  
+    None,      None,      None,      None,      None,      None,      None,      None,  
+    None,      None,      None,      None,      None,      None,      None,      None,  
+    None,      None,      None,      None,      None,      None,      None,
+))
+
 # ISO-10367's box drawing set
 graphdata.gsets["ir155"] = (96, 1, (
     None,      None,      None,      None,      None,      None,      None,      None,      

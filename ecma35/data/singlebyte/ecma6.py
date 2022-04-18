@@ -138,9 +138,30 @@ raw_variants = {
     # MSZ 7795/3 (Hungarian)
     "ir086": ([None, 0xA4, 0xC1, 0xC9, 0xD6, 0xDC, None, None, 
                            0xE1, 0xE9, 0xF6, 0xFC, 0x2DD], {}),
-    # JIS C 6220 / JIS X 0201 Roman set, OCR subset
+    # JIS X 9010 set for OCR-A font
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    # Violation of ECMA-6:1991: 0x28 is not (.
+    # Violation of ECMA-6:1991: 0x29 is not ).
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    # Violation of ECMA-6:1991: lowercase letters omitted.
+    "ir091": ([0xA3, None, -1, -1, 0xA5, 0x2442, -1, -1, 
+                           -1, -1, None, -1, -1], dict([
+        *{
+            0x21: -1,
+            0x28: 0x007B,
+            0x29: 0x007D,
+            0x3C: 0x2440,
+            0x3E: 0x2441,
+        }.items(),
+        *[(i, -1) for i in range(0x61, 0x7B)]])),
+    # JIS X 9010 primary set for OCR-B font
     "ir092": ([None, None, None, None, 0xA5, None, None, None, 
                            -1, None, None, None, -1], {}),
+    # JIS X 9010 Roman set for JIS X 9008 font
+    # Violation of ECMA-6:1991: lowercase letters omitted.
+    "ir094": ([None, None, None, None, 0xA5, None, None, None, 
+                           -1, -1, None, -1, -1], dict((i, -1) for i in range(0x61, 0x7B))),
     # T.61 subset of IRV
     "ir102": ([None, 0xA4, None, None, -1, None, -1, None, 
                            -1, -1, None, -1, -1], {}),
