@@ -132,6 +132,7 @@ graphdata.gsets["ir148"] = (96, 1, tuple((i,) for i in (
 
 # ISO 10367 supplementary set (containing characters in neither ISO-8859-2 nor the intersection
 #   of ISO-8859-1 and ISO-8859-9, but listed in Annex A of T.51; intended for use in a G3 set).
+#   Contrast IR-152.
 graphdata.gsets["ir154"] = (96, 1, (
     None,      None,      (0x0100,), (0x0108,), (0x010A,), None,      (0x0116,), (0x0112,), 
     (0x011C,), (0x2018,), (0x201C,), (0x2122,), (0x2190,), (0x2191,), (0x2192,), (0x2193,), 

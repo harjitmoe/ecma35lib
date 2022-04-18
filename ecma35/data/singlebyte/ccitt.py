@@ -145,7 +145,15 @@ _t51videotex3[58] = (0x25E3,)
 _t51videotex3[68] = (0x253C,)
 graphdata.gsets["ir099"] = graphdata.gsets["ir128"] = (94, 1, tuple(_t51videotex3))
 
-# TODO: ir152 (T.51 minus Latin-1 thru Latin-9 repertoires, which exists for some reason)
+# CENELEC supplement for characters listed in Annex A of T.51 but not in *any* of ISO-8859-1 thru 9.
+#   Contrast IR-154.
+_ir152 = [(i if n in (10, 12, 13, 14, 15, 26, 52, 53, 60, 61, 62, 63, 64, 70, 71, 74, 79, 86, 87, 90) else None) for n, i in enumerate(_t51)]
+_ir152[76] = (0x0174,)
+_ir152[77] = (0x0176,)
+_ir152[78] = (0x0178,)
+_ir152[92] = (0x0175,)
+_ir152[93] = (0x0177,)
+graphdata.gsets["ir152"] = (96, 1, tuple(_ir152))
 
 # ITU T.101-B (Videotex Data Syntax 1) Mosaic Set 1
 graphdata.gsets["ir137"] = (94, 1, ((0x2596,), (0x25AA,), (0x257B,), (0x259F,), (0x259C, 0xF87F), (0x1FB63, 0xF87F), (0x25B6,), (0x1FB3D, 0xF87F), (0x1F837,), (0x25C0, 0xF87A), (0x1F835, 0xF87A), (0x1FB9B,), (0x25D7, 0xF875), (0x25D7,), (0x25D7, 0xF87A), 
