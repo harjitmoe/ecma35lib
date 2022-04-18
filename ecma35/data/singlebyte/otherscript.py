@@ -70,14 +70,26 @@ graphdata.gsets["ir013win"] = (94, 1, _the_mother + (
 graphdata.gsetflags["ir013win"] |= {"GBK:NO_EURO"}
 graphdata.gsets["ir013euro"] = graphdata.gsets["ir013win"]
 
+# TODO: ir155 (ISO 10367 box drawing set), ir068 (APL)
+
+graphdata.gsets["ir155"] = (96, 1, (
+    None,      None,      None,      None,      None,      None,      None,      None,      
+    None,      None,      None,      None,      None,      None,      None,      None,      
+    None,      None,      None,      None,      None,      None,      None,      None,      
+    None,      None,      None,      None,      None,      None,      None,      None,      
+    (0x2503,), (0x2501,), (0x250F,), (0x2513,), (0x2517,), (0x251B,), (0x2523,), (0x252B,), 
+    (0x2533,), (0x253B,), (0x254B,), (0x2580,), (0x2584,), (0x2588,), (0x25AA,), None,      
+    (0x2502,), (0x2500,), (0x250C,), (0x2510,), (0x2514,), (0x2518,), (0x251C,), (0x2524,), 
+    (0x252C,), (0x2534,), (0x253C,), (0x2591,), (0x2592,), (0x2593,), None,      None,      
+    None,      None,      None,      None,      None,      None,      None,      None,      
+    None,      None,      None,      None,      None,      None,      None,      None,      
+    None,      None,      None,      None,      None,      None,      None,      None,      
+    None,      None,      None,      None,      None,      None,      None,      None,
+))
 
 # I.S. 434 Latin/Ogham RHS
 # Registered as a 96-set for some reason but doesn't actually allocate the corners.
 graphdata.gsets["ir208"] = (96, 1, 
              ((None,) * 64) + tuple((i,) for i in range(0x1680, 0x169D)) + (None, None, None))
-
-
-# TODO: ir155 (ISO 10367 box drawing set), ir068 (APL)
-
 
 
