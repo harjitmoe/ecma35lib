@@ -9,10 +9,6 @@
 from ecma35.data import graphdata
 from ecma35.data.singlebyte import sbmapparsers as parsers
 
-# I.S. 434 Latin/Ogham RHS
-# Registered as a 96-set for some reason but doesn't actually allocate the corners.
-graphdata.gsets["ir208"] = (96, 1, 
-             ((None,) * 64) + tuple((i,) for i in range(0x1680, 0x169D)) + (None, None, None))
 
 # Hankaku Katakana
 # Windows mappings:
@@ -73,6 +69,13 @@ graphdata.gsets["ir013win"] = (94, 1, _the_mother + (
                 (0x20AC,),) + tuple((i,) for i in range(0xF8F0, 0xF8F9)) + ((None,) * 21))
 graphdata.gsetflags["ir013win"] |= {"GBK:NO_EURO"}
 graphdata.gsets["ir013euro"] = graphdata.gsets["ir013win"]
+
+
+# I.S. 434 Latin/Ogham RHS
+# Registered as a 96-set for some reason but doesn't actually allocate the corners.
+graphdata.gsets["ir208"] = (96, 1, 
+             ((None,) * 64) + tuple((i,) for i in range(0x1680, 0x169D)) + (None, None, None))
+
 
 # TODO: ir155 (ISO 10367 box drawing set), ir068 (APL)
 
