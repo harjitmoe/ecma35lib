@@ -110,7 +110,7 @@ _bibliot51[18] = _bibliot51[19] = _bibliot51[20] = _bibliot51[59] = _bibliot51[6
 graphdata.gsets["ir053"] = (94, 1, tuple(_bibliot51))
 graphdata.gsets["ir053ext"] = (94, 1, tuple(_megabibliot51))
 
-# DIN 31624, related to ISO 5426-1 but avoids duplicating DIN 66003, lacks some chars that ISO 5426-1 has (adds?), and includes ASCII chars that DIN 66003 lacks.
+# DIN 31624, related to ISO 5426-1 but avoids duplicating DIN 66003, lacks some chars that ISO 5426-1 has (adds?) including base letters, and includes ASCII chars that DIN 66003 lacks and an extra base letter.
 _germanyt51 = _bibliot51[:]
 _germanyt51[3] = (0x00A4,)
 _germanyt51[4] = (0x2030,)
@@ -129,9 +129,30 @@ _germanyt51[69] = _germanyt51[85] = None
 graphdata.gsets["ir038"] = (94, 1, tuple(_germanyt51))
 graphdata.gsets["ir038ext"] = (94, 1, tuple(map(lambda a, b: a or b, _germanyt51, _megabibliot51)))
 
+# ANSI X3.110:1983, CSA T500:1983, ITU T.101-D. IR-099 is identical to IR-128; IR-128 is preferred.
+_t51videotex3 = _t51[1:-1]
+_t51videotex3[31] = (-0x20D1,)
+_t51videotex3[40] = (-0x0338,)
+_t51videotex3[53] = (0x2500,)
+_t51videotex3[54] = (0x2502,)
+_t51videotex3[55] = (0x2571,)
+_t51videotex3[56] = (0x2572,)
+_t51videotex3[57] = (0x25E2,)
+_t51videotex3[58] = (0x25E3,)
+_t51videotex3[68] = (0x253C,)
+graphdata.gsets["ir099"] = graphdata.gsets["ir128"] = (94, 1, tuple(_t51videotex3))
+
 # TODO: ir152 (T.51 minus Latin-1 thru Latin-9 repertoires, which exists for some reason)
-# TODO: ir099 (ANSI X3.110:1983 and Canadian CSA T500:1983) / ir128 (identical from ITU T.101-D) 
-# TODO: ir071/173 (Mosaics)
+
+# ITU T.101-B (Data Syntax 1) Mosaic Set 1
+graphdata.gsets["ir137"] = (94, 1, ((0x2596,), (0x25AA,), (0x257B,), (0x259F,), (0x259C, 0xF87F), (0x1FB63, 0xF87F), (0x25B6,), (0x1FB3D, 0xF87F), (0x1F837,), (0x25C0, 0xF87A), (0x1F835, 0xF87A), (0x1FB9B,), (0x25D7, 0xF875), (0x25D7,), (0x25D7, 0xF87A), 
+(0x2584,), (0x2597,), (0x25AC,), (0x2579,), (0x2599,), (0x259B, 0xF87F), (0x1FB58, 0xF87F), (0x25C0,), (0x1FB48, 0xF87F), (0x1F835,), (0x25B6, 0xF87A), (0x1F837, 0xF87A), (0x1FB9A,), (0x25D6, 0xF875), (0x25D6,), (0x25D6, 0xF87A),
+None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (0x1FB52,), (0x1FB53,), (0x1FB54,), (0x1FB55,), (0x1FB56,), (0x25E5,), (0x1FB57,), (0x1FB58,), (0x1FB59,), (0x1FB5A,), (0x1FB5B,), (0x1FB5C,), (0x1FB6C,), (0x1FB6D,), None, None, (0x1FB5D,), (0x1FB5E,), (0x1FB5F,), (0x1FB60,), (0x1FB61,), (0x25E4,), (0x1FB62,), (0x1FB63,), (0x1FB64,), (0x1FB65,), (0x1FB66,), (0x1FB67,), (0x1FB6E,), (0x1FB6F,), None))
+
+# ITU T.101-B (Data Syntax 1) Mosaic Set 2
+graphdata.gsets["ir071"] = (94, 1, ((0x1FB00,), (0x1FB01,), (0x1FB02,), (0x1FB03,), (0x1FB04,), (0x1FB05,), (0x1FB06,), (0x1FB07,), (0x1FB08,), (0x1FB09,), (0x1FB0A,), (0x1FB0B,), (0x1FB0C,), (0x1FB0D,), (0x1FB0E,), (0x1FB0F,), (0x1FB10,), (0x1FB11,), (0x1FB12,), (0x1FB13,), (0x258C,), (0x1FB14,), (0x1FB15,), (0x1FB16,), (0x1FB17,), (0x1FB18,), (0x1FB19,), (0x1FB1A,), (0x1FB1B,), (0x1FB1C,), (0x1FB1D,), (0x1FB3C,), (0x1FB3D,), (0x1FB3E,), (0x1FB3F,), (0x1FB40,), (0x25E3,), (0x1FB41,), (0x1FB42,), (0x1FB43,), (0x1FB44,), (0x1FB45,), (0x1FB46,), (0x1FB68,), (0x1FB69,), (0x1FB70,), (0x1FB95,), (0x1FB47,), (0x1FB48,), (0x1FB49,), (0x1FB4A,), (0x1FB4B,), (0x25E2,), (0x1FB4C,), (0x1FB4D,), (0x1FB4E,), (0x1FB4F,), (0x1FB50,), (0x1FB51,), (0x1FB6A,), (0x1FB6B,), (0x1FB75,), (0x2588,), (0x1FB1E,), (0x1FB1F,), (0x1FB20,), (0x1FB21,), (0x1FB22,), (0x1FB23,), (0x1FB24,), (0x1FB25,), (0x1FB26,), (0x1FB27,), (0x2590,), (0x1FB28,), (0x1FB29,), (0x1FB2A,), (0x1FB2B,), (0x1FB2C,), (0x1FB2D,), (0x1FB2E,), (0x1FB2F,), (0x1FB30,), (0x1FB31,), (0x1FB32,), (0x1FB33,), (0x1FB34,), (0x1FB35,), (0x1FB36,), (0x1FB37,), (0x1FB38,), (0x1FB39,), (0x1FB3A,), (0x1FB3B,)))
+
+# TODO: ir072/173 (other mosaics)
 
 
 
