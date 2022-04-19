@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020.
+# By HarJIT in 2019/2020/2022.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -13,7 +13,7 @@ directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "sbmaps")
 _temp = []
 identitymap = lambda pointer, ucs: ucs
 
-def read_single_byte(fil, *, mapper=identitymap, typ="plainext"):
+def read_single_byte(fil, *, mapper=identitymap, typ="plainext", filter_to_single=False):
     for _i in open(os.path.join(directory, fil), "r", encoding="utf-8"):
         pointer = None
         if not _i.strip():
@@ -37,6 +37,8 @@ def read_single_byte(fil, *, mapper=identitymap, typ="plainext"):
         elif _i[:2] == "0x":
             # Consortium-style format
             byts, ucs = _i.split("\t", 2)[:2]
+            if len(byts) > 4 and filter_to_single:
+                continue
             assert len(byts) == 4, byts
             byts = byts[2:4]
         elif typ != "plainext":

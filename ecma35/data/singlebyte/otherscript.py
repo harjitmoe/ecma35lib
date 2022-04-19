@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019, 2020.
+# By HarJIT in 2019, 2020, 2022.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -87,7 +87,8 @@ graphdata.gsets["ir050"] = (94, 1, (
     (0x2088,), (0x2089,), (0x03A3,), (0x03BC,), (0x03BD,), (0x03C9,), (0x03C0,)
 ))
 
-# TODO: ir068 (APL)
+# 7-bit APL
+graphdata.gsets["ir068"] = (94, 1, parsers.read_single_byte("UTC/APL-ISO-IR-68.TXT", typ="GL94", filter_to_single=True))
 
 # JIS X 9010 code for OCR-B font characters absent from JIS-Roman, basically a very small subset of
 #   ISO-8859-1's RHS where the backslash is substituted for the yen sign (compare the derivation of

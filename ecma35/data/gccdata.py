@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020.
+# By HarJIT in 2020, 2022.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import os, json, sys
+import os, json, sys, binascii
 from ecma35.data.names import namedata
 
 # GCC invocation (per ECMA-48):
@@ -15,9 +15,10 @@ from ecma35.data.names import namedata
 #   CSI 2 SP _: end of combining text.
 # This applies to combining in one space: it explicitly does not (per ECMA-43) overstamp anything.
 
-__all__ = ("gcc_sequences", "gcc_tuples")
+__all__ = ("gcc_sequences", "gcc_tuples", "bs_handle")
 
 cachefile = os.path.join(os.path.dirname(os.path.abspath(__file__)), "gcc_sequences.json")
+bscachefile = os.path.join(os.path.dirname(os.path.abspath(__file__)), "bs_sequences.json")
 
 if not os.path.exists(cachefile):
     gcc_sequences = {
@@ -28,7 +29,7 @@ if not os.path.exists(cachefile):
         "Pts": "₧",
         # The basmala is included as a single codepoint but, unlike the SAW, doesn't have a
         # decomposition. So, including it manually (at the same level of pointing as with the SAW).
-        "بسم الله الرحمن الرحيم": "﷽",
+        r"بسم الله الرحمن الرحيم": r"﷽",
         # MacJapanese mapping uses a character combination of ↓ and ↑ for ⇵ (added to UCS later??).
         # Other adjacently stacked vertical arrow pairs are included for purpose of completeness.
         "↓↑": "⇵", "↑↓": "⇅", "↑↑": "⇈", "↓↓": "⇊",
@@ -104,6 +105,113 @@ gcc_tuples = {}
 for i, j in gcc_sequences.items():
     gcc_tuples[tuple(ord(k) for k in i)] = tuple(ord(k) for k in j)
 
+rbs_maps = {
+    " ̈ "[1]: ('"', "¨"),
+    " ́ "[1]: ("'", "´", "ˊ"),
+    " ̧ "[1]: (",", "¸"),
+    " ̦ "[1]: (",",),
+    " ̨ "[1]: (",", "˛"),
+    " ̂ "[1]: ("^", "ˆ"),
+    " ̱ "[1]: ("_",),
+    " ̀ "[1]: ("`", "ˋ"),
+    " ̃ "[1]: ("~", "˜"),
+    " ̄ "[1]: ("¯", "‾"),
+    " ̣ "[1]: (".",),
+    " ̊ "[1]: ("°", "*"),
+    " ̵ "[1]: ("-",),
+    " ̸ "[1]: ("/",),
+    " ̆ "[1]: ("˘",),
+    " ̌ "[1]: ("ˇ",),
+    " ̋ "[1]: ("˝",),
+    " ̇ "[1]: ("˙",),
+}
 
+def breakup(i):
+    if i in namedata.canonical_decomp:
+        return namedata.canonical_decomp[i]
+    elif i in namedata.compat_decomp:
+        candidate = namedata.compat_decomp[i]
+        if candidate[0] == "compat":
+            if len(candidate[1]) > 1:
+                if namedata.get_ucscategory(candidate[1][1]) == "Mn":
+                    return candidate[1]
+    return None
+
+def recursive_breakup(i):
+    stack = []
+    while (b := breakup(i)) != None:
+        stack.extend(b[1:][::-1])
+        i = b[0]
+    return "".join([i, *stack[::-1]])
+
+for i in range(0x10FFFF):
+    i = chr(i)
+    rb = recursive_breakup(i)
+    if rb[0] == " " and i != " ":
+        rbs_maps.setdefault("".join(rb[1:]), (i,))
+
+bs_maps = {}
+for compchar, spacchars in rbs_maps.items():
+    for spacchar in spacchars:
+        bs_maps[spacchar] = compchar
+bs_maps[","] = " ̦ "[1]
+
+bs_deflators = {}
+for i in range(0x10FFFF):
+    i = chr(i)
+    bb = breakup(i)
+    if not bb:
+        continue
+    rb = recursive_breakup(i)
+    for k in {rb, bb}:
+        if len(k) >= 2 and k[1:] in rbs_maps:
+            base = k[0]
+            combines = rbs_maps[k[1:]]
+            for combine in combines:
+                bs_deflators[(base, combine)] = i
+                bs_deflators[(combine, base)] = i
+
+# Clearly wrong:
+# (('-', '⊂'), '⌾'),
+# (('⊂', '-'), '⌾'),
+# APL-ISO-IR-68.TXT lists U+233E as 0x5A085F and 0x5F085A which is wrong.
+# It should be 0x4A084F and 0x4F084A.
+
+_multis = []
+_singles = {}
+with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "singlebyte", "sbmaps", "UTC", "APL-ISO-IR-68.TXT")) as f:
+    for line in f:
+        if not line.strip() or line[0] == "#":
+            continue
+        byts, ucs, junk = line.split(None, 2)
+        byts = binascii.unhexlify(byts[2:])
+        ucs = chr(int(ucs[2:], 16))
+        if ucs == "\u233E": # See above
+            byts = byts.replace(b"\x5A", b"\x4A").replace(b"\x5F", b"\x4F")
+        if len(byts) == 1:
+            _singles[byts[0]] = ucs
+        else:
+            _multis.append((ucs, tuple(byts)))
+for (target, rawcomp) in _multis:
+    comp = tuple(_singles[i] for i in rawcomp if i != 8)
+    bs_deflators[comp] = target
+
+def test():
+    import pyuca, pprint
+    collator = pyuca.Collator()
+    pprint.pprint(sorted(bs_deflators.items(), key=lambda pair: [collator.sort_key(pair[1]), *pair]))
+
+def bs_handle(charses):
+    scratch = tuple(charses)
+    while len(scratch) > 1:
+        if scratch[:2] in bs_deflators:
+            scratch = (bs_deflators[scratch[:2]],) + scratch[2:]
+        elif scratch[-2:] in bs_deflators:
+            scratch = (bs_deflators[scratch[-2:]],) + scratch[:-2]
+        else:
+            bases = [i for i in scratch if i not in bs_maps]
+            combos = [bs_maps[i] for i in scratch if i in bs_maps]
+            return "\b".join(bases) + "".join(combos)
+    return scratch[0]
 
 

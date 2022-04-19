@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019.
+# By HarJIT in 2019, 2022.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -41,7 +41,8 @@ def process_stream(stream, *, lastfilter=None, **kwargs): # The entry point.
        controlsets, fixedcontrols, invocations, gccsequences, elexfilter, prefixdiacritics, \
        designations, graphsets, simpleprinter, escsequences, csisequences, controlstrings, \
        rawfilter, unkdocsfilter, ecma35docsfilter, hangulfillers, utf1filter, shiftjisfilter, \
-       scsufilter, uhcfilter, gbkfilter, gbhalfcodes, plainextasciifilter, bigfivefilter
+       scsufilter, uhcfilter, gbkfilter, gbhalfcodes, plainextasciifilter, bigfivefilter, \
+       bssequences
     for f in [_tokenise_stream, ecma35docsfilter.decode_ecma35docs, utf8filter.decode_utf8, 
               utf1filter.decode_utf1, shiftjisfilter.decode_shiftjis, utf32filter.decode_utf32, 
               scsufilter.decode_scsu, uhcfilter.decode_uhc, gbkfilter.decode_gbk, elexfilter.decode_elex,
@@ -55,7 +56,7 @@ def process_stream(stream, *, lastfilter=None, **kwargs): # The entry point.
               invocations.decode_invocations, graphsets.decode_graphical_sets, 
               hangulfillers.proc_hangul_fillers, gccsequences.proc_gcc_sequences, 
               formateffectors.format_effectors, prefixdiacritics.handle_prefix_diacritics, 
-              lastfilter or simpleprinter.simple_print]:
+              bssequences.proc_bs_sequences, lastfilter or simpleprinter.simple_print]:
         stream = f(stream, state)
     yield from stream
 
