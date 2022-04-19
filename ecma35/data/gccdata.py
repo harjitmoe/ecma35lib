@@ -156,7 +156,7 @@ for compchar, spacchars in rbs_maps.items():
         bs_maps[spacchar] = compchar
 bs_maps[","] = " ̦ "[1]
 
-bs_deflators = {}
+bs_deflators = {("o", "/"): "ø", ("O", "/"): "Ø", ("/", "o"): "ø", ("/", "O"): "Ø"}
 for i in range(0x10FFFF):
     i = chr(i)
     bb = breakup(i)
@@ -201,7 +201,7 @@ def test():
     collator = pyuca.Collator()
     pprint.pprint(sorted(bs_deflators.items(), key=lambda pair: [collator.sort_key(pair[1]), *pair]))
 
-def bs_handle(charses):
+def bs_handle_left_preference(charses):
     scratch = tuple(charses)
     while len(scratch) > 1:
         if scratch[:2] in bs_deflators:
@@ -213,5 +213,23 @@ def bs_handle(charses):
             combos = [bs_maps[i] for i in scratch if i in bs_maps]
             return "\b".join(bases) + "".join(combos)
     return scratch[0]
+
+def bs_handle_right_preference(charses):
+    scratch = tuple(charses)
+    while len(scratch) > 1:
+        if scratch[-2:] in bs_deflators:
+            scratch = (bs_deflators[scratch[-2:]],) + scratch[:-2]
+        elif scratch[:2] in bs_deflators:
+            scratch = (bs_deflators[scratch[:2]],) + scratch[2:]
+        else:
+            bases = [i for i in scratch if i not in bs_maps]
+            combos = [bs_maps[i] for i in scratch if i in bs_maps]
+            return "\b".join(bases) + "".join(combos)
+    return scratch[0]
+
+def bs_handle(charses):
+    return next(iter(sorted([
+        bs_handle_left_preference(charses),
+        bs_handle_right_preference(charses)], key=len)))
 
 
