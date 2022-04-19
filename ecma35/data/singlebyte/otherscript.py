@@ -70,6 +70,23 @@ graphdata.gsets["ir013win"] = (94, 1, _the_mother + (
 graphdata.gsetflags["ir013win"] |= {"GBK:NO_EURO"}
 graphdata.gsets["ir013euro"] = graphdata.gsets["ir013win"]
 
+# Non-Cyrillic INIS RHS. Greek support is insubstantial enough that it probably doesn't belong
+#   in greek.py.
+graphdata.gsets["ir050"] = (94, 1, (
+               None,      None,      None,      None,      None,      None,      None, 
+    None,      None,      None,      None,      None,      None,      None,      None,
+    None,      None,      None,      None,      None,      None,      None,      None, 
+    None,      None,      (0x03B1,), (0x03B2,), (0x03B3,), (0x03C3,), (0x039E,), None, 
+    None,      None,      None,      None,      None,      None,      None,      None, 
+    None,      None,      None,      None,      None,      None,      None,      None, 
+    None,      None,      None,      None,      None,      None,      None,      None, 
+    None,      None,      None,      None,      None,      None,      (0x2192,), (0x222B,), 
+    (0x2070,), (0xB9,),   (0xB2,),   (0xB3,),   (0x2074,), (0x2075,), (0x2076,), (0x2077,), 
+    (0x2078,), (0x2079,), (0x207A,), (0x207B,), (0x221A,), (0x0394,), (0x039B,), (0x03A9,), 
+    (0x2080,), (0x2081,), (0x2082,), (0x2083,), (0x2084,), (0x2085,), (0x2086,), (0x2087,), 
+    (0x2088,), (0x2089,), (0x03A3,), (0x03BC,), (0x03BD,), (0x03C9,), (0x03C0,)
+))
+
 # TODO: ir068 (APL)
 
 # JIS X 9010 code for OCR-B font characters absent from JIS-Roman, basically a very small subset of
