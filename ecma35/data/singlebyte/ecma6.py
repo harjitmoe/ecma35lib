@@ -165,10 +165,10 @@ raw_variants = {
     # T.61 subset of IRV
     "ir102": ([None, 0xA4, None, None, -1, None, -1, None, 
                            -1, -1, None, -1, -1], {}),
-    # CSA Z243.4:1985 main version (Canadian French)
+    # CSA Z243.4:1985 primary set main version (Canadian French)
     "ir121": ([None, None, 0xE0, 0xE2, 0xE7, 0xEA, 0xEE, None, 
                            0xF4, 0xE9, 0xF9, 0xE8, 0xFB], {}),
-    # CSA Z243.4:1985 alternative version (Canadian French)
+    # CSA Z243.4:1985 primary set alternative version (Canadian French)
     "ir122": ([None, None, 0xE0, 0xE2, 0xE7, 0xEA, 0xC9, None, 
                            0xF4, 0xE9, 0xF9, 0xE8, 0xFB], {}),
     # JUS I.B1.002 (CROSCII / Croatian / YUSCII for Gajica)

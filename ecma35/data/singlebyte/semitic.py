@@ -9,7 +9,7 @@
 from ecma35.data import graphdata
 from ecma35.data.singlebyte import sbmapparsers as parsers
 
-# TODO: ir059 (CODAR-U Arabic), ir089 (ASMO 449)
+# TODO: ir059 (CODAR-U Arabic)
 
 # ASMO-449 7-bit Arabic
 graphdata.gsets["ir089"] = (94, 1, tuple((i,) if i else None for i in (
