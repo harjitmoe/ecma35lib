@@ -23,10 +23,10 @@ def proc_bs_sequences(stream, state):
         elif token[:2] == ("CTRL", "BS") and len(stack) % 2:
             stack.append(token)
         elif stack:
-            if any(i[0] == "CHAR" and i[1] < 0 for i in stack) or any(
-                   i[0] == "COMPCHAR" and
-                   any(j < 0 for j in i[1])
-                   for i in stack):
+            if len(stack) <= 2 or any(i[0] == "CHAR" and i[1] < 0 for i in stack) or any(
+                    i[0] == "COMPCHAR" and
+                    any(j < 0 for j in i[1])
+                    for i in stack):
                 yield from stack
             else:
                 charses = tuple(chr(i[1]) if i[0] == "CHAR" else "".join(map(chr, i[1]))

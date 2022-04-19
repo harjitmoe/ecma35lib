@@ -19,7 +19,7 @@ def simple_print(stream, state):
                 raise ValueError("prefix diacritics unhandled")
         elif token[0] == "COMPCHAR":
             if token[1][0] >= 0:
-                print(end = "".join(chr(i) for i in token[1]))
+                print(end = "".join(chr(i) for i in token[1] if i < 0xD800 or i >= 0xE000))
             else:
                 raise ValueError("prefix diacritics unhandled")
         elif token[0] in ("RAWBYTE",):
