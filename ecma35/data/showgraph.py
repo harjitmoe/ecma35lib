@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020, 2021.
+# By HarJIT in 2020, 2021, 2022.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -229,7 +229,7 @@ def show(name, *, plane=None):
             curchar = chr(i)
             zenkaku = (ucd.east_asian_width(chr(i)) in ("W", "F"))
         #
-        print(curchar, end = " " if not zenkaku else "")
+        print(curchar, end = "\u200E " if not zenkaku else "\u200E")
     for i in range((hs - (n % hs) - 1) % hs):
         print(end = "\uFFFD ")
     print()
