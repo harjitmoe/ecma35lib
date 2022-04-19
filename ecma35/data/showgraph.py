@@ -229,6 +229,8 @@ def show(name, *, plane=None):
             curchar = chr(i)
             zenkaku = (ucd.east_asian_width(chr(i)) in ("W", "F"))
         #
+        if ucd.category(curchar[0]) == "Mn":
+            curchar = "\uFF65" + curchar
         print(curchar, end = "\u200E " if not zenkaku else "\u200E")
     for i in range((hs - (n % hs) - 1) % hs):
         print(end = "\uFFFD ")
