@@ -34,7 +34,8 @@ def process_stream(stream, *, lastfilter=None, **kwargs): # The entry point.
     # regard_bom=1) seems reasonable. However, regarding the designated noncharacter U+FFFE as a
     # generic "switch byte order" control probably isn't, except on trusted data containing
     # misconcatenated UTF-16 (our regard_bom=2).
-    statedict = {"osc_bel_term": True, "default_endian": ">", "regard_bom": 1, "docsmode": None}
+    statedict = {"osc_bel_term": True, "default_endian": ">", "regard_bom": 1, "bs_compose": True,
+                 "docsmode": None}
     statedict.update(kwargs)
     state = types.SimpleNamespace(**statedict)
     from ecma35.decoder import utf8filter, utf16filter, utf32filter, formateffectors, \

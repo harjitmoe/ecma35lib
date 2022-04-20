@@ -18,7 +18,11 @@ def proc_bs_sequences(stream, state):
         except StopIteration:
             break
         reconsume = None
-        if token[0] in ("CHAR", "COMPCHAR") and not (len(stack) % 2):
+        if not state.bs_compose:
+            if stack:
+                yield from stack
+            yield token
+        elif token[0] in ("CHAR", "COMPCHAR") and not (len(stack) % 2):
             stack.append(token)
         elif token[:2] == ("CTRL", "BS") and len(stack) % 2:
             stack.append(token)
