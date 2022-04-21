@@ -585,12 +585,12 @@ def dump_plane(outfile, planefunc, kutenfunc,
     print("<h1>{}{}</h1>".format(planefunc(number), h), file=outfile)
     if menuurl or lasturl or nexturl:
         _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname)
+    if planewarn:
+        print(f"<p>Warning: {planewarn}</p>", file=outfile)
     if not nonvacant_sets:
         notice = noallocatenotice or "There are no allocated codepoints in this range."
         print(f"<p>{notice}</p>", file=outfile)
         return
-    if planewarn:
-        print(f"<p>Warning: {planewarn}</p>", file=outfile)
     # Sparse mode is for large sections with barely any allocations, such as the higher planes
     #   of CCCII. Including all the blank space to scroll makes the table barely usable.
     allocated_slots = 0
