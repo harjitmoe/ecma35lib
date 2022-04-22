@@ -143,4 +143,23 @@ graphdata.gsets["ir155"] = (96, 1, (
 graphdata.gsets["ir208"] = (96, 1, 
              ((None,) * 64) + tuple((i,) for i in range(0x1680, 0x169D)) + (None, None, None))
 
+# ISO-10586:1996 Georgian
+# Not assigned an escape, but given the number here (possibly provisionally, but any new escape or
+#   IR number being assigned in the future seems unlikely since ISO-IR is basically legacy now):
+#   https://www.evertype.com/standards/iso10646/pdf/iso-10586.pdf
+graphdata.gsets["ir222"] = (94, 1, (
+               None,      None,      None,      None,      None,      None,      None,      
+    None,      None,      None,      None,      None,      None,      None,      None,      
+    None,      None,      None,      None,      None,      None,      None,      None,      
+    None,      None,      None,      None,      None,      None,      None,      None,      
+    None,      None,      None,      None,      None,      None,      None,      None,      
+    None,      None,      None,      None,      None,      (0x0589,), (0x0387,), (0x10FB,),
+    (0x10D0,), (0x10D1,), (0x10D2,), (0x10D3,), (0x10D4,), (0x10D5,), (0x10D6,), (0x10F1,),
+    (0x10D7,), (0x10D8,), (0x10D9,), (0x10DA,), (0x10DB,), (0x10DC,), (0x10F2,), (0x10DD,),
+    (0x10DE,), (0x10DF,), (0x10E0,), (0x10E1,), (0x10E2,), (0x10E3,), (0x10F3,), (0x10E4,),
+    (0x10E5,), (0x10E6,), (0x10E7,), (0x10E8,), (0x10E9,), (0x10EA,), (0x10EB,), (0x10EC,),
+    (0x10ED,), (0x10EE,), (0x10F4,), (0x10EF,), (0x10F0,), (0x10F5,), (0x10F6,), None,      
+    None,      None,      None,      None,      None,      None,      None,
+))
+
 

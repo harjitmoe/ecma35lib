@@ -120,6 +120,7 @@ Miscellaneous single-byte assignments:
 |`G*D4 $ 9`|7-bit Icelandic|
 |`G*D4 $ :`|7-bit Polish|
 |`G*D4 $ ;`|ISO 11822:1996 Arabic supplementary set|
+|`G*D4 $ <`|ISO 10586:1996 Georgian|
 |``IRR 1 G*D4 ` ``|Danish equivalent to NS 4551 (IBM's 1017)|
 |`G*D6 ! 0`|RFC 1345's so-called ISO-IR-111/ECMA-Cyrillic (incompatible with ISO-IR-111 itself).|
 |`IRR ? G*D6 $ 7`|Symbol font encoding, GR range (with euro)|
