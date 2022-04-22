@@ -168,12 +168,6 @@ def show(name, *, plane=None):
         if i is None:
             curchar = "\uFFFD"
             zenkaku = False
-        elif isinstance(i, tuple) and (len(i) == 1) and (i[0] < 0):
-            curchar = "\u25CC" + chr(-i[0])
-            zenkaku = False
-        elif (not isinstance(i, tuple)) and (i < 0):
-            curchar = "\u25CC" + chr(-i)
-            zenkaku = False
         elif isinstance(i, tuple) and (namedata.get_ucscategory(chr(abs(i[0]))) == "Co"):
             if len(i) == 1:
                 curchar = "\x1B[35m\uFFFC\x1B[m"
