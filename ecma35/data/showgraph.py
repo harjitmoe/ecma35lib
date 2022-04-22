@@ -174,7 +174,7 @@ def show(name, *, plane=None):
         elif (not isinstance(i, tuple)) and (i < 0):
             curchar = "\u25CC" + chr(-i)
             zenkaku = False
-        elif isinstance(i, tuple) and (namedata.get_ucscategory(chr(i[0])) == "Co"):
+        elif isinstance(i, tuple) and (namedata.get_ucscategory(chr(abs(i[0]))) == "Co"):
             if len(i) == 1:
                 curchar = "\x1B[35m\uFFFC\x1B[m"
             else:
@@ -184,7 +184,9 @@ def show(name, *, plane=None):
             curchar = "\x1B[31m\uFFFC\x1B[m"
             zenkaku = False
         elif isinstance(i, tuple):
-            curchar = "".join(chr(j) for j in i)
+            curchar = "".join(chr(abs(j)) for j in i)
+            if i[0] < 0:
+                curchar = curchar[::-1]
             if 0xF870 <= ord(curchar[-1]) <= 0xF87F:
                 if curchar[-1] == "\uF874":
                     # Left position (red).
@@ -218,7 +220,7 @@ def show(name, *, plane=None):
                     curchar = "\x1B[32m" + curchar[:-1] + "\x1B[m"
                 else:
                     curchar = "\x1B[33m" + curchar[:-1] + "\x1B[m"
-            zenkaku = (ucd.east_asian_width(chr(i[0])) in ("W", "F"))
+            zenkaku = (ucd.east_asian_width(chr(abs(i[0]))) in ("W", "F"))
         elif namedata.get_ucscategory(chr(i)) == "Co":
             curchar = "\x1B[32m\uFFFC\x1B[m"
             zenkaku = False
