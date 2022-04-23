@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020, 2021.
+# By HarJIT in 2020, 2021, 2022.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -42,70 +42,70 @@ def swap_arrows(t):
 print("Loading 1")
 plane1 = (1, ("UTC Big5", "UTC CNS", "MS Big5", "Mac Big5", "IBM Big5", "Web Big5", "Yasuoka CNS",
               "ICU '92CNS", "ICU EUC'14", "GOV-TW CNS", "Output"), [
-          swap_arrows(graphdata.gsets["ir171-utcbig5"][2]),
-          graphdata.gsets["ir171-utc"][2],
-          swap_arrows(graphdata.gsets["ir171-ms"][2]),
-          swap_arrows(graphdata.gsets["ir171-mac"][2]),
-          swap_arrows(graphdata.gsets["ir171-ibm950"][2]),
-          swap_arrows(graphdata.gsets["ir171-web"][2]),
-          graphdata.gsets["ir171-yasuoka"][2],
-          graphdata.gsets["ir171-icu"][2],
-          graphdata.gsets["ir171-icu-2014"][2],
-          graphdata.gsets["ir171-govtw"][2],
-          graphdata.gsets["ir171"][2],
+          swap_arrows(graphdata.gsets["ir171/utcbig5"][2]),
+          graphdata.gsets["ir171/utc"][2],
+          swap_arrows(graphdata.gsets["ir171/ms"][2]),
+          swap_arrows(graphdata.gsets["ir171/mac"][2]),
+          swap_arrows(graphdata.gsets["ir171/ibm950"][2]),
+          swap_arrows(graphdata.gsets["ir171/web"][2]),
+          graphdata.gsets["ir171/yasuoka"][2],
+          graphdata.gsets["ir171/icu"][2],
+          graphdata.gsets["ir171/icu-2014"][2],
+          graphdata.gsets["ir171/govtw"][2],
+          graphdata.gsets["ir171/full"][2],
 ])
 
 print("Loading 2")
 plane2 = (2, ("Big5", "CNS 11643"), [
-          graphdata.gsets["ir172-big5"][2],
+          graphdata.gsets["ir172/big5"][2],
           graphdata.gsets["ir172"][2],
 ])
 
 print("Loading 3")
 plane3 = (3, ("UTC CNS", "Yasuoka CNS", "ICU 1992 CNS",
               "ICU EUC 2014", "GOV-TW CNS", "Output", "Output Alt"), [
-          graphdata.gsets["ir183-utc"][2],
-          graphdata.gsets["ir183-yasuoka"][2],
-          graphdata.gsets["ir183-icu"][2],
-          graphdata.gsets["ir183-icu-2014"][2],
-          graphdata.gsets["ir183"][2],
-          graphdata.gsets["ir183-full"][2],
-          graphdata.gsets["ir183-1988plus"][2],
+          graphdata.gsets["ir183/utc"][2],
+          graphdata.gsets["ir183/yasuoka"][2],
+          graphdata.gsets["ir183/icu"][2],
+          graphdata.gsets["ir183/icu-2014"][2],
+          graphdata.gsets["ir183/govtw"][2],
+          graphdata.gsets["ir183/full"][2],
+          graphdata.gsets["ir183/1988plus"][2],
 ])
 
 print("Loading 4")
 plane4 = (4, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
-          graphdata.gsets["ir184-yasuoka"][2],
-          graphdata.gsets["ir184-icu"][2],
-          graphdata.gsets["ir184-icu-2014"][2],
-          graphdata.gsets["ir184-govtw"][2],
+          graphdata.gsets["ir184/yasuoka"][2],
+          graphdata.gsets["ir184/icu"][2],
+          graphdata.gsets["ir184/icu-2014"][2],
+          graphdata.gsets["ir184/govtw"][2],
           graphdata.gsets["ir184"][2],
 ])
 
 print("Loading 5")
 plane5 = (5, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
-          graphdata.gsets["ir185-yasuoka"][2],
-          graphdata.gsets["ir185-icu"][2],
-          graphdata.gsets["ir185-icu-2014"][2],
-          graphdata.gsets["ir185-govtw"][2],
+          graphdata.gsets["ir185/yasuoka"][2],
+          graphdata.gsets["ir185/icu"][2],
+          graphdata.gsets["ir185/icu-2014"][2],
+          graphdata.gsets["ir185/govtw"][2],
           graphdata.gsets["ir185"][2],
 ])
 
 print("Loading 6")
 plane6 = (6, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
-          graphdata.gsets["ir186-yasuoka"][2],
-          graphdata.gsets["ir186-icu"][2],
-          graphdata.gsets["ir186-icu-2014"][2],
-          graphdata.gsets["ir186-govtw"][2],
+          graphdata.gsets["ir186/yasuoka"][2],
+          graphdata.gsets["ir186/icu"][2],
+          graphdata.gsets["ir186/icu-2014"][2],
+          graphdata.gsets["ir186/govtw"][2],
           graphdata.gsets["ir186"][2],
 ])
 
 print("Loading 7")
 plane7 = (7, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
-          graphdata.gsets["ir187-yasuoka"][2],
-          graphdata.gsets["ir187-icu"][2],
-          graphdata.gsets["ir187-icu-2014"][2],
-          graphdata.gsets["ir187-govtw"][2],
+          graphdata.gsets["ir187/yasuoka"][2],
+          graphdata.gsets["ir187/icu"][2],
+          graphdata.gsets["ir187/icu-2014"][2],
+          graphdata.gsets["ir187/govtw"][2],
           graphdata.gsets["ir187"][2],
 ])
 

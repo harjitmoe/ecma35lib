@@ -137,19 +137,33 @@ for index in ir184_to_old_ir183:
 # Planes present in the original 1986 edition of CNS 11643.
 # Closely related to Big5. ISO-IR numbers in the 170s (whereas the 1992 additions are in the 180s).
 # ir171 was mostly kept the same until 2007, then extended a bit, due to being the non-kanji plane.
-graphdata.gsets["ir171"] = cns1 = (94, 2, cns[planesize * 0 : planesize * 1])
-graphdata.gsets["ir171-govtw"] = cns1_gov = (94, 2, cns_gov[planesize * 0 : planesize * 1])
-graphdata.gsets["ir171-ibm"] = euctw_g1_ibm = (94, 3, parsers.decode_main_plane_euc(
+graphdata.gsets["ir171/full"] = cns1_full = (94, 2, parsers.fuse([
+    cns[planesize * 0 : planesize * 1],
+    cns_icu_2014[planesize * 0 : planesize * 1]
+], "CSIC1-Full.json"))
+# 1992: 01-01 thru 05-80, 06-01 thru 06-30, 07-01 thru 09-25, 34-01 thru 34-33, 36-01 onward
+graphdata.gsets["ir171"] = cns1_1992 = (94, 2,
+    tuple(i if n <= (4 * 94 + 79)
+            or (5 * 94) <= n <= (5 * 94 + 29)
+            or (6 * 94) <= n <= (8 * 94 + 24)
+            or (33 * 94) <= n <= (33 * 94 + 32)
+            or (35 * 94) <= n
+            else None
+          for n, i in enumerate(cns[planesize * 0 : planesize * 1])
+    )
+)
+graphdata.gsets["ir171/govtw"] = cns1_gov = (94, 2, cns_gov[planesize * 0 : planesize * 1])
+graphdata.gsets["ir171/ibm"] = euctw_g1_ibm = (94, 3, parsers.decode_main_plane_euc(
     parsers.parse_file_format("ICU/euc-tw-2014.ucm"),
     "euc-tw-2014.ucm",
     plane = 1))
-graphdata.gsets["ir171-utc"] = (94, 3, parsers.decode_main_plane_gl(
+graphdata.gsets["ir171/utc"] = (94, 3, parsers.decode_main_plane_gl(
     parsers.parse_file_format("UTC/CNS11643.TXT"), 
     "CNS11643.TXT", 
     plane = 1))
-graphdata.gsets["ir171-yasuoka"] = (94, 2, cns_yasuoka[planesize * 0 : planesize * 1])
-graphdata.gsets["ir171-icu"] = (94, 2, cns_icu_old[planesize * 0 : planesize * 1])
-graphdata.gsets["ir171-icu-2014"] = (94, 2, cns_icu_2014[planesize * 0 : planesize * 1])
+graphdata.gsets["ir171/yasuoka"] = (94, 2, cns_yasuoka[planesize * 0 : planesize * 1])
+graphdata.gsets["ir171/icu"] = (94, 2, cns_icu_old[planesize * 0 : planesize * 1])
+graphdata.gsets["ir171/icu-2014"] = (94, 2, cns_icu_2014[planesize * 0 : planesize * 1])
 
 # ir172, ir172-govtw, ir172-icu, ir172-icu-2014, ir172-utc, ir172-yasuoka are all same
 graphdata.gsets["ir172"] = cns2 = (94, 2, cns[planesize * 1 : planesize * 2])
@@ -168,7 +182,7 @@ graphdata.gsets["ir172"] = cns2 = (94, 2, cns[planesize * 1 : planesize * 2])
 #   insofar as CNS11643.TXT has a lot more gaps for some reason, the only difference seems to
 #   be the current 毵 versus the CNS11643.TXT 毶 at 69-26, both being itaiji of 02-49-32 毿).
 #   Note that an unrelated plane 14 was added in 2007.
-graphdata.gsets["ir183"] = cns3 = (94, 2, cns[planesize * 2 : planesize * 3]) # == ir183-govtw
+graphdata.gsets["ir183/govtw"] = cns3 = (94, 2, cns_gov[planesize * 2 : planesize * 3])
 _ir183oldirg = parsers.decode_main_plane_gl(
     parsers.parse_file_format("UTC/CNS11643.TXT"),
     "CNS11643.TXT",
@@ -177,42 +191,42 @@ _ir183nearfull = tuple(cns_fullplane3[planesize * 2 : planesize * 3])
 _ir183full = parsers.fuse([_ir183nearfull, _ir183oldirg], "ir183fullnew.json")
 _ir183fullalt = parsers.fuse([_ir183oldirg, _ir183nearfull], "ir183fullalt.json")
 cns3_1988_array = tuple(_ir183fullalt)[:6319] + (None,) * (len(_ir183fullalt) - 6319)
-graphdata.gsets["ir183-1988"] = cns3_1988 = (94, 2, cns3_1988_array)
-graphdata.gsets["ir183-1988plus"] = cns3plus = (94, 2, tuple(_ir183fullalt))
+graphdata.gsets["ir183/1988"] = cns3_1988 = (94, 2, cns3_1988_array)
+graphdata.gsets["ir183/1988plus"] = cns3plus = (94, 2, tuple(_ir183fullalt))
 cns3_1992_array = tuple(_ir183fullalt)[:6148] + (None,) * (len(_ir183fullalt) - 6148)
-graphdata.gsets["ir183-1992"] = cns3_1992 = (94, 2, cns3_1992_array)
-graphdata.gsets["ir183-full"] = cns3_full = (94, 2, tuple(_ir183full))
-graphdata.gsets["ir183-utc"] = (94, 3, parsers.decode_main_plane_gl(
+graphdata.gsets["ir183"] = cns3_1992 = (94, 2, cns3_1992_array)
+graphdata.gsets["ir183/full"] = cns3_full = (94, 2, tuple(_ir183full))
+graphdata.gsets["ir183/utc"] = (94, 3, parsers.decode_main_plane_gl(
     parsers.parse_file_format("UTC/CNS11643.TXT"), 
     "CNS11643.TXT", 
     plane = 14)) # yes, this is correct.
-graphdata.gsets["ir183-yasuoka"] = (94, 2, cns_yasuoka[planesize * 2 : planesize * 3])
-graphdata.gsets["ir183-icu"] = (94, 2, cns_icu_old[planesize * 2 : planesize * 3])
-graphdata.gsets["ir183-icu-2014"] = (94, 2, cns_icu_2014[planesize * 2 : planesize * 3])
+graphdata.gsets["ir183/yasuoka"] = (94, 2, cns_yasuoka[planesize * 2 : planesize * 3])
+graphdata.gsets["ir183/icu"] = (94, 2, cns_icu_old[planesize * 2 : planesize * 3])
+graphdata.gsets["ir183/icu-2014"] = (94, 2, cns_icu_2014[planesize * 2 : planesize * 3])
 
 graphdata.gsets["ir184"] = cns4 = (94, 2, cns[planesize * 3 : planesize * 4])
-graphdata.gsets["ir184-govtw"] = cns4_gov = (94, 2, cns_gov[planesize * 3 : planesize * 4])
-graphdata.gsets["ir184-yasuoka"] = (94, 2, cns_yasuoka[planesize * 3 : planesize * 4])
-graphdata.gsets["ir184-icu"] = (94, 2, cns_icu_old[planesize * 3 : planesize * 4])
-graphdata.gsets["ir184-icu-2014"] = (94, 2, cns_icu_2014[planesize * 3 : planesize * 4])
+graphdata.gsets["ir184/govtw"] = cns4_gov = (94, 2, cns_gov[planesize * 3 : planesize * 4])
+graphdata.gsets["ir184/yasuoka"] = (94, 2, cns_yasuoka[planesize * 3 : planesize * 4])
+graphdata.gsets["ir184/icu"] = (94, 2, cns_icu_old[planesize * 3 : planesize * 4])
+graphdata.gsets["ir184/icu-2014"] = (94, 2, cns_icu_2014[planesize * 3 : planesize * 4])
 
 graphdata.gsets["ir185"] = cns5 = (94, 2, cns[planesize * 4 : planesize * 5])
-graphdata.gsets["ir185-govtw"] = cns5_gov = (94, 2, cns_gov[planesize * 4 : planesize * 5])
-graphdata.gsets["ir185-yasuoka"] = (94, 2, cns_yasuoka[planesize * 4 : planesize * 5])
-graphdata.gsets["ir185-icu"] = (94, 2, cns_icu_old[planesize * 4 : planesize * 5])
-graphdata.gsets["ir185-icu-2014"] = (94, 2, cns_icu_2014[planesize * 4 : planesize * 5])
+graphdata.gsets["ir185/govtw"] = cns5_gov = (94, 2, cns_gov[planesize * 4 : planesize * 5])
+graphdata.gsets["ir185/yasuoka"] = (94, 2, cns_yasuoka[planesize * 4 : planesize * 5])
+graphdata.gsets["ir185/icu"] = (94, 2, cns_icu_old[planesize * 4 : planesize * 5])
+graphdata.gsets["ir185/icu-2014"] = (94, 2, cns_icu_2014[planesize * 4 : planesize * 5])
 
 graphdata.gsets["ir186"] = cns6 = (94, 2, cns[planesize * 5 : planesize * 6])
-graphdata.gsets["ir186-govtw"] = cns6_gov = (94, 2, cns_gov[planesize * 5 : planesize * 6])
-graphdata.gsets["ir186-yasuoka"] = (94, 2, cns_yasuoka[planesize * 5 : planesize * 6])
-graphdata.gsets["ir186-icu"] = (94, 2, cns_icu_old[planesize * 5 : planesize * 6])
-graphdata.gsets["ir186-icu-2014"] = (94, 2, cns_icu_2014[planesize * 5 : planesize * 6])
+graphdata.gsets["ir186/govtw"] = cns6_gov = (94, 2, cns_gov[planesize * 5 : planesize * 6])
+graphdata.gsets["ir186/yasuoka"] = (94, 2, cns_yasuoka[planesize * 5 : planesize * 6])
+graphdata.gsets["ir186/icu"] = (94, 2, cns_icu_old[planesize * 5 : planesize * 6])
+graphdata.gsets["ir186/icu-2014"] = (94, 2, cns_icu_2014[planesize * 5 : planesize * 6])
 
 graphdata.gsets["ir187"] = cns7 = (94, 2, cns[planesize * 6 : planesize * 7])
-graphdata.gsets["ir187-govtw"] = cns7_gov = (94, 2, cns_gov[planesize * 6 : planesize * 7])
-graphdata.gsets["ir187-yasuoka"] = (94, 2, cns_yasuoka[planesize * 6 : planesize * 7])
-graphdata.gsets["ir187-icu"] = (94, 2, cns_icu_old[planesize * 6 : planesize * 7])
-graphdata.gsets["ir187-icu-2014"] = (94, 2, cns_icu_2014[planesize * 6 : planesize * 7])
+graphdata.gsets["ir187/govtw"] = cns7_gov = (94, 2, cns_gov[planesize * 6 : planesize * 7])
+graphdata.gsets["ir187/yasuoka"] = (94, 2, cns_yasuoka[planesize * 6 : planesize * 7])
+graphdata.gsets["ir187/icu"] = (94, 2, cns_icu_old[planesize * 6 : planesize * 7])
+graphdata.gsets["ir187/icu-2014"] = (94, 2, cns_icu_2014[planesize * 6 : planesize * 7])
 # Plane 7 is the last one to be registered with ISO-IR.
 
 # The entirety does also exist as an unregistered 94^n set, used by EUC-TW:
@@ -352,41 +366,41 @@ big5_to_cns2_ibmvar[0xDDFC] = (13, 4, 42)
 parsers.big5_to_cns_maps["big5_to_cns2_ibmvar"] = big5_to_cns2_ibmvar
 
 # Now that big5_to_cns2 is defined, we can do this:
-graphdata.gsets["ir171-ms"] = (94, 2, parsers.decode_main_plane_big5(
+graphdata.gsets["ir171/ms"] = (94, 2, parsers.decode_main_plane_big5(
     parsers.parse_file_format("ICU/windows-950-2000.ucm"),
     "windows-950-2000.ucm",
     "big5_to_cns2",
     plane=1))
 # IBM-950 uses a considerably different mapping to Windows-950 (though the rough identity of the
 #   characters doesn't differ besides no euro and added control pictures, the mapping does differ).
-graphdata.gsets["ir171-ibm950"] = (94, 2, parsers.decode_main_plane_big5(
+graphdata.gsets["ir171/ibm950"] = (94, 2, parsers.decode_main_plane_big5(
     parsers.parse_file_format("ICU/ibm-950_P110-1999.ucm"),
     "ibm-950_P110-1999.ucm",
     "big5_to_cns2",
     plane=1))
 # IBM-1373 mapping differs from MS-950 in whether C255 (01-86-33, 1-7641) maps to U+5F5E or U+5F5D
 #   (differing only in the version of the snout radical used)
-graphdata.gsets["ir171-ibm1373"] = (94, 2, parsers.decode_main_plane_big5(
+graphdata.gsets["ir171/ibm1373"] = (94, 2, parsers.decode_main_plane_big5(
     parsers.parse_file_format("ICU/ibm-1373_P100-2002.ucm"),
     "ibm-1373_P100-2002.ucm",
     "big5_to_cns2",
     plane=1))
-graphdata.gsets["ir171-utcbig5"] = (94, 2, parsers.decode_main_plane_big5(
+graphdata.gsets["ir171/utcbig5"] = (94, 2, parsers.decode_main_plane_big5(
     parsers.parse_file_format("UTC/BIG5.TXT"),
     "BIG5.TXT",
     "big5_to_cns2",
     plane=1))
-graphdata.gsets["ir171-utc"] = (94, 2, parsers.decode_main_plane_gl(
+graphdata.gsets["ir171/utc"] = (94, 2, parsers.decode_main_plane_gl(
     parsers.parse_file_format("UTC/CNS11643.TXT"),
     "CNS11643.TXT",
     plane=1))
-graphdata.gsets["ir171-1984moz"] = (94, 2, parsers.decode_main_plane_big5(
+graphdata.gsets["ir171/1984moz"] = (94, 2, parsers.decode_main_plane_big5(
     parsers.parse_file_format("Mozilla/big5_1984.txt"),
     "big5_1984.txt",
     "big5_to_cns2",
     plane=1))
 # Basically the Windows one, but with the addition of the control pictures:
-graphdata.gsets["ir171-web"] = (94, 2, parsers.decode_main_plane_big5(
+graphdata.gsets["ir171/web"] = (94, 2, parsers.decode_main_plane_big5(
     parsers.parse_file_format("WHATWG/index-big5.txt"),
     "index-big5.txt",
     "big5_to_cns2",
@@ -394,7 +408,7 @@ graphdata.gsets["ir171-web"] = (94, 2, parsers.decode_main_plane_big5(
 # "Mozilla 1.5" one's main plane matches Microsoft, while the "Mozilla 1.8" one's matches WHATWG.
 #
 # For IR-172 (unlike IR-171), MS, Mac, Web, Moz1984 and UTC-BIG5 actually match (while UTC-CNS differs)
-graphdata.gsets["ir172-big5"] = (94, 2, parsers.decode_main_plane_big5(
+graphdata.gsets["ir172/big5"] = (94, 2, parsers.decode_main_plane_big5(
     parsers.parse_file_format("UTC/BIG5.TXT"),
     "BIG5.TXT",
     "big5_to_cns2",
@@ -409,8 +423,8 @@ maccnsdata = parsers.read_untracked(
     "CHINTRAD.TXT",
     "big5_to_cns2_ibmvar",
     mapper = variationhints.ahmap)
-graphdata.gsets["ir171-mac"] = (94, 2, maccnsdata[:94*94])
-#graphdata.gsets["ir172-mac"] = (94, 2, maccnsdata[94*94:94*94*2]) # same as ir172-big5
+graphdata.gsets["ir171/mac"] = (94, 2, maccnsdata[:94*94])
+#graphdata.gsets["ir172/mac"] = (94, 2, maccnsdata[94*94:94*94*2]) # same as ir172-big5
 
 # The most basic subset of EUC-TW supported is basically a transformation format of
 #   Big5. Anything more isn't really supported/used nearly as much. So using Big5

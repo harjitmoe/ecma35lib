@@ -50,6 +50,10 @@ for i in used:
             elif gsets[i][0] == 96 and gsets[i][1] > 1 and nominal_kind[i] != "96n":
                 complaints.add((i, "ReferencedWithWrongKind", nominal_kind[i], "ShouldBe", "96n"))
 
+for i in gsetflags:
+    if i not in gsets:
+        complaints.add((i, "OrphanFlag"))
+
 checksums = {}
 for (setcode, (kind, bytecount, entries)) in sorted(gsets.items()):
     running_hash = 0

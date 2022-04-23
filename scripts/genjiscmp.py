@@ -44,25 +44,25 @@ plane1 = (1, ("1978 JIS<br>Illustrative",  "1978 JIS<br>90JIS Pivot",  "1983 JIS
               "IBM 78JIS", "IBM 90JIS<br>Plane 1", "Fujitsu", "MS / HTML5", 
               "Apple<br>Row + 10", "Apple<br>PostScript", "Apple<br>KanjiTalk7", 
               "ARIB<br>JIS Emoji", "DoCoMo<br>JIS Emoji", "au by KDDI<br>JIS Emoji", "SoftBank<br>JIS Emoji"), [
-          graphdata.gsets["ir042stricter"][2],
           graphdata.gsets["ir042"][2],
+          graphdata.gsets["ir042/1990pivot"][2],
           graphdata.gsets["ir087"][2],
           graphdata.gsets["ir168"][2],
           graphdata.gsets["ir228"][2],
           graphdata.gsets["ir233"][2],
-          graphdata.gsets["ir042nec"][2],
-          graphdata.gsets["ir042ibm"][2],
-          graphdata.gsets["ir168ibm"][2],
-          graphdata.gsets["ir087fujitsu"][2],
-          #graphdata.gsets["ir168icueuc"][2], # same as web.
-          graphdata.gsets["ir168web"][2],
-          graphdata.gsets["ir168mackt6"][2],
-          graphdata.gsets["ir168macps"][2],
-          graphdata.gsets["ir168mac"][2],
-          graphdata.gsets["ir168arib"][2],
-          graphdata.gsets["ir168docomo"][2],
-          graphdata.gsets["ir168kddipict"][2],
-          graphdata.gsets["ir168sbank"][2],
+          graphdata.gsets["ir042/nec"][2],
+          graphdata.gsets["ir042/ibm"][2],
+          graphdata.gsets["ir168/ibm"][2],
+          graphdata.gsets["ir087/fujitsu"][2],
+          #graphdata.gsets["ir168/icueuc"][2], # same as web.
+          graphdata.gsets["ir168/web"][2],
+          graphdata.gsets["ir168/mackt6"][2],
+          graphdata.gsets["ir168/macps"][2],
+          graphdata.gsets["ir168/mac"][2],
+          graphdata.gsets["ir168/arib"][2],
+          graphdata.gsets["ir168/docomo"][2],
+          graphdata.gsets["ir168/kddipict"][2],
+          graphdata.gsets["ir168/sbank"][2],
 ])
 
 plane2 = (2, ("IBM SJIS Ext<br>78JIS Ver.", "IBM SJIS Ext<br>MS / HTML5", "DoCoMo<br>SJIS Emoji",
@@ -75,10 +75,10 @@ plane2 = (2, ("IBM SJIS Ext<br>78JIS Ver.", "IBM SJIS Ext<br>MS / HTML5", "DoCoM
           graphdata.gsets["kddipictsjisext"][2],
           graphdata.gsets["sbanksjisext"][2],
           graphdata.gsets["ir159"][2],
-          graphdata.gsets["ir159va"][2],
-          graphdata.gsets["ir159osfm"][2],
-          graphdata.gsets["ir159ibm"][2],
-          graphdata.gsets["ir159icueuc"][2],
+          graphdata.gsets["ir159/va"][2],
+          graphdata.gsets["ir159/osfm"][2],
+          graphdata.gsets["ir159/ibm"][2],
+          graphdata.gsets["ir159/icueuc"][2],
           graphdata.gsets["ir229"][2],
 ])
 
@@ -109,8 +109,8 @@ for n, i in enumerate(japan.rawmac):
     cdispmap[(n, j)] = i
     if n >= (84 * 94):
         cdispmap[(n - (74 * 94), j)] = i
-for n, i in enumerate(graphdata.gsets["ir168kddipict"][2]):
-    j = graphdata.gsets["ir168kddisym"][2][n]
+for n, i in enumerate(graphdata.gsets["ir168/kddipict"][2]):
+    j = graphdata.gsets["ir168/kddisym"][2][n]
     if i != j and j:
         cdispmap[(n, i)] = j
 for n, i in enumerate(graphdata.gsets["kddipictsjisext"][2]):

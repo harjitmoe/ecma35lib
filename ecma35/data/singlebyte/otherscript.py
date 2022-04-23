@@ -58,17 +58,17 @@ graphdata.gsets["ir013"] = (94, 1, _the_mother + ((None,) * 31))
 graphdata.rhses["897"] = ((None,) * 33) + _the_mother + ((None,) * 32)
 graphdata.defgsets["897"] = ("ir014", "ir013", "nil", "nil")
 # IBM's 4992 (or unrestricted 896)
-graphdata.gsets["ir013ibm"] = (94, 1, _the_mother + (
+graphdata.gsets["ir013/ibm"] = (94, 1, _the_mother + (
                 (0xA2,), (0xA3,), (0xAC,), (0x5C,), (0x7E,), (0x203E,), (0xA6,)) + ((None,) * 24))
 # 1-byte MacJapanese
-graphdata.gsets["ir013mac"] = (94, 1, _the_mother + (
+graphdata.gsets["ir013/mac"] = (94, 1, _the_mother + (
                 (0x5C,), (0xA0,), (0xA9,), (0x2122,), (0x2026,), 
                 (0xFC,), (0xF880,), (0xF881,), (0x20A9,), (0x2013,), (0xFF3F,)) + ((None,) * 20))
 # For Windows code pages
-graphdata.gsets["ir013win"] = (94, 1, _the_mother + (
+graphdata.gsets["ir013/win"] = (94, 1, _the_mother + (
                 (0x20AC,),) + tuple((i,) for i in range(0xF8F0, 0xF8F9)) + ((None,) * 21))
-graphdata.gsetflags["ir013win"] |= {"GBK:NO_EURO"}
-graphdata.gsets["ir013euro"] = graphdata.gsets["ir013win"]
+graphdata.gsetflags["ir013/win"] |= {"GBK:NO_EURO"}
+graphdata.gsets["ir013/euro"] = graphdata.gsets["ir013/win"]
 
 # Non-Cyrillic INIS RHS. Greek support is insubstantial enough that it probably doesn't belong
 #   in greek.py.
@@ -94,14 +94,14 @@ graphdata.gsets["ir068"] = (94, 1, parsers.read_single_byte("UTC/APL-ISO-IR-68.T
 #   ISO-8859-1's RHS where the backslash is substituted for the yen sign (compare the derivation of
 #   DRV from DIN 66003 and ISO-8859-1).
 graphdata.gsets["ir093"] = (94, 1, (None, None, (0xA3,), (0xA4,), (0x5C,), None, (0xA7,)) + (None,) * 87)
-graphdata.gsets["ir093-ext"] = (94, 1, tuple((i,) if i != 0xA5 else (0x5C,) for i in range(0xA1, 0xFF)))
+graphdata.gsets["ir093/ext"] = (94, 1, tuple((i,) if i != 0xA5 else (0x5C,) for i in range(0xA1, 0xFF)))
 
 # JIS X 9010 code for JIS X 9008 font characters absent from JIS X 0201 (i.e. the backslash only),
 #   a single-character subset of IR-093.
 # Awkwardly, the sole character here is probably U+244A's character source, despite being evidently
 #   intended to be U+005C (if one reads the reg's rubric).
 graphdata.gsets["ir095"] = (94, 1, (None, None, None, None, (0x5C,), None, None) + (None,) * 87)
-graphdata.gsets["ir095-double"] = (94, 1, (None, None, None, None, (0x244A,), None, None) + (None,) * 87)
+graphdata.gsets["ir095/double"] = (94, 1, (None, None, None, None, (0x244A,), None, None) + (None,) * 87)
 
 # JIS X 9010 Kana set for JIS X 9008 font (which supports large katakana only)
 graphdata.gsets["ir096"] = (94, 1, (None,) + _the_mother[1:3] + (None, None) + _the_mother[5:6] + (None,)*9 + _the_mother[15:] + (None,)*31)

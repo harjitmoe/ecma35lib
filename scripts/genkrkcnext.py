@@ -57,7 +57,7 @@ decode_csic7 = {}
 csic_ucs_seen = {}
 
 
-for pointer, (ucsgb, ucsitu) in enumerate(zip(graphdata.gsets["ir058-full"][2], graphdata.gsets["ir165"][2])):
+for pointer, (ucsgb, ucsitu) in enumerate(zip(graphdata.gsets["ir058/full"][2], graphdata.gsets["ir165"][2])):
     first = 0x21 + (pointer // 94)
     second = 0x21 + (pointer % 94)
     save_ucsgb = ucsgb
@@ -121,7 +121,7 @@ for pointer, ucs in enumerate(graphdata.gsets["ir187"][2]):
     decode_csic7[(first, second)] = ucs
     encode_csic7[ucs] = (first, second)
 
-for pointer, (ucs, ucsalt) in enumerate(zip(graphdata.gsets["ir183-full"][2], graphdata.gsets["ir183-1988plus"][2])):
+for pointer, (ucs, ucsalt) in enumerate(zip(graphdata.gsets["ir183/full"][2], graphdata.gsets["ir183/1988plus"][2])):
     first = 0x21 + (pointer // 94)
     second = 0x21 + (pointer % 94)
     if not ucs:

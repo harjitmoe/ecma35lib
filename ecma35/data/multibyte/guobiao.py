@@ -70,7 +70,7 @@ def gb1986toregmap(pointer, ucs):
     return ucs
 
 # GB/T 2312 (EUC-CN RHS); note that the 2000 and 2005 "editions" refer to GB 18030 edition subsets.
-graphdata.gsets["ir058-1980"] = gb2312_1980 = (94, 2,
+graphdata.gsets["ir058/1980"] = gb2312_1980 = (94, 2,
     parsers.decode_main_plane_gl(
         parsers.parse_file_format("UTC/GB2312.TXT"),
         "GB2312.TXT",
@@ -80,37 +80,37 @@ graphdata.gsets["ir058"] = gb2312_1980reg = (94, 2,
         parsers.parse_file_format("UTC/GB2312.TXT"),
         "GB2312.TXT",
         mapper = gb1986toregmap))
-graphdata.gsets["ir058-1986"] = gb2312_1986 = (94, 2,
+graphdata.gsets["ir058/1986"] = gb2312_1986 = (94, 2,
     parsers.decode_main_plane_gl(
         parsers.parse_file_format("UTC/GB2312.TXT"),
         "GB2312.TXT"))
-graphdata.gsets["ir058-ms"] = gb2312_ms = (94, 2,
+graphdata.gsets["ir058/ms"] = gb2312_ms = (94, 2,
     parsers.decode_main_plane_euc(
         parsers.parse_file_format("ICU/windows-936-2000.ucm"),
         "windows-936-2000.ucm",
         gbklike = True))
-graphdata.gsets["ir058-ibm"] = gb2312_ibm = (94, 2,
+graphdata.gsets["ir058/ibm"] = gb2312_ibm = (94, 2,
     parsers.decode_main_plane_euc(
         parsers.parse_file_format("ICU/ibm-1383_P110-1999.ucm"),
         "ibm-1383_P110-1999.ucm"))
-graphdata.gsets["ir058-2000"] = gb2312_2000 = (94, 2, 
+graphdata.gsets["ir058/2000"] = gb2312_2000 = (94, 2, 
     parsers.decode_main_plane_whatwg(
         parsers.parse_file_format("WHATWG/index-gb18030.txt"),
         "index-gb18030.txt",
         gbklike = True,
         mapper = gb2005to2000map))
-graphdata.gsets["ir058-2005"] = gb2312_2005 = (94, 2, 
+graphdata.gsets["ir058/2005"] = gb2312_2005 = (94, 2, 
     parsers.decode_main_plane_whatwg(
         parsers.parse_file_format("WHATWG/index-gb18030.txt"),
         "index-gb18030.txt",
         gbklike = True))
-graphdata.gsetflags["ir058-2005"] |= {"GBK:ALT_4BYTE_CODES"}
+graphdata.gsetflags["ir058/2005"] |= {"GBK:ALT_4BYTE_CODES"}
 # ir058-full differs from ir058-2005 in (a) ACTUALLY USING the Vertical Forms block that was added
 #   for the precise purpose of GB18030 compatibility, and (b) not setting the GBK:ALT_4BYTE_CODES
 #   flag, so the original codepoint-order four-byte codes are used (i.e. there are two m-acutes).
 #   Since there are necessarily unencoded PUA codes and four-byte codes duplicating two-byte codes
 #   anyway. And since the whole point of "-full" is to use the non-PUA codepoints where applicable.
-graphdata.gsets["ir058-full"] = gb2312_full = (94, 2,
+graphdata.gsets["ir058/full"] = gb2312_full = (94, 2,
     parsers.decode_main_plane_whatwg(
         parsers.parse_file_format("WHATWG/index-gb18030.txt"),
         "index-gb18030.txt",
@@ -186,7 +186,7 @@ _ir165_std_add = _ir165_add[:]
 _ir165_std_add[258], _ir165_std_add[689] = (0xFF47,), (0x0261,)
 _ir165_std_add[916], _ir165_std_add[971] = (0x0067,), _ir165_std_add[916]
 ir165_std = parsers.fuse([_ir165_std_add, _ir165_raw, patterns], "CCITT-Chinese-Full-Std.json")
-graphdata.gsets["ir165std"] = (94, 2, ir165_std)
+graphdata.gsets["ir165/std"] = (94, 2, ir165_std)
 #
 # Further extended version of IR-165 with additional hanzi in the end of row 8, after the Zhuyin
 #   (i.e. kuten 08-83 thru 08-94).
@@ -200,7 +200,7 @@ ir165_engorged = parsers.fuse([
         ir165,
         (None,) * (7*94 + 82) + ((0x540B,), (0x544E,), (0x5521,), (0x6D6C,), (0x74E9,), (0x96BB,), (0x6E96,), (0x5338,), (0x590A,), (0x897E,), (0x9B25,), (0x9B31,)),
     ], "CCITT-Chinese-Extended.json")
-graphdata.gsets["ir165ext"] = (94, 2, ir165_engorged)
+graphdata.gsets["ir165/ext"] = (94, 2, ir165_engorged)
 #
 # For GB 6345: knock out 06-60 thru 06-81, rows 12 thru 15, 90 thru 94.
 graphdata.gsets["gb6345"] = (94, 2, parsers.fuse([
@@ -251,9 +251,9 @@ macgbdata = parsers.read_untracked(
     "Mac/CHINSIMP.TXT",
     gbklike = True,
     mapper = variationhints.ahmap)
-graphdata.gsets["ir058-macraw"] = (94, 2, macrawgbdata)
-graphdata.gsets["ir058-macsemiraw"] = (94, 2, macgbdata)
-graphdata.gsets["ir058-mac"] = gb2312_macfull = (94, 2, parsers.fuse([
+graphdata.gsets["ir058/macraw"] = (94, 2, macrawgbdata)
+graphdata.gsets["ir058/macsemiraw"] = (94, 2, macgbdata)
+graphdata.gsets["ir058/mac"] = gb2312_macfull = (94, 2, parsers.fuse([
     (None,) * 526 + gb2312_full[2][526:555],
     macgbdata], "Mac---CHINSIMP_mainplane_ahmap_fullverts.json"))
 
@@ -268,8 +268,8 @@ gbtrad = parsers.read_untracked(
         parsers.parse_file_format("UTC/GB12345.TXT"),
         "UTC/GB12345.TXT",
         gbklike = True)
-graphdata.gsets["ir058-hant-utc"] = gb12345_utc = (94, 2, gbtrad + (None,) * (94*94 - len(gbtrad)))
-graphdata.gsets["ir058-hant"] = gb12345 = (94, 2, parsers.fuse([
+graphdata.gsets["ir058/hant-utc"] = gb12345_utc = (94, 2, gbtrad + (None,) * (94*94 - len(gbtrad)))
+graphdata.gsets["ir058/hant"] = gb12345 = (94, 2, parsers.fuse([
         # U+2225 is already used elsewhere; UTC corrected GB2312 in 1999 but didn't change GB12345.
         (None,) * 11 + ((0x2016,),),
         gb12345_utc[2], 
@@ -303,7 +303,7 @@ gb1_strict_chars = tuple(((i - 1) * 94) + (j - 1) for i, j in (
     (74, 15),
     (83, 61),
 ))
-graphdata.gsets["ir058-hant-strict"] = gb12345_strict = (94, 2, parsers.fuse([
+graphdata.gsets["ir058/hant-strict"] = gb12345_strict = (94, 2, parsers.fuse([
         [i if n in gb1_strict_chars else None for n, i in enumerate(gb2312_full[2])],
         gb12345[2],
     ], "GB12345strict.json"))
@@ -426,7 +426,7 @@ graphdata.gsets["gb7590"] = gb7590 = (94, 2, _gb7590)
 # this part from index-gb18030.txt, but I'm trying to make this source code educational on how the
 # GBK and UHC pages are laid out.
 non_euccn_uro101 = [i for i in range(0x4E00, 0x9FA6) 
-                      if i not in graphdata.codepoint_coverages["ir058-2005"]]
+                      if i not in graphdata.codepoint_coverages["ir058/2005"]]
 
 # GBK/5, and the non-URO part of GBK/4.
 _gbk_exceptions_web = parsers.decode_gbk_non_uro_extras(
@@ -450,7 +450,7 @@ non_gbk_bmp = [i for i in range(0x0080, 0x10000)
            if ((i < 0x4E00 or i > 0x9FA5) and # i.e. not part of the original URO set
                (i < 0xD800 or i > 0xDFFF) and # i.e. not surrogate (don't count as codepoints)
                (i not in graphdata.codepoint_coverages["gbk-nonuro-extras"]) and
-               (i not in graphdata.codepoint_coverages["ir058-2000"]))]
+               (i not in graphdata.codepoint_coverages["ir058/2000"]))]
 
 
 

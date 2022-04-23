@@ -29,26 +29,26 @@ import json
 # ITU T.101-C is 1994 (2nd ed; 1st ed didn't include this one afaict); IR-165 reg is 1992.
 MACSET = "Apple"
 plane0 = (0, ("GB 2312<br>1980", "GB 2312<br>IR-058", "GB 2312<br>UTC", "GB 6345.1<br>1986", "GB 8565.2<br>1988", "ITU T.101-C<br>IR-165", "\"GB 8565.2\"<br>Old Unihan", "GB 12052<br>1989", "GB 12345<br>1990", "GB 12345<br>UTC", "IBM-1382", MACSET, "Windows", "GB 18030<br>2000", "GB 18030<br>2005", "GB 18030<br>Full"), [
-          graphdata.gsets["ir058-1980"][2],
+          graphdata.gsets["ir058/1980"][2],
           graphdata.gsets["ir058"][2],
-          graphdata.gsets["ir058-1986"][2],
+          graphdata.gsets["ir058/1986"][2],
           graphdata.gsets["gb6345"][2],
           graphdata.gsets["gb8565"][2],
           graphdata.gsets["ir165"][2],
           graphdata.gsets["gb8565-oldwrongunihan"][2],
           graphdata.gsets["gb12052"][2][:94*15] + ((None,) * (94*78)),
-          graphdata.gsets["ir058-hant-strict"][2][:94*15] + ((None,) * (94*78)),
-          graphdata.gsets["ir058-hant-utc"][2][:94*15] + ((None,) * (94*78)),
-          graphdata.gsets["ir058-ibm"][2],
-          graphdata.gsets["ir058-mac"][2],
-          graphdata.gsets["ir058-ms"][2],
-          graphdata.gsets["ir058-2000"][2],
-          graphdata.gsets["ir058-2005"][2],
-          graphdata.gsets["ir058-full"][2],
+          graphdata.gsets["ir058/hant-strict"][2][:94*15] + ((None,) * (94*78)),
+          graphdata.gsets["ir058/hant-utc"][2][:94*15] + ((None,) * (94*78)),
+          graphdata.gsets["ir058/ibm"][2],
+          graphdata.gsets["ir058/mac"][2],
+          graphdata.gsets["ir058/ms"][2],
+          graphdata.gsets["ir058/2000"][2],
+          graphdata.gsets["ir058/2005"][2],
+          graphdata.gsets["ir058/full"][2],
 ])
 plane1 = (1, ("GB 12345<br>1990", "GB 12345<br>UTC"), [
-          graphdata.gsets["ir058-hant-strict"][2],
-          graphdata.gsets["ir058-hant-utc"][2],
+          graphdata.gsets["ir058/hant-strict"][2],
+          graphdata.gsets["ir058/hant-utc"][2],
 ])
 plane2 = (2, ("GB7589",), [
           graphdata.gsets["gb7589"][2],
@@ -136,8 +136,8 @@ annots = {
     (0, 8, 32): "Compare 03-71.",
 }
 cdispmap = {}
-for n, i in enumerate(graphdata.gsets["ir058-macraw"][2]):
-    j = graphdata.gsets["ir058-mac"][2][n]
+for n, i in enumerate(graphdata.gsets["ir058/macraw"][2]):
+    j = graphdata.gsets["ir058/mac"][2][n]
     if i != j:
         cdispmap[(MACSET, n, j)] = i
 

@@ -85,7 +85,7 @@ for pointer, ucs in enumerate(graphdata.gsets["ir227"][2]):
     encode_greksupp[ucs] = byte
 
 
-for pointer, (nec, ibm) in enumerate(zip(graphdata.gsets["ir042nec"][2], graphdata.gsets["ir042ibm"][2])):
+for pointer, (nec, ibm) in enumerate(zip(graphdata.gsets["ir042/nec"][2], graphdata.gsets["ir042/ibm"][2])):
     first = 0x21 + (pointer // 94)
     second = 0x21 + (pointer % 94)
     if not ibm and not nec:
@@ -114,7 +114,7 @@ for pointer, (nec, ibm) in enumerate(zip(graphdata.gsets["ir042nec"][2], graphda
         encode_jis78[go_with] = (first, second)
 
 
-for pointer, ucs in enumerate(graphdata.gsets["ir159icueuc"][2]):
+for pointer, ucs in enumerate(graphdata.gsets["ir159/icueuc"][2]):
     first = 0x21 + (pointer // 94)
     second = 0x21 + (pointer % 94)
     if not ucs:
@@ -158,7 +158,7 @@ for pointer, ucs in enumerate(graphdata.gsets["ir233"][2]):
     encode_jis04[ucs] = (first, second)
 
 
-for pointer, ucs in enumerate(graphdata.gsets["ir058-full"][2]):
+for pointer, ucs in enumerate(graphdata.gsets["ir058/full"][2]):
     first = 0x21 + (pointer // 94)
     second = 0x21 + (pointer % 94)
     if not ucs:
@@ -169,7 +169,7 @@ for pointer, ucs in enumerate(graphdata.gsets["ir058-full"][2]):
     encode_gb7[ucs] = (first, second)
 
 
-for pointer, ucs in enumerate(graphdata.gsets["ir149-2002"][2]):
+for pointer, ucs in enumerate(graphdata.gsets["ir149/2002"][2]):
     first = 0x21 + (pointer // 94)
     second = 0x21 + (pointer % 94)
     if not ucs:
@@ -180,13 +180,13 @@ for pointer, ucs in enumerate(graphdata.gsets["ir149-2002"][2]):
     encode_ksc7[ucs] = (first, second)
 
 
-for pointer, (ucs, ucsms) in enumerate(zip(graphdata.gsets["ir171"][2], graphdata.gsets["ir171-ms"][2])):
+for pointer, (ucs, ucsms) in enumerate(zip(graphdata.gsets["ir171"][2], graphdata.gsets["ir171/ms"][2])):
     first = 0x21 + (pointer // 94)
     second = 0x21 + (pointer % 94)
     if not ucs:
         continue
     decode_only = False
-    if (0x3040 <= ucs[0] <= 0x30FF) and ucs in graphdata.gsets["ir058-full"][2]:
+    if (0x3040 <= ucs[0] <= 0x30FF) and ucs in graphdata.gsets["ir058/full"][2]:
         # Encode kana to GB 2312 (as explicitly recommended by RFC 1922) where possible.
         # Kana hadn't yet been added to CNS 11643 at the time RFC 1922 was written and cannot be
         #   assumed to be supported by all ISO-2022-CN implementations.

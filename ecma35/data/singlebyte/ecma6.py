@@ -23,24 +23,24 @@ raw_variants = {
     # convention) rather than U+00AF (per convention in more ISO 8859 influenced areas).
     "ir002": ([None, 0xA4, None, None, None, None, None, None, 
                            None, None, None, None, 0x203E], {}),
-    "ir002tilde": ([None, 0xA4, None, None, None, None, None, None, 
+    "ir002/tilde": ([None, 0xA4, None, None, None, None, None, None, 
                                 None, None, None, None, None], {}),
     # BS 4730 (United Kingdom)
     "ir004": ([0xA3, None, None, None, None, None, None, None, 
                            None, None, None, None, 0x203E], {}),
-    "ir004dec": ([0xA3, None, None, None, None, None, None, None, 
+    "ir004/dec": ([0xA3, None, None, None, None, None, None, None, 
                               None, None, None, None, None], {}),
     # US-ASCII / New IRV, ISO/IEC 10367 G0 set
     "ir006": ([None, None, None, None, None, None, None, None, 
                            None, None, None, None, None], {}),
     # CNS 5205 and also apparently the Dutch (non-DEC) set; IBM's 1019.
-    "ir006overline": ([None, None, None, None, None, None, None, None, 
+    "ir006/overline": ([None, None, None, None, None, None, None, None, 
                                    None, None, None, None, 0x203E], {}),
     # NATS-SEFI (Swedish and Finnish Journalism)
     "ir008-1": ([None, None, 0x3000, 0xC4, 0xD6, 0xC5, 0x25A0, None, 
                              0x2007, 0xE4, 0xF6, 0xE5, 0x2013], {}),
     # DEC NRCS for Finland (apparently used in response to ir008-1 escape)
-    "ir008-1dec": ([None, None, None, 0xC4, 0xD6, 0xC5, 0xDC, None, 
+    "ir008-1/dec": ([None, None, None, 0xC4, 0xD6, 0xC5, 0xDC, None, 
                                 0xE9, 0xE4, 0xF6, 0xE5, 0xFC], {}),
     # NATS-DANO (Danish and Norwegian Journalism)
     # Violation of ECMA-6:1991: 0x22 is not ".
@@ -48,7 +48,7 @@ raw_variants = {
     "ir009-1": ([0xBB, None, 0x3000, 0xC6, 0xD8, 0xC5, 0x25A0, None, 
                              0x2007, 0xE6, 0xF8, 0xE5, 0x2013], {0x22: 0xAB}),
     # DEC NRCS for Denmark and Norway
-    "ir009-1dec": ([None, None, 0xC4, 0xC6, 0xD8, 0xC5, 0xDC, None, 
+    "ir009-1/dec": ([None, None, 0xC4, 0xC6, 0xD8, 0xC5, 0xDC, None, 
                                 0xE4, 0xE6, 0xF8, 0xE5, 0xFC], {}),
     # SEN 85 02 00 ax B (Swedish and Finnish)
     "ir010": ([None, None, 0xC9, 0xC4, 0xD6, 0xC5, None, None, 
@@ -57,12 +57,12 @@ raw_variants = {
     "ir011": ([None, 0xA4, 0xC9, 0xC4, 0xD6, 0xC5, 0xDC, None, 
                            0xE9, 0xE4, 0xF6, 0xE5, 0xFC], {}),
     # DEC NRCS for Sweden
-    "ir011dec": ([None, None, 0xC9, 0xC4, 0xD6, 0xC5, 0xDC, None, 
+    "ir011/dec": ([None, None, 0xC9, 0xC4, 0xD6, 0xC5, 0xDC, None, 
                               0xE9, 0xE4, 0xF6, 0xE5, 0xFC], {}),
     # JIS C 6220 / JIS X 0201 Roman set (JIS-Roman)
     "ir014": ([None, None, None, None, 0xA5, None, None, None, 
                            None, None, None, None, 0x203E], {}),
-    "ir014tilde": ([None, None, None, None, 0xA5, None, None, None, 
+    "ir014/tilde": ([None, None, None, None, 0xA5, None, None, None, 
                                 None, None, None, None, None], {}),
     # KS X 1003 / G0 set of non-ASCII EUC-KR (KS-Roman, KSC-Roman)
     "ksroman": ([None, None, None, None, 0x20A9, None, None, None, 
@@ -74,7 +74,7 @@ raw_variants = {
                            0xF9, 0xE0, 0xF2, 0xE8, 0xEC], {}),
     # Roman G0 set of ETS 300 706 for Italy
     # Violation of ECMA-6:1991: 0x5F is not _.
-    "ir015ets": ([0xA3, None, 0xE9, 0xB0, 0xE7, 0x2192, 0x2191, 0x2317, 
+    "ir015/ets": ([0xA3, None, 0xE9, 0xB0, 0xE7, 0x2192, 0x2191, 0x2317, 
                               0xF9, 0xE0, 0xF2, 0xE8,   0xEC], {}),
     # Olivetti Portugese
     "ir016": ([None, None, 0xA7, 0xC3, 0xC7, 0xD5, None, None, 
@@ -115,10 +115,10 @@ raw_variants = {
     "ir060": ([None, None, None, 0xC6, 0xD8, 0xC5, None, None, 
                            None, 0xE6, 0xF8, 0xE5, 0x203E], {}),
     # Danish version, adding u-umlaut; IBM's 1017
-    "ir060dk": ([None, 0xA4, None, 0xC6, 0xD8, 0xC5, 0xDC, None,
+    "ir060/dk": ([None, 0xA4, None, 0xC6, 0xD8, 0xC5, 0xDC, None,
                              None, 0xE6, 0xF8, 0xE5, 0xFC], {}),
     # DEC alternative NRCS for Denmark and Norway
-    "ir060dec": ([None, None, None, 0xC6, 0xD8, 0xC5, None, None, 
+    "ir060/dec": ([None, None, None, 0xC6, 0xD8, 0xC5, None, None, 
                               None, 0xE6, 0xF8, 0xE5, None], {}),
     # NS 4551 version 2 (Norwegian)
     # Violation of ECMA-6:1991: 0x23 is not # or £.
@@ -130,7 +130,7 @@ raw_variants = {
     # IBM Portugese
     "ir084": ([None, None, 0xB4, 0xC3, 0xC7, 0xD5, None, None, 
                            None, 0xE3, 0xE7, 0xF5, None], {}),
-    "ir084dec": ([None, None, None, 0xC3, 0xC7, 0xD5, None, None, 
+    "ir084/dec": ([None, None, None, 0xC3, 0xC7, 0xD5, None, None, 
                               None, 0xE3, 0xE7, 0xF5, None], {}),
     # IBM Spanish
     "ir085": ([None, None, 0xB7, 0xA1, 0xD1, 0xC7, 0xBF, None, 
@@ -182,11 +182,11 @@ raw_variants = {
                        -1, -1, -1, -1, -1], {}),
     # Invariant subset of DEC NRCS
     # Violation of ECMA-6:1991: 0x5F is omitted.
-    "ir170dec": ([-1, None, -1, -1, -1, -1, -1, -1, 
+    "ir170/dec": ([-1, None, -1, -1, -1, -1, -1, -1, 
                             -1, -1, -1, -1, -1], {}),
     # Invariant subset of Roman G0 set of ETS 300 706
     # Violation of ECMA-6:1991: 0x5F is omitted.
-    "ir170ets": ([-1, -1, -1, -1, -1, -1, -1, -1, 
+    "ir170/ets": ([-1, -1, -1, -1, -1, -1, -1, -1, 
                           -1, -1, -1, -1, -1], {}),
     # I.S. 433 (Irish Gaelic)
     "ir207": ([0xA3, None, 0xD3, 0xC9, 0xCD, 0xDA, 0xC1, None, 

@@ -63,16 +63,16 @@ finals = {'\u3132': '\u11a9', '\u3133': '\u11aa', '\u3135': '\u11ac', '\u3136': 
 compjamo = set(finals.keys()) | set(vowels.keys()) | set(initials.keys())
 
 # KS C 5601 / KS X 1001 EUC-KR Wansung RHS
-graphdata.gsets["ir149-ibm"] = wansung = (94, 2, parsers.decode_main_plane_euc(
+graphdata.gsets["ir149/ibm"] = wansung = (94, 2, parsers.decode_main_plane_euc(
     parsers.parse_file_format("ICU/ibm-949_P110-1999.ucm"),
     "ibm-949_P110-1999.ucm",
     gbklike=True))
-graphdata.gsetflags["ir149-ibm"] |= {"UHC:IS_WANSUNG"}
-graphdata.gsets["ir149-1998"] = wansung = (94, 2, parsers.decode_main_plane_whatwg(
+graphdata.gsetflags["ir149/ibm"] |= {"UHC:IS_WANSUNG"}
+graphdata.gsets["ir149/1998"] = wansung = (94, 2, parsers.decode_main_plane_whatwg(
     parsers.parse_file_format("WHATWG/index-euc-kr.txt"),
     "index-euc-kr.txt", 
     gbklike=True))
-graphdata.gsetflags["ir149-1998"] |= {"UHC:IS_WANSUNG"}
+graphdata.gsetflags["ir149/1998"] |= {"UHC:IS_WANSUNG"}
 # Pre Euro-sign update (also lacking the registered trademark sign)
 # Note that the post-Unicode-2.0 UTC mappings are harmonious with MS/HTML5 besides those characters:
 graphdata.gsets["ir149"] = wansung87 = (94, 2, parsers.decode_main_plane_euc(
@@ -84,8 +84,8 @@ graphdata.gsetflags["ir149"] |= {"UHC:IS_WANSUNG"}
 _wansung_temp = parsers.fuse([
             ((None,) * 165) + ((0x327E,),), # South Korean Postal Mark
             wansung[2]], "Wansung_KRPM.json")
-graphdata.gsets["ir149-2002"] = wansung02 = (94, 2, _wansung_temp)
-graphdata.gsetflags["ir149-2002"] |= {"UHC:IS_WANSUNG"}
+graphdata.gsets["ir149/2002"] = wansung02 = (94, 2, _wansung_temp)
+graphdata.gsetflags["ir149/2002"] |= {"UHC:IS_WANSUNG"}
 # Pre-Unicode-2.0 UTC mapping file: uses MS's greedy-zenkaku approach but is otherwise closer to Apple,
 #   plus its own ideosyncracies (unifying the Korean interpunct with the Japanese one rather than with the
 #   Catalan one, and using U+2236 rather than U+02D0 for the alternative colon)
@@ -98,8 +98,8 @@ _wansung_syllables = parsers.fuse([
             (((-1,),) * 1410) + ((None,) * 2350) + (((-1,),) * 5076),
             wansung[2]], "Wansung_SyllablesOnly.json")
 _wansung_temp = parsers.fuse([_wansung_syllables, oldunicodeksc], "Wansung_AltUTC.json")
-graphdata.gsets["ir149-altutc"] = wansung_utcalt = (94, 2, _wansung_temp)
-graphdata.gsetflags["ir149-altutc"] |= {"UHC:IS_WANSUNG"}
+graphdata.gsets["ir149/altutc"] = wansung_utcalt = (94, 2, _wansung_temp)
+graphdata.gsetflags["ir149/altutc"] |= {"UHC:IS_WANSUNG"}
 
 # The non-KS 94×94 plane encoded by the old IBM code page 944
 graphdata.gsets["oldibmkorea-withcorppua"] = oldibmkorea_wcp = (94, 2, parsers.decode_main_plane_whatwg(
@@ -129,8 +129,8 @@ rawmac2 = parsers.read_untracked(
     parsers.parse_file_format("Mac/KOREAN_b02.TXT"),
     "KOREAN_b02.TXT",
     gbklike=True)
-macwansung21 = graphdata.gsets["ir149-mac-unicode2_1"] = (94, 2, rawmac2)
-graphdata.gsetflags["ir149-mac-unicode3_2"] |= {"UHC:IS_WANSUNG"}
+macwansung21 = graphdata.gsets["ir149/mac-unicode2_1"] = (94, 2, rawmac2)
+graphdata.gsetflags["ir149/mac-unicode3_2"] |= {"UHC:IS_WANSUNG"}
 rawmac = parsers.read_untracked(
     "Mac/macWansung32.json",
     "Mac/KOREAN.TXT",
@@ -138,8 +138,8 @@ rawmac = parsers.read_untracked(
     parsers.parse_file_format("Mac/KOREAN.TXT"),
     "KOREAN.TXT",
     gbklike=True)
-macwansung32 = graphdata.gsets["ir149-mac-unicode3_2"] = (94, 2, rawmac)
-graphdata.gsetflags["ir149-mac-unicode3_2"] |= {"UHC:IS_WANSUNG"}
+macwansung32 = graphdata.gsets["ir149/mac-unicode3_2"] = (94, 2, rawmac)
+graphdata.gsetflags["ir149/mac-unicode3_2"] |= {"UHC:IS_WANSUNG"}
 # No ir149-mac-unicode4_0 (same as ir149-mac-unicode3_2; altcomments only in sidecarriage then?)
 macwansungdata = parsers.read_untracked(
     "Mac/macWansung.json",
@@ -149,8 +149,8 @@ macwansungdata = parsers.read_untracked(
     "KOREAN.TXT",
     gbklike=True,
     mapper=ahmap_mk)
-macwansung = graphdata.gsets["ir149-mac"] = (94, 2, macwansungdata)
-graphdata.gsetflags["ir149-mac"] |= {"UHC:IS_WANSUNG"}
+macwansung = graphdata.gsets["ir149/mac"] = (94, 2, macwansungdata)
+graphdata.gsetflags["ir149/mac"] |= {"UHC:IS_WANSUNG"}
 
 # Apple and Elex's (Illekseu's) secondary HangulTalk plane
 rawelex21 = parsers.read_untracked(
@@ -201,24 +201,24 @@ elex2cid = parsers.decode_extra_plane_elex(
 macelexextrasadobe = graphdata.gsets["mac-elex-extras-adobe"] = (94, 2, macelexdata_adobe)
 
 # KPS 9566
-graphdata.gsets["ir202-2011"] = kps9566_2011 = (94, 2, parsers.decode_main_plane_euc(
+graphdata.gsets["ir202/2011"] = kps9566_2011 = (94, 2, parsers.decode_main_plane_euc(
     parsers.parse_file_format("UTCDocs/AppendixA_KPS9566-2011-to-Unicode.txt"),
     "AppendixA_KPS9566-2011-to-Unicode.txt",
     gbklike=True))
-graphdata.gsetflags["ir202-2011"] |= {"UHC:IS_KPS"}
-graphdata.gsets["ir202-2003"] = kps9566_2003 = (94, 2, parsers.decode_main_plane_euc(
+graphdata.gsetflags["ir202/2011"] |= {"UHC:IS_KPS"}
+graphdata.gsets["ir202/2003"] = kps9566_2003 = (94, 2, parsers.decode_main_plane_euc(
     parsers.parse_file_format("UTC/KPS9566.TXT"),
     "KPS9566.TXT",
     gbklike=True))
-graphdata.gsetflags["ir202-2003"] |= {"UHC:IS_KPS"}
-graphdata.gsetflags["ir202-2003"] |= {"UHC:Y_TREMA"}
+graphdata.gsetflags["ir202/2003"] |= {"UHC:IS_KPS"}
+graphdata.gsetflags["ir202/2003"] |= {"UHC:Y_TREMA"}
 _kps_temp = parsers.fuse([
             parsers.decode_main_plane_gl(parsers.parse_file_format("Custom/kps-override.txt"), "kps-override.txt"),
             ((None,) * 6400) + ((0x67FF,),), # Correct mapping per UTC L2/21-059 (IRG N2479), differs from deployed.
             kps9566_2011[2], kps9566_2003[2]], "KPS_FullMapping.json")
-graphdata.gsets["ir202-full"] = (94, 2, _kps_temp)
-graphdata.gsetflags["ir202-full"] |= {"UHC:IS_KPS"}
-graphdata.gsetflags["ir202-full"] |= {"UHC:Y_TREMA"}
+graphdata.gsets["ir202/full"] = (94, 2, _kps_temp)
+graphdata.gsetflags["ir202/full"] |= {"UHC:IS_KPS"}
+graphdata.gsetflags["ir202/full"] |= {"UHC:Y_TREMA"}
 _kps_temp = parsers.fuse([
             ((None,) * 663) + ((0x212A,),), # Kelvin sign (versus Euro)
             ((None,) * 1080) + ((0x2B97,),), # Category A mark

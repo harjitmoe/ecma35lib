@@ -27,13 +27,13 @@ _t51 =  [  (0x00A1,), (0x00A2,), (0x00A3,), (0x0024,), (0x00A5,), (0x0023,), (0x
 (0x0141,), (0x00D8,), (0x0152,), (0x00BA,), (0x00DE,), (0x0166,), (0x014A,), (0x0149,), 
 (0x0138,), (0x00E6,), (0x0111,), (0x00F0,), (0x0127,), (0x0131,), (0x0133,), (0x0140,), 
 (0x0142,), (0x00F8,), (0x0153,), (0x00DF,), (0x00FE,), (0x0167,), (0x014B,)]
-graphdata.gsets["ir090-ets-alpha"] = (94, 1, tuple(_t51))
+graphdata.gsets["ir090/ets-alpha"] = (94, 1, tuple(_t51))
 # I'll be honest, the ETS glyph for so-called U+03B1 in the Latin G2 set does not match
 #   the U+03B1 in the Greek G0 set, so I'm VERY skeptical about whether ETS really treats
 #   them as the same character when their charts font clearly doesn't.
 # U+221D seems like a more appropriate mapping.
 _t51[55] = (0x221D,)
-graphdata.gsets["ir090-ets"] = (94, 1, tuple(_t51))
+graphdata.gsets["ir090/ets"] = (94, 1, tuple(_t51))
 
 # ITU T.51 RHS, vanilla old version
 _t51[31] = _t51[40] = _t51[53] = _t51[54] = _t51[55] = None
@@ -68,7 +68,7 @@ _t51_156 = _t51[:]
 _t51_156[4] = _t51_156[6] = None
 graphdata.gsets["ir142"] = (96, 1, tuple(_t51_142))
 graphdata.gsets["ir156"] = (96, 1, tuple(_t51_156))
-graphdata.gsets["ir142-ir156"] = (96, 1, tuple(_t51))
+graphdata.gsets["ir142+ir156"] = (96, 1, tuple(_t51))
 
 # ISO 5426-1, bibliographic extended Latin, related to T.51 but moves a few diacritics, has much more diacritics, fewer base letters, different non-letters
 _bibliot51 = _t51[1:-1]
@@ -110,7 +110,7 @@ _bibliot51[62] = (-0xFE23,)
 _megabibliot51 = _bibliot51[:]
 _bibliot51[18] = _bibliot51[19] = _bibliot51[20] = _bibliot51[59] = _bibliot51[63] = _bibliot51[66] = _bibliot51[67] = _bibliot51[68] = _bibliot51[70] = _bibliot51[74] = _bibliot51[76] = _bibliot51[77] = _bibliot51[78] = _bibliot51[79] = _bibliot51[83] = _bibliot51[86] = _bibliot51[92] = _bibliot51[93] = None
 graphdata.gsets["ir053"] = (94, 1, tuple(_bibliot51))
-graphdata.gsets["ir053ext"] = (94, 1, tuple(_megabibliot51))
+graphdata.gsets["ir053/ext"] = (94, 1, tuple(_megabibliot51))
 
 # DIN 31624, related to ISO 5426-1 but avoids duplicating DIN 66003, lacks some chars that ISO 5426-1 has (adds?) including base letters, and includes ASCII chars that DIN 66003 lacks and an extra base letter.
 _germanyt51 = _bibliot51[:]
@@ -129,7 +129,7 @@ _germanyt51[40] = (-0x0336,)
 _germanyt51[90] = (0x01A6,)
 _germanyt51[69] = _germanyt51[85] = None
 graphdata.gsets["ir038"] = (94, 1, tuple(_germanyt51))
-graphdata.gsets["ir038ext"] = (94, 1, tuple(map(lambda a, b: a or b, _germanyt51, _megabibliot51)))
+graphdata.gsets["ir038/ext"] = (94, 1, tuple(map(lambda a, b: a or b, _germanyt51, _megabibliot51)))
 
 # ANSI X3.110:1983, CSA T500:1983, ITU T.101-D, Videotex Data Syntax 3.
 #   IR-099 is identical to IR-128; IR-128 is preferred.

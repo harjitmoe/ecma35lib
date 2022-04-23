@@ -42,7 +42,7 @@ def decode_elex(stream, state):
                 state.cur_c1 = "RFC1345"
                 state.glset = 0
                 state.grset = 1
-                state.cur_gsets = ["ir006", "ir149-mac", "ir013mac", "mac-elex-extras"]
+                state.cur_gsets = ["ir006", "ir149/mac", "ir013/mac", "mac-elex-extras"]
                 state.is_96 = [0, 0, 0, 0]
             else:
                 yield token

@@ -16,9 +16,9 @@ import json
 
 plane1 = (1, ("1997 KPS", "2003 KPS", "2011 KPS", "Output"), [
           graphdata.gsets["ir202"][2],
-          graphdata.gsets["ir202-2003"][2],
-          graphdata.gsets["ir202-2011"][2],
-          graphdata.gsets["ir202-full"][2],
+          graphdata.gsets["ir202/2003"][2],
+          graphdata.gsets["ir202/2011"][2],
+          graphdata.gsets["ir202/full"][2],
 ])
 
 def planefunc(number, mapname=None):

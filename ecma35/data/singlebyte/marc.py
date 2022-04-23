@@ -38,7 +38,7 @@ graphdata.gsets["ir231"] = (94, 1, (
 
 # ANSEL (ANSI/NISO Z39.47), with Library of Congress additions.
 # LoC still use the same escape sequence as assigned for the standard one though.
-graphdata.gsets["ir231-marc"] = (94, 1, (
+graphdata.gsets["ir231/marc"] = (94, 1, (
                          (0x0141,),  (0x00D8,),  (0x0110,), 
              (0x00DE,),  (0x00C6,),  (0x0152,),  (0x02B9,),
              (0x00B7,),  (0x266D,),  (0x00AE,),  (0x00B1,), 
@@ -70,7 +70,7 @@ graphdata.gsets["ir231-marc"] = (94, 1, (
 #   to their ASCII equivalents on Wikipedia, but also by GSU's now-discontinued PAF (arguably the
 #   only source of true wisdom in this respect). No idea what they were originally for. Mapping
 #   straight to their ASCII equivalents seems foolish here though, hence the zenkaku mappings.
-graphdata.gsets["ir231-full"] = (94, 1, (
+graphdata.gsets["ir231/full"] = (94, 1, (
                          (0x0141,),  (0x00D8,),  (0x0110,), 
              (0x00DE,),  (0x00C6,),  (0x0152,),  (0x02B9,),
              (0x00B7,),  (0x266D,),  (0x00AE,),  (0x00B1,), 

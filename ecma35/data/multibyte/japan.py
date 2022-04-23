@@ -108,22 +108,22 @@ def utcto90jis(pointer, ucs):
     return ucs
 
 # JIS C 6226:1978 / JIS X 0208:1978
-graphdata.gsets["ir042"] = jisx0208_1978 = (94, 2, parsers.decode_main_plane_gl(
+graphdata.gsets["ir042/1990pivot"] = jisx0208_1978_1990pivot = (94, 2, parsers.decode_main_plane_gl(
     parsers.parse_file_format("UTC/JIS0208.TXT"),
     "JIS0208.TXT",
     mapper = utcto78jis))
-graphdata.gsets["ir042stricter"] = jisx0208_1978_stricter = (94, 2, parsers.decode_main_plane_gl(
+graphdata.gsets["ir042"] = jisx0208_1978_stricter = (94, 2, parsers.decode_main_plane_gl(
     parsers.parse_file_format("UTC/JIS0208.TXT"),
     "JIS0208.TXT",
     mapper = utcto78jisstricter))
-graphdata.gsets["ir042ibm"] = jisx0208_ibm78 = (94, 2, parsers.decode_main_plane_sjis(
+graphdata.gsets["ir042/ibm"] = jisx0208_ibm78 = (94, 2, parsers.decode_main_plane_sjis(
     parsers.parse_file_format("ICU/ibm-942_P12A-1999.ucm"),
     "ibm-942_P12A-1999.ucm",
     plane = 1))
-graphdata.gsets["ir042nec"] = jisx0208_nec = (94, 2, parsers.decode_main_plane_gl(
+graphdata.gsets["ir042/nec"] = jisx0208_nec = (94, 2, parsers.decode_main_plane_gl(
     parsers.parse_file_format("Custom/NEC-C-6226-visual3.txt"),
     "NEC-C-6226-visual3.txt"))
-graphdata.gsets["ir042adobe"] = jisx0208_adobe = (94, 2, parsers.decode_main_plane_gl(
+graphdata.gsets["ir042/adobe"] = jisx0208_adobe = (94, 2, parsers.decode_main_plane_gl(
     parsers.parse_file_format("Adobe/AdobeJapan.txt", cidmap=("78", "UniJIS-UTF32")),
     "AdobeJapan.txt-78-UniJIS-UTF32"))
 # JIS C 6226:1983 / JIS X 0208:1983
@@ -131,14 +131,14 @@ graphdata.gsets["ir087"] = jisx0208_1983 = (94, 2, parsers.decode_main_plane_gl(
     parsers.parse_file_format("UTC/JIS0208.TXT"),
     "JIS0208.TXT",
     mapper = utcto83jis))
-graphdata.gsets["ir087fujitsu"] = (94, 2, parsers.fuse([
+graphdata.gsets["ir087/fujitsu"] = (94, 2, parsers.fuse([
     parsers.without_ideocompat(
         parsers.decode_main_plane_gl(
             parsers.parse_file_format("Adobe/AdobeJapan.txt", cidmap=("Add", "UniJIS-UTF32")),
             "AdobeJapan.txt-Add-UniJIS-UTF32"),
         "JIS-FujitsuCIDIdeoNorm.json",
     ),
-    jisx0208_1978[2],
+    jisx0208_1978_stricter[2],
 ], "JIS-Fujitsu3.json"))
 
 # JIS X 0212:1990 (i.e. the 1990 supplementary plane)
@@ -147,15 +147,15 @@ graphdata.gsets["ir159"] = jisx0212 = (94, 2, parsers.decode_main_plane_whatwg(
     "index-jis0212.txt"))
 # JIS X 0212 with allocated but not published (per Lunde) va/vi/ve/vo codepoints. Note that these
 # codepoints explicitly clash with (either plane of) JIS X 0213.
-graphdata.gsets["ir159va"] = jisx0212_extva = (94, 2, parsers.fuse([
+graphdata.gsets["ir159/va"] = jisx0212_extva = (94, 2, parsers.fuse([
         ((None,) * 462) + tuple((_i,) for _i in range(0x30F7, 0x30FB)), 
         jisx0212[2]], "JISX0212-VaExt.json"))
-graphdata.gsets["ir159ibm"] = jisx0212ibm = (94, 2, parsers.decode_main_plane_euc(
+graphdata.gsets["ir159/ibm"] = jisx0212ibm = (94, 2, parsers.decode_main_plane_euc(
     parsers.parse_file_format("ICU/ibm-954_P101-2007.ucm"),
     "ibm-954_P101-2007.ucm",
     eucjp = 1,
     plane = 2))
-graphdata.gsets["ir159icueuc"] = jisx0208_ibm90 = (94, 2, parsers.decode_main_plane_euc(
+graphdata.gsets["ir159/icueuc"] = jisx0208_ibm90 = (94, 2, parsers.decode_main_plane_euc(
     parsers.parse_file_format("ICU/euc-jp-2007.ucm"),
     "euc-jp-2007.ucm",
     eucjp = 1,
@@ -166,18 +166,18 @@ graphdata.gsets["ir168"] = jisx0208_1990 = (94, 2, parsers.decode_main_plane_gl(
     parsers.parse_file_format("UTC/JIS0208.TXT"),
     "JIS0208.TXT",
     mapper = utcto90jis))
-graphdata.gsets["ir168utc"] = jisx0208_utc = (94, 2, parsers.decode_main_plane_gl(
+graphdata.gsets["ir168/utc"] = jisx0208_utc = (94, 2, parsers.decode_main_plane_gl(
     parsers.parse_file_format("UTC/JIS0208.TXT"),
     "JIS0208.TXT"))
-graphdata.gsets["ir168ibm"] = jisx0208_ibm90 = (94, 2, parsers.decode_main_plane_euc(
+graphdata.gsets["ir168/ibm"] = jisx0208_ibm90 = (94, 2, parsers.decode_main_plane_euc(
     parsers.parse_file_format("ICU/ibm-954_P101-2007.ucm"),
     "ibm-954_P101-2007.ucm",
     eucjp = 1,
     plane = 1))
-#graphdata.gsets["ir168icueuc"] = jisx0208_ibm90 = (94, 2, # Same as web, basically
+#graphdata.gsets["ir168/icueuc"] = jisx0208_ibm90 = (94, 2, # Same as web, basically
 #        parsers.read_main_plane("ICU/euc-jp-2007.ucm", eucjp=1, plane=1))
 # JIS X 0208, Microsoft and WHATWG version, as specified for use in HTML5
-graphdata.gsets["ir168web"] = jisx0208_html5 = (94, 2, parsers.decode_main_plane_whatwg(
+graphdata.gsets["ir168/web"] = jisx0208_html5 = (94, 2, parsers.decode_main_plane_whatwg(
     parsers.parse_file_format("WHATWG/index-jis0208.txt"),
     "index-jis0208.txt",
     plane = 1))
@@ -196,14 +196,14 @@ rawmac = parsers.read_untracked(
     parsers.decode_main_plane_sjis,
     parsers.parse_file_format("Mac/JAPANESE.TXT"),
     "JAPANESE.TXT-noahmap")
-graphdata.gsets["ir168mac"] = jisx0208_applekt7 = (94, 2, kanjitalk7data)
-graphdata.gsets["ir168mac-raw"] = (94, 2, rawmac)
-graphdata.gsets["ir168macps"] = jisx0208_appleps = (94, 2, parsers.decode_main_plane_sjis(
+graphdata.gsets["ir168/mac"] = jisx0208_applekt7 = (94, 2, kanjitalk7data)
+graphdata.gsets["ir168/mac-raw"] = (94, 2, rawmac)
+graphdata.gsets["ir168/macps"] = jisx0208_appleps = (94, 2, parsers.decode_main_plane_sjis(
     parsers.parse_file_format("Custom/JAPAN_PS.TXT"),
     "JAPAN_PS.TXT",
     plane = 1,
     mapper = variationhints.ahmap))
-graphdata.gsets["ir168macps-raw"] = (94, 2, parsers.decode_main_plane_sjis(
+graphdata.gsets["ir168/macps-raw"] = (94, 2, parsers.decode_main_plane_sjis(
     parsers.parse_file_format("Custom/JAPAN_PS.TXT"),
     "JAPAN_PS.TXT-noahmap",
     plane = 1))
@@ -219,7 +219,7 @@ if not os.path.exists(_kt6fn):
     f.close()
 else:
     kanjitalk6 = parsers.LazyJSON(os.path.basename(_kt6fn))
-graphdata.gsets["ir168mackt6"] = jisx0208_applekt6 = (94, 2, kanjitalk6)
+graphdata.gsets["ir168/mackt6"] = jisx0208_applekt6 = (94, 2, kanjitalk6)
 
 # Emoji
 _windows_noNECSel = parsers.fuse([
@@ -235,21 +235,21 @@ _windows_noNECSel_au = parsers.fuse([
 arib_extonly = parsers.decode_main_plane_sjis(
     parsers.parse_file_format("Custom/pict_arib.txt"),
     "pict_arib.txt")
-graphdata.gsets["ir168arib"] = jisx0208_arib = (94, 2, 
+graphdata.gsets["ir168/arib"] = jisx0208_arib = (94, 2, 
         parsers.fuse([arib_extonly, jisx0208_1990[2]],
                      "Emoji--ARIB.json"))
-graphdata.gsets["ir168docomo"] = jisx0208_arib = (94, 2, 
+graphdata.gsets["ir168/docomo"] = jisx0208_arib = (94, 2, 
         parsers.fuse([cellemojidata.outmap["docomo"][:94*94], _windows_noNECSel],
                      "Emoji--DoCoMo-4.json"))
-graphdata.gsets["ir168kddipict"] = jisx0208_arib = (94, 2, 
+graphdata.gsets["ir168/kddipict"] = jisx0208_arib = (94, 2, 
         parsers.fuse([cellemojidata.outmap["kddi"][:94*94],
                       _windows_noNECSel_au],
                      "Emoji--KDDI-5-pictzodiac.json"))
-graphdata.gsets["ir168kddisym"] = jisx0208_arib = (94, 2, 
+graphdata.gsets["ir168/kddisym"] = jisx0208_arib = (94, 2, 
         parsers.fuse([cellemojidata.outmap["kddi_symboliczodiac"][:94*94],
                       _windows_noNECSel_au],
                      "Emoji--KDDI-5-symzodiac.json"))
-graphdata.gsets["ir168sbank"] = jisx0208_arib = (94, 2, 
+graphdata.gsets["ir168/sbank"] = jisx0208_arib = (94, 2, 
         parsers.fuse([cellemojidata.outmap["softbank"][:94*94], _windows_noNECSel],
                      "Emoji--Softbank-4.json"))
 graphdata.gsets["ibmsjisext"] = sjis_html5_g3 = (94, 2, parsers.decode_main_plane_whatwg(
@@ -369,17 +369,17 @@ osfeuc_puatwo = parsers.decode_main_plane_euc(
     eucjp = True, 
     plane = 2)
 #
-graphdata.gsets["ir168osf"]  = osf_0208_j = (94, 2, parsers.fuse([
+graphdata.gsets["ir168/osf"]  = osf_0208_j = (94, 2, parsers.fuse([
     osfeuc_0208j, osfeuc_nec, osfeuc_puaone], "OSF--eucJP-0208j-complete.json"))
-graphdata.gsets["ir168osfa"] = osf_0208_a = (94, 2, parsers.fuse([
+graphdata.gsets["ir168/osfa"] = osf_0208_a = (94, 2, parsers.fuse([
     osfeuc_0208a, osfeuc_nec, osfeuc_puaone], "OSF--eucJP-0208a-complete.json"))
-graphdata.gsets["ir168osfm"] = osf_0208_m = (94, 2, parsers.fuse([
+graphdata.gsets["ir168/osfm"] = osf_0208_m = (94, 2, parsers.fuse([
     osfeuc_0208m, osfeuc_nec, osfeuc_puaone], "OSF--eucJP-0208m-complete.json"))
-graphdata.gsets["ir159osf"]  = osf_0212_j = (94, 2, parsers.fuse([
+graphdata.gsets["ir159/osf"]  = osf_0212_j = (94, 2, parsers.fuse([
     osfeuc_0212j, osfeuc_ibm, osfeuc_puatwo], "OSF--eucJP-0212j-complete.json"))
-graphdata.gsets["ir159osfa"] = osf_0212_a = (94, 2, parsers.fuse([
+graphdata.gsets["ir159/osfa"] = osf_0212_a = (94, 2, parsers.fuse([
     osfeuc_0212a, osfeuc_ibm, osfeuc_puatwo], "OSF--eucJP-0212a-complete.json"))
-graphdata.gsets["ir159osfm"] = osf_0212_m = (94, 2, parsers.fuse([
+graphdata.gsets["ir159/osfm"] = osf_0212_m = (94, 2, parsers.fuse([
     osfeuc_0212m, osfeuc_ibm, osfeuc_puatwo], "OSF--eucJP-0212m-complete.json"))
 
 

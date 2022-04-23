@@ -32,7 +32,7 @@ def decode_uhc(stream, state):
                 state.cur_c1 = "RFC1345"
                 state.glset = 0
                 state.grset = 1
-                state.cur_gsets = ["ir006", "ir149", "ir013win", "2011kpsextras"]
+                state.cur_gsets = ["ir006", "ir149", "ir013/win", "2011kpsextras"]
                 state.is_96 = [0, 0, 0, 0]
             else:
                 yield token

@@ -60,7 +60,7 @@ def to_link(maybe_siglum, default_siglum, maybe_plane, default_plane, ku, ten):
     display_plane = f"{omen}-" if maybe_plane else ""
     return f'<a href="{url}">{display_siglum}{display_plane}{oku}-{oten}</a>'
 
-siglumre = re.compile("(?:(JIS|CNS|CCCII|EACC|KSC|GB) )?(?:(\d\d|Ψ|Ω|K)-)?(\d\d)-(\d\d)(?!-)")
+siglumre = re.compile(r"(?:(JIS|CNS|CCCII|EACC|KSC|GB) )?\b(?:(\d\d|Ψ|Ω|K)-)?(\d\d)-(\d\d)(?!-)\b")
 def inject_links(text, default_siglum=None, default_plane=None):
     def callback(m):
         if m.group(1) == None and default_siglum == None:
