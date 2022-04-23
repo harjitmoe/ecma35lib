@@ -143,6 +143,25 @@ graphdata.gsets["ir155"] = (96, 1, (
 graphdata.gsets["ir208"] = (96, 1, 
              ((None,) * 64) + tuple((i,) for i in range(0x1680, 0x169D)) + (None, None, None))
 
+# ISO-10585:1996 Armenian
+# Not assigned an escape, but given the number here (possibly provisionally, but any new escape or
+#   IR number being assigned in the future seems unlikely since ISO-IR is basically legacy now):
+#   https://www.evertype.com/standards/iso10646/pdf/iso-10585.pdf
+graphdata.gsets["ir221"] = (94, 1, (
+               (0x0531,), (0x0532,), (0x0533,), (0x0534,), (0x0535,), (0x0536,), (0x0537,),
+    (0x0538,), (0x0539,), (0x053A,), (0x053B,), (0x053C,), (0x053D,), (0x053E,), (0x053F,),
+    (0x0540,), (0x0541,), (0x0542,), (0x0543,), (0x0544,), (0x0545,), (0x0546,), (0x0547,),
+    (0x0548,), (0x0549,), (0x054A,), (0x054B,), (0x054C,), (0x054D,), (0x054E,), (0x054F,),
+    (0x0550,), (0x0551,), (0x0552,), (0x0553,), (0x0554,), (0x0555,), (0x0556,), None,     
+    (0x055D,), (0x055A,), (0x058A,), None,      (0x0589,), (0x002C,), (0x055E,), (0x055F,),
+    None,      (0x0561,), (0x0562,), (0x0563,), (0x0564,), (0x0565,), (0x0566,), (0x0567,),
+    (0x0568,), (0x0569,), (0x056A,), (0x056B,), (0x056C,), (0x056D,), (0x056E,), (0x056F,),
+    (0x0570,), (0x0571,), (0x0572,), (0x0573,), (0x0574,), (0x0575,), (0x0576,), (0x0577,),
+    (0x0578,), (0x0579,), (0x057A,), (0x057B,), (0x057C,), (0x057D,), (0x057E,), (0x057F,),
+    (0x0580,), (0x0581,), (0x0582,), (0x0583,), (0x0584,), (0x0585,), (0x0586,), None,     
+    (0x2015,), (0x2010,), (0x0022,), None,      (0x0387,), (0x055B,), (0x055C,),
+))
+
 # ISO-10586:1996 Georgian
 # Not assigned an escape, but given the number here (possibly provisionally, but any new escape or
 #   IR number being assigned in the future seems unlikely since ISO-IR is basically legacy now):
