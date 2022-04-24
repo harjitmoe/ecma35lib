@@ -41,7 +41,7 @@ def swap_arrows(t):
 
 print("Loading 1")
 plane1 = (1, ("UTC Big5", "UTC CNS", "MS Big5", "Mac Big5", "IBM Big5", "Web Big5", "Yasuoka CNS",
-              "ICU '92CNS", "ICU EUC'14", "GOV-TW CNS", "Output"), [
+              "ICU '92CNS", "IBM EUC", "ICU EUC'14", "GOV-TW CNS", "Output"), [
           swap_arrows(graphdata.gsets["ir171/utcbig5"][2]),
           graphdata.gsets["ir171/utc"][2],
           swap_arrows(graphdata.gsets["ir171/ms"][2]),
@@ -50,6 +50,7 @@ plane1 = (1, ("UTC Big5", "UTC CNS", "MS Big5", "Mac Big5", "IBM Big5", "Web Big
           swap_arrows(graphdata.gsets["ir171/web"][2]),
           graphdata.gsets["ir171/yasuoka"][2],
           graphdata.gsets["ir171/icu"][2],
+          graphdata.gsets["ir171/ibm"][2],
           graphdata.gsets["ir171/icu-2014"][2],
           graphdata.gsets["ir171/govtw"][2],
           graphdata.gsets["ir171/full"][2],
@@ -130,13 +131,15 @@ planeB = (11, ("GOV-TW CNS",), [
 ])
 
 print("Loading 12")
-planeC = (12, ("ICU EUC 2014", "GOV-TW CNS",), [
+planeC = (12, ("IBM EUC", "ICU EUC 2014", "GOV-TW CNS",), [
+          graphdata.gsets["cns-eucg2-ibm-full"][2][94*94*11 : 94*94*12],
           graphdata.gsets["cns-eucg2-icu-2014-full"][2][94*94*11 : 94*94*12],
           graphdata.gsets["cns-eucg2-govtw"][2][94*94*11 : 94*94*12],
 ])
 
 print("Loading 13")
-planeD = (13, ("ICU EUC 2014", "GOV-TW CNS",), [
+planeD = (13, ("IBM EUC", "ICU EUC 2014", "GOV-TW CNS",), [
+          graphdata.gsets["cns-eucg2-ibm-full"][2][94*94*12 : 94*94*13],
           graphdata.gsets["cns-eucg2-icu-2014-full"][2][94*94*12 : 94*94*13],
           graphdata.gsets["cns-eucg2-govtw"][2][94*94*12 : 94*94*13],
 ])
