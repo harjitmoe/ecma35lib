@@ -144,7 +144,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"!D"): "ir230",
             tuple(b"!E"): ("ir231/full", ("ir231/marc", "ir231/full"), ("ir231",)),
             tuple(b"!F"): "ir232",
-            # Other ETS sets
+            tuple(b"#0"): ("ksroman", ("ksromantilde",), ("ksroman",)),
             tuple(b"#1"): "etsfrench",
             tuple(b"#2"): "etsiberian",
             tuple(b"#3"): "etsestonian",
@@ -154,17 +154,14 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"#7"): "etspolish",
             tuple(b"#8"): "etsromanian",
             tuple(b"#9"): "etsturkish",
-            # Other NRCS sets
-            tuple(b"$1"): "decswiss", # Note: DEC itself uses b"4" (collides with ARIB Mosaic C)
-            tuple(b"$2"): "decdutch", # Note: DEC itself uses b"="
-            # Others
-            tuple(b"#0"): ("ksroman", ("ksromantilde",), ("ksroman",)),
             tuple(b"#:"): "sbank2gpageE",
             tuple(b"#;"): "sbank2gpageF",
             tuple(b"#<"): "sbank2gpageG",
             tuple(b"#="): "sbank2gpageO",
             tuple(b"#>"): "sbank2gpageP",
             tuple(b"#?"): "sbank2gpageQ",
+            tuple(b"$1"): "decswiss", # Note: DEC itself uses b"4" (collides with ARIB Mosaic C)
+            tuple(b"$2"): "decdutch", # Note: DEC itself uses b"="
             tuple(b"$3"): "marlett",
             tuple(b"$4"): "zdings_g0",
             tuple(b"$5"): "zdings_g1",
@@ -263,8 +260,8 @@ g94nbytes = {tuple(b"@"): ("ir042/nec", ("ir042/ibm", "ir042/nec", "ir042/1990pi
              tuple(b"Q"): "ir233",
              tuple(b"!0"): "gb12052",
              # Traditional Chinese off doing its own thing, as you do... no standard escapes here.
-             tuple(b"!1"): ("cns-eucg2", ("cns-eucg2-ibm", "cns-eucg2-ms", "cns-eucg2-mac", "cns-eucg2-govtw", "cns-eucg2-icu-old", "cns-eucg2-icu-2014", "cns-eucg2-yasuoka"), ("cns-eucg2",)),
-             tuple(b"!2"): ("hkscs", ("ibmbig5exts", "etenextsplus"), ("ms950exts", "big5-2003-exts", "etenexts", "gccs", "hkscs1999", "hkscs2001", "hkscs2004", "hkscs", "hkscs",)),
+             tuple(b"!1"): ("cns-eucg2", ("cns-eucg2-icu-2014", "cns-eucg2-ms", "cns-eucg2-mac", "cns-eucg2-govtw", "cns-eucg2-icu-old", None, "cns-eucg2-yasuoka"), ("cns-eucg2",)),
+             tuple(b"!2"): ("hkscs", ("ibmbig5exts", "etenextsplus"), ("ms950exts", "big5-2003-exts", "etenexts", "gccs", "hkscs1999", "hkscs2001", "hkscs2004", "hkscs", None,)),
              tuple(b"!3"): ("ms950utcexts", (), ("utcbig5exts", "ms950utcexts")),
              # Shift_JIS extensions for IBM/Windows/HTML5 and for cellular emoji
              tuple(b"!4"): ("ibmsjisextpua", ("ibmsjisextold",), ("ibmsjisext", "ibmsjisextpua")),

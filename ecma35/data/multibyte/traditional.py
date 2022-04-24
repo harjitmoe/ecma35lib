@@ -232,8 +232,6 @@ graphdata.gsets["ir187/icu-2014"] = (94, 2, cns_icu_2014[planesize * 6 : planesi
 # The entirety does also exist as an unregistered 94^n set, used by EUC-TW:
 graphdata.gsets["cns-eucg2"] = euctw_g2 = (94, 3, cns)
 graphdata.gsets["cns-eucg2-yasuoka"] = (94, 3, cns_yasuoka)
-graphdata.gsets["cns-eucg2-icu-old"] = (94, 3, cns_icu_old)
-graphdata.gsets["cns-eucg2-icu-2014"] = (94, 3, cns_icu_2014)
 graphdata.gsets["cns-eucg2-govtw"] = euctw_g2_gov = (94, 3, cns_gov)
 # The version of EUC-TW used by ICU, with standard assignments in planes 1-7 and 15,
 #   a user-defined area in plane 12, and IBM corporate assignments in plane 13.
@@ -243,10 +241,11 @@ graphdata.gsets["cns-eucg2-govtw"] = euctw_g2_gov = (94, 3, cns_gov)
 #   assignments were redundant and were skipped. Actually, the early full versions of
 #   cns-11643-1992.ucm include it as plane 9 for some reason (later versions remove
 #   it due to limiting that mapping's scope to ISO-2022-CN-EXT, then to ISO-2022-CN).
-graphdata.gsets["cns-eucg2-ibm"] = euctw_g2_ibm = (94, 3, parsers.decode_main_plane_euc(
-    parsers.parse_file_format("ICU/euc-tw-2014.ucm"),
-    "euc-tw-2014.ucm"))
-graphdata.gsetflags["cns-eucg2-ibm"] |= {"BIG5:IBMCOMPATKANJI"}
+graphdata.gsets["cns-eucg2-icu-2014"] = (94, 3, cns_icu_2014)
+graphdata.gsetflags["cns-eucg2-icu-2014"] |= {"BIG5:IBMCOMPATKANJI"}
+graphdata.gsets["cns-eucg2-icu-old"] = (94, 3, cns_icu_old)
+
+# TODO: strict IBM version.
 
 # # # # # # # # # #
 # Big Five

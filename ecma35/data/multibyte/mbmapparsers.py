@@ -91,7 +91,7 @@ class LazyJSON(list):
         return hash(tuple(self))
     def __eq__(self, i):
         self._load()
-        return tuple(self) == i
+        return tuple(self) == tuple(i)
     def __bool__(self, i):
         self._load()
         return super().__bool__()

@@ -75,26 +75,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`DOCS 6`|HangulTalk|
 |`DOCS / 0`|Standard Compression Scheme for Unicode (SCSU)|
 
-## Additional single-byte G-sets
-
-Regarding World System Teletext:
-
-|Private assignment|Meaning|
-|---|---|
-|`IRR 1 G*D4 ! B`|World System Teletext Latin G0, invariant subset|
-|`IRR 0 G*D4 Y`|World System Teletext Latin G0 for Italy|
-|`G*D4 # 1`|World System Teletext Latin G0 for France|
-|`G*D4 # 2`|World System Teletext Latin G0 for Spain and Portugal|
-|`G*D4 # 3`|World System Teletext Latin G0 for Estonia|
-|`G*D4 # 4`|World System Teletext Latin G0 for Latvia and Lithuania|
-|`G*D4 # 5`|World System Teletext Latin G0 for Serbia, Bosnia, Croatia and Slovenia|
-|`IRR 0 G*D4 # 5`|World System Teletext Latin G0 for Serbia, Slovenia _et al._ with the Dollar sign|
-|`G*D4 # 6`|World System Teletext Latin G0 for Czech and Slovak|
-|`G*D4 # 7`|World System Teletext Latin G0 for Poland|
-|`G*D4 # 8`|World System Teletext Latin G0 for Romania|
-|`G*D4 # 9`|World System Teletext Latin G0 for Turkey|
-
-Miscellaneous single-byte assignments:
+## Additional single-byte G-sets, and additional selectors for particular variants of single-byte G-sets
 
 |Private assignment|Meaning|
 |---|---|
@@ -106,9 +87,42 @@ Miscellaneous single-byte assignments:
 |`IRR 2 G*D4 I`|JIS X 0201 katakana, an extraction from Windows-31J and friends.|
 |`IRR 3 G*D4 I`|JIS X 0201 katakana, an extraction from Windows-31J and friends, suppressing the 0x80 control mapping in some DOCS filters in favour of the Euro.|
 |`IRR 0 G*D4 J`|JIS-Roman with tilde (rather than overscore)|
+|`IRR ? G*D4 O`|DIN 31624, possibly-older German relative of ISO 5426-1|
+|`IRR 0 G*D4 O`|DIN 31624, falling thru to T.51 for unallocated cells|
+|`IRR ? G*D4 P`|ISO 5426-1, bibliographic set related to (but incompatible with) T.51|
+|`IRR 0 G*D4 P`|ISO 5426-1, falling thru to T.51 for unallocated cells|
+|`IRR 0 G*D4 Y`|ETS 300 706 Latin G0 for Italy|
+|``IRR 1 G*D4 ` ``|Danish equivalent to NS 4551 (IBM's 1017)|
+|`IRR ? G*D4 l`|ITU T.51-1988 first supplementary set (i.e. older version of the T.51 supplementary set without NBSP, SHY, not sign or brvbar)|
+|`IRR 0 G*D4 l`|ITU T.51-1988 first supplementary set with ETS 300 706 extensions (default for this F-byte)|
+|`IRR 1 G*D4 l`|ITU T.51-1988 first supplementary set with ETS 300 706 extensions, alternative mapping|
+|`IRR ? G*D4 o`|JIS X 9010 non-JISCII set for OCR-B.|
+|`IRR 0 G*D4 o`|ISO-8859-1 RHS cropped to 94-set, with backslash replacing yen sign (superset of the non-JISCII set for OCR-B).|
+|`IRR ? G*D4 q`|JIS X 9010 backslash-only set for JIS X 9008, mapping to ASCII as strongly implied by registration rubric (subset of the non-JISCII set for OCR-B).|
+|`IRR 0 G*D4 q`|JIS X 9010 backslash-only set for JIS X 9008, mapping to OCR DOUBLE BACKSLASH.|
 |`IRR 0 G*D4 ! B`|DEC NRCS, invariant subset|
+|`IRR 1 G*D4 ! B`|ETS 300 706 Latin G0, invariant subset|
+|`IRR ? G*D4 ! E`|ANSEL supplementary set, ANSI standard version (i.e. no eszett)|
+|`IRR 0 G*D4 ! E`|ANSEL supplementary set, Library of Congress version (i.e. eszett at 0x47)|
+|`IRR 1 G*D4 ! E`|ANSEL supplementary set, combined Library of Congress and Genealogical Society of Utah versions, i.e. duplicate eszetts at 0x47 and 0x4F (default for this F-byte)|
 |`G*D4 # 0`|KS X 1003|
 |`IRR 0 G*D4 # 0`|KS X 1003 with tilde|
+|`G*D4 # 1`|ETS 300 706 Latin G0 for France|
+|`G*D4 # 2`|ETS 300 706 Latin G0 for Spain and Portugal|
+|`G*D4 # 3`|ETS 300 706 Latin G0 for Estonia|
+|`G*D4 # 4`|ETS 300 706 Latin G0 for Latvia and Lithuania|
+|`G*D4 # 5`|ETS 300 706 Latin G0 for Serbia, Bosnia, Croatia and Slovenia|
+|`IRR 0 G*D4 # 5`|ETS 300 706 Latin G0 for Serbia, Slovenia _et al._ with the Dollar sign|
+|`G*D4 # 6`|ETS 300 706 Latin G0 for Czech and Slovak|
+|`G*D4 # 7`|ETS 300 706 Latin G0 for Poland|
+|`G*D4 # 8`|ETS 300 706 Latin G0 for Romania|
+|`G*D4 # 9`|ETS 300 706 Latin G0 for Turkey|
+|`G*D4 # :`|SoftBank 2G (single-byte) Emoji page E|
+|`G*D4 # ;`|SoftBank 2G (single-byte) Emoji page F|
+|`G*D4 # <`|SoftBank 2G (single-byte) Emoji page G|
+|`G*D4 # =`|SoftBank 2G (single-byte) Emoji page O|
+|`G*D4 # >`|SoftBank 2G (single-byte) Emoji page P|
+|`G*D4 # ?`|SoftBank 2G (single-byte) Emoji page Q|
 |`G*D4 $ 1`|DEC NRCS for Switzerland (corresponding to DEC's (not ARIB's) `G*D4 4`)|
 |`G*D4 $ 2`|DEC NRCS for the Netherlands (corresponding to DEC's `G*D4 =`)|
 |`G*D4 $ 3`|Marlett encoding|
@@ -122,12 +136,15 @@ Miscellaneous single-byte assignments:
 |`G*D4 $ ;`|ISO 11822:1996 Arabic supplementary set|
 |`G*D4 $ <`|ISO 10586:1996 Georgian|
 |`G*D4 $ =`|ISO 10585:1996 Armenian|
-|``IRR 1 G*D4 ` ``|Danish equivalent to NS 4551 (IBM's 1017)|
+|`IRR ? G*D6 J`|ITU T.51 supplementary set for use with old IRV (excludes universal currency sign and hash)|
+|`IRR 0 G*D6 J`|Complete ITU T.51 supplementary set (same as `IRR 0 G*D6 R`; default for this F-byte)|
+|`IRR ? G*D6 R`|ITU T.51 supplementary set for use with ASCII (excludes dollar and hash)|
+|`IRR 0 G*D6 R`|Complete ITU T.51 supplementary set (same as `IRR 0 G*D6 J`; default for this F-byte)|
 |`G*D6 ! 0`|RFC 1345's so-called ISO-IR-111/ECMA-Cyrillic (incompatible with ISO-IR-111 itself).|
 |`IRR ? G*D6 $ 7`|Symbol font encoding, GR range (with euro)|
 |`IRR 0 G*D6 $ 7`|Symbol font encoding, GR range (with figure space)|
 
-## Additional multiple-byte G-sets
+## Additional multiple-byte G-sets, and additional selectors for particular variants of multiple-byte G-sets
 
 |Private assignment|Meaning|
 |---|---|
@@ -135,12 +152,11 @@ Miscellaneous single-byte assignments:
 |`IRR 0 G*DM4 @`|JIS C 6226, version encoded by IBM-932 and IBM-942|
 |`IRR 1 G*DM4 @`|JIS C 6226, version used by NEC PC98 (default for this F-byte)|
 |`IRR 2 G*DM4 @`|JIS C 6226-1978, character mapping changes by 90JIS pivot only|
-|`IRR 3 G*DM4 @`|JIS C 6226-1978, character mappings by CID map only, resulting in some gaps|
+|`IRR 3 G*DM4 @`|JIS C 6226-1978, character mappings by CID map only, resulting in some gaps (since CID maps are intended to preserve font correctness, not data integrity)|
 |`IRR ? G*DM4 A`|GB/T 2312-1980, with half of the GB 6345.1-1986 corrigienda, as shown in the ISO-IR-58 registration itself. Elsewhere, leans toward UTC mappings rather than GB 18030 mappings, e.g. unifying with the Japanese rather than Catalan interpunct.|
-|`IRR 0 G*DM4 A`|GB/T 12345|
+|`IRR 0 G*DM4 A`|GB/T 12345 (hybrid approach)|
 |`IRR 1 G*DM4 A`|GB 18030-2000 levels 1 and 2|
 |`IRR 2 G*DM4 A`|GB 18030-2005 levels 1 and 2 (default)|
-|`IRR 3 G*DM4 A`|~~GB 18030, WHATWG variant, same as 2005 unless in GBK DOCS (obsolete in favour of changing the G3 set and no longer affects GBK DOCS)~~|
 |`IRR 4 G*DM4 A`|GB 18030, favouring duplicate mappings over PUA mappings for standard characters|
 |`IRR 5 G*DM4 A`|GB/T 2312, variant used on classic Mac OS, updated mappings|
 |`IRR 6 G*DM4 A`|GB/T 2312-1980, without GB 6345.1-1986 corrigienda (including script g, rather than fullwidth or standard g). Otherwise leans toward UTC mappings.|
@@ -154,7 +170,7 @@ Miscellaneous single-byte assignments:
 |`IRR ? G*DM4 B`|JIS C 6226 / X 0208-1983|
 |`IRR @ G*DM4 B`|JIS X 0208-1990 (standard sequence, listed here for completeness)|
 |`IRR 0 G*DM4 B`|JIS X 0208, WHATWG variant (default; synchronised with Windows-31J)|
-|`IRR 1 G*DM4 B`|JIS X 0208, "KanjiTalk 7" (row+84 verticals, non-NEC gaiji) variant used on classic Mac OS, updated mappingsS|
+|`IRR 1 G*DM4 B`|JIS X 0208, "KanjiTalk 7" (row+84 verticals, non-NEC gaiji) variant used on classic Mac OS, updated mappings|
 |`IRR 2 G*DM4 B`|JIS X 0208, "PostScript" / "KanjiTalk 6 PostScript" (row+84 verticals, NEC gaiji) variant used on classic Mac OS, updated mappings|
 |`IRR 3 G*DM4 B`|JIS X 0208, "KanjiTalk 6 non-PostScript" (row+10 verticals, NEC gaiji) variant used on classic Mac OS|
 |`IRR 4 G*DM4 B`|JIS X 0208, with UTC-style mapping of em dash / horizontal bar character|
@@ -206,7 +222,7 @@ Miscellaneous single-byte assignments:
 |`IRR < G*DM4 G`|CNS 11643 plane 1, per ICU EUC-TW 2014 mappings|
 |`IRR = G*DM4 G`|CNS 11643 plane 1, per Yasuoka's mappings|
 |`IRR ? G*DM4 H`|CNS 11643 plane 2|
-|`IRR 1 G*DM4 H`|CNS 11643 plane 2, ICU mappings|
+|`IRR 1 G*DM4 H`|CNS 11643 plane 2, Big5 mappings|
 |`IRR ? G*DM4 I`|CNS 11643-1992 plane 3|
 |`IRR 0 G*DM4 I`|CNS 11643-1988 plane 14|
 |`IRR 1 G*DM4 I`|CNS 11643-1988 plane 14 with extensions, as submitted to the IRG|
@@ -241,27 +257,55 @@ Miscellaneous single-byte assignments:
 |`IRR 1 G*DM4 N`|KPS 9566-2011 (only the main plane unless in the UHC DOCS)|
 |`IRR 2 G*DM4 N`|All KPS 9566 editions overlayed (but only the main plane unless in the UHC DOCS)|
 |`G*DM4 ! 0`|GB/T 12052 (Korean in Mainland China)|
-|`G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, as included by EUC-TW as its G2 set|
-|`G*DM4 ! 2`|Hong Kong Supplementary Character Set, including ETEN characters (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
-|`G*DM4 ! 3`|Non-ETEN Big5 kana and Cyrillic (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
-|`G*DM4 ! 4`|IBM extensions for Shift\_JIS (accepted by Shift\_JIS filter in G3 slot, mapped to/from Shift\_JIS by the same mapping scheme as JIS X 0213 plane 2)|
+|`IRR ? G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, as included by EUC-TW as its G2 set|
+|`IRR 0 G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, as included by EUC-TW as its G2 set (ICU EUC-2014 version)|
+|`IRR 1 G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, as included by EUC-TW as its G2 set (Microsoft version)|
+|`IRR 2 G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, as included by EUC-TW as its G2 set (Apple version)|
+|`IRR 3 G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, as included by EUC-TW as its G2 set (GOV-TW version)|
+|`IRR 4 G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, as included by EUC-TW as its G2 set (old ICU version)|
+|`IRR 6 G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, as included by EUC-TW as its G2 set (Yasuoka version)|
+|`IRR ? G*DM4 ! 2`|MS-950 Big-5 extensions (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
+|`IRR @ G*DM4 ! 2`|Big5-2003 extension set (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
+|`IRR A G*DM4 ! 2`|Big5-ETEN extension set (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
+|`IRR B G*DM4 ! 2`|Hong Kong GCCS extension set (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
+|`IRR C G*DM4 ! 2`|Hong Kong Supplementary Character Set 1999 extension set (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
+|`IRR D G*DM4 ! 2`|Hong Kong Supplementary Character Set 2001 extension set (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
+|`IRR E G*DM4 ! 2`|Hong Kong Supplementary Character Set 2004 extension set (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
+|`IRR F G*DM4 ! 2`|Hong Kong Supplementary Character Set full (GCCS + 2008) extension set (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
+|`IRR 0 G*DM4 ! 2`|IBM Big-5 ETEN-based in-plane extensions (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
+|`IRR 1 G*DM4 ! 2`|Big5-ETEN with the subset of GCCS encoded with lead bytes following, not preceeding, the standard Big-5 assignments (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
+|`IRR ? G*DM4 ! 3`|Non-ETEN Big5 kana and Cyrillic (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
+|`IRR @ G*DM4 ! 3`|Non-ETEN Big5 kana and Cyrillic (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere) combined with Microsoft non-EUDC extensions, as in Python's built-in (used when not on Windows or when MS-950 is not the ACP) version of "cp950".|
+|`IRR ? G*DM4 ! 4`|IBM extensions for Shift\_JIS (accepted by Shift\_JIS filter in G3 slot, mapped to/from Shift\_JIS by the same mapping scheme as JIS X 0213 plane 2); excluding UDC|
+|`IRR @ G*DM4 ! 4`|IBM extensions for Shift\_JIS (accepted by Shift\_JIS filter in G3 slot, mapped to/from Shift\_JIS by the same mapping scheme as JIS X 0213 plane 2); including UDC|
+|`IRR 0 G*DM4 ! 4`|IBM extensions for Shift\_JIS (accepted by Shift\_JIS filter in G3 slot, mapped to/from Shift\_JIS by the same mapping scheme as JIS X 0213 plane 2); old mappings for use with 78JIS|
 |`G*DM4 ! 5`|DoCoMo Emoji extensions for Shift\_JIS (as above)|
 |`IRR ? G*DM4 ! 6`|KDDI Emoji extensions for Shift\_JIS (as above), pictorial zodiac variant|
 |`IRR 0 G*DM4 ! 6`|KDDI Emoji extensions for Shift\_JIS (as above), symbolic zodiac variant|
 |`G*DM4 ! 7`|SoftBank Emoji extensions for Shift\_JIS (as above)|
 |`IRR ? G*DM4 ! 8`|GB 13131 (supplementary traditional).|
-|`IRR 0 G*DM4 ! 8`|GB 7589 (supplementary simplified)&mdash;This is generated from the GB 13131 mappings, and may be inaccurate in places.|
+|`IRR 0 G*DM4 ! 8`|GB 7589 (supplementary simplified)&mdash;This is generated from the GB 13131 mappings, and may be minorly inaccurate in places.|
 |`IRR ? G*DM4 ! 9`|GB 13132 (further supplementary traditional)&ensp;This is based on Unihan source data, and has several gaps.|
-|`IRR 0 G*DM4 ! 9`|GB 7590 (further supplementary simplified)&mdash;This is generated from the GB 13132 mappings, and may be inaccurate in places.|
-|`G*DM4 ! :`|HangulTalk second plane (accepted by HangulTalk filter in G3 slot)|
+|`IRR 0 G*DM4 ! 9`|GB 7590 (further supplementary simplified)&mdash;This is generated from the GB 13132 mappings, and may be minorly inaccurate in places.|
+|`IRR ? G*DM4 ! :`|HangulTalk second plane (accepted by HangulTalk filter in G3 slot), Apple mappings|
+|`IRR 0 G*DM4 ! :`|HangulTalk second plane (accepted by HangulTalk filter in G3 slot), updated mappings (recommended; default)|
+|`IRR 1 G*DM4 ! :`|HangulTalk second plane (accepted by HangulTalk filter in G3 slot), marginally newer (but not *that* up-to-date) Apple mappings given by Apple in mapping file comments|
+|`IRR 2 G*DM4 ! :`|HangulTalk second plane (accepted by HangulTalk filter in G3 slot), old Apple mappings|
+|`IRR 3 G*DM4 ! :`|HangulTalk second plane (accepted by HangulTalk filter in G3 slot), Adobe CID mappings (very partial)|
+|`IRR 4 G*DM4 ! :`|HangulTalk second plane (accepted by HangulTalk filter in G3 slot), mappings taking advantage of the PUA of the Nishiki-teki font where possible|
 |`G*DM4 ! ;`|Non-syllable part of KPS 9566-2011 outside the main plane (accepted by UHC filter in G3 slot)|
 |`G*DM4 ! <`|Big5-E extensions (for Big-5 filter's G3 slot)|
 |`G*DM4 ! =`|KS X 1002 (South Korean first supplementary plane)|
 |`G*DM4 ! >`|KS X 1027-1 (South Korean second supplementary plane)|
 |`G*DM4 ! ?`|KS X 1027-2 (South Korean third supplementary plane)|
-|`G*DM4 " 0`|Big5 AtOn/ChinaSea extensions (for Big-5 filter's G3 slot)|
-|`G*DM4 " 1`|IBM-926 (IBM-944)'s 94×94 plane (not KS X 1001 compatible for the most part).&ensp;No DOCS filter exists for it yet though.|
-|`G*DM4 " 2`|GB 16500 (yet another supplementary set).|
+|`IRR ? G*DM4 " 0`|Big5 AtOn/ChinaSea extensions (for Big-5 filter's G3 slot)|
+|`IRR 0 G*DM4 " 0`|Big5 AtOn/ChinaSea extensions (for Big-5 filter's G3 slot), alternate version|
+|`IRR ? G*DM4 " 1`|IBM-926 (IBM-944)'s 94×94 plane (not KS X 1001 compatible for the most part).&ensp;No DOCS filter exists for it yet though.&ensp;Reconstructed original version.|
+|`IRR @ G*DM4 " 1`|IBM-926 (IBM-944)'s 94×94 plane (not KS X 1001 compatible for the most part).&ensp;No DOCS filter exists for it yet though.|
+|`IRR 0 G*DM4 " 1`|IBM-926 (IBM-944)'s 94×94 plane (not KS X 1001 compatible for the most part).&ensp;No DOCS filter exists for it yet though.&ensp;IBM mappings including corporate PUA.|
+|`IRR ? G*DM4 " 2`|GB 16500 (yet another supplementary set, numbered the seventh in its title though Unihan calls it "GE").|
+|`IRR @ G*DM4 " 2`|GB 16500 combined with Unihan's "G7"/"GB7" (do not overlap).|
+|`IRR 0 G*DM4 " 2`|Unihan's "GB7"/"G7" (not sure if it's really supposed to be a CCS, though it's structured in 94-char rows).|
 |`G*DM4 " 3`|Big5 DynaLab extensions (for Big-5 filter's G3 slot)|
 |`G*DM4 " 4`|Big5 Monotype extensions (for Big-5 filter's G3 slot)|
 |`G*DM4 " 5`|Big5-Plus in-plane extensions (for Big-5 filter's G3 slot)|
@@ -337,17 +381,18 @@ following sequences can be used to change this:
   (which confines the entire ISO 6937 repertoire definition (rather than just one of the charts
   as in ISO/IEC 6937) to an annex which isn't referenced from the main text), and (b) we're 
   mapping to ISO/IEC 10646, not to ISO/IEC 10367 or 8859, so combining marks aren't a problem.
+- All graphical sets (besides Blissymbolics) with registered escapes.
+- Backspace composition sequences.
 
 # Still to do
 
-- More graphical sets.
 - More general RHS sets.
 - Support for JOHAB as a DOCS set.
 - Support for LMBCS as a DOCS set.
+- Support for EBCDIC as a DOCS set, with the addition of 190 and 190^n sets implied by this.
 - Dynamically allocating sets, IRR codes, DOCS codes (e.g. Shift_JIS) in some configurable way.
 - Functionality of CSI, CEX, C1 _et cetera_ controls.
   - Rich or annotated output of some sort.
-- Backspace composition sequences.
 - Figure out how the relevant parts of Videotex work:
   - The rest of the control sets.
   - The rest of the DOCS codes.
