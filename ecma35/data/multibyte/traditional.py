@@ -129,6 +129,9 @@ cns_icu_old = parsers.decode_main_plane_gl(
 cns_icu_2014 = parsers.decode_main_plane_euc(
     parsers.parse_file_format("ICU/euc-tw-2014.ucm"), 
     "euc-tw-2014.ucm")
+cns_ibm = parsers.decode_main_plane_euc(
+    parsers.parse_file_format("ICU/ibm-964_P110-1999.ucm"), 
+    "ibm-964_P110-1999.ucm")
 
 cns_fullplane3 = list(cns) # Conversion from tuple creates a copy
 for index in ir184_to_old_ir183:
@@ -154,8 +157,8 @@ graphdata.gsets["ir171"] = cns1_1992 = (94, 2,
 )
 graphdata.gsets["ir171/govtw"] = cns1_gov = (94, 2, cns_gov[planesize * 0 : planesize * 1])
 graphdata.gsets["ir171/ibm"] = euctw_g1_ibm = (94, 3, parsers.decode_main_plane_euc(
-    parsers.parse_file_format("ICU/euc-tw-2014.ucm"),
-    "euc-tw-2014.ucm",
+    parsers.parse_file_format("ICU/ibm-964_P110-1999.ucm"),
+    "ibm-964_P110-1999.ucm",
     plane = 1))
 graphdata.gsets["ir171/utc"] = (94, 3, parsers.decode_main_plane_gl(
     parsers.parse_file_format("UTC/CNS11643.TXT"), 
@@ -230,7 +233,10 @@ graphdata.gsets["ir187/icu-2014"] = (94, 2, cns_icu_2014[planesize * 6 : planesi
 # Plane 7 is the last one to be registered with ISO-IR.
 
 # The entirety does also exist as an unregistered 94^n set, used by EUC-TW:
-graphdata.gsets["cns-eucg2"] = euctw_g2 = (94, 3, cns)
+graphdata.gsets["cns-eucg2"] = euctw_g2 = (94, 3, parsers.fuse([
+    cns,
+    cns_icu_2014,
+], "CSIC-All.json"))
 graphdata.gsets["cns-eucg2-yasuoka"] = (94, 3, cns_yasuoka)
 graphdata.gsets["cns-eucg2-govtw"] = euctw_g2_gov = (94, 3, cns_gov)
 # The version of EUC-TW used by ICU, with standard assignments in planes 1-7 and 15,
@@ -241,11 +247,15 @@ graphdata.gsets["cns-eucg2-govtw"] = euctw_g2_gov = (94, 3, cns_gov)
 #   assignments were redundant and were skipped. Actually, the early full versions of
 #   cns-11643-1992.ucm include it as plane 9 for some reason (later versions remove
 #   it due to limiting that mapping's scope to ISO-2022-CN-EXT, then to ISO-2022-CN).
-graphdata.gsets["cns-eucg2-icu-2014"] = (94, 3, cns_icu_2014)
-graphdata.gsetflags["cns-eucg2-icu-2014"] |= {"BIG5:IBMCOMPATKANJI"}
+graphdata.gsets["cns-eucg2-icu-2014-full"] = (94, 3, cns_icu_2014)
+graphdata.gsetflags["cns-eucg2-icu-2014-full"] |= {"BIG5:IBMCOMPATKANJI"}
+graphdata.gsets["cns-eucg2-icu-2014-noplane1"] = (94, 3, (None,) * (94 * 94) + cns_icu_2014[94*94:])
+graphdata.gsetflags["cns-eucg2-icu-2014-noplane1"] |= {"BIG5:IBMCOMPATKANJI"}
 graphdata.gsets["cns-eucg2-icu-old"] = (94, 3, cns_icu_old)
-
-# TODO: strict IBM version.
+graphdata.gsets["cns-eucg2-ibm-full"] = (94, 3, cns_ibm)
+graphdata.gsetflags["cns-eucg2-ibm-full"] |= {"BIG5:IBMCOMPATKANJI"}
+graphdata.gsets["cns-eucg2-ibm-noplane1"] = (94, 3, (None,) * (94 * 94) + cns_ibm[94*94:])
+graphdata.gsetflags["cns-eucg2-ibm-noplane1"] |= {"BIG5:IBMCOMPATKANJI"}
 
 # # # # # # # # # #
 # Big Five

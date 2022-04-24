@@ -131,13 +131,13 @@ planeB = (11, ("GOV-TW CNS",), [
 
 print("Loading 12")
 planeC = (12, ("ICU EUC 2014", "GOV-TW CNS",), [
-          graphdata.gsets["cns-eucg2-ibm"][2][94*94*11 : 94*94*12],
+          graphdata.gsets["cns-eucg2-icu-2014-full"][2][94*94*11 : 94*94*12],
           graphdata.gsets["cns-eucg2-govtw"][2][94*94*11 : 94*94*12],
 ])
 
 print("Loading 13")
 planeD = (13, ("ICU EUC 2014", "GOV-TW CNS",), [
-          graphdata.gsets["cns-eucg2-ibm"][2][94*94*12 : 94*94*13],
+          graphdata.gsets["cns-eucg2-icu-2014-full"][2][94*94*12 : 94*94*13],
           graphdata.gsets["cns-eucg2-govtw"][2][94*94*12 : 94*94*13],
 ])
 
@@ -149,7 +149,7 @@ planeE = (14, ("GOV-TW CNS",), [
 print("Loading 15")
 planeF = (15, ("ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
           graphdata.gsets["cns-eucg2-icu-old"][2][94*94*8 : 94*94*9], # yes, this is correct.
-          graphdata.gsets["cns-eucg2-icu-2014"][2][94*94*14 : 94*94*15],
+          graphdata.gsets["cns-eucg2-icu-2014-full"][2][94*94*14 : 94*94*15],
           graphdata.gsets["cns-eucg2-govtw"][2][94*94*14 : 94*94*15],
           graphdata.gsets["cns-eucg2"][2][94*94*14 : 94*94*15],
 ])
