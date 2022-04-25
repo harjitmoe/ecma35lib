@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2021.
+# By HarJIT in 2021, 2022.
 
 # This file is made available under the CC0 Public Domain Dedication.  To the extent possible
 #   under law, the author(s) have dedicated all copyright and related and neighboring rights to
@@ -180,7 +180,7 @@ for pointer, ucs in enumerate(graphdata.gsets["ir149/2002"][2]):
     encode_ksc7[ucs] = (first, second)
 
 
-for pointer, (ucs, ucsms) in enumerate(zip(graphdata.gsets["ir171"][2], graphdata.gsets["ir171/ms"][2])):
+for pointer, (ucs, ucsms) in enumerate(zip(graphdata.gsets["ir171/full"][2], graphdata.gsets["ir171/ms"][2])):
     first = 0x21 + (pointer // 94)
     second = 0x21 + (pointer % 94)
     if not ucs:
