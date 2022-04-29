@@ -160,7 +160,19 @@ for compchar, spacchars in rbs_maps.items():
         bs_maps[spacchar] = compchar
 bs_maps[","] = " ̦ "[1]
 
-bs_deflators = {("o", "/"): "ø", ("O", "/"): "Ø", ("/", "o"): "ø", ("/", "O"): "Ø"}
+bs_deflators = {
+    # Cases without decompositions which therefore need giving manually
+    ("=", "-"): "≡", ("-", "="): "≡",
+    ("=", "_"): "≡", ("_", "="): "≡",
+    ("l", "-"): "ł", ("-", "l"): "ł",
+    ("l", "/"): "ł", ("/", "l"): "ł",
+    ("L", "-"): "Ł", ("-", "L"): "Ł",
+    ("L", "/"): "Ł", ("/", "L"): "Ł",
+    ("d", "-"): "đ", ("-", "d"): "đ",
+    ("D", "-"): "Ð", ("-", "D"): "Ð",
+    ("o", "/"): "ø", ("/", "o"): "ø",
+    ("O", "/"): "Ø", ("/", "O"): "Ø",
+}
 for i in range(0x10FFFF):
     i = chr(i)
     bb = breakup(i)
@@ -183,6 +195,15 @@ for i in range(0x10FFFF):
 
 _multis = []
 _singles = {}
+apl_alts = {
+    "⎕": ("▯",), "⋄": ("◊",), "∣": ("|", "│"),
+    "∩": ("⋂",), "∪": ("⋃",), "∼": ("~",),
+    "∧": ("⋀",), "∨": ("⋁",), "!": ("ǃ",),
+    "\\": ("\u2216",), "⋆": ("*",), "-": ("−",),
+    "⍺": ("α",), "∊": ("ε", "∈"), "⍳": ("ι",), "⍴": ("ρ",), "⍵": ("ω",),
+    ":": ("∶",),
+}
+apl_alt = lambda c: (c,) + apl_alts.get(c, ())
 with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "singlebyte", "sbmaps", "UTC", "APL-ISO-IR-68.TXT")) as f:
     for line in f:
         if not line.strip() or line[0] == "#":
@@ -197,8 +218,10 @@ with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "singlebyte",
         else:
             _multis.append((ucs, tuple(byts)))
 for (target, rawcomp) in _multis:
-    comp = tuple(_singles[i] for i in rawcomp if i != 8)
-    bs_deflators[comp] = target
+    pcomp = tuple(_singles[i] for i in rawcomp if i != 8)
+    assert len(pcomp) == 2
+    for comp in [(i, j) for i in apl_alt(pcomp[0]) for j in apl_alt(pcomp[1])]:
+        bs_deflators[comp] = target
 
 def test():
     import pyuca, pprint
@@ -213,7 +236,7 @@ def bs_handle_left_preference(charses):
         elif scratch[-2:] in bs_deflators:
             scratch = (bs_deflators[scratch[-2:]],) + scratch[:-2]
         else:
-            bases = [i for i in scratch if i not in bs_maps]
+            bases = [i for i in scratch if i not in bs_maps] or " "
             combos = [bs_maps[i] for i in scratch if i in bs_maps]
             return "\b".join(bases) + "".join(combos)
     return scratch[0]
@@ -226,7 +249,7 @@ def bs_handle_right_preference(charses):
         elif scratch[:2] in bs_deflators:
             scratch = (bs_deflators[scratch[:2]],) + scratch[2:]
         else:
-            bases = [i for i in scratch if i not in bs_maps]
+            bases = [i for i in scratch if i not in bs_maps] or " "
             combos = [bs_maps[i] for i in scratch if i in bs_maps]
             return "\b".join(bases) + "".join(combos)
     return scratch[0]
