@@ -6,7 +6,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-from ecma35.data.multibyte.korea import initials, vowels, finals, combjamo
+from ecma35.data.multibyte.korea import initials, vowels, finals, compatjamo
 from ecma35.data.names import namedata
 
 def proc_hangul_fillers(stream, state):
@@ -20,7 +20,7 @@ def proc_hangul_fillers(stream, state):
         reconsume = None
         if first is not None:
             assert fourth is None # Shouldn't remain non-None across iterations.
-            if (token[0] != "CHAR" or chr(token[1]) not in combjamo) and (
+            if (token[0] != "CHAR" or chr(token[1]) not in compatjamo) and (
                     token[0] != "CTRL" or token[1] not in ("HF", "HWHF")):
                 yield("ERROR", "TRUNCHANGUL", None)
                 yield first

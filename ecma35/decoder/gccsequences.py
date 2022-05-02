@@ -16,7 +16,7 @@ def gcc_lookup(tupl):
     if tupl in gcc_tuples:
         return gcc_tuples[tupl]
     chartuple = tuple(chr(i) for i in tupl)
-    if chartuple and all(i in korea.combjamo for i in chartuple):
+    if chartuple and all(i in korea.compatjamo for i in chartuple):
         hangultuple = tuple(itertools.dropwhile(lambda c: c == "\u3164", chartuple))[::-1]
         hangultuple = tuple(itertools.dropwhile(lambda c: c == "\u3164", hangultuple))[::-1]
         unic = None
