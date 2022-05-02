@@ -55,8 +55,8 @@ def process_stream(stream, *, lastfilter=None, **kwargs): # The entry point.
               fixedcontrols.decode_fixed_controls, escsequences.decode_esc_sequences, 
               csisequences.decode_csi_sequences, controlstrings.decode_control_strings, 
               invocations.decode_invocations, graphsets.decode_graphical_sets, 
-              hangulfillers.proc_hangul_fillers, gccsequences.proc_gcc_sequences, 
-              formateffectors.format_effectors, prefixdiacritics.handle_prefix_diacritics, 
+              formateffectors.format_effectors, prefixdiacritics.handle_prefix_diacritics,
+              gccsequences.proc_gcc_sequences, hangulfillers.proc_hangul_fillers,  
               bssequences.proc_bs_sequences, lastfilter or simpleprinter.simple_print]:
         stream = f(stream, state)
     yield from stream
