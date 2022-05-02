@@ -44,20 +44,19 @@ def gcc_lookup(tupl):
                 f = korea.compfinals.get(finals, None)
             if f is not None and i and v:
                 unic = i + v + f
+        elif hangultuple in korea.compsimple:
+            unic = korea.compsimple[hangultuple]
+        elif hangultuple in korea.compinitials:
+            unic = korea.compinitials[hangultuple] + "\u1160"
+        elif hangultuple in korea.compfinals:
+            unic = "\u115F\u1160" + korea.compfinals[hangultuple]
         else:
-            if hangultuple in korea.compsimple:
-                unic = korea.compsimple[hangultuple]
-            elif hangultuple in korea.compinitials:
-                unic = korea.compinitials[hangultuple] + "\u1160"
-            elif hangultuple in korea.compfinals:
-                unic = "\u115F\u1160" + korea.compfinals[hangultuple]
-            else:
-                for split in range(1, len(hangultuple)):
-                    if (inits := hangultuple[:split]) in korea.compinitials:
-                        if (finals := hangultuple[split:]) in korea.compfinals:
-                            unic = korea.compinitials[inits] + "\u1160" + korea.compfinals[finals]
-                            break
-        if unic: # NOT elif
+            for split in range(1, len(hangultuple)):
+                if (inits := hangultuple[:split]) in korea.compinitials:
+                    if (finals := hangultuple[split:]) in korea.compfinals:
+                        unic = korea.compinitials[inits] + "\u1160" + korea.compfinals[finals]
+                        break
+        if unic:
             return tuple(ord(i) for i in namedata.canonical_recomp.get(unic, unic))  
     return tupl
 
