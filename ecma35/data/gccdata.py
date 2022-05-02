@@ -160,68 +160,103 @@ for compchar, spacchars in rbs_maps.items():
         bs_maps[spacchar] = compchar
 bs_maps[","] = " ̦ "[1]
 
-bs_deflators = {
-    # Cases without decompositions which therefore need giving manually
-    ("=", "-"): "≡", ("-", "="): "≡",
-    ("=", "_"): "≡", ("_", "="): "≡",
-    ("l", "-"): "ł", ("-", "l"): "ł",
-    ("l", "/"): "ł", ("/", "l"): "ł",
-    ("L", "-"): "Ł", ("-", "L"): "Ł",
-    ("L", "/"): "Ł", ("/", "L"): "Ł",
-    ("d", "-"): "đ", ("-", "d"): "đ",
-    ("D", "-"): "Ð", ("-", "D"): "Ð",
-    ("o", "/"): "ø", ("/", "o"): "ø",
-    ("O", "/"): "Ø", ("/", "O"): "Ø",
-}
-for i in range(0x10FFFF):
-    i = chr(i)
-    bb = breakup(i)
-    if not bb:
-        continue
-    rb = recursive_breakup(i)
-    for k in {rb, bb}:
-        if len(k) >= 2 and k[1:] in rbs_maps:
-            base = k[0]
-            combines = rbs_maps[k[1:]]
-            for combine in combines:
-                bs_deflators[(base, combine)] = i
-                bs_deflators[(combine, base)] = i
-
-# Clearly wrong:
-# (('-', '⊂'), '⌾'),
-# (('⊂', '-'), '⌾'),
-# APL-ISO-IR-68.TXT lists U+233E as 0x5A085F and 0x5F085A which is wrong.
-# It should be 0x4A084F and 0x4F084A.
-
-_multis = []
-_singles = {}
-apl_alts = {
-    "⎕": ("▯",), "⋄": ("◊",), "∣": ("|", "│"),
-    "∩": ("⋂",), "∪": ("⋃",), "∼": ("~",),
-    "∧": ("⋀",), "∨": ("⋁",), "!": ("ǃ",),
-    "\\": ("\u2216",), "⋆": ("*",), "-": ("−",),
-    "⍺": ("α",), "∊": ("ε", "∈"), "⍳": ("ι",), "⍴": ("ρ",), "⍵": ("ω",),
-    ":": ("∶",),
-}
-apl_alt = lambda c: (c,) + apl_alts.get(c, ())
-with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "singlebyte", "sbmaps", "UTC", "APL-ISO-IR-68.TXT")) as f:
-    for line in f:
-        if not line.strip() or line[0] == "#":
+if not os.path.exists(bscachefile):
+    bs_deflators = {
+        # Cases without decompositions which therefore need giving manually
+        ("=", "-"): "≡", ("-", "="): "≡",
+        ("=", "_"): "≡", ("_", "="): "≡",
+        (":", "-"): "÷", ("-", ":"): "÷", 
+        ("l", "-"): "ł", ("-", "l"): "ł",
+        ("l", "/"): "ł", ("/", "l"): "ł",
+        ("L", "-"): "Ł", ("-", "L"): "Ł",
+        ("L", "/"): "Ł", ("/", "L"): "Ł",
+        ("d", "-"): "đ", ("-", "d"): "đ",
+        ("D", "-"): "Ð", ("-", "D"): "Ð",
+        ("o", "/"): "ø", ("/", "o"): "ø",
+        ("O", "/"): "Ø", ("/", "O"): "Ø",
+    }
+    for i in range(0x10FFFF):
+        i = chr(i)
+        bb = breakup(i)
+        if not bb:
             continue
-        byts, ucs, junk = line.split(None, 2)
-        byts = binascii.unhexlify(byts[2:])
-        ucs = chr(int(ucs[2:], 16))
-        if ucs == "\u233E": # See above
-            byts = byts.replace(b"\x5A", b"\x4A").replace(b"\x5F", b"\x4F")
-        if len(byts) == 1:
-            _singles[byts[0]] = ucs
-        else:
-            _multis.append((ucs, tuple(byts)))
-for (target, rawcomp) in _multis:
-    pcomp = tuple(_singles[i] for i in rawcomp if i != 8)
-    assert len(pcomp) == 2
-    for comp in [(i, j) for i in apl_alt(pcomp[0]) for j in apl_alt(pcomp[1])]:
-        bs_deflators[comp] = target
+        rb = recursive_breakup(i)
+        for k in {rb, bb}:
+            if len(k) >= 2 and k[1:] in rbs_maps:
+                base = k[0]
+                combines = rbs_maps[k[1:]]
+                for combine in combines:
+                    if base == " " and i == combine:
+                        continue
+                    bs_deflators[(base, combine)] = i
+                    bs_deflators[(combine, base)] = i
+    
+    # Clearly wrong:
+    # (('-', '⊂'), '⌾'),
+    # (('⊂', '-'), '⌾'),
+    # APL-ISO-IR-68.TXT lists U+233E as 0x5A085F and 0x5F085A which is wrong.
+    # It should be 0x4A084F and 0x4F084A.
+    
+    _multis = []
+    _singles = {}
+    apl_alts = { # Other Unicode mappings elsewhere listed for the APL characters
+        "⎕": ("▯",), "⋄": ("◊",), "∣": ("|", "│"),
+        "∩": ("⋂",), "∪": ("⋃",), "∼": ("~",),
+        "∧": ("⋀",), "∨": ("⋁",), "!": ("ǃ",),
+        "\\": ("\u2216",), "⋆": ("*",), "-": ("−",),
+        "⍺": ("α",), "∊": ("ε", "∈"), "⍳": ("ι",), "⍴": ("ρ",), "⍵": ("ω",),
+        ":": ("∶",),
+    }
+    apl_alt = lambda c: (c,) + apl_alts.get(c, ())
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "singlebyte", "sbmaps", "UTC", "APL-ISO-IR-68.TXT")) as f:
+        for line in f:
+            if not line.strip() or line[0] == "#":
+                continue
+            byts, ucs, junk = line.split(None, 2)
+            byts = binascii.unhexlify(byts[2:])
+            ucs = chr(int(ucs[2:], 16))
+            if ucs == "\u233E": # See above
+                byts = byts.replace(b"\x5A", b"\x4A").replace(b"\x5F", b"\x4F")
+            if len(byts) == 1:
+                _singles[byts[0]] = ucs
+            else:
+                _multis.append((ucs, tuple(byts)))
+    for (target, rawcomp) in _multis:
+        pcomp = tuple(_singles[i] for i in rawcomp if i != 8)
+        assert len(pcomp) == 2
+        for comp in [(i, j) for i in apl_alt(pcomp[0]) for j in apl_alt(pcomp[1])]:
+            bs_deflators[comp] = target
+    
+    # Address e.g. =\b/\b-, which won't happen with just =\b- and ≡\b/ but needs a ≠\b- and/or =\b⌿
+    _rbsdf = {val: tuple(i for i, j in bs_deflators.items() if j == val) for val in bs_deflators.values()}
+    for pair in tuple(bs_deflators.keys()): # tuple to take a copy
+        altpairs = []
+        if pair[0] in _rbsdf and pair[1] != " ":
+            for result in _rbsdf[pair[0]]:
+                if " " not in result and (result[1], pair[1]) in bs_deflators:
+                    rebracket = bs_deflators[(result[1], pair[1])]
+                    altpairs.append((result[0], rebracket))
+        if pair[1] in _rbsdf and pair[0] != " ":
+            for result in _rbsdf[pair[1]]:
+                if " " not in result and (pair[0], result[0]) in bs_deflators:
+                    rebracket = bs_deflators[(pair[0], result[0])]
+                    altpairs.append((rebracket, result[1]))
+        for altpair in altpairs:
+            # Note: altpair may already be legitimately used for a different character, e.g. Ṻ, Ǖ
+            # Some cases applying diacritics in a different order are correct (e.g. ά\b᾿→ἄ, or ĕ\b,→ḝ),
+            #   while some are arguably incorrect (e.g. Ō\b~→Ȭ, which should rather stay as a Ō with a
+            #   combining tilde)—this is low priority since it's not like overprinting *hardware* would
+            #   have differentiated the two by order of typing anyway.
+            if altpair not in bs_deflators:
+                bs_deflators[altpair] = bs_deflators[pair]
+    
+    f = open(bscachefile, "w")
+    f.write(json.dumps(list(bs_deflators.items())))
+    f.close()
+else:
+    f = open(bscachefile, "r")
+    bs_deflators = dict((tuple(i), j) for i, j in json.load(f))
+    f.close()
 
 def test():
     import pyuca, pprint
