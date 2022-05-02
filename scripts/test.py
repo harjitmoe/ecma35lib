@@ -55,7 +55,7 @@ dat = (b"\x1B[m\x1B%G\x1B!F" + teststr.encode("utf-8-sig") + "\x1CJ염盐塩鹽\
        '\n\x1B%G\x1B[1\x20_ㅂㅅㅅㅠㅖㄼㅅ\x1B[2\x20_\x1B[1\x20_ㅂㅅㅅㄼㅅ\x1B[2\x20_'.encode("utf-8") +
        '\x1B[1\x20_ㅅㅅㅠㅅ\x1B[2\x20_\x1B[1\x20_ㅂㅅㅅ\x1B[2\x20_'.encode("utf-8") +
        '\x1B[1\x20_ㅅㅅ\x1B[2\x20_\x1B[1\x20_ㅠㅖ\x1B[2\x20_'.encode("utf-8") +
-       '\x1B[1\x20_ㅂㅅ\u3164ㅅ\x1B[2\x20_'.encode("utf-8") +
+       '\x1B[1\x20_ㅂㅅ\u3164ㅅ\x1B[2\x20_\x1B%G\x1B[1\x20_ㅇㅠㅖㅅㅂ∘\x1B[2\x20_'.encode("utf-8") +
        b"\x1Bc\x1B%9unrecdata" + # Unrecognised WSR DOCS, should stay as WORD ops in output.
        b"\x1B%/L" + teststr.encode("utf-16be") + 
        b"\xDC\x20\xD8\x20" +                             # Deliberately invalid UTF-16BE

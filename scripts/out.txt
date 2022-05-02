@@ -5,7 +5,7 @@ Display test: "Muhammad ﷺ"
 
 ⅔⅔
 
-ᄥᆒᇓᄥᅠᇓ쓧ᄥᅠㅆᅟᆒᄡᅠᆺ￼￼￼￼￼￼￼￼￼￼
+ᄥᆒᇓᄥᅠᇓ쓧ᄥᅠㅆᅟᆒᄡᅠᆺᄋᆒퟫ￼￼￼￼￼￼￼￼￼￼
 かFoo￼ら侅ら¥a~염盐塩鹽䝼/丽/〒｜“걈 ~¥”￼￼￼𐐈𐐤𐐓𐐀㎏¥
 ����
 かFoo￼ら侅ら¥a~염盐塩鹽䝼/丽/〒｜“걈 ~¥”￼￼￼𐐈𐐤𐐓𐐀㎏¥
@@ -375,6 +375,29 @@ Wenn ich nur nichts von Nachwelt hören sollte. Gesetzt daß ich von Nachwelt r
    ('CHAR', 12613, 'UCS', (12613,), 'UTF-8', 'UTF-8'),
    ('CTRL', 'HF', 'UCS', (12644,), 'UTF-8', 'UTF-8'),
    ('CHAR', 12613, 'UCS', (12613,), 'UTF-8', 'UTF-8'),
+   ('CSISEQ',
+    'GCC',
+    (50,),
+    (('CTRL', 'CSI', 'RFC1345', 27, 'C1', 'ESC'),
+     ('G0', 18, 'GL'),
+     ('G0', 0, 'GL'),
+     ('G0', 63, 'GL'))))),
+ ('RDOCS', 'UTF-8', False, (71,)),
+ ('COMPCHAR',
+  (4363, 4498, 55275),
+  (('CSISEQ',
+    'GCC',
+    (49,),
+    (('CTRL', 'CSI', 'RFC1345', 27, 'C1', 'ESC'),
+     ('G0', 17, 'GL'),
+     ('G0', 0, 'GL'),
+     ('G0', 63, 'GL'))),
+   ('CHAR', 12615, 'UCS', (12615,), 'UTF-8', 'UTF-8'),
+   ('CHAR', 12640, 'UCS', (12640,), 'UTF-8', 'UTF-8'),
+   ('CHAR', 12630, 'UCS', (12630,), 'UTF-8', 'UTF-8'),
+   ('CHAR', 12613, 'UCS', (12613,), 'UTF-8', 'UTF-8'),
+   ('CHAR', 12610, 'UCS', (12610,), 'UTF-8', 'UTF-8'),
+   ('CHAR', 8728, 'UCS', (8728,), 'UTF-8', 'UTF-8'),
    ('CSISEQ',
     'GCC',
     (50,),
