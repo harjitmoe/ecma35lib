@@ -12,7 +12,7 @@ sys.path.append(os.path.abspath(os.pardir))
 import io, pprint
 from ecma35.decoder import tokenfeed
 
-teststr = "\nかFoo\x7fら侅ら¥a~염盐塩鹽䝼/丽/〒｜“걈 ~¥”\x1b[A\x1b[B\x1b]0;𐐈𐐤𐐓𐐀\x1b\\𐐈𐐤𐐓𐐀\x1b[\x20_kg¥\n"
+teststr = "\nかFoo\x7fら侅ら¥a~염盐塩鹽䝼/丽/〒｜“걈쬬 ~¥”\x1b[A\x1b[B\x1b]0;𐐈𐐤𐐓𐐀\x1b\\𐐈𐐤𐐓𐐀\x1b[\x20_kg¥\n"
 test2 = "\nНаш благодетель знает своё высокое призвание и будет верен ему.\n"
 scsutest = (b"\xD6\x6C\x20\x66\x6C\x69\x65\xDF\x74\x20\x12\x9C\xBE\xC1\xBA\xB2\xB0" +
             b"\x08\x00\x1B\x4C\xEA\x16\xCA\xD3\x94\x0F\x53\xEF\x61\x1B\xE5\x84\xC4" + 

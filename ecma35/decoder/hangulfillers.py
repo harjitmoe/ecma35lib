@@ -8,6 +8,14 @@
 
 from ecma35.data.multibyte.korea import initials, vowels, finals, compatjamo
 from ecma35.data.names import namedata
+from ecma35.data.controldata import rformats
+
+def _get_codepoint(tkn):
+    if tkn[0] in ("CHAR", "COMPCHAR"):
+        return tkn[1]
+    elif tkn[0] == "CTRL" and tkn[1] in rformats:
+        return rformats[tkn[1]]
+    return None
 
 def proc_hangul_fillers(stream, state):
     first = second = third = fourth = None
@@ -37,8 +45,8 @@ def proc_hangul_fillers(stream, state):
                     if first[:2] not in {("CTRL", "HF"), ("CTRL", "HWHF")}:
                         raise KeyError
                     # KeyError may also be raised by the following statement:
-                    unic = (initials[chr(second[1])] + vowels[chr(third[1])] +
-                            finals[chr(fourth[1])])
+                    unic = (initials[chr(_get_codepoint(second))] + vowels[chr(_get_codepoint(third))] +
+                            finals[chr(_get_codepoint(fourth))])
                 except KeyError:
                     yield("ERROR", "BADHANGUL", None)
                     yield first
