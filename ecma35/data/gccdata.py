@@ -20,6 +20,20 @@ __all__ = ("gcc_sequences", "gcc_tuples", "bs_handle")
 cachefile = os.path.join(os.path.dirname(os.path.abspath(__file__)), "gcc_sequences.json")
 bscachefile = os.path.join(os.path.dirname(os.path.abspath(__file__)), "bs_sequences.json")
 
+conformation_sets = {frozenset(i) for i in (
+    # Generally speaking, GCC sequences are expected to be of ISO 8859 characters where applicable.
+    # Doesn't mean that their Unicode decompositions can't also be supported.
+    {"\u2044", "/", "\u2215", "/"}, {"\u02BC", "'"}, {"ℓ", "l"},
+    #
+    # Variation in Unicode mappings listed for APL characters in different sources
+    {"⎕", "▯"}, {"⋄", "◊"}, {"∣", "|", "│"},
+    {"∩", "⋂"}, {"∪", "⋃"}, {"∼", "~"},
+    {"∧", "⋀"}, {"∨", "⋁"}, {"!", "ǃ"},
+    {"\\", "\u2216"}, {"⋆", "*"}, {"-", "−"},
+    {"⍺", "α"}, {"∊", "ε", "∈"}, {"⍳", "ι"}, {"⍴", "ρ"}, {"⍵", "ω"},
+    {":", "∶"},
+)}
+
 if not os.path.exists(cachefile):
     gcc_sequences = {
         # "Pts" is specifically listed as a GCC example in Annex C of ECMA-43, so we should
@@ -37,6 +51,10 @@ if not os.path.exists(cachefile):
         "⇃↾": "⥯", "↿⇂": "⥮", "↿↾": "⥣", "⇃⇂": "⥥",
         # MacKorean's shadowed keycapped number 10
         "\uF864[10]": "\U0001F51F",
+        # Mathematical symbols that have no decompositions (unlike e.g. ⩴, ⩵, ⩶)
+        "||": "‖", "|||": "⦀", "///": "⫻", "//": "⫽", "\\\\": "⑊",
+        "::": "∷", "-:": "∹", ":=": "≔", "=:": "≕", ":-:": "∺",
+        "<<": "≪", ">>": "≫", "<<<": "⋘", ">>>": "⋙",
     }
     from_1F18B = ["IC", "PA", "SA", "AB", "WC", "DJ",
                   "CL", "COOL", "FREE", "ID", "NEW", "NG", "OK", "SOS", "UP!", "VS", "3D", 
@@ -71,21 +89,12 @@ if not os.path.exists(cachefile):
 
     gcc_sequences["pH"] = gcc_sequences["PH"] # Well, they messed that decomposition up, didn't they.
 
-    # Generally speaking, GCC sequences are expected to be of ISO 8859 characters where applicable.
-    # Doesn't mean that their Unicode decompositions can't also be supported.
-    # I don't think any uses multiple at the moment, but one loop each covers for that.
-    for i in gcc_sequences.copy():
-        if "\u2044" in i:
-            gcc_sequences[i.replace("\u2044", "/")] = gcc_sequences[i]
-    for i in gcc_sequences.copy():
-        if "\u2215" in i:
-            gcc_sequences[i.replace("\u2215", "/")] = gcc_sequences[i]
-    for i in gcc_sequences.copy():
-        if "\u02BC" in i:
-            gcc_sequences[i.replace("\u02BC", "'")] = gcc_sequences[i]
-    for i in gcc_sequences.copy():
-        if "ℓ" in i:
-            gcc_sequences[i.replace("ℓ", "l")] = gcc_sequences[i]
+    for cset in conformation_sets:
+        for i in tuple(gcc_sequences.keys()):
+            for c1 in cset:
+                for c2 in cset - {c1}:
+                    if c1 in i:
+                        gcc_sequences.setdefault(i.replace(c1, c2), gcc_sequences[i])
 
     # Micro-thing unit symbol blocks just as much sense in contexts with the ISO-8859-1 repertoire 
     # (including U+00B5) as in those with the ISO-8859-7 repertoire (including U+03BC). It's the 
@@ -199,15 +208,6 @@ if not os.path.exists(bscachefile):
     
     _multis = []
     _singles = {}
-    apl_alts = { # Other Unicode mappings elsewhere listed for the APL characters
-        "⎕": ("▯",), "⋄": ("◊",), "∣": ("|", "│"),
-        "∩": ("⋂",), "∪": ("⋃",), "∼": ("~",),
-        "∧": ("⋀",), "∨": ("⋁",), "!": ("ǃ",),
-        "\\": ("\u2216",), "⋆": ("*",), "-": ("−",),
-        "⍺": ("α",), "∊": ("ε", "∈"), "⍳": ("ι",), "⍴": ("ρ",), "⍵": ("ω",),
-        ":": ("∶",),
-    }
-    apl_alt = lambda c: (c,) + apl_alts.get(c, ())
     with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "singlebyte", "sbmaps", "UTC", "APL-ISO-IR-68.TXT")) as f:
         for line in f:
             if not line.strip() or line[0] == "#":
@@ -222,10 +222,18 @@ if not os.path.exists(bscachefile):
             else:
                 _multis.append((ucs, tuple(byts)))
     for (target, rawcomp) in _multis:
-        pcomp = tuple(_singles[i] for i in rawcomp if i != 8)
-        assert len(pcomp) == 2
-        for comp in [(i, j) for i in apl_alt(pcomp[0]) for j in apl_alt(pcomp[1])]:
-            bs_deflators[comp] = target
+        comp = tuple(_singles[i] for i in rawcomp if i != 8)
+        bs_deflators[comp] = target
+
+    for cset in conformation_sets:
+        for i in tuple(bs_deflators.keys()):
+            for c1 in cset:
+                if i[0] == c1:
+                    for c2 in cset - {c1}:
+                        bs_deflators.setdefault((c2, i[1]), bs_deflators[i])
+                if i[1] == c1: # not elif
+                    for c2 in cset - {c1}:
+                        bs_deflators.setdefault((i[0], c2), bs_deflators[i])
     
     # Address e.g. =\b/\b-, which won't happen with just =\b- and ≡\b/ but needs a ≠\b- and/or =\b⌿
     _rbsdf = {val: tuple(i for i, j in bs_deflators.items() if j == val) for val in bs_deflators.values()}
