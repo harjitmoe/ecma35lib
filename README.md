@@ -153,14 +153,14 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 1 G*DM4 @`|JIS C 6226, version used by NEC PC98 (default for this F-byte)|
 |`IRR 2 G*DM4 @`|JIS C 6226-1978, character mapping changes by 90JIS pivot only|
 |`IRR 3 G*DM4 @`|JIS C 6226-1978, character mappings by CID map only, resulting in some gaps (since CID maps are intended to preserve font correctness, not data integrity)|
-|`IRR ? G*DM4 A`|GB/T 2312-1980, with half of the GB 6345.1-1986 corrigienda, as shown in the ISO-IR-58 registration itself. Elsewhere, leans toward UTC mappings rather than GB 18030 mappings, e.g. unifying with the Japanese rather than Catalan interpunct.|
+|`IRR ? G*DM4 A`|GB/T 2312-1980|
 |`IRR 0 G*DM4 A`|GB/T 12345 (hybrid approach)|
 |`IRR 1 G*DM4 A`|GB 18030-2000 levels 1 and 2|
 |`IRR 2 G*DM4 A`|GB 18030-2005 levels 1 and 2 (default)|
 |`IRR 4 G*DM4 A`|GB 18030, favouring duplicate mappings over PUA mappings for standard characters|
 |`IRR 5 G*DM4 A`|GB/T 2312, variant used on classic Mac OS, updated mappings|
-|`IRR 6 G*DM4 A`|GB/T 2312-1980, without GB 6345.1-1986 corrigienda (including script g, rather than fullwidth or standard g). Otherwise leans toward UTC mappings.|
-|`IRR 7 G*DM4 A`|GB/T 2312-1980, with corrigienda but not extensions from GB 6345.1-1986 (matching UTC mappings)|
+|`IRR 6 G*DM4 A`|GB/T 2312-1980, UTC version|
+|`IRR 7 G*DM4 A`|GB/T 2312-1980, with alterations but not extensions from GB 6345.1-1986|
 |`IRR 8 G*DM4 A`|GB/T 12345 (strict compliance, including retaining certain simplified characters from GB/T 2312 which are often implemented replaced by traditional versions)|
 |`IRR 9 G*DM4 A`|GB/T 12345 (UTC mapping, including additional replacements by traditional versions, and lacking non‑hanzi not present in GB/T 2312)|
 |`IRR : G*DM4 A`|GB/T 2312, IBM version with PUA filling empty space and extensions in row 94|
@@ -202,7 +202,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 4 G*DM4 D`|JIS X 0212, version encoded by IBM-954|
 |`IRR 5 G*DM4 D`|JIS X 0212, version encoded by ICU's EUC-JP|
 |`IRR ? G*DM4 E`|CCITT Hanzi Code (GB 2312 variant) from ITU T.101-C, which bases it on GB 6345.1-1986 and GB 8565.2-1988 with further adjustments and expansions|
-|`IRR 0 G*DM4 E`|CCITT Hanzi Code, amended to strictly follow GB 6345.1-1986 where applicable|
+|`IRR 0 G*DM4 E`|CCITT Hanzi Code, with a more conventional mapping of the lowercase gs (appropriate for their GB 18030 reference glyphs)|
 |`IRR 1 G*DM4 E`|CCITT Hanzi Code, combined with an additional hanzi extension in row 8|
 |`IRR 2 G*DM4 E`|GB 6345.1-1986|
 |`IRR 3 G*DM4 E`|GB 8565.2-1988|

@@ -51,39 +51,33 @@ def gb2005to2000map(pointer, ucs):
     if ucs == (0x1E3F,):
         return (0xE7C7,)
     return ucs
-def gb1986to1980map(pointer, ucs):
-    # Reversing non-extensional changes made to GB 2312-1980 by GB 6345.1-1986 and also included
-    # in GB 8565.2-1988 (which did not include the extensional changes, rather being an independent
-    # but non-collisive extension). These corrigienda were incoporated into mappings such as
-    # GB2312.TXT, and into GB 18030.
-    if ucs == (0x953A,):
-        return (0x937E,)
+def gbutcto1986map(pointer, ucs):
+    # GB 2312 subset of GB 6345.1.
+    # Contra Lunde, GB 6345.1 changes 03-71 from looped to open (not vice versa).
     if ucs == (0xFF47,):
         return (0x0261,)
     return ucs
-def gb1986toregmap(pointer, ucs):
-    # The registered ISO-IR chart apparently does it like this. Go figure. Although it does make
-    # the ISO-IR chart for the ITU version swapping the lowercase Gs seem even weirder, considering
-    # that the ISO-IR reg for GB 2312 displayed a closed one in the ISO-646 row to begin with…
+def gbutcto1980map(pointer, ucs):
+    # Original GB 2312. 
     if ucs == (0x953A,):
         return (0x937E,)
     return ucs
 
 # GB/T 2312 (EUC-CN RHS); note that the 2000 and 2005 "editions" refer to GB 18030 edition subsets.
-graphdata.gsets["ir058/1980"] = gb2312_1980 = (94, 2,
+graphdata.gsets["ir058"] = gb2312_1980 = (94, 2,
     parsers.decode_main_plane_gl(
         parsers.parse_file_format("UTC/GB2312.TXT"),
         "GB2312.TXT",
-        mapper = gb1986to1980map))
-graphdata.gsets["ir058"] = gb2312_1980reg = (94, 2,
-    parsers.decode_main_plane_gl(
-        parsers.parse_file_format("UTC/GB2312.TXT"),
-        "GB2312.TXT",
-        mapper = gb1986toregmap))
-graphdata.gsets["ir058/1986"] = gb2312_1986 = (94, 2,
+        mapper = gbutcto1980map))
+graphdata.gsets["ir058/utc"] = gb2312_1980 = (94, 2,
     parsers.decode_main_plane_gl(
         parsers.parse_file_format("UTC/GB2312.TXT"),
         "GB2312.TXT"))
+graphdata.gsets["ir058/1986"] = gb2312_1986 = (94, 2,
+    parsers.decode_main_plane_gl(
+        parsers.parse_file_format("UTC/GB2312.TXT"),
+        "GB2312.TXT",
+        mapper = gbutcto1986map))
 graphdata.gsets["ir058/ms"] = gb2312_ms = (94, 2,
     parsers.decode_main_plane_euc(
         parsers.parse_file_format("ICU/windows-936-2000.ucm"),
@@ -124,19 +118,6 @@ graphdata.gsets["ir058/full"] = gb2312_full = (94, 2,
 #   incorporated into GB 18030 (including the infamous m-acute). However, iso-ir-165.ucm doesn't 
 #   have the benefit of all the GB 18030-2005 mappings, omitting any mapping for the n-grave, which
 #   was added in Unicode 3.0.
-# Also, the closed-tail and open-tail "g" glyphs are inverted in the ISO-IR-165 registration with
-#   respect to (say) GB 18030 or Macintosh Simplified Chinese, and this is reflected in the UCM  
-#   file from ICU, with their mappings also being the other way around. This is apparently related 
-#   to the plain "g" being defined as open-tailed in GB 2312-1980, and altered to closed-tailed in 
-#   GB 6345.1-1986 (which added the separate code for the open-tailed one), with GB 8565.2-1988 
-#   also including this change (see Lunde). The question remains, of course, of whether the ITU
-#   version swapped them to restore the 1980 layout, or just double-applied the swap (that the
-#   ISO-IR-58 registration actually shows a closed-tail version for the plain "g" anyway — despite
-#   not changing 鍾 to 锺, per the other corrigiendum made by GB 6345.1 to an existing GB 2312
-#   character — might suggest the latter, if it had any impact). Interestingly, Lunde doesn't seem
-#   to mention this discrepency, rather listing it as incorporating all modifications and additions
-#   in both GB 6345.1 and GB 8565.2… but keeping ICU mappings, in all respects besides adding the
-#   missing ones where possible, seems sensible.
 _ir165_raw = parsers.decode_main_plane_gl(
     parsers.parse_file_format("ICU/iso-ir-165.ucm"),
     "iso-ir-165.ucm")
@@ -181,12 +162,12 @@ patterns = (None,) * (5*94 + 59) + ((0x25A5,), (0x1F7E5, 0xFE0E), (0x1F7E6, 0xFE
 ir165 = parsers.fuse([_ir165_add, _ir165_raw, patterns], "CCITT-Chinese-Full.json")
 graphdata.gsets["ir165"] = isoir165 = (94, 2, ir165)
 #
-# Include one which actually conforms to standards in which way around the lowercase Gs are too…
-_ir165_std_add = _ir165_add[:]
-_ir165_std_add[258], _ir165_std_add[689] = (0xFF47,), (0x0261,)
-_ir165_std_add[916], _ir165_std_add[971] = (0x0067,), _ir165_std_add[916]
-ir165_std = parsers.fuse([_ir165_std_add, _ir165_raw, patterns], "CCITT-Chinese-Full-Std.json")
-graphdata.gsets["ir165/std"] = (94, 2, ir165_std)
+# More conventional mapping of the lowercase gs.
+_ir165_swapg_add = _ir165_add[:]
+_ir165_swapg_add[258], _ir165_swapg_add[689] = (0xFF47,), (0x0261,)
+_ir165_swapg_add[916], _ir165_swapg_add[971] = (0x0067,), _ir165_swapg_add[916]
+ir165_std = parsers.fuse([_ir165_swapg_add, _ir165_raw, patterns], "CCITT-Chinese-Full-Std.json")
+graphdata.gsets["ir165/swapg"] = (94, 2, ir165_std)
 #
 # Further extended version of IR-165 with additional hanzi in the end of row 8, after the Zhuyin
 #   (i.e. kuten 08-83 thru 08-94).
@@ -207,7 +188,7 @@ graphdata.gsets["gb6345"] = (94, 2, parsers.fuse([
         (None,) * (5*94 + 59) + ((-1,),) * (22),
         (None,) * (11*94) + ((-1,),) * (4*94),
         (None,) * (89*94) + ((-1,),) * (5*94),
-        ir165_std,
+        ir165,
     ], "GB6345.json"))
 #
 # For GB 8565: knock out 06-60 thru 06-81, 08-27 thru 08-32, rows 10 thru 12, 13-51 thru 13-94, and 15-94.
@@ -217,7 +198,7 @@ graphdata.gsets["gb8565"] = (94, 2, parsers.fuse([
         (None,) * (9*94) + ((-1,),) * (3*94),
         (None,) * (12*94 + 50) + ((-1,),) * 44,
         (None,) * (14*94 + 93) + ((-1,),),
-        ir165_std,
+        ir165,
     ], "GB8565.json"))
 #
 # Reconstruction of the pre-IRGN2276 pseudo-G8 source, complete with erroneous mappings for 覀粦亅啰.

@@ -28,10 +28,9 @@ import json
 
 # ITU T.101-C is 1994 (2nd ed; 1st ed didn't include this one afaict); IR-165 reg is 1992.
 MACSET = "Apple"
-plane0 = (0, ("GB 2312<br>1980", "GB 2312<br>IR-058", "GB 2312<br>UTC", "GB 6345.1<br>1986", "GB 8565.2<br>1988", "ITU T.101-C<br>IR-165", "\"GB 8565.2\"<br>Old Unihan", "GB 12052<br>1989", "GB 12345<br>1990", "GB 12345<br>UTC", "IBM-1382", MACSET, "Windows", "GB 18030<br>2000", "GB 18030<br>2005", "GB 18030<br>Full"), [
-          graphdata.gsets["ir058/1980"][2],
+plane0 = (0, ("GB 2312<br>1980", "GB 2312<br>UTC", "GB 6345.1<br>1986", "GB 8565.2<br>1988", "ITU T.101-C<br>IR-165", "\"GB 8565.2\"<br>Old Unihan", "GB 12052<br>1989", "GB 12345<br>1990", "GB 12345<br>UTC", "IBM-1382", MACSET, "Windows", "GB 18030<br>2000", "GB 18030<br>2005", "GB 18030<br>Full"), [
           graphdata.gsets["ir058"][2],
-          graphdata.gsets["ir058/1986"][2],
+          graphdata.gsets["ir058/utc"][2],
           graphdata.gsets["gb6345"][2],
           graphdata.gsets["gb8565"][2],
           graphdata.gsets["ir165"][2],
@@ -129,11 +128,11 @@ annots = {
     (0, 2, 67): "Microsoft encodes the euro sign as a single byte code (0x80) instead.",
     (0, 3, 4): "Compare 01-71.",
     (0, 3, 13): "Compare both JIS 01-01-61 and JIS 01-02-17.",
-    (0, 3, 71): "Compare 08-32.",
+    (0, 3, 71): "Compare 08-32.&ensp;Mapping to U+FF47 is usual regardless of reference glyph (except for the old ICU mapping for the IR-165 set), but this has been avoided here for the sake of illustration.&ensp;Lunde (2009) lists the change in GB 6345.1 as from open to looped (i.e. <em>away</em> from U+0261), but he appears to have gotten this backward (<a href='https://www.itscj-ipsj.jp/ir/058.pdf'>in GB 2312</a>, <a href='https://i.imgur.com/3L2CMyr.png'>in GB 6345.1</a>).",
     (0, 3, 94): "Compare JIS 01-01-17.",
     (0, 6, 56): "Some explanation is in order for the following characters.&ensp;The Unicode Vertical Forms block (containing the vertical forms from GB 18030) apparently postdates GB 18030, hence the Apple mappings using PUA hints and the GB18030 and Windows mappings to the Private Use Area.&ensp;This doesn't affect the vertical presentation forms with correspondances to Big5, which were already included in the CJK Compatibility Forms block.",
     (0, 6, 59): "ITU T.101-C instead includes pattern characters in the following range; they are largely unmappable.&ensp;<em>Extremely</em> approximate mappings that I essentially made up (although not without justifications) are used below so that the collision with the vertical forms is visible.",
-    (0, 8, 32): "Compare 03-71.",
+    (0, 8, 32): "Compare 03-71.&ensp;Mapping to U+0261 is usual regardless of reference glyph (except for the old ICU mapping for the IR-165 set), but this has been avoided here for the sake of illustration.",
 }
 cdispmap = {}
 for n, i in enumerate(graphdata.gsets["ir058/macraw"][2]):

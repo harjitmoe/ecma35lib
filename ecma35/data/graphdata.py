@@ -225,7 +225,7 @@ g94nbytes = {tuple(b"@"): ("ir042/nec", ("ir042/ibm", "ir042/nec", "ir042/1990pi
              tuple(b"A"): ("ir058/2005", # Preferred version
                            # Private versions
                            ("ir058/hant", "ir058/2000", "ir058/2005", None, "ir058/full",
-                            "ir058/mac", "ir058/1980", "ir058/1986", "ir058/hant-strict",
+                            "ir058/mac", "ir058/utc", "ir058/1986", "ir058/hant-strict",
                             "ir058/hant-utc", "ir058/ibm", "ir058/macraw", "ir058/macsemiraw",
                             "ir058/ms"),
                            ("ir058",)), # Original followed by any registered revisions
@@ -239,7 +239,7 @@ g94nbytes = {tuple(b"@"): ("ir042/nec", ("ir042/ibm", "ir042/nec", "ir042/1990pi
              tuple(b"D"): ("ir159",
                            ("ir159/va", "ir159/osf", "ir159/osfa", "ir159/osfm", "ir159/ibm", "ir159/icueuc"),
                            ("ir159",)),
-             tuple(b"E"): ("ir165", ("ir165/std", "ir165/ext", "gb6345", "gb8565", "gb8565-oldwrongunihan"), ("ir165",)),
+             tuple(b"E"): ("ir165", ("ir165/swapg", "ir165/ext", "gb6345", "gb8565", "gb8565-oldwrongunihan"), ("ir165",)),
              tuple(b"F"): "ir169",
              tuple(b"G"): ("ir171/full",
                            ("ir171/full", "ir171/ms", "ir171/utc", "ir171/utcbig5", "ir171/mac", "ir171/govtw", "ir171/ibm", "ir171/ibm950", "ir171/ibm1373", "ir171/web", "ir171/1984moz", "ir171/icu", "ir171/icu-2014", "ir171/yasuoka"),
