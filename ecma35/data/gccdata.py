@@ -213,7 +213,7 @@ if not os.path.exists(bscachefile):
         ("≐", "."): "≑", ("=", ":"): "≑", ("÷", "-"): "≑", ("∘", "="): "≖", 
         ("°", "="): "≗", ("˚", "="): "≗", ("^", "="): "≙", ("ˆ", "="): "≙", ("ˇ", "="): "≚",
         ("*", "="): "≛", ("≡", "_"): "≣", ("<", "_"): "≤", (">", "_"): "≥", ("(", ")"): "≬",
-        ("⊂", "_"): "⊆", ("⊃", "_"): "⊇", ("⊏", "_"): "⊑", ("⊐", "_"): "⊒", ("○", "="): "⊜",
+        ("⊏", "_"): "⊑", ("⊐", "_"): "⊒", ("○", "="): "⊜",
         ("○", "+"): "⊕", ("⎕", "+"): "⊞", ("□", "+"): "⊞", ("⎕", "-"): "⊟", ("□", "-"): "⊟", 
         ("⎕", "×"): "⊠", ("□", "×"): "⊠", ("⊲", "_"): "⊴", ("⊳", "_"): "⊵", 
         ("∧", "‾"): "⊼", ("∨", "‾"): "⊽", ("∙", "○"): "⊙", ("∨", "|"): "⩛", ("∧", "|"): "⩚",
@@ -292,7 +292,7 @@ if not os.path.exists(bscachefile):
                 _multis.append((ucs, tuple(byts)))
     for (target, rawcomp) in _multis:
         comp = tuple(_singles[i] for i in rawcomp if i != 8)
-        assert bs_deflators.get(comp, target) == target, (comp, target, bs_deflators[comp])
+        assert comp not in bs_deflators, comp
         bs_deflators[comp] = target
 
     for cset in conformation_sets:
