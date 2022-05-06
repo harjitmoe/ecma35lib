@@ -241,7 +241,7 @@ if not os.path.exists(bscachefile):
         ("⊂", "∘"): "⟃", ("⊃", "∘"): "⟄", ("∨", "∙"): "⟇", ("∧", "∙"): "⟑",
         ("⌋", "∙"): "⟓", ("⌈", "∙"): "⟔", ("(", "<"): "⦓", (")", ">"): "⦔",
         ("=", "|"): "⧧", ("[", "_"): "⦋", ("]", "_"): "⦌", ("⦅", ">"): "⦕", ("⦆", "<"): "⦖",
-        ("/", "‾"): "⧶", ("\\", "-"): "⧷", ("⁝", "."): "⦙", ("⁝", "˙"): "⦙", ("≡", "|"): "⯒",
+        ("/", "‾"): "⧶", ("⁝", "."): "⦙", ("⁝", "˙"): "⦙", ("≡", "|"): "⯒",
         ("␥", "🖵"): "⎚", ("|", "∙"): "⍿",
     }
     for i in tuple(bs_deflators.keys()):
@@ -267,6 +267,8 @@ if not os.path.exists(bscachefile):
     # (('⊂', '-'), '⌾'),
     # APL-ISO-IR-68.TXT lists U+233E as 0x5A085F and 0x5F085A which is wrong.
     # It should be 0x4A084F and 0x4F084A.
+    # It also maps 0x2A084C/0x4C082A to both U+2338 and U+236F; the former should be 0x25084C/0x4C0825
+    # It maps U+2357 and U+2358 both to 0x46084B/0x4B0846; the former should be 0x4C0855/0x55084C
     
     _multis = []
     _singles = {}
@@ -277,14 +279,20 @@ if not os.path.exists(bscachefile):
             byts, ucs, junk = line.split(None, 2)
             byts = binascii.unhexlify(byts[2:])
             ucs = chr(int(ucs[2:], 16))
-            if ucs == "\u233E": # See above
+            # Corrections for APL-ISO-IR-68.TXT, see above
+            if ucs == "\u233E":
                 byts = byts.replace(b"\x5A", b"\x4A").replace(b"\x5F", b"\x4F")
+            elif ucs == "\u2338":
+                byts = byts.replace(b"\x2A", b"\x25")
+            elif ucs == "\u2357":
+                byts = byts.replace(b"\x46", b"\x4C").replace(b"\x4B", b"\x55")
             if len(byts) == 1:
                 _singles[byts[0]] = ucs
             else:
                 _multis.append((ucs, tuple(byts)))
     for (target, rawcomp) in _multis:
         comp = tuple(_singles[i] for i in rawcomp if i != 8)
+        assert bs_deflators.get(comp, target) == target, (comp, target, bs_deflators[comp])
         bs_deflators[comp] = target
 
     for cset in conformation_sets:
