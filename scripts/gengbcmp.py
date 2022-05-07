@@ -138,7 +138,7 @@ cdispmap = {}
 for n, i in enumerate(graphdata.gsets["ir058/macraw"][2]):
     j = graphdata.gsets["ir058/mac"][2][n]
     if i != j:
-        cdispmap[(MACSET, n, j)] = i
+        cdispmap[(MACSET, n - (94 * 94), j)] = i # Dock by 94*94, negative since it's plane 0.
 
 fnbn = lambda bn: "{:X}".format(bn) if bn != KPLANE else "K"
 
