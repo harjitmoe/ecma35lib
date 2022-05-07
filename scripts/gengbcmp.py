@@ -61,7 +61,8 @@ plane4 = (4, ("GB7590",), [
 plane5 = (5, ("GB13132",), [
           graphdata.gsets["gb13132"][2],
 ])
-plane7 = (7, ("GB16500",), [
+plane7 = (7, ("Unihan G7", "GB16500"), [
+          graphdata.gsets["the-other-gb7"][2],
           graphdata.gsets["gb16500"][2],
 ])
 KPLANE = 8
@@ -88,7 +89,7 @@ def planefunc(number, mapname=None):
 
 def planefunc2(number, mapname=None):
     if mapname is None:
-        return "Guobiao 94×94 sets"
+        return "General Purpose Han Characters for Modern Chinese" if number == 7 else "Guobiao 94×94 sets"
     return ""
 
 def kutenfunc(number, row, cell):
@@ -143,7 +144,7 @@ for n, i in enumerate(graphdata.gsets["ir058/macraw"][2]):
 fnbn = lambda bn: "{:X}".format(bn) if bn != KPLANE else "K"
 
 for n, p in enumerate([plane0, plane1, plane2, plane3, plane4, plane5, plane7, planeK]):
-    for q in range(1, 7) if p[0] == 0 else range(2, 7):
+    for q in range(1, 7) if p[0] in (0, 7) else range(2, 7):
         bn = p[0]
         f = open("gbplane{}{}.html".format(fnbn(bn), chr(0x60 + q)), "w", encoding="utf-8")
         lasturl = lastname = nexturl = nextname = None
@@ -152,9 +153,9 @@ for n, p in enumerate([plane0, plane1, plane2, plane3, plane4, plane5, plane7, p
         if q > 2:
             lasturl = "gbplane{}{}.html".format(fnbn(bn), chr(0x60 + q - 1))
             lastname = f"{currentbit}, part {q-1:d}"
-        elif q == 2 and bn == 0:
+        elif q == 2 and bn in (0, 7):
             lasturl = "gbplane{}{}.html".format(fnbn(bn), chr(0x60 + q - 1))
-            lastname = f"{planefunc2(0)}, part {q-1:d}"
+            lastname = f"{planefunc2(bn)}, part {q-1:d}"
         elif bn > 0:
             lastbn = bn - 1 if bn != 7 else 5
             lasturl = "gbplane{}f.html".format(fnbn(lastbn))
@@ -163,16 +164,21 @@ for n, p in enumerate([plane0, plane1, plane2, plane3, plane4, plane5, plane7, p
         if q < 6:
             nexturl = "gbplane{}{}.html".format(fnbn(bn), chr(0x60 + q + 1))
             nextname = f"{currentbit}, part {q+1:d}"
-        elif bn < 8:
-            nextbn = bn + 1 if bn != 5 else 7
+        elif bn < 8 and bn != 5:
+            nextbn = bn + 1
             nexturl = "gbplane{}b.html".format(fnbn(nextbn))
             nextname = titles[nextbn] + ", part 2"
+        elif bn == 5:
+            nexturl = "gbplane{}a.html".format(fnbn(7))
+            nextname = planefunc2(7) + ", part 1"
         #
         planewarn = None
         if bn in (4, 5):
             planewarn = "The copious gaps shown in this plane are probably not actually empty, but rather a result of lack of mapping information (although this probably makes them <i>de facto</i> empty)."
+        if bn == 7:
+            planewarn = "Unihan's G7 or \"kGB7\" source is the \"General Purpose Hanzi List for Modern Chinese Language, and General List of Simplified Hanzi\", which has been listed since the first version of Unihan (CJKXREF), is laid out as a 94×94 set for some reason, only seems to occupy a few rows, and I have only found it attested as a CCS in Unihan contexts.&ensp;The <em>actual</em> Guobiao \"seventh supplementary set\" is GB 16500, which Unihan <a href='https://appsrv.cse.cuhk.edu.hk/~irg/irg/N376'>added a bit later</a> and calls \"GE\", and which starts at row 16 (like all of them, which either substantially match GB 2312 with possible extensions in the first 15 rows, or deliberately skip them).&ensp;Since they don't seem to collide, I'm showing both as \"plane 7\"."
         #
-        showgraph.dump_plane(f, planefunc if bn > 0 or q > 1 else planefunc2,
+        showgraph.dump_plane(f, planefunc if q > 1 else planefunc2,
                              kutenfunc, *p, lang="zh-CN" if bn != KPLANE else "ko-CN",
                              part=q, css="../css/codechart.css",
                              menuurl="/gb-conc.html", menuname="Guobiao code variant comparison",
