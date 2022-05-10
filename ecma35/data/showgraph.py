@@ -568,7 +568,8 @@ def dump_plane(outfile, planefunc, kutenfunc,
                menuurl = menuurl, menuname = menuname, lasturl = lasturl, 
                nexturl = nexturl, lastname = lastname, nextname = nextname,
                is_96 = is_96, is_sbcs = is_sbcs, blot = blot, showbmppua = showbmppuas[0],
-               planewarn = planewarn, skiprows = skiprows, big5ext_mode = big5ext_mode)
+               planewarn = planewarn, skiprows = skiprows, big5ext_mode = big5ext_mode,
+               rowannots = {j: v for ((i, j, k), v) in annots.items() if i == number and not k})
     setnames2 = tuple(zip(*nonvacant_sets))[0] if nonvacant_sets else ()
     zplarray = tuple(zip(*tuple(zip(*nonvacant_sets))[1])) if nonvacant_sets else ()
     h = ", part {:d}".format(part) if part else ""
@@ -681,7 +682,7 @@ def dump_preview(outfile, planename, kutenfunc, number, array, *, lang="zh-TW", 
                css=None, part=None, menuurl=None, menuname="Up to menu", jlfunc=None, 
                lasturl=None, nexturl=None, lastname=None, nextname=None, showbmppua=False,
                is_96=False, is_sbcs=False, blot="", unicodefunc=_default_unicodefunc,
-               planewarn=None, skiprows=None, big5ext_mode=0):
+               planewarn=None, skiprows=None, big5ext_mode=0, rowannots={}, siglum=None):
     """Dump an HTML single-mapping table."""
     stx, edx = (1, 95) if not is_96 else (0, 96)
     if is_sbcs:
@@ -722,6 +723,9 @@ def dump_preview(outfile, planename, kutenfunc, number, array, *, lang="zh-TW", 
         print("".join("<th>_{:1X}".format(i) for i in range(0x10)), file=outfile)
         if row == stx:
             print("</thead>", file=outfile)
+        if row in rowannots:
+            print("<tr class=annotation><td colspan=17><p>", file=outfile)
+            print("Note:", inject_links(rowannots[row], siglum, number), file=outfile)
         print("<tr><th class=cpt>", file=outfile)
         print("<a id='{:d}.{:d}.1' class=anchor></a>".format(number, row), file=outfile)
         print(kutenfunc(number, row, -1), file=outfile)

@@ -134,6 +134,7 @@ annots = {
     (0, 6, 56): "Some explanation is in order for the following characters.&ensp;The Unicode Vertical Forms block (containing the vertical forms from GB 18030) apparently postdates GB 18030, hence the Apple mappings using PUA hints and the GB18030 and Windows mappings to the Private Use Area.&ensp;This doesn't affect the vertical presentation forms with correspondances to Big5, which were already included in the CJK Compatibility Forms block.",
     (0, 6, 59): "ITU T.101-C instead includes pattern characters in the following range; they are largely unmappable.&ensp;<em>Extremely</em> approximate mappings that I essentially made up (although not without justifications) are used below so that the collision with the vertical forms is visible.",
     (0, 8, 32): "Compare 03-71.&ensp;Mapping to U+0261 is usual regardless of reference glyph (except for the old ICU mapping for the IR-165 set), but this has been avoided here for the sake of illustration.",
+    (7, 1, 0): "There are three constituents of plane 7: \"General Purpose Han Characters for Modern Chinese\" (row 1), \"General List of Simplified Hanzi\" (rows 2 and 3), and the \"Seventh Supplementary Set\" (GB 16500, rows 16 and up).&ensp;Unihan's G7 or \"kGB7\" includes only the first two.&ensp;The first of these is first attested in <a href=\"http://www.dkuug.dk/jtc1/sc2/wg2/docs/N0667.doc\">WG2 N667</a> from before the 10646/Unicode merger, and has been listed since the first version of the Unihan mappings (<a href=\"https://www.unicode.org/Public/1.1-Update/CJKXREF.TXT\">CJKXREF</a>).&ensp;Unihan added GB 16500 later (presumably when it came out), pursuant to <a href='https://appsrv.cse.cuhk.edu.hk/~irg/irg/N376'>IRG N376</a>, and calls it \"GE\".",
 }
 cdispmap = {}
 for n, i in enumerate(graphdata.gsets["ir058/macraw"][2]):
@@ -175,8 +176,6 @@ for n, p in enumerate([plane0, plane1, plane2, plane3, plane4, plane5, plane7, p
         planewarn = None
         if bn in (4, 5):
             planewarn = "The copious gaps shown in this plane are probably not actually empty, but rather a result of lack of mapping information (although this probably makes them <i>de facto</i> empty)."
-        if bn == 7:
-            planewarn = "Unihan's G7 or \"kGB7\" source is the \"General Purpose Hanzi List for Modern Chinese Language, and General List of Simplified Hanzi\", which has been listed since the first version of Unihan (CJKXREF), is laid out as a 94×94 set for some reason, only seems to occupy a few rows, and I have only found it attested as a CCS in Unihan contexts.&ensp;The <em>actual</em> Guobiao \"seventh supplementary set\" is GB 16500, which Unihan <a href='https://appsrv.cse.cuhk.edu.hk/~irg/irg/N376'>added a bit later</a> and calls \"GE\", and which starts at row 16 (like all of them, which either substantially match GB 2312 with possible extensions in the first 15 rows, or deliberately skip them).&ensp;Since they don't seem to collide, I'm showing both as \"plane 7\"."
         #
         showgraph.dump_plane(f, planefunc if q > 1 else planefunc2,
                              kutenfunc, *p, lang="zh-CN" if bn != KPLANE else "ko-CN",

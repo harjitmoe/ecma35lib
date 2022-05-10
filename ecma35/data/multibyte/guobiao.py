@@ -348,6 +348,24 @@ graphdata.gsets["gb16500"] = gb16500 = (94, 2, parsers.fuse([
         (None,) * ((94 * 43) + 22) + ((0x891D,),),
     ], "GB16500.json"))
 
+# This is an interesting one. Known as G7 or GB7 in Unihan, it is not the Seventh Supplementary Set
+#   (which would be GB 16500, Unihan's GE). It seems to have been one of the original source
+#   standards from the very beginning: WG2N667 lists nine Chinese sources to be consolidated, being
+#   GBs 2312, 12545, 7589, 13131 (not yet so called), 7590, 13132 (likewise) and 8565, "A few
+#   additional Han characters (< 100) for Modern Chinese" (presumably this one, since there's only
+#   42 or 43 in the first row, which is the only URO-mapped row with the rest being CJKA-mapped,
+#   and less than 200 in total) and CNS 11643. It is therefore a supplement to be used alongside
+#   GBs 2312, 7589 and 7590 for modern Chinese. Its characters are Simplified in all three rows.
+# It has likewise been in the Unihan data since its very first manifestation (CJKXREF), which calls
+#   it "General Purpose Han Characters for Modern Chinese", and first assigns it the number 7;
+#   GB 16500 is not amongst its sources, and was added later pursuant to IRGN376. Current Unihan
+#   calls the Unihan GB7 "General Purpose Hanzi List for Modern Chinese Language, and General List
+#   of Simplified Hanzi" ("General List of Simplified Hanzi" may be the CJKA-mapped portion in
+#   rows 2 and 3).
+# Given this information, I suspect this CCS is entirely fictitious, since it would clearly predate
+#   the ability to submit NCSes to the IRG, and it doesn't seem to follow the usual structure of
+#   either mostly following GB2312 where applicable in the first 15 rows or leaving them empty
+#   (though this, plus its small size, means it doesn't actually *collide* with GB 16500 either).
 graphdata.gsets["the-other-gb7"] = (94, 2, parsers.fuse([
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G7"),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "G7"),

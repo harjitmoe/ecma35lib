@@ -307,8 +307,8 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR @ G*DM4 " 1`|IBM-926 (IBM-944)'s 94×94 plane (not KS X 1001 compatible for the most part).&ensp;No DOCS filter exists for it yet though.|
 |`IRR 0 G*DM4 " 1`|IBM-926 (IBM-944)'s 94×94 plane (not KS X 1001 compatible for the most part).&ensp;No DOCS filter exists for it yet though.&ensp;IBM mappings including corporate PUA.|
 |`IRR ? G*DM4 " 2`|GB 16500 (yet another supplementary set, numbered the seventh in its title though Unihan calls it "GE").|
-|`IRR @ G*DM4 " 2`|GB 16500 combined with Unihan's "G7"/"GB7" (do not overlap).|
-|`IRR 0 G*DM4 " 2`|Unihan's "GB7"/"G7" (not sure if it's really supposed to be a CCS, though it's structured in 94-char rows).|
+|`IRR @ G*DM4 " 2`|GB 16500 combined with "General Purpose Hanzi" (do not overlap, both are plane "7").|
+|`IRR 0 G*DM4 " 2`|"General Purpose Hanzi" (a small supplement of fewer than 200 characters for use alongside GBs 2312, 7589 and 7590 for Simplified Chinese).|
 |`G*DM4 " 3`|Big5 DynaLab extensions (for Big-5 filter's G3 slot)|
 |`G*DM4 " 4`|Big5 Monotype extensions (for Big-5 filter's G3 slot)|
 |`G*DM4 " 5`|Big5-Plus in-plane extensions (for Big-5 filter's G3 slot)|
