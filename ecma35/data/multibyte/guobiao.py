@@ -64,12 +64,12 @@ def gbutcto1980map(pointer, ucs):
     return ucs
 
 # GB/T 2312 (EUC-CN RHS); note that the 2000 and 2005 "editions" refer to GB 18030 edition subsets.
-graphdata.gsets["ir058"] = gb2312_1980 = (94, 2,
+graphdata.gsets["ir058"] = (94, 2,
     parsers.decode_main_plane_gl(
         parsers.parse_file_format("UTC/GB2312.TXT"),
         "GB2312.TXT",
         mapper = gbutcto1980map))
-graphdata.gsets["ir058/utc"] = gb2312_1980 = (94, 2,
+graphdata.gsets["ir058/utc"] = (94, 2,
     parsers.decode_main_plane_gl(
         parsers.parse_file_format("UTC/GB2312.TXT"),
         "GB2312.TXT"))
@@ -78,22 +78,22 @@ graphdata.gsets["ir058/1986"] = gb2312_1986 = (94, 2,
         parsers.parse_file_format("UTC/GB2312.TXT"),
         "GB2312.TXT",
         mapper = gbutcto1986map))
-graphdata.gsets["ir058/ms"] = gb2312_ms = (94, 2,
+graphdata.gsets["ir058/ms"] = (94, 2,
     parsers.decode_main_plane_euc(
         parsers.parse_file_format("ICU/windows-936-2000.ucm"),
         "windows-936-2000.ucm",
         gbklike = True))
-graphdata.gsets["ir058/ibm"] = gb2312_ibm = (94, 2,
+graphdata.gsets["ir058/ibm"] = (94, 2,
     parsers.decode_main_plane_euc(
         parsers.parse_file_format("ICU/ibm-1383_P110-1999.ucm"),
         "ibm-1383_P110-1999.ucm"))
-graphdata.gsets["ir058/2000"] = gb2312_2000 = (94, 2, 
+graphdata.gsets["ir058/2000"] = (94, 2, 
     parsers.decode_main_plane_whatwg(
         parsers.parse_file_format("WHATWG/index-gb18030.txt"),
         "index-gb18030.txt",
         gbklike = True,
         mapper = gb2005to2000map))
-graphdata.gsets["ir058/2005"] = gb2312_2005 = (94, 2, 
+graphdata.gsets["ir058/2005"] = (94, 2, 
     parsers.decode_main_plane_whatwg(
         parsers.parse_file_format("WHATWG/index-gb18030.txt"),
         "index-gb18030.txt",
@@ -291,7 +291,7 @@ graphdata.gsets["ir058/hant-strict"] = gb12345_strict = (94, 2, parsers.fuse([
 
 # GB/T 12052 (Korean in Mainland China). The non-Hangul non-kanji rows are basically
 #   the same as GB2312, but there is a second dollar sign instead of a yuan sign.
-graphdata.gsets["gb12052"] = gb12052 = (94, 2, parsers.decode_main_plane_euc(
+graphdata.gsets["gb12052"] = (94, 2, parsers.decode_main_plane_euc(
     parsers.parse_file_format("Other/gb12052-uni.txt", gb12052 = True),
     "gb12052-uni.txt"))
 #
@@ -340,7 +340,7 @@ graphdata.gsets["gb13132"] = gb13132 = (94, 2, parsers.fuse([
 #     U+6FF9 at 32-29
 #     U+809E at 40-50
 #     U+891D at 44-23
-graphdata.gsets["gb16500"] = gb16500 = (94, 2, parsers.fuse([
+graphdata.gsets["gb16500"] = (94, 2, parsers.fuse([
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "GE"),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "GE"),
         (None,) * ((94 * 31) + 28) + ((0x6FF9,),),

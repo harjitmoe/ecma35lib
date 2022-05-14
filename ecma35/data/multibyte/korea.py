@@ -74,7 +74,7 @@ compsimple = {('ㄱ', 'ㄱ'): 'ㄲ', ('ㄱ', 'ㅅ'): 'ㄳ', ('ㄴ', 'ㄴ'): 'ㅥ
 compatjamo = set(finals.keys()) | set(vowels.keys()) | set(initials.keys()) | {"∘", "◦", '̥'}
 
 # KS C 5601 / KS X 1001 EUC-KR Wansung RHS
-graphdata.gsets["ir149/ibm"] = wansung = (94, 2, parsers.decode_main_plane_euc(
+graphdata.gsets["ir149/ibm"] = (94, 2, parsers.decode_main_plane_euc(
     parsers.parse_file_format("ICU/ibm-949_P110-1999.ucm"),
     "ibm-949_P110-1999.ucm",
     gbklike=True))
@@ -86,7 +86,7 @@ graphdata.gsets["ir149/1998"] = wansung = (94, 2, parsers.decode_main_plane_what
 graphdata.gsetflags["ir149/1998"] |= {"UHC:IS_WANSUNG"}
 # Pre Euro-sign update (also lacking the registered trademark sign)
 # Note that the post-Unicode-2.0 UTC mappings are harmonious with MS/HTML5 besides those characters:
-graphdata.gsets["ir149"] = wansung87 = (94, 2, parsers.decode_main_plane_euc(
+graphdata.gsets["ir149"] = (94, 2, parsers.decode_main_plane_euc(
     parsers.parse_file_format("UTC/KSC5601.TXT"),
     "KSC5601.TXT",
     gbklike=True))
@@ -95,7 +95,7 @@ graphdata.gsetflags["ir149"] |= {"UHC:IS_WANSUNG"}
 _wansung_temp = parsers.fuse([
             ((None,) * 165) + ((0x327E,),), # South Korean Postal Mark
             wansung[2]], "Wansung_KRPM.json")
-graphdata.gsets["ir149/2002"] = wansung02 = (94, 2, _wansung_temp)
+graphdata.gsets["ir149/2002"] = (94, 2, _wansung_temp)
 graphdata.gsetflags["ir149/2002"] |= {"UHC:IS_WANSUNG"}
 # Pre-Unicode-2.0 UTC mapping file: uses MS's greedy-zenkaku approach but is otherwise closer to Apple,
 #   plus its own ideosyncracies (unifying the Korean interpunct with the Japanese one rather than with the
@@ -113,15 +113,15 @@ graphdata.gsets["ir149/altutc"] = wansung_utcalt = (94, 2, _wansung_temp)
 graphdata.gsetflags["ir149/altutc"] |= {"UHC:IS_WANSUNG"}
 
 # The non-KS 94×94 plane encoded by the old IBM code page 944
-graphdata.gsets["oldibmkorea-withcorppua"] = oldibmkorea_wcp = (94, 2, parsers.decode_main_plane_whatwg(
+graphdata.gsets["oldibmkorea-withcorppua"] = (94, 2, parsers.decode_main_plane_whatwg(
     parsers.parse_file_format("Custom/index-oldibmkorea-withcorppua.txt"),
     "index-oldibmkorea-withcorppua.txt",
     plane = 1))
-graphdata.gsets["oldibmkorea"] = oldibmkorea = (94, 2, parsers.decode_main_plane_whatwg(
+graphdata.gsets["oldibmkorea"] = (94, 2, parsers.decode_main_plane_whatwg(
     parsers.parse_file_format("Custom/index-oldibmkorea.txt"),
     "index-oldibmkorea.txt",
     plane = 1))
-graphdata.gsets["oldibmkorea-excavated"] = oldibmkorea_excavated = (94, 2, parsers.decode_main_plane_whatwg(
+graphdata.gsets["oldibmkorea-excavated"] = (94, 2, parsers.decode_main_plane_whatwg(
     parsers.parse_file_format("Custom/index-oldibmkorea-cleaned.txt"),
     "index-oldibmkorea-cleaned.txt",
     plane = 1))
@@ -140,7 +140,7 @@ rawmac2 = parsers.read_untracked(
     parsers.parse_file_format("Mac/KOREAN_b02.TXT"),
     "KOREAN_b02.TXT",
     gbklike=True)
-macwansung21 = graphdata.gsets["ir149/mac-unicode2_1"] = (94, 2, rawmac2)
+graphdata.gsets["ir149/mac-unicode2_1"] = (94, 2, rawmac2)
 graphdata.gsetflags["ir149/mac-unicode3_2"] |= {"UHC:IS_WANSUNG"}
 rawmac = parsers.read_untracked(
     "Mac/macWansung32.json",
@@ -149,7 +149,7 @@ rawmac = parsers.read_untracked(
     parsers.parse_file_format("Mac/KOREAN.TXT"),
     "KOREAN.TXT",
     gbklike=True)
-macwansung32 = graphdata.gsets["ir149/mac-unicode3_2"] = (94, 2, rawmac)
+graphdata.gsets["ir149/mac-unicode3_2"] = (94, 2, rawmac)
 graphdata.gsetflags["ir149/mac-unicode3_2"] |= {"UHC:IS_WANSUNG"}
 # No ir149-mac-unicode4_0 (same as ir149-mac-unicode3_2; altcomments only in sidecarriage then?)
 macwansungdata = parsers.read_untracked(
@@ -160,7 +160,7 @@ macwansungdata = parsers.read_untracked(
     "KOREAN.TXT",
     gbklike=True,
     mapper=ahmap_mk)
-macwansung = graphdata.gsets["ir149/mac"] = (94, 2, macwansungdata)
+graphdata.gsets["ir149/mac"] = (94, 2, macwansungdata)
 graphdata.gsetflags["ir149/mac"] |= {"UHC:IS_WANSUNG"}
 
 # Apple and Elex's (Illekseu's) secondary HangulTalk plane
@@ -170,21 +170,21 @@ rawelex21 = parsers.read_untracked(
     parsers.decode_extra_plane_elex,
     parsers.parse_file_format("Mac/KOREAN_b02.TXT"),
     "KOREAN_b02.TXT")
-macelexextras21 = graphdata.gsets["mac-elex-extras-unicode2_1"] = (94, 2, rawelex21)
+graphdata.gsets["mac-elex-extras-unicode2_1"] = (94, 2, rawelex21)
 rawelex = parsers.read_untracked(
     "Mac/macElex32.json",
     "Mac/KOREAN.TXT",
     parsers.decode_extra_plane_elex,
     parsers.parse_file_format("Mac/KOREAN.TXT"),
     "KOREAN.TXT")
-macelexextras32 = graphdata.gsets["mac-elex-extras-unicode3_2"] = (94, 2, rawelex)
+graphdata.gsets["mac-elex-extras-unicode3_2"] = (94, 2, rawelex)
 rawelex4 = parsers.read_untracked(
     "Mac/macElex40.json",
     "Mac/KOREAN.TXT",
     parsers.decode_extra_plane_elex,
     parsers.parse_file_format("Mac/KOREAN.TXT", altcomments=True),
     "KOREAN.TXT-altcomments-True")
-macelexextras40 = graphdata.gsets["mac-elex-extras-unicode4_0"] = (94, 2, rawelex4)
+graphdata.gsets["mac-elex-extras-unicode4_0"] = (94, 2, rawelex4)
 macelexdata = parsers.read_untracked(
     "Mac/macElex.json",
     "Mac/KOREAN.TXT",
@@ -192,7 +192,7 @@ macelexdata = parsers.read_untracked(
     parsers.parse_file_format("Mac/KOREAN.TXT"),
     "KOREAN.TXT",
     mapper=ahmap_mk)
-macelexextras = graphdata.gsets["mac-elex-extras"] = (94, 2, macelexdata)
+graphdata.gsets["mac-elex-extras"] = (94, 2, macelexdata)
 macelexdata_nt = parsers.read_untracked(
     "Mac/macElexNT.json",
     "Mac/KOREAN.TXT",
@@ -200,7 +200,7 @@ macelexdata_nt = parsers.read_untracked(
     parsers.parse_file_format("Mac/KOREAN.TXT"),
     "KOREAN.TXT",
     mapper=ahmap_nt)
-macelexextrasnt = graphdata.gsets["mac-elex-extras-nishiki-teki"] = (94, 2, macelexdata_nt)
+graphdata.gsets["mac-elex-extras-nishiki-teki"] = (94, 2, macelexdata_nt)
 macelexdata_adobe = parsers.decode_extra_plane_elex(
     parsers.parse_file_format("Adobe/AdobeKorea.txt", cidmap=("KSCpc-EUC", "UniKS-UTF32")),
     "AdobeKorea.txt-KSCpc-EUC-UniKS-UTF32"
@@ -209,7 +209,7 @@ elex2cid = parsers.decode_extra_plane_elex(
     parsers.parse_file_format("Adobe/AdobeKorea.txt", cidmap=("KSCpc-EUC", "CID")),
     "AdobeKorea.txt-KSCpc-EUC-CID"
 )
-macelexextrasadobe = graphdata.gsets["mac-elex-extras-adobe"] = (94, 2, macelexdata_adobe)
+graphdata.gsets["mac-elex-extras-adobe"] = (94, 2, macelexdata_adobe)
 
 # KPS 9566
 graphdata.gsets["ir202/2011"] = kps9566_2011 = (94, 2, parsers.decode_main_plane_euc(
@@ -235,7 +235,7 @@ _kps_temp = parsers.fuse([
             ((None,) * 1080) + ((0x2B97,),), # Category A mark
             ((None,) * 1222) + (((-1,),) * 141), # Remove Latin-1 part
             kps9566_2003[2]], "KPS_1997.json")
-graphdata.gsets["ir202"] = kps9566_1997 = (94, 2, _kps_temp)
+graphdata.gsets["ir202"] = (94, 2, _kps_temp)
 graphdata.gsetflags["ir202"] |= {"UHC:IS_KPS"}
 kpsext = read_kps9566extras("UTCDocs/AppendixA_KPS9566-2011-to-Unicode.txt")
 graphdata.gsets["2011kpsextras"] = (94, 2, kpsext + (None,) * (94*94 - len(kpsext)))
