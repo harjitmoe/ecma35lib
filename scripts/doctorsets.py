@@ -101,3 +101,8 @@ for (setcode, (kind, bytecount, entries)) in gsets.items():
 
 pprint.pprint([*sorted(complaints)])
 
+print("Forcing all gsets to test whether any lazy code is broken")
+for i in gsets.values():
+    tuple(i[2])
+
+
