@@ -21,7 +21,7 @@ def to_link(maybe_siglum, default_siglum, maybe_plane, default_plane, ku, ten):
         men = default_plane
     omen, oku, oten = men, ku, ten
     part_zi = int(ku, 10) // 16
-    if siglum == "CNS" and men in "ΨΩ":
+    if siglum == "CNS" and men in "ΨΓ":
         basename = "../cnstables/b5xplane"
         if men == "Ψ":
             men = "1"
@@ -31,7 +31,7 @@ def to_link(maybe_siglum, default_siglum, maybe_plane, default_plane, ku, ten):
                 part_zi = 4
             else:
                 part_zi = 5
-        elif men == "Ω":
+        elif men == "Γ":
             men = "2"
             part_zi = int(ku, 10) // 11
         else:
@@ -60,7 +60,7 @@ def to_link(maybe_siglum, default_siglum, maybe_plane, default_plane, ku, ten):
     display_plane = f"{omen}-" if maybe_plane else ""
     return f'<a href="{url}">{display_siglum}{display_plane}{oku}-{oten}</a>'
 
-siglumre = re.compile(r"(?:(JIS|CNS|CCCII|EACC|KSC|GB) )?\b(?:(\d\d|Ψ|Ω|K)-)?(\d\d)-(\d\d)(?!-)\b")
+siglumre = re.compile(r"(?:(JIS|CNS|CCCII|EACC|KSC|GB) )?\b(?:(\d\d|[ΓΨΩK])-)?(\d\d)-(\d\d)(?!-)\b")
 def inject_links(text, default_siglum=None, default_plane=None):
     def callback(m):
         if m.group(1) == None and default_siglum == None:

@@ -96,10 +96,10 @@ def kutenfunc(number, row, cell):
     else:
         raise ValueError("plane not 1 or 2")
     if cell >= 0:
-        pseudokuten = "({}-{:02d}-{:02d})".format("¿ΨΩ"[number], row, cell)
+        pseudokuten = "({}-{:02d}-{:02d})".format("¿ΨΓ"[number], row, cell)
         big5code = "0x{:02X}{:02X}".format(lead, trail)
     else:
-        pseudokuten = "({}-{:02d}-{})".format("¿ΨΩ"[number], row,
+        pseudokuten = "({}-{:02d}-{})".format("¿ΨΓ"[number], row,
             "{:02d}+".format(-cell) if cell != -1 or number == 2 else "*")
         if not trail & 0xF:
             big5code = "0x{:02X}{:X}_".format(lead, trail >> 4)

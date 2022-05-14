@@ -507,7 +507,7 @@ graphdata.gsets["utcbig5exts"] = (94, 2, parsers.decode_extra_plane_big5(
         parsers.parse_file_format("UTC/BIG5.TXT"),
         "BIG5.TXT"))
 graphdata.gsets["ms950utcexts"] = (94, 2,
-    parsers.fuse([utc_big5_extras[2], ms_big5_extras[2]], "BIG5-MSUTC.json"))
+    parsers.fuse([graphdata.gsets["utcbig5exts"][2], graphdata.gsets["ms950exts"][2]], "BIG5-MSUTC.json"))
 #
 dynalab_a = parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Adobe/AdobeCNS.txt", cidmap=("HKdla-B5", "UniCNS-UTF32")),
