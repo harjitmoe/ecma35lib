@@ -67,6 +67,8 @@ if not os.path.exists(cachefile):
         # Alchemical symbols without decompositions
         "QE": "🜀", "AR": "🜇", "SSS": "🝜", "MB": "🝫", "VB": "🝬",
         "🜄F": "🜅", "🜄R": "🜆",
+        # Other things
+        "AE": "Æ", "ae": "æ", "OE": "Œ", "oe": "œ",
     }
     from_1F18B = ["IC", "PA", "SA", "AB", "WC", "DJ",
                   "CL", "COOL", "FREE", "ID", "NEW", "NG", "OK", "SOS", "UP!", "VS", "3D", 
