@@ -132,7 +132,8 @@ _rbs_maps = {
      '̀': ('`', 'ˋ'),
      '́': ("'", '´', 'ˊ', '\u0384', '\u1ffd'),
      '̂': ('^', 'ˆ'),
-     '̃': ('~', '˜'),
+     '̃': ('~', '˜', '῀'),
+     '̴': ('~', '∼', '⁓', '～', '〜'),
      '̄': ('¯', '‾'),
      '̆': ('˘',),
      '̇': ('˙',),
@@ -197,8 +198,9 @@ bs_maps = {}
 for compchar, spacchars in rbs_maps.items():
     for spacchar in spacchars:
         bs_maps[spacchar] = compchar
-bs_maps[","] = " ̦ "[1]
+bs_maps[","] = " ̦"[1]
 bs_maps["*"] = " ⃰"[1]
+bs_maps["~"] = " ̃"[1]
 
 if not os.path.exists(bscachefile):
     bs_deflators = {
