@@ -210,6 +210,7 @@ applesinglehints = {
     (0x534D, 0xF87F): (0x0FD6,),  # Manji as a non-kanji
     (0xFF0A, 0xF87F): (0x3000, 0x20F0), # High asterisk
     (0x2206, 0xF87F): (0x1D71F,), # Medium-bold oblique capital delta
+    (0x0021, 0xF87F): (0x2757,), # Emphasised exclamation mark
     #
     # Avoid transcoding hints on the alternate versions of manicules by mapping to
     #   backhand (even though they are usually just shown as bigger versions):
@@ -221,6 +222,9 @@ applesinglehints = {
     # Special cases
     # Small white square: was already present so unclear why it wasn't used anywhere in the mapping
     (0x25A1, 0xF87C): (0x25AB,),
+    # Weight-unbalanced vertical lines, added in Unicode 3.1 but not used by the mapping to 3.2.
+    (0x2016, 0xF87B): (0x1D102,), # Double vertical, bold on right
+    (0x2016, 0xF87C): (0x1D103,), # Double vertical, bold on left
     # Telephone dial. None of the four encoded variants of the ☏ are at all close,
     #   but U+260F is the most likely of the four to display a dial (U+1F57E and
     #   U+1F57F are expressly keyed, while U+260E is often displayed as a keyed
