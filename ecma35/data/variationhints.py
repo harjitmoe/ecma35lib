@@ -233,6 +233,10 @@ applesinglehints = {
     (0x203C, 0xF87F): (0x203C, 0xFE0F), # Honestly that's good enough.
     (0xFF01, 0xF874): (0xFF01, 0xFE00), # Later gained an SVS
     (0x3002, 0xF87D): (0x3002, 0xFE00), # Later gained an SVS
+    # Ideographic circular zero. Appears in a range of rotated Chinese numerals, but the circular
+    #   zero is rotationally symmetric (and no other U+3007 appears anywhere else in MacKorean).
+    (0x3007, 0xF876): (0x3007,),
+    (0x24EA, 0xF87F): (0x24EA,), # It's the only circled zero, the other set starts at one.
     #
     # Some direct PUA mappings used by MacKorean but no longer needed
     (0xF808,): (0x1D36D,), # Five vertical lines
@@ -311,6 +315,12 @@ applesinglehints_mackorean.update({
     #
     # (0x5370, 0x20DD) vs (0x329E,) are a special case (used for different duplicates)
     # (0x329E, 0xF87F) is already used for the dotted one.
+    #
+    # Poorly chosen combining sequences unlikely to show correctly, to better ones:
+    # - Is 0xA1AB (U+2016), not U+2225 (0xA755), with long double underline not short equals below
+    (0x2225, 0x0347): (0x2016, 0x0333),
+    # - Is 0xA755 (U+2225) plus long double underline (not short equals below)
+    (0x2AFD, 0x0347): (0x2225, 0x0333),
     #
     # Special case for flowers: 0xA67B corresponds to Adobe-Japan1 CID-12228, which maps to U+2740.
     #   As such, U+2740 in Adobe-Japan1-based fonts (like Source Han/Noto CJK) corresponds closely
