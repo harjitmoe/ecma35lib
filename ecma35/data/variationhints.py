@@ -239,6 +239,7 @@ applesinglehints = {
     (0x24EA, 0xF87F): (0x24EA,), # It's the only circled zero, the other set starts at one.
     #
     # Some direct PUA mappings used by MacKorean but no longer needed
+    (0xF806,): (0x26CB, 0xF87A),
     (0xF808,): (0x1D36D,), # Five vertical lines
     (0xF809, 0xF87A): (0x169B2, 0xF87F), # Like a flipped version of U+169B2 (itself like an MOT sign)
     (0xF809,): (0x169B2, 0xF87A), # Like a filled and flipped version of U+169B2
@@ -252,6 +253,11 @@ applesinglehints = {
     (0xF844,): (0x2B9C,), # Leftward arrowhead
     (0xF84C,): (0x2B20,), # White pentagon
     (0xF84D,): (0x23E2,), # Trapezoid
+    #
+    # Absolute kludges
+    (0xF841,): (0x21F9, 0x0302, 0x032C),
+    (0xF843,): (0x1F898, 0xF87A),
+    (0xF845,): (0x21A2, 0xF87F),
     #
     # Adobe PUA assignments. Apple originally inherited these, though it mostly switched to hints.
     # Hence, it is appropriate to treat these in the same PUA processor.
@@ -342,6 +348,65 @@ applesinglehints_mackorean.update({
     (0x2314, 0xF87F): (0x29A1,), # Angle or sector opening upward, not a white closed sector shape
 })
 
+# Version avoiding mapping to variation sequences when the base character isn't otherwise mapped,
+#   or combining sequences when the base character isn't otherwise mapped and is good enough, so
+#   encoder will accept hint-stripped or selector-stripped version.
+applesinglehints_mackorean_pragmatic = applesinglehints_mackorean.copy()
+applesinglehints_mackorean_pragmatic.update({
+    (0x261C, 0xF87F): (0x1F448,),
+    (0x261D, 0xF87F): (0x1F446,),
+    (0x261E, 0xF87F): (0x1F449,),
+    (0x261F, 0xF87F): (0x1F447,),
+    (0xF809, 0xF87A): (0x169B2,),
+    (0x2748, 0x20D8): (0x2748,),
+    (0x25CB, 0xF879): (0x2B55,),
+    (0x25A1, 0xF879): (0x2B1C,),
+    (0xF805, 0x20DE): (0x1F4A0, 0x20DE),
+    (0xF806, 0x20DF): (0x26CB, 0x20DF),
+    (0xF843,): (0x1F898,),
+    (0xF845,): (0x21A2,),
+    (0xF846,): (0x1F56A,),
+    (0xF847,): (0x1F50A,),
+    #
+    # Really not the right shape/character, but better than PUA
+    (0xF805,): (0x1F4A0,),
+    (0xF80C,): (0x0CA3,),
+    (0xF84E,): (0x1FB4D,), # declining tetragon
+    (0xF84F,): (0x1FB42,), # inclining tetragon
+    #
+    # Map dot-after capitals to squared capitals (by elimination to some extent)
+    (0xF860, 0x0041, 0x002E): (0x1F130,), # 🄰
+    (0xF860, 0x0042, 0x002E): (0x1F131,), # 🄱
+    (0xF860, 0x0043, 0x002E): (0x1F132,), # 🄲
+    (0xF860, 0x0044, 0x002E): (0x1F133,), # 🄳
+    (0xF860, 0x0045, 0x002E): (0x1F134,), # 🄴
+    (0xF860, 0x0046, 0x002E): (0x1F135,), # 🄵
+    (0xF860, 0x0047, 0x002E): (0x1F136,), # 🄶
+    (0xF860, 0x0048, 0x002E): (0x1F137,), # 🄷
+    (0xF860, 0x0049, 0x002E): (0x1F138,), # 🄸
+    (0xF860, 0x004A, 0x002E): (0x1F139,), # 🄹
+    (0xF860, 0x004B, 0x002E): (0x1F13A,), # 🄺
+    (0xF860, 0x004C, 0x002E): (0x1F13B,), # 🄻
+    (0xF860, 0x004D, 0x002E): (0x1F13C,), # 🄼
+    (0xF860, 0x004E, 0x002E): (0x1F13D,), # 🄽
+    (0xF860, 0x004F, 0x002E): (0x1F13E,), # 🄾
+    (0xF860, 0x0050, 0x002E): (0x1F13F,), # 🄿
+    (0xF860, 0x0051, 0x002E): (0x1F140,), # 🅀
+    (0xF860, 0x0052, 0x002E): (0x1F141,), # 🅁
+    (0xF860, 0x0053, 0x002E): (0x1F142,), # 🅂
+    (0xF860, 0x0054, 0x002E): (0x1F143,), # 🅃
+    (0xF860, 0x0055, 0x002E): (0x1F144,), # 🅄
+    (0xF860, 0x0056, 0x002E): (0x1F145,), # 🅅
+    (0xF860, 0x0057, 0x002E): (0x1F146,), # 🅆
+    (0xF860, 0x0058, 0x002E): (0x1F147,), # 🅇
+    (0xF860, 0x0059, 0x002E): (0x1F148,), # 🅈
+    (0xF860, 0x005A, 0x002E): (0x1F149,), # 🅉
+    #
+    # Grumble grumble grumble (if stripping hint sequences after decode, don't want a round-trip
+    #   indirect zigzag convergence for non-PUA)
+    (0x2939,): (0x2939,),
+})
+
 applesinglehints_mackorean_nishikiteki = applesinglehints_mackorean.copy()
 applesinglehints_mackorean_nishikiteki.update({
     #
@@ -363,13 +428,17 @@ applesinglehints_mackorean_nishikiteki.update({
     (0x25C6, 0x20DE): (0xE3D4,), # Black lozenge in square
     #
     # Apple PUA actually included in Nishiki-teki (override inferior approximations in the other dict)
+    (0xF806,): (0xF806,),
     (0xF807,): (0xF807,), # Telephone dial
     (0xF808,): (0xF808,), # Five vertical lines
     (0xF809,): (0xF809,), # Like a filled and flipped version of the MOT Test symbol
-    (0xF80B,): (0xF80B,), # Four pointed flower or quilt square
     (0xF80A,): (0xF80A,), # Two interwoven eye shapes
+    (0xF80B,): (0xF80B,), # Four pointed flower or quilt square
     (0xF840,): (0xF840,), # Three vertical asterisks
+    (0xF841,): (0xF841,), # Cardinal points arrow / move cursor / cross barby
     (0xF842,): (0xF842,), # Downward wave arrow
+    (0xF843,): (0xF843,),
+    (0xF845,): (0xF845,),
     (0xF846,): (0xF846,), # Pointing and broadcasting to left
     (0xF847,): (0xF847,), # Pointing and broadcasting to right
     (0xF848,): (0xF848,), # White leftward heavy rocket

@@ -54,8 +54,20 @@ if not os.path.exists(cachefile) or not os.path.exists(bscachefile):
                 tobit = via[1:].split("→", 1)[0].replace("\u200E", "")
             else:
                 tobit = "".join(chr(int(i, 16)) for i in to.split())
-            if len(frombit) == 1 and len(tobit) > 1:
-                uts39data[tobit] = frombit
+            if 0xFB4F < ord(frombit[0]) < 0xFDF0:
+                continue
+            elif 0xFEF0 <= ord(frombit[0]) <= 0xFEFF:
+                continue
+            elif tobit == "\u0d28\u0d41":
+                continue
+            elif len(frombit) == 1 and len(tobit) > 1:
+                be_overridden_list = ("ꓺ", "⳹", "ꜻ", "Ꜻ", "Ƃ", "ꮜ", "Ɏ", "Ᏺ", "ǳ", "ѳ", "Ɵ", "ꚙ", "Ꚙ", "ѣ", r"ݲ", r"Ӊ", "ӊ")
+                if frombit in be_overridden_list:
+                    continue
+                elif (tobit not in uts39data) or (uts39data[tobit] in be_overridden_list):
+                    uts39data[tobit] = frombit
+                else:
+                    print(tobit, ascii(tobit), uts39data[tobit], ascii(uts39data[tobit]), frombit, ascii(frombit))
 
 if not os.path.exists(cachefile):
     gcc_sequences = {
@@ -161,6 +173,7 @@ _rbs_maps = {
      '̦': (',',),
      '̧': (',', '¸'),
      '̨': (',', '˛'),
+     '̡': (',', ),
      '̱': ('_', 'ˍ'),
      '̵': ('-',),
      '̸': ('/',),
@@ -176,7 +189,7 @@ _rbs_maps = {
      '⃠': ("🛇", "🚫"),
      '⃢': ("🖵",),
      '⃤': ("△",),
-     '⃧': ("⌉", "⌝"),
+     '⃧': ("⌉", "⌝", "˺"),
      '⃫': ("⫽",),
      '⃪': ("←",),
 }

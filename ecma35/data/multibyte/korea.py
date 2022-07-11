@@ -129,6 +129,9 @@ graphdata.gsets["oldibmkorea-excavated"] = (94, 2, parsers.decode_main_plane_wha
 def ahmap_mk(pointer, ucs):
     return variationhints.ahmap(pointer, ucs, variationhints.applesinglehints_mackorean)
 
+def ahmap_pr(pointer, ucs):
+    return variationhints.ahmap(pointer, ucs, variationhints.applesinglehints_mackorean_pragmatic)
+
 def ahmap_nt(pointer, ucs):
     return variationhints.ahmap(pointer, ucs, variationhints.applesinglehints_mackorean_nishikiteki)
 
@@ -162,6 +165,11 @@ macwansungdata = parsers.read_untracked(
     mapper=ahmap_mk)
 graphdata.gsets["ir149/mac"] = (94, 2, macwansungdata)
 graphdata.gsetflags["ir149/mac"] |= {"UHC:IS_WANSUNG"}
+graphdata.gsets["ir149/mac-pragmatic"] = (94, 2, parsers.decode_main_plane_euc(
+    parsers.parse_file_format("Custom/pragmatic-hangultalk.ucmfrag"),
+    "pragmatic-hangultalk.ucmfrag",
+    gbklike=True))
+graphdata.gsetflags["ir149/mac-pragmatic"] |= {"UHC:IS_WANSUNG"}
 
 # Apple and Elex's (Illekseu's) secondary HangulTalk plane
 rawelex21 = parsers.read_untracked(
@@ -201,6 +209,17 @@ macelexdata_nt = parsers.read_untracked(
     "KOREAN.TXT",
     mapper=ahmap_nt)
 graphdata.gsets["mac-elex-extras-nishiki-teki"] = (94, 2, macelexdata_nt)
+macelexdata_pr = parsers.read_untracked(
+    "Mac/macElexPR.json",
+    "Mac/KOREAN.TXT",
+    parsers.decode_extra_plane_elex,
+    parsers.parse_file_format("Mac/KOREAN.TXT"),
+    "KOREAN.TXT",
+    mapper=ahmap_pr)
+graphdata.gsets["~mac-elex-extras-semipragmatic"] = (94, 2, macelexdata_pr)
+graphdata.gsets["mac-elex-extras-pragmatic"] = (94, 2, parsers.decode_extra_plane_elex(
+    parsers.parse_file_format("Custom/pragmatic-hangultalk.ucmfrag"),
+    "pragmatic-hangultalk.ucmfrag"))
 macelexdata_adobe = parsers.decode_extra_plane_elex(
     parsers.parse_file_format("Adobe/AdobeKorea.txt", cidmap=("KSCpc-EUC", "UniKS-UTF32")),
     "AdobeKorea.txt-KSCpc-EUC-UniKS-UTF32"
