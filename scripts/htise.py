@@ -13,6 +13,7 @@ from ecma35.data import graphdata
 
 main_plane = graphdata.gsets["ir149/mac"][2]
 main_plane_nom = graphdata.gsets["ir149/mac-unicode3_2"][2]
+main_plane_web = graphdata.gsets["ir149/1998"][2]
 side_plane = graphdata.gsets["~mac-elex-extras-semipragmatic"][2]
 side_plane_nom = graphdata.gsets["mac-elex-extras-unicode3_2"][2]
 side_plane_fontnom = graphdata.gsets["mac-elex-extras-adobe"][2]
@@ -29,8 +30,12 @@ firsts_nom = set(itertools.chain((i[0] for i in main_plane_nom if i and len(i) =
 
 losses = firsts_nom - firsts
 
+wehaves = set(itertools.chain(main_plane, side_plane))
+
 for i, j in zip(itertools.chain(main_plane, side_plane, side_plane), itertools.chain(main_plane_nom, side_plane_nom, side_plane_fontnom)):
     if j and len(j) == 1 and j[0] in losses:
+        collapses_encoder[j] = i
+    elif j and len(j) > 1 and (j not in wehaves or 0xF860 <= j[0] <= 0xF86F):
         collapses_encoder[j] = i
 
 ultra = firsts | firsts_nom
@@ -38,6 +43,15 @@ ultra = firsts | firsts_nom
 numbers = "⓪①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳㉑㉒㉓㉔㉕㉖㉗㉘㉙㉚㉛㉜㉝㉞㉟㊱㊲㊳㊴㊵㊶㊷㊸㊹㊺㊻㊼㊽㊾㊿"
 minuscules = "⒜⒝⒞⒟⒠⒡⒢⒣⒤⒥⒦⒧⒨⒩⒪⒫⒬⒭⒮⒯⒰⒱⒲⒳⒴⒵"
 capitals = "🄐🄑🄒🄓🄔🄕🄖🄗🄘🄙🄚🄛🄜🄝🄞🄟🄠🄡🄢🄣🄤🄥🄦🄧🄨🄩"
+
+def sanitise(j):
+    if j == ord("*"):
+        return 0xFE61
+    elif j == ord("["):
+        return 0xFE5D
+    elif j == ord("]"):
+        return 0xFE5E
+    return j
 
 for i in itertools.chain(main_plane, side_plane):
     if not i:
@@ -54,13 +68,10 @@ for i in itertools.chain(main_plane, side_plane):
         elif len(crux) == 1 and crux in "abcdefghijklmnopqrstuvwxyz":
             collapses_decoder[i] = (ord(minuscules[ord(crux) - ord("a")]),)
         else:
-            collapses_decoder[i] = i[1:]
-
-decoder_map = {}
-encoder_map = {}
-temp_map = {}
-
-# 0x41-7D, 0x81-A0, (0xFF)
+            sanitised = tuple(sanitise(j) for j in i[1:])
+            collapses_decoder[i] = sanitised
+            if sanitised != i[1:]:
+                collapses_encoder[sanitised] = i
 
 def to_code(planeno, row, cell):
     if planeno == 1:
@@ -75,8 +86,20 @@ def to_code(planeno, row, cell):
     else:
         raise ValueError(f"planeno must be 1 or 2, got {planeno}")
 
+do_not_need_codes = set()
+for index, (webmap, ourmap) in enumerate(zip(main_plane_web, main_plane)):
+    if webmap == ourmap and ourmap != None:
+        row = (index // 94) + 1
+        cell = (index % 94) + 1
+        do_not_need_codes.add(to_code(1, row, cell))
+
+decoder_map = {}
+encoder_map = {}
+temp_map = {}
 for planeno, plane in [(1, main_plane), (2, side_plane)]:
     for index, mapping in enumerate(plane):
+        if mapping is None:
+            continue
         row = (index // 94) + 1
         cell = (index % 94) + 1
         coded = to_code(planeno, row, cell)
@@ -96,16 +119,17 @@ for i in collapses_encoder:
     else:
         encoder_map[i] = encoder_map[collapses_encoder[i]]
 
-allucs = sorted(set(i for i in itertools.chain(encoder_map.keys(), decoder_map.values()) if i))
-for ucs in allucs:
-    alr = set()
-    if ucs in encoder_map:
-        kind = "|0" if decoder_map[encoder_map[ucs]] == ucs else "|1"
-        print("".join(f"<U{i:04X}>" for i in ucs), "".join(f"\\x{j:02X}" for j in encoder_map[ucs]), kind)
-        alr.add(encoder_map[ucs])
-    dmks = set(i for i, j in decoder_map.items() if j == ucs) - alr
-    if dmks:
-        for dmk in sorted(dmks):
-            print("".join(f"<U{i:04X}>" for i in ucs), "".join(f"\\x{j:02X}" for j in dmk), "|3")
+with open("pragmatic-hangultalk.ucmfrag", "w") as f:
+    allucs = sorted(set(i for i in itertools.chain(encoder_map.keys(), decoder_map.values()) if i))
+    for ucs in allucs:
+        alr = set()
+        if ucs in encoder_map:
+            kind = "|0" if decoder_map[encoder_map[ucs]] == ucs else "|1"
+            print("".join(f"<U{i:04X}>" for i in ucs), "".join(f"\\x{j:02X}" for j in encoder_map[ucs]), kind, file=f)
+            alr.add(encoder_map[ucs])
+        dmks = set(i for i, j in decoder_map.items() if j == ucs) - alr
+        if dmks:
+            for dmk in sorted(dmks):
+                print("".join(f"<U{i:04X}>" for i in ucs), "".join(f"\\x{j:02X}" for j in dmk), "|3", file=f)
 
 
