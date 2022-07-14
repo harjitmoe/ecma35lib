@@ -36,7 +36,9 @@ for i, j in zip(itertools.chain(main_plane, side_plane, side_plane), itertools.c
     if j and len(j) == 1 and j[0] in losses:
         collapses_encoder[j] = i
     elif j and len(j) > 1 and (j not in wehaves or 0xF860 <= j[0] <= 0xF86F):
-        collapses_encoder[j] = i
+        # Skip sequences that risk masking/swallowing ASCII punctuation
+        if not any(k <= 0x2F or 0x3A <= k <= 0x40 or 0x5B <= k <= 0x60 or 0x7B <= k <= 0x7F for k in j):
+            collapses_encoder[j] = i
 
 ultra = firsts | firsts_nom
 
@@ -131,5 +133,4 @@ with open("pragmatic-hangultalk.ucmfrag", "w") as f:
         if dmks:
             for dmk in sorted(dmks):
                 print("".join(f"<U{i:04X}>" for i in ucs), "".join(f"\\x{j:02X}" for j in dmk), "|3", file=f)
-
 
