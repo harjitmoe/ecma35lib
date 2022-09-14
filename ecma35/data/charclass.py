@@ -13,7 +13,8 @@ abbreviations = {
     "RAD": "Code-point for a radical",
     "HCJ": "Hangul Element / Compatibility Jamo",
     "STRK": "Code-point for a stroke",
-    "CJKA": "Chinese/Japanese/Korean Extension A",  
+    "CJKA": "Chinese/Japanese/Korean Extension A", 
+    "CJKA+": "Appendage to Chinese/Japanese/Korean Extension A", 
     "URO": "Unified Repertoire and Ordering",
     "URO+": "Appendage to Unified Repertoire and Ordering", 
     "HJXA": "Hangul Jamo, Extended A",
@@ -33,12 +34,20 @@ abbreviations = {
     "CJKB": "Chinese/Japanese/Korean Extension B",
     "CJKB+": "Appendage to Chinese/Japanese/Korean Extension B",
     "CJKC": "Chinese/Japanese/Korean Extension C",
+    "CJKC+": "Appendage to Chinese/Japanese/Korean Extension C",
     "CJKD": "Chinese/Japanese/Korean Extension D",
+    "CJKD+": "Appendage to Chinese/Japanese/Korean Extension D",
     "CJKE": "Chinese/Japanese/Korean Extension E",  
+    "CJKE+": "Appendage to Chinese/Japanese/Korean Extension E",  
     "CJKF": "Chinese/Japanese/Korean Extension F",  
+    "CJKF+": "Appendage to Chinese/Japanese/Korean Extension F",  
     "CIS": "Compatibility Ideographs Supplement",
     "SIP": "Miscellaneous Supplementary Ideographic Plane",
     "CJKG": "Chinese/Japanese/Korean Extension G",
+    "CJKG+": "Appendage to Chinese/Japanese/Korean Extension G",
+    "CJKH": "Chinese/Japanese/Korean Extension H",
+    # CJKH has been shrinkwrapped to a multiple of 16 characters from the beginning, so no appendage
+    #   can be made.
     "TIP": "Miscellaneous Tertiary Ideographic Plane", 
     "SSP": "Supplementary Special-purpose Plane",
     "SPUA": "Supplementary Private-Use Area A",
@@ -64,8 +73,10 @@ def initialism(codepoint):
         return "HCJ"
     elif 0x31C0 <= codepoint < 0x31F0:
         return "STRK"
-    elif 0x3400 <= codepoint < 0x4DC0:
+    elif 0x3400 <= codepoint < 0x4DB6:
         return "CJKA"
+    elif 0x4DB6 <= codepoint < 0x4DC0:
+        return "CJKA+"
     elif 0x4E00 <= codepoint < 0x9FA6:
         return "URO"
     elif 0x9FA6 <= codepoint < 0xA000:
@@ -109,22 +120,34 @@ def initialism(codepoint):
         return "CJKB"
     elif 0x2A6D7 <= codepoint < 0x2A6E0:
         return "CJKB+"
-    elif 0x2A700 <= codepoint < 0x2B740:
+    elif 0x2A700 <= codepoint < 0x2B735:
         return "CJKC"
-    elif 0x2B740 <= codepoint < 0x2B820:
+    elif 0x2B735 <= codepoint < 0x2B740:
+        return "CJKC+"
+    elif 0x2B740 <= codepoint < 0x2B81E:
         return "CJKD"
-    elif 0x2B820 <= codepoint < 0x2CEB0:
+    elif 0x2B81E <= codepoint < 0x2B820:
+        return "CJKD+"
+    elif 0x2B820 <= codepoint < 0x2CEA2:
         return "CJKE"
-    elif 0x2CEB0 <= codepoint < 0x2EBF0:
+    elif 0x2CEA2 <= codepoint < 0x2CEB0:
+        return "CJKE+"
+    elif 0x2CEB0 <= codepoint < 0x2EBE1:
         return "CJKF"
+    elif 0x2EBE1 <= codepoint < 0x2EBF0:
+        return "CJKF+"
     elif 0x2F800 <= codepoint < 0x2FA20:
         return "CIS"
     elif 0x20000 <= codepoint < 0x30000:
         return "SIP"
     #####################################
     # TERTIARY IDEOGRAPHIC PLANE
-    elif 0x30000 <= codepoint < 0x31350:
+    elif 0x30000 <= codepoint < 0x3134B:
         return "CJKG"
+    elif 0x3134B <= codepoint < 0x31350:
+        return "CJKG+"
+    elif 0x31350 <= codepoint < 0x323B0:
+        return "CJKH"
     elif 0x30000 <= codepoint < 0x40000:
         return "TIP"
     #####################################
