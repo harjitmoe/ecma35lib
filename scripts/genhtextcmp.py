@@ -14,14 +14,13 @@ from ecma35.data.multibyte import korea, cellemojidata
 from ecma35.data import graphdata, showgraph
 import json
 
-plane = (1, ("Adobe-Korea1<br>KSCpc-EUC", "Apple for<br>Unicode 2.1", "Apple for<br>Unicode 3.2", "Apple for<br>Unicode 4.0", "Updated<br>Illustrative", "PUA Scheme<br>Nishiki-teki", "Pragmatic"), [
+plane = (1, ("Adobe-Korea1<br>KSCpc-EUC", "Apple for<br>Unicode 2.1", "Apple for<br>Unicode 3.2", "Apple for<br>Unicode 4.0", "Updated<br>Illustrative", "PUA Scheme<br>Nishiki-teki"), [
           graphdata.gsets["mac-elex-extras-adobe"][2],
           graphdata.gsets["mac-elex-extras-unicode2_1"][2],
           graphdata.gsets["mac-elex-extras-unicode3_2"][2],
           graphdata.gsets["mac-elex-extras-unicode4_0"][2],
           graphdata.gsets["mac-elex-extras"][2],
           graphdata.gsets["mac-elex-extras-nishiki-teki"][2],
-          graphdata.gsets["mac-elex-extras-pragmatic"][2],
 ])
 
 def planefunc(number, mapname=None):

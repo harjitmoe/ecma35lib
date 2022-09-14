@@ -272,7 +272,7 @@ g94nbytes = {tuple(b"@"): ("ir042/nec", ("ir042/ibm", "ir042/nec", "ir042/1990pi
              tuple(b"!8"): ("gb13131", ("gb7589",), ("gb13131",)),
              tuple(b"!9"): ("gb13132", ("gb7590",), ("gb13132",)),
              tuple(b"!:"): ("mac-elex-extras", 
-                            ("mac-elex-extras", "mac-elex-extras-unicode4_0", "mac-elex-extras-unicode2_1", "mac-elex-extras-adobe", "mac-elex-extras-nishiki-teki", "mac-elex-extras-pragmatic"),
+                            ("mac-elex-extras", "mac-elex-extras-unicode4_0", "mac-elex-extras-unicode2_1", "mac-elex-extras-adobe", "mac-elex-extras-nishiki-teki"),
                             ("mac-elex-extras-unicode3_2",)),
              tuple(b"!;"): "2011kpsextras",
              tuple(b"!<"): ("big5e-exts", (), ("big5e-exts",)),

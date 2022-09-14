@@ -14,14 +14,13 @@ from ecma35.data.multibyte import korea, cellemojidata
 from ecma35.data import graphdata, showgraph
 import json
 
-plane1 = (1, ("Old UTC<br>Ported", "IBM", "Macintosh", "MS/New UTC<br>Unicode 2.0", "MS/HTML5<br>1998 Update", "2002 Update<br>MS-Style", "Pragmatic"), [
+plane1 = (1, ("Old UTC<br>Ported", "IBM", "Macintosh", "MS/New UTC<br>Unicode 2.0", "MS/HTML5<br>1998 Update", "2002 Update<br>MS-Style"), [
           graphdata.gsets["ir149/altutc"][2],
           graphdata.gsets["ir149/ibm"][2],
           graphdata.gsets["ir149/mac"][2],
           graphdata.gsets["ir149"][2],
           graphdata.gsets["ir149/1998"][2],
           graphdata.gsets["ir149/2002"][2],
-          graphdata.gsets["ir149/mac-pragmatic"][2],
 ])
 
 plane2 = (2, ("KS X 1002<br>No symbols"), [
