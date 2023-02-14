@@ -48,7 +48,7 @@ graphdata.gsets["ir031"] = (94, 1, (
     (0x03C9,), (0x03C2,), (0x03DC,), (0x03DE,), (0x03E0,), (0x03DA,), None,
 ))
 
-# ISO 5428:1980 (not compatible with the older 1976 edition (draft?) in IR-031)
+# ISO 5428:1980 (not compatible with the older 1976 edition (draft?) in IR-031), also part of MARC 21
 graphdata.gsets["ir055"] = (94, 1, (
                     (-0x0300,), (-0x0301,), (-0x0308,), (-0x0342,), (-0x0313,), (-0x0314,), (-0x0345,), 
          None,      None,      None,      None,      None,      None,      None,      None,      
@@ -56,11 +56,11 @@ graphdata.gsets["ir055"] = (94, 1, (
          None,      None,      None,      (0x0387,), None,      None,      None,      (0x037E,), 
          None,      (0x0391,), (0x0392,), None,      (0x0393,), (0x0394,), (0x0395,), (0x03DA,), 
          (0x03DC,), (0x0396,), (0x0397,), (0x0398,), (0x0399,), (0x039A,), (0x039B,), (0x039C,), 
-         (0x039D,), (0x039E,), (0x039F,), (0x03A0,), (0x03D8,), (0x03A1,), (0x03A3,), None,      
+         (0x039D,), (0x039E,), (0x039F,), (0x03A0,), (0x03DE,), (0x03A1,), (0x03A3,), None,      
          (0x03A4,), (0x03A5,), (0x03A6,), (0x03A7,), (0x03A8,), (0x03A9,), (0x03E0,), None,      
          None,      (0x03B1,), (0x03B2,), (0x03D0,), (0x03B3,), (0x03B4,), (0x03B5,), (0x03DB,), 
          (0x03DD,), (0x03B6,), (0x03B7,), (0x03B8,), (0x03B9,), (0x03BA,), (0x03BB,), (0x03BC,), 
-         (0x03BD,), (0x03BE,), (0x03BF,), (0x03C0,), (0x03D9,), (0x03C1,), (0x03C3,), (0x03C2,), 
+         (0x03BD,), (0x03BE,), (0x03BF,), (0x03C0,), (0x03DF,), (0x03C1,), (0x03C3,), (0x03C2,), 
          (0x03C4,), (0x03C5,), (0x03C6,), (0x03C7,), (0x03C8,), (0x03C9,), (0x03E1,)))
 
 # "New" (DEC) 7-bit Greek, also the since-withdrawn ELOT-927
