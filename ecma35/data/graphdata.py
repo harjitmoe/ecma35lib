@@ -116,7 +116,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"h"): "ir085",
             tuple(b"i"): "ir086",
             tuple(b"j"): "ir088",
-            tuple(b"k"): "ir089",
+            tuple(b"k"): ("ir089", ("ir089/marc",), ("ir089",)),
             tuple(b"l"): ("ir090/ets",
                           ("ir090/ets", "ir090/ets-alpha"),
                           ("ir090",)),
@@ -160,7 +160,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"#="): "sbank2gpageO",
             tuple(b"#>"): "sbank2gpageP",
             tuple(b"#?"): "sbank2gpageQ",
-            tuple(b"$1"): "decswiss", # Note: DEC itself uses b"4" (collides with ARIB Mosaic C)
+            tuple(b"$1"): "decswiss", # Note: DEC itself uses b"4" (collides ARIB Mosaic C, MARC)
             tuple(b"$2"): "decdutch", # Note: DEC itself uses b"="
             tuple(b"$3"): "marlett",
             tuple(b"$4"): "zdings_g0",
@@ -173,6 +173,8 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"$;"): "ir224",
             tuple(b"$<"): "ir222",
             tuple(b"$="): "ir221",
+            tuple(b"$>"): "marc-he", # Note: MARC itself uses b"2"
+            tuple(b"$?"): "marc-ar-ext", # Note: MARC itself uses b"4"
             tuple(b"~"): "nil"}
 
 g96bytes = {tuple(b"@"): "ir111",

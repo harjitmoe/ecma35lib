@@ -93,6 +93,8 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 0 G*D4 P`|ISO 5426-1, falling thru to T.51 for unallocated cells|
 |`IRR 0 G*D4 Y`|ETS 300 706 Latin G0 for Italy|
 |``IRR 1 G*D4 ` ``|Danish equivalent to NS 4551 (IBM's 1017)|
+|`IRR ? G*D4 k`|ASMO 449 (ISO 9036) 7-bit Arabic|
+|`IRR 0 G*D4 k`|MARC-8 Basic Arabic|
 |`IRR ? G*D4 l`|ITU T.51-1988 first supplementary set (i.e. older version of the T.51 supplementary set without NBSP, SHY, not sign or brvbar)|
 |`IRR 0 G*D4 l`|ITU T.51-1988 first supplementary set with ETS 300 706 extensions (default for this F-byte)|
 |`IRR 1 G*D4 l`|ITU T.51-1988 first supplementary set with ETS 300 706 extensions, alternative mapping|
@@ -136,6 +138,8 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 $ ;`|ISO 11822:1996 Arabic supplementary set|
 |`G*D4 $ <`|ISO 10586:1996 Georgian|
 |`G*D4 $ =`|ISO 10585:1996 Armenian|
+|`G*D4 $ >`|MARC-8 Hebrew|
+|`G*D4 $ ?`|MARC-8 Extended Arabic|
 |`IRR ? G*D6 J`|ITU T.51 supplementary set for use with old IRV (excludes universal currency sign and hash)|
 |`IRR 0 G*D6 J`|Complete ITU T.51 supplementary set (same as `IRR 0 G*D6 R`; default for this F-byte)|
 |`IRR ? G*D6 R`|ITU T.51 supplementary set for use with ASCII (excludes dollar and hash)|
