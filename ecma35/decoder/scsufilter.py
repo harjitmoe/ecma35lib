@@ -8,7 +8,7 @@
 
 # Switch to ECMA-35 is 01 1B 25 40 in single-byte mode, and 00 1B 00 25 00 40 in "Unicode" mode.
 # In either case, just 1B 25 40 will not switch to ECMA-35, so SCSU is "without standard return".
-scsudocs = ("DOCS", True, (0x30,))
+scsudocs = ("DOCS", True, (0x35,))
 
 def _get_offset(window):
     if window < 0: # i.e. an astral window (U+10000 or higher)
