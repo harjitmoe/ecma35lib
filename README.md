@@ -140,6 +140,8 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 $ =`|ISO 10585:1996 Armenian|
 |`G*D4 $ >`|MARC-8 Hebrew|
 |`G*D4 $ ?`|MARC-8 Extended Arabic|
+|`G*D4 % 0`|MARC-8 subscript numbers|
+|`G*D4 % 1`|MARC-8 superscript numbers|
 |`IRR ? G*D6 J`|ITU T.51 supplementary set for use with old IRV (excludes universal currency sign and hash)|
 |`IRR 0 G*D6 J`|Complete ITU T.51 supplementary set (same as `IRR 0 G*D6 R`; default for this F-byte)|
 |`IRR ? G*D6 R`|ITU T.51 supplementary set for use with ASCII (excludes dollar and hash)|

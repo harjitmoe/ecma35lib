@@ -66,7 +66,7 @@ defgsets = {}
 
 # Note: has to be imported after gsets &co are defined
 from ecma35.data.multibyte import korea, japan, guobiao, traditional
-from ecma35.data.singlebyte import ecma6, extlatin, c0substs, dingbats, quoocs_ngwx, marc, ccitt, cyrillic, semitic, greek, indic, otherscript
+from ecma35.data.singlebyte import ecma6, extlatin, c0substs, dingbats, quoocs_ngwx, ccitt, cyrillic, semitic, greek, indic, otherscript
 
 g94bytes = {tuple(b"@"): ("ir002", # Preferred version
                           ("ir002/tilde",), # Private versions
@@ -175,6 +175,8 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"$="): "ir221",
             tuple(b"$>"): "marc-he", # Note: MARC itself uses b"2"
             tuple(b"$?"): "marc-ar-ext", # Note: MARC itself uses b"4"
+            tuple(b"%0"): "marc-subscript",
+            tuple(b"%1"): "marc-superscript",
             tuple(b"~"): "nil"}
 
 g96bytes = {tuple(b"@"): "ir111",

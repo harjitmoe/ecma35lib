@@ -338,6 +338,93 @@ graphdata.gsets["ir226"] = (96, 1, tuple((i,) for i in (
 # TDS 565 7-bit Turkmen
 graphdata.gsets["ir230"] = (94, 1, ((0x21,), (0x22,), (0x23,), (0x24,), (0x25,), (0x26,), (0x27,), (0x28,), (0x29,), (0x2A,), (0x2B,), (0x2C,), (0x2D,), (0x2E,), (0x2F,), (0x30,), (0x31,), (0x32,), (0x33,), (0x34,), (0x35,), (0x36,), (0x37,), (0x38,), (0x39,), (0x3A,), (0x3B,), (0x3C,), (0x3D,), (0x3E,), (0x3F,), (0x40,), (0x41,), (0x42,), (0xC7,), (0x44,), (0x45,), (0xC4,), (0x46,), (0x47,), (0x48,), (0x49,), (0x4A,), (0x017D,), (0x4B,), (0x4C,), (0x4D,), (0x4E,), (0x0147,), (0x4F,), (0xD6,), (0x50,), (0x52,), (0x53,), (0x015E,), (0x54,), (0x55,), (0xDC,), (0x57,), (0x59,), (0xDD,), (0x5A,), (0x5F,), (0x2116,), (0x61,), (0x62,), (0xE7,), (0x64,), (0x65,), (0xE4,), (0x66,), (0x67,), (0x68,), (0x69,), (0x6A,), (0x017E,), (0x6B,), (0x6C,), (0x6D,), (0x6E,), (0x0148,), (0x6F,), (0xF6,), (0x70,), (0x72,), (0x73,), (0x015F,), (0x74,), (0x75,), (0xFC,), (0x77,), (0x79,), (0xFD,), (0x7A,)))
 
+# ANSEL (ANSI/NISO Z39.47), vanilla (without an eszett)
+graphdata.gsets["ir231"] = (94, 1, (
+                         (0x0141,),  (0x00D8,),  (0x0110,), 
+             (0x00DE,),  (0x00C6,),  (0x0152,),  (0x02B9,),
+             (0x00B7,),  (0x266D,),  (0x00AE,),  (0x00B1,), 
+             (0x01A0,),  (0x01AF,),  (0x02BC,),  None, 
+             (0x02BB,),  (0x0142,),  (0x00F8,),  (0x0111,), 
+             (0x00FE,),  (0x00E6,),  (0x0153,),  (0x02BA,), 
+             (0x0131,),  (0x00A3,),  (0x00F0,),  None,      
+             (0x01A1,),  (0x01B0,),  None,       None, 
+             (0x00B0,),  (0x2113,),  (0x2117,),  (0x00A9,), 
+             (0x266F,),  (0x00BF,),  (0x00A1,),  None,
+             None,       None,       None,       None, 
+             None,       None,       None,       None,  
+             None,       None,       None,       None,      
+             None,       None,       None,       None, 
+             None,       None,       None,       None,      
+             None,       None,       None,       None, 
+             (-0x0309,), (-0x0300,), (-0x0301,), (-0x0302,), 
+             (-0x0303,), (-0x0304,), (-0x0306,), (-0x0307,), 
+             (-0x0308,), (-0x030C,), (-0x030A,), (-0xFE20,), 
+             (-0xFE21,), (-0x0315,), (-0x030B,), (-0x0310,), 
+             (-0x0327,), (-0x0328,), (-0x0323,), (-0x0324,), 
+             (-0x0325,), (-0x0333,), (-0x0332,), (-0x0326,), 
+             (-0x031C,), (-0x032E,), (-0xFE22,), (-0xFE23,), 
+             None,       None,       (-0x0313,) ))
+
+# ANSEL (ANSI/NISO Z39.47), with Library of Congress additions.
+# LoC still use the same escape sequence as assigned for the standard one though.
+graphdata.gsets["ir231/marc"] = (94, 1, (
+                         (0x0141,),  (0x00D8,),  (0x0110,), 
+             (0x00DE,),  (0x00C6,),  (0x0152,),  (0x02B9,),
+             (0x00B7,),  (0x266D,),  (0x00AE,),  (0x00B1,), 
+             (0x01A0,),  (0x01AF,),  (0x02BC,),  None, 
+             (0x02BB,),  (0x0142,),  (0x00F8,),  (0x0111,), 
+             (0x00FE,),  (0x00E6,),  (0x0153,),  (0x02BA,), 
+             (0x0131,),  (0x00A3,),  (0x00F0,),  None,      
+             (0x01A1,),  (0x01B0,),  None,       None, 
+             (0x00B0,),  (0x2113,),  (0x2117,),  (0x00A9,), 
+             (0x266F,),  (0x00BF,),  (0x00A1,),  (0x00DF,), 
+             (0x20AC,),  None,       None,       None, 
+             None,       None,       None,       None,  
+             None,       None,       None,       None,      
+             None,       None,       None,       None, 
+             None,       None,       None,       None,      
+             None,       None,       None,       None, 
+             (-0x0309,), (-0x0300,), (-0x0301,), (-0x0302,), 
+             (-0x0303,), (-0x0304,), (-0x0306,), (-0x0307,), 
+             (-0x0308,), (-0x030C,), (-0x030A,), (-0xFE20,), 
+             (-0xFE21,), (-0x0315,), (-0x030B,), (-0x0310,), 
+             (-0x0327,), (-0x0328,), (-0x0323,), (-0x0324,), 
+             (-0x0325,), (-0x0333,), (-0x0332,), (-0x0326,), 
+             (-0x031C,), (-0x032E,), (-0xFE22,), (-0xFE23,), 
+             None,       None,       (-0x0313,) ))
+
+# ANSEL (ANSI/NISO Z39.47), with Library of Congress and Genealogical Society of Utah additions.
+# The extensions do not collide and mostly co-exist, besides both adding the eszett (a conspicuous
+#   omission from the original ANSEL if I ever saw one). GSU's midline letters are not only mapped
+#   to their ASCII equivalents on Wikipedia, but also by GSU's now-discontinued PAF (arguably the
+#   only source of true wisdom in this respect). No idea what they were originally for. Mapping
+#   straight to their ASCII equivalents seems foolish here though, hence the zenkaku mappings.
+graphdata.gsets["ir231/full"] = (94, 1, (
+                         (0x0141,),  (0x00D8,),  (0x0110,), 
+             (0x00DE,),  (0x00C6,),  (0x0152,),  (0x02B9,),
+             (0x00B7,),  (0x266D,),  (0x00AE,),  (0x00B1,), 
+             (0x01A0,),  (0x01AF,),  (0x02BC,),  None, 
+             (0x02BB,),  (0x0142,),  (0x00F8,),  (0x0111,), 
+             (0x00FE,),  (0x00E6,),  (0x0153,),  (0x02BA,), 
+             (0x0131,),  (0x00A3,),  (0x00F0,),  None,      
+             (0x01A1,),  (0x01B0,),  (0x25A1,),  (0x25A0,), 
+             (0x00B0,),  (0x2113,),  (0x2117,),  (0x00A9,), 
+             (0x266F,),  (0x00BF,),  (0x00A1,),  (0x00DF,), 
+             (0x20AC,),  None,       None,       None, 
+             None,       (0xFF45,),  (0xFF4F,),  (0x00DF,), 
+             None,       None,       None,       None,      
+             None,       None,       None,       None, 
+             None,       None,       None,       None,      
+             None,       None,       None,       None, 
+             (-0x0309,), (-0x0300,), (-0x0301,), (-0x0302,), 
+             (-0x0303,), (-0x0304,), (-0x0306,), (-0x0307,), 
+             (-0x0308,), (-0x030C,), (-0x030A,), (-0xFE20,), 
+             (-0xFE21,), (-0x0315,), (-0x030B,), (-0x0310,), 
+             (-0x0327,), (-0x0328,), (-0x0323,), (-0x0324,), 
+             (-0x0325,), (-0x0333,), (-0x0332,), (-0x0326,), 
+             (-0x031C,), (-0x032E,), (-0xFE22,), (-0xFE23,), 
+             (-0x0338,), None,       (-0x0313,) ))
+
 # TDS 616:2003 RHS for 8-bit Turkmen (duplicates ASCII in several places so presumably for a non-ASCII LHS?)
 graphdata.gsets["ir232"] = (94, 1, (None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (0x41,), (0x42,), (0xC7,), (0x44,), (0x45,), (0xC4,), (0x46,), (0x47,), (0x48,), (0x49,), (0x4A,), (0x017D,), (0x4B,), (0x4C,), (0x4D,), (0x4E,), (0x0147,), (0x4F,), (0xD6,), (0x50,), (0x52,), (0x53,), (0x015E,), (0x54,), (0x55,), (0xDC,), (0x57,), (0x59,), (0xDD,), (0x5A,), None, (0x2116,), (0x61,), (0x62,), (0xE7,), (0x64,), (0x65,), (0xE4,), (0x66,), (0x67,), (0x68,), (0x69,), (0x6A,), (0x017E,), (0x6B,), (0x6C,), (0x6D,), (0x6E,), (0x0148,), (0x6F,), (0xF6,), (0x70,), (0x72,), (0x73,), (0x015F,), (0x74,), (0x75,), (0xFC,), (0x77,), (0x79,), (0xFD,), (0x7A,), None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None))
 

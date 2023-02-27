@@ -181,4 +181,34 @@ graphdata.gsets["ir222"] = (94, 1, (
     None,      None,      None,      None,      None,      None,      None,
 ))
 
+# MARC 21's MARC-8 subscript numbers set
+graphdata.gsets["marc-subscript"] = (94, 1, tuple((i,) if i else None for i in (
+                     None, None, None, None, None, None, None,
+             0x208D, 0x208E, None, 0x208A, None, 0x208B, None, None,
+             0x2080, 0x2081, 0x2082, 0x2083, 0x2084, 0x2085, 0x2086, 0x2087,
+             0x2088, 0x2089, None, None, None, None, None, None,
+             None, None, None, None, None, None, None, None,
+             None, None, None, None, None, None, None, None,
+             None, None, None, None, None, None, None, None,
+             None, None, None, None, None, None, None, None,
+             None, None, None, None, None, None, None, None,
+             None, None, None, None, None, None, None, None,
+             None, None, None, None, None, None, None, None,
+             None, None, None, None, None, None, None)))
+
+# MARC 21's MARC-8 superscript numbers set
+graphdata.gsets["marc-superscript"] = (94, 1, tuple((i,) if i else None for i in (
+                     None, None, None, None, None, None, None,
+             0x207D, 0x207E, None, 0x207A, None, 0x207B, None, None,
+             0x2070, 0x00B9, 0x00B2, 0x00B3, 0x2074, 0x2075, 0x2076, 0x2077,
+             0x2078, 0x2079, None, None, None, None, None, None, 
+             None, None, None, None, None, None, None, None, 
+             None, None, None, None, None, None, None, None, 
+             None, None, None, None, None, None, None, None, 
+             None, None, None, None, None, None, None, None, 
+             None, None, None, None, None, None, None, None, 
+             None, None, None, None, None, None, None, None, 
+             None, None, None, None, None, None, None, None, 
+             None, None, None, None, None, None, None)))
+
 
