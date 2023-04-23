@@ -24,7 +24,7 @@ raw_variants = {
     "ir002": ([None, 0xA4, None, None, None, None, None, None, 
                            None, None, None, None, 0x203E], {}),
     "ir002/tilde": ([None, 0xA4, None, None, None, None, None, None, 
-                                None, None, None, None, None], {}),
+                                 None, None, None, None, None], {}),
     # BS 4730 (United Kingdom)
     "ir004": ([0xA3, None, None, None, None, None, None, None, 
                            None, None, None, None, 0x203E], {}),
@@ -36,6 +36,14 @@ raw_variants = {
     # CNS 5205 and also apparently the Dutch (non-DEC) set; IBM's 1019.
     "ir006/overline": ([None, None, None, None, None, None, None, None, 
                                    None, None, None, None, 0x203E], {}),
+    # ASCII-1967 with broken vertical bar, also basis of DP94-range subset of EBCDIC code pages 256
+    #   and 500.
+    "ir006/brvbar": ([None, None, None, None, None, None, None, None, 
+                                  None, None, 0xA6, None, None], {}),
+    # ASCII-1967, PL/I variant.
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    "ir006/pli": ([None, None, None, None, None, None, 0xAC, None, 
+                               None, None, 0xA6, None, None], {0x21: 0x7C}),
     # NATS-SEFI (Swedish and Finnish Journalism)
     "ir008-1": ([None, None, 0x3000, 0xC4, 0xD6, 0xC5, 0x25A0, None, 
                              0x2007, 0xE4, 0xF6, 0xE5, 0x2013], {}),
@@ -61,12 +69,12 @@ raw_variants = {
                            0xE9, 0xE4, 0xF6, 0xE5, 0xFC], {}),
     # DEC NRCS for Sweden
     "ir011/dec": ([None, None, 0xC9, 0xC4, 0xD6, 0xC5, 0xDC, None, 
-                              0xE9, 0xE4, 0xF6, 0xE5, 0xFC], {}),
+                               0xE9, 0xE4, 0xF6, 0xE5, 0xFC], {}),
     # JIS C 6220 / JIS X 0201 Roman set (JIS-Roman)
     "ir014": ([None, None, None, None, 0xA5, None, None, None, 
                            None, None, None, None, 0x203E], {}),
     "ir014/tilde": ([None, None, None, None, 0xA5, None, None, None, 
-                                None, None, None, None, None], {}),
+                                 None, None, None, None, None], {}),
     # KS X 1003 / G0 set of non-ASCII EUC-KR (KS-Roman, KSC-Roman)
     "ksroman": ([None, None, None, None, 0x20A9, None, None, None, 
                              None, None, None, None, 0x203E], {}),
@@ -78,7 +86,7 @@ raw_variants = {
     # Roman G0 set of ETS 300 706 for Italy
     # Violation of ECMA-6:1991: 0x5F is not _.
     "ir015/ets": ([0xA3, None, 0xE9, 0xB0, 0xE7, 0x2192, 0x2191, 0x2317, 
-                              0xF9, 0xE0, 0xF2, 0xE8,   0xEC], {}),
+                               0xF9, 0xE0, 0xF2, 0xE8,   0xEC], {}),
     # Olivetti Portugese
     "ir016": ([None, None, 0xA7, 0xC3, 0xC7, 0xD5, None, None, 
                            None, 0xE3, 0xE7, 0xF5, 0xB0], {}),
@@ -148,7 +156,7 @@ raw_variants = {
     "ir084": ([None, None, 0xB4, 0xC3, 0xC7, 0xD5, None, None, 
                            None, 0xE3, 0xE7, 0xF5, None], {}),
     "ir084/dec": ([None, None, None, 0xC3, 0xC7, 0xD5, None, None, 
-                              None, 0xE3, 0xE7, 0xF5, None], {}),
+                               None, 0xE3, 0xE7, 0xF5, None], {}),
     # IBM Spanish
     "ir085": ([None, None, 0xB7, 0xA1, 0xD1, 0xC7, 0xBF, None, 
                            None, 0xB4, 0xF1, 0xE7, 0xA8], {}),
@@ -200,11 +208,11 @@ raw_variants = {
     # Invariant subset of DEC NRCS
     # Violation of ECMA-6:1991: 0x5F is omitted.
     "ir170/dec": ([-1, None, -1, -1, -1, -1, -1, -1, 
-                            -1, -1, -1, -1, -1], {}),
+                             -1, -1, -1, -1, -1], {}),
     # Invariant subset of Roman G0 set of ETS 300 706
     # Violation of ECMA-6:1991: 0x5F is omitted.
     "ir170/ets": ([-1, -1, -1, -1, -1, -1, -1, -1, 
-                          -1, -1, -1, -1, -1], {}),
+                           -1, -1, -1, -1, -1], {}),
     # I.S. 433 (Irish Gaelic)
     "ir207": ([0xA3, None, 0xD3, 0xC9, 0xCD, 0xDA, 0xC1, None, 
                            0xF3, 0xE9, 0xED, 0xFA, 0xE1], {}),
@@ -286,6 +294,31 @@ raw_variants = {
                           0x11F, 0x130, 0x15E, 0xD6, 0xC7, 0xDC,
                           0x11E, 0x131, 0x15F, 0xF6, 0xE7, 0xFC], {}),
     ##
+    # Extraction from DP94-range subset of EBCDIC code page 24
+    "ibmbritish": ([0xA3, None, None, None, 0xBD, None, 0xB5, None,
+                                0xB1, 0xB2, 0x23, 0xB3, 0xB0], {}),
+    # Extraction from DP94 set of EBCDIC code page 275
+    # Violation of ECMA-6:1991: 0x23 is not # or £.
+    # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
+    "ibmbrazil": ([0xD5, 0xC7, 0xC3, 0xC9, None, 0x24, None, None,
+                               0xE3, 0xF5, 0xE7, 0xE9, None], {}),
+    # Extraction from DP94 set of EBCDIC code page 260 or 276
+    "ibmquebec": ([None, None, None, 0xE0, 0xB8, 0xB4, None, None,
+                               None, 0xE9, 0xF9, 0xE8, 0xA8], {}),
+    # Extraction from DP94 set of EBCDIC code page 277
+    # Violation of ECMA-6:1991: 0x23 is not # or £.
+    # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
+    "ibmdanish": ([0xC6, 0xC5, 0xD8, 0x23, None, 0xA4, None, None,
+                               None, 0xE6, 0xF8, 0xE5, 0xFC], {}),
+    # Extraction from DP94 set of EBCDIC code page 278
+    # Violation of ECMA-6:1991: 0x23 is not # or £.
+    # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
+    "ibmswedish": ([0xC4, 0xC5, 0xD6, 0xA7, 0xC9, 0xA4, None, None,
+                                0xE9, 0xE4, 0xF6, 0xE5, 0xFC], {}),
+    # Extraction from DP94 set of EBCDIC code page 282
+    # Violation of ECMA-6:1991: 0x23 is not # or £.
+    "ibmportugal": ([0xC3, None, 0xD5, None, 0xC7, None, None, None,
+                                 None, 0xE3, 0xF5, 0xB4, 0xE7], {}),
 }
 
 for (name, (myvars, override)) in raw_variants.items():

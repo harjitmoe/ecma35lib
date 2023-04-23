@@ -72,7 +72,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
                           ("ir002/tilde",), # Private versions
                           ("ir002",)), # Original followed by any registered revisions, each of which must be superset of the previous
             tuple(b"A"): ("ir004", ("ir004/dec",), ("ir004",)),
-            tuple(b"B"): ("ir006", ("ir006/overline",), ("ir006",)),
+            tuple(b"B"): ("ir006", ("ir006/overline", "ir006/brvbar", "ir006/pli"), ("ir006",)),
             tuple(b"C"): ("ir008-1", ("ir008-1/dec",), ("ir008-1",)),
             tuple(b"D"): "ir008-2",
             tuple(b"E"): ("ir009-1", ("ir009-1/dec",), ("ir009-1",)),
@@ -177,6 +177,12 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"$?"): "marc-ar-ext", # Note: MARC itself uses b"4"
             tuple(b"%0"): "marc-subscript",
             tuple(b"%1"): "marc-superscript",
+            tuple(b"%2"): "ibmbritish",
+            tuple(b"%3"): "ibmbrazil",
+            tuple(b"%4"): "ibmquebec",
+            tuple(b"%5"): "ibmdanish",
+            tuple(b"%6"): "ibmswedish",
+            tuple(b"%7"): "ibmportugal",
             tuple(b"~"): "nil"}
 
 g96bytes = {tuple(b"@"): "ir111",

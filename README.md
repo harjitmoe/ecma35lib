@@ -82,6 +82,8 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 0 G*D4 @`|Old IRV with tilde (rather than overscore)|
 |``IRR 0 G*D4 [ACEH`g]``|DEC NRCS, where they differ from standard|
 |`IRR 0 G*D4 B`|ASCII with overscore (rather than tilde)|
+|`IRR 1 G*D4 B`|ASCII-1967 using broken-bar mapping|
+|`IRR 2 G*D4 B`|ASCII-1967, PL/I variant|
 |`IRR 0 G*D4 G`|Variant Swedish and Finnish, based on IBM WP96|
 |`IRR 0 G*D4 I`|JIS X 0201 katakana, IBM's 4992 (used for its counterparts from IBM's 1041 in the Shift\_JIS filter).|
 |`IRR 1 G*D4 I`|JIS X 0201 katakana, an analogous extraction from MacJapanese.|
@@ -151,6 +153,12 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 $ ?`|MARC-8 Extended Arabic|
 |`G*D4 % 0`|MARC-8 subscript numbers|
 |`G*D4 % 1`|MARC-8 superscript numbers|
+|`G*D4 % 2`|7-bit British, based on IBM WP96|
+|`G*D4 % 3`|7-bit Brazilian Portugese, based on IBM DP94|
+|`G*D4 % 4`|7-bit Canadian French, based on IBM DP94|
+|`G*D4 % 5`|7-bit Danish and Norwegian, based on IBM DP94|
+|`G*D4 % 6`|7-bit Swedish and Finnish, based on IBM DP94|
+|`G*D4 % 7`|7-bit European Portugese, based on IBM DP94|
 |`IRR ? G*D6 J`|ITU T.51 supplementary set for use with old IRV (excludes universal currency sign and hash)|
 |`IRR 0 G*D6 J`|Complete ITU T.51 supplementary set (same as `IRR 0 G*D6 R`; default for this F-byte)|
 |`IRR ? G*D6 R`|ITU T.51 supplementary set for use with ASCII (excludes dollar and hash)|
