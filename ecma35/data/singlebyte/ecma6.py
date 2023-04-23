@@ -225,9 +225,12 @@ raw_variants = {
     # DEC NRCS for the Netherlands; IBM's 1102
     "decdutch": ([0xA3, None, 0xBE, 0x133, 0xBD, 0x7C, None, None, 
                               None, 0xA8, 0x192, 0xBC, 0xB4], {}),
-    # Supposed Icelandic version (cannot verify)
-    "icelandic": ([None, None, 0xD0, 0xDE, None, 0xC6, 0xD6, None, 
+    # Supposed Icelandic version (close to IBM one below)
+    "icelandic": ([None, 0xA4, 0xD0, 0xDE, None, 0xC6, 0xD6, None, 
                                0xF0, 0xFE, None, 0xE6, 0xF6], {}),
+    # Extraction from DP94 set of IBM code page 871
+    "icelandic/ibm": ([None, None, 0xD0, 0xDE, 0xB4, 0xC6, 0xD6, None, 
+                                   0xF0, 0xFE, 0xA6, 0xE6, 0xF6], {}),
     # BN-74/3101-01 for Polish (not verified but close to IBM one below)
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
     "polish": ([None, (0x7A, 0x200D, 0x142), 

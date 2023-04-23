@@ -168,7 +168,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"$6"): "symbolgl",
             tuple(b"$7"): "symbolgr",
             tuple(b"$8"): "maltese",
-            tuple(b"$9"): "icelandic",
+            tuple(b"$9"): ("icelandic", ("icelandic/ibm",), ("icelandic",)),
             tuple(b"$:"): ("polish/full", ("polish/ibm", "polish/full"), ("polish",)),
             tuple(b"$;"): "ir224",
             tuple(b"$<"): "ir222",

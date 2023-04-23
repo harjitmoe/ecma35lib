@@ -142,7 +142,8 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 $ 6`|Symbol font encoding, GL range|
 |`G*D4 $ 7`|Symbol font encoding, GR range (no euro)|
 |`G*D4 $ 8`|7-bit Maltese|
-|`G*D4 $ 9`|7-bit Icelandic|
+|`IRR ? G*D4 $ 9`|7-bit Icelandic|
+|`IRR 0 G*D4 $ 9`|7-bit Icelandic, following the DP94 set of EBCDIC code page 871|
 |`IRR ? G*D4 $ :`|7-bit Polish, ostensibly (unverified) following BN-74/3101-01|
 |`IRR 0 G*D4 $ :`|7-bit Polish, following the DP94-range subset (GL set) of EBCDIC code page 252|
 |`IRR 1 G*D4 $ :`|7-bit Polish, compromise between the two above (default for these I/F bytes)|
