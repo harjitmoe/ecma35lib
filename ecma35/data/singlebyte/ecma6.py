@@ -319,6 +319,12 @@ raw_variants = {
     # Violation of ECMA-6:1991: 0x23 is not # or £.
     "ibmportugal": ([0xC3, None, 0xD5, None, 0xC7, None, None, None,
                                  None, 0xE3, 0xF5, 0xB4, 0xE7], {}),
+    # Extraction from DP94 set of EBCDIC code page 322, 905, 1026, 1155 or 1175
+    # Violation of ECMA-6:1991: 0x22 is not ".
+    # Violation of ECMA-6:1991: 0x23 is not # or £.
+    # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
+    "ibmturkish": ([0xD6, 0x0130, 0x015E, 0xC7, 0xFC,   0x011E, None, None,
+                                  0x0131, 0xE7, 0x015F, 0x011F, 0xF6], {0x22: 0xDC}),
 }
 
 for (name, (myvars, override)) in raw_variants.items():

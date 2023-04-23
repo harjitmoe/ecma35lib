@@ -159,6 +159,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 % 5`|7-bit Danish and Norwegian, based on IBM DP94|
 |`G*D4 % 6`|7-bit Swedish and Finnish, based on IBM DP94|
 |`G*D4 % 7`|7-bit European Portugese, based on IBM DP94|
+|`G*D4 % 8`|7-bit Turkish, based on IBM DP94|
 |`IRR ? G*D6 J`|ITU T.51 supplementary set for use with old IRV (excludes universal currency sign and hash)|
 |`IRR 0 G*D6 J`|Complete ITU T.51 supplementary set (same as `IRR 0 G*D6 R`; default for this F-byte)|
 |`IRR ? G*D6 R`|ITU T.51 supplementary set for use with ASCII (excludes dollar and hash)|
