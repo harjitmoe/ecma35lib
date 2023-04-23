@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020/2021.
+# By HarJIT in 2019/2020/2021/2023.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -77,7 +77,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"D"): "ir008-2",
             tuple(b"E"): ("ir009-1", ("ir009-1/dec",), ("ir009-1",)),
             tuple(b"F"): "ir009-2",
-            tuple(b"G"): "ir010",
+            tuple(b"G"): ("ir010", ("ir010/ibm",), ("ir010",)),
             tuple(b"H"): ("ir011", ("ir011/dec",), ("ir011",)),
             tuple(b"I"): ("ir013", ("ir013/ibm", "ir013/mac", "ir013/win", "ir013/euro"),
                                    ("ir013",)),
@@ -89,7 +89,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"O"): ("ir038/ext", ("ir038/ext",), ("ir038",)),
             tuple(b"P"): ("ir053/ext", ("ir053/ext",), ("ir053",)),
             tuple(b"Q"): "ir054",
-            tuple(b"R"): "ir025",
+            tuple(b"R"): ("ir025", ("ir025/ibmbelgian", "ir025/ibmbelgianwp"), ("ir025",)),
             tuple(b"S"): "ir055",
             tuple(b"T"): "ir057",
             tuple(b"U"): "ir027",
@@ -103,7 +103,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"]"): "ir050",
             tuple(b"^"): "ir051",
             tuple(b"_"): "ir059",
-            tuple(b"`"): ("ir060", ("ir060/dec", "ir060/dk"), ("ir060",)),
+            tuple(b"`"): ("ir060", ("ir060/dec", "ir060/dk", "ir060/ibm"), ("ir060",)),
             tuple(b"a"): "ir061",
             tuple(b"b"): "ir070",
             tuple(b"c"): "ir071",

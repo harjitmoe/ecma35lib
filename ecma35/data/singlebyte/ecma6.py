@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019, 2020, 2022.
+# By HarJIT in 2019, 2020, 2022, 2023.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -41,7 +41,7 @@ raw_variants = {
                              0x2007, 0xE4, 0xF6, 0xE5, 0x2013], {}),
     # DEC NRCS for Finland (apparently used in response to ir008-1 escape)
     "ir008-1/dec": ([None, None, None, 0xC4, 0xD6, 0xC5, 0xDC, None, 
-                                0xE9, 0xE4, 0xF6, 0xE5, 0xFC], {}),
+                                 0xE9, 0xE4, 0xF6, 0xE5, 0xFC], {}),
     # NATS-DANO (Danish and Norwegian Journalism)
     # Violation of ECMA-6:1991: 0x22 is not ".
     # Violation of ECMA-6:1991: 0x23 is not # or £.
@@ -49,10 +49,13 @@ raw_variants = {
                              0x2007, 0xE6, 0xF8, 0xE5, 0x2013], {0x22: 0xAB}),
     # DEC NRCS for Denmark and Norway
     "ir009-1/dec": ([None, None, 0xC4, 0xC6, 0xD8, 0xC5, 0xDC, None, 
-                                0xE4, 0xE6, 0xF8, 0xE5, 0xFC], {}),
+                                 0xE4, 0xE6, 0xF8, 0xE5, 0xFC], {}),
     # SEN 85 02 00 ax B (Swedish and Finnish)
-    "ir010": ([None, None, 0xC9, 0xC4, 0xD6, 0xC5, None, None, 
+    "ir010": ([None, 0xA4, None, 0xC4, 0xD6, 0xC5, None, None, 
                            None, 0xE4, 0xF6, 0xE5, 0x203E], {}),
+    # Extraction from DP94-range subset of EBCDIC code page 19
+    "ir010/ibm": ([0xA3, None, 0xA7, 0xC4, 0xD6, 0xC5, None, None, 
+                               None, 0xE4, 0xF6, 0xE5, 0xB4], {}),
     # SEN 85 02 00 ax C (Swedish names), ETS for Sweden and Finland
     "ir011": ([None, 0xA4, 0xC9, 0xC4, 0xD6, 0xC5, 0xDC, None, 
                            0xE9, 0xE4, 0xF6, 0xE5, 0xFC], {}),
@@ -93,6 +96,12 @@ raw_variants = {
     # NF Z 62-010:1973 (old or DEC version French)
     "ir025": ([0xA3, None, 0xE0, 0xB0, 0xE7, 0xA7, None, None, 
                            None, 0xE9, 0xF9, 0xE8, 0xA8], {}),
+    # Projection from DP94 set of EBCDIC code page 274 (CCSID 4370)
+    "ir025/ibmbelgian": ([None, None, 0xE0, None, 0xE7, None, None, None, 
+                                      None, 0xE9, 0xF9, 0xE8, 0xA8], {}),
+    # Projection from DP94-range subset of EBCDIC code page 9
+    "ir025/ibmbelgianwp": ([None, None, 0xE0, 0xB0, 0xE7, 0xA7, None, None, 
+                                        0xA3, 0xE9, 0xF9, 0xE8, 0xA8], {}),
     # Honeywell-Bull's "mixed" Latin-Greek
     # Violation of ECMA-6:1991: 0x21 is not !.
     # Violation of ECMA-6:1991: 0x23 is not # or £.
@@ -119,12 +128,15 @@ raw_variants = {
     # NS 4551 version 1 (Norwegian)
     "ir060": ([None, None, None, 0xC6, 0xD8, 0xC5, None, None, 
                            None, 0xE6, 0xF8, 0xE5, 0x203E], {}),
+    # Extraction from DP94-range subset of EBCDIC code page 20
+    "ir060/ibm": ([0xA3, None, 0xB4, 0xC6, 0xD8, 0xC5, None, None, 
+                               None, 0xE6, 0xF8, 0xE5, 0xA8], {}),
     # Danish version, adding u-umlaut; IBM's 1017
     "ir060/dk": ([None, 0xA4, None, 0xC6, 0xD8, 0xC5, 0xDC, None,
-                             None, 0xE6, 0xF8, 0xE5, 0xFC], {}),
+                              None, 0xE6, 0xF8, 0xE5, 0xFC], {}),
     # DEC alternative NRCS for Denmark and Norway
     "ir060/dec": ([None, None, None, 0xC6, 0xD8, 0xC5, None, None, 
-                              None, 0xE6, 0xF8, 0xE5, None], {}),
+                               None, 0xE6, 0xF8, 0xE5, None], {}),
     # NS 4551 version 2 (Norwegian)
     # Violation of ECMA-6:1991: 0x23 is not # or £.
     "ir061": ([0xA7, None, None, 0xC6, 0xD8, 0xC5, None, None, 
@@ -273,6 +285,7 @@ raw_variants = {
     "etsturkish": ([(0x54, 0x200D, 0x4C), 
                           0x11F, 0x130, 0x15E, 0xD6, 0xC7, 0xDC,
                           0x11E, 0x131, 0x15F, 0xF6, 0xE7, 0xFC], {}),
+    ##
 }
 
 for (name, (myvars, override)) in raw_variants.items():

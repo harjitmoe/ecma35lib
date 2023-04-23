@@ -82,6 +82,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 0 G*D4 @`|Old IRV with tilde (rather than overscore)|
 |``IRR 0 G*D4 [ACEH`g]``|DEC NRCS, where they differ from standard|
 |`IRR 0 G*D4 B`|ASCII with overscore (rather than tilde)|
+|`IRR 0 G*D4 G`|Variant Swedish and Finnish, based on IBM WP96|
 |`IRR 0 G*D4 I`|JIS X 0201 katakana, IBM's 4992 (used for its counterparts from IBM's 1041 in the Shift\_JIS filter).|
 |`IRR 1 G*D4 I`|JIS X 0201 katakana, an analogous extraction from MacJapanese.|
 |`IRR 2 G*D4 I`|JIS X 0201 katakana, an extraction from Windows-31J and friends.|
@@ -93,8 +94,12 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 0 G*D4 O`|DIN 31624, falling thru to T.51 for unallocated cells|
 |`IRR ? G*D4 P`|ISO 5426-1, bibliographic set related to (but incompatible with) T.51|
 |`IRR 0 G*D4 P`|ISO 5426-1, falling thru to T.51 for unallocated cells|
+|`IRR 0 G*D4 R`|Variant Belgian French based on IBM DP94|
+|`IRR 1 G*D4 R`|Variant Belgian French based on IBM WP96|
 |`IRR 0 G*D4 Y`|ETS 300 706 Latin G0 for Italy|
+|``IRR 0 G*D4 ` ``|DEC alternate NRCS for Denmark and Norway|
 |``IRR 1 G*D4 ` ``|Danish equivalent to NS 4551 (IBM's 1017)|
+|``IRR 2 G*D4 ` ``|Variant Denmark and Norway based on IBM WP96|
 |`IRR ? G*D4 k`|ASMO 449 (ISO 9036) 7-bit Arabic|
 |`IRR 0 G*D4 k`|MARC-8 Basic Arabic|
 |`IRR ? G*D4 l`|ITU T.51-1988 first supplementary set (i.e. older version of the T.51 supplementary set without NBSP, SHY, not sign or brvbar)|
