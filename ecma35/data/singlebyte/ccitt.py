@@ -131,7 +131,7 @@ _germanyt51[69] = _germanyt51[85] = None
 graphdata.gsets["ir038"] = (94, 1, tuple(_germanyt51))
 graphdata.gsets["ir038/ext"] = (94, 1, tuple(map(lambda a, b: a or b, _germanyt51, _megabibliot51)))
 
-# ANSI X3.110:1983, CSA T500:1983, ITU T.101-D, Videotex Data Syntax 3.
+# ANSI X3.110:1983, CSA T500:1983, ITU T.101-D, FIPS PUB 121, NAPLPS, Videotex Data Syntax 3.
 #   IR-099 is identical to IR-128; IR-128 is preferred.
 _t51videotex3 = _t51[1:-1]
 _t51videotex3[31] = (-0x20D1,)

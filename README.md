@@ -87,6 +87,8 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 2 G*D4 I`|JIS X 0201 katakana, an extraction from Windows-31J and friends.|
 |`IRR 3 G*D4 I`|JIS X 0201 katakana, an extraction from Windows-31J and friends, suppressing the 0x80 control mapping in some DOCS filters in favour of the Euro.|
 |`IRR 0 G*D4 J`|JIS-Roman with tilde (rather than overscore)|
+|`IRR ? G*D4 K`|DIN 66003 with apostrophe (default)|
+|`IRR 0 G*D4 K`|DIN 66003 with acute|
 |`IRR ? G*D4 O`|DIN 31624, possibly-older German relative of ISO 5426-1|
 |`IRR 0 G*D4 O`|DIN 31624, falling thru to T.51 for unallocated cells|
 |`IRR ? G*D4 P`|ISO 5426-1, bibliographic set related to (but incompatible with) T.51|
@@ -134,7 +136,9 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 $ 7`|Symbol font encoding, GR range (no euro)|
 |`G*D4 $ 8`|7-bit Maltese|
 |`G*D4 $ 9`|7-bit Icelandic|
-|`G*D4 $ :`|7-bit Polish|
+|`IRR ? G*D4 $ :`|7-bit Polish, ostensibly (unverified) following BN-74/3101-01|
+|`IRR 0 G*D4 $ :`|7-bit Polish, following the DP94-range subset (GL set) of EBCDIC code page 252|
+|`IRR 1 G*D4 $ :`|7-bit Polish, compromise between the two above (default for these I/F bytes)|
 |`G*D4 $ ;`|ISO 11822:1996 Arabic supplementary set|
 |`G*D4 $ <`|ISO 10586:1996 Georgian|
 |`G*D4 $ =`|ISO 10585:1996 Armenian|

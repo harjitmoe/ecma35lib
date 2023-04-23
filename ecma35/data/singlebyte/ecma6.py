@@ -85,6 +85,11 @@ raw_variants = {
     # DIN 66 003 (German; also same in DEC and ETS)
     "ir021": ([None, None, 0xA7, 0xC4, 0xD6, 0xDC, None, None, 
                            None, 0xE4, 0xF6, 0xFC, 0xDF], {}),
+    # DIN 66003 variant projected from EBCDIC code page 9 (as opposed to EBCDIC code page 273, whose
+    #   DP94 set (CCSID 4369) corresponds directly to the DIN 66003 map above)
+    # Violation of ECMA-6:1991: 0x27 is not (strictly) '.
+    "ir021/acute": ([None, None, 0xA7, 0xC4, 0xD6, 0xDC, None, None, 
+                           None, 0xE4, 0xF6, 0xFC, 0xDF], {0x27: 0xB4}),
     # NF Z 62-010:1973 (old or DEC version French)
     "ir025": ([0xA3, None, 0xE0, 0xB0, 0xE7, 0xA7, None, None, 
                            None, 0xE9, 0xF9, 0xE8, 0xA8], {}),
@@ -203,11 +208,18 @@ raw_variants = {
     # Supposed Icelandic version (cannot verify)
     "icelandic": ([None, None, 0xD0, 0xDE, None, 0xC6, 0xD6, None, 
                                0xF0, 0xFE, None, 0xE6, 0xF6], {}),
-    # Supposedly matches BN-74/3101-01 for Polish (cannot verify)
+    # BN-74/3101-01 for Polish (not verified but close to IBM one below)
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
     "polish": ([None, (0x7A, 0x200D, 0x142), 
                             0x119, 0x17A, None, 0x144, 0x15B, None, 
                             0x105, 0xF3, 0x142, 0x17C, 0x107], {}),
+    # BN-74/3101-01 variant projected from DP94-range subset of EBCDIC code page 252
+    # Violation of ECMA-6:1991: 0x27 is not (strictly) '.
+    "polish/ibm": ([None, 0xA4, 0x119, 0x17A, 0x141, 0x144, 0x15B, None, 
+                                0x105, 0xF3, 0x142, 0x17C, 0x107], {0x27: 0xB4}),
+    # Compromise of the two above
+    "polish/full": ([None, 0xA4, 0x119, 0x17A, 0x141, 0x144, 0x15B, None, 
+                                 0x105, 0xF3, 0x142, 0x17C, 0x107], {}),
     # Supposed Maltese version (cannot verify)
     "maltese": ([None, None, None,  0x121, 0x17C, 0x127, None, None, 
                              0x10B, 0x120, 0x17B, 0x126, 0x10A], {}),
