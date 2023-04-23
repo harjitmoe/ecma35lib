@@ -166,8 +166,7 @@ graphdata.rhses["869"] = parsers.read_single_byte("ICU/ibm-869_P100-1995.ucm")
 # Macintosh code page
 graphdata.rhses["10006"] = graphdata.rhses["1280"] = parsers.read_mozilla_ut_file("Mozilla/macgreek.ut")
 
-# TODO: Greek Teletext, ir181 (Technical), ir031 (ISO 5428:1976, incompatible with ISO 5428:1980),
-#   ir050 (INIS Greek non-homoglyphs)
+# TODO: Greek Teletext
 
 # Symbol (ibm-1038)
 graphdata.gsets["symbolgl"] = (94, 1, parsers.read_single_byte("UTC/symbol.txt", typ="GL94"))
