@@ -147,11 +147,12 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR ? G*D4 $ :`|7-bit Polish, ostensibly (unverified) following BN-74/3101-01|
 |`IRR 0 G*D4 $ :`|7-bit Polish, following the DP94-range subset (GL set) of EBCDIC code page 252|
 |`IRR 1 G*D4 $ :`|7-bit Polish, compromise between the two above (default for these I/F bytes)|
-|`G*D4 $ ;`|ISO 11822:1996 Arabic supplementary set|
+|`IRR ? G*D4 $ ;`|ISO 11822:1996 Arabic supplementary set|
+|`IRR 0 G*D4 $ ;`|MARC-8 Extended Arabic|
 |`G*D4 $ <`|ISO 10586:1996 Georgian|
 |`G*D4 $ =`|ISO 10585:1996 Armenian|
 |`G*D4 $ >`|MARC-8 Hebrew|
-|`G*D4 $ ?`|MARC-8 Extended Arabic|
+|~~`G*D4 $ ?`~~|~~MARC-8 Extended Arabic~~|
 |`G*D4 % 0`|MARC-8 subscript numbers|
 |`G*D4 % 1`|MARC-8 superscript numbers|
 |`G*D4 % 2`|7-bit British, based on IBM WP96|

@@ -170,11 +170,10 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"$8"): "maltese",
             tuple(b"$9"): ("icelandic", ("icelandic/ibm",), ("icelandic",)),
             tuple(b"$:"): ("polish/full", ("polish/ibm", "polish/full"), ("polish",)),
-            tuple(b"$;"): "ir224",
+            tuple(b"$;"): ("ir224", ("ir224/marc",), ("ir224",)), # Note: MARC itself uses b"4"
             tuple(b"$<"): "ir222",
             tuple(b"$="): "ir221",
             tuple(b"$>"): "marc-he", # Note: MARC itself uses b"2"
-            tuple(b"$?"): "marc-ar-ext", # Note: MARC itself uses b"4"
             tuple(b"%0"): "marc-subscript",
             tuple(b"%1"): "marc-superscript",
             tuple(b"%2"): "ibmbritish",
