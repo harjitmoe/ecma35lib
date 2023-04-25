@@ -111,7 +111,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
                           (), # Private versions
                           ("ir072", "ir173")), # Original followed by any registered revisions, each of which must be superset of the previous
             tuple(b"e"): "ir068",
-            tuple(b"f"): "ir069",
+            tuple(b"f"): ("ir069", ("ir069/ibmmaghreb",), ("ir069",)),
             tuple(b"g"): ("ir084", ("ir084/dec",), ("ir084",)),
             tuple(b"h"): "ir085",
             tuple(b"i"): "ir086",
@@ -179,10 +179,11 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"%2"): "ibmbritish",
             tuple(b"%3"): "ibmbrazil",
             tuple(b"%4"): "ibmquebec",
-            tuple(b"%5"): "ibmdanish",
-            tuple(b"%6"): "ibmswedish",
+            tuple(b"%5"): ("ibmdanish/euro", ("ibmdanish/euro",), ("ibmdanish",)),
+            tuple(b"%6"): ("ibmswedish/euro", ("ibmswedish/euro",), ("ibmswedish",)),
             tuple(b"%7"): "ibmportugal",
             tuple(b"%8"): "ibmturkish",
+            tuple(b"%9"): "ibm38xx",
             tuple(b"~"): "nil"}
 
 g96bytes = {tuple(b"@"): "ir111",

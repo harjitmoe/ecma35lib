@@ -152,6 +152,10 @@ raw_variants = {
     # NF Z 62-010:1982 (new version French)
     "ir069": ([0xA3, None, 0xE0, 0xB0, 0xE7, 0xA7, None, None, 
                            0xB5, 0xE9, 0xF9, 0xE8, 0xA8], {}),
+    # Extraction from DP94 set of EBCDIC code page 421 (ir069 with µ/£ swap, à→á, ù→ú)
+    # Violation of ECMA-6:1991: 0x23 is not # or £.
+    "ir069/ibmmaghreb": ([0xB5, None, 0xE1, 0xB0, 0xE7, 0xA7, None, None, 
+                                      0xA3, 0xE9, 0xFA, 0xE8, 0xA8], {}),
     # IBM Portugese
     "ir084": ([None, None, 0xB4, 0xC3, 0xC7, 0xD5, None, None, 
                            None, 0xE3, 0xE7, 0xF5, None], {}),
@@ -317,11 +321,21 @@ raw_variants = {
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
     "ibmdanish": ([0xC6, 0xC5, 0xD8, 0x23, None, 0xA4, None, None,
                                None, 0xE6, 0xF8, 0xE5, 0xFC], {}),
+    # Extraction from DP94 set of EBCDIC code page 1142
+    # Violation of ECMA-6:1991: 0x23 is not # or £.
+    # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
+    "ibmdanish/euro": ([0xC6, 0xC5, 0xD8, 0x23, None, 0x20AC, None, None,
+                                    None, 0xE6, 0xF8, 0xE5,   0xFC], {}),
     # Extraction from DP94 set of EBCDIC code page 278
     # Violation of ECMA-6:1991: 0x23 is not # or £.
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
     "ibmswedish": ([0xC4, 0xC5, 0xD6, 0xA7, 0xC9, 0xA4, None, None,
                                 0xE9, 0xE4, 0xF6, 0xE5, 0xFC], {}),
+    # Extraction from DP94 set of EBCDIC code page 1143
+    # Violation of ECMA-6:1991: 0x23 is not # or £.
+    # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
+    "ibmswedish/euro": ([0xC4, 0xC5, 0xD6, 0xA7, 0xC9, 0x20AC, None, None,
+                                     0xE9, 0xE4, 0xF6, 0xE5,   0xFC], {}),
     # Extraction from DP94 set of EBCDIC code page 282
     # Violation of ECMA-6:1991: 0x23 is not # or £.
     "ibmportugal": ([0xC3, None, 0xD5, None, 0xC7, None, None, None,
@@ -332,6 +346,9 @@ raw_variants = {
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
     "ibmturkish": ([0xD6, 0x0130, 0x015E, 0xC7, 0xFC,   0x011E, None, None,
                                   0x0131, 0xE7, 0x015F, 0x011F, 0xF6], {0x22: 0xDC}),
+    # Extraction from DP94 set of EBCDIC code page 361
+    "ibm38xx": ([None, None, None, None, None, None, 0xAC, None,
+                             -1,   None, None, None, -1], {}),
 }
 
 for (name, (myvars, override)) in raw_variants.items():
