@@ -113,6 +113,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 0 G*D4 q`|JIS X 9010 backslash-only set for JIS X 9008, mapping to OCR DOUBLE BACKSLASH.|
 |`IRR 0 G*D4 ! B`|DEC NRCS, invariant subset|
 |`IRR 1 G*D4 ! B`|ETS 300 706 Latin G0, invariant subset|
+|`IRR 2 G*D4 ! B`|IBM version of the invariant set|
 |`IRR ? G*D4 ! E`|ANSEL supplementary set, ANSI standard version (i.e. no eszett)|
 |`IRR 0 G*D4 ! E`|ANSEL supplementary set, Library of Congress version (i.e. eszett at 0x47)|
 |`IRR 1 G*D4 ! E`|ANSEL supplementary set, combined Library of Congress and Genealogical Society of Utah versions, i.e. duplicate eszetts at 0x47 and 0x4F (default for this F-byte)|

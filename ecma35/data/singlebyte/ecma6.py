@@ -203,7 +203,7 @@ raw_variants = {
     "ir151": ([None, 0xA4, None, 0xA1, 0xD1, None, 0xBF, None, 
                            None, 0xB4, 0xF1, 0x5B, 0xA8], {}),
     # Invariant subset of ECMA-6
-    "ir170": ([-1, -1, -1, -1, -1, -1, -1, 0x5F, 
+    "ir170": ([-1, -1, -1, -1, -1, -1, -1, None, 
                        -1, -1, -1, -1, -1], {}),
     # Invariant subset of DEC NRCS
     # Violation of ECMA-6:1991: 0x5F is omitted.
@@ -213,6 +213,10 @@ raw_variants = {
     # Violation of ECMA-6:1991: 0x5F is omitted.
     "ir170/ets": ([-1, -1, -1, -1, -1, -1, -1, -1, 
                            -1, -1, -1, -1, -1], {}),
+    # IBM's version of the invariant set
+    # Violation of ECMA-6:1991: 0x21 is omitted.
+    "ir170/ibm": ([-1, -1, -1, -1, -1, -1, -1, None, 
+                           -1, -1, -1, -1, -1], {0x21: -1}),
     # I.S. 433 (Irish Gaelic)
     "ir207": ([0xA3, None, 0xD3, 0xC9, 0xCD, 0xDA, 0xC1, None, 
                            0xF3, 0xE9, 0xED, 0xFA, 0xE1], {}),

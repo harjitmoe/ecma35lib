@@ -139,7 +139,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"}"): "ir147",
             tuple(b"!@"): "ir150",
             tuple(b"!A"): "ir151",
-            tuple(b"!B"): ("ir170", ("ir170/dec", "ir170/ets"), ("ir170",)),
+            tuple(b"!B"): ("ir170", ("ir170/dec", "ir170/ets", "ir170/ibm"), ("ir170",)),
             tuple(b"!C"): "ir207",
             tuple(b"!D"): "ir230",
             tuple(b"!E"): ("ir231/full", ("ir231/marc", "ir231/full"), ("ir231",)),
