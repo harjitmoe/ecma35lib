@@ -96,12 +96,19 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 0 G*D4 O`|DIN 31624, falling thru to T.51 for unallocated cells|
 |`IRR ? G*D4 P`|ISO 5426-1, bibliographic set related to (but incompatible with) T.51|
 |`IRR 0 G*D4 P`|ISO 5426-1, falling thru to T.51 for unallocated cells|
-|`IRR 0 G*D4 R`|Variant Belgian French based on IBM DP94|
-|`IRR 1 G*D4 R`|Variant Belgian French based on IBM WP96|
+|`IRR ? G*D4 R`|NF Z 62-010 (7-bit French), 1973 edition (also used by DEC)|
+|`IRR 0 G*D4 R`|Variant 7-bit French based on IBM DP94 for Belgian French|
+|`IRR 1 G*D4 R`|Variant 7-bit French based on IBM WP96 for Belgian French|
+|`IRR 2 G*D4 R`|Variant 7-bit French based on IBM 38xx for Belgian French|
 |`IRR 0 G*D4 Y`|ETS 300 706 Latin G0 for Italy|
+|`IRR 1 G*D4 Y`|7-bit Italian with not-sign|
 |``IRR 0 G*D4 ` ``|DEC alternate NRCS for Denmark and Norway|
 |``IRR 1 G*D4 ` ``|Danish equivalent to NS 4551 (IBM's 1017)|
 |``IRR 2 G*D4 ` ``|Variant Denmark and Norway based on IBM WP96|
+|`IRR ? G*D4 f`|NF Z 62-010 (7-bit French), 1982 edition|
+|`IRR 0 G*D4 f`|Variant 7-bit French based on IBM encodings for Maghrebi French|
+|`IRR 1 G*D4 f`|Variant 7-bit French based on IBM 38xx encoding|
+|`IRR 2 G*D4 f`|Variant 7-bit French based on IBM DCF Migration encoding|
 |`IRR ? G*D4 k`|ASMO 449 (ISO 9036) 7-bit Arabic|
 |`IRR 0 G*D4 k`|MARC-8 Basic Arabic|
 |`IRR ? G*D4 l`|ITU T.51-1988 first supplementary set (i.e. older version of the T.51 supplementary set without NBSP, SHY, not sign or brvbar)|
@@ -157,12 +164,16 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 % 0`|MARC-8 subscript numbers|
 |`G*D4 % 1`|MARC-8 superscript numbers|
 |`G*D4 % 2`|7-bit British, based on IBM WP96|
-|`G*D4 % 3`|7-bit Brazilian Portugese, based on IBM DP94|
+|`IRR ? G*D4 % 3`|7-bit Brazilian Portugese, based on IBM DP94|
+|`IRR 0 G*D4 % 3`|7-bit Brazilian Portugese, based on IBM 38xx|
 |`G*D4 % 4`|7-bit Canadian French, based on IBM DP94|
-|`G*D4 % 5`|7-bit Danish and Norwegian, based on IBM DP94|
-|`G*D4 % 6`|7-bit Swedish and Finnish, based on IBM DP94|
+|`IRR ? G*D4 % 5`|7-bit Danish and Norwegian, based on IBM DP94|
+|`IRR 0 G*D4 % 5`|7-bit Danish and Norwegian with Euro, based on IBM DP94|
+|`IRR ? G*D4 % 6`|7-bit Swedish and Finnish, based on IBM DP94|
+|`IRR 0 G*D4 % 6`|7-bit Swedish and Finnish with Euro, based on IBM DP94|
 |`G*D4 % 7`|7-bit European Portugese, based on IBM DP94|
 |`G*D4 % 8`|7-bit Turkish, based on IBM DP94|
+|`G*D4 % 9`|7-bit Roman, based on IBM 38xx|
 |`IRR ? G*D6 J`|ITU T.51 supplementary set for use with old IRV (excludes universal currency sign and hash)|
 |`IRR 0 G*D6 J`|Complete ITU T.51 supplementary set (same as `IRR 0 G*D6 R`; default for this F-byte)|
 |`IRR ? G*D6 R`|ITU T.51 supplementary set for use with ASCII (excludes dollar and hash)|

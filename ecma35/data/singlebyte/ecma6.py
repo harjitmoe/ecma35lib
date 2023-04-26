@@ -87,6 +87,9 @@ raw_variants = {
     # Violation of ECMA-6:1991: 0x5F is not _.
     "ir015/ets": ([0xA3, None, 0xE9, 0xB0, 0xE7, 0x2192, 0x2191, 0x2317, 
                                0xF9, 0xE0, 0xF2, 0xE8,   0xEC], {}),
+    # Projection from DP94-range subset of EBCDIC code page 389 (=ir015 but with ¬ not ^)
+    "ir015/notsign": ([0xA3, None, 0xA7, 0xB0, 0xE7, 0xE9, 0xAC, None, 
+                                   0xF9, 0xE0, 0xF2, 0xE8, 0xEC], {}),
     # Olivetti Portugese
     "ir016": ([None, None, 0xA7, 0xC3, 0xC7, 0xD5, None, None, 
                            None, 0xE3, 0xE7, 0xF5, 0xB0], {}),
@@ -101,6 +104,9 @@ raw_variants = {
     # Violation of ECMA-6:1991: 0x27 is not (strictly) '.
     "ir021/acute": ([None, None, 0xA7, 0xC4, 0xD6, 0xDC, None, None, 
                            None, 0xE4, 0xF6, 0xFC, 0xDF], {0x27: 0xB4}),
+    # Projection from DP94-range subset of EBCDIC code page 382
+    "ir021/ibm38xx": ([None, None, 0xA7, 0xC4, 0xD6, 0xDC, 0xAC, None, 
+                                   -1,   0xE4, 0xF6, 0xFC, 0xDF], {}),
     # NF Z 62-010:1973 (old or DEC version French)
     "ir025": ([0xA3, None, 0xE0, 0xB0, 0xE7, 0xA7, None, None, 
                            None, 0xE9, 0xF9, 0xE8, 0xA8], {}),
@@ -110,6 +116,9 @@ raw_variants = {
     # Projection from DP94-range subset of EBCDIC code page 9
     "ir025/ibmbelgianwp": ([None, None, 0xE0, 0xB0, 0xE7, 0xA7, None, None, 
                                         0xA3, 0xE9, 0xF9, 0xE8, 0xA8], {}),
+    # Projection from DP94-range subset of EBCDIC code page 383
+    "ir025/ibmbelgian38xx": ([None, None, 0xE0, None, 0xE7, None, 0xAC, None, 
+                                          -1,   0xE9, 0xF9, 0xE8, -1], {}),
     # Honeywell-Bull's "mixed" Latin-Greek
     # Violation of ECMA-6:1991: 0x21 is not !.
     # Violation of ECMA-6:1991: 0x23 is not # or £.
@@ -152,10 +161,16 @@ raw_variants = {
     # NF Z 62-010:1982 (new version French)
     "ir069": ([0xA3, None, 0xE0, 0xB0, 0xE7, 0xA7, None, None, 
                            0xB5, 0xE9, 0xF9, 0xE8, 0xA8], {}),
-    # Extraction from DP94 set of EBCDIC code page 421 (ir069 with µ/£ swap, à→á, ù→ú)
+    # Extraction from DP94-range subset of EBCDIC code page 421 (ir069 with µ/£ swap, à→á, ù→ú)
     # Violation of ECMA-6:1991: 0x23 is not # or £.
     "ir069/ibmmaghreb": ([0xB5, None, 0xE1, 0xB0, 0xE7, 0xA7, None, None, 
                                       0xA3, 0xE9, 0xFA, 0xE8, 0xA8], {}),
+    # Extraction from DP94-range subset of EBCDIC code page 388
+    "ir069/ibm38xx": ([0xA3, None, 0xE0, 0xB0, 0xE7, 0xA7, 0xAC, None, 
+                                   -1,   0xE9, 0xF9, 0xE8, -1], {}),
+    # Extraction from DP94-range subset of EBCDIC code page 2059
+    "ir069/ibmdcf": ([None, None, 0xE0, 0xB0, 0xE7, 0xA7, 0xAC, None, 
+                                  -1,   0xE9, 0xF9, 0xE8, -1], {}),
     # IBM Portugese
     "ir084": ([None, None, 0xB4, 0xC3, 0xC7, 0xD5, None, None, 
                            None, 0xE3, 0xE7, 0xF5, None], {}),
@@ -313,6 +328,11 @@ raw_variants = {
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
     "ibmbrazil": ([0xD5, 0xC7, 0xC3, 0xC9, None, 0x24, None, None,
                                0xE3, 0xF5, 0xE7, 0xE9, None], {}),
+    # Extraction from DP94 set of EBCDIC code page 384
+    # Violation of ECMA-6:1991: 0x23 is not # or £.
+    # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
+    "ibmbrazil/38xx": ([0xD5, 0xC7, 0xC3, 0xC9, None, 0x24, 0xAC, None,
+                                    0xE3, 0xF5, 0xE7, 0xE9, -1], {}),
     # Extraction from DP94 set of EBCDIC code page 260 or 276
     "ibmquebec": ([None, None, None, 0xE0, 0xB8, 0xB4, None, None,
                                None, 0xE9, 0xF9, 0xE8, 0xA8], {}),
@@ -346,9 +366,15 @@ raw_variants = {
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
     "ibmturkish": ([0xD6, 0x0130, 0x015E, 0xC7, 0xFC,   0x011E, None, None,
                                   0x0131, 0xE7, 0x015F, 0x011F, 0xF6], {0x22: 0xDC}),
-    # Extraction from DP94 set of EBCDIC code page 361
+    # Extraction from DP94-range subset of EBCDIC code page 361
     "ibm38xx": ([None, None, None, None, None, None, 0xAC, None,
                              -1,   None, None, None, -1], {}),
+    # Extraction from DP94-range subset of EBCDIC code page 423
+    "ibmusedwithgreek": ([0xA3, None, 0xA7, None, 0xB0, None, None, None,
+                                      None, 0xB8, None, 0xB4, 0xA8], {}),
+    # Extraction from DP94-range subset of EBCDIC code page 410
+    "ibmusedwithcyrillic": ([None, None, None, None, None, None, None, None,
+                                         0xA7, 0xA4, None, 0xB2, 0xB3], {}),
 }
 
 for (name, (myvars, override)) in raw_variants.items():
