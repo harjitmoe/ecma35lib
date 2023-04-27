@@ -96,6 +96,10 @@ raw_variants = {
     # Projection from DP94-range subset of EBCDIC code page 389 (=ir015 but with ¬ not ^)
     "ir015/notsign": ([0xA3, None, 0xA7, 0xB0, 0xE7, 0xE9, 0xAC, None, 
                                    0xF9, 0xE0, 0xF2, 0xE8, 0xEC], {}),
+    # Projection from DP94-range subset of EBCDIC code page 2060
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    "ir015/ibmdcf": ([None, None, None, 0xB0, None, 0xE9, 0xAC, None, 
+                                  0xF9, 0xE0, 0xF2, 0xE8, 0xEC], {0x21: 0x7C}),
     # Olivetti Portugese
     "ir016": ([None, None, 0xA7, 0xC3, 0xC7, 0xD5, None, None, 
                            None, 0xE3, 0xE7, 0xF5, 0xB0], {}),
@@ -390,6 +394,108 @@ raw_variants = {
     # Projection from DP94-range subset of EBCDIC code page 2056
     "alt646/ibmdcfbelgium": ([None, None, None,   None, None, None, None, None,
                                           0x25A0, None, 0xA6, None, 0x2070], {}),
+    #
+    # Projection from DP94-range subset of EBCDIC code page 1303
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    "alt646/ibmbarcode": ([None, None, None, -1,   None, 0x21, -1, None, 
+                                       None, None, -1,   None, None], {0x21: 0x2503}),
+    # Projection from DP94-range subset of EBCDIC code page 1002
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    "alt646/ibmdcf": ([None, None, None, 0xA2, None, 0x21, 0xAC, None, 
+                                   -1,   -1,   -1,   -1,   -1], {0x21: 0x7C}),
+    # Projection from DP94-range subset of EBCDIC code page 1068
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    "alt646/ibmdcf/braces": ([None, None, None, 0xA2, None, 0x21, 0xAC, None, 
+                                          -1,   None, -1,   None, -1], {0x21: 0x7C}),
+    # Projection from DP94-range subset of EBCDIC code page 1003
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    "alt646/ibmdcf/degreesign": ([None, None, None, 0xA2, None, 0x21, 0xAC, None, 
+                                              -1,   -1,   -1,   -1,   0xB0], {0x21: 0x7C}),
+    # Projection from DP94-range subset of EBCDIC code page 39
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
+    "alt646/ibmisrael": ([None, 0xA3, None, 0x24, 0xBD, 0x21, 0xB5, None, 
+                                      0xB1, 0xB2, 0x5D, 0xB3, 0xB0], {0x21: 0x5B}),
+    # Projection from DP94-range subset of EBCDIC code page 298
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    "alt646/ibmjapan": ([None, None, None, 0xA2, 0xA5, 0x21, 0xAC, None, 
+                                     None, None, 0xA6, None, None], {0x21: 0x7C}),
+    # Projection from DP94-range subset of EBCDIC code page 1027
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    "alt646/ibmjapan/noyen": ([None, None, None, 0xA2, None, 0x21, 0xAC, None, 
+                                           None, None, -1,   None, None], {0x21: 0x7C}),
+    # Projection from DP94-range subset of EBCDIC code page 281
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
+    "alt646/ibmjapan/swapyen": ([None, 0xA5, None, 0xA3, 0x24, 0x21, 0xAC, None, 
+                                             None, None, 0xA6, None, 0x203E], {0x21: 0x7C}),
+    # Projection from DP94-range subset of EBCDIC code page 833
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    "alt646/ibmkorea": ([None, None, None, 0xA2, 0x20A9, 0x21, 0xAC, None, 
+                                     None, None, 0xA6,   None, None], {0x21: 0x7C}),
+    # Projection from DP94-range subset of EBCDIC code page 9025
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    "alt646/ibmkorea/small": ([None, None, None, -1,   0x20A9, 0x21, -1, None, 
+                                           None, None, -1,     None, None], {0x21: 0x7C}),
+    # Projection from DP94-range subset of EBCDIC code page 2105
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    "alt646/ibmlcs": ([None, None, None, 0xA2, -1, 0x21, 0xAC, None, 
+                                   -1,   -1,   -1, -1,   0xB0], {0x21: 0x7C}),
+    # Projection from DP94-range subset of EBCDIC code page 6201
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    "alt646/ibmlcs/big": ([None, None, None, 0xA2, None, 0x21, 0xAC, None, 
+                                       -1,   -1,   0xA6, -1,   0xB0], {0x21: 0x7C}),
+    # Projection from DP94-range subset of EBCDIC code page 284
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    # Violation of ECMA-6:1991: 0x23 is not # or £.
+    "alt646/ibmspanish": ([0xD1, None, None, None, None, None, 0xAC, None, 
+                                       None, None, 0xF1, None, 0xA8], {0x21: 0x7C}),
+    # Projection from DP94-range subset of EBCDIC code page 392
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    # Violation of ECMA-6:1991: 0x23 is not # or £.
+    "alt646/ibmspanish/38xx": ([0xD1, None, None, None, None, None, 0xAC, None, 
+                                      -1,   None, 0xF1, None, -1], {0x21: 0x7C}),
+    # Projection from DP94-range subset of EBCDIC code page 283
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    # Violation of ECMA-6:1991: 0x23 is not # or £.
+    # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
+    "alt646/ibmspanish/peseta": ([0xD1, 0x20A7, None, None, None, None, 0xAC, None, 
+                                                None, None, 0xF1, None, 0xA8], {0x21: 0x7C}),
+    # Projection from DP94-range subset of EBCDIC code page 285
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
+    "alt646/ibmuk": ([None, 0xA3, None, 0x24, None, 0x21, 0xAC, None, 
+                                  None, None, 0xA6, None, 0x203E], {0x21: 0x7C}),
+    # Projection from DP94-range subset of EBCDIC code page 2116
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
+    "alt646/ibmuk/dcf": ([None, 0xA3, None, 0x24, None, 0x21, 0xAC, None, 
+                                      -1,   -1,   -1,   -1,   -1], {0x21: 0x7C}),
+    # Projection from DP94-range subset of EBCDIC code page 37
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    "alt646/ibmusa": ([None, None, None, 0xA2, None, 0x21, 0xAC, None, 
+                                   None, None, 0xA6, None, None], {0x21: 0x7C}),
+    # Projection from DP94-range subset of EBCDIC code page 24613
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    "alt646/ibmusa/asciinohatsqb": ([None, None, None, -1,   None, 0x21, -1, None, 
+                                                 None, None, -1,   None, None], {0x21: 0x7C}),
+    # Projection from DP94-range subset of EBCDIC code page 5413
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    "alt646/ibmusa/asciinosqb": ([None, None, None, -1,   None, 0x21, None, None, 
+                                              None, None, -1,   None, None], {0x21: 0x7C}),
+    # Projection from DP94-range subset of EBCDIC code page 1047
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    "alt646/ibmusa/hat": ([None, None, None, 0xA2, None, 0x21, None, None, 
+                                       None, None, 0xA6, None, None], {0x21: 0x7C}),
+    # Projection from DP94-range subset of EBCDIC code page 32805
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    "alt646/ibmusa/tiny": ([None, None, None, -1,   -1, 0x21, -1, None, 
+                                        None, None, -1, None, -1], {0x21: 0x7C}),
+    # Projection from DP94-range subset of EBCDIC code page 9028
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
+    "alt646/ibmschsmall": ([None, -1, None, -1,   0x24, 0x21, -1, None, 
+                                      None, None, -1,   None, -1], {0x21: 0x7C}),
 }
 
 for (name, (myvars, override)) in raw_variants.items():

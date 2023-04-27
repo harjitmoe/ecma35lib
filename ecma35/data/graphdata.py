@@ -96,7 +96,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"V"): "ir047",
             tuple(b"W"): "ir049",
             tuple(b"X"): "ir031",
-            tuple(b"Y"): ("ir015", ("ir015/ets", "ir015/notsign"), ("ir015",)),
+            tuple(b"Y"): ("ir015", ("ir015/ets", "ir015/notsign", "ir015/ibmdcf"), ("ir015",)),
             tuple(b"Z"): "ir017",
             tuple(b"["): "ir018",
             tuple(b"\\"): "ir019",
@@ -176,15 +176,13 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"$<"): "ir222",
             tuple(b"$="): "ir221",
             tuple(b"$>"): "marc-he", # Note: MARC itself uses b"2"
-            tuple(b"%0"): "marc-subscript",
+            # %0 collides with VTx
             tuple(b"%1"): "marc-superscript",
-            tuple(b"%2"): "alt646/ibmbritish",
-            tuple(b"%3"): ("alt646/ibmbrazil", ("alt646/ibmbrazil/38xx",), ("alt646/ibmbrazil",)),
+            # %2 collides with VTx
+            # %3 collides with VTx
             tuple(b"%4"): "alt646/ibmquebec",
-            tuple(b"%5"): ("alt646/ibmdanish/euro", ("alt646/ibmdanish/euro",), ("alt646/ibmdanish",)),
-            tuple(b"%6"): ("alt646/ibmswedish/euro", 
-                           ("alt646/ibmswedish/euro",), 
-                           ("alt646/ibmswedish",)),
+            # %5 collides with VTx
+            # %6 collides with VTx
             tuple(b"%7"): "alt646/ibmportugal",
             tuple(b"%8"): "alt646/ibmturkish",
             tuple(b"%9"): "alt646/ibm38xx",
@@ -195,6 +193,25 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
                            ("alt646/ibmusedwithcyrillic/small",),
                            ("alt646/ibmusedwithcyrillic",)),
             tuple(b"%<"): "alt646/ibmdcfbelgium",
+            # %= collides with VTx
+            tuple(b"%>"): ("alt646/ibmdcf", ("alt646/ibmdcf/braces", "alt646/ibmdcf/degreesign"), ("alt646/ibmdcf",)),
+            tuple(b"%?"): "alt646/ibmisrael",
+            tuple(b"&0"): ("alt646/ibmjapan", ("alt646/ibmjapan/noyen", "alt646/ibmjapan/swapyen"), ("alt646/ibmjapan",)),
+            tuple(b"&1"): ("alt646/ibmkorea", ("alt646/ibmkorea/small",), ("alt646/ibmkorea",)),
+            tuple(b"&2"): ("alt646/ibmlcs/big", ("alt646/ibmlcs/big",), ("alt646/ibmlcs",)),
+            tuple(b"&3"): "alt646/ibmschsmall",
+            # &4, &5 would collide with VTx
+            tuple(b"&6"): ("alt646/ibmspanish", ("alt646/ibmspanish/38xx", "alt646/ibmspanish/peseta"), ("alt646/ibmspanish",)),
+            tuple(b"&7"): ("alt646/ibmuk", ("alt646/ibmuk/dcf",), ("alt646/ibmuk",)),
+            tuple(b"&8"): ("alt646/ibmusa", ("alt646/ibmusa/asciinohatsqb", "alt646/ibmusa/asciinosqb", "alt646/ibmusa/hat", "alt646/ibmusa/tiny"), ("alt646/ibmusa",)),
+            tuple(b"&9"): "marc-subscript",
+            tuple(b"&:"): "alt646/ibmbritish",
+            tuple(b"&;"): ("alt646/ibmbrazil", ("alt646/ibmbrazil/38xx",), ("alt646/ibmbrazil",)),
+            tuple(b"&<"): ("alt646/ibmdanish/euro", ("alt646/ibmdanish/euro",), ("alt646/ibmdanish",)),
+            tuple(b"&="): ("alt646/ibmswedish/euro", 
+                           ("alt646/ibmswedish/euro",), 
+                           ("alt646/ibmswedish",)),
+            tuple(b"&>"): "alt646/ibmbarcode",
             tuple(b"~"): "nil"}
 
 g96bytes = {tuple(b"@"): "ir111",
