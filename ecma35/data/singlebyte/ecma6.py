@@ -82,10 +82,10 @@ raw_variants = {
     "ir014/tilde": ([None, None, None, None, 0xA5, None, None, None, 
                                  None, None, None, None, None], {}),
     # KS X 1003 / G0 set of non-ASCII EUC-KR (KS-Roman, KSC-Roman)
-    "ksroman": ([None, None, None, None, 0x20A9, None, None, None, 
-                             None, None, None, None, 0x203E], {}),
-    "ksromantilde": ([None, None, None, None, 0x20A9, None, None, None, 
-                                  None, None, None, None, None], {}),
+    "alt646/ksroman": ([None, None, None, None, 0x20A9, None, None, None, 
+                                    None, None, None, None, 0x203E], {}),
+    "alt646/ksroman/tilde": ([None, None, None, None, 0x20A9, None, None, None, 
+                                          None, None, None, None, None], {}),
     # Olivetti Italian
     "ir015": ([0xA3, None, 0xA7, 0xB0, 0xE7, 0xE9, None, None, 
                            0xF9, 0xE0, 0xF2, 0xE8, 0xEC], {}),
@@ -249,147 +249,147 @@ raw_variants = {
     # DEC NRCS for Switzerland; IBM's 1021
     # Violation of ECMA-6:1991: 0x23 is not # or £.
     # Violation of ECMA-6:1991: 0x5F is not _.
-    "decswiss": ([0xF9, None, 0xE0, 0xE9, 0xE7, 0xEA, 0xEE, 0xE8, 
-                              0xF4, 0xE4, 0xF6, 0xFC, 0xFB], {}),
+    "alt646/decswiss": ([0xF9, None, 0xE0, 0xE9, 0xE7, 0xEA, 0xEE, 0xE8, 
+                                     0xF4, 0xE4, 0xF6, 0xFC, 0xFB], {}),
     # DEC NRCS for the Netherlands; IBM's 1102
-    "decdutch": ([0xA3, None, 0xBE, 0x133, 0xBD, 0x7C, None, None, 
-                              None, 0xA8, 0x192, 0xBC, 0xB4], {}),
+    "alt646/decdutch": ([0xA3, None, 0xBE, 0x133, 0xBD, 0x7C, None, None, 
+                                     None, 0xA8, 0x192, 0xBC, 0xB4], {}),
     # Supposed Icelandic version (close to IBM one below)
-    "icelandic": ([None, 0xA4, 0xD0, 0xDE, None, 0xC6, 0xD6, None, 
-                               0xF0, 0xFE, None, 0xE6, 0xF6], {}),
+    "alt646/icelandic": ([None, 0xA4, 0xD0, 0xDE, None, 0xC6, 0xD6, None, 
+                                      0xF0, 0xFE, None, 0xE6, 0xF6], {}),
     # Projection from DP94 set of EBCDIC code page 871
-    "icelandic/ibm": ([None, None, 0xD0, 0xDE, 0xB4, 0xC6, 0xD6, None, 
-                                   0xF0, 0xFE, 0xA6, 0xE6, 0xF6], {}),
+    "alt646/icelandic/ibm": ([None, None, 0xD0, 0xDE, 0xB4, 0xC6, 0xD6, None, 
+                                          0xF0, 0xFE, 0xA6, 0xE6, 0xF6], {}),
     # BN-74/3101-01 for Polish (not verified but close to IBM one below)
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
-    "polish": ([None, (0x7A, 0x200D, 0x142), 
+    "alt646/polish": ([None, (0x7A, 0x200D, 0x142), 
                             0x119, 0x17A, None, 0x144, 0x15B, None, 
                             0x105, 0xF3, 0x142, 0x17C, 0x107], {}),
     # BN-74/3101-01 variant projected from DP94-range subset of EBCDIC code page 252
     # Violation of ECMA-6:1991: 0x27 is not (strictly) '.
-    "polish/ibm": ([None, 0xA4, 0x119, 0x17A, 0x141, 0x144, 0x15B, None, 
-                                0x105, 0xF3, 0x142, 0x17C, 0x107], {0x27: 0xB4}),
+    "alt646/polish/ibm": ([None, 0xA4, 0x119, 0x17A, 0x141, 0x144, 0x15B, None, 
+                                       0x105, 0xF3, 0x142, 0x17C, 0x107], {0x27: 0xB4}),
     # Compromise of the two above
-    "polish/full": ([None, 0xA4, 0x119, 0x17A, 0x141, 0x144, 0x15B, None, 
-                                 0x105, 0xF3, 0x142, 0x17C, 0x107], {}),
+    "alt646/polish/full": ([None, 0xA4, 0x119, 0x17A, 0x141, 0x144, 0x15B, None, 
+                                        0x105, 0xF3, 0x142, 0x17C, 0x107], {}),
     # Supposed Maltese version (cannot verify)
-    "maltese": ([None, None, None,  0x121, 0x17C, 0x127, None, None, 
-                             0x10B, 0x120, 0x17B, 0x126, 0x10A], {}),
+    "alt646/maltese": ([None, None, None,  0x121, 0x17C, 0x127, None, None, 
+                                    0x10B, 0x120, 0x17B, 0x126, 0x10A], {}),
     ##
     # Roman G0 set of ETS 300 706 for French
     # Violation of ECMA-6:1991: 0x23 is not # or £.
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
     # Violation of ECMA-6:1991: 0x5F is not _.
-    "etsfrench": ([0xE9, 0xEF, 0xE0, 0xEB, 0xEA, 0xF9, 0xEE, 0x2317, 
-                               0xE8, 0xE2, 0xF4, 0xFB, 0xE7], {}),
+    "alt646/etsfrench": ([0xE9, 0xEF, 0xE0, 0xEB, 0xEA, 0xF9, 0xEE, 0x2317, 
+                                      0xE8, 0xE2, 0xF4, 0xFB, 0xE7], {}),
     # Roman G0 set of ETS 300 706 for Spain and Portugal
     # Violation of ECMA-6:1991: 0x23 is not # or £.
     # Violation of ECMA-6:1991: 0x5F is not _.
-    "etsiberian": ([0xE7, None, 0xA1, 0xE1, 0xE9, 0xED, 0xF3, 
-                          0xFA, 0xBF, 0xFC, 0xF1, 0xE8, 0xE0], {}),
+    "alt646/etsiberian": ([0xE7, None, 0xA1, 0xE1, 0xE9, 0xED, 0xF3, 
+                                 0xFA, 0xBF, 0xFC, 0xF1, 0xE8, 0xE0], {}),
     # Roman G0 set of ETS 300 706 for Estonia
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
     # Violation of ECMA-6:1991: 0x5F is not _.
-    "etsestonian": ([None, 0xF5, 0x160, 0xC4, 0xD6, 0x17D, 0xDC, 
-                           0xD5, 0x161, 0xE4, 0xF6, 0x17E, 0xFC], {}),
+    "alt646/etsestonian": ([None, 0xF5, 0x160, 0xC4, 0xD6, 0x17D, 0xDC, 
+                                  0xD5, 0x161, 0xE4, 0xF6, 0x17E, 0xFC], {}),
     # Roman G0 set of ETS 300 706 for Lithuania and Latvia
     # Violation of ECMA-6:1991: 0x5F is not _.
-    "etsbaltic": ([None, None, 0x160, 0x117, 0x119, 0x17D, 0x10D, 0x16B, 
-                               0x161, 0x105, 0x173, 0x17E, 0x12F], {}),
+    "alt646/etsbaltic": ([None, None, 0x160, 0x117, 0x119, 0x17D, 0x10D, 0x16B, 
+                                      0x161, 0x105, 0x173, 0x17E, 0x12F], {}),
     # Roman G0 set of ETS 300 706 for West South Slavic languages
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤ (except in the alternate version).
     # Violation of ECMA-6:1991: 0x5F is not _.
-    "etsgajica": ([None, 0xCB, 0x10C, 0x106, 0x17D, 0x110, 0x160,
-                         0xEB, 0x10D, 0x107, 0x17E, 0x111, 0x161], {}),
-    "etsgajicadollar": ([None, None, 0x10C, 0x106, 0x17D, 0x110, 0x160,
-                               0xEB, 0x10D, 0x107, 0x17E, 0x111, 0x161], {}),
+    "alt646/etsgajica": ([None, 0xCB, 0x10C, 0x106, 0x17D, 0x110, 0x160,
+                                0xEB, 0x10D, 0x107, 0x17E, 0x111, 0x161], {}),
+    "alt646/etsgajica/dollar": ([None, None, 0x10C, 0x106, 0x17D, 0x110, 0x160,
+                                       0xEB, 0x10D, 0x107, 0x17E, 0x111, 0x161], {}),
     # Roman G0 set of ETS 300 706 for Czech and Slovak
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤ (except in the alternate version).
     # Violation of ECMA-6:1991: 0x5F is not _.
-    "etsczechoslovak": ([None, 0x16F, 0x10D, 0x165, 0x17E, 0xFD, 0xED,
-                               0x159, 0xE9,  0xE1,  0x11B, 0xFA, 0x161], {}),
+    "alt646/etsczechoslovak": ([None, 0x16F, 0x10D, 0x165, 0x17E, 0xFD, 0xED,
+                                      0x159, 0xE9,  0xE1,  0x11B, 0xFA, 0x161], {}),
     # Roman G0 set of ETS 300 706 for Polish
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
     # Violation of ECMA-6:1991: 0x5F is not _.
-    "etspolish": ([None, 0x144, 0x105, (0x7A, 0x200D, 0x142), 
+    "alt646/etspolish": ([None, 0x144, 0x105, (0x7A, 0x200D, 0x142), 
                                               0x15A, 0x141, 0x107, 0xF3, 
                                 0x119, 0x17C, 0x15B, 0x142, 0x17A], {}),
     # Roman G0 set of ETS 300 706 for Romanian
     # Violation of ECMA-6:1991: 0x5F is not _.
-    "etsromanian": ([None, 0xA4, 0x21A, 0xC2, 0x218, 0x102, 0xCE, 0x131, 
-                                 0x21B, 0xE2, 0x219, 0x103, 0xEE], {}),
+    "alt646/etsromanian": ([None, 0xA4, 0x21A, 0xC2, 0x218, 0x102, 0xCE, 0x131, 
+                                        0x21B, 0xE2, 0x219, 0x103, 0xEE], {}),
     # Roman G0 set of ETS 300 706 for Turkish
     # Violation of ECMA-6:1991: 0x23 is not # or £.
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
     # Violation of ECMA-6:1991: 0x5F is not _.
-    "etsturkish": ([(0x54, 0x200D, 0x4C), 
+    "alt646/etsturkish": ([(0x54, 0x200D, 0x4C), 
                           0x11F, 0x130, 0x15E, 0xD6, 0xC7, 0xDC,
                           0x11E, 0x131, 0x15F, 0xF6, 0xE7, 0xFC], {}),
     ##
     # Projection from DP94-range subset of EBCDIC code page 24
-    "ibmbritish": ([0xA3, None, None, None, 0xBD, None, 0xB5, None,
-                                0xB1, 0xB2, 0x23, 0xB3, 0xB0], {}),
+    "alt646/ibmbritish": ([0xA3, None, None, None, 0xBD, None, 0xB5, None,
+                                       0xB1, 0xB2, 0x23, 0xB3, 0xB0], {}),
     # Projection from DP94 set of EBCDIC code page 275
     # Violation of ECMA-6:1991: 0x23 is not # or £.
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
-    "ibmbrazil": ([0xD5, 0xC7, 0xC3, 0xC9, None, 0x24, None, None,
-                               0xE3, 0xF5, 0xE7, 0xE9, None], {}),
+    "alt646/ibmbrazil": ([0xD5, 0xC7, 0xC3, 0xC9, None, 0x24, None, None,
+                                      0xE3, 0xF5, 0xE7, 0xE9, None], {}),
     # Projection from DP94 set of EBCDIC code page 384
     # Violation of ECMA-6:1991: 0x23 is not # or £.
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
-    "ibmbrazil/38xx": ([0xD5, 0xC7, 0xC3, 0xC9, None, 0x24, 0xAC, None,
-                                    0xE3, 0xF5, 0xE7, 0xE9, -1], {}),
+    "alt646/ibmbrazil/38xx": ([0xD5, 0xC7, 0xC3, 0xC9, None, 0x24, 0xAC, None,
+                                           0xE3, 0xF5, 0xE7, 0xE9, -1], {}),
     # Projection from DP94 set of EBCDIC code page 260 or 276
-    "ibmquebec": ([None, None, None, 0xE0, 0xB8, 0xB4, None, None,
-                               None, 0xE9, 0xF9, 0xE8, 0xA8], {}),
+    "alt646/ibmquebec": ([None, None, None, 0xE0, 0xB8, 0xB4, None, None,
+                                      None, 0xE9, 0xF9, 0xE8, 0xA8], {}),
     # Projection from DP94 set of EBCDIC code page 277
     # Violation of ECMA-6:1991: 0x23 is not # or £.
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
-    "ibmdanish": ([0xC6, 0xC5, 0xD8, 0x23, None, 0xA4, None, None,
-                               None, 0xE6, 0xF8, 0xE5, 0xFC], {}),
+    "alt646/ibmdanish": ([0xC6, 0xC5, 0xD8, 0x23, None, 0xA4, None, None,
+                                      None, 0xE6, 0xF8, 0xE5, 0xFC], {}),
     # Projection from DP94 set of EBCDIC code page 1142
     # Violation of ECMA-6:1991: 0x23 is not # or £.
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
-    "ibmdanish/euro": ([0xC6, 0xC5, 0xD8, 0x23, None, 0x20AC, None, None,
-                                    None, 0xE6, 0xF8, 0xE5,   0xFC], {}),
+    "alt646/ibmdanish/euro": ([0xC6, 0xC5, 0xD8, 0x23, None, 0x20AC, None, None,
+                                           None, 0xE6, 0xF8, 0xE5,   0xFC], {}),
     # Projection from DP94 set of EBCDIC code page 278
     # Violation of ECMA-6:1991: 0x23 is not # or £.
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
-    "ibmswedish": ([0xC4, 0xC5, 0xD6, 0xA7, 0xC9, 0xA4, None, None,
-                                0xE9, 0xE4, 0xF6, 0xE5, 0xFC], {}),
+    "alt646/ibmswedish": ([0xC4, 0xC5, 0xD6, 0xA7, 0xC9, 0xA4, None, None,
+                                       0xE9, 0xE4, 0xF6, 0xE5, 0xFC], {}),
     # Projection from DP94 set of EBCDIC code page 1143
     # Violation of ECMA-6:1991: 0x23 is not # or £.
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
-    "ibmswedish/euro": ([0xC4, 0xC5, 0xD6, 0xA7, 0xC9, 0x20AC, None, None,
-                                     0xE9, 0xE4, 0xF6, 0xE5,   0xFC], {}),
+    "alt646/ibmswedish/euro": ([0xC4, 0xC5, 0xD6, 0xA7, 0xC9, 0x20AC, None, None,
+                                            0xE9, 0xE4, 0xF6, 0xE5,   0xFC], {}),
     # Projection from DP94 set of EBCDIC code page 282
     # Violation of ECMA-6:1991: 0x23 is not # or £.
-    "ibmportugal": ([0xC3, None, 0xD5, None, 0xC7, None, None, None,
-                                 None, 0xE3, 0xF5, 0xB4, 0xE7], {}),
+    "alt646/ibmportugal": ([0xC3, None, 0xD5, None, 0xC7, None, None, None,
+                                        None, 0xE3, 0xF5, 0xB4, 0xE7], {}),
     # Projection from DP94 set of EBCDIC code page 322, 905, 1026, 1155 or 1175
     # Violation of ECMA-6:1991: 0x22 is not ".
     # Violation of ECMA-6:1991: 0x23 is not # or £.
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
-    "ibmturkish": ([0xD6, 0x0130, 0x015E, 0xC7, 0xFC,   0x011E, None, None,
-                                  0x0131, 0xE7, 0x015F, 0x011F, 0xF6], {0x22: 0xDC}),
+    "alt646/ibmturkish": ([0xD6, 0x0130, 0x015E, 0xC7, 0xFC,   0x011E, None, None,
+                                         0x0131, 0xE7, 0x015F, 0x011F, 0xF6], {0x22: 0xDC}),
     # Projection from DP94-range subset of EBCDIC code page 361
-    "ibm38xx": ([None, None, None, None, None, None, 0xAC, None,
-                             -1,   None, None, None, -1], {}),
+    "alt646/ibm38xx": ([None, None, None, None, None, None, 0xAC, None,
+                                    -1,   None, None, None, -1], {}),
     # Projection from DP94-range subset of EBCDIC code page 423
-    "ibmusedwithgreek": ([0xA3, None, 0xA7, None, 0xB0, None, None, None,
-                                      None, 0xB8, None, 0xB4, 0xA8], {}),
+    "alt646/ibmusedwithgreek": ([0xA3, None, 0xA7, None, 0xB0, None, None, None,
+                                             None, 0xB8, None, 0xB4, 0xA8], {}),
     # Projection from DP94-range subset of EBCDIC code page 4519
-    "ibmusedwithgreek/small": ([0xA3, None, 0xA7, None, 0xB0, None, None, None,
-                                            None, 0xB8, -1,   0xB4, 0xA8], {}),
+    "alt646/ibmusedwithgreek/small": ([0xA3, None, 0xA7, None, 0xB0, None, None, None,
+                                                   None, 0xB8, -1,   0xB4, 0xA8], {}),
     # Projection from DP94-range subset of EBCDIC code page 410
-    "ibmusedwithcyrillic": ([None, None, None, None, None, None, None, None,
-                                         0xA7, 0xA4, None, 0xB2, 0xB3], {}),
+    "alt646/ibmusedwithcyrillic": ([None, None, None, None, None, None, None, None,
+                                                0xA7, 0xA4, None, 0xB2, 0xB3], {}),
     # Projection from DP94-range subset of EBCDIC code page 4976
-    "ibmusedwithcyrillic/small": ([None, None, None, None, None, None, 0x2303, None,
-                                               -1,   -1,   None, -1,   -1], {}),
+    "alt646/ibmusedwithcyrillic/small": ([None, None, None, None, None, None, 0x2303, None,
+                                                      -1,   -1,   None, -1,   -1], {}),
     # Projection from DP94-range subset of EBCDIC code page 2056
-    "ibmdcfbelgium": ([None, None, None,   None, None, None, None, None,
-                                   0x25A0, None, 0xA6, None, 0x2070], {}),
+    "alt646/ibmdcfbelgium": ([None, None, None,   None, None, None, None, None,
+                                          0x25A0, None, 0xA6, None, 0x2070], {}),
 }
 
 for (name, (myvars, override)) in raw_variants.items():
