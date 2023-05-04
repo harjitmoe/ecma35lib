@@ -63,10 +63,11 @@ gsetflags = collections.defaultdict(set)
 c0graphics = {}
 rhses = {}
 defgsets = {}
+rhsflags = collections.defaultdict(set)
 
 # Note: has to be imported after gsets &co are defined
 from ecma35.data.multibyte import korea, japan, guobiao, traditional
-from ecma35.data.singlebyte import ecma6, extlatin, c0substs, dingbats, quoocs_ngwx, ccitt, cyrillic, semitic, greek, indic, otherscript
+from ecma35.data.singlebyte import ecma6, extlatin, c0substs, dingbats, quoocs_ngwx, ccitt, cyrillic, semitic, greek, indic, otherscript, splitebcdic
 
 g94bytes = {tuple(b"@"): ("ir002", # Preferred version
                           ("ir002/tilde",), # Private versions
@@ -200,7 +201,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"&1"): ("alt646/ibmkorea", ("alt646/ibmkorea/small",), ("alt646/ibmkorea",)),
             tuple(b"&2"): ("alt646/ibmlcs/big", ("alt646/ibmlcs/big",), ("alt646/ibmlcs",)),
             tuple(b"&3"): "alt646/ibmschsmall",
-            # &4, &5 would collide with VTx
+            # &4 (KOI-8 94-set GR set), &5 (Short-KOI) would collide with VTx
             tuple(b"&6"): ("alt646/ibmspanish", ("alt646/ibmspanish/38xx", "alt646/ibmspanish/peseta"), ("alt646/ibmspanish",)),
             tuple(b"&7"): ("alt646/ibmuk", ("alt646/ibmuk/dcf",), ("alt646/ibmuk",)),
             tuple(b"&8"): ("alt646/ibmusa", ("alt646/ibmusa/asciinohatsqb", "alt646/ibmusa/asciinosqb", "alt646/ibmusa/hat", "alt646/ibmusa/tiny"), ("alt646/ibmusa",)),

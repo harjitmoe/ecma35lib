@@ -14,7 +14,21 @@ def decode_invocations(stream, state):
     single_token = None
     single_need = 0
     single_area = None
+    start_of_ge = False
     for token in stream:
+        if start_of_ge:
+            if token[0] in workingsets and token[2] in ("GL", "GR"):
+                single_area = token[2]
+                single_set = (2 if single_area == "GL" else 3)
+                single_need = graphdata.gsets[state.cur_gsets[single_set]][1]
+                if not single_need:
+                    yield ("ERROR", "INDETERMSINGLE", token)
+                    single_set = -1
+            else:
+                single_set = 2 # will get set to -1 in next part
+            start_of_ge = False
+            # (Fall through to next part.)
+        #
         if single_set >= 0:
             expected = (single_area,) if single_area else ("GL", "GR")
             if token[0] in workingsets and token[2] in expected:
@@ -36,10 +50,16 @@ def decode_invocations(stream, state):
         # Since no GL or GR opcodes will remain, this won't break anything.
         # NOT elif (so byte after truncated single shift sequence isn't swallowed):
         if token[0] == "CTRL" and token[1] in ("SI", "LS0"):
-            state.glset = 0
+            if state.docsmode == "ebcdic" and token[1] == "SI":
+                state.in_ebcdic_dbcs_mode = False
+            else:
+                state.glset = 0
             yield token
         elif token[0] == "CTRL" and token[1] in ("SO", "LS1"):
-            state.glset = 1
+            if state.docsmode == "ebcdic" and token[1] == "SO":
+                state.in_ebcdic_dbcs_mode = True
+            else:
+                state.glset = 1
             yield token
         elif token[0] == "CTRL" and token[1] == "LS2":
             state.glset = 2
@@ -79,6 +99,9 @@ def decode_invocations(stream, state):
             if not single_need:
                 yield ("ERROR", "INDETERMSINGLE", token)
                 single_set = -1
+        elif token[0] == "CTRL" and token[1] == "GE":
+            single_token = token
+            start_of_ge = True
         elif token[0] == "DESIG":
             yield token
             state.is_96[token[1]] = (token[2] not in ("94", "94n"))

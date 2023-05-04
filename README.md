@@ -74,6 +74,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`DOCS 5`|Big Five (lead byte range `0xA1-0xFC`)|
 |`DOCS 6`|HangulTalk|
 |`DOCS / 5`|Standard Compression Scheme for Unicode (SCSU). Was previously `DOCS / 0`; changed to avoid conflict with use of `DOCS / 0` by X11 Compound Text.|
+|`DOCS / 6`|EBCDIC.|
 
 ## Additional single-byte G-sets, and additional selectors for particular variants of single-byte G-sets
 
@@ -430,13 +431,13 @@ following sequences can be used to change this:
   mapping to ISO/IEC 10646, not to ISO/IEC 10367 or 8859, so combining marks aren't a problem.
 - All graphical sets (besides Blissymbolics) with registered escapes.
 - Backspace composition sequences.
+- Support for EBCDIC as a DOCS set.
 
 # Still to do
 
 - More general RHS sets.
 - Support for JOHAB as a DOCS set.
 - Support for LMBCS as a DOCS set.
-- Support for EBCDIC as a DOCS set, with the addition of 190 and 190^n sets implied by this.
 - Dynamically allocating sets, IRR codes, DOCS codes (e.g. Shift_JIS) in some configurable way.
 - Functionality of CSI, CEX, C1 _et cetera_ controls.
   - Rich or annotated output of some sort.
