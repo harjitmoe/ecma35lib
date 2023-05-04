@@ -31,10 +31,28 @@ ebcdicdocs = ("DOCS", True, (0x36,))
 def decode_ebcdic(stream, state):
     workingsets = ("G0", "G1", "G2", "G3")
     dbcs_lead = None
+    seeking_65th_control_code = None
     for token in stream:
         if dbcs_lead and (token[0] != "WORD" or state.docsmode != "ebcdic"):
             yield ("ERROR", "DBEBCDICTRUNCATE", dbcs_lead)
             dbcs_lead = None
+            # Fall through.
+        #
+        if seeking_65th_control_code:
+            if state.docsmode == "ebcdic" and token[0] == "WORD":
+                if token[1] <= 0x40:
+                    yield ("ERROR", "SEEK65THNOTVALID", (seeking_65th_control_code, token))
+                    seeking_65th_control_code = None
+                    # Fall through
+                else:
+                    yield ("SET65THCONTROL", token[1])
+                    state.ebcdic_65th_control_code = token[1]
+                    seeking_65th_control_code = None
+                    continue
+            else:
+                yield ("ERROR", "SEEK65THTRUNCATE", seeking_65th_control_code)
+                seeking_65th_control_code = None
+                # Fall through.
         #
         if (token[0] == "DOCS"):
             if token == ebcdicdocs:
@@ -51,11 +69,20 @@ def decode_ebcdic(stream, state):
                 state.c0_graphics_mode = 1
                 state.in_ebcdic_dbcs_mode = False # Gets set by special-casing in invocations module
                 state.ebcdic_dbcs = "nil"
+                state.ebcdic_65th_control_code = 0xFF
             else:
                 yield token
+        elif state.docsmode == "ebcdic" and token == ("ESC", None, (), 0x30):
+            # Private use sequence, make use of it for setting the 65th control code position
+            seeking_65th_control_code = token
         elif state.docsmode == "ebcdic" and token[0] == "WORD":
             assert (token[1] < 0x100), token
-            conv_byte = conv_map[token[1]]
+            if token[1] == 0xFF:
+                conv_byte = conv_map[state.ebcdic_65th_control_code]
+            elif token[1] == state.ebcdic_65th_control_code:
+                conv_byte = conv_map[0xFF]
+            else:
+                conv_byte = conv_map[token[1]]
             if conv_byte < 0x20 or 0x7F <= conv_byte < 0xA0:
                 assert state.c0_graphics_mode in (1, 2, 4), state.c0_graphics_mode
                 if (state.c0_graphics_mode == 1) or token[1] == 0x1B or (

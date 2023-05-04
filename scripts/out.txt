@@ -57,7 +57,7 @@ Pa∫sive Voice 𠠆剑 £20😀😁😂😃😄😅😆😇😈😉😊😋😌
 
 ?Foo￼???¥a~?????/?/??“?? ~¥”￼￼￼????㎏¥
 Wenn ich nur nichts von Nachwelt hören sollte. Gesetzt daß ich von Nachwelt reden wollte, Wer machte denn der Mitwelt Spaß? o︠o︡ o︢o︣
-Hello 𐡌𐡔ﬣ　⍝≡[1B][25][40][48][41][48][41][5F][41][53][5F][49][46][A1]￼
+Hello 𐡌𐡔ﬣ　⍝≡￼¬￼¬￼[1B][25][40][48][41][48][41][5F][41][53][5F][49][46][A1]￼
 
 [('RDOCS', 'ECMA-35', False, (64,)),
  ('CSISEQ',
@@ -3006,6 +3006,11 @@ Hello 𐡌𐡔ﬣ　⍝≡[1B][25][40][48][41][48][41][5F][41][53][5F][49][46][A
  ('CTRL', 'SI', 'ir001', 15, 'C0', 'CL'),
  ('CHAR', 9053, 'gr310', (83,), 'G3', 'SSGR'),
  ('CHAR', 8801, 'gl310', (60,), 'G2', 'SSGL'),
+ ('CTRL', 'EO', 'c1ebcdic', 31, 'C1', 'CR'),
+ ('CHAR', 172, 'alt646/ibmusa', (62,), 'G0', 'GL'),
+ ('SET65THCONTROL', 95),
+ ('CHAR', 172, 'alt646/ibmusa', (62,), 'G0', 'GL'),
+ ('CTRL', 'EO', 'c1ebcdic', 31, 'C1', 'CR'),
  ('RDOCS', 'ECMA-35', False, (64,)),
  ('RDOCS', 'RAW', True, (66,)),
  ('RAWBYTE', 27),
