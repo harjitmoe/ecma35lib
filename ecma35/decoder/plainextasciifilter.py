@@ -102,6 +102,9 @@ def decode_plainextascii(stream, state):
             yield ("CHCP", codepage)
         elif state.docsmode == "plainextascii" and token[0] == "CSISEQ" and token[1] == "DECSDPT":
             # Select Digital Printed Data Type, also part of DEC's IBM ProPrinter emulation.
+            # Note: IBM documents "ESC X'7E08'", i.e. `ESC ~ BS`, as Print All Characters; this
+            #   is not conformant with ECMA-35's use of ESC, unlike the DEC sequence:
+            # https://web.archive.org/web/20160317081202/http://www-01.ibm.com/software/globalization/cp/cp01042.html
             if token[2] == (0x34,): # 4: Print All Characters
                 state.c0_graphics_mode = 4
                 yield ("C0GRAPH", 4)
