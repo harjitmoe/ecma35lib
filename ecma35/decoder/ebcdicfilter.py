@@ -17,10 +17,16 @@
 #   mappings for EBCDIC control codes made in 1986 (U+009F maps to EO at 0xFF now, not NSP at 0xE1).
 #   With the exception of the business with 0xE1, this is a simple sequential mapping of GR to the
 #   non-DP94 ranges.
-# Note also that EBCDIC encodings of the 65th Control Code other than 0xE1 and 0xFF exist: the XHCS
+# Note also that EBCDIC encodings of the 65th control code other than 0xE1 and 0xFF exist: the XHCS
 #   manual from Siemens/Fujitsu lists (non-IBM) EBCDIC code pages that freely assign 0xFF to normal
 #   graphical chars without batting an eyelid, although they generally have at least one
-#   unassignable position (usually but not always including 0x5F) elsewhere in the graphical region.
+#   unassignable position (usually but not always including 0x5F) elsewhere in the graphical region:
+#     https://bs2manuals.ts.fujitsu.com/download/manual/3085.5
+#   In these cases, U+009F does indeed map to 0x5F (not to 0xE1 or 0xFF):
+#     https://www.iana.org/assignments/charset-reg/OSD-EBCDIC-DF04-1
+# For this reason, the position of the 65th control code (U+009F) is made configurable below; the
+#   mapping itself is in given in terms of 0xFF as a sensible default (applicable to post-1986 code
+#   page 37, for example).
 conv_map = [0, 1, 2, 3, 156, 9, 134, 127, 151, 141, 142, 11, 12, 13, 14, 15, 16, 17, 18, 19, 157, 133, 8, 135, 24, 25, 146, 143, 28, 29, 30, 31, 128, 129, 130, 131, 132, 10, 23, 27, 136, 137, 138, 139, 140, 5, 6, 7, 144, 145, 22, 147, 148, 149, 150, 4, 152, 153, 154, 155, 20, 21, 158, 26, 32, 160, 161, 162, 163, 164, 165, 166, 167, 168, 91, 46, 60, 40, 43, 33, 38, 169, 170, 171, 172, 173, 174, 175, 176, 177, 93, 36, 42, 41, 59, 94, 45, 47, 178, 179, 180, 181, 182, 183, 184, 185, 124, 44, 37, 95, 62, 63, 186, 187, 188, 189, 190, 191, 192, 193, 194, 96, 58, 35, 64, 39, 61, 34, 195, 97, 98, 99, 100, 101, 102, 103, 104, 105, 196, 197, 198, 199, 200, 201, 202, 106, 107, 108, 109, 110, 111, 112, 113, 114, 203, 204, 205, 206, 207, 208, 209, 126, 115, 116, 117, 118, 119, 120, 121, 122, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 123, 65, 66, 67, 68, 69, 70, 71, 72, 73, 232, 233, 234, 235, 236, 237, 125, 74, 75, 76, 77, 78, 79, 80, 81, 82, 238, 239, 240, 241, 242, 243, 92, 255, 83, 84, 85, 86, 87, 88, 89, 90, 244, 245, 246, 247, 248, 249, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 250, 251, 252, 253, 254, 159]
 
 import sys
