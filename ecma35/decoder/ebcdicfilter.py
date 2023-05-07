@@ -69,8 +69,8 @@ def decode_ebcdic(stream, state):
                 state.cur_c1 = "c1ebcdic"
                 state.glset = 0
                 state.grset = 1
-                state.cur_rhs = "37"
-                state.cur_gsets = list(graphdata.defgsets[state.cur_rhs])
+                state.cur_ebcdic = "37"
+                state.cur_gsets = list(graphdata.defgsets[state.cur_ebcdic])
                 state.is_96 = [graphdata.gsets[i][0] > 94 for i in state.cur_gsets]
                 state.c0_graphics_mode = 1
                 state.in_ebcdic_dbcs_mode = False # Gets set by special-casing in invocations module
@@ -100,7 +100,7 @@ def decode_ebcdic(stream, state):
                     else:
                         yield ("C0", conv_byte, "CL")
                 elif conv_byte >= 0x80:
-                    c1replset = state.cur_rhs
+                    c1replset = state.cur_ebcdic
                     ccindex = 0x21 + conv_byte - 0x80
                     if c1replset not in graphdata.c0graphics or len(
                             graphdata.c0graphics[c1replset]) <= ccindex:
@@ -112,7 +112,7 @@ def decode_ebcdic(stream, state):
                     else:
                         yield ("C1", conv_byte - 0x80, "CR")
                 else:
-                    c0replset = state.cur_rhs
+                    c0replset = state.cur_ebcdic
                     if c0replset not in graphdata.c0graphics:
                         c0replset = "437"
                     c0repl = graphdata.c0graphics[c0replset][
@@ -157,8 +157,8 @@ def decode_ebcdic(stream, state):
         elif state.docsmode == "ebcdic" and token[0] == "CSISEQ" and token[1] == "DECSPPCS":
             # DEC Select [IBM] ProPrinter Character Set, i.e. CSI sequence for basically chcp.
             codepage = bytes(token[2]).decode("ascii")
-            state.cur_rhs = codepage
-            state.cur_gsets = list(graphdata.defgsets[state.cur_rhs])
+            state.cur_ebcdic = codepage
+            state.cur_gsets = list(graphdata.defgsets[state.cur_ebcdic])
             state.is_96 = [graphdata.gsets[i][0] > 94 for i in state.cur_gsets]
             yield ("CHCP", codepage)
         elif state.docsmode == "ebcdic" and token[0] == "CSISEQ" and token[1] == "DECSDPT":
