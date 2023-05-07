@@ -101,14 +101,16 @@ def decode_ebcdic(stream, state):
                         yield ("C0", conv_byte, "CL")
                 elif conv_byte >= 0x80:
                     c1replset = state.cur_rhs
-                    if c1replset not in graphdata.rhses:
-                        yield ("CHAR?", c1replset, (conv_byte - 0x80,), "RHS", "RHS")
+                    ccindex = 0x21 + conv_byte - 0x80
+                    if c1replset not in graphdata.c0graphics or len(
+                            graphdata.c0graphics[c1replset]) <= ccindex:
+                        yield ("C1", conv_byte - 0x80, "CR")
                         continue
-                    c1repl = graphdata.rhses[c1replset][conv_byte - 0x80]
+                    c1repl = graphdata.c0graphics[c1replset][ccindex]
                     if c1repl is not None:
                         yield ("CHAR", c1repl, c1replset, (conv_byte,), "RHS", "RHS")
                     else:
-                        yield ("C1", conv_byte - 0x80, "CL")
+                        yield ("C1", conv_byte - 0x80, "CR")
                 else:
                     c0replset = state.cur_rhs
                     if c0replset not in graphdata.c0graphics:
@@ -156,9 +158,7 @@ def decode_ebcdic(stream, state):
             # DEC Select [IBM] ProPrinter Character Set, i.e. CSI sequence for basically chcp.
             codepage = bytes(token[2]).decode("ascii")
             state.cur_rhs = codepage
-            state.cur_gsets = list(graphdata.defgsets[state.cur_rhs
-                                                      if state.cur_rhs in graphdata.defgsets
-                                                      else "437"])
+            state.cur_gsets = list(graphdata.defgsets[state.cur_rhs])
             state.is_96 = [graphdata.gsets[i][0] > 94 for i in state.cur_gsets]
             yield ("CHCP", codepage)
         elif state.docsmode == "ebcdic" and token[0] == "CSISEQ" and token[1] == "DECSDPT":
