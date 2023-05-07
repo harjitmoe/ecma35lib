@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2023.
+# By HarJIT in 2023, as a refactor extracting earlier work from various parts of ecma35lib.
+
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import sys
 from ecma35.data import graphdata
