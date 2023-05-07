@@ -1,14 +1,10 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020.
+# By HarJIT in 2019/2020/2023.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
-
-# Switch to ECMA-35 is 01 1B 25 40 in single-byte mode, and 00 1B 00 25 00 40 in "Unicode" mode.
-# In either case, just 1B 25 40 will not switch to ECMA-35, so SCSU is "without standard return".
-scsudocs = ("DOCS", True, (0x35,))
 
 def _get_offset(window):
     if window < 0: # i.e. an astral window (U+10000 or higher)
@@ -28,16 +24,15 @@ _staticoffset = [0x00, 0x80, 0x100, 0x300, 0x2000, 0x2080, 0x2100, 0x3000]
 def decode_scsu(stream, state):
     pending = None
     for token in stream:
-        if (token[0] == "DOCS"):
-            if token == scsudocs:
+        if (token[0] == "RDOCS"):
+            if token[1] == "scsu":
                 state.docsmode = "scsu"
                 state.scsumode = 1
                 state.cur_dynwindows = [0x1, 0xF9, 0x8, 0xC, 0x12, 0xFD, 0xFE, 0xA6]
                 state.cur_windex = 0
                 # Note: is 1 even in "Unicode" mode, because mixed 1-byte controls and 2-byte words
                 state.bytewidth = 1
-            else:
-                yield token
+            yield token
         elif state.docsmode == "scsu" and token[0] == "WORD":
             assert (token[1] < 0x100), token
             if state.scsumode == 1:

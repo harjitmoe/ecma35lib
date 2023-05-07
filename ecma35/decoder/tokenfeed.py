@@ -43,13 +43,14 @@ def process_stream(stream, *, lastfilter=None, **kwargs): # The entry point.
        designations, graphsets, simpleprinter, escsequences, csisequences, controlstrings, \
        rawfilter, unkdocsfilter, ecma35docsfilter, hangulfillers, utf1filter, shiftjisfilter, \
        scsufilter, uhcfilter, gbkfilter, gbhalfcodes, plainextasciifilter, bigfivefilter, \
-       bssequences, ebcdicfilter
-    for f in [_tokenise_stream, ecma35docsfilter.decode_ecma35docs, utf8filter.decode_utf8, 
+       bssequences, ebcdicfilter, docssequences
+    for f in [_tokenise_stream, docssequences.decode_docs_sequences,
+              ecma35docsfilter.decode_ecma35docs, utf8filter.decode_utf8, 
               utf1filter.decode_utf1, shiftjisfilter.decode_shiftjis, utf32filter.decode_utf32, 
-              scsufilter.decode_scsu, uhcfilter.decode_uhc, gbkfilter.decode_gbk, elexfilter.decode_elex,
-              plainextasciifilter.decode_plainextascii, bigfivefilter.decode_bigfive,
-              utf16filter.decode_utf16, ebcdicfilter.decode_ebcdic, rawfilter.decode_raw, 
-              unkdocsfilter.decode_remaining_docs, 
+              scsufilter.decode_scsu, uhcfilter.decode_uhc, gbkfilter.decode_gbk,
+              elexfilter.decode_elex, plainextasciifilter.decode_plainextascii,
+              bigfivefilter.decode_bigfive, ebcdicfilter.decode_ebcdic, utf16filter.decode_utf16, 
+              rawfilter.decode_raw, unkdocsfilter.decode_remaining_docs, 
               #
               designations.decode_designations, 
               gbhalfcodes.decode_gbhalfcodes, controlsets.decode_control_sets, 

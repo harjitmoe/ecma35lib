@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020.
+# By HarJIT in 2020, 2023.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -17,14 +17,11 @@
 import sys
 from ecma35.data import graphdata
 
-plainextasciidocs = ("DOCS", False, (0x33,))
-
 def decode_plainextascii(stream, state):
     workingsets = ("G0", "G1", "G2", "G3")
     for token in stream:
-        if (token[0] == "DOCS"):
-            if token == plainextasciidocs:
-                yield ("RDOCS", "PLAINEXTASCII", token[1], token[2])
+        if (token[0] == "RDOCS"):
+            if token[1] == "plainextascii":
                 state.bytewidth = 1
                 state.docsmode = "plainextascii"
                 state.cur_c0 = "ir001"
@@ -35,8 +32,7 @@ def decode_plainextascii(stream, state):
                 state.cur_gsets = list(graphdata.defgsets[state.cur_rhs])
                 state.is_96 = [graphdata.gsets[i][0] > 94 for i in state.cur_gsets]
                 state.c0_graphics_mode = 1
-            else:
-                yield token
+            yield token
         elif state.docsmode == "plainextascii" and token[0] == "WORD":
             assert (token[1] < 0x100), token
             if token[1] < 0x20 or token[1] == 0x7F:
@@ -94,12 +90,18 @@ def decode_plainextascii(stream, state):
         elif state.docsmode == "plainextascii" and token[0] == "CSISEQ" and token[1] == "DECSPPCS":
             # DEC Select [IBM] ProPrinter Character Set, i.e. CSI sequence for basically chcp.
             codepage = bytes(token[2]).decode("ascii")
-            state.cur_rhs = codepage
-            state.cur_gsets = list(graphdata.defgsets[state.cur_rhs
-                                                      if state.cur_rhs in graphdata.defgsets
-                                                      else "437"])
-            state.is_96 = [graphdata.gsets[i][0] > 94 for i in state.cur_gsets]
-            yield ("CHCP", codepage)
+            if codepage not in graphdata.chcpdocs:
+                yield ("ERROR", "UNRECCHCP", token)
+            elif graphdata.chcpdocs[codepage] == "plainextascii":
+                state.cur_rhs = codepage
+                state.cur_gsets = list(graphdata.defgsets[state.cur_rhs
+                                                          if state.cur_rhs in graphdata.defgsets
+                                                          else "437"])
+                state.is_96 = [graphdata.gsets[i][0] > 94 for i in state.cur_gsets]
+                yield ("CHCP", codepage)
+            else:
+                state.feedback.append(("RDOCS", graphdata.chcpdocs[codepage], None, None))
+                state.feedback.append(token)
         elif state.docsmode == "plainextascii" and token[0] == "CSISEQ" and token[1] == "DECSDPT":
             # Select Digital Printed Data Type, also part of DEC's IBM ProPrinter emulation.
             # Note: IBM documents "ESC X'7E08'", i.e. `ESC ~ BS`, as Print All Characters; this

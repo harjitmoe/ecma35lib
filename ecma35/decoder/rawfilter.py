@@ -1,22 +1,18 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019.
+# By HarJIT in 2019, 2023.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-rawdocs = ("DOCS", True, (0x42,))
-
 def decode_raw(stream, state):
     for token in stream:
-        if (token[0] == "DOCS"):
-            if token == rawdocs:
-                yield ("RDOCS", "RAW", token[1], token[2])
+        if (token[0] == "RDOCS"):
+            if token[1] == "raw":
                 state.bytewidth = 1
                 state.docsmode = "raw"
-            else:
-                yield token
+            yield token
         elif state.docsmode == "raw":
             if token[0] == "ENDSTREAM":
                 yield token

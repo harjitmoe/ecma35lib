@@ -1,15 +1,10 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020.
+# By HarJIT in 2019/2020/2023.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
-
-utf8docs = (("DOCS", False, (0x47,)), # Current (still in ISO/IEC 10646 for UTF-8)
-            ("DOCS", True, (0x47,)),  # Deprecated (UTF-8 level 1)
-            ("DOCS", True, (0x48,)),  # Deprecated (UTF-8 level 2)
-            ("DOCS", True, (0x49,)))  # Current (still in ISO/IEC 10646 for UTF-8)
 
 def decode_utf8(stream, state):
     utf8_brot = []
@@ -22,22 +17,28 @@ def decode_utf8(stream, state):
         except StopIteration:
             break
         reconsume = None
-        if (token[0] == "DOCS"):
+        if token[0] in ("DOCS", "RDOCS"):
             if utf8_brot:
                 yield ("ERROR", "UTF8TRUNC", tuple(utf8_brot))
                 del utf8_brot[:]
-            if token in utf8docs:
-                yield ("RDOCS", "UTF-8", token[1], token[2])
+            if token[0] == "RDOCS" and token[1] == "utf-8":
                 firstchar = True
                 state.bytewidth = 1
                 state.docsmode = "utf-8"
-            else:
-                yield token
+            yield token
         elif state.docsmode == "utf-8":
             if not utf8_brot:
                 if token[0] != "WORD":
                     # ESC passing through
-                    yield token
+                    if token[0] == "CSISEQ" and token[1] == "DECSPPCS":
+                        codepage = bytes(token[2]).decode("ascii")
+                        if codepage not in graphdata.chcpdocs:
+                            yield ("ERROR", "UNRECCHCP", token)
+                        else:
+                            state.feedback.append(("RDOCS", graphdata.chcpdocs[codepage], None, None))
+                            state.feedback.append(token)
+                    else:
+                        yield token
                     continue
                 # Lead byte
                 if token[1] < 0x80:

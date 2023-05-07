@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2023.
+# By HarJIT in 2023 (with some earlier material partly derived from other parts of ecma35lib).
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -32,8 +32,6 @@ conv_map = [0, 1, 2, 3, 156, 9, 134, 127, 151, 141, 142, 11, 12, 13, 14, 15, 16,
 import sys
 from ecma35.data import graphdata
 
-ebcdicdocs = ("DOCS", True, (0x36,))
-
 def decode_ebcdic(stream, state):
     workingsets = ("G0", "G1", "G2", "G3")
     dbcs_lead = None
@@ -60,9 +58,8 @@ def decode_ebcdic(stream, state):
                 seeking_65th_control_code = None
                 # Fall through.
         #
-        if (token[0] == "DOCS"):
-            if token == ebcdicdocs:
-                yield ("RDOCS", "ebcdic", token[1], token[2])
+        if (token[0] == "RDOCS"):
+            if token[1] == "ebcdic":
                 state.bytewidth = 1
                 state.docsmode = "ebcdic"
                 state.cur_c0 = "ir001"
@@ -76,8 +73,7 @@ def decode_ebcdic(stream, state):
                 state.in_ebcdic_dbcs_mode = False # Gets set by special-casing in invocations module
                 state.ebcdic_dbcs = "nil"
                 state.ebcdic_65th_control_code = 0xFF
-            else:
-                yield token
+            yield token
         elif state.docsmode == "ebcdic" and token == ("ESC", None, (), 0x30):
             # Private use sequence, make use of it for setting the 65th control code position
             seeking_65th_control_code = token
@@ -157,10 +153,16 @@ def decode_ebcdic(stream, state):
         elif state.docsmode == "ebcdic" and token[0] == "CSISEQ" and token[1] == "DECSPPCS":
             # DEC Select [IBM] ProPrinter Character Set, i.e. CSI sequence for basically chcp.
             codepage = bytes(token[2]).decode("ascii")
-            state.cur_ebcdic = codepage
-            state.cur_gsets = list(graphdata.defgsets[state.cur_ebcdic])
-            state.is_96 = [graphdata.gsets[i][0] > 94 for i in state.cur_gsets]
-            yield ("CHCP", codepage)
+            if codepage not in graphdata.chcpdocs:
+                yield ("ERROR", "UNRECCHCP", token)
+            elif graphdata.chcpdocs[codepage] == "ebcdic":
+                state.cur_ebcdic = codepage
+                state.cur_gsets = list(graphdata.defgsets[state.cur_ebcdic])
+                state.is_96 = [graphdata.gsets[i][0] > 94 for i in state.cur_gsets]
+                yield ("CHCP", codepage)
+            else:
+                state.feedback.append(("RDOCS", graphdata.chcpdocs[codepage], None, None))
+                state.feedback.append(token)
         elif state.docsmode == "ebcdic" and token[0] == "CSISEQ" and token[1] == "DECSDPT":
             # Select Digital Printed Data Type, also part of DEC's IBM ProPrinter emulation.
             if token[2] == (0x34,): # 4: Print All Characters

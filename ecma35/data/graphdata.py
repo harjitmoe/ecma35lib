@@ -63,11 +63,14 @@ gsetflags = collections.defaultdict(set)
 c0graphics = {}
 rhses = {}
 defgsets = {}
-rhsflags = collections.defaultdict(set)
+chcpdocs = {}
 
 # Note: has to be imported after gsets &co are defined
 from ecma35.data.multibyte import korea, japan, guobiao, traditional
 from ecma35.data.singlebyte import ecma6, extlatin, c0substs, dingbats, quoocs_ngwx, ccitt, cyrillic, semitic, greek, indic, otherscript, splitebcdic
+
+for _i in rhses:
+    chcpdocs.setdefault(_i, "plainextascii")
 
 g94bytes = {tuple(b"@"): ("ir002", # Preferred version
                           ("ir002/tilde",), # Private versions

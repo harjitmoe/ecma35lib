@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019.
+# By HarJIT in 2019, 2023.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 # As defined to this day in ISO-IR-178
-
-utf1docs = ("DOCS", False, (0x42,))
 
 # ISO-IR-178's "U" function used in the *decoder* for UTF-1.
 #  Basically: the GL range (narrowly defined) is mapped to the first 94 values, GR to the next 96.
@@ -36,22 +34,28 @@ def decode_utf1(stream, state):
         except StopIteration:
             break
         reconsume = None
-        if (token[0] == "DOCS"):
+        if token[0] in ("DOCS", "RDOCS"):
             if utf1_brot:
                 yield ("ERROR", "UTF1TRUNC", tuple(utf1_brot))
                 del utf1_brot[:]
-            if token == utf1docs:
-                yield ("RDOCS", "UTF-1", token[1], token[2])
+            if token[0] == "RDOCS" and token[1] == "utf-1":
                 firstchar = True
                 state.bytewidth = 1
                 state.docsmode = "utf-1"
-            else:
-                yield token
+            yield token
         elif state.docsmode == "utf-1":
             if not utf1_brot:
                 if token[0] != "WORD":
                     # ESC passing through
-                    yield token
+                    if token[0] == "CSISEQ" and token[1] == "DECSPPCS":
+                        codepage = bytes(token[2]).decode("ascii")
+                        if codepage not in graphdata.chcpdocs:
+                            yield ("ERROR", "UNRECCHCP", token)
+                        else:
+                            state.feedback.append(("RDOCS", graphdata.chcpdocs[codepage], None, None))
+                            state.feedback.append(token)
+                    else:
+                        yield token
                     continue
                 # Lead byte
                 if token[1] < 0xA0:

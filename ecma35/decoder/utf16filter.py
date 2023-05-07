@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020.
+# By HarJIT in 2019/2020/2023.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -9,13 +9,6 @@
 # Note that this also handles surrogate pairs retrieved by DOCS filters upstream, either as an
 # error case (UTF-8, UTF-1, UTF-32) or as a legitimate part of the respective encodings 
 # (SCSU, LMBCS, UTF-7). Hence, it must be used after most UCS formats (except maybe GB18030).
-
-utf16docs = (("DOCS", True, (0x40,)), # Deprecated (UCS-2 level 1)
-             ("DOCS", True, (0x43,)), # Deprecated (UCS-2 level 2)
-             ("DOCS", True, (0x45,)), # Deprecated (UCS-2 level 3)
-             ("DOCS", True, (0x4A,)), # Deprecated (UTF-16 level 1)
-             ("DOCS", True, (0x4B,)), # Deprecated (UTF-16 level 2)
-             ("DOCS", True, (0x4C,))) # Current (still in ISO/IEC 10646 for UTF-16be)
 
 def decode_utf16(stream, state):
     utf16_lead = None
@@ -27,24 +20,30 @@ def decode_utf16(stream, state):
         except StopIteration:
             break
         reconsume = None
-        if (token[0] == "DOCS"):
+        if token[0] in ("DOCS", "RDOCS"):
             if utf16_lead:
                 yield ("ERROR", "UTF16ISOLATE", utf16_lead)
                 yield ("UCS", utf16_lead, "UTF-16", "WTF-16" + bo) # "Wobbly UTF-16"
                 utf16_lead = None
-            if token in utf16docs:
-                yield ("RDOCS", "UTF-16", token[1], token[2])
+            if token[0] == "RDOCS" and token[1] == "utf-16":
                 state.bytewidth = 2
                 state.endian = state.default_endian
                 firstchar = True
                 state.docsmode = "utf-16"
-            else:
-                yield token
+            yield token
         elif (state.docsmode == "utf-16") or (token[0] in ("CESU", "PAIR")):
             if not utf16_lead:
                 if token[0] not in ("WORD", "CESU", "PAIR"):
                     # ESC passing through
-                    yield token
+                    if token[0] == "CSISEQ" and token[1] == "DECSPPCS":
+                        codepage = bytes(token[2]).decode("ascii")
+                        if codepage not in graphdata.chcpdocs:
+                            yield ("ERROR", "UNRECCHCP", token)
+                        else:
+                            state.feedback.append(("RDOCS", graphdata.chcpdocs[codepage], None, None))
+                            state.feedback.append(token)
+                    else:
+                        yield token
                     continue
                 # Lead word
                 if (token[1] < 0xD800) or (token[1] >= 0xDC00):

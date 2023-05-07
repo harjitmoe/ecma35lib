@@ -1,19 +1,16 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020.
+# By HarJIT in 2019/2020/2023.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-ecma35docs = ("DOCS", False, (0x40,))
-
 def decode_ecma35docs(stream, state):
     workingsets = ("G0", "G1", "G2", "G3")
     for token in stream:
-        if (token[0] == "DOCS"):
-            if token == ecma35docs:
-                yield ("RDOCS", "ECMA-35", token[1], token[2])
+        if (token[0] == "RDOCS"):
+            if token[1] == "ecma-35":
                 state.bytewidth = 1
                 state.docsmode = "ecma-35"
                 state.cur_c0 = "ir001"
@@ -22,8 +19,7 @@ def decode_ecma35docs(stream, state):
                 state.grset = 1
                 state.cur_gsets = ["ir006", "ir100", "nil", "nil"]
                 state.is_96 = [0, 0, 1, 1]
-            else:
-                yield token
+            yield token
         elif state.docsmode == "ecma-35" and token[0] == "WORD":
             assert (token[1] < 0x100), token
             if token[1] < 0x20:
@@ -39,6 +35,18 @@ def decode_ecma35docs(stream, state):
                 yield ("C1", token[1] - 0x80, "CR")
             else:
                 yield (workingsets[state.grset], token[1] - 0xA0, "GR")
+        elif state.docsmode == "ecma-35" and token[0] == "CSISEQ" and token[1] == "DECSPPCS":
+            # DEC Select [IBM] ProPrinter Character Set, i.e. CSI sequence for basically chcp.
+            codepage = bytes(token[2]).decode("ascii")
+            if codepage not in graphdata.chcpdocs:
+                yield ("ERROR", "UNRECCHCP", token)
+            elif graphdata.chcpdocs[codepage] == "ecma-35":
+                state.cur_gsets = list(graphdata.defgsets[codepage])
+                state.is_96 = [graphdata.gsets[i][0] > 94 for i in state.cur_gsets]
+                yield ("CHCP", codepage)
+            else:
+                state.feedback.append(("RDOCS", graphdata.chcpdocs[codepage], None, None))
+                state.feedback.append(token)
         else:
             yield token
         #

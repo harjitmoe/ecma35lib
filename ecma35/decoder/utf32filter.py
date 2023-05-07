@@ -1,31 +1,33 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020.
+# By HarJIT in 2019/2020/2023.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-utf32docs = (("DOCS", True, (0x41,)), # Deprecated (UCS-4 level 1)
-             ("DOCS", True, (0x44,)), # Deprecated (UCS-4 level 2)
-             ("DOCS", True, (0x46,))) # Current (still in ISO/IEC 10646 for UTF-32be)
-
 def decode_utf32(stream, state):
     bomap = {"<": "le", ">": "be"}
     for token in stream:
-        if (token[0] == "DOCS"):
-            if token in utf32docs:
-                yield ("RDOCS", "UTF-32", token[1], token[2])
+        if (token[0] == "RDOCS"):
+            if token[1] == "utf-32":
                 state.bytewidth = 4
                 state.endian = state.default_endian
                 firstchar = True
                 state.docsmode = "utf-32"
-            else:
-                yield token
+            yield token
         elif state.docsmode == "utf-32":
             if token[0] != "WORD":
                 # ESC passing through
-                yield token
+                if token[0] == "CSISEQ" and token[1] == "DECSPPCS":
+                    codepage = bytes(token[2]).decode("ascii")
+                    if codepage not in graphdata.chcpdocs:
+                        yield ("ERROR", "UNRECCHCP", token)
+                    else:
+                        state.feedback.append(("RDOCS", graphdata.chcpdocs[codepage], None, None))
+                        state.feedback.append(token)
+                else:
+                    yield token
                 continue
             if (0xD800 <= token[1] < 0xE000) and state.pedantic_surrogates:
                 yield ("CESU", token[1], "32" + bo)

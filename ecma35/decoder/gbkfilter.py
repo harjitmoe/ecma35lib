@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020.
+# By HarJIT in 2019/2020/2023.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -10,8 +10,6 @@
 
 from ecma35.data import graphdata
 from ecma35.data.multibyte import guobiao
-
-gbkdocs = ("DOCS", False, (0x32,))
 
 def decode_gbk(stream, state):
     workingsets = ("G0", "G1", "G2", "G3")
@@ -23,9 +21,8 @@ def decode_gbk(stream, state):
         except StopIteration:
             break
         reconsume = None
-        if (token[0] == "DOCS"):
-            if token == gbkdocs:
-                yield ("RDOCS", "GBK", token[1], token[2])
+        if (token[0] == "RDOCS"):
+            if token[1] == "gbk":
                 state.bytewidth = 1
                 state.docsmode = "gbk"
                 state.cur_c0 = "ir001"
@@ -34,8 +31,7 @@ def decode_gbk(stream, state):
                 state.grset = 1
                 state.cur_gsets = ["ir006", "ir058/2005", "ir013/euro", "gbk-nonuro-extras-full"]
                 state.is_96 = [0, 0, 0, 0]
-            else:
-                yield token
+            yield token
         elif state.docsmode == "gbk" and token[0] == "WORD":
             assert (token[1] < 0x100), token
             if token[1] < 0x20:

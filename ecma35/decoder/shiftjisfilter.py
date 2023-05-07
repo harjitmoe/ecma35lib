@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020.
+# By HarJIT in 2019/2020/2023.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -9,10 +9,6 @@
 # Note that this works by interpreting Shift_JIS codes as the corresponding EUC-JP codes would
 # have been interpreted; it is therefore possible to make full use of designation sequences to,
 # for example, switch to a certain edition of JIS X 0208, or switch to JIS X 0213 (inc. plane 2).
-
-# The 1B 25 40 sequence will indeed switch to ECMA-35, and cannot occur coincidentally since C0/CL
-# bytes are not used as trail bytes, so it is in fact "with standard return".
-shiftjisdocs = ("DOCS", False, (0x30,))
 
 def decode_shiftjis(stream, state):
     workingsets = ("G0", "G1", "G2", "G3", "G4")
@@ -24,12 +20,11 @@ def decode_shiftjis(stream, state):
         except StopIteration:
             break
         reconsume = None
-        if (token[0] == "DOCS"):
+        if token[0] in ("DOCS", "RDOCS"):
             if sjis_lead:
                 yield ("ERROR", "SJISTRUNC", sjis_lead)
                 sjis_lead = None
-            if token == shiftjisdocs:
-                yield ("RDOCS", "Shift_JIS", token[1], token[2])
+            if token[0] == "RDOCS" and token[1] == "shift_jis":
                 state.bytewidth = 1
                 state.docsmode = "shift_jis"
                 # Sensible-ish defaults (if ir014 is changed to ir006, it would correspond
@@ -38,8 +33,7 @@ def decode_shiftjis(stream, state):
                 state.cur_gsets = ["ir014", "ir168/web", "ir013", "ibmsjisext", None]
                 state.is_96 = [0, 0, 0, 0, 0]
                 state.glset = 0
-            else:
-                yield token
+            yield token
         elif state.docsmode == "shift_jis" and token[0] == "WORD":
             assert (token[1] < 0x100), token
             if sjis_lead is None:
