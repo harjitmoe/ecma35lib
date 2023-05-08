@@ -35,18 +35,11 @@ def decode_ecma35docs(stream, state):
                 yield ("C1", token[1] - 0x80, "CR")
             else:
                 yield (workingsets[state.grset], token[1] - 0xA0, "GR")
-        elif state.docsmode == "ecma-35" and token[0] == "CSISEQ" and token[1] == "DECSPPCS":
-            # DEC Select [IBM] ProPrinter Character Set, i.e. CSI sequence for basically chcp.
-            codepage = bytes(token[2]).decode("ascii")
-            if codepage not in graphdata.chcpdocs:
-                yield ("ERROR", "UNRECCHCP", token)
-            elif graphdata.chcpdocs[codepage] == "ecma-35":
-                state.cur_gsets = list(graphdata.defgsets[codepage])
-                state.is_96 = [graphdata.gsets[i][0] > 94 for i in state.cur_gsets]
-                yield ("CHCP", codepage)
-            else:
-                state.feedback.append(("RDOCS", graphdata.chcpdocs[codepage], None, None))
-                state.feedback.append(token)
+        elif state.docsmode == "ecma-35" and token[0] == "CHCP":
+            codepage = token[1]
+            state.cur_gsets = list(graphdata.defgsets[codepage])
+            state.is_96 = [graphdata.gsets[i][0] > 94 for i in state.cur_gsets]
+            yield token
         else:
             yield token
         #

@@ -35,15 +35,7 @@ def decode_utf16(stream, state):
             if not utf16_lead:
                 if token[0] not in ("WORD", "CESU", "PAIR"):
                     # ESC passing through
-                    if token[0] == "CSISEQ" and token[1] == "DECSPPCS":
-                        codepage = bytes(token[2]).decode("ascii")
-                        if codepage not in graphdata.chcpdocs:
-                            yield ("ERROR", "UNRECCHCP", token)
-                        else:
-                            state.feedback.append(("RDOCS", graphdata.chcpdocs[codepage], None, None))
-                            state.feedback.append(token)
-                    else:
-                        yield token
+                    yield token
                     continue
                 # Lead word
                 if (token[1] < 0xD800) or (token[1] >= 0xDC00):

@@ -150,19 +150,13 @@ def decode_ebcdic(stream, state):
                     yield (workingsets[state.glset], conv_byte - 0x20, "GL")
             else:
                 yield (workingsets[state.grset], conv_byte - 0xA0, "GR")
-        elif state.docsmode == "ebcdic" and token[0] == "CSISEQ" and token[1] == "DECSPPCS":
+        elif state.docsmode == "ebcdic" and token[0] == "CHCP":
             # DEC Select [IBM] ProPrinter Character Set, i.e. CSI sequence for basically chcp.
-            codepage = bytes(token[2]).decode("ascii")
-            if codepage not in graphdata.chcpdocs:
-                yield ("ERROR", "UNRECCHCP", token)
-            elif graphdata.chcpdocs[codepage] == "ebcdic":
-                state.cur_ebcdic = codepage
-                state.cur_gsets = list(graphdata.defgsets[state.cur_ebcdic])
-                state.is_96 = [graphdata.gsets[i][0] > 94 for i in state.cur_gsets]
-                yield ("CHCP", codepage)
-            else:
-                state.feedback.append(("RDOCS", graphdata.chcpdocs[codepage], None, None))
-                state.feedback.append(token)
+            codepage = token[1]
+            state.cur_ebcdic = codepage
+            state.cur_gsets = list(graphdata.defgsets[state.cur_ebcdic])
+            state.is_96 = [graphdata.gsets[i][0] > 94 for i in state.cur_gsets]
+            yield token
         elif state.docsmode == "ebcdic" and token[0] == "CSISEQ" and token[1] == "DECSDPT":
             # Select Digital Printed Data Type, also part of DEC's IBM ProPrinter emulation.
             if token[2] == (0x34,): # 4: Print All Characters

@@ -87,21 +87,14 @@ def decode_plainextascii(stream, state):
                         yield ("CHAR", iucs, state.cur_rhs, (index,), "RHS", "RHS")
                 else:
                     yield ("CHAR", ucs, state.cur_rhs, (index,), "RHS", "RHS")
-        elif state.docsmode == "plainextascii" and token[0] == "CSISEQ" and token[1] == "DECSPPCS":
-            # DEC Select [IBM] ProPrinter Character Set, i.e. CSI sequence for basically chcp.
-            codepage = bytes(token[2]).decode("ascii")
-            if codepage not in graphdata.chcpdocs:
-                yield ("ERROR", "UNRECCHCP", token)
-            elif graphdata.chcpdocs[codepage] == "plainextascii":
-                state.cur_rhs = codepage
-                state.cur_gsets = list(graphdata.defgsets[state.cur_rhs
-                                                          if state.cur_rhs in graphdata.defgsets
-                                                          else "437"])
-                state.is_96 = [graphdata.gsets[i][0] > 94 for i in state.cur_gsets]
-                yield ("CHCP", codepage)
-            else:
-                state.feedback.append(("RDOCS", graphdata.chcpdocs[codepage], None, None))
-                state.feedback.append(token)
+        elif state.docsmode == "plainextascii" and token[0] == "CHCP":
+            codepage = token[1]
+            state.cur_rhs = codepage
+            state.cur_gsets = list(graphdata.defgsets[state.cur_rhs
+                                                      if state.cur_rhs in graphdata.defgsets
+                                                      else "437"])
+            state.is_96 = [graphdata.gsets[i][0] > 94 for i in state.cur_gsets]
+            yield token
         elif state.docsmode == "plainextascii" and token[0] == "CSISEQ" and token[1] == "DECSDPT":
             # Select Digital Printed Data Type, also part of DEC's IBM ProPrinter emulation.
             # Note: IBM documents "ESC X'7E08'", i.e. `ESC ~ BS`, as Print All Characters; this

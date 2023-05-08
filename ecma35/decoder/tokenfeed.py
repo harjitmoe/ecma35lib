@@ -43,8 +43,8 @@ def process_stream(stream, *, lastfilter=None, **kwargs): # The entry point.
        designations, graphsets, simpleprinter, escsequences, csisequences, controlstrings, \
        rawfilter, unkdocsfilter, ecma35docsfilter, hangulfillers, utf1filter, shiftjisfilter, \
        scsufilter, uhcfilter, gbkfilter, gbhalfcodes, plainextasciifilter, bigfivefilter, \
-       bssequences, ebcdicfilter, docssequences
-    for f in [_tokenise_stream, docssequences.decode_docs_sequences,
+       bssequences, ebcdicfilter, docssequences, chcpsequences
+    for f in [_tokenise_stream, docssequences.decode_docs_sequences, chcpsequences.decode_chcp,
               ecma35docsfilter.decode_ecma35docs, utf8filter.decode_utf8, 
               utf1filter.decode_utf1, shiftjisfilter.decode_shiftjis, utf32filter.decode_utf32, 
               scsufilter.decode_scsu, uhcfilter.decode_uhc, gbkfilter.decode_gbk,

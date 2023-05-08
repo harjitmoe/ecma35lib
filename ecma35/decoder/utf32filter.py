@@ -19,15 +19,7 @@ def decode_utf32(stream, state):
         elif state.docsmode == "utf-32":
             if token[0] != "WORD":
                 # ESC passing through
-                if token[0] == "CSISEQ" and token[1] == "DECSPPCS":
-                    codepage = bytes(token[2]).decode("ascii")
-                    if codepage not in graphdata.chcpdocs:
-                        yield ("ERROR", "UNRECCHCP", token)
-                    else:
-                        state.feedback.append(("RDOCS", graphdata.chcpdocs[codepage], None, None))
-                        state.feedback.append(token)
-                else:
-                    yield token
+                yield token
                 continue
             if (0xD800 <= token[1] < 0xE000) and state.pedantic_surrogates:
                 yield ("CESU", token[1], "32" + bo)
