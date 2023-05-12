@@ -6,6 +6,8 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+from ecma35.data import graphdata
+
 def decode_ecma35docs(stream, state):
     workingsets = ("G0", "G1", "G2", "G3")
     for token in stream:
