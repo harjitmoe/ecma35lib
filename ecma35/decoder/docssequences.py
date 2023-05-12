@@ -23,6 +23,7 @@ elexdocs = ("DOCS", False, (0x36,))
 # In either case, just 1B 25 40 will not switch to ECMA-35, so SCSU is "without standard return".
 scsudocs = ("DOCS", True, (0x35,))
 ebcdicdocs = ("DOCS", True, (0x36,))
+utfebcdicdocs = ("DOCS", True, (0x37,))
 
 ecma35docs = ("DOCS", False, (0x40,))
 utf1docs = ("DOCS", False, (0x42,))

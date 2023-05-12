@@ -75,6 +75,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`DOCS 6`|HangulTalk|
 |`DOCS / 5`|Standard Compression Scheme for Unicode (SCSU). Was previously `DOCS / 0`; changed to avoid conflict with use of `DOCS / 0` by X11 Compound Text.|
 |`DOCS / 6`|EBCDIC.|
+|`DOCS / 7`|UTF-EBCDIC.|
 
 ## Additional single-byte G-sets, and additional selectors for particular variants of single-byte G-sets
 

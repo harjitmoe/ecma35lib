@@ -72,6 +72,8 @@ from ecma35.data.singlebyte import ecma6, extlatin, c0substs, dingbats, quoocs_n
 for _i in rhses:
     chcpdocs.setdefault(_i, "plainextascii")
 
+chcpdocs["1210"] = chcpdocs["1211"] = "utf-ebcdic"
+
 g94bytes = {tuple(b"@"): ("ir002", # Preferred version
                           ("ir002/tilde",), # Private versions
                           ("ir002",)), # Original followed by any registered revisions, each of which must be superset of the previous
