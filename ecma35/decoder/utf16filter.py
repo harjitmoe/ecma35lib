@@ -20,15 +20,16 @@ def decode_utf16(stream, state):
         except StopIteration:
             break
         reconsume = None
+        docsmap = {"utf-16": state.default_endian, "utf-16le": "<", "utf-16be": ">"}
         if token[0] in ("DOCS", "RDOCS"):
             if utf16_lead:
                 yield ("ERROR", "UTF16ISOLATE", utf16_lead)
                 yield ("UCS", utf16_lead, "UTF-16", "WTF-16" + bo) # "Wobbly UTF-16"
                 utf16_lead = None
-            if token[0] == "RDOCS" and token[1] == "utf-16":
+            if token[0] == "RDOCS" and token[1] in docsmap:
                 state.bytewidth = 2
-                state.endian = state.default_endian
-                firstchar = True
+                state.endian = docsmap[token[1]]
+                firstchar = token[1] == "utf-16"
                 state.docsmode = "utf-16"
             yield token
         elif (state.docsmode == "utf-16") or (token[0] in ("CESU", "PAIR")):

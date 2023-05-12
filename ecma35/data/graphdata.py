@@ -72,7 +72,16 @@ from ecma35.data.singlebyte import ecma6, extlatin, c0substs, dingbats, quoocs_n
 for _i in rhses:
     chcpdocs.setdefault(_i, "plainextascii")
 
+chcpdocs["1200"] = chcpdocs["1201"] = "utf-16be"
+chcpdocs["1202"] = chcpdocs["1203"] = "utf-16le"
+chcpdocs["1204"] = chcpdocs["1205"] = "utf-16"
+chcpdocs["1208"] = chcpdocs["1209"] = "utf-8"
 chcpdocs["1210"] = chcpdocs["1211"] = "utf-ebcdic"
+chcpdocs["1212"] = chcpdocs["1213"] = "scsu"
+chcpdocs["1232"] = chcpdocs["1233"] = "utf-32be"
+chcpdocs["1234"] = chcpdocs["1235"] = "utf-32le"
+chcpdocs["1236"] = chcpdocs["1237"] = "utf-32"
+chcpdocs["1392"] = chcpdocs["5488"] = "gbk"
 
 g94bytes = {tuple(b"@"): ("ir002", # Preferred version
                           ("ir002/tilde",), # Private versions

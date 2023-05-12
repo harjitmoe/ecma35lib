@@ -9,11 +9,12 @@
 def decode_utf32(stream, state):
     bomap = {"<": "le", ">": "be"}
     for token in stream:
+        docsmap = {"utf-32": state.default_endian, "utf-32le": "<", "utf-32be": ">"}
         if (token[0] == "RDOCS"):
-            if token[1] == "utf-32":
+            if token[1] in docsmap:
                 state.bytewidth = 4
-                state.endian = state.default_endian
-                firstchar = True
+                state.endian = docsmap[token[1]]
+                firstchar = token[1] == "utf-32"
                 state.docsmode = "utf-32"
             yield token
         elif state.docsmode == "utf-32":
