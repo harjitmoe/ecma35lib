@@ -64,6 +64,7 @@ c0graphics = {}
 rhses = {}
 defgsets = {}
 chcpdocs = {}
+ebcdicdbcs = {}
 
 # Note: has to be imported after gsets &co are defined
 from ecma35.data.multibyte import korea, japan, guobiao, traditional

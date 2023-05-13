@@ -28,6 +28,12 @@ def decode_csi_sequences(stream, state):
             elif (token[0] == "CTRL") and (token[1] in ("CEX",)):
                 active.append(token)
                 mode = "cex"
+            # Both the IBM and Fujitsu-Siemens mappings for EBCDIC controls to the C1 area (we're
+            #   using the IBM one) map CSI onto Customer Use 3 (CU3). We want to have easy access
+            #   to CSI inside the EBCDIC DOCS either way.
+            elif (token[0] == "CTRL") and (token[1] in ("CU3",)) and state.docsmode in ("ebcdic", "utf-ebcdic"):
+                active.append(token)
+                mode = "csi"
             else:
                 yield token # Pass everything else through
         elif mode in ("csi", "csinoparam"):

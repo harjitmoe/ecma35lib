@@ -153,9 +153,20 @@ def decode_ebcdic(stream, state):
         elif state.docsmode == "ebcdic" and token[0] == "CHCP":
             # DEC Select [IBM] ProPrinter Character Set, i.e. CSI sequence for basically chcp.
             codepage = token[1]
-            state.cur_ebcdic = codepage
-            state.cur_gsets = list(graphdata.defgsets[state.cur_ebcdic])
-            state.is_96 = [graphdata.gsets[i][0] > 94 for i in state.cur_gsets]
+            if codepage in graphdata.defgsets:
+                state.cur_ebcdic = codepage
+                state.cur_gsets = list(graphdata.defgsets[state.cur_ebcdic])
+                state.is_96 = [graphdata.gsets[i][0] > 94 for i in state.cur_gsets]
+                if codepage in graphdata.ebcdicdbcs:
+                    state.ebcdic_dbcs = graphdata.ebcdicdbcs[codepage]
+                else:
+                    state.in_ebcdic_dbcs_mode = False
+            elif codepage in graphdata.ebcdicdbcs:
+                state.cur_ebcdic = codepage
+                state.ebcdic_dbcs = graphdata.ebcdicdbcs[codepage]
+                state.in_ebcdic_dbcs_mode = True
+            else:
+                yield ("ERROR", "UNRECCECP", token)
             yield token
         elif state.docsmode == "ebcdic" and token[0] == "CSISEQ" and token[1] == "DECSDPT":
             # Select Digital Printed Data Type, also part of DEC's IBM ProPrinter emulation.
