@@ -112,15 +112,23 @@ _wansung_temp = parsers.fuse([_wansung_syllables, oldunicodeksc], "Wansung_AltUT
 graphdata.gsets["ir149/altutc"] = wansung_utcalt = (94, 2, _wansung_temp)
 graphdata.gsetflags["ir149/altutc"] |= {"UHC:IS_WANSUNG"}
 
+ibm_korea_pua = {0xF843: 0x5580, 0xF844: 0x91B5, 0xF845: 0x7A27, 0xF846: 0x6677, 0xF847: 0x8987, 0xF848: 0x551C, 0xF849: 0x7370, 0xF84A: 0x9B27, 0xF84B: 0x797F, 0xF84C: 0x5BE5, 0xF84D: 0x63D0, 0xF84E: 0x5A46, 0xF84F: 0x6F58, 0xF850: 0x904D, 0xF851: 0x541F, 0xF852: 0x5DFF, 0xF853: 0x6C99, 0xF854: 0x8D07, 0xF855: 0x9E9D, 0xF856: 0x9F5F, 0xF857: 0x5C04, 0xF858: 0x55AE, 0xF859: 0x6D17, 0xF85A: 0x9730, 0xF85B: 0xF909, 0xF85C: 0x5BBF, 0xF85D: 0x96CE, 0xF85E: 0x5BFA, 0xF85F: 0x745F, 0xF860: 0x5C04, 0xF861: 0x5C04, 0xF862: 0x7FA8, 0xF863: 0x540A, 0xF864: 0x5247, 0xF865: 0x6E4C, 0xF866: 0x6578, 0xF867: 0x69CC, 0xF868: 0x677B, 0xF869: 0x8D05, 0xF86A: 0x5E40, 0xF86B: 0x5206, 0xF86C: 0x90AF, 0xF86D: 0x614A, 0xF86E: 0x965C}
+
+def ibmpuamap_korea(pointer, ucs):
+    if len(ucs) == 1 and ucs[0] in ibm_korea_pua:
+        return (ibm_korea_pua[ucs[0]],)
+    return ucs 
+
 # The non-KS 94×94 plane encoded by the old IBM code page 944
 graphdata.gsets["oldibmkorea-withcorppua"] = (94, 2, parsers.decode_main_plane_whatwg(
     parsers.parse_file_format("Custom/index-oldibmkorea-withcorppua.txt"),
     "index-oldibmkorea-withcorppua.txt",
     plane = 1))
 graphdata.gsets["oldibmkorea"] = (94, 2, parsers.decode_main_plane_whatwg(
-    parsers.parse_file_format("Custom/index-oldibmkorea.txt"),
-    "index-oldibmkorea.txt",
-    plane = 1))
+    parsers.parse_file_format("Custom/index-oldibmkorea-withcorppua.txt"),
+    "index-oldibmkorea-withcorppua.txt",
+    plane = 1,
+    mapper = ibmpuamap_korea))
 graphdata.gsets["oldibmkorea-excavated"] = (94, 2, parsers.decode_main_plane_whatwg(
     parsers.parse_file_format("Custom/index-oldibmkorea-cleaned.txt"),
     "index-oldibmkorea-cleaned.txt",
@@ -289,13 +297,13 @@ non_kps9566_johab = [i for i in range(0xAC00, 0xD7A4)
                        if i not in graphdata.codepoint_coverages["ir202"]]
 non_kps9566_johab.sort(key = _sort_by_kps)
 
-graphdata.gsets["johab/ibmkorea"] = (190, 2, parsers.decode_main_plane_dbebcdic(parsers.parse_file_format("ICU/ibm-933_P110-1995.ucm"), "ibm-933_P110-1995.ucm"))
+graphdata.gsets["johab/ibmkorea"] = (190, 2, parsers.decode_main_plane_dbebcdic(parsers.parse_file_format("ICU/ibm-933_P110-1995.ucm"), "ibm-933_P110-1995.ucm", mapper = ibmpuamap_korea))
 graphdata.ebcdicdbcs["834"] = graphdata.ebcdicdbcs["933"] = graphdata.ebcdicdbcs["5029"] = "johab/ibmkorea"
 graphdata.chcpdocs["834"] = graphdata.chcpdocs["933"] = graphdata.chcpdocs["5029"] = "ebcdic"
 graphdata.defgsets["933"] = ("alt646/ibmkorea", "gr833", "gl310", "gr310")
 graphdata.defgsets["5029"] = ("alt646/ibmkorea", "gr4929", "gl310", "gr310")
 
-graphdata.gsets["johab/ibmkorea/full"] = (190, 2, parsers.decode_main_plane_dbebcdic(parsers.parse_file_format("ICU/ibm-1364_P110-2007.ucm"), "ibm-1364_P110-2007.ucm"))
+graphdata.gsets["johab/ibmkorea/full"] = (190, 2, parsers.decode_main_plane_dbebcdic(parsers.parse_file_format("ICU/ibm-1364_P110-2007.ucm"), "ibm-1364_P110-2007.ucm", mapper = ibmpuamap_korea))
 graphdata.ebcdicdbcs["1364"] = graphdata.ebcdicdbcs["4930"] = "johab/ibmkorea/full"
 graphdata.chcpdocs["1364"] = graphdata.chcpdocs["4930"] = "ebcdic"
 graphdata.defgsets["1364"] = ("alt646/ibmkorea", "gr833", "gl310", "gr310")
