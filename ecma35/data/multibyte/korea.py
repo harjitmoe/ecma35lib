@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020/2021/2022.
+# By HarJIT in 2019/2020/2021/2022/2023.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -288,6 +288,17 @@ f_order[""] = 0
 non_kps9566_johab = [i for i in range(0xAC00, 0xD7A4) 
                        if i not in graphdata.codepoint_coverages["ir202"]]
 non_kps9566_johab.sort(key = _sort_by_kps)
+
+graphdata.gsets["johab/ibmkorea"] = (190, 2, parsers.decode_main_plane_dbebcdic(parsers.parse_file_format("ICU/ibm-933_P110-1995.ucm"), "ibm-933_P110-1995.ucm"))
+graphdata.ebcdicdbcs["834"] = graphdata.ebcdicdbcs["933"] = graphdata.ebcdicdbcs["5029"] = "johab/ibmkorea"
+graphdata.chcpdocs["834"] = graphdata.chcpdocs["933"] = graphdata.chcpdocs["5029"] = "ebcdic"
+graphdata.defgsets["933"] = ("alt646/ibmkorea", "gr833", "gl310", "gr310")
+graphdata.defgsets["5029"] = ("alt646/ibmkorea", "gr4929", "gl310", "gr310")
+
+graphdata.gsets["johab/ibmkorea/full"] = (190, 2, parsers.decode_main_plane_dbebcdic(parsers.parse_file_format("ICU/ibm-1364_P110-2007.ucm"), "ibm-1364_P110-2007.ucm"))
+graphdata.ebcdicdbcs["1364"] = graphdata.ebcdicdbcs["4930"] = "johab/ibmkorea/full"
+graphdata.chcpdocs["1364"] = graphdata.chcpdocs["4930"] = "ebcdic"
+graphdata.defgsets["1364"] = ("alt646/ibmkorea", "gr833", "gl310", "gr310")
 
 
 

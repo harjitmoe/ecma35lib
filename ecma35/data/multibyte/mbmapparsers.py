@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020/2021.
+# By HarJIT in 2019/2020/2021/2023.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -655,6 +655,24 @@ def decode_gbk_non_uro_extras(parsed_stream, filenamekey):
         pseudoku2 = pseudoku - 0x1F
         _put_at(_temp, (pseudoku2 * 96) + pseudoten, ucs, False)
     _fill_to_plane_boundary(_temp, 96)
+    return tuple(_temp)
+
+@with_caching
+def decode_main_plane_dbebcdic(parsed_stream, filenamekey, *, mapper=identitymap):
+    # The filenamekey argument is absolutely needed for the @with_caching since the parsed_stream
+    #   is not incorporated into the memo key for obvious reasons—it is otherwise unused.
+    # It does not have to be a filename, but must be unique for every different parse_file_format invocation
+    #   even for the same filename.
+    _temp = []
+    for coded, ucs in parsed_stream:
+        if len(coded) != 2:
+            continue
+        pointer = ((coded[0] - 0x41) * 190) + (coded[1] - 0x41)
+        if pointer == None:
+            continue
+        iucs = mapper(pointer, ucs)
+        _put_at(_temp, pointer, iucs, False)
+    _fill_to_plane_boundary(_temp, 190)
     return tuple(_temp)
 
 @with_caching

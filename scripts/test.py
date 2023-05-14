@@ -94,8 +94,10 @@ dat = (b"\x1B[m\x1B%G\x1B!F" + teststr.encode("utf-8-sig") + "\x1CJ염盐塩鹽\
        b"\x1B%/6" + "\x1B\"C\x1B[1082*p\x1B\"!1Hello ".encode("cp500") + b"\xCD\xEE\x9B" +
        b"\x0E\x40\x40\x0F\x08\xDF\x08\xE0\xFF\x5F\x27\xF0\x5F\xFF\x5F" + "\x1B%@".encode("cp500") +
        b"\x1B[1211*p\xB6\x73\xB8\x41\x41\xDB\x73\x73\xDC\x57\x41\x41" + 
-       b"\xEB\x49\x71\x56\xED\x72\x41\x41\x41" + 
-       "\x1B%@".encode("cp500") +
+       b"\xEB\x49\x71\x56\xED\x72\x41\x41\x41" + "\x1B%@".encode("cp500") +
+       b"\x1B[930*p\x0E\x43\x76\xE0\x53\x0F\xA5" + "\x9B16684*p".encode("cp500") + 
+       b"\x43\x76\xE0\x53\x0F\xA5" + "\x9B1364*p".encode("cp500") + "\x0E똠방각하".encode("johab") + 
+       "\x0F\x1B%@".encode("cp500") +
        b"\x1B%/B\x1B%@HAHA_AS_IF\xA1" # i.e. the last DOCS @ should not switch back.
 )
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020/2022.
+# By HarJIT in 2019/2020/2022/2023.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -381,5 +381,19 @@ graphdata.gsets["ir159/osfa"] = (94, 2, parsers.fuse([
     osfeuc_0212a, osfeuc_ibm, osfeuc_puatwo], "OSF--eucJP-0212a-complete.json"))
 graphdata.gsets["ir159/osfm"] = (94, 2, parsers.fuse([
     osfeuc_0212m, osfeuc_ibm, osfeuc_puatwo], "OSF--eucJP-0212m-complete.json"))
+
+graphdata.gsets["ibmjapan/1992"] = (190, 2, parsers.decode_main_plane_dbebcdic(parsers.parse_file_format("ICU/ibm-930_P120-1999.ucm"), "ibm-930_P120-1999.ucm"))
+graphdata.ebcdicdbcs["300"] = graphdata.ebcdicdbcs["930"] = graphdata.ebcdicdbcs["931"] = graphdata.ebcdicdbcs["939"] = graphdata.ebcdicdbcs["9122"] = "ibmjapan/1992"
+graphdata.chcpdocs["300"] = graphdata.chcpdocs["930"] = graphdata.chcpdocs["931"] = graphdata.chcpdocs["939"] = graphdata.chcpdocs["9122"] = "ebcdic"
+graphdata.defgsets["930"] = ("gl290", "gr290", "gl310", "gr310")
+graphdata.defgsets["931"] = ("alt646/ibmusa", "nil", "gl310", "gr310")
+graphdata.defgsets["939"] = ("alt646/ibmjapan/noyen", "gr1027", "gl310", "gr310")
+graphdata.defgsets["9122"] = ("gl887", "gr4386", "gl310", "gr310")
+
+graphdata.gsets["ibmjapan/2002"] = (190, 2, parsers.decode_main_plane_dbebcdic(parsers.parse_file_format("ICU/ibm-16684_P110-2003.ucm"), "ibm-16684_P110-2003.ucm"))
+graphdata.ebcdicdbcs["1390"] = graphdata.ebcdicdbcs["1399"] = graphdata.ebcdicdbcs["9582"] = graphdata.ebcdicdbcs["9591"] = graphdata.ebcdicdbcs["16684"] = graphdata.ebcdicdbcs["24876"] = "ibmjapan/2002"
+graphdata.chcpdocs["1390"] = graphdata.chcpdocs["1399"] = graphdata.chcpdocs["9582"] = graphdata.chcpdocs["9591"] = graphdata.chcpdocs["16684"] = graphdata.chcpdocs["24876"] = "ebcdic"
+graphdata.defgsets["1390"] = graphdata.defgsets["9582"] = ("gl290", "gr8482", "gl310", "gr310")
+graphdata.defgsets["1399"] = graphdata.defgsets["9591"] = ("alt646/ibmjapan/noyen", "gr5123", "gl310", "gr310")
 
 
