@@ -9,7 +9,7 @@
 import sys, os, pprint
 sys.path.append(os.path.abspath(os.pardir))
 
-from ecma35.data.graphdata import gsets, g94bytes, g96bytes, g94nbytes, g96nbytes, defgsets, gsetflags
+from ecma35.data.graphdata import gsets, g94bytes, g96bytes, g94nbytes, g96nbytes, defgsets, gsetflags, ebcdicdbcs
 used = set()
 complaints = set()
 nominal_kind = {}
@@ -31,6 +31,8 @@ for (kind, (idbytes, bit)) in [
 for sets in defgsets.values():
     for i in sets:
         used.add(i)
+for i in ebcdicdbcs.values():
+    used.add(i)
 used.remove(None)
 for i in used:
     assert isinstance(i, str), i
@@ -72,7 +74,7 @@ for (setcode, (kind, bytecount, entries)) in sorted(gsets.items()):
         checksums[running_hash] = setcode
 
 for (setcode, (kind, bytecount, entries)) in gsets.items():
-    assert kind==94 or kind==96
+    assert kind==94 or kind==96 or kind==190
     if setcode not in used and setcode[0] != "~":
         complaints.add((setcode, "NotDesignatable"))
     if len(entries) < (kind ** bytecount):
