@@ -213,6 +213,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR ; G*DM4 A`|GB/T 2312, variant used on classic Mac OS, as specified by Apple|
 |`IRR < G*DM4 A`|GB/T 2312, variant used on classic Mac OS, mixed mappings|
 |`IRR = G*DM4 A`|GB/T 2312, Microsoft version|
+|`IRR > G*DM4 A`|GB/T 12345, including what Unihan calls the "Pseudo-GB1" extensions|
 |`IRR ? G*DM4 B`|JIS C 6226 / X 0208-1983|
 |`IRR @ G*DM4 B`|JIS X 0208-1990 (standard sequence, listed here for completeness)|
 |`IRR 0 G*DM4 B`|JIS X 0208, WHATWG variant (default; synchronised with Windows-31J)|

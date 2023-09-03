@@ -45,9 +45,10 @@ plane0 = (0, ("GB 2312<br>1980", "GB 2312<br>UTC", "GB 6345.1<br>1986", "GB 8565
           graphdata.gsets["ir058/2005"][2],
           graphdata.gsets["ir058/full"][2],
 ])
-plane1 = (1, ("GB 12345<br>1990", "GB 12345<br>UTC"), [
+plane1 = (1, ("GB 12345<br>1990", "GB 12345<br>UTC", "GB 12345<br>Unihan Ext"), [
           graphdata.gsets["ir058/hant-strict"][2],
           graphdata.gsets["ir058/hant-utc"][2],
+          graphdata.gsets["ir058/hant-full"][2],
 ])
 plane2 = (2, ("GB7589",), [
           graphdata.gsets["gb7589"][2],

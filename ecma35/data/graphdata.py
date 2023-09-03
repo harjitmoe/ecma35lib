@@ -282,7 +282,7 @@ g94nbytes = {tuple(b"@"): ("ir042/nec", ("ir042/ibm", "ir042/nec", "ir042/1990pi
                            ("ir058/hant", "ir058/2000", "ir058/2005", None, "ir058/full",
                             "ir058/mac", "ir058/utc", "ir058/1986", "ir058/hant-strict",
                             "ir058/hant-utc", "ir058/ibm", "ir058/macraw", "ir058/macsemiraw",
-                            "ir058/ms"),
+                            "ir058/ms", "ir058/hant-full"),
                            ("ir058",)), # Original followed by any registered revisions
              tuple(b"B"): ("ir168/web",
                            ("ir168/web", "ir168/mac", "ir168/macps", "ir168/mackt6", "ir168/utc",

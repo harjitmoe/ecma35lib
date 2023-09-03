@@ -136,3 +136,4 @@
 '["decode_main_plane_gl", ["cccii-maxmat.txt"], {"set96": true}]', (37199872, 3912488)
 '["decode_main_plane_gl", ["eacc-maxmat.txt"], {"set96": true}]', (41112576, 3912479)
 '["decode_main_plane_gl", ["cccii-nonkanji.txt"], {"set96": true}]', (45025280, 4093937)
+'["read_unihan_planes", ["UCD/Unihan_OtherMappings-14.txt", "kPseudoGB1"], {"kutenform": true}]', (49119232, 53475)

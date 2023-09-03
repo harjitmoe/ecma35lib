@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020/2022.
+# By HarJIT in 2019/2020/2022/2023.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -257,6 +257,10 @@ graphdata.gsets["ir058/hant"] = gb12345 = (94, 2, parsers.fuse([
         (None,) * 526 + gb2312_full[2][526:555],
         (None,) * 684 + gb2312_full[2][684:690],
     ], "GB12345.json"))
+graphdata.gsets["ir058/hant-full"] = gb12345_full = (94, 2, parsers.fuse([
+        gb12345[2],
+        parsers.read_unihan_planes("UCD/Unihan_OtherMappings-14.txt", "kPseudoGB1", kutenform=True),
+    ], "GB12345full.json"))
 #
 # Certain characters are still simplified in GB 12345 proper, but were replaced with traditional
 #   characters in the version of GB 12345 supplied to the UTC. Source: Lunde 2009, p.102.
