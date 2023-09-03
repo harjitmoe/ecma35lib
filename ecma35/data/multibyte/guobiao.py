@@ -259,7 +259,7 @@ graphdata.gsets["ir058/hant"] = gb12345 = (94, 2, parsers.fuse([
     ], "GB12345.json"))
 graphdata.gsets["ir058/hant-full"] = gb12345_full = (94, 2, parsers.fuse([
         gb12345[2],
-        parsers.read_unihan_planes("UCD/Unihan_OtherMappings-14.txt", "kPseudoGB1", kutenform=True),
+        parsers.read_unihan_planes("UCD/Unihan_OtherMappings-15.txt", "kPseudoGB1", kutenform=True),
     ], "GB12345full.json"))
 #
 # Certain characters are still simplified in GB 12345 proper, but were replaced with traditional
@@ -319,6 +319,7 @@ graphdata.gsets["gb12052"] = (94, 2, parsers.decode_main_plane_euc(
 #     U+8226 at 69-53 (traditional / simplified)
 #     U+84C3 at 73-83 (traditional / simplified)
 graphdata.gsets["gb13131"] = gb13131 = (94, 2, parsers.fuse([
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_GSource", "G3"),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G3"),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "G3"),
         (None,) * ((94 * 18) + 56) + ((0x72AE,),),
@@ -334,8 +335,10 @@ graphdata.gsets["gb13131"] = gb13131 = (94, 2, parsers.fuse([
         (None,) * ((94 * 72) + 82) + ((0x84C3,),),
     ], "GB13131.json"))
 graphdata.gsets["gb13132"] = gb13132 = (94, 2, parsers.fuse([
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_GSource", "G5"),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G5"),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "G5"),
+        parsers.read_unihan_planes("UCD/Unihan_OtherMappings-15.txt", "kGB5", kutenform=True),
         parsers.read_unihan_planes("UCD/Unihan_OtherMappings-14.txt", "kGB5", kutenform=True),
         parsers.read_unihan_planes("UCD/Unihan_OtherMappings-13.txt", "kGB5", kutenform=True),
     ], "GB13132.json"))
@@ -345,6 +348,7 @@ graphdata.gsets["gb13132"] = gb13132 = (94, 2, parsers.fuse([
 #     U+809E at 40-50
 #     U+891D at 44-23
 graphdata.gsets["gb16500"] = (94, 2, parsers.fuse([
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_GSource", "GE"),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "GE"),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "GE"),
         (None,) * ((94 * 31) + 28) + ((0x6FF9,),),
@@ -371,8 +375,10 @@ graphdata.gsets["gb16500"] = (94, 2, parsers.fuse([
 #   either mostly following GB2312 where applicable in the first 15 rows or leaving them empty
 #   (though this, plus its small size, means it doesn't actually *collide* with GB 16500 either).
 graphdata.gsets["the-other-gb7"] = (94, 2, parsers.fuse([
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_GSource", "G7"),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G7"),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "G7"),
+        parsers.read_unihan_planes("UCD/Unihan_OtherMappings-15.txt", "kGB7", kutenform=True),
         parsers.read_unihan_planes("UCD/Unihan_OtherMappings-14.txt", "kGB7", kutenform=True),
         parsers.read_unihan_planes("UCD/Unihan_OtherMappings-13.txt", "kGB7", kutenform=True),
     ], "the-other-GB7.json"))
