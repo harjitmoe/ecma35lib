@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020/2021/2022.
+# By HarJIT in 2020/2021/2022/2023.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import os, ast, sys, json, pprint, shutil
-from ecma35.data import graphdata, variationhints
+from ecma35.data import graphdata, variationhints, deprecated_cjkci
 from ecma35.data.multibyte import mbmapparsers as parsers
 
 # Charsets originating from Hong Kong or Taiwan (CCCII, CNS 11643, Big 5, HKSCS…).
@@ -107,7 +107,20 @@ cns_spuaa = parsers.decode_main_plane_gl(
     parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
     "CNS2UNICODE_Unicode 15.txt",
     mapper = cnsmapper_contraspua)
-cns = parsers.fuse([cns_bmp, cns_sip, cns_spuaa], "GOV-TW---CNS2UNICODE_swar_tsci_cspua_crcb.json")
+cns_unihan_parts = []
+for _i in range(1, 16):
+    cns_unihan_parts.append(
+        (None,) * (94 * 94 * (_i - 1)) + 
+        parsers.read_unihan_planes(
+            "UCD/Unihan_IRGSources-15.txt", "kIRG_TSource", f"T{_i:X}",
+            mapper=cnsmapper_contraredundantcjkb))
+cns_unihan = parsers.fuse(cns_unihan_parts, "Unihan-CNS-11643.json")
+cns = parsers.fuse([
+    cns_unihan,
+    cns_bmp,
+    cns_sip,
+    cns_spuaa,
+], "Unihan-GOV-TW---CNS2UNICODE_swar_tsci_cspua_crcb.json")
 
 cns_govbmp = parsers.decode_main_plane_gl(
     parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode BMP.txt"),
@@ -168,8 +181,9 @@ graphdata.gsets["ir171/yasuoka"] = (94, 2, cns_yasuoka[planesize * 0 : planesize
 graphdata.gsets["ir171/icu"] = (94, 2, cns_icu_old[planesize * 0 : planesize * 1])
 graphdata.gsets["ir171/icu-2014"] = (94, 2, cns_icu_2014[planesize * 0 : planesize * 1])
 
-# ir172, ir172-govtw, ir172-icu, ir172-icu-2014, ir172-utc, ir172-yasuoka are all same
-graphdata.gsets["ir172"] = (94, 2, cns[planesize * 1 : planesize * 2])
+# ir172-govtw, ir172-icu, ir172-icu-2014, ir172-utc, ir172-yasuoka are all same
+graphdata.gsets["ir172"] = (94, 2, cns_gov[planesize * 1 : planesize * 2])
+graphdata.gsets["ir172/unihan"] = (94, 2, cns_unihan[planesize * 1 : planesize * 2])
 
 # ISO-IR-183 deserves particular mention.
 # It was first published in 1988, containing 6319 characters, as an extension to CNS 11643
@@ -186,6 +200,7 @@ graphdata.gsets["ir172"] = (94, 2, cns[planesize * 1 : planesize * 2])
 #   be the current 毵 versus the CNS11643.TXT 毶 at 69-26, both being itaiji of 02-49-32 毿).
 #   Note that an unrelated plane 14 was added in 2007.
 graphdata.gsets["ir183/govtw"] = (94, 2, cns_gov[planesize * 2 : planesize * 3])
+graphdata.gsets["ir183/unihan"] = (94, 2, cns_unihan[planesize * 2 : planesize * 3])
 _ir183oldirg = parsers.decode_main_plane_gl(
     parsers.parse_file_format("UTC/CNS11643.TXT"),
     "CNS11643.TXT",
@@ -209,24 +224,28 @@ graphdata.gsets["ir183/icu-2014"] = (94, 2, cns_icu_2014[planesize * 2 : planesi
 
 graphdata.gsets["ir184"] = (94, 2, cns[planesize * 3 : planesize * 4])
 graphdata.gsets["ir184/govtw"] = (94, 2, cns_gov[planesize * 3 : planesize * 4])
+graphdata.gsets["ir184/unihan"] = (94, 2, cns_unihan[planesize * 3 : planesize * 4])
 graphdata.gsets["ir184/yasuoka"] = (94, 2, cns_yasuoka[planesize * 3 : planesize * 4])
 graphdata.gsets["ir184/icu"] = (94, 2, cns_icu_old[planesize * 3 : planesize * 4])
 graphdata.gsets["ir184/icu-2014"] = (94, 2, cns_icu_2014[planesize * 3 : planesize * 4])
 
 graphdata.gsets["ir185"] = (94, 2, cns[planesize * 4 : planesize * 5])
 graphdata.gsets["ir185/govtw"] = (94, 2, cns_gov[planesize * 4 : planesize * 5])
+graphdata.gsets["ir185/unihan"] = (94, 2, cns_unihan[planesize * 4 : planesize * 5])
 graphdata.gsets["ir185/yasuoka"] = (94, 2, cns_yasuoka[planesize * 4 : planesize * 5])
 graphdata.gsets["ir185/icu"] = (94, 2, cns_icu_old[planesize * 4 : planesize * 5])
 graphdata.gsets["ir185/icu-2014"] = (94, 2, cns_icu_2014[planesize * 4 : planesize * 5])
 
 graphdata.gsets["ir186"] = (94, 2, cns[planesize * 5 : planesize * 6])
 graphdata.gsets["ir186/govtw"] = (94, 2, cns_gov[planesize * 5 : planesize * 6])
+graphdata.gsets["ir186/unihan"] = (94, 2, cns_unihan[planesize * 5 : planesize * 6])
 graphdata.gsets["ir186/yasuoka"] = (94, 2, cns_yasuoka[planesize * 5 : planesize * 6])
 graphdata.gsets["ir186/icu"] = (94, 2, cns_icu_old[planesize * 5 : planesize * 6])
 graphdata.gsets["ir186/icu-2014"] = (94, 2, cns_icu_2014[planesize * 5 : planesize * 6])
 
 graphdata.gsets["ir187"] = (94, 2, cns[planesize * 6 : planesize * 7])
 graphdata.gsets["ir187/govtw"] = (94, 2, cns_gov[planesize * 6 : planesize * 7])
+graphdata.gsets["ir187/unihan"] = (94, 2, cns_unihan[planesize * 6 : planesize * 7])
 graphdata.gsets["ir187/yasuoka"] = (94, 2, cns_yasuoka[planesize * 6 : planesize * 7])
 graphdata.gsets["ir187/icu"] = (94, 2, cns_icu_old[planesize * 6 : planesize * 7])
 graphdata.gsets["ir187/icu-2014"] = (94, 2, cns_icu_2014[planesize * 6 : planesize * 7])
@@ -536,7 +555,7 @@ graphdata.gsets["monotypeexts"] = (94, 2, parsers.fuse([
 #   point and is therefore not referenced (the LoC mapping also includes non-kanji).
 # I'm treating kCCCII as the best source for CCCII insofar as it covers.
 
-cccii_unihan = parsers.read_unihan_planes("UCD/Unihan_OtherMappings-14.txt", "kCCCII", set96=True)
+cccii_unihan = parsers.read_unihan_planes("UCD/Unihan_OtherMappings-15.txt", "kCCCII", set96=True)
 graphdata.gsets["eacc-pure"] = (96, 3, parsers.decode_main_plane_gl(
     parsers.parse_file_format("LoC/eacc2uni.txt", libcongress=True),
     "eacc2uni.txt",
@@ -555,11 +574,13 @@ graphdata.gsets["eacc-hongkong"] = (96, 3, parsers.decode_main_plane_gl(
 maxmat1 = parsers.decode_main_plane_gl(
     parsers.parse_file_format("Custom/cccii-maxmat.txt"),
     "cccii-maxmat.txt",
-    set96=True)
+    set96=True,
+    mapper=deprecated_cjkci.remove_deprecated_cjkci)
 maxmat2 = parsers.decode_main_plane_gl(
     parsers.parse_file_format("Custom/eacc-maxmat.txt"),
     "eacc-maxmat.txt",
-    set96=True)
+    set96=True,
+    mapper=deprecated_cjkci.remove_deprecated_cjkci)
 # The tilde sets (~cccii and ~eacc) are used in the process of (re)generating the maxmat files.
 graphdata.gsets["~cccii"] = (96, 3, parsers.fuse([
     parsers.decode_main_plane_gl(

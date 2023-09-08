@@ -676,7 +676,7 @@ def decode_main_plane_dbebcdic(parsed_stream, filenamekey, *, mapper=identitymap
     return tuple(_temp)
 
 @with_caching
-def read_unihan_planes(fil, wantkey, wantsource=None, set96=False, kutenform=False):
+def read_unihan_planes(fil, wantkey, wantsource=None, set96=False, kutenform=False, *, mapper=identitymap):
     #wantkey = "kIRG_" + region + "Source"
     ST, ED, SZ = (1, 94, 94) if not set96 else (0, 95, 96)
     f = open(os.path.join(directory, fil), "r")
@@ -724,7 +724,7 @@ def read_unihan_planes(fil, wantkey, wantsource=None, set96=False, kutenform=Fal
             # I suspect this is an error in Unihan?
             continue
         pointer = _main_plane_pointer(men, ku, ten, None, set96)
-        _put_at(_temp, pointer, (ucs,), False)
+        _put_at(_temp, pointer, mapper(pointer, (ucs,)), False)
     _fill_to_plane_boundary(_temp, SZ)
     return tuple(_temp)
 

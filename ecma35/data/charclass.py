@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020, 2021.
+# By HarJIT in 2020, 2021, 2023.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+from ecma35.data.deprecated_cjkci import deprecated_compatibility_ideographs
 
 abbreviations = {
     "ASCII": "American Standard Code for Information Interchange",
@@ -23,6 +25,7 @@ abbreviations = {
     "PUA": "Private Use Area",
     "DD": "Dirty Dozen (of unified ideographs in the Compatibility Ideographs block)",
     "CI": "Compatibility Ideograph",
+    "DCI": "Compatibility Ideograph (Deprecated)",
     "VF": "Vertical Form",
     "VCF": "Compatibility Form (Vertical)",
     "CF": "Compatibility Form",
@@ -41,7 +44,10 @@ abbreviations = {
     "CJKE+": "Appendage to Chinese/Japanese/Korean Extension E",  
     "CJKF": "Chinese/Japanese/Korean Extension F",  
     "CJKF+": "Appendage to Chinese/Japanese/Korean Extension F",  
+    "CJKI": "Chinese/Japanese/Korean Extension I",  
+    "CJKI+": "Appendage to Chinese/Japanese/Korean Extension I",  
     "CIS": "Compatibility Ideographs Supplement",
+    "DCIS": "Compatibility Ideographs Supplement (Deprecated)",
     "SIP": "Miscellaneous Supplementary Ideographic Plane",
     "CJKG": "Chinese/Japanese/Korean Extension G",
     "CJKG+": "Appendage to Chinese/Japanese/Korean Extension G",
@@ -93,6 +99,8 @@ def initialism(codepoint):
         if codepoint in (0xFA0E, 0xFA0F, 0xFA11, 0xFA13, 0xFA14, 0xFA1F,
                     0xFA21, 0xFA23, 0xFA24, 0xFA27, 0xFA28, 0xFA29):
             return "DD"
+        elif codepoint in deprecated_compatibility_ideographs:
+            return "DCI"
         else:
             return "CI"
     elif 0xFE10 <= codepoint < 0xFE20:
@@ -136,8 +144,15 @@ def initialism(codepoint):
         return "CJKF"
     elif 0x2EBE1 <= codepoint < 0x2EBF0:
         return "CJKF+"
+    elif 0x2EBF0 <= codepoint < 0x2EE5E:
+        return "CJKI"
+    elif 0x2EE5E <= codepoint < 0x2EE60:
+        return "CJKI+"
     elif 0x2F800 <= codepoint < 0x2FA20:
-        return "CIS"
+        if codepoint in deprecated_compatibility_ideographs:
+            return "DCIS"
+        else:
+            return "CIS"
     elif 0x20000 <= codepoint < 0x30000:
         return "SIP"
     #####################################

@@ -57,56 +57,62 @@ plane1 = (1, ("UTC Big5", "UTC CNS", "MS Big5", "Mac Big5", "IBM Big5", "Web Big
 ])
 
 print("Loading 2")
-plane2 = (2, ("Big5", "CNS 11643"), [
+plane2 = (2, ("Big5", "CNS 11643", "Unihan CNS"), [
           graphdata.gsets["ir172/big5"][2],
           graphdata.gsets["ir172"][2],
+          graphdata.gsets["ir172/unihan"][2],
 ])
 
 print("Loading 3")
 plane3 = (3, ("UTC CNS", "Yasuoka CNS", "ICU 1992 CNS",
-              "ICU EUC 2014", "GOV-TW CNS", "Output", "Output Alt"), [
+              "ICU EUC 2014", "GOV-TW CNS", "Unihan CNS", "Output", "Output Alt"), [
           graphdata.gsets["ir183/utc"][2],
           graphdata.gsets["ir183/yasuoka"][2],
           graphdata.gsets["ir183/icu"][2],
           graphdata.gsets["ir183/icu-2014"][2],
           graphdata.gsets["ir183/govtw"][2],
+          graphdata.gsets["ir183/unihan"][2],
           graphdata.gsets["ir183/full"][2],
           graphdata.gsets["ir183/1988plus"][2],
 ])
 
 print("Loading 4")
-plane4 = (4, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
+plane4 = (4, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Unihan CNS", "Output"), [
           graphdata.gsets["ir184/yasuoka"][2],
           graphdata.gsets["ir184/icu"][2],
           graphdata.gsets["ir184/icu-2014"][2],
           graphdata.gsets["ir184/govtw"][2],
+          graphdata.gsets["ir184/unihan"][2],
           graphdata.gsets["ir184"][2],
 ])
 
 print("Loading 5")
-plane5 = (5, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
+plane5 = (5, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Unihan CNS", "Output"), [
           graphdata.gsets["ir185/yasuoka"][2],
           graphdata.gsets["ir185/icu"][2],
           graphdata.gsets["ir185/icu-2014"][2],
           graphdata.gsets["ir185/govtw"][2],
+          graphdata.gsets["ir185/unihan"][2],
           graphdata.gsets["ir185"][2],
 ])
 
 print("Loading 6")
-plane6 = (6, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
+plane6 = (6, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Unihan CNS", "Output"), [
           graphdata.gsets["ir186/yasuoka"][2],
           graphdata.gsets["ir186/icu"][2],
           graphdata.gsets["ir186/icu-2014"][2],
           graphdata.gsets["ir186/govtw"][2],
+          graphdata.gsets["ir186/unihan"][2],
           graphdata.gsets["ir186"][2],
 ])
 
 print("Loading 7")
-plane7 = (7, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
+plane7 = (7, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Unihan CNS", "Output"), [
           graphdata.gsets["ir187/yasuoka"][2],
           graphdata.gsets["ir187/icu"][2],
           graphdata.gsets["ir187/icu-2014"][2],
           graphdata.gsets["ir187/govtw"][2],
+          graphdata.gsets["ir187/unihan"][2],
           graphdata.gsets["ir187"][2],
 ])
 
