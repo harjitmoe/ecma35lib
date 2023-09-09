@@ -9,7 +9,7 @@
 # Korea (both South and North)
 
 import os, json, shutil
-from ecma35.data import graphdata, variationhints
+from ecma35.data import graphdata, variationhints, deprecated_cjkci
 from ecma35.data.multibyte import mbmapparsers as parsers
 from ecma35.data.names import namedata
 
@@ -97,6 +97,11 @@ _wansung_temp = parsers.fuse([
             wansung[2]], "Wansung_KRPM.json")
 graphdata.gsets["ir149/2002"] = (94, 2, _wansung_temp)
 graphdata.gsetflags["ir149/2002"] |= {"UHC:IS_WANSUNG"}
+graphdata.gsets["ir149/unihan"] = (94, 2, parsers.fuse([
+    parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_KSource", "K0"),
+    _wansung_temp,
+], "Wansung_Updated.json"))
+graphdata.gsetflags["ir149/unihan"] |= {"UHC:IS_WANSUNG"}
 # Pre-Unicode-2.0 UTC mapping file: uses MS's greedy-zenkaku approach but is otherwise closer to Apple,
 #   plus its own ideosyncracies (unifying the Korean interpunct with the Japanese one rather than with the
 #   Catalan one, and using U+2236 rather than U+02D0 for the alternative colon)
@@ -270,8 +275,9 @@ ksx1002_syllables = parsers.decode_main_plane_gl(
 graphdata.gsets["ksx1002"] = (94, 2, parsers.fuse([ksx1002_hanja, ksx1002_syllables], "KSX1002-nosym.json"))
 
 # KS X 1027. Part 1 seems complete, part 2 has a lot of holes. Other parts are not ECMA-35 structured.
-graphdata.gsets["ksx1027_1"] = (94, 2, parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_KSource", "K2"))
-graphdata.gsets["ksx1027_2"] = (94, 2, parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_KSource", "K3"))
+graphdata.gsets["ksx1027_1"] = (94, 2, parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_KSource", "K2"))
+ksx1027_2_hanja = parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_KSource", "K3")
+graphdata.gsets["ksx1027_2"] = (94, 2, ksx1027_2_hanja)
 
 # Amounting to the entirety of the UHC extensions, in order:
 non_wangsung_johab = [i for i in range(0xAC00, 0xD7A4) 

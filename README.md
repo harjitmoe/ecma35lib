@@ -241,6 +241,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 4 G*DM4 C`|KS X 1001-1987, using IBM mappings|
 |`IRR 5 G*DM4 C`|KS X 1001-1987 extended, main plane of Apple/Elex extension (HangulTalk), old Apple mappings|
 |`IRR 6 G*DM4 C`|KS X 1001-1987 extended, main plane of Apple/Elex extension (HangulTalk), Apple mappings|
+|`IRR 7 G*DM4 C`|KS X 1001-2002, updated mappings from Unihan database|
 |`IRR ? G*DM4 D`|JIS X 0212:1990|
 |`IRR 0 G*DM4 D`|JIS X 0212 with va/vi/ve/vo|
 |`IRR 1 G*DM4 D`|JIS X 0212, Open Group version for JIS-Roman based EUC-JP|

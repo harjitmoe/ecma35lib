@@ -290,7 +290,7 @@ g94nbytes = {tuple(b"@"): ("ir042/nec", ("ir042/ibm", "ir042/nec", "ir042/1990pi
                             "ir168/docomo", "ir168/kddisym", "ir168/sbank", "ir168/kddipict",
                             "ir087/fujitsu", "ir168/arib", "ir168/mac-raw", "ir168/macps-raw"),
                            ("ir087", "ir168")),
-             tuple(b"C"): ("ir149/2002", ("ir149/altutc", "ir149/1998", "ir149/2002", "ir149/mac", "ir149/ibm", "ir149/mac-unicode2_1", "ir149/mac-unicode3_2"), ("ir149",)),
+             tuple(b"C"): ("ir149/unihan", ("ir149/altutc", "ir149/1998", "ir149/2002", "ir149/mac", "ir149/ibm", "ir149/mac-unicode2_1", "ir149/mac-unicode3_2", "ir149/unihan"), ("ir149",)),
              tuple(b"D"): ("ir159",
                            ("ir159/va", "ir159/osf", "ir159/osfa", "ir159/osfm", "ir159/ibm", "ir159/icueuc"),
                            ("ir159",)),

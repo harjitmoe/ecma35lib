@@ -159,3 +159,6 @@
 '["decode_main_plane_gl", ["eacc-maxmat.txt"], {"set96": true, "mapper": "remove_deprecated_cjkci"}]', (42547200, 3912477)
 '["decode_main_plane_gl", ["cccii-nonkanji.txt"], {"set96": true}]', (46459904, 4093937)
 '["decode_extra_plane_big5", ["index-big5_updated.txt"], {"mapper": "remove_deprecated_cjkci"}]', (50553856, 69766)
+'["read_unihan_planes", ["UCD/Unihan_IRGSources-15.txt", "kIRG_KSource", "K0"], {}]', (50624000, 67680)
+'["read_unihan_planes", ["UCD/Unihan_IRGSources-15.txt", "kIRG_KSource", "K2"], {}]', (50692096, 76749)
+'["read_unihan_planes", ["UCD/Unihan_IRGSources-15.txt", "kIRG_KSource", "K3"], {}]', (50768896, 58518)
