@@ -12,10 +12,10 @@
 #   mapping has been moved to the correct disunified character (or a newer compatibility ideograph
 #   which decomposes to the correct unified ideograph).
 deprecated_compatibility_ideographs = {
-    0x2F949: 0x04039,
+    #0x2F949: 0x04039, # U+FAD4 disunified from U+4039 (to U+9FC3) makes U+2F949 redundant but valid
     #
     0x2F89F: 0x05FF9,
-    0x0FAD4: 0x09FC3,
+    0x0FAD4: 0x09FC3, # See above.
     #
     0x0F92C: 0x0FA2E,
     0x0F9B8: 0x0FA2F,
