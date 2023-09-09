@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020, 2021, 2022.
+# By HarJIT in 2020, 2021, 2022, 2023.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -258,39 +258,9 @@ def _codepfmt(j, oflength):
         ret = f"<span class=puacdpt>{ret}</span>"
     return ret
 
-# Using an annoyingly old version of JS here for compatibility's sake
-_abbreviation_script = """\
-<script>
-var abbreviations = """ + json.dumps(charclass.abbreviations) + """;
-window.onload = function () {
-    var abbrs = document.getElementsByTagName("abbr");
-    for (var i = 0; i < abbrs.length; i += 1) {
-        var e = abbrs[i];
-        var itx = (e.innerText || e.textContent).replace(/^\s+|\s+$/g, '');
-        if (typeof abbreviations[itx] != "undefined") {
-            e.setAttribute("title", abbreviations[itx]);
-        }
-    }
-};
-</script>
-"""
-
-# Would rather use this but less compatible
-_abbreviation_script_newbrowsers = """\
-<script>
-var abbreviations = """ + json.dumps(charclass.abbreviations) + """;
-window.addEventListener("load", () =>
-    [...document.getElementsByTagName("abbr")].filter(e => 
-        typeof abbreviations[e.innerText.trim()] != "undefined" 
-    ).map(e =>
-        e.setAttribute("title", abbreviations[e.innerText.trim()])
-    )
-);
-</script>
-"""
-
 def _classify(cdisplayi, outfile):
-    print("(<abbr>{}</abbr>)".format(charclass.initialism(cdisplayi[0])), file=outfile)
+    initialism = charclass.initialism(cdisplayi[0])
+    print(f"(<abbr title=\"{charclass.abbreviations[initialism]}\">{initialism}</abbr>)", file=outfile)
 
 def is_kanji(cdisplayi):
     if not cdisplayi:
@@ -574,7 +544,6 @@ def dump_plane(outfile, planefunc, kutenfunc,
     zplarray = tuple(zip(*tuple(zip(*nonvacant_sets))[1])) if nonvacant_sets else ()
     h = ", part {:d}".format(part) if part else ""
     print("<!DOCTYPE html><meta charset='utf-8'/><title>{}{}</title>".format(planefunc(number), h), file=outfile)
-    print(_abbreviation_script, file=outfile)
     if css:
         print("<link rel='stylesheet' href='{}'>".format(css), file=outfile)
     if blot:
@@ -700,7 +669,6 @@ def dump_preview(outfile, planename, kutenfunc, number, array, *, lang="zh-TW", 
     edpt = (edx - 1) * 94 if not is_96 else edx * 96
     h = ", part {:d}".format(part) if part else ""
     print("<!DOCTYPE html><meta charset='utf-8'/><title>{}{}</title>".format(planename, h), file=outfile)
-    print(_abbreviation_script, file=outfile)
     if css:
         print("<link rel='stylesheet' href='{}'>".format(css), file=outfile)
     if blot:
