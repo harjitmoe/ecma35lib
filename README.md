@@ -270,6 +270,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR = G*DM4 G`|CNS 11643 plane 1, per Yasuoka's mappings|
 |`IRR ? G*DM4 H`|CNS 11643 plane 2|
 |`IRR 1 G*DM4 H`|CNS 11643 plane 2, Big5 mappings|
+|`IRR 5 G*DM4 H`|CNS 11643 plane 2, Unihan mappings|
 |`IRR ? G*DM4 I`|CNS 11643-1992 plane 3|
 |`IRR 0 G*DM4 I`|CNS 11643-1988 plane 14|
 |`IRR 1 G*DM4 I`|CNS 11643-1988 plane 14 with extensions, as submitted to the IRG|
@@ -279,26 +280,31 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 5 G*DM4 I`|CNS 11643-1992 plane 3, per former ICU ISO-2022-CN-EXT mappings|
 |`IRR 6 G*DM4 I`|CNS 11643-1992 plane 3, per ICU EUC-TW 2014 mappings|
 |`IRR 7 G*DM4 I`|CNS 11643-1992 plane 3, per Yasuoka's mappings|
+|`IRR 8 G*DM4 I`|CNS 11643-1992 plane 3, per Unihan mappings|
 |`IRR ? G*DM4 J`|CNS 11643-1992 plane 4|
 |`IRR 0 G*DM4 J`|CNS 11643-1992 plane 4, as officially defined in Taiwan|
 |`IRR 1 G*DM4 J`|CNS 11643-1992 plane 4, per former ICU ISO-2022-CN-EXT mappings|
 |`IRR 2 G*DM4 J`|CNS 11643-1992 plane 4, per ICU EUC-TW 2014 mappings|
 |`IRR 3 G*DM4 J`|CNS 11643-1992 plane 4, per Yasuoka's mappings|
+|`IRR 4 G*DM4 J`|CNS 11643-1992 plane 4, per Unihan mappings|
 |`IRR ? G*DM4 K`|CNS 11643-1992 plane 5|
 |`IRR 0 G*DM4 K`|CNS 11643-1992 plane 5, as officially defined in Taiwan|
 |`IRR 1 G*DM4 K`|CNS 11643-1992 plane 5, per former ICU ISO-2022-CN-EXT mappings|
 |`IRR 2 G*DM4 K`|CNS 11643-1992 plane 5, per ICU EUC-TW 2014 mappings|
 |`IRR 3 G*DM4 K`|CNS 11643-1992 plane 5, per Yasuoka's mappings|
+|`IRR 4 G*DM4 K`|CNS 11643-1992 plane 5, per Unihan mappings|
 |`IRR ? G*DM4 L`|CNS 11643-1992 plane 6|
 |`IRR 0 G*DM4 L`|CNS 11643-1992 plane 6, as officially defined in Taiwan|
 |`IRR 1 G*DM4 L`|CNS 11643-1992 plane 6, per former ICU ISO-2022-CN-EXT mappings|
 |`IRR 2 G*DM4 L`|CNS 11643-1992 plane 6, per ICU EUC-TW 2014 mappings|
 |`IRR 3 G*DM4 L`|CNS 11643-1992 plane 6, per Yasuoka's mappings|
+|`IRR 4 G*DM4 L`|CNS 11643-1992 plane 6, per Unihan mappings|
 |`IRR ? G*DM4 M`|CNS 11643-1992 plane 7|
 |`IRR 0 G*DM4 M`|CNS 11643-1992 plane 7, as officially defined in Taiwan|
 |`IRR 1 G*DM4 M`|CNS 11643-1992 plane 7, per former ICU ISO-2022-CN-EXT mappings|
 |`IRR 2 G*DM4 M`|CNS 11643-1992 plane 7, per ICU EUC-TW 2014 mappings|
 |`IRR 3 G*DM4 M`|CNS 11643-1992 plane 7, per Yasuoka's mappings|
+|`IRR 4 G*DM4 M`|CNS 11643-1992 plane 7, per Unihan mappings|
 |`IRR ? G*DM4 N`|KPS 9566-97|
 |`IRR 0 G*DM4 N`|KPS 9566-2003 (only the main plane unless in the UHC DOCS)|
 |`IRR 1 G*DM4 N`|KPS 9566-2011 (only the main plane unless in the UHC DOCS)|
@@ -322,6 +328,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR D G*DM4 ! 2`|Hong Kong Supplementary Character Set 2001 extension set (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`IRR E G*DM4 ! 2`|Hong Kong Supplementary Character Set 2004 extension set (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`IRR F G*DM4 ! 2`|Hong Kong Supplementary Character Set full (GCCS + 2008) extension set (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
+|`IRR G G*DM4 ! 2`|Hong Kong Supplementary Character Set full (GCCS + 2008) extension set, with some mappings updated due to disunifications within Unicode (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`IRR 0 G*DM4 ! 2`|IBM Big-5 ETEN-based in-plane extensions (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`IRR 1 G*DM4 ! 2`|Big5-ETEN with the subset of GCCS encoded with lead bytes following, not preceeding, the standard Big-5 assignments (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`IRR ? G*DM4 ! 3`|Non-ETEN Big5 kana and Cyrillic (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|

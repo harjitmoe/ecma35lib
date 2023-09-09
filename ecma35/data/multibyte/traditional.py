@@ -475,6 +475,15 @@ graphdata.gsets["aton-exts2"] = (94, 2, parsers.decode_extra_plane_big5(
 graphdata.gsets["big5e-exts"] = (94, 2, parsers.decode_extra_plane_big5(
     parsers.parse_file_format("Mozilla/big5e.txt"),
     "big5e.txt"))
+graphdata.gsets["hkscs-updated"] = hkscs_extras = (94, 2, parsers.fuse([
+    parsers.decode_extra_plane_big5(
+        parsers.parse_file_format("WHATWG/index-big5.txt"),
+        "index-big5_updated.txt",
+        mapper=deprecated_cjkci.remove_deprecated_cjkci), 
+    parsers.decode_extra_plane_big5(
+        parsers.parse_file_format("Mozilla/hkscs2004.txt", moz2004=True),
+        "hkscs2004.txt"),
+], "BIG5-HKSCS2008-updated.json"))
 graphdata.gsets["hkscs"] = hkscs_extras = (94, 2, parsers.fuse([
     parsers.decode_extra_plane_big5(
         parsers.parse_file_format("WHATWG/index-big5.txt"),
@@ -482,7 +491,7 @@ graphdata.gsets["hkscs"] = hkscs_extras = (94, 2, parsers.fuse([
     parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Mozilla/hkscs2004.txt", moz2004=True),
         "hkscs2004.txt"),
-], "BIG5-HKSCS2004.json"))
+], "BIG5-HKSCS2008.json"))
 graphdata.gsets["hkscs2004"] = (94, 2, parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Mozilla/hkscs2004.txt", moz2004=True),
         "hkscs2004.txt"))

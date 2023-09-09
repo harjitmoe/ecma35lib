@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020, 2021.
+# By HarJIT in 2020, 2021, 2023.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -22,7 +22,7 @@ annots = {
 }
 
 def _foo(label, inpt):
-    for n, (mebbepua, mebbenot) in enumerate(zip(inpt, graphdata.gsets["hkscs"][2])):
+    for n, (mebbepua, mebbenot) in enumerate(zip(inpt, graphdata.gsets["hkscs-updated"][2])):
         if mebbepua and mebbenot and (mebbepua != mebbenot) and ucd.category(chr(mebbepua[0])) == "Co":
             cdispmap[(label, n, mebbenot)] = mebbepua
             yield mebbenot
@@ -44,7 +44,7 @@ def _bar():
             yield i
 blendy = tuple(_bar())
 
-plane1 = (1, ("UTC <br/>BIG5.TXT", "Microsoft <br/>MS-950", "Python <br/>\"MS-950\"", "IBM <br/>IBM-950", "CNS Big5 <br/>Big5-2003", "CNS Big5 <br/>Big5-Plus", "CNS Big5 <br/>Big5-E", "ETEN", "HKSCS <br/>GCCS", "HKSCS <br/>1999", "HKSCS <br/>2001", "HKSCS <br/>2004", "HKSCS <br/>WHATWG", "WHATWG <br/>Encoder", "ChinaSea <br/>At-On 2.41", "ChinaSea <br/>At-On 2.50", "Dynalab <br/>Ext. A", "Dynalab <br/>Ext. B", "Monotype <br/>Extensions"), [
+plane1 = (1, ("UTC <br/>BIG5.TXT", "Microsoft <br/>MS-950", "Python <br/>\"MS-950\"", "IBM <br/>IBM-950", "CNS Big5 <br/>Big5-2003", "CNS Big5 <br/>Big5-Plus", "CNS Big5 <br/>Big5-E", "ETEN", "HKSCS <br/>GCCS", "HKSCS <br/>1999", "HKSCS <br/>2001", "HKSCS <br/>2004", "HKSCS <br/>WHATWG", "HKSCS <br/>Updated", "WHATWG <br/>Encoder", "ChinaSea <br/>At-On 2.41", "ChinaSea <br/>At-On 2.50", "Dynalab <br/>Ext. A", "Dynalab <br/>Ext. B", "Monotype <br/>Extensions"), [
           graphdata.gsets["utcbig5exts"][2],
           graphdata.gsets["ms950exts"][2],
           pseudomicrosoft,
@@ -58,6 +58,7 @@ plane1 = (1, ("UTC <br/>BIG5.TXT", "Microsoft <br/>MS-950", "Python <br/>\"MS-95
           tuple(_foo("HKSCS <br/>2001", graphdata.gsets["hkscs2001"][2])),
           graphdata.gsets["hkscs2004"][2],
           graphdata.gsets["hkscs"][2],
+          graphdata.gsets["hkscs-updated"][2],
           blendy,
           graphdata.gsets["aton-exts"][2],
           graphdata.gsets["aton-exts2"][2],

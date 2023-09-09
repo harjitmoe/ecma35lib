@@ -158,3 +158,4 @@
 '["decode_main_plane_gl", ["cccii-maxmat.txt"], {"set96": true, "mapper": "remove_deprecated_cjkci"}]', (38634496, 3912486)
 '["decode_main_plane_gl", ["eacc-maxmat.txt"], {"set96": true, "mapper": "remove_deprecated_cjkci"}]', (42547200, 3912477)
 '["decode_main_plane_gl", ["cccii-nonkanji.txt"], {"set96": true}]', (46459904, 4093937)
+'["decode_extra_plane_big5", ["index-big5_updated.txt"], {"mapper": "remove_deprecated_cjkci"}]', (50553856, 69766)
