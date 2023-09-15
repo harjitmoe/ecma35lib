@@ -162,3 +162,5 @@
 '["read_unihan_planes", ["UCD/Unihan_IRGSources-15.txt", "kIRG_KSource", "K0"], {}]', (50624000, 67680)
 '["read_unihan_planes", ["UCD/Unihan_IRGSources-15.txt", "kIRG_KSource", "K2"], {}]', (50692096, 76749)
 '["read_unihan_planes", ["UCD/Unihan_IRGSources-15.txt", "kIRG_KSource", "K3"], {}]', (50768896, 58518)
+'["decode_main_plane_whatwg", ["SJT-IDS.TXT"], {"mapper": "puatostandardmap"}]', (50827776, 65767)
+'["decode_main_plane_whatwg", ["SJT-IDS-supported.TXT"], {"mapper": "babelstone_update_map2"}]', (50893824, 60404)

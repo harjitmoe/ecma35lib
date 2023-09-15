@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020, 2021, 2022.
+# By HarJIT in 2020, 2021, 2022, 2023.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -66,7 +66,15 @@ plane7 = (7, ("Unihan G7", "GB16500"), [
           graphdata.gsets["the-other-gb7"][2],
           graphdata.gsets["gb16500"][2],
 ])
-KPLANE = 8
+plane7 = (7, ("Unihan G7", "GB16500"), [
+          graphdata.gsets["the-other-gb7"][2],
+          graphdata.gsets["gb16500"][2],
+])
+plane8 = (8, ("Subset", "PUA<br>BabelStone"), [
+          graphdata.gsets["sj11239"][2],
+          graphdata.gsets["sj11239/babelstonehan"][2],
+])
+KPLANE = 9
 planeK = (KPLANE, ("GB12052",), [
           graphdata.gsets["gb12052"][2],
 ])
@@ -80,6 +88,7 @@ titles = [
     "GB 13132",
     "nul points",
     "GB 16500",
+    "SJ 11239",
     "GB 12052",
 ]
 
@@ -145,7 +154,7 @@ for n, i in enumerate(graphdata.gsets["ir058/macraw"][2]):
 
 fnbn = lambda bn: "{:X}".format(bn) if bn != KPLANE else "K"
 
-for n, p in enumerate([plane0, plane1, plane2, plane3, plane4, plane5, plane7, planeK]):
+for n, p in enumerate([plane0, plane1, plane2, plane3, plane4, plane5, plane7, plane8, planeK]):
     for q in range(1, 7) if p[0] in (0, 7) else range(2, 7):
         bn = p[0]
         f = open("gbplane{}{}.html".format(fnbn(bn), chr(0x60 + q)), "w", encoding="utf-8")
@@ -166,7 +175,7 @@ for n, p in enumerate([plane0, plane1, plane2, plane3, plane4, plane5, plane7, p
         if q < 6:
             nexturl = "gbplane{}{}.html".format(fnbn(bn), chr(0x60 + q + 1))
             nextname = f"{currentbit}, part {q+1:d}"
-        elif bn < 8 and bn != 5:
+        elif bn < KPLANE and bn != 5:
             nextbn = bn + 1
             nexturl = "gbplane{}b.html".format(fnbn(nextbn))
             nextname = titles[nextbn] + ", part 2"
@@ -177,14 +186,18 @@ for n, p in enumerate([plane0, plane1, plane2, plane3, plane4, plane5, plane7, p
         planewarn = None
         if bn in (4, 5):
             planewarn = "The copious gaps shown in this plane are probably not actually empty, but rather a result of lack of mapping information (although this probably makes them <i>de facto</i> empty)."
+        elif bn == 8:
+            planewarn = "Not all of this plane exists in Unicode.&ensp;This plane is visualised mainly from BabelStone's <a href=\"https://babelstone.co.uk/CJK/SJT-IDS.TXT\">SJT-IDS.TXT</a>."
         #
+        showbmppuas = None if bn != 8 else (False, True)
         showgraph.dump_plane(f, planefunc if q > 1 else planefunc2,
                              kutenfunc, *p, lang="zh-CN" if bn != KPLANE else "ko-CN",
                              part=q, css="../css/codechart.css",
                              menuurl="/gb-conc.html", menuname="Guobiao code variant comparison",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
                              annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True,
-                             planewarn=planewarn, siglum="GB")
+                             planewarn=planewarn, siglum="GB", showbmppuas=showbmppuas,
+                             pua_collides=(bn == 8))
         f.close()
 
 

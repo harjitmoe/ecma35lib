@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020/2021.
+# By HarJIT in 2019/2020/2021/2023.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -718,6 +718,8 @@ def arrow_to_angle(arrow):
         return 90, False
     return 0, False
 
+_is_idc = lambda char: 0x2FF0 <= ord(char) < 0x3000 or ord(char) == 0x31EF
+
 def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
     sequence_inverse = sequence_big = sequence_small = sequence_bold = False
     if i[0] >= 0xF0000:
@@ -939,7 +941,7 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
         elif ucd.normalize("NFC", strep2) != strep2:
             # Not strictly supposed to have non-NFC verbatim characters in HTML (escape them).
             print(strep2.encode("ascii", errors="xmlcharrefreplace").decode("ascii"), file=outfile)
-        elif len(strep2) >= 3 and all(namedata.east_asian_width(ii) == "W" for ii in strep2):
+        elif len(strep2) >= 3 and all(namedata.east_asian_width(ii) == "W" for ii in strep2) and not _is_idc(strep2[0]):
             halflen = math.ceil(len(strep2) / 2)
             maybe_vertical = " vertical" if i[0] == 0xF863 else ""
             print(f"<span class='fourwideliga{maybe_vertical}' style='font-size: {1.5 / halflen}rem;'>", file=outfile)

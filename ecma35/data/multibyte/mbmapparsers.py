@@ -6,7 +6,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import sys, os, binascii, json, urllib.parse, shutil, itertools, dbm.dumb, collections.abc
+import sys, os, binascii, json, urllib.parse, shutil, itertools, dbm.dumb, collections.abc, re
 from ecma35.data import gccdata
 from ecma35.data.names import namedata
 
@@ -282,6 +282,54 @@ def parse_file_format(fil, *, twoway=False, prefer_sjis=False, skipstring=None, 
             byts, ucs = _i.split("\t", 2)[:2]
             pointer = int(byts.strip(), 10)
             yield pointer, parse_ucs_codepoints(ucs)
+
+_uplus_regex = re.compile(r"\bU[+][0-9A-Fa-f]+\b")
+def read_babelstone_update_file(fil):
+    def reader():
+        for _i in open(os.path.join(directory, fil), "r", encoding="utf-8-sig"):
+            if not _i.strip():
+                continue
+            frm, to = _uplus_regex.findall(_i)
+            yield (parse_ucs_codepoints(frm), parse_ucs_codepoints(to))
+    data = None
+    def puatostandardmap(pointer, ucs):
+        nonlocal data
+        data = data or dict(reader())
+        return data.get(ucs, ucs)
+    return puatostandardmap
+
+def parse_sjt11239_mapping_file(fil, *,
+        include_variation_selectors=True,
+        include_uncertain_mappings=False,
+        fallback_preferencer=None,
+        fallback_nothing_selector=None):
+    for _i in open(os.path.join(directory, fil), "r", encoding="utf-8-sig"):
+        if _i.startswith("#") or not _i.strip():
+            continue
+        columns = _i.rstrip().split("\t", 6)
+        ucs, vs, preview, kuten, radstridx, ids, uncertain = columns + [""] * (7 - len(columns))
+        ku, ten = tuple(int(j, 10) for j in kuten.split("-", 1))
+        pointer = ((ku - 1) * 94) + (ten - 1)
+        if uncertain.endswith("?") and include_uncertain_mappings:
+            ucs, vs = uncertain.split(None, 1)[0].split("+", 1)
+        ucs = int(ucs, 16) if ucs else None
+        ids = ids.lstrip("^").rstrip("$")
+        is_pua = ucs and (0xE000 <= ucs < 0xF900 or ucs >= 0xF0000)
+        if (not ucs) or (ids and "-" not in ids and "?" not in ids and "(" not in ids and is_pua and fallback_preferencer and fallback_preferencer((ucs,))):
+            if fallback_nothing_selector and fallback_nothing_selector((ucs,)):
+                continue
+            yield pointer, tuple(ord(i) for i in ids)
+        elif is_pua and fallback_nothing_selector and fallback_nothing_selector((ucs,)):
+            continue
+        else:
+            ucsvs = (ucs,)
+            if vs and include_variation_selectors:
+                vsno = int(vs.lstrip("VS"), 10)
+                if vsno <= 16:
+                    ucsvs = (ucs, 0xFE00 + (vsno - 1))
+                else:
+                    ucsvs = (ucs, 0xE0100 + (vsno - 17))
+            yield pointer, ucsvs
 
 def _sjis_xkt_to_mkt(ku, ten):
     if ku <= 94:

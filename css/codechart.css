@@ -27,6 +27,13 @@
     /* format() are "woff", "woff2", "truetype" (not "ttf"), "opentype", "embedded-opentype", "svg" */
     src: local('Quivira'), url('https://harjit.moe/fonts/Quivira.woff2') format('woff2');
 }
+@font-face {
+    font-family: 'BabelStone Han PUA';
+    font-style: normal;
+    font-weight: 400;
+    /* format() are "woff", "woff2", "truetype" (not "ttf"), "opentype", "embedded-opentype", "svg" */
+    src: url('https://harjit.moe/fonts/BabelStoneHanPUA.woff2') format('woff2'), url('https://harjit.moe/fonts/BabelStoneHanPUA.woff') format('woff'), local('BabelStone Han PUA');
+}
 
 /* Sadly border-collapse: collapse; borks the borders on the position: sticky; */
 table {
@@ -292,7 +299,7 @@ table {
 
 .cpc.spua[lang|="zh"], .codepicture.spua[lang|="zh"] {
     /* TW-Sung-Plus and TW-Kai-Plus are the Gov-TW-supplied SPUA fonts for CNS */
-    font-family: TW-Sung-Plus, TW-Kai-Plus;
+    font-family: TW-Sung-Plus, TW-Kai-Plus, BabelStone Han PUA;
     font-display: block;
     font-size: 1.5rem;
 }
