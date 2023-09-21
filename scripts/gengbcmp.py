@@ -20,11 +20,13 @@ import json
 # №3: GB-13131: Code of Chinese Ideogram Set for Information Interchange, the 3rd Supplementary Set
 # №4: GB-7590: Code of Chinese Ideogram Set for Information Interchange, the 4th Supplementary Set
 # №5: GB-13132: Code of Chinese Ideogram Set for Information Interchange, the 5th Supplementary Set
-# There appears to be no №6
+# There appears to be no №6 (unless GB-12052 is it?)
 # №7: GB-16500: Code of Chinese Ideograms Set for Information Interchange, the 7th Supplementary Set 
 # Unihan uses "G7" for a different source which isn't a CCS, and calls GB-16500 GE, but its title indicates it is in fact №7
+# №8: SJ-11239: Chinese Ideograms Coded Character Set for Information Interchange, the 8th Supplementary Set 
 # GB-8565.2: Information Processing - Coded Character Sets for Text Communication - Part 2: Graphic Characters (Unihan calls it G8; it is an expansion of GB-2312 though, not a plane in its own right.)
 # GB-12052: Korean Coded Character Set for Information Interchange (Unihan's GK)
+# GB-15564: Code of Chinese ideogram set for teletext broadcasting--HongKong subset
 
 # ITU T.101-C is 1994 (2nd ed; 1st ed didn't include this one afaict); IR-165 reg is 1992.
 MACSET = "Apple"
