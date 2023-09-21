@@ -50,21 +50,21 @@ plane1 = (1, ("GB 12345<br>1990", "GB 12345<br>UTC", "GB 12345<br>Unihan Ext"), 
           graphdata.gsets["ir058/hant-utc"][2],
           graphdata.gsets["ir058/hant-full"][2],
 ])
-plane2 = (2, ("GB7589",), [
+plane2 = (2, ("GB 7589<br>Unihan", "GB 7589<br>IRGN2302"), [
+          graphdata.gsets["gb7589-unihan"][2],
           graphdata.gsets["gb7589"][2],
 ])
-plane3 = (3, ("GB13131",), [
+plane3 = (3, ("GB 13131<br>Unihan", "GB 13131<br>IRGN2302"), [
+          graphdata.gsets["gb13131-unihan"][2],
           graphdata.gsets["gb13131"][2],
 ])
-plane4 = (4, ("GB7590",), [
+plane4 = (4, ("GB 7590<br>Unihan", "GB 7590<br>IRGN2302"), [
+          graphdata.gsets["gb7590-unihan"][2],
           graphdata.gsets["gb7590"][2],
 ])
-plane5 = (5, ("GB13132",), [
+plane5 = (5, ("GB 13132<br>Unihan", "GB 13132<br>IRGN2302"), [
+          graphdata.gsets["gb13132-unihan"][2],
           graphdata.gsets["gb13132"][2],
-])
-plane7 = (7, ("Unihan G7", "GB16500"), [
-          graphdata.gsets["the-other-gb7"][2],
-          graphdata.gsets["gb16500"][2],
 ])
 plane7 = (7, ("Unihan G7", "GB16500"), [
           graphdata.gsets["the-other-gb7"][2],
@@ -185,7 +185,7 @@ for n, p in enumerate([plane0, plane1, plane2, plane3, plane4, plane5, plane7, p
         #
         planewarn = None
         if bn in (4, 5):
-            planewarn = "The copious gaps shown in this plane are probably not actually empty, but rather a result of lack of mapping information (although this probably makes them <i>de facto</i> empty)."
+            planewarn = "The copious gaps shown in this plane are not actually empty, but rather a result of lack of mapping information (although this probably makes them <i>de facto</i> empty)."
         elif bn == 8:
             planewarn = "Not all of this plane exists in Unicode.&ensp;This plane is visualised mainly from BabelStone's <a href=\"https://babelstone.co.uk/CJK/SJT-IDS.TXT\">SJT-IDS.TXT</a>."
         #

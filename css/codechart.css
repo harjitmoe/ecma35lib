@@ -96,7 +96,7 @@ thead:first-of-type th:first-child {
     font-size: 0.7rem;
 }
 .codepicture[lang|="zh"], .cpc[lang|="zh"] {
-    font-family: Noto Serif CJK TC, Source Han Serif TC, Noto Sans CJK TC, Source Han Sans TC, TW-Sung-Ext-B, TW-Kai-Ext-B, HanaMinB, BabelStone Han, Noto Sans Symbols, Quivira, Symbola, serif;
+    font-family: Noto Serif CJK TC, Source Han Serif TC, Noto Sans CJK TC, Source Han Sans TC, TW-Sung-Ext-B, TW-Kai-Ext-B, HanaMinB, BabelStone Han, Noto Sans Symbols, Quivira, Symbola, "CJKUI Extension I 622", serif;
     font-size: 1.5rem;
     line-height: 2rem;
 }

@@ -341,10 +341,16 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR ? G*DM4 ! 6`|KDDI Emoji extensions for Shift\_JIS (as above), pictorial zodiac variant|
 |`IRR 0 G*DM4 ! 6`|KDDI Emoji extensions for Shift\_JIS (as above), symbolic zodiac variant|
 |`G*DM4 ! 7`|SoftBank Emoji extensions for Shift\_JIS (as above)|
-|`IRR ? G*DM4 ! 8`|GB 13131 (supplementary traditional).|
-|`IRR 0 G*DM4 ! 8`|GB 7589 (supplementary simplified)&mdash;This is generated from the GB 13131 mappings, and may be minorly inaccurate in places.|
-|`IRR ? G*DM4 ! 9`|GB 13132 (further supplementary traditional)&ensp;This is based on Unihan source data, and has several gaps.|
-|`IRR 0 G*DM4 ! 9`|GB 7590 (further supplementary simplified)&mdash;This is generated from the GB 13132 mappings, and may be minorly inaccurate in places.|
+|`IRR ? G*DM4 ! 8`|Currently same as `IRR 1 G*DM4 ! 8` but may change in future.|
+|`IRR 0 G*DM4 ! 8`|Almost GB 7589 (supplementary simplified), based on the Unihan database without [IRGN2302](https://appsrv.cse.cuhk.edu.hk/~irg/irg/irg50/IRGN2302EddieLi.pdf) corrections&mdash;this is generated from the GB 13131 mappings, and may be minorly inaccurate in places.|
+|`IRR 1 G*DM4 ! 8`|Almost GB 13131 (supplementary traditional), based on the Unihan database without [IRGN2302](https://appsrv.cse.cuhk.edu.hk/~irg/irg/irg50/IRGN2302EddieLi.pdf) corrections.|
+|`IRR 2 G*DM4 ! 8`|GB 7589 (supplementary simplified) with [IRGN2302](https://appsrv.cse.cuhk.edu.hk/~irg/irg/irg50/IRGN2302EddieLi.pdf) corrections&mdash;this is generated from the GB 13131 mappings, and may be minorly inaccurate in places.|
+|`IRR 3 G*DM4 ! 8`|GB 13131 (supplementary traditional) with [IRGN2302](https://appsrv.cse.cuhk.edu.hk/~irg/irg/irg50/IRGN2302EddieLi.pdf) corrections.|
+|`IRR ? G*DM4 ! 9`|Currently same as `IRR 1 G*DM4 ! 9` but may change in future.|
+|`IRR 0 G*DM4 ! 9`|Almost GB 7590 (further supplementary simplified), based on the Unihan database without [IRGN2302](https://appsrv.cse.cuhk.edu.hk/~irg/irg/irg50/IRGN2302EddieLi.pdf) corrections&mdash;this is generated from the GB 13131 mappings, and may be minorly inaccurate in places.|
+|`IRR 1 G*DM4 ! 9`|Almost GB 13132 (further supplementary traditional), based on the Unihan database without [IRGN2302](https://appsrv.cse.cuhk.edu.hk/~irg/irg/irg50/IRGN2302EddieLi.pdf) corrections.|
+|`IRR 2 G*DM4 ! 9`|GB 7590 (further supplementary simplified)&mdash;this is generated from the GB 13132 mappings, and may be minorly inaccurate in places.|
+|`IRR 3 G*DM4 ! 9`|GB 13132 (further supplementary traditional).|
 |`IRR ? G*DM4 ! :`|HangulTalk second plane (accepted by HangulTalk filter in G3 slot), Apple mappings|
 |`IRR 0 G*DM4 ! :`|HangulTalk second plane (accepted by HangulTalk filter in G3 slot), updated mappings (recommended; default)|
 |`IRR 1 G*DM4 ! :`|HangulTalk second plane (accepted by HangulTalk filter in G3 slot), marginally newer (but not *that* up-to-date) Apple mappings given by Apple in mapping file comments|

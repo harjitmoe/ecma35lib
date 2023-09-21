@@ -306,6 +306,14 @@ graphdata.gsets["gb12052"] = (94, 2, parsers.decode_main_plane_euc(
 #   citing 13131/13132 and the former citing 7589/7590), except for that kGB3 and kGB5 have many
 #   more gaps (they seem to only cover the URO).
 #
+# A few of the Unihan mappings for GB 13131 and 13132 are off by one:
+#   https://appsrv.cse.cuhk.edu.hk/~irg/irg/irg50/IRGN2302EddieLi.pdf
+#   Unihan's 03-16-65 thru 03-16-82 should be 03-16-66 thru 03-16-83
+#     The 03-16-65 position should be ⿰亻兮 or some traditional variant of it (U+202F9 𠋹 ???).
+#     Unihan's 03-16-83 shouldn't be present.
+#   Unihan's 05-67-11 thru 05-67-24 should be 05-67-12 thru 05-67-25
+#   Unihan's 05-74-05 thru 05-74-15 should be 05-74-04 thru 05-74-14
+#
 # Handful of GB 7589 / 13131 not mapped to Unicode in kIRG_GSource:
 #     U+72AE at 19-57 (traditional / simplified)
 #     U+5829 at 20-53 (traditional; simplified not in Unicode)
@@ -318,7 +326,7 @@ graphdata.gsets["gb12052"] = (94, 2, parsers.decode_main_plane_euc(
 #     U+79C4 at 59-51 (traditional / simplified)
 #     U+8226 at 69-53 (traditional / simplified)
 #     U+84C3 at 73-83 (traditional / simplified)
-graphdata.gsets["gb13131"] = gb13131 = (94, 2, parsers.fuse([
+graphdata.gsets["gb13131-unihan"] = (94, 2, parsers.fuse([
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_GSource", "G3"),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G3"),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "G3"),
@@ -333,15 +341,30 @@ graphdata.gsets["gb13131"] = gb13131 = (94, 2, parsers.fuse([
         (None,) * ((94 * 58) + 50) + ((0x79C4,),),
         (None,) * ((94 * 68) + 52) + ((0x8226,),),
         (None,) * ((94 * 72) + 82) + ((0x84C3,),),
-    ], "GB13131.json"))
-graphdata.gsets["gb13132"] = gb13132 = (94, 2, parsers.fuse([
+    ], "GB13131-Unihan.json"))
+_pseudogb3 = graphdata.gsets["gb13131-unihan"][2]
+graphdata.gsets["gb13131"] = (94, 2, (
+    *_pseudogb3[:1474],
+    (0xFFFD,),
+    *_pseudogb3[1474:1492],
+    *_pseudogb3[1493:]))
+graphdata.gsets["gb13132-unihan"] = (94, 2, parsers.fuse([
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_GSource", "G5"),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G5"),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "G5"),
         parsers.read_unihan_planes("UCD/Unihan_OtherMappings-15.txt", "kGB5", kutenform=True),
         parsers.read_unihan_planes("UCD/Unihan_OtherMappings-14.txt", "kGB5", kutenform=True),
         parsers.read_unihan_planes("UCD/Unihan_OtherMappings-13.txt", "kGB5", kutenform=True),
-    ], "GB13132.json"))
+    ], "GB13132-Unihan.json"))
+_pseudogb5 = graphdata.gsets["gb13132-unihan"][2]
+graphdata.gsets["gb13132"] = (94, 2, (
+    *_pseudogb5[:6214],
+    None,
+    *_pseudogb5[6214:6228],
+    *_pseudogb5[6229:6865],
+    *_pseudogb5[6866:6877],
+    None,
+    *_pseudogb5[6877:]))
 #
 # Small handful of GB16500 not in kIRG_GSource in Unihan 13.0 (Unihan 14.0 unmaps a few more):
 #     U+6FF9 at 32-29
@@ -524,27 +547,41 @@ resolve = {(0x8b78,): (0x8bea,), (0x8b32,): (0x2c904,), (0x9c44,): (0x2b68b,),
            (0x9c68,): (0x9cbf,), (0x9766,): (0x4a44,), (0x7060,): (0x30710,), 
            (0x9d82,): (0x2cdfc,)}
 tradat = parsers.parse_variants("UCD/Unihan_Variants.txt")
-_gb7589fn = os.path.join(parsers.cachedirectory, "GB7589.json")
-_gb7590fn = os.path.join(parsers.cachedirectory, "GB7590.json")
+_gb7589fn = os.path.join(parsers.cachedirectory, "GB7589-Actual.json")
+_gb7590fn = os.path.join(parsers.cachedirectory, "GB7590-Actual.json")
+_pseudogb7589fn = os.path.join(parsers.cachedirectory, "GB7589-Unihan.json")
+_pseudogb7590fn = os.path.join(parsers.cachedirectory, "GB7590-Unihan.json")
 def blonkit(i):
     ret = resolve.get(i, (tradat.get(i, [[],[]])[1] + [i])[0])
     if ret in gb2312_1986[2]:
         return i
     return ret
-if (not os.path.exists(_gb7589fn)) or (not os.path.exists(_gb7590fn)):
-    _gb7589 = tuple(blonkit(i) for i in gb13131[2])
-    _gb7590 = tuple(blonkit(i) for i in gb13132[2])
+if (not os.path.exists(_gb7589fn)) or (not os.path.exists(_gb7590fn)) or (not os.path.exists(_pseudogb7589fn)) or (not os.path.exists(_pseudogb7590fn)):
+    _gb7589 = tuple(blonkit(i) for i in graphdata.gsets["gb13131"][2])
+    _gb7590 = tuple(blonkit(i) for i in graphdata.gsets["gb13132"][2])
+    _pseudogb7589 = tuple(blonkit(i) for i in graphdata.gsets["gb13131-unihan"][2])
+    _pseudogb7590 = tuple(blonkit(i) for i in graphdata.gsets["gb13132-unihan"][2])
     f = open(_gb7589fn, "w")
     f.write(json.dumps(_gb7589))
     f.close()
     f = open(_gb7590fn, "w")
     f.write(json.dumps(_gb7590))
     f.close()
+    f = open(_pseudogb7589fn, "w")
+    f.write(json.dumps(_pseudogb7589))
+    f.close()
+    f = open(_pseudogb7590fn, "w")
+    f.write(json.dumps(_pseudogb7590))
+    f.close()
 else:
     _gb7589 = parsers.LazyJSON(os.path.basename(_gb7589fn))
     _gb7590 = parsers.LazyJSON(os.path.basename(_gb7590fn))
+    _pseudogb7589 = parsers.LazyJSON(os.path.basename(_pseudogb7589fn))
+    _pseudogb7590 = parsers.LazyJSON(os.path.basename(_pseudogb7590fn))
 graphdata.gsets["gb7589"] = gb7589 = (94, 2, _gb7589)
 graphdata.gsets["gb7590"] = gb7590 = (94, 2, _gb7590)
+graphdata.gsets["gb7589-unihan"] = gb7589 = (94, 2, _pseudogb7589)
+graphdata.gsets["gb7590-unihan"] = gb7590 = (94, 2, _pseudogb7590)
 # Some traditional forms remain, but I guess this is good enough. They would presumably be forms
 #  where simplified counterparts do not exist in Unicode anyway.
 
