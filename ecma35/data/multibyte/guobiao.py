@@ -355,6 +355,9 @@ graphdata.gsets["gb13132-unihan"] = (94, 2, parsers.fuse([
         parsers.read_unihan_planes("UCD/Unihan_OtherMappings-15.txt", "kGB5", kutenform=True),
         parsers.read_unihan_planes("UCD/Unihan_OtherMappings-14.txt", "kGB5", kutenform=True),
         parsers.read_unihan_planes("UCD/Unihan_OtherMappings-13.txt", "kGB5", kutenform=True),
+        #
+        # Referenced by UTC L2/21-044 (IRG N2446) from both GB-7590 and SJ-11239:
+        (None,) * ((94 * 78) + 56) + ((0x2B737,),),
     ], "GB13132-Unihan.json"))
 _pseudogb5 = graphdata.gsets["gb13132-unihan"][2]
 graphdata.gsets["gb13132"] = (94, 2, (
