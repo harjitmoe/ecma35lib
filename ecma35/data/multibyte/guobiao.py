@@ -309,7 +309,7 @@ graphdata.gsets["gb12052"] = (94, 2, parsers.decode_main_plane_euc(
 # A few of the Unihan mappings for GB 13131 and 13132 are off by one:
 #   https://appsrv.cse.cuhk.edu.hk/~irg/irg/irg50/IRGN2302EddieLi.pdf
 #   Unihan's 03-16-65 thru 03-16-82 should be 03-16-66 thru 03-16-83
-#     The 03-16-65 position should be ⿰亻兮 or some traditional variant of it (U+202F9 𠋹 ???).
+#     The 03-16-65 position should be U+201B5 𠆵 or some traditional variant of it.
 #     Unihan's 03-16-83 shouldn't be present.
 #   Unihan's 05-67-11 thru 05-67-24 should be 05-67-12 thru 05-67-25
 #   Unihan's 05-74-05 thru 05-74-15 should be 05-74-04 thru 05-74-14
@@ -345,7 +345,7 @@ graphdata.gsets["gb13131-unihan"] = (94, 2, parsers.fuse([
 _pseudogb3 = graphdata.gsets["gb13131-unihan"][2]
 graphdata.gsets["gb13131"] = (94, 2, (
     *_pseudogb3[:1474],
-    (0xFFFD,),
+    (0x201B5,),
     *_pseudogb3[1474:1492],
     *_pseudogb3[1493:]))
 graphdata.gsets["gb13132-unihan"] = (94, 2, parsers.fuse([
