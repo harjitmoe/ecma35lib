@@ -324,8 +324,8 @@ g94nbytes = {tuple(b"@"): ("ir042/nec", ("ir042/ibm", "ir042/nec", "ir042/1990pi
              tuple(b"!6"): ("kddipictsjisext", ("kddisymsjisext",), ("kddipictsjisext",)),
              tuple(b"!7"): "sbanksjisext",
              # GB 7589/13131 and GB 7590/13132. Insofar as I can support them.
-             tuple(b"!8"): ("gb13131", ("gb7589-unihan", "gb13131-unihan", "gb7589", "gb13131"), ("gb13131-unihan",)),
-             tuple(b"!9"): ("gb13132", ("gb7590-unihan", "gb13132-unihan", "gb7590", "gb13132"), ("gb13132-unihan",)),
+             tuple(b"!8"): ("gb13131-irgn2376", ("gb7589-non-irgn2302", "gb13131-irgn2376", "gb7589", "gb13131-irgn2302"), ("gb13131-unihan",)),
+             tuple(b"!9"): ("gb13132-irgn2376", ("gb7590-non-irgn2302", "gb13132-irgn2376", "gb7590", "gb13132-irgn2302"), ("gb13132-unihan",)),
              tuple(b"!:"): ("mac-elex-extras", 
                             ("mac-elex-extras", "mac-elex-extras-unicode4_0", "mac-elex-extras-unicode2_1", "mac-elex-extras-adobe", "mac-elex-extras-nishiki-teki"),
                             ("mac-elex-extras-unicode3_2",)),

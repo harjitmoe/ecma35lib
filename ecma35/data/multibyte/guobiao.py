@@ -306,13 +306,20 @@ graphdata.gsets["gb12052"] = (94, 2, parsers.decode_main_plane_euc(
 #   citing 13131/13132 and the former citing 7589/7590), except for that kGB3 and kGB5 have many
 #   more gaps (they seem to only cover the URO).
 #
-# A few of the Unihan mappings for GB 13131 and 13132 are off by one:
-#   https://appsrv.cse.cuhk.edu.hk/~irg/irg/irg50/IRGN2302EddieLi.pdf
-#   Unihan's 03-16-65 thru 03-16-82 should be 03-16-66 thru 03-16-83
-#     The 03-16-65 position should be U+201B5 𠆵 or some traditional variant of it.
-#     Unihan's 03-16-83 shouldn't be present.
-#   Unihan's 05-67-11 thru 05-67-24 should be 05-67-12 thru 05-67-25
-#   Unihan's 05-74-05 thru 05-74-15 should be 05-74-04 thru 05-74-14
+# A few of the Unihan mappings for GB 13131 and 13132 are off by one versus the published GB 7589
+#   and 7590 standards per IRG N2302:
+#     https://appsrv.cse.cuhk.edu.hk/~irg/irg/irg50/IRGN2302EddieLi.pdf
+#   - Unihan's 03-16-65 thru 03-16-82 should be 02-16-66 thru 02-16-83
+#     - The 02-16-65 position should be U+201B5 (𠆵); Unihan's 03-16-83 shouldn't be present.
+#   - Unihan's 05-67-11 thru 05-67-24 should be 04-67-12 thru 04-67-25
+#   - Unihan's 05-74-05 thru 05-74-15 should be 04-74-04 thru 04-74-14
+# Note that the Chinese national body, having initially considered them per IRG N2293 (see also
+#   IRG N2290 / UTC L2/18-189), seemingly rejected the IRG N2302 corrections in IRG N2376.
+#   Possibly, this means they reflect regions of non-homology between the (published) GB 7589 and
+#   7590 and the (unpublished) GB 13131 and 13132?
+#     https://appsrv.cse.cuhk.edu.hk/~irg/irg/irg50/IRGN2293MiscEditorialReportIRG50.docx
+#     https://www.unicode.org/L2/L2018/18189-irgn-2290-irg50-recs.pdf
+#     https://appsrv.cse.cuhk.edu.hk/~irg/irg/irg52/IRGN2376_UpdateGRef.pdf
 #
 # Handful of GB 7589 / 13131 not mapped to Unicode in kIRG_GSource:
 #     U+72AE at 19-57 (traditional / simplified)
@@ -326,7 +333,7 @@ graphdata.gsets["gb12052"] = (94, 2, parsers.decode_main_plane_euc(
 #     U+79C4 at 59-51 (traditional / simplified)
 #     U+8226 at 69-53 (traditional / simplified)
 #     U+84C3 at 73-83 (traditional / simplified)
-graphdata.gsets["gb13131-unihan"] = (94, 2, parsers.fuse([
+graphdata.gsets["gb13131-irgn2376"] = (94, 2, parsers.fuse([
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_GSource", "G3"),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G3"),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "G3"),
@@ -342,13 +349,13 @@ graphdata.gsets["gb13131-unihan"] = (94, 2, parsers.fuse([
         (None,) * ((94 * 68) + 52) + ((0x8226,),),
         (None,) * ((94 * 72) + 82) + ((0x84C3,),),
     ], "GB13131-Unihan.json"))
-_pseudogb3 = graphdata.gsets["gb13131-unihan"][2]
-graphdata.gsets["gb13131"] = (94, 2, (
-    *_pseudogb3[:1474],
+_irgn2376gb3 = graphdata.gsets["gb13131-irgn2376"][2]
+graphdata.gsets["gb13131-irgn2302"] = (94, 2, (
+    *_irgn2376gb3[:1474],
     (0x201B5,),
-    *_pseudogb3[1474:1492],
-    *_pseudogb3[1493:]))
-graphdata.gsets["gb13132-unihan"] = (94, 2, parsers.fuse([
+    *_irgn2376gb3[1474:1492],
+    *_irgn2376gb3[1493:]))
+graphdata.gsets["gb13132-irgn2376"] = (94, 2, parsers.fuse([
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_GSource", "G5"),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G5"),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "G5"),
@@ -356,18 +363,83 @@ graphdata.gsets["gb13132-unihan"] = (94, 2, parsers.fuse([
         parsers.read_unihan_planes("UCD/Unihan_OtherMappings-14.txt", "kGB5", kutenform=True),
         parsers.read_unihan_planes("UCD/Unihan_OtherMappings-13.txt", "kGB5", kutenform=True),
         #
-        # Referenced by UTC L2/21-044 (IRG N2446) from both GB-7590 and SJ-11239:
-        (None,) * ((94 * 78) + 56) + ((0x2B737,),),
+        (None,) * ((94 * (16 - 1)) + 5 - 1) + ((0x53C0,),),
+        (None,) * ((94 * (16 - 1)) + 13 - 1) + ((0x596D,),),
+        (None,) * ((94 * (16 - 1)) + 21 - 1) + ((0x269A7,),),
+        (None,) * ((94 * (16 - 1)) + 63 - 1) + ((0x20A69,),),
+        (None,) * ((94 * (17 - 1)) + 31 - 1) + ((0x4FB4,),),
+        (None,) * ((94 * (19 - 1)) + 34 - 1) + ((0x3563,),),
+        (None,) * ((94 * (19 - 1)) + 63 - 1) + ((0x27708,),),
+        (None,) * ((94 * (21 - 1)) + 23 - 1) + ((0x20B38,),),
+        (None,) * ((94 * (21 - 1)) + 29 - 1) + ((0x20B57,),),
+        (None,) * ((94 * (21 - 1)) + 55 - 1) + ((0x5725,),),
+        (None,) * ((94 * (22 - 1)) + 92 - 1) + ((0x21523,),),
+        (None,) * ((94 * (23 - 1)) + 49 - 1) + ((0x2AA07,),),
+        (None,) * ((94 * (24 - 1)) + 14 - 1) + ((0x2D1D2,),),
+        (None,) * ((94 * (24 - 1)) + 46 - 1) + ((0x54F6, 0xE0100),),
+        (None,) * ((94 * (26 - 1)) + 64 - 1) + ((0x2AA26,),),
+        (None,) * ((94 * (27 - 1)) + 83 - 1) + ((0x21F0C,),),
+        (None,) * ((94 * (30 - 1)) + 1 - 1) + ((0x21A04,),),
+        (None,) * ((94 * (31 - 1)) + 25 - 1) + ((0x21D0B,),),
+        (None,) * ((94 * (31 - 1)) + 27 - 1) + ((0x8294, 0xE0100),),
+        (None,) * ((94 * (32 - 1)) + 54 - 1) + ((0x21827,),),
+        (None,) * ((94 * (32 - 1)) + 71 - 1) + ((0x218B6,),),
+        (None,) * ((94 * (34 - 1)) + 35 - 1) + ((0x24959,),),
+        (None,) * ((94 * (34 - 1)) + 60 - 1) + ((0x746C, 0xE0102),),
+        (None,) * ((94 * (34 - 1)) + 66 - 1) + ((0x74D2,),),
+        (None,) * ((94 * (36 - 1)) + 22 - 1) + ((0x234E7,),),
+        (None,) * ((94 * (39 - 1)) + 18 - 1) + ((0x30869,),),
+        (None,) * ((94 * (40 - 1)) + 24 - 1) + ((0x2166E,),),
+        (None,) * ((94 * (40 - 1)) + 85 - 1) + ((0x22F3E,),),
+        (None,) * ((94 * (41 - 1)) + 25 - 1) + ((0x22F44,),),
+        (None,) * ((94 * (41 - 1)) + 33 - 1) + ((0x22F43,),),
+        (None,) * ((94 * (41 - 1)) + 34 - 1) + ((0x20B70,),),
+        (None,) * ((94 * (41 - 1)) + 37 - 1) + ((0x22FAB,),),
+        (None,) * ((94 * (41 - 1)) + 39 - 1) + ((0x27AEC,),),
+        (None,) * ((94 * (41 - 1)) + 41 - 1) + ((0x23014,),),
+        (None,) * ((94 * (44 - 1)) + 72 - 1) + ((0x22BF3,),),
+        (None,) * ((94 * (45 - 1)) + 59 - 1) + ((0x64A1, 0xE0100),),
+        (None,) * ((94 * (46 - 1)) + 15 - 1) + ((0x23B86,),),
+        (None,) * ((94 * (46 - 1)) + 28 - 1) + ((0x23BCD,),),
+        (None,) * ((94 * (48 - 1)) + 81 - 1) + ((0x27BF8,),),
+        (None,) * ((94 * (50 - 1)) + 81 - 1) + ((0x22601,),),
+        (None,) * ((94 * (54 - 1)) + 36 - 1) + ((0x3659,),),
+        (None,) * ((94 * (58 - 1)) + 94 - 1) + ((0x2576C,),),
+        (None,) * ((94 * (59 - 1)) + 44 - 1) + ((0x258D9,),),
+        (None,) * ((94 * (62 - 1)) + 51 - 1) + ((0x259B8,),),
+        (None,) * ((94 * (63 - 1)) + 69 - 1) + ((0x277E8, 0xE0100),),
+        (None,) * ((94 * (64 - 1)) + 9 - 1) + ((0x29504,),),
+        (None,) * ((94 * (64 - 1)) + 78 - 1) + ((0x868E,),),
+        (None,) * ((94 * (64 - 1)) + 94 - 1) + ((0x86C2,),),
+        (None,) * ((94 * (68 - 1)) + 59 - 1) + ((0x26960,),),
+        (None,) * ((94 * (68 - 1)) + 64 - 1) + ((0x81EE,),),
+        (None,) * ((94 * (69 - 1)) + 32 - 1) + ((0x2762C,),),
+        (None,) * ((94 * (69 - 1)) + 50 - 1) + ((0x2E5BD,),),
+        (None,) * ((94 * (72 - 1)) + 80 - 1) + ((0x242BE,),),
+        (None,) * ((94 * (75 - 1)) + 40 - 1) + ((0x7DA4,),),
+        (None,) * ((94 * (78 - 1)) + 66 - 1) + ((0x280E8,),),
+        (None,) * ((94 * (79 - 1)) + 57 - 1) + ((0x2B737,),),
+        (None,) * ((94 * (80 - 1)) + 71 - 1) + ((0x27CBE,),),
+        (None,) * ((94 * (82 - 1)) + 60 - 1) + ((0x27A74,),),
+        (None,) * ((94 * (83 - 1)) + 28 - 1) + ((0x2338D,),),
+        (None,) * ((94 * (83 - 1)) + 34 - 1) + ((0x29092,),),
+        (None,) * ((94 * (83 - 1)) + 75 - 1) + ((0x29167,),),
+        (None,) * ((94 * (83 - 1)) + 88 - 1) + ((0x4A3F,),),
+        (None,) * ((94 * (86 - 1)) + 63 - 1) + ((0x9C9E,),),
+        (None,) * ((94 * (87 - 1)) + 71 - 1) + ((0x4A9E,),),
+        (None,) * ((94 * (87 - 1)) + 72 - 1) + ((0x4A9E,),),
+        (None,) * ((94 * (88 - 1)) + 85 - 1) + ((0x2CCD4,),),
+        (None,) * ((94 * (89 - 1)) + 91 - 1) + ((0x4D1F,),),
     ], "GB13132-Unihan.json"))
-_pseudogb5 = graphdata.gsets["gb13132-unihan"][2]
-graphdata.gsets["gb13132"] = (94, 2, (
-    *_pseudogb5[:6214],
+_irgn2376gb5 = graphdata.gsets["gb13132-irgn2376"][2]
+graphdata.gsets["gb13132-irgn2302"] = (94, 2, (
+    *_irgn2376gb5[:6214],
     None,
-    *_pseudogb5[6214:6228],
-    *_pseudogb5[6229:6865],
-    *_pseudogb5[6866:6877],
+    *_irgn2376gb5[6214:6228],
+    *_irgn2376gb5[6229:6865],
+    *_irgn2376gb5[6866:6877],
     None,
-    *_pseudogb5[6877:]))
+    *_irgn2376gb5[6877:]))
 #
 # Small handful of GB16500 not in kIRG_GSource in Unihan 13.0 (Unihan 14.0 unmaps a few more):
 #     U+6FF9 at 32-29
@@ -546,9 +618,12 @@ graphdata.gsets["sj11239"] = (94, 2, parsers.decode_main_plane_whatwg(
 #     GB 13132:
 #   0x7060 灠 → 0x6f24 漤,  0x30710 𰜐 (漤 is more common in both and in GB 2312; 𰜐 is simplified 灠)
 #   0x9d82 鶂 → 0x2cdfc 𬷼, 0x31288 𱊈 (trad 鷁, simp 鹢 is today more common; favour SIP over TIP)
+# Other special cases:
+#   U+6AD4 櫔 → U+6803 栃 (櫔 is a Japanese kokuji for horse-chestnut also used in place-names;
+#       栃 is its shinjitai form (and used for the place-names in Simplified Chinese))
 resolve = {(0x8b78,): (0x8bea,), (0x8b32,): (0x2c904,), (0x9c44,): (0x2b68b,), 
            (0x9c68,): (0x9cbf,), (0x9766,): (0x4a44,), (0x7060,): (0x30710,), 
-           (0x9d82,): (0x2cdfc,)}
+           (0x9d82,): (0x2cdfc,), (0x6ad4,): (0x6803,)}
 tradat = parsers.parse_variants("UCD/Unihan_Variants.txt")
 _gb7589fn = os.path.join(parsers.cachedirectory, "GB7589-Actual.json")
 _gb7590fn = os.path.join(parsers.cachedirectory, "GB7590-Actual.json")
@@ -560,10 +635,10 @@ def blonkit(i):
         return i
     return ret
 if (not os.path.exists(_gb7589fn)) or (not os.path.exists(_gb7590fn)) or (not os.path.exists(_pseudogb7589fn)) or (not os.path.exists(_pseudogb7590fn)):
-    _gb7589 = tuple(blonkit(i) for i in graphdata.gsets["gb13131"][2])
-    _gb7590 = tuple(blonkit(i) for i in graphdata.gsets["gb13132"][2])
-    _pseudogb7589 = tuple(blonkit(i) for i in graphdata.gsets["gb13131-unihan"][2])
-    _pseudogb7590 = tuple(blonkit(i) for i in graphdata.gsets["gb13132-unihan"][2])
+    _gb7589 = tuple(blonkit(i) for i in graphdata.gsets["gb13131-irgn2302"][2])
+    _gb7590 = tuple(blonkit(i) for i in graphdata.gsets["gb13132-irgn2302"][2])
+    _pseudogb7589 = tuple(blonkit(i) for i in graphdata.gsets["gb13131-irgn2376"][2])
+    _pseudogb7590 = tuple(blonkit(i) for i in graphdata.gsets["gb13132-irgn2376"][2])
     f = open(_gb7589fn, "w")
     f.write(json.dumps(_gb7589))
     f.close()
@@ -583,8 +658,8 @@ else:
     _pseudogb7590 = parsers.LazyJSON(os.path.basename(_pseudogb7590fn))
 graphdata.gsets["gb7589"] = gb7589 = (94, 2, _gb7589)
 graphdata.gsets["gb7590"] = gb7590 = (94, 2, _gb7590)
-graphdata.gsets["gb7589-unihan"] = gb7589 = (94, 2, _pseudogb7589)
-graphdata.gsets["gb7590-unihan"] = gb7590 = (94, 2, _pseudogb7590)
+graphdata.gsets["gb7589-non-irgn2302"] = gb7589 = (94, 2, _pseudogb7589)
+graphdata.gsets["gb7590-non-irgn2302"] = gb7590 = (94, 2, _pseudogb7590)
 # Some traditional forms remain, but I guess this is good enough. They would presumably be forms
 #  where simplified counterparts do not exist in Unicode anyway.
 
