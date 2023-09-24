@@ -621,9 +621,10 @@ graphdata.gsets["sj11239"] = (94, 2, parsers.decode_main_plane_whatwg(
 # Other special cases:
 #   U+6AD4 櫔 → U+6803 栃 (櫔 is a Japanese kokuji for horse-chestnut also used in place-names;
 #       栃 is its shinjitai form (and used for the place-names in Simplified Chinese))
+#   U+8518 蔘 → U+26C9E+(E0100) 𦲞󠄀 (not sure why this doesn't get mapped in Unihan)
 resolve = {(0x8b78,): (0x8bea,), (0x8b32,): (0x2c904,), (0x9c44,): (0x2b68b,), 
            (0x9c68,): (0x9cbf,), (0x9766,): (0x4a44,), (0x7060,): (0x30710,), 
-           (0x9d82,): (0x2cdfc,), (0x6ad4,): (0x6803,)}
+           (0x9d82,): (0x2cdfc,), (0x6ad4,): (0x6803,), (0x8518,): (0x26c9e,)}
 tradat = parsers.parse_variants("UCD/Unihan_Variants.txt")
 _gb7589fn = os.path.join(parsers.cachedirectory, "GB7589-Actual.json")
 _gb7590fn = os.path.join(parsers.cachedirectory, "GB7590-Actual.json")
