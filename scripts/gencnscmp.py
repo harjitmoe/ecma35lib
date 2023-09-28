@@ -184,7 +184,7 @@ def kutenfunc(number, row, cell):
     if number == 1:
         euc = "{:02x}{:02x}".format(0xA0 + row, 0xA0 + cell)
     elif cell < 0:
-        euc = "8e{:02x}{:x}_".format(0xa0 + row, (0xA0 - cell) >> 4)
+        euc = "8e{:02x}{:02x}{:x}_".format(0xA0 + number, 0xa0 + row, (0xA0 - cell) >> 4)
     else:
         euc = "8e{:02x}{:02x}{:02x}".format(0xA0 + number, 0xA0 + row, 0xA0 + cell)
     big5 = ""
