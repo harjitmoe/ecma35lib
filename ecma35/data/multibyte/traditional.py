@@ -258,6 +258,7 @@ graphdata.gsets["cns-eucg2"] = (94, 3, parsers.fuse([
 ], "CSIC-All.json"))
 graphdata.gsets["cns-eucg2-yasuoka"] = (94, 3, cns_yasuoka)
 graphdata.gsets["cns-eucg2-govtw"] = (94, 3, cns_gov)
+graphdata.gsets["cns-eucg2-unihan"] = (94, 3, cns_unihan)
 # The version of EUC-TW used by ICU, with standard assignments in planes 1-7 and 15,
 #   a user-defined area in plane 12, and IBM corporate assignments in plane 13.
 #   Note that this is incompatible with the current standard's use of planes 12 and 13.

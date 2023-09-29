@@ -57,7 +57,7 @@ plane1 = (1, ("UTC Big5", "UTC CNS", "MS Big5", "Mac Big5", "IBM Big5", "Web Big
 ])
 
 print("Loading 2")
-plane2 = (2, ("Big5", "CNS 11643", "Unihan CNS"), [
+plane2 = (2, ("Big5", "GOV-TW CNS", "Unihan CNS"), [
           graphdata.gsets["ir172/big5"][2],
           graphdata.gsets["ir172"][2],
           graphdata.gsets["ir172/unihan"][2],
@@ -127,39 +127,46 @@ plane9 = (9, ("GOV-TW CNS",), [
 ])
 
 print("Loading 10")
-planeA = (10, ("GOV-TW CNS",), [
+planeA = (10, ("GOV-TW CNS", "Unihan CNS"), [
           graphdata.gsets["cns-eucg2-govtw"][2][94*94*9 : 94*94*10],
+          graphdata.gsets["cns-eucg2-unihan"][2][94*94*9 : 94*94*10],
 ])
 
 print("Loading 11")
-planeB = (11, ("GOV-TW CNS",), [
+planeB = (11, ("GOV-TW CNS", "Unihan CNS"), [
           graphdata.gsets["cns-eucg2-govtw"][2][94*94*10 : 94*94*11],
+          graphdata.gsets["cns-eucg2-unihan"][2][94*94*10 : 94*94*11],
 ])
 
 print("Loading 12")
-planeC = (12, ("IBM EUC", "ICU EUC 2014", "GOV-TW CNS",), [
+planeC = (12, ("IBM EUC", "ICU EUC 2014", "GOV-TW CNS", "Unihan CNS"), [
           graphdata.gsets["cns-eucg2-ibm-full"][2][94*94*11 : 94*94*12],
           graphdata.gsets["cns-eucg2-icu-2014-full"][2][94*94*11 : 94*94*12],
           graphdata.gsets["cns-eucg2-govtw"][2][94*94*11 : 94*94*12],
+          graphdata.gsets["cns-eucg2-unihan"][2][94*94*11 : 94*94*12],
 ])
 
 print("Loading 13")
-planeD = (13, ("IBM EUC", "ICU EUC 2014", "GOV-TW CNS",), [
+planeD = (13, ("IBM EUC", "ICU EUC 2014", "GOV-TW CNS", "Unihan CNS"), [
           graphdata.gsets["cns-eucg2-ibm-full"][2][94*94*12 : 94*94*13],
           graphdata.gsets["cns-eucg2-icu-2014-full"][2][94*94*12 : 94*94*13],
           graphdata.gsets["cns-eucg2-govtw"][2][94*94*12 : 94*94*13],
+          graphdata.gsets["cns-eucg2-unihan"][2][94*94*12 : 94*94*13],
 ])
 
 print("Loading 14")
-planeE = (14, ("GOV-TW CNS",), [
+planeE = (14, ("GOV-TW CNS", "Unihan CNS", "Output"), [
           graphdata.gsets["cns-eucg2-govtw"][2][94*94*13 : 94*94*14],
+          graphdata.gsets["cns-eucg2-unihan"][2][94*94*13 : 94*94*14],
+          graphdata.gsets["cns-eucg2"][2][94*94*13 : 94*94*14],
 ])
 
 print("Loading 15")
-planeF = (15, ("ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Output"), [
+planeF = (15, ("ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Unihan CNS", "Output"), [
           graphdata.gsets["cns-eucg2-icu-old"][2][94*94*8 : 94*94*9], # yes, this is correct.
           graphdata.gsets["cns-eucg2-icu-2014-full"][2][94*94*14 : 94*94*15],
           graphdata.gsets["cns-eucg2-govtw"][2][94*94*14 : 94*94*15],
+          graphdata.gsets["cns-eucg2-unihan"][2][94*94*14 : 94*94*15],
           graphdata.gsets["cns-eucg2"][2][94*94*14 : 94*94*15],
 ])
 
@@ -325,7 +332,8 @@ annots = {
              "numbers 1 through 10 here, like the other mappings.",
  (1, 6, 94): "CNS uses a slightly modified classical radical system, in which ⼡ is not included, "
              "and its characters are listed under ⼢ instead (see 01-07-34 below).\u2002This is "
-             "presumably an extension to allow all of Unicode's classical radicals to be encoded.",
+             "presumably an extension to allow all of Unicode's classical radicals to be encoded; "
+             "compare 08-84-57.",
  (1, 7, 0): "Regarding the next two-and-a-bit rows: mappings too old to have made use of Unicode's "
             "classical radical codepoints either miss these out altogether (they're outside Big5, "
             "so arguably expendable), or many-to-one map them to their ordinary Chinese character "
@@ -352,7 +360,7 @@ annots = {
               "as opposed to just Big5 use U+5F5E.&ensp;Although Windows-950 uses U+5F5D, IBM-1373 " 
               "(otherwise identical to Windows-950 as far as the CNS-mapped part of Big5 is "
               "concerned, hence it is not shown here) actually follows IBM-950 instead in this "
-              "specific location in mapping it to U+5F5E.",
+              "specific location in mapping it to U+5F5E.&ensp;Compare 03-55-68.",
  (2, 1, 41): 'Compare 13-01-10, Ψ-66-63.',
  (2, 23, 79): "I'm following RFC 1922 mappings between CNS and Big5 here, even though the gov-tw "
               "mappings seem to differ.&ensp;Not sure if these two are consistently supposed "
@@ -362,7 +370,9 @@ annots = {
               "mappings seem to differ.&ensp;Not sure if these two are consistently supposed "
               "to look different in all styles (their TW Kai reference glyphs seem to be the same, "
               "although the TW Sung ones differ).&ensp;Compare 02-23-79.",
+ (2, 44, 65): "Compare 14-69-76.",
  (3, 1, 24): "Compare 01-04-31.",
+ (3, 55, 68): "Compare 01-86-33.",
  (3, 66, 38): "Between 1992 and 2007, this was the last <i>de jure</i> codepoint on this "
               "plane.\u200203-66-39 through 03-68-21 were removed and distributed amongst plane 4 "
               "in 1992 (at the same time this plane was moved from an extension in plane 14 to a "
@@ -406,6 +416,7 @@ annots = {
  (12, 1, 0): "Plane 12 is used by IBM and ICU for an IBM-designated user defined area.&ensp;It is no longer considered private-use in the upstream standard however.",
  (13, 1, 0): "Plane 13 is used by IBM and ICU for IBM corporate asssignments, mostly for round-trip from other IBM encodings.&ensp;It is no longer considered private-use in the upstream standard however.",
  (13, 1, 10): "In IBM's private use area fallback scheme (code pages 1445 and 1449, 1449 in this case) which is being used here, U+F83E is a duplicate U+4EDD (仝, the first being 02-01-41).&ensp;U+02BA here is a fallback for a second U+3003 (〃, the first being 01-01-81).&ensp;These two dittoes are included here by IBM for the pupose of round-tripping Big5, since they are duplicated in the ETEN extensions, at Ψ-66-62 and Ψ-66-63.",
+ (14, 69, 76): "Compare 02-44-65.",
  (15, 8, 82): "Compare 04-08-07",
  (15, 16, 80): "U+3DB7 and U+2420E (CJKB) are "
                "<a href='https://unicode.org/wg2/docs/n2644.pdf'>known exact duplicates</a>.",
