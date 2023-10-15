@@ -88,10 +88,27 @@ def cnsmapper_swaparrows_thrashscii2(pointer, ucs):
         return (ucs[0], 0xF87F)
     return ucs
 
-def cnsmapper_contraredundantcjkb(pointer, ucs):
+def cnsmapper_contrabadcjkb(pointer, ucs):
     # U+2420E arguably should never have been added: https://unicode.org/wg2/docs/n2644.pdf
     if ucs == (0x2420E,):
         return (0x3DB7,)
+    # U+272F0 is a yuurei-itaiji of U+86D7 with a horizontal dividing line and one insect radical
+    #   (sort of a hybrid between U+86D7 and its itaiji U+27499). CNS 11643's 7-496B (07-41-75)
+    #   displays identically to U+27499 (with two insect radicals), despite being the only IRG
+    #   source for U+272F0:
+    #     https://www.cns11643.gov.tw/wordView.jsp?ID=477547
+    # The T-source glyph for U+272F0 currently (Unicode 15.1) follows the UCS2003 glyph, not the
+    #   CNS 11643 glyph, thus avoiding being an exact duplicate of U+27499; note further that it
+    #   is a Y-variant, not a Z-variant, of U+27499. Thus, the correct Unicode mapping for
+    #   EUC-TW \x8E\xA7\xC9\xEB is U+27499, despite the fact that no published mapping table
+    #   actually uses it.
+    # Further info (note that interlinks between Michael Kaplan's and Andrew West's sites no longer
+    #   work due to both having changed URL in the interim):
+    #   - https://archives.miloush.net/michkap/archive/2007/11/22/6462768.html (see comments)
+    #   - https://www.babelstone.co.uk/Blog/2007/12/cjk-b-case-study-1-u272f0.html
+    #   - https://archives.miloush.net/michkap/archive/2007/12/03/6643180.html
+    if pointer in (3834, 56850) and ucs == (0x272F0,):
+        return (0x27499,)
     return ucs
 
 planesize = 94 * 94
@@ -102,21 +119,30 @@ cns_bmp = parsers.decode_main_plane_gl(
 cns_sip = parsers.decode_main_plane_gl(
     parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 2.txt"),
     "CNS2UNICODE_Unicode 2.txt",
-    mapper = cnsmapper_contraredundantcjkb)
+    mapper = cnsmapper_contrabadcjkb)
 cns_spuaa = parsers.decode_main_plane_gl(
     parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
     "CNS2UNICODE_Unicode 15.txt",
     mapper = cnsmapper_contraspua)
+
+cns_unihan_amended_parts = []
+for _i in range(1, 16):
+    cns_unihan_amended_parts.append(
+        (None,) * (94 * 94 * (_i - 1)) + 
+        parsers.read_unihan_planes(
+            "UCD/Unihan_IRGSources-15.txt", "kIRG_TSource", f"T{_i:X}",
+            mapper=cnsmapper_contrabadcjkb))
+cns_unihan_amended = parsers.fuse(cns_unihan_amended_parts, "Unihan-CNS-11643-Amended.json")
+
 cns_unihan_parts = []
 for _i in range(1, 16):
     cns_unihan_parts.append(
         (None,) * (94 * 94 * (_i - 1)) + 
-        parsers.read_unihan_planes(
-            "UCD/Unihan_IRGSources-15.txt", "kIRG_TSource", f"T{_i:X}",
-            mapper=cnsmapper_contraredundantcjkb))
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_TSource", f"T{_i:X}"))
 cns_unihan = parsers.fuse(cns_unihan_parts, "Unihan-CNS-11643.json")
+
 cns = parsers.fuse([
-    cns_unihan,
+    cns_unihan_amended,
     cns_bmp,
     cns_sip,
     cns_spuaa,

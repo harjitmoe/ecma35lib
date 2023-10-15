@@ -382,6 +382,10 @@ graphdata.gsets["ir159/osfa"] = (94, 2, parsers.fuse([
 graphdata.gsets["ir159/osfm"] = (94, 2, parsers.fuse([
     osfeuc_0212m, osfeuc_ibm, osfeuc_puatwo], "OSF--eucJP-0212m-complete.json"))
 
+graphdata.gsets["japan-plane-3"] = (94, 2, parsers.decode_main_plane_gl(
+    parsers.parse_file_format("Custom/jasource.txt"),
+    "jasource.txt"))
+
 graphdata.gsets["ibmjapan/1992"] = (190, 2, parsers.decode_main_plane_dbebcdic(parsers.parse_file_format("ICU/ibm-930_P120-1999.ucm"), "ibm-930_P120-1999.ucm"))
 graphdata.ebcdicdbcs["300"] = graphdata.ebcdicdbcs["930"] = graphdata.ebcdicdbcs["931"] = graphdata.ebcdicdbcs["939"] = graphdata.ebcdicdbcs["9122"] = "ibmjapan/1992"
 graphdata.chcpdocs["300"] = graphdata.chcpdocs["930"] = graphdata.chcpdocs["931"] = graphdata.chcpdocs["939"] = graphdata.chcpdocs["9122"] = "ebcdic"

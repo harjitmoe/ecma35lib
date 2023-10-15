@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020, 2021.
+# By HarJIT in 2020, 2021, 2023.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -82,25 +82,38 @@ plane2 = (2, ("IBM SJIS Ext<br>78JIS Ver.", "IBM SJIS Ext<br>MS / HTML5", "DoCoM
           graphdata.gsets["ir229"][2],
 ])
 
+plane3 = (3, ("Plane 3",), [
+          graphdata.gsets["japan-plane-3"][2],
+])
+
 def planefunc(number, mapname=None):
     if mapname is None:
+        if number == 3:
+            return "Unified Japanese IT Vendors 1993"
         return "JIS plane {:d}".format(number)
     return ""
 
 def kutenfunc(number, row, cell):
-    if number == 1:
-        euc = "{:02x}{:02x}".format(0xA0 + row, 0xA0 + cell)
-        jis = "(JIS {:02x}{:02x})<br>".format(0x20 + row, 0x20 + cell)
+    fmteuc = sjis = jis = ""
+    if number in (1, 2):
+        if number == 1:
+            euc = "{:02x}{:02x}".format(0xA0 + row, 0xA0 + cell)
+            jis = "(JIS {:02x}{:02x})<br>".format(0x20 + row, 0x20 + cell)
+        else:
+            assert number == 2
+            euc = "8f{:02x}{:02x}".format(0xA0 + row, 0xA0 + cell)
+            jis = ""
+        fmteuc = "(<abbr title='Extended Unix Code'>EUC</abbr> {})".format(euc)
+        if number == 2:
+            fmteuc += "<br>(<abbr title='Microsoft Extended Unix Code'>MSEUC</abbr> {:02x}{:02x})".format(0xA0 + row, 0x20 + cell)
+        sjis = to_sjis(number, row, cell)
+    if cell >= 0:
+        anchorlink = "<a href='#{:d}.{:d}.{:d}'>{:02d}-{:02d}-{:02d}</a>".format(
+                     number, row, cell, number, row, cell)
     else:
-        assert number == 2
-        euc = "8f{:02x}{:02x}".format(0xA0 + row, 0xA0 + cell)
-        jis = ""
-    fmteuc = "(<abbr title='Extended Unix Code'>EUC</abbr> {})".format(euc)
-    if number == 2:
-        fmteuc += "<br>(<abbr title='Microsoft Extended Unix Code'>MSEUC</abbr> {:02x}{:02x})".format(0xA0 + row, 0x20 + cell)
-    sjis = to_sjis(number, row, cell)
-    anchorlink = "<a href='#{:d}.{:d}.{:d}'>{:02d}-{:02d}-{:02d}</a>".format(
-                 number, row, cell, number, row, cell)
+        anchorlink = "<a href='#{:d}.{:d}.{:d}'>{:02d}-{:02d}-{}</a>".format(
+                     number, row, -cell, number, row, 
+                     "{:02d}+".format(-cell) if cell != -1 else "*")
     return "{}<br>{}{}{}".format(anchorlink, jis, fmteuc, sjis)
 
 cdispmap = cellemojidata.hints2pua.copy()
@@ -556,13 +569,21 @@ annots = {
               'ISO-IR-229 registration (registered for the second plane of '
               '2000 JIS, but not superseded upon 2004 JIS) visibly shows a 鬜 '
               '(U+9B1C) though.',
+ (3, 1, 0):
+    "Best as I can ascertain, this is a largely artifical or fictitious ISO/IEC 2022 (ECMA-35) "
+    "based charset, i.e. one which was never used anywhere (it has no ISO-IR registration, "
+    "and EUC-JP uses all four G-sets already so there's no provision for using it from there "
+    "either).</p><p>It may have been created purely as an impetus for getting these characters "
+    "into Unicode; they appear in CJK Extension A, except for two which were already present as "
+    '"compatibility" ideographs sourced from IBM Japan (they are two of the twelve that are '
+    "actually CJK Unified Ideographs despite being in the CJK Compatibility Ideographs block).",
 }
 
 blot = ""
 if os.path.exists("__analyt__"):
     blot = open("__analyt__").read()
 
-for n, p in enumerate([plane1, plane2]):
+for n, p in enumerate([plane1, plane2, plane3]):
     for q in range(1, 7):
         bn = n + 1
         f = open("jisplane{:X}{}.html".format(bn, chr(0x60 + q)), "w", encoding="utf-8")
@@ -579,7 +600,7 @@ for n, p in enumerate([plane1, plane2]):
         if q < 6:
             nexturl = "jisplane{:X}{}.html".format(bn, chr(0x60 + q + 1))
             nextname = "JIS plane {:d}, part {:d}".format(bn, q + 1)
-        elif bn < 2:
+        elif bn < 3:
             nexturl = "jisplane{:X}a.html".format(bn + 1)
             nextname = "JIS plane {:d}, part 1".format(bn + 1)
         showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ja", part=q, css="../css/codechart.css",
