@@ -362,6 +362,7 @@ annots = {
               "concerned, hence it is not shown here) actually follows IBM-950 instead in this "
               "specific location in mapping it to U+5F5E.&ensp;Compare 03-55-68.",
  (2, 1, 41): 'Compare 13-01-10, Ψ-66-63.',
+ (2, 8, 48): "This has a \"meat\" radical, not \"moon\"; compare 06-12-03.",
  (2, 23, 79): "I'm following RFC 1922 mappings between CNS and Big5 here, even though the gov-tw "
               "mappings seem to differ.&ensp;Not sure if these two are consistently supposed "
               "to look different in all styles (their TW Kai reference glyphs seem to be the same, "
@@ -370,6 +371,7 @@ annots = {
               "mappings seem to differ.&ensp;Not sure if these two are consistently supposed "
               "to look different in all styles (their TW Kai reference glyphs seem to be the same, "
               "although the TW Sung ones differ).&ensp;Compare 02-23-79.",
+ (2, 38, 33): "This has a \"meat\" radical, not \"moon\"; compare 05-31-70.",
  (2, 44, 65): "Compare 14-69-76.",
  (3, 1, 24): "Compare 01-04-31.",
  (3, 55, 68): "Compare 01-86-33.",
@@ -395,24 +397,41 @@ annots = {
  (3, 70, 17): 'Compare 04-07-74.',
  (3, 70, 80): 'Compare 04-16-34.',
  (3, 70, 87): 'Compare 04-67-25.',
- (4, 2, 59): "Compare 04-06-05",
+ (4, 2, 59): "Compare 04-06-05.",
  (4, 3, 65): 'Compare 03-68-63.',
- (4, 6, 5): "Compare 04-02-59",
+ (4, 6, 5): "Compare 04-02-59.",
+ (4, 7, 69): "This has a \"meat\" radical, not \"moon\"; compare 05-06-42.",
  (4, 7, 74): 'Compare 03-70-17.',
- (4, 8, 7): "Compare 15-08-82",
+ (4, 8, 7): "Compare 15-08-82.",
  (4, 8, 93): 'Compare 03-68-77.',
  (4, 10, 78): 'Compare 03-69-44.',
  (4, 16, 34): 'Compare 03-70-80.',
  (4, 24, 60): 'Compare 03-69-34.',
- (4, 25, 38): 'Compare 06-43-90; see <a href="https://unicode.org/wg2/docs/n3196.pdf">WG2 N3196</a> for explanation of this particular pair.',
+
+ (4, 25, 38): 'Compare 06-43-90; see <a href="https://unicode.org/wg2/docs/n3196.pdf">WG2 N3196</a> for explanation of this particular pair.&ensp;U+FAD4 normalises to U+4039, which turns out to be inappropriate (a similar appearance and similar meaning but different pronunciation to the character intended at this position), hence it was later superseded by the later-added U+9FC3.',
+
  (4, 36, 56): 'Compare 03-69-59.',
  (4, 51, 28): "Compare 15-49-93",
  (4, 67, 25): 'Compare 03-70-87.',
  (4, 72, 47): "Compare 05-79-52",
  (5, 79, 52): "Compare 04-72-47",
+
+ (5, 6, 42): "This is a <a href=\"https://en.wikipedia.org/wiki/Radical_130#Variant_forms\">moon-versus-meat</a> issue, see <a href='https://www.unicode.org/wg2/docs/n5083-IRG%20N2391_Errata%20report%20for%20WG2%20submission_TCA.pdf'>IRG N2391 / WG2 N5083 / UTC L2/19-241</a>; specifically, this one is supposed to have a \"moon\" radical.&ensp;U+2F8D7 compatibility-normalises to U+43D9 (䏙), which has a \"meat\" radical; compare 04-07-69.",
+
+ (5, 27, 48): "This is a <a href=\"https://en.wikipedia.org/wiki/Radical_130#Variant_forms\">moon-versus-meat</a> issue, see <a href='https://www.unicode.org/wg2/docs/n5083-IRG%20N2391_Errata%20report%20for%20WG2%20submission_TCA.pdf'>IRG N2391 / WG2 N5083 / UTC L2/19-241</a>; specifically, this one is supposed to have a \"meat\" radical.&ensp;U+2F984 does compatibility-normalise to U+440B; however, it is redundant when 06-41-94 is mapped to the newer U+4DBC rather than to U+440B.",
+
+ (5, 31, 70): "This is a <a href=\"https://en.wikipedia.org/wiki/Radical_130#Variant_forms\">moon-versus-meat</a> issue, see <a href='https://www.unicode.org/wg2/docs/n5083-IRG%20N2391_Errata%20report%20for%20WG2%20submission_TCA.pdf'>IRG N2391 / WG2 N5083 / UTC L2/19-241</a>; specifically, this one is supposed to have a \"moon\" radical.&ensp;U+2F8DA compatibility-normalises to U+6721 (朡), which has a \"meat\" radical; compare 02-38-33.",
+
  (6, 1, 3): "U+3405 㐅 is the number five (also 𠄡, but much more commonly 五 or 伍, hence 㐅 is in the CJKA block).&ensp;U+4E44 乄, on the other hand, is a duplicate encoding in the URO (JIS X 0212's fault) of 〆 (U+3006 IDEOGRAPHIC CLOSING MARK), which is a Japanese abbreviation for words pronounced しめ (shi\u202Fme).&ensp;Both the current and 1992 CNS glyphs are very clearly 㐅, as in, the middle of 𠄡.</p><p>Yasuoka's mapping was published in March 1998, however, and hence predates the CJKA block (the 1992 in ICU's 1992 CNS mapping, unlike the 2014 in its EUC 2014 mapping, references the standard year, not the mapping timestamp, hence it is a shade newer than Yasuoka's, which it cites).",
- (6, 43, 90): 'Compare 04-25-38; see <a href="https://unicode.org/wg2/docs/n3196.pdf">WG2 N3196</a> for explanation of this particular pair.',
+
+ (6, 12, 3): "This is a <a href=\"https://en.wikipedia.org/wiki/Radical_130#Variant_forms\">moon-versus-meat issue</a>, see <a href='https://www.unicode.org/wg2/docs/n5083-IRG%20N2391_Errata%20report%20for%20WG2%20submission_TCA.pdf'>IRG N2391 / WG2 N5083 / UTC L2/19-241</a>; specifically, this one is supposed to have a \"moon\" radical.&ensp;U+2F8D6 compatibility-normalises to U+80AD (肭), which has a \"meat\" radical; compare 02-08-48.",
+
+ (6, 41, 94): "This is a <a href=\"https://en.wikipedia.org/wiki/Radical_130#Variant_forms\">moon-versus-meat</a> issue, see <a href='https://www.unicode.org/wg2/docs/n5083-IRG%20N2391_Errata%20report%20for%20WG2%20submission_TCA.pdf'>IRG N2391 / WG2 N5083 / UTC L2/19-241</a>; specifically, this one is supposed to have a \"moon\" radical.&ensp;Compare 05-27-48.",
+
+ (6, 43, 90): 'Compare 04-25-38; see <a href="https://unicode.org/wg2/docs/n3196.pdf">WG2 N3196</a> for explanation of this particular pair.&ensp;U+2F949 normalises to U+4039, so is redundant when 04-25-38 does not map to U+4039.',
+
  (7, 41, 75): 'This is a variant of U+86D7 蛗 (see 02-32-03); its glyph on the CNS 11643 website still matches U+27499 despite listing the Unicode mapping of U+272F0; by contrast, U+272F0\'s T-source glyph in the Unicode code charts as of Unicode 15.1 now matches the old UCS2003 glyph (with only one insect radical at the bottom).&ensp;<a href="https://www.babelstone.co.uk/Blog/2007/12/cjk-b-case-study-1-u272f0.html">More information from Andrew West</a> (note: the updated link to Michael Kaplan\'s post is <a href="https://archives.miloush.net/michkap/archive/2007/11/22/6462768.html">here</a>).&ensp;Compare 11-03-39.',
+
  (11, 3, 39): 'Compare 07-41-75.',
  (13, 4, 28): "In IBM's private use area fallback scheme (code pages 1445 and 1449, 1449 in this case) which is being used here, U+F83F through U+F842 are basically duplicates of U+FE33 ︳, U+2574 ╴, U+FE34 ︴ and U+FE4F ﹏ respectively.&ensp;These also appear in IBM Big5, at Γ-61-30 through Γ-61-33.&ensp;Compare 01-01-26 through 01-01-29.",
  (12, 1, 0): "Plane 12 is used by IBM and ICU for an IBM-designated user defined area.&ensp;It is no longer considered private-use in the upstream standard however.",
