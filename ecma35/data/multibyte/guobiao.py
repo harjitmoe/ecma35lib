@@ -640,14 +640,14 @@ sjt_amendments = [
 ]
 
 graphdata.gsets["sj11239/babelstonehan"] = (94, 2, parsers.fuse([
-    sjt_amendments,
+    *sjt_amendments,
     parsers.decode_main_plane_whatwg(
         parsers.parse_sjt11239_mapping_file("BabelStone/SJT-IDS.TXT"),
         "SJT-IDS.TXT",
         mapper=babelstone_update_map)], "SJ-11239-BabelStoneHan.json"))
 
 graphdata.gsets["sj11239"] = (94, 2, parsers.fuse([
-    sjt_amendments,
+    *sjt_amendments,
     parsers.decode_main_plane_whatwg(
         parsers.parse_sjt11239_mapping_file("BabelStone/SJT-IDS.TXT",
             include_variation_selectors=False,
