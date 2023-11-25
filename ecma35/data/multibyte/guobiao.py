@@ -488,7 +488,7 @@ graphdata.gsets["gb16500-ext"] = (94, 2, parsers.fuse([
 
 babelstone_update_map = parsers.read_babelstone_update_file("BabelStone/PUA_1_357_MAPPINGS.TXT")
 
-def babelstone_update_map2(pointer, ucs):
+def sj11239_fixer(pointer, ucs):
     if stducs := {
             # Not sure why this one hasn't been moved out
             (0xF188,): (0x2EBF0,),
@@ -586,23 +586,76 @@ def babelstone_update_map2(pointer, ucs):
             (0xF3CC,): (0x22B72, 0xF87F),
             (0xF3D0,): (0x650A, 0xF87F),
             (0xF3D3,): (0x22CF6, 0xF87F),
+            #
+            # Further cases noted in https://appsrv.cse.cuhk.edu.hk/~irg/irg/irg61/IRGN2641.pdf
+            (0xE487,): (0x4EC9, 0xF87F),
+            (0xE1A3,): (0x2CDFC, 0xF87F),
+            (0xF6B9,): (0x2596D, 0xF87F),
+            (0xF6BA,): (0x7A96, 0xF87F),
+            (0xE48C,): (0x7AA6, 0xF87F),
+            (0xE25E,): (0x2C8F5, 0xF87F),
+            (0xE25F,): (0x2C8F5, 0xF87F),
+            (0xE236,): (0x2CE9E, 0xF87F), # note: U+FA0B4 or U+FDBA7 in CNS 11643 supplementary PUA
+            (0xE48F,): (0x8FCF, 0xF87F),
+            (0xE493,): (0x212A5, 0xF87F),
+            (0xE2B4,): (0x212B8, 0xF87F),
+            (0xE2C6,): (0x3647, 0xF87F),
+            (0xE2D3,): (0x315B3, 0xF87F),
+            (0xE2ED,): (0x3664, 0xF87F),
+            (0xE2F1,): (0x2EC2D, 0xF87F),
+            (0xE727,): (0x315F0, 0xF87F),
+            (0xE2FA,): (0x302AE, 0xF87F),
+            (0xE4B6,): (0x2B1FA, 0xF87F),
+            (0xE4BB,): (0x849F, 0xF87F),
+            (0xF48D,): (0x2A948, 0xF87F),
+            (0xE1A8,): (0x20BD7, 0xF87F),
+            (0xE284,): (0x316EF, 0xF87F),
+            (0xE1E2,): (0x23D89, 0xF87F),
+            (0xE1DF,): (0x8533, 0xF87F),
+            (0xE1C0,): (0x2ECAA, 0xF87F),
+            (0xE1BF,): (0x6715, 0xF87F),
+            (0xE7F5,): (0x31C29, 0xF87F),
             }.get(ucs, None):
         return stducs
     return babelstone_update_map(pointer, ucs)
 
-graphdata.gsets["sj11239/babelstonehan"] = (94, 2, parsers.decode_main_plane_whatwg(
-    parsers.parse_sjt11239_mapping_file("BabelStone/SJT-IDS.TXT"),
-    "SJT-IDS.TXT",
-    mapper=babelstone_update_map))
+sjt_amendments = [
+    # https://appsrv.cse.cuhk.edu.hk/~irg/irg/irg61/IRGN2641.pdf
+    (None,) * (94*22 + 75) + ((0x839C, 0xF87F),), # 08-23-76 → U+839C
+    (None,) * (94*22 + 90) + ((0x8422, 0xF87F),), # 08-23-91 → U+8422
+    (None,) * (94*22 + 91) + ((0x8421, 0xF87F),), # 08-23-92 → U+8421
+    (None,) * (94*23 + 58) + ((0x9E71, 0xF87F),), # 08-24-59 → U+9E71
+    (None,) * (94*23 + 70) + ((0x3162D, 0xF87F),), # 08-24-71 → U+3162D
+    (None,) * (94*29 + 17) + ((0x23D3A, 0xF87F),), # 08-30-18 → U+23D3A
+    (None,) * (94*29 + 19) + ((0x6E42, 0xF87F),), # 08-30-20 → U+6E42
+    (None,) * (94*29 + 38) + ((0x6DEF, 0xF87F),), # 08-30-39 → U+6DEF
+    (None,) * (94*31 + 12) + ((0x5C2A, 0xF87F),), # 08-32-13 → U+5C2A
+    (None,) * (94*31 + 18) + ((0x5C29, 0xF87F),), # 08-32-19 → U+5C29
+    (None,) * (94*32 + 71) + ((0x23542, 0xF87F),), # 08-33-72 → U+23542
+    (None,) * (94*33 + 48) + ((0x2EC05, 0xF87F),), # 08-34-49 → U+2EC05
+    (None,) * (94*34 + 70) + ((0x79A4, 0xF87F),), # 08-35-71 → U+79A4
+    (None,) * (94*37 + 32) + ((0x213A0, 0xF87F),), # 08-38-33 → U+213A0
+    (None,) * (94*38 + 69) + ((0x27741, 0xF87F),), # 08-39-70 → U+27741
 
-graphdata.gsets["sj11239"] = (94, 2, parsers.decode_main_plane_whatwg(
-    parsers.parse_sjt11239_mapping_file("BabelStone/SJT-IDS.TXT",
-        include_variation_selectors=False,
-        include_uncertain_mappings=True,
-        fallback_nothing_selector=(lambda ucs: babelstone_update_map2(None, ucs) == ucs),
-        fallback_preferencer=(lambda ucs: babelstone_update_map2(None, ucs) == ucs)),
-    "SJT-IDS-supported.TXT",
-    mapper=babelstone_update_map2))
+]
+
+graphdata.gsets["sj11239/babelstonehan"] = (94, 2, parsers.fuse([
+    sjt_amendments,
+    parsers.decode_main_plane_whatwg(
+        parsers.parse_sjt11239_mapping_file("BabelStone/SJT-IDS.TXT"),
+        "SJT-IDS.TXT",
+        mapper=babelstone_update_map)], "SJ-11239-BabelStoneHan.json"))
+
+graphdata.gsets["sj11239"] = (94, 2, parsers.fuse([
+    sjt_amendments,
+    parsers.decode_main_plane_whatwg(
+        parsers.parse_sjt11239_mapping_file("BabelStone/SJT-IDS.TXT",
+            include_variation_selectors=False,
+            include_uncertain_mappings=True,
+            fallback_nothing_selector=(lambda ucs: sj11239_fixer(None, ucs) == ucs),
+            fallback_preferencer=(lambda ucs: sj11239_fixer(None, ucs) == ucs)),
+        "SJT-IDS-supported.TXT",
+        mapper=sj11239_fixer)], "SJ-11239.json"))
 
 # GB 7589 and GB 7590 are just the simplified versions, right?
 # (Contrary to docs, kGB3 and kGB5 seem to be less complete mappings to the same G3 and G5

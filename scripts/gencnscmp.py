@@ -107,12 +107,13 @@ plane6 = (6, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Unih
 ])
 
 print("Loading 7")
-plane7 = (7, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Unihan CNS", "Output"), [
+plane7 = (7, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Unihan CNS", "Lax Matching", "Output"), [
           graphdata.gsets["ir187/yasuoka"][2],
           graphdata.gsets["ir187/icu"][2],
           graphdata.gsets["ir187/icu-2014"][2],
           graphdata.gsets["ir187/govtw"][2],
           graphdata.gsets["ir187/unihan"][2],
+          graphdata.gsets["cns-eucg2-lax-matching"][2][94*94*6 : 94*94*7],
           graphdata.gsets["ir187"][2],
 ])
 
@@ -122,52 +123,77 @@ plane8 = (8, ("GOV-TW CNS",), [
 ])
 
 print("Loading 9")
-plane9 = (9, ("GOV-TW CNS",), [
+plane9 = (9, ("GOV-TW CNS", "Lax Matching", "Output"), [
           graphdata.gsets["cns-eucg2-govtw"][2][94*94*8 : 94*94*9],
+          graphdata.gsets["cns-eucg2-lax-matching"][2][94*94*8 : 94*94*9],
+          graphdata.gsets["cns-eucg2"][2][94*94*8 : 94*94*9],
 ])
 
 print("Loading 10")
-planeA = (10, ("GOV-TW CNS", "Unihan CNS"), [
+planeA = (10, ("GOV-TW CNS",), [
           graphdata.gsets["cns-eucg2-govtw"][2][94*94*9 : 94*94*10],
-          graphdata.gsets["cns-eucg2-unihan"][2][94*94*9 : 94*94*10],
 ])
 
 print("Loading 11")
-planeB = (11, ("GOV-TW CNS", "Unihan CNS"), [
+planeB = (11, ("GOV-TW CNS", "Unihan CNS", "Lax Matching", "Output"), [
           graphdata.gsets["cns-eucg2-govtw"][2][94*94*10 : 94*94*11],
           graphdata.gsets["cns-eucg2-unihan"][2][94*94*10 : 94*94*11],
+          graphdata.gsets["cns-eucg2-lax-matching"][2][94*94*10 : 94*94*11],
+          graphdata.gsets["cns-eucg2"][2][94*94*10 : 94*94*11],
 ])
 
 print("Loading 12")
-planeC = (12, ("IBM EUC", "ICU EUC 2014", "GOV-TW CNS", "Unihan CNS"), [
+planeC = (12, ("IBM EUC", "ICU EUC 2014", "GOV-TW CNS", "Unihan CNS", "Lax Matching", "Output"), [
           graphdata.gsets["cns-eucg2-ibm-full"][2][94*94*11 : 94*94*12],
           graphdata.gsets["cns-eucg2-icu-2014-full"][2][94*94*11 : 94*94*12],
           graphdata.gsets["cns-eucg2-govtw"][2][94*94*11 : 94*94*12],
           graphdata.gsets["cns-eucg2-unihan"][2][94*94*11 : 94*94*12],
+          graphdata.gsets["cns-eucg2-lax-matching"][2][94*94*11 : 94*94*12],
+          graphdata.gsets["cns-eucg2"][2][94*94*11 : 94*94*12],
 ])
 
 print("Loading 13")
-planeD = (13, ("IBM EUC", "ICU EUC 2014", "GOV-TW CNS", "Unihan CNS"), [
+planeD = (13, ("IBM EUC", "ICU EUC 2014", "GOV-TW CNS", "Unihan CNS", "Lax Matching", "Output"), [
           graphdata.gsets["cns-eucg2-ibm-full"][2][94*94*12 : 94*94*13],
           graphdata.gsets["cns-eucg2-icu-2014-full"][2][94*94*12 : 94*94*13],
           graphdata.gsets["cns-eucg2-govtw"][2][94*94*12 : 94*94*13],
           graphdata.gsets["cns-eucg2-unihan"][2][94*94*12 : 94*94*13],
+          graphdata.gsets["cns-eucg2-lax-matching"][2][94*94*12 : 94*94*13],
+          graphdata.gsets["cns-eucg2"][2][94*94*12 : 94*94*13],
 ])
 
 print("Loading 14")
-planeE = (14, ("GOV-TW CNS", "Unihan CNS", "Output"), [
+planeE = (14, ("GOV-TW CNS", "Unihan CNS", "Lax Matching", "Output"), [
           graphdata.gsets["cns-eucg2-govtw"][2][94*94*13 : 94*94*14],
           graphdata.gsets["cns-eucg2-unihan"][2][94*94*13 : 94*94*14],
+          graphdata.gsets["cns-eucg2-lax-matching"][2][94*94*13 : 94*94*14],
           graphdata.gsets["cns-eucg2"][2][94*94*13 : 94*94*14],
 ])
 
 print("Loading 15")
-planeF = (15, ("ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Unihan CNS", "Output"), [
+planeF = (15, ("ICU 1992 CNS", "ICU EUC 2014", "GOV-TW CNS", "Unihan CNS", "Lax Matching", "Output"), [
           graphdata.gsets["cns-eucg2-icu-old"][2][94*94*8 : 94*94*9], # yes, this is correct.
           graphdata.gsets["cns-eucg2-icu-2014-full"][2][94*94*14 : 94*94*15],
           graphdata.gsets["cns-eucg2-govtw"][2][94*94*14 : 94*94*15],
           graphdata.gsets["cns-eucg2-unihan"][2][94*94*14 : 94*94*15],
+          graphdata.gsets["cns-eucg2-lax-matching"][2][94*94*14 : 94*94*15],
           graphdata.gsets["cns-eucg2"][2][94*94*14 : 94*94*15],
+])
+
+print("Loading 17")
+planeH = (17, ("GOV-TW CNS", "Unihan CNS", "Lax Matching", "Output"), [
+          graphdata.gsets["cns-eucg2-govtw"][2][94*94*16 : 94*94*17],
+          graphdata.gsets["cns-eucg2-unihan"][2][94*94*16 : 94*94*17],
+          graphdata.gsets["cns-eucg2-lax-matching"][2][94*94*16 : 94*94*17],
+          graphdata.gsets["cns-eucg2"][2][94*94*16 : 94*94*17],
+])
+
+print("Loading 19")
+planeJ = (19, ("GOV-TW CNS", "Unihan CNS", "Lax Matching", "Output"), [
+          graphdata.gsets["cns-eucg2-govtw"][2][94*94*18 : 94*94*19],
+          graphdata.gsets["cns-eucg2-unihan"][2][94*94*18 : 94*94*19],
+          graphdata.gsets["cns-eucg2-lax-matching"][2][94*94*18 : 94*94*19],
+          graphdata.gsets["cns-eucg2"][2][94*94*18 : 94*94*19],
 ])
 
 def planefunc(number, mapname=None):
@@ -391,6 +417,11 @@ annots = {
               "whatever case, compare 15-28-28 (always mapped to U+6BF5 毵), 15-28-30 (always "
               "U+6BF6 毶, although absent in non-GovTW mappings) and 02-49-32 (毿, the version "
               "present in Big5, due to being the favoured version in zh-Hant).",
+ (2, 82, 37): "This character was apparently "
+              "<a href='https://www.unicode.org/L2/L2022/22256-irgn2580-t-glyph.pdf#page=4'>"
+              "added in a 2022 amendment</a>; compare Ψ-62-46 (Big5-Plus), Ψ-74-34 (Big5-ChinaSea) "
+              "and Ψ-82-72 (Big5-HKSCS).",
+ (3, 7, 8): 'Compare 12-87-16.',
  (3, 69, 34): 'Compare 04-24-60.',
  (3, 69, 44): 'Compare 04-10-78.',
  (3, 69, 59): 'Compare 04-36-56.',
@@ -430,11 +461,13 @@ annots = {
 
  (6, 43, 90): 'Compare 04-25-38; see <a href="https://unicode.org/wg2/docs/n3196.pdf">WG2 N3196</a> for explanation of this particular pair.&ensp;U+2F949 normalises to U+4039, so is redundant when 04-25-38 does not map to U+4039.',
 
+ (7, 15, 43): 'Compare 10-60-31.',
  (7, 41, 75): 'This is a variant of U+86D7 蛗 (see 02-32-03); its glyph on the CNS 11643 website still matches U+27499 despite listing the Unicode mapping of U+272F0; by contrast, U+272F0\'s T-source glyph in the Unicode code charts as of Unicode 15.1 now matches the old UCS2003 glyph (with only one insect radical at the bottom).&ensp;<a href="https://www.babelstone.co.uk/Blog/2007/12/cjk-b-case-study-1-u272f0.html">More information from Andrew West</a> (note: the updated link to Michael Kaplan\'s post is <a href="https://archives.miloush.net/michkap/archive/2007/11/22/6462768.html">here</a>).&ensp;Compare 11-03-39.',
 
  (11, 3, 39): 'Compare 07-41-75.',
  (13, 4, 28): "In IBM's private use area fallback scheme (code pages 1445 and 1449, 1449 in this case) which is being used here, U+F83F through U+F842 are basically duplicates of U+FE33 ︳, U+2574 ╴, U+FE34 ︴ and U+FE4F ﹏ respectively.&ensp;These also appear in IBM Big5, at Γ-61-30 through Γ-61-33.&ensp;Compare 01-01-26 through 01-01-29.",
  (12, 1, 0): "Plane 12 is used by IBM and ICU for an IBM-designated user defined area.&ensp;It is no longer considered private-use in the upstream standard however.",
+ (12, 87, 16): 'Compare 03-07-08.',
  (13, 1, 0): "Plane 13 is used by IBM and ICU for IBM corporate asssignments, mostly for round-trip from other IBM encodings.&ensp;It is no longer considered private-use in the upstream standard however.",
  (13, 1, 10): "In IBM's private use area fallback scheme (code pages 1445 and 1449, 1449 in this case) which is being used here, U+F83E is a duplicate U+4EDD (仝, the first being 02-01-41).&ensp;U+02BA here is a fallback for a second U+3003 (〃, the first being 01-01-81).&ensp;These two dittoes are included here by IBM for the pupose of round-tripping Big5, since they are duplicated in the ETEN extensions, at Ψ-66-62 and Ψ-66-63.",
  (14, 69, 76): "Compare 02-44-65.",
@@ -453,9 +486,9 @@ if os.path.exists("__analyt__"):
     blot = open("__analyt__").read()
 
 print("Writing HTML")
-for n, p in enumerate([plane1, plane2, plane3, plane4, plane5, plane6, plane7, plane8, plane9, planeA, planeB, planeC, planeD, planeE, planeF]):
+for n, p in enumerate([plane1, plane2, plane3, plane4, plane5, plane6, plane7, plane8, plane9, planeA, planeB, planeC, planeD, planeE, planeF, planeH, planeJ]):
     for q in range(1, 7):
-        bnx = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)
+        bnx = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 19)
         bn = bnx[n]
         f = open("cnsplane{:X}{}.html".format(bn, chr(0x60 + q)), "w", encoding="utf-8")
         lasturl = lastname = nexturl = nextname = None
@@ -474,7 +507,7 @@ for n, p in enumerate([plane1, plane2, plane3, plane4, plane5, plane6, plane7, p
         elif bn == 2:
             nexturl = "b5xplane1a.html"
             nextname = "Big5 extension set, part 1"
-        elif bn < 15:
+        elif bn < 19:
             nexturl = "cnsplane{:X}a.html".format(bnx[n + 1])
             nextname = "CNS 11643 plane {:d}, part 1".format(bnx[n + 1])
         planewarn = None

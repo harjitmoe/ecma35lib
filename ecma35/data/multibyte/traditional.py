@@ -9,38 +9,18 @@
 import os, ast, sys, json, pprint, shutil
 from ecma35.data import graphdata, variationhints, deprecated_cjkci
 from ecma35.data.multibyte import mbmapparsers as parsers
+from ecma35.data.multibyte.cns11643_pua_to_standard import cns11643_pua_to_standard
+from ecma35.data.multibyte.cns11643_pua_to_standard_loose import cns11643_pua_to_standard_loose
 
 # Charsets originating from Hong Kong or Taiwan (CCCII, CNS 11643, Big 5, HKSCS…).
 #   (GB12345 is traditional but Mainland Chinese: see guobiao.py for that one.)
 # Bumpy ride here, so brace yourselves.
 
-# ISO 10646:2017 Annex P says:
-# - U+20885: mistakenly unified with T5-3669
-# - U+22936: mistakenly unified with T5-6777
-# - U+23023: mistakenly unified with T5-6C34
-# - U+23EE4: mistakenly unified with T7-243F
-# - U+243BE: T7-2F4B mapping, but should have been unified with U+24381
-# - U+28321: mistakenly unified with T6-632A
-
-_contraspua = {
-    # Alternative mappings per Yasuoka/ICU for some of the ones that otherwise get mapped to SPUA.
-    # On the basis that PUA mappings for defined characters are kinda a last resort… since there's
-    #   no guarantee it'll show up even legibly same (and you can forget about aural rendering).
-    (0xFFF7A,): (0x5B90,), (0xFFF7B,): (0x8786,), (0xFFFEF,): (0x7E64,), (0xFFFF0,): (0x5900,),
-    (0xFFFF1,): (0x5365,), (0xFFFF3,): (0x5324,), (0xFFFF5,): (0x5E71,), (0xFFFF6,): (0x7193,),
-    (0xFFFF7,): (0x6E7C,), (0xFFFF8,): (0x98E4,), (0xFFFF9,): (0x79CC,), (0xFFFFA,): (0x5CD5,),
-    (0xFFFFB,): (0x488C,), (0xFFFFC,): (0x80BB,), (0xFFFFD,): (0x5759,),
-    # The Gov-TW mappings seem to insist on SPUA assignments for Roman characters which
-    #   Unicode represents as combining sequences.
-    (0xF91D1,): (0x6D, 0x0302), (0xF91D2,): (0x6E, 0x0302), (0xF91D3,): (0x6D, 0x030C),
-    (0xF91D4,): (0x6D, 0x0304), (0xF91D5,): (0x6E, 0x0304), (0xF91D6,): (0x6D, 0x030D),
-    (0xF91D7,): (0x6E, 0x030D), (0xF91D8,): (0x61, 0x030D), (0xF91D9,): (0x69, 0x030D),
-    (0xF91DA,): (0x75, 0x030D), (0xF91DB,): (0x65, 0x030D), (0xF91DC,): (0x6F, 0x030D),
-    (0xF91DD,): (0x6D, 0x030B), (0xF91DE,): (0x6E, 0x030B), (0xF91DF,): (0x61, 0x030B),
-    (0xF91E0,): (0x69, 0x030B), (0xF91F7,): (0x65, 0x030B),
-}
 def cnsmapper_contraspua(pointer, ucs):
-    return _contraspua.get(ucs, ucs)
+    return cns11643_pua_to_standard.get(ucs, ucs)
+
+def cnsmapper_contraspua_thorough(pointer, ucs):
+    return cns11643_pua_to_standard_loose.get(ucs, None)
 
 ir184_to_old_ir183 = { 26554: 23820, 26564: 23821, 26588: 23822, 26590: 23823, 26621: 23824, 26633: 23825, 
          26638: 23826, 26655: 23827, 26658: 23828, 26666: 23829, 26682: 23830, 26684: 23831, 26713: 23832, 
@@ -109,6 +89,22 @@ def cnsmapper_contrabadcjkb(pointer, ucs):
     #   - https://archives.miloush.net/michkap/archive/2007/12/03/6643180.html
     if pointer in (3834, 56850) and ucs == (0x272F0,):
         return (0x27499,)
+    # ISO 10646:2020 Annex P says:
+    # - U+20885: mistakenly unified with T5-3669
+    # - U+22936: mistakenly unified with T5-6777
+    # - U+23023: mistakenly unified with T5-6C34
+    # - U+23EE4: mistakenly unified with T7-243F
+    # - U+243BE: T7-2F4B source but should have been unified with U+24381 (T-source glyph matches
+    #   latter since Unicode 6.0 so they are now homoglyphs; both are variants of U+70C8)
+    # - U+27B1F: mistaken unification with T7-5035 although it's the G-source regarded as at fault
+    # - U+28321: mistakenly unified with T6-632A
+    # - U+28B75: glyph of TF-686D changed since UCS2003 glyph designed
+    # - U+293FB: glyph of T5-7C22 later diverged from G-source glyph
+    # - U+29C52: glyph of T7-5666 changed since UCS2003 glyph designed
+    # - U+2A0B8: glyph of T7-523A later diverged from G-source glyph
+    # - U+2A6C0: mistaken unification with T5-7B5E although it's the G-source regarded as at fault
+    if pointer in (1358, 54374) and ucs == (0x243BE,):
+        return (0x24381,)
     return ucs
 
 planesize = 94 * 94
@@ -124,29 +120,39 @@ cns_spuaa = parsers.decode_main_plane_gl(
     parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
     "CNS2UNICODE_Unicode 15.txt",
     mapper = cnsmapper_contraspua)
+cns_spuaa_loose = parsers.decode_main_plane_gl(
+    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
+    "CNS2UNICODE_Unicode 15.txt",
+    mapper = cnsmapper_contraspua_thorough)
 
 cns_unihan_amended_parts = []
-for _i in range(1, 16):
+for _i in range(1, 20):
     cns_unihan_amended_parts.append(
         (None,) * (94 * 94 * (_i - 1)) + 
         parsers.read_unihan_planes(
-            "UCD/Unihan_IRGSources-15.txt", "kIRG_TSource", f"T{_i:X}",
+            "UCD/Unihan_IRGSources-15-1.txt", "kIRG_TSource", f"T{_i:X}",
             mapper=cnsmapper_contrabadcjkb))
 cns_unihan_amended = parsers.fuse(cns_unihan_amended_parts, "Unihan-CNS-11643-Amended.json")
 
 cns_unihan_parts = []
-for _i in range(1, 16):
+for _i in range(1, 20):
     cns_unihan_parts.append(
         (None,) * (94 * 94 * (_i - 1)) + 
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_TSource", f"T{_i:X}"))
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-15-1.txt", "kIRG_TSource", f"T{_i:X}"))
 cns_unihan = parsers.fuse(cns_unihan_parts, "Unihan-CNS-11643.json")
 
+misc_amendments = [
+    (None,) * (94*94*2 + 94*6 + 7) + ((0x2ED9D,),), # 03-07-08 → U+2ED9D
+    (None,) * (94*94*2 + 94*68 + 25) + ((0x6BF5,),), # 03-69-26 → U+6BF5
+]
+
 cns = parsers.fuse([
+    *misc_amendments,
     cns_unihan_amended,
     cns_bmp,
     cns_sip,
     cns_spuaa,
-], "Unihan-GOV-TW---CNS2UNICODE_swar_tsci_cspua_crcb.json")
+], "Unihan-GOV-TW---CNS2UNICODE_etc.json")
 
 cns_govbmp = parsers.decode_main_plane_gl(
     parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode BMP.txt"),
@@ -165,9 +171,17 @@ cns_yasuoka = parsers.decode_main_plane_gl(
 cns_icu_old = parsers.decode_main_plane_gl(
     parsers.parse_file_format("ICU/cns-11643-1992.ucm"), 
     "cns-11643-1992.ucm")
+def no_bmp_pua(pointer, ucs):
+    if len(ucs) == 1 and 0xE000 <= ucs[0] < 0xF900:
+        return None
+    return ucs
 cns_icu_2014 = parsers.decode_main_plane_euc(
     parsers.parse_file_format("ICU/euc-tw-2014.ucm"), 
     "euc-tw-2014.ucm")
+cns_icu_2014_nobmppua = parsers.decode_main_plane_euc(
+    parsers.parse_file_format("ICU/euc-tw-2014.ucm"), 
+    "euc-tw-2014.ucm",
+    mapper = no_bmp_pua)
 cns_ibm = parsers.decode_main_plane_euc(
     parsers.parse_file_format("ICU/ibm-964_P110-1999.ucm"), 
     "ibm-964_P110-1999.ucm")
@@ -282,6 +296,13 @@ graphdata.gsets["cns-eucg2"] = (94, 3, parsers.fuse([
     cns,
     cns_icu_2014,
 ], "CSIC-All.json"))
+graphdata.gsets["cns-eucg2-lax-matching"] = (94, 3, parsers.fuse([
+    cns_unihan_amended,
+    cns_bmp,
+    cns_sip,
+    cns_icu_2014_nobmppua,
+    cns_spuaa_loose,
+], "CSIC-Lax-Matching.json"))
 graphdata.gsets["cns-eucg2-yasuoka"] = (94, 3, cns_yasuoka)
 graphdata.gsets["cns-eucg2-govtw"] = (94, 3, cns_gov)
 graphdata.gsets["cns-eucg2-unihan"] = (94, 3, cns_unihan)
