@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020, 2021, 2022, 2023.
+# By HarJIT in 2020, 2021, 2022, 2023, 2024.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -148,6 +148,7 @@ annots = {
     (0, 8, 32): "Compare 03-71.&ensp;Mapping to U+0261 is usual regardless of reference glyph (except for the old ICU mapping for the IR-165 set), but this has been avoided here for the sake of illustration.",
     (2, 54, 53): "Properly, this is U+7001 (瀁) with its right-hand component simplified to 飬 (unregistered BabelStone IVS: U+7001+E0103), while U+3071D instead simplifies the right-hand component to 养.",
     (7, 1, 0): "There are three constituents of plane 7: \"General Purpose Han Characters for Modern Chinese\" (row 1), \"General List of Simplified Hanzi\" (rows 2 and 3), and the \"Seventh Supplementary Set\" (GB 16500, rows 16 and up).&ensp;Unihan's G7 or \"kGB7\" includes only the first two.&ensp;The first of these is first attested in <a href=\"http://www.dkuug.dk/jtc1/sc2/wg2/docs/N0667.doc\">WG2 N667</a> from before the 10646/Unicode merger, and has been listed since the first version of the Unihan mappings (<a href=\"https://www.unicode.org/Public/1.1-Update/CJKXREF.TXT\">CJKXREF</a>).&ensp;Unihan added GB 16500 later (presumably when it came out), pursuant to <a href='https://appsrv.cse.cuhk.edu.hk/~irg/irg/N376'>IRG N376</a>, and calls it \"GE\".",
+    (8, 16, 36): "U+2B92C 𫤬 is a pictographic variant of 溝 (\"ditch\") and should have straight vertical lines (while the horizontal lines may be straight or slanted), but its reference glyph was poorly designed, making it look more like U+5146 兆 (\"trillion\").&ensp;See <a href=\"https://www.unicode.org/L2/L2023/23244-irgn2616-glyph-corr.pdf\">IRG N2616 (UTC L2/23-244)</a>.&ensp;This is expected to be fixed in Unicode 16 (2024), per <a href=\"https://www.unicode.org/L2/L2023/23250-irgn2620-recs.pdf#page=3\">IRG recommendation IRG M61.07</a>.",
 }
 cdispmap = {}
 for n, i in enumerate(graphdata.gsets["ir058/macraw"][2]):
@@ -156,6 +157,10 @@ for n, i in enumerate(graphdata.gsets["ir058/macraw"][2]):
         cdispmap[(MACSET, n - (94 * 94), j)] = i # Dock by 94*94, negative since it's plane 0.
 
 fnbn = lambda bn: "{:X}".format(bn) if bn != KPLANE else "K"
+
+blot = ""
+if os.path.exists("__analyt__"):
+    blot = open("__analyt__").read()
 
 for n, p in enumerate([plane0, plane1, plane2, plane3, plane4, plane5, plane7, plane8, planeK]):
     for q in range(1, 7) if p[0] in (0, 7) else range(2, 7):
@@ -199,7 +204,7 @@ for n, p in enumerate([plane0, plane1, plane2, plane3, plane4, plane5, plane7, p
                              menuurl="/gb-conc.html", menuname="Guobiao code variant comparison",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
                              annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True,
-                             planewarn=planewarn, siglum="GB", showbmppuas=showbmppuas,
+                             planewarn=planewarn, siglum="GB", showbmppuas=showbmppuas, blot=blot,
                              pua_collides=(bn == 8))
         f.close()
 

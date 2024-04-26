@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020, 2021, 2022, 2023.
+# By HarJIT in 2020, 2021, 2022, 2023, 2024.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -104,7 +104,7 @@ def reptuple(tpl):
     out.append(")")
     return "".join(out)
 
-def show(name, *, plane=None):
+def _resolve_name(name):
     if isinstance(name, tuple):
         x = name
     elif name in graphdata.rhses:
@@ -127,6 +127,10 @@ def show(name, *, plane=None):
         x = graphdata.gsets[name]
     else:
         raise ValueError("unknown set: {!r}".format(name))
+    return x
+
+def show(name, *, plane=None):
+    x = _resolve_name(name)
     #
     if x[1] == 1:
         sz = 0
@@ -752,19 +756,40 @@ def stat(verbose=False):
         print("Total:", tot + atot + btot)
         print()
 
-def dump_maptable(name):
-    array = graphdata.gsets[name][2]
+def dump_maptable(name, as_ucm_fragment=False):
+    byterange, bytecount, array = _resolve_name(name)
+    outputs = []
     for n, ucses in enumerate(array):
+        byts = []
+        remaining = n
+        for i in range(bytecount):
+            lower = remaining % byterange
+            remaining //= byterange
+            if byterange == 94:
+                lower += 0x21
+            elif byterange == 96:
+                lower += 0x20
+            byts.insert(0, f"{lower:02X}")
+        assert not remaining
         if ucses == None:
-            continue
-        ku = (n // 94) + 1
-        ten = (n % 94) + 1
-        first = ku + 0x20
-        second = ten + 0x20
-        start = "0x{:02X}{:02X}".format(first, second)
-        middle = "U+" + "+".join("{:04X}".format(i) for i in ucses)
-        end = "# " + " + ".join(ucd.name(chr(i), "<{:04X}>".format(i)) for i in ucses)
-        print(start, middle, end, sep = "\t")
+            if len(byts) == 1 and byts[0] < "20":
+                ucses = int(byts[0], 16)
+            else:
+                continue
+        ucses = (ucses if hasattr(type(ucses), "__len__") else (ucses,))
+        if not as_ucm_fragment:
+            start = "0x" + "".join(byts)
+            middle = "U+" + "+".join("{:04X}".format(i) for i in ucses)
+            end = "# " + " + ".join(ucd.name(chr(i), "<{:04X}>".format(i)) for i in ucses)
+            outputs.append(f"{start}\t{middle}\t{end}")
+        else:
+            start = "<U" + "><U".join("{:04X}".format(i) for i in ucses) + ">"
+            middle = "\\x" + "\\x".join(byts)
+            end = "|0"
+            outputs.append(f"{start} {middle} {end}")
+    outputs.sort()
+    for line in outputs:
+        print(line)
 
 if __name__ == "__main__":
     import sys

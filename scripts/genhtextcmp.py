@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020, 2021.
+# By HarJIT in 2020, 2021, 2023.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -221,6 +221,10 @@ Unified Hangul Code extended syllables.&ensp;This is not shown below since it is
 affects most of the table, would make the areas of the table which are actually of note harder \
 to spot, and would misrepresent Unified Hangul Code since their ranges only partly overlap."""
 
+blot = ""
+if os.path.exists("__analyt__"):
+    blot = open("__analyt__").read()
+
 for q in range(1, 7):
     f = open("htxplane1{}.html".format(chr(0x60 + q)), "w", encoding="utf-8")
     lasturl = lastname = nexturl = nextname = None
@@ -239,7 +243,7 @@ for q in range(1, 7):
     showgraph.dump_plane(f, planefunc, kutenfunc, *plane, lang="ko-KR", part=q, css="../css/codechart.css",
                          menuurl="/ksc-conc.html", menuname="Wansung code variant comparison",
                          lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
-                         annots=annots, selfhandledanchorlink=True, planewarn=warning,
+                         annots=annots, selfhandledanchorlink=True, planewarn=warning, blot=blot,
                          pua_collides=True, showbmppuas=(0, 0, 0, 0, 0, 1, 0), siglum="KSC")
     f.close()
 

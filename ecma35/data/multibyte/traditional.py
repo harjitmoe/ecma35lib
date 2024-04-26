@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020/2021/2022/2023.
+# By HarJIT in 2020/2021/2022/2023/2024.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -105,6 +105,10 @@ def cnsmapper_contrabadcjkb(pointer, ucs):
     # - U+2A6C0: mistaken unification with T5-7B5E although it's the G-source regarded as at fault
     if pointer in (1358, 54374) and ucs == (0x243BE,):
         return (0x24381,)
+    # U+20B9D is just U+BBF8 (mis)interpreted as a hanja:
+    #   https://www.unicode.org/L2/L2024/24126-comments-cjk-abbrev.pdf
+    if ucs == (0x20B9D,):
+        return (0xBBF8,)
     return ucs
 
 planesize = 94 * 94

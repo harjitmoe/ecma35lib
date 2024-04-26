@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020, 2021, 2023.
+# By HarJIT in 2020, 2021, 2023, 2024.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -116,6 +116,10 @@ def kutenfunc(number, row, cell):
                      number, row, cell, big5code)
         return "{}<br>{}".format(anchorlink, pseudokuten)
 
+blot = ""
+if os.path.exists("__analyt__"):
+    blot = open("__analyt__").read()
+
 for p in [plane1, plane2]:
     for q in range(1, 7):
         bn = p[0]
@@ -142,7 +146,7 @@ for p in [plane1, plane2]:
         showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="zh-HK", part=q, css="../css/codechart.css",
                              menuurl="/cns-conc.html", menuname="CNS 11643 and Big5 comparison tables",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
-                             annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True,
+                             annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True, blot=blot,
                              pua_collides=False, big5ext_mode=bn, siglum="CNS")
         f.close()
 

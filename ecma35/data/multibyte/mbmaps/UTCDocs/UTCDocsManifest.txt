@@ -6,3 +6,6 @@ AppendixA_KPS9566-2011-to-Unicode.txt
 → from https://www.unicode.org/L2/L2018/18011-info-kps9566-2011.pdf
 → attached to document by Jaemin Chung
 
+L2_23-114R_metadata.txt
+→ from https://www.unicode.org/L2/L2023/23114r-unc-extension-i.pdf
+→ attached with filename metadata.txt to document by Ken Lunde

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020.
+# By HarJIT in 2020, 2023.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -99,6 +99,10 @@ annots = {
                 "UTC L2/21-059 (IRG N2479)</a>."
 }
 
+blot = ""
+if os.path.exists("__analyt__"):
+    blot = open("__analyt__").read()
+
 for n, p in enumerate([plane1]):
     for q in range(1, 7):
         bn = n + 1
@@ -119,7 +123,7 @@ for n, p in enumerate([plane1]):
         showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ko-KP", part=q, css="../css/codechart.css",
                              menuurl="/kps-conc.html", menuname="KPS character set variant comparison",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
-                             annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True,
+                             annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True, blot=blot,
                              pua_collides=True)
         f.close()
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019, 2020, 2022, 2023.
+# By HarJIT in 2019, 2020, 2022, 2023, 2024.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -276,7 +276,7 @@ raw_variants = {
     # Compromise of the two above
     "alt646/polish/full": ([None, 0xA4, 0x119, 0x17A, 0x141, 0x144, 0x15B, None, 
                                         0x105, 0xF3, 0x142, 0x17C, 0x107], {}),
-    # Supposed Maltese version (cannot verify)
+    # Maltese version (Star Micronics code page 3041)
     "alt646/maltese": ([None, None, None,  0x121, 0x17C, 0x127, None, None, 
                                     0x10B, 0x120, 0x17B, 0x126, 0x10A], {}),
     ##

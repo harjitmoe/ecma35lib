@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020, 2021.
+# By HarJIT in 2020, 2021, 2023.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -147,6 +147,10 @@ annots = {
                 'is also 0x4BA0 through 0x4BFD in IBM-933 shift-out.',
 }
 
+blot = ""
+if os.path.exists("__analyt__"):
+    blot = open("__analyt__").read()
+
 for n, p in enumerate([plane1]):
     for q in range(1, 7):
         bn = n + 1
@@ -174,7 +178,7 @@ for n, p in enumerate([plane1]):
         showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ko-KR", part=q, css="../css/codechart.css",
                              menuurl="/ksc-conc.html", menuname="Wansung code variant comparison",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
-                             annots=annots, selfhandledanchorlink=True, siglum="KSC",
+                             annots=annots, selfhandledanchorlink=True, siglum="KSC", blot=blot,
                              pua_collides=True)
         f.close()
 

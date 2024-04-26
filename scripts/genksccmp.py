@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020, 2021.
+# By HarJIT in 2020, 2021, 2023.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -79,6 +79,10 @@ annots = {
     (1, 1, 77): 'Compare these two with Ψ-06-28 and Ψ-06-29.',
 }
 
+blot = ""
+if os.path.exists("__analyt__"):
+    blot = open("__analyt__").read()
+
 for n, p in enumerate([plane1, plane2, plane3, plane4]):
     for q in range(1, 7):
         bn = n + 1
@@ -128,7 +132,7 @@ for n, p in enumerate([plane1, plane2, plane3, plane4]):
                              menuurl="/ksc-conc.html", menuname="Wansung code variant comparison",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
                              annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True,
-                             noallocatenotice=noallocatenotice, planewarn=planewarn,
+                             noallocatenotice=noallocatenotice, planewarn=planewarn, blot=blot,
                              skiprows = range(37, 55) if bn == 2 else None, siglum="KSC")
         f.close()
 
