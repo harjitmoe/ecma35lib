@@ -119,10 +119,10 @@ applesinglehints = {
     (0x21e9, 0x20DD): (0x2B8B,),
     #
     # White arrows in black square (_de facto_ used in emoji variation for these codepoints):
-    (0x21e6, 0x20DE): (0x2b05, 0xFE0F),
-    (0x21e7, 0x20DE): (0x2b06, 0xFE0F),
-    (0x21e8, 0x20DE): (0x27a1, 0xFE0F),
-    (0x21e9, 0x20DE): (0x2b07, 0xFE0F),
+    (0x21e6, 0x20DE): (0x1F8B4,),
+    (0x21e7, 0x20DE): (0x1F8B5,),
+    (0x21e8, 0x20DE): (0x1F8B6,),
+    (0x21e9, 0x20DE): (0x1F8B7,),
     #
     # Right-angled bendy arrows (minus the five with standard mappings already):
     (0x21BB, 0xF87B): (0x2B11,), # Left then up
@@ -131,7 +131,7 @@ applesinglehints = {
     #
     # Normal bendy arrows (minus the five with standard mappings already):
     (0x21B0, 0xF87F): (0x2BAA, 0xF87F), # Up then left
-    (0x21B1, 0xF87F): (0x2BAB, 0xF87F), # Up then right
+    (0x21B1, 0xF87F): (0x1F8B2,), # Up then right
     (0x21BB, 0xF87F): (0x2BAC, 0xF87F), # Left then up
     #
     # Triangle-headed bendy arrows
@@ -161,20 +161,9 @@ applesinglehints = {
     (0xff3b, 0xf87e): (0xfe47,), # Opening hard bracket
     (0xff3d, 0xf87e): (0xfe48,), # Closing hard bracket
     #
-    # Keycap numbers 1 through 9:
-    (0x0031, 0x20DE, 0xF87B): (0x0031, 0x20E3),
-    (0x0032, 0x20DE, 0xF87B): (0x0032, 0x20E3),
-    (0x0033, 0x20DE, 0xF87B): (0x0033, 0x20E3),
-    (0x0034, 0x20DE, 0xF87B): (0x0034, 0x20E3),
-    (0x0035, 0x20DE, 0xF87B): (0x0035, 0x20E3),
-    (0x0036, 0x20DE, 0xF87B): (0x0036, 0x20E3),
-    (0x0037, 0x20DE, 0xF87B): (0x0037, 0x20E3),
-    (0x0038, 0x20DE, 0xF87B): (0x0038, 0x20E3),
-    (0x0039, 0x20DE, 0xF87B): (0x0039, 0x20E3),
-    #
     # Typographical rockets (mapped direct to PUA by Apple):
-    (0xF848,): (0x1F66C, 0xF87A), # White leftward heavy rocket
-    (0xF849,): (0x1F66E, 0xF87A), # White rightward heavy rocket
+    (0xF848,): (0x1CC56, 0xF87A), # White leftward heavy rocket
+    (0xF849,): (0x1CC58, 0xF87A), # White rightward heavy rocket
     (0xF84A,): (0x1F66C,), # Leftward lozenge-tipped rocket or bowed arrow
     (0xF84B,): (0x1F66E,), # Rightward lozenge-tipped rocket or bowed arrow
     #
@@ -212,6 +201,17 @@ applesinglehints = {
     (0x2206, 0xF87F): (0x1D71F,), # Medium-bold oblique capital delta
     (0x0021, 0xF87F): (0x2757,), # Emphasised exclamation mark
     #
+    # Keycap numbers 1 through 9:
+    (0x0031, 0x20DE, 0xF87B): (0x0031, 0x20E3),
+    (0x0032, 0x20DE, 0xF87B): (0x0032, 0x20E3),
+    (0x0033, 0x20DE, 0xF87B): (0x0033, 0x20E3),
+    (0x0034, 0x20DE, 0xF87B): (0x0034, 0x20E3),
+    (0x0035, 0x20DE, 0xF87B): (0x0035, 0x20E3),
+    (0x0036, 0x20DE, 0xF87B): (0x0036, 0x20E3),
+    (0x0037, 0x20DE, 0xF87B): (0x0037, 0x20E3),
+    (0x0038, 0x20DE, 0xF87B): (0x0038, 0x20E3),
+    (0x0039, 0x20DE, 0xF87B): (0x0039, 0x20E3),
+    #
     # Avoid transcoding hints on the alternate versions of manicules by mapping to
     #   backhand (even though they are usually just shown as bigger versions):
     (0x261C, 0xF87F): (0x1F448, 0xFE0E),
@@ -237,9 +237,14 @@ applesinglehints = {
     #   zero is rotationally symmetric (and no other U+3007 appears anywhere else in MacKorean).
     (0x3007, 0xF876): (0x3007,),
     (0x24EA, 0xF87F): (0x24EA,), # It's the only circled zero, the other set starts at one.
+    # Code chart annotations and Unicode Technical Note #27 both note that U+156F is in fact a
+    #   doubled asterisk, which got miscategorised as a letter.
+    (0xF860, 0x002A, 0x002A): (0x156F,),
+    (0xF867, 0x002A, 0x002A): (0x156F, 0xF879),
     #
     # Some direct PUA mappings used by MacKorean but no longer needed
-    (0xF806,): (0x26CB, 0xF87A),
+    (0xF806,): (0x1CC8D,), # "Inverse black diamond"
+    (0xF806, 0x20DF): (0x1CC8D, 0x20DF), # "Inverse black diamond" within enclosing diamond
     (0xF808,): (0x1D36D,), # Five vertical lines
     (0xF809, 0xF87A): (0x169B2, 0xF87F), # Like a flipped version of U+169B2 (itself like an MOT sign)
     (0xF809,): (0x169B2, 0xF87A), # Like a filled and flipped version of U+169B2
@@ -385,11 +390,12 @@ applesinglehints_mackorean_pragmatic.update({
     (0x25CB, 0xF879): (0x2B55,),
     (0x25A1, 0xF879): (0x2B1C,),
     (0xF805, 0x20DE): (0x1F4A0, 0x20DE),
-    (0xF806, 0x20DF): (0x26CB, 0x20DF),
     (0xF843,): (0x1F898,),
     (0xF845,): (0x21A2,),
     (0xF846,): (0x1F56A,),
     (0xF847,): (0x1F50A,),
+    (0xF848,): (0x1CC56,), # White leftward heavy rocket
+    (0xF849,): (0x1CC58,), # White rightward heavy rocket
     #
     # Really not the right shape/character, but better than PUA
     (0xF805,): (0x1F4A0,),
@@ -452,6 +458,7 @@ applesinglehints_mackorean_nishikiteki.update({
     #
     # Apple PUA actually included in Nishiki-teki (override inferior approximations in the other dict)
     (0xF806,): (0xF806,),
+    (0xF806, 0x20DF): (0xF806, 0x20DF),
     (0xF807,): (0xF807,), # Telephone dial
     (0xF808,): (0xF808,), # Five vertical lines
     (0xF809,): (0xF809,), # Like a filled and flipped version of the MOT Test symbol

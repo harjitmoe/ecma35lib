@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
-<!-- Copyright © 1991-2022 Unicode, Inc.
+<!-- Copyright © 1991-2024 Unicode, Inc.
 For terms of use, see http://www.unicode.org/copyright.html
-SPDX-License-Identifier: Unicode-DFS-2016
+SPDX-License-Identifier: Unicode-3.0
 CLDR data files are interpreted according to the LDML specification (http://unicode.org/reports/tr35/)
 
 Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/ for derived annotations.
@@ -26,7 +26,7 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🏿">اصلاح‌گر شکلک | پوست | پوست آبنوسی | پوست تیره | تن پوست | رنگ پوست | نوع ۶</annotation>
 		<annotation cp="🏿" type="tts">پوست آبنوسی</annotation>
 		<annotation cp="‾" draft="contributed">رو خط</annotation>
-		<annotation cp="‾" type="tts" draft="contributed">رو خط</annotation>
+		<annotation cp="‾" type="tts">رو خط</annotation>
 		<annotation cp="_">خط | خط زیرین | خط فاصله | خط فاصله پایین | خط فاصله زیرین | زیرخط</annotation>
 		<annotation cp="_" type="tts">خط زیرین</annotation>
 		<annotation cp="-">خط تیره | خط تیره-منها | خط فاصله | منها</annotation>
@@ -61,10 +61,10 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="?" type="tts">علامت سؤال</annotation>
 		<annotation cp="¿">سؤال | علامت سؤال | علامت سؤال وارونه | وارونه</annotation>
 		<annotation cp="¿" type="tts">علامت سؤال وارونه</annotation>
-		<annotation cp="؟">سؤال | عربی | علامت سؤال | علامت سؤال عربی</annotation>
-		<annotation cp="؟" type="tts">علامت سؤال عربی</annotation>
+		<annotation cp="؟">سؤال | عربی | علامت سؤال | علامت سؤال عربی | علامت سؤال فارسی</annotation>
+		<annotation cp="؟" type="tts">علامت سؤال فارسی</annotation>
 		<annotation cp="‽" draft="contributed">نقطه پرسشی</annotation>
-		<annotation cp="‽" type="tts" draft="contributed">نقطه پرسشی</annotation>
+		<annotation cp="‽" type="tts">نقطه پرسشی</annotation>
 		<annotation cp=".">توقف کامل | دات | نقطه</annotation>
 		<annotation cp="." type="tts">نقطه</annotation>
 		<annotation cp="…">حذف | سه‌نقطه | نقاط</annotation>
@@ -129,19 +129,19 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="〗" type="tts">کمانک لنزی توخالی بسته</annotation>
 		<annotation cp="§">بخش | پاراگراف | جزء | نشان بخش</annotation>
 		<annotation cp="§" type="tts">بخش</annotation>
-		<annotation cp="¶">پاراف | علامت پاراگراف | نشان پاراگراف | نشان پارگراف | نماد پاراگراف</annotation>
-		<annotation cp="¶" type="tts">نشان پارگراف</annotation>
+		<annotation cp="¶">پاراف | علامت پاراگراف | نشان پاراگراف | نماد پاراگراف</annotation>
+		<annotation cp="¶" type="tts">نشان پاراگراف</annotation>
 		<annotation cp="@">آروبا | آروباز | آمپرست | ات‌ساین | ات‌مارک | استرودل | علامت اَت</annotation>
 		<annotation cp="@" type="tts">علامت اَت</annotation>
 		<annotation cp="*">ستاره | علامت ستاره | نویسۀ عمومی</annotation>
 		<annotation cp="*" type="tts">علامت ستاره</annotation>
-		<annotation cp="/">شترق | ضربه | کج‌خط | ممیز | مورب | نشان ممیز | ویرگول</annotation>
+		<annotation cp="/">سهم | ضربه | کج‌خط | ممیز | مورب | نشان ممیز | ویرگول</annotation>
 		<annotation cp="/" type="tts">نشان ممیز</annotation>
 		<annotation cp="\">خط مورب وارونه | ممیز | واکج‌خط</annotation>
 		<annotation cp="\" type="tts">واکج‌خط</annotation>
 		<annotation cp="&amp;">امپرساند | نماد «و» | و</annotation>
 		<annotation cp="&amp;" type="tts">نماد «و»</annotation>
-		<annotation cp="#">پوند | عدد | علامت هش | هش | هشتگ</annotation>
+		<annotation cp="#">پوند | شماره | علامت هش | هش | هشتگ</annotation>
 		<annotation cp="#" type="tts">علامت هش</annotation>
 		<annotation cp="%">در صد | درصد</annotation>
 		<annotation cp="%" type="tts">درصد</annotation>
@@ -157,21 +157,21 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="‧" type="tts">نقطه خط تیره</annotation>
 		<annotation cp="′">پریم</annotation>
 		<annotation cp="′" type="tts">پریم</annotation>
-		<annotation cp="″">پریم | دبل پریم</annotation>
+		<annotation cp="″">پریم | دبل پریم | زگوند</annotation>
 		<annotation cp="″" type="tts">دبل پریم</annotation>
 		<annotation cp="‴">پریم | تریپل پریم</annotation>
 		<annotation cp="‴" type="tts">تریپل پریم</annotation>
-		<annotation cp="‸" draft="contributed">هشتک</annotation>
+		<annotation cp="‸">هشتک</annotation>
 		<annotation cp="‸" type="tts">هشتک</annotation>
 		<annotation cp="※">علامت مرجع</annotation>
 		<annotation cp="※" type="tts">علامت مرجع</annotation>
 		<annotation cp="⁂" draft="contributed">سه ستاره</annotation>
-		<annotation cp="⁂" type="tts" draft="contributed">سه ستاره</annotation>
+		<annotation cp="⁂" type="tts">سه ستاره</annotation>
 		<annotation cp="`">اکسان | تون | گراو</annotation>
 		<annotation cp="`" type="tts">اکسان گراو</annotation>
 		<annotation cp="´">اکسان | اگو | تون</annotation>
 		<annotation cp="´" type="tts">اکسان اگو</annotation>
-		<annotation cp="^">آکسان | توان | خمان | سرکنفلکس | شورون | کلاهک | کُلاهک | کنترل | گوه | نشانه‌رو | هشتک</annotation>
+		<annotation cp="^">آکسان | توان | چنبری | خمان | شورون | کلاهک | کُلاهک | کنترل | گوه | نشانه‌رو | هشتک</annotation>
 		<annotation cp="^" type="tts">کُلاهک</annotation>
 		<annotation cp="¨">اوملاوت | ترما | دونقطه</annotation>
 		<annotation cp="¨" type="tts">اوملاوت</annotation>
@@ -181,176 +181,176 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="℗" type="tts">حق نسخه‌برداری برای ضبط صدا</annotation>
 		<annotation cp="←">پیکان | پیکان روبه چپ | چپ</annotation>
 		<annotation cp="←" type="tts">پیکان روبه چپ</annotation>
-		<annotation cp="↚" draft="contributed">پیکان به سمت چپ در کنار خط اریب</annotation>
-		<annotation cp="↚" type="tts" draft="contributed">پیکان به سمت چپ در کنار خط اریب</annotation>
+		<annotation cp="↚">پیکان به سمت چپ در کنار خط اریب</annotation>
+		<annotation cp="↚" type="tts">پیکان به سمت چپ در کنار خط اریب</annotation>
 		<annotation cp="→">پیکان | پیکان روبه راست | راست</annotation>
 		<annotation cp="→" type="tts">پیکان روبه راست</annotation>
-		<annotation cp="↛" draft="contributed">پیکان به سمت راست در کنار خط اریب</annotation>
-		<annotation cp="↛" type="tts" draft="contributed">پیکان به سمت راست در کنار خط اریب</annotation>
+		<annotation cp="↛">پیکان به سمت راست در کنار خط اریب</annotation>
+		<annotation cp="↛" type="tts">پیکان به سمت راست در کنار خط اریب</annotation>
 		<annotation cp="↑">بالا | پیکان | پیکان روبه بالا</annotation>
 		<annotation cp="↑" type="tts">پیکان روبه بالا</annotation>
 		<annotation cp="↓">پایین | پیکان | پیکان روبه پایین</annotation>
 		<annotation cp="↓" type="tts">پیکان روبه پایین</annotation>
-		<annotation cp="↜" draft="contributed">پیکان موجی به سمت چپ</annotation>
-		<annotation cp="↜" type="tts" draft="contributed">پیکان موجی به سمت چپ</annotation>
-		<annotation cp="↝" draft="contributed">پیکان موجی به سمت راست</annotation>
-		<annotation cp="↝" type="tts" draft="contributed">پیکان موجی به سمت راست</annotation>
-		<annotation cp="↞" draft="contributed">پیکان دوسر به سمت چپ</annotation>
-		<annotation cp="↞" type="tts" draft="contributed">پیکان دوسر به سمت چپ</annotation>
-		<annotation cp="↟" draft="contributed">پیکان دوسر به سمت بالا</annotation>
-		<annotation cp="↟" type="tts" draft="contributed">پیکان دوسر به سمت بالا</annotation>
-		<annotation cp="↠" draft="contributed">پیکان دوسر به سمت راست</annotation>
-		<annotation cp="↠" type="tts" draft="contributed">پیکان دوسر به سمت راست</annotation>
-		<annotation cp="↡" draft="contributed">پیکان دوسر به سمت پایین</annotation>
-		<annotation cp="↡" type="tts" draft="contributed">پیکان دوسر به سمت پایین</annotation>
-		<annotation cp="↢" draft="contributed">پیکان دنباله‌دار به سمت چپ</annotation>
-		<annotation cp="↢" type="tts" draft="contributed">پیکان دنباله‌دار به سمت چپ</annotation>
-		<annotation cp="↣" draft="contributed">پیکان دنباله‌دار به سمت راست</annotation>
-		<annotation cp="↣" type="tts" draft="contributed">پیکان دنباله‌دار به سمت راست</annotation>
-		<annotation cp="↤" draft="contributed">پیکان به سمت چپ با ته میله‌ای</annotation>
-		<annotation cp="↤" type="tts" draft="contributed">پیکان به سمت چپ با ته میله‌ای</annotation>
-		<annotation cp="↥" draft="contributed">پیکان به سمت بالا با ته میله‌ای</annotation>
-		<annotation cp="↥" type="tts" draft="contributed">پیکان به سمت بالا با ته میله‌ای</annotation>
-		<annotation cp="↦" draft="contributed">پیکان به سمت راست با ته میله‌ای</annotation>
-		<annotation cp="↦" type="tts" draft="contributed">پیکان به سمت راست با ته میله‌ای</annotation>
-		<annotation cp="↧" draft="contributed">پیکان به سمت پایین با ته میله‌ای</annotation>
-		<annotation cp="↧" type="tts" draft="contributed">پیکان به سمت پایین با ته میله‌ای</annotation>
-		<annotation cp="↨" draft="contributed">پیکان به سمت بالا و پایین با پایه</annotation>
-		<annotation cp="↨" type="tts" draft="contributed">پیکان به سمت بالا و پایین با پایه</annotation>
-		<annotation cp="↫" draft="contributed">پیکان به سمت چپ با ته حلقه‌ای</annotation>
-		<annotation cp="↫" type="tts" draft="contributed">پیکان به سمت چپ با ته حلقه‌ای</annotation>
-		<annotation cp="↬" draft="contributed">پیکان به سمت راست با ته حلقه‌ای</annotation>
-		<annotation cp="↬" type="tts" draft="contributed">پیکان به سمت راست با ته حلقه‌ای</annotation>
-		<annotation cp="↭" draft="contributed">پیکان موجی به سمت چپ و راست</annotation>
-		<annotation cp="↭" type="tts" draft="contributed">پیکان موجی به سمت چپ و راست</annotation>
-		<annotation cp="↯" draft="contributed">پیکان زیگزاگی به سمت پایین</annotation>
-		<annotation cp="↯" type="tts" draft="contributed">پیکان زیگزاگی به سمت پایین</annotation>
-		<annotation cp="↰" draft="contributed">پیکان رو به بالا با نوک پیچیده به سمت چپ</annotation>
-		<annotation cp="↰" type="tts" draft="contributed">پیکان رو به بالا با نوک پیچیده به سمت چپ</annotation>
-		<annotation cp="↱" draft="contributed">پیکان رو به بالا با نوک پیچیده به سمت راست</annotation>
-		<annotation cp="↱" type="tts" draft="contributed">پیکان رو به بالا با نوک پیچیده به سمت راست</annotation>
-		<annotation cp="↲" draft="contributed">پیکان رو به پایین با نوک پیچیده به سمت چپ</annotation>
-		<annotation cp="↲" type="tts" draft="contributed">پیکان رو به پایین با نوک پیچیده به سمت چپ</annotation>
-		<annotation cp="↳" draft="contributed">پیکان رو به پایین با نوک پیچیده به سمت راست</annotation>
-		<annotation cp="↳" type="tts" draft="contributed">پیکان رو به پایین با نوک پیچیده به سمت راست</annotation>
-		<annotation cp="↴" draft="contributed">پیکان رو به راست با نوک پیچیده به سمت پایین</annotation>
-		<annotation cp="↴" type="tts" draft="contributed">پیکان رو به راست با نوک پیچیده به سمت پایین</annotation>
-		<annotation cp="↵" draft="contributed">پیکان رو به راست با نوک پیچیده به سمت چپ</annotation>
-		<annotation cp="↵" type="tts" draft="contributed">پیکان رو به راست با نوک پیچیده به سمت چپ</annotation>
-		<annotation cp="↶" draft="contributed">پیکان نیم‌دایره پادساعتگرد با قوس به سمت بالا</annotation>
-		<annotation cp="↶" type="tts" draft="contributed">پیکان نیم‌دایره پادساعتگرد با قوس به سمت بالا</annotation>
-		<annotation cp="↷" draft="contributed">پیکان نیم‌دایره ساعتگرد با قوس به سمت بالا</annotation>
-		<annotation cp="↷" type="tts" draft="contributed">پیکان نیم‌دایره ساعتگرد با قوس به سمت بالا</annotation>
-		<annotation cp="↸" draft="contributed">پیکان شمال غربی به طرف میله بلند</annotation>
-		<annotation cp="↸" type="tts" draft="contributed">پیکان شمال غربی به طرف میله بلند</annotation>
-		<annotation cp="↹" draft="contributed">پیکان به سمت چپ با نوک چسبیده به میله روی پیکان به سمت راست با نوک چسبیده به میله</annotation>
-		<annotation cp="↹" type="tts" draft="contributed">پیکان به سمت چپ با نوک چسبیده به میله روی پیکان به سمت راست با نوک چسبیده به میله</annotation>
-		<annotation cp="↺" draft="contributed">پیکان دایره‌ای پادساعتگرد باز</annotation>
-		<annotation cp="↺" type="tts" draft="contributed">پیکان دایره‌ای پادساعتگرد باز</annotation>
-		<annotation cp="↻" draft="contributed">پیکان دایره‌ای ساعتگرد باز</annotation>
-		<annotation cp="↻" type="tts" draft="contributed">پیکان دایره‌ای ساعتگرد باز</annotation>
-		<annotation cp="↼" draft="contributed">نیزه به سمت چپ با نوک قلابی شکل به طرف بالا</annotation>
-		<annotation cp="↼" type="tts" draft="contributed">نیزه به سمت چپ با نوک قلابی شکل به طرف بالا</annotation>
-		<annotation cp="↽" draft="contributed">نیزه به سمت چپ با نوک قلابی شکل به طرف پایین</annotation>
-		<annotation cp="↽" type="tts" draft="contributed">نیزه به سمت چپ با نوک قلابی شکل به طرف پایین</annotation>
-		<annotation cp="↾" draft="contributed">نیزه به سمت بالا با نوک قلابی شکل به طرف راست</annotation>
-		<annotation cp="↾" type="tts" draft="contributed">نیزه به سمت بالا با نوک قلابی شکل به طرف راست</annotation>
-		<annotation cp="↿" draft="contributed">نیزه به سمت بالا با نوک قلابی شکل به طرف چپ</annotation>
-		<annotation cp="↿" type="tts" draft="contributed">نیزه به سمت بالا با نوک قلابی شکل به طرف چپ</annotation>
-		<annotation cp="⇀" draft="contributed">نیزه به سمت راست با نوک قلابی شکل به طرف بالا</annotation>
-		<annotation cp="⇀" type="tts" draft="contributed">نیزه به سمت راست با نوک قلابی شکل به طرف بالا</annotation>
-		<annotation cp="⇁" draft="contributed">نیزه به سمت راست با نوک قلابی شکل به طرف پایین</annotation>
-		<annotation cp="⇁" type="tts" draft="contributed">نیزه به سمت راست با نوک قلابی شکل به طرف پایین</annotation>
-		<annotation cp="⇂" draft="contributed">نیزه به سمت پایین با نوک قلابی شکل به طرف راست</annotation>
-		<annotation cp="⇂" type="tts" draft="contributed">نیزه به سمت پایین با نوک قلابی شکل به طرف راست</annotation>
-		<annotation cp="⇃" draft="contributed">نیزه به سمت پایین با نوک قلابی شکل به طرف چپ</annotation>
-		<annotation cp="⇃" type="tts" draft="contributed">نیزه به سمت پایین با نوک قلابی شکل به طرف چپ</annotation>
-		<annotation cp="⇄" draft="contributed">پیکان به سمت راست روی پیکان به سمت چپ</annotation>
-		<annotation cp="⇄" type="tts" draft="contributed">پیکان به سمت راست روی پیکان به سمت چپ</annotation>
+		<annotation cp="↜">پیکان موجی به سمت چپ</annotation>
+		<annotation cp="↜" type="tts">پیکان موجی به سمت چپ</annotation>
+		<annotation cp="↝">پیکان موجی به سمت راست</annotation>
+		<annotation cp="↝" type="tts">پیکان موجی به سمت راست</annotation>
+		<annotation cp="↞">پیکان دوسر به سمت چپ</annotation>
+		<annotation cp="↞" type="tts">پیکان دوسر به سمت چپ</annotation>
+		<annotation cp="↟">پیکان دوسر به سمت بالا</annotation>
+		<annotation cp="↟" type="tts">پیکان دوسر به سمت بالا</annotation>
+		<annotation cp="↠">پیکان دوسر به سمت راست</annotation>
+		<annotation cp="↠" type="tts">پیکان دوسر به سمت راست</annotation>
+		<annotation cp="↡">پیکان دوسر به سمت پایین</annotation>
+		<annotation cp="↡" type="tts">پیکان دوسر به سمت پایین</annotation>
+		<annotation cp="↢">پیکان دنباله‌دار به سمت چپ</annotation>
+		<annotation cp="↢" type="tts">پیکان دنباله‌دار به سمت چپ</annotation>
+		<annotation cp="↣">پیکان دنباله‌دار به سمت راست</annotation>
+		<annotation cp="↣" type="tts">پیکان دنباله‌دار به سمت راست</annotation>
+		<annotation cp="↤">پیکان به سمت چپ با ته میله‌ای</annotation>
+		<annotation cp="↤" type="tts">پیکان به سمت چپ با ته میله‌ای</annotation>
+		<annotation cp="↥">پیکان به سمت بالا با ته میله‌ای</annotation>
+		<annotation cp="↥" type="tts">پیکان به سمت بالا با ته میله‌ای</annotation>
+		<annotation cp="↦">پیکان به سمت راست با ته میله‌ای</annotation>
+		<annotation cp="↦" type="tts">پیکان به سمت راست با ته میله‌ای</annotation>
+		<annotation cp="↧">پیکان به سمت پایین با ته میله‌ای</annotation>
+		<annotation cp="↧" type="tts">پیکان به سمت پایین با ته میله‌ای</annotation>
+		<annotation cp="↨">پیکان به سمت بالا و پایین با پایه</annotation>
+		<annotation cp="↨" type="tts">پیکان به سمت بالا و پایین با پایه</annotation>
+		<annotation cp="↫">پیکان به سمت چپ با ته حلقه‌ای</annotation>
+		<annotation cp="↫" type="tts">پیکان به سمت چپ با ته حلقه‌ای</annotation>
+		<annotation cp="↬">پیکان به سمت راست با ته حلقه‌ای</annotation>
+		<annotation cp="↬" type="tts">پیکان به سمت راست با ته حلقه‌ای</annotation>
+		<annotation cp="↭">پیکان موجی به سمت چپ و راست</annotation>
+		<annotation cp="↭" type="tts">پیکان موجی به سمت چپ و راست</annotation>
+		<annotation cp="↯">پیکان زیگزاگی به سمت پایین</annotation>
+		<annotation cp="↯" type="tts">پیکان زیگزاگی به سمت پایین</annotation>
+		<annotation cp="↰">پیکان رو به بالا با نوک پیچیده به سمت چپ</annotation>
+		<annotation cp="↰" type="tts">پیکان رو به بالا با نوک پیچیده به سمت چپ</annotation>
+		<annotation cp="↱">پیکان رو به بالا با نوک پیچیده به سمت راست</annotation>
+		<annotation cp="↱" type="tts">پیکان رو به بالا با نوک پیچیده به سمت راست</annotation>
+		<annotation cp="↲">پیکان رو به پایین با نوک پیچیده به سمت چپ</annotation>
+		<annotation cp="↲" type="tts">پیکان رو به پایین با نوک پیچیده به سمت چپ</annotation>
+		<annotation cp="↳">پیکان رو به پایین با نوک پیچیده به سمت راست</annotation>
+		<annotation cp="↳" type="tts">پیکان رو به پایین با نوک پیچیده به سمت راست</annotation>
+		<annotation cp="↴">پیکان رو به راست با نوک پیچیده به سمت پایین</annotation>
+		<annotation cp="↴" type="tts">پیکان رو به راست با نوک پیچیده به سمت پایین</annotation>
+		<annotation cp="↵">پیکان رو به راست با نوک پیچیده به سمت چپ</annotation>
+		<annotation cp="↵" type="tts">پیکان رو به راست با نوک پیچیده به سمت چپ</annotation>
+		<annotation cp="↶">پیکان نیم‌دایره پادساعتگرد به سمت پایین</annotation>
+		<annotation cp="↶" type="tts">پیکان نیم‌دایره پادساعتگرد به سمت پایین</annotation>
+		<annotation cp="↷">پیکان نیم‌دایره ساعتگرد به سمت پایین</annotation>
+		<annotation cp="↷" type="tts">پیکان نیم‌دایره ساعتگرد به سمت پایین</annotation>
+		<annotation cp="↸">پیکان شمال غربی به طرف میله بلند</annotation>
+		<annotation cp="↸" type="tts">پیکان شمال غربی به طرف میله بلند</annotation>
+		<annotation cp="↹">پیکان به سمت چپ با نوک چسبیده به میله روی پیکان به سمت راست با نوک چسبیده به میله | پیکان به سمت چپ روی پیکان به سمت راست</annotation>
+		<annotation cp="↹" type="tts">پیکان به سمت چپ روی پیکان به سمت راست</annotation>
+		<annotation cp="↺">پیکان دایره‌ای پادساعتگرد باز</annotation>
+		<annotation cp="↺" type="tts">پیکان دایره‌ای پادساعتگرد باز</annotation>
+		<annotation cp="↻">پیکان دایره‌ای ساعتگرد باز</annotation>
+		<annotation cp="↻" type="tts">پیکان دایره‌ای ساعتگرد باز</annotation>
+		<annotation cp="↼">نیزه با نوک قلابی | نیزه با نوک قلابی شکل به سمت چپ و بالا | نیزه قلابی شکل به سمت چپ و بالا</annotation>
+		<annotation cp="↼" type="tts">نیزه با نوک قلابی شکل به سمت چپ و بالا</annotation>
+		<annotation cp="↽">نیزه با نوک قلابی شکل به سمت چپ و پایین | نیزه به سمت چپ با نوک قلابی شکل به طرف پایین</annotation>
+		<annotation cp="↽" type="tts">نیزه با نوک قلابی شکل به سمت چپ و پایین</annotation>
+		<annotation cp="↾">نیزه با نوک قلابی شکل به سمت بالا و راست | نیزه به سمت بالا با نوک قلابی شکل به طرف راست</annotation>
+		<annotation cp="↾" type="tts">نیزه با نوک قلابی شکل به سمت بالا و راست</annotation>
+		<annotation cp="↿">نیزه با نوک قلابی شکل به سمت بالا و چپ | نیزه به سمت بالا با نوک قلابی شکل به طرف چپ</annotation>
+		<annotation cp="↿" type="tts">نیزه با نوک قلابی شکل به سمت بالا و چپ</annotation>
+		<annotation cp="⇀">نیزه با نوک قلابی شکل به سمت راست و بالا | نیزه به سمت راست با نوک قلابی شکل به طرف بالا</annotation>
+		<annotation cp="⇀" type="tts">نیزه با نوک قلابی شکل به سمت راست و بالا</annotation>
+		<annotation cp="⇁">نیزه با نوک قلابی شکل به سمت راست و پایین | نیزه به سمت راست با نوک قلابی شکل به طرف پایین</annotation>
+		<annotation cp="⇁" type="tts">نیزه با نوک قلابی شکل به سمت راست و پایین</annotation>
+		<annotation cp="⇂">نیزه با نوک قلابی شکل به سمت پایین و راست | نیزه به سمت پایین با نوک قلابی شکل به طرف راست</annotation>
+		<annotation cp="⇂" type="tts">نیزه با نوک قلابی شکل به سمت پایین و راست</annotation>
+		<annotation cp="⇃">نیزه با نوک قلابی شکل به سمت پایین و چپ | نیزه به سمت پایین با نوک قلابی شکل به طرف چپ</annotation>
+		<annotation cp="⇃" type="tts">نیزه با نوک قلابی شکل به سمت پایین و چپ</annotation>
+		<annotation cp="⇄">پیکان به سمت راست روی پیکان به سمت چپ</annotation>
+		<annotation cp="⇄" type="tts">پیکان به سمت راست روی پیکان به سمت چپ</annotation>
 		<annotation cp="⇅">بالا | پایین | پیکان | پیکان‌های روبه بالا و روبه پایین</annotation>
 		<annotation cp="⇅" type="tts">پیکان‌های روبه بالا و روبه پایین</annotation>
 		<annotation cp="⇆">پیکان | پیکان روبه چپ روی پیکان روبه راست | چپ | راست</annotation>
 		<annotation cp="⇆" type="tts">پیکان روبه چپ روی پیکان روبه راست</annotation>
-		<annotation cp="⇇" draft="contributed">پیکان‌های جفتی به سمت چپ</annotation>
-		<annotation cp="⇇" type="tts" draft="contributed">پیکان‌های جفتی به سمت چپ</annotation>
-		<annotation cp="⇈" draft="contributed">پیکان‌های جفتی به سمت بالا</annotation>
-		<annotation cp="⇈" type="tts" draft="contributed">پیکان‌های جفتی به سمت بالا</annotation>
-		<annotation cp="⇉" draft="contributed">پیکان‌های جفتی به سمت راست</annotation>
-		<annotation cp="⇉" type="tts" draft="contributed">پیکان‌های جفتی به سمت راست</annotation>
-		<annotation cp="⇊" draft="contributed">پیکان‌های جفتی به سمت پایین</annotation>
-		<annotation cp="⇊" type="tts" draft="contributed">پیکان‌های جفتی به سمت پایین</annotation>
-		<annotation cp="⇋" draft="contributed">نیزه به سمت چپ روی نیزه به سمت راست</annotation>
-		<annotation cp="⇋" type="tts" draft="contributed">نیزه به سمت چپ روی نیزه به سمت راست</annotation>
-		<annotation cp="⇌" draft="contributed">نیزه به سمت راست روی نیزه به سمت چپ</annotation>
-		<annotation cp="⇌" type="tts" draft="contributed">نیزه به سمت راست روی نیزه به سمت چپ</annotation>
-		<annotation cp="⇐" draft="contributed">پیکان دوتایی به سمت چپ</annotation>
-		<annotation cp="⇐" type="tts" draft="contributed">پیکان دوتایی به سمت چپ</annotation>
-		<annotation cp="⇍" draft="contributed">پیکان دوتایی به سمت چپ با خط اریب</annotation>
-		<annotation cp="⇍" type="tts" draft="contributed">پیکان دوتایی به سمت چپ با خط اریب</annotation>
-		<annotation cp="⇑" draft="contributed">پیکان دوتایی به سمت بالا</annotation>
-		<annotation cp="⇑" type="tts" draft="contributed">پیکان دوتایی به سمت بالا</annotation>
-		<annotation cp="⇒" draft="contributed">پیکان دوتایی به سمت راست</annotation>
-		<annotation cp="⇒" type="tts" draft="contributed">پیکان دوتایی به سمت راست</annotation>
-		<annotation cp="⇏" draft="contributed">پیکان دوتایی به سمت راست با خط اریب</annotation>
-		<annotation cp="⇏" type="tts" draft="contributed">پیکان دوتایی به سمت راست با خط اریب</annotation>
-		<annotation cp="⇓" draft="contributed">پیکان دوتایی به سمت پایین</annotation>
-		<annotation cp="⇓" type="tts" draft="contributed">پیکان دوتایی به سمت پایین</annotation>
-		<annotation cp="⇔" draft="contributed">پیکان دوتایی به سمت چپ و راست</annotation>
-		<annotation cp="⇔" type="tts" draft="contributed">پیکان دوتایی به سمت چپ و راست</annotation>
-		<annotation cp="⇎" draft="contributed">پیکان دوتایی به سمت چپ و راست با خط اریب</annotation>
-		<annotation cp="⇎" type="tts" draft="contributed">پیکان دوتایی به سمت چپ و راست با خط اریب</annotation>
-		<annotation cp="⇖" draft="contributed">پیکان دوتایی شمال غربی</annotation>
-		<annotation cp="⇖" type="tts" draft="contributed">پیکان دوتایی شمال غربی</annotation>
-		<annotation cp="⇗" draft="contributed">پیکان دوتایی شمال شرقی</annotation>
-		<annotation cp="⇗" type="tts" draft="contributed">پیکان دوتایی شمال شرقی</annotation>
-		<annotation cp="⇘" draft="contributed">پیکان دوتایی جنوب شرقی</annotation>
-		<annotation cp="⇘" type="tts" draft="contributed">پیکان دوتایی جنوب شرقی</annotation>
-		<annotation cp="⇙" draft="contributed">پیکان دوتایی جنوب غربی</annotation>
-		<annotation cp="⇙" type="tts" draft="contributed">پیکان دوتایی جنوب غربی</annotation>
-		<annotation cp="⇚" draft="contributed">پیکان سه‌تایی به سمت چپ</annotation>
-		<annotation cp="⇚" type="tts" draft="contributed">پیکان سه‌تایی به سمت چپ</annotation>
-		<annotation cp="⇛" draft="contributed">پیکان سه‌تایی به سمت راست</annotation>
-		<annotation cp="⇛" type="tts" draft="contributed">پیکان سه‌تایی به سمت راست</annotation>
-		<annotation cp="⇜" draft="contributed">پیکان به سمت چپ با خط مارپیچ</annotation>
-		<annotation cp="⇜" type="tts" draft="contributed">پیکان به سمت چپ با خط مارپیچ</annotation>
-		<annotation cp="⇝" draft="contributed">پیکان به سمت راست با خط مارپیچ</annotation>
-		<annotation cp="⇝" type="tts" draft="contributed">پیکان به سمت راست با خط مارپیچ</annotation>
-		<annotation cp="⇞" draft="contributed">پیکان به سمت بالا با دو خط قاطع</annotation>
-		<annotation cp="⇞" type="tts" draft="contributed">پیکان به سمت بالا با دو خط قاطع</annotation>
-		<annotation cp="⇟" draft="contributed">پیکان به سمت پایین با دو خط قاطع</annotation>
-		<annotation cp="⇟" type="tts" draft="contributed">پیکان به سمت پایین با دو خط قاطع</annotation>
-		<annotation cp="⇠" draft="contributed">پیکان به سمت چپ با خط فاصله</annotation>
-		<annotation cp="⇠" type="tts" draft="contributed">پیکان به سمت چپ با خط فاصله</annotation>
-		<annotation cp="⇡" draft="contributed">پیکان به سمت بالا با خط فاصله</annotation>
-		<annotation cp="⇡" type="tts" draft="contributed">پیکان به سمت بالا با خط فاصله</annotation>
-		<annotation cp="⇢" draft="contributed">پیکان به سمت راست با خط فاصله</annotation>
-		<annotation cp="⇢" type="tts" draft="contributed">پیکان به سمت راست با خط فاصله</annotation>
-		<annotation cp="⇣" draft="contributed">پیکان به سمت پایین با خط فاصله</annotation>
-		<annotation cp="⇣" type="tts" draft="contributed">پیکان به سمت پایین با خط فاصله</annotation>
-		<annotation cp="⇤" draft="contributed">پیکان به سمت چپ با نوک چسبیده به میله</annotation>
-		<annotation cp="⇤" type="tts" draft="contributed">پیکان به سمت چپ با نوک چسبیده به میله</annotation>
-		<annotation cp="⇥" draft="contributed">پیکان به سمت راست با نوک چسبیده به میله</annotation>
-		<annotation cp="⇥" type="tts" draft="contributed">پیکان به سمت راست با نوک چسبیده به میله</annotation>
-		<annotation cp="⇦" draft="contributed">پیکان توخالی به سمت چپ</annotation>
-		<annotation cp="⇦" type="tts" draft="contributed">پیکان توخالی به سمت چپ</annotation>
-		<annotation cp="⇧" draft="contributed">پیکان توخالی به سمت بالا</annotation>
-		<annotation cp="⇧" type="tts" draft="contributed">پیکان توخالی به سمت بالا</annotation>
-		<annotation cp="⇨" draft="contributed">پیکان توخالی به سمت راست</annotation>
-		<annotation cp="⇨" type="tts" draft="contributed">پیکان توخالی به سمت راست</annotation>
-		<annotation cp="⇩" draft="contributed">پیکان توخالی به سمت پایین</annotation>
-		<annotation cp="⇩" type="tts" draft="contributed">پیکان توخالی به سمت پایین</annotation>
-		<annotation cp="⇪" draft="contributed">پیکان توخالی به سمت بالا از روی میله</annotation>
-		<annotation cp="⇪" type="tts" draft="contributed">پیکان توخالی به سمت بالا از روی میله</annotation>
-		<annotation cp="⇵" draft="contributed">پیکان به سمت پایین در طرف چپ پیکان به سمت بالا</annotation>
-		<annotation cp="⇵" type="tts" draft="contributed">پیکان به سمت پایین در طرف چپ پیکان به سمت بالا</annotation>
+		<annotation cp="⇇">پیکان‌های جفتی به سمت چپ</annotation>
+		<annotation cp="⇇" type="tts">پیکان‌های جفتی به سمت چپ</annotation>
+		<annotation cp="⇈">پیکان‌های جفتی به سمت بالا</annotation>
+		<annotation cp="⇈" type="tts">پیکان‌های جفتی به سمت بالا</annotation>
+		<annotation cp="⇉">پیکان‌های جفتی به سمت راست</annotation>
+		<annotation cp="⇉" type="tts">پیکان‌های جفتی به سمت راست</annotation>
+		<annotation cp="⇊">پیکان‌های جفتی به سمت پایین</annotation>
+		<annotation cp="⇊" type="tts">پیکان‌های جفتی به سمت پایین</annotation>
+		<annotation cp="⇋">نیزه به سمت چپ روی نیزه به سمت راست</annotation>
+		<annotation cp="⇋" type="tts">نیزه به سمت چپ روی نیزه به سمت راست</annotation>
+		<annotation cp="⇌">نیزه به سمت راست روی نیزه به سمت چپ</annotation>
+		<annotation cp="⇌" type="tts">نیزه به سمت راست روی نیزه به سمت چپ</annotation>
+		<annotation cp="⇐">پیکان دوتایی به سمت چپ</annotation>
+		<annotation cp="⇐" type="tts">پیکان دوتایی به سمت چپ</annotation>
+		<annotation cp="⇍">پیکان دوتایی به سمت چپ با خط اریب</annotation>
+		<annotation cp="⇍" type="tts">پیکان دوتایی به سمت چپ با خط اریب</annotation>
+		<annotation cp="⇑">پیکان دوتایی به سمت بالا</annotation>
+		<annotation cp="⇑" type="tts">پیکان دوتایی به سمت بالا</annotation>
+		<annotation cp="⇒">پیکان دوتایی به سمت راست</annotation>
+		<annotation cp="⇒" type="tts">پیکان دوتایی به سمت راست</annotation>
+		<annotation cp="⇏">پیکان دوتایی به سمت راست با خط اریب</annotation>
+		<annotation cp="⇏" type="tts">پیکان دوتایی به سمت راست با خط اریب</annotation>
+		<annotation cp="⇓">پیکان دوتایی به سمت پایین</annotation>
+		<annotation cp="⇓" type="tts">پیکان دوتایی به سمت پایین</annotation>
+		<annotation cp="⇔">پیکان دوتایی به سمت چپ و راست</annotation>
+		<annotation cp="⇔" type="tts">پیکان دوتایی به سمت چپ و راست</annotation>
+		<annotation cp="⇎">پیکان دوتایی به سمت چپ و راست با خط اریب</annotation>
+		<annotation cp="⇎" type="tts">پیکان دوتایی به سمت چپ و راست با خط اریب</annotation>
+		<annotation cp="⇖">پیکان دوتایی شمال غربی</annotation>
+		<annotation cp="⇖" type="tts">پیکان دوتایی شمال غربی</annotation>
+		<annotation cp="⇗">پیکان دوتایی شمال شرقی</annotation>
+		<annotation cp="⇗" type="tts">پیکان دوتایی شمال شرقی</annotation>
+		<annotation cp="⇘">پیکان دوتایی جنوب شرقی</annotation>
+		<annotation cp="⇘" type="tts">پیکان دوتایی جنوب شرقی</annotation>
+		<annotation cp="⇙">پیکان دوتایی جنوب غربی</annotation>
+		<annotation cp="⇙" type="tts">پیکان دوتایی جنوب غربی</annotation>
+		<annotation cp="⇚">پیکان سه‌تایی به سمت چپ</annotation>
+		<annotation cp="⇚" type="tts">پیکان سه‌تایی به سمت چپ</annotation>
+		<annotation cp="⇛">پیکان سه‌تایی به سمت راست</annotation>
+		<annotation cp="⇛" type="tts">پیکان سه‌تایی به سمت راست</annotation>
+		<annotation cp="⇜">پیکان به سمت چپ با خط مارپیچ</annotation>
+		<annotation cp="⇜" type="tts">پیکان به سمت چپ با خط مارپیچ</annotation>
+		<annotation cp="⇝">پیکان به سمت راست با خط مارپیچ</annotation>
+		<annotation cp="⇝" type="tts">پیکان به سمت راست با خط مارپیچ</annotation>
+		<annotation cp="⇞">پیکان به سمت بالا با دو خط قاطع</annotation>
+		<annotation cp="⇞" type="tts">پیکان به سمت بالا با دو خط قاطع</annotation>
+		<annotation cp="⇟">پیکان به سمت پایین با دو خط قاطع</annotation>
+		<annotation cp="⇟" type="tts">پیکان به سمت پایین با دو خط قاطع</annotation>
+		<annotation cp="⇠">پیکان به سمت چپ با خط فاصله</annotation>
+		<annotation cp="⇠" type="tts">پیکان به سمت چپ با خط فاصله</annotation>
+		<annotation cp="⇡">پیکان به سمت بالا با خط فاصله</annotation>
+		<annotation cp="⇡" type="tts">پیکان به سمت بالا با خط فاصله</annotation>
+		<annotation cp="⇢">پیکان به سمت راست با خط فاصله</annotation>
+		<annotation cp="⇢" type="tts">پیکان به سمت راست با خط فاصله</annotation>
+		<annotation cp="⇣">پیکان به سمت پایین با خط فاصله</annotation>
+		<annotation cp="⇣" type="tts">پیکان به سمت پایین با خط فاصله</annotation>
+		<annotation cp="⇤">پیکان به سمت چپ با نوک چسبیده به میله</annotation>
+		<annotation cp="⇤" type="tts">پیکان به سمت چپ با نوک چسبیده به میله</annotation>
+		<annotation cp="⇥">پیکان به سمت راست با نوک چسبیده به میله</annotation>
+		<annotation cp="⇥" type="tts">پیکان به سمت راست با نوک چسبیده به میله</annotation>
+		<annotation cp="⇦">پیکان توخالی به سمت چپ</annotation>
+		<annotation cp="⇦" type="tts">پیکان توخالی به سمت چپ</annotation>
+		<annotation cp="⇧">پیکان توخالی به سمت بالا</annotation>
+		<annotation cp="⇧" type="tts">پیکان توخالی به سمت بالا</annotation>
+		<annotation cp="⇨">پیکان توخالی به سمت راست</annotation>
+		<annotation cp="⇨" type="tts">پیکان توخالی به سمت راست</annotation>
+		<annotation cp="⇩">پیکان توخالی به سمت پایین</annotation>
+		<annotation cp="⇩" type="tts">پیکان توخالی به سمت پایین</annotation>
+		<annotation cp="⇪">پیکان توخالی به سمت بالا از روی میله</annotation>
+		<annotation cp="⇪" type="tts">پیکان توخالی به سمت بالا از روی میله</annotation>
+		<annotation cp="⇵">پیکان به سمت پایین در طرف چپ پیکان به سمت بالا | پیکان پایین‌رو در چپ پیکان بالارو</annotation>
+		<annotation cp="⇵" type="tts">پیکان پایین‌رو در چپ پیکان بالارو</annotation>
 		<annotation cp="∀" draft="contributed">برای همه</annotation>
-		<annotation cp="∀" type="tts" draft="contributed">برای همه</annotation>
-		<annotation cp="∂" draft="contributed">دیفرانسیل با مشتقات جزئی</annotation>
-		<annotation cp="∂" type="tts" draft="contributed">دیفرانسیل با مشتقات جزئی</annotation>
-		<annotation cp="∃" draft="contributed">وجود دارد</annotation>
-		<annotation cp="∃" type="tts" draft="contributed">وجود دارد</annotation>
+		<annotation cp="∀" type="tts">برای همه</annotation>
+		<annotation cp="∂">دیفرانسیل با مشتقات جزئی</annotation>
+		<annotation cp="∂" type="tts">دیفرانسیل با مشتقات جزئی</annotation>
+		<annotation cp="∃">وجود دارد</annotation>
+		<annotation cp="∃" type="tts">وجود دارد</annotation>
 		<annotation cp="∅" draft="contributed">مجموعه تهی</annotation>
-		<annotation cp="∅" type="tts" draft="contributed">مجموعه تهی</annotation>
+		<annotation cp="∅" type="tts">مجموعه تهی</annotation>
 		<annotation cp="∆">افزایش | مثلث</annotation>
 		<annotation cp="∆" type="tts">افزایش</annotation>
 		<annotation cp="∇">عملگر دل، نابلا | مثلث</annotation>
@@ -358,15 +358,15 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="∈">شامل | عضویت | عنصر | عنصرِ | مجموعه</annotation>
 		<annotation cp="∈" type="tts">عنصرِ</annotation>
 		<annotation cp="∉" draft="contributed">عضو نیست</annotation>
-		<annotation cp="∉" type="tts" draft="contributed">عضو نیست</annotation>
+		<annotation cp="∉" type="tts">عضو نیست</annotation>
 		<annotation cp="∋" draft="contributed">شامل عضو</annotation>
-		<annotation cp="∋" type="tts" draft="contributed">شامل عضو</annotation>
+		<annotation cp="∋" type="tts">شامل عضو</annotation>
 		<annotation cp="∎" draft="contributed">انتهای برهان</annotation>
-		<annotation cp="∎" type="tts" draft="contributed">انتهای برهان</annotation>
+		<annotation cp="∎" type="tts">انتهای برهان</annotation>
 		<annotation cp="∏" draft="contributed">حاصل Nتایی</annotation>
-		<annotation cp="∏" type="tts" draft="contributed">حاصل Nتایی</annotation>
+		<annotation cp="∏" type="tts">حاصل Nتایی</annotation>
 		<annotation cp="∑" draft="contributed">حاصل جمع Nتایی</annotation>
-		<annotation cp="∑" type="tts" draft="contributed">حاصل جمع Nتایی</annotation>
+		<annotation cp="∑" type="tts">حاصل جمع Nتایی</annotation>
 		<annotation cp="+">اضافه | جمع | علامت بعلاوه</annotation>
 		<annotation cp="+" type="tts">علامت بعلاوه</annotation>
 		<annotation cp="±">بعلاوه-منها | به‌اضافه-منها</annotation>
@@ -378,7 +378,7 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="&lt;">تگ | تگ باز | کوچکتر از</annotation>
 		<annotation cp="&lt;" type="tts">کوچکتر از</annotation>
 		<annotation cp="≮" draft="contributed">کمتر نباشد از</annotation>
-		<annotation cp="≮" type="tts" draft="contributed">کمتر نباشد از</annotation>
+		<annotation cp="≮" type="tts">کمتر نباشد از</annotation>
 		<annotation cp="=">برابر | مساوی</annotation>
 		<annotation cp="=" type="tts">مساوی</annotation>
 		<annotation cp="≠">نابرابر | نابرابری | نامساوی</annotation>
@@ -386,7 +386,7 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="&gt;">بزرگتر از | تگ | تگ بسته</annotation>
 		<annotation cp="&gt;" type="tts">بزرگتر از</annotation>
 		<annotation cp="≯" draft="contributed">بزرگتر نباشد از</annotation>
-		<annotation cp="≯" type="tts" draft="contributed">بزرگتر نباشد از</annotation>
+		<annotation cp="≯" type="tts">بزرگتر نباشد از</annotation>
 		<annotation cp="¬">نقیض | نیست</annotation>
 		<annotation cp="¬" type="tts">نقیض</annotation>
 		<annotation cp="|">چوب | خط | خط عمودی | دسته | ضربه | ضربه شفر | لوله | میله | نوار عمودی | وی‌بار</annotation>
@@ -398,393 +398,319 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="⁻">زِبَرنوشت، برنوشته | منفی | منفی زِبَرنوشت، منفی برنوشته</annotation>
 		<annotation cp="⁻" type="tts">منفی زِبَرنوشت، منفی برنوشته</annotation>
 		<annotation cp="∓" draft="contributed">به‌اضافه یا منهای</annotation>
-		<annotation cp="∓" type="tts" draft="contributed">به‌اضافه یا منهای</annotation>
+		<annotation cp="∓" type="tts">به‌اضافه یا منهای</annotation>
 		<annotation cp="∕" draft="contributed">خط مایل تقسیم</annotation>
-		<annotation cp="∕" type="tts" draft="contributed">خط مایل تقسیم</annotation>
+		<annotation cp="∕" type="tts">خط مایل تقسیم</annotation>
 		<annotation cp="⁄" draft="contributed">خط مایل کسری</annotation>
-		<annotation cp="⁄" type="tts" draft="contributed">خط مایل کسری</annotation>
+		<annotation cp="⁄" type="tts">خط مایل کسری</annotation>
 		<annotation cp="∗" draft="contributed">عملگر ستاره</annotation>
-		<annotation cp="∗" type="tts" draft="contributed">عملگر ستاره</annotation>
+		<annotation cp="∗" type="tts">عملگر ستاره</annotation>
 		<annotation cp="∘" draft="contributed">عملگر حلقه</annotation>
-		<annotation cp="∘" type="tts" draft="contributed">عملگر حلقه</annotation>
+		<annotation cp="∘" type="tts">عملگر حلقه</annotation>
 		<annotation cp="∙" draft="contributed">عملگر گلوله</annotation>
-		<annotation cp="∙" type="tts" draft="contributed">عملگر گلوله</annotation>
+		<annotation cp="∙" type="tts">عملگر گلوله</annotation>
 		<annotation cp="√">جذر، ریشه دوم | رادیکال | ریشه | مجذور</annotation>
 		<annotation cp="√" type="tts">جذر، ریشه دوم</annotation>
 		<annotation cp="∝" draft="contributed">تناسبی</annotation>
-		<annotation cp="∝" type="tts" draft="contributed">تناسبی</annotation>
+		<annotation cp="∝" type="tts">تناسبی</annotation>
 		<annotation cp="∞">بینهایت، نامتناهی | علامت بینهایت، علامت نامتناهی</annotation>
 		<annotation cp="∞" type="tts">علامت بینهایت، علامت نامتناهی</annotation>
 		<annotation cp="∟" draft="contributed">زاویه راست</annotation>
-		<annotation cp="∟" type="tts" draft="contributed">زاویه راست</annotation>
+		<annotation cp="∟" type="tts">زاویه راست</annotation>
 		<annotation cp="∠" draft="contributed">زاویه</annotation>
-		<annotation cp="∠" type="tts" draft="contributed">زاویه</annotation>
+		<annotation cp="∠" type="tts">زاویه</annotation>
 		<annotation cp="∣" draft="contributed">تقسیم می‌کند</annotation>
-		<annotation cp="∣" type="tts" draft="contributed">تقسیم می‌کند</annotation>
-		<annotation cp="∥" draft="contributed">موازی</annotation>
-		<annotation cp="∥" type="tts" draft="contributed">موازی</annotation>
+		<annotation cp="∣" type="tts">تقسیم می‌کند</annotation>
+		<annotation cp="∥">موازی</annotation>
+		<annotation cp="∥" type="tts">موازی</annotation>
 		<annotation cp="∧" draft="contributed">و منطقی</annotation>
-		<annotation cp="∧" type="tts" draft="contributed">و منطقی</annotation>
-		<annotation cp="∩">اشتراک | مجموعه</annotation>
+		<annotation cp="∧" type="tts">و منطقی</annotation>
+		<annotation cp="∩">اشتراک | فصل مشترک | مجموعه</annotation>
 		<annotation cp="∩" type="tts">اشتراک</annotation>
-		<annotation cp="∪">اجتماع | مجموعه</annotation>
+		<annotation cp="∪">اتحاد | اجتماع | مجموعه</annotation>
 		<annotation cp="∪" type="tts">اجتماع</annotation>
 		<annotation cp="∫" draft="contributed">انتگرال</annotation>
-		<annotation cp="∫" type="tts" draft="contributed">انتگرال</annotation>
+		<annotation cp="∫" type="tts">انتگرال</annotation>
 		<annotation cp="∬" draft="contributed">انتگرال دوگانه</annotation>
-		<annotation cp="∬" type="tts" draft="contributed">انتگرال دوگانه</annotation>
-		<annotation cp="∮" draft="contributed">انتگرال‌گیری کانتور</annotation>
-		<annotation cp="∮" type="tts" draft="contributed">انتگرال‌گیری کانتور</annotation>
+		<annotation cp="∬" type="tts">انتگرال دوگانه</annotation>
+		<annotation cp="∮">انتگرال‌گیری کانتور</annotation>
+		<annotation cp="∮" type="tts">انتگرال‌گیری کانتور</annotation>
 		<annotation cp="∴" draft="contributed">بنابراین</annotation>
-		<annotation cp="∴" type="tts" draft="contributed">بنابراین</annotation>
+		<annotation cp="∴" type="tts">بنابراین</annotation>
 		<annotation cp="∵" draft="contributed">چون که</annotation>
-		<annotation cp="∵" type="tts" draft="contributed">چون که</annotation>
-		<annotation cp="∶" draft="contributed">نسبت</annotation>
-		<annotation cp="∶" type="tts" draft="contributed">نسبت</annotation>
-		<annotation cp="∷" draft="contributed">تناسب</annotation>
-		<annotation cp="∷" type="tts" draft="contributed">تناسب</annotation>
+		<annotation cp="∵" type="tts">چون که</annotation>
+		<annotation cp="∶">نسبت</annotation>
+		<annotation cp="∶" type="tts">نسبت</annotation>
+		<annotation cp="∷">تناسب</annotation>
+		<annotation cp="∷" type="tts">تناسب</annotation>
 		<annotation cp="∼" draft="contributed">عملگر مد</annotation>
-		<annotation cp="∼" type="tts" draft="contributed">عملگر مد</annotation>
+		<annotation cp="∼" type="tts">عملگر مد</annotation>
 		<annotation cp="∽" draft="contributed">مد برعکس</annotation>
-		<annotation cp="∽" type="tts" draft="contributed">مد برعکس</annotation>
-		<annotation cp="∾" draft="contributed">اس معکوس خوابیده</annotation>
-		<annotation cp="∾" type="tts" draft="contributed">اس معکوس خوابیده</annotation>
+		<annotation cp="∽" type="tts">مد برعکس</annotation>
+		<annotation cp="∾">اس معکوس خوابیده</annotation>
+		<annotation cp="∾" type="tts">اس معکوس خوابیده</annotation>
 		<annotation cp="≃" draft="contributed">برابر مجانبی</annotation>
-		<annotation cp="≃" type="tts" draft="contributed">برابر مجانبی</annotation>
+		<annotation cp="≃" type="tts">برابر مجانبی</annotation>
 		<annotation cp="≅" draft="contributed">تقریباً برابر</annotation>
-		<annotation cp="≅" type="tts" draft="contributed">تقریباً برابر</annotation>
+		<annotation cp="≅" type="tts">تقریباً برابر</annotation>
 		<annotation cp="≈">تقریب | تقریباً مساوی | تقریبی</annotation>
 		<annotation cp="≈" type="tts">تقریباً مساوی</annotation>
 		<annotation cp="≌" draft="contributed">همه برابر</annotation>
-		<annotation cp="≌" type="tts" draft="contributed">همه برابر</annotation>
-		<annotation cp="≒" draft="contributed">تقریباً برابر تصویر</annotation>
-		<annotation cp="≒" type="tts" draft="contributed">تقریباً برابر تصویر</annotation>
+		<annotation cp="≌" type="tts">همه برابر</annotation>
+		<annotation cp="≒">تقریباً برابر تصویر</annotation>
+		<annotation cp="≒" type="tts">تقریباً برابر تصویر</annotation>
 		<annotation cp="≖" draft="contributed">حلقه داخل مساوی</annotation>
-		<annotation cp="≖" type="tts" draft="contributed">حلقه داخل مساوی</annotation>
-		<annotation cp="≡">سه‌خط | عین | معادل با، این‌همان با | معادل، این‌همان</annotation>
-		<annotation cp="≡" type="tts">معادل با، این‌همان با</annotation>
+		<annotation cp="≖" type="tts">حلقه داخل مساوی</annotation>
+		<annotation cp="≡">سه‌خط | معادل | معادل با | همسان</annotation>
+		<annotation cp="≡" type="tts">معادل</annotation>
 		<annotation cp="≣" draft="contributed">اکیداً معادل</annotation>
-		<annotation cp="≣" type="tts" draft="contributed">اکیداً معادل</annotation>
+		<annotation cp="≣" type="tts">اکیداً معادل</annotation>
 		<annotation cp="≤">کوچکتر از | کوچکتر یا مساوی | مساوی | مساوی باشد | نابرابری</annotation>
 		<annotation cp="≤" type="tts">کوچکتر یا مساوی</annotation>
 		<annotation cp="≥">بزرگتر از | بزرگتر یا مساوی | مساوی | مساوی باشد | نابرابری</annotation>
 		<annotation cp="≥" type="tts">بزرگتر یا مساوی</annotation>
 		<annotation cp="≦" draft="contributed">علامت کوچکتر از روی مساوی</annotation>
-		<annotation cp="≦" type="tts" draft="contributed">علامت کوچکتر از روی مساوی</annotation>
+		<annotation cp="≦" type="tts">علامت کوچکتر از روی مساوی</annotation>
 		<annotation cp="≧" draft="contributed">علامت بزرگتر از روی مساوی</annotation>
-		<annotation cp="≧" type="tts" draft="contributed">علامت بزرگتر از روی مساوی</annotation>
+		<annotation cp="≧" type="tts">علامت بزرگتر از روی مساوی</annotation>
 		<annotation cp="≪" draft="contributed">خیلی کوچکتر از</annotation>
-		<annotation cp="≪" type="tts" draft="contributed">خیلی کوچکتر از</annotation>
+		<annotation cp="≪" type="tts">خیلی کوچکتر از</annotation>
 		<annotation cp="≫" draft="contributed">خیلی بزرگتر از</annotation>
-		<annotation cp="≫" type="tts" draft="contributed">خیلی بزرگتر از</annotation>
-		<annotation cp="≬" draft="contributed">بین</annotation>
-		<annotation cp="≬" type="tts" draft="contributed">بین</annotation>
+		<annotation cp="≫" type="tts">خیلی بزرگتر از</annotation>
+		<annotation cp="≬">بین</annotation>
+		<annotation cp="≬" type="tts">بین</annotation>
 		<annotation cp="≳" draft="contributed">معادل بزرگتر از</annotation>
-		<annotation cp="≳" type="tts" draft="contributed">معادل بزرگتر از</annotation>
+		<annotation cp="≳" type="tts">معادل بزرگتر از</annotation>
 		<annotation cp="≺" draft="contributed">مقدم است بر</annotation>
-		<annotation cp="≺" type="tts" draft="contributed">مقدم است بر</annotation>
+		<annotation cp="≺" type="tts">مقدم است بر</annotation>
 		<annotation cp="≻" draft="contributed">می‌آید به دنبال</annotation>
-		<annotation cp="≻" type="tts" draft="contributed">می‌آید به دنبال</annotation>
+		<annotation cp="≻" type="tts">می‌آید به دنبال</annotation>
 		<annotation cp="⊁" draft="contributed">نمی‌آید به دنبال</annotation>
-		<annotation cp="⊁" type="tts" draft="contributed">نمی‌آید به دنبال</annotation>
+		<annotation cp="⊁" type="tts">نمی‌آید به دنبال</annotation>
 		<annotation cp="⊂">زیرمجموعه | زیرمجموعهٔ | مجموعه</annotation>
 		<annotation cp="⊂" type="tts">زیرمجموعهٔ</annotation>
 		<annotation cp="⊃" draft="contributed">فوق مجموعه</annotation>
-		<annotation cp="⊃" type="tts" draft="contributed">فوق مجموعه</annotation>
-		<annotation cp="⊆" draft="contributed">مساوی زیرمجموعه</annotation>
-		<annotation cp="⊆" type="tts" draft="contributed">مساوی زیرمجموعه</annotation>
+		<annotation cp="⊃" type="tts">فوق مجموعه</annotation>
+		<annotation cp="⊆">مساوی زیرمجموعه</annotation>
+		<annotation cp="⊆" type="tts">مساوی زیرمجموعه</annotation>
 		<annotation cp="⊇" draft="contributed">مساوی فوق مجموعه</annotation>
-		<annotation cp="⊇" type="tts" draft="contributed">مساوی فوق مجموعه</annotation>
+		<annotation cp="⊇" type="tts">مساوی فوق مجموعه</annotation>
 		<annotation cp="⊕" draft="contributed">علامت به‌اضافه داخل دایره</annotation>
-		<annotation cp="⊕" type="tts" draft="contributed">علامت به‌اضافه داخل دایره</annotation>
+		<annotation cp="⊕" type="tts">علامت به‌اضافه داخل دایره</annotation>
 		<annotation cp="⊖" draft="contributed">علامت منها داخل دایره</annotation>
-		<annotation cp="⊖" type="tts" draft="contributed">علامت منها داخل دایره</annotation>
+		<annotation cp="⊖" type="tts">علامت منها داخل دایره</annotation>
 		<annotation cp="⊗" draft="contributed">علامت ضربدر داخل دایره</annotation>
-		<annotation cp="⊗" type="tts" draft="contributed">علامت ضربدر داخل دایره</annotation>
+		<annotation cp="⊗" type="tts">علامت ضربدر داخل دایره</annotation>
 		<annotation cp="⊘" draft="contributed">خط مایل تقسیم داخل دایره</annotation>
-		<annotation cp="⊘" type="tts" draft="contributed">خط مایل تقسیم داخل دایره</annotation>
+		<annotation cp="⊘" type="tts">خط مایل تقسیم داخل دایره</annotation>
 		<annotation cp="⊙" draft="contributed">عملگر نقطه داخل دایره</annotation>
-		<annotation cp="⊙" type="tts" draft="contributed">عملگر نقطه داخل دایره</annotation>
-		<annotation cp="⊚" draft="contributed">عملگر حلقه داخل دایره</annotation>
-		<annotation cp="⊚" type="tts" draft="contributed">عملگر حلقه داخل دایره</annotation>
+		<annotation cp="⊙" type="tts">عملگر نقطه داخل دایره</annotation>
+		<annotation cp="⊚">عملگر حلقه داخل دایره</annotation>
+		<annotation cp="⊚" type="tts">عملگر حلقه داخل دایره</annotation>
 		<annotation cp="⊛" draft="contributed">عملگر ستاره داخل دایره</annotation>
-		<annotation cp="⊛" type="tts" draft="contributed">عملگر ستاره داخل دایره</annotation>
+		<annotation cp="⊛" type="tts">عملگر ستاره داخل دایره</annotation>
 		<annotation cp="⊞" draft="contributed">علامت به‌اضافه داخل مربع</annotation>
-		<annotation cp="⊞" type="tts" draft="contributed">علامت به‌اضافه داخل مربع</annotation>
+		<annotation cp="⊞" type="tts">علامت به‌اضافه داخل مربع</annotation>
 		<annotation cp="⊟" draft="contributed">علامت منهای داخل مربع</annotation>
-		<annotation cp="⊟" type="tts" draft="contributed">علامت منهای داخل مربع</annotation>
+		<annotation cp="⊟" type="tts">علامت منهای داخل مربع</annotation>
 		<annotation cp="⊥" draft="contributed">گزاره منطقی</annotation>
-		<annotation cp="⊥" type="tts" draft="contributed">گزاره منطقی</annotation>
-		<annotation cp="⊮" draft="contributed">بدون اجبار</annotation>
-		<annotation cp="⊮" type="tts" draft="contributed">بدون اجبار</annotation>
+		<annotation cp="⊥" type="tts">گزاره منطقی</annotation>
+		<annotation cp="⊮">بدون اجبار</annotation>
+		<annotation cp="⊮" type="tts">بدون اجبار</annotation>
 		<annotation cp="⊰" draft="contributed">مقدم است بر رابطه</annotation>
-		<annotation cp="⊰" type="tts" draft="contributed">مقدم است بر رابطه</annotation>
+		<annotation cp="⊰" type="tts">مقدم است بر رابطه</annotation>
 		<annotation cp="⊱" draft="contributed">می‌آید به دنبال رابطه</annotation>
-		<annotation cp="⊱" type="tts" draft="contributed">می‌آید به دنبال رابطه</annotation>
+		<annotation cp="⊱" type="tts">می‌آید به دنبال رابطه</annotation>
 		<annotation cp="⋭" draft="contributed">بدون تساوی زیرگروه نرمال</annotation>
-		<annotation cp="⋭" type="tts" draft="contributed">بدون تساوی زیرگروه نرمال</annotation>
-		<annotation cp="⊶" draft="contributed">اصلی</annotation>
-		<annotation cp="⊶" type="tts" draft="contributed">اصلی</annotation>
+		<annotation cp="⋭" type="tts">بدون تساوی زیرگروه نرمال</annotation>
+		<annotation cp="⊶">اصلی</annotation>
+		<annotation cp="⊶" type="tts">اصلی</annotation>
 		<annotation cp="⊹" draft="contributed">ماتریس هرمیتی مزدوج</annotation>
-		<annotation cp="⊹" type="tts" draft="contributed">ماتریس هرمیتی مزدوج</annotation>
+		<annotation cp="⊹" type="tts">ماتریس هرمیتی مزدوج</annotation>
 		<annotation cp="⊿" draft="contributed">مثلث قائم‌الزاویه</annotation>
-		<annotation cp="⊿" type="tts" draft="contributed">مثلث قائم‌الزاویه</annotation>
+		<annotation cp="⊿" type="tts">مثلث قائم‌الزاویه</annotation>
 		<annotation cp="⋁" draft="contributed">تابع nتایی منطقی یا</annotation>
-		<annotation cp="⋁" type="tts" draft="contributed">تابع nتایی منطقی یا</annotation>
+		<annotation cp="⋁" type="tts">تابع nتایی منطقی یا</annotation>
 		<annotation cp="⋂" draft="contributed">اشتراک Nتایی</annotation>
-		<annotation cp="⋂" type="tts" draft="contributed">اشتراک Nتایی</annotation>
+		<annotation cp="⋂" type="tts">اشتراک Nتایی</annotation>
 		<annotation cp="⋃" draft="contributed">اجتماع Nتایی</annotation>
-		<annotation cp="⋃" type="tts" draft="contributed">اجتماع Nتایی</annotation>
+		<annotation cp="⋃" type="tts">اجتماع Nتایی</annotation>
 		<annotation cp="⋅" draft="contributed">عملگر نقطه</annotation>
-		<annotation cp="⋅" type="tts" draft="contributed">عملگر نقطه</annotation>
+		<annotation cp="⋅" type="tts">عملگر نقطه</annotation>
 		<annotation cp="⋆" draft="contributed">عملگر ستاره‌ای</annotation>
-		<annotation cp="⋆" type="tts" draft="contributed">عملگر ستاره‌ای</annotation>
+		<annotation cp="⋆" type="tts">عملگر ستاره‌ای</annotation>
 		<annotation cp="⋈" draft="contributed">پیوند طبیعی</annotation>
-		<annotation cp="⋈" type="tts" draft="contributed">پیوند طبیعی</annotation>
+		<annotation cp="⋈" type="tts">پیوند طبیعی</annotation>
 		<annotation cp="⋒" draft="contributed">اشتراک دوجانبه</annotation>
-		<annotation cp="⋒" type="tts" draft="contributed">اشتراک دوجانبه</annotation>
+		<annotation cp="⋒" type="tts">اشتراک دوجانبه</annotation>
 		<annotation cp="⋘" draft="contributed">بسیار کوچکتر از</annotation>
-		<annotation cp="⋘" type="tts" draft="contributed">بسیار کوچکتر از</annotation>
+		<annotation cp="⋘" type="tts">بسیار کوچکتر از</annotation>
 		<annotation cp="⋙" draft="contributed">بسیار بزرگتر از</annotation>
-		<annotation cp="⋙" type="tts" draft="contributed">بسیار بزرگتر از</annotation>
+		<annotation cp="⋙" type="tts">بسیار بزرگتر از</annotation>
 		<annotation cp="⋮" draft="contributed">سه‌نقطه عمودی</annotation>
-		<annotation cp="⋮" type="tts" draft="contributed">سه‌نقطه عمودی</annotation>
+		<annotation cp="⋮" type="tts">سه‌نقطه عمودی</annotation>
 		<annotation cp="⋯" draft="contributed">سه‌نقطه افقی وسط</annotation>
-		<annotation cp="⋯" type="tts" draft="contributed">سه‌نقطه افقی وسط</annotation>
+		<annotation cp="⋯" type="tts">سه‌نقطه افقی وسط</annotation>
 		<annotation cp="⋰" draft="contributed">سه‌نقطه اریب از بالا راست به پایین چپ</annotation>
-		<annotation cp="⋰" type="tts" draft="contributed">سه‌نقطه اریب از بالا راست به پایین چپ</annotation>
+		<annotation cp="⋰" type="tts">سه‌نقطه اریب از بالا راست به پایین چپ</annotation>
 		<annotation cp="⋱" draft="contributed">سه‌نقطه اریب از بالا چپ به پایین راست</annotation>
-		<annotation cp="⋱" type="tts" draft="contributed">سه‌نقطه اریب از بالا چپ به پایین راست</annotation>
-		<annotation cp="■" draft="contributed">مربع توپر</annotation>
-		<annotation cp="■" type="tts" draft="contributed">مربع توپر</annotation>
-		<annotation cp="□" draft="contributed">مربع توخالی</annotation>
-		<annotation cp="□" type="tts" draft="contributed">مربع توخالی</annotation>
-		<annotation cp="▢" draft="contributed">مربع توخالی با گوشه‌های گرد</annotation>
-		<annotation cp="▢" type="tts" draft="contributed">مربع توخالی با گوشه‌های گرد</annotation>
-		<annotation cp="▣" draft="contributed">مربع توخالی حاوی مربع توپر</annotation>
-		<annotation cp="▣" type="tts" draft="contributed">مربع توخالی حاوی مربع توپر</annotation>
-		<annotation cp="▤" draft="contributed">مربع توپر با راه‌راه افقی</annotation>
-		<annotation cp="▤" type="tts" draft="contributed">مربع توپر با راه‌راه افقی</annotation>
-		<annotation cp="▥" draft="contributed">مربع توپر با راه‌راه عمودی</annotation>
-		<annotation cp="▥" type="tts" draft="contributed">مربع توپر با راه‌راه عمودی</annotation>
-		<annotation cp="▦" draft="contributed">مربع توپر با هاشور عمود بر هم</annotation>
-		<annotation cp="▦" type="tts" draft="contributed">مربع توپر با هاشور عمود بر هم</annotation>
-		<annotation cp="▧" draft="contributed">مربع توپر با هاشور از سمت چپ بالا به سمت راست پایین</annotation>
-		<annotation cp="▧" type="tts" draft="contributed">مربع توپر با هاشور از سمت چپ بالا به سمت راست پایین</annotation>
-		<annotation cp="▨" draft="contributed">مربع توپر با هاشور از سمت راست بالا به سمت چپ پایین</annotation>
-		<annotation cp="▨" type="tts" draft="contributed">مربع توپر با هاشور از سمت راست بالا به سمت چپ پایین</annotation>
-		<annotation cp="▩" draft="contributed">مربع با هاشور اریب متقاطع</annotation>
-		<annotation cp="▩" type="tts" draft="contributed">مربع با هاشور اریب متقاطع</annotation>
-		<annotation cp="▬" draft="contributed">مستطیل توپر</annotation>
-		<annotation cp="▬" type="tts" draft="contributed">مستطیل توپر</annotation>
-		<annotation cp="▭" draft="contributed">مستطیل توخالی</annotation>
-		<annotation cp="▭" type="tts" draft="contributed">مستطیل توخالی</annotation>
-		<annotation cp="▮" draft="contributed">مستطیل توپر عمودی</annotation>
-		<annotation cp="▮" type="tts" draft="contributed">مستطیل توپر عمودی</annotation>
-		<annotation cp="▰" draft="contributed">متوازی‌الاضلاع توپر</annotation>
-		<annotation cp="▰" type="tts" draft="contributed">متوازی‌الاضلاع توپر</annotation>
+		<annotation cp="⋱" type="tts">سه‌نقطه اریب از بالا چپ به پایین راست</annotation>
+		<annotation cp="■">مربع توپر</annotation>
+		<annotation cp="■" type="tts">مربع توپر</annotation>
+		<annotation cp="□">مربع توخالی</annotation>
+		<annotation cp="□" type="tts">مربع توخالی</annotation>
+		<annotation cp="▢">مربع توخالی با گوشه‌های گرد</annotation>
+		<annotation cp="▢" type="tts">مربع توخالی با گوشه‌های گرد</annotation>
+		<annotation cp="▣">مربع توخالی حاوی مربع توپر</annotation>
+		<annotation cp="▣" type="tts">مربع توخالی حاوی مربع توپر</annotation>
+		<annotation cp="▤">مربع توپر با راه‌راه افقی</annotation>
+		<annotation cp="▤" type="tts">مربع توپر با راه‌راه افقی</annotation>
+		<annotation cp="▥">مربع توپر با راه‌راه عمودی</annotation>
+		<annotation cp="▥" type="tts">مربع توپر با راه‌راه عمودی</annotation>
+		<annotation cp="▦">مربع توپر با هاشور عمود بر هم</annotation>
+		<annotation cp="▦" type="tts">مربع توپر با هاشور عمود بر هم</annotation>
+		<annotation cp="▧">مربع توپر با هاشور اریب چپ به راست</annotation>
+		<annotation cp="▧" type="tts">مربع توپر با هاشور اریب چپ به راست</annotation>
+		<annotation cp="▨">مربع توپر با هاشور اریب راست به چپ</annotation>
+		<annotation cp="▨" type="tts">مربع توپر با هاشور اریب راست به چپ</annotation>
+		<annotation cp="▩">مربع با هاشور اریب متقاطع</annotation>
+		<annotation cp="▩" type="tts">مربع با هاشور اریب متقاطع</annotation>
+		<annotation cp="▬">مستطیل توپر</annotation>
+		<annotation cp="▬" type="tts">مستطیل توپر</annotation>
+		<annotation cp="▭">مستطیل توخالی</annotation>
+		<annotation cp="▭" type="tts">مستطیل توخالی</annotation>
+		<annotation cp="▮">مستطیل توپر عمودی</annotation>
+		<annotation cp="▮" type="tts">مستطیل توپر عمودی</annotation>
+		<annotation cp="▰">متوازی‌الاضلاع توپر</annotation>
+		<annotation cp="▰" type="tts">متوازی‌الاضلاع توپر</annotation>
 		<annotation cp="▲">بالا | پیکان | توپُر | مثلث روبه‌بالای توپُر</annotation>
 		<annotation cp="▲" type="tts">مثلث روبه‌بالای توپُر</annotation>
-		<annotation cp="△" draft="contributed">مثلث توخالی با رأس به سمت بالا</annotation>
-		<annotation cp="△" type="tts" draft="contributed">مثلث توخالی با رأس به سمت بالا</annotation>
-		<annotation cp="▴" draft="contributed">مثلث توپر کوچک با رأس رو به بالا</annotation>
-		<annotation cp="▴" type="tts" draft="contributed">مثلث توپر کوچک با رأس رو به بالا</annotation>
-		<annotation cp="▵" draft="contributed">مثلث توخالی کوچک با رأس رو به بالا</annotation>
-		<annotation cp="▵" type="tts" draft="contributed">مثلث توخالی کوچک با رأس رو به بالا</annotation>
-		<annotation cp="▷" draft="contributed">مثلث توخالی با رأس به سمت راست</annotation>
-		<annotation cp="▷" type="tts" draft="contributed">مثلث توخالی با رأس به سمت راست</annotation>
-		<annotation cp="▸" draft="contributed">مثلث توپر کوچک با رأس به سمت راست</annotation>
-		<annotation cp="▸" type="tts" draft="contributed">مثلث توپر کوچک با رأس به سمت راست</annotation>
-		<annotation cp="▹" draft="contributed">مثلث توخالی کوچک با رأس به سمت راست</annotation>
-		<annotation cp="▹" type="tts" draft="contributed">مثلث توخالی کوچک با رأس به سمت راست</annotation>
-		<annotation cp="►" draft="contributed">مثلث توپر با رأس به سمت راست</annotation>
-		<annotation cp="►" type="tts" draft="contributed">مثلث توپر با رأس به سمت راست</annotation>
-		<annotation cp="▻" draft="contributed">مثلث توخالی کشیده با رأس به سمت راست</annotation>
-		<annotation cp="▻" type="tts" draft="contributed">مثلث توخالی کشیده با رأس به سمت راست</annotation>
+		<annotation cp="△">مثلث توخالی با رأس به سمت بالا</annotation>
+		<annotation cp="△" type="tts">مثلث توخالی با رأس به سمت بالا</annotation>
+		<annotation cp="▴">مثلث توپر کوچک با رأس رو به بالا</annotation>
+		<annotation cp="▴" type="tts">مثلث توپر کوچک با رأس رو به بالا</annotation>
+		<annotation cp="▵">مثلث توخالی کوچک با رأس رو به بالا</annotation>
+		<annotation cp="▵" type="tts">مثلث توخالی کوچک با رأس رو به بالا</annotation>
+		<annotation cp="▷">مثلث توخالی با رأس به سمت راست</annotation>
+		<annotation cp="▷" type="tts">مثلث توخالی با رأس به سمت راست</annotation>
+		<annotation cp="▸">مثلث توپر کوچک با رأس به سمت راست</annotation>
+		<annotation cp="▸" type="tts">مثلث توپر کوچک با رأس به سمت راست</annotation>
+		<annotation cp="▹">مثلث توخالی کوچک با رأس به سمت راست</annotation>
+		<annotation cp="▹" type="tts">مثلث توخالی کوچک با رأس به سمت راست</annotation>
+		<annotation cp="►">مثلث توپر با رأس به سمت راست</annotation>
+		<annotation cp="►" type="tts">مثلث توپر با رأس به سمت راست</annotation>
+		<annotation cp="▻">مثلث توخالی کشیده با رأس به سمت راست</annotation>
+		<annotation cp="▻" type="tts">مثلث توخالی کشیده با رأس به سمت راست</annotation>
 		<annotation cp="▼">پایین | پیکان | توپُر | مثلث | مثلث روبه‌پایین توپُر</annotation>
 		<annotation cp="▼" type="tts">مثلث روبه‌پایین توپُر</annotation>
-		<annotation cp="▽" draft="contributed">مثلث توخالی با رأس به سمت پایین</annotation>
-		<annotation cp="▽" type="tts" draft="contributed">مثلث توخالی با رأس به سمت پایین</annotation>
-		<annotation cp="▾" draft="contributed">مثلث کوچک توپر با رأس به سمت پایین</annotation>
-		<annotation cp="▾" type="tts" draft="contributed">مثلث کوچک توپر با رأس به سمت پایین</annotation>
-		<annotation cp="▿" draft="contributed">مثلث کوچک توخالی با رأس به سمت پایین</annotation>
-		<annotation cp="▿" type="tts" draft="contributed">مثلث کوچک توخالی با رأس به سمت پایین</annotation>
-		<annotation cp="◁" draft="contributed">مثلث توخالی با رأس به سمت چپ</annotation>
-		<annotation cp="◁" type="tts" draft="contributed">مثلث توخالی با رأس به سمت چپ</annotation>
-		<annotation cp="◂" draft="contributed">مثلث کوچک توپر با رأس به سمت چپ</annotation>
-		<annotation cp="◂" type="tts" draft="contributed">مثلث کوچک توپر با رأس به سمت چپ</annotation>
-		<annotation cp="◃" draft="contributed">مثلث کوچک توخالی با رأس به سمت چپ</annotation>
-		<annotation cp="◃" type="tts" draft="contributed">مثلث کوچک توخالی با رأس به سمت چپ</annotation>
-		<annotation cp="◄" draft="contributed">مثلث توپر با رأس به سمت چپ</annotation>
-		<annotation cp="◄" type="tts" draft="contributed">مثلث توپر با رأس به سمت چپ</annotation>
-		<annotation cp="◅" draft="contributed">مثلث کشیده توخالی با رأس به سمت چپ</annotation>
-		<annotation cp="◅" type="tts" draft="contributed">مثلث کشیده توخالی با رأس به سمت چپ</annotation>
-		<annotation cp="◆" draft="contributed">لوزی توپر</annotation>
-		<annotation cp="◆" type="tts" draft="contributed">لوزی توپر</annotation>
-		<annotation cp="◇" draft="contributed">لوزی توخالی</annotation>
-		<annotation cp="◇" type="tts" draft="contributed">لوزی توخالی</annotation>
-		<annotation cp="◈" draft="contributed">لوزی توپر در لوزی توخالی</annotation>
-		<annotation cp="◈" type="tts" draft="contributed">لوزی توپر در لوزی توخالی</annotation>
-		<annotation cp="◉" draft="contributed">دایره توپر در دایره توخالی</annotation>
-		<annotation cp="◉" type="tts" draft="contributed">دایره توپر در دایره توخالی</annotation>
+		<annotation cp="▽">مثلث توخالی با رأس به سمت پایین</annotation>
+		<annotation cp="▽" type="tts">مثلث توخالی با رأس به سمت پایین</annotation>
+		<annotation cp="▾">مثلث کوچک توپر با رأس به سمت پایین</annotation>
+		<annotation cp="▾" type="tts">مثلث کوچک توپر با رأس به سمت پایین</annotation>
+		<annotation cp="▿">مثلث کوچک توخالی با رأس به سمت پایین</annotation>
+		<annotation cp="▿" type="tts">مثلث کوچک توخالی با رأس به سمت پایین</annotation>
+		<annotation cp="◁">مثلث توخالی با رأس به سمت چپ</annotation>
+		<annotation cp="◁" type="tts">مثلث توخالی با رأس به سمت چپ</annotation>
+		<annotation cp="◂">مثلث کوچک توپر با رأس به سمت چپ</annotation>
+		<annotation cp="◂" type="tts">مثلث کوچک توپر با رأس به سمت چپ</annotation>
+		<annotation cp="◃">مثلث کوچک توخالی با رأس به سمت چپ</annotation>
+		<annotation cp="◃" type="tts">مثلث کوچک توخالی با رأس به سمت چپ</annotation>
+		<annotation cp="◄">مثلث توپر با رأس به سمت چپ</annotation>
+		<annotation cp="◄" type="tts">مثلث توپر با رأس به سمت چپ</annotation>
+		<annotation cp="◅">مثلث کشیده توخالی با رأس به سمت چپ</annotation>
+		<annotation cp="◅" type="tts">مثلث کشیده توخالی با رأس به سمت چپ</annotation>
+		<annotation cp="◆">لوزی توپر</annotation>
+		<annotation cp="◆" type="tts">لوزی توپر</annotation>
+		<annotation cp="◇">لوزی توخالی</annotation>
+		<annotation cp="◇" type="tts">لوزی توخالی</annotation>
+		<annotation cp="◈">لوزی توپر در لوزی توخالی</annotation>
+		<annotation cp="◈" type="tts">لوزی توپر در لوزی توخالی</annotation>
+		<annotation cp="◉">دایره توپر در دایره توخالی</annotation>
+		<annotation cp="◉" type="tts">دایره توپر در دایره توخالی</annotation>
 		<annotation cp="◊">خشت | لوزی | متوازی‌الاضلاع</annotation>
 		<annotation cp="◊" type="tts">لوزی</annotation>
 		<annotation cp="○">حلقه | دایره | دایره توخالی</annotation>
 		<annotation cp="○" type="tts">دایره توخالی</annotation>
-		<annotation cp="◌" draft="contributed">دایره نقطه‌چین</annotation>
-		<annotation cp="◌" type="tts" draft="contributed">دایره نقطه‌چین</annotation>
-		<annotation cp="◍" draft="contributed">دایره توپر عمودی</annotation>
-		<annotation cp="◍" type="tts" draft="contributed">دایره توپر عمودی</annotation>
+		<annotation cp="◌">دایره نقطه‌چین</annotation>
+		<annotation cp="◌" type="tts">دایره نقطه‌چین</annotation>
+		<annotation cp="◍">دایره توپر عمودی</annotation>
+		<annotation cp="◍" type="tts">دایره توپر عمودی</annotation>
 		<annotation cp="◎" draft="contributed">دوایر هم‌مرکز</annotation>
-		<annotation cp="◎" type="tts" draft="contributed">دوایر هم‌مرکز</annotation>
+		<annotation cp="◎" type="tts">دوایر هم‌مرکز</annotation>
 		<annotation cp="●">دایره | دایره توپُر</annotation>
 		<annotation cp="●" type="tts">دایره توپُر</annotation>
-		<annotation cp="◐" draft="contributed">دایره با نیمه چپ پر</annotation>
-		<annotation cp="◐" type="tts" draft="contributed">دایره با نیمه چپ پر</annotation>
-		<annotation cp="◑" draft="contributed">دایره با نیمه راست پر</annotation>
-		<annotation cp="◑" type="tts" draft="contributed">دایره با نیمه راست پر</annotation>
-		<annotation cp="◒" draft="contributed">دایره با نیمه پایین پر</annotation>
-		<annotation cp="◒" type="tts" draft="contributed">دایره با نیمه پایین پر</annotation>
-		<annotation cp="◓" draft="contributed">دایره با نیمه بالا پر</annotation>
-		<annotation cp="◓" type="tts" draft="contributed">دایره با نیمه بالا پر</annotation>
-		<annotation cp="◔" draft="contributed">دایره با یک‌چهارم بالا سمت راست پر</annotation>
-		<annotation cp="◔" type="tts" draft="contributed">دایره با یک‌چهارم بالا سمت راست پر</annotation>
-		<annotation cp="◕" draft="contributed">دایره توپر با یک‌چهارم بالا سمت چپ خالی</annotation>
-		<annotation cp="◕" type="tts" draft="contributed">دایره توپر با یک‌چهارم بالا سمت چپ خالی</annotation>
-		<annotation cp="◖" draft="contributed">نیم‌دایره سمت چپ توپر</annotation>
-		<annotation cp="◖" type="tts" draft="contributed">نیم‌دایره سمت چپ توپر</annotation>
-		<annotation cp="◗" draft="contributed">نیم‌دایره سمت راست توپر</annotation>
-		<annotation cp="◗" type="tts" draft="contributed">نیم‌دایره سمت راست توپر</annotation>
-		<annotation cp="◘" draft="contributed">بولت توخالی در مربع توپر</annotation>
-		<annotation cp="◘" type="tts" draft="contributed">بولت توخالی در مربع توپر</annotation>
-		<annotation cp="◙" draft="contributed">دایره توخالی در مربع توپر</annotation>
-		<annotation cp="◙" type="tts" draft="contributed">دایره توخالی در مربع توپر</annotation>
-		<annotation cp="◜" draft="contributed">قوس یک‌چهارم سمت چپ بالای دایره</annotation>
-		<annotation cp="◜" type="tts" draft="contributed">قوس یک‌چهارم سمت چپ بالای دایره</annotation>
-		<annotation cp="◝" draft="contributed">قوس یک‌چهارم سمت راست بالای دایره</annotation>
-		<annotation cp="◝" type="tts" draft="contributed">قوس یک‌چهارم سمت راست بالای دایره</annotation>
-		<annotation cp="◞" draft="contributed">قوس یک‌چهارم سمت راست پایین دایره</annotation>
-		<annotation cp="◞" type="tts" draft="contributed">قوس یک‌چهارم سمت راست پایین دایره</annotation>
-		<annotation cp="◟" draft="contributed">قوس یک‌چهارم سمت چپ پایین دایره</annotation>
-		<annotation cp="◟" type="tts" draft="contributed">قوس یک‌چهارم سمت چپ پایین دایره</annotation>
-		<annotation cp="◠" draft="contributed">قوس بالای دایره</annotation>
-		<annotation cp="◠" type="tts" draft="contributed">قوس بالای دایره</annotation>
-		<annotation cp="◡" draft="contributed">قوس پایین دایره</annotation>
-		<annotation cp="◡" type="tts" draft="contributed">قوس پایین دایره</annotation>
-		<annotation cp="◢" draft="contributed">مثلث توپر با زاویه قائمه در پایین سمت راست</annotation>
-		<annotation cp="◢" type="tts" draft="contributed">مثلث توپر با زاویه قائمه در پایین سمت راست</annotation>
-		<annotation cp="◣" draft="contributed">مثلث توپر با زاویه قائمه در پایین سمت چپ</annotation>
-		<annotation cp="◣" type="tts" draft="contributed">مثلث توپر با زاویه قائمه در پایین سمت چپ</annotation>
-		<annotation cp="◤" draft="contributed">مثلث توپر با زاویه قائمه در بالا سمت چپ</annotation>
-		<annotation cp="◤" type="tts" draft="contributed">مثلث توپر با زاویه قائمه در بالا سمت چپ</annotation>
-		<annotation cp="◥" draft="contributed">مثلث توپر با زاویه قائمه در بالا سمت راست</annotation>
-		<annotation cp="◥" type="tts" draft="contributed">مثلث توپر با زاویه قائمه در بالا سمت راست</annotation>
-		<annotation cp="◦" draft="contributed">بولت توخالی</annotation>
-		<annotation cp="◦" type="tts" draft="contributed">بولت توخالی</annotation>
+		<annotation cp="◐">دایره با نیمه چپ پر</annotation>
+		<annotation cp="◐" type="tts">دایره با نیمه چپ پر</annotation>
+		<annotation cp="◑">دایره با نیمه راست پر</annotation>
+		<annotation cp="◑" type="tts">دایره با نیمه راست پر</annotation>
+		<annotation cp="◒">دایره با نیمه پایین پر</annotation>
+		<annotation cp="◒" type="tts">دایره با نیمه پایین پر</annotation>
+		<annotation cp="◓">دایره با نیمه بالا پر</annotation>
+		<annotation cp="◓" type="tts">دایره با نیمه بالا پر</annotation>
+		<annotation cp="◔">دایره با یک‌چهارم بالا سمت راست پر</annotation>
+		<annotation cp="◔" type="tts">دایره با یک‌چهارم بالا سمت راست پر</annotation>
+		<annotation cp="◕">دایره توپر با یک‌چهارم بالا سمت چپ خالی</annotation>
+		<annotation cp="◕" type="tts">دایره توپر با یک‌چهارم بالا سمت چپ خالی</annotation>
+		<annotation cp="◖">نیم‌دایره سمت چپ توپر</annotation>
+		<annotation cp="◖" type="tts">نیم‌دایره سمت چپ توپر</annotation>
+		<annotation cp="◗">نیم‌دایره سمت راست توپر</annotation>
+		<annotation cp="◗" type="tts">نیم‌دایره سمت راست توپر</annotation>
+		<annotation cp="◘">بولت توخالی در مربع توپر</annotation>
+		<annotation cp="◘" type="tts">بولت توخالی در مربع توپر</annotation>
+		<annotation cp="◙">دایره توخالی در مربع توپر</annotation>
+		<annotation cp="◙" type="tts">دایره توخالی در مربع توپر</annotation>
+		<annotation cp="◜">قوس یک‌چهارم سمت چپ بالای دایره</annotation>
+		<annotation cp="◜" type="tts">قوس یک‌چهارم سمت چپ بالای دایره</annotation>
+		<annotation cp="◝">قوس یک‌چهارم سمت راست بالای دایره</annotation>
+		<annotation cp="◝" type="tts">قوس یک‌چهارم سمت راست بالای دایره</annotation>
+		<annotation cp="◞">قوس یک‌چهارم سمت راست پایین دایره</annotation>
+		<annotation cp="◞" type="tts">قوس یک‌چهارم سمت راست پایین دایره</annotation>
+		<annotation cp="◟">قوس یک‌چهارم سمت چپ پایین دایره</annotation>
+		<annotation cp="◟" type="tts">قوس یک‌چهارم سمت چپ پایین دایره</annotation>
+		<annotation cp="◠">قوس بالای دایره</annotation>
+		<annotation cp="◠" type="tts">قوس بالای دایره</annotation>
+		<annotation cp="◡">قوس پایین دایره</annotation>
+		<annotation cp="◡" type="tts">قوس پایین دایره</annotation>
+		<annotation cp="◢">مثلث توپر با زاویه قائمه در پایین سمت راست</annotation>
+		<annotation cp="◢" type="tts">مثلث توپر با زاویه قائمه در پایین سمت راست</annotation>
+		<annotation cp="◣">مثلث توپر با زاویه قائمه در پایین سمت چپ</annotation>
+		<annotation cp="◣" type="tts">مثلث توپر با زاویه قائمه در پایین سمت چپ</annotation>
+		<annotation cp="◤">مثلث توپر با زاویه قائمه در بالا سمت چپ</annotation>
+		<annotation cp="◤" type="tts">مثلث توپر با زاویه قائمه در بالا سمت چپ</annotation>
+		<annotation cp="◥">مثلث توپر با زاویه قائمه در بالا سمت راست</annotation>
+		<annotation cp="◥" type="tts">مثلث توپر با زاویه قائمه در بالا سمت راست</annotation>
+		<annotation cp="◦">بولت توخالی</annotation>
+		<annotation cp="◦" type="tts">بولت توخالی</annotation>
 		<annotation cp="◯">حلقه | دایره | دایره توخالی بزرگ</annotation>
 		<annotation cp="◯" type="tts">دایره توخالی بزرگ</annotation>
-		<annotation cp="◳" draft="contributed">مربع توخالی با یک‌چهارم بالا سمت راست</annotation>
-		<annotation cp="◳" type="tts" draft="contributed">مربع توخالی با یک‌چهارم بالا سمت راست</annotation>
-		<annotation cp="◷" draft="contributed">دایره توخالی با یک‌چهارم بالا سمت راست</annotation>
-		<annotation cp="◷" type="tts" draft="contributed">دایره توخالی با یک‌چهارم بالا سمت راست</annotation>
-		<annotation cp="◿" draft="contributed">مثلث در پایین سمت راست</annotation>
-		<annotation cp="◿" type="tts" draft="contributed">مثلث در پایین سمت راست</annotation>
+		<annotation cp="◳">مربع توخالی با یک‌چهارم بالا سمت راست</annotation>
+		<annotation cp="◳" type="tts">مربع توخالی با یک‌چهارم بالا سمت راست</annotation>
+		<annotation cp="◷">دایره توخالی با یک‌چهارم بالا سمت راست</annotation>
+		<annotation cp="◷" type="tts">دایره توخالی با یک‌چهارم بالا سمت راست</annotation>
+		<annotation cp="◿">مثلث در پایین سمت راست</annotation>
+		<annotation cp="◿" type="tts">مثلث در پایین سمت راست</annotation>
 		<annotation cp="♪">موسیقی | نت | نت هشتم | هشته</annotation>
 		<annotation cp="♪" type="tts">نت هشتم</annotation>
-		<annotation cp="⨧" draft="contributed">بعلاوه با اندیس 2</annotation>
-		<annotation cp="⨧" type="tts" draft="contributed">بعلاوه با اندیس 2</annotation>
-		<annotation cp="⨯" draft="contributed">علامت ضربدر</annotation>
-		<annotation cp="⨯" type="tts" draft="contributed">علامت ضربدر</annotation>
-		<annotation cp="⨼" draft="contributed">حاصلضرب درونی</annotation>
-		<annotation cp="⨼" type="tts" draft="contributed">حاصلضرب درونی</annotation>
-		<annotation cp="⩣" draft="contributed">وی با دو زیرخط</annotation>
-		<annotation cp="⩣" type="tts" draft="contributed">وی با دو زیرخط</annotation>
-		<annotation cp="⩽" draft="contributed">کوچکتر مساوی</annotation>
-		<annotation cp="⩽" type="tts" draft="contributed">کوچکتر مساوی</annotation>
-		<annotation cp="⪍" draft="contributed">علامت کوچکتر روی تقریباً مساوی</annotation>
-		<annotation cp="⪍" type="tts" draft="contributed">علامت کوچکتر روی تقریباً مساوی</annotation>
+		<annotation cp="⨧">بعلاوه با اندیس 2</annotation>
+		<annotation cp="⨧" type="tts">بعلاوه با اندیس 2</annotation>
+		<annotation cp="⨯">علامت ضربدر</annotation>
+		<annotation cp="⨯" type="tts">علامت ضربدر</annotation>
+		<annotation cp="⨼">حاصلضرب درونی</annotation>
+		<annotation cp="⨼" type="tts">حاصلضرب درونی</annotation>
+		<annotation cp="⩣">وی با دو زیرخط</annotation>
+		<annotation cp="⩣" type="tts">وی با دو زیرخط</annotation>
+		<annotation cp="⩽">کوچکتر مساوی</annotation>
+		<annotation cp="⩽" type="tts">کوچکتر مساوی</annotation>
+		<annotation cp="⪍">علامت کوچکتر روی تقریباً مساوی</annotation>
+		<annotation cp="⪍" type="tts">علامت کوچکتر روی تقریباً مساوی</annotation>
 		<annotation cp="⪚" draft="contributed">بزرگتر مساوی</annotation>
-		<annotation cp="⪚" type="tts" draft="contributed">بزرگتر مساوی</annotation>
-		<annotation cp="⪺" draft="contributed">علامت می‌آید به دنبال روی نامساوی تقریبی</annotation>
-		<annotation cp="⪺" type="tts" draft="contributed">علامت می‌آید به دنبال روی نامساوی تقریبی</annotation>
+		<annotation cp="⪚" type="tts">بزرگتر مساوی</annotation>
+		<annotation cp="⪺">علامت می‌آید به دنبال روی نامساوی تقریبی</annotation>
+		<annotation cp="⪺" type="tts">علامت می‌آید به دنبال روی نامساوی تقریبی</annotation>
 		<annotation cp="♭">بمل | بِمُل | موسیقی | نت</annotation>
 		<annotation cp="♭" type="tts">بمل</annotation>
 		<annotation cp="♯">دایسیس | دیز | دِیز | موسیقی | نت</annotation>
 		<annotation cp="♯" type="tts">دیز</annotation>
-		<annotation cp="🥹">چهره با چشمان پراشک | عصبانی | غمگین | گریان | مغرور | مقاومت</annotation>
-		<annotation cp="🥹" type="tts">چهره با چشمان پراشک</annotation>
-		<annotation cp="🧌">افسانه | تخیلی | غول | هیولا</annotation>
-		<annotation cp="🧌" type="tts">غول</annotation>
-		<annotation cp="🩻">استخوان | اسکلت | اشعه ایکس | پزشکی | دکتر</annotation>
-		<annotation cp="🩻" type="tts">اشعه ایکس</annotation>
-		<annotation cp="🩼">چوب | صدمه | عصا | عصای زیر بغل | کمک حرکت | ناتوانی</annotation>
-		<annotation cp="🩼" type="tts">عصای زیر بغل</annotation>
-		<annotation cp="🪩">توپ آینه‌ای | درخشش | دیسکو | رقص | مهمانی</annotation>
-		<annotation cp="🪩" type="tts">توپ آینه‌ای</annotation>
-		<annotation cp="🪪">امنیت | شناسه | کارت شناسایی | گواهینامه | مدرک شناسایی</annotation>
-		<annotation cp="🪪" type="tts">کارت شناسایی</annotation>
-		<annotation cp="🪫">الکترونیکی | انرژی ضعیف | باتری ضعیف</annotation>
-		<annotation cp="🪫" type="tts">باتری ضعیف</annotation>
-		<annotation cp="🪬">خمسه | دست | طلسم | فاطمه | محافظت | مری | مریم</annotation>
-		<annotation cp="🪬" type="tts">خمسه</annotation>
-		<annotation cp="🪷">بودایی | خلوص | گل | نیلوفر | هند | هندو | ویتنام</annotation>
-		<annotation cp="🪷" type="tts">نیلوفر</annotation>
-		<annotation cp="🪸">آبسنگ | اقیانوس | مرجان</annotation>
-		<annotation cp="🪸" type="tts">مرجان</annotation>
-		<annotation cp="🪹">آشیانه خالی | لانه کردن</annotation>
-		<annotation cp="🪹" type="tts">آشیانه خالی</annotation>
-		<annotation cp="🪺">آشیانه با تخم | لانه کردن</annotation>
-		<annotation cp="🪺" type="tts">آشیانه با تخم</annotation>
-		<annotation cp="🫃">باد کرده | باردار | پر | شکم | مرد باردار</annotation>
-		<annotation cp="🫃" type="tts">مرد باردار</annotation>
-		<annotation cp="🫄">آدم باردار | باد کرده | باردار | پر | شکم</annotation>
-		<annotation cp="🫄" type="tts">آدم باردار</annotation>
-		<annotation cp="🫅">آدم تاج‌دار | اشراف | پادشاه | سلطنتی | شاهانه</annotation>
-		<annotation cp="🫅" type="tts">آدم تاج‌دار</annotation>
-		<annotation cp="🫗">خالی کردن | ریختن | ریختن مایع | لیوان | نوشابه</annotation>
-		<annotation cp="🫗" type="tts">ریختن مایع</annotation>
-		<annotation cp="🫘">حبوبات | غذا | کلیه | لوبیا</annotation>
-		<annotation cp="🫘" type="tts">لوبیا</annotation>
-		<annotation cp="🫙">ادویه | خالی | سس | شیشه دهان‌گشاد | قوطی | مغازه</annotation>
-		<annotation cp="🫙" type="tts">شیشه دهان‌گشاد</annotation>
-		<annotation cp="🫠">چهره درحال ذوب شدن | حل شدن | ذوب شدن | مایع | ناپدید شدن</annotation>
-		<annotation cp="🫠" type="tts">چهره درحال ذوب شدن</annotation>
-		<annotation cp="🫡">آفتابی | افراد | اوکی | بله | چهره سلام‌کنان | سلام | سلام نظامی</annotation>
-		<annotation cp="🫡" type="tts">چهره سلام‌کنان</annotation>
-		<annotation cp="🫢">ترس | چهره با چشمان باز و دست روی دهان | حیرت | خجالت | شگفتی | غافلگیری | ناباوری</annotation>
-		<annotation cp="🫢" type="tts">چهره با چشمان باز و دست روی دهان</annotation>
-		<annotation cp="🫣">چهره با نگاه دزدکی | خیره شدن | شیفته | نگاه دزدکی</annotation>
-		<annotation cp="🫣" type="tts">چهره با نگاه دزدکی</annotation>
-		<annotation cp="🫤">بی‌تفاوت | صورت با دهان کج | مشکوک | ناامید | نامطمئن</annotation>
-		<annotation cp="🫤" type="tts">صورت با دهان کج</annotation>
-		<annotation cp="🫥">افسرده | برون‌گرا | پنهان | چهره با خط‌چین | ناپدید | نامرئی</annotation>
-		<annotation cp="🫥" type="tts">چهره با خط‌چین</annotation>
-		<annotation cp="🫦">ترس | دلواپس | طنازی | عصبی | گازگرفتن لب | ناراحت | نگران</annotation>
-		<annotation cp="🫦" type="tts">گازگرفتن لب</annotation>
-		<annotation cp="🫧">آروغ | تمیزی | حباب | زیر آب | صابون</annotation>
-		<annotation cp="🫧" type="tts">حباب</annotation>
-		<annotation cp="🫰">بشکن | پول | دست با انگشت اشاره و شست متقاطع | عشق | قلب | گران</annotation>
-		<annotation cp="🫰" type="tts">دست با انگشت اشاره و شست متقاطع</annotation>
-		<annotation cp="🫱">به سمت راست | دست | دست به سمت راست | راست</annotation>
-		<annotation cp="🫱" type="tts">دست به سمت راست</annotation>
-		<annotation cp="🫲">به سمت چپ | چپ | دست | دست به سمت چپ</annotation>
-		<annotation cp="🫲" type="tts">دست به سمت چپ</annotation>
-		<annotation cp="🫳">انداختن | کف دست به پایین | کیش کردن | مرخص کردن</annotation>
-		<annotation cp="🫳" type="tts">کف دست به پایین</annotation>
-		<annotation cp="🫴">بیا | تعارف | فراخواندن | کف دست به بالا | گرفتن</annotation>
-		<annotation cp="🫴" type="tts">کف دست به بالا</annotation>
-		<annotation cp="🫵">اشاره | اشاره به بیننده | شما</annotation>
-		<annotation cp="🫵" type="tts">اشاره به بیننده</annotation>
-		<annotation cp="🫶">شکل قلب با دست | عشق</annotation>
-		<annotation cp="🫶" type="tts">شکل قلب با دست</annotation>
-		<annotation cp="🛝">بازی | پارک بازی | سرسره</annotation>
-		<annotation cp="🛝" type="tts">سرسره</annotation>
-		<annotation cp="🛞">تایر | چرخ | حلقه | دور | لاستیک</annotation>
-		<annotation cp="🛞" type="tts">چرخ</annotation>
-		<annotation cp="🛟">ایمنی | حلقه نجات | شناور | محافظ | نجات | نجات‌بخش</annotation>
-		<annotation cp="🛟" type="tts">حلقه نجات</annotation>
-		<annotation cp="🟰">برابری | ریاضی | علامت تساوی پررنگ</annotation>
-		<annotation cp="🟰" type="tts">علامت تساوی پررنگ</annotation>
 		<annotation cp="😀">خنده | صورت با لبخند | لبخند | نیش باز</annotation>
 		<annotation cp="😀" type="tts">خنده</annotation>
 		<annotation cp="😃">باز | خنده | دهان | صورت | صورت خندان | لبخند</annotation>
@@ -805,6 +731,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🙂" type="tts">لبخند ملایم</annotation>
 		<annotation cp="🙃">صورت | لبخند | معکوس | وارونه</annotation>
 		<annotation cp="🙃" type="tts">صورت وارونه</annotation>
+		<annotation cp="🫠">چهره درحال ذوب شدن | حل شدن | ذوب شدن | مایع | ناپدید شدن</annotation>
+		<annotation cp="🫠" type="tts">چهره درحال ذوب شدن</annotation>
 		<annotation cp="😉">چشمک | صورت</annotation>
 		<annotation cp="😉" type="tts">چشمک</annotation>
 		<annotation cp="😊">چشم | خجالت | سرخ شدن | صورت | لبخند | لبخند خجالتی</annotation>
@@ -815,8 +743,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🥰" type="tts">صورت خندان و عاشق</annotation>
 		<annotation cp="😍">چشم | چشم‌های عاشق | صورت | عاشق | عشق | قلب | لبخند</annotation>
 		<annotation cp="😍" type="tts">چشم‌های عاشق</annotation>
-		<annotation cp="🤩">آدم مشهور | آدم مشهور دیده | چشمان | خندان | ستاره | صورت</annotation>
-		<annotation cp="🤩" type="tts">آدم مشهور دیده</annotation>
+		<annotation cp="🤩">جذاب | چشمان | خندان | ستاره | صورت | فوق‌العاده | هیجان‌انگیز</annotation>
+		<annotation cp="🤩" type="tts">فوق‌العاده</annotation>
 		<annotation cp="😘">بوسه | بوسه فرستادن | بوسیدن | صورت | قلب</annotation>
 		<annotation cp="😘" type="tts">بوسه فرستادن</annotation>
 		<annotation cp="😗">بوسه | بوسیدن | صورت</annotation>
@@ -825,30 +753,36 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="☺" type="tts">لبخند</annotation>
 		<annotation cp="😚">بسته | بوسه | بوسهٔ خجالتی | بوسیدن | چشم | صورت</annotation>
 		<annotation cp="😚" type="tts">بوسهٔ خجالتی</annotation>
-		<annotation cp="😙">بوسه | بوسیدن | چشم | صورت | لبخند | لبخند و بوسه</annotation>
-		<annotation cp="😙" type="tts">لبخند و بوسه</annotation>
+		<annotation cp="😙">بوسه | بوسیدن | بوسیدن با چشمان خندان | چشم | صورت | لبخند</annotation>
+		<annotation cp="😙" type="tts">بوسیدن با چشمان خندان</annotation>
 		<annotation cp="🥲">آسوده‌خاطر | اشک | چهرهٔ خندان با اشک | خرسند | خندان | سربلند | مسرور</annotation>
 		<annotation cp="🥲" type="tts">چهرهٔ خندان با اشک</annotation>
-		<annotation cp="😋">به‌به | خوشمزه | صورت | صورت با زبان آب افتاده | لبخند | لذیذ</annotation>
-		<annotation cp="😋" type="tts">صورت با زبان آب افتاده</annotation>
-		<annotation cp="😛">زبان | زبونک | صورت</annotation>
-		<annotation cp="😛" type="tts">زبونک</annotation>
-		<annotation cp="😜">چشمک | زبان | زبونک و چشمک | شوخی | صورت</annotation>
-		<annotation cp="😜" type="tts">زبونک و چشمک</annotation>
-		<annotation cp="🤪">احمق | بزرگ | بی‌عقل | چشم | دیوانه | کوچک</annotation>
-		<annotation cp="🤪" type="tts">دیوانه</annotation>
+		<annotation cp="😋">به‌به | خوشمزه | صورت | صورت درحال لیسیدن لب | لبخند | لذیذ</annotation>
+		<annotation cp="😋" type="tts">صورت درحال لیسیدن لب</annotation>
+		<annotation cp="😛">زبان | زبان بیرون آمده | زبانک | صورت | صورت با زبان بیرون‌آمده</annotation>
+		<annotation cp="😛" type="tts">صورت با زبان بیرون‌آمده</annotation>
+		<annotation cp="😜">چشمک زدن | زبان | زبانک انداختن و چشمک زدن | شوخی | صورت با چشمک و زبان بیرون آمده | صورتک</annotation>
+		<annotation cp="😜" type="tts">صورت با چشمک و زبان بیرون آمده</annotation>
+		<annotation cp="🤪">احمق | بزرگ | بی‌عقل | چشم | دیوانه | صورتک لوده | کوچک</annotation>
+		<annotation cp="🤪" type="tts">صورتک لوده</annotation>
 		<annotation cp="😝">چشم بسته | زبان | زبونک با چشم بسته | صورت | فجیع</annotation>
 		<annotation cp="😝" type="tts">زبونک با چشم بسته</annotation>
 		<annotation cp="🤑">پول | دهان | صورت | صورت پول‌دوست</annotation>
 		<annotation cp="🤑" type="tts">صورت پول‌دوست</annotation>
 		<annotation cp="🤗">آغوش | بغل کردن | در آغوش گرفتن | صورت | لبخند</annotation>
 		<annotation cp="🤗" type="tts">بغل کردن</annotation>
-		<annotation cp="🤭">آخ | آه | اوه | ای وای | دست روی دهن | وا</annotation>
-		<annotation cp="🤭" type="tts">دست روی دهن</annotation>
+		<annotation cp="🤭">آخ | اوه | ای وای | دست روی دهان | صورتک با دست روی دهان | وا</annotation>
+		<annotation cp="🤭" type="tts">صورتک با دست روی دهان</annotation>
+		<annotation cp="🫢">ترس | چهره با چشمان باز و دست روی دهان | حیرت | خجالت | شگفتی | غافلگیری | ناباوری</annotation>
+		<annotation cp="🫢" type="tts">چهره با چشمان باز و دست روی دهان</annotation>
+		<annotation cp="🫣">چهره با نگاه دزدکی | خیره شدن | شیفته | نگاه دزدکی</annotation>
+		<annotation cp="🫣" type="tts">چهره با نگاه دزدکی</annotation>
 		<annotation cp="🤫">بی‌صدا | ساکت | هیس</annotation>
 		<annotation cp="🤫" type="tts">هیس</annotation>
 		<annotation cp="🤔">تفکر | درحال تفکر | صورت | فکر کردن | متفکر</annotation>
 		<annotation cp="🤔" type="tts">درحال تفکر</annotation>
+		<annotation cp="🫡">آفتابی | افراد | اوکی | بله | چهره سلام‌کنان | سلام | سلام نظامی</annotation>
+		<annotation cp="🫡" type="tts">چهره سلام‌کنان</annotation>
 		<annotation cp="🤐">دهان | دهان چفت | زیپ | صورت | قابل اعتماد | قفل</annotation>
 		<annotation cp="🤐" type="tts">دهان چفت</annotation>
 		<annotation cp="🤨">سوءظن | شک | شکاک | صورت با ابروی بالاداده</annotation>
@@ -859,6 +793,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="😑" type="tts">صورت بی‌حالت</annotation>
 		<annotation cp="😶">آرام | بی‌صدا | دهان | ساکت | صورت | صورت بدون لب</annotation>
 		<annotation cp="😶" type="tts">صورت بدون لب</annotation>
+		<annotation cp="🫥">افسرده | برون‌گرا | پنهان | چهره با خط‌چین | ناپدید | نامرئی</annotation>
+		<annotation cp="🫥" type="tts">چهره با خط‌چین</annotation>
 		<annotation cp="😶‍🌫">حواس‌پرت | سر در میان ابرها | صورتک در مه | صورتک میان ابر | صورتک میان ابرها</annotation>
 		<annotation cp="😶‍🌫" type="tts">صورتک میان ابر</annotation>
 		<annotation cp="😏">پوزخند | تمسخر | صورت</annotation>
@@ -873,10 +809,16 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="😮‍💨" type="tts">صورتک در حال بازدم</annotation>
 		<annotation cp="🤥">پینوکیو | دروغ | دروغگو | دماغ دراز | دماغ‌دراز | صورت دروغگو</annotation>
 		<annotation cp="🤥" type="tts">صورت دروغگو</annotation>
+		<annotation cp="🫨">چهره لرزان | زلزله | شوک | صورت | لرزان | مرتعش</annotation>
+		<annotation cp="🫨" type="tts">چهره لرزان</annotation>
+		<annotation cp="🙂‍↔">تکان دادن افقی سر | نه، تکان سر</annotation>
+		<annotation cp="🙂‍↔" type="tts">تکان دادن افقی سر</annotation>
+		<annotation cp="🙂‍↕">تکان دادن عمودی سر | تکان سر، بله</annotation>
+		<annotation cp="🙂‍↕" type="tts">تکان دادن عمودی سر</annotation>
 		<annotation cp="😌">آسوده‌خاطر | خیال راحت | صورت</annotation>
 		<annotation cp="😌" type="tts">آسوده‌خاطر</annotation>
-		<annotation cp="😔">افسرده | پژمرده | صورت | غمگین | ناراحت</annotation>
-		<annotation cp="😔" type="tts">افسرده</annotation>
+		<annotation cp="😔">افسرده | اندیشناک | چهره غمگین | غمگین | محزون | ناامید</annotation>
+		<annotation cp="😔" type="tts">چهره غمگین</annotation>
 		<annotation cp="😪">خواب | خواب‌آلود | صورت</annotation>
 		<annotation cp="😪" type="tts">خواب‌آلود</annotation>
 		<annotation cp="🤤">آب افتادن | آب افتادن دهان | دهان | دهن</annotation>
@@ -921,6 +863,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🧐" type="tts">صورت با عینک یک‌چشمی</annotation>
 		<annotation cp="😕">صورت | گیج | گیج‌شده | مغشوش</annotation>
 		<annotation cp="😕" type="tts">گیج‌شده</annotation>
+		<annotation cp="🫤">بی‌تفاوت | صورت با دهان کج | مشکوک | ناامید | نامطمئن</annotation>
+		<annotation cp="🫤" type="tts">صورت با دهان کج</annotation>
 		<annotation cp="😟">آشوب | چهره نگران | صورت | نگران</annotation>
 		<annotation cp="😟" type="tts">چهره نگران</annotation>
 		<annotation cp="🙁">اخم | دلخور | صورت</annotation>
@@ -937,7 +881,9 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="😳" type="tts">سرخ‌شده</annotation>
 		<annotation cp="🥺">التماس | التماس‌کنان | بخشش | خواهش | دلسوزی</annotation>
 		<annotation cp="🥺" type="tts">التماس‌کنان</annotation>
-		<annotation cp="😦">اخم | باز | باورنکردنی | توقع نداشتن | چهره درهم‌کشیده با دهان باز | دهان | صورت | ناباور</annotation>
+		<annotation cp="🥹">چهره با چشمان پراشک | عصبانی | غمگین | گریان | مغرور | مقاومت</annotation>
+		<annotation cp="🥹" type="tts">چهره با چشمان پراشک</annotation>
+		<annotation cp="😦">اخم | باز | باورنکردنی | چهره | چهره درهم کشیده با دهان باز | چهره درهم‌کشیده با دهان باز | دهان</annotation>
 		<annotation cp="😦" type="tts">چهره درهم‌کشیده با دهان باز</annotation>
 		<annotation cp="😧">دردمند | صورت | مضطرب | نگران</annotation>
 		<annotation cp="😧" type="tts">دردمند</annotation>
@@ -975,13 +921,13 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="😠" type="tts">عصبانی</annotation>
 		<annotation cp="🤬">صورت با نمادهایی روی دهان | ناسزاگویان</annotation>
 		<annotation cp="🤬" type="tts">صورت با نمادهایی روی دهان</annotation>
-		<annotation cp="😈">جن | خنده شرورانه | شاخ | شرور | صورت | صورت لبخندزنان با دوشاخ | فانتزی | لبخند</annotation>
+		<annotation cp="😈">افسانه | تخیلی | خنده شیطانی | شاخ | صورت | صورت خندان با دوشاخ | صورت لبخندزنان با دوشاخ</annotation>
 		<annotation cp="😈" type="tts">صورت لبخندزنان با دوشاخ</annotation>
 		<annotation cp="👿">چهره عصبانی با دو شاخ | دیو | شرور | شیطان | صورت | فانتزی</annotation>
 		<annotation cp="👿" type="tts">چهره عصبانی با دو شاخ</annotation>
 		<annotation cp="💀">اسکلت | بدن | جمجمه | جن و پری | صورت | مرگ | هیولا</annotation>
 		<annotation cp="💀" type="tts">جمجمه</annotation>
-		<annotation cp="☠">استخوان | استخوان صلیبی | جمجمه | جمجمه و استخوان صلیبی | خطر | صورت | مرگ | نشان مرگ</annotation>
+		<annotation cp="☠">استخوان صلیبی | جمجمه | جمجمه و استخوان صلیبی | خطر مرگ | صورت | مرگ | هیولا</annotation>
 		<annotation cp="☠" type="tts">جمجمه و استخوان صلیبی</annotation>
 		<annotation cp="💩">پی‌پی | صورت | طنز | گه | مدفوع | هیولا | یه تپهٔ گه</annotation>
 		<annotation cp="💩" type="tts">یه تپهٔ گه</annotation>
@@ -1017,14 +963,12 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="😿" type="tts">گربهٔ گریان</annotation>
 		<annotation cp="😾">اخم | صورت | گربه | گربهٔ اخمو</annotation>
 		<annotation cp="😾" type="tts">گربهٔ اخمو</annotation>
-		<annotation cp="🙈">دیدن | شر | صورت | ممنوع | میمون | میمون خردمند | میمون خوش‌بین | میمون شرنبین</annotation>
+		<annotation cp="🙈">دیدن | شر | صورت | ممنوع | میمون | میمون خوش‌بین | میمون شرنبین</annotation>
 		<annotation cp="🙈" type="tts">میمون شرنبین</annotation>
-		<annotation cp="🙉">شر | شنیدن | صورت | ممنوع | میمون | میمون خردمند | میمون خوش‌باور | میمون شرنشنو</annotation>
+		<annotation cp="🙉">شر | شنیدن | صورت | ممنوع | میمون | میمون خوش‌باور | میمون شرنشنو</annotation>
 		<annotation cp="🙉" type="tts">میمون شرنشنو</annotation>
 		<annotation cp="🙊">شر | صورت | ممنوع | میمون | میمون خردمند | میمون خوش‌زبان | میمون شرنگو</annotation>
 		<annotation cp="🙊" type="tts">میمون شرنگو</annotation>
-		<annotation cp="💋">بوسه | بوسه ماتیکی | بوسهٔ ماتیکی | عاشقانه | علامت | قلب | لب</annotation>
-		<annotation cp="💋" type="tts">بوسه ماتیکی</annotation>
 		<annotation cp="💌">ایمیل | عاشقانه | عشق | قلب | نامه | نامهٔ عاشقانه</annotation>
 		<annotation cp="💌" type="tts">نامهٔ عاشقانه</annotation>
 		<annotation cp="💘">الههٔ عشق | تیر | عاشقانه | قلب | قلب تیرخورده | کوپید</annotation>
@@ -1053,22 +997,30 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="❤‍🩹" type="tts">قلب التیام‌یافته</annotation>
 		<annotation cp="❤">قلب | قلب قرمز</annotation>
 		<annotation cp="❤" type="tts">قلب قرمز</annotation>
+		<annotation cp="🩷">بامزه | دوست داشتن | صورتی | عشق | قلب</annotation>
+		<annotation cp="🩷" type="tts">قلب صورتی</annotation>
 		<annotation cp="🧡">قلب نارنجی | نارنجی</annotation>
 		<annotation cp="🧡" type="tts">قلب نارنجی</annotation>
 		<annotation cp="💛">زرد | قلب</annotation>
 		<annotation cp="💛" type="tts">قلب زرد</annotation>
 		<annotation cp="💚">سبز | قلب</annotation>
 		<annotation cp="💚" type="tts">قلب سبز</annotation>
-		<annotation cp="💙">آبی | قلب</annotation>
+		<annotation cp="💙">آبی | قلب آبی</annotation>
 		<annotation cp="💙" type="tts">قلب آبی</annotation>
-		<annotation cp="💜">بنفش | قلب</annotation>
+		<annotation cp="🩵">آبی روشن | آبی کم‌رنگ | سبزآبی | قلب | قلب آبی کم‌رنگ</annotation>
+		<annotation cp="🩵" type="tts">قلب آبی کم‌رنگ</annotation>
+		<annotation cp="💜">بنفش | قلب بنفش</annotation>
 		<annotation cp="💜" type="tts">قلب بنفش</annotation>
 		<annotation cp="🤎">قلب | قهوه‌ای</annotation>
 		<annotation cp="🤎" type="tts">قلب قهوه‌ای</annotation>
 		<annotation cp="🖤">سنگ‌دل | سیاه | سیاه‌دل | شرور | شیطانی | قلب سیاه</annotation>
 		<annotation cp="🖤" type="tts">قلب سیاه</annotation>
+		<annotation cp="🩶">خاکستری | رنگ خاکستری لوح | قلب | نقره‌ای</annotation>
+		<annotation cp="🩶" type="tts">قلب خاکستری</annotation>
 		<annotation cp="🤍">سفید | قلب</annotation>
 		<annotation cp="🤍" type="tts">قلب سفید</annotation>
+		<annotation cp="💋">بوسه | بوسه ماتیکی | بوسهٔ ماتیکی | عاشقانه | علامت | قلب | لب</annotation>
+		<annotation cp="💋" type="tts">بوسه ماتیکی</annotation>
 		<annotation cp="💯">۱۰۰ | امتیاز | تمام | صد | کامل | نمره</annotation>
 		<annotation cp="💯" type="tts">۱۰۰ امتیاز</annotation>
 		<annotation cp="💢">دیوانه | عصبانی | کمیک | مصور | نماد عصبانیت</annotation>
@@ -1083,8 +1035,6 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="💨" type="tts">به سرعت باد</annotation>
 		<annotation cp="🕳">چاله | سوراخ</annotation>
 		<annotation cp="🕳" type="tts">چاله</annotation>
-		<annotation cp="💣">بمب | کمیک | مصور</annotation>
-		<annotation cp="💣" type="tts">بمب</annotation>
 		<annotation cp="💬">بالن | بالن گفتار | حباب | دیالوگ | کمیک | گفتگو | مصور</annotation>
 		<annotation cp="💬" type="tts">بالن گفتار</annotation>
 		<annotation cp="👁‍🗨">چشم در حباب گفتار | حباب گفتار | کمپین منع قلدری | گفتگو | من شاهدم</annotation>
@@ -1097,16 +1047,28 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="💭" type="tts">بالن افکار</annotation>
 		<annotation cp="💤">خروپف | خواب | کمیک | مصور</annotation>
 		<annotation cp="💤" type="tts">خروپف</annotation>
-		<annotation cp="👋">بدن | تکان دادن | تکان دادن دست | دست | موج</annotation>
+		<annotation cp="👋">تکان | تکان دادن | تکان دادن دست | دست</annotation>
 		<annotation cp="👋" type="tts">تکان دادن دست</annotation>
-		<annotation cp="🤚">اجازه | بالا بردن دست | پشت دست | دست | موافقت</annotation>
-		<annotation cp="🤚" type="tts">پشت دست</annotation>
+		<annotation cp="🤚">اجازه | بالا بردن دست | پشت دست | پشت دست روبه بالا | دست | موافقت</annotation>
+		<annotation cp="🤚" type="tts">پشت دست روبه بالا</annotation>
 		<annotation cp="🖐">انگشتان | پنج | خداحافظی | دست | دست با انگشتان باز | سلام</annotation>
 		<annotation cp="🖐" type="tts">دست با انگشتان باز</annotation>
-		<annotation cp="✋">احترام | دست | دست بالابرده | سلام</annotation>
+		<annotation cp="✋">احترام | بزن قدش | دست | دست بالابرده | سلام</annotation>
 		<annotation cp="✋" type="tts">دست بالابرده</annotation>
 		<annotation cp="🖖">اسپاک | انگشت | پیشتازان فضا | دست | سلام | ولکان</annotation>
 		<annotation cp="🖖" type="tts">سلام ولکان</annotation>
+		<annotation cp="🫱">به سمت راست | دست | دست به سمت راست | راست</annotation>
+		<annotation cp="🫱" type="tts">دست به سمت راست</annotation>
+		<annotation cp="🫲">به سمت چپ | چپ | دست | دست به سمت چپ</annotation>
+		<annotation cp="🫲" type="tts">دست به سمت چپ</annotation>
+		<annotation cp="🫳">انداختن | کف دست به پایین | کیش کردن | مرخص کردن</annotation>
+		<annotation cp="🫳" type="tts">کف دست به پایین</annotation>
+		<annotation cp="🫴">بیا | تعارف | فراخواندن | کف دست به بالا | گرفتن</annotation>
+		<annotation cp="🫴" type="tts">کف دست به بالا</annotation>
+		<annotation cp="🫷">بزن قدش | توقف | دست فشاردهنده به سمت چپ | رد کردن | سمت چپ | فشار | منتظر بمان</annotation>
+		<annotation cp="🫷" type="tts">دست فشاردهنده به سمت چپ</annotation>
+		<annotation cp="🫸">بزن قدش | توقف | دست فشاردهنده به سمت راست | رد کردن | سمت راست | فشار | منتظر بمان</annotation>
+		<annotation cp="🫸" type="tts">دست فشاردهنده به سمت راست</annotation>
 		<annotation cp="👌">اوکی | باشه | بله | تأیید | دست | علامت اوکی | قبول</annotation>
 		<annotation cp="👌" type="tts">علامت اوکی</annotation>
 		<annotation cp="🤌">اشاره با دست | انگشتان | جمع‌شده | سؤال | طنزآلود</annotation>
@@ -1117,6 +1079,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="✌" type="tts">علامت پیروزی</annotation>
 		<annotation cp="🤞">انگشت | انگشتان گره خورده | بخت | پنجه | دست | شانس | گره</annotation>
 		<annotation cp="🤞" type="tts">انگشتان گره خورده</annotation>
+		<annotation cp="🫰">بشکن | پول | دست با انگشت اشاره و شست متقاطع | عشق | قلب | گران</annotation>
+		<annotation cp="🫰" type="tts">دست با انگشت اشاره و شست متقاطع</annotation>
 		<annotation cp="🤟">دست | دوست دارم | دوستت دارم | علامت دوستت دارم</annotation>
 		<annotation cp="🤟" type="tts">علامت دوستت دارم</annotation>
 		<annotation cp="🤘">انگشت | دست | راک | شاخ | شیطان | نماد شاخ</annotation>
@@ -1135,6 +1099,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="👇" type="tts">اشاره به پایین</annotation>
 		<annotation cp="☝">اشاره | اشاره به بالا | انگشت | بالا | بدن | دست</annotation>
 		<annotation cp="☝" type="tts">اشاره به بالا</annotation>
+		<annotation cp="🫵">اشاره | اشاره به بیننده | شما</annotation>
+		<annotation cp="🫵" type="tts">اشاره به بیننده</annotation>
 		<annotation cp="👍">1+ | بالا | پسندیدن | دست | شست</annotation>
 		<annotation cp="👍" type="tts">پسندیدن</annotation>
 		<annotation cp="👎">1- | پایین | دست | شست | نپسندیدن</annotation>
@@ -1149,8 +1115,10 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🤜" type="tts">مشت به راست</annotation>
 		<annotation cp="👏">بدن | دست | دست زدن</annotation>
 		<annotation cp="👏" type="tts">دست زدن</annotation>
-		<annotation cp="🙌">بالابرده | تحسین | تمجید | جشن | دست | دست‌های بالا آورده | ژست | هورا</annotation>
+		<annotation cp="🙌">بالابرده | تحسین | جشن | دست | دست‌های بالا آورده | ژست | هورا</annotation>
 		<annotation cp="🙌" type="tts">دست‌های بالا آورده</annotation>
+		<annotation cp="🫶">شکل قلب با دست | عشق</annotation>
+		<annotation cp="🫶" type="tts">شکل قلب با دست</annotation>
 		<annotation cp="👐">باز | بدن | دست | دست‌های باز</annotation>
 		<annotation cp="👐" type="tts">دست‌های باز</annotation>
 		<annotation cp="🤲">دست دعا | دعا | راز و نیاز | عبادت | نماز</annotation>
@@ -1199,6 +1167,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="👅" type="tts">زبان</annotation>
 		<annotation cp="👄">بدن | دهان | لب</annotation>
 		<annotation cp="👄" type="tts">لب</annotation>
+		<annotation cp="🫦">ترس | دلواپس | طنازی | عصبی | گازگرفتن لب | ناراحت | نگران</annotation>
+		<annotation cp="🫦" type="tts">گازگرفتن لب</annotation>
 		<annotation cp="👶">خردسال | طفل | نوزاد</annotation>
 		<annotation cp="👶" type="tts">نوزاد</annotation>
 		<annotation cp="🧒">بچه | بی‌جنس | جنس خنثی | جوان</annotation>
@@ -1413,6 +1383,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="👷‍♂" type="tts">کارگر ساختمانی مرد</annotation>
 		<annotation cp="👷‍♀">ساختمان‌سازی | ساخت‌و‌ساز | کارگر ساختمانی زن | کارگر مرد | کلاه ایمنی</annotation>
 		<annotation cp="👷‍♀" type="tts">کارگر ساختمانی زن</annotation>
+		<annotation cp="🫅">آدم تاج‌دار | اشراف | پادشاه | سلطنتی | شاهانه</annotation>
+		<annotation cp="🫅" type="tts">آدم تاج‌دار</annotation>
 		<annotation cp="🤴">آقازاده | تاج به سر | شاهزاده | شهزاده</annotation>
 		<annotation cp="🤴" type="tts">شاهزاده</annotation>
 		<annotation cp="👸">افسانه | جن و پری | شاهدخت | شاهزاده خانم | فانتزی</annotation>
@@ -1441,6 +1413,10 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="👰‍♀" type="tts">زن با تور عروس</annotation>
 		<annotation cp="🤰">باردار | بچه در شکم | حامله | زن | شکم | شیکم</annotation>
 		<annotation cp="🤰" type="tts">زن باردار</annotation>
+		<annotation cp="🫃">باد کرده | باردار | پر | شکم | مرد باردار</annotation>
+		<annotation cp="🫃" type="tts">مرد باردار</annotation>
+		<annotation cp="🫄">آدم باردار | باد کرده | باردار | پر | شکم</annotation>
+		<annotation cp="🫄" type="tts">آدم باردار</annotation>
 		<annotation cp="🤱">تغذیه | تغذیه با شیر مادر | شیر مادر | شیردهی | طفل</annotation>
 		<annotation cp="🤱" type="tts">تغذیه با شیر مادر</annotation>
 		<annotation cp="👩‍🍼">بچه | زن | زنی که به بچه شیر می‌دهد | شیر دادن | غذا دادن | مراقبت</annotation>
@@ -1511,6 +1487,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🧟‍♂" type="tts">مرده متحرک مرد</annotation>
 		<annotation cp="🧟‍♀">جسد متحرک | زامبی مرد | مرده متحرک زن | مرده متحرک مرد</annotation>
 		<annotation cp="🧟‍♀" type="tts">مرده متحرک زن</annotation>
+		<annotation cp="🧌">افسانه | تخیلی | غول | هیولا</annotation>
+		<annotation cp="🧌" type="tts">غول</annotation>
 		<annotation cp="💆">سالن | ماساژ | ماساژ صورت</annotation>
 		<annotation cp="💆" type="tts">ماساژ صورت</annotation>
 		<annotation cp="💆‍♂">سالن ماساژ | ماساژ | ماساژ صورت برای آقایان | ماساژ صورت مرد</annotation>
@@ -1697,8 +1675,6 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="💏" type="tts">بوسه</annotation>
 		<annotation cp="💑">داستان عاشقانه | زوج | زوج عاشق | عشق | قلب</annotation>
 		<annotation cp="💑" type="tts">زوج عاشق</annotation>
-		<annotation cp="👪">خانه‌وار | خانواده | عائله | فامیل</annotation>
-		<annotation cp="👪" type="tts">خانواده</annotation>
 		<annotation cp="🗣">درحال صحبت کردن | سایه‌نما | سر | صحبت | صحبت کردن | صورت</annotation>
 		<annotation cp="🗣" type="tts">درحال صحبت کردن</annotation>
 		<annotation cp="👤">تندیس | سایه‌نما | سیاه‌نما | سیلوئت | نیم‌چهره‌نما</annotation>
@@ -1707,6 +1683,16 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="👥" type="tts">تندیس‌های سایه‌نما</annotation>
 		<annotation cp="🫂">تشکر | خداحافظ | درآغوش گرفتن | روبوسی | سلام</annotation>
 		<annotation cp="🫂" type="tts">درآغوش گرفتن</annotation>
+		<annotation cp="👪">خانه‌وار | خانواده | عائله | فامیل</annotation>
+		<annotation cp="👪" type="tts">خانواده</annotation>
+		<annotation cp="🧑‍🧑‍🧒">خانواده: بزرگسال، بالغ، کودک</annotation>
+		<annotation cp="🧑‍🧑‍🧒" type="tts">خانواده: بزرگسال، بالغ، کودک</annotation>
+		<annotation cp="🧑‍🧑‍🧒‍🧒">خانواده: بزرگسال، بالغ، کودک، فرزند</annotation>
+		<annotation cp="🧑‍🧑‍🧒‍🧒" type="tts">خانواده: بزرگسال، بالغ، کودک، فرزند</annotation>
+		<annotation cp="🧑‍🧒">خانواده: بزرگسال، کودک</annotation>
+		<annotation cp="🧑‍🧒" type="tts">خانواده: بزرگسال، کودک</annotation>
+		<annotation cp="🧑‍🧒‍🧒">خانواده: بزرگسال، کودک، فرزند</annotation>
+		<annotation cp="🧑‍🧒‍🧒" type="tts">خانواده: بزرگسال، کودک، فرزند</annotation>
 		<annotation cp="👣">اثر | بدن | پوشاک | جای پا | رد پا</annotation>
 		<annotation cp="👣" type="tts">رد پا</annotation>
 		<annotation cp="🦰">سرخ‌مو | سرخ‌موی | موسرخ | موقرمز | موی قرمز</annotation>
@@ -1757,6 +1743,10 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🐆" type="tts">پلنگ</annotation>
 		<annotation cp="🐴">اسب | صورت</annotation>
 		<annotation cp="🐴" type="tts">صورت اسب</annotation>
+		<annotation cp="🫎" draft="contributed">موس</annotation>
+		<annotation cp="🫎" type="tts">موس</annotation>
+		<annotation cp="🫏" draft="contributed">الاغ</annotation>
+		<annotation cp="🫏" type="tts">الاغ</annotation>
 		<annotation cp="🐎">اسب | اسب‌سواری | مسابقه</annotation>
 		<annotation cp="🐎" type="tts">اسب</annotation>
 		<annotation cp="🦄">تک‌شاخ | صورت</annotation>
@@ -1881,6 +1871,14 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🦚" type="tts">طاووس</annotation>
 		<annotation cp="🦜">پرنده | حرف زدن | دزدان دریایی | طوطی | یاوه‌گویی</annotation>
 		<annotation cp="🦜" type="tts">طوطی</annotation>
+		<annotation cp="🪽">بال</annotation>
+		<annotation cp="🪽" type="tts">بال</annotation>
+		<annotation cp="🐦‍⬛">پرنده | حقه‌باز | زاغ | سیاه | کلاغ</annotation>
+		<annotation cp="🐦‍⬛" type="tts">پرنده سیاه</annotation>
+		<annotation cp="🪿">احمق | پرنده | صدای غاز | غاز | مرغابی</annotation>
+		<annotation cp="🪿" type="tts">غاز</annotation>
+		<annotation cp="🐦‍🔥">فانتزی، پرنده آتشین، تولد دوباره، تناسخ | ققنوس</annotation>
+		<annotation cp="🐦‍🔥" type="tts">ققنوس</annotation>
 		<annotation cp="🐸">صورت | قورباغه</annotation>
 		<annotation cp="🐸" type="tts">قورباغه</annotation>
 		<annotation cp="🐊">تمساح | سوسمار | کروکودیل</annotation>
@@ -1919,6 +1917,10 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🐙" type="tts">هشت‌پا</annotation>
 		<annotation cp="🐚">صدف | صدف مارپیچی | مارپیچ</annotation>
 		<annotation cp="🐚" type="tts">صدف مارپیچی</annotation>
+		<annotation cp="🪸">آبسنگ | اقیانوس | مرجان</annotation>
+		<annotation cp="🪸" type="tts">مرجان</annotation>
+		<annotation cp="🪼">بی‌مهره | جواهرنشان | دریایی | سوختن | عروس دریایی | لزج | نیش‌دار</annotation>
+		<annotation cp="🪼" type="tts">عروس دریایی</annotation>
 		<annotation cp="🐌">حلزون | لیسک</annotation>
 		<annotation cp="🐌" type="tts">حلزون</annotation>
 		<annotation cp="🦋">پروانه | حشره | زیبا | عاشق</annotation>
@@ -1957,6 +1959,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🌸" type="tts">شکوفه گیلاس</annotation>
 		<annotation cp="💮">گل | گل سفید</annotation>
 		<annotation cp="💮" type="tts">گل سفید</annotation>
+		<annotation cp="🪷">بودایی | خلوص | گل | نیلوفر | هند | هندو | ویتنام</annotation>
+		<annotation cp="🪷" type="tts">نیلوفر</annotation>
 		<annotation cp="🏵">گل | گل رزت | گیاه</annotation>
 		<annotation cp="🏵" type="tts">گل رزت</annotation>
 		<annotation cp="🌹">رز | گل | گیاه</annotation>
@@ -1971,6 +1975,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🌼" type="tts">شکوفه</annotation>
 		<annotation cp="🌷">گل | گیاه | لاله</annotation>
 		<annotation cp="🌷" type="tts">لاله</annotation>
+		<annotation cp="🪻">استوخودوس | سنبل | گل | گل میمون | لوپن | مامیران آبی</annotation>
+		<annotation cp="🪻" type="tts">سنبل</annotation>
 		<annotation cp="🌱">جوان | جوانه | گیاه</annotation>
 		<annotation cp="🌱" type="tts">جوانه</annotation>
 		<annotation cp="🪴">بی‌ثمر | خانه | رشد | کسل‌کننده | گیاه | گیاه گلدانی | مراقبت</annotation>
@@ -1997,6 +2003,12 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🍂" type="tts">برگ‌ریزان</annotation>
 		<annotation cp="🍃">باد | برگ | حرکت در باد | رقص برگ در باد | گیاه | وزیدن</annotation>
 		<annotation cp="🍃" type="tts">رقص برگ در باد</annotation>
+		<annotation cp="🪹">آشیانه خالی | لانه کردن</annotation>
+		<annotation cp="🪹" type="tts">آشیانه خالی</annotation>
+		<annotation cp="🪺">آشیانه با تخم | لانه کردن</annotation>
+		<annotation cp="🪺" type="tts">آشیانه با تخم</annotation>
+		<annotation cp="🍄">قارچ | گیاه</annotation>
+		<annotation cp="🍄" type="tts">قارچ</annotation>
 		<annotation cp="🍇">انگور | گیاه | میوه</annotation>
 		<annotation cp="🍇" type="tts">انگور</annotation>
 		<annotation cp="🍈">طالبی | گیاه | میوه</annotation>
@@ -2007,6 +2019,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🍊" type="tts">نارنگی</annotation>
 		<annotation cp="🍋">گیاه | لیمو ترش | مرکبات | میوه</annotation>
 		<annotation cp="🍋" type="tts">لیمو ترش</annotation>
+		<annotation cp="🍋‍🟩">لیمو | لیمو ترش | مرکبات، میوه، گرمسیری</annotation>
+		<annotation cp="🍋‍🟩" type="tts">لیمو</annotation>
 		<annotation cp="🍌">گیاه | موز | میوه</annotation>
 		<annotation cp="🍌" type="tts">موز</annotation>
 		<annotation cp="🍍">آناناس | گیاه | میوه</annotation>
@@ -2059,12 +2073,18 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🧄" type="tts">سیر</annotation>
 		<annotation cp="🧅">پیاز | طعم‌دهنده</annotation>
 		<annotation cp="🧅" type="tts">پیاز</annotation>
-		<annotation cp="🍄">قارچ | گیاه</annotation>
-		<annotation cp="🍄" type="tts">قارچ</annotation>
 		<annotation cp="🥜">بادام | بادام زمینی | بادم زمینی | بادوم</annotation>
 		<annotation cp="🥜" type="tts">بادام زمینی</annotation>
+		<annotation cp="🫘">حبوبات | غذا | کلیه | لوبیا</annotation>
+		<annotation cp="🫘" type="tts">لوبیا</annotation>
 		<annotation cp="🌰">فندق | گیاه</annotation>
 		<annotation cp="🌰" type="tts">فندق</annotation>
+		<annotation cp="🫚">آبجو | ادویه | ریشه | زنجبیل</annotation>
+		<annotation cp="🫚" type="tts">زنجبیل</annotation>
+		<annotation cp="🫛">دولپه‌ای | سبزیجات | سویای سبز | غلاف | لوبیا | نخود | نخودفرنگی</annotation>
+		<annotation cp="🫛" type="tts">نخودفرنگی</annotation>
+		<annotation cp="🍄‍🟫">غذا، قارچ، طبیعت، سبزیجات | قارچ قهوه‌ای</annotation>
+		<annotation cp="🍄‍🟫" type="tts">قارچ قهوه‌ای</annotation>
 		<annotation cp="🍞">تکه | قرص | لقمه | نان</annotation>
 		<annotation cp="🍞" type="tts">نان</annotation>
 		<annotation cp="🥐">پیراشکی | کرواسان | کروسان | نان | نون</annotation>
@@ -2233,6 +2253,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🥂" type="tts">صدای به‌هم خوردن پیاله‌ها</annotation>
 		<annotation cp="🥃">بی‌دسته | جرعه | قُلُپ | لیوان | لیوان ته‌گنبدی | نوشابه الکلی | ویسکی</annotation>
 		<annotation cp="🥃" type="tts">لیوان ته‌گنبدی</annotation>
+		<annotation cp="🫗">خالی کردن | ریختن | ریختن مایع | لیوان | نوشابه</annotation>
+		<annotation cp="🫗" type="tts">ریختن مایع</annotation>
 		<annotation cp="🥤">آب‌میوه | افشره | سودا | فنجان با نی | لیموناد | نوشابهٔ گازدار</annotation>
 		<annotation cp="🥤" type="tts">فنجان با نی</annotation>
 		<annotation cp="🧋">چای | چای حُبابی | حباب | شیر | مروارید</annotation>
@@ -2253,6 +2275,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🥄" type="tts">قاشق</annotation>
 		<annotation cp="🔪">آشپزی | ابزار | اسلحه | چاقو | چاقوی آشپزخانه | ساطور | هوچو</annotation>
 		<annotation cp="🔪" type="tts">چاقوی آشپزخانه</annotation>
+		<annotation cp="🫙">ادویه | خالی | سس | شیشه دهان‌گشاد | قوطی | مغازه</annotation>
+		<annotation cp="🫙" type="tts">شیشه دهان‌گشاد</annotation>
 		<annotation cp="🏺">آشپزی | دلو | زودیاک | سبو | کوزه | نوشیدنی</annotation>
 		<annotation cp="🏺" type="tts">سبو</annotation>
 		<annotation cp="🌍">اروپا | افریقا | زمین | کرهٔ جغرافیایی | کرهٔ زمین | نقشهٔ اروپا-افریقا روی کره</annotation>
@@ -2377,6 +2401,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="♨" type="tts">چشمهٔ آب گرم</annotation>
 		<annotation cp="🎠">اسب | چرخ‌وفلک | چرخ‌وفلک اسبی</annotation>
 		<annotation cp="🎠" type="tts">چرخ‌وفلک اسبی</annotation>
+		<annotation cp="🛝">بازی | پارک بازی | سرسره</annotation>
+		<annotation cp="🛝" type="tts">سرسره</annotation>
 		<annotation cp="🎡">چرخ | چرخ و فلک | چرخ‌وفلک | شهر بازی</annotation>
 		<annotation cp="🎡" type="tts">چرخ‌وفلک</annotation>
 		<annotation cp="🎢">ترن هوایی | رولر | شهر بازی</annotation>
@@ -2473,6 +2499,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🛢" type="tts">بشکه نفت</annotation>
 		<annotation cp="⛽">ایستگاه | بنزین | پمپ | سوخت | گاز | گازوئیل</annotation>
 		<annotation cp="⛽" type="tts">پمپ بنزین</annotation>
+		<annotation cp="🛞">تایر | چرخ | حلقه | دور | لاستیک</annotation>
+		<annotation cp="🛞" type="tts">چرخ</annotation>
 		<annotation cp="🚨">آژیر | پلیس | چراغ | چراغ ماشین پلیس | خودرو | وسیلهٔ نقلیه</annotation>
 		<annotation cp="🚨" type="tts">چراغ ماشین پلیس</annotation>
 		<annotation cp="🚥">ترافیک | چراغ | چراغ راهنمایی افقی | علامت</annotation>
@@ -2485,6 +2513,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🚧" type="tts">ساخت‌وساز</annotation>
 		<annotation cp="⚓">ابزار | کشتی | لنگر</annotation>
 		<annotation cp="⚓" type="tts">لنگر</annotation>
+		<annotation cp="🛟">ایمنی | حلقه نجات | شناور | محافظ | نجات | نجات‌بخش</annotation>
+		<annotation cp="🛟" type="tts">حلقه نجات</annotation>
 		<annotation cp="⛵">تفریح | تفریحی | دریا | قایق | قایق بادبانی | کشتی شخصی</annotation>
 		<annotation cp="⛵" type="tts">قایق بادبانی</annotation>
 		<annotation cp="🛶">بلم | پارو | زورق | قایق | قایقرانی | کانو</annotation>
@@ -2799,14 +2829,14 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🪀" type="tts">یویو</annotation>
 		<annotation cp="🪁">اوج گرفتن | بادبادک</annotation>
 		<annotation cp="🪁" type="tts">بادبادک</annotation>
+		<annotation cp="🔫">ابزار | اسلحه | تفنگ | تفنگ آب‌پاش | رولور</annotation>
+		<annotation cp="🔫" type="tts">تفنگ آب‌پاش</annotation>
 		<annotation cp="🎱">۸ | ۸ توپ | بازی | بال | بیلیارد | هشت</annotation>
 		<annotation cp="🎱" type="tts">بیلیارد</annotation>
 		<annotation cp="🔮">ابزار | بخت و اقبال | تخیلی | جن و پری | کریستال | گوی</annotation>
 		<annotation cp="🔮" type="tts">گوی</annotation>
 		<annotation cp="🪄">جادو | جادوگر | سحرآمیز | عصای سحرآمیز</annotation>
 		<annotation cp="🪄" type="tts">عصای سحرآمیز</annotation>
-		<annotation cp="🧿">جادو | چشم‌زخم | سحر | طلسم | مهره | نظرقربانی</annotation>
-		<annotation cp="🧿" type="tts">نظرقربانی</annotation>
 		<annotation cp="🎮">بازی | بازی ویدیویی | دسته | کنترل‌کننده</annotation>
 		<annotation cp="🎮" type="tts">بازی ویدیویی</annotation>
 		<annotation cp="🕹">بازی | بازی ویدیویی | دسته بازی</annotation>
@@ -2821,6 +2851,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🧸" type="tts">تدی خرسه</annotation>
 		<annotation cp="🪅">پینیاتا | جشن | مهمانی</annotation>
 		<annotation cp="🪅" type="tts">پینیاتا</annotation>
+		<annotation cp="🪩">توپ آینه‌ای | درخشش | دیسکو | رقص | مهمانی</annotation>
+		<annotation cp="🪩" type="tts">توپ آینه‌ای</annotation>
 		<annotation cp="🪆">تودرتو | روسیه | عروسک</annotation>
 		<annotation cp="🪆" type="tts">عروسک تودرتو</annotation>
 		<annotation cp="♠">بازی | پیک | خال | کارت</annotation>
@@ -2893,6 +2925,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="👙" type="tts">بیکینی</annotation>
 		<annotation cp="👚">پوشاک | زنانه | لباس زنانه</annotation>
 		<annotation cp="👚" type="tts">لباس زنانه</annotation>
+		<annotation cp="🪭">بادبزن | خجالتی | خنک کردن | رقص | گرم | لرزش</annotation>
+		<annotation cp="🪭" type="tts">بادبزن</annotation>
 		<annotation cp="👛">پوشاک | سکه | کیف | کیف دستی</annotation>
 		<annotation cp="👛" type="tts">کیف دستی</annotation>
 		<annotation cp="👜">پوشاک | کیف | کیف دوشی</annotation>
@@ -2921,6 +2955,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🩰" type="tts">کفش باله</annotation>
 		<annotation cp="👢">بوت | پوتین | پوتین زنانه | پوشاک | چکمه | زن | کفش</annotation>
 		<annotation cp="👢" type="tts">پوتین زنانه</annotation>
+		<annotation cp="🪮">آفریقایی | جداکردن | شانه | شانه جداکننده | مو</annotation>
+		<annotation cp="🪮" type="tts">شانه جداکننده</annotation>
 		<annotation cp="👑">پوشاک | تاج | شاه | ملکه</annotation>
 		<annotation cp="👑" type="tts">تاج</annotation>
 		<annotation cp="👒">پوشاک | زن | کلاه | کلاه زنانه</annotation>
@@ -2997,6 +3033,10 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🥁" type="tts">طبل</annotation>
 		<annotation cp="🪘">ریتم | ضرب | طبل | طبل بلند | کانگا</annotation>
 		<annotation cp="🪘" type="tts">طبل بلند</annotation>
+		<annotation cp="🪇">پرکاشن | تکان دادن | جعجغه | ساز | ساز جغجغه‌ای | موسیقی</annotation>
+		<annotation cp="🪇" type="tts">ساز جغجغه‌ای</annotation>
+		<annotation cp="🪈">بادی چوبی | ضبط‌صوت | فلوت | موسیقی | نی | نی‌لبک</annotation>
+		<annotation cp="🪈" type="tts">فلوت</annotation>
 		<annotation cp="📱">تلفن | گوشی | موبایل | همراه</annotation>
 		<annotation cp="📱" type="tts">تلفن همراه</annotation>
 		<annotation cp="📲">پیکان | تلفن همراه | تلفن همراه با پیکان | دریافت | گوشی</annotation>
@@ -3011,6 +3051,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="📠" type="tts">دستگاه نمابر</annotation>
 		<annotation cp="🔋">باتری | باطری | شارژ | شارژ کردن</annotation>
 		<annotation cp="🔋" type="tts">باتری</annotation>
+		<annotation cp="🪫">الکترونیکی | انرژی ضعیف | باتری ضعیف</annotation>
+		<annotation cp="🪫" type="tts">باتری ضعیف</annotation>
 		<annotation cp="🔌">الکتریسیته | الکتریکی | برق | دوشاخه</annotation>
 		<annotation cp="🔌" type="tts">دوشاخه</annotation>
 		<annotation cp="💻">پی‌سی | رایانه | رایانهٔ کیفی | شخصی</annotation>
@@ -3233,8 +3275,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🗡" type="tts">خنجر</annotation>
 		<annotation cp="⚔">اسلحه | شمشیر | شمشیرهای ضرب‌دری | صلیب | متقاطع</annotation>
 		<annotation cp="⚔" type="tts">شمشیرهای ضرب‌دری</annotation>
-		<annotation cp="🔫">ابزار | اسلحه | تفنگ | تفنگ آب‌پاش | رولور</annotation>
-		<annotation cp="🔫" type="tts">تفنگ آب‌پاش</annotation>
+		<annotation cp="💣">بمب | کمیک | مصور</annotation>
+		<annotation cp="💣" type="tts">بمب</annotation>
 		<annotation cp="🪃">استرالیا | بومرنگ | کمانه | واجهش</annotation>
 		<annotation cp="🪃" type="tts">بومرنگ</annotation>
 		<annotation cp="🏹">اسلحه | برج فلکی | پیکان | تیر | تیر و کمان | زودیاک | کمان</annotation>
@@ -3259,6 +3301,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🦯" type="tts">عصای سفید</annotation>
 		<annotation cp="🔗">اتصال | پیوند | حلقه | حلقهٔ زنجیر | دانه زنجیر | دانهٔ زنجیر</annotation>
 		<annotation cp="🔗" type="tts">حلقهٔ زنجیر</annotation>
+		<annotation cp="⛓‍💥">زنجیر پاره | شکستن، پاره شدن، زنجیر، دستبند، آزادی</annotation>
+		<annotation cp="⛓‍💥" type="tts">زنجیر پاره</annotation>
 		<annotation cp="⛓">زنجیر | زنجیرها | غل | غل و زنجیر | قیدوبند</annotation>
 		<annotation cp="⛓" type="tts">غل و زنجیر</annotation>
 		<annotation cp="🪝">انحنا | به‌دام انداختن | خمیدگی | قلاب | گرفتن | نقطه فروش</annotation>
@@ -3291,8 +3335,12 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="💊" type="tts">قرص</annotation>
 		<annotation cp="🩹">چسب | چسب زخم</annotation>
 		<annotation cp="🩹" type="tts">چسب زخم</annotation>
+		<annotation cp="🩼">چوب | صدمه | عصا | عصای زیر بغل | کمک حرکت | ناتوانی</annotation>
+		<annotation cp="🩼" type="tts">عصای زیر بغل</annotation>
 		<annotation cp="🩺">پزشک | دارو | دکتر | قلب | گوشی پزشکی</annotation>
 		<annotation cp="🩺" type="tts">گوشی پزشکی</annotation>
+		<annotation cp="🩻">استخوان | اسکلت | اشعه ایکس | پزشکی | دکتر</annotation>
+		<annotation cp="🩻" type="tts">اشعه ایکس</annotation>
 		<annotation cp="🚪">در | درب | راهرو</annotation>
 		<annotation cp="🚪" type="tts">در</annotation>
 		<annotation cp="🛗">آسانسور | بالابر | جرثقیل | دسترس‌پذیری</annotation>
@@ -3333,6 +3381,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🪣" type="tts">سطل</annotation>
 		<annotation cp="🧼">تمیز کردن | حمام کردن | صابون | ظرف صابون | کف | نوار</annotation>
 		<annotation cp="🧼" type="tts">صابون</annotation>
+		<annotation cp="🫧">آروغ | تمیزی | حباب | زیر آب | صابون</annotation>
+		<annotation cp="🫧" type="tts">حباب</annotation>
 		<annotation cp="🪥">بهداشت | تمیز کردن | حمام | دندان | مربوط به دندان | مسواک</annotation>
 		<annotation cp="🪥" type="tts">مسواک</annotation>
 		<annotation cp="🧽">اسفنج | پرمنفذ | تمیز کردن | جاذب | لیف | لیف حمام</annotation>
@@ -3349,10 +3399,16 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🪦" type="tts">سنگ قبر</annotation>
 		<annotation cp="⚱">خاکستر | خاکستردان | سوزاندن | مرگ</annotation>
 		<annotation cp="⚱" type="tts">خاکستردان</annotation>
+		<annotation cp="🧿">جادو | چشم‌زخم | سحر | طلسم | مهره | نظرقربانی</annotation>
+		<annotation cp="🧿" type="tts">نظرقربانی</annotation>
+		<annotation cp="🪬">خمسه | دست | طلسم | فاطمه | محافظت | مری | مریم</annotation>
+		<annotation cp="🪬" type="tts">خمسه</annotation>
 		<annotation cp="🗿">پیکره | پیکرهٔ موآی | تندیس | سردیس موآی | صورت | موآی</annotation>
 		<annotation cp="🗿" type="tts">سردیس موآی</annotation>
 		<annotation cp="🪧">اعتراض | اعتصاب | پلاکارد | تظاهرات</annotation>
 		<annotation cp="🪧" type="tts">پلاکارد</annotation>
+		<annotation cp="🪪">امنیت | شناسه | کارت شناسایی | گواهینامه | مدرک شناسایی</annotation>
+		<annotation cp="🪪" type="tts">کارت شناسایی</annotation>
 		<annotation cp="🏧">ای تی ام | بانک | خودپرداز | دستگاه | عابربانک | نشان خودپرداز | نشان عابربانک</annotation>
 		<annotation cp="🏧" type="tts">نشان عابربانک</annotation>
 		<annotation cp="🚮">آشغال | زباله | زباله‌دان | سطل آشغال | علامت ریختن زباله در زباله‌دان</annotation>
@@ -3425,8 +3481,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="↕" type="tts">پیکان بالا و پایین</annotation>
 		<annotation cp="↔">پیکان | پیکان دوطرفه</annotation>
 		<annotation cp="↔" type="tts">پیکان دوطرفه</annotation>
-		<annotation cp="↮" draft="contributed">پیکان به سمت چپ و راست در کنار خط اریب</annotation>
-		<annotation cp="↮" type="tts" draft="contributed">پیکان به سمت چپ و راست در کنار خط اریب</annotation>
+		<annotation cp="↮">پیکان به سمت چپ و راست در کنار خط اریب</annotation>
+		<annotation cp="↮" type="tts">پیکان به سمت چپ و راست در کنار خط اریب</annotation>
 		<annotation cp="↩">پیکان | پیکان خمیده راست</annotation>
 		<annotation cp="↩" type="tts">پیکان خمیده راست</annotation>
 		<annotation cp="↪">پیکان | پیکان خمیده چپ</annotation>
@@ -3473,6 +3529,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🕎" type="tts">منورا</annotation>
 		<annotation cp="🔯">اقبال | بخت | ستاره | ستارهٔ شش‌پر</annotation>
 		<annotation cp="🔯" type="tts">ستارهٔ شش‌پر</annotation>
+		<annotation cp="🪯">خندا | سیک | مذهب</annotation>
+		<annotation cp="🪯" type="tts">خندا</annotation>
 		<annotation cp="♈">برج | حمل | فروردین</annotation>
 		<annotation cp="♈" type="tts">برج حمل</annotation>
 		<annotation cp="♉">اردیبهشت | برج | ثور</annotation>
@@ -3543,6 +3601,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="🔆" type="tts">دکمهٔ روشن کردن صفحه</annotation>
 		<annotation cp="📶">آنتن | تلفن | تلفن همراه | سیگنال | گوشی | موبایل | نوار</annotation>
 		<annotation cp="📶" type="tts">نوار سیگنال</annotation>
+		<annotation cp="🛜">اینترنت | بی‌سیم | رایانه | شبکه</annotation>
+		<annotation cp="🛜" type="tts">بی‌سیم</annotation>
 		<annotation cp="📳">تلفن همراه | حالت لرزش | گوشی | لرزش | موبایل | ویبره</annotation>
 		<annotation cp="📳" type="tts">حالت لرزش</annotation>
 		<annotation cp="📴">تلفن | تلفن همراه | تلفن همراه خاموش | خاموش | گوشی | موبایل</annotation>
@@ -3561,6 +3621,8 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="➖" type="tts">تفریق</annotation>
 		<annotation cp="➗">÷ | تقسیم | تقسیم کردن | ریاضی | علامت</annotation>
 		<annotation cp="➗" type="tts">تقسیم کردن</annotation>
+		<annotation cp="🟰">برابری | ریاضی | علامت تساوی پررنگ</annotation>
+		<annotation cp="🟰" type="tts">علامت تساوی پررنگ</annotation>
 		<annotation cp="♾">برای همیشه | بی‌حدوحصر | بی‌نهایت | کلی</annotation>
 		<annotation cp="♾" type="tts">بی‌نهایت</annotation>
 		<annotation cp="‼">دو علامت تعجب | علامت تعجب | علامت تعجب دوتایی | علامت‌گذاری</annotation>
@@ -3621,7 +3683,7 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="©" type="tts">حق نسخه‌برداری</annotation>
 		<annotation cp="®">ثبت‌شده | علامت تجاری ثبت‌شده | نشان تجاری ثبت‌شده</annotation>
 		<annotation cp="®" type="tts">نشان تجاری ثبت‌شده</annotation>
-		<annotation cp="™">tm | TM | تی‌ام | علامت | علامت تجاری | نشان تجاری | نماد بازرگانی</annotation>
+		<annotation cp="™">TM | تی‌ام | علامت | علامت تجاری | نشان تجاری | نماد بازرگانی</annotation>
 		<annotation cp="™" type="tts">نماد بازرگانی</annotation>
 		<annotation cp="🔠">بزرگ | حروف | لاتین | ورودی</annotation>
 		<annotation cp="🔠" type="tts">ورودی حروف بزرگ</annotation>
@@ -3794,11 +3856,11 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="¥">ارز | ین | ین ژاپن | یوان | یوان چین</annotation>
 		<annotation cp="¥" type="tts">ین</annotation>
 		<annotation cp="₢" draft="contributed">کروزیرو</annotation>
-		<annotation cp="₢" type="tts" draft="contributed">کروزیرو</annotation>
+		<annotation cp="₢" type="tts">کروزیرو</annotation>
 		<annotation cp="₣" draft="contributed">فرانک فرانسه</annotation>
-		<annotation cp="₣" type="tts" draft="contributed">فرانک فرانسه</annotation>
+		<annotation cp="₣" type="tts">فرانک فرانسه</annotation>
 		<annotation cp="₤" draft="contributed">لیره</annotation>
-		<annotation cp="₤" type="tts" draft="contributed">لیره</annotation>
+		<annotation cp="₤" type="tts">لیره</annotation>
 		<annotation cp="₥">میلیون</annotation>
 		<annotation cp="₥" type="tts">میلیون</annotation>
 		<annotation cp="₩">وون | وون کرۀ جنوبی | وون کرۀ شمالی</annotation>
@@ -3806,15 +3868,15 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="€">ارز | یورو</annotation>
 		<annotation cp="€" type="tts">یورو</annotation>
 		<annotation cp="₰" draft="contributed">پنی آلمانی</annotation>
-		<annotation cp="₰" type="tts" draft="contributed">پنی آلمانی</annotation>
+		<annotation cp="₰" type="tts">پنی آلمانی</annotation>
 		<annotation cp="₱">پزو</annotation>
 		<annotation cp="₱" type="tts">پزو</annotation>
 		<annotation cp="₳" draft="contributed">آئوسترال</annotation>
-		<annotation cp="₳" type="tts" draft="contributed">آئوسترال</annotation>
+		<annotation cp="₳" type="tts">آئوسترال</annotation>
 		<annotation cp="₶" draft="contributed">لیور تورنوا</annotation>
-		<annotation cp="₶" type="tts" draft="contributed">لیور تورنوا</annotation>
+		<annotation cp="₶" type="tts">لیور تورنوا</annotation>
 		<annotation cp="₷" draft="contributed">اسپسمیلو</annotation>
-		<annotation cp="₷" type="tts" draft="contributed">اسپسمیلو</annotation>
+		<annotation cp="₷" type="tts">اسپسمیلو</annotation>
 		<annotation cp="₹">ارز | روپیه | روپیه هند</annotation>
 		<annotation cp="₹" type="tts">روپیه هند</annotation>
 		<annotation cp="₽">ارز | روبل</annotation>
@@ -3822,15 +3884,15 @@ Warnings: All cp values have U+FE0F characters removed. See /annotationsDerived/
 		<annotation cp="₿">BTC | بیت‌کوین</annotation>
 		<annotation cp="₿" type="tts">بیت‌کوین</annotation>
 		<annotation cp="₨" draft="contributed">روپیه</annotation>
-		<annotation cp="₨" type="tts" draft="contributed">روپیه</annotation>
+		<annotation cp="₨" type="tts">روپیه</annotation>
 		<annotation cp="﷼" draft="contributed">ریال</annotation>
-		<annotation cp="﷼" type="tts" draft="contributed">ریال</annotation>
-		<annotation cp="¹">زِبَرنوشت، برنوشته | یک | یک زِبَرنوشت، یک برنوشته</annotation>
-		<annotation cp="¹" type="tts">یک زِبَرنوشت، یک برنوشته</annotation>
-		<annotation cp="²">به‌توان دو | دو | دو زِبَرنوشت، دو برنوشته | زِبَرنوشت، برنوشته</annotation>
-		<annotation cp="²" type="tts">دو زِبَرنوشت، دو برنوشته</annotation>
-		<annotation cp="³">به‌توان سه | زِبَرنوشت، برنوشته | سه | سه زِبَرنوشت، سه برنوشته</annotation>
-		<annotation cp="³" type="tts">سه زِبَرنوشت، سه برنوشته</annotation>
+		<annotation cp="﷼" type="tts">ریال</annotation>
+		<annotation cp="¹">بالانگاشت | بالانوشت | زِبَرنوشت | یک</annotation>
+		<annotation cp="¹" type="tts">یک بالانوشت</annotation>
+		<annotation cp="²">بالانگاشت | بالانوشت | توان ۲ | دو | زِبَرنوشت | عدد دو بالانگاشت</annotation>
+		<annotation cp="²" type="tts">عدد دو بالانگاشت</annotation>
+		<annotation cp="³">بالانگاشت | توان ۳ | توان سه | زِبَرنوشت | سه | عدد سه بالانگاشت</annotation>
+		<annotation cp="³" type="tts">عدد سه بالانگاشت</annotation>
 		<annotation cp="µ">سنجه | نشان میکرو</annotation>
 		<annotation cp="µ" type="tts">نشان میکرو</annotation>
 	</annotations>

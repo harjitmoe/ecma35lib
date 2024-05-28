@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd">
-<!-- Copyright © 1991-2022 Unicode, Inc.
+<!-- Copyright © 1991-2024 Unicode, Inc.
 For terms of use, see http://www.unicode.org/copyright.html
-SPDX-License-Identifier: Unicode-DFS-2016
+SPDX-License-Identifier: Unicode-3.0
 CLDR data files are interpreted according to the LDML specification (http://unicode.org/reports/tr35/)
 -->
 <ldml>
@@ -207,8 +207,6 @@ CLDR data files are interpreted according to the LDML specification (http://unic
 		<annotation cp="🙉" type="tts">ikke høre</annotation>
 		<annotation cp="🙊">ikke tale | tre vise aber</annotation>
 		<annotation cp="🙊" type="tts">ikke tale</annotation>
-		<annotation cp="💋">læbeaftryk | læber | romantik</annotation>
-		<annotation cp="💋" type="tts">læbeaftryk</annotation>
 		<annotation cp="💌">brev med hjerte | kærlighedsbrev</annotation>
 		<annotation cp="💌" type="tts">kærlighedsbrev</annotation>
 		<annotation cp="💘">følelser | hjerte | hjerte med pil | kærlighed | pil</annotation>
@@ -243,6 +241,8 @@ CLDR data files are interpreted according to the LDML specification (http://unic
 		<annotation cp="💜" type="tts">violet hjerte</annotation>
 		<annotation cp="🖤">hjerte | ondskab | ondt | sort</annotation>
 		<annotation cp="🖤" type="tts">sort hjerte</annotation>
+		<annotation cp="💋">læbeaftryk | læber | romantik</annotation>
+		<annotation cp="💋" type="tts">læbeaftryk</annotation>
 		<annotation cp="💯">100 point | alle rigtige | hundrede | point</annotation>
 		<annotation cp="💯" type="tts">100 point</annotation>
 		<annotation cp="💢">følelse | tegn for vrede | vrede</annotation>
@@ -257,8 +257,6 @@ CLDR data files are interpreted according to the LDML specification (http://unic
 		<annotation cp="💨" type="tts">smutter</annotation>
 		<annotation cp="🕳">hul | sort</annotation>
 		<annotation cp="🕳" type="tts">hul</annotation>
-		<annotation cp="💣">bombe | følelse</annotation>
-		<annotation cp="💣" type="tts">bombe</annotation>
 		<annotation cp="💬">tale | taleboble</annotation>
 		<annotation cp="💬" type="tts">taleboble</annotation>
 		<annotation cp="👁‍🗨">øje | øje i taleboble | se | taleboble | vidne</annotation>
@@ -281,9 +279,9 @@ CLDR data files are interpreted according to the LDML specification (http://unic
 		<annotation cp="✋" type="tts">løftet hånd</annotation>
 		<annotation cp="🖖">finger | hånd | krop | vulcan-hilsen</annotation>
 		<annotation cp="🖖" type="tts">vulcan-hilsen</annotation>
-		<annotation cp="👌">OK-håndtegn | ok-tegn | OK-tegn</annotation>
+		<annotation cp="👌">OK-håndtegn | OK-tegn</annotation>
 		<annotation cp="👌" type="tts">ok-tegn</annotation>
-		<annotation cp="✌">v-tegn | V-tegn | yeah</annotation>
+		<annotation cp="✌">V-tegn | yeah</annotation>
 		<annotation cp="✌" type="tts">v-tegn</annotation>
 		<annotation cp="🤞">finger | håb | hånd | held og lykke | krop | krydsede fingre | krydser fingre</annotation>
 		<annotation cp="🤞" type="tts">krydsede fingre</annotation>
@@ -647,14 +645,14 @@ CLDR data files are interpreted according to the LDML specification (http://unic
 		<annotation cp="💏" type="tts">kys</annotation>
 		<annotation cp="💑">kærlighed | par med hjerte | romantik</annotation>
 		<annotation cp="💑" type="tts">par med hjerte</annotation>
-		<annotation cp="👪">barn | familie | far | menneske | mor</annotation>
-		<annotation cp="👪" type="tts">familie</annotation>
 		<annotation cp="🗣">ansigt | hoved | silhuet | tale | talende</annotation>
 		<annotation cp="🗣" type="tts">talende hoved</annotation>
 		<annotation cp="👤">buste | buste i silhuet</annotation>
 		<annotation cp="👤" type="tts">buste i silhuet</annotation>
 		<annotation cp="👥">buster | buster i silhuet</annotation>
 		<annotation cp="👥" type="tts">buster i silhuet</annotation>
+		<annotation cp="👪">barn | familie | far | menneske | mor</annotation>
+		<annotation cp="👪" type="tts">familie</annotation>
 		<annotation cp="👣">fødder | fodspor</annotation>
 		<annotation cp="👣" type="tts">fodspor</annotation>
 		<annotation cp="🐵">abe | abeansigt | dyr | hoved</annotation>
@@ -865,6 +863,8 @@ CLDR data files are interpreted according to the LDML specification (http://unic
 		<annotation cp="🍂" type="tts">faldende blade</annotation>
 		<annotation cp="🍃">blad | blad i vinden | blæst | vind</annotation>
 		<annotation cp="🍃" type="tts">blad i vinden</annotation>
+		<annotation cp="🍄">plante | svamp</annotation>
+		<annotation cp="🍄" type="tts">svamp</annotation>
 		<annotation cp="🍇">frugt | vin | vindruer</annotation>
 		<annotation cp="🍇" type="tts">vindruer</annotation>
 		<annotation cp="🍈">frugt | melon</annotation>
@@ -909,8 +909,6 @@ CLDR data files are interpreted according to the LDML specification (http://unic
 		<annotation cp="🌶" type="tts">chili</annotation>
 		<annotation cp="🥒">agurk | grøntsag | mad</annotation>
 		<annotation cp="🥒" type="tts">agurk</annotation>
-		<annotation cp="🍄">plante | svamp</annotation>
-		<annotation cp="🍄" type="tts">svamp</annotation>
 		<annotation cp="🥜">mad | mellemmåltid | nød | nødder | peanuts | snack</annotation>
 		<annotation cp="🥜" type="tts">peanuts</annotation>
 		<annotation cp="🌰">kastanje | plante</annotation>
@@ -1539,6 +1537,8 @@ CLDR data files are interpreted according to the LDML specification (http://unic
 		<annotation cp="🎿" type="tts">ski</annotation>
 		<annotation cp="🎯">plet | pletskud</annotation>
 		<annotation cp="🎯" type="tts">pletskud</annotation>
+		<annotation cp="🔫">pistol | revolver | våben</annotation>
+		<annotation cp="🔫" type="tts">pistol</annotation>
 		<annotation cp="🎱">billard | billardkugle</annotation>
 		<annotation cp="🎱" type="tts">billard</annotation>
 		<annotation cp="🔮">krystalkugle | spådom | spådomskunst</annotation>
@@ -1901,8 +1901,8 @@ CLDR data files are interpreted according to the LDML specification (http://unic
 		<annotation cp="🗡" type="tts">daggert</annotation>
 		<annotation cp="⚔">korslagt | korslagte sværd | sværd | våben</annotation>
 		<annotation cp="⚔" type="tts">korslagte sværd</annotation>
-		<annotation cp="🔫">pistol | revolver | våben</annotation>
-		<annotation cp="🔫" type="tts">pistol</annotation>
+		<annotation cp="💣">bombe | følelse</annotation>
+		<annotation cp="💣" type="tts">bombe</annotation>
 		<annotation cp="🏹">bue | bue og pil | bueskytte | pil | skytten | stjernetegn | våben | værktøj</annotation>
 		<annotation cp="🏹" type="tts">bue og pil</annotation>
 		<annotation cp="🛡">skjold | våben</annotation>

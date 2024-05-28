@@ -248,6 +248,7 @@ graphdata.gsets["ir202/2003"] = kps9566_2003 = (94, 2, parsers.decode_main_plane
 graphdata.gsetflags["ir202/2003"] |= {"UHC:IS_KPS"}
 graphdata.gsetflags["ir202/2003"] |= {"UHC:Y_TREMA"}
 _kps_temp = parsers.fuse([
+            ((None,) * 175) + ((0x1CC81,),), # Added in Unicode 16.0
             parsers.decode_main_plane_gl(parsers.parse_file_format("Custom/kps-override.txt"), "kps-override.txt"),
             ((None,) * 6400) + ((0x67FF,),), # Correct mapping per UTC L2/21-059 (IRG N2479), differs from deployed.
             kps9566_2011[2], kps9566_2003[2]], "KPS_FullMapping.json")
