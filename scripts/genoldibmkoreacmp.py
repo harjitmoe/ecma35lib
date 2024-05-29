@@ -141,9 +141,50 @@ annots = {
                 'either don\'t appear here or only appear here with a PUA mapping (in the applicable '
                 'column) are encoded consecutively in IBM-944 as 115-01 through 123-13, i.e. beyond '
                 'the main plane, and also in 0x6841 through 0x6C45 in IBM-933.',
-    (1, 93, 1): 'Row 93 matches and is presumably taken from KS X 1001 row 8 (see 01-08-01).&ensp;It '
+    (1, 43, 67): 'Not actually a duplicate; <a href="https://github.com/unicode-org/icu-data/blob/main/charset/data/ucm/ibm-944_X100-1995.ucm"><code>ibm-944_X100-1995.ucm</code></a> '
+                 'agrees that it is U+7A27 (02-68-46).&ensp;It is unclear why '
+                 '<a href="https://github.com/unicode-org/icu-data/blob/main/charset/data/ucm/ibm-944_P100-1995.ucm"><code>ibm-944_P100-1995.ucm</code></a> '
+                 'maps it to the Private Use Area (U+F845).',
+    (1, 59, 9): 'Not actually a duplicate; '
+                '<a href="https://github.com/unicode-org/icu-data/blob/main/charset/data/ucm/ibm-944_X100-1995.ucm"><code>ibm-944_X100-1995.ucm</code></a> '
+                'maps this to Unicode as a duplicate U+5E02 (01-67-28; Ω-64-73; '
+                '<span lang="ko">市</span>).&ensp;This is presumably due to U+5E02 being much more '
+                'common than U+5DFF (03-15-92, <span lang="ko">巿</span>), and the two often being '
+                'homoglyphs.</p><p>However, hanja in this range are sorted by sound-reading, and '
+                '<span lang="ko">佛</span> and <span lang="ko">弗</span> are both read '
+                '"<i lang="ko-Latn">bul</i>" (compare Middle Chinese '
+                '"<i lang="ltc-Latn">pjut</i>" for U+5DFF); U+5E02, by contrast, is read '
+                '"<i lang="ko-Latn">si</i>" (from Middle Chinese '
+                '"<i lang="ltc-Latn">dzyi<sup>X</sup></i>").</p><p>This miscategorisation as a '
+                'duplicate of Ω-64-73 is presumably why '
+                '<a href="https://github.com/unicode-org/icu-data/blob/main/charset/data/ucm/ibm-944_P100-1995.ucm"><code>ibm-944_P100-1995.ucm</code></a> '
+                'maps it to the Private Use Area (U+F852).',
+    (1, 78, 72): 'Not actually a duplicate; '
+                 '<a href="https://github.com/unicode-org/icu-data/blob/main/charset/data/ucm/ibm-944_X100-1995.ucm"><code>ibm-944_X100-1995.ucm</code></a> '
+                 'thinks it\'s a duplicate U+98E1 (01-65-66; <span lang="ko">飡</span>) despite the '
+                 'code chart for the corresponding Korean EBCDIC character clearly showing a '
+                 '<a href="https://en.wikipedia.org/wiki/Radical_85">water-radical</a> (as opposed '
+                 'to U+98E1\'s <a href="https://en.wikipedia.org/wiki/Radical_15">ice-radical</a>), '
+                 'making it U+6E4C (03-33-34; <span lang="ko">湌</span>).</p><p>This '
+                 'miscategorisation as a duplicate is presumably why '
+                 '<a href="https://github.com/unicode-org/icu-data/blob/main/charset/data/ucm/ibm-944_P100-1995.ucm"><code>ibm-944_P100-1995.ucm</code></a> '
+                 'maps it to the Private Use Area (U+F865).',
+    (1, 86, 13): 'That this is a duplicate is not contested, hence '
+                 '<a href="https://github.com/unicode-org/icu-data/blob/main/charset/data/ucm/ibm-944_P100-1995.ucm"><code>ibm-944_P100-1995.ucm</code></a> '
+                 'maps it to the Private Use Area (U+F86E).</p><p>However, '
+                 '<a href="https://github.com/unicode-org/icu-data/blob/main/charset/data/ucm/ibm-944_X100-1995.ucm"><code>ibm-944_X100-1995.ucm</code></a> '
+                 'thinks it\'s U+965D (01-64-77; <span lang="ko">陝</span>), presumably because U+965D '
+                 'is more common than U+965C (01-89-80; Ω-85-10; '
+                 '<span lang="ko">陜</span>).</p><p>Nonetheless, U+965C is correct: '
+                 'hanja in this range are sorted by sound-reading, and <span lang="ko">莢</span> and '
+                 '<span lang="ko">鋏</span> are both read "<i lang="ko-Latn">hyeop</i>", while '
+                 'U+965D is read "<i lang="ko-Latn">seom</i>" (U+965C is "<i lang="ko-Latn">hyeop</i>" '
+                 'or "<i lang="ko-Latn">hap</i>", of which Ω-85-10 would be the '
+                 'latter); additionally, the IBM code chart glyph for the corresponding Korean EBCDIC '
+                 'character is closer to that of 01-89-80 than to that of 01-64-77.',
+    (1, 93, 0): 'Row 93 matches and is presumably taken from KS X 1001 row 8 (see 01-08-01).&ensp;It '
                 'is also 0x4B41 through 0x4B9E in IBM-933 shift-out.',
-    (1, 94, 1): 'Row 94 matches and is presumably taken from KS X 1001 row 9 (see 01-09-01).&ensp;It '
+    (1, 94, 0): 'Row 94 matches and is presumably taken from KS X 1001 row 9 (see 01-09-01).&ensp;It '
                 'is also 0x4BA0 through 0x4BFD in IBM-933 shift-out.',
 }
 

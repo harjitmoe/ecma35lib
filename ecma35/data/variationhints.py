@@ -389,7 +389,6 @@ applesinglehints_mackorean_pragmatic.update({
     (0x2748, 0x20D8): (0x2748,),
     (0x25CB, 0xF879): (0x2B55,),
     (0x25A1, 0xF879): (0x2B1C,),
-    (0xF805, 0x20DE): (0x1F4A0, 0x20DE),
     (0xF843,): (0x1F898,),
     (0xF845,): (0x21A2,),
     (0xF846,): (0x1F56A,),
@@ -399,6 +398,7 @@ applesinglehints_mackorean_pragmatic.update({
     #
     # Really not the right shape/character, but better than PUA
     (0xF805,): (0x1F4A0,),
+    (0xF805, 0x20DE): (0x1F4A0, 0x20DE),
     (0xF80C,): (0x0CA3,),
     (0xF84E,): (0x1FB4D,), # declining tetragon
     (0xF84F,): (0x1FB42,), # inclining tetragon
