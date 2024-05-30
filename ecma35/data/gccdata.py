@@ -20,6 +20,7 @@ __all__ = ("gcc_sequences", "gcc_tuples", "bs_handle")
 cachefile = os.path.join(os.path.dirname(os.path.abspath(__file__)), "gcc_sequences.json")
 bscachefile = os.path.join(os.path.dirname(os.path.abspath(__file__)), "bs_sequences.json")
 confusablesfn = os.path.join(os.path.dirname(os.path.abspath(__file__)), "names", "namemaps", "UCD", "confusables.txt")
+donotemitfn = os.path.join(os.path.dirname(os.path.abspath(__file__)), "names", "namemaps", "UCD", "DoNotEmit.txt")
 
 conformation_sets = {frozenset(i) for i in (
     # Generally speaking, GCC sequences are expected to be of ISO 8859 characters where applicable.
@@ -68,6 +69,18 @@ if not os.path.exists(cachefile) or not os.path.exists(bscachefile):
                     uts39data[tobit] = frombit
                 else:
                     print(tobit, ascii(tobit), uts39data[tobit], ascii(uts39data[tobit]), frombit, ascii(frombit))
+    with open(donotemitfn, "r", encoding="utf-8-sig") as f:
+        for line in f:
+            if (not line.strip()) or line[0] == "#":
+                continue
+            frm, to, detail = tuple(i.strip() for i in line.split(";", 2))
+            frombit = "".join(chr(int(i, 16)) for i in frm.split())
+            tobit = "".join(chr(int(i, 16)) for i in to.split())
+            if len(tobit) == 1 and len(frombit) > 1:
+                if frombit not in uts39data:
+                    uts39data[frombit] = tobit
+                elif uts39data[frombit] != tobit:
+                    print(frombit, ascii(frombit), uts39data[frombit], ascii(uts39data[frombit]), tobit, ascii(tobit))
 
 if not os.path.exists(cachefile):
     gcc_sequences = {
@@ -373,9 +386,10 @@ else:
     f.close()
 
 def test():
-    import pyuca, pprint
-    collator = pyuca.Collator()
-    pprint.pprint(sorted(bs_deflators.items(), key=lambda pair: [collator.sort_key(pair[1]), *pair]))
+    import locale, pprint
+    current_locale = locale.getlocale()
+    locale.setlocale(locale.LC_COLLATE, current_locale)
+    pprint.pprint(sorted(bs_deflators.items(), key=lambda pair: [locale.strxfrm(pair[1]), *pair]))
 
 def bs_handle_left_preference(charses):
     scratch = tuple(charses)
