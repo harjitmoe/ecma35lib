@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020, 2022.
+# By HarJIT in 2020, 2022, 2024.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -92,6 +92,26 @@ if not os.path.exists(cachefile):
         # The basmala is included as a single codepoint but, unlike the SAW, doesn't have a
         # decomposition. So, including it manually (at the same level of pointing as with the SAW).
         r"بسم الله الرحمن الرحيم": r"﷽",
+        # Likewise with the honourific ligatures added in Unicode 14:
+        r"ﺳﻼﻣﻪ ﻋﻠﻴﻨﺎ": r"﷏",
+        r"سبحانه وتعالى": r"﷾",
+        r"عز وجل": r"﷿",
+        r"رحمه الله": r"﵀",
+        r"رضي الله عنه": r"﵁",
+        r"رضي الله عنها": r"﵂",
+        r"رضي الله عنهم": r"﵃",
+        r"رضي الله عنهما": r"﵄",
+        r"رضي الله عنهن": r"﵅",
+        r"صلى لله عليه وآله": r"﵆",
+        r"عليه لسلام": r"﵇",
+        r"عليهم لسلام": r"﵈",
+        r"عليهما لسلام": r"﵉",
+        r"عليه لصلاة ولسلام": r"﵊",
+        r"قدس سره": r"﵋",
+        r"صلى لله عليه وآله وسلم": r"﵌",
+        r"عليها لسلام": r"﵍",
+        r"تبارك وتعالى": r"﵎",
+        r"رحمهم الله": r"﵏",
         # MacJapanese mapping uses a character combination of ↓ and ↑ for ⇵ (added to UCS later??).
         # Other adjacently stacked vertical arrow pairs are included for purpose of completeness.
         '↓↑': '⇵', '↑↓': '⇅', '↑↑': '⇈', '↓↓': '⇊', '⭣⭡': '⮃', '⭡⭣': '⮁', '⭡⭡': '⮅', '⭣⭣': '⮇',
