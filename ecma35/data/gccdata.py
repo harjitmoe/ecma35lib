@@ -135,9 +135,10 @@ if not os.path.exists(cachefile):
         i = chr(i)
         if i in namedata.canonical_decomp:
             continue
-        k = namedata.compat_decomp.get(i, (None, i))[1]
+        tag, k = namedata.compat_decomp.get(i, (None, i))
         if (len(k) > len(i)) and (namedata.get_ucscategory(k[1])[0] != "M"):
-            gcc_sequences[k] = i
+            if k not in namedata.canonical_recomp:
+                gcc_sequences[k] = i
 
     gcc_sequences["pH"] = gcc_sequences["PH"] # Well, they messed that decomposition up, didn't they.
 
@@ -218,6 +219,10 @@ def breakup(i):
             if len(candidate[1]) > 1:
                 if namedata.get_ucscategory(candidate[1][1]) == "Mn":
                     return candidate[1]
+        elif candidate[0] == "circle" and len(candidate[1]) == 1:
+            return candidate[1] + '⃝'
+        elif candidate[0] == "square" and len(candidate[1]) == 1:
+            return candidate[1] + '⃞'
     return None
 
 def recursive_breakup(i):
@@ -390,6 +395,12 @@ def test():
     current_locale = locale.getlocale()
     locale.setlocale(locale.LC_COLLATE, current_locale)
     pprint.pprint(sorted(bs_deflators.items(), key=lambda pair: [locale.strxfrm(pair[1]), *pair]))
+
+def test2():
+    import locale, pprint
+    current_locale = locale.getlocale()
+    locale.setlocale(locale.LC_COLLATE, current_locale)
+    pprint.pprint(sorted(gcc_sequences.items(), key=lambda pair: [locale.strxfrm(pair[1]), *pair]))
 
 def bs_handle_left_preference(charses):
     scratch = tuple(charses)
