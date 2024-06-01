@@ -55,6 +55,7 @@ if not os.path.exists(cachefile) or not os.path.exists(bscachefile):
                 tobit = via[1:].split("→", 1)[0].replace("\u200E", "")
             else:
                 tobit = "".join(chr(int(i, 16)) for i in to.split())
+            tobit = tobit.replace("\t", "") # *sigh*
             if 0xFB4F < ord(frombit[0]) < 0xFDF0:
                 continue
             elif 0xFEF0 <= ord(frombit[0]) <= 0xFEFF:
