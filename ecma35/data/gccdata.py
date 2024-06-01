@@ -81,6 +81,11 @@ if not os.path.exists(cachefile) or not os.path.exists(bscachefile):
                     uts39data[frombit] = tobit
                 elif uts39data[frombit] != tobit:
                     print(frombit, ascii(frombit), uts39data[frombit], ascii(uts39data[frombit]), tobit, ascii(tobit))
+            elif len(frombit) == 1 and len(tobit) > 1:
+                if tobit not in uts39data:
+                    uts39data[tobit] = frombit
+                elif uts39data[tobit] != frombit:
+                    print(tobit, ascii(tobit), uts39data[tobit], ascii(uts39data[tobit]), frombit, ascii(frombit))
 
 if not os.path.exists(cachefile):
     gcc_sequences = {
@@ -121,7 +126,7 @@ if not os.path.exists(cachefile):
         #   UTS39-gleaned compositions either
         '||': '‖', '|||': '⦀', '::': '∷', '-:': '∹', ':=': '≔', '=:': '≕', ':-:': '∺', '|⊢': '⊩',
         '||⊢': '⊪', '⊣|': '⫣', '∙∙∙': '⋯', '∩∩': '⩋', '∪∪': '⩊', '⊣⊢': '⟛', '⫤⊨': '⟚',
-        '++': '⧺', '+++': '⧻',
+        '++': '⧺', '+++': '⧻', '<-': '←', '->': '→', '<=': '⇐', '=>': '⇒', '<->': '↔', '<=>': '⇔',
         # Alchemical symbols without decompositions or UTS39-gleaned compositions
         'SSS': '🝜', '🜄F': '🜅', '🜄R': '🜆'
     }
@@ -271,7 +276,8 @@ if not os.path.exists(bscachefile):
     bs_deflators = {
         #
         # Mostly in aid of using as part of a larger composition
-        ("˙", "."): ":", ("-", "_"): "=", 
+        ("˙", "."): ":", ("-", "_"): "=", ("'", "."): "!", ("ʔ", "."): "?", ("˙", ","): ";", 
+        ("ʕ", "."): "⸮",
         #
         # Cases which aren't decompositions nor APL-ISO-IR-68.TXT compositions, which therefore
         #   need giving manually.
@@ -307,7 +313,11 @@ if not os.path.exists(bscachefile):
         ('⊂', '∘'): '⟃', ('⊃', '∘'): '⟄', ('∨', '∙'): '⟇', ('⌋', '∙'): '⟓', ('⌈', '∙'): '⟔',
         ('(', '<'): '⦓', (')', '>'): '⦔', ('=', '|'): '⧧', ('[', '_'): '⦋', (']', '_'): '⦌',
         ('⦅', '>'): '⦕', ('⦆', '<'): '⦖', ('⁝', '.'): '⦙', ('⁝', '˙'): '⦙', ('≡', '|'): '⯒',
-        ('␥', '🖵'): '⎚', ('|', '∙'): '⍿',
+        ('␥', '🖵'): '⎚', ('|', '∙'): '⍿', ('∷', '-'): '∺', ('¨', '‥'): '∷', ('"', '‥'): '∷',
+        ('^', '|'): '↑', ('v', '|'): '↓',
+        ('^', '‖'): '⇑', ('∧', '‖'): '⇑', ('↑', '|'): '⇑', ('⩚', '|'): '⇑', 
+        ('v', '‖'): '⇓', ('∨', '‖'): '⇓', ('↓', '|'): '⇓', ('⩛', '|'): '⇓', 
+        ('←', '-'): '⇐', ('→', '-'): '⇒', ('<', '='): '⇐', ('>', '='): '⇒',
     }
     for i in uts39data:
         if len(i) == 2 and i[1] in _rbs_maps:
