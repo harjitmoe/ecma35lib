@@ -38,11 +38,12 @@ conformation_sets = {frozenset(i) for i in (
     # Misc
     {"⊲", "◅"}, {"⊳", "▻"}, {"∘", "◦"}, {"¯", "‾"}, {"∙", "⋅", "·", "･", "・"}, {"∫", "ʃ"},
     {"‖", "∥"}, # Some CJK sets distinguish (making ∥ like ⫽), others unify so mappings differ
-    {"∇", "🜄"},
+    {"∇", "🜄"}, {"⦅", "⸨", "｟"}, {"⦆", "⸩", "｠"},
 )}
 
 if not os.path.exists(cachefile) or not os.path.exists(bscachefile):
     uts39data = {}
+    be_overridden_list = ("ꓺ", "⳹", "ꜻ", "Ꜻ", "Ƃ", "ꮜ", "Ɏ", "Ᏺ", "ǳ", "ѳ", "Ɵ", "ꚙ", "Ꚙ", "ѣ", r"ݲ", r"Ӊ", "ӊ", "ᶂ", "ᶆ", "ᶎ")
     with open(confusablesfn, "r", encoding="utf-8-sig") as f:
         for line in f:
             if (not line.strip()) or line[0] == "#":
@@ -63,7 +64,6 @@ if not os.path.exists(cachefile) or not os.path.exists(bscachefile):
             elif tobit == "\u0d28\u0d41":
                 continue
             elif len(frombit) == 1 and len(tobit) > 1:
-                be_overridden_list = ("ꓺ", "⳹", "ꜻ", "Ꜻ", "Ƃ", "ꮜ", "Ɏ", "Ᏺ", "ǳ", "ѳ", "Ɵ", "ꚙ", "Ꚙ", "ѣ", r"ݲ", r"Ӊ", "ӊ")
                 if frombit in be_overridden_list:
                     continue
                 elif (tobit not in uts39data) or (uts39data[tobit] in be_overridden_list):
@@ -78,12 +78,16 @@ if not os.path.exists(cachefile) or not os.path.exists(bscachefile):
             frombit = "".join(chr(int(i, 16)) for i in frm.split())
             tobit = "".join(chr(int(i, 16)) for i in to.split())
             if len(tobit) == 1 and len(frombit) > 1:
-                if frombit not in uts39data:
+                if tobit in be_overridden_list:
+                    continue
+                elif (frombit not in uts39data) or (uts39data[frombit] in be_overridden_list):
                     uts39data[frombit] = tobit
                 elif uts39data[frombit] != tobit:
                     print(frombit, ascii(frombit), uts39data[frombit], ascii(uts39data[frombit]), tobit, ascii(tobit))
             elif len(frombit) == 1 and len(tobit) > 1:
-                if tobit not in uts39data:
+                if frombit in be_overridden_list:
+                    continue
+                elif (tobit not in uts39data) or (uts39data[tobit] in be_overridden_list):
                     uts39data[tobit] = frombit
                 elif uts39data[tobit] != frombit:
                     print(tobit, ascii(tobit), uts39data[tobit], ascii(uts39data[tobit]), frombit, ascii(frombit))
