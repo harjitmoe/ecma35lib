@@ -31,14 +31,14 @@ def decode_plainextascii(stream, state):
                 state.cur_rhs = "437"
                 state.cur_gsets = list(graphdata.defgsets[state.cur_rhs])
                 state.is_96 = [graphdata.gsets[i][0] > 94 for i in state.cur_gsets]
-                state.c0_graphics_mode = 1
+                state.c0_graphics_mode = 3
             yield token
         elif state.docsmode == "plainextascii" and token[0] == "WORD":
             assert (token[1] < 0x100), token
             if token[1] < 0x20 or token[1] == 0x7F:
-                assert state.c0_graphics_mode in (1, 2, 4), state.c0_graphics_mode
-                if (state.c0_graphics_mode == 1) or token[1] == 0x1B or (
-                        state.c0_graphics_mode == 2 and token[1] in (7, 8, 9, 0xA, 0xD)):
+                assert state.c0_graphics_mode in (1, 2, 3, 5, 4), state.c0_graphics_mode
+                if (state.c0_graphics_mode in (1, 2, 3)) or token[1] == 0x1B or (
+                        state.c0_graphics_mode == 5 and token[1] in (7, 8, 9, 0xA, 0xD)):
                     # BEL, BS, HT, LF and CR don't print as graphic in Windows terminal mode.
                     # The rest do.
                     # They do have their own graphics though, used for Print All Characters.
@@ -74,6 +74,8 @@ def decode_plainextascii(stream, state):
                     yield ("CTRL", "SP", "ECMA-35", 0, "GL", workingsets[state.glset])
                 else:
                     yield (workingsets[state.glset], token[1] - 0x20, "GL")
+            elif state.c0_graphics_mode in (1, 2) and 0x80 <= token[1] < 0xA0:
+                yield ("C1", token[1] - 0x80, "CR")
             else: # i.e. it is on the right-hand side
                 index = token[1] - 0x80
                 if state.cur_rhs not in graphdata.rhses:
@@ -96,19 +98,50 @@ def decode_plainextascii(stream, state):
             state.is_96 = [graphdata.gsets[i][0] > 94 for i in state.cur_gsets]
             yield token
         elif state.docsmode == "plainextascii" and token[0] == "CSISEQ" and token[1] == "DECSDPT":
-            # Select Digital Printed Data Type, also part of DEC's IBM ProPrinter emulation.
+            # Select Digital Printed Data Type, also part of DEC's IBM ProPrinter emulation (i.e.
+            #   for making print-to-terminal work the same as print-to-printer).
+            # https://vt100.net/docs/vt510-rm/DECSDPT.html
             # Note: IBM documents "ESC X'7E08'", i.e. `ESC ~ BS`, as Print All Characters; this
             #   is not conformant with ECMA-35's use of ESC, unlike the DEC sequence:
             # https://web.archive.org/web/20160317081202/http://www-01.ibm.com/software/globalization/cp/cp01042.html
-            if token[2] == (0x34,): # 4: Print All Characters
-                state.c0_graphics_mode = 4
-                yield ("C0GRAPH", 4)
-            elif token[2] == (0x32,): # 2: National and Line Drawing
-                state.c0_graphics_mode = 2
-                yield ("C0GRAPH", 2)
-            else: # Default behaviour
+            # Note 2: having consulted PN6328945 (the original 1985 IBM ProPrinter manual), the
+            #   relevant ProPrinter modes are:
+            # - ESC 6: Select "Character Set 2" (i.e. the full code-page 437 minus C0 graphics)
+            # - ESC 7: Select "Character Set 1" (i.e. code-page 437 without C0 *or* C1 area graphics)
+            # - ESC \ (n) (n): Enable Print All Characters mode for the next (uInt16LE parameter)
+            #     characters. Interestingly, it seems only to yet have supported a subset of the
+            #     code-page 437 C0 graphics (and no DEL graphic).
+            # - ESC ^: Same as ESC \ SOH NUL (i.e. Print All Characters as a single-shift).
+            # From this, I can deduce the intended meanings of DEC's parameters as perhaps:
+            # - `CSI ) p` or `CSI 0 ) p`: default as per ECMA-48 (i.e. same as `CSI 1 ) p`).
+            # - `CSI 1 ) p`: "Print National Only" (i.e. 0x20–7E?)
+            # - `CSI 2 ) p`: "Print National and Line Drawing" (i.e. 0x20–7E,A0–FF?)
+            # - `CSI 3 ) p`: "Print Multinational" (i.e. 0x20–7E,80–FF?)
+            # - `CSI 4 ) p`: "Print All Characters" (i.e. 0x00–FF?)
+            # This does not quite match what we previously did, which was:
+            # - `CSI 1 ) p`: 0x20–7E,80–FF
+            # - `CSI 2 ) p`: 0x01–06,0B–0C,0E–1A,1C–FF
+            # - `CSI 4 ) p`: 0x01–1A,1C–FF
+            if token[2] == (0x31,): # Print GL region (currently also prints GR region)
                 state.c0_graphics_mode = 1
                 yield ("C0GRAPH", 1)
+            elif token[2] == (0x32,): # Print GL and GR regions
+                state.c0_graphics_mode = 2
+                yield ("C0GRAPH", 2)
+            elif token[2] == (0x33,): # Print GL, C1 and GR regions
+                state.c0_graphics_mode = 3
+                yield ("C0GRAPH", 3)
+            elif token[2] == (0x35,): # Print it like a classic Windows Console (besides ESC)
+                state.c0_graphics_mode = 5
+                yield ("C0GRAPH", 5)
+            elif token[2] == (0x34,): # Print C0, GL, C1 and GR regions (except ESC)
+                state.c0_graphics_mode = 4
+                yield ("C0GRAPH", 4)
+            elif (not token[2]) or (token[2] == (0x30,)): # Use default behaviour
+                state.c0_graphics_mode = 3
+                yield ("C0GRAPH", 3)
+            else:
+                yield ("ERROR", "UNKNOWNC0GRAPHMODE", token)
         else:
             yield token
         #

@@ -391,7 +391,8 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 ## "Plain extended ASCII" mode
 
 Plain extended ASCII mode is switched to by `DOCS 3` as 
-mentioned above.&ensp;Once inside, the DEC-defined DECSPPCS control sequence (i.e. `CSI … * p`) is
+mentioned above.&ensp;Once inside, [the DEC-defined DECSPPCS control
+sequence](https://vt100.net/docs/vt510-rm/DECSPPCS.html) (i.e. `CSI … * p`) is
 used for switching between numbered code pages (e.g. `CSI 1 2 5 2 * p`).&ensp;Numbers above 65535
 are used for custom purposes.&ensp;Specifically:
 
@@ -416,13 +417,16 @@ defaults can vary with code page (the default is usually GL=G0=ASCII, for exampl
 also includes the GR of ISO-8859-1 as its G1 set for fairly obvious reasons).
 
 Hence, by default, all C0 control codes will continue to work as normal.&ensp;However, the 
-following sequences can be used to change this:
+following sequences can be used to change this (note: this is based on [DEC's approach](https://vt100.net/docs/vt510-rm/DECSDPT.html)&rpar;:
 
 |Private assignment|Meaning|
 |---|---|
-|`ESC [ 1 ) p`|C0 control codes work as normal.|
-|`ESC [ 2 ) p`|C0 codes are mostly interpreted as graphical characters, except for BEL, BS, HT, LF, CR and ESC.|
+|`ESC [ ) p`|Reset to implementation default behaviour (in this case, the same as `ESC [ 3 ) p`).|
+|`ESC [ 1 ) p`|C0 and C1 control codes work as normal (note: previously incorrectly implemented same as `ESC [ 3 ) p`).|
+|`ESC [ 2 ) p`|C0 and C1 control codes work as normal (note: previously incorrectly implemented like the current `ESC [ 5 ) p`).|
+|`ESC [ 3 ) p`|C0 control codes work as normal.|
 |`ESC [ 4 ) p`|C0 codes are almost all graphical characters, the sole exception being ESC so that reversal is possible.|
+|`ESC [ 5 ) p`|C0 codes are mostly interpreted as graphical characters, except for BEL, BS, HT, LF, CR and ESC.|
 
 # Carried out
 
