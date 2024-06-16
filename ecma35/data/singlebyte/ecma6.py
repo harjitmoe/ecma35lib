@@ -329,6 +329,12 @@ raw_variants = {
     "alt646/etsturkish": ([(0x54, 0x200D, 0x4C), 
                           0x11F, 0x130, 0x15E, 0xD6, 0xC7, 0xDC,
                           0x11E, 0x131, 0x15F, 0xF6, 0xE7, 0xFC], {}),
+    # DEC 7-bit Turkish, related to but not identical to the ETS set.
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    # Violation of ECMA-6:1991: 0x26 is not &.
+    "alt646/decturkish": ([None, None, 
+                          0x130, 0x15E, 0xD6, 0xC7, 0xDC, None,
+                          0x11E, 0x15F, 0xF6, 0xE7, 0xFC], {0x21: 0x131, 0x26: 0x11F}),
     ##
     # Projection from DP94-range subset of EBCDIC code page 24
     "alt646/ibmbritish": ([0xA3, None, None, None, 0xBD, None, 0xB5, None,

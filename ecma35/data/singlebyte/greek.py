@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019, 2020, 2022.
+# By HarJIT in 2019, 2020, 2022, 2024.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -66,7 +66,7 @@ graphdata.gsets["ir055"] = (94, 1, (
          (0x03BD,), (0x03BE,), (0x03BF,), (0x03C0,), (0x03DF,), (0x03C1,), (0x03C3,), (0x03C2,), 
          (0x03C4,), (0x03C5,), (0x03C6,), (0x03C7,), (0x03C8,), (0x03C9,), (0x03E1,)))
 
-# "New" (DEC) 7-bit Greek, also the since-withdrawn ELOT-927
+# "New" (the since-withdrawn ELOT-927) 7-bit Greek
 graphdata.gsets["ir088"] = (94, 1, tuple((i,) for i in range(0x21, 0x41)) + 
                                    tuple((i,) for i in range(0x0391, 0x039A)) + (None,) + 
                                    tuple((i,) for i in range(0x039A, 0x03A2)) + 
@@ -130,7 +130,9 @@ graphdata.gsets["ir150"] = (94, 1, (
 #   takes the opposite way around on the perennial phi problem (maps 0x76 to U+03C6 and 0x7B
 #   to U+03D5)). For my own part, I prefer matching Unicode reference glyphs (and fonts on
 #   my system following them) for phi mappings.
-# ‡ http://unicode.org/wg2/docs/n2032.pdf
+# ‡ http://unicode.org/wg2/docs/n2032.pdf (incidentally, the author of that document was a
+#   fascinating figure in his own right - https://en.wikipedia.org/wiki/Hugh_McGregor_Ross - but
+#   that is entirely tangential).
 graphdata.gsets["ir181"] = (96, 1, (
     (0xA0,),   (0x2510,), (0x238D,), (0x238E,), (0x25C7,), (0x238F,), (0x2390,),  (0x2391,),
     (0x2392,), (0xA9,),   (0x2264,), (0x226A,), (0xAC,),   (0xAD,),   (0xAE,),    None,      

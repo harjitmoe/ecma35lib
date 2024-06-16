@@ -104,7 +104,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"N"): "ir037",
             tuple(b"O"): ("ir038/ext", ("ir038/ext",), ("ir038",)),
             tuple(b"P"): ("ir053/ext", ("ir053/ext",), ("ir053",)),
-            tuple(b"Q"): "ir054",
+            tuple(b"Q"): "ir054", # Note: VTx/XTerm/compatibles interpret this as ir121, bizarrely.
             tuple(b"R"): ("ir025", ("ir025/ibmbelgian", "ir025/ibmbelgianwp", "ir025/ibmbelgian38xx"), ("ir025",)),
             tuple(b"S"): "ir055",
             tuple(b"T"): "ir057",
@@ -117,7 +117,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"["): "ir018",
             tuple(b"\\"): "ir019",
             tuple(b"]"): "ir050",
-            tuple(b"^"): "ir051",
+            tuple(b"^"): ("ir051", ("ir051/dec",), ("ir051",)),
             tuple(b"_"): "ir059",
             tuple(b"`"): ("ir060", ("ir060/dec", "ir060/dk", "ir060/ibm"), ("ir060",)),
             tuple(b"a"): "ir061",
@@ -160,6 +160,42 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"!D"): "ir230",
             tuple(b"!E"): ("ir231/full", ("ir231/marc", "ir231/full"), ("ir231",)),
             tuple(b"!F"): "ir232",
+            #
+            # "0":
+            #     VTx/XTerm/compatible: Special Graphics
+            #     ARIB: fixed-width Hiragana (extension of single row from JIS X 0208)
+            # "1":
+            #     VTx/MSTerm: ASCII, alternative font
+            #     ARIB: fixed-width non-JISX0201 Katakana (extension of single row from JIS X 0208)
+            # "2":
+            #     VTx/MSTerm: Special Graphics, alternative font
+            #     MARC: "marc-he"
+            #     ARIB: spacing "Mosaic A" pseudographics
+            # "3":
+            #     ARIB: spacing "Mosaic B" pseudographics
+            # "4":
+            #     VTx/XTerm/compatible: "alt646/decdutch"
+            #     MARC: "ir224/marc"
+            #     ARIB: nonspacing "Mosaic C" pseudographics
+            # "5":
+            #     VTx/XTerm/compatible: "ir008-1/dec"
+            #     ARIB: nonspacing "Mosaic D" pseudographics
+            # "6":
+            #     VTx/XTerm/compatible: "ir009-1/dec"
+            #     ARIB: proportional-width JIS-Roman
+            # "7":
+            #     VTx/XTerm/compatible: "ir011/dec"
+            #     ARIB: proportional-width Hiragana (extension of single row from JIS X 0208)
+            # "8":
+            #     ARIB: proportional-width Katakana (extension of single row from JIS X 0208)
+            #
+            tuple(b"9"): "ir121", # Thus VTx and compatible
+            #tuple(b"<"): preferred supplementary set (default Latin-1 or DEC MCS)
+            tuple(b"="): "alt646/decswiss", # Thus VTx and compatible
+            #tuple(b">"): DEC Technical
+            #tuple(b"\"4"): VTx "DEC Hebrew"
+            #tuple(b"\">"): VTx "Greek NRCS"
+            #tuple(b"\"?"): VTx "DEC Greek"
             tuple(b"#0"): ("alt646/ksroman", ("alt646/ksroman/tilde",), ("alt646/ksroman",)),
             tuple(b"#1"): "alt646/etsfrench",
             tuple(b"#2"): "alt646/etsiberian",
@@ -176,8 +212,8 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"#="): "sbank2gpageO",
             tuple(b"#>"): "sbank2gpageP",
             tuple(b"#?"): "sbank2gpageQ",
-            tuple(b"$1"): "alt646/decswiss", # Note: DEC itself uses b"4" (collides ARIB Mosaic C, MARC)
-            tuple(b"$2"): "alt646/decdutch", # Note: DEC itself uses b"="
+            tuple(b"$1"): "alt646/decswiss", # Note: DEC itself uses b"="
+            tuple(b"$2"): "alt646/decdutch", # Note: DEC itself uses b"4"
             tuple(b"$3"): "marlett",
             tuple(b"$4"): "zdings_g0",
             tuple(b"$5"): "zdings_g1",
@@ -192,13 +228,13 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"$<"): "ir222",
             tuple(b"$="): "ir221",
             tuple(b"$>"): "marc-he", # Note: MARC itself uses b"2"
-            # %0 collides with VTx
+            tuple(b"%0"): "ir148/dec", # Thus VTx and compatible
             tuple(b"%1"): "marc-superscript",
-            # %2 collides with VTx
-            # %3 collides with VTx
+            tuple(b"%2"): "alt646/decturkish", # Thus VTx and compatibles
+            # %3 collides with VTx "SCS NRCS" (so far as I know, nobody knows what this means)
             tuple(b"%4"): "alt646/ibmquebec",
-            # %5 collides with VTx
-            # %6 collides with VTx
+            tuple(b"%5"): "ir100/dec", # Thus VTx and compatibles
+            tuple(b"%6"): "ir084/dec", # Thus VTx and compatibles
             tuple(b"%7"): "alt646/ibmportugal",
             tuple(b"%8"): "alt646/ibmturkish",
             tuple(b"%9"): "alt646/ibm38xx",
@@ -209,14 +245,15 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
                            ("alt646/ibmusedwithcyrillic/small",),
                            ("alt646/ibmusedwithcyrillic",)),
             tuple(b"%<"): "alt646/ibmdcfbelgium",
-            # %= collides with VTx
+            tuple(b"%="): "hebrew7", # Thus VTx and compatibles
             tuple(b"%>"): ("alt646/ibmdcf", ("alt646/ibmdcf/braces", "alt646/ibmdcf/degreesign"), ("alt646/ibmdcf",)),
             tuple(b"%?"): "alt646/ibmisrael",
             tuple(b"&0"): ("alt646/ibmjapan", ("alt646/ibmjapan/noyen", "alt646/ibmjapan/swapyen"), ("alt646/ibmjapan",)),
             tuple(b"&1"): ("alt646/ibmkorea", ("alt646/ibmkorea/small",), ("alt646/ibmkorea",)),
             tuple(b"&2"): ("alt646/ibmlcs/big", ("alt646/ibmlcs/big",), ("alt646/ibmlcs",)),
             tuple(b"&3"): "alt646/ibmschsmall",
-            # &4 (KOI-8 94-set GR set), &5 (Short-KOI) would collide with VTx
+            tuple(b"&4"): "ir051/dec", # Thus VTx and compatibles
+            tuple(b"&5"): "shortkoi", # Thus VTx and compatibles
             tuple(b"&6"): ("alt646/ibmspanish", ("alt646/ibmspanish/38xx", "alt646/ibmspanish/peseta"), ("alt646/ibmspanish",)),
             tuple(b"&7"): ("alt646/ibmuk", ("alt646/ibmuk/dcf",), ("alt646/ibmuk",)),
             tuple(b"&8"): ("alt646/ibmusa", ("alt646/ibmusa/asciinohatsqb", "alt646/ibmusa/asciinosqb", "alt646/ibmusa/hat", "alt646/ibmusa/tiny"), ("alt646/ibmusa",)),
