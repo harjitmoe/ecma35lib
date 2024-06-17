@@ -189,13 +189,13 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             # "8":
             #     ARIB: proportional-width Katakana (extension of single row from JIS X 0208)
             #
-            tuple(b"9"): "ir121", # Thus VTx and compatible
+            tuple(b"9"): "ir121", # Thus VTx and compatibles
             #tuple(b"<"): preferred supplementary set (default Latin-1 or DEC MCS)
-            tuple(b"="): "alt646/decswiss", # Thus VTx and compatible
+            tuple(b"="): "alt646/decswiss", # Thus VTx and compatibles
             #tuple(b">"): DEC Technical
-            #tuple(b"\"4"): VTx "DEC Hebrew"
-            #tuple(b"\">"): VTx "Greek NRCS"
-            #tuple(b"\"?"): VTx "DEC Greek"
+            tuple(b"\"4"): "ir138/dec", # Thus VTx and compatibles
+            tuple(b"\">"): "decgreek7", # Thus VTx and compatibles
+            tuple(b"\"?"): "decgreek8", # Thus VTx and compatibles
             tuple(b"#0"): ("alt646/ksroman", ("alt646/ksroman/tilde",), ("alt646/ksroman",)),
             tuple(b"#1"): "alt646/etsfrench",
             tuple(b"#2"): "alt646/etsiberian",
@@ -228,12 +228,12 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"$<"): "ir222",
             tuple(b"$="): "ir221",
             tuple(b"$>"): "marc-he", # Note: MARC itself uses b"2"
-            tuple(b"%0"): "ir148/dec", # Thus VTx and compatible
+            tuple(b"%0"): "decturkish8", # Thus VTx and compatible
             tuple(b"%1"): "marc-superscript",
             tuple(b"%2"): "alt646/decturkish", # Thus VTx and compatibles
             # %3 collides with VTx "SCS NRCS" (so far as I know, nobody knows what this means)
             tuple(b"%4"): "alt646/ibmquebec",
-            tuple(b"%5"): "ir100/dec", # Thus VTx and compatibles
+            tuple(b"%5"): "decmultinational", # Thus VTx and compatibles
             tuple(b"%6"): "ir084/dec", # Thus VTx and compatibles
             tuple(b"%7"): "alt646/ibmportugal",
             tuple(b"%8"): "alt646/ibmturkish",

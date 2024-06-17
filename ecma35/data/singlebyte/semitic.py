@@ -104,6 +104,21 @@ graphdata.gsets["ir138"] = (96, 1, tuple((i,) if i else None for i in (
              0x05E0, 0x05E1, 0x05E2, 0x05E3, 0x05E4, 0x05E5, 0x05E6, 0x05E7, 
              0x05E8, 0x05E9, 0x05EA, None,   None,   None,   None,   None)))
 
+# DEC 8-bit Hebrew
+graphdata.gsets["ir138/dec"] = (94, 1, tuple((i,) if i else None for i in (
+                     0x00A1, 0x00A2, 0x00A3, None,   0x00A5, None,   0x00A7, 
+             0x00A4, 0x00A9, 0x00AA, 0x00AB, None,   None,   None,   None, 
+             0x00B0, 0x00B1, 0x00B2, 0x00B3, None,   0x00B5, 0x00B6, 0x00B7, 
+             None,   0x00B9, 0x00BA, 0x00BB, 0x00BC, 0x00BD, None,   0x00BF, 
+             None,   None,   None,   None,   None,   None,   None,   None, 
+             None,   None,   None,   None,   None,   None,   None,   None, 
+             None,   None,   None,   None,   None,   None,   None,   None, 
+             None,   None,   None,   None,   None,   None,   None,   None, 
+             0x05D0, 0x05D1, 0x05D2, 0x05D3, 0x05D4, 0x05D5, 0x05D6, 0x05D7, 
+             0x05D8, 0x05D9, 0x05DA, 0x05DB, 0x05DC, 0x05DD, 0x05DE, 0x05DF, 
+             0x05E0, 0x05E1, 0x05E2, 0x05E3, 0x05E4, 0x05E5, 0x05E6, 0x05E7, 
+             0x05E8, 0x05E9, 0x05EA, None,   None,   None,   None)))
+
 # CCITT Hebrew (pretty much ISO-8859-8 RHS but letters only)
 # Registered as a 96-set for some reason but doesn't actually allocate the corners.
 graphdata.gsets["ir164"] = (96, 1, tuple((i,) if i else None for i in (

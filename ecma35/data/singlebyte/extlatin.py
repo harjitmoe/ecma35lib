@@ -54,7 +54,7 @@ graphdata.gsets["ir039"] = (94, 1, (
 graphdata.gsets["ir100"] = (96, 1, tuple((i,) for i in range(0xA0, 0x100)))
 
 # DEC Multinational Character Set (MCS); direct precursor to ISO-8859-1.
-graphdata.gsets["ir100/dec"] = (94, 1, tuple((i,) if i else None for i in (
+graphdata.gsets["decmultinational"] = (94, 1, tuple((i,) if i else None for i in (
                      0x00A1, 0x00A2, 0x00A3, None,   0x00A5, None,   0x00A7, 
              0x00A4, 0x00A9, 0x00AA, 0x00AB, None,   None,   None,   None, 
              0x00B0, 0x00B1, 0x00B2, 0x00B3, None,   0x00B5, 0x00B6, 0x00B7, 
@@ -161,7 +161,7 @@ graphdata.gsets["ir148"] = (96, 1, tuple((i,) for i in (
 
 # DEC 8-bit Turkish; roughly to ISO-8859-9 as DEC MCS is to ISO-8859-1 (note that the coding for
 #   the non-ASCII dotless/dotted I letters differs from ISO-8859-9 although the others do not)
-graphdata.gsets["ir148/dec"] = (94, 1, tuple((i,) if i else None for i in (
+graphdata.gsets["decturkish8"] = (94, 1, tuple((i,) if i else None for i in (
                      0x00A1, 0x00A2, 0x00A3, None,   0x00A5, None,   0x00A7, 
              0x00A4, 0x00A9, 0x00AA, 0x00AB, None,   None,   0x0130, None, 
              0x00B0, 0x00B1, 0x00B2, 0x00B3, None,   0x00B5, 0x00B6, 0x00B7, 

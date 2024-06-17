@@ -79,6 +79,20 @@ graphdata.gsets["ir088"] = (94, 1, tuple((i,) for i in range(0x21, 0x41)) +
                                    tuple((i,) for i in range(0x03C7, 0x03CA)) + 
                                    tuple((i,) for i in range(0x7B, 0x7F)))
 
+# DEC 7-bit Greek
+graphdata.gsets["decgreek7"] = (94, 1, tuple((i,) for i in range(0x21, 0x40)) + 
+                                   ((0x03CA,),) +
+                                   tuple((i,) for i in range(0x0391, 0x03A0)) + (None,) + 
+                                   tuple((i,) for i in range(0x03A0, 0x03A2)) + 
+                                   tuple((i,) for i in range(0x03A3, 0x03AA)) + 
+                                   tuple((i,) for i in range(0x03AC, 0x03B0)) + (None,) + 
+                                   ((0x03CC,), (0x03CB,)) + 
+                                   tuple((i,) for i in range(0x03B1, 0x03C0)) + (None,) + 
+                                   tuple((i,) for i in range(0x03C0, 0x03C2)) + 
+                                   tuple((i,) for i in range(0x03C3, 0x03CA)) + ((0x03C2,),) + 
+                                   tuple((i,) for i in range(0x03CD, 0x03CF)) + 
+                                   ((0x0384,), None))
+
 # ELOT-928 ECMA-118 ISO-8859-7:1987 Latin/Greek RHS
 graphdata.gsets["ir126"] = (96, 1, (
          (0x00A0,), (0x2018,), (0x2019,), (0x00A3,), None,      None,      (0x00A6,), (0x00A7,), 
@@ -93,6 +107,24 @@ graphdata.gsets["ir126"] = (96, 1, (
          (0x03B8,), (0x03B9,), (0x03BA,), (0x03BB,), (0x03BC,), (0x03BD,), (0x03BE,), (0x03BF,), 
          (0x03C0,), (0x03C1,), (0x03C2,), (0x03C3,), (0x03C4,), (0x03C5,), (0x03C6,), (0x03C7,), 
          (0x03C8,), (0x03C9,), (0x03CA,), (0x03CB,), (0x03CC,), (0x03CD,), (0x03CE,), None))
+
+# DEC 8-bit Greek
+graphdata.gsets["decgreek8"] = (94, 1, tuple((i,) if i else None for i in (
+                     0x00A1, 0x00A2, 0x00A3, None,   0x00A5, None,   0x00A7, 
+             0x00A4, 0x00A9, 0x00AA, 0x00AB, None,   None,   None,   None, 
+             0x00B0, 0x00B1, 0x00B2, 0x00B3, None,   0x00B5, 0x00B6, 0x00B7, 
+             None,   0x00B9, 0x00BA, 0x00BB, 0x00BC, 0x00BD, None,   0x00BF)) + 
+           ((0x03CA,),) +
+           tuple((i,) for i in range(0x0391, 0x03A0)) + (None,) + 
+           tuple((i,) for i in range(0x03A0, 0x03A2)) + 
+           tuple((i,) for i in range(0x03A3, 0x03AA)) + 
+           tuple((i,) for i in range(0x03AC, 0x03B0)) + (None,) + 
+           ((0x03CC,), (0x03CB,)) + 
+           tuple((i,) for i in range(0x03B1, 0x03C0)) + (None,) + 
+           tuple((i,) for i in range(0x03C0, 0x03C2)) + 
+           tuple((i,) for i in range(0x03C3, 0x03CA)) + ((0x03C2,),) + 
+           tuple((i,) for i in range(0x03CD, 0x03CF)) + 
+           ((0x0384,), None))
 
 # IEC-P27-1 supplementary technical set
 graphdata.gsets["ir143"] = (96, 1, (
