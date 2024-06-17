@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020/2021/2023.
+# By HarJIT in 2019/2020/2021/2023/2024.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -162,16 +162,17 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"!F"): "ir232",
             #
             # "0":
-            #     VTx/XTerm/compatible: Special Graphics
-            #     ARIB: fixed-width Hiragana (extension of single row from JIS X 0208)
+            #     VTx/XTerm/compatible: "decgraphics"
+            #     ARIB: fixed-width "aribkana/hiragana"
             # "1":
-            #     VTx/MSTerm: ASCII, alternative font
-            #     ARIB: fixed-width non-JISX0201 Katakana (extension of single row from JIS X 0208)
+            #     VTx/MSTerm: "ir006"
+            #     ARIB: fixed-width "aribkana/katakana"
             # "2":
-            #     VTx/MSTerm: Special Graphics, alternative font
+            #     VTx/MSTerm: "decgraphics"
             #     MARC: "marc-he"
             #     ARIB: spacing "Mosaic A" pseudographics
             # "3":
+            #     MARC: "ir089/marc"
             #     ARIB: spacing "Mosaic B" pseudographics
             # "4":
             #     VTx/XTerm/compatible: "alt646/decdutch"
@@ -182,17 +183,17 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             #     ARIB: nonspacing "Mosaic D" pseudographics
             # "6":
             #     VTx/XTerm/compatible: "ir009-1/dec"
-            #     ARIB: proportional-width JIS-Roman
+            #     ARIB: proportional-width "ir014"
             # "7":
             #     VTx/XTerm/compatible: "ir011/dec"
-            #     ARIB: proportional-width Hiragana (extension of single row from JIS X 0208)
-            # "8":
-            #     ARIB: proportional-width Katakana (extension of single row from JIS X 0208)
+            #     ARIB: proportional-width "aribkana/hiragana"
             #
+            tuple(b"8"): "aribkana/katakana", # Thus ARIB STD B24 Volume 1
             tuple(b"9"): "ir121", # Thus VTx and compatibles
             #tuple(b"<"): preferred supplementary set (set via DECAUPSS; default Latin-1 or DEC MCS)
             tuple(b"="): "alt646/decswiss", # Thus VTx and compatibles
             tuple(b">"): "dectechnical", # Thus VTx and compatibles
+            tuple(b"?"): "aribkana/hiragana",
             tuple(b"\"4"): "ir138/dec", # Thus VTx and compatibles
             tuple(b"\">"): "decgreek7", # Thus VTx and compatibles
             tuple(b"\"?"): "decgreek8", # Thus VTx and compatibles
@@ -265,6 +266,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
                            ("alt646/ibmswedish/euro",), 
                            ("alt646/ibmswedish",)),
             tuple(b"&>"): "alt646/ibmbarcode",
+            tuple(b"&?"): "decgraphics",
             tuple(b"~"): "nil"}
 
 g96bytes = {tuple(b"@"): "ir111",

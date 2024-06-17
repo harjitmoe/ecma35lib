@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019, 2020, 2022.
+# By HarJIT in 2019, 2020, 2022, 2024.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -69,6 +69,16 @@ graphdata.gsets["ir013/win"] = (94, 1, _the_mother + (
                 (0x20AC,),) + tuple((i,) for i in range(0xF8F0, 0xF8F9)) + ((None,) * 21))
 graphdata.gsetflags["ir013/win"] |= {"GBK:NO_EURO"}
 graphdata.gsets["ir013/euro"] = graphdata.gsets["ir013/win"]
+
+# ARIB STD-B24 Volume 1, single-byte Hiragana
+graphdata.gsets["aribkana/hiragana"] = (94, 1, tuple((i,) if i else None for i in
+            tuple(range(0x3041, 0x3094)) +
+            (None, None, None, 0x309D, 0x309E, 0x30FC, 0x3002, 0x300C, 0x300D, 0x3001, 0x30FB)))
+
+# ARIB STD-B24 Volume 1, single-byte non-JISX0201 Katakana
+graphdata.gsets["aribkana/katakana"] = (94, 1, tuple((i,) if i else None for i in
+            tuple(range(0x30A1, 0x30F7)) +
+            (0x30FD, 0x30FE, 0x30FC, 0x3002, 0x300C, 0x300D, 0x3001, 0x30FB)))
 
 # Non-Cyrillic INIS RHS. Greek support is insubstantial enough that it probably doesn't belong
 #   in greek.py.
@@ -211,4 +221,18 @@ graphdata.gsets["marc-superscript"] = (94, 1, tuple((i,) if i else None for i in
              None, None, None, None, None, None, None, None, 
              None, None, None, None, None, None, None)))
 
+# DEC Special Graphics ("DECGraphics")
+graphdata.gsets["decgraphics"] = (94, 1, tuple((i,) if i else None for i in (
+                    0x0021, 0x0022, 0x0023, 0x0024, 0x0025, 0x0026, 0x0027, 
+            0x0028, 0x0029, 0x002A, 0x002B, 0x002C, 0x002D, 0x002E, 0x002F, 
+            0x0030, 0x0031, 0x0032, 0x0033, 0x0034, 0x0035, 0x0036, 0x0037, 
+            0x0038, 0x0039, 0x003A, 0x003B, 0x003C, 0x003D, 0x003E, 0x003F, 
+            0x0040, 0x0041, 0x0042, 0x0043, 0x0044, 0x0045, 0x0046, 0x0047, 
+            0x0048, 0x0049, 0x004A, 0x004B, 0x004C, 0x004D, 0x004E, 0x004F, 
+            0x0050, 0x0051, 0x0052, 0x0053, 0x0054, 0x0055, 0x0056, 0x0057, 
+            0x0058, 0x0059, 0x005A, 0x005B, 0x005C, 0x005D, 0x005E, 0x00A0, 
+            0x25C6, 0x2592, 0x2409, 0x240C, 0x240D, 0x240A, 0x00B0, 0x00B1, 
+            0x2424, 0x240B, 0x2518, 0x2510, 0x250C, 0x2514, 0x253C, 0x23BA, 
+            0x23BB, 0x2500, 0x23BC, 0x23BD, 0x251C, 0x2524, 0x2534, 0x252C, 
+            0x2502, 0x2264, 0x2265, 0x03C0, 0x2260, 0x00A3, 0x2219)))
 
