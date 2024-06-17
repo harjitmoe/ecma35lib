@@ -213,6 +213,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"#="): "sbank2gpageO",
             tuple(b"#>"): "sbank2gpageP",
             tuple(b"#?"): "sbank2gpageQ",
+            tuple(b"$0"): "decgraphicsold",
             tuple(b"$1"): "alt646/decswiss", # Note: DEC itself uses b"="
             tuple(b"$2"): "alt646/decdutch", # Note: DEC itself uses b"4"
             tuple(b"$3"): "marlett",
@@ -266,7 +267,9 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
                            ("alt646/ibmswedish/euro",), 
                            ("alt646/ibmswedish",)),
             tuple(b"&>"): "alt646/ibmbarcode",
-            tuple(b"&?"): "decgraphics",
+            tuple(b"&?"): ("decgraphics/composite", 
+                           ("decgraphics/modified", "decgraphics/composite"), 
+                           ("decgraphics",)),
             tuple(b"~"): "nil"}
 
 g96bytes = {tuple(b"@"): "ir111",
