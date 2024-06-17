@@ -190,9 +190,9 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             #     ARIB: proportional-width Katakana (extension of single row from JIS X 0208)
             #
             tuple(b"9"): "ir121", # Thus VTx and compatibles
-            #tuple(b"<"): preferred supplementary set (default Latin-1 or DEC MCS)
+            #tuple(b"<"): preferred supplementary set (set via DECAUPSS; default Latin-1 or DEC MCS)
             tuple(b"="): "alt646/decswiss", # Thus VTx and compatibles
-            #tuple(b">"): DEC Technical
+            tuple(b">"): "dectechnical", # Thus VTx and compatibles
             tuple(b"\"4"): "ir138/dec", # Thus VTx and compatibles
             tuple(b"\">"): "decgreek7", # Thus VTx and compatibles
             tuple(b"\"?"): "decgreek8", # Thus VTx and compatibles
