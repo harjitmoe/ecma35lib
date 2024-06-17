@@ -94,6 +94,9 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"E"): ("ir009-1", ("ir009-1/dec",), ("ir009-1",)),
             tuple(b"F"): "ir009-2",
             tuple(b"G"): ("ir010", ("ir010/ibm",), ("ir010",)),
+            # Note: some pre-standardised variants of ISO-2022-JP / JIS_Encoding, as well as OKI
+            #   dot-matrix / line printers, interpret "H" in a nonstandard way
+            #   (as "ir013" or "ir006").
             tuple(b"H"): ("ir011", ("ir011/dec",), ("ir011",)),
             tuple(b"I"): ("ir013", ("ir013/ibm", "ir013/mac", "ir013/win", "ir013/euro"),
                                    ("ir013",)),
@@ -174,6 +177,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             # "3":
             #     MARC: "ir089/marc"
             #     ARIB: spacing "Mosaic B" pseudographics
+            #     ITU-T.101-B: "ir137"
             # "4":
             #     VTx/XTerm/compatible: "alt646/decdutch"
             #     MARC: "ir224/marc"
@@ -295,7 +299,8 @@ g96bytes = {tuple(b"@"): "ir111",
             tuple(b"T"): "ir166",
             tuple(b"U"): "ir167",
             tuple(b"V"): "ir157",
-            tuple(b"W"): "ir158",
+            # "W" exceptionally reserved for the ITU-T.101-B "Picture Description Instructions" set
+            tuple(b"X"): "ir158",
             tuple(b"Y"): "ir179",
             tuple(b"Z"): "ir180",
             tuple(b"["): "ir181",
@@ -314,6 +319,8 @@ g96bytes = {tuple(b"@"): "ir111",
             tuple(b"h"): "ir209",
             tuple(b"i"): "ir227",
             tuple(b"j"): "ir234",
+            # "8": ITU-T.101-B "Display Control" set
+            # "9": ITU-T.101-B "MVI" set (TODO what does "MVI" stand for?)
             tuple(b"!0"): "rfc1345-ir111", # Not even a private IRR: no practical compatibility.
             tuple(b"$7"): ("symbolgr-euro", ("symbolgr-numsp",), ("symbolgr-euro",)),
             tuple(b"~"): "nil"}
