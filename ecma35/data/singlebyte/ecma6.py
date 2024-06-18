@@ -502,6 +502,11 @@ raw_variants = {
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
     "alt646/ibmschsmall": ([None, -1, None, -1,   0x24, 0x21, -1, None, 
                                       None, None, -1,   None, -1], {0x21: 0x7C}),
+    # Galaksija encoding for Gajica, extended with lowercase forms
+    # Violation of ECMA-6:1991: 0x27 is not '.
+    "alt646/galaksija/extended": ([None, None, 0x2962, 0x010C, 0x0106, 0x017D, 0x0160, None,
+                                               None,   0x010D, 0x0107, 0x017E, 0x0161],
+                                  {0x27: 0x1F896}),
 }
 
 for (name, (myvars, override)) in raw_variants.items():
