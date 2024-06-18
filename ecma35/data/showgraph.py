@@ -218,7 +218,8 @@ def show(name, *, plane=None):
                     curchar = "\x1B[32m" + curchar[:-1] + "\x1B[m"
                 else:
                     curchar = "\x1B[33m" + curchar[:-1] + "\x1B[m"
-            zenkaku = (ucd.east_asian_width(chr(abs(i[0]))) in ("W", "F"))
+            zenkaku = (ucd.east_asian_width(chr(abs(i[0]))) in ("W", "F")) and (
+                ucd.name(chr(abs(i[0])), None))
         elif namedata.get_ucscategory(chr(i)) == "Co":
             curchar = "\x1B[32m\uFFFC\x1B[m"
             zenkaku = False

@@ -68,7 +68,7 @@ ebcdicdbcs = {}
 
 # Note: has to be imported after gsets &co are defined
 from ecma35.data.multibyte import korea, japan, guobiao, traditional
-from ecma35.data.singlebyte import ecma6, extlatin, c0substs, dingbats, quoocs_ngwx, ccitt, cyrillic, semitic, greek, indic, otherscript, splitebcdic
+from ecma35.data.singlebyte import ecma6, extlatin, c0substs, dingbats, quoocs_ngwx, ccitt, cyrillic, semitic, greek, indic, otherscript, splitebcdic, pseudographics
 
 for _i in rhses:
     chcpdocs.setdefault(_i, "plainextascii")
@@ -173,15 +173,14 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             # "2":
             #     VTx/MSTerm: "decgraphics"
             #     MARC: "marc-he"
-            #     ARIB: spacing "Mosaic A" pseudographics
+            #     ARIB: "ir071"
             # "3":
             #     MARC: "ir089/marc"
-            #     ARIB: spacing "Mosaic B" pseudographics
-            #     ITU-T.101-B: "ir137"
+            #     ARIB and ITU-T.101-B: "ir137"
             # "4":
             #     VTx/XTerm/compatible: "alt646/decdutch"
             #     MARC: "ir224/marc"
-            #     ARIB: nonspacing "Mosaic C" pseudographics
+            #     ARIB: "aribmosaic-c"
             # "5":
             #     VTx/XTerm/compatible: "ir008-1/dec"
             #     ARIB: nonspacing "Mosaic D" pseudographics
@@ -199,6 +198,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b">"): "dectechnical", # Thus VTx and compatibles
             tuple(b"?"): "aribkana/hiragana",
             tuple(b"\"4"): "ir138/dec", # Thus VTx and compatibles
+            tuple(b"\"<"): "aribmosaic-c",
             tuple(b"\"="): "alt646/galaksija/extended",
             tuple(b"\">"): "decgreek7", # Thus VTx and compatibles
             tuple(b"\"?"): "decgreek8", # Thus VTx and compatibles
