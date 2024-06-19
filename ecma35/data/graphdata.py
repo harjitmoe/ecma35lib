@@ -323,6 +323,7 @@ g96bytes = {tuple(b"@"): "ir111",
             # "8": ITU-T.101-B "Display Control" set
             # "9": ITU-T.101-B "MVI" set (TODO what does "MVI" stand for?)
             tuple(b"!0"): "rfc1345-ir111", # Not even a private IRR: no practical compatibility.
+            tuple(b"!1"): "t101c-mosaic1",
             tuple(b"$7"): ("symbolgr-euro", ("symbolgr-numsp",), ("symbolgr-euro",)),
             tuple(b"~"): "nil"}
 
