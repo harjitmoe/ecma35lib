@@ -68,7 +68,7 @@ ebcdicdbcs = {}
 
 # Note: has to be imported after gsets &co are defined
 from ecma35.data.multibyte import korea, japan, guobiao, traditional
-from ecma35.data.singlebyte import ecma6, extlatin, c0substs, dingbats, quoocs_ngwx, ccitt, cyrillic, semitic, greek, indic, otherscript, splitebcdic, pseudographics
+from ecma35.data.singlebyte import ecma6, extlatin, c0substs, dingbats, quoocs_ngwx, ccitt, cyrillic, semitic, greek, indic, otherscript, splitebcdic, pseudographics, kana, fragment
 
 for _i in rhses:
     chcpdocs.setdefault(_i, "plainextascii")
