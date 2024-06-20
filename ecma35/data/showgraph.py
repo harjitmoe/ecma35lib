@@ -334,42 +334,40 @@ def _dump_wikitable_row(outfile, typ, array, name="", plane=-1, row=-1, euc=0, n
         print("=== {{anchor|%s}}Character set %s (%s) ===" % (
               prefix, prefix, rowdat), file=outfile)
     maybe_prefix = " (prefixed with {})".format(prefix) if prefix else ""
-    print("{| {{chset-tableformat}}", file=outfile)
-    print("{{chset-table-header|%s%s}}" % (name, maybe_prefix), file=outfile)
+    print("{|{{chset-table-header1|%s%s}}" % (name, maybe_prefix), file=outfile)
     arr2 = array if typ == 96 else (None,) + array + (None,)
     for n in range(6):
         arr3 = arr2[n*16:(n+1)*16]
         print("|-", file=outfile)
         if euc == 0:
-            print("!{{chset-left|%X}}" % (n + 2), file=outfile)
+            print("!{{chset-left1|%Xx}}" % (n + 2), file=outfile)
         elif euc == 1:
-            print("!{{chset-left|%X}}" % (n + 0xA), file=outfile)
+            print("!{{chset-left1|%Xx}}" % (n + 0xA), file=outfile)
         else:
-            print("!{{chset-left|%X|%X}}" % (n + 2, n + 0xA), file=outfile)
+            print("!{{chset-left1|%Xx/%Xx}}" % (n + 2, n + 0xA), file=outfile)
         for m, i in enumerate(arr3):
             ten = (n * 16) + m
             maybe_kuten = ""
             if plane>0 and row>0:
-                maybe_kuten = "|kuten={:d}-{:d}-{:d}".format(plane, row, ten)
+                maybe_kuten = "{:d}-{:d}-{:d} ".format(plane, row, ten)
             elif row>0:
-                maybe_kuten = "|kuten={:d}-{:d}".format(row, ten)
+                maybe_kuten = "{:d}-{:d} ".format(row, ten)
             if (typ == 94) and ((n == 0 and m == 0) or (n == 5 and m == 15)):
-                print("|{{chset-color-undef}}|", file=outfile)
+                print("|{{chset-cell1|||style=background:#DDD}}", file=outfile)
                 continue
             elif not i:
                 if maybe_kuten:
-                    print("|{{chset-color-undef}}|{{chset-cell||%s}}" % maybe_kuten, file=outfile)
+                    print("|{{chset-cell1|%s||style=background:#DDD}}" % maybe_kuten.strip(), file=outfile)
                 else:
-                    print("|{{chset-color-undef}}|", file=outfile)
+                    print("|{{chset-cell1|||style=background:#DDD}}", file=outfile)
                 continue
             dispi = cdispmap.get((n, i), i)
             hexes = " ".join("{:04X}".format(j) for j in dispi) if isinstance(dispi, tuple) \
                                                                  else "{:04X}".format(dispi)
             hexes = hexes.replace(" FE0F ", " ")
             if hexes.endswith(" FE0F"):
-                hexes = points[:-5]
+                hexes = hexes[:-5]
             strep = "".join(chr(j) for j in i)
-            cat = categorise(strep[0])
             if images and (dispi in images):
                 strep = "[[File:" + images[dispi] + "|14px|" + "".join(chr(i) for i in dispi) + "]]"
             elif namedata.get_ucscategory(strep[0]) == "Co":
@@ -377,10 +375,13 @@ def _dump_wikitable_row(outfile, typ, array, name="", plane=-1, row=-1, euc=0, n
             else:
                 strep = strep.replace("\uF860", "").replace("\uF861", "").replace("\uF862", "")
                 strep = strep.replace("[", "&#x5B;").replace("]", "&#x5D;")
-                if (n, i) not in cdispmap:
-                    strep = "[[" + strep + "]]"
-            print("|{{chset-color%s}}|{{chset-cell|%s|%s%s}}" % (
-                  cat, hexes, strep, maybe_kuten), file=outfile)
+            names = ", ".join(f"U+{i} {namedata.get_ucsname(chr(int(i, 16)), None)}" for i in hexes.split())
+            if not " " in hexes:
+                print("|{{chset-cell1|u=%s|%s%s|%s}}" % (
+                      hexes, maybe_kuten, names, strep), file=outfile)
+            else:
+                print("|{{chset-cell1|%s%s|%s}}" % (
+                      maybe_kuten, names, strep), file=outfile)
     print("|}", file=outfile)
     print(file=outfile)
 
