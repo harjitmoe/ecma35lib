@@ -219,6 +219,19 @@ raw_variants = {
     # T.61 subset of IRV
     "ir102": ([None, 0xA4, None, None, -1, None, -1, None, 
                            -1, -1, None, -1, -1], {}),
+    # IBM's reduced invariant set for ASN.1 (IBM code page 61710)
+    # Violation of ECMA-6:1991: 0x21 is omitted.
+    # Violation of ECMA-6:1991: 0x22 is omitted.
+    # Violation of ECMA-6:1991: 0x25 is omitted.
+    # Violation of ECMA-6:1991: 0x26 is omitted.
+    # Violation of ECMA-6:1991: 0x2A is omitted.
+    # Violation of ECMA-6:1991: 0x3B is omitted.
+    # Violation of ECMA-6:1991: 0x3C is omitted.
+    # Violation of ECMA-6:1991: 0x3E is omitted.
+    # Violation of ECMA-6:1991: 0x5F is omitted.
+    "ir102/ibm": ([-1, -1, -1, -1, -1, -1, -1, -1, 
+                            -1, -1, -1, -1, -1],
+                  {0x21: -1, 0x22: -1, 0x25: -1, 0x26: -1, 0x2A: -1, 0x3B: -1, 0x3C: -1, 0x3E: -1}),
     # CSA Z243.4:1985 primary set main version (Canadian French)
     "ir121": ([None, None, 0xE0, 0xE2, 0xE7, 0xEA, 0xEE, None, 
                            0xF4, 0xE9, 0xF9, 0xE8, 0xFB], {}),
@@ -242,7 +255,7 @@ raw_variants = {
     # Violation of ECMA-6:1991: 0x5F is omitted.
     "ir170/ets": ([-1, -1, -1, -1, -1, -1, -1, -1, 
                            -1, -1, -1, -1, -1], {}),
-    # IBM's version of the invariant set
+    # IBM's version of the invariant set (IBM code page 61700)
     # Violation of ECMA-6:1991: 0x21 is omitted.
     "ir170/ibm": ([-1, -1, -1, -1, -1, -1, -1, None, 
                            -1, -1, -1, -1, -1], {0x21: -1}),

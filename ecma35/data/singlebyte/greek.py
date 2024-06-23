@@ -227,8 +227,9 @@ graphdata.rhses["10006"] = graphdata.rhses["1280"] = parsers.read_mozilla_ut_fil
 graphdata.gsets["symbolgl"] = (94, 1, parsers.read_single_byte("UTC/symbol.txt", typ="GL94"))
 # TODO: symbolgl-swapphi
 graphdata.gsets["symbolgr"] = (94, 1, parsers.read_single_byte("UTC/symbol.txt", typ="GR94", mapper=variationhints.ahmap))
-graphdata.gsets["symbolgr-euro"] = (96, 1, parsers.read_single_byte("UTC/symbol.txt", typ="GR96", mapper=variationhints.ahmap))
-graphdata.gsets["symbolgr-numsp"] = (96, 1, ((0x2007,),) + graphdata.gsets["symbolgr"][2] + (None,))
+graphdata.gsets["symbolgr/euro"] = (96, 1, parsers.read_single_byte("UTC/symbol.txt", typ="GR96", mapper=variationhints.ahmap))
+graphdata.gsets["symbolgr/numsp"] = (96, 1, ((0x2007,),) + graphdata.gsets["symbolgr"][2] + (None,))
+graphdata.gsets["symbolgr/euro/numsp"] = (96, 1, ((0x20AC,),) + graphdata.gsets["symbolgr"][2] + ((0x2007,),))
 
 
 

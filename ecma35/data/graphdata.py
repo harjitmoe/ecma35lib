@@ -147,7 +147,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"r"): "ir096",
             tuple(b"s"): "ir098",
             tuple(b"t"): "ir099",
-            tuple(b"u"): "ir102",
+            tuple(b"u"): ("ir102", ("ir102/ibm",), ("ir102",)),
             tuple(b"v"): "ir103",
             tuple(b"w"): "ir121",
             tuple(b"x"): "ir122",
@@ -324,7 +324,9 @@ g96bytes = {tuple(b"@"): "ir111",
             # "9": ITU-T.101-B "MVI" set (TODO what does "MVI" stand for?)
             tuple(b"!0"): "rfc1345-ir111", # Not even a private IRR: no practical compatibility.
             tuple(b"!1"): "t101c-mosaic1",
-            tuple(b"$7"): ("symbolgr-euro", ("symbolgr-numsp",), ("symbolgr-euro",)),
+            tuple(b"$7"): ("symbolgr/euro/numsp",
+                           ("symbolgr/numsp",),
+                           ("symbolgr/euro", "symbolgr/euro/numsp")),
             tuple(b"~"): "nil"}
 
 g94nbytes = {tuple(b"@"): ("ir042/nec", ("ir042/ibm", "ir042/nec", "ir042/1990pivot", "ir042/adobe"), ("ir042",)),
