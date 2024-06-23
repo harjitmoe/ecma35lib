@@ -98,7 +98,8 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             #   dot-matrix / line printers, interpret "H" in a nonstandard way
             #   (as "ir013" or "ir006").
             tuple(b"H"): ("ir011", ("ir011/dec",), ("ir011",)),
-            tuple(b"I"): ("ir013", ("ir013/ibm", "ir013/mac", "ir013/win", "ir013/euro"),
+            tuple(b"I"): ("ir013", ("ir013/ibm", "ir013/mac", "ir013/win", "ir013/euro",
+                                    "ir013/ibm/strict"),
                                    ("ir013",)),
             tuple(b"J"): ("ir014", ("ir014/tilde",), ("ir014",)),
             tuple(b"K"): ("ir021", ("ir021/acute", "ir021/ibm38xx"), ("ir021",)),
@@ -198,6 +199,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b">"): "dectechnical", # Thus VTx and compatibles
             tuple(b"?"): "aribkana/hiragana",
             tuple(b"\"4"): "ir138/dec", # Thus VTx and compatibles
+            tuple(b"\";"): "ir166/1986",
             tuple(b"\"<"): "aribmosaic-c",
             tuple(b"\"="): "alt646/galaksija/extended",
             tuple(b"\">"): "decgreek7", # Thus VTx and compatibles
@@ -297,7 +299,7 @@ g96bytes = {tuple(b"@"): "ir111",
             tuple(b"Q"): "ir155",
             tuple(b"R"): ("ir142+ir156", ("ir142+ir156",), ("ir156",)),
             tuple(b"S"): "ir164",
-            tuple(b"T"): "ir166",
+            tuple(b"T"): ("ir166", ("ir166/ibm",), ("ir166",)),
             tuple(b"U"): "ir167",
             tuple(b"V"): "ir157",
             # "W" exceptionally reserved for the ITU-T.101-B "Picture Description Instructions" set
