@@ -199,6 +199,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b">"): "dectechnical", # Thus VTx and compatibles
             tuple(b"?"): "aribkana/hiragana",
             tuple(b"\"4"): "ir138/dec", # Thus VTx and compatibles
+            tuple(b"\":"): "alt646/ibmarabic",
             tuple(b"\";"): "ir166/1986",
             tuple(b"\"<"): "aribmosaic-c",
             tuple(b"\"="): "alt646/galaksija/extended",

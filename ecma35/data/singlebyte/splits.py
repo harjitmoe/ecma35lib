@@ -8,8 +8,6 @@
 
 from ecma35.data import graphdata
 
-graphdata.gsets['gl1006'] = (94, 1, ((33,), (34,), (35,), (36,), (1642,), (38,), (39,), (40,), (41,), (1645,), (43,), (44,), (45,), (46,), (47,), (48,), (49,), (50,), (51,), (52,), (53,), (54,), (55,), (56,), (57,), (58,), (59,), (60,), (61,), (62,), (63,), (64,), (65,), (66,), (67,), (68,), (69,), (70,), (71,), (72,), (73,), (74,), (75,), (76,), (77,), (78,), (79,), (80,), (81,), (82,), (83,), (84,), (85,), (86,), (87,), (88,), (89,), (90,), (91,), (92,), (93,), (94,), (95,), (96,), (97,), (98,), (99,), (100,), (101,), (102,), (103,), (104,), (105,), (106,), (107,), (108,), (109,), (110,), (111,), (112,), (113,), (114,), (115,), (116,), (117,), (118,), (119,), (120,), (121,), (122,), (123,), (124,), (125,), (126,)))
-
 graphdata.gsets['gl1034'] = (94, 1, (None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (9098,), None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None))
 
 graphdata.gsets['gl1036'] = (94, 1, ((33,), (34,), None, None, (37,), (38,), (39,), (40,), (41,), (42,), (43,), (44,), (45,), (46,), (47,), (48,), (49,), (50,), (51,), (52,), (53,), (54,), (55,), (56,), (57,), (58,), (59,), (60,), (61,), (62,), (63,), (64,), (65,), (66,), (67,), (68,), (69,), (70,), (71,), (72,), (73,), (74,), (75,), (76,), (77,), (78,), (79,), (80,), (81,), (82,), (83,), (84,), (85,), (86,), (87,), (88,), (89,), (90,), (91,), None, (93,), None, (95,), None, (97,), (98,), (99,), (100,), (101,), (102,), (103,), (104,), (105,), (106,), (107,), (108,), (109,), (110,), (111,), (112,), (113,), (114,), (115,), (116,), (117,), (118,), (119,), (120,), (121,), (122,), None, (124,), None, None))
@@ -105,9 +103,9 @@ graphdata.defgsets['922'] = ('ir006', 'gr922', 'nil', 'nil')
 graphdata.chcpdocs['923'] = 'ecma-35'
 graphdata.defgsets['923'] = ('ir006', 'ir203', 'nil', 'nil')
 graphdata.chcpdocs['1006'] = 'ecma-35'
-graphdata.defgsets['1006'] = ('gl1006', 'gr1006', 'nil', 'nil')
+graphdata.defgsets['1006'] = ('alt646/ibmarabic', 'gr1006', 'nil', 'nil')
 graphdata.chcpdocs['1008'] = 'ecma-35'
-graphdata.defgsets['1008'] = ('gl1006', 'gr1008', 'nil', 'nil')
+graphdata.defgsets['1008'] = ('alt646/ibmarabic', 'gr1008', 'nil', 'nil')
 graphdata.chcpdocs['1009'] = 'ecma-35'
 graphdata.defgsets['1009'] = ('ir002/tilde', 'nil', 'nil', 'nil')
 graphdata.chcpdocs['1010'] = 'ecma-35'
@@ -137,7 +135,7 @@ graphdata.defgsets['1021'] = ('alt646/decswiss', 'nil', 'nil', 'nil')
 graphdata.chcpdocs['1023'] = 'ecma-35'
 graphdata.defgsets['1023'] = ('ir017', 'nil', 'nil', 'nil')
 graphdata.chcpdocs['1029'] = 'ecma-35'
-graphdata.defgsets['1029'] = ('gl1006', 'gr1029', 'nil', 'nil')
+graphdata.defgsets['1029'] = ('alt646/ibmarabic', 'gr1029', 'nil', 'nil')
 graphdata.chcpdocs['1034'] = 'ecma-35'
 graphdata.defgsets['1034'] = ('gl1034', 'nil', 'nil', 'nil')
 graphdata.chcpdocs['1036'] = 'ecma-35'
@@ -157,7 +155,7 @@ graphdata.defgsets['1055'] = ('gl1055', 'nil', 'nil', 'nil')
 graphdata.chcpdocs['1056'] = 'ecma-35'
 graphdata.defgsets['1056'] = ('gl1056', 'nil', 'nil', 'nil')
 graphdata.chcpdocs['1089'] = 'ecma-35'
-graphdata.defgsets['1089'] = ('gl1006', 'ir127', 'nil', 'nil')
+graphdata.defgsets['1089'] = ('alt646/ibmarabic', 'ir127', 'nil', 'nil')
 graphdata.chcpdocs['1090'] = 'ecma-35'
 graphdata.defgsets['1090'] = ('decgraphics', 'nil', 'nil', 'nil')
 graphdata.chcpdocs['1100'] = 'ecma-35'
@@ -205,9 +203,9 @@ graphdata.defgsets['4992'] = ('ir013/ibm/strict', 'nil', 'nil', 'nil')
 graphdata.chcpdocs['5012'] = 'ecma-35'
 graphdata.defgsets['5012'] = ('ir006', 'ir198', 'nil', 'nil')
 graphdata.chcpdocs['5104'] = 'ecma-35'
-graphdata.defgsets['5104'] = ('gl1006', 'gr5104', 'nil', 'nil')
+graphdata.defgsets['5104'] = ('alt646/ibmarabic', 'gr5104', 'nil', 'nil')
 graphdata.chcpdocs['5142'] = 'ecma-35'
-graphdata.defgsets['5142'] = ('gl1006', 'gr5142', 'nil', 'nil')
+graphdata.defgsets['5142'] = ('alt646/ibmarabic', 'gr5142', 'nil', 'nil')
 graphdata.chcpdocs['9005'] = 'ecma-35'
 graphdata.defgsets['9005'] = ('ir006', 'ir227', 'nil', 'nil')
 graphdata.chcpdocs['9444'] = 'ecma-35'

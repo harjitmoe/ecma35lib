@@ -515,6 +515,12 @@ raw_variants = {
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
     "alt646/ibmschsmall": ([None, -1, None, -1,   0x24, 0x21, -1, None, 
                                       None, None, -1,   None, -1], {0x21: 0x7C}),
+    # Left-hand side of IBM code page 1008
+    # Violation of ECMA-6:1991: 0x25 is not (strictly) %.
+    # Violation of ECMA-6:1991: 0x2A is not (strictly) *.
+    "alt646/ibmarabic": ([None, None, None, None, None, None, None, None, 
+                                      None, None, None, None, None],
+                         {0x25: 0x066A, 0x2A: 0x066D}),
     # Galaksija encoding for Gajica, extended with lowercase forms
     # Violation of ECMA-6:1991: 0x27 is not '.
     "alt646/galaksija/extended": ([None, None, 0x2962, 0x010C, 0x0106, 0x017D, 0x0160, None,
