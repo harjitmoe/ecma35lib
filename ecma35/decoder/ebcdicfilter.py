@@ -86,9 +86,10 @@ def decode_ebcdic(stream, state):
             else:
                 conv_byte = conv_map[token[1]]
             if conv_byte < 0x20 or 0x7F <= conv_byte < 0xA0:
-                assert state.c0_graphics_mode in (1, 2, 4), state.c0_graphics_mode
-                if (state.c0_graphics_mode == 1) or token[1] == 0x1B or (
-                        state.c0_graphics_mode == 2 and token[1] in (7, 8, 9, 0xA, 0xD, 0x85)):
+                assert state.c0_graphics_mode in (1, 2, 3, 5, 4), state.c0_graphics_mode
+                if (state.c0_graphics_mode in (1, 2)) or (
+                        state.c0_graphics_mode == 3 and conv_byte < 0x80) or conv_byte == 0x1B or (
+                        state.c0_graphics_mode == 5 and conv_byte in (7, 8, 9, 0xA, 0xD)):
                     if conv_byte == 0x7F:
                         yield ("CTRL", "DEL", "ECMA-35", 95, "GL", workingsets[state.glset])
                     elif conv_byte >= 0x80:
@@ -170,15 +171,26 @@ def decode_ebcdic(stream, state):
             yield token
         elif state.docsmode == "ebcdic" and token[0] == "CSISEQ" and token[1] == "DECSDPT":
             # Select Digital Printed Data Type, also part of DEC's IBM ProPrinter emulation.
-            if token[2] == (0x34,): # 4: Print All Characters
-                state.c0_graphics_mode = 4
-                yield ("C0GRAPH", 4)
-            elif token[2] == (0x32,): # 2: National and Line Drawing
-                state.c0_graphics_mode = 2
-                yield ("C0GRAPH", 2)
-            else: # Default behaviour
+            if token[2] == (0x31,): # Print GL region (currently also prints GR region)
                 state.c0_graphics_mode = 1
                 yield ("C0GRAPH", 1)
+            elif token[2] == (0x32,): # Print GL and GR regions
+                state.c0_graphics_mode = 2
+                yield ("C0GRAPH", 2)
+            elif token[2] == (0x33,): # Print GL, C1 and GR regions
+                state.c0_graphics_mode = 3
+                yield ("C0GRAPH", 3)
+            elif token[2] == (0x35,): # Print it like a classic Windows Console (besides ESC)
+                state.c0_graphics_mode = 5
+                yield ("C0GRAPH", 5)
+            elif token[2] == (0x34,): # Print C0, GL, C1 and GR regions (except ESC)
+                state.c0_graphics_mode = 4
+                yield ("C0GRAPH", 4)
+            elif (not token[2]) or (token[2] == (0x30,)): # Use default behaviour
+                state.c0_graphics_mode = 2
+                yield ("C0GRAPH", 2)
+            else:
+                yield ("ERROR", "UNKNOWNC0GRAPHMODE", token)
         else:
             yield token
         #

@@ -57,9 +57,12 @@ _the_mother = tuple((i,) for i in range(0xFF61, 0xFFA0))
 graphdata.gsets["ir013"] = (94, 1, _the_mother + ((None,) * 31))
 graphdata.rhses["897"] = ((None,) * 33) + _the_mother + ((None,) * 32)
 graphdata.defgsets["897"] = ("ir014", "ir013", "nil", "nil")
-# IBM's 4992 (or unrestricted 896)
+# IBM's 4992 (or unrestricted 896), plus further additions as explained above
 graphdata.gsets["ir013/ibm"] = (94, 1, _the_mother + (
                 (0xA2,), (0xA3,), (0xAC,), (0x5C,), (0x7E,), (0x203E,), (0xA6,)) + ((None,) * 24))
+# IBM's 4992 (or unrestricted 896) only
+graphdata.gsets["ir013/ibm/strict"] = (94, 1, _the_mother + (
+                (0xA2,), (0xA3,), (0xAC,), (0x5C,), (0x7E,)) + ((None,) * 26))
 # 1-byte MacJapanese
 graphdata.gsets["ir013/mac"] = (94, 1, _the_mother + (
                 (0x5C,), (0xA0,), (0xA9,), (0x2122,), (0x2026,), 
