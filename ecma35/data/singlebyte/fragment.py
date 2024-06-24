@@ -85,3 +85,12 @@ graphdata.gsets["marc-superscript"] = (94, 1, tuple((i,) if i else None for i in
              None, None, None, None, None, None, None, None, 
              None, None, None, None, None, None, None)))
 
+# IBM code page 1034 "Printer Application - Shipping Label, Set #2", containing only what IBM calls
+#   the "Vital Safety Parts (VSP) Symbol" and which is better recognised as a symbol for "halt"
+#   on buttons or the old-style (pre-octagon) "type B2b" stop sign.
+graphdata.gsets["stop-symbol"] = (94, 1, (None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (9098,), None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None))
+graphdata.chcpdocs['1034'] = 'ecma-35'
+graphdata.defgsets['1034'] = ('stop-symbol', 'nil', 'nil', 'nil')
+
+
+

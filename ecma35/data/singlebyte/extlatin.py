@@ -50,8 +50,13 @@ graphdata.gsets["ir039"] = (94, 1, (
     (0x0295,), (0x0294,), (0x0298,), (0x01C0,), (0x01C2,), (0x01C3,), (0x01C1,),
 ))
 
+graphdata.chcpdocs['65504'] = 'ecma-35'
+graphdata.defgsets['65504'] = ('ir006', 'ir039', 'nil', 'nil')
+
 # ECMA-94-L1 ISO-8859-1 Latin-1 Western European RHS
 graphdata.gsets["ir100"] = (96, 1, tuple((i,) for i in range(0xA0, 0x100)))
+graphdata.chcpdocs['819'] = 'ecma-35'
+graphdata.defgsets['819'] = ('ir006', 'ir100', 'nil', 'nil')
 
 # DEC Multinational Character Set (MCS); direct precursor to ISO-8859-1.
 graphdata.gsets["decmultinational"] = (94, 1, tuple((i,) if i else None for i in (
@@ -67,6 +72,8 @@ graphdata.gsets["decmultinational"] = (94, 1, tuple((i,) if i else None for i in
              0x00E8, 0x00E9, 0x00EA, 0x00EB, 0x00EC, 0x00ED, 0x00EE, 0x00EF, 
              None,   0x00F1, 0x00F2, 0x00F3, 0x00F4, 0x00F5, 0x00F6, 0x0153, 
              0x00F8, 0x00F9, 0x00FA, 0x00FB, 0x00FC, 0x00FF, None)))
+graphdata.chcpdocs['1100'] = 'ecma-35'
+graphdata.defgsets['1100'] = ('ir006', 'decmultinational', 'nil', 'nil')
 
 # ECMA-94-L2 ISO-8859-2 Latin-2 Central European RHS (RHS of IBM code page 912)
 graphdata.gsets["ir101"] = (96, 1, tuple((i,) for i in (
@@ -82,6 +89,8 @@ graphdata.gsets["ir101"] = (96, 1, tuple((i,) for i in (
              0x010D, 0x00E9, 0x0119, 0x00EB, 0x011B, 0x00ED, 0x00EE, 0x010F, 
              0x0111, 0x0144, 0x0148, 0x00F3, 0x00F4, 0x0151, 0x00F6, 0x00F7, 
              0x0159, 0x016F, 0x00FA, 0x0171, 0x00FC, 0x00FD, 0x0163, 0x02D9)))
+graphdata.chcpdocs['912'] = 'ecma-35'
+graphdata.defgsets['912'] = ('ir006', 'ir101', 'nil', 'nil')
 
 # ECMA-94-L2 ISO-8859-2 with overring rather than degrees sign (RHS of IBM code page 1111)
 graphdata.gsets["ir101/overring"] = (96, 1, tuple((i,) for i in (
@@ -97,6 +106,8 @@ graphdata.gsets["ir101/overring"] = (96, 1, tuple((i,) for i in (
              0x010D, 0x00E9, 0x0119, 0x00EB, 0x011B, 0x00ED, 0x00EE, 0x010F, 
              0x0111, 0x0144, 0x0148, 0x00F3, 0x00F4, 0x0151, 0x00F6, 0x00F7, 
              0x0159, 0x016F, 0x00FA, 0x0171, 0x00FC, 0x00FD, 0x0163, 0x02D9)))
+graphdata.chcpdocs['1111'] = 'ecma-35'
+graphdata.defgsets['1111'] = ('ir006', 'ir101/overring', 'nil', 'nil')
 
 # ECMA-94-L3 ISO-8859-3 Latin-3 South European RHS
 graphdata.gsets["ir109"] = (96, 1, tuple((i,) if i else None for i in (
@@ -112,6 +123,8 @@ graphdata.gsets["ir109"] = (96, 1, tuple((i,) if i else None for i in (
              0x00E8, 0x00E9, 0x00EA, 0x00EB, 0x00EC, 0x00ED, 0x00EE, 0x00EF, 
              None,   0x00F1, 0x00F2, 0x00F3, 0x00F4, 0x0121, 0x00F6, 0x00F7, 
              0x011D, 0x00F9, 0x00FA, 0x00FB, 0x00FC, 0x016D, 0x015D, 0x02D9)))
+graphdata.chcpdocs['913'] = 'ecma-35'
+graphdata.defgsets['913'] = ('ir006', 'ir109', 'nil', 'nil')
 
 # ECMA-94-L4 ISO-8859-4 Latin-4 North European RHS
 graphdata.gsets["ir110"] = (96, 1, tuple((i,) for i in (
@@ -127,6 +140,8 @@ graphdata.gsets["ir110"] = (96, 1, tuple((i,) for i in (
              0x010D, 0x00E9, 0x0119, 0x00EB, 0x0117, 0x00ED, 0x00EE, 0x012B, 
              0x0111, 0x0146, 0x014D, 0x0137, 0x00F4, 0x00F5, 0x00F6, 0x00F7, 
              0x00F8, 0x0173, 0x00FA, 0x00FB, 0x00FC, 0x0169, 0x016B, 0x02D9)))
+graphdata.chcpdocs['914'] = 'ecma-35'
+graphdata.defgsets['914'] = ('ir006', 'ir110', 'nil', 'nil')
 
 # Right-hand side of Canadian Standard CSA Z243.4:1985 8-bit set (English/French)
 graphdata.gsets["ir123"] = (96, 1, (
@@ -143,6 +158,9 @@ graphdata.gsets["ir123"] = (96, 1, (
     (0xFB,),   (0xFC,),   (0xA9,),   (0x2500,), (0x2502,), (0x2514,), (0x2518,), (0x2510,), 
     (0x250C,), (0x251C,), (0x2534,), (0x2524,), (0x252C,), (0x253C,), (0xAC,),   (0x2588,),
 ))
+
+graphdata.chcpdocs['65501'] = 'ecma-35'
+graphdata.defgsets['65501'] = ('ir006', 'ir123', 'nil', 'nil')
 
 # ČSN 369103 (minor Latin-2 mod for RHS use with previous IRV, i.e. swapping ¤ and $)
 graphdata.gsets["ir139"] = (96, 1, tuple((i,) for i in (
@@ -173,6 +191,8 @@ graphdata.gsets["ir148"] = (96, 1, tuple((i,) for i in (
              0x00E8, 0x00E9, 0x00EA, 0x00EB, 0x00EC, 0x00ED, 0x00EE, 0x00EF, 
              0x011F, 0x00F1, 0x00F2, 0x00F3, 0x00F4, 0x00F5, 0x00F6, 0x00F7, 
              0x00F8, 0x00F9, 0x00FA, 0x00FB, 0x00FC, 0x0131, 0x015F, 0x00FF)))
+graphdata.chcpdocs['920'] = 'ecma-35'
+graphdata.defgsets['920'] = ('ir006', 'ir148', 'nil', 'nil')
 
 # DEC 8-bit Turkish; roughly to ISO-8859-9 as DEC MCS is to ISO-8859-1 (note that the coding for
 #   the non-ASCII dotless/dotted I letters differs from ISO-8859-9 although the others do not)
@@ -204,6 +224,8 @@ graphdata.gsets["decturkish8/nbsp"] = (96, 1, tuple((i,) if i else None for i in
              0x00E8, 0x00E9, 0x00EA, 0x00EB, 0x00EC, 0x00ED, 0x00EE, 0x00EF, 
              0x011F, 0x00F1, 0x00F2, 0x00F3, 0x00F4, 0x00F5, 0x00F6, 0x0153, 
              0x00F8, 0x00F9, 0x00FA, 0x00FB, 0x00FC, 0x00FF, 0x015F, None)))
+graphdata.chcpdocs['1288'] = 'ecma-35'
+graphdata.defgsets['1288'] = ('ir006', 'decturkish8/nbsp', 'nil', 'nil')
 
 # ISO 10367 supplementary set (containing characters in neither ISO-8859-2 nor the intersection
 #   of ISO-8859-1 and ISO-8859-9, but listed in Annex A of T.51; intended for use in a G3 set).
@@ -238,6 +260,8 @@ graphdata.gsets["ir157"] = (96, 1, tuple((i,) for i in (
              0x010D, 0x00E9, 0x0119, 0x00EB, 0x0117, 0x00ED, 0x00EE, 0x00EF, 
              0x00F0, 0x0146, 0x014D, 0x00F3, 0x00F4, 0x00F5, 0x00F6, 0x0169, 
              0x00F8, 0x0173, 0x00FA, 0x00FB, 0x00FC, 0x00FD, 0x00FE, 0x0138)))
+graphdata.chcpdocs['919'] = 'ecma-35'
+graphdata.defgsets['919'] = ('ir006', 'ir157', 'nil', 'nil')
 
 # Single-shift supplement to ISO-8859-6 for Saami; the infamous "High Ogonek" set
 graphdata.gsets["ir158"] = (96, 1, (
@@ -269,6 +293,20 @@ graphdata.gsets["ir179"] = (96, 1, tuple((i,) for i in (
              0x010D, 0x00E9, 0x017A, 0x0117, 0x0123, 0x0137, 0x012B, 0x013C, 
              0x0161, 0x0144, 0x0146, 0x00F3, 0x014D, 0x00F5, 0x00F6, 0x00F7, 
              0x0173, 0x0142, 0x015B, 0x016B, 0x00FC, 0x017C, 0x017E, 0x2019)))
+graphdata.chcpdocs['921'] = 'ecma-35'
+graphdata.defgsets['921'] = ('ir006', 'ir179', 'nil', 'nil')
+
+# Adaptation of ISO-8859-1 with Icelandic letters replaced with Estonian letters (similar in
+#   concept to ISO-8859-9 but for Estonian rather than Turkish); RHS of IBM code page 922.
+#   Encoding of Estonian letters matches ISO-8859-13.
+graphdata.gsets["ibmestonian"] = (96, 1, ((160,), (161,), (162,), (163,), (164,), (165,), (166,), (167,), (168,), (169,), (170,), (171,), (172,), (173,), (174,), (175,), (176,), (177,), (178,), (179,), (180,), (181,), (182,), (183,), (184,), (185,), (186,), (187,), (188,), (189,), (190,), (191,), (192,), (193,), (194,), (195,), (196,), (197,), (198,), (199,), (200,), (201,), (202,), (203,), (204,), (205,), (206,), (207,), (352,), (209,), (210,), (211,), (212,), (213,), (214,), (215,), (216,), (217,), (218,), (219,), (220,), (221,), (381,), (223,), (224,), (225,), (226,), (227,), (228,), (229,), (230,), (231,), (232,), (233,), (234,), (235,), (236,), (237,), (238,), (239,), (353,), (241,), (242,), (243,), (244,), (245,), (246,), (247,), (248,), (249,), (250,), (251,), (252,), (253,), (382,), (255,)))
+graphdata.chcpdocs['922'] = 'ecma-35'
+graphdata.defgsets['922'] = ('ir006', 'ibmestonian', 'nil', 'nil')
+
+# RHS of IBM code page 902 (Euro sign modification of IBM code page 922)
+graphdata.gsets["ibmestonian/euro"] = (96, 1, ((160,), (161,), (162,), (163,), (8364,), (165,), (166,), (167,), (168,), (169,), (170,), (171,), (172,), (173,), (174,), (175,), (176,), (177,), (178,), (179,), (180,), (181,), (182,), (183,), (184,), (185,), (186,), (187,), (188,), (189,), (190,), (191,), (192,), (193,), (194,), (195,), (196,), (197,), (198,), (199,), (200,), (201,), (202,), (203,), (204,), (205,), (206,), (207,), (352,), (209,), (210,), (211,), (212,), (213,), (214,), (215,), (216,), (217,), (218,), (219,), (220,), (221,), (381,), (223,), (224,), (225,), (226,), (227,), (228,), (229,), (230,), (231,), (232,), (233,), (234,), (235,), (236,), (237,), (238,), (239,), (353,), (241,), (242,), (243,), (244,), (245,), (246,), (247,), (248,), (249,), (250,), (251,), (252,), (253,), (382,), (255,)))
+graphdata.chcpdocs['902'] = 'ecma-35'
+graphdata.defgsets['902'] = ('ir006', 'ibmestonian/euro', 'nil', 'nil')
 
 # ISO 8859 Adaptation for Welsh (ancestor to ISO-8859-14), RHS
 graphdata.gsets["ir182"] = (96, 1, (
@@ -301,6 +339,8 @@ graphdata.gsets["ir197"] = (96, 1, (
     (0xF0,), (0xF1,), (0xF2,), (0xF3,), (0xF4,), (0xF5,), (0xF6,), (0xF7,),
     (0xF8,), (0xF9,), (0xFA,), (0xFB,), (0xFC,), (0xFD,), (0xFE,), (0xFF,),
 ))
+graphdata.chcpdocs['59187'] = 'ecma-35'
+graphdata.defgsets['59187'] = ('ir006', 'ir197', 'nil', 'nil')
 
 # ISO-8859-14 Latin-8 Celtic RHS
 graphdata.gsets["ir199"] = (96, 1, tuple((i,) for i in (
@@ -316,6 +356,8 @@ graphdata.gsets["ir199"] = (96, 1, tuple((i,) for i in (
              0x00E8, 0x00E9, 0x00EA, 0x00EB, 0x00EC, 0x00ED, 0x00EE, 0x00EF, 
              0x0175, 0x00F1, 0x00F2, 0x00F3, 0x00F4, 0x00F5, 0x00F6, 0x1E6B, 
              0x00F8, 0x00F9, 0x00FA, 0x00FB, 0x00FC, 0x00FD, 0x0177, 0x00FF)))
+graphdata.chcpdocs['58163'] = 'ecma-35'
+graphdata.defgsets['58163'] = ('ir006', 'ir199', 'nil', 'nil')
 
 # ISO-8859-15 Latin-9 Latin-0 New Western European RHS
 graphdata.gsets["ir203"] = (96, 1, tuple((i,) for i in (
@@ -331,11 +373,15 @@ graphdata.gsets["ir203"] = (96, 1, tuple((i,) for i in (
              0x00E8, 0x00E9, 0x00EA, 0x00EB, 0x00EC, 0x00ED, 0x00EE, 0x00EF, 
              0x00F0, 0x00F1, 0x00F2, 0x00F3, 0x00F4, 0x00F5, 0x00F6, 0x00F7, 
              0x00F8, 0x00F9, 0x00FA, 0x00FB, 0x00FC, 0x00FD, 0x00FE, 0x00FF)))
+graphdata.chcpdocs['923'] = 'ecma-35'
+graphdata.defgsets['923'] = ('ir006', 'ir203', 'nil', 'nil')
 
 # Euro update of ECMA-94:L1 ISO-8859-1 Latin-1 Western European RHS
 graphdata.gsets["ir204"] = (96, 1, tuple((i,) for i in (
              0x00A0, 0x00A1, 0x00A2, 0x00A3, 0x20AC, 0x00A5, 0x00A6, 0x00A7, 
              )) + tuple((i,) for i in range(0xA8, 0x100)))
+graphdata.chcpdocs['61235'] = 'ecma-35'
+graphdata.defgsets['61235'] = ('ir006', 'ir204', 'nil', 'nil')
 # Euro update of ECMA-94:L4 ISO-8859-4 Latin-4 North European RHS
 graphdata.gsets["ir205"] = (96, 1, tuple((i,) for i in (
              0x00A0, 0x0104, 0x0138, 0x0156, 0x20AC, 0x0128, 0x013B, 0x00A7, 
@@ -350,6 +396,8 @@ graphdata.gsets["ir205"] = (96, 1, tuple((i,) for i in (
              0x010D, 0x00E9, 0x0119, 0x00EB, 0x0117, 0x00ED, 0x00EE, 0x012B, 
              0x0111, 0x0146, 0x014D, 0x0137, 0x00F4, 0x00F5, 0x00F6, 0x00F7, 
              0x00F8, 0x0173, 0x00FA, 0x00FB, 0x00FC, 0x0169, 0x016B, 0x02D9)))
+graphdata.chcpdocs['58258'] = 'ecma-35'
+graphdata.defgsets['58258'] = ('ir006', 'ir205', 'nil', 'nil')
 # Euro update of ISO-8859-13 Latin-7 Baltic Rim RHS
 graphdata.gsets["ir206"] = (96, 1, tuple((i,) for i in (
              0x00A0, 0x201D, 0x00A2, 0x00A3, 0x20AC, 0x201E, 0x00A6, 0x00A7, 
@@ -364,6 +412,8 @@ graphdata.gsets["ir206"] = (96, 1, tuple((i,) for i in (
              0x010D, 0x00E9, 0x017A, 0x0117, 0x0123, 0x0137, 0x012B, 0x013C, 
              0x0161, 0x0144, 0x0146, 0x00F3, 0x014D, 0x00F5, 0x00F6, 0x00F7, 
              0x0173, 0x0142, 0x015B, 0x016B, 0x00FC, 0x017C, 0x017E, 0x2019)))
+graphdata.chcpdocs['901'] = 'ecma-35'
+graphdata.defgsets['901'] = ('ir006', 'ir206', 'nil', 'nil')
 
 # ISO 8859 Adaptation for Saami and Romani (RHS)
 graphdata.gsets["ir209"] = (96, 1, (
@@ -380,6 +430,8 @@ graphdata.gsets["ir209"] = (96, 1, (
     (0xF0,), (0xF1,), (0xF2,), (0xF3,), (0xF4,), (0xF5,), (0xF6,), (0xF7,),
     (0xF8,), (0xF9,), (0xFA,), (0xFB,), (0xFC,), (0xFD,), (0xFE,), (0xFF,),
 ))
+graphdata.chcpdocs['60211'] = 'ecma-35'
+graphdata.defgsets['60211'] = ('ir006', 'ir209', 'nil', 'nil')
 
 # SR-14111 ISO-8859-16 Latin-10 South-Eastern European RHS
 graphdata.gsets["ir226"] = (96, 1, tuple((i,) for i in (
@@ -395,6 +447,9 @@ graphdata.gsets["ir226"] = (96, 1, tuple((i,) for i in (
              0x00E8, 0x00E9, 0x00EA, 0x00EB, 0x00EC, 0x00ED, 0x00EE, 0x00EF, 
              0x0111, 0x0144, 0x00F2, 0x00F3, 0x00F4, 0x0151, 0x00F6, 0x015B, 
              0x0171, 0x00F9, 0x00FA, 0x00FB, 0x00FC, 0x0119, 0x021B, 0x00FF)))
+
+graphdata.chcpdocs['65500'] = 'ecma-35'
+graphdata.defgsets['65500'] = ('ir006', 'ir226', 'nil', 'nil')
 
 # TDS 565 7-bit Turkmen
 graphdata.gsets["ir230"] = (94, 1, ((0x21,), (0x22,), (0x23,), (0x24,), (0x25,), (0x26,), (0x27,), (0x28,), (0x29,), (0x2A,), (0x2B,), (0x2C,), (0x2D,), (0x2E,), (0x2F,), (0x30,), (0x31,), (0x32,), (0x33,), (0x34,), (0x35,), (0x36,), (0x37,), (0x38,), (0x39,), (0x3A,), (0x3B,), (0x3C,), (0x3D,), (0x3E,), (0x3F,), (0x40,), (0x41,), (0x42,), (0xC7,), (0x44,), (0x45,), (0xC4,), (0x46,), (0x47,), (0x48,), (0x49,), (0x4A,), (0x017D,), (0x4B,), (0x4C,), (0x4D,), (0x4E,), (0x0147,), (0x4F,), (0xD6,), (0x50,), (0x52,), (0x53,), (0x015E,), (0x54,), (0x55,), (0xDC,), (0x57,), (0x59,), (0xDD,), (0x5A,), (0x5F,), (0x2116,), (0x61,), (0x62,), (0xE7,), (0x64,), (0x65,), (0xE4,), (0x66,), (0x67,), (0x68,), (0x69,), (0x6A,), (0x017E,), (0x6B,), (0x6C,), (0x6D,), (0x6E,), (0x0148,), (0x6F,), (0xF6,), (0x70,), (0x72,), (0x73,), (0x015F,), (0x74,), (0x75,), (0xFC,), (0x77,), (0x79,), (0xFD,), (0x7A,)))
@@ -491,6 +546,14 @@ graphdata.gsets["ir232"] = (94, 1, (None, None, None, None, None, None, None, No
 
 # Brazilian ABICOMP (Associação Brasileira de Indústria de Computadores)
 graphdata.gsets["abicomp"] = (96, 1, ((160,), (192,), (193,), (194,), (195,), (196,), (199,), (200,), (201,), (202,), (203,), (204,), (205,), (206,), (938,), (209,), (210,), (211,), (212,), (213,), (214,), (338,), (217,), (218,), (219,), (220,), (221,), (168,), (163,), (180,), (167,), (176,), (161,), (224,), (225,), (226,), (227,), (228,), (231,), (232,), (233,), (234,), (235,), (236,), (237,), (238,), (239,), (241,), (242,), (243,), (244,), (245,), (246,), (339,), (249,), (250,), (251,), (252,), (253,), (223,), (170,), (186,), (191,), (177,), None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None))
+graphdata.chcpdocs['3848'] = 'ecma-35'
+graphdata.defgsets['3848'] = ('ir006', 'abicomp', 'nil', 'nil')
+
+# "HP Roman" supplementary set; IBM's code page 1050 (on its own) or 1051 (as a complete 8-bit encoding)
+graphdata.gsets["hproman"] = (94, 1, ((192,), (194,), (200,), (202,), (203,), (206,), (207,), (180,), (715,), (710,), (168,), (732,), (217,), (219,), (8356,), (8254,), (221,), (253,), (730,), (199,), (231,), (209,), (241,), (161,), (191,), (164,), (163,), (165,), (167,), (402,), (162,), (226,), (234,), (244,), (251,), (225,), (233,), (243,), (250,), (224,), (232,), (242,), (249,), (228,), (235,), (246,), (252,), (197,), (238,), (216,), (198,), (229,), (237,), (248,), (230,), (196,), (236,), (214,), (220,), (201,), (239,), (223,), (212,), (193,), (195,), (227,), (208,), (240,), (205,), (204,), (211,), (210,), (213,), (245,), (352,), (353,), (218,), (376,), (255,), (222,), (254,), (183,), (956,), (182,), (190,), (45,), (188,), (189,), (170,), (186,), (171,), (9632,), (187,), (177,)))
+graphdata.chcpdocs['1050'] = graphdata.chcpdocs['1051'] = 'ecma-35'
+graphdata.defgsets['1050'] = ('hproman', 'nil', 'nil', 'nil')
+graphdata.defgsets['1051'] = ('ir006', 'hproman', 'nil', 'nil')
 
 # Windows code pages for non-Vietnamese Latin
 graphdata.rhses["1250"] = parsers.read_single_byte("WHATWG/index-windows-1250.txt") # Central European
@@ -503,7 +566,7 @@ graphdata.rhses["1257"] = parsers.read_single_byte("WHATWG/index-windows-1257.tx
 # OEM pages (TODO: OEM 210 Greek and OEM 220 Spanish are both listed by DEC in the very definition
 #   of the DECSPPCS CSI control. I do not have a source for their layout.)
 graphdata.rhses["437"] = parsers.read_single_byte("ICU/ibm-437_P100-1995.ucm") # United States
-graphdata.defgsets["437"] = ("ir006", "nil", "nil", "nil") # Note: gets used as the default.
+graphdata.defgsets["437"] = ("ir006", "pclinedrawing", "nil", "nil") # Note: gets used as the default.
 graphdata.rhses["775"] = parsers.read_single_byte("ICU/ibm-775_P100-1996.ucm") # Baltic
 graphdata.rhses["850"] = parsers.read_single_byte("ICU/ibm-850_P100-1995.ucm") # Western European
 graphdata.rhses["852"] = parsers.read_single_byte("ICU/ibm-852_P100-1995.ucm") # Central European

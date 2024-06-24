@@ -11,6 +11,8 @@ from ecma35.data.singlebyte import sbmapparsers as parsers
 
 # 7-bit APL
 graphdata.gsets["ir068"] = (94, 1, parsers.read_single_byte("UTC/APL-ISO-IR-68.TXT", typ="GL94", filter_to_single=True))
+graphdata.chcpdocs['371'] = 'ecma-35'
+graphdata.defgsets['371'] = ('ir068', 'nil', 'nil', 'nil')
 
 # I.S. 434 Latin/Ogham RHS
 # Registered as a 96-set for some reason but doesn't actually allocate the corners.
@@ -38,6 +40,9 @@ graphdata.gsets["ir221"] = (94, 1, (
 
 # Armenian Standard AST 34.002 ("ArmSCII"); FreeDOS code page 65506
 graphdata.gsets["armscii"] = (94, 1, ((1421,), (1415,), (1417,), (41,), (40,), (187,), (171,), (8212,), (8228,), (1373,), (44,), (173,), (1418,), (8230,), (1372,), (1371,), (1374,), (1329,), (1377,), (1330,), (1378,), (1331,), (1379,), (1332,), (1380,), (1333,), (1381,), (1334,), (1382,), (1335,), (1383,), (1336,), (1384,), (1337,), (1385,), (1338,), (1386,), (1339,), (1387,), (1340,), (1388,), (1341,), (1389,), (1342,), (1390,), (1343,), (1391,), (1344,), (1392,), (1345,), (1393,), (1346,), (1394,), (1347,), (1395,), (1348,), (1396,), (1349,), (1397,), (1350,), (1398,), (1351,), (1399,), (1352,), (1400,), (1353,), (1401,), (1354,), (1402,), (1355,), (1403,), (1356,), (1404,), (1357,), (1405,), (1358,), (1406,), (1359,), (1407,), (1360,), (1408,), (1361,), (1409,), (1362,), (1410,), (1363,), (1411,), (1364,), (1412,), (1365,), (1413,), (1366,), (1414,), (1370,)))
+
+graphdata.chcpdocs['65506'] = 'ecma-35'
+graphdata.defgsets['65506'] = ('ir006', 'armscii', 'nil', 'nil')
 
 # ISO-10586:1996 Georgian
 # Not assigned an escape, but given the number here (possibly provisionally, but any new escape or

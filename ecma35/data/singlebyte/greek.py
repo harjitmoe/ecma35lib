@@ -107,6 +107,8 @@ graphdata.gsets["ir126"] = (96, 1, (
          (0x03B8,), (0x03B9,), (0x03BA,), (0x03BB,), (0x03BC,), (0x03BD,), (0x03BE,), (0x03BF,), 
          (0x03C0,), (0x03C1,), (0x03C2,), (0x03C3,), (0x03C4,), (0x03C5,), (0x03C6,), (0x03C7,), 
          (0x03C8,), (0x03C9,), (0x03CA,), (0x03CB,), (0x03CC,), (0x03CD,), (0x03CE,), None))
+graphdata.chcpdocs['813'] = 'ecma-35'
+graphdata.defgsets['813'] = ('ir006', 'ir126', 'nil', 'nil')
 
 # ELOT-928 ECMA-118 ISO-8859-7:1987 Latin/Greek RHS plus the Euro sign (only) from ISO-8859-7:2003
 # See also "ir227" below.
@@ -123,6 +125,8 @@ graphdata.gsets["ir126/euro"] = (96, 1, (
          (0x03B8,), (0x03B9,), (0x03BA,), (0x03BB,), (0x03BC,), (0x03BD,), (0x03BE,), (0x03BF,), 
          (0x03C0,), (0x03C1,), (0x03C2,), (0x03C3,), (0x03C4,), (0x03C5,), (0x03C6,), (0x03C7,), 
          (0x03C8,), (0x03C9,), (0x03CA,), (0x03CB,), (0x03CC,), (0x03CD,), (0x03CE,), None))
+graphdata.chcpdocs['4909'] = 'ecma-35'
+graphdata.defgsets['4909'] = ('ir006', 'ir126/euro', 'nil', 'nil')
 
 # DEC 8-bit Greek
 graphdata.gsets["decgreek8"] = (94, 1, tuple((i,) if i else None for i in (
@@ -159,6 +163,8 @@ graphdata.gsets["decgreek8/nbsp"] = (96, 1, tuple((i,) if i else None for i in (
            tuple((i,) for i in range(0x03C3, 0x03CA)) + ((0x03C2,),) + 
            tuple((i,) for i in range(0x03CD, 0x03CF)) + 
            ((0x0384,), None, None))
+graphdata.chcpdocs['1287'] = 'ecma-35'
+graphdata.defgsets['1287'] = ('ir006', 'decgreek8/nbsp', 'nil', 'nil')
 
 # IEC-P27-1 supplementary technical set
 graphdata.gsets["ir143"] = (96, 1, (
@@ -174,6 +180,9 @@ graphdata.gsets["ir143"] = (96, 1, (
         (0x03B8,), (0x03B9,), (0x03BA,), (0x03BB,), (0x03BC,), (0x03BD,), (0x03BE,), (0x2030,), 
         (0x03C0,), (0x03C1,), (0x03C3,), (0x00F7,), (0x03C4,), (0x03C5,), (0x03C6,), (0x03C7,), 
         (0x03C8,), (0x03C9,), (0x2020,), (0x2190,), (0x2191,), (0x2192,), (0x2193,), (0x203E,)))
+
+graphdata.chcpdocs['65502'] = 'ecma-35'
+graphdata.defgsets['65502'] = ('ir006', 'ir143', 'nil', 'nil')
 
 # Videotex (ITU) 7-bit Greek
 graphdata.gsets["ir150"] = (94, 1, (
@@ -214,6 +223,9 @@ graphdata.gsets["ir181"] = (96, 1, (
     (0x03C8,), (0x03C9,), (0x03D1,), (0x03C6,), (0x03B5,), None,      None,       None,
 ))
 
+graphdata.chcpdocs['65503'] = 'ecma-35'
+graphdata.defgsets['65503'] = ('ir006', 'ir181', 'nil', 'nil')
+
 # ISO-8859-7:2003 Latin/Greek RHS
 graphdata.gsets["ir227"] = (96, 1, (
          (0x00A0,), (0x2018,), (0x2019,), (0x00A3,), (0x20AC,), (0x20AF,), (0x00A6,), (0x00A7,), 
@@ -228,6 +240,8 @@ graphdata.gsets["ir227"] = (96, 1, (
          (0x03B8,), (0x03B9,), (0x03BA,), (0x03BB,), (0x03BC,), (0x03BD,), (0x03BE,), (0x03BF,), 
          (0x03C0,), (0x03C1,), (0x03C2,), (0x03C3,), (0x03C4,), (0x03C5,), (0x03C6,), (0x03C7,), 
          (0x03C8,), (0x03C9,), (0x03CA,), (0x03CB,), (0x03CC,), (0x03CD,), (0x03CE,), None))
+graphdata.chcpdocs['9005'] = 'ecma-35'
+graphdata.defgsets['9005'] = ('ir006', 'ir227', 'nil', 'nil')
 
 # DEC Technical Character Set (TCS)
 #   https://vt100.net/charsets/technical.html
@@ -264,6 +278,8 @@ graphdata.gsets["symbolgr"] = (94, 1, parsers.read_single_byte("UTC/symbol.txt",
 graphdata.gsets["symbolgr/euro"] = (96, 1, parsers.read_single_byte("UTC/symbol.txt", typ="GR96", mapper=variationhints.ahmap))
 graphdata.gsets["symbolgr/numsp"] = (96, 1, ((0x2007,),) + graphdata.gsets["symbolgr"][2] + (None,))
 graphdata.gsets["symbolgr/euro/numsp"] = (96, 1, ((0x20AC,),) + graphdata.gsets["symbolgr"][2] + ((0x2007,),))
+graphdata.chcpdocs['1038'] = 'ecma-35'
+graphdata.defgsets['1038'] = ('symbolgl', 'symbolgr/numsp', 'nil', 'nil')
 
 
 

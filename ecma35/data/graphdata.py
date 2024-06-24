@@ -68,7 +68,7 @@ ebcdicdbcs = {}
 
 # Note: has to be imported after gsets &co are defined
 from ecma35.data.multibyte import korea, japan, guobiao, traditional
-from ecma35.data.singlebyte import ecma6, extlatin, c0substs, dingbats, quoocs_ngwx, ccitt, cyrillic, semitic, greek, indic, otherscript, splits, splitebcdic, pseudographics, kana, fragment
+from ecma35.data.singlebyte import ecma6, extlatin, c0substs, dingbats, quoocs_ngwx, ccitt, cyrillic, semitic, greek, indic, otherscript, splitebcdic, pseudographics, kana, fragment
 
 for _i in rhses:
     chcpdocs.setdefault(_i, "plainextascii")
@@ -151,7 +151,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"r"): "ir096",
             tuple(b"s"): "ir098",
             tuple(b"t"): "ir099",
-            tuple(b"u"): ("ir102", ("ir102/ibm",), ("ir102",)),
+            tuple(b"u"): ("ir102", ("ir102/ibm", "ir102/strict"), ("ir102",)),
             tuple(b"v"): "ir103",
             tuple(b"w"): "ir121",
             tuple(b"x"): "ir122",
@@ -201,7 +201,13 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"="): "alt646/decswiss", # Thus VTx and compatibles
             tuple(b">"): "dectechnical", # Thus VTx and compatibles
             tuple(b"?"): "aribkana/hiragana",
+            tuple(b"\"2"): "alt646/hplegal",
+            tuple(b"\"3"): "pclinedrawing",
             tuple(b"\"4"): "ir138/dec", # Thus VTx and compatibles
+            tuple(b"\"5"): "hplinedrawing",
+            tuple(b"\"6"): "hproman",
+            tuple(b"\"7"): "ibm-troff",
+            tuple(b"\"8"): "stop-symbol",
             tuple(b"\"9"): "adobe-standard",
             tuple(b"\":"): "alt646/ibmarabic",
             tuple(b"\";"): "ir166/1986",
@@ -334,6 +340,7 @@ g96bytes = {tuple(b"@"): "ir111",
             tuple(b"!2"): "abicomp",
             tuple(b"!3"): ("ibmvietnamese/euro", ("ibmvietnamese/euro",), ("ibmvietnamese",)),
             tuple(b"!4"): "ibmlao",
+            tuple(b"!5"): ("ibmestonian/euro", ("ibmestonian/euro",), ("ibmestonian",)),
             tuple(b"\"?"): "decgreek8/nbsp",
             tuple(b"%0"): "decturkish8/nbsp",
             tuple(b"$7"): ("symbolgr/euro/numsp",

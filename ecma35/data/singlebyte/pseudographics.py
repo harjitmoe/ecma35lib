@@ -26,6 +26,8 @@ graphdata.gsets["decgraphics"] = (94, 1, tuple((i,) if i else None for i in (
             0x2424, 0x240B, 0x2518, 0x2510, 0x250C, 0x2514, 0x253C, 0x23BA, 
             0x23BB, 0x2500, 0x23BC, 0x23BD, 0x251C, 0x2524, 0x2534, 0x252C, 
             0x2502, 0x2264, 0x2265, 0x03C0, 0x2260, 0x00A3, 0x2219)))
+graphdata.chcpdocs['1090'] = 'ecma-35'
+graphdata.defgsets['1090'] = ('decgraphics', 'nil', 'nil', 'nil')
 
 # Modified DEC Special Graphics
 # As seen in e.g.: https://commons.wikimedia.org/wiki/File:Shift_In_and_Shift_out_on_Linux.png
@@ -120,4 +122,19 @@ graphdata.gsets["aribmosaic-c"] = (94, 1,
     tuple((i,) for i in range(0x1CE70, 0x1CE8F)))
 
 # TODO: ARIB STD-B24 Volume 1 Mosaic set D
+
+# IBM code page 1109 "DITROFF Specials Compatibility", consisting mainly of pieces of tall bracket
+graphdata.gsets["ibm-troff"] = (94, 1, ((9615,), (9146,), (9149,), (9148,), (9121,), (9123,), (9124,), (9126,), (9127,), (9128,), (9129,), (9131,), (9132,), (9133,), (9130,), (9633,), None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None))
+graphdata.chcpdocs['1109'] = 'ecma-35'
+graphdata.defgsets['1109'] = ('ibm-troff', 'nil', 'nil', 'nil')
+
+# HP 2640 series terminal Line Drawing set; IBM code page 1056
+graphdata.gsets["hplinedrawing"] = (94, 1, ((9504,), (9512,), (9519,), (9527,), (9567,), (9570,), (9572,), (9575,), (9553,), (9538,), (9535,), (9472,), (118295,), (9474,), (9532,), (9547,), (9507,), (9515,), (9523,), (9531,), (9500,), (9508,), (9516,), (9524,), (9552,), (9475,), (9473,), (9579,), (118294,), (9578,), (117826,), (9566,), (9495,), (9545,), (9608,), (9612,), (9615,), (9492,), (9496,), (118287,), (118292,), (118288,), (118289,), (118290,), (9543,), (9544,), (118293,), (118297,), (9487,), (9484,), (9499,), (9488,), (118291,), (9546,), (9491,), (9632,), (118296,), (9604,), (9569,), (9548,), (9576,), (118286,), (9573,), (9566,), (9495,), (9545,), (9608,), (9612,), (9615,), (9492,), (9496,), (118287,), (118292,), (118288,), (118289,), (118290,), (9543,), (9544,), (118293,), (118297,), (9487,), (9484,), (9499,), (9488,), (118291,), (9546,), (9491,), (9632,), (118296,), (9604,), (9569,), (9548,), (9576,), (118286,)))
+graphdata.chcpdocs['1056'] = 'ecma-35'
+graphdata.defgsets['1056'] = ('hplinedrawing', 'nil', 'nil', 'nil')
+
+# Line Drawing subset from RHS of code page 437; IBM's code page 1055
+graphdata.gsets["pclinedrawing"] = (94, 1, (None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (9617,), (9618,), (9619,), (9474,), (9508,), (9569,), (9570,), (9558,), (9557,), (9571,), (9553,), (9559,), (9565,), (9564,), (9563,), (9488,), (9492,), (9524,), (9516,), (9500,), (9472,), (9532,), (9566,), (9567,), (9562,), (9556,), (9577,), (9574,), (9568,), (9552,), (9580,), (9575,), (9576,), (9572,), (9573,), (9561,), (9560,), (9554,), (9555,), (9579,), (9578,), (9496,), (9484,), (9608,), (9604,), (9612,), (9616,), (9600,), None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (8729,), (183,), None, None, None, (9632,)))
+graphdata.chcpdocs['1055'] = 'ecma-35'
+graphdata.defgsets['1055'] = ('pclinedrawing', 'nil', 'nil', 'nil')
 

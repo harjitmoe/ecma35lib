@@ -220,9 +220,12 @@ raw_variants = {
     # Violation of ECMA-6:1991: lowercase letters omitted.
     "ir094": ([None, None, None, None, 0xA5, None, None, None, 
                            -1, -1, None, -1, -1], dict((i, -1) for i in range(0x61, 0x7B))),
-    # T.61 subset of IRV
+    # T.61 subset of IRV as in the IR-102 chart
     "ir102": ([None, 0xA4, None, None, -1, None, -1, None, 
                            -1, -1, None, -1, -1], {}),
+    # T.61 subset of IRV by strict definition without the two alternative-choice characters
+    "ir102/strict": ([-1, -1, None, None, -1, None, -1, None, 
+                              -1, -1, None, -1, -1], {}),
     # IBM's reduced invariant set for ASN.1 (IBM code page 61710)
     # Violation of ECMA-6:1991: 0x21 is omitted.
     # Violation of ECMA-6:1991: 0x22 is omitted.
@@ -530,6 +533,14 @@ raw_variants = {
     "alt646/galaksija/extended": ([None, None, 0x2962, 0x010C, 0x0106, 0x017D, 0x0160, None,
                                                None,   0x010D, 0x0107, 0x017E, 0x0161],
                                   {0x27: 0x1F896}),
+    # HP 7-bit "Gothic Legal" (with e.g. trademark / section signs) encoding; IBM code page 1052.
+    # Violation of ECMA-6:1991: 0x22 is not (strictly) ".
+    # Violation of ECMA-6:1991: 0x27 is not (strictly) '.
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/hplegal": ([None, None, None, None, 0xAE, None,   0xA9, None,
+                                    0xB0, 0xA7, 0xB6, 0x2020, 0x2122],
+                       {0x22: 0x2033, 0x27: 0x2032, 0x3C: 0x2017, 0x3E: 0xA2}),
 }
 
 for (name, (myvars, override)) in raw_variants.items():
@@ -542,5 +553,35 @@ for (name, (myvars, override)) in raw_variants.items():
                 myset[frm - 0x21] = None
     graphdata.gsets[name] = (94, 1, tuple(myset))
 
+graphdata.chcpdocs['367'] = graphdata.chcpdocs['895'] = graphdata.chcpdocs['1009'] = graphdata.chcpdocs['1010'] = graphdata.chcpdocs['1011'] = graphdata.chcpdocs['1012'] = graphdata.chcpdocs['1013'] = graphdata.chcpdocs['1014'] = graphdata.chcpdocs['1015'] = graphdata.chcpdocs['1016'] = graphdata.chcpdocs['1017'] = graphdata.chcpdocs['1018'] = graphdata.chcpdocs['1019'] = graphdata.chcpdocs['1020'] = graphdata.chcpdocs['1021'] = graphdata.chcpdocs['1023'] = graphdata.chcpdocs['1101'] = graphdata.chcpdocs['1102'] = graphdata.chcpdocs['1103'] = graphdata.chcpdocs['1104'] = graphdata.chcpdocs['1105'] = graphdata.chcpdocs['1106'] = graphdata.chcpdocs['1107'] = graphdata.chcpdocs['1052'] = graphdata.chcpdocs['1054'] = graphdata.chcpdocs['9444'] = graphdata.chcpdocs['61699'] = graphdata.chcpdocs['61700'] = graphdata.chcpdocs['61710'] = 'ecma-35'
+
+graphdata.defgsets['367'] = ('ir006', 'nil', 'nil', 'nil')
+graphdata.defgsets['895'] = ('ir014', 'nil', 'nil', 'nil')
+graphdata.defgsets['1009'] = ('ir002/tilde', 'nil', 'nil', 'nil')
+graphdata.defgsets['1010'] = ('ir069', 'nil', 'nil', 'nil')
+graphdata.defgsets['1011'] = ('ir021', 'nil', 'nil', 'nil')
+graphdata.defgsets['1012'] = ('ir015', 'nil', 'nil', 'nil')
+graphdata.defgsets['1013'] = ('ir004', 'nil', 'nil', 'nil')
+graphdata.defgsets['1014'] = ('ir085', 'nil', 'nil', 'nil')
+graphdata.defgsets['1015'] = ('ir084', 'nil', 'nil', 'nil')
+graphdata.defgsets['1016'] = ('ir060', 'nil', 'nil', 'nil')
+graphdata.defgsets['1017'] = ('ir060/dk', 'nil', 'nil', 'nil')
+graphdata.defgsets['1018'] = ('ir010', 'nil', 'nil', 'nil')
+graphdata.defgsets['1019'] = ('ir006/overline', 'nil', 'nil', 'nil')
+graphdata.defgsets['1020'] = ('ir121', 'nil', 'nil', 'nil')
+graphdata.defgsets['1021'] = ('alt646/decswiss', 'nil', 'nil', 'nil')
+graphdata.defgsets['1023'] = ('ir017', 'nil', 'nil', 'nil')
+
+graphdata.defgsets['1101'] = ('ir004/dec', 'nil', 'nil', 'nil')
+graphdata.defgsets['1102'] = ('alt646/decdutch', 'nil', 'nil', 'nil')
+graphdata.defgsets['1103'] = ('ir008-1/dec', 'nil', 'nil', 'nil')
+graphdata.defgsets['1104'] = ('ir025', 'nil', 'nil', 'nil')
+graphdata.defgsets['1105'] = ('ir009-1/dec', 'nil', 'nil', 'nil')
+graphdata.defgsets['1106'] = ('ir011/dec', 'nil', 'nil', 'nil')
+graphdata.defgsets['1107'] = ('ir060/dec', 'nil', 'nil', 'nil')
+graphdata.defgsets['1052'] = ('alt646/hplegal', 'nil', 'nil', 'nil')
+graphdata.defgsets['1054'] = graphdata.defgsets['9444'] = ('ir006', 'nil', 'nil', 'nil')
+graphdata.defgsets['61699'] = graphdata.defgsets['61700'] = ('ir170/ibm', 'nil', 'nil', 'nil')
+graphdata.defgsets['61710'] = ('ir102/ibm', 'nil', 'nil', 'nil')
 
 

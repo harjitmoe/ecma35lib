@@ -109,6 +109,8 @@ graphdata.gsets["ir144"] = (96, 1, tuple((i,) for i in (
              0x0448, 0x0449, 0x044A, 0x044B, 0x044C, 0x044D, 0x044E, 0x044F, 
              0x2116, 0x0451, 0x0452, 0x0453, 0x0454, 0x0455, 0x0456, 0x0457, 
              0x0458, 0x0459, 0x045A, 0x045B, 0x045C, 0x00A7, 0x045E, 0x045F)))
+graphdata.chcpdocs['915'] = 'ecma-35'
+graphdata.defgsets['915'] = ('ir006', 'ir144', 'nil', 'nil')
 
 # RHS of IBM code page 1124; ISO-8859-5 modification for Ukrainian
 graphdata.gsets["ir144/ukraine"] = (96, 1, tuple((i,) for i in (
@@ -124,6 +126,8 @@ graphdata.gsets["ir144/ukraine"] = (96, 1, tuple((i,) for i in (
              0x0448, 0x0449, 0x044A, 0x044B, 0x044C, 0x044D, 0x044E, 0x044F, 
              0x2116, 0x0451, 0x0452, 0x0491, 0x0454, 0x0455, 0x0456, 0x0457, 
              0x0458, 0x0459, 0x045A, 0x045B, 0x045C, 0x00A7, 0x045E, 0x045F)))
+graphdata.chcpdocs['1124'] = 'ecma-35'
+graphdata.defgsets['1124'] = ('ir006', 'ir144/ukraine', 'nil', 'nil')
 
 # JUS-I.B1.003 SRPSCII Cyrillic
 graphdata.gsets["ir146"] = (94, 1, (
@@ -192,6 +196,8 @@ graphdata.gsets["ir200"] = (96, 1, tuple((i,) if i else None for i in (
              0x0448, 0x0449, 0x044A, 0x044B, 0x044C, 0x044D, 0x044E, 0x044F, 
              0x2116, 0x0451, 0x04C8, 0x04D3, 0x04ED, 0x048D, 0x0456, 0x04E7,   
              0x048B, 0x04C6, 0x04CA, 0x00BB, 0x04CE, 0x00A7, 0x048F, 0x02EE)))
+graphdata.chcpdocs['59283'] = 'ecma-35'
+graphdata.defgsets['59283'] = ('ir006', 'ir200', 'nil', 'nil')
 
 # Volga-Uralic and Volga-Turkic Cyrillic (Everson-Gunn), another superset of IR-153
 graphdata.gsets["ir201"] = (96, 1, tuple((i,) if i else None for i in (
@@ -207,6 +213,8 @@ graphdata.gsets["ir201"] = (96, 1, tuple((i,) if i else None for i in (
              0x0448, 0x0449, 0x044A, 0x044B, 0x044C, 0x044D, 0x044E, 0x044F, 
              0x2116, 0x0451, 0x04D1, 0x04D3, 0x04D7, 0x04AB, 0x0456, 0x04E7,   
              0x04E5, 0x04DD, 0x04A5, 0x04F9, 0x04DF, 0x00A7, 0x04F1, 0x04F5)))
+graphdata.chcpdocs['58259'] = 'ecma-35'
+graphdata.defgsets['58259'] = ('ir006', 'ir201', 'nil', 'nil')
 
 # Other KOI-8 encodings
 graphdata.rhses["878"] = graphdata.rhses["20866"] = parsers.read_single_byte("WHATWG/index-koi8-r.txt")
