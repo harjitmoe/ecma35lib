@@ -155,6 +155,7 @@ _ir152[92] = (0x0175,)
 _ir152[93] = (0x0177,)
 graphdata.gsets["ir152"] = (96, 1, tuple(_ir152))
 
-# TODO: Adobe Standard and NeXT PostScript
+# The "Adobe Standard" or "PostScript Standard" encoding, yet another encoding related to T.61.
+graphdata.gsets["adobe-standard"] = (94, 1, ((161,), (162,), (163,), (8260,), (165,), (402,), (167,), (164,), (39,), (8220,), (171,), (8249,), (8250,), (64257,), (64258,), None, (8211,), (8224,), (8225,), (183,), None, (182,), (8226,), (8218,), (8222,), (8221,), (187,), (8230,), (8240,), None, (191,), None, (96,), (180,), (710,), (732,), (175,), (728,), (729,), (168,), None, (730,), (184,), None, (733,), (731,), (711,), (8212,), None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (198,), None, (170,), None, None, None, None, (321,), (216,), (338,), (186,), None, None, None, None, None, (230,), None, None, None, (305,), None, None, (322,), (248,), (339,), (223,), None, None, None))
 
 

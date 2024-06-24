@@ -88,7 +88,10 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
                           ("ir002/tilde",), # Private versions
                           ("ir002",)), # Original followed by any registered revisions, each of which must be superset of the previous
             tuple(b"A"): ("ir004", ("ir004/dec",), ("ir004",)),
-            tuple(b"B"): ("ir006", ("ir006/overline", "ir006/brvbar", "ir006/pli", "ir006/florin"), ("ir006",)),
+            tuple(b"B"): ("ir006",
+                          ("ir006/overline", "ir006/brvbar", "ir006/pli", "ir006/florin",
+                           "ir006/smartquotes"),
+                          ("ir006",)),
             tuple(b"C"): ("ir008-1", ("ir008-1/dec",), ("ir008-1",)),
             tuple(b"D"): "ir008-2",
             tuple(b"E"): ("ir009-1", ("ir009-1/dec",), ("ir009-1",)),
@@ -199,6 +202,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b">"): "dectechnical", # Thus VTx and compatibles
             tuple(b"?"): "aribkana/hiragana",
             tuple(b"\"4"): "ir138/dec", # Thus VTx and compatibles
+            tuple(b"\"9"): "adobe-standard",
             tuple(b"\":"): "alt646/ibmarabic",
             tuple(b"\";"): "ir166/1986",
             tuple(b"\"<"): "aribmosaic-c",
@@ -282,17 +286,17 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
 
 g96bytes = {tuple(b"@"): "ir111",
             tuple(b"A"): "ir100",
-            tuple(b"B"): "ir101",
+            tuple(b"B"): ("ir101", ("ir101/overring",), ("ir101",)),
             tuple(b"C"): "ir109",
             tuple(b"D"): "ir110",
             tuple(b"E"): "ir123",
-            tuple(b"F"): "ir126",
+            tuple(b"F"): ("ir126/euro", ("ir126/euro",), ("ir126",)),
             tuple(b"G"): "ir127",
             tuple(b"H"): "ir138",
             tuple(b"I"): "ir139",
             tuple(b"J"): ("ir142+ir156", ("ir142+ir156",), ("ir142",)),
             tuple(b"K"): "ir143",
-            tuple(b"L"): "ir144",
+            tuple(b"L"): ("ir144", ("ir144/ukraine",), ("ir144",)),
             tuple(b"M"): "ir148",
             tuple(b"N"): "ir152",
             tuple(b"O"): "ir153",
@@ -327,6 +331,11 @@ g96bytes = {tuple(b"@"): "ir111",
             # "9": ITU-T.101-B "MVI" set (TODO what does "MVI" stand for?)
             tuple(b"!0"): "rfc1345-ir111", # Not even a private IRR: no practical compatibility.
             tuple(b"!1"): "t101c-mosaic1",
+            tuple(b"!2"): "abicomp",
+            tuple(b"!3"): ("ibmvietnamese/euro", ("ibmvietnamese/euro",), ("ibmvietnamese",)),
+            tuple(b"!4"): "ibmlao",
+            tuple(b"\"?"): "decgreek8/nbsp",
+            tuple(b"%0"): "decturkish8/nbsp",
             tuple(b"$7"): ("symbolgr/euro/numsp",
                            ("symbolgr/numsp",),
                            ("symbolgr/euro", "symbolgr/euro/numsp")),

@@ -50,6 +50,10 @@ raw_variants = {
     # Violation of ECMA-6:1991: 0x21 is not !.
     "ir006/pli": ([None, None, None, None, None, None, 0xAC, None, 
                                None, None, 0xA6, None, None], {0x21: 0x7C}),
+    # ASCII-1967, curly quotation marks variant.
+    # Violation of ECMA-6:1991: 0x27 is not (strictly) '.
+    "ir006/smartquotes": ([None, None, None,   None, None, None, None, None, 
+                                       0x2018, None, None, None, None], {0x27: 0x2019}),
     # NATS-SEFI (Swedish and Finnish Journalism)
     "ir008-1": ([None, None, 0x3000, 0xC4, 0xD6, 0xC5, 0x25A0, None, 
                              0x2007, 0xE4, 0xF6, 0xE5, 0x2013], {}),
@@ -232,10 +236,10 @@ raw_variants = {
     "ir102/ibm": ([-1, -1, -1, -1, -1, -1, -1, -1, 
                             -1, -1, -1, -1, -1],
                   {0x21: -1, 0x22: -1, 0x25: -1, 0x26: -1, 0x2A: -1, 0x3B: -1, 0x3C: -1, 0x3E: -1}),
-    # CSA Z243.4:1985 primary set main version (Canadian French)
+    # Canadian Standard CSA Z243.4:1985 7-bit set main version (Canadian French)
     "ir121": ([None, None, 0xE0, 0xE2, 0xE7, 0xEA, 0xEE, None, 
                            0xF4, 0xE9, 0xF9, 0xE8, 0xFB], {}),
-    # CSA Z243.4:1985 primary set alternative version (Canadian French)
+    # Canadian Standard CSA Z243.4:1985 7-bit set alternative version (Canadian French)
     "ir122": ([None, None, 0xE0, 0xE2, 0xE7, 0xEA, 0xC9, None, 
                            0xF4, 0xE9, 0xF9, 0xE8, 0xFB], {}),
     # JUS I.B1.002 (CROSCII / Croatian / YUSCII for Gajica)

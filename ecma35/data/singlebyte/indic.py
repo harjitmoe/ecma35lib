@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019, 2020.
+# By HarJIT in 2019, 2020, 2024.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -55,5 +55,6 @@ graphdata.defgsets["874"] = graphdata.defgsets["1162"] = ("ir006", "ir166", "nil
 # Macintosh code page (doesn't have a Mozilla file)
 #graphdata.rhses["10021"] = parsers.read_mozilla_ut_file("Mozilla/macthai.ut")
 
-
+# RHS of IBM code page 1133 for Lao
+graphdata.gsets["ibmlao"] = (96, 1, (None, (3713,), (3714,), (3716,), (3719,), (3720,), (3754,), (3722,), (3725,), (3732,), (3733,), (3734,), (3735,), (3737,), (3738,), (3739,), (3740,), (3741,), (3742,), (3743,), (3745,), (3746,), (3747,), (3749,), (3751,), (3755,), (3757,), (3758,), None, None, None, (3759,), (3760,), (3762,), (3763,), (3764,), (3765,), (3766,), (3767,), (3768,), (3769,), (3772,), (3761,), (3771,), (3773,), None, None, None, (3776,), (3777,), (3778,), (3779,), (3780,), (3784,), (3785,), (3786,), (3787,), (3788,), (3789,), (3782,), None, (3804,), (3805,), (8365,), None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (3792,), (3793,), (3794,), (3795,), (3796,), (3797,), (3798,), (3799,), (3800,), (3801,), None, None, (162,), (172,), (166,), (160,)))
 
