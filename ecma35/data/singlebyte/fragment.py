@@ -54,6 +54,7 @@ graphdata.gsets["ir098"] = (94, 1, (
     None,      None,      None,      None,      None,      None,      None,      None,  
     None,      None,      None,      None,      None,      None,      None,
 ))
+graphdata.gsets["ir098/extended"] = (94, 1, (None, None, None, (9287,), None, None, None, None, None, (9286,), None, None, (9289,), None, (9288,), (48,), (49,), (50,), (51,), (52,), (53,), (54,), (55,), (56,), (57,), (9286,), (9287,), (9288,), (9289,), None, None, None, (9286,), (9287,), (9288,), (9289,), None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (8203,), None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None))
 
 # MARC 21's MARC-8 subscript numbers set
 graphdata.gsets["marc-subscript"] = (94, 1, tuple((i,) if i else None for i in (

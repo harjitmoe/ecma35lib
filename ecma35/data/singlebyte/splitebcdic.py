@@ -138,8 +138,6 @@ graphdata.gsets['gl1007'] = (94, 1, ((33,), None, (35,), (36,), (1642,), (38,), 
 
 graphdata.gsets['gl1024'] = (94, 1, ((33,), (34,), (35,), (36,), None, (38,), (39,), (40,), (41,), None, (43,), (44,), (45,), (46,), (47,), (48,), (49,), (50,), (51,), (52,), (53,), (54,), (55,), (56,), (57,), (58,), (59,), None, (61,), (62,), (63,), None, (65,), (66,), (67,), (68,), (69,), (70,), (71,), (72,), (73,), (74,), (75,), (76,), (77,), (78,), (79,), (80,), (81,), (82,), (83,), (84,), (85,), (86,), (87,), (88,), (89,), (90,), (91,), None, (93,), (770,), (95,), (768,), (97,), (98,), (99,), (100,), (101,), (102,), (103,), (104,), (105,), (106,), (107,), (108,), (109,), (110,), (111,), (112,), (113,), (114,), (115,), (116,), (117,), (118,), (119,), (120,), (121,), (122,), None, None, None, (771,)))
 
-graphdata.gsets['gl1032'] = (94, 1, (None, None, None, (9287,), None, None, None, None, None, (9286,), None, None, (9289,), None, (9288,), (48,), (49,), (50,), (51,), (52,), (53,), (54,), (55,), (56,), (57,), (9286,), (9287,), (9288,), (9289,), None, None, None, (9286,), (9287,), (9288,), (9289,), None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (8203,), None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None))
-
 graphdata.gsets['gl1033'] = (94, 1, (None, None, None, (65533,), None, (65533,), None, None, None, (65533,), None, None, (65533,), None, (65533,), (48,), (49,), (50,), (51,), (52,), (53,), (54,), (55,), (56,), (57,), (65533,), (65533,), (65533,), (65533,), (65533,), None, None, (65,), (66,), (67,), (68,), (69,), (70,), (71,), (72,), (73,), (74,), (75,), (76,), (77,), (78,), (79,), (80,), (81,), (82,), (83,), (84,), (85,), (86,), (87,), (88,), (89,), (90,), None, None, (8203,), None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None))
 
 graphdata.gsets['gl1039'] = (94, 1, (None, None, None, None, None, None, None, (9650,), None, None, None, None, None, None, None, None, (9675,), (8212,), (9830,), (9644,), None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None))
@@ -1039,7 +1037,7 @@ graphdata.defgsets['1030'] = ('gl290', 'gr1030', 'gl310', 'gr310')
 graphdata.chcpdocs['1031'] = 'ebcdic'
 graphdata.defgsets['1031'] = ('alt646/ibmjapan/noyen', 'gr1031', 'gl310', 'gr310')
 graphdata.chcpdocs['1032'] = 'ebcdic'
-graphdata.defgsets['1032'] = ('gl1032', 'gr1001', 'gl310', 'gr310')
+graphdata.defgsets['1032'] = ('ir098/extended', 'gr1001', 'gl310', 'gr310')
 graphdata.chcpdocs['1033'] = 'ebcdic'
 graphdata.defgsets['1033'] = ('gl1033', 'gr1033', 'gl310', 'gr310')
 graphdata.chcpdocs['1037'] = 'ebcdic'
