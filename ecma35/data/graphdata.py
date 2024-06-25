@@ -207,6 +207,10 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"="): "alt646/decswiss", # Thus VTx and compatibles
             tuple(b">"): "dectechnical", # Thus VTx and compatibles
             tuple(b"?"): "aribkana/hiragana",
+            tuple(b"!<"): "webdings_g0",
+            tuple(b"!="): "wingdings1_g0",
+            tuple(b"!>"): "wingdings2_g0",
+            tuple(b"!?"): "wingdings3_g0",
             tuple(b"\"0"): "iscii/devanagari",
             tuple(b"\"1"): "nbytehangul",
             tuple(b"\"2"): "alt646/hplegal",
@@ -218,7 +222,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"\"8"): "stop-symbol",
             tuple(b"\"9"): "adobe-standard",
             tuple(b"\":"): ("alt646/ibmarabic", ("alt646/ibmarabic/tiny",), ("alt646/ibmarabic",)),
-            tuple(b"\";"): "ir166/1986",
+            tuple(b"\";"): ("ir166/1986", (), ("ir166/minimal", "ir166/1986")),
             tuple(b"\"<"): "aribmosaic-c",
             tuple(b"\"="): "alt646/galaksija/extended",
             tuple(b"\">"): "decgreek7", # Thus VTx and compatibles
@@ -256,6 +260,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"$<"): "ir222",
             tuple(b"$="): "ir221",
             tuple(b"$>"): "marc-he", # Note: MARC itself uses b"2"
+            tuple(b"$?"): "armscii",
             tuple(b"%0"): "decturkish8", # Thus VTx and compatible
             tuple(b"%1"): "marc-superscript",
             tuple(b"%2"): "alt646/decturkish", # Thus VTx and compatibles
@@ -318,7 +323,7 @@ g96bytes = {tuple(b"@"): "ir111",
             tuple(b"Q"): "ir155",
             tuple(b"R"): ("ir142+ir156", ("ir142+ir156",), ("ir156",)),
             tuple(b"S"): "ir164",
-            tuple(b"T"): ("ir166", ("ir166/ibm",), ("ir166",)),
+            tuple(b"T"): ("ir166", ("ir166/ibm", "ir166/ibm/euro"), ("ir166",)),
             tuple(b"U"): "ir167",
             tuple(b"V"): "ir157",
             # "W" exceptionally reserved for the ITU-T.101-B "Picture Description Instructions" set
@@ -350,6 +355,14 @@ g96bytes = {tuple(b"@"): "ir111",
             tuple(b"!4"): "ibmlao",
             tuple(b"!5"): ("ibmestonian/euro", ("ibmestonian/euro",), ("ibmestonian",)),
             tuple(b"!6"): "lithuanian8",
+            tuple(b"!7"): ("ibmarabic/euro", ("ibmarabic/euro",), ("ibmarabic",)),
+            tuple(b"!8"): "ibmurdu",
+            tuple(b"!9"): ("ibmaix-arabic/isoextended",
+                           ("ibmaix-arabic/isoextended",),
+                           ("ibmaix-arabic/base",)),
+            tuple(b"!<"): ("ibmpc-arabic/base",
+                           ("ibmpc-arabic/small", "ibmpc-arabic/tiny"),
+                           ("ibmpc-arabic/base",)),
             tuple(b"\"?"): "decgreek8/nbsp",
             tuple(b"%0"): "decturkish8/nbsp",
             tuple(b"$7"): ("symbolgr/euro/numsp",

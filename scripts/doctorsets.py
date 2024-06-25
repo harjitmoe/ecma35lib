@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2022.
+# By HarJIT in 2022, 2024.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import sys, os, pprint
+import sys, os, pprint, re
 sys.path.append(os.path.abspath(os.pardir))
 
 from ecma35.data.graphdata import gsets, g94bytes, g96bytes, g94nbytes, g96nbytes, defgsets, gsetflags, ebcdicdbcs
@@ -28,9 +28,11 @@ for (kind, (idbytes, bit)) in [
         used.add(bit)
         if nominal_kind.setdefault(bit, kind) != kind:
             complaints.add((bit, "ReferencedWithConflictingKinds", nominal_kind[bit], kind))
+defgsetscountsasused = re.compile(r"^g[lr]\d+(?:/\w+)?\Z")
 for sets in defgsets.values():
     for i in sets:
-        used.add(i)
+        if defgsetscountsasused.match(i):
+            used.add(i)
 for i in ebcdicdbcs.values():
     used.add(i)
 used.remove(None)
