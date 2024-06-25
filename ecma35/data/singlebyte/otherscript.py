@@ -63,3 +63,8 @@ graphdata.gsets["ir222"] = (94, 1, (
     None,      None,      None,      None,      None,      None,      None,
 ))
 
+# KS C 5601's alternative "N-byte Hangul Code" (IBM code page 891)
+graphdata.gsets["nbytehangul"] = (94, 1, (None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (65440,), (65441,), (65442,), (65443,), (65444,), (65445,), (65446,), (65447,), (65448,), (65449,), (65450,), (65451,), (65452,), (65453,), (65454,), (65455,), (65456,), (65457,), (65458,), (65459,), (65460,), (65461,), (65462,), (65463,), (65464,), (65465,), (65466,), (65467,), (65468,), (65469,), (65470,), None, None, None, (65474,), (65475,), (65476,), (65477,), (65478,), (65479,), None, None, (65482,), (65483,), (65484,), (65485,), (65486,), (65487,), None, None, (65490,), (65491,), (65492,), (65493,), (65494,), (65495,), None, None, (65498,), (65499,), (65500,), None, None))
+graphdata.chcpdocs['891'] = 'ecma-35'
+graphdata.defgsets['891'] = ('alt646/ksroman', 'nbytehangul', 'nil', 'nil')
+

@@ -220,6 +220,11 @@ raw_variants = {
     # Violation of ECMA-6:1991: lowercase letters omitted.
     "ir094": ([None, None, None, None, 0xA5, None, None, None, 
                            -1, -1, None, -1, -1], dict((i, -1) for i in range(0x61, 0x7B))),
+    # LHS of IBM code page 4993
+    # Violation of ECMA-6:1991: lowercase letters omitted.
+    "ir094/ibm": ([None, None, None, -1, 0xA5, -1, -1, None, 
+                               -1,   -1, None, -1, 0x203E],
+                  dict((i, -1) for i in range(0x61, 0x7B))),
     # T.61 subset of IRV as in the IR-102 chart
     "ir102": ([None, 0xA4, None, None, -1, None, -1, None, 
                            -1, -1, None, -1, -1], {}),
@@ -446,6 +451,9 @@ raw_variants = {
     # Violation of ECMA-6:1991: 0x21 is not !.
     "alt646/ibmjapan": ([None, None, None, 0xA2, 0xA5, 0x21, 0xAC, None, 
                                      None, None, 0xA6, None, None], {0x21: 0x7C}),
+    # IBM code page 9089
+    "alt646/ibmjapan/tiny": ([None, None, None, -1,   -1,   -1,   -1, None, 
+                                          None, None, None, None, -1], {}),
     # Projection from DP94-range subset of EBCDIC code page 1027
     # Violation of ECMA-6:1991: 0x21 is not !.
     "alt646/ibmjapan/noyen": ([None, None, None, 0xA2, None, 0x21, 0xAC, None, 
@@ -528,6 +536,12 @@ raw_variants = {
     "alt646/ibmarabic": ([None, None, None, None, None, None, None, None, 
                                       None, None, None, None, None],
                          {0x25: 0x066A, 0x2A: 0x066D}),
+    # Left-hand side of IBM code page 13152
+    # Violation of ECMA-6:1991: 0x25 is not (strictly) %.
+    # Violation of ECMA-6:1991: 0x2A is not (strictly) *.
+    "alt646/ibmarabic/tiny": ([None, None, None, -1, -1,   -1, -1, None, 
+                                           -1,   -1, None, -1, -1],
+                              {0x25: 0x066A, 0x2A: 0x066D}),
     # Galaksija encoding for Gajica, extended with lowercase forms
     # Violation of ECMA-6:1991: 0x27 is not '.
     "alt646/galaksija/extended": ([None, None, 0x2962, 0x010C, 0x0106, 0x017D, 0x0160, None,
@@ -553,9 +567,8 @@ for (name, (myvars, override)) in raw_variants.items():
                 myset[frm - 0x21] = None
     graphdata.gsets[name] = (94, 1, tuple(myset))
 
-graphdata.chcpdocs['367'] = graphdata.chcpdocs['895'] = graphdata.chcpdocs['1009'] = graphdata.chcpdocs['1010'] = graphdata.chcpdocs['1011'] = graphdata.chcpdocs['1012'] = graphdata.chcpdocs['1013'] = graphdata.chcpdocs['1014'] = graphdata.chcpdocs['1015'] = graphdata.chcpdocs['1016'] = graphdata.chcpdocs['1017'] = graphdata.chcpdocs['1018'] = graphdata.chcpdocs['1019'] = graphdata.chcpdocs['1020'] = graphdata.chcpdocs['1021'] = graphdata.chcpdocs['1023'] = graphdata.chcpdocs['1101'] = graphdata.chcpdocs['1102'] = graphdata.chcpdocs['1103'] = graphdata.chcpdocs['1104'] = graphdata.chcpdocs['1105'] = graphdata.chcpdocs['1106'] = graphdata.chcpdocs['1107'] = graphdata.chcpdocs['1052'] = graphdata.chcpdocs['1054'] = graphdata.chcpdocs['9444'] = graphdata.chcpdocs['61699'] = graphdata.chcpdocs['61700'] = graphdata.chcpdocs['61710'] = 'ecma-35'
+graphdata.chcpdocs['367'] = graphdata.chcpdocs['895'] = graphdata.chcpdocs['1009'] = graphdata.chcpdocs['1010'] = graphdata.chcpdocs['1011'] = graphdata.chcpdocs['1012'] = graphdata.chcpdocs['1013'] = graphdata.chcpdocs['1014'] = graphdata.chcpdocs['1015'] = graphdata.chcpdocs['1016'] = graphdata.chcpdocs['1017'] = graphdata.chcpdocs['1018'] = graphdata.chcpdocs['1019'] = graphdata.chcpdocs['1020'] = graphdata.chcpdocs['1021'] = graphdata.chcpdocs['1023'] = graphdata.chcpdocs['1052'] = graphdata.chcpdocs['1054'] = graphdata.chcpdocs['1088'] = graphdata.chcpdocs['1101'] = graphdata.chcpdocs['1102'] = graphdata.chcpdocs['1103'] = graphdata.chcpdocs['1104'] = graphdata.chcpdocs['1105'] = graphdata.chcpdocs['1106'] = graphdata.chcpdocs['1107'] = graphdata.chcpdocs['1114'] = graphdata.chcpdocs['1126'] = graphdata.chcpdocs['5211'] = graphdata.chcpdocs['5222'] = graphdata.chcpdocs['9089'] = graphdata.chcpdocs['9444'] = graphdata.chcpdocs['61697'] = graphdata.chcpdocs['61699'] = graphdata.chcpdocs['61700'] = graphdata.chcpdocs['61710'] = 'ecma-35'
 
-graphdata.defgsets['367'] = ('ir006', 'nil', 'nil', 'nil')
 graphdata.defgsets['895'] = ('ir014', 'nil', 'nil', 'nil')
 graphdata.defgsets['1009'] = ('ir002/tilde', 'nil', 'nil', 'nil')
 graphdata.defgsets['1010'] = ('ir069', 'nil', 'nil', 'nil')
@@ -571,6 +584,8 @@ graphdata.defgsets['1019'] = ('ir006/overline', 'nil', 'nil', 'nil')
 graphdata.defgsets['1020'] = ('ir121', 'nil', 'nil', 'nil')
 graphdata.defgsets['1021'] = ('alt646/decswiss', 'nil', 'nil', 'nil')
 graphdata.defgsets['1023'] = ('ir017', 'nil', 'nil', 'nil')
+graphdata.defgsets['1052'] = ('alt646/hplegal', 'nil', 'nil', 'nil')
+graphdata.defgsets['1088'] = graphdata.defgsets['1126'] = graphdata.defgsets['5222'] = ('alt646/ksroman/tilde', 'nil', 'nil', 'nil')
 
 graphdata.defgsets['1101'] = ('ir004/dec', 'nil', 'nil', 'nil')
 graphdata.defgsets['1102'] = ('alt646/decdutch', 'nil', 'nil', 'nil')
@@ -579,9 +594,10 @@ graphdata.defgsets['1104'] = ('ir025', 'nil', 'nil', 'nil')
 graphdata.defgsets['1105'] = ('ir009-1/dec', 'nil', 'nil', 'nil')
 graphdata.defgsets['1106'] = ('ir011/dec', 'nil', 'nil', 'nil')
 graphdata.defgsets['1107'] = ('ir060/dec', 'nil', 'nil', 'nil')
-graphdata.defgsets['1052'] = ('alt646/hplegal', 'nil', 'nil', 'nil')
-graphdata.defgsets['1054'] = graphdata.defgsets['9444'] = ('ir006', 'nil', 'nil', 'nil')
-graphdata.defgsets['61699'] = graphdata.defgsets['61700'] = ('ir170/ibm', 'nil', 'nil', 'nil')
+graphdata.defgsets['9089'] = ('alt646/ibmjapan/tiny', 'nil', 'nil', 'nil')
+
+graphdata.defgsets['367'] = graphdata.defgsets['1054'] = graphdata.defgsets['1114'] = graphdata.defgsets['5211'] = graphdata.defgsets['9444'] = ('ir006', 'nil', 'nil', 'nil')
+graphdata.defgsets['61697'] = graphdata.defgsets['61699'] = graphdata.defgsets['61700'] = ('ir170/ibm', 'nil', 'nil', 'nil')
 graphdata.defgsets['61710'] = ('ir102/ibm', 'nil', 'nil', 'nil')
 
 

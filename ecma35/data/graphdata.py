@@ -6,7 +6,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import os, urllib.parse, json, collections, shutil
+import sys, os, urllib.parse, json, collections, shutil
 
 __all__ = [
     "codepoint_coverages", "gsets", "g94bytes", "g96bytes", "g94nbytes", "g96nbytes", "sumps",
@@ -60,9 +60,15 @@ codepoint_coverages = CoveragesOnDemand()
 gsets = {"nil": (94, 1, (None,)*94), "Unknown": (94, 1, (None,)*94)}
 gsetflags = collections.defaultdict(set)
 
+class GrumblingDict(dict):
+    def __setitem__(self, key, value):
+        if key in self:
+            print(f"{key!r} already in dictionary", file=sys.stderr)
+        super().__setitem__(key, value)
+
 c0graphics = {}
 rhses = {}
-defgsets = {}
+defgsets = GrumblingDict()
 chcpdocs = {}
 ebcdicdbcs = {}
 
@@ -102,7 +108,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             #   (as "ir013" or "ir006").
             tuple(b"H"): ("ir011", ("ir011/dec",), ("ir011",)),
             tuple(b"I"): ("ir013", ("ir013/ibm", "ir013/mac", "ir013/win", "ir013/euro",
-                                    "ir013/ibm/strict"),
+                                    "ir013/ibm/strict", "ir013/ibm/alternate"),
                                    ("ir013",)),
             tuple(b"J"): ("ir014", ("ir014/tilde",), ("ir014",)),
             tuple(b"K"): ("ir021", ("ir021/acute", "ir021/ibm38xx"), ("ir021",)),
@@ -146,7 +152,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"m"): "ir091",
             tuple(b"n"): "ir092",
             tuple(b"o"): ("ir093/ext", ("ir093/ext",), ("ir093",)),
-            tuple(b"p"): "ir094",
+            tuple(b"p"): ("ir094", ("ir094/ibm",), ("ir094",)),
             tuple(b"q"): ("ir095", ("ir095/double",), ("ir095",)),
             tuple(b"r"): "ir096",
             tuple(b"s"): "ir098",
@@ -201,6 +207,8 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"="): "alt646/decswiss", # Thus VTx and compatibles
             tuple(b">"): "dectechnical", # Thus VTx and compatibles
             tuple(b"?"): "aribkana/hiragana",
+            tuple(b"\"0"): "iscii/devanagari",
+            tuple(b"\"1"): "nbytehangul",
             tuple(b"\"2"): "alt646/hplegal",
             tuple(b"\"3"): "pclinedrawing",
             tuple(b"\"4"): "ir138/dec", # Thus VTx and compatibles
@@ -209,7 +217,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"\"7"): "ibm-troff",
             tuple(b"\"8"): "stop-symbol",
             tuple(b"\"9"): "adobe-standard",
-            tuple(b"\":"): "alt646/ibmarabic",
+            tuple(b"\":"): ("alt646/ibmarabic", ("alt646/ibmarabic/tiny",), ("alt646/ibmarabic",)),
             tuple(b"\";"): "ir166/1986",
             tuple(b"\"<"): "aribmosaic-c",
             tuple(b"\"="): "alt646/galaksija/extended",
@@ -268,7 +276,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"%="): "hebrew7", # Thus VTx and compatibles
             tuple(b"%>"): ("alt646/ibmdcf", ("alt646/ibmdcf/braces", "alt646/ibmdcf/degreesign"), ("alt646/ibmdcf",)),
             tuple(b"%?"): "alt646/ibmisrael",
-            tuple(b"&0"): ("alt646/ibmjapan", ("alt646/ibmjapan/noyen", "alt646/ibmjapan/swapyen"), ("alt646/ibmjapan",)),
+            tuple(b"&0"): ("alt646/ibmjapan", ("alt646/ibmjapan/noyen", "alt646/ibmjapan/swapyen", "alt646/ibmjapan/tiny"), ("alt646/ibmjapan",)),
             tuple(b"&1"): ("alt646/ibmkorea", ("alt646/ibmkorea/small",), ("alt646/ibmkorea",)),
             tuple(b"&2"): ("alt646/ibmlcs/big", ("alt646/ibmlcs/big",), ("alt646/ibmlcs",)),
             tuple(b"&3"): "alt646/ibmschsmall",
@@ -341,6 +349,7 @@ g96bytes = {tuple(b"@"): "ir111",
             tuple(b"!3"): ("ibmvietnamese/euro", ("ibmvietnamese/euro",), ("ibmvietnamese",)),
             tuple(b"!4"): "ibmlao",
             tuple(b"!5"): ("ibmestonian/euro", ("ibmestonian/euro",), ("ibmestonian",)),
+            tuple(b"!6"): "lithuanian8",
             tuple(b"\"?"): "decgreek8/nbsp",
             tuple(b"%0"): "decturkish8/nbsp",
             tuple(b"$7"): ("symbolgr/euro/numsp",

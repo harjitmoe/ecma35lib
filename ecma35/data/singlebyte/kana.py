@@ -61,6 +61,14 @@ graphdata.chcpdocs['1139'] = 'ecma-35'
 graphdata.defgsets['1139'] = ('ir014', 'ir013', 'nil', 'nil')
 graphdata.rhses["897"] = ((None,) * 33) + _the_mother + ((None,) * 32)
 graphdata.defgsets["897"] = ("ir014", "ir013", "nil", "nil")
+graphdata.chcpdocs['1086'] = 'ecma-35'
+graphdata.defgsets['1086'] = ('ir014', 'ir013', 'nil', 'nil')
+graphdata.chcpdocs['4993'] = 'ecma-35'
+graphdata.defgsets['4993'] = ('ir094/ibm', 'ir013', 'nil', 'nil')
+graphdata.chcpdocs['13185'] = 'ecma-35'
+graphdata.defgsets['13185'] = ('ir014', 'ir013', 'nil', 'nil')
+graphdata.chcpdocs['62337'] = 'ecma-35'
+graphdata.defgsets['62337'] = ('ir014', 'ir013', 'nil', 'nil')
 # IBM's 4992 (or unrestricted 896), plus further additions as explained above
 graphdata.gsets["ir013/ibm"] = (94, 1, _the_mother + (
                 (0xA2,), (0xA3,), (0xAC,), (0x5C,), (0x7E,), (0x203E,), (0xA6,)) + ((None,) * 24))
@@ -69,6 +77,11 @@ graphdata.gsets["ir013/ibm/strict"] = (94, 1, _the_mother + (
                 (0xA2,), (0xA3,), (0xAC,), (0x5C,), (0x7E,)) + ((None,) * 26))
 graphdata.chcpdocs['4992'] = 'ecma-35'
 graphdata.defgsets['4992'] = ('ir013/ibm/strict', 'nil', 'nil', 'nil')
+# RHS of IBM's code page 911
+graphdata.gsets["ir013/ibm/alternate"] = (94, 1, _the_mother + (
+                None, (0xA3,), (0xA2,), (0xAC,)) + ((None,) * 27))
+graphdata.chcpdocs['911'] = 'ecma-35'
+graphdata.defgsets['911'] = ('ir014', 'ir013/ibm/alternate', 'nil', 'nil')
 # 1-byte MacJapanese
 graphdata.gsets["ir013/mac"] = (94, 1, _the_mother + (
                 (0x5C,), (0xA0,), (0xA9,), (0x2122,), (0x2026,), 

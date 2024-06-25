@@ -262,5 +262,13 @@ graphdata.gsets['gr5142'] = (96, 1, ((160,), None, None, None, (164,), None, Non
 graphdata.chcpdocs['5142'] = 'ecma-35'
 graphdata.defgsets['5142'] = ('alt646/ibmarabic', 'gr5142', 'nil', 'nil')
 
+graphdata.gsets['gr9056'] = (96, 1, ((160,), (173,), None, (163,), (164,), None, None, None, None, None, None, None, (1548,), None, None, None, (1632,), (1633,), (1634,), (1635,), (1636,), (1637,), (1638,), (1639,), (1640,), (1641,), None, (1563,), None, None, None, (1567,), (162,), (65152,), (65153,), (65155,), (65157,), None, (65163,), (65165,), (65169,), (65171,), (65175,), (65179,), (65183,), (65187,), (65191,), (65193,), (65195,), (65197,), (65199,), (65203,), (65207,), (65211,), (65215,), (65219,), (65223,), (65227,), (65231,), (166,), (172,), (247,), (215,), None, (1600,), (65235,), (65239,), (65243,), (65247,), (65251,), (65255,), (65259,), (65261,), (65263,), (65267,), None, None, None, None, None, None, (65148,), None, None, None, None, None, None, None, None, None, None, None, None, None, None))
+graphdata.chcpdocs['9056'] = 'ecma-35'
+graphdata.defgsets['9056'] = ('alt646/ibmarabic', 'gr9056', 'nil', 'nil')
+
+graphdata.gsets['gr13152'] = (96, 1, ((160,), (173,), None, None, None, None, None, None, None, (65167,), (65173,), (65177,), (1548,), (65181,), (65185,), (65189,), None, None, None, None, None, None, None, None, None, None, (65233,), (1563,), (1587,), (1588,), (1589,), (1567,), (162,), (65152,), (65153,), (65155,), (65157,), None, (65163,), (65165,), None, (65171,), None, None, None, None, None, (65193,), (65195,), (65197,), (65199,), None, None, None, None, (65219,), (65223,), None, None, (166,), (172,), (247,), (215,), (65225,), (1600,), None, None, None, None, None, None, None, (65261,), (65263,), None, (1590,), None, None, (65229,), (65249,), None, (65148,), (65253,), (65257,), None, None, None, None, (65237,), None, None, (65245,), (65241,), (65265,), None, None))
+graphdata.chcpdocs['13152'] = 'ecma-35'
+graphdata.defgsets['13152'] = ('alt646/ibmarabic/tiny', 'gr13152', 'nil', 'nil')
+
 
 
