@@ -156,6 +156,7 @@ def show(name, *, plane=None):
     else:
         raise ValueError("unsupported set byte length size")
     #
+    offset = 1
     for (n, i) in enumerate(series):
         if not (n % hs):
             print()
@@ -168,21 +169,23 @@ def show(name, *, plane=None):
                     print(end = " " * 4)
             else:
                 print(end = tplat.format((n // hs) + ofs))
+            offset = 5
         #
+        orig_curchar = "".join(chr(abs(j)) for j in i) if isinstance(i, tuple) else chr(abs(i)) if i is not None else None
         if i is None:
-            curchar = "\uFFFD"
+            curchar = orig_curchar = "\uFFFD"
             zenkaku = False
         elif isinstance(i, tuple) and (namedata.get_ucscategory(chr(abs(i[0]))) == "Co"):
             if len(i) == 1:
-                curchar = "\x1B[35m\uFFFC\x1B[m"
+                curchar = "\x1B[35m\u253C\x1B[m"
             else:
-                curchar = "\x1B[33m\uFFFC\x1B[m"
+                curchar = "\x1B[33m\u253C\x1B[m"
             zenkaku = False
         elif isinstance(i, tuple) and (0x80 <= i[0] <= 0x9F):
             curchar = "\x1B[31m\uFFFC\x1B[m"
             zenkaku = False
         elif isinstance(i, tuple):
-            curchar = "".join(chr(abs(j)) for j in i)
+            curchar = orig_curchar = "".join(chr(abs(j)) for j in i)
             if i[0] < 0:
                 curchar = curchar[::-1]
             if 0xF870 <= ord(curchar[-1]) <= 0xF87F:
@@ -221,18 +224,19 @@ def show(name, *, plane=None):
             zenkaku = (ucd.east_asian_width(chr(abs(i[0]))) in ("W", "F")) and (
                 ucd.name(chr(abs(i[0])), None))
         elif namedata.get_ucscategory(chr(i)) == "Co":
-            curchar = "\x1B[32m\uFFFC\x1B[m"
+            curchar = "\x1B[32m\u253C\x1B[m"
             zenkaku = False
         elif 0x80 <= i <= 0x9F:
-            curchar = "\x1B[31m\uFFFC\x1B[m"
+            curchar = "\x1B[31m\u253C\x1B[m"
             zenkaku = False
         else:
             curchar = chr(i)
             zenkaku = (ucd.east_asian_width(chr(i)) in ("W", "F"))
         #
-        if ucd.category(curchar[0]) == "Mn":
+        if ucd.category(orig_curchar[0]) == "Mn":
             curchar = "\uFF65" + curchar
-        print(curchar, end = "\u200E " if not zenkaku else "\u200E")
+        offset += 2
+        print(curchar, end = f"\x1B[{offset:d}G")
     for i in range((hs - (n % hs) - 1) % hs):
         print(end = "\uFFFD ")
     print()

@@ -75,7 +75,7 @@ def read_single_byte(fil, *, mapper=identitymap, typ="plainext", filter_to_singl
                 raise ValueError("unknown type {!r}".format(typ))
         #
         if ucs[:2] in ("0x", "U+", "<U"):
-            ucs = mapper(pointer, tuple(int(j, 16) for j in ucs[2:].rstrip(">").split("+")))
+            ucs = mapper(pointer, tuple(int(j, 16) for j in ucs[2:].rstrip(">").replace("><U", "+").split("+")))
         else:
             ucs = mapper(pointer, (int(ucs, 16),))
         #
