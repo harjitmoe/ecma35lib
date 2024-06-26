@@ -174,20 +174,19 @@ def show(name, *, plane=None):
         orig_curchar = "".join(chr(abs(j)) for j in i) if isinstance(i, tuple) else chr(abs(i)) if i is not None else None
         if i is None:
             curchar = orig_curchar = "\uFFFD"
-            zenkaku = False
         elif isinstance(i, tuple) and (namedata.get_ucscategory(chr(abs(i[0]))) == "Co"):
             if len(i) == 1:
                 curchar = "\x1B[35m\u253C\x1B[m"
             else:
                 curchar = "\x1B[33m\u253C\x1B[m"
-            zenkaku = False
         elif isinstance(i, tuple) and (0x80 <= i[0] <= 0x9F):
             curchar = "\x1B[31m\uFFFC\x1B[m"
-            zenkaku = False
         elif isinstance(i, tuple):
             curchar = orig_curchar = "".join(chr(abs(j)) for j in i)
             if i[0] < 0:
                 curchar = curchar[::-1]
+            if ucd.category(orig_curchar[0]) == "Mn":
+                curchar = "\uFF65" + curchar
             if 0xF870 <= ord(curchar[-1]) <= 0xF87F:
                 if curchar[-1] == "\uF874":
                     # Left position (red).
@@ -221,20 +220,15 @@ def show(name, *, plane=None):
                     curchar = "\x1B[32m" + curchar[:-1] + "\x1B[m"
                 else:
                     curchar = "\x1B[33m" + curchar[:-1] + "\x1B[m"
-            zenkaku = (ucd.east_asian_width(chr(abs(i[0]))) in ("W", "F")) and (
-                ucd.name(chr(abs(i[0])), None))
         elif namedata.get_ucscategory(chr(i)) == "Co":
             curchar = "\x1B[32m\u253C\x1B[m"
-            zenkaku = False
         elif 0x80 <= i <= 0x9F:
             curchar = "\x1B[31m\u253C\x1B[m"
-            zenkaku = False
         else:
             curchar = chr(i)
-            zenkaku = (ucd.east_asian_width(chr(i)) in ("W", "F"))
+            if ucd.category(orig_curchar[0]) == "Mn":
+                curchar = "\uFF65" + curchar
         #
-        if ucd.category(orig_curchar[0]) == "Mn":
-            curchar = "\uFF65" + curchar
         offset += 2
         print(curchar, end = f"\x1B[{offset:d}G")
     for i in range((hs - (n % hs) - 1) % hs):
