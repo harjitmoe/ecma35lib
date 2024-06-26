@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2023.
+# By HarJIT in 2023, 2024.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -61,6 +61,9 @@ def cmyk_to_rgb(c, m, y, k):
     #   they are generally unsupported and ignored by terminal emulators, but convention seems to
     #   be for CMYK coördinates to be out of 100, including in contexts where RGB coördinates are
     #   out of 255, see e.g. https://content.tfl.gov.uk/tfl-colour-standard-issue-08.pdf
+    # Note that at least one existing implementation is documented as using the otherwise-undefined
+    #   "colourspace ID" parameter to set the maximum channel value:
+    #     https://github.com/mintty/mintty/wiki/Tips#text-attributes-and-rendering
     cf, mf, yf, kf = [i / 100.0 for i in (c, m, y, k)]
     cmid, mmid, ymid = [i * 3 for i in (cf, mf, yf)]
     kmid = kf * 4
