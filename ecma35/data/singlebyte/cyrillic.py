@@ -217,10 +217,12 @@ graphdata.chcpdocs['58259'] = 'ecma-35'
 graphdata.defgsets['58259'] = ('ir006', 'ir201', 'nil', 'nil')
 
 # Other KOI-8 encodings
-graphdata.rhses["878"] = graphdata.rhses["20866"
+graphdata.rhses["878"] = graphdata.rhses["4019"] = graphdata.rhses["20866"
     ] = parsers.read_single_byte("WHATWG/index-koi8-r.txt") # KOI8-R
-graphdata.rhses["1167"] = parsers.read_single_byte("ICU/ibm-1167_P100-2002.ucm") # KOI8-RU
-graphdata.rhses["1168"] = parsers.read_single_byte("ICU/ibm-1168_P100-2002.ucm") # KOI8-U
+graphdata.rhses["1167"] = graphdata.rhses["59246"
+    ] = parsers.read_single_byte("ICU/ibm-1167_P100-2002.ucm") # KOI8-RU
+graphdata.rhses["1168"] = graphdata.rhses["58222"
+    ] = parsers.read_single_byte("ICU/ibm-1168_P100-2002.ucm") # KOI8-U
 graphdata.rhses["21866"] = parsers.read_single_byte("WHATWG/index-koi8-u.txt") # KOI8-RU/U hybrid
 
 # The Windows encoding
@@ -237,7 +239,8 @@ graphdata.rhses["10007"] = graphdata.rhses["1283"] = tuple(maccy)
 
 # OEM code pages
 graphdata.rhses["855"] = parsers.read_single_byte("ICU/ibm-855_P100-1995.ucm") # non-Al’ternativnaja
-graphdata.rhses["866"] = parsers.read_single_byte("WHATWG/index-ibm866.txt") # Russia; "Cyrillic (DOS)"
+graphdata.rhses["866"] = graphdata.rhses["900"
+    ] = parsers.read_single_byte("WHATWG/index-ibm866.txt") # Russia; "Cyrillic (DOS)"
 graphdata.rhses["1125"] = parsers.read_single_byte("ICU/ibm-1125_P100-1997.ucm") # Ukraine
 graphdata.rhses["1131"] = parsers.read_single_byte("ICU/ibm-1131_P100-1997.ucm") # Belarus
 
