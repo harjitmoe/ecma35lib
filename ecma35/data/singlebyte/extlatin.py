@@ -568,8 +568,7 @@ graphdata.rhses["1254"] = parsers.read_single_byte("WHATWG/index-windows-1254.tx
 graphdata.defgsets["1254"] = ("ir006", "ir148", "nil", "nil")
 graphdata.rhses["1257"] = parsers.read_single_byte("WHATWG/index-windows-1257.txt") # Baltic
 
-# OEM pages (TODO: OEM 210 Greek and OEM 220 Spanish are both listed by DEC in the very definition
-#   of the DECSPPCS CSI control. I do not have a source for their layout.)
+graphdata.rhses["220"] = parsers.read_single_byte("Other/T1000220.ucm") # Spanish
 graphdata.rhses["437"] = parsers.read_single_byte("ICU/ibm-437_P100-1995.ucm") # United States
 graphdata.defgsets["437"] = ("ir006", "pclinedrawing", "nil", "nil") # Note: gets used as the default.
 graphdata.rhses["775"] = parsers.read_single_byte("ICU/ibm-775_P100-1996.ucm") # Baltic

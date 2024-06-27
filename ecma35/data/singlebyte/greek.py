@@ -263,7 +263,7 @@ graphdata.gsets["dectechnical"] = (94, 1, (
 graphdata.rhses["1253"] = parsers.read_single_byte("WHATWG/index-windows-1253.txt")
 
 # OEM code pages
-graphdata.rhses["737"] = parsers.read_single_byte("ICU/ibm-737_P100-1997.ucm")
+graphdata.rhses["210"] = graphdata.rhses["737"] = parsers.read_single_byte("ICU/ibm-737_P100-1997.ucm")
 graphdata.rhses["869"] = parsers.read_single_byte("ICU/ibm-869_P100-1995.ucm")
 
 # Macintosh code page

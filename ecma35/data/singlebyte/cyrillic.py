@@ -217,9 +217,11 @@ graphdata.chcpdocs['58259'] = 'ecma-35'
 graphdata.defgsets['58259'] = ('ir006', 'ir201', 'nil', 'nil')
 
 # Other KOI-8 encodings
-graphdata.rhses["878"] = graphdata.rhses["20866"] = parsers.read_single_byte("WHATWG/index-koi8-r.txt")
-# TODO: number 21866 is in reality used for both KOI8-U and KOI8-RU. WHATWG's "KOI8-U" is a hybrid.
-graphdata.rhses["1168"] = graphdata.rhses["21866"] = parsers.read_single_byte("WHATWG/index-koi8-u.txt")
+graphdata.rhses["878"] = graphdata.rhses["20866"
+    ] = parsers.read_single_byte("WHATWG/index-koi8-r.txt") # KOI8-R
+graphdata.rhses["1167"] = parsers.read_single_byte("ICU/ibm-1167_P100-2002.ucm") # KOI8-RU
+graphdata.rhses["1168"] = parsers.read_single_byte("ICU/ibm-1168_P100-2002.ucm") # KOI8-U
+graphdata.rhses["21866"] = parsers.read_single_byte("WHATWG/index-koi8-u.txt") # KOI8-RU/U hybrid
 
 # The Windows encoding
 graphdata.rhses["1251"] = parsers.read_single_byte("WHATWG/index-windows-1251.txt")
