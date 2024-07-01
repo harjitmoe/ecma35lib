@@ -35,6 +35,9 @@ deprecated_compatibility_ideographs = {
     0x2F8DA: 0x04DBD,
     0x2F8F0: 0x04DBE,
     0x2FA02: 0x04DBF,
+    # Note that U+FA99, U+FAB0 and U+FAD1 are candidates for future disunification and deprecation
+    #   when the CJK-K block gets added in however many years' time:
+    # https://appsrv.cse.cuhk.edu.hk/~irg/irg/irg57/IRGN2510_Disunify-3-chars.pdf
 }
 
 def remove_deprecated_cjkci(pointer, ucs):
