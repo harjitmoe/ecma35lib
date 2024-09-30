@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020/2021/2022/2023.
+# By HarJIT in 2019/2020/2021/2022/2023/2024.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -275,8 +275,16 @@ ksx1002_syllables = parsers.decode_main_plane_gl(
     "AppendixB-4300modernhangulsyllablesfromvarious94by94nationalstandards.txt")
 graphdata.gsets["ksx1002"] = (94, 2, parsers.fuse([ksx1002_hanja, ksx1002_syllables], "KSX1002-nosym.json"))
 
-# KS X 1027. Part 1 seems complete, part 2 has a lot of holes. Other parts are not ECMA-35 structured.
-graphdata.gsets["ksx1027_1"] = (94, 2, parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_KSource", "K2"))
+# KS X 1027. Part 1 (horizontal extensions) is more or less complete as expected of a set of
+#   horizontal extensions, while part 2 (vertical extensions) has a lot of holes. Other parts
+#   are not ECMA-35 structured.
+ksx1027_1_unihan = parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_KSource", "K2")
+ksx1027_1 = parsers.fuse([
+            # "K2-6557" Unihan source reference removed from U+8FD6 in Unicode 3.1.1 for unclear
+            #   reasons.
+            ((None,) * 6446) + ((0x8FD6,),),
+            ksx1027_1_unihan], "KSX1027-1.json")
+graphdata.gsets["ksx1027_1"] = (94, 2, ksx1027_1)
 ksx1027_2_hanja = parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_KSource", "K3")
 graphdata.gsets["ksx1027_2"] = (94, 2, ksx1027_2_hanja)
 
