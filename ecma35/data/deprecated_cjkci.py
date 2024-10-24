@@ -39,8 +39,10 @@ deprecated_compatibility_ideographs = {
     #   when the CJK-K block gets added in however many years' time, although this is disputed and
     #   may well not happen:
     # https://www.unicode.org/irg/docs/n2510-Disunify3.pdf
-    # U+2F980 is another candidate for future disunification and deprecation:
+    # U+2F980 is another candidate for future disunification and deprecation (proposed for U+2B73E):
     # https://www.unicode.org/irg/docs/n2771-Disunify.pdf
+    # https://www.unicode.org/irg/docs/n2702-Recommendations.pdf#page=4
+    # https://www.unicode.org/irg/docs/n2704-MiscEditorialReport.pdf#page=2
 }
 
 def remove_deprecated_cjkci(pointer, ucs):
