@@ -139,8 +139,15 @@ def show(name, *, plane=None):
         series = ((0x20,) if x[0] < 96 else ()) + x[2]
     elif x[1] == 2:
         sz = x[0]
-        hs = sz // 2
+        divisor = 2
+        hs = sz // divisor
         ofs = (8 - (hs % 8)) % 8
+        while hs >= 80:
+            divisor += 1
+            while sz % divisor:
+                divisor += 1
+            hs = sz // divisor
+            ofs = 1
         series = x[2]
     elif x[1] == 3:
         if plane is None:
@@ -160,16 +167,16 @@ def show(name, *, plane=None):
     for (n, i) in enumerate(series):
         if not (n % hs):
             print()
-            tplat = "{:2d}: "
+            tplat = "{:3d}: "
             #
             if sz:
-                if not ((n // hs) % 2):
+                if not ((n // hs) % divisor):
                     print(end = tplat.format((n // sz) + ofs))
                 else:
-                    print(end = " " * 4)
+                    print(end = " " * 5)
             else:
                 print(end = tplat.format((n // hs) + ofs))
-            offset = 5
+            offset = 6
         #
         orig_curchar = "".join(chr(abs(j)) for j in i) if isinstance(i, tuple) else chr(abs(i)) if i is not None else None
         if i is None:
