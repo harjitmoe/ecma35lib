@@ -81,6 +81,11 @@ annots = {
                'less of a problem than it might appear at first glance since it already appears in '
                'plane 1, at 01-05-81 (indeed, several of the characters in plane 2 row 9 (and, to '
                'a lesser extent, row 8) duplicate characters in plane 1 row 5).',
+    (2, 40, 0): '눐 is 02-18-76; 누ᇙ for 02-40-08 is a conjectural emendation.&ensp; 닔 is 02-19-27; 니ᇙ for 02-40-15 is per fold-out chart.&ensp; 듨 is 02-20-41; 드ᇓ for 02-40-81 is a conjectural emendation.',
+    (2, 45, 0): 'ᄫᅡᆨ is 02-45-45; ᄫᅡᆰ for 02-45-49 is a conjectural emendation.',
+    (2, 46, 0): 'ᄉᆞᇙ is 02-46-13; 사ᇙ for 02-46-36 is a conjectural emendation.&ensp; 숤 is 02-26-32; 수ᇌ for 02-46-59 is a conjectural emendation.',
+    (2, 49, 0): '옰 is 01-21-13; 오ᇙ for 02-49-40 is per fold-out chart.',
+    (2, 54, 0): 'ᄒᆞᇙ is 02-54-33; 하ᇙ for 02-54-49 is a conjectural emendation.',
 }
 
 blot = ""
@@ -115,14 +120,15 @@ for n, p in enumerate([plane1, plane2, plane3, plane4]):
         planewarn = None
         if bn == 2:
             planewarn = ("Established or deployed Unicode mappings for rows 1&ndash;14 and "
-                         "37&ndash;54 do not exist; rows 37&ndash;54 are not empty, although they are "
-                         "not shown here at present.&ensp;See also "
+                         "37&ndash;54 do not exist.&ensp;See also "
                          "<a href='https://charset.fandom.com/ko/wiki/KS_X_1002'>another speculative "
-                         "Unicode-mapped table</a>, which might differ from this one for rows "
-                         "1&ndash;14 in places (since those rows in this table were derived from the "
-                         "charts in the specification itself, not from that table).</p><p>By contrast, "
-                         "the remaining rows (i.e. 16–36 and 55–85) <em>do</em> have definitive "
-                         "Unicode mappings (given in the <a href=\"https://www.unicode.org/L2/L2024/24124-hangulsources-ucd-proposal.pdf\">proposed HangulSources.txt file</a> and the Unihan Database respectively), and those rows in this table reflect that.")
+                         "Unicode-mapped table</a>, which might differ from this one for those rows "
+                         "in places (since those rows in this table were derived from the charts in "
+                         "the specification itself, not from that table).</p><p>By contrast, the "
+                         "remaining rows (i.e. 16–36 and 55–85) <em>do</em> have definitive Unicode "
+                         "mappings (given in the <a href=\"https://www.unicode.org/L2/L2024/24124-hangulsources-ucd-proposal.pdf\">proposed "
+                         "HangulSources.txt file</a> and the Unihan Database respectively), and "
+                         "those rows in this table reflect that.")
         #
         showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ko-KR", part=q,
                              css="../css/codechart.css",
@@ -130,7 +136,7 @@ for n, p in enumerate([plane1, plane2, plane3, plane4]):
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
                              annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True,
                              noallocatenotice=noallocatenotice, planewarn=planewarn, blot=blot,
-                             skiprows = range(37, 55) if bn == 2 else None, siglum="KSC")
+                             siglum="KSC")
         f.close()
 
 

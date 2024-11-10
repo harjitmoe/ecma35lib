@@ -728,6 +728,9 @@ def dump_preview(outfile, planename, kutenfunc, number, array, *, lang="zh-TW", 
                 continue
             #
             print("<td>", end="", file=outfile)
+            if not has_break:
+                print("<a id='{:d}.{:d}.{:d}' class=anchor></a>".format(number,
+                            row, cell), file=outfile)
             variationhints.print_hints_to_html5(i, outfile, lang=lang, showbmppua=showbmppua)
             unicodefunc(i, outfile, None, jlfunc, number, row, cell)
         if big5ext_mode == 2:

@@ -195,3 +195,4 @@
 '["decode_main_plane_gl", ["cccii-maxmat.txt"], {"set96": true, "mapper": "remove_deprecated_cjkci"}]', (42840064, 3912486)
 '["decode_main_plane_gl", ["eacc-maxmat.txt"], {"set96": true, "mapper": "remove_deprecated_cjkci"}]', (46752768, 3912477)
 '["decode_main_plane_gl", ["cccii-nonkanji.txt"], {"set96": true}]', (50665472, 4093937)
+'["decode_main_plane_gl", ["ksx1002_37_54.txt"], {}]', (54759424, 72898)

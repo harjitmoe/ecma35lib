@@ -272,7 +272,8 @@ ksx1002_syllables = parsers.decode_main_plane_gl(
     parsers.parse_file_format("UTCDocs/HangulSources.txt", hangulsourcestxt = "1002"),
     "HangulSources.txt/1002")
 ksx1002_symbols = parsers.decode_main_plane_gl(parsers.parse_file_format("Custom/ksx1002_1_14.txt"), "ksx1002_1_14.txt")
-graphdata.gsets["ksx1002"] = (94, 2, parsers.fuse([ksx1002_symbols, ksx1002_hanja, ksx1002_syllables], "KSX1002-nosym.json"))
+ksx1002_oldsyllables = parsers.decode_main_plane_gl(parsers.parse_file_format("Custom/ksx1002_37_54.txt"), "ksx1002_37_54.txt")
+graphdata.gsets["ksx1002"] = (94, 2, parsers.fuse([ksx1002_symbols, ksx1002_hanja, ksx1002_syllables, ksx1002_oldsyllables], "KSX1002.json"))
 
 # KS X 1027. Part 1 (horizontal extensions) is more or less complete as expected of a set of
 #   horizontal extensions, while part 2 (vertical extensions) has a lot of holes (although these
