@@ -1,7 +1,8 @@
-AppendixB-4300modernhangulsyllablesfromvarious94by94nationalstandards.txt
-→ from https://unicode.org/L2/L2017/17080-three-hangul-syl.pdf
-→ attached to document by Jaemin Chung
-
 AppendixA_KPS9566-2011-to-Unicode.txt
 → from https://www.unicode.org/L2/L2018/18011-info-kps9566-2011.pdf
 → attached to document by Jaemin Chung
+
+HangulSources.txt
+→ from https://www.unicode.org/L2/L2024/24124-hangulsources-ucd-proposal.pdf
+→ attached to document by Ken Lunde & Jaemin Chung
+

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020/2021/2023.
+# By HarJIT in 2019/2020/2021/2023/2024.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -144,7 +144,7 @@ def readhexbytes(byt):
             byt = byt[2:]
 
 def parse_file_format(fil, *, twoway=False, prefer_sjis=False, skipstring=None, altcomments=False, 
-                      libcongress=False, utcl2_17_080=None, cidmap=None, gb12052=False, moz2004=False):
+                      libcongress=False, hangulsourcestxt=None, cidmap=None, gb12052=False, moz2004=False):
     cidmapnames = None
     for _i in open(os.path.join(directory, fil), "r", encoding="utf-8"):
         if not _i.strip():
@@ -159,26 +159,26 @@ def parse_file_format(fil, *, twoway=False, prefer_sjis=False, skipstring=None, 
             _ilist = _i.split()
             byts, ucs = _ilist[0], _ilist[-1]
             yield readhexbytes(byts), parse_ucs_codepoints(ucs)
-        elif utcl2_17_080 is not None:
-            number, ducs, ucs, wansung, ksx1002, kps, gbko, olducs, decomp = _i.strip().split()
-            if utcl2_17_080 == "wansung":
-                if wansung == "-":
+        elif hangulsourcestxt is not None:
+            ucs, johab, wansung, ksx1002, kps, gbko = _i.split("#", 1)[0].strip().split(";")
+            if hangulsourcestxt == "wansung":
+                if not wansung:
                     continue
-                yield readhexbytes(wansung), parse_ucs_codepoints(ucs)
-            elif utcl2_17_080 == "1002":
-                if ksx1002 == "-":
+                yield readhexbytes(wansung.lstrip("*")), parse_ucs_codepoints(ucs)
+            elif hangulsourcestxt == "1002":
+                if not ksx1002:
                     continue
                 yield readhexbytes(ksx1002), parse_ucs_codepoints(ucs)
-            elif utcl2_17_080 == "kps":
-                if kps == "-":
+            elif hangulsourcestxt == "kps":
+                if not kps:
                     continue
-                yield readhexbytes(kps), parse_ucs_codepoints(ucs)
-            elif utcl2_17_080 == "gbko":
-                if gbko == "-":
+                yield readhexbytes(kps.lstrip("*")), parse_ucs_codepoints(ucs)
+            elif hangulsourcestxt == "gbko":
+                if not gbko:
                     continue
                 yield readhexbytes(gbko), parse_ucs_codepoints(ucs)
             else:
-                raise ValueError("unrecognised utcl2_17_080 arg: {!r}".format(utcl2_17_080))
+                raise ValueError("unrecognised hangulsourcestxt arg: {!r}".format(hangulsourcestxt))
         elif cidmap:
             frm, to = cidmap
             if not cidmapnames:

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020, 2021, 2023.
+# By HarJIT in 2020, 2021, 2023, 2024.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -77,6 +77,10 @@ annots = {
                 'it, being closer to an elongated equals sign.&ensp;Compare the nominally bolder, '
                 'but still nominally much less bold/tall than typical display, mark at Ψ-06-61.',
     (1, 1, 77): 'Compare these two with Ψ-06-28 and Ψ-06-29.',
+    (2, 9, 0): 'Yes, the lowercase rho is skipped between 02-09-42 and 02-09-43.&ensp; This is '
+               'less of a problem than it might appear at first glance since it already appears in '
+               'plane 1, at 01-05-81 (indeed, several of the characters in plane 2 row 9 (and, to '
+               'a lesser extent, row 8) duplicate characters in plane 1 row 5).',
 }
 
 blot = ""
@@ -110,25 +114,18 @@ for n, p in enumerate([plane1, plane2, plane3, plane4]):
         noallocatenotice = None
         planewarn = None
         if bn == 2:
-            noallocatenotice = ("Established or deployed mappings do not exist for rows 1&ndash;15 "
-                                "of KS X 1002, although they are not empty.&ensp;See also "
-                                "<a href='https://twitter.com/ken_lunde/status/398651431072575488'>"
-                                "this excerpt of row 12 and part of 11</a> and "
-                                "<a href='https://charset.fandom.com/ko/wiki/KS_X_1002'>this "
-                                "speculative table</a>.")
-            planewarn = ("Rows 1&ndash;15 and 37&ndash;54 are not empty, although they are not "
-                         "shown since established or deployed mappings do not exist.&ensp;See "
-                         "also <a href='https://twitter.com/ken_lunde/status/398651431072575488'>"
-                         "this excerpt of row 12 and part of 11</a> and "
-                         "<a href='https://charset.fandom.com/ko/wiki/KS_X_1002'>this speculative "
-                         "table</a>.")
-        if bn == 4:
-            planewarn = ("My sole source for the mapping of KS X 1027-2 is the Unihan database; "
-                         "the frequent gaps are likely supposed to contain other hanja characters "
-                         "which are either absent from Unicode, or where KS X 1027-2 is not "
-                         "listed as their South Korean source mapping.")
+            planewarn = ("Established or deployed Unicode mappings for rows 1&ndash;14 and "
+                         "37&ndash;54 do not exist; rows 37&ndash;54 are not empty, although they are "
+                         "not shown here at present.&ensp;See also "
+                         "<a href='https://charset.fandom.com/ko/wiki/KS_X_1002'>another speculative "
+                         "Unicode-mapped table</a>, which might differ from this one for rows "
+                         "1&ndash;14 in places (since those rows in this table were derived from the "
+                         "charts in the specification itself, not from that table).</p><p>By contrast, "
+                         "the remaining rows (i.e. 16–36 and 55–85) <em>do</em> have definitive "
+                         "Unicode mappings (given in the <a href=\"https://www.unicode.org/L2/L2024/24124-hangulsources-ucd-proposal.pdf\">proposed HangulSources.txt file</a> and the Unihan Database respectively), and those rows in this table reflect that.")
         #
-        showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ko-KR", part=q, css="../css/codechart.css",
+        showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ko-KR", part=q,
+                             css="../css/codechart.css",
                              menuurl="/ksc-conc.html", menuname="Wansung code variant comparison",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
                              annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True,

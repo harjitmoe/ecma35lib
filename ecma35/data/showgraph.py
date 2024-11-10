@@ -547,7 +547,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
         return dump_preview(outfile, planefunc(number), kutenfunc, number, 
                nonvacant_sets[0][1], lang = lang, css = css, part = part, jlfunc = jlfunc,
                menuurl = menuurl, menuname = menuname, lasturl = lasturl, 
-               nexturl = nexturl, lastname = lastname, nextname = nextname,
+               nexturl = nexturl, lastname = lastname, nextname = nextname, siglum = siglum,
                is_96 = is_96, is_sbcs = is_sbcs, blot = blot, showbmppua = showbmppuas[0],
                planewarn = planewarn, skiprows = skiprows, big5ext_mode = big5ext_mode,
                rowannots = {j: v for ((i, j, k), v) in annots.items() if i == number and not k})

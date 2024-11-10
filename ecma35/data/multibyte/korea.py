@@ -266,22 +266,22 @@ kpsext = read_kps9566extras("UTCDocs/AppendixA_KPS9566-2011-to-Unicode.txt")
 graphdata.gsets["2011kpsextras"] = (94, 2, kpsext + (None,) * (94*94 - len(kpsext)))
 # KPS 10721 doesn't appear to be ECMA-35 structured.
 
-# KS X 1002. I can't find charts, leave alone mappings, for the
-#   special characters / symbols, only for the syllables and hanja.
+# KS X 1002.
 ksx1002_hanja = parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_KSource", "K1")
 ksx1002_syllables = parsers.decode_main_plane_gl(
-    parsers.parse_file_format("UTCDocs/AppendixB-4300modernhangulsyllablesfromvarious94by94nationalstandards.txt",
-        utcl2_17_080 = "1002"),
-    "AppendixB-4300modernhangulsyllablesfromvarious94by94nationalstandards.txt")
-graphdata.gsets["ksx1002"] = (94, 2, parsers.fuse([ksx1002_hanja, ksx1002_syllables], "KSX1002-nosym.json"))
+    parsers.parse_file_format("UTCDocs/HangulSources.txt", hangulsourcestxt = "1002"),
+    "HangulSources.txt/1002")
+ksx1002_symbols = parsers.decode_main_plane_gl(parsers.parse_file_format("Custom/ksx1002_1_14.txt"), "ksx1002_1_14.txt")
+graphdata.gsets["ksx1002"] = (94, 2, parsers.fuse([ksx1002_symbols, ksx1002_hanja, ksx1002_syllables], "KSX1002-nosym.json"))
 
 # KS X 1027. Part 1 (horizontal extensions) is more or less complete as expected of a set of
-#   horizontal extensions, while part 2 (vertical extensions) has a lot of holes. Other parts
-#   are not ECMA-35 structured.
+#   horizontal extensions, while part 2 (vertical extensions) has a lot of holes (although these
+#   "holes" are indeed skipped in at least the most recent few editions of KS X 1027-2 itself).
+#   Other parts are not ECMA-35 structured.
 ksx1027_1_unihan = parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_KSource", "K2")
 ksx1027_1 = parsers.fuse([
             # "K2-6557" Unihan source reference removed from U+8FD6 in Unicode 3.1.1 for unclear
-            #   reasons.
+            #   reasons. KS X 1027-1:2011 and KS X 1027-1:2021 both skip it.
             ((None,) * 6446) + ((0x8FD6,),),
             ksx1027_1_unihan], "KSX1027-1.json")
 graphdata.gsets["ksx1027_1"] = (94, 2, ksx1027_1)
