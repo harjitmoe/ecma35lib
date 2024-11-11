@@ -6,28 +6,20 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import sys, os, binascii, json, urllib.parse, shutil, itertools, dbm.dumb, collections.abc, re
+import sys, os, binascii, json, urllib.parse, shutil, itertools, collections.abc, re, urllib.parse, binascii
 from ecma35.data import gccdata
 from ecma35.data.names import namedata
 
 directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mbmaps")
 cachedirectory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mbmapscache.d")
-cachedbmfn = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mbmapscache")
 
 def identitymap(pointer, ucs):
     return ucs
 
 if (os.environ.get("ECMA35LIBDECACHE", "") == "1") and os.path.exists(cachedirectory):
     shutil.rmtree(cachedirectory)
-    os.unlink(cachedbmfn + ".dir")
-    os.unlink(cachedbmfn + ".dat")
-    os.unlink(cachedbmfn + ".bak")
 
 os.makedirs(cachedirectory, exist_ok=True)
-try:
-    cachedbm = dbm.dumb.open(cachedbmfn, "c")
-except EnvironmentError:
-    cachedbm = {}
 
 def return_to_list(f):
     def inner(*args, **kwargs):
@@ -49,37 +41,31 @@ def with_caching(f):
             else:
                 filtkwargs[key] = kwargs[key]
         token = json.dumps([f.__name__, filtargs, filtkwargs])
-        if token in cachedbm:
-            return LazyJSON(token, isfilecache=False)
+        tokencrc32 = "{:08X}".format(binascii.crc32(token.encode("utf-8")) & 0xFFFFFFFF)
+        main_arg = os.path.splitext(os.path.basename(filtargs[0]))[0] if filtargs and isinstance(filtargs[0], str) else f.__name__
+        filename = urllib.parse.quote(main_arg, "") + "_" + tokencrc32 + ".json"
+        if os.path.exists(os.path.join(cachedirectory, filename)):
+            return LazyJSON(filename)
         ret = f(*args, **kwargs)
         try:
-            cachedbm[token] = json.dumps(ret)
+            with open(os.path.join(cachedirectory, filename), "w", encoding="utf-8") as out:
+                out.write(json.dumps(ret))
         except EnvironmentError:
             pass
         return ret
     return inner
 
 class LazyJSON(list):
-    def __init__(self, filename, iscache=True, isfilecache=True):
-        if iscache and not isfilecache:
-            assert filename[0] != "/"
-            self._key = filename
-            self._filename = None
-        elif iscache and isfilecache:
+    def __init__(self, filename, iscache=True):
+        if iscache:
             self._filename = os.path.join(cachedirectory, filename)
-            self._key = None
         else:
             self._filename = os.path.join(directory, filename)
-            self._key = None
     def _load(self):
         if not super().__len__():
-            if self._filename:
-                f = open(self._filename)
-                super().extend(tuple(i) if isinstance(i, list) else i for i in json.load(f))
-                f.close()
-            else:
-                super().extend(tuple(i) if isinstance(i, list) else i
-                    for i in json.loads(cachedbm[self._key]))
+            f = open(self._filename)
+            super().extend(tuple(i) if isinstance(i, list) else i for i in json.load(f))
+            f.close()
     def __iter__(self):
         self._load()
         return super().__iter__()
