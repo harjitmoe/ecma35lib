@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020/2022/2023.
+# By HarJIT in 2019/2020/2022/2023/2024.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -37,16 +37,25 @@ from ecma35.data.multibyte import mbmapparsers as parsers
 # codes, and are somewhat chaotic, with a mixture of mappings to PUA, CJKA, CJKCI.
 
 
-full2005dict = {(0xE78D,): (0xFE10,), (0xE78E,): (0xFE12,), (0xE78F,): (0xFE11,), 
-                (0xE790,): (0xFE13,), (0xE791,): (0xFE14,), (0xE792,): (0xFE15,), 
-                (0xE793,): (0xFE16,), (0xE794,): (0xFE17,), (0xE795,): (0xFE18,), 
-                (0xE796,): (0xFE19,), (0xE816,): (0x20087,), (0xE817,): (0x20089,), 
-                (0xE818,): (0x200CC,), (0xE81E,): (0x9FB4,), (0xE826,): (0x9FB5,), 
-                (0xE82B,): (0x9FB6,), (0xE82C,): (0x9FB7,), (0xE831,): (0x215D7,), 
-                (0xE832,): (0x9FB8,), (0xE83B,): (0x2298F,), (0xE843,): (0x9FB9,), 
-                (0xE854,): (0x9FBA,), (0xE855,): (0x241FE,), (0xE864,): (0x9FBB,)}
+dict2005tofull = {(0xE78D,): (0xFE10,), (0xE78E,): (0xFE12,), (0xE78F,): (0xFE11,), 
+                  (0xE790,): (0xFE13,), (0xE791,): (0xFE14,), (0xE792,): (0xFE15,), 
+                  (0xE793,): (0xFE16,), (0xE794,): (0xFE17,), (0xE795,): (0xFE18,), 
+                  (0xE796,): (0xFE19,), (0xE816,): (0x20087,), (0xE817,): (0x20089,), 
+                  (0xE818,): (0x200CC,), (0xE81E,): (0x9FB4,), (0xE826,): (0x9FB5,), 
+                  (0xE82B,): (0x9FB6,), (0xE82C,): (0x9FB7,), (0xE831,): (0x215D7,), 
+                  (0xE832,): (0x9FB8,), (0xE83B,): (0x2298F,), (0xE843,): (0x9FB9,), 
+                  (0xE854,): (0x9FBA,), (0xE855,): (0x241FE,), (0xE864,): (0x9FBB,)}
+dict2005to2022 = {(0xE78D,): (0xFE10,), (0xE78E,): (0xFE12,), (0xE78F,): (0xFE11,), 
+                  (0xE790,): (0xFE13,), (0xE791,): (0xFE14,), (0xE792,): (0xFE15,), 
+                  (0xE793,): (0xFE16,), (0xE794,): (0xFE17,), (0xE795,): (0xFE18,), 
+                  (0xE796,): (0xFE19,), (0xE81E,): (0x9FB4,), (0xE826,): (0x9FB5,), 
+                  (0xE82B,): (0x9FB6,), (0xE82C,): (0x9FB7,), (0xE832,): (0x9FB8,), 
+                  (0xE843,): (0x9FB9,), (0xE854,): (0x9FBA,), (0xE864,): (0x9FBB,)}
+dict2022to2005 = {j: i for i, j in dict2005to2022.items()}
 def gb2005tofullmap(pointer, ucs):
-    return full2005dict.get(ucs, ucs)
+    return dict2005tofull.get(ucs, ucs)
+def gb2005to2022map(pointer, ucs):
+    return dict2005to2022.get(ucs, ucs)
 def gb2005to2000map(pointer, ucs):
     if ucs == (0x1E3F,):
         return (0xE7C7,)
@@ -110,6 +119,13 @@ graphdata.gsets["ir058/full"] = gb2312_full = (94, 2,
         "index-gb18030.txt",
         gbklike = True,
         mapper = gb2005tofullmap))
+graphdata.gsets["ir058/2022"] = (94, 2, 
+    parsers.decode_main_plane_whatwg(
+        parsers.parse_file_format("WHATWG/index-gb18030.txt"),
+        "index-gb18030.txt",
+        gbklike = True,
+        mapper = gb2005to2022map))
+graphdata.gsetflags["ir058/2022"] |= {"GBK:ALL_ALT_4BYTE_CODES"}
 
 # ITU's extension of ir058, i.e. with 6763 GB 2312 chars, 705 GB 8565.2 chars and 139 others.
 # Basically sticks a load of stuff (both hankaku and zenkaku) in what GBK would consider the
@@ -734,16 +750,19 @@ non_euccn_uro101 = [i for i in range(0x4E00, 0x9FA6)
 _gbk_exceptions_web = parsers.decode_gbk_non_uro_extras(
     parsers.parse_file_format("WHATWG/index-gb18030.txt"),
     "index-gb18030.txt")
-_gbk_exceptions_full = tuple(full2005dict.get(_i, _i) for _i in _gbk_exceptions_web)
+_gbk_exceptions_full = tuple(dict2005tofull.get(_i, _i) for _i in _gbk_exceptions_web)
 _gbk_exceptions = tuple({(0x3000,): (0xE5E5,)}.get(_i, _i) for _i in _gbk_exceptions_web)
+_gbk_exceptions_2022 = tuple(dict2005to2022.get(_i, _i) for _i in _gbk_exceptions)
 graphdata.gsets["gbk-nonuro-extras"] = (96, 2, _gbk_exceptions)
 graphdata.gsets["gbk-nonuro-extras-web"] = (96, 2, _gbk_exceptions_web)
 graphdata.gsets["gbk-nonuro-extras-full"] = (96, 2, _gbk_exceptions_full)
+graphdata.gsets["gbk-nonuro-extras-2022"] = (96, 2, _gbk_exceptions_2022)
 
 # Amounting to the first section of four-byte codes in GB18030: the second section can be mapped
 # directly, since no astral codepoint is in any part of the 2000 standard mappings for GBK (nor in
-# the 2005 standard mappings, for that matter), even though they do appear there in _de facto_
-# mappings which avoid mapping fully defined characters to PUA (see full2005dict above).
+# the 2005 standard mappings, for that matter, and the 2022 edition specifically excludes the
+# astral codepoints from its additional swaps), even though they do appear there in _de facto_
+# mappings which avoid mapping fully defined characters to PUA (see dict2005tofull above).
 # This does have to be generated from the 2000 edition standard mappings for the two-byte codes
 # (if the 2005 edition mappings are used, everything between U+1E3F and U+E7C7 finishes up off by 
 # one); the re-mapping of index 7457(dec) to 0xE7C7 in the 2005 version is handled directly by 

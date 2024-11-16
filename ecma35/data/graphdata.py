@@ -374,9 +374,9 @@ g96bytes = {tuple(b"@"): "ir111",
             tuple(b"~"): "nil"}
 
 g94nbytes = {tuple(b"@"): ("ir042/nec", ("ir042/ibm", "ir042/nec", "ir042/1990pivot", "ir042/adobe"), ("ir042",)),
-             tuple(b"A"): ("ir058/2005", # Preferred version
+             tuple(b"A"): ("ir058/2022", # Preferred version
                            # Private versions
-                           ("ir058/hant", "ir058/2000", "ir058/2005", None, "ir058/full",
+                           ("ir058/hant", "ir058/2000", "ir058/2005", "ir058/2022", "ir058/full",
                             "ir058/mac", "ir058/utc", "ir058/1986", "ir058/hant-strict",
                             "ir058/hant-utc", "ir058/ibm", "ir058/macraw", "ir058/macsemiraw",
                             "ir058/ms", "ir058/hant-full"),
@@ -443,7 +443,7 @@ g94nbytes = {tuple(b"@"): ("ir042/nec", ("ir042/ibm", "ir042/nec", "ir042/1990pi
              tuple(b"\"9"): ("japan-plane-3", (), ("japan-plane-3",)),
              tuple(b"~"): "nil"}
 
-g96nbytes = {tuple(b"!0"):("gbk-nonuro-extras", ("gbk-nonuro-extras-web", "gbk-nonuro-extras-full"), ("gbk-nonuro-extras",)),
+g96nbytes = {tuple(b"!0"):("gbk-nonuro-extras-2022", ("gbk-nonuro-extras-web", "gbk-nonuro-extras-full", "gbk-nonuro-extras-2022"), ("gbk-nonuro-extras",)),
              tuple(b"!1"): ("cccii", ("cccii-koha", "eacc-hongkong", "cccii", "eacc",), ("eacc-pure",)),
              tuple(b"~"): "nil"}
 

@@ -202,7 +202,8 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR ? G*DM4 A`|GB/T 2312-1980|
 |`IRR 0 G*DM4 A`|GB/T 12345 (hybrid approach)|
 |`IRR 1 G*DM4 A`|GB 18030-2000 levels 1 and 2|
-|`IRR 2 G*DM4 A`|GB 18030-2005 levels 1 and 2 (default)|
+|`IRR 2 G*DM4 A`|GB 18030-2005 levels 1 and 2|
+|`IRR 3 G*DM4 A`|GB 18030-2022 levels 1 and 2 (default)|
 |`IRR 4 G*DM4 A`|GB 18030, favouring duplicate mappings over PUA mappings for standard characters|
 |`IRR 5 G*DM4 A`|GB/T 2312, variant used on classic Mac OS, updated mappings|
 |`IRR 6 G*DM4 A`|GB/T 2312-1980, UTC version|
@@ -379,9 +380,10 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR ? G*DM4 " 8`|SJ 11239 (yet another supplementary set but labelled SJ rather than GB; numbered the eighth in its title)|
 |`IRR 0 G*DM4 " 8`|SJ 11239 making use of the BabelStone Han PUA|
 |`G*DM4 " 9`|"Unified Japanese IT Vendors Contemporary Ideographs, 1993", essentially a third JIS plane|
-|`IRR ? G*DM6 ! 0`|GBK extras (GB 18030, level 5 with associated UDC zone and non-URO part of level 4; accepted by GBK filter in G3 slot)|
+|`IRR ? G*DM6 ! 0`|GBK extras per GB 18030-2000 or GB 18030-2005 (GBK level 5 with associated UDC zone and non-URO part of level 4; accepted by GBK filter in G3 slot)|
 |`IRR 0 G*DM6 ! 0`|GBK extras, WHATWG/HTML5 variant|
 |`IRR 1 G*DM6 ! 0`|GBK extras, mapping all characters with defined glyphs to non-PUA|
+|`IRR 2 G*DM6 ! 0`|GBK extras per GB 18030-2022|
 |`IRR ? G*DM6 ! 1`|EACC / CCCII, Library of Congress version|
 |`IRR 0 G*DM6 ! 1`|EACC / CCCII, Koha Taiwan version|
 |`IRR 1 G*DM6 ! 1`|EACC / CCCII, Hong Kong Innovative Users Group / Hong Kong University version|
