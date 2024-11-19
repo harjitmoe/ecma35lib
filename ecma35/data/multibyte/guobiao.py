@@ -188,7 +188,7 @@ graphdata.gsets["ir165/swapg"] = (94, 2, ir165_std)
 # Further extended version of IR-165 with additional hanzi in the end of row 8, after the Zhuyin
 #   (i.e. kuten 08-83 thru 08-94).
 # This, along with the CCITT additions, were two extensions to GB 8565 which formerly left imprints
-#   on the Unihan database: https://appsrv.cse.cuhk.edu.hk/~irg/irg/irg50/IRGN2276.pdf
+#   on the Unihan database: https://www.unicode.org/irg/docs/n2276-GSourceIssues.pdf
 # That this resulted in a duplicate encoding of U+9B25 (between GB 8565 and this unnamed extension)
 #   apparently created confusion resulting in four characters (覀粦亅啰) being encoded off by one. The
 #   "ir165ext" table probably shouldn't recreate that, since it's merely a combination of extensions,
@@ -324,7 +324,7 @@ graphdata.gsets["gb12052"] = (94, 2, parsers.decode_main_plane_euc(
 #
 # A few of the Unihan mappings for GB 13131 and 13132 are off by one versus the published GB 7589
 #   and 7590 standards per IRG N2302:
-#     https://appsrv.cse.cuhk.edu.hk/~irg/irg/irg50/IRGN2302EddieLi.pdf
+#     https://www.unicode.org/irg/docs/n2302-GSourceIssues.pdf
 #   - Unihan's 03-16-65 thru 03-16-82 should be 02-16-66 thru 02-16-83
 #     - The 02-16-65 position should be U+201B5 (𠆵); Unihan's 03-16-83 shouldn't be present.
 #   - Unihan's 05-67-11 thru 05-67-24 should be 04-67-12 thru 04-67-25
@@ -333,9 +333,9 @@ graphdata.gsets["gb12052"] = (94, 2, parsers.decode_main_plane_euc(
 #   IRG N2290 / UTC L2/18-189), seemingly rejected the IRG N2302 corrections in IRG N2376.
 #   Possibly, this means they reflect regions of non-homology between the (published) GB 7589 and
 #   7590 and the (unpublished) GB 13131 and 13132?
-#     https://appsrv.cse.cuhk.edu.hk/~irg/irg/irg50/IRGN2293MiscEditorialReportIRG50.docx
+#     https://www.unicode.org/irg/docs/n2293-MiscEditorialReport.pdf
 #     https://www.unicode.org/L2/L2018/18189-irgn-2290-irg50-recs.pdf
-#     https://appsrv.cse.cuhk.edu.hk/~irg/irg/irg52/IRGN2376_UpdateGRef.pdf
+#     https://www.unicode.org/irg/docs/n2376-GSourceUpdate.pdf
 #
 # Handful of GB 7589 / 13131 not mapped to Unicode in kIRG_GSource:
 #     U+72AE at 19-57 (traditional / simplified)
@@ -545,7 +545,7 @@ def sj11239_fixer(pointer, ucs):
             (0xF3D0,): (0x650A, 0xF87F),
             (0xF3D3,): (0x22CF6, 0xF87F),
             #
-            # Further cases noted in https://appsrv.cse.cuhk.edu.hk/~irg/irg/irg61/IRGN2641.pdf
+            # Further cases noted in https://www.unicode.org/irg/docs/n2641-RareChinesePlaceNames.pdf
             (0xE487,): (0x4EC9, 0xF87F),
             (0xE1A3,): (0x2CDFC, 0xF87F),
             (0xF6B9,): (0x2596D, 0xF87F),
@@ -578,7 +578,7 @@ def sj11239_fixer(pointer, ucs):
     return babelstone_update_map(pointer, ucs)
 
 sjt_amendments = [
-    # https://appsrv.cse.cuhk.edu.hk/~irg/irg/irg61/IRGN2641.pdf
+    # https://www.unicode.org/irg/docs/n2641-RareChinesePlaceNames.pdf
     (None,) * (94*22 + 75) + ((0x839C, 0xF87F),), # 08-23-76 → U+839C
     (None,) * (94*22 + 90) + ((0x8422, 0xF87F),), # 08-23-91 → U+8422
     (None,) * (94*22 + 91) + ((0x8421, 0xF87F),), # 08-23-92 → U+8421

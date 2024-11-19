@@ -1,6 +1,6 @@
 # Characters from CNS 11643 planes 12, 13 and 14 proposed for horizontal extension to
 #   various Unicode characters in ISO/IEC JTC1/SC2/WG2/IRG N2635:
-# https://appsrv.cse.cuhk.edu.hk/~irg/irg/irg61/IRGN2635_HorizontalExtension.pdf
+# https://www.unicode.org/irg/docs/n2635-HorizontalExtension.pdf
 
 0xC2263 U+2EBF2
 0xC2265 U+2EBF3
