@@ -641,16 +641,18 @@ _gb7589fn = os.path.join(parsers.cachedirectory, "GB7589-Actual.json")
 _gb7590fn = os.path.join(parsers.cachedirectory, "GB7590-Actual.json")
 _pseudogb7589fn = os.path.join(parsers.cachedirectory, "GB7589-Unihan.json")
 _pseudogb7590fn = os.path.join(parsers.cachedirectory, "GB7590-Unihan.json")
-def blonkit(i):
-    ret = resolve.get(i, (tradat.get(i, [[],[]])[1] + [i])[0])
-    if ret in gb2312_1986[2]:
-        return i
-    return ret
+def gb13131or13132to7589or7590(i):
+    if result := resolve.get(i, None):
+        return result
+    if result := tradat.get(i, None):
+        if len(result[1]) == 1 and result[1][0] not in gb2312_1986[2]:
+            return result[1][0]
+    return i
 if (not os.path.exists(_gb7589fn)) or (not os.path.exists(_gb7590fn)) or (not os.path.exists(_pseudogb7589fn)) or (not os.path.exists(_pseudogb7590fn)):
-    _gb7589 = tuple(blonkit(i) for i in graphdata.gsets["gb13131-irgn2302"][2])
-    _gb7590 = tuple(blonkit(i) for i in graphdata.gsets["gb13132-irgn2302"][2])
-    _pseudogb7589 = tuple(blonkit(i) for i in graphdata.gsets["gb13131-irgn2376"][2])
-    _pseudogb7590 = tuple(blonkit(i) for i in graphdata.gsets["gb13132-irgn2376"][2])
+    _gb7589 = tuple(gb13131or13132to7589or7590(i) for i in graphdata.gsets["gb13131-irgn2302"][2])
+    _gb7590 = tuple(gb13131or13132to7589or7590(i) for i in graphdata.gsets["gb13132-irgn2302"][2])
+    _pseudogb7589 = tuple(gb13131or13132to7589or7590(i) for i in graphdata.gsets["gb13131-irgn2376"][2])
+    _pseudogb7590 = tuple(gb13131or13132to7589or7590(i) for i in graphdata.gsets["gb13132-irgn2376"][2])
     f = open(_gb7589fn, "w")
     f.write(json.dumps(_gb7589))
     f.close()
