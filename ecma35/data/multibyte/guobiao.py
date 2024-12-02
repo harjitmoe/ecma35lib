@@ -389,7 +389,7 @@ graphdata.gsets["gb13132-irgn2376"] = (94, 2, parsers.fuse([
 _irgn2376gb5 = graphdata.gsets["gb13132-irgn2376"][2]
 graphdata.gsets["gb13132-irgn2302"] = (94, 2, (
     *_irgn2376gb5[:6214],
-    None,
+    (0x25B36,),
     *_irgn2376gb5[6214:6228],
     *_irgn2376gb5[6229:6865],
     *_irgn2376gb5[6866:6877],

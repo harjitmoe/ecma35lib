@@ -1,5 +1,6 @@
-# Incomplete, work in progress table for converting the portions of GB 13132 (i.e. GB 7590 but
-#   with Traditional Chinese forms) that aren't listed as Unihan Database sources to Unicode.
+# Incomplete, work in progress table for converting the portions of GB 13132 (mainly homologous
+#   to GB 7590 but with Traditional Chinese forms, and with two small non-homologous regions)
+#   that aren't listed as Unihan Database sources to Unicode.
 0x3025	U+53C0
 0x3028	U+2219A
 0x3029	U+231C7
@@ -1158,6 +1159,47 @@
 0x6273	U+25B07
 0x6274	U+25AF1
 0x627D	U+25B14
+0x6323	U+25B0F
+0x632A	U+25CCA
+0x632C	U+25B2F
+0x632F	U+25B39
+0x6330	U+25B35
+0x6332	U+25B37
+0x6335	U+25B32
+0x6337	U+25B2E
+0x633A	U+25B59
+0x633C	U+25B89
+0x6342	U+25B56
+0x6343	U+25B57
+0x6347	U+25B53
+0x6349	U+25BF6
+0x6350	U+25B8F
+0x6351	U+25CA3
+0x6352	U+25BE7
+0x6354	U+25C77
+0x6355	U+25B98
+0x6357	U+25B92
+0x6358	U+25BE6
+0x635D	U+25BE9
+0x635F	U+25BE8
+0x6360	U+25D34
+0x6364	U+25C2D
+0x6366	U+25BDB
+0x6367	U+25BDA
+0x636C	U+25C1A
+0x636D	U+25C38
+0x636E	U+25C30
+0x636F	U+25C3C
+0x6371	U+25C19
+0x6372	U+25C7B
+0x6373	U+25D28
+0x6375	U+25E00
+0x6376	U+25C35
+0x6377	U+25CAC
+0x6378	U+25C28
+0x637A	U+25C22
+0x637C	U+25C26
+0x637D	U+25C2A
 0x645B	U+26960
 0x6460	U+81EE
 0x6540	U+2762C
