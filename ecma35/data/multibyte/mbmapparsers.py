@@ -710,7 +710,7 @@ def decode_main_plane_dbebcdic(parsed_stream, filenamekey, *, mapper=identitymap
     return tuple(_temp)
 
 @with_caching
-def read_unihan_planes(fil, wantkey, wantsource=None, set96=False, kutenform=False, *, mapper=identitymap):
+def read_unihan_planes(fil, wantkey, wantsource=None, set96=False, kutenform=False, transformfirst=None, *, mapper=identitymap):
     #wantkey = "kIRG_" + region + "Source"
     ST, ED, SZ = (1, 94, 94) if not set96 else (0, 95, 96)
     f = open(os.path.join(directory, fil), "r")
@@ -733,6 +733,8 @@ def read_unihan_planes(fil, wantkey, wantsource=None, set96=False, kutenform=Fal
             # Both are apparently y-variants of U+4EA1 (亡, CCCII 0x21305B)
             # Kludge to get this to work.
             continue
+        if transformfirst and data in transformfirst:
+            data = transformfirst[data]
         if wantsource:
             data = data[len(wantsource):]
         if kutenform:

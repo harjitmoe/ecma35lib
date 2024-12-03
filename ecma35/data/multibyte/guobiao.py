@@ -349,11 +349,22 @@ graphdata.gsets["gb12052"] = (94, 2, parsers.decode_main_plane_euc(
 #     U+79C4 at 59-51 (traditional / simplified)
 #     U+8226 at 69-53 (traditional / simplified)
 #     U+84C3 at 73-83 (traditional / simplified)
+g_source_conversion = {}
+with open(os.path.join(parsers.directory, "Custom/newgsource.txt"), "r") as _f:
+    for _line in _f:
+        if (not _line.strip()) or _line.startswith("#"):
+            continue
+        _a, _b = _line.strip().split()
+        g_source_conversion[_a] = _b
 graphdata.gsets["gb13131-irgn2376"] = (94, 2, parsers.fuse([
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "G3"),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_GSource", "G3"),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G3"),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "G3"),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "G3", transformfirst=g_source_conversion),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_GSource", "G3", transformfirst=g_source_conversion),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G3", transformfirst=g_source_conversion),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "G3", transformfirst=g_source_conversion),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "G2", transformfirst=g_source_conversion),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_GSource", "G2", transformfirst=g_source_conversion),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G2", transformfirst=g_source_conversion),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "G2", transformfirst=g_source_conversion),
         (None,) * ((94 * 18) + 56) + ((0x72AE,),),
         (None,) * ((94 * 19) + 52) + ((0x5829,),),
         (None,) * ((94 * 20) + 4) + ((0x22341,),),
@@ -373,10 +384,14 @@ graphdata.gsets["gb13131-irgn2302"] = (94, 2, (
     *_irgn2376gb3[1474:1492],
     *_irgn2376gb3[1493:]))
 graphdata.gsets["gb13132-irgn2376"] = (94, 2, parsers.fuse([
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "G5"),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_GSource", "G5"),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G5"),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "G5"),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "G5", transformfirst=g_source_conversion),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_GSource", "G5", transformfirst=g_source_conversion),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G5", transformfirst=g_source_conversion),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "G5", transformfirst=g_source_conversion),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "G4", transformfirst=g_source_conversion),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_GSource", "G4", transformfirst=g_source_conversion),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G4", transformfirst=g_source_conversion),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "G4", transformfirst=g_source_conversion),
         parsers.read_unihan_planes("UCD/Unihan_OtherMappings-16.txt", "kGB5", kutenform=True),
         parsers.read_unihan_planes("UCD/Unihan_OtherMappings-15.txt", "kGB5", kutenform=True),
         parsers.read_unihan_planes("UCD/Unihan_OtherMappings-14.txt", "kGB5", kutenform=True),
@@ -598,6 +613,7 @@ sjt_amendments = [
 ]
 
 graphdata.gsets["sj11239/babelstonehan"] = (94, 2, parsers.fuse([
+    parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "GSJT", transformfirst=g_source_conversion),
     *sjt_amendments,
     parsers.decode_main_plane_whatwg(
         parsers.parse_sjt11239_mapping_file("BabelStone/SJT-IDS.TXT"),
@@ -605,6 +621,7 @@ graphdata.gsets["sj11239/babelstonehan"] = (94, 2, parsers.fuse([
         mapper=babelstone_update_map)], "SJ-11239-BabelStoneHan.json"))
 
 graphdata.gsets["sj11239"] = (94, 2, parsers.fuse([
+    parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "GSJT", transformfirst=g_source_conversion),
     *sjt_amendments,
     parsers.decode_main_plane_whatwg(
         parsers.parse_sjt11239_mapping_file("BabelStone/SJT-IDS.TXT",
