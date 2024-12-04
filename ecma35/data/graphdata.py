@@ -389,7 +389,7 @@ g94nbytes = {tuple(b"@"): ("ir042/nec", ("ir042/ibm", "ir042/nec", "ir042/1990pi
                            ("ir087", "ir168")),
              tuple(b"C"): ("ir149/unihan", ("ir149/altutc", "ir149/1998", "ir149/2002", "ir149/mac", "ir149/ibm", "ir149/mac-unicode2_1", "ir149/mac-unicode3_2", "ir149/unihan"), ("ir149",)),
              tuple(b"D"): ("ir159",
-                           ("ir159/va", "ir159/osf", "ir159/osfa", "ir159/osfm", "ir159/ibm", "ir159/icueuc"),
+                           ("ir159/va", "ir159/osf", "ir159/osfa", "ir159/osfm", "ir159/ibm", "ir159/icueuc", "ir159/irgn2722"),
                            ("ir159",)),
              tuple(b"E"): ("ir165", ("ir165/swapg", "ir165/ext", "gb6345", "gb8565", "gb8565-oldwrongunihan"), ("ir165",)), # n.b. KS X 1002 seems to unilaterally usurp this one?
              tuple(b"F"): "ir169",

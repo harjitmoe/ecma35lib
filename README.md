@@ -250,6 +250,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 3 G*DM4 D`|JIS X 0212, Open Group version for Microsoft-style EUC-JP|
 |`IRR 4 G*DM4 D`|JIS X 0212, version encoded by IBM-954|
 |`IRR 5 G*DM4 D`|JIS X 0212, version encoded by ICU's EUC-JP|
+|`IRR 6 G*DM4 D`|JIS X 0212, with potential source-reference change highlighted in [IRGN2722](https://www.unicode.org/irg/docs/n2722-JSourceIssues.pdf)|
 |`IRR ? G*DM4 E`|CCITT Hanzi Code (GB 2312 variant) from ITU T.101-C, which bases it on GB 6345.1-1986 and GB 8565.2-1988 with further adjustments and expansions|
 |`IRR 0 G*DM4 E`|CCITT Hanzi Code, with a more conventional mapping of the lowercase gs (appropriate for their GB 18030 reference glyphs)|
 |`IRR 1 G*DM4 E`|CCITT Hanzi Code, combined with an additional hanzi extension in row 8|

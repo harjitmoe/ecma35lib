@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020, 2021, 2023.
+# By HarJIT in 2020, 2021, 2023, 2024.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -67,7 +67,8 @@ plane1 = (1, ("1978 JIS<br>Illustrative",  "1978 JIS<br>90JIS Pivot",  "1983 JIS
 
 plane2 = (2, ("IBM SJIS Ext<br>78JIS Ver.", "IBM SJIS Ext<br>MS / HTML5", "DoCoMo<br>SJIS Emoji",
               "au by KDDI<br>SJIS Emoji", "SoftBank<br>SJIS Emoji",
-              "1990 JIS<br>Plane 2", "Va Extension<br>Plane 2", "OSF EUC<br>Plane 2M",
+              "1990 JIS<br>Plane 2", "IRG N2722<br>Plane 2", "Va Extension<br>Plane 2",
+              "OSF EUC<br>Plane 2M",
               "IBM 90JIS<br>Plane 2", "ICU EUC<br>Plane 2", "2000/04 JIS<br>Plane 2"), [
           graphdata.gsets["ibmsjisextold"][2],
           graphdata.gsets["ibmsjisextpua"][2],
@@ -75,6 +76,7 @@ plane2 = (2, ("IBM SJIS Ext<br>78JIS Ver.", "IBM SJIS Ext<br>MS / HTML5", "DoCoM
           graphdata.gsets["kddipictsjisext"][2],
           graphdata.gsets["sbanksjisext"][2],
           graphdata.gsets["ir159"][2],
+          graphdata.gsets["ir159/irgn2722"][2],
           graphdata.gsets["ir159/va"][2],
           graphdata.gsets["ir159/osfm"][2],
           graphdata.gsets["ir159/ibm"][2],

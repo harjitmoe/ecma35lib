@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020/2022/2023.
+# By HarJIT in 2019/2020/2022/2023/2024.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -160,6 +160,15 @@ graphdata.gsets["ir159/icueuc"] = (94, 2, parsers.decode_main_plane_euc(
     "euc-jp-2007.ucm",
     eucjp = 1,
     plane = 2))
+def irgn2722proposal(pointer, ucs):
+    # https://www.unicode.org/irg/docs/n2722-JSourceIssues.pdf
+    if pointer == 4661 and ucs == (0x7BF9,):
+        return (0x25CBB,)
+    return ucs
+graphdata.gsets["ir159/irgn2722"] = (94, 2, parsers.decode_main_plane_whatwg(
+    parsers.parse_file_format("WHATWG/index-jis0212.txt"),
+    "index-jis0212.txt",
+    mapper = irgn2722proposal))
 
 # JIS X 0208:1990 or 1997
 graphdata.gsets["ir168"] = jisx0208_1990 = (94, 2, parsers.decode_main_plane_gl(
