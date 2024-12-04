@@ -408,7 +408,7 @@ graphdata.gsets["gb13132-irgn2302"] = (94, 2, (
     *_irgn2376gb5[6214:6228],
     *_irgn2376gb5[6229:6865],
     *_irgn2376gb5[6866:6877],
-    None,
+    (0x26F30,),
     *_irgn2376gb5[6877:]))
 #
 # Small handful of GB16500 not in kIRG_GSource in Unihan 13.0 (Unihan 14.0 unmaps a few more):
