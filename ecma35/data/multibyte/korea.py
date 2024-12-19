@@ -113,9 +113,31 @@ oldunicodeksc = parsers.decode_main_plane_gl(
 _wansung_syllables = parsers.fuse([
             (((-1,),) * 1410) + ((None,) * 2350) + (((-1,),) * 5076),
             wansung[2]], "Wansung_SyllablesOnly.json")
-_wansung_temp = parsers.fuse([_wansung_syllables, oldunicodeksc], "Wansung_AltUTC.json")
-graphdata.gsets["ir149/altutc"] = wansung_utcalt = (94, 2, _wansung_temp)
+_wansung_utcalt = parsers.fuse([_wansung_syllables, oldunicodeksc], "Wansung_AltUTC.json")
+graphdata.gsets["ir149/altutc"] = wansung_utcalt = (94, 2, _wansung_utcalt)
 graphdata.gsetflags["ir149/altutc"] |= {"UHC:IS_WANSUNG"}
+
+# https://www.unicode.org/irg/docs/n2298r-IICoreChanges.pdf#page=6
+_irgn2298feedback_table = {
+    0x596C: 0x734E,
+    0x6E17: 0x6EF2,
+    0x8009: 0x8008,
+    0x80C4: 0x5191,
+    0x9ED8: 0x9ED9,
+}
+def irgn2298feedback_convert(pointer, ucs):
+    if len(ucs) == 1 and (target := _irgn2298feedback_table.get(ucs[0], None)):
+        return (target,)
+    return deprecated_cjkci.remove_deprecated_cjkci(pointer, ucs)
+graphdata.gsets["ir149/irgn2298feedback"] = (94, 2, parsers.fuse([
+    parsers.decode_main_plane_whatwg(
+        parsers.parse_file_format("WHATWG/index-euc-kr.txt"),
+        "index-euc-kr.txt", 
+        gbklike=True,
+        mapper=irgn2298feedback_convert),
+    _wansung_temp,
+], "Wansung_IRGN2298_feedback.json"))
+graphdata.gsetflags["ir149/irgn2298feedback"] |= {"UHC:IS_WANSUNG"}
 
 ibm_korea_pua = {0xF843: 0x5580, 0xF844: 0x91B5, 0xF845: 0x7A27, 0xF846: 0x6677, 0xF847: 0x8987, 0xF848: 0x551C, 0xF849: 0x7370, 0xF84A: 0x9B27, 0xF84B: 0x797F, 0xF84C: 0x5BE5, 0xF84D: 0x63D0, 0xF84E: 0x5A46, 0xF84F: 0x6F58, 0xF850: 0x904D, 0xF851: 0x541F, 0xF852: 0x5DFF, 0xF853: 0x6C99, 0xF854: 0x8D07, 0xF855: 0x9E9D, 0xF856: 0x9F5F, 0xF857: 0x5C04, 0xF858: 0x55AE, 0xF859: 0x6D17, 0xF85A: 0x9730, 0xF85B: 0xF909, 0xF85C: 0x5BBF, 0xF85D: 0x96CE, 0xF85E: 0x5BFA, 0xF85F: 0x745F, 0xF860: 0x5C04, 0xF861: 0x5C04, 0xF862: 0x7FA8, 0xF863: 0x540A, 0xF864: 0x5247, 0xF865: 0x6E4C, 0xF866: 0x6578, 0xF867: 0x69CC, 0xF868: 0x677B, 0xF869: 0x8D05, 0xF86A: 0x5E40, 0xF86B: 0x5206, 0xF86C: 0x90AF, 0xF86D: 0x614A, 0xF86E: 0x965C}
 
