@@ -109,7 +109,7 @@ def cnsmapper_contrabadcjkb(pointer, ucs):
     #   https://www.unicode.org/L2/L2024/24126-comments-cjk-abbrev.pdf
     if ucs == (0x20B9D,):
         return (0xBBF8,)
-    return ucs
+    return deprecated_cjkci.remove_deprecated_cjkci(pointer, ucs)
 
 planesize = 94 * 94
 cns_bmp = parsers.decode_main_plane_gl(

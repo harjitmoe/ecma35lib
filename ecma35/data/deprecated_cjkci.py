@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2023.
+# By HarJIT in 2023, 2024.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -35,6 +35,26 @@ deprecated_compatibility_ideographs = {
     0x2F8DA: 0x04DBD,
     0x2F8F0: 0x04DBE,
     0x2FA02: 0x04DBF,
+    #
+    # CNS 11643 references not moved yet but proposed to be:
+    #   https://www.unicode.org/irg/docs/n2519-TSourceIssues.pdf#page=35
+    0x2F82C: 0x20984,
+    0x2F85B: 0x21533,
+    0x2F860: 0x216A7,
+    0x2F89C: 0x22505,
+    0x2F905: 0x23D40,
+    0x2F90E: 0x23F1C,
+    0x2F91C: 0x242B3,
+    0x2F927: 0x2AEC5,
+    #0x2F935: 0x24C36, # disunified in other direction to U+24C53, thus redundant but valid
+    0x2F943: 0x2511A,
+    0x2F94B: 0x25271,
+    0x2F953: 0x25632, # lacks acknowledgement in code chart cross-references
+    0x2F96E: 0x31E7C, # lacks acknowledgement in code chart cross-references
+    0x2F9B6: 0x27205,
+    0x2F9CB: 0x4695,
+    0x2F9D6: 0x25AD4,
+    #
     # Note that U+FA99, U+FAB0 and U+FAD1 are candidates for future disunification and deprecation
     #   when the CJK-K block gets added in however many years' time, although this is disputed and
     #   may well not happen:
