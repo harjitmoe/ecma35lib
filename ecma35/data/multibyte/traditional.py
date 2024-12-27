@@ -518,6 +518,9 @@ graphdata.gsets["cns-eucg2-ms"] = (94, 3, parsers.decode_main_plane_big5(
     "big5_to_cns2_ibmvar"))
 graphdata.gsetflags["cns-eucg2-ms"] |= {"BIG5:IBMCOMPATKANJI"}
 
+graphdata.gsets["chinasea-exts-core"] = (94, 2, parsers.decode_main_plane_gl(
+    parsers.parse_file_format("Custom/ChinaSea-core.txt"),
+    "ChinaSea-core.txt"))
 graphdata.gsets["aton-exts"] = (94, 2, parsers.decode_extra_plane_big5(
     parsers.parse_file_format("Mozilla/uao241-b2u.txt"),
     "uao241-b2u.txt"))
