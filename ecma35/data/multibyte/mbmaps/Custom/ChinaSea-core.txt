@@ -2526,7 +2526,7 @@
 0x5A3A	U+2601	# ☁
 0x5A3B	U+1F327	# 🌧
 0x5A3C	U+2602	# ☂
-0x5A3D	U+1F3DA	# 🏚
+0x5A3D	U+1F3E0	# 🏠
 0x5A3E	U+ECA0	# (silhouette of island of Taiwan?)
 0x5A3F	U+2139	# ℹ
 0x5A40	U+2708	# ✈
