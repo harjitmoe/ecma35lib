@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020/2021/2023.
+# By HarJIT in 2019/2020/2021/2023/2024.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -8,7 +8,7 @@
 
 # Detail regarding Apple-compatible versus up-to-date mappings
 
-import os, json, shutil, math
+import os, json, shutil, math, re
 import unicodedata as ucd
 from ecma35.data import gccdata
 from ecma35.data.multibyte import mbmapparsers as parsers
@@ -726,6 +726,7 @@ def arrow_to_angle(arrow):
     return 0, False
 
 _is_idc = lambda char: 0x2FF0 <= ord(char) < 0x3000 or ord(char) == 0x31EF
+_charref = re.compile(r"(?i)&(?:\w+|#(?:x[0-9a-f]+|\d+));")
 
 def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
     sequence_inverse = sequence_big = sequence_small = sequence_bold = False
@@ -854,7 +855,7 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
             print("</text></svg>", file=outfile)
         elif (strep2[0] == "[") and (strep2[-1] == "]"):
             hsf = 0
-            for strepc in strep2[1:-1]:
+            for strepc in _charref.sub(".", strep2[1:-1]):
                 if ucd.east_asian_width(strepc) not in ("W", "F"):
                     hsf += 1
                 else:
@@ -929,7 +930,7 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
             print("</text><polygon points='2,82 86,82 44,6' class='enclosure' /></svg>", file=outfile)
         elif (strep2[0] == "[") and (strep2[-1] == "]"):
             hsf = 0
-            for strepc in strep2[1:-1]:
+            for strepc in _charref.sub(".", strep2[1:-1]):
                 if ucd.east_asian_width(strepc) not in ("W", "F"):
                     hsf += 1
                 else:
