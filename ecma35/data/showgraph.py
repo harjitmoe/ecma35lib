@@ -766,7 +766,7 @@ def stat(verbose=False):
         print("Total:", tot + atot + btot)
         print()
 
-def dump_maptable(name, as_ucm_fragment=False):
+def dump_maptable(name, as_ucm_fragment=False, show_by_display=False, byte_sequence_converter=(lambda i:i)):
     byterange, bytecount, array = _resolve_name(name)
     outputs = []
     for n, ucses in enumerate(array):
@@ -779,18 +779,22 @@ def dump_maptable(name, as_ucm_fragment=False):
                 lower += 0x21
             elif byterange == 96:
                 lower += 0x20
-            byts.insert(0, f"{lower:02X}")
+            byts.insert(0, lower)
         assert not remaining
         if ucses == None:
-            if len(byts) == 1 and byts[0] < "20":
+            if len(byts) == 1 and byts[0] < 0x20:
                 ucses = int(byts[0], 16)
             else:
                 continue
+        byts = [f"{i:02X}" for i in byte_sequence_converter(bytes(byts))]
         ucses = (ucses if hasattr(type(ucses), "__len__") else (ucses,))
         if not as_ucm_fragment:
             start = "0x" + "".join(byts)
             middle = "U+" + "+".join("{:04X}".format(i) for i in ucses)
-            end = "# " + " + ".join(ucd.name(chr(i), "<{:04X}>".format(i)) for i in ucses)
+            if show_by_display and any(ucd.category(chr(i)) != "Co" for i in ucses):
+                end = "# " + "".join(chr(i) for i in ucses)
+            else:
+                end = "# " + " + ".join(ucd.name(chr(i), "<{:04X}>".format(i)) for i in ucses)
             outputs.append(f"{start}\t{middle}\t{end}")
         else:
             start = "<U" + "><U".join("{:04X}".format(i) for i in ucses) + ">"
@@ -800,6 +804,19 @@ def dump_maptable(name, as_ucm_fragment=False):
     outputs.sort()
     for line in outputs:
         print(line)
+
+def byte_sequence_to_big5_main_extension(sequence):
+    if len(sequence) != 2:
+        raise ValueError("Big5 extensions set must be a 94×94 set")
+    is_rhs = (sequence[0] - 0x21) % 2
+    if sequence[0] <= 0x60:
+        lead = ((sequence[0] - 0x21) // 2) + 0x81
+    elif sequence[0] <= 0x66:
+        lead = ((sequence[0] - 0x61) // 2) + 0xC6
+    else:
+        lead = ((sequence[0] - 0x67) // 2) + 0xF9
+    trail = sequence[1] | 0x80 if is_rhs else sequence[1]
+    return bytes([lead, trail])
 
 if __name__ == "__main__":
     import sys
