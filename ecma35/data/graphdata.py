@@ -431,7 +431,7 @@ g94nbytes = {tuple(b"@"): ("ir042/nec", ("ir042/ibm", "ir042/nec", "ir042/1990pi
              tuple(b"!="): "ksx1002",
              tuple(b"!>"): "ksx1027_1",
              tuple(b"!?"): "ksx1027_2",
-             tuple(b"\"0"): ("aton-exts", ("aton-exts2", "chinasea-exts-core"), ("aton-exts",)),
+             tuple(b"\"0"): ("aton-exts", ("aton-exts2", "chinasea-exts-core", "chinasea-exts-gothic"), ("aton-exts",)),
              tuple(b"\"1"): ("oldibmkorea", ("oldibmkorea-withcorppua",), ("oldibmkorea-excavated", "oldibmkorea")),
              tuple(b"\"2"): ("gb16500-ext", ("the-other-gb7",), ("gb16500", "gb16500-ext")),
              tuple(b"\"3"): ("dynalabexts", (), ("dynalabexts",)),
