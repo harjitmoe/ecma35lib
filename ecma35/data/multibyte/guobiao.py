@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020/2022/2023/2024.
+# By HarJIT in 2019/2020/2022/2023/2024/2025.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -384,7 +384,14 @@ graphdata.gsets["gb13131-irgn2302"] = (94, 2, (
     *_irgn2376gb3[1474:1492],
     *_irgn2376gb3[1493:]))
 graphdata.gsets["gb13132-irgn2376"] = (94, 2, parsers.fuse([
+        # Pedantically, 05-37-52 is U+23727 𣜧 (or rather, 04-37-52 is 𣜧's Simplified Chinese
+        #   equivalent form).
+        # U+6A69 橩 is 07-56-19, although it is an extension not present in the published GB 16500.
+        # See https://www.unicode.org/irg/docs/n2297-GSourceChanges.pdf
+        # All three of the above (04-37-52, 05-37-52/U+23727, and 07-56-19/U+6A69) have the
+        #   pronunciation "qióng" and meaning "game dice", making them interchangable variants.
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "G5", transformfirst=g_source_conversion),
+        (None,) * ((94 * 36) + 51) + ((0x23727,),),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_GSource", "G5", transformfirst=g_source_conversion),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G5", transformfirst=g_source_conversion),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "G5", transformfirst=g_source_conversion),
