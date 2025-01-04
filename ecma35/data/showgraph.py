@@ -21,6 +21,7 @@ def to_link(maybe_siglum, default_siglum, maybe_plane, default_plane, ku, ten):
         men = default_plane
     omen, oku, oten = men, ku, ten
     part_zi = int(ku, 10) // 16
+    menelement = None
     if siglum == "CNS" and men in "ΨΓ":
         basename = "../cnstables/b5xplane"
         if men == "Ψ":
@@ -37,7 +38,9 @@ def to_link(maybe_siglum, default_siglum, maybe_plane, default_plane, ku, ten):
         else:
             raise AssertionError()
     elif siglum == "GB" and men == "K":
-        men = "8"
+        basename = "../guobiaotables/gbplane"
+        men = "9"
+        menelement = "K"
     elif siglum == "KSC" and men == "Ψ":
         basename = "../wansungtables/htxplane"
         men = "1"
@@ -54,7 +57,7 @@ def to_link(maybe_siglum, default_siglum, maybe_plane, default_plane, ku, ten):
     part_letter = chr(0x61 + part_zi)
     if not maybe_siglum:
         basename = posixpath.basename(basename)
-    menelement = f"{int(men, 10):X}" if not men.strip("0123456789") else men
+    menelement = menelement or f"{int(men, 10):X}" if not men.strip("0123456789") else men
     url = f"{basename}{menelement}{part_letter}.html#{men}.{ku}.{ten}"
     display_siglum = f"{maybe_siglum} " if maybe_siglum else ""
     display_plane = f"{omen}-" if maybe_plane else ""
