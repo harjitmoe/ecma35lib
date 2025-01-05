@@ -423,6 +423,7 @@ graphdata.gsets["gb13132-irgn2302"] = (94, 2, (
 #     U+809E at 40-50
 #     U+891D at 44-23
 graphdata.gsets["gb16500"] = (94, 2, parsers.fuse([
+        (None,) * ((94 * 55) + 18) + ((0x6A69,),), # See comments regarding GB 13132 above
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "GE"),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_GSource", "GE"),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "GE"),
