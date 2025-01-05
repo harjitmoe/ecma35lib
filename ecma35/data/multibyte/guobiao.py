@@ -422,8 +422,7 @@ graphdata.gsets["gb13132-irgn2302"] = (94, 2, (
 #     U+6FF9 at 32-29
 #     U+809E at 40-50
 #     U+891D at 44-23
-graphdata.gsets["gb16500"] = (94, 2, parsers.fuse([
-        (None,) * ((94 * 55) + 18) + ((0x6A69,),), # See comments regarding GB 13132 above
+gb16500_strict = parsers.fuse([
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "GE"),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_GSource", "GE"),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "GE"),
@@ -431,7 +430,12 @@ graphdata.gsets["gb16500"] = (94, 2, parsers.fuse([
         (None,) * ((94 * 31) + 28) + ((0x6FF9,),),
         (None,) * ((94 * 39) + 49) + ((0x809E,),),
         (None,) * ((94 * 43) + 22) + ((0x891D,),),
-    ], "GB16500.json"))
+    ], "GB16500_strict.json")
+graphdata.gsets["gb16500/strict"] = (94, 2, gb16500_strict)
+graphdata.gsets["gb16500"] = (94, 2, parsers.fuse([
+        (None,) * ((94 * 55) + 18) + ((0x6A69,),), # See comments regarding GB 13132 above
+        gb16500_strict,
+    ], "GB16500_extended.json"))
 
 # This is an interesting one. Known as G7 or GB7 in Unihan, it is not the Seventh Supplementary Set
 #   (which would be GB 16500, Unihan's GE). It seems to have been one of the original source
