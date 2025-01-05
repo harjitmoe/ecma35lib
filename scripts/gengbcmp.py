@@ -200,9 +200,7 @@ for n, p in enumerate([plane0, plane1, plane2, plane3, plane4, plane5, plane7, p
             nextname = planefunc2(7) + ", part 1"
         #
         planewarn = None
-        if bn in (4, 5):
-            planewarn = "The copious gaps shown in this plane are not actually empty, but rather a result of lack of information about how the positions in question map to Unicode (although this may well make them <i>de facto</i> empty in terms of deployed implementations).&ensp;I am partway through the process of identifying and filling in some of the missing Unicode mappings."
-        elif bn == 8:
+        if bn == 8:
             planewarn = "Not all of this plane exists in Unicode.&ensp;This plane is visualised mainly from BabelStone's <a href=\"https://babelstone.co.uk/CJK/SJT-IDS.TXT\">SJT-IDS.TXT</a>."
         #
         showbmppuas = None if bn != 8 else (False, True)
