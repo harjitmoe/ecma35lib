@@ -349,6 +349,7 @@ graphdata.gsets["gb12052"] = (94, 2, parsers.decode_main_plane_euc(
 #     U+79C4 at 59-51 (traditional / simplified)
 #     U+8226 at 69-53 (traditional / simplified)
 #     U+84C3 at 73-83 (traditional / simplified)
+#
 g_source_conversion = {}
 with open(os.path.join(parsers.directory, "Custom/newgsource.txt"), "r") as _f:
     for _line in _f:
@@ -383,6 +384,22 @@ graphdata.gsets["gb13131-irgn2302"] = (94, 2, (
     (0x201B5,),
     *_irgn2376gb3[1474:1492],
     *_irgn2376gb3[1493:]))
+# Note: oddly, GB 7589's 42-79 has a 盾 rather than a 質=貭=质 as in the Unihan GB 13131.
+graphdata.gsets["gb7589"] = gb7589 = (94, 2, parsers.fuse([
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "G4", transformfirst=g_source_conversion),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_GSource", "G4", transformfirst=g_source_conversion),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G4", transformfirst=g_source_conversion),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "G4", transformfirst=g_source_conversion),
+        parsers.decode_main_plane_gl(
+            parsers.parse_file_format("Custom/GB7589.txt"),
+            "GB7589.txt",
+        ),
+    ], "GB7589.json"))
+graphdata.gsets["gb7589-non-irgn2302"] = (94, 2, (
+    *gb7589[2][:1474],
+    *gb7589[2][1475:1493],
+    (0x4F47,),
+    *gb7589[2][1493:]))
 graphdata.gsets["gb13132-irgn2376"] = (94, 2, parsers.fuse([
         # Pedantically, 05-37-52 is U+23727 𣜧 (or rather, 04-37-52 is 𣜧's Simplified Chinese
         #   equivalent form).
@@ -644,31 +661,17 @@ graphdata.gsets["sj11239"] = (94, 2, parsers.fuse([
         "SJT-IDS-supported.TXT",
         mapper=sj11239_fixer)], "SJ-11239.json"))
 
-# GB 7589 and GB 7590 are just the simplified versions, right?
-# (Contrary to docs, kGB3 and kGB5 seem to be less complete mappings to the same G3 and G5
-#  in kIRG_GSource, i.e. they are the traditional GB 13131/13132 forms.
-#  Notably, GB 13131/13132 appear never published.)
-# Cases of multiple Simplified mappings though:
-#     GB 13131:
-#   0x8b78 譸 → 0x8bea 诪,  0x2c8aa 𬢪 (0x2c8aa is a hybrid; favour BMP over SIP)
-#   0x8b32 謲 → 0x2c8b3 𬢳, 0x2c904 𬤄 (0x2c8b3 is a hybrid)
-#   0x9c44 鱄 → 0x2b68b 𫚋, 0x31210 𱈐 (0x31210 is a hybrid; favour SIP over TIP)
-#   0x9c68 鱨 → 0x9cbf 鲿,  0x31218 𱈘 (0x31218 is a hybrid; favour BMP over TIP)
-#   0x9766 靦 → 0x4a44 䩄,  0x817c 腼  (no idea; 腼 is in GB 2312 though, so 䩄 must be GB 7589)
-#     GB 13132:
+# Cases of multiple Traditional-to-Simplified Unihan mappings applicable to GB 13132:
 #   0x7060 灠 → 0x6f24 漤,  0x30710 𰜐 (漤 is more common in both and in GB 2312; 𰜐 is simplified 灠)
 #   0x9d82 鶂 → 0x2cdfc 𬷼, 0x31288 𱊈 (trad 鷁, simp 鹢 is today more common; favour SIP over TIP)
 # Other special cases:
 #   U+6AD4 櫔 → U+6803 栃 (櫔 is a Japanese kokuji for horse-chestnut also used in place-names;
 #       栃 is its shinjitai form (and used for the place-names in Simplified Chinese))
 #   U+8518 蔘 → U+26C9E+(E0100) 𦲞󠄀 (not sure why this doesn't get mapped in Unihan)
-resolve = {(0x8b78,): (0x8bea,), (0x8b32,): (0x2c904,), (0x9c44,): (0x2b68b,), 
-           (0x9c68,): (0x9cbf,), (0x9766,): (0x4a44,), (0x7060,): (0x30710,), 
-           (0x9d82,): (0x2cdfc,), (0x6ad4,): (0x6803,), (0x8518,): (0x26c9e,)}
+resolve = {(0x7060,): (0x30710,), (0x9d82,): (0x2cdfc,),
+           (0x6ad4,): (0x6803,), (0x8518,): (0x26c9e,)}
 tradat = parsers.parse_variants("UCD/Unihan_Variants.txt")
-_gb7589fn = os.path.join(parsers.cachedirectory, "GB7589-Actual.json")
 _gb7590fn = os.path.join(parsers.cachedirectory, "GB7590-Actual.json")
-_pseudogb7589fn = os.path.join(parsers.cachedirectory, "GB7589-Unihan.json")
 _pseudogb7590fn = os.path.join(parsers.cachedirectory, "GB7590-Unihan.json")
 def gb13131or13132to7589or7590(i):
     if result := resolve.get(i, None):
@@ -677,31 +680,19 @@ def gb13131or13132to7589or7590(i):
         if len(result[1]) == 1 and result[1][0] not in gb2312_1986[2]:
             return result[1][0]
     return i
-if (not os.path.exists(_gb7589fn)) or (not os.path.exists(_gb7590fn)) or (not os.path.exists(_pseudogb7589fn)) or (not os.path.exists(_pseudogb7590fn)):
-    _gb7589 = tuple(gb13131or13132to7589or7590(i) for i in graphdata.gsets["gb13131-irgn2302"][2])
+if (not os.path.exists(_gb7590fn)) or (not os.path.exists(_pseudogb7590fn)):
     _gb7590 = tuple(gb13131or13132to7589or7590(i) for i in graphdata.gsets["gb13132-irgn2302"][2])
-    _pseudogb7589 = tuple(gb13131or13132to7589or7590(i) for i in graphdata.gsets["gb13131-irgn2376"][2])
     _pseudogb7590 = tuple(gb13131or13132to7589or7590(i) for i in graphdata.gsets["gb13132-irgn2376"][2])
-    f = open(_gb7589fn, "w")
-    f.write(json.dumps(_gb7589))
-    f.close()
     f = open(_gb7590fn, "w")
     f.write(json.dumps(_gb7590))
-    f.close()
-    f = open(_pseudogb7589fn, "w")
-    f.write(json.dumps(_pseudogb7589))
     f.close()
     f = open(_pseudogb7590fn, "w")
     f.write(json.dumps(_pseudogb7590))
     f.close()
 else:
-    _gb7589 = parsers.LazyJSON(os.path.basename(_gb7589fn))
     _gb7590 = parsers.LazyJSON(os.path.basename(_gb7590fn))
-    _pseudogb7589 = parsers.LazyJSON(os.path.basename(_pseudogb7589fn))
     _pseudogb7590 = parsers.LazyJSON(os.path.basename(_pseudogb7590fn))
-graphdata.gsets["gb7589"] = gb7589 = (94, 2, _gb7589)
 graphdata.gsets["gb7590"] = gb7590 = (94, 2, _gb7590)
-graphdata.gsets["gb7589-non-irgn2302"] = gb7589 = (94, 2, _pseudogb7589)
 graphdata.gsets["gb7590-non-irgn2302"] = gb7590 = (94, 2, _pseudogb7590)
 # Some traditional forms remain, but I guess this is good enough. They would presumably be forms
 #  where simplified counterparts do not exist in Unicode anyway.
