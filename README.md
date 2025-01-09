@@ -346,9 +346,9 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 0 G*DM4 ! 6`|KDDI Emoji extensions for Shift\_JIS (as above), symbolic zodiac variant|
 |`G*DM4 ! 7`|SoftBank Emoji extensions for Shift\_JIS (as above)|
 |`IRR ? G*DM4 ! 8`|Currently same as `IRR 1 G*DM4 ! 8` but may change in future.|
-|`IRR 0 G*DM4 ! 8`|Almost GB/T 7589 (supplementary simplified), based on the GB 13131 mappings without [IRGN2302](https://www.unicode.org/irg/docs/n2302-GSourceIssues.pdf) corrections&mdash;this is generated from the GB/T 13131 mappings, and may also be minorly inaccurate in other ways in places.|
+|`IRR 0 G*DM4 ! 8`|Modified GB/T 7589 (supplementary simplified), corresponding to to GB/T 13131 without [IRGN2302](https://www.unicode.org/irg/docs/n2302-GSourceIssues.pdf) corrections.|
 |`IRR 1 G*DM4 ! 8`|GB/T 13131 (supplementary traditional), without [IRGN2302](https://www.unicode.org/irg/docs/n2302-GSourceIssues.pdf) corrections.&ensp;The correct behaviour with respect to the IRGN2302 corrections is unclear since [the Chinese national body rejected them in IRGN2376](https://www.unicode.org/irg/docs/n2376-GSourceUpdate.pdf), and GB/T 13131 was never published (IRGN2302 references the theoretically homologous GB/T 7589).|
-|`IRR 2 G*DM4 ! 8`|GB/T 7589 (supplementary simplified)&mdash;this is generated from the GB/T 13131 mappings, and may be minorly inaccurate in places.|
+|`IRR 2 G*DM4 ! 8`|GB/T 7589 (supplementary simplified).|
 |`IRR 3 G*DM4 ! 8`|GB/T 13131 (supplementary traditional) with [IRGN2302](https://www.unicode.org/irg/docs/n2302-GSourceIssues.pdf) corrections.&ensp;The correct behaviour with respect to the IRGN2302 corrections is unclear for the reasons mentioned above.|
 |`IRR ? G*DM4 ! 9`|Currently same as `IRR 1 G*DM4 ! 9` but may change in future.|
 |`IRR 0 G*DM4 ! 9`|Almost GB/T 7590 (further supplementary simplified), based on the GB 13132 mappings without [IRGN2302](https://www.unicode.org/irg/docs/n2302-GSourceIssues.pdf) corrections&mdash;this is generated from the GB/T 13132 mappings, and may also be minorly inaccurate in other ways in places.|
