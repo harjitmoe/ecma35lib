@@ -53,21 +53,21 @@ plane1 = (1, ("GB 12345<br>1990", "GB 12345<br>UTC", "GB 12345<br>Unihan Ext"), 
           graphdata.gsets["ir058/hant-utc"][2],
           graphdata.gsets["ir058/hant-full"][2],
 ])
-plane2 = (2, ("GB 7589<br>Non-IRGN2302", "GB 7589<br>IRGN2302"), [
-          graphdata.gsets["gb7589-non-irgn2302"][2],
+plane2 = (2, ("GB 7589<br>like GB 13131", "GB 7589<br>1987"), [
+          graphdata.gsets["gb7589/gb13131-homologue"][2],
           graphdata.gsets["gb7589"][2],
 ])
-plane3 = (3, ("GB 13131<br>IRGN2376", "GB 13131<br>IRGN2302"), [
-          graphdata.gsets["gb13131-irgn2376"][2],
-          graphdata.gsets["gb13131-irgn2302"][2],
+plane3 = (3, ("GB 13131<br>IRGN2376", "GB 13131<br>like GB 7589"), [
+          graphdata.gsets["gb13131"][2],
+          graphdata.gsets["gb13131/gb7589-homologue"][2],
 ])
-plane4 = (4, ("GB 7590<br>Non-IRGN2302", "GB 7590<br>IRGN2302"), [
-          graphdata.gsets["gb7590-non-irgn2302"][2],
+plane4 = (4, ("GB 7590<br>like GB 13132", "GB 7590<br>1987"), [
+          graphdata.gsets["gb7590/gb13132-homologue"][2],
           graphdata.gsets["gb7590"][2],
 ])
-plane5 = (5, ("GB 13132<br>IRGN2376", "GB 13132<br>IRGN2302"), [
-          graphdata.gsets["gb13132-irgn2376"][2],
-          graphdata.gsets["gb13132-irgn2302"][2],
+plane5 = (5, ("GB 13132<br>IRGN2376", "GB 13132<br>like GB 7590"), [
+          graphdata.gsets["gb13132"][2],
+          graphdata.gsets["gb13132/gb7590-homologue"][2],
 ])
 plane7 = (7, ("Unihan G7", "GB16500"), [
           graphdata.gsets["the-other-gb7"][2],

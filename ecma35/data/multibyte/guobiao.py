@@ -357,7 +357,7 @@ with open(os.path.join(parsers.directory, "Custom/newgsource.txt"), "r") as _f:
             continue
         _a, _b = _line.strip().split()
         g_source_conversion[_a] = _b
-graphdata.gsets["gb13131-irgn2376"] = (94, 2, parsers.fuse([
+graphdata.gsets["gb13131"] = (94, 2, parsers.fuse([
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "G3", transformfirst=g_source_conversion),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_GSource", "G3", transformfirst=g_source_conversion),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G3", transformfirst=g_source_conversion),
@@ -378,8 +378,8 @@ graphdata.gsets["gb13131-irgn2376"] = (94, 2, parsers.fuse([
         (None,) * ((94 * 68) + 52) + ((0x8226,),),
         (None,) * ((94 * 72) + 82) + ((0x84C3,),),
     ], "GB13131.json"))
-_irgn2376gb3 = graphdata.gsets["gb13131-irgn2376"][2]
-graphdata.gsets["gb13131-irgn2302"] = (94, 2, (
+_irgn2376gb3 = graphdata.gsets["gb13131"][2]
+graphdata.gsets["gb13131/gb7589-homologue"] = (94, 2, (
     *_irgn2376gb3[:1474],
     (0x201B5,),
     *_irgn2376gb3[1474:1492],
@@ -395,12 +395,12 @@ graphdata.gsets["gb7589"] = gb7589 = (94, 2, parsers.fuse([
             "GB7589.txt",
         ),
     ], "GB7589.json"))
-graphdata.gsets["gb7589-non-irgn2302"] = (94, 2, (
+graphdata.gsets["gb7589/gb13131-homologue"] = (94, 2, (
     *gb7589[2][:1474],
     *gb7589[2][1475:1493],
     (0x4F47,),
     *gb7589[2][1493:]))
-graphdata.gsets["gb13132-irgn2376"] = (94, 2, parsers.fuse([
+graphdata.gsets["gb13132"] = (94, 2, parsers.fuse([
         # Pedantically, 05-37-52 is U+23727 𣜧 (or rather, 04-37-52 is 𣜧's Simplified Chinese
         #   equivalent form).
         # U+6A69 橩 is 07-56-19, although it is an extension not present in the published GB 16500.
@@ -425,12 +425,15 @@ graphdata.gsets["gb13132-irgn2376"] = (94, 2, parsers.fuse([
             "GB13132_additional.txt",
         ),
     ], "GB13132.json"))
-_irgn2376gb5 = graphdata.gsets["gb13132-irgn2376"][2]
-graphdata.gsets["gb13132-irgn2302"] = (94, 2, (
+_irgn2376gb5 = graphdata.gsets["gb13132"][2]
+graphdata.gsets["gb13132/gb7590-homologue"] = (94, 2, (
     *_irgn2376gb5[:6214],
     (0x25B36,),
     *_irgn2376gb5[6214:6228],
-    *_irgn2376gb5[6229:6865],
+    *_irgn2376gb5[6229:6860],
+    *_irgn2376gb5[6861:6862],
+    (0x26E91,),
+    *_irgn2376gb5[6862:6865],
     *_irgn2376gb5[6866:6877],
     (0x26F30,),
     *_irgn2376gb5[6877:]))
@@ -483,7 +486,7 @@ graphdata.gsets["the-other-gb7"] = (94, 2, parsers.fuse([
         parsers.read_unihan_planes("UCD/Unihan_OtherMappings-13.txt", "kGB7", kutenform=True),
     ], "the-other-GB7.json"))
 
-graphdata.gsets["gb16500-ext"] = (94, 2, parsers.fuse([
+graphdata.gsets["gb16500/ext"] = (94, 2, parsers.fuse([
         graphdata.gsets["gb16500"][2],
         graphdata.gsets["the-other-gb7"][2],
     ], "GB16500-with-the-other-GB7.json"))
@@ -681,8 +684,8 @@ def gb13131or13132to7589or7590(i):
             return result[1][0]
     return i
 if (not os.path.exists(_gb7590fn)) or (not os.path.exists(_pseudogb7590fn)):
-    _gb7590 = tuple(gb13131or13132to7589or7590(i) for i in graphdata.gsets["gb13132-irgn2302"][2])
-    _pseudogb7590 = tuple(gb13131or13132to7589or7590(i) for i in graphdata.gsets["gb13132-irgn2376"][2])
+    _gb7590 = tuple(gb13131or13132to7589or7590(i) for i in graphdata.gsets["gb13132/gb7590-homologue"][2])
+    _pseudogb7590 = tuple(gb13131or13132to7589or7590(i) for i in graphdata.gsets["gb13132"][2])
     f = open(_gb7590fn, "w")
     f.write(json.dumps(_gb7590))
     f.close()
@@ -693,7 +696,7 @@ else:
     _gb7590 = parsers.LazyJSON(os.path.basename(_gb7590fn))
     _pseudogb7590 = parsers.LazyJSON(os.path.basename(_pseudogb7590fn))
 graphdata.gsets["gb7590"] = gb7590 = (94, 2, _gb7590)
-graphdata.gsets["gb7590-non-irgn2302"] = gb7590 = (94, 2, _pseudogb7590)
+graphdata.gsets["gb7590/gb13132-homologue"] = (94, 2, _pseudogb7590)
 # Some traditional forms remain, but I guess this is good enough. They would presumably be forms
 #  where simplified counterparts do not exist in Unicode anyway.
 
