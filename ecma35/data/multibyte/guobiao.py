@@ -431,12 +431,9 @@ graphdata.gsets["gb13132/gb7590-homologue"] = (94, 2, (
     (0x25B36,),
     *_irgn2376gb5[6214:6228],
     *_irgn2376gb5[6229:6860],
-    *_irgn2376gb5[6861:6862],
-    (0x26E91,),
-    *_irgn2376gb5[6862:6865],
-    *_irgn2376gb5[6866:6877],
-    (0x26F30,),
-    *_irgn2376gb5[6877:]))
+    *_irgn2376gb5[6861:6880],
+    (0x859E,),
+    *_irgn2376gb5[6880:]))
 #
 # Small handful of GB16500 not in kIRG_GSource in Unihan 13.0 (Unihan 14.0 unmaps a few more):
 #     U+6FF9 at 32-29

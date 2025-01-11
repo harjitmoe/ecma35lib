@@ -1,5 +1,5 @@
 # Table for converting the portions of GB 13132 (mainly homologous to GB 7590 but with 
-#   Traditional Chinese forms, and with some small off-by-one non-homologous regions)
+#   Traditional Chinese forms, and with two small off-by-one non-homologous regions)
 #   that aren't listed as Unihan Database sources to Unicode.
 0x3025	U+53C0+F87F
 0x3028	U+2219A
@@ -2186,22 +2186,21 @@
 0x6979	U+26EB4
 0x697A	U+27114
 0x697C	U+31FA2
-# Second non-homologous region is here
-0x6A21	U+26EB8
-0x6A22	U+26F2F
-0x6A23	U+26E87
-# Begin third non-homologous region
-0x6A24	U+26F30
+# Begin second non-homologous region
+0x6A21	U+26E91
+0x6A22	U+26EB8
+0x6A23	U+26F2F
+0x6A24	U+26E87
 0x6A27	U+26EC2
 0x6A28	U+26E8D
 0x6A29	U+26EA6
 0x6A2C	U+26E96
 0x6A2D	U+26E92
 0x6A2E	U+270D2
-# End third non-homologous region
-0x6A30	U+26F2A
-0x6A31	U+26F38
-0x6A32	U+859E
+0x6A30	U+26F30
+0x6A31	U+26F2A
+0x6A32	U+26F38
+# End second non-homologous region
 0x6A33	U+26F2B
 0x6A36	U+26483
 0x6A38	U+26F50
