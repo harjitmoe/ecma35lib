@@ -386,10 +386,7 @@ graphdata.gsets["gb13131/gb7589-homologue"] = (94, 2, (
     *_irgn2376gb3[1493:]))
 # Note: oddly, GB 7589's 42-79 has a 盾 rather than a 質=貭=质 as in the Unihan GB 13131.
 graphdata.gsets["gb7589"] = gb7589 = (94, 2, parsers.fuse([
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "G4", transformfirst=g_source_conversion),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_GSource", "G4", transformfirst=g_source_conversion),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G4", transformfirst=g_source_conversion),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "G4", transformfirst=g_source_conversion),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "G2", transformfirst=g_source_conversion),
         parsers.decode_main_plane_gl(
             parsers.parse_file_format("Custom/GB7589.txt"),
             "GB7589.txt",
@@ -434,6 +431,21 @@ graphdata.gsets["gb13132/gb7590-homologue"] = (94, 2, (
     *_irgn2376gb5[6861:6880],
     (0x859E,),
     *_irgn2376gb5[6880:]))
+graphdata.gsets["gb7590"] = gb7590 = (94, 2, parsers.fuse([
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "G4", transformfirst=g_source_conversion),
+        parsers.decode_main_plane_gl(
+            parsers.parse_file_format("Custom/GB7590.txt"),
+            "GB7590.txt",
+        ),
+    ], "GB7590.json"))
+graphdata.gsets["gb7590/gb13132-homologue"] = (94, 2, (
+    *gb7590[2][:6214],
+    *gb7590[2][6215:6229],
+    (0x25B36,),
+    *gb7590[2][6229:6860],
+    (0x8575,),
+    *gb7590[2][6860:6879],
+    *gb7590[2][6880:]))
 #
 # Small handful of GB16500 not in kIRG_GSource in Unihan 13.0 (Unihan 14.0 unmaps a few more):
 #     U+6FF9 at 32-29
@@ -660,42 +672,6 @@ graphdata.gsets["sj11239"] = (94, 2, parsers.fuse([
             fallback_preferencer=(lambda ucs: sj11239_fixer(None, ucs) == ucs)),
         "SJT-IDS-supported.TXT",
         mapper=sj11239_fixer)], "SJ-11239.json"))
-
-# Cases of multiple Traditional-to-Simplified Unihan mappings applicable to GB 13132:
-#   0x7060 灠 → 0x6f24 漤,  0x30710 𰜐 (漤 is more common in both and in GB 2312; 𰜐 is simplified 灠)
-#   0x9d82 鶂 → 0x2cdfc 𬷼, 0x31288 𱊈 (trad 鷁, simp 鹢 is today more common; favour SIP over TIP)
-# Other special cases:
-#   U+6AD4 櫔 → U+6803 栃 (櫔 is a Japanese kokuji for horse-chestnut also used in place-names;
-#       栃 is its shinjitai form (and used for the place-names in Simplified Chinese))
-#   U+8518 蔘 → U+26C9E+(E0100) 𦲞󠄀 (not sure why this doesn't get mapped in Unihan)
-resolve = {(0x7060,): (0x30710,), (0x9d82,): (0x2cdfc,),
-           (0x6ad4,): (0x6803,), (0x8518,): (0x26c9e,)}
-tradat = parsers.parse_variants("UCD/Unihan_Variants.txt")
-_gb7590fn = os.path.join(parsers.cachedirectory, "GB7590-Actual.json")
-_pseudogb7590fn = os.path.join(parsers.cachedirectory, "GB7590-Unihan.json")
-def gb13131or13132to7589or7590(i):
-    if result := resolve.get(i, None):
-        return result
-    if result := tradat.get(i, None):
-        if len(result[1]) == 1 and result[1][0] not in gb2312_1986[2]:
-            return result[1][0]
-    return i
-if (not os.path.exists(_gb7590fn)) or (not os.path.exists(_pseudogb7590fn)):
-    _gb7590 = tuple(gb13131or13132to7589or7590(i) for i in graphdata.gsets["gb13132/gb7590-homologue"][2])
-    _pseudogb7590 = tuple(gb13131or13132to7589or7590(i) for i in graphdata.gsets["gb13132"][2])
-    f = open(_gb7590fn, "w")
-    f.write(json.dumps(_gb7590))
-    f.close()
-    f = open(_pseudogb7590fn, "w")
-    f.write(json.dumps(_pseudogb7590))
-    f.close()
-else:
-    _gb7590 = parsers.LazyJSON(os.path.basename(_gb7590fn))
-    _pseudogb7590 = parsers.LazyJSON(os.path.basename(_pseudogb7590fn))
-graphdata.gsets["gb7590"] = gb7590 = (94, 2, _gb7590)
-graphdata.gsets["gb7590/gb13132-homologue"] = (94, 2, _pseudogb7590)
-# Some traditional forms remain, but I guess this is good enough. They would presumably be forms
-#  where simplified counterparts do not exist in Unicode anyway.
 
 # Amounting to the entirety of GBK/3 and most of GBK/4, minus the non-URO end part.
 # And, yes, it would indeed be more straightforward to just read the GBK mappings for

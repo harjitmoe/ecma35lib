@@ -346,15 +346,15 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 0 G*DM4 ! 6`|KDDI Emoji extensions for Shift\_JIS (as above), symbolic zodiac variant|
 |`G*DM4 ! 7`|SoftBank Emoji extensions for Shift\_JIS (as above)|
 |`IRR ? G*DM4 ! 8`|Currently same as `IRR 1 G*DM4 ! 8` but may change in future.|
-|`IRR 0 G*DM4 ! 8`|Modified GB/T 7589 (supplementary simplified), corresponding to to GB/T 13131 without [IRGN2302](https://www.unicode.org/irg/docs/n2302-GSourceIssues.pdf) corrections.|
-|`IRR 1 G*DM4 ! 8`|GB/T 13131 (supplementary traditional), without [IRGN2302](https://www.unicode.org/irg/docs/n2302-GSourceIssues.pdf) corrections.&ensp;The correct behaviour with respect to the IRGN2302 corrections is unclear since the Chinese national body rejected them in [IRGN2376](https://www.unicode.org/irg/docs/n2376-GSourceUpdate.pdf), and GB/T 13131 was never published (IRGN2302 references the theoretically homologous GB/T 7589).|
-|`IRR 2 G*DM4 ! 8`|GB/T 7589 (supplementary simplified).|
-|`IRR 3 G*DM4 ! 8`|GB/T 13131 (supplementary traditional) with [IRGN2302](https://www.unicode.org/irg/docs/n2302-GSourceIssues.pdf) corrections.&ensp;The correct behaviour with respect to the IRGN2302 corrections is unclear for the reasons mentioned above.|
+|`IRR 0 G*DM4 ! 8`|Modified GB/T 7589 (supplementary simplified), variant projected from GB/T 13131 with deviations from the GB/T 7589-1987 sequence retained per [IRGN2376](https://www.unicode.org/irg/docs/n2376-GSourceUpdate.pdf).|
+|`IRR 1 G*DM4 ! 8`|GB/T 13131 (supplementary traditional), with deviations from the GB/T 7589-1987 sequence retained per [IRGN2376](https://www.unicode.org/irg/docs/n2376-GSourceUpdate.pdf).|
+|`IRR 2 G*DM4 ! 8`|GB/T 7589 (supplementary simplified), 1987 edition.|
+|`IRR 3 G*DM4 ! 8`|GB/T 13131 (supplementary traditional), without deviations from the GB/T 7589-1987 sequence (as highlighted in [IRGN2302](https://www.unicode.org/irg/docs/n2302-GSourceIssues.pdf)&rpar;.|
 |`IRR ? G*DM4 ! 9`|Currently same as `IRR 1 G*DM4 ! 9` but may change in future.|
-|`IRR 0 G*DM4 ! 9`|Modified GB/T 7590 (further supplementary simplified), corresponding to to GB/T 13132 without [IRGN2302](https://www.unicode.org/irg/docs/n2302-GSourceIssues.pdf) or similar corrections.|
-|`IRR 1 G*DM4 ! 9`|GB/T 13132 (further supplementary traditional) without [IRGN2302](https://www.unicode.org/irg/docs/n2302-GSourceIssues.pdf) or similar corrections.&ensp;The correct behaviour in relation to the IRGN2302 corrections is unclear since the Chinese national body rejected them in [IRGN2376](https://www.unicode.org/irg/docs/n2376-GSourceUpdate.pdf), and GB/T 13132 was never published (IRGN2302 references the theoretically homologous GB/T 7590).|
-|`IRR 2 G*DM4 ! 9`|GB/T 7590 (further supplementary simplified)&mdash;this is generated from the GB/T 13132 mappings, and may be minorly inaccurate in places.|
-|`IRR 3 G*DM4 ! 9`|GB/T 13132 (further supplementary traditional) with [IRGN2302](https://www.unicode.org/irg/docs/n2302-GSourceIssues.pdf) and other similar corrections.&ensp;The correct behaviour with respect to the IRGN2302 corrections is unclear for the reasons mentioned above.|
+|`IRR 0 G*DM4 ! 9`|GB/T 7590 (further supplementary simplified), variant projected from GB/T 13132 with deviations from the GB/T 7590-1987 sequence retained per [IRGN2376](https://www.unicode.org/irg/docs/n2376-GSourceUpdate.pdf).|
+|`IRR 1 G*DM4 ! 9`|GB/T 13132 (further supplementary traditional), with deviations from the GB/T 7590-1987 sequence retained per [IRGN2376](https://www.unicode.org/irg/docs/n2376-GSourceUpdate.pdf).|
+|`IRR 2 G*DM4 ! 9`|GB/T 7590 (further supplementary simplified), 1987 edition.|
+|`IRR 3 G*DM4 ! 9`|GB/T 13132 (further supplementary traditional) without deviations from the GB/T 7590-1987 sequence (of which most, but not all, are highlighted in [IRGN2302](https://www.unicode.org/irg/docs/n2302-GSourceIssues.pdf)&rpar;.|
 |`IRR ? G*DM4 ! :`|HangulTalk second plane (accepted by HangulTalk filter in G3 slot), Apple mappings|
 |`IRR 0 G*DM4 ! :`|HangulTalk second plane (accepted by HangulTalk filter in G3 slot), updated mappings (recommended; default)|
 |`IRR 1 G*DM4 ! :`|HangulTalk second plane (accepted by HangulTalk filter in G3 slot), marginally newer (but not *that* up-to-date) Apple mappings given by Apple in mapping file comments|
