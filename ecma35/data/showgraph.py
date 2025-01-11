@@ -546,7 +546,8 @@ def dump_plane(outfile, planefunc, kutenfunc,
     edpt = (edx - 1) * 94 if not is_96 else edx * 96
     nonvacant_sets = [(i, j) for (i, j) in zip(setnames, plarray) if j[stpt:edpt] != (
                   (None,) * len(j[stpt:edpt]))]
-    if len(nonvacant_sets) == 1:
+    unique_nonvacant_sets = {tuple(j[stpt:edpt]) for (i, j) in nonvacant_sets}
+    if len(unique_nonvacant_sets) == 1:
         return dump_preview(outfile, planefunc(number), kutenfunc, number, 
                nonvacant_sets[0][1], lang = lang, css = css, part = part, jlfunc = jlfunc,
                menuurl = menuurl, menuname = menuname, lasturl = lasturl, 
