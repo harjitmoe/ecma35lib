@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020, 2021, 2022, 2023.
+# By HarJIT in 2020, 2021, 2022, 2023, 2025.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -387,8 +387,8 @@ annots = {
               "(otherwise identical to Windows-950 as far as the CNS-mapped part of Big5 is "
               "concerned, hence it is not shown here) actually follows IBM-950 instead in this "
               "specific location in mapping it to U+5F5E.&ensp;Compare 03-55-68.",
- (2, 1, 41): 'Compare 13-01-10, Ψ-66-63.',
- (2, 8, 48): "This has a \"meat\" radical, not \"moon\"; compare 06-12-03.",
+ (2, 1, 0): 'Compare 02-01-41 with 13-01-10, Ψ-66-63.',
+ (2, 8, 0): "02-08-48 has a \"meat\" radical, not \"moon\"; compare 06-12-03.",
  (2, 23, 79): "I'm following RFC 1922 mappings between CNS and Big5 here, even though the gov-tw "
               "mappings seem to differ.&ensp;Not sure if these two are consistently supposed "
               "to look different in all styles (their TW Kai reference glyphs seem to be the same, "
@@ -399,6 +399,10 @@ annots = {
               "although the TW Sung ones differ).&ensp;Compare 02-23-79.",
  (2, 38, 33): "This has a \"meat\" radical, not \"moon\"; compare 05-31-70.",
  (2, 44, 65): "Compare 14-69-76.",
+ (2, 82, 37): "This character was apparently "
+              "<a href='https://www.unicode.org/L2/L2022/22256-irgn2580-t-glyph.pdf#page=4'>"
+              "added in a 2022 amendment</a>; compare Ψ-62-46 (Big5-Plus), Ψ-74-34 (Big5-ChinaSea) "
+              "and Ψ-82-72 (Big5-HKSCS).",
  (3, 1, 24): "Compare 01-04-31.",
  (3, 55, 68): "Compare 01-86-33.",
  (3, 66, 38): "Between 1992 and 2007, this was the last <i>de jure</i> codepoint on this "
@@ -417,10 +421,6 @@ annots = {
               "whatever case, compare 15-28-28 (always mapped to U+6BF5 毵), 15-28-30 (always "
               "U+6BF6 毶, although absent in non-GovTW mappings) and 02-49-32 (毿, the version "
               "present in Big5, due to being the favoured version in zh-Hant).",
- (2, 82, 37): "This character was apparently "
-              "<a href='https://www.unicode.org/L2/L2022/22256-irgn2580-t-glyph.pdf#page=4'>"
-              "added in a 2022 amendment</a>; compare Ψ-62-46 (Big5-Plus), Ψ-74-34 (Big5-ChinaSea) "
-              "and Ψ-82-72 (Big5-HKSCS).",
  (3, 7, 8): 'Compare 12-87-16.',
  (3, 69, 34): 'Compare 04-24-60.',
  (3, 69, 44): 'Compare 04-10-78.',

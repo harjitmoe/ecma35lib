@@ -548,6 +548,9 @@ def dump_plane(outfile, planefunc, kutenfunc,
                   (None,) * len(j[stpt:edpt]))]
     unique_nonvacant_sets = {tuple(j[stpt:edpt]) for (i, j) in nonvacant_sets}
     if len(unique_nonvacant_sets) == 1:
+        missing_annotations = [((i, j, k), v) for ((i, j, k), v) in annots.items() if i == number and k and stx <= j < edx]
+        if missing_annotations:
+            print("WARNING: Annotations will not be shown: ", missing_annotations)
         return dump_preview(outfile, planefunc(number), kutenfunc, number, 
                nonvacant_sets[0][1], lang = lang, css = css, part = part, jlfunc = jlfunc,
                menuurl = menuurl, menuname = menuname, lasturl = lasturl, 
