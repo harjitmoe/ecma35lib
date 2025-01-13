@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020/2021/2022/2023/2024.
+# By HarJIT in 2020/2021/2022/2023/2024/2025.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -294,6 +294,39 @@ graphdata.gsets["ir187/yasuoka"] = (94, 2, cns_yasuoka[planesize * 6 : planesize
 graphdata.gsets["ir187/icu"] = (94, 2, cns_icu_old[planesize * 6 : planesize * 7])
 graphdata.gsets["ir187/icu-2014"] = (94, 2, cns_icu_2014[planesize * 6 : planesize * 7])
 # Plane 7 is the last one to be registered with ISO-IR.
+
+graphdata.gsets["csic8"] = (94, 2, cns[planesize * 7 : planesize * 8])
+graphdata.gsets["csic8/govtw"] = (94, 2, cns_gov[planesize * 7 : planesize * 8])
+
+graphdata.gsets["csic9"] = (94, 2, cns[planesize * 8 : planesize * 9])
+graphdata.gsets["csic9/govtw"] = (94, 2, cns_gov[planesize * 8 : planesize * 9])
+
+graphdata.gsets["csic10"] = (94, 2, cns[planesize * 9 : planesize * 10])
+
+graphdata.gsets["csic11"] = (94, 2, cns[planesize * 10 : planesize * 11])
+graphdata.gsets["csic11/govtw"] = (94, 2, cns_gov[planesize * 10 : planesize * 11])
+
+graphdata.gsets["csic12"] = (94, 2, cns[planesize * 11 : planesize * 12])
+graphdata.gsets["csic12/govtw"] = (94, 2, cns_gov[planesize * 11 : planesize * 12])
+
+graphdata.gsets["csic13-2007"] = (94, 2, cns[planesize * 12 : planesize * 13])
+graphdata.gsets["csic13-2007/govtw"] = (94, 2, cns_gov[planesize * 12 : planesize * 13])
+
+graphdata.gsets["ibm-euctw-extension-plane"] = (94, 2, cns_ibm[planesize * 12 : planesize * 13])
+
+graphdata.gsets["csic14-2007"] = (94, 2, cns[planesize * 13 : planesize * 14])
+graphdata.gsets["csic14-2007/govtw"] = (94, 2, cns_gov[planesize * 13 : planesize * 14])
+
+graphdata.gsets["csic15"] = (94, 2, cns[planesize * 14 : planesize * 15])
+graphdata.gsets["csic15/govtw"] = (94, 2, cns_gov[planesize * 14 : planesize * 15])
+graphdata.gsets["csic15/unihan"] = (94, 2, cns_unihan[planesize * 14 : planesize * 15])
+graphdata.gsets["csic15/icu"] = (94, 2,
+    cns_icu_old[planesize * 8 : planesize * 9]) # yes, this is correct.
+graphdata.gsets["csic15/icu-2014"] = (94, 2, cns_icu_2014[planesize * 14 : planesize * 15])
+
+graphdata.gsets["csic17"] = (94, 2, cns[planesize * 16 : planesize * 17])
+
+graphdata.gsets["csic19"] = (94, 2, cns[planesize * 18 : planesize * 19])
 
 # The entirety does also exist as an unregistered 94^n set, used by EUC-TW:
 graphdata.gsets["cns-eucg2"] = (94, 3, parsers.fuse([

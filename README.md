@@ -385,6 +385,22 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR ? G*DM4 " 8`|SJ 11239 (yet another supplementary set but labelled SJ rather than GB; numbered the eighth in its title)|
 |`IRR 0 G*DM4 " 8`|SJ 11239 making use of the BabelStone Han PUA|
 |`G*DM4 " 9`|"Unified Japanese IT Vendors Contemporary Ideographs, 1993", essentially a third JIS plane|
+|`G*DM4 " :`|TCVN 5773:1993 (Chữ Nôm)|
+|`G*DM4 " ;`|TCVN 6056:1995 (Chữ Hán).&ensp;Consists of some characters that are not present in TCVN 5773, all of which are present in (and presumably selected from) the original Unicode URO, and which include many very common Chinese characters.&ensp;This may or may not have anything to do with TCVN 6909:2001.|
+|`G*DM4 " <`|An offsetting of VHN 01:1998 (Hán Nôm, first supplement) with all allocations moved backward by 19 rows so as to fit within a 94×94 plane.&ensp;This may or may not have anything to do with TCVN 6909:2001.|
+|`G*DM4 " =`|VHN 02:1998 (Hán Nôm, second supplement).&ensp;This may or may not have anything to do with TCVN 6909:2001.|
+|`G*DM4 " >`|"Hán Nôm Coded Character Repertoire 2007" (Hán Nôm, third supplement)|
+|`G*DM4 " ?`|The extension plane 13 that appears in IBM's EUC-TW variant|
+|`G*DM4 # 0`|CNS 11643-2007 plane 8|
+|`G*DM4 # 1`|CNS 11643-2007 plane 9|
+|`G*DM4 # 2`|CNS 11643-2007 plane 10|
+|`G*DM4 # 3`|CNS 11643-2007 plane 11|
+|`G*DM4 # 4`|CNS 11643-2007 plane 12|
+|`G*DM4 # 5`|CNS 11643-2007 plane 13|
+|`G*DM4 # 6`|CNS 11643-2007 plane 14|
+|`G*DM4 # 7`|CNS 11643 plane 15|
+|`G*DM4 # 9`|CNS 11643 plane 17|
+|`G*DM4 # ;`|CNS 11643 plane 19|
 |`IRR ? G*DM6 ! 0`|GBK extras per GB 18030-2000 or GB 18030-2005 (GBK level 5 with associated UDC zone and non-URO part of level 4; accepted by GBK filter in G3 slot)|
 |`IRR 0 G*DM6 ! 0`|GBK extras, WHATWG/HTML5 variant|
 |`IRR 1 G*DM6 ! 0`|GBK extras, mapping all characters with defined glyphs to non-PUA|

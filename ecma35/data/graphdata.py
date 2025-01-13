@@ -73,7 +73,7 @@ chcpdocs = {}
 ebcdicdbcs = {}
 
 # Note: has to be imported after gsets &co are defined
-from ecma35.data.multibyte import korea, japan, guobiao, traditional
+from ecma35.data.multibyte import korea, japan, guobiao, traditional, tcvn
 from ecma35.data.singlebyte import ecma6, extlatin, c0substs, dingbats, quoocs_ngwx, ccitt, cyrillic, semitic, greek, indic, otherscript, splitebcdic, pseudographics, kana, fragment
 
 for _i in rhses:
@@ -441,6 +441,22 @@ g94nbytes = {tuple(b"@"): ("ir042/nec", ("ir042/ibm", "ir042/nec", "ir042/1990pi
              tuple(b"\"7"): ("ibmbig5exts2", (), ("ibmbig5exts2",)),
              tuple(b"\"8"): ("sj11239", ("sj11239/babelstonehan",), ("sj11239",)),
              tuple(b"\"9"): ("japan-plane-3", (), ("japan-plane-3",)),
+             tuple(b"\":"): ("tcvn5773", (), ("tcvn5773",)),
+             tuple(b"\";"): ("tcvn6056", (), ("tcvn6056",)),
+             tuple(b"\"<"): ("vhn01-row-minus-19", (), ("vhn01-row-minus-19",)),
+             tuple(b"\"="): ("vhn02", (), ("vhn02",)),
+             tuple(b"\">"): ("vhn03", (), ("vhn03",)),
+             tuple(b"\"?"): ("ibm-euctw-extension-plane", (), ("ibm-euctw-extension-plane",)),
+             tuple(b"#0"): ("csic8", ("csic8/govtw",), ("csic8",)),
+             tuple(b"#1"): ("csic9", ("csic9/govtw",), ("csic9",)),
+             tuple(b"#2"): ("csic10", (), ("csic10",)),
+             tuple(b"#3"): ("csic11", ("csic11/govtw",), ("csic11",)),
+             tuple(b"#4"): ("csic12", ("csic12/govtw",), ("csic12",)),
+             tuple(b"#5"): ("csic13-2007", ("csic13-2007/govtw",), ("csic13-2007",)),
+             tuple(b"#6"): ("csic14-2007", ("csic14-2007/govtw",), ("csic14-2007",)),
+             tuple(b"#7"): ("csic15", ("csic15/govtw", "csic15/icu", "csic15/icu-2014", None, "csic15/unihan"), ("csic15",)),
+             tuple(b"#9"): ("csic17", (), ("csic17",)),
+             tuple(b"#;"): ("csic19", (), ("csic19",)),
              tuple(b"~"): "nil"}
 
 g96nbytes = {tuple(b"!0"):("gbk-nonuro-extras-2022", ("gbk-nonuro-extras-web", "gbk-nonuro-extras-full", "gbk-nonuro-extras-2022"), ("gbk-nonuro-extras",)),
