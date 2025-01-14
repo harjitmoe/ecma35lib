@@ -314,7 +314,16 @@ graphdata.gsets["ir058/hant-strict"] = gb12345_strict = (94, 2, parsers.fuse([
 graphdata.gsets["gb12052"] = (94, 2, parsers.decode_main_plane_euc(
     parsers.parse_file_format("Other/gb12052-uni.txt", gb12052 = True),
     "gb12052-uni.txt"))
-#
+
+graphdata.gsets["gb15564"] = gb15564 = (94, 2, parsers.fuse([
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "GH", kutenform=True),
+        gb12345[2],
+        graphdata.gsets["gb8565"][2],
+    ], "GB15564.json"))
+
+graphdata.gsets["unihan-singapore-characters"] = (94, 2,
+    parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "GS"))
+
 # Being as GB 7589, 13131, 7590, 13132, 16500 do not include non-Kanji, Unihan mappings theoretically
 #   can describe their entire mappings… in reality, the GB 13131 and 16500 mappings contain almost
 #   everything with only a few gaps (listed below), whereas the GB 13132 mapping is full of holes.

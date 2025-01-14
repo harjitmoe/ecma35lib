@@ -258,6 +258,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 2 G*DM4 E`|GB 6345.1-1986|
 |`IRR 3 G*DM4 E`|GB 8565.2-1988|
 |`IRR 4 G*DM4 E`|Pseudo-G8, an incorrect version of GB 8565.2-1988 which had been referenced by older versions of the Unihan database (incorrectly shifts the actual GB 8565.2 characters 15-90 through 15-93 back by one code point over 15-89, and also includes the row 8 hanzi extensions and most of the CCITT hanzi extensions).|
+|`IRR 5 G*DM4 E`|GB 8565.2-1988 with those of the GB 15564-1995 extensions (intended for Hong Kong teletext) that are listed in the Unihan database|
 |`IRR 0 G*DM4 G`|CNS 11643 plane 1, recommended version (default)|
 |`IRR 1 G*DM4 G`|CNS 11643 plane 1, mapped from Microsoft Big-5|
 |`IRR 2 G*DM4 G`|CNS 11643 plane 1, according to UTC mappings|
@@ -401,6 +402,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*DM4 # 7`|CNS 11643 plane 15|
 |`G*DM4 # 9`|CNS 11643 plane 17|
 |`G*DM4 # ;`|CNS 11643 plane 19|
+|`G*DM4 % 0`|The IRG/Unihan source described only as "Singapore Characters"|
 |`IRR ? G*DM6 ! 0`|GBK extras per GB 18030-2000 or GB 18030-2005 (GBK level 5 with associated UDC zone and non-URO part of level 4; accepted by GBK filter in G3 slot)|
 |`IRR 0 G*DM6 ! 0`|GBK extras, WHATWG/HTML5 variant|
 |`IRR 1 G*DM6 ! 0`|GBK extras, mapping all characters with defined glyphs to non-PUA|
