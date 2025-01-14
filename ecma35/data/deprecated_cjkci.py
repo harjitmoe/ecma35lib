@@ -55,6 +55,9 @@ deprecated_compatibility_ideographs = {
     0x2F9CB: 0x4695,
     0x2F9D6: 0x25AD4,
     #
+    # https://www.unicode.org/L2/L2025/25009-cjk-unihan-wg-utc182.pdf#page=5
+    0x2F81D: 0x20674,
+    #
     # Note that U+FA99, U+FAB0 and U+FAD1 are candidates for future disunification and deprecation
     #   when the CJK-K block gets added in however many years' time, although this is disputed and
     #   may well not happen:
