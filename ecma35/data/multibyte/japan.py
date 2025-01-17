@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020/2022/2023/2024.
+# By HarJIT in 2019/2020/2022/2023/2024/2025.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -244,9 +244,18 @@ _windows_noNECSel_au = parsers.fuse([
 arib_extonly = parsers.decode_main_plane_sjis(
     parsers.parse_file_format("Custom/pict_arib.txt"),
     "pict_arib.txt")
-graphdata.gsets["ir168/arib"] = (94, 2, 
-        parsers.fuse([arib_extonly, jisx0208_1990[2]],
-                     "Emoji--ARIB.json"))
+graphdata.gsets["ir168/arib"] = (94, 2, parsers.fuse([
+        arib_extonly,
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_JSource", "JARIB"),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-15-1.txt", "kIRG_JSource", "JARIB"),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_JSource", "JARIB"),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_JSource", "JARIB"),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_JSource", "JARIB"),
+        parsers.decode_main_plane_gl(
+            parsers.parse_file_format("Custom/kanji_arib.txt"),
+            "kanji_arib.txt"),
+        jisx0208_1990[2],
+    ], "JISX0208--ARIB.json"))
 graphdata.gsets["ir168/docomo"] = (94, 2, 
         parsers.fuse([cellemojidata.outmap["docomo"][:94*94], _windows_noNECSel],
                      "Emoji--DoCoMo-4.json"))
