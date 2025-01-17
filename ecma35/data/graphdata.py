@@ -394,10 +394,10 @@ g94nbytes = {tuple(b"@"): ("ir042/nec", ("ir042/ibm", "ir042/nec", "ir042/1990pi
              tuple(b"E"): ("ir165", ("ir165/swapg", "ir165/ext", "gb6345", "gb8565", "gb8565-oldwrongunihan", "gb15564"), ("ir165",)), # n.b. KS X 1002 seems to unilaterally usurp this one?
              tuple(b"F"): "ir169",
              tuple(b"G"): ("ir171/full",
-                           ("ir171/full", "ir171/ms", "ir171/utc", "ir171/utcbig5", "ir171/mac", "ir171/govtw", "ir171/ibm", "ir171/ibm950", "ir171/ibm1373", "ir171/web", "ir171/1984moz", "ir171/icu", "ir171/icu-2014", "ir171/yasuoka"),
+                           ("ir171/full", "ir171/ms", "ir171/utc", "ir171/utcbig5", "ir171/mac", "ir171/govtw", "ir171/ibm", "ir171/ibm950", "ir171/ibm1373", "ir171/web", "ir171/1984moz", "ir171/icu", "ir171/icu-2014", "ir171/yasuoka", "ir171/hkscs2016"),
                            ("ir171",)),
              tuple(b"H"): ("ir172",
-                           (None, "ir172/big5", None, None, None, "ir172/unihan"),
+                           (None, "ir172/big5", None, None, None, "ir172/unihan", "ir172/hkscs2016"),
                            ("ir172",)),
              tuple(b"I"): ("ir183/full",
                            ("ir183/1988", "ir183/1988plus", "ir183/govtw", "ir183/full", "ir183/utc", "ir183/icu", "ir183/icu-2014", "ir183/yasuoka", "ir183/unihan"),

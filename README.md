@@ -273,9 +273,11 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR ; G*DM4 G`|CNS 11643 plane 1, per ICU ISO-2022-CN mappings|
 |`IRR < G*DM4 G`|CNS 11643 plane 1, per ICU EUC-TW 2014 mappings|
 |`IRR = G*DM4 G`|CNS 11643 plane 1, per Yasuoka's mappings|
+|`IRR > G*DM4 G`|CNS 11643 plane 1, alternative mappings for HKSCS-2016 preferred forms|
 |`IRR ? G*DM4 H`|CNS 11643 plane 2|
 |`IRR 1 G*DM4 H`|CNS 11643 plane 2, Big5 mappings|
 |`IRR 5 G*DM4 H`|CNS 11643 plane 2, Unihan mappings|
+|`IRR 6 G*DM4 H`|CNS 11643 plane 2, alternative mappings for HKSCS-2016 preferred forms|
 |`IRR ? G*DM4 I`|CNS 11643-1992 plane 3|
 |`IRR 0 G*DM4 I`|CNS 11643-1988 plane 14|
 |`IRR 1 G*DM4 I`|CNS 11643-1988 plane 14 with extensions, as submitted to the IRG|

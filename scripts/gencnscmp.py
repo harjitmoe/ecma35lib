@@ -40,7 +40,7 @@ def swap_arrows(t):
     return t[:148] + (t[149], t[148]) + t[150:]
 
 print("Loading 1")
-plane1 = (1, ("UTC Big5", "UTC CNS", "MS Big5", "Mac Big5", "IBM Big5", "Web Big5", "Yasuoka CNS",
+plane1 = (1, ("UTC Big5", "UTC CNS", "MS Big5", "Mac Big5", "IBM Big5", "Web Big5", "HKSCS'16", "Yasuoka CNS",
               "ICU '92CNS", "IBM EUC", "ICU EUC'14", "GOV-TW CNS", "Output"), [
           swap_arrows(graphdata.gsets["ir171/utcbig5"][2]),
           graphdata.gsets["ir171/utc"][2],
@@ -48,6 +48,7 @@ plane1 = (1, ("UTC Big5", "UTC CNS", "MS Big5", "Mac Big5", "IBM Big5", "Web Big
           swap_arrows(graphdata.gsets["ir171/mac"][2]),
           swap_arrows(graphdata.gsets["ir171/ibm950"][2]),
           swap_arrows(graphdata.gsets["ir171/web"][2]),
+          swap_arrows(graphdata.gsets["ir171/hkscs2016"][2]),
           graphdata.gsets["ir171/yasuoka"][2],
           graphdata.gsets["ir171/icu"][2],
           graphdata.gsets["ir171/ibm"][2],
@@ -57,8 +58,9 @@ plane1 = (1, ("UTC Big5", "UTC CNS", "MS Big5", "Mac Big5", "IBM Big5", "Web Big
 ])
 
 print("Loading 2")
-plane2 = (2, ("Big5", "GOV-TW CNS", "Unihan CNS"), [
+plane2 = (2, ("Big5", "HKSCS'16", "GOV-TW CNS", "Unihan CNS"), [
           graphdata.gsets["ir172/big5"][2],
+          graphdata.gsets["ir172/hkscs2016"][2],
           graphdata.gsets["ir172"][2],
           graphdata.gsets["ir172/unihan"][2],
 ])
@@ -387,8 +389,8 @@ annots = {
               "(otherwise identical to Windows-950 as far as the CNS-mapped part of Big5 is "
               "concerned, hence it is not shown here) actually follows IBM-950 instead in this "
               "specific location in mapping it to U+5F5E.&ensp;Compare 03-55-68.",
- (2, 1, 0): 'Compare 02-01-41 with 13-01-10, Ψ-66-63.',
- (2, 8, 0): "02-08-48 has a \"meat\" radical, not \"moon\"; compare 06-12-03.",
+ (2, 1, 41): 'Compare 13-01-10, Ψ-66-63.',
+ (2, 8, 48): "This has a \"meat\" radical, not \"moon\"; compare 06-12-03.",
  (2, 23, 79): "I'm following RFC 1922 mappings between CNS and Big5 here, even though the gov-tw "
               "mappings seem to differ.&ensp;Not sure if these two are consistently supposed "
               "to look different in all styles (their TW Kai reference glyphs seem to be the same, "
@@ -401,8 +403,8 @@ annots = {
  (2, 44, 65): "Compare 14-69-76.",
  (2, 82, 37): "This character was apparently "
               "<a href='https://www.unicode.org/L2/L2022/22256-irgn2580-t-glyph.pdf#page=4'>"
-              "added in a 2022 amendment</a>; compare Ψ-62-46 (Big5-Plus), Ψ-74-34 (Big5-ChinaSea) "
-              "and Ψ-82-72 (Big5-HKSCS).",
+              "added in a 2022 amendment</a>; compare Ψ-62-46 (Big5-Plus), Ψ-74-34 (some "
+              "variants of Big5-ChinaSea) and Ψ-82-72 (Big5-HKSCS).",
  (3, 1, 24): "Compare 01-04-31.",
  (3, 55, 68): "Compare 01-86-33.",
  (3, 66, 38): "Between 1992 and 2007, this was the last <i>de jure</i> codepoint on this "

@@ -478,6 +478,11 @@ big5_to_cns2_ibmvar[0xC94A] = (13, 4, 40)
 big5_to_cns2_ibmvar[0xDDFC] = (13, 4, 42)
 parsers.big5_to_cns_maps["big5_to_cns2_ibmvar"] = big5_to_cns2_ibmvar
 
+_hkscs2008_to_hkscs2016 = {(0x514C,): (0x5151,), (0x544A,): (0x543F,), (0x5ABC,): (0x5AAA,), (0x6085,): (0x60A6,), (0x614D,): (0x6120,), (0x6329,): (0x635D,), (0x6553,): (0x655A,), (0x68B2,): (0x68C1,), (0x6C33,): (0x6C32,), (0x6D97,): (0x6D9A,), (0x7185,): (0x7174,), (0x7A05,): (0x7A0E,), (0x7E15,): (0x7DFC,), (0x812B,): (0x8131,), (0x8183,): (0x817D,), (0x860A,): (0x85F4,), (0x86FB,): (0x8715,), (0x8AAA,): (0x8AAC,), (0x8F40,): (0x8F3C,), (0x919E,): (0x9196,), (0x92B3,): (0x92ED,), (0x95B1,): (0x95B2,)}
+
+def hkscs2008_to_hkscs2016(pointer, ucs):
+    return _hkscs2008_to_hkscs2016.get(ucs, ucs)
+
 # Now that big5_to_cns2 is defined, we can do this:
 graphdata.gsets["ir171/ms"] = (94, 2, parsers.decode_main_plane_big5(
     parsers.parse_file_format("ICU/windows-950-2000.ucm"),
@@ -518,6 +523,12 @@ graphdata.gsets["ir171/web"] = (94, 2, parsers.decode_main_plane_big5(
     "index-big5.txt",
     "big5_to_cns2",
     plane=1))
+graphdata.gsets["ir171/hkscs2016"] = (94, 2, parsers.decode_main_plane_big5(
+    parsers.parse_file_format("WHATWG/index-big5.txt"),
+    "index-big5.txt",
+    "big5_to_cns2",
+    plane=1,
+    mapper=hkscs2008_to_hkscs2016))
 # "Mozilla 1.5" one's main plane matches Microsoft, while the "Mozilla 1.8" one's matches WHATWG.
 #
 # For IR-172 (unlike IR-171), MS, Mac, Web, Moz1984 and UTC-BIG5 actually match (while UTC-CNS differs)
@@ -526,6 +537,12 @@ graphdata.gsets["ir172/big5"] = (94, 2, parsers.decode_main_plane_big5(
     "BIG5.TXT",
     "big5_to_cns2",
     plane=2))
+graphdata.gsets["ir172/hkscs2016"] = (94, 2, parsers.decode_main_plane_big5(
+    parsers.parse_file_format("UTC/BIG5.TXT"),
+    "BIG5.TXT",
+    "big5_to_cns2",
+    plane=2,
+    mapper=hkscs2008_to_hkscs2016))
 
 # Macintosh-compatibility variants
 maccnsdata = parsers.read_untracked(
@@ -595,6 +612,7 @@ graphdata.gsets["hkscs1999"] = (94, 2, parsers.decode_extra_plane_big5(
 graphdata.gsets["gccs"] = (94, 2, parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Mozilla/gccs.txt"),
         "gccs.txt"))
+
 # ETEN exts, plus the handful of HKSCS ones which follow, rather than preceeding, the standard
 #   assignments. Used by WHATWG's encoder (as opposed to decoder, which is full HKSCS):
 graphdata.gsets["etenextsplus"] = (94, 2, 
