@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2023, 2024.
+# By HarJIT in 2023, 2024, 2025.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -38,6 +38,8 @@ deprecated_compatibility_ideographs = {
     #
     # CNS 11643 references not moved yet but proposed to be:
     #   https://www.unicode.org/irg/docs/n2519-TSourceIssues.pdf#page=35
+    #   https://www.unicode.org/L2/L2025/25009-cjk-unihan-wg-utc182.pdf#page=5
+    0x2F81D: 0x20674,
     0x2F82C: 0x20984,
     0x2F85B: 0x21533,
     0x2F860: 0x216A7,
@@ -55,17 +57,19 @@ deprecated_compatibility_ideographs = {
     0x2F9CB: 0x4695,
     0x2F9D6: 0x25AD4,
     #
-    # https://www.unicode.org/L2/L2025/25009-cjk-unihan-wg-utc182.pdf#page=5
-    0x2F81D: 0x20674,
-    #
     # Note that U+FA99, U+FAB0 and U+FAD1 are candidates for future disunification and deprecation
     #   when the CJK-K block gets added in however many years' time, although this is disputed and
-    #   may well not happen:
-    # https://www.unicode.org/irg/docs/n2510-Disunify3.pdf
-    # U+2F980 is another candidate for future disunification and deprecation (proposed for U+2B73E):
-    # https://www.unicode.org/irg/docs/n2771-Disunify.pdf
-    # https://www.unicode.org/irg/docs/n2702-Recommendations.pdf#page=4
-    # https://www.unicode.org/irg/docs/n2704-MiscEditorialReport.pdf#page=2
+    #   may well not happen (U+FAD1 in particular seems not to be planned):
+    #     https://www.unicode.org/irg/docs/n2510-Disunify3.pdf
+    #     https://www.unicode.org/L2/L2021/21178-jiang-two-characters.pdf
+    #     https://www.unicode.org/irg/docs/n2785-KPSourceFeedback.pdf
+    #     https://hc.jsecs.org/irg/ws2024/app/?find=UTC-00777
+    #     https://hc.jsecs.org/irg/ws2024/app/?find=UTC-03249
+    # U+2F980 is another candidate for future disunification and deprecation
+    #   (proposed for U+2B73E):
+    #     https://www.unicode.org/irg/docs/n2771-Disunify.pdf
+    #     https://www.unicode.org/irg/docs/n2702-Recommendations.pdf#page=4
+    #     https://www.unicode.org/irg/docs/n2704-MiscEditorialReport.pdf#page=2
 }
 
 def remove_deprecated_cjkci(pointer, ucs):
