@@ -334,10 +334,15 @@ graphdata.gsets["unihan-singapore-characters"] = (94, 2,
 # A few of the Unihan mappings for GB 13131 and 13132 are off by one versus the published GB 7589
 #   and 7590 standards per IRG N2302:
 #     https://www.unicode.org/irg/docs/n2302-GSourceIssues.pdf
-#   - Unihan's 03-16-65 thru 03-16-82 should be 02-16-66 thru 02-16-83
-#     - The 02-16-65 position should be U+201B5 (𠆵); Unihan's 03-16-83 shouldn't be present.
-#   - Unihan's 05-67-11 thru 05-67-24 should be 04-67-12 thru 04-67-25
-#   - Unihan's 05-74-05 thru 05-74-15 should be 04-74-04 thru 04-74-14
+#   - Unihan's 03-16-65 thru 03-16-82 corresponds to 02-16-66 thru 02-16-83
+#     - The 02-16-65 position should be U+201B5 (𠆵). Unihan's 03-16-83 corresponds to nothing
+#       since U+4F47 (佇) does not appear in GB 7589.
+#   - Unihan's 05-67-11 thru 05-67-24 corresponds to 04-67-12 thru 04-67-25
+#   - Unihan's 05-74-05 thru 05-74-15 corresponds to 04-74-04 thru 04-74-14
+#     - Although IRG N2302 doesn't note the issues with 05-73-93 and 05-73-94, the off-by-one
+#       range is actually the somewhat larger 05-73-94 thru 05-74-18, which corresponds to
+#       04-73-93 thru 04-74-17. The 04-74-18 position should be U+859E (薞); the 05-73-93 position
+#       corresponds to nothing since U+8575 (蕵)—not quite U+859E—does not appear in GB 7590.
 # Note that the Chinese national body, having initially considered them per IRG N2293 (see also
 #   IRG N2290 / UTC L2/18-189), seemingly rejected the IRG N2302 corrections in IRG N2376.
 #   Possibly, this means they reflect regions of non-homology between the (published) GB 7589 and
