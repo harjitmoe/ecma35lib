@@ -458,6 +458,7 @@ g94nbytes = {tuple(b"@"): ("ir042/nec", ("ir042/ibm", "ir042/nec", "ir042/1990pi
              tuple(b"#9"): ("csic17", (), ("csic17",)),
              tuple(b"#;"): ("csic19", (), ("csic19",)),
              tuple(b"%0"): ("unihan-singapore-characters", (), ("unihan-singapore-characters",)),
+             tuple(b"%1"): ("pseudo-tcvn6056", (), ("pseudo-tcvn6056",)),
              tuple(b"~"): "nil"}
 
 g96nbytes = {tuple(b"!0"):("gbk-nonuro-extras-2022", ("gbk-nonuro-extras-web", "gbk-nonuro-extras-full", "gbk-nonuro-extras-2022"), ("gbk-nonuro-extras",)),

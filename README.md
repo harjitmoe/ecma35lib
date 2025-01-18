@@ -405,6 +405,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*DM4 # 9`|CNS 11643 plane 17|
 |`G*DM4 # ;`|CNS 11643 plane 19|
 |`G*DM4 % 0`|The IRG/Unihan source described only as "Singapore Characters"|
+|`G*DM4 % 1`|Re-arrangement of TCVN 6056 (Chữ Hán), as was referenced by the Unicode 3.0 Unihan database|
 |`IRR ? G*DM6 ! 0`|GBK extras per GB 18030-2000 or GB 18030-2005 (GBK level 5 with associated UDC zone and non-URO part of level 4; accepted by GBK filter in G3 slot)|
 |`IRR 0 G*DM6 ! 0`|GBK extras, WHATWG/HTML5 variant|
 |`IRR 1 G*DM6 ! 0`|GBK extras, mapping all characters with defined glyphs to non-PUA|

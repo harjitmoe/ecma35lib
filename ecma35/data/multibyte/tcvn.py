@@ -22,6 +22,12 @@ graphdata.gsets["tcvn6056"] = (94, 2,
         "TCVN6056.txt",
         skip_invalid_kuten=False))
 
+graphdata.gsets["pseudo-tcvn6056"] = (94, 2,
+    parsers.decode_main_plane_gl(
+        parsers.parse_file_format("Custom/ChuwxNoom/V1_OLD.txt"),
+        "V1_OLD.txt",
+        skip_invalid_kuten=False))
+
 graphdata.gsets["vhn01-row-minus-19"] = (94, 2,
     parsers.decode_main_plane_gl(
         parsers.parse_file_format("Custom/ChuwxNoom/VHN01.txt"),
