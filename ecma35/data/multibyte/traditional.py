@@ -150,8 +150,13 @@ misc_amendments = [
     (None,) * (94*94*2 + 94*68 + 25) + ((0x6BF5,),), # 03-69-26 → U+6BF5
 ]
 
+cns_19 = parsers.decode_main_plane_gl(
+    parsers.parse_file_format("Custom/CSIC_plane_19.txt"),
+    "CSIC_plane_19.txt")
+
 cns = parsers.fuse([
     *misc_amendments,
+    (None,) * (94*94*18) + tuple(cns_19),
     cns_unihan_amended,
     cns_bmp,
     cns_sip,
@@ -317,6 +322,11 @@ graphdata.gsets["ibm-euctw-extension-plane"] = (94, 2, cns_ibm[planesize * 12 : 
 graphdata.gsets["csic14-2007"] = (94, 2, cns[planesize * 13 : planesize * 14])
 graphdata.gsets["csic14-2007/govtw"] = (94, 2, cns_gov[planesize * 13 : planesize * 14])
 
+# Special mention is warrented for plane 15: it was published as an extension in 1990,
+#   but was only integrated into the standard proper in 2007, by which point several
+#   assignments were redundant and were skipped. Actually, the early full versions of
+#   cns-11643-1992.ucm include it as plane 9 for some reason (later versions remove
+#   it due to limiting that mapping's scope to ISO-2022-CN-EXT, then to ISO-2022-CN).
 graphdata.gsets["csic15"] = (94, 2, cns[planesize * 14 : planesize * 15])
 graphdata.gsets["csic15/govtw"] = (94, 2, cns_gov[planesize * 14 : planesize * 15])
 graphdata.gsets["csic15/unihan"] = (94, 2, cns_unihan[planesize * 14 : planesize * 15])
@@ -334,6 +344,8 @@ graphdata.gsets["cns-eucg2"] = (94, 3, parsers.fuse([
     cns_icu_2014,
 ], "CSIC-All.json"))
 graphdata.gsets["cns-eucg2-lax-matching"] = (94, 3, parsers.fuse([
+    *misc_amendments,
+    (None,) * (94*94*18) + tuple(cns_19),
     cns_unihan_amended,
     cns_bmp,
     cns_sip,
@@ -346,11 +358,6 @@ graphdata.gsets["cns-eucg2-unihan"] = (94, 3, cns_unihan)
 # The version of EUC-TW used by ICU, with standard assignments in planes 1-7 and 15,
 #   a user-defined area in plane 12, and IBM corporate assignments in plane 13.
 #   Note that this is incompatible with the current standard's use of planes 12 and 13.
-# Special mention is warrented for plane 15: it was published as an extension in 1990,
-#   but was only integrated into the standard proper in 2007, by which point several
-#   assignments were redundant and were skipped. Actually, the early full versions of
-#   cns-11643-1992.ucm include it as plane 9 for some reason (later versions remove
-#   it due to limiting that mapping's scope to ISO-2022-CN-EXT, then to ISO-2022-CN).
 graphdata.gsets["cns-eucg2-icu-2014-full"] = (94, 3, cns_icu_2014)
 graphdata.gsetflags["cns-eucg2-icu-2014-full"] |= {"BIG5:IBMCOMPATKANJI"}
 graphdata.gsets["cns-eucg2-icu-2014-noplane1"] = (94, 3, (None,) * (94 * 94) + cns_icu_2014[94*94:])
