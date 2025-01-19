@@ -356,10 +356,12 @@ graphdata.gsets["unihan-singapore-characters"] = (94, 2,
 #     U+5829 at 20-53 (traditional; simplified not in Unicode)
 #     U+22341 at 21-05 (traditional / simplified)
 #     U+7D94 at 21-25 (traditional / simplified)
-#     U+5570/U+56C9 at 22-51 (simplified: U+5570; traditional: U+56C9)
+#     U+5570 at 22-51 (simplified: U+5570; traditional: U+56C9)
+#         Note: U+56C9 is 88-51 in GB 12345, so this is U+5570 in both GB 7589 and 13131.
 #     U+625C at 41-53 (traditional / simplified)
 #     U+781E at 55-58 (traditional / simplified)
 #     U+77AD at 58-43 (traditional; traditional even in GB 7589 since simplified converges to 了)
+#         Note: U+77AD is 88-49 in GB 12345, so this is redundant in GB 13131.
 #     U+79C4 at 59-51 (traditional / simplified)
 #     U+8226 at 69-53 (traditional / simplified)
 #     U+84C3 at 73-83 (traditional / simplified)
@@ -384,10 +386,10 @@ graphdata.gsets["gb13131"] = (94, 2, parsers.fuse([
         (None,) * ((94 * 19) + 52) + ((0x5829,),),
         (None,) * ((94 * 20) + 4) + ((0x22341,),),
         (None,) * ((94 * 20) + 24) + ((0x7D94,),),
-        (None,) * ((94 * 21) + 50) + ((0x56C9,),),
+        (None,) * ((94 * 21) + 50) + ((0x5570,),),
         (None,) * ((94 * 40) + 52) + ((0x625C,),),
         (None,) * ((94 * 54) + 57) + ((0x781E,),),
-        (None,) * ((94 * 57) + 42) + ((0x77AD,),),
+        (None,) * ((94 * 57) + 42) + ((0x77AD, 0xF87F),),
         (None,) * ((94 * 58) + 50) + ((0x79C4,),),
         (None,) * ((94 * 68) + 52) + ((0x8226,),),
         (None,) * ((94 * 72) + 82) + ((0x84C3,),),
