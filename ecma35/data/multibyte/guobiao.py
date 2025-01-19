@@ -366,6 +366,8 @@ graphdata.gsets["unihan-singapore-characters"] = (94, 2,
 #     U+8226 at 69-53 (traditional / simplified)
 #     U+84C3 at 73-83 (traditional / simplified)
 #
+# Also, U+8280 is 04-71-30 or 05-71-30 (GB 7590 or GB 13132). 02-72-15 or 03-72-15 (GB 7589 or
+#   GB 13131) is actually U+827B, not U+8280.
 g_source_conversion = {}
 with open(os.path.join(parsers.directory, "Custom/newgsource.txt"), "r") as _f:
     for _line in _f:
@@ -374,6 +376,7 @@ with open(os.path.join(parsers.directory, "Custom/newgsource.txt"), "r") as _f:
         _a, _b = _line.strip().split()
         g_source_conversion[_a] = _b
 graphdata.gsets["gb13131"] = (94, 2, parsers.fuse([
+        (None,) * ((94 * 71) + 14) + ((0x827B,),),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "G3", transformfirst=g_source_conversion),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_GSource", "G3", transformfirst=g_source_conversion),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G3", transformfirst=g_source_conversion),
