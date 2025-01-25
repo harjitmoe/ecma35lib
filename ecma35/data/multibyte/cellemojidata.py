@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; charset: utf-8 -*-
-# Written by HarJIT in 2019, 2020.
+# Written by HarJIT in 2019, 2020, 2025.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -41,7 +41,7 @@ kddizodiacmap = {
 }
 rkddizodiacmap = dict(zip(kddizodiacmap.values(), kddizodiacmap.keys()))
 
-f = open(os.path.join(parsers.directory, "Perl/Encode-JP-Emoji/lib/Encode/JP/Emoji/Mapping.pm"), "rU", encoding="utf-8")
+f = open(os.path.join(parsers.directory, "Perl/Encode-JP-Emoji/lib/Encode/JP/Emoji/Mapping.pm"), "r", encoding="utf-8")
 b = f.read()
 f.close()
 kddi_microsoft = range(0xE000, 0xE758)

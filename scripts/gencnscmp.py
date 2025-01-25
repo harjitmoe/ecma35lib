@@ -208,6 +208,8 @@ def planefunc(number, mapname=None):
             return '<br>Plane "9"'
         elif "Big5" in mapname:
             return "<br>Level {}".format(number) if number <= 2 else "(beyond)"
+        elif "HKSCS" in mapname:
+            return "<br>Alternatives"
         else:
             return "<br>Plane {}".format(number)
 
