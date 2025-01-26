@@ -70,6 +70,9 @@ deprecated_compatibility_ideographs = {
     #     https://www.unicode.org/irg/docs/n2771-Disunify.pdf
     #     https://www.unicode.org/irg/docs/n2702-Recommendations.pdf#page=4
     #     https://www.unicode.org/irg/docs/n2704-MiscEditorialReport.pdf#page=2
+    # U+FACB and U+2F9FF have also been proposed for future disunification and deprecation (while
+    #   U+2F9FE would remain valid):
+    #     https://www.unicode.org/irg/docs/n2786-Disunify.pdf
 }
 
 def remove_deprecated_cjkci(pointer, ucs):
