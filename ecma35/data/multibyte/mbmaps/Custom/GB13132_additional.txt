@@ -1,6 +1,17 @@
 # Table for converting the portions of GB 13132 (mainly homologous to GB 7590 but with 
-#   Traditional Chinese forms, and with two small off-by-one non-homologous regions)
-#   that aren't listed as Unihan Database sources to Unicode.
+# Traditional Chinese forms, and with two small off-by-one non-homologous regions) that
+# aren't listed as Unihan Database sources to Unicode.
+#
+# The Unicode Private Use Area character U+F87F is appended as an Apple-style transcoding
+# hint in cases where the Unicode mapping is approximate or does not round-trip.
+#
+# The two non-homologous regions are treated as correct per IRGN2376:
+#   https://www.unicode.org/irg/docs/n2376-GSourceUpdate.pdf
+#
+# They had been highlighted in IRGN2302 figures 2 and 3 respectively, although figure 3
+# highlights only part of the second range (which includes a small part of row 73):
+#   https://www.unicode.org/irg/docs/n2302-GSourceIssues.pdf
+#
 0x3025	U+53C0+F87F
 0x3028	U+2219A
 0x3029	U+231C7
