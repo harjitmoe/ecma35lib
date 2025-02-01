@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020, 2022, 2024.
+# By HarJIT in 2020, 2022, 2024, 2025.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -9,7 +9,7 @@
 from ecma35.data import graphdata
 from ecma35.data.singlebyte import sbmapparsers as parsers
 
-# Scope of this file is the "tee-sixty-one-ic" supplements and their further supplements, i.e. the
+# Scope of this file is the ITU-T.61-based supplements and their further supplements, i.e. the
 #   closely interrelated ITU T.51, ITU T.61, ITU T.101, DIN 31624, ISO 5426, ISO 6937, ETS 300 706,
 #   excluding those in the scope of ecma6.py, greek.py, cyrillic.py, semitic.py, pseudographics.py
 
@@ -147,6 +147,15 @@ _t51videotex3[58] = (0x25E3,)
 _t51videotex3[68] = (0x253C,)
 graphdata.gsets["ir099"] = graphdata.gsets["ir128"] = (94, 1, tuple(_t51videotex3))
 
+# The "Adobe Standard" or "PostScript Standard" encoding, yet another encoding related to T.61.
+graphdata.gsets["adobe-standard"] = (94, 1, ((161,), (162,), (163,), (8260,), (165,), (402,), (167,), (164,), (39,), (8220,), (171,), (8249,), (8250,), (64257,), (64258,), None, (8211,), (8224,), (8225,), (183,), None, (182,), (8226,), (8218,), (8222,), (8221,), (187,), (8230,), (8240,), None, (191,), None, (96,), (180,), (710,), (732,), (175,), (728,), (729,), (168,), None, (730,), (184,), None, (733,), (731,), (711,), (8212,), None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (198,), None, (170,), None, None, None, None, (321,), (216,), (338,), (186,), None, None, None, None, None, (230,), None, None, None, (305,), None, None, (322,), (248,), (339,), (223,), None, None, None))
+graphdata.chcpdocs['1276'] = 'ecma-35'
+graphdata.defgsets['1276'] = ('ir006/smartquotes', 'adobe-standard', 'nil', 'nil')
+
+#######################################################
+# FURTHER SUPPLEMENTS TO ITU-T.61-DERIVED SUPPLEMENTS #
+#######################################################
+
 # CENELEC supplement for characters listed in Annex A of T.51 but not in *any* of ISO-8859-1 thru 9.
 #   Contrast IR-154.
 _ir152 = [(i if n in (10, 12, 13, 14, 15, 26, 52, 53, 60, 61, 62, 63, 64, 70, 71, 74, 79, 86, 87, 90) else None) for n, i in enumerate(_t51)]
@@ -157,9 +166,8 @@ _ir152[92] = (0x0175,)
 _ir152[93] = (0x0177,)
 graphdata.gsets["ir152"] = (96, 1, tuple(_ir152))
 
-# The "Adobe Standard" or "PostScript Standard" encoding, yet another encoding related to T.61.
-graphdata.gsets["adobe-standard"] = (94, 1, ((161,), (162,), (163,), (8260,), (165,), (402,), (167,), (164,), (39,), (8220,), (171,), (8249,), (8250,), (64257,), (64258,), None, (8211,), (8224,), (8225,), (183,), None, (182,), (8226,), (8218,), (8222,), (8221,), (187,), (8230,), (8240,), None, (191,), None, (96,), (180,), (710,), (732,), (175,), (728,), (729,), (168,), None, (730,), (184,), None, (733,), (731,), (711,), (8212,), None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (198,), None, (170,), None, None, None, None, (321,), (216,), (338,), (186,), None, None, None, None, None, (230,), None, None, None, (305,), None, None, (322,), (248,), (339,), (223,), None, None, None))
-graphdata.chcpdocs['1276'] = 'ecma-35'
-graphdata.defgsets['1276'] = ('ir006/smartquotes', 'adobe-standard', 'nil', 'nil')
+# ISO 5426-2, supplement to ISO 5426-1 containing mainly mediæval scribal notation
+graphdata.gsets["ir213"] = (94, 1, ((0x002F,), (0x273D,), (0x00B6,), (0x261E,), (0x204C,), (0x2619,), (0x2202,), None, (0x204A,), (0x1D97,), (0xA75D,), (0x2E39,), (0xA76F,), (0xA76D,), (0xA770,), None, (0x02B9,), (0x203B,), (0x204B,), (0x2720,), (0x204D,), (0x2767,), (0x213A,), None, (0x204A, 0x0334,), (0xA794,), (0x2183,), (0xA76B,), (0x1613,), (0xA75B,), None, (0x0313,), (0x1DE3,), (0x1DF1,), (0x1AB0,), (0x1DC8,), (0x0363,), (0x0364,), (0x030A,), (0x1DE6,), (0x0334,), (0x0335,), (0x0338,), (0x0337,), None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (0x01B7,), (0x01E4,), (0x0126,), (0x004B, 0x0315,), (0x014A,), (0xA752,), (0xA754,), (0xA750,), (0xA756,), (0x01A6,), (0x0166,), (0x01F7,), (0x021C,), (0xA759,), (0x017F,), None, (0x0292,), (0x01E5,), (0x0127,), (0x0138,), (0x014B,), (0xA753,), (0xA755,), (0xA751,), (0xA757,), (0x0280,), (0x0167,), (0x01BF,), (0x021D,), (0x0071, 0x200D, 0xA76B,), (0x017F, 0x200D, 0x0A6D)))
+
 
 

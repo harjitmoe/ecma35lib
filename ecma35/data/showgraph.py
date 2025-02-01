@@ -240,7 +240,7 @@ def show(name, *, plane=None):
                 curchar = "\uFF65" + curchar
         #
         offset += 2
-        print(curchar, end = f"\x1B[{offset:d}G")
+        print(curchar, end = f"\u200D\x1B[{offset:d}G")
     for i in range((hs - (n % hs) - 1) % hs):
         print(end = "\uFFFD ")
     print()
