@@ -7,3 +7,8 @@ itself:
 > License, v. 2.0. If a copy of the MPL was not distributed with this
 > file, You can obtain one at https://mozilla.org/MPL/2.0/
 
+I have linked the file `GB13132_additional.txt` [from Unicode Public Review Issue
+feedback](https://www.unicode.org/review/pri508/feedback.html#ID20250130151942).&ensp; For the
+avoidance of doubt, the above terms are not intended to replace, override nor affect the scope of
+the [Unicode Public Review Issue Notice of Intellectual Property
+License](https://corp.unicode.org/reporting/pri.html).
