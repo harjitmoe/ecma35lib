@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2022, 2024.
+# By HarJIT in 2022, 2024, 2025.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -20,13 +20,22 @@ for (kind, (idbytes, bit)) in [
         *[("96n", i) for i in g96nbytes.items()]]:
     if isinstance(bit, tuple):
         preferred, private, formal = bit
+        expected_size = expected_width = None
         for i in [preferred, *private, *formal]:
             used.add(i)
-            if nominal_kind.setdefault(i, kind) != kind:
+            if nominal_kind.setdefault(i, kind) != kind and i != "nil":
                 complaints.add((i, "ReferencedWithConflictingKinds", nominal_kind[i], kind))
+            if i in gsets:
+                size, width = gsets[i][:2]
+                if len(kind) == 2 and width != 1 and size != int(kind, 10):
+                    complaints.add((i, "ReferencedWithWrongKind", nominal_kind[i], size, width))
+                if expected_size is None:
+                    expected_size, expected_width = size, width
+                elif (expected_size, expected_width) != (size, width):
+                    complaints.add((i, "MultipleKinds", expected_size, expected_width, size, width))
     else:
         used.add(bit)
-        if nominal_kind.setdefault(bit, kind) != kind:
+        if nominal_kind.setdefault(bit, kind) != kind and bit != "nil":
             complaints.add((bit, "ReferencedWithConflictingKinds", nominal_kind[bit], kind))
 defgsetscountsasused = re.compile(r"^g[lr]\d+(?:/\w+)?\Z")
 for sets in defgsets.values():

@@ -57,20 +57,19 @@ codepoint_coverages = CoveragesOnDemand()
 #  - A tuple of integers, giving an equivalent UCS codepoint sequence.
 # Negative integers may also be used, denoting a combining character which requires translocation
 #   to after the next base character.
-gsets = {"nil": (94, 1, (None,)*94), "Unknown": (94, 1, (None,)*94)}
-gsetflags = collections.defaultdict(set)
-
 class GrumblingDict(dict):
     def __setitem__(self, key, value):
         if key in self:
             print(f"{key!r} already in dictionary", file=sys.stderr)
         super().__setitem__(key, value)
+gsets = GrumblingDict({"nil": (94, 1, (None,)*94), "Unknown": (94, 1, (None,)*94)})
+gsetflags = collections.defaultdict(set)
 
-c0graphics = {}
-rhses = {}
+c0graphics = GrumblingDict()
+rhses = GrumblingDict()
 defgsets = GrumblingDict()
-chcpdocs = {}
-ebcdicdbcs = {}
+chcpdocs = GrumblingDict()
+ebcdicdbcs = GrumblingDict()
 
 # Note: has to be imported after gsets &co are defined
 from ecma35.data.multibyte import korea, japan, guobiao, traditional, tcvn

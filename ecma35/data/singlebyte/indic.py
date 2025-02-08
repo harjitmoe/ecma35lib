@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019, 2020, 2024.
+# By HarJIT in 2019, 2020, 2024, 2025.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -54,8 +54,9 @@ graphdata.defgsets['1161'] = ('ir006', 'ir166/ibm/euro', 'nil', 'nil')
 # Code pages 874 (TIS-620 exts)
 # Per alias comments in ICU's convrtrs.txt, IBM's 874 is identical to IBM's 9066.
 # Microsoft's 874, on the other hand, matches the layout of IBM's 1162.
-graphdata.rhses["1162"] = parsers.read_single_byte("WHATWG/index-windows-874.txt")
-graphdata.rhses["1162"] += (None,) * (128 - len(graphdata.rhses["1162"]))
+_windows_thai = parsers.read_single_byte("WHATWG/index-windows-874.txt")
+_windows_thai += (None,) * (128 - len(_windows_thai))
+graphdata.rhses["1162"] = _windows_thai
 # The two only collide at 0xA0, which IBM uses for an alternate U+0E48 and which Microsoft
 #   uses for an NBSP. Favour the more-deployed Microsoft / ISO-8859-11 NBSP for "874".
 graphdata.rhses["874"] = tuple(a or b for a, b in zip(

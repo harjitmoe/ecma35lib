@@ -218,13 +218,13 @@ graphdata.gsets["ir171"] = cns1_1992 = (94, 2,
     )
 )
 graphdata.gsets["ir171/govtw"] = (94, 2, cns_gov[planesize * 0 : planesize * 1])
-graphdata.gsets["ir171/ibm"] = (94, 3, parsers.decode_main_plane_euc(
+graphdata.gsets["ir171/ibm"] = (94, 2, parsers.decode_main_plane_euc(
     parsers.parse_file_format("ICU/ibm-964_P110-1999.ucm"),
     "ibm-964_P110-1999.ucm",
     plane = 1))
-graphdata.gsets["ir171/utc"] = (94, 3, parsers.decode_main_plane_gl(
-    parsers.parse_file_format("UTC/CNS11643.TXT"), 
-    "CNS11643.TXT", 
+graphdata.gsets["ir171/utc"] = (94, 2, parsers.decode_main_plane_gl(
+    parsers.parse_file_format("UTC/CNS11643.TXT"),
+    "CNS11643.TXT",
     plane = 1))
 graphdata.gsets["ir171/yasuoka"] = (94, 2, cns_yasuoka[planesize * 0 : planesize * 1])
 graphdata.gsets["ir171/icu"] = (94, 2, cns_icu_old[planesize * 0 : planesize * 1])
@@ -263,7 +263,7 @@ graphdata.gsets["ir183/1988plus"] = (94, 2, tuple(_ir183fullalt))
 cns3_1992_array = tuple(_ir183fullalt)[:6148] + (None,) * (len(_ir183fullalt) - 6148)
 graphdata.gsets["ir183"] = (94, 2, cns3_1992_array)
 graphdata.gsets["ir183/full"] = (94, 2, tuple(_ir183full))
-graphdata.gsets["ir183/utc"] = (94, 3, parsers.decode_main_plane_gl(
+graphdata.gsets["ir183/utc"] = (94, 2, parsers.decode_main_plane_gl(
     parsers.parse_file_format("UTC/CNS11643.TXT"), 
     "CNS11643.TXT", 
     plane = 14)) # yes, this is correct.
@@ -514,10 +514,6 @@ graphdata.gsets["ir171/utcbig5"] = (94, 2, parsers.decode_main_plane_big5(
     parsers.parse_file_format("UTC/BIG5.TXT"),
     "BIG5.TXT",
     "big5_to_cns2",
-    plane=1))
-graphdata.gsets["ir171/utc"] = (94, 2, parsers.decode_main_plane_gl(
-    parsers.parse_file_format("UTC/CNS11643.TXT"),
-    "CNS11643.TXT",
     plane=1))
 graphdata.gsets["ir171/1984moz"] = (94, 2, parsers.decode_main_plane_big5(
     parsers.parse_file_format("Mozilla/big5_1984.txt"),
