@@ -207,6 +207,8 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"="): "alt646/decswiss", # Thus VTx and compatibles
             tuple(b">"): "dectechnical", # Thus VTx and compatibles
             tuple(b"?"): "aribkana/hiragana",
+            tuple(b"!1"): "ibmsymbol",
+            tuple(b"!2"): "alt646/ibmtiny",
             tuple(b"!3"): "ir213",
             tuple(b"!4"): "ir217",
             tuple(b"!5"): "ir218",

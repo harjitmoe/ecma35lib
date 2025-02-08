@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019, 2020, 2022, 2023, 2024.
+# By HarJIT in 2019, 2020, 2022, 2023, 2024, 2025.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -542,6 +542,11 @@ raw_variants = {
     "alt646/ibmarabic/tiny": ([None, None, None, -1, -1,   -1, -1, None, 
                                            -1,   -1, None, -1, -1],
                               {0x25: 0x066A, 0x2A: 0x066D}),
+    # Left-hand side of IBM code page 12725; DP94-range subset of IBM code pages 12544 and 12788
+    # Violation of ECMA-6:1991: 0x23 is not # or £.
+    "alt646/ibmtiny": ([-1, None, -1, -1, -1, -1, None, None,
+                                  -1, -1, -1, -1, -1],
+                              {}),
     # Galaksija encoding for Gajica, extended with lowercase forms
     # Violation of ECMA-6:1991: 0x27 is not '.
     "alt646/galaksija/extended": ([None, None, 0x2962, 0x010C, 0x0106, 0x017D, 0x0160, None,
