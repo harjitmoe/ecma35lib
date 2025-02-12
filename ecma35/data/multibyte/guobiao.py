@@ -368,6 +368,9 @@ graphdata.gsets["unihan-singapore-characters"] = (94, 2,
 #
 # Also, U+8280 is 04-71-30 or 05-71-30 (GB 7590 or GB 13132). 02-72-15 or 03-72-15 (GB 7589 or
 #   GB 13131) is actually U+827B, not U+8280.
+# Some other issues:
+#   78-18 actually U+27C52: https://www.unicode.org/review/pri508/feedback.html#ID20250201120049
+#   25-80 actually U+5DC2: https://www.unicode.org/review/pri508/feedback.html#ID20250202081204
 g_source_conversion = {}
 with open(os.path.join(parsers.directory, "Custom/newgsource.txt"), "r") as _f:
     for _line in _f:
@@ -376,7 +379,9 @@ with open(os.path.join(parsers.directory, "Custom/newgsource.txt"), "r") as _f:
         _a, _b = _line.strip().split()
         g_source_conversion[_a] = _b
 graphdata.gsets["gb13131"] = (94, 2, parsers.fuse([
+        (None,) * ((94 * 24) + 79) + ((0x5DC2,),),
         (None,) * ((94 * 71) + 14) + ((0x827B,),),
+        (None,) * ((94 * 78) + 18) + ((0x27C52,),),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "G3", transformfirst=g_source_conversion),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_GSource", "G3", transformfirst=g_source_conversion),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G3", transformfirst=g_source_conversion),
@@ -417,14 +422,20 @@ graphdata.gsets["gb7589/gb13131-homologue"] = (94, 2, (
     (0x4F47,),
     *gb7589[2][1493:]))
 graphdata.gsets["gb13132"] = (94, 2, parsers.fuse([
+        #
+        # https://www.unicode.org/review/pri508/feedback.html#ID20250202081204
+        (None,) * ((94 * 30) + 22) + ((0x96DF,),),
+        #
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "G5", transformfirst=g_source_conversion),
+        #
         # Pedantically, 05-37-52 is U+23727 𣜧 (or rather, 04-37-52 is 𣜧's Simplified Chinese
         #   equivalent form).
         # U+6A69 橩 is 07-56-19, although it is an extension not present in the published GB 16500.
         # See https://www.unicode.org/irg/docs/n2297-GSourceChanges.pdf
         # All three of the above (04-37-52, 05-37-52/U+23727, and 07-56-19/U+6A69) have the
         #   pronunciation "qióng" and meaning "game dice", making them interchangable variants.
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "G5", transformfirst=g_source_conversion),
         (None,) * ((94 * 36) + 51) + ((0x23727,),),
+        #
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_GSource", "G5", transformfirst=g_source_conversion),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G5", transformfirst=g_source_conversion),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "G5", transformfirst=g_source_conversion),
