@@ -9,7 +9,7 @@
 #   https://www.unicode.org/irg/docs/n2376-GSourceUpdate.pdf
 #
 # They had been highlighted in IRGN2302 figures 2 and 3 respectively, although figure 3
-# highlights only part of the second range (which includes a small part of row 73):
+# highlights only part of the second range (which also includes a small part of row 73):
 #   https://www.unicode.org/irg/docs/n2302-GSourceIssues.pdf
 #
 0x3025	U+53C0+F87F
