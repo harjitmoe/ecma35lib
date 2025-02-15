@@ -64,9 +64,38 @@ graphdata.gsets["ir222"] = (94, 1, (
 ))
 
 # KS C 5601's alternative "N-byte Hangul Code" (IBM code page 891)
-graphdata.gsets["nbytehangul"] = (94, 1, (None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (65440,), (65441,), (65442,), (65443,), (65444,), (65445,), (65446,), (65447,), (65448,), (65449,), (65450,), (65451,), (65452,), (65453,), (65454,), (65455,), (65456,), (65457,), (65458,), (65459,), (65460,), (65461,), (65462,), (65463,), (65464,), (65465,), (65466,), (65467,), (65468,), (65469,), (65470,), None, None, None, (65474,), (65475,), (65476,), (65477,), (65478,), (65479,), None, None, (65482,), (65483,), (65484,), (65485,), (65486,), (65487,), None, None, (65490,), (65491,), (65492,), (65493,), (65494,), (65495,), None, None, (65498,), (65499,), (65500,), None, None))
-graphdata.chcpdocs['891'] = 'ecma-35'
-graphdata.defgsets['891'] = ('alt646/ksroman', 'nbytehangul', 'nil', 'nil')
+graphdata.gsets["nbytehangul"] = (94, 1, (
+               None,      None,      None,      None,      None,      None,      None,
+    None,      None,      None,      None,      None,      None,      None,      None,
+    None,      None,      None,      None,      None,      None,      None,      None,
+    None,      None,      None,      None,      None,      None,      None,      None,
+    (0xFFA0,), (0xFFA1,), (0xFFA2,), (0xFFA3,), (0xFFA4,), (0xFFA5,), (0xFFA6,), (0xFFA7,),
+    (0xFFA8,), (0xFFA9,), (0xFFAA,), (0xFFAB,), (0xFFAC,), (0xFFAD,), (0xFFAE,), (0xFFAF,),
+    (0xFFB0,), (0xFFB1,), (0xFFB2,), (0xFFB3,), (0xFFB4,), (0xFFB5,), (0xFFB6,), (0xFFB7,),
+    (0xFFB8,), (0xFFB9,), (0xFFBA,), (0xFFBB,), (0xFFBC,), (0xFFBD,), (0xFFBE,), None,
+    None,      None,      (0xFFC2,), (0xFFC3,), (0xFFC4,), (0xFFC5,), (0xFFC6,), (0xFFC7,),
+    None,      None,      (0xFFCA,), (0xFFCB,), (0xFFCC,), (0xFFCD,), (0xFFCE,), (0xFFCF,),
+    None,      None,      (0xFFD2,), (0xFFD3,), (0xFFD4,), (0xFFD5,), (0xFFD6,), (0xFFD7,),
+    None,      None,      (0xFFDA,), (0xFFDB,), (0xFFDC,), None,      None))
+graphdata.rhses["25467"] = ((None,) * 33) + graphdata.gsets["nbytehangul"][2] + (None,)
+graphdata.chcpdocs["891"] = "ecma-35"
+graphdata.defgsets["891"] = graphdata.defgsets["25467"] = ("alt646/ksroman", "nbytehangul", "nil", "nil")
+
+graphdata.gsets["nbytehangul/ext"] = (96, 1, (
+    None,      None,      None,      None,      None,      None,      None,      None,
+    None,      None,      None,      None,      None,      None,      None,      None,
+    None,      None,      None,      None,      None,      None,      None,      None,
+    None,      None,      None,      None,      None,      None,      None,      None,
+    (0xFFA0,), (0xFFA1,), (0xFFA2,), (0xFFA3,), (0xFFA4,), (0xFFA5,), (0xFFA6,), (0xFFA7,),
+    (0xFFA8,), (0xFFA9,), (0xFFAA,), (0xFFAB,), (0xFFAC,), (0xFFAD,), (0xFFAE,), (0xFFAF,),
+    (0xFFB0,), (0xFFB1,), (0xFFB2,), (0xFFB3,), (0xFFB4,), (0xFFB5,), (0xFFB6,), (0xFFB7,),
+    (0xFFB8,), (0xFFB9,), (0xFFBA,), (0xFFBB,), (0xFFBC,), (0xFFBD,), (0xFFBE,), (0x00A6,),
+    None,      None,      (0xFFC2,), (0xFFC3,), (0xFFC4,), (0xFFC5,), (0xFFC6,), (0xFFC7,),
+    None,      None,      (0xFFCA,), (0xFFCB,), (0xFFCC,), (0xFFCD,), (0xFFCE,), (0xFFCF,),
+    None,      None,      (0xFFD2,), (0xFFD3,), (0xFFD4,), (0xFFD5,), (0xFFD6,), (0xFFD7,),
+    None,      None,      (0xFFDA,), (0xFFDB,), (0xFFDC,), (0x00AC,), (0x005C,), (0x007E,)))
+graphdata.rhses["1040"] = graphdata.rhses["29712"] = ((0x00A2,),) + ((None,) * 31) + graphdata.gsets["nbytehangul/ext"][2]
+graphdata.defgsets["1040"] = graphdata.defgsets["29712"] = ("alt646/ksroman", "nbytehangul/ext", "nil", "nil")
 
 # ISO 6826-A (mathematical symbols)
 graphdata.gsets["ir217"] = (94, 1, ((0x0338,), (0x20D2,), (0x20D3,), (0x0335,), (0x20D8,), (0x20DA,), (0x20D9,), (0x20D4,), (0x0307,), (0x0308,), (0x20D6,), (0x0302,), (0x030C,), (0x20D7,), (0x20D5,), (0x00D7,), (0x00B1,), (0x223C,), (0x2248,), (0x2261,), (0x2264,), (0x2276,), (0x2272,), (0x226A,), (0x2225,), (0x221F,), (0x2206,), (0x00B0,), (0x27E8,), (0x27E6,), (0x2211,), (0x00F7,), (0x2213,), (0x2243,), (0x2245,), (0x224F,), (0x2265,), (0x2277,), (0x2273,), (0x226B,), (0x22A5,), (0x2220,), (0x2207,), (0x2030,), (0x27E9,), (0x27E7,), (0x220F,), (0x002B,), (0x2282,), (0x2286,), (0x2208,), (0x222A,), (0x2200,), (0x2201,), (0x2191,), (0x2190,), (0x21B6,), (0x2194,), (0x21C6,), (0x21A6,), (0x21D1,), (0x21D0,), (0x221E,), (0x2212,), (0x2283,), (0x2287,), (0x220B,), (0x2229,), (0x2203,), (0x2205,), (0x2193,), (0x2192,), (0x21B7,), (0x2195,), (0x21C4,), (0x21C5,), (0x21D3,), (0x21D2,), (0x221A,), (0x2032,), (0x2033,), (0x2034,), (0x2228,), (0x2227,), (0x00AC,), (0x210E,), (0x22A2,), (0x222B,), (0x222C,), (0x222D,), (0x2202,), (0x210F,), (0x2135,), (0x2218,)))

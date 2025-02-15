@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019–2024.
+# By HarJIT in 2019–2025.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -97,4 +97,15 @@ graphdata.defgsets['1034'] = ('stop-symbol', 'nil', 'nil', 'nil')
 
 graphdata.gsets["digits-only"] = (94, 1, (None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (48,), (49,), (50,), (51,), (52,), (53,), (54,), (55,), (56,), (57,), None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None))
 
+graphdata.gsets["ibmextras/zh-hans"] = (96, 1, (None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (0x00AC,), (0x005C,), (0x007E,)))
+graphdata.rhses["1042"] = graphdata.rhses["29714"] = ((0x00A3,),) + ((None,) * 31) + graphdata.gsets["ibmextras/zh-hans"][2]
+graphdata.defgsets["1042"] = graphdata.defgsets["29714"] = ("ir014", "ibmextras/zh-hans", "nil", "nil")
+
+graphdata.gsets["ibmextras/zh-hant"] = (94, 1, (None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (0x00AC,), (0x00A6,)))
+graphdata.rhses["1043"] = graphdata.rhses["29715"] = ((0x00A2,),) + ((None,) * 31) + graphdata.gsets["ibmextras/zh-hant"][2]
+graphdata.defgsets["1043"] = graphdata.defgsets["29715"] = ("ir006", "ibmextras/zh-hant", "nil", "nil")
+
+graphdata.gsets["enyay"] = (94, 1, (None, None, None, (0x00F1,), (0x00D1,), None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None))
+graphdata.rhses["20917"] = graphdata.rhses["49589"] = (None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (0x00A3,), None, None, None, None) + graphdata.gsets["enyay"][2]
+graphdata.defgsets["20917"] = graphdata.defgsets["49589"] = ("ir006", "enyay", "nil", "nil")
 

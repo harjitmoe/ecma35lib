@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019–2024.
+# By HarJIT in 2019–2025.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -104,4 +104,8 @@ graphdata.gsets["aribkana/katakana"] = (94, 1, tuple((i,) if i else None for i i
 
 # JIS X 9010 Kana set for JIS X 9008 font (which supports large katakana only)
 graphdata.gsets["ir096"] = (94, 1, (None,) + _the_mother[1:3] + (None, None) + _the_mother[5:6] + (None,)*9 + _the_mother[15:] + (None,)*31)
+
+graphdata.gsets["ir013/ibm/sjis"] = (94, 1, _the_mother + (None,) * 29 + ((0x00AC,), (0x005C,)))
+graphdata.defgsets["1041"] = graphdata.defgsets["5137"] = graphdata.defgsets["29713"] = graphdata.defgsets["54289"] = ("ir014", "ir013/ibm/sjis", "nil", "nil")
+graphdata.rhses["1041"] = graphdata.rhses["5137"] = graphdata.rhses["29713"] = graphdata.rhses["54289"] = ((0x00A2,),) + ((None,) * 31) + ((0x00A3,),) + graphdata.gsets["ir013/ibm/sjis"][2] + ((0x007E,),)
 

@@ -138,6 +138,19 @@ graphdata.gsets["ir164"] = (96, 1, tuple((i,) if i else None for i in (
              0x05D8, 0x05D9, 0x05DA, 0x05DB, 0x05DC, 0x05DD, 0x05DE, 0x05DF, 
              0x05E0, 0x05E1, 0x05E2, 0x05E3, 0x05E4, 0x05E5, 0x05E6, 0x05E7, 
              0x05E8, 0x05E9, 0x05EA, None,   None,   None,   None,   None)))
+graphdata.gsets["ir164/ibm"] = (96, 1, (
+    None,      None,      None,      None,      None,      None,      None,      None,
+    None,      None,      None,      None,      None,      None,      None,      None,
+    (0x2591,), (0x2592,), (0x2593,), (0x2502,), (0x2524,), (0x2561,), (0x2562,), (0x2556,),
+    (0x2555,), (0x2563,), (0x2551,), (0x2557,), (0x255D,), (0x255C,), (0x255B,), (0x2510,),
+    (0x2514,), (0x2534,), (0x252C,), (0x251C,), (0x2500,), (0x253C,), (0x255E,), (0x255F,),
+    (0x255A,), (0x2554,), (0x2569,), (0x2566,), (0x2560,), (0x2550,), (0x256C,), (0x2567,),
+    (0x2568,), (0x2564,), (0x2565,), (0x2559,), (0x2558,), (0x2552,), (0x2553,), (0x256B,),
+    (0x256A,), (0x2518,), (0x250C,), (0x2588,), (0x2584,), (0x258C,), (0x2590,), (0x2580,),
+    (0x05D0,), (0x05D1,), (0x05D2,), (0x05D3,), (0x05D4,), (0x05D5,), (0x05D6,), (0x05D7,),
+    (0x05D8,), (0x05D9,), (0x05DA,), (0x05DB,), (0x05DC,), (0x05DD,), (0x05DE,), (0x05DF,),
+    (0x05E0,), (0x05E1,), (0x05E2,), (0x05E3,), (0x05E4,), (0x05E5,), (0x05E6,), (0x05E7,),
+    (0x05E8,), (0x05E9,), (0x05EA,), None,      None,      None,      None,      (0x00A0,)))
 
 # Extended version of ASMO-708/ISO-8859-6 to also support French and German, RHS
 graphdata.gsets["ir167"] = (96, 1, (
@@ -241,10 +254,35 @@ graphdata.gsets["ibmhebrew7"] = (94, 1, ((124,), (34,), (35,), (1500, 8205, 1524
 graphdata.rhses["1255"] = parsers.read_single_byte("WHATWG/index-windows-1255.txt") # Hebrew
 graphdata.rhses["1256"] = parsers.read_single_byte("WHATWG/index-windows-1256.txt") # Arabic
 
-# OEM code pages
-graphdata.rhses["720"] = parsers.read_single_byte("ICU/ibm-720_P100-1997.ucm") # Arabic
-graphdata.rhses["862"] = parsers.read_single_byte("ICU/ibm-862_P100-1995.ucm") # Hebrew
-graphdata.rhses["864"] = parsers.read_single_byte("ICU/ibm-864_X110-1999.ucm") # Arabic
+# OEM code pages for Hebrew
+graphdata.rhses["972"] = ((0x2067, 0x2007, 0x05B8, 0x2069), (0x2067, 0x2007, 0x05B7, 0x2069), (0x2067, 0x2007, 0x05B6, 0x2069), (0x2067, 0x2007, 0x05B5, 0x2069), (0x2067, 0x2007, 0x05B4, 0x2069), (0x2067, 0x2007, 0x05C7, 0x2069), (0x2067, 0x2007, 0x05B0, 0x2069), (0x2067, 0x2007, 0x05BB, 0x2069)) + ((None,) * 24) + graphdata.gsets["ir164/ibm"][2]
+graphdata.defgsets["972"] = ("ir006", "ir164/ibm", "nil", "nil")
+graphdata.rhses["862"] = parsers.read_single_byte("ICU/ibm-862_P100-1995.ucm")
+
+# OEM code pages for Arabic
+graphdata.rhses["708"] = (
+    (0x2502,), (0x2524,), (0x00E9,), (0x00E2,), (0x2561,), (0x00E0,), (0x2562,), (0x00E7,),
+    (0x00EA,), (0x00EB,), (0x00E8,), (0x00EF,), (0x00EE,), (0x2556,), (0x2555,), (0x2563,),
+    (0x2551,), (0x2557,), (0x255D,), (0x00F4,), (0x255C,), (0x255B,), (0x00FB,), (0x00F9,),
+    (0x2510,), (0x2514,), None, None, None, None, None, None,
+    None,      (0x2534,), (0x252C,), (0x251C,), (0x00A4,), (0x2500,), (0x253C,), (0x255E,),
+    (0x255F,), (0x255A,), (0x2554,), (0x2569,), (0x060C,), (0x2566,), (0x00AB,), (0x00BB,),
+    (0x2591,), (0x2592,), (0x2593,), (0x2560,), (0x2550,), (0x256C,), (0x2567,), (0x2568,),
+    (0x2564,), (0x2565,), (0x2559,), (0x061B,), (0x2558,), (0x2552,), (0x2553,), (0x061F,),
+    (0x256B,), (0x0621,), (0x0622,), (0x0623,), (0x0624,), (0x0625,), (0x0626,), (0x0627,),
+    (0x0628,), (0x0629,), (0x062A,), (0x062B,), (0x062C,), (0x062D,), (0x062E,), (0x062F,),
+    (0x0630,), (0x0631,), (0x0632,), (0x0633,), (0x0634,), (0x0635,), (0x0636,), (0x0637,),
+    (0x0638,), (0x0639,), (0x063A,), (0x2588,), (0x2584,), (0x258C,), (0x2590,), (0x2580,),
+    (0x0640,), (0x0641,), (0x0642,), (0x0643,), (0x0644,), (0x0645,), (0x0646,), (0x0647,),
+    (0x0648,), (0x0649,), (0x064A,), (0x064B,), (0x064C,), (0x064D,), (0x064E,), (0x064F,),
+    (0x0650,), (0x0651,), (0x0652,), None, None, None, None, None,
+    None,      (0x256A,), (0x2518,), (0x250C,), (0x00B5,), (0x00A3,), (0x25A0,), (0x00A0,))
+graphdata.defgsets["708"] = ("ir006", "ir127", "nil", "nil")
+graphdata.rhses["720"] = parsers.read_single_byte("ICU/ibm-720_P100-1997.ucm")
+_oem864 = parsers.read_single_byte("ICU/ibm-864_X110-1999.ucm")
+graphdata.rhses["864"] = _oem864[:31] + ((0xFE73,),) + _oem864[32:]
+graphdata.rhses["165"] = _oem864[:27] + ((0xFEF9,), (0xFEFA,)) + _oem864[29:31] + ((0xFE73,),) + _oem864[32:38] + ((0xFE87,), (0xFE88,)) + _oem864[40:]
+graphdata.defgsets["165"] = graphdata.defgsets["864"] = ("alt646/ibmarabic", "ibmpc-arabic/alternate", "nil", "nil")
 
 # Macintosh code pages (both seem to have only Microsoft IDs?)
 graphdata.rhses["10004"] = parsers.read_mozilla_ut_file("Mozilla/macarabic.ut")
@@ -274,6 +312,8 @@ graphdata.defgsets['5142'] = ('alt646/ibmarabic', 'ibmaix-arabic/base', 'nil', '
 graphdata.gsets["ibmpc-arabic/small"] = (96, 1, ((160,), (173,), None, (163,), (164,), None, None, None, None, None, None, None, (1548,), None, None, None, (1632,), (1633,), (1634,), (1635,), (1636,), (1637,), (1638,), (1639,), (1640,), (1641,), None, (1563,), None, None, None, (1567,), (162,), (1569,), (1570,), (1571,), (1572,), None, (1574,), (1575,), (1576,), (1577,), (1578,), (1579,), (1580,), (1581,), (1582,), (1583,), (1584,), (1585,), (1586,), (1587,), (1588,), (1589,), (1590,), (1591,), (1592,), (1593,), (1594,), (166,), (172,), (247,), (215,), None, (1600,), (1601,), (1602,), (1603,), (1604,), (1605,), (1606,), (1607,), (1608,), (1609,), (1610,), None, None, None, None, None, None, (1617,), None, None, None, None, None, None, None, None, None, None, None, None, None, None))
 graphdata.chcpdocs['9056'] = 'ecma-35'
 graphdata.defgsets['9056'] = ('alt646/ibmarabic', 'ibmpc-arabic/small', 'nil', 'nil')
+graphdata.rhses["37728"] = ((None,) * 32) + graphdata.gsets["ibmpc-arabic/small"][2]
+graphdata.defgsets["37728"] = ("alt646/ibmarabic", "ibmpc-arabic/small", "nil", "nil")
 
 graphdata.gsets["ibmpc-arabic/tiny"] = (96, 1, ((160,), (173,), None, None, None, None, None, None, None, (1576,), (1578,), (1579,), (1548,), (1580,), (1581,), (1582,), None, None, None, None, None, None, None, None, None, None, (1601,), (1563,), (1587,), (1588,), (1589,), (1567,), (162,), (1569,), (1570,), (1571,), (1572,), None, (1574,), (1575,), None, (1577,), None, None, None, None, None, (1583,), (1584,), (1585,), (1586,), None, None, None, None, (1591,), (1592,), None, None, (166,), (172,), (247,), (215,), (1593,), (1600,), None, None, None, None, None, None, None, (1608,), (1609,), None, (1590,), None, None, (1594,), (1605,), None, (1617,), (1606,), (1607,), None, None, None, None, (1602,), None, None, (1604,), (1603,), (1610,), None, None))
 graphdata.chcpdocs['13152'] = 'ecma-35'
@@ -281,4 +321,9 @@ graphdata.defgsets['13152'] = ('alt646/ibmarabic/tiny', 'ibmpc-arabic/tiny', 'ni
 
 graphdata.gsets["ibmpc-arabic/base"] = (96, 1, tuple(i or j for i, j in zip(graphdata.gsets["ibmpc-arabic/small"][2], graphdata.gsets["ibmpc-arabic/tiny"][2])))
 
+graphdata.gsets["ibmpc-arabic/alternate"] = (96, 1, ((0x00A0,), (0x00AD,), (0xFE82,), (0x00A3,), (0x00A4,), (0xFE84,), (0xFE87,), (0xFE88,), (0xFE8E,), (0xFE8F,), (0xFE95,), (0xFE99,), (0x060C,), (0xFE9D,), (0xFEA1,), (0xFEA5,), (0x0660,), (0x0661,), (0x0662,), (0x0663,), (0x0664,), (0x0665,), (0x0666,), (0x0667,), (0x0668,), (0x0669,), (0xFED1,), (0x061B,), (0x0633,), (0x0634,), (0x0635,), (0x061F,), (0x00A2,), (0xFE80,), (0xFE81,), (0xFE83,), (0xFE85,), (0xFECA,), (0xFE8B,), (0xFE8D,), (0xFE91,), (0xFE93,), (0xFE97,), (0xFE9B,), (0xFE9F,), (0xFEA3,), (0xFEA7,), (0xFEA9,), (0xFEAB,), (0xFEAD,), (0xFEAF,), (0xFEB3,), (0xFEB7,), (0xFEBB,), (0xFEBF,), (0xFEC3,), (0xFEC7,), (0xFECB,), (0xFECF,), (0x00A6,), (0x00AC,), (0x00F7,), (0x00D7,), (0xFEC9,), (0x0640,), (0xFED3,), (0xFED7,), (0xFEDB,), (0xFEDF,), (0xFEE3,), (0xFEE7,), (0xFEEB,), (0xFEED,), (0xFEEF,), (0xFEF3,), (0x0636,), (0xFECC,), (0xFECE,), (0xFECD,), (0xFEE1,), (0xFE7D,), (0xFE7C,), (0xFEE5,), (0xFEE9,), (0xFEEC,), (0xFEF0,), (0xFEF2,), (0xFED0,), (0xFED5,), (0xFEF5,), (0xFEF6,), (0xFEDD,), (0xFED9,), (0xFEF1,), (0x25A0,), (0x00A0,)))
+
+graphdata.gsets["ibmpc-arabic/alternate/small"] = (96, 1, ((0x00A0,), (0x00AD,), None, None, None, None, None, None, None, (0xFE8F,), (0xFE95,), (0xFE99,), (0x060C,), (0xFE9D,), (0xFEA1,), (0xFEA5,), None, None, None, None, None, None, None, None, None, None, (0xFED1,), (0x061B,), (0x0633,), (0x0634,), (0x0635,), (0x061F,), (0x00A2,), (0xFE80,), (0xFE81,), (0xFE83,), (0xFE85,), None, (0xFE8B,), (0xFE8D,), None, (0xFE93,), None, None, None, None, None, (0xFEA9,), (0xFEAB,), (0xFEAD,), (0xFEAF,), None, None, None, None, (0xFEC3,), (0xFEC7,), None, None, (0x00A6,), (0x00AC,), (0x00F7,), (0x00D7,), (0xFEC9,), (0x0640,), None, None, None, None, None, None, None, (0xFEED,), (0xFEEF,), None, (0x0636,), None, None, (0xFECD,), (0xFEE1,), None, (0xFE7C,), (0xFEE5,), (0xFEE9,), None, None, None, None, (0xFED5,), (0xFEF5,), None, (0xFEDD,), (0xFED9,), (0xFEF1,), None, None))
+graphdata.rhses["41824"] = ((None,) * 41) + ((0xFEF7,), None, None, None, (0xFEFB,), None, None) + graphdata.gsets["ibmpc-arabic/alternate/small"][2]
+graphdata.defgsets["41824"] = ("alt646/ibmarabic/tiny", "ibmpc-arabic/alternate/small", "nil", "nil")
 

@@ -58,18 +58,21 @@ codepoint_coverages = CoveragesOnDemand()
 # Negative integers may also be used, denoting a combining character which requires translocation
 #   to after the next base character.
 class GrumblingDict(dict):
+    def __init__(self, name, initial = None):
+        super().__init__(initial or {})
+        self._name = name
     def __setitem__(self, key, value):
         if key in self:
-            print(f"{key!r} already in dictionary", file=sys.stderr)
+            print(f"{key!r} already in dictionary {self._name!r}", file=sys.stderr)
         super().__setitem__(key, value)
-gsets = GrumblingDict({"nil": (94, 1, (None,)*94), "Unknown": (94, 1, (None,)*94)})
+gsets = GrumblingDict("gsets", {"nil": (94, 1, (None,)*94), "Unknown": (94, 1, (None,)*94)})
 gsetflags = collections.defaultdict(set)
 
-c0graphics = GrumblingDict()
-rhses = GrumblingDict()
-defgsets = GrumblingDict()
-chcpdocs = GrumblingDict()
-ebcdicdbcs = GrumblingDict()
+c0graphics = GrumblingDict("c0graphics")
+rhses = GrumblingDict("rhses")
+defgsets = GrumblingDict("defgsets")
+chcpdocs = GrumblingDict("chcpdocs")
+ebcdicdbcs = GrumblingDict("ebcdicdocs")
 
 # Note: has to be imported after gsets &co are defined
 from ecma35.data.multibyte import korea, japan, guobiao, traditional, tcvn
@@ -107,7 +110,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             #   (as "ir013" or "ir006").
             tuple(b"H"): ("ir011", ("ir011/dec",), ("ir011",)),
             tuple(b"I"): ("ir013", ("ir013/ibm", "ir013/mac", "ir013/win", "ir013/euro",
-                                    "ir013/ibm/strict", "ir013/ibm/alternate"),
+                                    "ir013/ibm/strict", "ir013/ibm/alternate", "ir013/ibm/sjis"),
                                    ("ir013",)),
             tuple(b"J"): ("ir014", ("ir014/tilde",), ("ir014",)),
             tuple(b"K"): ("ir021", ("ir021/acute", "ir021/ibm38xx"), ("ir021",)),
@@ -311,6 +314,8 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"&?"): ("decgraphics/composite", 
                            ("decgraphics/modified", "decgraphics/composite"), 
                            ("decgraphics",)),
+            tuple(b"'0"): "ibmextras/zh-hant",
+            tuple(b"'1"): "enyay",
             tuple(b"~"): "nil"}
 
 g96bytes = {tuple(b"@"): "ir111",
@@ -332,7 +337,7 @@ g96bytes = {tuple(b"@"): "ir111",
             tuple(b"P"): "ir154",
             tuple(b"Q"): "ir155",
             tuple(b"R"): ("ir142+ir156", ("ir142+ir156",), ("ir156",)),
-            tuple(b"S"): "ir164",
+            tuple(b"S"): ("ir164", ("ir164/ibm",), ("ir164",)),
             tuple(b"T"): ("ir166", ("ir166/ibm", "ir166/ibm/euro"), ("ir166",)),
             tuple(b"U"): "ir167",
             tuple(b"V"): "ir157",
@@ -371,13 +376,15 @@ g96bytes = {tuple(b"@"): "ir111",
                            ("ibmaix-arabic/isoextended",),
                            ("ibmaix-arabic/base",)),
             tuple(b"!<"): ("ibmpc-arabic/base",
-                           ("ibmpc-arabic/small", "ibmpc-arabic/tiny"),
+                           ("ibmpc-arabic/small", "ibmpc-arabic/tiny", "ibmpc-arabic/alternate", "ibmpc-arabic/alternate/small"),
                            ("ibmpc-arabic/base",)),
+            tuple(b"\"1"): "nbytehangul/ext",
             tuple(b"\"?"): "decgreek8/nbsp",
             tuple(b"%0"): "decturkish8/nbsp",
             tuple(b"$7"): ("symbolgr/euro/numsp",
                            ("symbolgr/numsp",),
                            ("symbolgr/euro", "symbolgr/euro/numsp")),
+            tuple(b"'0"): "ibmextras/zh-hans",
             tuple(b"~"): "nil"}
 
 g94nbytes = {tuple(b"@"): ("ir042/nec", ("ir042/ibm", "ir042/nec", "ir042/1990pivot", "ir042/adobe"), ("ir042",)),
