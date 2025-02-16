@@ -50,6 +50,19 @@ raw_variants = {
     # Violation of ECMA-6:1991: 0x21 is not !.
     "ir006/pli": ([None, None, None, None, None, None, 0xAC, None, 
                                None, None, 0xA6, None, None], {0x21: 0x7C}),
+    # Left-hand side of IBM code page 877 for the OCR-A optical character recognition font
+    # Violation of ECMA-6:1991: 0x5F is not (strictly) _.
+    "ir006/ocr-a": ([None, None, None, None, None,   None, 0x2303, 0x02CD,
+                                  None, None, 0xFFE8, None, None], {}),
+    # Left-hand side of IBM HP-compatibility code page 1053
+    "ir006/ibm-hp-diacritics": ([None, None, None,   None, None, None, 0x02C6, None,
+                                              0x02CB, None, None, None, 0x02DC], {}),
+    # Left-hand side of IBM HP-compatibility code page 1057
+    "ir006/ibm-hp-alternatives": ([None, None, None,   None, None,   None, 0x02C6, None,
+                                               0x02CB, None, 0xFFE8, None, 0x02DC], {}),
+    # Left-hand side of IBM HP-compatibility code page 1058
+    "ir006/ibm-hp-ascii-tilde": ([None, None, None,   None, None,   None, 0x02C6, None,
+                                               0x02CB, None, 0xFFE8, None, None], {}),
     # ASCII-1967, curly quotation marks variant.
     # Violation of ECMA-6:1991: 0x27 is not (strictly) '.
     "ir006/smartquotes": ([None, None, None,   None, None, None, None, None, 
@@ -542,11 +555,32 @@ raw_variants = {
     "alt646/ibmarabic/tiny": ([None, None, None, -1, -1,   -1, -1, None, 
                                            -1,   -1, None, -1, -1],
                               {0x25: 0x066A, 0x2A: 0x066D}),
+    # Left-hand side of IBM code page 906
+    "alt646/ibmsmall": ([None, None, None, None, None, None, -1, None,
+                                     -1,   None, None, None, -1], {}),
     # Left-hand side of IBM code page 12725; DP94-range subset of IBM code pages 12544 and 12788
     # Violation of ECMA-6:1991: 0x23 is not # or £.
     "alt646/ibmtiny": ([-1, None, -1, -1, -1, -1, None, None,
-                                  -1, -1, -1, -1, -1],
-                              {}),
+                                  -1, -1, -1, -1, -1], {}),
+    # Left-hand side of IBM code page 1044
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    # Violation of ECMA-6:1991: 0x23 is not # or £.
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    # Violation of ECMA-6:1991: 0x3F is not ?.
+    # Violation of ECMA-6:1991: 0x5F is not _.
+    # Violation of ECMA-6:1991: lowercase letters omitted.
+    "alt646/ibmverytiny": ([-1, None, -1, -1, None, -1, -1, -1,
+                                      -1, -1, -1,   -1, -1], dict([
+        *{0x21: -1, 0x3C: -1, 0x3E: -1, 0x3F: -1}.items(),
+        *[(i, -1) for i in range(0x61, 0x7B)]])),
+    # Galaksija encoding for Gajica
+    # Violation of ECMA-6:1991: 0x27 is not '.
+    # Violation of ECMA-6:1991: lowercase letters omitted.
+    "alt646/galaksija": ([None, None, 0x2962, 0x010C, 0x0106, 0x017D, 0x0160, None,
+                                      -1, -1, -1, -1, -1], dict([
+        *{0x27: 0x1F896}.items(),
+        *[(i, -1) for i in range(0x61, 0x7B)]])),
     # Galaksija encoding for Gajica, extended with lowercase forms
     # Violation of ECMA-6:1991: 0x27 is not '.
     "alt646/galaksija/extended": ([None, None, 0x2962, 0x010C, 0x0106, 0x017D, 0x0160, None,
@@ -560,6 +594,14 @@ raw_variants = {
     "alt646/hplegal": ([None, None, None, None, 0xAE, None,   0xA9, None,
                                     0xB0, 0xA7, 0xB6, 0x2020, 0x2122],
                        {0x22: 0x2033, 0x27: 0x2032, 0x3C: 0x2017, 0x3E: 0xA2}),
+    # Left-hand site of FreeDOS code page 60258
+    # Violation of ECMA-6:1991: 0x49 is not (strictly) I.
+    "alt646/freedos-turkic": ([None, None, None, None, None, None, None, None,
+                                           None, None, None, None, None], {0x49: 0x0130}),
+    # Left-hand site of FreeDOS code page 899
+    # Violation of ECMA-6:1991: 0x27 is not (strictly) '.
+    "alt646/freedos-armenian": ([None, None, None,   None, None, None, None, None,
+                                             0x055D, None, None, None, 0x055C], {0x27: 0x055B}),
 }
 
 for (name, (myvars, override)) in raw_variants.items():

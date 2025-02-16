@@ -98,7 +98,8 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"A"): ("ir004", ("ir004/dec",), ("ir004",)),
             tuple(b"B"): ("ir006",
                           ("ir006/overline", "ir006/brvbar", "ir006/pli", "ir006/florin",
-                           "ir006/smartquotes"),
+                           "ir006/smartquotes", "ir006/ocr-a", "ir006/ibm-hp-alternatives",
+                           "ir006/ibm-hp-diacritics", "ir006/ibm-hp-ascii-tilde"),
                           ("ir006",)),
             tuple(b"C"): ("ir008-1", ("ir008-1/dec",), ("ir008-1",)),
             tuple(b"D"): "ir008-2",
@@ -205,12 +206,16 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             #
             tuple(b"8"): "aribkana/katakana", # Thus ARIB STD B24 Volume 1
             tuple(b"9"): "ir121", # Thus VTx and compatibles
+            tuple(b";"): "alt646/freedos-armenian",
             #tuple(b"<"): preferred supplementary set (set via DECAUPSS; default Latin-1 or DEC MCS)
             tuple(b"="): "alt646/decswiss", # Thus VTx and compatibles
             tuple(b">"): "dectechnical", # Thus VTx and compatibles
             tuple(b"?"): "aribkana/hiragana",
+            tuple(b"!0"): "alt646/freedos-turkic",
             tuple(b"!1"): "ibmsymbol",
-            tuple(b"!2"): "alt646/ibmtiny",
+            tuple(b"!2"): ("alt646/ibmtiny",
+                           ("alt646/ibmsmall", "alt646/ibmverytiny"),
+                           ("alt646/ibmtiny",)),
             tuple(b"!3"): "ir213",
             tuple(b"!4"): "ir217",
             tuple(b"!5"): "ir218",
@@ -237,7 +242,9 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"\":"): ("alt646/ibmarabic", ("alt646/ibmarabic/tiny",), ("alt646/ibmarabic",)),
             tuple(b"\";"): ("ir166/1986", (), ("ir166/minimal", "ir166/1986")),
             tuple(b"\"<"): "aribmosaic-c",
-            tuple(b"\"="): "alt646/galaksija/extended",
+            tuple(b"\"="): ("alt646/galaksija/extended",
+                            (),
+                            ("alt646/galaksija", "alt646/galaksija/extended")),
             tuple(b"\">"): "decgreek7", # Thus VTx and compatibles
             tuple(b"\"?"): "decgreek8", # Thus VTx and compatibles
             tuple(b"#0"): ("alt646/ksroman", ("alt646/ksroman/tilde",), ("alt646/ksroman",)),
