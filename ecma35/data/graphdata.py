@@ -76,7 +76,7 @@ ebcdicdbcs = GrumblingDict("ebcdicdocs")
 
 # Note: has to be imported after gsets &co are defined
 from ecma35.data.multibyte import korea, japan, guobiao, traditional, tcvn
-from ecma35.data.singlebyte import ecma6, extlatin, c0substs, dingbats, quoocs_ngwx, ccitt, cyrillic, semitic, greek, indic, otherscript, splitebcdic, pseudographics, kana, fragment
+from ecma35.data.singlebyte import ecma6, extlatin, c0substs, dingbats, quoocs_ngwx, ccitt, cyrillic, semitic, greek, indic, otherscript, splitebcdic, pseudographics, kana, fragment, userdefined
 
 for _i in rhses:
     chcpdocs.setdefault(_i, "plainextascii")
@@ -206,6 +206,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             #
             tuple(b"8"): "aribkana/katakana", # Thus ARIB STD B24 Volume 1
             tuple(b"9"): "ir121", # Thus VTx and compatibles
+            tuple(b":"): "user-defined/94",
             tuple(b";"): "alt646/freedos-armenian",
             #tuple(b"<"): preferred supplementary set (set via DECAUPSS; default Latin-1 or DEC MCS)
             tuple(b"="): "alt646/decswiss", # Thus VTx and compatibles
@@ -370,6 +371,7 @@ g96bytes = {tuple(b"@"): "ir111",
             tuple(b"j"): "ir234",
             # "8": ITU-T.101-B "Display Control" set
             # "9": ITU-T.101-B "MVI" set (TODO what does "MVI" stand for?)
+            tuple(b":"): ("user-defined/96", ("user-defined/96/web",), ("user-defined/96",)),
             tuple(b"!0"): "rfc1345-ir111", # Not even a private IRR: no practical compatibility.
             tuple(b"!1"): "t101c-mosaic1",
             tuple(b"!2"): "abicomp",
@@ -431,6 +433,7 @@ g94nbytes = {tuple(b"@"): ("ir042/nec", ("ir042/ibm", "ir042/nec", "ir042/1990pi
              tuple(b"O"): "ir228",
              tuple(b"P"): "ir229",
              tuple(b"Q"): "ir233",
+             tuple(b":"): "user-defined/6204",
              tuple(b"!0"): "gb12052",
              # Traditional Chinese off doing its own thing, as you do... no standard escapes here.
              tuple(b"!1"): ("cns-eucg2", ("cns-eucg2-icu-2014-full", "cns-eucg2-ms", "cns-eucg2-mac", "cns-eucg2-govtw", "cns-eucg2-icu-old", "cns-eucg2-ibm-full", "cns-eucg2-yasuoka", "cns-eucg2-icu-2014-noplane1", "cns-eucg2-ibm-noplane1", "cns-eucg2-unihan", "cns-eucg2-lax-matching"), ("cns-eucg2",)),

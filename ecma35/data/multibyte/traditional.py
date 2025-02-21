@@ -314,6 +314,8 @@ graphdata.gsets["csic11/govtw"] = (94, 2, cns_gov[planesize * 10 : planesize * 1
 graphdata.gsets["csic12"] = (94, 2, cns[planesize * 11 : planesize * 12])
 graphdata.gsets["csic12/govtw"] = (94, 2, cns_gov[planesize * 11 : planesize * 12])
 
+graphdata.gsets["user-defined/6204"] = (94, 2, cns_ibm[planesize * 11 : planesize * 12])
+
 graphdata.gsets["csic13-2007"] = (94, 2, cns[planesize * 12 : planesize * 13])
 graphdata.gsets["csic13-2007/govtw"] = (94, 2, cns_gov[planesize * 12 : planesize * 13])
 
