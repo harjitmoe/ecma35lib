@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019, 2020, 2022, 2024.
+# By HarJIT in 2019, 2020, 2022, 2024, 2025.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -562,17 +562,20 @@ graphdata.defgsets['1051'] = ('ir006', 'hproman', 'nil', 'nil')
 
 # Windows code pages for non-Vietnamese Latin
 graphdata.rhses["1250"] = parsers.read_single_byte("WHATWG/index-windows-1250.txt") # Central European
-graphdata.rhses["1252"] = parsers.read_single_byte("WHATWG/index-windows-1252.txt") # ISO-8859-1 ext.
-graphdata.defgsets["1252"] = ("ir006", "ir100", "nil", "nil")
+graphdata.rhses["1252"] = graphdata.rhses["1004"] = parsers.read_single_byte(
+    "WHATWG/index-windows-1252.txt") # ISO-8859-1 ext.
+graphdata.defgsets["1252"] = graphdata.defgsets["1004"] = ("ir006", "ir100", "nil", "nil")
 graphdata.rhses["1254"] = parsers.read_single_byte("WHATWG/index-windows-1254.txt") # ISO-8859-9 ext.
 graphdata.defgsets["1254"] = ("ir006", "ir148", "nil", "nil")
 graphdata.rhses["1257"] = parsers.read_single_byte("WHATWG/index-windows-1257.txt") # Baltic
 
+# OEM code pages
 graphdata.rhses["220"] = parsers.read_single_byte("Other/T1000220.ucm") # Spanish
 graphdata.rhses["437"] = parsers.read_single_byte("ICU/ibm-437_P100-1995.ucm") # United States
 graphdata.defgsets["437"] = ("ir006", "pclinedrawing", "nil", "nil") # Note: gets used as the default.
 graphdata.rhses["775"] = parsers.read_single_byte("ICU/ibm-775_P100-1996.ucm") # Baltic
 graphdata.rhses["850"] = parsers.read_single_byte("ICU/ibm-850_P100-1995.ucm") # Western European
+graphdata.rhses["1108"] = graphdata.rhses["850"][:-1] + (None,)
 graphdata.rhses["852"] = parsers.read_single_byte("ICU/ibm-852_P100-1995.ucm") # Central European
 graphdata.rhses["857"] = parsers.read_single_byte("ICU/ibm-857_P100-1995.ucm") # Turkish
 graphdata.rhses["858"] = parsers.read_single_byte("ICU/ibm-858_P100-1997.ucm") # New Western European
@@ -580,10 +583,13 @@ graphdata.rhses["860"] = parsers.read_single_byte("ICU/ibm-860_P100-1995.ucm") #
 graphdata.rhses["861"] = parsers.read_single_byte("ICU/ibm-861_P100-1995.ucm") # Icelandic
 graphdata.rhses["863"] = parsers.read_single_byte("ICU/ibm-863_P100-1995.ucm") # Quebecois French
 graphdata.rhses["865"] = parsers.read_single_byte("ICU/ibm-865_P100-1995.ucm") # Nordic
+graphdata.rhses["877"] = parsers.read_single_byte("Other/T1000877.ucm") # Optical Character Recognition
 graphdata.rhses["903"] = (None,) * 128
 graphdata.defgsets["903"] = ("ir014", "nil", "nil", "nil")
 graphdata.rhses["904"] = (None,) * 128
 graphdata.defgsets["904"] = ("ir006", "nil", "nil", "nil")
+graphdata.rhses["906"] = parsers.read_single_byte("Other/T1000906.ucm") # IBM 3812 and IBM 3820
+graphdata.defgsets["906"] = ("alt646/ibm-minus3", "pclinedrawing", "nil", "nil")
 
 # Macintosh pages
 graphdata.rhses["10000"] = graphdata.rhses["1275"] = parsers.read_single_byte("WHATWG/index-macintosh.txt")
@@ -593,4 +599,11 @@ graphdata.rhses["10082"] = graphdata.rhses["1284"] = parsers.read_mozilla_ut_fil
 graphdata.rhses["10010"] = graphdata.rhses["1285"] = parsers.read_mozilla_ut_file("Mozilla/macro.ut")
 graphdata.rhses["10079"] = graphdata.rhses["1286"] = parsers.read_mozilla_ut_file("Mozilla/macicela.ut")
 
+# HP-compatibility code pages
+graphdata.rhses["1053"] = ((None,) * 32) + tuple((i,) for i in range(0xA0, 0x100))
+graphdata.defgsets["1053"] = ("ir006/ibm-hp-diacritics", "ir100", "nil", "nil")
+graphdata.rhses["1057"] = parsers.read_single_byte("Other/T1001057.ucm")
+graphdata.defgsets["1057"] = ("ir006/ibm-hp-alternatives", "pclinedrawing", "nil", "nil")
+graphdata.rhses["1058"] = parsers.read_single_byte("Other/T1001058.ucm")
+graphdata.defgsets["1058"] = ("ir006/ibm-hp-ascii-tilde", "pclinedrawing", "nil", "nil")
 

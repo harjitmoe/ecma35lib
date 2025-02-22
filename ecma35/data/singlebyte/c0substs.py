@@ -46,7 +46,8 @@ graphdata.c0graphics['1088'] = graphdata.c0graphics['1126'] = (
 
 # Modified OEM set of C0 graphics containing double-lined box drawing characters; used in some
 #   Arabic-language code pages where there was otherwise only space for single-lined box drawing
-graphdata.c0graphics['165'] = graphdata.c0graphics['864'] = graphdata.c0graphics['50016'] = (
+graphdata.c0graphics["165"] = graphdata.c0graphics["864"] = graphdata.c0graphics["17248"] = \
+graphdata.c0graphics["50016"] = (
   None,      (0x263A,), (0x266A,), (0x266B,), (0x263C,), (0x2550,), (0x2551,), (0x256C,),
   (0x2563,), (0x2566,), (0x2560,), (0x2569,), (0x2557,), (0x2554,), (0x255A,), (0x255D,),
   (0x25BA,), (0x25C4,), (0x2195,), (0x203C,), (0x00B6,), (0x00A7,), (0x25AC,), (0x21A8,),
@@ -95,12 +96,29 @@ graphdata.c0graphics['1004'] = (
   None,      None, None,      None,      None,      None,      None,      None,
     None)
 
+# IBM's modification of OEM-850 with additional professional-typesetting characters in the C0 area
+graphdata.c0graphics["1108"] = (
+  None,      (0x263A,), (0xFB00,), (0xFB01,), (0xFB02,), (0xFB03,), (0xFB04,), (0x2022,),
+  (0x2013,), (0x25CB,), (0x2020,), (0x2021,), (0x2122,), (0x2014,), (0x2018,), (0x2019,),
+  (0x25BA,), (0x25C4,), (0x215B,), (0x215C,), (0x215D,), (0x2070,), (0x2074,), (0x2075,),
+  (0x2191,), (0x2193,), (0x2192,), (0x2190,), (0x2076,), (0x2077,), (0x2078,), (0x2079,),
+    (0x2302,))
+
+# "User-defined" (i.e. Private Use Area) C0 replacements
 graphdata.c0graphics["42"] = graphdata.c0graphics["?42"] = (
   (0xF000,), (0xF001,), (0xF002,), (0xF003,), (0xF004,), (0xF005,), (0xF006,), (0xF007,),
   (0xF008,), (0xF009,), (0xF00A,), (0xF00B,), (0xF00C,), (0xF00D,), (0xF00E,), (0xF00F,),
   (0xF010,), (0xF011,), (0xF012,), (0xF013,), (0xF014,), (0xF015,), (0xF016,), (0xF017,),
   (0xF018,), (0xF019,), (0xF01A,), (0xF01B,), (0xF01C,), (0xF01D,), (0xF01E,), (0xF01F,),
     (0xF07F,))
+
+# Alternative representations of two characters in the DOS code page for IBM Symbols Set 7
+graphdata.c0graphics["899"] = graphdata.c0graphics["1092"] = (
+  None, None, None, None, None, None,      None, None,
+  None, None, None, None, None, None,      None, None,
+  None, None, None, None, None, (0x2085,), None, None,
+  None, None, None, None, None, None,      None, None,
+    (0x0020,))
 
 # Macintosh compatibility C0 graphics
 # The common C0 replacements are the device controls. Others seem to vary with version.

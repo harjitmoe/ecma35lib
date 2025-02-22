@@ -230,6 +230,8 @@ graphdata.rhses["21866"] = parsers.read_single_byte("WHATWG/index-koi8-u.txt") #
 
 # The Windows encoding
 graphdata.rhses["1251"] = parsers.read_single_byte("WHATWG/index-windows-1251.txt")
+graphdata.rhses["60643"
+    ] = parsers.read_single_byte("Other/T1060643.ucm") # "Northeastern Iranian languages"
 
 # 10007/1283 is the original MacCyrillic; current MacCyrillic is a Euro update of 10017.
 # Mappings to U+00A4 changed to U+20AC across the board, so number the current one 10017, and use
@@ -246,6 +248,8 @@ graphdata.rhses["866"] = graphdata.rhses["900"
     ] = parsers.read_single_byte("WHATWG/index-ibm866.txt") # Russia; "Cyrillic (DOS)"
 graphdata.rhses["1125"] = parsers.read_single_byte("ICU/ibm-1125_P100-1997.ucm") # Ukraine
 graphdata.rhses["1131"] = parsers.read_single_byte("ICU/ibm-1131_P100-1997.ucm") # Belarus
+graphdata.rhses["60258"] = parsers.read_single_byte("Other/T1060258.ucm") # Azerbaijan
+graphdata.defgsets["60258"] = ("alt646/freedos-turkic", "pclinedrawing", "nil", "nil")
 
 
 

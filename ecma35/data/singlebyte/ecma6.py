@@ -50,9 +50,9 @@ raw_variants = {
     # Violation of ECMA-6:1991: 0x21 is not !.
     "ir006/pli": ([None, None, None, None, None, None, 0xAC, None, 
                                None, None, 0xA6, None, None], {0x21: 0x7C}),
-    # Left-hand side of IBM code page 877 for the OCR-A optical character recognition font
+    # Left-hand side of IBM code page 877 for the OCR-B optical character recognition font
     # Violation of ECMA-6:1991: 0x5F is not (strictly) _.
-    "ir006/ocr-a": ([None, None, None, None, None,   None, 0x2303, 0x02CD,
+    "ir006/ocr-b": ([None, None, None, None, None,   None, 0x2303, 0x02CD,
                                   None, None, 0xFFE8, None, None], {}),
     # Left-hand side of IBM HP-compatibility code page 1053
     "ir006/ibm-hp-diacritics": ([None, None, None,   None, None, None, 0x02C6, None,
@@ -624,7 +624,7 @@ for (name, (myvars, override)) in raw_variants.items():
                 myset[frm - 0x21] = None
     graphdata.gsets[name] = (94, 1, tuple(myset))
 
-graphdata.chcpdocs['367'] = graphdata.chcpdocs['895'] = graphdata.chcpdocs['1009'] = graphdata.chcpdocs['1010'] = graphdata.chcpdocs['1011'] = graphdata.chcpdocs['1012'] = graphdata.chcpdocs['1013'] = graphdata.chcpdocs['1014'] = graphdata.chcpdocs['1015'] = graphdata.chcpdocs['1016'] = graphdata.chcpdocs['1017'] = graphdata.chcpdocs['1018'] = graphdata.chcpdocs['1019'] = graphdata.chcpdocs['1020'] = graphdata.chcpdocs['1021'] = graphdata.chcpdocs['1023'] = graphdata.chcpdocs['1052'] = graphdata.chcpdocs['1054'] = graphdata.chcpdocs['1088'] = graphdata.chcpdocs['1101'] = graphdata.chcpdocs['1102'] = graphdata.chcpdocs['1103'] = graphdata.chcpdocs['1104'] = graphdata.chcpdocs['1105'] = graphdata.chcpdocs['1106'] = graphdata.chcpdocs['1107'] = graphdata.chcpdocs['1114'] = graphdata.chcpdocs['1126'] = graphdata.chcpdocs['5211'] = graphdata.chcpdocs['5222'] = graphdata.chcpdocs['9089'] = graphdata.chcpdocs['9444'] = graphdata.chcpdocs['61697'] = graphdata.chcpdocs['61699'] = graphdata.chcpdocs['61700'] = graphdata.chcpdocs['61710'] = 'ecma-35'
+graphdata.chcpdocs['367'] = graphdata.chcpdocs['895'] = graphdata.chcpdocs['1009'] = graphdata.chcpdocs['1010'] = graphdata.chcpdocs['1011'] = graphdata.chcpdocs['1012'] = graphdata.chcpdocs['1013'] = graphdata.chcpdocs['1014'] = graphdata.chcpdocs['1015'] = graphdata.chcpdocs['1016'] = graphdata.chcpdocs['1017'] = graphdata.chcpdocs['1018'] = graphdata.chcpdocs['1019'] = graphdata.chcpdocs['1020'] = graphdata.chcpdocs['1021'] = graphdata.chcpdocs['1023'] = graphdata.chcpdocs['1052'] = graphdata.chcpdocs['1054'] = graphdata.chcpdocs['1088'] = graphdata.chcpdocs['1101'] = graphdata.chcpdocs['1102'] = graphdata.chcpdocs['1103'] = graphdata.chcpdocs['1104'] = graphdata.chcpdocs['1105'] = graphdata.chcpdocs['1106'] = graphdata.chcpdocs['1107'] = graphdata.chcpdocs['1114'] = graphdata.chcpdocs['1126'] = graphdata.chcpdocs['5211'] = graphdata.chcpdocs['5222'] = graphdata.chcpdocs['9089'] = graphdata.chcpdocs['9444'] = graphdata.chcpdocs['61697'] = graphdata.chcpdocs['61698'] = graphdata.chcpdocs['61699'] = graphdata.chcpdocs['61700'] = graphdata.chcpdocs['61710'] = 'ecma-35'
 
 graphdata.defgsets['895'] = ('ir014', 'nil', 'nil', 'nil')
 graphdata.defgsets['1009'] = ('ir002/tilde', 'nil', 'nil', 'nil')
@@ -654,7 +654,6 @@ graphdata.defgsets['1107'] = ('ir060/dec', 'nil', 'nil', 'nil')
 graphdata.defgsets['9089'] = ('alt646/ibmjapan/tiny', 'nil', 'nil', 'nil')
 
 graphdata.defgsets['367'] = graphdata.defgsets['1054'] = graphdata.defgsets['1114'] = graphdata.defgsets['5211'] = graphdata.defgsets['9444'] = ('ir006', 'nil', 'nil', 'nil')
-graphdata.defgsets['61697'] = graphdata.defgsets['61699'] = graphdata.defgsets['61700'] = ('ir170/ibm', 'nil', 'nil', 'nil')
+graphdata.defgsets["61697"] = graphdata.defgsets["61698"] = graphdata.defgsets["61699"] = graphdata.defgsets["61700"] = ("ir170/ibm", "nil", "nil", "nil")
 graphdata.defgsets['61710'] = ('ir102/ibm', 'nil', 'nil', 'nil')
-
 

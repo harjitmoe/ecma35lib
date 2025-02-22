@@ -44,6 +44,10 @@ graphdata.gsets["armscii"] = (94, 1, ((1421,), (1415,), (1417,), (41,), (40,), (
 graphdata.chcpdocs['65506'] = 'ecma-35'
 graphdata.defgsets['65506'] = ('ir006', 'armscii', 'nil', 'nil')
 
+# OEM code page for Armenian; FreeDOS code page 899 (but unrelated to IBM code page 899)
+graphdata.rhses["?899"] = parsers.read_single_byte("Other/DOS00899.ucm")
+graphdata.defgsets["?899"] = ("alt646/freedos-armenian", "pclinedrawing", "nil", "nil")
+
 # ISO-10586:1996 Georgian
 # Not assigned an escape, but given the number here (possibly provisionally, but any new escape or
 #   IR number being assigned in the future seems unlikely since ISO-IR is basically legacy now):
@@ -102,4 +106,11 @@ graphdata.gsets["ir217"] = (94, 1, ((0x0338,), (0x20D2,), (0x20D3,), (0x0335,), 
 
 # ISO 6826-B (mathematical symbols)
 graphdata.gsets["ir218"] = (94, 1, ((0x2295,), (0x2296,), (0x2297,), (0x2299,), (0x2234,), (0x2235,), (0x228F,), (0x2290,), (0x22B7,), (0x22B6,), (0x22B9,), (0x2214,), (0x223E,), (0x223B,), (0x22B0,), (0x2260,), (0x2253,), (0x27EC,), (0x230A,), (0x22EE,), (0x2308,), (0x2291,), (0x2294,), (0x22B2,), (0x227F,), (0x227A,), (0x227C,), (0x2238,), (0x2258,), (0x25C3,), (0x25B5,), (0x2243,), (0x2237,), (0x27ED,), (0x230B,), (0x224E,), (0x2309,), (0x2292,), (0x2293,), (0x22B4,), (0x227E,), (0x227B,), (0x227D,), (0x2250,), (0x225A,), (0x25B9,), (0x25BF,), (0x2016,), (0x2215,), (0x22A4,), (0x22C1,), (0x22C3,), (0x2E26,), (0x220A,), (0x2196,), (0x2199,), (0x21BE,), (0x219B,), (0x21AA,), (0x25CB,), (0x25A1,), (0x25AD,), (0x25CA,), (0x2223,), (0x29F5,), (0x2216,), (0x22C0,), (0x22C2,), (0x2E27,), (0x220D,), (0x2197,), (0x2198,), (0x21DD,), (0x21A0,), (0x21A9,), (0x25CF,), (0x25A0,), (0x25B1,), (0x2222,), (0x2252,), (0x223A,), (0x221D,), (0x2307,), (0x22A8,), (0x22A6,), (0x2226,), (0x2224,), (0x219A,), (0x21DC,), (0x21D4,), (0x21D5,), (0x2129,), (0x2118,), (0x211E,)))
+
+# DOS code page for IBM Symbols Set 7 (mostly mathematical symbols)
+graphdata.rhses["899"] = parsers.read_single_byte("Other/T1000899.ucm")
+graphdata.defgsets["899"] = ("ibmsymbol", "pclinedrawing", "nil", "nil")
+graphdata.rhses["1092"] = parsers.read_single_byte("Other/T1001092.ucm")
+graphdata.defgsets["1092"] = ("ibmsymbol", "pclinedrawing", "nil", "nil")
+
 

@@ -282,7 +282,18 @@ graphdata.rhses["720"] = parsers.read_single_byte("ICU/ibm-720_P100-1997.ucm")
 _oem864 = parsers.read_single_byte("ICU/ibm-864_X110-1999.ucm")
 graphdata.rhses["864"] = _oem864[:31] + ((0xFE73,),) + _oem864[32:]
 graphdata.rhses["165"] = _oem864[:27] + ((0xFEF9,), (0xFEFA,)) + _oem864[29:31] + ((0xFE73,),) + _oem864[32:38] + ((0xFE87,), (0xFE88,)) + _oem864[40:]
-graphdata.defgsets["165"] = graphdata.defgsets["864"] = ("alt646/ibmarabic", "ibmpc-arabic/alternate", "nil", "nil")
+graphdata.rhses["17248"] = graphdata.rhses["50016"] = _oem864[:31] + ((0xFE73,),) + _oem864[32:39] + ((0x20AC,),) + _oem864[40:]
+graphdata.defgsets["165"] = graphdata.defgsets["864"] = graphdata.defgsets["17248"] = graphdata.defgsets["50016"] = ("alt646/ibmarabic", "ibmpc-arabic/alternate", "nil", "nil")
+graphdata.rhses["1127"] = parsers.read_single_byte("Other/T1001127.ucm")
+graphdata.defgsets["1127"] = ('alt646/ibmarabic', 'pclinedrawing', 'nil', 'nil')
+
+# OEM code pages for Urdu
+graphdata.rhses["868"] = parsers.read_single_byte("Other/T1000868.ucm")
+graphdata.defgsets["868"] = ("alt646/ibmarabic", "pclinedrawing", "nil", "nil")
+
+# OEM code pages for Farsi
+graphdata.rhses["1098"] = parsers.read_single_byte("Other/T1001098.ucm")
+graphdata.defgsets["1098"] = ("alt646/ibmarabic", "pclinedrawing", "nil", "nil")
 
 # Macintosh code pages (both seem to have only Microsoft IDs?)
 graphdata.rhses["10004"] = parsers.read_mozilla_ut_file("Mozilla/macarabic.ut")

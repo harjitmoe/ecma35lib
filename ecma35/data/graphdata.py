@@ -98,7 +98,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"A"): ("ir004", ("ir004/dec",), ("ir004",)),
             tuple(b"B"): ("ir006",
                           ("ir006/overline", "ir006/brvbar", "ir006/pli", "ir006/florin",
-                           "ir006/smartquotes", "ir006/ocr-a", "ir006/ibm-hp-alternatives",
+                           "ir006/smartquotes", "ir006/ocr-b", "ir006/ibm-hp-alternatives",
                            "ir006/ibm-hp-diacritics", "ir006/ibm-hp-ascii-tilde"),
                           ("ir006",)),
             tuple(b"C"): ("ir008-1", ("ir008-1/dec",), ("ir008-1",)),
