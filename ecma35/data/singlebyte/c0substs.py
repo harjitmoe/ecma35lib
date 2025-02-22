@@ -95,6 +95,13 @@ graphdata.c0graphics['1004'] = (
   None,      None, None,      None,      None,      None,      None,      None,
     None)
 
+graphdata.c0graphics["42"] = graphdata.c0graphics["?42"] = (
+  (0xF000,), (0xF001,), (0xF002,), (0xF003,), (0xF004,), (0xF005,), (0xF006,), (0xF007,),
+  (0xF008,), (0xF009,), (0xF00A,), (0xF00B,), (0xF00C,), (0xF00D,), (0xF00E,), (0xF00F,),
+  (0xF010,), (0xF011,), (0xF012,), (0xF013,), (0xF014,), (0xF015,), (0xF016,), (0xF017,),
+  (0xF018,), (0xF019,), (0xF01A,), (0xF01B,), (0xF01C,), (0xF01D,), (0xF01E,), (0xF01F,),
+    (0xF07F,))
+
 # Macintosh compatibility C0 graphics
 # The common C0 replacements are the device controls. Others seem to vary with version.
 # Version attested in Chicago bitmaps from Mac OS 8.0 and also in KEYBOARD.TXT. Note that the 

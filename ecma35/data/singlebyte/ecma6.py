@@ -556,12 +556,22 @@ raw_variants = {
                                            -1,   -1, None, -1, -1],
                               {0x25: 0x066A, 0x2A: 0x066D}),
     # Left-hand side of IBM code page 906
-    "alt646/ibmsmall": ([None, None, None, None, None, None, -1, None,
-                                     -1,   None, None, None, -1], {}),
+    "alt646/ibm-minus3": ([None, None, None, None, None, None, -1, None,
+                                       -1,   None, None, None, -1], {}),
+    # Left-hand side of IBM code page 4947
+    # Violation of ECMA-6:1991: 0x23 is not # or £.
+    "alt646/ibm-minus6": ([-1, None, -1,   None, -1,   None, None, None,
+                                     None, -1,   None, -1,   -1], {}),
+    # Left-hand side of IBM code page 8629
+    "alt646/ibm-minus7": ([None, None, -1,   -1,   -1, -1, None, None,
+                                       None, -1, None, -1, -1], {}),
+    # Left-hand side of IBM code page 16821
+    "alt646/ibm-minus8": ([None, None, None, -1, -1, -1, None, None,
+                                             -1,   -1, -1, -1, -1], {}),
     # Left-hand side of IBM code page 12725; DP94-range subset of IBM code pages 12544 and 12788
     # Violation of ECMA-6:1991: 0x23 is not # or £.
-    "alt646/ibmtiny": ([-1, None, -1, -1, -1, -1, None, None,
-                                  -1, -1, -1, -1, -1], {}),
+    "alt646/ibm-minus10": ([-1, None, -1, -1, -1, -1, None, None,
+                                      -1, -1, -1, -1, -1], {}),
     # Left-hand side of IBM code page 1044
     # Violation of ECMA-6:1991: 0x21 is not !.
     # Violation of ECMA-6:1991: 0x23 is not # or £.
@@ -570,7 +580,7 @@ raw_variants = {
     # Violation of ECMA-6:1991: 0x3F is not ?.
     # Violation of ECMA-6:1991: 0x5F is not _.
     # Violation of ECMA-6:1991: lowercase letters omitted.
-    "alt646/ibmverytiny": ([-1, None, -1, -1, None, -1, -1, -1,
+    "alt646/ibm-minus41": ([-1, None, -1, -1, None, -1, -1, -1,
                                       -1, -1, -1,   -1, -1], dict([
         *{0x21: -1, 0x3C: -1, 0x3E: -1, 0x3F: -1}.items(),
         *[(i, -1) for i in range(0x61, 0x7B)]])),
