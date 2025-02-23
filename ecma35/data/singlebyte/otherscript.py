@@ -67,6 +67,12 @@ graphdata.gsets["ir222"] = (94, 1, (
     None,      None,      None,      None,      None,      None,      None,
 ))
 
+# OEM code page for unicameral Georgian
+graphdata.rhses["59829"] = parsers.read_single_byte("Other/T1059829.ucm")
+
+# OEM code page for bicameral Georgian
+graphdata.rhses["60853"] = parsers.read_single_byte("Other/T1060853.ucm")
+
 # KS C 5601's alternative "N-byte Hangul Code" (IBM code page 891)
 graphdata.gsets["nbytehangul"] = (94, 1, (
                None,      None,      None,      None,      None,      None,      None,

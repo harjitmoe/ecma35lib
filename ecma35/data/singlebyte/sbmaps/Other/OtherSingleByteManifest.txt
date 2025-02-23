@@ -43,6 +43,9 @@ T1000868.ucm:
 T1000877.ucm:
     https://ccsids.net/viewer.html#877
 
+T1000898.ucm:
+    https://ccsids.net/viewer.html#25474
+
 T1000899.ucm:
     https://ccsids.net/viewer.html#25475
 
@@ -64,6 +67,12 @@ T1001092.ucm:
 T1001098.ucm:
     https://ccsids.net/viewer.html#25674
 
+T1001116.ucm
+    https://ccsids.net/viewer.html#25692
+
+T1001117.ucm:
+    https://ccsids.net/viewer.html#25693
+
 T1001118.ucm:
     https://ccsids.net/viewer.html#25694
 
@@ -79,6 +88,9 @@ T1003012.ucm:
 T1003021.ucm:
     https://ccsids.net/viewer.html#3021
 
+T1003840.ucm:
+    https://ccsids.net/viewer.html#3840
+
 T1003844.ucm:
     https://ccsids.net/viewer.html#3844
 
@@ -88,9 +100,53 @@ T1003845.ucm:
 T1003846.ucm:
     https://ccsids.net/viewer.html#3846
 
+T1057781.ucm:
+    https://ccsids.net/viewer.html#57781
+
+T1058152.ucm:
+    https://ccsids.net/viewer.html#58152
+
+T1058210.ucm:
+    https://ccsids.net/viewer.html#58210
+
+T1058335.ucm:
+    https://ccsids.net/viewer.html#58335
+
+T1059234.ucm:
+    https://ccsids.net/viewer.html#59234
+
+T1059829.ucm:
+    https://ccsids.net/viewer.html#59829
+
 T1060258.ucm:
     https://ccsids.net/viewer.html#60258
+
+T1060270.ucm:
+    https://ccsids.net/viewer.html#60270
 
 T1060643.ucm:
     https://ccsids.net/viewer.html#60643
 
+T1060853.ucm:
+    https://ccsids.net/viewer.html#60853
+
+T1061294.ucm:
+    https://ccsids.net/viewer.html#61294
+
+T1061667.ucm:
+    https://ccsids.net/viewer.html#161667
+
+T1062318.ucm:
+    https://ccsids.net/viewer.html#162318
+
+T1062306.ucm:
+    https://ccsids.net/viewer.html#162306
+
+T1062691.ucm:
+    https://ccsids.net/viewer.html#162691
+
+T1063342.ucm:
+    https://ccsids.net/viewer.html#163342
+
+next.txt:
+    https://www.columbia.edu/kermit/ftp/charsets/next.txt

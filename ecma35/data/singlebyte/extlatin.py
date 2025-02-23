@@ -595,6 +595,7 @@ graphdata.rhses["861"] = parsers.read_single_byte("ICU/ibm-861_P100-1995.ucm") #
 graphdata.rhses["863"] = parsers.read_single_byte("ICU/ibm-863_P100-1995.ucm") # Quebecois French
 graphdata.rhses["865"] = parsers.read_single_byte("ICU/ibm-865_P100-1995.ucm") # Nordic
 graphdata.rhses["877"] = parsers.read_single_byte("Other/T1000877.ucm") # Optical Character Recognition
+graphdata.rhses["898"] = parsers.read_single_byte("Other/T1000898.ucm") # IBM Word Processing
 graphdata.rhses["903"] = (None,) * 128
 graphdata.defgsets["903"] = ("ir014", "nil", "nil", "nil")
 graphdata.rhses["904"] = (None,) * 128
@@ -602,10 +603,14 @@ graphdata.defgsets["904"] = ("ir006", "nil", "nil", "nil")
 graphdata.rhses["906"] = parsers.read_single_byte("Other/T1000906.ucm") # IBM 3812 and IBM 3820
 graphdata.defgsets["906"] = ("alt646/ibm-minus3", "pclinedrawing", "nil", "nil")
 graphdata.rhses["991"] = parsers.read_single_byte("Other/T1000991.ucm") # Polish (Mazovia)
+graphdata.rhses["1116"] = parsers.read_single_byte("Other/T1001116.ucm") # Estonian
+graphdata.rhses["1117"] = parsers.read_single_byte("Other/T1001117.ucm") # Latvian
 graphdata.rhses["1118"] = parsers.read_single_byte("Other/T1001118.ucm") # Baltic (LST 1283)
 graphdata.rhses["3844"] = parsers.read_single_byte("Other/T1003844.ucm") # Czech
 graphdata.rhses["3845"] = parsers.read_single_byte("Other/T1003845.ucm") # Hungarian
 graphdata.rhses["3846"] = parsers.read_single_byte("Other/T1003846.ucm") # Turkish (Star Micronics)
+graphdata.rhses["57781"] = parsers.read_single_byte("Other/T1057781.ucm") # Hungarian with Forint sign
+graphdata.rhses["58335"] = parsers.read_single_byte("Other/T1058335.ucm") # Kashubian
 
 # Macintosh pages
 graphdata.rhses["10000"] = graphdata.rhses["1275"] = parsers.read_single_byte("WHATWG/index-macintosh.txt")

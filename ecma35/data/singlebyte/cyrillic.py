@@ -227,11 +227,17 @@ graphdata.rhses["1167"] = graphdata.rhses["59246"
 graphdata.rhses["1168"] = graphdata.rhses["58222"
     ] = parsers.read_single_byte("ICU/ibm-1168_P100-2002.ucm") # KOI8-U
 graphdata.rhses["21866"] = parsers.read_single_byte("WHATWG/index-koi8-u.txt") # KOI8-RU/U hybrid
+graphdata.rhses["60270"] = parsers.read_single_byte("Other/T1060270.ucm") # KOI8-F
+graphdata.rhses["61294"] = parsers.read_single_byte("Other/T1061294.ucm") # KOI8-CA
+graphdata.rhses["62318"] = parsers.read_single_byte("Other/T1062318.ucm") # KOI8-T
+graphdata.rhses["63342"] = parsers.read_single_byte("Other/T1063342.ucm") # KOI8-C
 
 # The Windows encoding
 graphdata.rhses["1251"] = parsers.read_single_byte("WHATWG/index-windows-1251.txt")
 graphdata.rhses["60643"
     ] = parsers.read_single_byte("Other/T1060643.ucm") # "Northeastern Iranian languages"
+graphdata.rhses["61667"] = parsers.read_single_byte("Other/T1061667.ucm") # Aleutian languages
+graphdata.rhses["62691"] = parsers.read_single_byte("Other/T1062691.ucm") # Tungusic languages
 
 # 10007/1283 is the original MacCyrillic; current MacCyrillic is a Euro update of 10017.
 # Mappings to U+00A4 changed to U+20AC across the board, so number the current one 10017, and use
@@ -244,7 +250,15 @@ graphdata.rhses["10007"] = graphdata.rhses["1283"] = tuple(maccy)
 
 # OEM code pages
 graphdata.rhses["771"] = parsers.read_single_byte("Other/T1000771.ucm") # Lithuania (KBL)
+graphdata.rhses["808"
+    ] = parsers.read_single_byte("ICU/ibm-808_P100-1999.ucm") # Russia with Euro sign
 graphdata.rhses["855"] = parsers.read_single_byte("ICU/ibm-855_P100-1995.ucm") # non-Al’ternativnaja
+graphdata.rhses["848"
+    ] = parsers.read_single_byte("ICU/ibm-848_P100-1999.ucm") # Ukraine with Euro sign
+graphdata.rhses["849"
+    ] = parsers.read_single_byte("ICU/ibm-849_P100-1999.ucm") # Belarus with Euro sign
+graphdata.rhses["872"
+    ] = parsers.read_single_byte("ICU/ibm-872_P100-1999.ucm") # non-Al’ternativnaja with Euro sign
 graphdata.rhses["866"] = graphdata.rhses["900"
     ] = parsers.read_single_byte("WHATWG/index-ibm866.txt") # Russia; "Cyrillic (DOS)"
 graphdata.rhses["1119"] = parsers.read_single_byte("Other/T1001119.ucm") # Lithuania (LST 1284)
@@ -252,8 +266,13 @@ graphdata.rhses["1125"] = parsers.read_single_byte("ICU/ibm-1125_P100-1997.ucm")
 graphdata.rhses["1131"] = parsers.read_single_byte("ICU/ibm-1131_P100-1997.ucm") # Belarus
 graphdata.rhses["3012"] = parsers.read_single_byte("Other/T1003012.ucm") # Latvia
 graphdata.rhses["3021"] = parsers.read_single_byte("Other/T1003021.ucm") # Bulgaria
-graphdata.rhses["60258"] = parsers.read_single_byte("Other/T1060258.ucm") # Azerbaijan
+graphdata.rhses["3840"] = parsers.read_single_byte("Other/T1003840.ucm") # Russia
+graphdata.rhses["58152"] = parsers.read_single_byte("Other/T1058152.ucm") # Kazakhstan
+graphdata.rhses["58210"] = parsers.read_single_byte("Other/T1058210.ucm") # Azerbaijan (Cyrillic)
+graphdata.rhses["59234"] = parsers.read_single_byte("Other/T1059234.ucm") # Tatar
+graphdata.rhses["60258"] = parsers.read_single_byte("Other/T1060258.ucm") # Azerbaijan (Cyrillic/Latin)
 graphdata.defgsets["60258"] = ("alt646/freedos-turkic", "pclinedrawing", "nil", "nil")
+graphdata.rhses["62306"] = parsers.read_single_byte("Other/T1062306.ucm") # Uzbekistan
 
 
 
