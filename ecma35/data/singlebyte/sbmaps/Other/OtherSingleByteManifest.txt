@@ -1,8 +1,41 @@
 DOS00899.ucm:
     https://ccsids.net/viewer.html#100899
 
+T1000112.ucm:
+    https://ccsids.net/viewer.html#24688
+
+T1000113.ucm:
+    https://ccsids.net/viewer.html#24689
+
 T1000220.ucm:
     https://ccsids.net/viewer.html#220
+
+T1000667.ucm:
+    https://ccsids.net/viewer.html#667
+
+T1000668.ucm:
+    https://ccsids.net/viewer.html#668
+
+T1000770.ucm:
+    https://ccsids.net/viewer.html#770
+
+T1000771.ucm:
+    https://ccsids.net/viewer.html#771
+
+T1000773.ucm:
+    https://ccsids.net/viewer.html#773
+
+T1000777.ucm:
+    https://ccsids.net/viewer.html#777
+
+T1000778.ucm:
+    https://ccsids.net/viewer.html#778
+
+T1000790.ucm:
+    https://ccsids.net/viewer.html#790
+
+T1000853.ucm:
+    https://ccsids.net/viewer.html#25429
 
 T1000868.ucm:
     https://ccsids.net/viewer.html#25444
@@ -16,6 +49,9 @@ T1000899.ucm:
 T1000906.ucm:
     https://ccsids.net/viewer.html#25482
 
+T1000991.ucm:
+    https://ccsids.net/viewer.html#991
+
 T1001057.ucm:
     https://ccsids.net/viewer.html#25633
 
@@ -28,8 +64,29 @@ T1001092.ucm:
 T1001098.ucm:
     https://ccsids.net/viewer.html#25674
 
+T1001118.ucm:
+    https://ccsids.net/viewer.html#25694
+
+T1001119.ucm:
+    https://ccsids.net/viewer.html#25695
+
 T1001127.ucm:
     https://ccsids.net/viewer.html#25703
+
+T1003012.ucm:
+    https://ccsids.net/viewer.html#3012
+
+T1003021.ucm:
+    https://ccsids.net/viewer.html#3021
+
+T1003844.ucm:
+    https://ccsids.net/viewer.html#3844
+
+T1003845.ucm:
+    https://ccsids.net/viewer.html#3845
+
+T1003846.ucm:
+    https://ccsids.net/viewer.html#3846
 
 T1060258.ucm:
     https://ccsids.net/viewer.html#60258

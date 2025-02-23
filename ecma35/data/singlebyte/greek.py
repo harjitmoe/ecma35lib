@@ -280,6 +280,7 @@ graphdata.rhses["1253"] = parsers.read_single_byte("WHATWG/index-windows-1253.tx
 
 # OEM code pages
 graphdata.rhses["210"] = graphdata.rhses["737"] = parsers.read_single_byte("ICU/ibm-737_P100-1997.ucm")
+graphdata.rhses["851"] = parsers.read_single_byte("ICU/ibm-851_P100-1995.ucm")
 graphdata.rhses["869"] = parsers.read_single_byte("ICU/ibm-869_P100-1995.ucm")
 
 # Macintosh code page

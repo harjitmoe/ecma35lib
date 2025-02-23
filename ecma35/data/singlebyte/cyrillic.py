@@ -243,11 +243,15 @@ maccy[0x36] = (0x2202,)
 graphdata.rhses["10007"] = graphdata.rhses["1283"] = tuple(maccy)
 
 # OEM code pages
+graphdata.rhses["771"] = parsers.read_single_byte("Other/T1000771.ucm") # Lithuania (KBL)
 graphdata.rhses["855"] = parsers.read_single_byte("ICU/ibm-855_P100-1995.ucm") # non-Al’ternativnaja
 graphdata.rhses["866"] = graphdata.rhses["900"
     ] = parsers.read_single_byte("WHATWG/index-ibm866.txt") # Russia; "Cyrillic (DOS)"
+graphdata.rhses["1119"] = parsers.read_single_byte("Other/T1001119.ucm") # Lithuania (LST 1284)
 graphdata.rhses["1125"] = parsers.read_single_byte("ICU/ibm-1125_P100-1997.ucm") # Ukraine
 graphdata.rhses["1131"] = parsers.read_single_byte("ICU/ibm-1131_P100-1997.ucm") # Belarus
+graphdata.rhses["3012"] = parsers.read_single_byte("Other/T1003012.ucm") # Latvia
+graphdata.rhses["3021"] = parsers.read_single_byte("Other/T1003021.ucm") # Bulgaria
 graphdata.rhses["60258"] = parsers.read_single_byte("Other/T1060258.ucm") # Azerbaijan
 graphdata.defgsets["60258"] = ("alt646/freedos-turkic", "pclinedrawing", "nil", "nil")
 

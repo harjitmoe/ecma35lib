@@ -255,9 +255,11 @@ graphdata.rhses["1255"] = parsers.read_single_byte("WHATWG/index-windows-1255.tx
 graphdata.rhses["1256"] = parsers.read_single_byte("WHATWG/index-windows-1256.txt") # Arabic
 
 # OEM code pages for Hebrew
+graphdata.rhses["856"] = parsers.read_single_byte("ICU/ibm-856_P100-1995.ucm")
+graphdata.rhses["862"] = parsers.read_single_byte("ICU/ibm-862_P100-1995.ucm")
+graphdata.rhses["867"] = parsers.read_single_byte("ICU/ibm-867_P100-1998.ucm")
 graphdata.rhses["972"] = ((0x2067, 0x2007, 0x05B8, 0x2069), (0x2067, 0x2007, 0x05B7, 0x2069), (0x2067, 0x2007, 0x05B6, 0x2069), (0x2067, 0x2007, 0x05B5, 0x2069), (0x2067, 0x2007, 0x05B4, 0x2069), (0x2067, 0x2007, 0x05C7, 0x2069), (0x2067, 0x2007, 0x05B0, 0x2069), (0x2067, 0x2007, 0x05BB, 0x2069)) + ((None,) * 24) + graphdata.gsets["ir164/ibm"][2]
 graphdata.defgsets["972"] = ("ir006", "ir164/ibm", "nil", "nil")
-graphdata.rhses["862"] = parsers.read_single_byte("ICU/ibm-862_P100-1995.ucm")
 
 # OEM code pages for Arabic
 graphdata.rhses["708"] = (
