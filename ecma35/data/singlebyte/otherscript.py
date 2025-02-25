@@ -67,6 +67,9 @@ graphdata.gsets["ir222"] = (94, 1, (
     None,      None,      None,      None,      None,      None,      None,
 ))
 
+# Windows-1252 modification for Georgian
+graphdata.rhses["58596"] = parsers.read_single_byte("Other/T1058596.ucm")
+
 # OEM code page for unicameral Georgian
 graphdata.rhses["59829"] = parsers.read_single_byte("Other/T1059829.ucm")
 

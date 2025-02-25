@@ -82,6 +82,9 @@ T1001119.ucm:
 T1001127.ucm:
     https://ccsids.net/viewer.html#25703
 
+T1001169.ucm:
+    https://ccsids.net/viewer.html#1169
+
 T1003012.ucm:
     https://ccsids.net/viewer.html#3012
 
@@ -112,8 +115,23 @@ T1058210.ucm:
 T1058335.ucm:
     https://ccsids.net/viewer.html#58335
 
+T1058595.ucm:
+    https://ccsids.net/viewer.html#58595
+
+T1058596.ucm:
+    https://ccsids.net/viewer.html#58596
+
+T1058619.ucm:
+    https://ccsids.net/viewer.html#58619
+
+T1058630.ucm:
+    https://ccsids.net/viewer.html#58630
+
 T1059234.ucm:
     https://ccsids.net/viewer.html#59234
+
+T1059620.ucm:
+    https://ccsids.net/viewer.html#59620
 
 T1059829.ucm:
     https://ccsids.net/viewer.html#59829

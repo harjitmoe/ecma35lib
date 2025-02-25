@@ -233,7 +233,13 @@ graphdata.rhses["62318"] = parsers.read_single_byte("Other/T1062318.ucm") # KOI8
 graphdata.rhses["63342"] = parsers.read_single_byte("Other/T1063342.ucm") # KOI8-C
 
 # The Windows encoding
-graphdata.rhses["1251"] = parsers.read_single_byte("WHATWG/index-windows-1251.txt")
+graphdata.rhses["1251"] = graphdata.rhses["5347"
+    ] = parsers.read_single_byte("WHATWG/index-windows-1251.txt")
+graphdata.rhses["1169"] = graphdata.rhses["59619"
+    ] = parsers.read_single_byte("Other/T1001169.ucm") # Central Asia
+graphdata.rhses["1174"
+    ] = parsers.read_single_byte("ICU/ibm-1174_X100-2007.ucm") # Kazakhstan (KZ-1048)
+graphdata.rhses["59595"] = parsers.read_single_byte("Other/T1058595.ucm") # Kazakhstan (variant)
 graphdata.rhses["60643"
     ] = parsers.read_single_byte("Other/T1060643.ucm") # "Northeastern Iranian languages"
 graphdata.rhses["61667"] = parsers.read_single_byte("Other/T1061667.ucm") # Aleutian languages
@@ -242,7 +248,8 @@ graphdata.rhses["62691"] = parsers.read_single_byte("Other/T1062691.ucm") # Tung
 # 10007/1283 is the original MacCyrillic; current MacCyrillic is a Euro update of 10017.
 # Mappings to U+00A4 changed to U+20AC across the board, so number the current one 10017, and use
 #   a version with that change but not the others for 10007/1283.
-graphdata.rhses["10017"] = parsers.read_single_byte("WHATWG/index-x-mac-cyrillic.txt")
+graphdata.rhses["10017"] = graphdata.rhses["58627"
+    ] = parsers.read_single_byte("WHATWG/index-x-mac-cyrillic.txt")
 maccy = list(graphdata.rhses["10017"])
 maccy[0x22] = (0x00A2,)
 maccy[0x36] = (0x2202,)

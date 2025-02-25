@@ -178,7 +178,7 @@ graphdata.gsets["ir139"] = (96, 1, tuple((i,) for i in (
              0x0159, 0x016F, 0x00FA, 0x0171, 0x00FC, 0x00FD, 0x0163, 0x02D9)))
 
 # ECMA-128 ISO-8859-9 Latin-5 Turkish RHS
-graphdata.gsets["ir148"] = (96, 1, tuple((i,) for i in (
+latin5 = tuple((i,) for i in (
              0x00A0, 0x00A1, 0x00A2, 0x00A3, 0x00A4, 0x00A5, 0x00A6, 0x00A7, 
              0x00A8, 0x00A9, 0x00AA, 0x00AB, 0x00AC, 0x00AD, 0x00AE, 0x00AF, 
              0x00B0, 0x00B1, 0x00B2, 0x00B3, 0x00B4, 0x00B5, 0x00B6, 0x00B7, 
@@ -190,7 +190,10 @@ graphdata.gsets["ir148"] = (96, 1, tuple((i,) for i in (
              0x00E0, 0x00E1, 0x00E2, 0x00E3, 0x00E4, 0x00E5, 0x00E6, 0x00E7, 
              0x00E8, 0x00E9, 0x00EA, 0x00EB, 0x00EC, 0x00ED, 0x00EE, 0x00EF, 
              0x011F, 0x00F1, 0x00F2, 0x00F3, 0x00F4, 0x00F5, 0x00F6, 0x00F7, 
-             0x00F8, 0x00F9, 0x00FA, 0x00FB, 0x00FC, 0x0131, 0x015F, 0x00FF)))
+             0x00F8, 0x00F9, 0x00FA, 0x00FB, 0x00FC, 0x0131, 0x015F, 0x00FF))
+graphdata.gsets["ir148"] = (96, 1, latin5)
+graphdata.gsets["ir148/azeri"
+    ] = (96, 1, latin5[:38] + ((0x018F,),) + latin5[39:70] + ((0x0259,),) + latin5[71:])
 graphdata.chcpdocs['920'] = 'ecma-35'
 graphdata.defgsets['920'] = ('ir006', 'ir148', 'nil', 'nil')
 
@@ -567,7 +570,11 @@ graphdata.rhses["1252"] = graphdata.rhses["1004"] = parsers.read_single_byte(
 graphdata.defgsets["1252"] = graphdata.defgsets["1004"] = ("ir006", "ir100", "nil", "nil")
 graphdata.rhses["1254"] = parsers.read_single_byte("WHATWG/index-windows-1254.txt") # ISO-8859-9 ext.
 graphdata.defgsets["1254"] = ("ir006", "ir148", "nil", "nil")
+graphdata.rhses["58598"] = graphdata.rhses["1254"][:32] + graphdata.gsets["ir148/azeri"][2]
+graphdata.defgsets["58598"] = ("ir006", "ir148/azeri", "nil", "nil")
 graphdata.rhses["1257"] = parsers.read_single_byte("WHATWG/index-windows-1257.txt") # Baltic
+graphdata.rhses["59620"
+    ] = parsers.read_single_byte("Other/T1059620.ucm") # CeltScript Latin-8 (FreeDOS variant)
 
 # OEM code pages
 graphdata.rhses["112"] = parsers.read_single_byte("Other/T1000112.ucm") # Turkish and Maltese
@@ -613,12 +620,20 @@ graphdata.rhses["57781"] = parsers.read_single_byte("Other/T1057781.ucm") # Hung
 graphdata.rhses["58335"] = parsers.read_single_byte("Other/T1058335.ucm") # Kashubian
 
 # Macintosh pages
-graphdata.rhses["10000"] = graphdata.rhses["1275"] = parsers.read_single_byte("WHATWG/index-macintosh.txt")
-graphdata.rhses["10081"] = graphdata.rhses["1281"] = parsers.read_mozilla_ut_file("Mozilla/macturki.ut")
-graphdata.rhses["10029"] = graphdata.rhses["1282"] = parsers.read_mozilla_ut_file("Mozilla/macce.ut")
-graphdata.rhses["10082"] = graphdata.rhses["1284"] = parsers.read_mozilla_ut_file("Mozilla/maccroat.ut")
-graphdata.rhses["10010"] = graphdata.rhses["1285"] = parsers.read_mozilla_ut_file("Mozilla/macro.ut")
-graphdata.rhses["10079"] = graphdata.rhses["1286"] = parsers.read_mozilla_ut_file("Mozilla/macicela.ut")
+graphdata.rhses["10000"] = graphdata.rhses["1275"
+    ] = parsers.read_single_byte("WHATWG/index-macintosh.txt") # MacRoman
+graphdata.rhses["10081"] = graphdata.rhses["1281"
+    ] = parsers.read_mozilla_ut_file("Mozilla/macturki.ut") # MacTurkish
+graphdata.rhses["10029"] = graphdata.rhses["1282"
+    ] = parsers.read_mozilla_ut_file("Mozilla/macce.ut") # Macintosh Central European
+graphdata.rhses["10082"] = graphdata.rhses["1284"
+    ] = parsers.read_mozilla_ut_file("Mozilla/maccroat.ut") # MacCroatian
+graphdata.rhses["10010"] = graphdata.rhses["1285"
+    ] = parsers.read_mozilla_ut_file("Mozilla/macro.ut") # MacRomanian
+graphdata.rhses["10079"] = graphdata.rhses["1286"
+    ] = parsers.read_mozilla_ut_file("Mozilla/macicela.ut") # MacIcelandic
+graphdata.rhses["58619"] = parsers.read_single_byte("Other/T1058619.ucm") # MacGaelic
+graphdata.rhses["58630"] = parsers.read_single_byte("Other/T1058630.ucm") # MacSaami
 
 # HP-compatibility code pages
 graphdata.rhses["1053"] = ((None,) * 32) + tuple((i,) for i in range(0xA0, 0x100))
