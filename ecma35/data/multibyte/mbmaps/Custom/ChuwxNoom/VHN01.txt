@@ -1226,7 +1226,8 @@
 0x7B45	U+241E9
 0x7B46	U+241EA
 0x7B47	U+241E2
-0x7B48	U+241F3
+# U+241FD, not U+241F3; see https://www.unicode.org/irg/docs/n2798-VSourceChanges.pdf
+0x7B48	U+241FD
 0x7B49	U+2421D
 0x7B4A	U+2421F
 0x7B4B	U+2422A

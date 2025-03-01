@@ -2078,7 +2078,8 @@
 0x4630	U+28981
 0x4631	U+289A5
 0x4632	U+9299
-0x4633	U+928A
+# U+2CACD, not U+928A; see https://www.unicode.org/irg/docs/n2798-VSourceChanges.pdf
+0x4633	U+2CACD
 0x4634	U+289A9
 0x4635	U+92F2
 0x4636	U+289C6
