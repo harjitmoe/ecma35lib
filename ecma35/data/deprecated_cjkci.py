@@ -63,6 +63,13 @@ deprecated_compatibility_ideographs = {
     0x2F9CB: 0x4695,
     0x2F9D6: 0x25AD4,
     #
+    # U+2F980 is another candidate for future disunification and deprecation
+    #   (located at U+2B73E in the alpha-stage code chart for Unicode 17.0):
+    #     https://www.unicode.org/irg/docs/n2771-Disunify.pdf
+    #     https://www.unicode.org/irg/docs/n2702-Recommendations.pdf#page=4
+    #     https://www.unicode.org/irg/docs/n2704-MiscEditorialReport.pdf#page=2
+    0x2F980: 0x2B73E,
+    #
     # Note that U+FA99, U+FAB0 and U+FAD1 are candidates for future disunification and deprecation
     #   when the CJK-K block gets added in however many years' time, although this is disputed and
     #   may well not happen (U+FAD1 in particular seems not to be planned):
@@ -71,11 +78,6 @@ deprecated_compatibility_ideographs = {
     #     https://www.unicode.org/irg/docs/n2785-KPSourceFeedback.pdf
     #     https://hc.jsecs.org/irg/ws2024/app/?find=UTC-00777
     #     https://hc.jsecs.org/irg/ws2024/app/?find=UTC-03249
-    # U+2F980 is another candidate for future disunification and deprecation
-    #   (proposed for U+2B73E):
-    #     https://www.unicode.org/irg/docs/n2771-Disunify.pdf
-    #     https://www.unicode.org/irg/docs/n2702-Recommendations.pdf#page=4
-    #     https://www.unicode.org/irg/docs/n2704-MiscEditorialReport.pdf#page=2
     # U+FACB and U+2F9FF have also been proposed for future disunification and deprecation (while
     #   U+2F9FE would remain valid):
     #     https://www.unicode.org/irg/docs/n2786-Disunify.pdf

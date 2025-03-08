@@ -152,6 +152,11 @@ irgn2779_amendments = parsers.decode_main_plane_gl(
 misc_amendments = [
     (None,) * (94*94*2 + 94*6 + 7) + ((0x2ED9D,),), # 03-07-08 → U+2ED9D
     (None,) * (94*94*2 + 94*68 + 25) + ((0x6BF5,),), # 03-69-26 → U+6BF5
+    #
+    # Unicode 17.0 (currently in alpha stage):
+    (None,) * (94*94*3 + 94*5 + 19) + ((0x2B73A,),), # 04-06-20 → U+2B73A
+    (None,) * (94*94*10 + 94*92 + 11) + ((0x2B73C,),), # 11-93-12 → U+2B73C
+    (None,) * (94*94*10 + 94*92 + 14) + ((0x2B73D,),), # 11-93-15 → U+2B73D
 ]
 
 cns_19 = parsers.decode_main_plane_gl(
@@ -166,6 +171,8 @@ cns = parsers.fuse([
     cns_bmp,
     cns_sip,
     cns_spuaa,
+    # https://sign.hakka.gov.tw/File/Attach/47455/File_98707.pdf#page=189
+    (None,) * (94*94*10 + 94*92 + 8) + ((0xFFB1B,),), # 11-93-09 → U+FFB1B (SPUA)
 ], "Unihan-GOV-TW---CNS2UNICODE_etc.json")
 
 cns_govbmp = parsers.decode_main_plane_gl(
