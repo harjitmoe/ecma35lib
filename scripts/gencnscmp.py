@@ -379,8 +379,9 @@ annots = {
              "forms of various strokes, characters and components in brush script.\u2002This being "
              "additional to the strokes section, the radicals section, and the Chinese character "
              "section, which sections it frequently duplicates (besides being in brush-script "
-             "even in mincho/songti style fonts for some reason).\u2002I do not know what they "
-             "are intended to be used for.",
+             "regardless of the font style.\u2002<a href=\""
+             "https://www.unicode.org/irg/docs/n2799-CJKComponents4IDS.pdf#page=4\">Some "
+             "background for these character components</a>.",
  (1, 34, 35): "The Euro sign and circle were added to CNS 11643 in 2007, although Microsoft had "
               "added the Euro sign to Big5 in the corresponding location earlier.",
  (1, 34, 52): "Using private use assignments for grapheme clusters which have standard Unicode "

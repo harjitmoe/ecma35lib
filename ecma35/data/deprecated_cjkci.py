@@ -39,20 +39,26 @@ deprecated_compatibility_ideographs = {
     # CNS 11643 references not moved yet but proposed to be:
     #   https://www.unicode.org/irg/docs/n2519-TSourceIssues.pdf#page=35
     #   https://www.unicode.org/L2/L2025/25009-cjk-unihan-wg-utc182.pdf#page=5
+    #   https://www.unicode.org/irg/docs/n2778-Disunify.pdf
     0x2F81D: 0x20674,
     0x2F82C: 0x20984,
+    0x2F82D: 0x2D161,
     0x2F85B: 0x21533,
+    0x2F85D: 0x21587,
     0x2F860: 0x216A7,
     0x2F89C: 0x22505,
     0x2F905: 0x23D40,
     0x2F90E: 0x23F1C,
     0x2F91C: 0x242B3,
     0x2F927: 0x2AEC5,
+    0x2F92B: 0x248FD,
     #0x2F935: 0x24C36, # disunified in other direction to U+24C53, thus redundant but valid
     0x2F943: 0x2511A,
     0x2F94B: 0x25271,
     0x2F953: 0x25632, # lacks acknowledgement in code chart cross-references
     0x2F96E: 0x31E7C, # lacks acknowledgement in code chart cross-references
+    0x2F97E: 0x2659D,
+    0x2F9A4: 0x26D06,
     0x2F9B6: 0x27205,
     0x2F9CB: 0x4695,
     0x2F9D6: 0x25AD4,
