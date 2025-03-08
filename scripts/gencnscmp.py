@@ -132,7 +132,8 @@ plane9 = (9, ("GOV-TW CNS", "Lax Matching", "Output"), [
 ])
 
 print("Loading 10")
-planeA = (10, ("GOV-TW CNS",), [
+planeA = (10, ("GOV-TW CNS", "Output"), [
+          graphdata.gsets["csic10/govtw"][2],
           graphdata.gsets["csic10"][2],
 ])
 
@@ -441,12 +442,14 @@ annots = {
  (4, 8, 7): "Compare 15-08-82.",
  (4, 8, 93): 'Compare 03-68-77.',
  (4, 10, 78): 'Compare 03-69-44.',
+ (4, 13, 81): "Compare 10-55-01.",
  (4, 16, 34): 'Compare 03-70-80.',
  (4, 24, 60): 'Compare 03-69-34.',
 
  (4, 25, 38): 'Compare 06-43-90; see <a href="https://unicode.org/wg2/docs/n3196.pdf">WG2 N3196</a> for explanation of this particular pair.&ensp;U+FAD4 normalises to U+4039, which turns out to be inappropriate (a similar appearance and similar meaning but different pronunciation to the character intended at this position), hence it was later superseded by the later-added U+9FC3.',
 
  (4, 36, 56): 'Compare 03-69-59.',
+ (4, 39, 20): "Compare 11-05-47",
  (4, 51, 28): "Compare 15-49-93",
  (4, 67, 25): 'Compare 03-70-87.',
  (4, 72, 47): "Compare 05-79-52",
@@ -457,6 +460,8 @@ annots = {
  (5, 27, 48): "This is a <a href=\"https://en.wikipedia.org/wiki/Radical_130#Variant_forms\">moon-versus-meat</a> issue, see <a href='https://www.unicode.org/wg2/docs/n5083-IRG%20N2391_Errata%20report%20for%20WG2%20submission_TCA.pdf'>IRG N2391 / WG2 N5083 / UTC L2/19-241</a>; specifically, this one is supposed to have a \"meat\" radical.&ensp;U+2F984 does change to U+440B under all Unicode normalisation forms; however, it is redundant when 06-41-94 is mapped to the newer U+4DBC rather than to U+440B.",
 
  (5, 31, 70): "This is a <a href=\"https://en.wikipedia.org/wiki/Radical_130#Variant_forms\">moon-versus-meat</a> issue, see <a href='https://www.unicode.org/wg2/docs/n5083-IRG%20N2391_Errata%20report%20for%20WG2%20submission_TCA.pdf'>IRG N2391 / WG2 N5083 / UTC L2/19-241</a>; specifically, this one is supposed to have a \"moon\" radical.&ensp;U+2F8DA changes to U+6721 (朡) under all Unicode normalisation forms, which has a \"meat\" radical; compare 02-38-33.",
+
+ (5, 54, 30): "Compare 10-78-79.",
 
  (6, 1, 3): "U+3405 㐅 is the number five (also 𠄡, but much more commonly 五 or 伍, hence 㐅 is in the CJKA block).&ensp;U+4E44 乄, on the other hand, is a duplicate encoding in the URO (JIS X 0212's fault) of 〆 (U+3006 IDEOGRAPHIC CLOSING MARK), which is a Japanese abbreviation for words pronounced しめ (shi\u202Fme).&ensp;Both the current and 1992 CNS glyphs are very clearly 㐅, as in, the middle of 𠄡.</p><p>Yasuoka's mapping was published in March 1998, however, and hence predates the CJKA block (the 1992 in ICU's 1992 CNS mapping, unlike the 2014 in its EUC 2014 mapping, references the standard year, not the mapping timestamp, hence it is a shade newer than Yasuoka's, which it cites).",
 
@@ -469,7 +474,11 @@ annots = {
  (7, 15, 43): 'Compare 10-60-31.',
  (7, 41, 75): 'This is a variant of U+86D7 蛗 (see 02-32-03); its glyph on the CNS 11643 website still matches U+27499 despite listing the Unicode mapping of U+272F0; by contrast, U+272F0\'s T-source glyph in the Unicode code charts as of Unicode 15.1 now matches the old UCS2003 glyph (with only one insect radical at the bottom).&ensp;<a href="https://www.babelstone.co.uk/Blog/2007/12/cjk-b-case-study-1-u272f0.html">More information from Andrew West</a> (note: the updated link to Michael Kaplan\'s post is <a href="https://archives.miloush.net/michkap/archive/2007/11/22/6462768.html">here</a>).&ensp;Compare 11-03-39.',
 
+ (10, 55, 1): "Compare 04-13-81.",
+ (10, 78, 79): "Compare 05-54-30.",
+
  (11, 3, 39): 'Compare 07-41-75.',
+ (11, 5, 47): "Compare 04-39-20",
  (13, 4, 28): "In IBM's private use area fallback scheme (code pages 1445 and 1449, 1449 in this case) which is being used here, U+F83F through U+F842 are basically duplicates of U+FE33 ︳, U+2574 ╴, U+FE34 ︴ and U+FE4F ﹏ respectively.&ensp;These also appear in IBM Big5, at Γ-61-30 through Γ-61-33.&ensp;Compare 01-01-26 through 01-01-29.",
  (12, 1, 0): "Plane 12 is used by IBM and ICU for an IBM-designated user defined area.&ensp;It is no longer considered private-use in the upstream standard however.",
  (12, 87, 16): 'Compare 03-07-08.',

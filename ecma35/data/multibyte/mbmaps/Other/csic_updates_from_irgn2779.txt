@@ -1,0 +1,23 @@
+# Characters mainly from CNS 11643 planes 3-7 and 10 proposed for horizontal
+#   extension to, or reassignment to other, Unicode characters in
+#   ISO/IEC JTC1/SC2/WG2/IRG N2779:
+# https://www.unicode.org/irg/docs/n2779-TCAHorizontalExtension.pdf
+
+0x36247	U+21D14
+0x36249	U+688D
+0x3653A	U+6BF5
+0x42827	U+488C
+0x42D71	U+23D6D
+0x44734	U+277F5
+0x5563E	U+25871
+0x57C53	U+30E6C
+0x57C58	U+275FC
+0x76659	U+3184B
+0x76661	U+2DECD
+0x76662	U+2CF02
+0xA2738	U+20727
+0xA3E37	U+21F12
+0xA5721	U+23CEB
+0xA6E6F	U+25864
+0xB254F	U+277F1
+0xF3C3E	U+6BF6

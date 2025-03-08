@@ -145,6 +145,10 @@ for _i in range(1, 20):
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_TSource", f"T{_i:X}"))
 cns_unihan = parsers.fuse(cns_unihan_parts, "Unihan-CNS-11643.json")
 
+irgn2779_amendments = parsers.decode_main_plane_gl(
+    parsers.parse_file_format("Other/csic_updates_from_irgn2779.txt"),
+    "csic_updates_from_irgn2779.txt")
+
 misc_amendments = [
     (None,) * (94*94*2 + 94*6 + 7) + ((0x2ED9D,),), # 03-07-08 → U+2ED9D
     (None,) * (94*94*2 + 94*68 + 25) + ((0x6BF5,),), # 03-69-26 → U+6BF5
@@ -157,6 +161,7 @@ cns_19 = parsers.decode_main_plane_gl(
 cns = parsers.fuse([
     *misc_amendments,
     (None,) * (94*94*18) + tuple(cns_19),
+    irgn2779_amendments,
     cns_unihan_amended,
     cns_bmp,
     cns_sip,
@@ -307,6 +312,7 @@ graphdata.gsets["csic9"] = (94, 2, cns[planesize * 8 : planesize * 9])
 graphdata.gsets["csic9/govtw"] = (94, 2, cns_gov[planesize * 8 : planesize * 9])
 
 graphdata.gsets["csic10"] = (94, 2, cns[planesize * 9 : planesize * 10])
+graphdata.gsets["csic10/govtw"] = (94, 2, cns_gov[planesize * 9 : planesize * 10])
 
 graphdata.gsets["csic11"] = (94, 2, cns[planesize * 10 : planesize * 11])
 graphdata.gsets["csic11/govtw"] = (94, 2, cns_gov[planesize * 10 : planesize * 11])

@@ -474,7 +474,7 @@ g94nbytes = {tuple(b"@"): ("ir042/nec", ("ir042/ibm", "ir042/nec", "ir042/1990pi
              tuple(b"\"?"): ("ibm-euctw-extension-plane", (), ("ibm-euctw-extension-plane",)),
              tuple(b"#0"): ("csic8", ("csic8/govtw",), ("csic8",)),
              tuple(b"#1"): ("csic9", ("csic9/govtw",), ("csic9",)),
-             tuple(b"#2"): ("csic10", (), ("csic10",)),
+             tuple(b"#2"): ("csic10", ("csic10/govtw",), ("csic10",)),
              tuple(b"#3"): ("csic11", ("csic11/govtw",), ("csic11",)),
              tuple(b"#4"): ("csic12", ("csic12/govtw",), ("csic12",)),
              tuple(b"#5"): ("csic13-2007", ("csic13-2007/govtw",), ("csic13-2007",)),
