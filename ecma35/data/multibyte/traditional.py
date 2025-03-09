@@ -163,11 +163,16 @@ cns_19 = parsers.decode_main_plane_gl(
     parsers.parse_file_format("Custom/CSIC_plane_19.txt"),
     "CSIC_plane_19.txt")
 
+cns_misc = parsers.decode_main_plane_gl(
+    parsers.parse_file_format("Custom/CSIC_misc_unified.txt"),
+    "CSIC_misc_unified.txt")
+
 cns = parsers.fuse([
     *misc_amendments,
     (None,) * (94*94*18) + tuple(cns_19),
     irgn2779_amendments,
     cns_unihan_amended,
+    cns_misc,
     cns_bmp,
     cns_sip,
     cns_spuaa,
@@ -361,7 +366,9 @@ graphdata.gsets["cns-eucg2"] = (94, 3, parsers.fuse([
 graphdata.gsets["cns-eucg2-lax-matching"] = (94, 3, parsers.fuse([
     *misc_amendments,
     (None,) * (94*94*18) + tuple(cns_19),
+    irgn2779_amendments,
     cns_unihan_amended,
+    cns_misc,
     cns_bmp,
     cns_sip,
     cns_icu_2014_nobmppua,
