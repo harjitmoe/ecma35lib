@@ -458,7 +458,7 @@ g94nbytes = {tuple(b"@"): ("ir042/nec", ("ir042/ibm", "ir042/nec", "ir042/1990pi
              tuple(b"!?"): "ksx1027_2",
              tuple(b"\"0"): ("aton-exts", ("aton-exts2", "chinasea-exts-core", "chinasea-exts-gothic"), ("aton-exts",)),
              tuple(b"\"1"): ("oldibmkorea", ("oldibmkorea-withcorppua",), ("oldibmkorea-excavated", "oldibmkorea")),
-             tuple(b"\"2"): ("gb16500/ext", ("the-other-gb7", "gb16500"), ("gb16500/strict", "gb16500/ext")),
+             tuple(b"\"2"): ("gb16500/ext", ("the-old-other-gb7", "gb16500"), ("gb16500/strict", "gb16500/ext")),
              tuple(b"\"3"): ("dynalabexts", (), ("dynalabexts",)),
              tuple(b"\"4"): ("monotypeexts", (), ("monotypeexts",)),
              tuple(b"\"5"): ("big5-plus-exts1", (), ("big5-plus-exts1",)),
@@ -484,6 +484,7 @@ g94nbytes = {tuple(b"@"): ("ir042/nec", ("ir042/ibm", "ir042/nec", "ir042/1990pi
              tuple(b"#;"): ("csic19", (), ("csic19",)),
              tuple(b"%0"): ("unihan-singapore-characters", (), ("unihan-singapore-characters",)),
              tuple(b"%1"): ("pseudo-tcvn6056", (), ("pseudo-tcvn6056",)),
+             tuple(b"%2"): ("the-new-other-gb7/ext", (), ("the-new-other-gb7", "the-new-other-gb7/ext")),
              tuple(b"~"): "nil"}
 
 g96nbytes = {tuple(b"!0"):("gbk-nonuro-extras-2022", ("gbk-nonuro-extras-web", "gbk-nonuro-extras-full", "gbk-nonuro-extras-2022"), ("gbk-nonuro-extras",)),

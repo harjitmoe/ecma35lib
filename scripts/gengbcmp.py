@@ -69,8 +69,9 @@ plane5 = (5, ("GB 13132<br>IRGN2376", "GB 13132<br>like GB 7590"), [
           graphdata.gsets["gb13132"][2],
           graphdata.gsets["gb13132/gb7590-homologue"][2],
 ])
-plane7 = (7, ("Unihan G7", "GB16500"), [
-          graphdata.gsets["the-other-gb7"][2],
+plane7 = (7, ("Unihan G7<br>pre-IRGN2808", "Unihan G7<br>IRGN2808", "GB16500"), [
+          graphdata.gsets["the-old-other-gb7"][2],
+          graphdata.gsets["the-new-other-gb7"][2],
           graphdata.gsets["gb16500"][2],
 ])
 plane8 = (8, ("Subset", "PUA<br>BabelStone"), [
@@ -90,7 +91,7 @@ titles = [
     "GB 7590",
     "GB 13132",
     "nul points",
-    "GB 16500",
+    "GB 16500 + Table of Hanzi not in GB 2312",
     "SJ 11239",
     "GB 12052",
 ]
@@ -103,6 +104,13 @@ def planefunc(number, mapname=None):
 def planefunc2(number, mapname=None):
     if mapname is None:
         return "General Purpose Han Characters for Modern Chinese" if number == 7 else "Guobiao 94×94 sets"
+    return ""
+
+def planefunc3(number, mapname=None):
+    if mapname is None:
+        if number == 7:
+            return "GB 16500"
+        return titles[number]
     return ""
 
 def kutenfunc(number, row, cell):
@@ -153,7 +161,7 @@ annots = {
     (2, 18, 93): "Compare 04-17-31; see remarks at 00-90-30.",
     (4, 17, 0): "Compare 04-17-31 with 00-90-30 and 02-18-93.",
     (5, 37, 0): "Compare 05-37-52 with 07-56-19.",
-    (7, 1, 0): "There are multiple constituent character sets shown here in plane 7:</p><ul><li>Selections from the \"General Purpose Han Characters for Modern Chinese\" (row 1), followed by 07-01-43 which <a href=\"https://www.unicode.org/review/pri508/feedback.html#ID20250209023050\">appears to be additional to that</a>.&ensp;This character set is first attested in <a href=\"https://web.archive.org/web/20150104034755/http://std.dkuug.dk/jtc1/sc2/wg2/docs/N0667.doc\">WG2 N667</a> from before the ISO 10646 / Unicode merger, and has been listed since the first version of the Unihan database mappings (<a href=\"https://www.unicode.org/Public/1.1-Update/CJKXREF.TXT\">CJKXREF</a>).&ensp;Having been included since Unicode 1.0.1, these characters are included in the Unicode URO.\n<li>Selections from the \"General List of Simplified Hanzi\" (row 2).&ensp;These were added in Unicode 3.0; hence, they are included in CJK Extension A; they were kept under the same \"G7\" source prefix, but a mention of \"General List of Simplified Hanzi\" was added to the documentation of that source prefix.\n<li>Row 3.&ensp;These were also added in Unicode 3.0 as part of CJK Extension A, and also given source references with the \"G7-\" prefix, but <a href=\"https://www.unicode.org/review/pri508/feedback.html#ID20250209023050\">appear not to have been sourced from either list</a>.\n<li>GB 16500, the \"Seventh Supplementary Set\" (rows 16 and up).&ensp;It was intended to <a href=\"https://www.unicode.org/L2/L2018/18263-telegraph-add.pdf\">include all of the characters in the Unicode 2.0 URO that did not have another Mainland China source reference</a>.&ensp;Despite its title, this part was not added to the Unihan \"G7-\" source when it was published.&ensp;Instead, it was added pursuant to <a href='https://web.archive.org/web/20241124092456/https://appsrv.cse.cuhk.edu.hk/~irg/irg/N376'>IRG N376</a> as a separate source, and given the \"GE-\" source prefix—the \"E\" appears to stand for \"extension\", in reference to <a href=\"https://www.unicode.org/L2/L2023/23089-irgn2609-extb-g-glyph-changes.pdf#page=5\">its status as a set of horizontal extensions</a> (i.e. additional reference glyphs for existing Unicode codepoints).</ul><p>",
+    (7, 1, 0): "There are multiple constituent character sets shown here in plane 7:</p><ul><li>Selections from the \"General Purpose Han Characters for Modern Chinese\" (row 1), followed by 07-01-43 which <a href=\"https://www.unicode.org/irg/docs/n2788-GSourceIssues.pdf#page=4\">appears to be additional to that</a>.&ensp;This character set is first attested in <a href=\"https://web.archive.org/web/20150104034755/http://std.dkuug.dk/jtc1/sc2/wg2/docs/N0667.doc\">WG2 N667</a> from before the ISO 10646 / Unicode merger, and has been listed since the first version of the Unihan database mappings (<a href=\"https://www.unicode.org/Public/1.1-Update/CJKXREF.TXT\">CJKXREF</a>).&ensp;Having been included since Unicode 1.0.1, these characters are included in the Unicode URO.\n<li>Selections from the \"General List of Simplified Hanzi\" (row 2).&ensp;These were added in Unicode 3.0; hence, they are included in CJK Extension A; they were kept under the same \"G7\" source prefix, but a mention of \"General List of Simplified Hanzi\" was added to the documentation of that source prefix.\n<li>Row 3.&ensp;These were also added in Unicode 3.0 as part of CJK Extension A, and also given source references with the \"G7-\" prefix, but <a href=\"https://www.unicode.org/irg/docs/n2788-GSourceIssues.pdf#page=4\">appear not to have been sourced from either list</a>.\n<li>GB 16500, the \"Seventh Supplementary Set\" (rows 16 and up).&ensp;It was intended to <a href=\"https://www.unicode.org/L2/L2018/18263-telegraph-add.pdf\">include all of the characters in the Unicode 2.0 URO that did not have another Mainland China source reference</a>.&ensp;Despite its title, this part was not added to the Unihan \"G7-\" source when it was published.&ensp;Instead, it was added pursuant to <a href='https://web.archive.org/web/20241124092456/https://appsrv.cse.cuhk.edu.hk/~irg/irg/N376'>IRG N376</a> as a separate source, and given the \"GE-\" source prefix—the \"E\" appears to stand for \"extension\", in reference to <a href=\"https://www.unicode.org/L2/L2023/23089-irgn2609-extb-g-glyph-changes.pdf#page=5\">its status as a set of horizontal extensions</a> (i.e. additional reference glyphs for existing Unicode codepoints).\n<li>The complete sixth appendix (\"Data Statistics Table of Hanzi not included in GB 2312\") of the \"General Purpose Han Characters for Modern Chinese\", which was converted to a 94×94 set in <a href=\"https://www.unicode.org/irg/docs/n2808-GSourceChanges.pdf\">IRGN2808</a>.&ensp;Since this also uses rows 16 and up, it collides with GB 16500.</ul><p>",
     (7, 56, 0): "07-56-19 is not, strictly speaking, part of GB 16500, but a small extension to it; it was disunified from 05-37-52.&ensp;See <a href=\"https://www.unicode.org/irg/docs/n2297-GSourceChanges.pdf\">IRG N2297</a>.",
     (8, 16, 36): "U+2B92C 𫤬 is a pictographic variant of 溝 (\"ditch\") and should have straight vertical lines (while the horizontal lines may be straight or slanted), but its reference glyph was poorly designed, making it look more like U+5146 兆 (\"trillion\").&ensp;See <a href=\"https://www.unicode.org/L2/L2023/23244-irgn2616-glyph-corr.pdf\">IRG N2616 (UTC L2/23-244)</a>.&ensp;This is expected to be fixed in Unicode 16 (2024), per <a href=\"https://www.unicode.org/L2/L2023/23250-irgn2620-recs.pdf#page=3\">IRG recommendation IRG M61.07</a>.",
     (KPLANE, 72, 0): "This row is nominally equivalent to 01-93-07 through 01-93-94, since GB 12052 was not one of the sources submitted for inclusion in the original Unicode URO, so its hanja (from both this row and row 71) were submitted as part of an extended version of GB 12345 instead.</p><p>The handwritten glyphs in GB 12052 <a href=\"https://hc.jsecs.org/irg/ws2021/app/index.php?find=UTC-03193\">differ in a number of places</a> from the typeset glyphs in the extended version of GB 12345.&ensp; By far the most prominent of these is K-72-67, which the handwritten GB 12052 gives as an icheja of the immediately preceeding K-72-66 (U+7233 爳) with the bottom component written as 𰆊, while the GB 12345 extension instead gives it as U+5655 噕, whence the conventional Unicode mapping.",
@@ -204,7 +212,7 @@ for n, p in enumerate([plane0, plane1, plane2, plane3, plane4, plane5, plane7, p
             planewarn = "Not all of this plane exists in Unicode.&ensp;This plane is visualised mainly from BabelStone's <a href=\"https://babelstone.co.uk/CJK/SJT-IDS.TXT\">SJT-IDS.TXT</a>."
         #
         showbmppuas = None if bn != 8 else (False, True)
-        showgraph.dump_plane(f, planefunc if q > 1 else planefunc2,
+        showgraph.dump_plane(f, planefunc if 1 < q <= 3 else (planefunc2 if q == 1 else planefunc3),
                              kutenfunc, *p, lang="zh-CN" if bn != KPLANE else "ko-CN",
                              part=q, css="../css/codechart.css",
                              menuurl="/gb-conc.html", menuname="Guobiao code variant comparison",

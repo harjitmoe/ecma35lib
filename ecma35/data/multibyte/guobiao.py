@@ -496,25 +496,26 @@ graphdata.gsets["gb16500"] = (94, 2, parsers.fuse([
         gb16500_strict,
     ], "GB16500_extended.json"))
 
-# This is an interesting one. Known as G7 or GB7 in Unihan, it is not the Seventh Supplementary Set
-#   (which would be GB 16500, Unihan's GE). It seems to have been one of the original source
-#   standards from the very beginning: WG2N667 lists nine Chinese sources to be consolidated, being
-#   GBs 2312, 12545, 7589, 13131 (not yet so called), 7590, 13132 (likewise) and 8565, "A few
-#   additional Han characters (< 100) for Modern Chinese" (presumably this one, since there's only
-#   42 or 43 in the first row, which is the only URO-mapped row with the rest being CJKA-mapped,
-#   and less than 200 in total) and CNS 11643. It is therefore a supplement to be used alongside
-#   GBs 2312, 7589 and 7590 for modern Chinese. Its characters are Simplified in all three rows.
-# It has likewise been in the Unihan data since its very first manifestation (CJKXREF), which calls
-#   it "General Purpose Han Characters for Modern Chinese", and first assigns it the number 7;
-#   GB 16500 is not amongst its sources, and was added later pursuant to IRGN376. Current Unihan
-#   calls the Unihan GB7 "General Purpose Hanzi List for Modern Chinese Language, and General List
-#   of Simplified Hanzi" ("General List of Simplified Hanzi" may be the CJKA-mapped portion in
-#   rows 2 and 3).
-# Given this information, I suspect this CCS is entirely fictitious, since it would clearly predate
-#   the ability to submit NCSes to the IRG, and it doesn't seem to follow the usual structure of
-#   either mostly following GB2312 where applicable in the first 15 rows or leaving them empty
-#   (though this, plus its small size, means it doesn't actually *collide* with GB 16500 either).
-graphdata.gsets["the-other-gb7"] = (94, 2, parsers.fuse([
+# The set known as G7 or (formerly) GB7 in Unihan, despite not being the Seventh Supplementary Set
+#   (which is GB 16500, Unihan's GE). Its characters are Simplified Chinese in all three rows.
+# The first row was one of the original sources from the very beginning: WG2N667 lists nine Chinese
+#   sources to be consolidated, being GBs 2312, 12545, 7589, 13131 (not yet so called), 7590,
+#   13132 (likewise) and 8565, "A few additional Han characters (< 100) for Modern Chinese", and
+#   CNS 11643. It has likewise been in the Unihan data since its first manifestation (CJKXREF),
+#   which calls it "General Purpose Han Characters for Modern Chinese", and assigns it the number
+#   7; GB 16500 is not amongst its sources, and was added later pursuant to IRGN376.
+# As the description suggests, most of the first row is selections from the General Purpose Hanzi
+#   List for Modern Chinese. As noted by IRGN2788 and IRGN2808, the last character in the row is an
+#   urgently-needed character that had recently been brought back into Simplified Chinese use,
+#   hence the early ISO 10646 draft describes the "G7" source as including "41+1" characters.
+# Current Unihan calls the Unihan GB7 "General Purpose Hanzi List for Modern Chinese Language, and
+#   General List of Simplified Hanzi". "General List of Simplified Hanzi" is the list which row 2
+#   comprises selections from, as noted in IRGN2788.
+# As noted in IRGN2808, this will be replaced in future Unicode versions.
+# https://www.unicode.org/irg/docs/n2788-GSourceIssues.pdf#page=4
+# https://www.unicode.org/irg/docs/n2808-GSourceChanges.pdf
+graphdata.gsets["the-old-other-gb7"] = (94, 2, parsers.fuse([
+        # For reasons noted above, do not add post-Unicode-16 Unihan database versions here.
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "G7"),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_GSource", "G7"),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G7"),
@@ -523,12 +524,31 @@ graphdata.gsets["the-other-gb7"] = (94, 2, parsers.fuse([
         parsers.read_unihan_planes("UCD/Unihan_OtherMappings-15.txt", "kGB7", kutenform=True),
         parsers.read_unihan_planes("UCD/Unihan_OtherMappings-14.txt", "kGB7", kutenform=True),
         parsers.read_unihan_planes("UCD/Unihan_OtherMappings-13.txt", "kGB7", kutenform=True),
-    ], "the-other-GB7.json"))
+    ], "the-old-other-GB7.json"))
 
+# A replacement / redefinition of the "G7" Unihan source based on directly converting the numbered
+#   repertoire of the characters from "Data Statistics Table of Hanzi not included in GB 2312",
+#   which is Appendix 6 of General Purpose Hanzi List for Modern Chinese, into a 94×94 set starting
+#   in row 16.
+# See: https://www.unicode.org/irg/docs/n2808-GSourceChanges.pdf
+graphdata.gsets["the-new-other-gb7"] = (94, 2, parsers.fuse([
+        # Add post-Unicode-16 Unihan database versions here.
+        (),
+        parsers.decode_main_plane_gl(
+            parsers.parse_file_format("Custom/irgn2808a.txt"), "irgn2808a.txt"),
+    ], "the-new-other-GB7.json"))
+
+# The "old" Unihan "G7" allocates rows 1, 2 and 3. The "new" Unihan "G7", and GB16500, both
+#   allocate rows 16 onwards. Thus, the latter two cannot be combined, but either can be combined
+#   with the former.
 graphdata.gsets["gb16500/ext"] = (94, 2, parsers.fuse([
         graphdata.gsets["gb16500"][2],
-        graphdata.gsets["the-other-gb7"][2],
+        graphdata.gsets["the-old-other-gb7"][2],
     ], "GB16500-with-the-other-GB7.json"))
+graphdata.gsets["the-new-other-gb7/ext"] = (94, 2, parsers.fuse([
+        graphdata.gsets["the-new-other-gb7"][2],
+        graphdata.gsets["the-old-other-gb7"][2],
+    ], "the-old-and-new-other-GB7.json"))
 
 babelstone_update_map = parsers.read_babelstone_update_file("BabelStone/PUA_1_357_MAPPINGS.TXT")
 
