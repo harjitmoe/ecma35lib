@@ -275,9 +275,9 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"$7"): "symbolgr",
             tuple(b"$8"): "alt646/maltese",
             tuple(b"$9"): ("alt646/icelandic", ("alt646/icelandic/ibm",), ("alt646/icelandic",)),
-            tuple(b"$:"): ("alt646/polish/full", 
-                           ("alt646/polish/ibm", "alt646/polish/full"), 
-                           ("alt646/polish",)),
+            tuple(b"$:"): ("alt646/polish", 
+                           ("alt646/polish/ibm", "alt646/polish"), 
+                           ("alt646/polish/zloty",)),
             tuple(b"$;"): ("ir224", ("ir224/marc",), ("ir224",)), # Note: MARC itself uses b"4"
             tuple(b"$<"): "ir222",
             tuple(b"$="): "ir221",
@@ -325,6 +325,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
                            ("decgraphics",)),
             tuple(b"'0"): "ibmextras/zh-hant",
             tuple(b"'1"): "enyay",
+            tuple(b"'2"): "alt646/polish/alt",
             tuple(b"~"): "nil"}
 
 g96bytes = {tuple(b"@"): "ir111",

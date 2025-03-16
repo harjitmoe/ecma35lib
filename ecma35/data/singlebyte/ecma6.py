@@ -299,21 +299,26 @@ raw_variants = {
     # Supposed Icelandic version (close to IBM one below)
     "alt646/icelandic": ([None, 0xA4, 0xD0, 0xDE, None, 0xC6, 0xD6, None, 
                                       0xF0, 0xFE, None, 0xE6, 0xF6], {}),
-    # Projection from DP94 set of EBCDIC code page 871
+    # Projection from DP94 set of EBCDIC code page 871 for Icelandic
     "alt646/icelandic/ibm": ([None, None, 0xD0, 0xDE, 0xB4, 0xC6, 0xD6, None, 
                                           0xF0, 0xFE, 0xA6, 0xE6, 0xF6], {}),
-    # BN-74/3101-01 for Polish (not verified but close to IBM one below)
+    # PN⁠-⁠T⁠-⁠42109-02-ZU0 for Polish
+    "alt646/polish": ([None, 0xA4, 0x119, 0x17A, 0x141, 0x144, 0x15B, None, 
+                                   0x105, 0xF3, 0x142, 0x17C, 0x107], {}),
+    # PN⁠-⁠T⁠-⁠42109-02-ZU0 variant with Polish Złoty sign and backslash
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
-    "alt646/polish": ([None, (0x7A, 0x200D, 0x142), 
+    "alt646/polish/zloty": ([None, (0x7A, 0x200D, 0x142), 
                             0x119, 0x17A, None, 0x144, 0x15B, None, 
                             0x105, 0xF3, 0x142, 0x17C, 0x107], {}),
-    # BN-74/3101-01 variant projected from DP94-range subset of EBCDIC code page 252
+    # PN⁠-⁠T⁠-⁠42109-02-ZU0 variant projected from DP94-range subset of EBCDIC code page 252 for Polish
     # Violation of ECMA-6:1991: 0x27 is not (strictly) '.
     "alt646/polish/ibm": ([None, 0xA4, 0x119, 0x17A, 0x141, 0x144, 0x15B, None, 
                                        0x105, 0xF3, 0x142, 0x17C, 0x107], {0x27: 0xB4}),
-    # Compromise of the two above
-    "alt646/polish/full": ([None, 0xA4, 0x119, 0x17A, 0x141, 0x144, 0x15B, None, 
-                                        0x105, 0xF3, 0x142, 0x17C, 0x107], {}),
+    # PN⁠-⁠T⁠-⁠42109-02-ZU1 for use in Poland
+    # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
+    # Violation of ECMA-6:1991: 0x5F is not _.
+    "alt646/polish/alt": ([None, 0xA3, None, None, 0x24, None, 0x2191, 0x2190, 
+                                       0x5F, -1,   -1,   -1,   -1], {}),
     # Maltese version (Star Micronics code page 3041)
     "alt646/maltese": ([None, None, None,  0x121, 0x17C, 0x127, None, None, 
                                     0x10B, 0x120, 0x17B, 0x126, 0x10A], {}),
