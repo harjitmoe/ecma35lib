@@ -127,6 +127,44 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR ? G*D4 ! E`|ANSEL supplementary set, ANSI standard version (i.e. no eszett)|
 |`IRR 0 G*D4 ! E`|ANSEL supplementary set, Library of Congress version (i.e. eszett at 0x47)|
 |`IRR 1 G*D4 ! E`|ANSEL supplementary set, combined Library of Congress and Genealogical Society of Utah versions, i.e. duplicate eszetts at 0x47 and 0x4F (default for this F-byte)|
+|`G*D4 8`|ARIB-STD-B24-1 single-byte JIS-X-0208-based (as opposed to JIS-X-0201-based) Katakana|
+|`G*D4 9`|7-bit Quebec French (same as `G*D4 w`)|
+|`G*D4 =`|DEC NRCS for Switzerland (same as `G*D4 $ 1`)|
+|`G*D4 >`|DEC Technical Character Set|
+|`G*D4 :`|User-defined (left-hand side of Windows code page 42)|
+|`G*D4 ;`|ASCII but with Armenian versions of certain punctuation marks|
+|`G*D4 ?`|ARIB-STD-B24-1 single-byte Hiragana|
+|`G*D4 ! 0`|ASCII with dotted uppercase I|
+|`G*D4 ! 1`|IBM 7-bit symbol set|
+|`G*D4 ! 2`|Various miscellaneous ASCII subsets selected with `IRR`|
+|`G*D4 ! 3`|ISO 5426-2 (mediæval scribal notation supplement)|
+|`G*D4 ! 4`|ISO 6826-A (mathematical symbols)|
+|`G*D4 ! 5`|ISO 6826-B (mathematical symbols)|
+|`G*D4 ! 6`|ISO 10754 (Non-Slavic Cyrillic supplement)|
+|`G*D4 ! 7`|IBM 7-bit Hebrew|
+|`G*D4 ! 8`|Digits only|
+|`G*D4 ! 9`|Machine-readable cheque delimeter marks|
+|`G*D4 ! :`|ISO 8957-A 7-bit Hebrew|
+|`G*D4 ! ;`|ISO 8957-B Hebrew cantillation marks supplement|
+|`G*D4 ! <`|Left-hand side of the code page of the Webdings font|
+|`G*D4 ! =`|Left-hand side of the code page of the Wingdings font|
+|`G*D4 ! >`|Left-hand side of the code page of the Wingdings 2 font|
+|`G*D4 ! ?`|Left-hand side of the code page of the Wingdings 3 font|
+|`G*D4 " 0`|ISCII Devanagari|
+|`G*D4 " 1`|Korean N-byte Hangul Code (KS C 5601:1974)|
+|`G*D4 " 2`|Hewlett-Packard 7-bit Legal|
+|`G*D4 " 3`|IBM-PC line drawing|
+|`G*D4 " 4`|DEC 8-bit Hebrew|
+|`G*D4 " 5`|Hewlett-Packard line drawing|
+|`G*D4 " 6`|Hewlett-Packard 8-bit Roman encoding, right-hand side|
+|`G*D4 " 7`|IBM additional pseudographics for `troff`|
+|`G*D4 " 9`|Adobe Standard / PostScript Standard encoding, right-hand side|
+|`G*D4 " :`|ASCII but with Arabic versions of certain punctuation marks|
+|`G*D4 " ;`|Thai TIS-620:1986 (as a 94-character set designatable to G0, unlike `G*D6 T`)|
+|`G*D4 " <`|ARIB-STD-B24-1 mosaic set C|
+|`G*D4 " =`|Galaksija 7-bit Gajica|
+|`G*D4 " >`|DEC 7-bit Greek|
+|`G*D4 " ?`|DEC 8-bit Greek, right-hand side|
 |`G*D4 # 0`|KS X 1003|
 |`IRR 0 G*D4 # 0`|KS X 1003 with tilde|
 |`G*D4 # 1`|ETS 300 706 Latin G0 for France|
@@ -145,8 +183,9 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 # =`|SoftBank 2G (single-byte) Emoji page O|
 |`G*D4 # >`|SoftBank 2G (single-byte) Emoji page P|
 |`G*D4 # ?`|SoftBank 2G (single-byte) Emoji page Q|
-|`G*D4 $ 1`|DEC NRCS for Switzerland (corresponding to DEC's (not ARIB's) `G*D4 4`)|
-|`G*D4 $ 2`|DEC NRCS for the Netherlands (corresponding to DEC's `G*D4 =`)|
+|`G*D4 $ 0`|DEC Special Graphics (VT52 version)|
+|`G*D4 $ 1`|DEC NRCS for Switzerland (same as `G*D4 =`)|
+|`G*D4 $ 2`|DEC NRCS for the Netherlands (corresponding to DEC's (not ARIB's) `G*D4 4`)|
 |`G*D4 $ 3`|Marlett encoding|
 |`G*D4 $ 4`|Zapf Dingbats, GL range|
 |`G*D4 $ 5`|Zapf Dingbats, GR range|
@@ -155,25 +194,45 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 $ 8`|7-bit Maltese|
 |`IRR ? G*D4 $ 9`|7-bit Icelandic|
 |`IRR 0 G*D4 $ 9`|7-bit Icelandic, following the DP94 set of EBCDIC code page 871|
-|`IRR ? G*D4 $ :`|7-bit Polish, ostensibly (unverified) following BN-74/3101-01|
+|`IRR ? G*D4 $ :`|7-bit Polish (PN⁠-⁠T⁠-⁠42109-02-ZU0 variant with Złoty sign)|
 |`IRR 0 G*D4 $ :`|7-bit Polish, following the DP94-range subset (GL set) of EBCDIC code page 252|
-|`IRR 1 G*D4 $ :`|7-bit Polish, compromise between the two above (default for these I/F bytes)|
+|`IRR 1 G*D4 $ :`|7-bit Polish (PN⁠-⁠T⁠-⁠42109-02-ZU0)|
 |`IRR ? G*D4 $ ;`|ISO 11822:1996 Arabic supplementary set|
 |`IRR 0 G*D4 $ ;`|MARC-8 Extended Arabic|
 |`G*D4 $ <`|ISO 10586:1996 Georgian|
 |`G*D4 $ =`|ISO 10585:1996 Armenian|
 |`G*D4 $ >`|MARC-8 Hebrew|
-|~~`G*D4 $ ?`~~|~~MARC-8 Extended Arabic~~ changed to `IRR 0 G*D4 $ ;`|
-|~~`G*D4 % 0`~~|~~MARC-8 subscript numbers~~ collides with use elsewhere, changed to `G*D4 & 9`|
+|`G*D4 $ ?`|Armenian ARMSCII|
+|`G*D4 % 0`|DEC 8-bit Turkish, right-hand side|
 |`G*D4 % 1`|MARC-8 superscript numbers|
+|`G*D4 % 2`|DEC 7-bit Turkish|
 |`G*D4 % 4`|7-bit Canadian French, projected from EBCDIC DP94|
+|`G*D4 % 5`|DEC Multinational Character Set, right-hand side|
+|`G*D4 % 6`|DEC 7-bit Portugese|
 |`G*D4 % 7`|7-bit European Portugese, projected from EBCDIC DP94|
 |`G*D4 % 8`|7-bit Turkish, projected from EBCDIC DP94|
 |`G*D4 % 9`|7-bit Roman, projected from EBCDIC 38xx|
 |`IRR ? G*D4 % :`|7-bit Roman for use with a Greek set, projected from EBCDIC, small version|
 |`IRR @ G*D4 % :`|7-bit Roman for use with a Greek set, projected from EBCDIC, large version|
-|`IRR ? G*D4 % :`|7-bit Roman for use with a Cyrillic set, projected from EBCDIC, large version|
-|`IRR 0 G*D4 % :`|7-bit Roman for use with a Cyrillic set, projected from EBCDIC, small version|
+|`IRR ? G*D4 % ;`|7-bit Roman for use with a Cyrillic set, projected from EBCDIC, large version|
+|`IRR 0 G*D4 % ;`|7-bit Roman for use with a Cyrillic set, projected from EBCDIC, small version|
+|`G*D4 % <`|7-bit Belgium, projected from EBCDIC Document Composition Facility|
+|`G*D4 % =`|7-bit Hebrew|
+|`G*D4 % >`|7-bit Roman, projected from EBCDIC Document Composition Facility|
+|`G*D4 % ?`|7-bit Roman, projected from EBCDIC WP96 for Israel|
+|`G*D4 & 0`|7-bit Roman, projected from EBCDIC DP94 for Japan|
+|`G*D4 & 1`|7-bit Roman, projected from EBCDIC for Korea|
+|`G*D4 & 2`|7-bit Roman, projected from EBCDIC Library Character Set|
+|`G*D4 & 3`|7-bit Roman for use with a Simplified Chinese set, projected from EBCDIC, small version|
+|`G*D4 & 4`|8-bit Cyrillic (plain KOI-8), right-hand side|
+|`G*D4 & 5`|7-bit Cyrillic (Short-KOI)|
+|`IRR ? G*D4 & 6`|7-bit Spanish, projected from EBCDIC DP94|
+|`IRR 0 G*D4 & 6`|7-bit Spanish, projected from EBCDIC 38xx|
+|`IRR 1 G*D4 & 6`|7-bit Spanish with Peseta sign, projected from EBCDIC DP94|
+|`IRR ? G*D4 & 7`|7-bit British, projected from EBCDIC DP94|
+|`IRR 0 G*D4 & 7`|7-bit British, projected from EBCDIC Document Composition Facility|
+|`G*D4 & 8`|7-bit United States, projected from EBCDIC DP94|
+|`G*D4 & 9`|MARC-8 subscript numbers|
 |`G*D4 & :`|7-bit British, projected from EBCDIC WP96|
 |`IRR ? G*D4 & ;`|7-bit Brazilian Portugese, projected from EBCDIC DP94|
 |`IRR 0 G*D4 & ;`|7-bit Brazilian Portugese, projected from EBCDIC 38xx|
@@ -181,7 +240,13 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 0 G*D4 & <`|7-bit Danish and Norwegian with Euro, projected from EBCDIC DP94|
 |`IRR ? G*D4 & =`|7-bit Swedish and Finnish, projected from EBCDIC DP94|
 |`IRR 0 G*D4 & =`|7-bit Swedish and Finnish with Euro, projected from EBCDIC DP94|
-|`G*D4 & 9`|MARC-8 subscript numbers|
+|`G*D4 & >`|7-bit barcode text, projected from EBCDIC|
+|`IRR ? G*D4 & ?`|DEC Special Graphics (VT100 version)|
+|`IRR 0 G*D4 & ?`|DEC Special Graphics (variant)|
+|`IRR 1 G*D4 & ?`|DEC Special Graphics (combined)|
+|`G*D4 ' 0`|Right-hand side of single-byte component of IBM 5550 Traditional Chinese encoding|
+|`G*D4 ' 1`|Subset of the right-hand sides of IBM-PC code pages, containing only the Ñ/ñ letters|
+|`G*D4 ' 2`|7-bit PN⁠-⁠T⁠-⁠42109-02-ZU1|
 |`IRR ? G*D6 J`|ITU T.51 supplementary set for use with old IRV (excludes universal currency sign and hash)|
 |`IRR 0 G*D6 J`|Complete ITU T.51 supplementary set (same as `IRR 0 G*D6 R`; default for this F-byte)|
 |`IRR ? G*D6 R`|ITU T.51 supplementary set for use with ASCII (excludes dollar and hash)|

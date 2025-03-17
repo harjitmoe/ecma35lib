@@ -297,7 +297,7 @@ raw_variants = {
     "alt646/decdutch": ([0xA3, None, 0xBE, 0x133, 0xBD, 0x7C, None, None, 
                                      None, 0xA8, 0x192, 0xBC, 0xB4], {}),
     # Supposed Icelandic version (close to IBM one below)
-    "alt646/icelandic": ([None, 0xA4, 0xD0, 0xDE, None, 0xC6, 0xD6, None, 
+    "alt646/icelandic": ([None, None, 0xD0, 0xDE, 0xB4, 0xC6, 0xD6, None, 
                                       0xF0, 0xFE, None, 0xE6, 0xF6], {}),
     # Projection from DP94 set of EBCDIC code page 871 for Icelandic
     "alt646/icelandic/ibm": ([None, None, 0xD0, 0xDE, 0xB4, 0xC6, 0xD6, None, 
@@ -305,11 +305,11 @@ raw_variants = {
     # PN⁠-⁠T⁠-⁠42109-02-ZU0 for Polish
     "alt646/polish": ([None, 0xA4, 0x119, 0x17A, 0x141, 0x144, 0x15B, None, 
                                    0x105, 0xF3, 0x142, 0x17C, 0x107], {}),
-    # PN⁠-⁠T⁠-⁠42109-02-ZU0 variant with Polish Złoty sign and backslash
+    # PN⁠-⁠T⁠-⁠42109-02-ZU0 variant with Polish Złoty sign
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
     "alt646/polish/zloty": ([None, (0x7A, 0x200D, 0x142), 
-                            0x119, 0x17A, None, 0x144, 0x15B, None, 
-                            0x105, 0xF3, 0x142, 0x17C, 0x107], {}),
+                            0x119, 0x17A, 0x141, 0x144, 0x15B, None, 
+                            0x105, 0xF3,  0x142, 0x17C, 0x107], {}),
     # PN⁠-⁠T⁠-⁠42109-02-ZU0 variant projected from DP94-range subset of EBCDIC code page 252 for Polish
     # Violation of ECMA-6:1991: 0x27 is not (strictly) '.
     "alt646/polish/ibm": ([None, 0xA4, 0x119, 0x17A, 0x141, 0x144, 0x15B, None, 
