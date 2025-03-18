@@ -247,11 +247,28 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 ' 0`|Right-hand side of single-byte component of IBM 5550 Traditional Chinese encoding|
 |`G*D4 ' 1`|Subset of the right-hand sides of IBM-PC code pages, containing only the Ñ/ñ letters|
 |`G*D4 ' 2`|7-bit PN⁠-⁠T⁠-⁠42109-02-ZU1|
+|`IRR ? G*D6 B`|Right-hand side of ISO-8859-2, Central European Roman|
+|`IRR 0 G*D6 B`|Right-hand side of IBM code page 1111 (ISO-8859-2 with overring replacing degrees sign)|
+|`IRR ? G*D6 F`|Right-hand side of ISO-8859-7 for Greek, 1987 version|
+|`IRR 0 G*D6 F`|Right-hand side of ISO-8859-7 with Euro sign; intermediate between 1987 and 2003 versions|
 |`IRR ? G*D6 J`|ITU T.51 supplementary set for use with old IRV (excludes universal currency sign and hash)|
 |`IRR 0 G*D6 J`|Complete ITU T.51 supplementary set (same as `IRR 0 G*D6 R`; default for this F-byte)|
+|`IRR ? G*D6 L`|Right-hand side for ISO-8859-5 for Cyrillic|
+|`IRR 0 G*D6 L`|Adaptation of ISO-8859-5 for Ukrainian, as in IBM code page 1124|
+|`IRR ? G*D6 L`|Right-hand side for ISO-8859-9 for Turkish|
+|`IRR 0 G*D6 L`|Adaptation of ISO-8859-9 with the addition of the schwa letter (Ə/ə) for Azeri use|
 |`IRR ? G*D6 R`|ITU T.51 supplementary set for use with ASCII (excludes dollar and hash)|
 |`IRR 0 G*D6 R`|Complete ITU T.51 supplementary set (same as `IRR 0 G*D6 J`; default for this F-byte)|
+|`IRR ? G*D6 S`|CCITT Hebrew (letters-only subset of right-hand-side of ISO-8859-8)|
+|`IRR 0 G*D6 S`|CCITT Hebrew plus box-drawing characters, as in code page 972|
+|`IRR ? G*D6 T`|Thai ISO-8859-11 (TIS-620:1986 plus non-breaking space)|
+|`IRR 0 G*D6 T`|Thai ISO-8859-11 with IBM extensions|
+|`IRR 1 G*D6 T`|Thai ISO-8859-11 with IBM extensions including the Euro sign|
+|`IRR ? G*D4 :`|User-defined (right-hand side of Windows code page 42)|
+|`IRR 0 G*D4 :`|User-defined (right-hand side of W3C/WHATWG definition of `x-user-defined`)|
 |`G*D6 ! 0`|RFC 1345's so-called ISO-IR-111/ECMA-Cyrillic (incompatible with ISO-IR-111 itself).|
+|`G*D6 ! 1`|ITU T.101 Annex C mosaic set 1.|
+|`G*D6 ! 2`|Right-hand side of ABICOMP encoding for Portugese in Brazil.|
 |`IRR ? G*D6 $ 7`|Symbol font encoding, GR range (with euro)|
 |`IRR 0 G*D6 $ 7`|Symbol font encoding, GR range (with figure space)|
 
@@ -381,6 +398,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 0 G*DM4 N`|KPS 9566-2003 (only the main plane unless in the UHC DOCS)|
 |`IRR 1 G*DM4 N`|KPS 9566-2011 (only the main plane unless in the UHC DOCS)|
 |`IRR 2 G*DM4 N`|All KPS 9566 editions overlayed (but only the main plane unless in the UHC DOCS)|
+|`G*D4 :`|User-defined (plane 12 from IBM's version of EUC-TW)|
 |`G*DM4 ! 0`|GB/T 12052 (Korean in Mainland China)|
 |`IRR ? G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, as included by EUC-TW as its G2 set (recommended version)|
 |`IRR 0 G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, as included by EUC-TW as its G2 set (ICU EUC-2014 version)|
@@ -393,6 +411,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 7 G*DM4 ! 1`|Planes 2 and up of CNS 11643 as a 94^3 set, as included by IBM EUC-TW as its G2 set (ICU EUC-2014 version)|
 |`IRR 8 G*DM4 ! 1`|Planes 2 and up of CNS 11643 as a 94^3 set, as included by IBM EUC-TW as its G2 set (IBM version)|
 |`IRR 9 G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, following the Unihan database (thus excluding non-hanzi)|
+|`IRR : G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, including some highly approximate Unicode mappings|
 |`IRR ? G*DM4 ! 2`|MS-950 Big-5 extensions (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`IRR @ G*DM4 ! 2`|Big5-2003 extension set (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`IRR A G*DM4 ! 2`|Big5-ETEN extension set (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
@@ -405,7 +424,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 0 G*DM4 ! 2`|IBM Big-5 ETEN-based in-plane extensions (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`IRR 1 G*DM4 ! 2`|Big5-ETEN with the subset of GCCS encoded with lead bytes following, not preceeding, the standard Big-5 assignments (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`IRR ? G*DM4 ! 3`|Non-ETEN Big5 kana and Cyrillic (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
-|`IRR @ G*DM4 ! 3`|Non-ETEN Big5 kana and Cyrillic (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere) combined with Microsoft non-EUDC extensions, as in Python's built-in (used when not on Windows or when MS-950 is not the ACP) version of "cp950".|
+|`IRR @ G*DM4 ! 3`|Non-ETEN Big5 kana and Cyrillic (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere) combined with Microsoft non-EUDC extensions, as in Python's built-in `"cp950"` Windows codepage implementation.|
 |`IRR ? G*DM4 ! 4`|IBM extensions for Shift\_JIS (accepted by Shift\_JIS filter in G3 slot, mapped to/from Shift\_JIS by the same mapping scheme as JIS X 0213 plane 2); excluding UDC|
 |`IRR @ G*DM4 ! 4`|IBM extensions for Shift\_JIS (accepted by Shift\_JIS filter in G3 slot, mapped to/from Shift\_JIS by the same mapping scheme as JIS X 0213 plane 2); including UDC|
 |`IRR 0 G*DM4 ! 4`|IBM extensions for Shift\_JIS (accepted by Shift\_JIS filter in G3 slot, mapped to/from Shift\_JIS by the same mapping scheme as JIS X 0213 plane 2); old mappings for use with 78JIS|
@@ -459,18 +478,30 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*DM4 " =`|VHN 02:1998 (Hán Nôm, second supplement).&ensp;This may or may not have anything to do with TCVN 6909:2001.|
 |`G*DM4 " >`|"Hán Nôm Coded Character Repertoire 2007" (Hán Nôm, third supplement)|
 |`G*DM4 " ?`|The extension plane 13 that appears in IBM's EUC-TW variant|
-|`G*DM4 # 0`|CNS 11643-2007 plane 8|
-|`G*DM4 # 1`|CNS 11643-2007 plane 9|
-|`G*DM4 # 2`|CNS 11643-2007 plane 10|
-|`G*DM4 # 3`|CNS 11643-2007 plane 11|
-|`G*DM4 # 4`|CNS 11643-2007 plane 12|
-|`G*DM4 # 5`|CNS 11643-2007 plane 13|
-|`G*DM4 # 6`|CNS 11643-2007 plane 14|
-|`G*DM4 # 7`|CNS 11643 plane 15|
+|`IRR ? G*DM4 # 0`|CNS 11643-2007 plane 8|
+|`IRR 0 G*DM4 # 0`|CNS 11643-2007 plane 8 (following GOV-TW data)|
+|`IRR ? G*DM4 # 1`|CNS 11643-2007 plane 9|
+|`IRR 0 G*DM4 # 1`|CNS 11643-2007 plane 9 (following GOV-TW data)|
+|`IRR ? G*DM4 # 2`|CNS 11643-2007 plane 10|
+|`IRR 0 G*DM4 # 2`|CNS 11643-2007 plane 10 (following GOV-TW data)|
+|`IRR ? G*DM4 # 3`|CNS 11643-2007 plane 11|
+|`IRR 0 G*DM4 # 3`|CNS 11643-2007 plane 11 (following GOV-TW data)|
+|`IRR ? G*DM4 # 4`|CNS 11643-2007 plane 12|
+|`IRR 0 G*DM4 # 4`|CNS 11643-2007 plane 12 (following GOV-TW data)|
+|`IRR ? G*DM4 # 5`|CNS 11643-2007 plane 13|
+|`IRR 0 G*DM4 # 5`|CNS 11643-2007 plane 13 (following GOV-TW data)|
+|`IRR ? G*DM4 # 6`|CNS 11643-2007 plane 14|
+|`IRR 0 G*DM4 # 6`|CNS 11643-2007 plane 14 (following GOV-TW data)|
+|`IRR ? G*DM4 # 7`|CNS 11643 plane 15|
+|`IRR 0 G*DM4 # 7`|CNS 11643 plane 15 (following GOV-TW data)|
+|`IRR 1 G*DM4 # 7`|CNS 11643 plane 15 (following "plane 9" of the 2000 ICU data)|
+|`IRR 2 G*DM4 # 7`|CNS 11643 plane 15 (following 2014 ICU data)|
+|`IRR 4 G*DM4 # 7`|CNS 11643 plane 15 (following Unihan data)|
 |`G*DM4 # 9`|CNS 11643 plane 17|
 |`G*DM4 # ;`|CNS 11643 plane 19|
 |`G*DM4 % 0`|The IRG/Unihan source described only as "Singapore Characters"|
 |`G*DM4 % 1`|Re-arrangement of TCVN 6056 (Chữ Hán), as was referenced by the Unicode 3.0 Unihan database|
+|`G*DM4 % 2`|"Data Statistics Table of Hanzi not included in GB 2312", as converted into a 94×94 set in [IRGN2808](https://www.unicode.org/irg/docs/n2808-GSourceChanges.pdf)|
 |`IRR ? G*DM6 ! 0`|GBK extras per GB 18030-2000 or GB 18030-2005 (GBK level 5 with associated UDC zone and non-URO part of level 4; accepted by GBK filter in G3 slot)|
 |`IRR 0 G*DM6 ! 0`|GBK extras, WHATWG/HTML5 variant|
 |`IRR 1 G*DM6 ! 0`|GBK extras, mapping all characters with defined glyphs to non-PUA|
