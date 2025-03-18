@@ -246,7 +246,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 1 G*D4 & ?`|DEC Special Graphics (combined)|
 |`G*D4 ' 0`|Right-hand side of single-byte component of IBM 5550 Traditional Chinese encoding|
 |`G*D4 ' 1`|Subset of the right-hand sides of IBM-PC code pages, containing only the Ñ/ñ letters|
-|`G*D4 ' 2`|7-bit PN⁠-⁠T⁠-⁠42109-02-ZU1|
+|`G*D4 ' 2`|ICT 1900 character set, standardised in Poland as PN⁠-⁠T⁠-⁠42109-02-ZU1|
 |`IRR ? G*D6 B`|Right-hand side of ISO-8859-2, Central European Roman|
 |`IRR 0 G*D6 B`|Right-hand side of IBM code page 1111 (ISO-8859-2 with overring replacing degrees sign)|
 |`IRR ? G*D6 F`|Right-hand side of ISO-8859-7 for Greek, 1987 version|
