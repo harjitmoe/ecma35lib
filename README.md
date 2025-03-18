@@ -255,8 +255,8 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 0 G*D6 J`|Complete ITU T.51 supplementary set (same as `IRR 0 G*D6 R`; default for this F-byte)|
 |`IRR ? G*D6 L`|Right-hand side for ISO-8859-5 for Cyrillic|
 |`IRR 0 G*D6 L`|Adaptation of ISO-8859-5 for Ukrainian, as in IBM code page 1124|
-|`IRR ? G*D6 L`|Right-hand side for ISO-8859-9 for Turkish|
-|`IRR 0 G*D6 L`|Adaptation of ISO-8859-9 with the addition of the schwa letter (Ə/ə) for Azeri use|
+|`IRR ? G*D6 M`|Right-hand side for ISO-8859-9 for Turkish|
+|`IRR 0 G*D6 M`|Adaptation of ISO-8859-9 with the addition of the schwa letter (Ə/ə) for Azeri use|
 |`IRR ? G*D6 R`|ITU T.51 supplementary set for use with ASCII (excludes dollar and hash)|
 |`IRR 0 G*D6 R`|Complete ITU T.51 supplementary set (same as `IRR 0 G*D6 J`; default for this F-byte)|
 |`IRR ? G*D6 S`|CCITT Hebrew (letters-only subset of right-hand-side of ISO-8859-8)|
