@@ -264,13 +264,17 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR ? G*D6 T`|Thai ISO-8859-11 (TIS-620:1986 plus non-breaking space)|
 |`IRR 0 G*D6 T`|Thai ISO-8859-11 with IBM extensions|
 |`IRR 1 G*D6 T`|Thai ISO-8859-11 with IBM extensions including the Euro sign|
-|`IRR ? G*D4 :`|User-defined (right-hand side of Windows code page 42)|
-|`IRR 0 G*D4 :`|User-defined (right-hand side of W3C/WHATWG definition of `x-user-defined`)|
+|`IRR ? G*D6 :`|User-defined (right-hand side of Windows code page 42)|
+|`IRR 0 G*D6 :`|User-defined (right-hand side of W3C/WHATWG definition of `x-user-defined`)|
 |`G*D6 ! 0`|RFC 1345's so-called ISO-IR-111/ECMA-Cyrillic (incompatible with ISO-IR-111 itself).|
 |`G*D6 ! 1`|ITU T.101 Annex C mosaic set 1.|
 |`G*D6 ! 2`|Right-hand side of ABICOMP encoding for Portugese in Brazil.|
+|`G*D6 " 1`|Korean N-byte Hangul Code (KS C 5601:1974) with IBM extensions|
+|`G*D6 " ?`|DEC 8-bit Greek, right-hand side with non-breaking space|
+|`G*D6 % 0`|DEC 8-bit Turkish, right-hand side with non-breaking space|
 |`IRR ? G*D6 $ 7`|Symbol font encoding, GR range (with euro)|
 |`IRR 0 G*D6 $ 7`|Symbol font encoding, GR range (with figure space)|
+|`G*D6 ' 0`|Right-hand side of single-byte component of IBM 5550 Simplified Chinese (extended `Shift_GB`) encoding|
 
 ## Additional multiple-byte G-sets, and additional selectors for particular variants of multiple-byte G-sets
 
