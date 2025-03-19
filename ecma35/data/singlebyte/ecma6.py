@@ -296,9 +296,11 @@ raw_variants = {
     # DEC NRCS for the Netherlands; IBM's 1102
     "alt646/decdutch": ([0xA3, None, 0xBE, 0x133, 0xBD, 0x7C, None, None, 
                                      None, 0xA8, 0x192, 0xBC, 0xB4], {}),
-    # Supposed Icelandic version (close to IBM one below)
-    "alt646/icelandic": ([None, None, 0xD0, 0xDE, 0xB4, 0xC6, 0xD6, None, 
-                                      0xF0, 0xFE, None, 0xE6, 0xF6], {}),
+    # Icelandic versions; see https://timarit.is/page/2356282#page/n3/mode/2up
+    "alt646/icelandic": ([0xA3, None, 0xD0, 0xDE, 0xB4,  0xC6, 0xD6, None, 
+                                      0xF0, 0xFE, 0x2CA, 0xE6, 0xF6], {}),
+    "alt646/icelandic/alt": ([None, 0xA4, 0xD0, 0xDE, 0xB4,  0xC6, 0xD6, None, 
+                                          0xF0, 0xFE, 0x2CA, 0xE6, 0xF6], {}),
     # Projection from DP94 set of EBCDIC code page 871 for Icelandic
     "alt646/icelandic/ibm": ([None, None, 0xD0, 0xDE, 0xB4, 0xC6, 0xD6, None, 
                                           0xF0, 0xFE, 0xA6, 0xE6, 0xF6], {}),

@@ -192,8 +192,9 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 $ 6`|Symbol font encoding, GL range|
 |`G*D4 $ 7`|Symbol font encoding, GR range (no euro)|
 |`G*D4 $ 8`|7-bit Maltese|
-|`IRR ? G*D4 $ 9`|7-bit Icelandic|
+|`IRR ? G*D4 $ 9`|7-bit Icelandic with octothorpe and universal-currency-sign|
 |`IRR 0 G*D4 $ 9`|7-bit Icelandic, following the DP94 set of EBCDIC code page 871|
+|`IRR 1 G*D4 $ 9`|7-bit Icelandic with pound-sterling and dollar signs|
 |`IRR ? G*D4 $ :`|7-bit Polish (PN⁠-⁠T⁠-⁠42109-02-ZU0 variant with Złoty sign)|
 |`IRR 0 G*D4 $ :`|7-bit Polish, following the DP94-range subset (GL set) of EBCDIC code page 252|
 |`IRR 1 G*D4 $ :`|7-bit Polish (PN⁠-⁠T⁠-⁠42109-02-ZU0)|
