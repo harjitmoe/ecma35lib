@@ -117,7 +117,7 @@ raw_variants = {
     # Violation of ECMA-6:1991: 0x21 is not !.
     "ir015/ibmdcf": ([None, None, None, 0xB0, None, 0xE9, 0xAC, None, 
                                   0xF9, 0xE0, 0xF2, 0xE8, 0xEC], {0x21: 0x7C}),
-    # Olivetti Portugese
+    # Olivetti Portuguese
     "ir016": ([None, None, 0xA7, 0xC3, 0xC7, 0xD5, None, None, 
                            None, 0xE3, 0xE7, 0xF5, 0xB0], {}),
     # Olivetti Spanish
@@ -198,7 +198,7 @@ raw_variants = {
     # Projection from DP94-range subset of EBCDIC code page 2059
     "ir069/ibmdcf": ([None, None, 0xE0, 0xB0, 0xE7, 0xA7, 0xAC, None, 
                                   -1,   0xE9, 0xF9, 0xE8, -1], {}),
-    # IBM Portugese
+    # IBM Portuguese
     "ir084": ([None, None, 0xB4, 0xC3, 0xC7, 0xD5, None, None, 
                            None, 0xE3, 0xE7, 0xF5, None], {}),
     "ir084/dec": ([None, None, None, 0xC3, 0xC7, 0xD5, None, None, 

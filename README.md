@@ -210,8 +210,8 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 % 2`|DEC 7-bit Turkish|
 |`G*D4 % 4`|7-bit Canadian French, projected from EBCDIC DP94|
 |`G*D4 % 5`|DEC Multinational Character Set, right-hand side|
-|`G*D4 % 6`|DEC 7-bit Portugese|
-|`G*D4 % 7`|7-bit European Portugese, projected from EBCDIC DP94|
+|`G*D4 % 6`|DEC 7-bit Portuguese|
+|`G*D4 % 7`|7-bit European Portuguese, projected from EBCDIC DP94|
 |`G*D4 % 8`|7-bit Turkish, projected from EBCDIC DP94|
 |`G*D4 % 9`|7-bit Roman, projected from EBCDIC 38xx|
 |`IRR ? G*D4 % :`|7-bit Roman for use with a Greek set, projected from EBCDIC, small version|
@@ -236,8 +236,8 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 & 8`|7-bit United States, projected from EBCDIC DP94|
 |`G*D4 & 9`|MARC-8 subscript numbers|
 |`G*D4 & :`|7-bit British, projected from EBCDIC WP96|
-|`IRR ? G*D4 & ;`|7-bit Brazilian Portugese, projected from EBCDIC DP94|
-|`IRR 0 G*D4 & ;`|7-bit Brazilian Portugese, projected from EBCDIC 38xx|
+|`IRR ? G*D4 & ;`|7-bit Brazilian Portuguese, projected from EBCDIC DP94|
+|`IRR 0 G*D4 & ;`|7-bit Brazilian Portuguese, projected from EBCDIC 38xx|
 |`IRR ? G*D4 & <`|7-bit Danish and Norwegian, projected from EBCDIC DP94|
 |`IRR 0 G*D4 & <`|7-bit Danish and Norwegian with Euro, projected from EBCDIC DP94|
 |`IRR ? G*D4 & =`|7-bit Swedish and Finnish, projected from EBCDIC DP94|
@@ -270,7 +270,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 0 G*D6 :`|User-defined (right-hand side of W3C/WHATWG definition of `x-user-defined`)|
 |`G*D6 ! 0`|RFC 1345's so-called ISO-IR-111/ECMA-Cyrillic (incompatible with ISO-IR-111 itself).|
 |`G*D6 ! 1`|ITU T.101 Annex C mosaic set 1.|
-|`G*D6 ! 2`|Right-hand side of ABICOMP encoding for Portugese in Brazil.|
+|`G*D6 ! 2`|Right-hand side of ABICOMP encoding for Portuguese in Brazil.|
 |`G*D6 " 1`|Korean N-byte Hangul Code (KS C 5601:1974) with IBM extensions|
 |`G*D6 " ?`|DEC 8-bit Greek, right-hand side with non-breaking space|
 |`G*D6 % 0`|DEC 8-bit Turkish, right-hand side with non-breaking space|
