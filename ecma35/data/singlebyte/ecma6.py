@@ -306,12 +306,25 @@ raw_variants = {
                                           0xF0, 0xFE, 0xA6, 0xE6, 0xF6], {}),
     # PN⁠-⁠T⁠-⁠42109-02-ZU0 for Polish
     "alt646/polish": ([None, 0xA4, 0x119, 0x17A, 0x141, 0x144, 0x15B, None, 
-                                   0x105, 0xF3, 0x142, 0x17C, 0x107], {}),
+                                   0x105, 0xF3,  0x142, 0x17C, 0x107], {}),
     # PN⁠-⁠T⁠-⁠42109-02-ZU0 variant with Polish Złoty sign
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
     "alt646/polish/zloty": ([None, (0x7A, 0x200D, 0x142), 
                             0x119, 0x17A, 0x141, 0x144, 0x15B, None, 
                             0x105, 0xF3,  0x142, 0x17C, 0x107], {}),
+    # PN⁠-⁠T⁠-⁠42109-03-ZU2 for Polish (supplementary set)
+    # Violation of ECMA-6:1991: 0x23 is not # or £.
+    # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
+    # Violation of ECMA-6:1991: 0x26 is not &.
+    # Violation of ECMA-6:1991: 0x27 is not '.
+    # Violation of ECMA-6:1991: 0x2A is not *.
+    # Violation of ECMA-6:1991: 0x3B is not ;.
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/polish/complete-uppercase": ([0x118, 0x106, 0x119, 0x17A, 0x141, 0x144, 0x15B, None, 
+                                                        0x105, 0xF3,  0x142, 0x17C, 0x107],
+                                         {0x26: 0x17B, 0x27: 0xD3,  0x2A: 0x179,
+                                          0x3B: 0x104, 0x3C: 0x143, 0x3E: 0x15A}),
     # PN⁠-⁠T⁠-⁠42109-02-ZU0 variant projected from DP94-range subset of EBCDIC code page 252 for Polish
     # Violation of ECMA-6:1991: 0x27 is not (strictly) '.
     "alt646/polish/ibm": ([None, 0xA4, 0x119, 0x17A, 0x141, 0x144, 0x15B, None, 

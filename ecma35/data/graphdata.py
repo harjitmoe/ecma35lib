@@ -278,7 +278,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
                            ("alt646/icelandic/ibm", "alt646/icelandic"),
                            ("alt646/icelandic/alt",)),
             tuple(b"$:"): ("alt646/polish", 
-                           ("alt646/polish/ibm", "alt646/polish"), 
+                           ("alt646/polish/ibm", "alt646/polish", "alt646/polish/complete-uppercase"), 
                            ("alt646/polish/zloty",)),
             tuple(b"$;"): ("ir224", ("ir224/marc",), ("ir224",)), # Note: MARC itself uses b"4"
             tuple(b"$<"): "ir222",

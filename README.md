@@ -198,6 +198,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR ? G*D4 $ :`|7-bit Polish (PN⁠-⁠T⁠-⁠42109-02-ZU0 variant with Złoty sign)|
 |`IRR 0 G*D4 $ :`|7-bit Polish, following the DP94-range subset (GL set) of EBCDIC code page 252|
 |`IRR 1 G*D4 $ :`|7-bit Polish (PN⁠-⁠T⁠-⁠42109-02-ZU0)|
+|`IRR 2 G*D4 $ :`|7-bit Polish with complete uppercase and lowercase (PN⁠-⁠T⁠-⁠42109-03-ZU2)|
 |`IRR ? G*D4 $ ;`|ISO 11822:1996 Arabic supplementary set|
 |`IRR 0 G*D4 $ ;`|MARC-8 Extended Arabic|
 |`G*D4 $ <`|ISO 10586:1996 Georgian|
