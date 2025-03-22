@@ -271,6 +271,17 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D6 ! 0`|RFC 1345's so-called ISO-IR-111/ECMA-Cyrillic (incompatible with ISO-IR-111 itself).|
 |`G*D6 ! 1`|ITU T.101 Annex C mosaic set 1.|
 |`G*D6 ! 2`|Right-hand side of ABICOMP encoding for Portuguese in Brazil.|
+|`IRR ? G*D6 ! 3`|Right-hand side of code page 1129 for Vietnamese|
+|`IRR 0 G*D6 ! 3`|Right-hand side of code page 1163 for Vietnamese with Euro sign|
+|`G*D6 ! 4`|Right-hand side of code page 1133 for Lao|
+|`IRR ? G*D6 ! 5`|Right-hand side of code page 922 for Estonian (intermediate between ISO-8859-1 and ISO-8859-13)|
+|`IRR 0 G*D6 ! 5`|Right-hand side of code page 902 for Estonian with Euro sign|
+|`G*D6 ! 6`|Right-hand side of code page 63283 for Lithuanian|
+|`IRR ? G*D6 ! 7`|Right-hand side of code page 1008 for Arabic|
+|`IRR 0 G*D6 ! 7`|Right-hand side of code page 5104 for Arabic with Euro sign|
+|`G*D6 ! 8`|Right-hand side of code page 1006 for Urdu|
+|`IRR ? G*D6 ! 9`|Right-hand side of code page 5142 for Arabic|
+|`IRR 0 G*D6 ! 9`|Right-hand side of code page 1029 for Arabic positional forms|
 |`G*D6 " 1`|Korean N-byte Hangul Code (KS C 5601:1974) with IBM extensions|
 |`G*D6 " ?`|DEC 8-bit Greek, right-hand side with non-breaking space|
 |`G*D6 % 0`|DEC 8-bit Turkish, right-hand side with non-breaking space|
