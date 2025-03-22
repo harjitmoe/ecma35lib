@@ -282,6 +282,11 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D6 ! 8`|Right-hand side of code page 1006 for Urdu|
 |`IRR ? G*D6 ! 9`|Right-hand side of code page 5142 for Arabic|
 |`IRR 0 G*D6 ! 9`|Right-hand side of code page 1029 for Arabic positional forms|
+|`IRR ? G*D6 ! <`|0xA0–0xFF region of combined code pages 9056, 13152 and 41824 for Arabic|
+|`IRR 0 G*D6 ! <`|0xA0–0xFF region of code page 9056 for Arabic|
+|`IRR 1 G*D6 ! <`|0xA0–0xFF region of code page 13152 for Arabic|
+|`IRR 2 G*D6 ! <`|0xA0–0xFF region of code page 165 for Arabic positional forms|
+|`IRR 3 G*D6 ! <`|0xA0–0xFF region of code page 41824 for Arabic|
 |`G*D6 " 1`|Korean N-byte Hangul Code (KS C 5601:1974) with IBM extensions|
 |`G*D6 " ?`|DEC 8-bit Greek, right-hand side with non-breaking space|
 |`G*D6 % 0`|DEC 8-bit Turkish, right-hand side with non-breaking space|
