@@ -138,6 +138,7 @@ graphdata.gsets["ir164"] = (96, 1, tuple((i,) if i else None for i in (
              0x05D8, 0x05D9, 0x05DA, 0x05DB, 0x05DC, 0x05DD, 0x05DE, 0x05DF, 
              0x05E0, 0x05E1, 0x05E2, 0x05E3, 0x05E4, 0x05E5, 0x05E6, 0x05E7, 
              0x05E8, 0x05E9, 0x05EA, None,   None,   None,   None,   None)))
+graphdata.gsets["ir164/94"] = (94, 1, graphdata.gsets["ir164"][2][1:-1])
 graphdata.gsets["ir164/ibm"] = (96, 1, (
     None,      None,      None,      None,      None,      None,      None,      None,
     None,      None,      None,      None,      None,      None,      None,      None,

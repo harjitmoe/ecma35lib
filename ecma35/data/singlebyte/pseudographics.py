@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019–2024.
+# By HarJIT in 2019–2025.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -113,6 +113,7 @@ graphdata.gsets["ir155"] = (96, 1, (
     None,      None,      None,      None,      None,      None,      None,      None,      
     None,      None,      None,      None,      None,      None,      None,      None,
 ))
+graphdata.gsets["ir155/94"] = (94, 1, graphdata.gsets["ir155"][2][1:-1])
 
 # ARIB STD-B24 Volume 1 Mosaic Set C
 graphdata.gsets["aribmosaic-c"] = (94, 1,

@@ -18,6 +18,7 @@ graphdata.defgsets['371'] = ('ir068', 'nil', 'nil', 'nil')
 # Registered as a 96-set for some reason but doesn't actually allocate the corners.
 graphdata.gsets["ir208"] = (96, 1, 
              ((None,) * 64) + tuple((i,) for i in range(0x1680, 0x169D)) + (None, None, None))
+graphdata.gsets["ir208/94"] = (94, 1, graphdata.gsets["ir208"][2][1:-1])
 
 # ISO-10585:1996 Armenian
 # Not assigned an escape, but given the number here (possibly provisionally, but any new escape or

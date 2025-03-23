@@ -77,7 +77,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`DOCS / 6`|EBCDIC.|
 |`DOCS / 7`|UTF-EBCDIC.|
 
-## Additional single-byte G-sets, and additional selectors for particular variants of single-byte G-sets
+## Additional single-byte 94-character G-sets, and additional selectors for particular variants of single-byte 94-character G-sets
 
 |Private assignment|Meaning|
 |---|---|
@@ -249,6 +249,15 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 ' 0`|Right-hand side of single-byte component of IBM 5550 Traditional Chinese encoding|
 |`G*D4 ' 1`|Subset of the right-hand sides of IBM-PC code pages, containing only the Ñ/ñ letters|
 |`G*D4 ' 2`|ICT 1900 character set, standardised in Poland as PN⁠-⁠T⁠-⁠42109-02-ZU1|
+|`G*D4 ' 3`|CENELEC supplementary set for characters in Annex A of T.51 but not in the first 9 parts of ISO 8859: same as `G*D6 N`, but as a 94-character set designatable to G0|
+|`G*D4 ' 4`|ISO 10367 box-drawing set: same as `G*D6 Q`, but as a 94-character set designatable to G0|
+|`G*D4 ' 5`|CCITT Hebrew (letters-only subset of right-hand-side of ISO-8859-8): same as `G*D6 S`, but as a 94-character set designatable to G0|
+|`G*D4 ' 6`|I.S. 434 charset for Ogham: same as `G*D6 g`, but as a 94-character set designatable to G0|
+
+## Additional single-byte 96-character G-sets, and additional selectors for particular variants of single-byte 96-character G-sets
+
+|Private assignment|Meaning|
+|---|---|
 |`IRR ? G*D6 B`|Right-hand side of ISO-8859-2, Central European Roman|
 |`IRR 0 G*D6 B`|Right-hand side of IBM code page 1111 (ISO-8859-2 with overring replacing degrees sign)|
 |`IRR ? G*D6 F`|Right-hand side of ISO-8859-7 for Greek, 1987 version|
@@ -261,7 +270,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 0 G*D6 M`|Adaptation of ISO-8859-9 with the addition of the schwa letter (Ə/ə) for Azeri use|
 |`IRR ? G*D6 R`|ITU T.51 supplementary set for use with ASCII (excludes dollar and hash)|
 |`IRR 0 G*D6 R`|Complete ITU T.51 supplementary set (same as `IRR 0 G*D6 J`; default for this F-byte)|
-|`IRR ? G*D6 S`|CCITT Hebrew (letters-only subset of right-hand-side of ISO-8859-8)|
+|`IRR ? G*D6 S`|CCITT Hebrew (letters-only subset of right-hand-side of ISO-8859-8); same as `G*D4 ' 5`|
 |`IRR 0 G*D6 S`|CCITT Hebrew plus box-drawing characters, as in code page 972|
 |`IRR ? G*D6 T`|Thai ISO-8859-11 (TIS-620:1986 plus non-breaking space)|
 |`IRR 0 G*D6 T`|Thai ISO-8859-11 with IBM extensions|
