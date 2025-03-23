@@ -152,7 +152,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 ! ?`|Left-hand side of the code page of the Wingdings 3 font|
 |`G*D4 " 0`|ISCII Devanagari|
 |`G*D4 " 1`|Korean N-byte Hangul Code (KS C 5601:1974)|
-|`G*D4 " 2`|Hewlett-Packard 7-bit Legal|
+|`G*D4 " 2`|Hewlett-Packard 7-bit legal notation (with e.g. trademark / section signs)|
 |`G*D4 " 3`|IBM-PC line drawing|
 |`G*D4 " 4`|DEC 8-bit Hebrew|
 |`G*D4 " 5`|Hewlett-Packard line drawing|
