@@ -253,6 +253,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 ' 4`|ISO 10367 box-drawing set: same as `G*D6 Q`, but as a 94-character set designatable to G0|
 |`G*D4 ' 5`|CCITT Hebrew (letters-only subset of right-hand-side of ISO-8859-8): same as `G*D6 S`, but as a 94-character set designatable to G0|
 |`G*D4 ' 6`|I.S. 434 charset for Ogham: same as `G*D6 g`, but as a 94-character set designatable to G0|
+|`G*D4 ' 7`|7-bit Polish with Euro sign|
 
 ## Additional single-byte 96-character G-sets, and additional selectors for particular variants of single-byte 96-character G-sets
 

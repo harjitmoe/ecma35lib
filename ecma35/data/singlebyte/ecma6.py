@@ -328,7 +328,10 @@ raw_variants = {
     # PN⁠-⁠T⁠-⁠42109-02-ZU0 variant projected from DP94-range subset of EBCDIC code page 252 for Polish
     # Violation of ECMA-6:1991: 0x27 is not (strictly) '.
     "alt646/polish/ibm": ([None, 0xA4, 0x119, 0x17A, 0x141, 0x144, 0x15B, None, 
-                                       0x105, 0xF3, 0x142, 0x17C, 0x107], {0x27: 0xB4}),
+                                       0x105, 0xF3,  0x142, 0x17C, 0x107], {0x27: 0xB4}),
+    # PN⁠-⁠I-⁠10050 for Polish with Euro sign
+    "alt646/newpolish": ([None, None, None,   0x104, 0x118, 0x141, 0x17B, None, 
+                                      0x20AC, 0x105, 0x119, 0x142, 0x17C], {}),
     # ICT 1900 character set, standardised in Poland as PN⁠-⁠T⁠-⁠42109-02-ZU1
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
     # Violation of ECMA-6:1991: 0x5F is not _.
