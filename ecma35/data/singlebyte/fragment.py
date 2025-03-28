@@ -110,3 +110,47 @@ graphdata.rhses["20917"] = graphdata.rhses["49589"] = (None, None, None, None, N
 graphdata.defgsets["20917"] = graphdata.defgsets["49589"] = ("ir006", "enyay", "nil", "nil")
 
 graphdata.rhses["1115"] = ((0x00A3,), (0x00AC,), (0x00A5,), (0x203E,), (0x00A6,), None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None)
+
+graphdata.gsets["square-brackets"] = (94, 1, (
+               None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, (0x5B,), None,
+         None, None, None, None, (0x5D,), None, None, None,
+         None, None, None, None, None, None, None))
+
+graphdata.gsets["squared-and-cubed"] = (94, 1, (
+               None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, (0xB3,), None,
+         None, None, None, None, (0xB2,), None, None, None,
+         None, None, None, None, None, None, None))
+
+graphdata.gsets["half-and-trema"] = (94, 1, (
+               None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, (0xA8,), None,
+         None, None, None, None, (0xBD,), None, None, None,
+         None, None, None, None, None, None, None))
+
+

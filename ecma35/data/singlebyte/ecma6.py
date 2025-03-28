@@ -126,14 +126,19 @@ raw_variants = {
     # DIN 66 003 (German; also same in DEC and ETS)
     "ir021": ([None, None, 0xA7, 0xC4, 0xD6, 0xDC, None, None, 
                            None, 0xE4, 0xF6, 0xFC, 0xDF], {}),
-    # DIN 66003 variant projected from EBCDIC code page 9 (as opposed to EBCDIC code page 273, whose
+    # DIN 66003 variant projected from EBCDIC code page 8 (as opposed to EBCDIC code page 273, whose
     #   DP94 set (CCSID 4369) corresponds directly to the DIN 66003 map above)
     # Violation of ECMA-6:1991: 0x27 is not (strictly) '.
     "ir021/acute": ([None, None, 0xA7, 0xC4, 0xD6, 0xDC, None, None, 
-                           None, 0xE4, 0xF6, 0xFC, 0xDF], {0x27: 0xB4}),
+                                 None, 0xE4, 0xF6, 0xFC, 0xDF], {0x27: 0xB4}),
     # Projection from DP94-range subset of EBCDIC code page 382
     "ir021/ibm38xx": ([None, None, 0xA7, 0xC4, 0xD6, 0xDC, 0xAC, None, 
                                    -1,   0xE4, 0xF6, 0xFC, 0xDF], {}),
+    # Projection from DP94-range subset of EBCDIC code page 7
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "ir021/ibm-wp": ([None, None, 0xA7, 0xC4, 0xD6, 0xDC, 0xB4, None,
+                                  None, 0xE4, 0xF6, 0xFC, 0xDF], {0x3C: 0xB2, 0x3E: 0xB3}),
     # NF Z 62-010:1973 (old or DEC version French)
     "ir025": ([0xA3, None, 0xE0, 0xB0, 0xE7, 0xA7, None, None, 
                            None, 0xE9, 0xF9, 0xE8, 0xA8], {}),
@@ -413,6 +418,12 @@ raw_variants = {
     # Projection from DP94 set of EBCDIC code page 260 or 276
     "alt646/ibmquebec": ([None, None, None, 0xE0, 0xB8, 0xB4, None, None,
                                       None, 0xE9, 0xF9, 0xE8, 0xA8], {}),
+    # Projection from DP94-range subset of EBCDIC code page 11
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/ibmquebec/wp": ([None, None, None, 0xA2, 0xB8, 0xB4, None, None,
+                                         None, 0xE9, 0xB0, 0xB3, 0xA8],
+                            {0x22: 0xB2, 0x3C: 0xAB, 0x3E: 0xBB}),
     # Projection from DP94 set of EBCDIC code page 277
     # Violation of ECMA-6:1991: 0x23 is not # or £.
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
@@ -536,6 +547,15 @@ raw_variants = {
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
     "alt646/ibmuk": ([None, 0xA3, None, 0x24, None, 0x21, 0xAC, None, 
                                   None, None, 0xA6, None, 0x203E], {0x21: 0x7C}),
+    # Projection from DP94-range subset of EBCDIC code page 40
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    # Violation of ECMA-6:1991: 0x23 is not # or £.
+    # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not <.
+    "alt646/ibmuk/wp": ([-1, 0xA3, None, 0x24, 0xBD, 0x21, -1, None,
+                                   -1,   -1,   0xBE, -1,   -1],
+                        {0x21: 0xBC, 0x3C: -1, 0x3E: -1}),
     # Projection from DP94-range subset of EBCDIC code page 2116
     # Violation of ECMA-6:1991: 0x21 is not !.
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
@@ -635,6 +655,250 @@ raw_variants = {
     # Violation of ECMA-6:1991: 0x27 is not (strictly) '.
     "alt646/freedos-armenian": ([None, None, None,   None, None, None, None, None,
                                              0x055D, None, None, None, 0x055C], {0x27: 0x055B}),
+    # Projection from DP94-range subset of EBCDIC code page 1
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/ibm-usa-wp": ([None, None, None, None, 0xBC, None, 0xA2, None,
+                                       0xB1, 0xB2, 0xBD, 0xB3, 0xB0],
+                          {0x3C: 0xA7, 0x3E: 0xB6}),
+    # Projection from DP94-range subset of EBCDIC code page 5
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/ibm-usa-wp/small": ([None, None, None, -1, 0xBC, -1, 0xA2, None,
+                                             0xB1, -1, 0xBD, -1, -1],
+                                {0x21: -1, 0x3C: -1, 0x3E: -1}),
+    # Projection from DP94-range subset of EBCDIC code page 2
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/ibm-usa-alternative": ([None, None, None, None, -1,   None, 0xA2, None,
+                                                -1,   -1,   0xAE, -1,   0xB0],
+                                   {0x21: -1, 0x3C: -1, 0x3E: -1}),
+    # Projection from DP94-range subset of EBCDIC code page 3
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/ibm-usa-accounting/a": ([None, None, None, -1, 0xBC,   -1, 0xA2, None,
+                                                 -1,   -1, 0x2017, -1, -1],
+                                    {0x21: 0xA3, 0x3C: -1, 0x3E: -1}),
+    # Projection from DP94-range subset of EBCDIC code page 4
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/ibm-usa-accounting/b": ([None, None, None, 0xA3, -1,     -1, 0xA2, None,
+                                                 -1,   -1,   0x2017, -1, -1],
+                                    {0x3C: -1, 0x3E: -1}),
+    # Hybrid of the two above
+    "alt646/ibm-usa-accounting": ([None, None, None, 0xA3, 0xBC,   -1,   0xA2, None,
+                                               None, None, 0x2017, None, None], {}),
+    # Projection from DP94-range subset of EBCDIC code page 6
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/ibm-latin-america-wp": ([None, None, 0xBF, None, 0xD1, None, 0xA8, None,
+                                                 0xB4, 0xA3, 0xF1, 0xA1, 0xB0],
+                                    {0x3C: 0xBD, 0x3E: 0xBC}),
+    # Projection from DP94-range subset of EBCDIC code page 10
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/ibm-canada-english-wp": ([None, None, None, None, 0xBC, None, 0xA2, None,
+                                                  0xB1, 0xB2, 0xBD, 0xB3, 0xB0],
+                                     {0x3C: 0xA3, 0x3E: 0xB6}),
+    # Projection from DP94-range subset of EBCDIC code page 13
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/ibmdutch": ([0xA3, None, 0x192, 0xA7, 0xBC, 0xB4, None, None,
+                                     None,  0xB2, 0xBD, 0xB3, 0xA8],
+                            {0x3C: 0xB1, 0x3E: 0xB0}),
+    # Projection from DP94-range subset of EBCDIC code page 14
+    # Violation of ECMA-6:1991: 0x23 is not # or £.
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/ibm-spain-wp": ([0x20A7, None, 0xBF, 0xE7, 0xD1, 0xB4, None, None,
+                                           None, 0xBD, 0xF1, 0xA1, 0xA8],
+                            {0x3C: 0xBA, 0x3E: 0xAA}),
+    # Projection from DP94-range subset of EBCDIC code page 15
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    # Violation of ECMA-6:1991: 0x23 is not # or £.
+    # Violation of ECMA-6:1991: 0x3B is not ;.
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/ibm-swiss-french-wp": ([-1, None, 0xE7, 0xE0, 0xE9, 0xE8, None, None,
+                                              0xF9, -1,   -1,   -1,   0xA8],
+                                   {0x21: -1, 0x3B: -1, 0x3C: 0xBD, 0x3E: 0xBC}),
+    # Projection from DP94-range subset of EBCDIC code page 16
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/ibm-switzerland-wp": ([0xA3, None, 0xE7, 0xE0, 0xE9, 0xE8, None, None,
+                                               None, 0xE4, 0xF6, 0xFC, 0xA8],
+                                  {0x21: 0xB4, 0x3C: 0xA7, 0x3E: 0xB0}),
+    # Projection from DP94-range subset of EBCDIC code page 17
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    # Violation of ECMA-6:1991: 0x23 is not # or £.
+    # Violation of ECMA-6:1991: 0x3B is not ;.
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/ibm-swiss-german-wp": ([-1, None, 0xE7, -1,   0xE9, -1,   None, None,
+                                              None, 0xE4, 0xF6, 0xFC, -1],
+                                   {0x21: -1, 0x3B: -1, 0x3C: 0xA7, 0x3E: -1}),
+    # Projection from DP94-range subset of EBCDIC code page 18
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
+    # Violation of ECMA-6:1991: 0x2A is not *.
+    # Violation of ECMA-6:1991: 0x3B is not ;.
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/ibm-sweden-finland-wp": ([0xA3, -1, 0xA7, 0xC4, 0xD6, 0xC5, -1, None,
+                                                None, 0xE4, 0xF6, 0xE5, 0xB4],
+                                     {0x21: -1, 0x2A: 0xFC, 0x3B: -1, 0x3C: -1, 0x3E: -1}),
+    # Projection from DP94-range subset of EBCDIC code page 21
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/ibm-brazil-wp": ([0xA3, None, 0xAA, 0xA7, 0xC7, 0x7C, None, None,
+                                          None, 0xBA, 0xE7, 0xB4, None],
+                             {0x3C: 0xB2, 0x3E: 0xB3}),
+    # Projection from DP94-range subset of EBCDIC code page 22
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/ibm-portugal-wp": ([0xA3, None, 0xAA, 0xA7, 0xC7, 0x7C, None, None,
+                                            None, 0xBA, 0xE7, 0xB4, None],
+                               {0x3C: 0x131, 0x3E: 0xA8}),
+    # Projection from DP94-range subset of EBCDIC code page 23
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/ibm-uk-wp": ([0xA3, None, None, 0xBC, 0xBD, 0xBE, -1, None,
+                                      -1,   -1,   -1,   -1,   -1],
+                         {0x3C: -1, 0x3E: -1}),
+    # Projection from DP94-range subset of EBCDIC code page 25
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/ibm-japan-wp/small": ([None, None, None, 0xA3, 0xA5, 0xB0, -1, None,
+                                               -1,   -1,   -1,   -1,   -1],
+                                  {0x21: 0xB1, 0x3C: -1, 0x3E: -1}),
+    # Projection from DP94-range subset of EBCDIC code page 26
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/ibm-japan-wp": ([None, None, None, 0xA3, 0xA5, 0xB0, None, None,
+                                         None, 0xA8, 0xB4, 0xA8, None],
+                            {0x3C: 0xDF, 0x3E: 0xE7}),
+    # Projection from DP94-range subset of EBCDIC code page 27
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/ibm-greece-wp": ([0xA3, None, None, 0xB0, 0xA2, 0xB8, None, None,
+                                          None, 0xA8, 0xB4, 0xA8, None],
+                             {0x3C: 0xBD, 0x3E: 0xBC}),
+    # Projection from DP94-range subset of EBCDIC code page 29
+    # Violation of ECMA-6:1991: 0x27 is not (strictly) '.
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/ibm-iceland-wp": ([0xA3, None, 0xD0, 0xC6, 0xD6, 0xC5, 0xB0, None,
+                                           0xF0, 0xE6, 0xF6, 0xE5, 0xA8],
+                              {0x27: 0xB4, 0x3C: 0xDE, 0x3E: 0xFE}),
+    # Projection from DP94-range subset of EBCDIC code page 30
+    # Violation of ECMA-6:1991: 0x23 is not # or £.
+    # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
+    # Violation of ECMA-6:1991: 0x26 is not &.
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/ibm-turkish-wp": ([0x5E, 0x131, 0xE9, 0xC7, 0xD6, 0xDC, 0x11E, None,
+                                            None, 0xE7, 0xF6, 0xFC, 0x11F],
+                              {0x26: 0x130, 0x3C: 0x15F, 0x3E: 0x15E}),
+    # Projection from DP94-range subset of EBCDIC code page 31
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/ibmafrikaans": ([0xA3, None, None, 0xF7, 0xB4,  0x2113, None, None,
+                                         None, 0xB2, 0x149, 0xB3,   0xA8],
+                            {0x3C: 0xB0, 0x3E: 0xBD}),
+    # Projection from DP94-range subset of EBCDIC code page 32
+    # Violation of ECMA-6:1991: 0x23 is not # or £.
+    # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
+    # Violation of ECMA-6:1991: 0x26 is not &.
+    # Violation of ECMA-6:1991: 0x27 is not (strictly) '.
+    # Violation of ECMA-6:1991: 0x2A is not *.
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    # Violation of ECMA-6:1991: 0x25, 0x28, 0x29, 0x3B and 0x3D are omitted.
+    "alt646/ibmczech/small": ([0x159, 0x161, 0x17E, -1,   0xED,  0x11B, 0x2C7, None,
+                                             0xB4,  0xFD, 0x10D, 0xE1,  0xA8],
+                              {0x25: -1, 0x26: 0xFA, 0x27: 0x60, 0x28: -1, 0x29: -1, 0x2A: 0x16F,
+                               0x3B: -1, 0x3C: 0xE9, 0x3D: -1, 0x3E: 0xA7}),
+    # Projection from DP94-range subset of EBCDIC code page 33
+    # Violation of ECMA-6:1991: 0x23 is not # or £.
+    # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
+    # Violation of ECMA-6:1991: 0x26 is not &.
+    # Violation of ECMA-6:1991: 0x2A is not *.
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/ibmczech": ([0x159, 0x161, 0x17E, 0x2DA, 0xED,  0x11B, 0x2C7, None,
+                                       0xB4,  0xFD,  0x10D, 0xE1,  0xA8],
+                        {0x26: 0xFA, 0x2A: 0x16F, 0x3C: 0xE9, 0x3E: 0xA7}),
+    # Projection from DP94-range subset of EBCDIC code page 34
+    # Violation of ECMA-6:1991: 0x23 is not # or £.
+    # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
+    # Violation of ECMA-6:1991: 0x26 is not &.
+    # Violation of ECMA-6:1991: 0x27 is not '.
+    # Violation of ECMA-6:1991: 0x2A is not *.
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/ibmslovak": ([0x13E, 0x161, 0x17E, 0x2DA, 0xED,  0x165, 0x2C7, None,
+                                        0xB4,  0xFD,  0x10D, 0xE1,  0xE4],
+                         {0x26: 0xFA, 0x27: 0x148, 0x2A: 0xF4, 0x3C: 0xE9, 0x3E: 0xA7}),
+    # Projection from DP94-range subset of EBCDIC code page 35
+    # Violation of ECMA-6:1991: 0x26 is not &.
+    # Violation of ECMA-6:1991: 0x27 is not (strictly) '.
+    # Violation of ECMA-6:1991: 0x2A is not *.
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/ibmromanian/small": ([0xA3, None, -1,   -1,    -1,   -1,   None, None,
+                                              None, 0x103, 0xEE, 0xE2, 0xA8],
+                                 {0x26: -1, 0x27: 0xB4, 0x2A: 0x163, 0x3C: 0x15F, 0x3E: -1}),
+    # Projection from DP94-range subset of EBCDIC code page 36
+    # Violation of ECMA-6:1991: 0x27 is not (strictly) '.
+    # Violation of ECMA-6:1991: 0x2A is not *.
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/ibmromanian": ([0xA3, None, 0x162, 0x102, 0xCE, 0xC2, 0xB8, None,
+                                        None,  0x103, 0xEE, 0xE2, 0xA8],
+                           {0x27: 0xB4, 0x2A: 0x163, 0x3C: 0x15F, 0x3E: 0x15E}),
+    # Projection from DP94-range subset of EBCDIC code page 251
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/ibmhongkong": ([None, None, None, None, 0xBC, None, 0xA3, None,
+                                        0xB1, 0xB2, 0xBD, 0xB3, 0xB0],
+                           {0x3C: 0xA7, 0x3E: 0xB6}),
+    # Projection from DP94-range subset of EBCDIC code page 286
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    # Violation of ECMA-6:1991: 0x22 is not ".
+    # Violation of ECMA-6:1991: 0x23 is not # or £.
+    # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
+    "alt646/ibm-3270-german": ([0xC4, 0xDC, 0xD6, 0xF6, -1,   0xFC, 0xAC, None,
+                                            -1,   -1,   0xDF, -1,   -1],
+                               {0x21: 0x7C, 0x22: 0xE4}),
+    # Projection from DP94-range subset of EBCDIC code page 287
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    # Violation of ECMA-6:1991: 0x22 is not ".
+    # Violation of ECMA-6:1991: 0x23 is not # or £.
+    # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
+    "alt646/ibm-3270-denmark-norway": ([0xC6, 0xC5, 0xD8, 0xF8, -1,   0xE5, 0xAC, None,
+                                                    -1,   -1,   0xA6, -1,   -1],
+                                       {0x21: 0x7C, 0x22: 0xE6}),
+    # Projection from DP94-range subset of EBCDIC code page 288
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    # Violation of ECMA-6:1991: 0x22 is not ".
+    # Violation of ECMA-6:1991: 0x23 is not # or £.
+    # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
+    "alt646/ibm-3270-sweden-finland": ([0xC4, 0xC5, 0xD6, 0xF6, -1,   0xE5, 0xAC, None,
+                                                    -1,   -1,   0xA6, -1,   -1],
+                                       {0x21: 0x7C, 0x22: 0xE4}),
+    # Projection from DP94-range subset of EBCDIC code page 289
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    # Violation of ECMA-6:1991: 0x22 is not ".
+    # Violation of ECMA-6:1991: 0x23 is not # or £.
+    # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
+    "alt646/ibm-3270-spanish": ([0xD1, 0x20A7, None, 0xA2, -1,   0x21, 0xAC, None,
+                                               -1,   -1,   0xA6, -1,   -1],
+                                {0x21: 0x7C, 0x22: 0xF1}),
 }
 
 for (name, (myvars, override)) in raw_variants.items():

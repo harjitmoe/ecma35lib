@@ -95,6 +95,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 0 G*D4 J`|JIS-Roman with tilde (rather than overscore)|
 |`IRR ? G*D4 K`|DIN 66003 with apostrophe (default)|
 |`IRR 0 G*D4 K`|DIN 66003 with acute|
+|`IRR 1 G*D4 K`|DIN 66003 variant projected from EBCDIC WP96|
 |`IRR ? G*D4 O`|DIN 31624, possibly-older German relative of ISO 5426-1|
 |`IRR 0 G*D4 O`|DIN 31624, falling thru to T.51 for unallocated cells|
 |`IRR ? G*D4 P`|ISO 5426-1, bibliographic set related to (but incompatible with) T.51|
@@ -208,7 +209,8 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 % 0`|DEC 8-bit Turkish, right-hand side|
 |`G*D4 % 1`|MARC-8 superscript numbers|
 |`G*D4 % 2`|DEC 7-bit Turkish|
-|`G*D4 % 4`|7-bit Canadian French, projected from EBCDIC DP94|
+|`IRR ? G*D4 % 4`|7-bit Canadian French, projected from EBCDIC DP94|
+|`IRR 0 G*D4 % 4`|7-bit Canadian French, projected from EBCDIC WP96|
 |`G*D4 % 5`|DEC Multinational Character Set, right-hand side|
 |`G*D4 % 6`|DEC 7-bit Portuguese|
 |`G*D4 % 7`|7-bit European Portuguese, projected from EBCDIC DP94|
@@ -233,6 +235,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 1 G*D4 & 6`|7-bit Spanish with Peseta sign, projected from EBCDIC DP94|
 |`IRR ? G*D4 & 7`|7-bit British, projected from EBCDIC DP94|
 |`IRR 0 G*D4 & 7`|7-bit British, projected from EBCDIC Document Composition Facility|
+|`IRR 1 G*D4 & 7`|7-bit British, projected from EBCDIC DP94-coördinated WP96|
 |`G*D4 & 8`|7-bit United States, projected from EBCDIC DP94|
 |`G*D4 & 9`|MARC-8 subscript numbers|
 |`G*D4 & :`|7-bit British, projected from EBCDIC WP96|
