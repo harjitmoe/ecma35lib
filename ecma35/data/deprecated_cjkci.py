@@ -70,6 +70,15 @@ deprecated_compatibility_ideographs = {
     #     https://www.unicode.org/irg/docs/n2704-MiscEditorialReport.pdf#page=2
     0x2F980: 0x2B73E,
     #
+    # U+FACB and U+2F9FF have also been proposed for future disunification and deprecation (while
+    #   U+2F9FE would remain valid):
+    #     https://www.unicode.org/irg/docs/n2786-Disunify.pdf
+    #     https://www.unicode.org/irg/docs/n2765-Recommendations.pdf#page=3
+    # However, U+FACB and U+2F9FF are potentially Z-variants of, not U+980B, but U+2EA07:
+    #   https://www.unicode.org/irg/docs/n2834-Feedback980B.pdf
+    0xFACB: 0x2EA07,
+    0x2F9FF: 0x2EA07,
+    #
     # Note that U+FA99, U+FAB0 and U+FAD1 are candidates for future disunification and deprecation
     #   when the CJK-K block gets added in however many years' time, although this is disputed and
     #   may well not happen (U+FAD1 in particular seems not to be planned):
@@ -78,9 +87,6 @@ deprecated_compatibility_ideographs = {
     #     https://www.unicode.org/irg/docs/n2785-KPSourceFeedback.pdf
     #     https://hc.jsecs.org/irg/ws2024/app/?find=UTC-00777
     #     https://hc.jsecs.org/irg/ws2024/app/?find=UTC-03249
-    # U+FACB and U+2F9FF have also been proposed for future disunification and deprecation (while
-    #   U+2F9FE would remain valid):
-    #     https://www.unicode.org/irg/docs/n2786-Disunify.pdf
 }
 
 def remove_deprecated_cjkci(pointer, ucs):
