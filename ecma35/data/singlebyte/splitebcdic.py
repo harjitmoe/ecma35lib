@@ -96,9 +96,7 @@ graphdata.gsets['gl2086'] = (94, 1, (None, None, None, (36,), None, (38,), (39,)
 
 graphdata.gsets['gl2087'] = (94, 1, (None, None, (35,), (36,), (37,), (38,), None, None, None, (42,), (43,), (44,), (45,), (46,), (47,), (48,), (49,), (50,), (51,), (52,), (53,), (54,), (55,), (56,), (57,), None, None, (60,), None, None, None, (64,), (65,), (66,), (67,), (68,), (69,), (70,), (71,), (72,), (73,), (74,), (75,), (76,), (77,), (78,), (79,), (80,), (81,), (82,), (83,), (84,), (85,), (86,), (87,), (88,), (89,), (90,), None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None))
 
-graphdata.gsets['gl2088/full'] = (94, 1, ((124,), (34,), (35,), (36,), (37,), (38,), (39,), (40,), (41,), (42,), (43,), (44,), (45,), (46,), (47,), (48,), (49,), (50,), (51,), (52,), (53,), (54,), (55,), (56,), (57,), (58,), (59,), (60,), (61,), (62,), (63,), (64,), (65,), (66,), (67,), (68,), (69,), (70,), (71,), (72,), (73,), (74,), (75,), (76,), (77,), (78,), (79,), (80,), (81,), (82,), (83,), (84,), (85,), (86,), (87,), (88,), (89,), (90,), (162,), (92,), (33,), (180,), (95,), (96,), (97,), (98,), (99,), (100,), (101,), (102,), (103,), (104,), (105,), (106,), (107,), (108,), (109,), (110,), (111,), (112,), (113,), (114,), (115,), (116,), (117,), (118,), (119,), (120,), (121,), (122,), (123,), (166,), (125,), None))
-
-graphdata.gsets['gl2088'] = (94, 1, (None, None, (35,), (36,), None, (38,), None, None, None, (42,), None, (44,), (45,), (46,), (47,), (48,), (49,), (50,), (51,), (52,), (53,), (54,), (55,), (56,), (57,), None, None, None, None, None, None, (64,), (65,), (66,), (67,), (68,), (69,), (70,), (71,), (72,), (73,), (74,), (75,), (76,), (77,), (78,), (79,), (80,), (81,), (82,), (83,), (84,), (85,), (86,), (87,), (88,), (89,), (90,), None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None))
+graphdata.gsets['gl2088'] = (94, 1, ((124,), (34,), (35,), (36,), (37,), (38,), (39,), (40,), (41,), (42,), (43,), (44,), (45,), (46,), (47,), (48,), (49,), (50,), (51,), (52,), (53,), (54,), (55,), (56,), (57,), (58,), (59,), (60,), (61,), (62,), (63,), (64,), (65,), (66,), (67,), (68,), (69,), (70,), (71,), (72,), (73,), (74,), (75,), (76,), (77,), (78,), (79,), (80,), (81,), (82,), (83,), (84,), (85,), (86,), (87,), (88,), (89,), (90,), (162,), (92,), (33,), (180,), (95,), (96,), (97,), (98,), (99,), (100,), (101,), (102,), (103,), (104,), (105,), (106,), (107,), (108,), (109,), (110,), (111,), (112,), (113,), (114,), (115,), (116,), (117,), (118,), (119,), (120,), (121,), (122,), (123,), (166,), (125,), None))
 
 graphdata.gsets['gl2089'] = (94, 1, (None, None, (35,), (36,), (37,), (38,), None, None, None, (42,), (43,), (44,), (45,), (46,), (47,), (48,), (49,), (50,), (51,), (52,), (53,), (54,), (55,), (56,), (57,), None, None, (8977,), None, None, None, (64,), (65,), (66,), (67,), (68,), (69,), (70,), (71,), (72,), (73,), (74,), (75,), (76,), (77,), (78,), (79,), (80,), (81,), (82,), (83,), (84,), (85,), (86,), (87,), (88,), (89,), (90,), None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None))
 
@@ -290,8 +288,6 @@ graphdata.gsets['gr875'] = (96, 1, ((913,), (914,), (915,), (916,), (917,), (918
 
 graphdata.gsets['gr880'] = (96, 1, ((160,), (1106,), (1107,), (1105,), (1108,), (1109,), (1110,), (1111,), (1112,), (1113,), (1114,), (1115,), (1116,), (1118,), (1119,), (1066,), (8470,), (1026,), (1027,), (1025,), (1028,), (1029,), (1030,), (1031,), (1032,), (1033,), (1034,), (1035,), (1036,), (173,), (1038,), (1039,), (1102,), (1072,), (1073,), (1094,), (1076,), (1077,), (1092,), (1075,), (1093,), (1080,), (1081,), (1082,), (1083,), (1084,), (1085,), (1086,), (1087,), (1103,), (1088,), (1089,), (1090,), (1091,), (1078,), (1074,), (1100,), (1099,), (1079,), (1096,), (1101,), (1097,), (1095,), (1098,), (1070,), (1040,), (1041,), (1062,), (1044,), (1045,), (1060,), (1043,), (1061,), (1048,), (1049,), (1050,), (1051,), (1052,), (1053,), (1054,), (1055,), (1071,), (1056,), (1057,), (1058,), (1059,), (1046,), (1042,), (1068,), (1067,), (1047,), (1064,), (1069,), (1065,), (1063,), (164,)))
 
-graphdata.gsets['gr881'] = (94, 1, (None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (8452,), None, None, None, (176,), (177,), None, (9012,), (8615,), None, (8960,), None, (8804,), (8805,), (8486,), None, None, (9013,), (181,), (8901,)))
-
 graphdata.gsets['gr885'] = (94, 1, (None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (8452,), None, None, None, None, (177,), None, (9012,), (8615,), None, (8960,), None, (8804,), (8805,), (8486,), None, None, (9013,), None, (8901,)))
 
 graphdata.gsets['gr886'] = (94, 1, (None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (8452,), None, None, None, None, (177,), None, (9012,), (8615,), None, (8960,), None, (8804,), (8805,), (8486,), None, None, (9013,), (181,), (8901,)))
@@ -306,11 +302,9 @@ graphdata.gsets['gr890'] = (96, 1, ((160,), (226,), (228,), (224,), (225,), (259
 
 graphdata.gsets['gr892'] = (94, 1, (None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (196,), None, None, None, (197,), None, (209,), None, None, None, None, None, None, None, (11835,), None, (216,), None, None, None, None, None, None, None, None, None, None, None, (198,), None, None, None, None, None, None, None, None, None, (163,), (165,), None, None, None, None, None, None, None, None, (65512,), None, None, None, (9608,), None, (9281,), None, None, None, None, None, (9280,), None, None, None, (8963,), None, (9282,), (214,), None, None, None, None, None, (220,), None, None))
 
-graphdata.gsets['gr893/euro'] = (94, 1, (None, (228,), None, None, None, (229,), None, None, None, None, None, None, None, None, None, None, (223,), None, (196,), (120262,), None, None, (197,), None, (209,), (248,), None, None, None, None, None, (717,), (11835,), None, (216,), None, None, None, None, (307,), (306,), None, None, None, (230,), (184,), (198,), (164,), (8364,), None, None, None, None, None, None, None, (163,), (165,), None, None, (167,), None, None, None, None, None, (65512,), None, (168,), (180,), (9608,), None, None, (246,), None, None, None, None, None, (252,), None, None, (8963,), None, None, (214,), None, None, None, None, None, (220,), None, None))
+graphdata.gsets['gr893'] = (94, 1, (None, (228,), None, None, None, (229,), None, None, None, None, None, None, None, None, None, None, (223,), None, (196,), (120262,), None, None, (197,), None, (209,), (248,), None, None, None, None, None, (717,), (11835,), None, (216,), None, None, None, None, (307,), (306,), None, None, None, (230,), (184,), (198,), (164,), (8364,), None, None, None, None, None, None, None, (163,), (165,), None, None, (167,), None, None, None, None, None, (65512,), None, (168,), (180,), (9608,), None, None, (246,), None, None, None, None, None, (252,), None, None, (8963,), None, None, (214,), None, None, None, None, None, (220,), None, None))
 
-graphdata.gsets['gr905/interpunct'] = (96, 1, ((160,), (226,), (228,), (224,), (225,), None, (267,), (123,), (241,), (233,), (234,), (235,), (232,), (237,), (238,), (239,), (236,), (223,), (194,), (196,), (192,), (193,), None, (266,), (91,), (209,), None, (201,), (202,), (203,), (200,), (205,), (206,), (207,), (204,), (728,), (295,), (265,), (349,), (365,), None, (124,), (176,), (293,), (285,), (309,), (184,), None, (164,), (181,), (294,), (264,), (348,), (364,), None, (64,), (729,), (163,), (380,), (125,), (379,), (167,), (93,), (183,), (189,), (36,), (292,), (284,), (308,), (168,), (180,), (215,), (173,), (244,), (126,), (242,), (243,), (289,), (96,), (251,), (92,), (249,), (250,), None, (178,), (212,), (35,), (210,), (211,), (288,), (179,), (219,), (34,), (217,), (218,), (247,)))
-
-graphdata.gsets['gr905'] = (96, 1, ((160,), (226,), (228,), (224,), (225,), None, (267,), (123,), (241,), (233,), (234,), (235,), (232,), (237,), (238,), (239,), (236,), (223,), (194,), (196,), (192,), (193,), None, (266,), (91,), (209,), None, (201,), (202,), (203,), (200,), (205,), (206,), (207,), (204,), (728,), (295,), (265,), (349,), (365,), None, (124,), (176,), (293,), (285,), (309,), (184,), None, (164,), (181,), (294,), (264,), (348,), (364,), None, (64,), (729,), (163,), (380,), (125,), (379,), (167,), (93,), None, (189,), (36,), (292,), (284,), (308,), (168,), (180,), (215,), (173,), (244,), (126,), (242,), (243,), (289,), (96,), (251,), (92,), (249,), (250,), None, (178,), (212,), (35,), (210,), (211,), (288,), (179,), (219,), (34,), (217,), (218,), (247,)))
+graphdata.gsets['gr905'] = (96, 1, ((160,), (226,), (228,), (224,), (225,), None, (267,), (123,), (241,), (233,), (234,), (235,), (232,), (237,), (238,), (239,), (236,), (223,), (194,), (196,), (192,), (193,), None, (266,), (91,), (209,), None, (201,), (202,), (203,), (200,), (205,), (206,), (207,), (204,), (728,), (295,), (265,), (349,), (365,), None, (124,), (176,), (293,), (285,), (309,), (184,), None, (164,), (181,), (294,), (264,), (348,), (364,), None, (64,), (729,), (163,), (380,), (125,), (379,), (167,), (93,), (183,), (189,), (36,), (292,), (284,), (308,), (168,), (180,), (215,), (173,), (244,), (126,), (242,), (243,), (289,), (96,), (251,), (92,), (249,), (250,), None, (178,), (212,), (35,), (210,), (211,), (288,), (179,), (219,), (34,), (217,), (218,), (247,)))
 
 graphdata.gsets['gr918'] = (96, 1, ((160,), (1548,), (1563,), (1567,), (65153,), (65165,), (65166,), (1575,), (65167,), (65169,), (64342,), (64344,), (65171,), (65173,), (65175,), (64358,), (64360,), (65177,), (65179,), (65181,), (65183,), (64378,), (64380,), (65185,), (65187,), (65189,), (1776,), (1777,), (1778,), (1779,), (1780,), (1781,), (1782,), (1783,), (1784,), (65191,), (65193,), (64392,), (65195,), (65197,), (64396,), (65199,), (64394,), (65201,), (65203,), (65205,), (65207,), (65209,), (65211,), (65213,), (65215,), (65219,), (65223,), (65225,), (65226,), (65227,), (65228,), (65229,), (65230,), (65231,), (65232,), (65233,), (65235,), (65237,), (65239,), (64398,), (65243,), (124,), (64402,), (64404,), (65245,), (65247,), (173,), (65248,), (65249,), (65251,), (64414,), (65253,), (65255,), (65157,), (65261,), (64422,), (64424,), (64425,), (65152,), (65161,), (65162,), (65163,), (64508,), (64509,), (64510,), (64432,), (64430,), (65148,), (65149,), (64426,)))
 
@@ -518,9 +512,7 @@ graphdata.gsets['gr2084'] = (96, 1, ((65,), (66,), (67,), (68,), (69,), (70,), (
 
 graphdata.gsets['gr2085'] = (96, 1, ((160,), None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (123,), (8804,), (8317,), (8314,), (9532,), None, None, (125,), None, (8318,), (177,), (9632,), (8315,), None, (9492,), (9484,), (91,), (8805,), (8226,), (8304,), (185,), (178,), (179,), (8308,), (8309,), (8310,), (8311,), (8312,), (8313,), None, (9496,), (9488,), (93,), (8800,), (9472,), None, None, None, None, None, None, None, None, (167,), None, None, None, None, None, None, None, None, None, (9474,), None, None, None, None, None))
 
-graphdata.gsets['gr2088/ext'] = (94, 1, (None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (91,), None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (93,), None, None, None, None, (9280,), None, (9282,), None, None, None, None, None, None, None, None, None, (9281,), None, None, None, (65512,), None, None, None, None))
-
-graphdata.gsets['gr2088'] = (94, 1, (None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (9280,), None, (9282,), None, None, None, None, None, None, None, None, None, (9281,), None, None, None, None, None, None, None, None))
+graphdata.gsets['gr2088'] = (94, 1, (None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (91,), None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (93,), None, None, None, None, (9280,), None, (9282,), None, None, None, None, None, None, None, None, None, (9281,), None, None, None, (65512,), None, None, None, None))
 
 graphdata.gsets['gr2091'] = (96, 1, (None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (8734,), (8733,), (8801,), (8706,), (8747,), (8804,), (8805,), (8800,), (8730,), None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (8592,)))
 
@@ -891,13 +883,13 @@ graphdata.defgsets['875'] = ('ir006', 'gr875', 'gl310', 'gr310')
 graphdata.chcpdocs['880'] = 'ebcdic'
 graphdata.defgsets['880'] = ('ir006', 'gr880', 'gl310', 'gr310')
 graphdata.chcpdocs['881'] = 'ebcdic'
-graphdata.defgsets['881'] = ('alt646/ibmusa', 'gr881', 'gl310', 'gr310')
+graphdata.defgsets['881'] = ('alt646/ibmusa', 'ibm5080-technical', 'gl310', 'gr310')
 graphdata.chcpdocs['882'] = 'ebcdic'
-graphdata.defgsets['882'] = ('alt646/ibmuk', 'gr881', 'gl310', 'gr310')
+graphdata.defgsets['882'] = ('alt646/ibmuk', 'ibm5080-technical', 'gl310', 'gr310')
 graphdata.chcpdocs['883'] = 'ebcdic'
-graphdata.defgsets['883'] = ('alt646/ibmswedish', 'gr881', 'gl310', 'gr310')
+graphdata.defgsets['883'] = ('alt646/ibmswedish', 'ibm5080-technical', 'gl310', 'gr310')
 graphdata.chcpdocs['884'] = 'ebcdic'
-graphdata.defgsets['884'] = ('ir021', 'gr881', 'gl310', 'gr310')
+graphdata.defgsets['884'] = ('ir021', 'ibm5080-technical', 'gl310', 'gr310')
 graphdata.chcpdocs['885'] = 'ebcdic'
 graphdata.defgsets['885'] = ('ir069', 'gr885', 'gl310', 'gr310')
 graphdata.chcpdocs['886'] = 'ebcdic'
@@ -913,13 +905,9 @@ graphdata.defgsets['890'] = ('ir141', 'gr890', 'gl310', 'gr310')
 graphdata.chcpdocs['892'] = 'ebcdic'
 graphdata.defgsets['892'] = ('gl892', 'gr892', 'gl310', 'gr310')
 graphdata.chcpdocs['893'] = 'ebcdic'
-graphdata.defgsets['893'] = ('gl340', 'gr340', 'gl310', 'gr310')
-graphdata.chcpdocs['?893'] = 'ebcdic'
-graphdata.defgsets['?893'] = ('ir006', 'gr893/euro', 'gl310', 'gr310')
+graphdata.defgsets['893'] = ('ir006', 'gr893', 'gl310', 'gr310')
 graphdata.chcpdocs['905'] = 'ebcdic'
 graphdata.defgsets['905'] = ('alt646/ibmturkish', 'gr905', 'gl310', 'gr310')
-graphdata.chcpdocs['?905'] = 'ebcdic'
-graphdata.defgsets['?905'] = ('alt646/ibmturkish', 'gr905/interpunct', 'gl310', 'gr310')
 graphdata.chcpdocs['918'] = 'ebcdic'
 graphdata.defgsets['918'] = ('gl918', 'gr918', 'gl310', 'gr310')
 graphdata.chcpdocs['924'] = 'ebcdic'
@@ -953,7 +941,7 @@ graphdata.defgsets['1031'] = ('alt646/ibmjapan/noyen', 'gr1031', 'gl310', 'gr310
 graphdata.chcpdocs['1032'] = 'ebcdic'
 graphdata.defgsets['1032'] = ('ir098/extended', 'ibm-e13b', 'gl310', 'gr310')
 graphdata.chcpdocs['1037'] = 'ebcdic'
-graphdata.defgsets['1037'] = ('alt646/ibmkorea', 'gr881', 'gl310', 'gr310')
+graphdata.defgsets['1037'] = ('alt646/ibmkorea', 'ibm5080-technical', 'gl310', 'gr310')
 graphdata.chcpdocs['1039'] = 'ebcdic'
 graphdata.defgsets['1039'] = ('gl1039', 'gr1039', 'gl310', 'gr310')
 graphdata.chcpdocs['1047'] = 'ebcdic'
@@ -1148,8 +1136,6 @@ graphdata.chcpdocs['2087'] = 'ebcdic'
 graphdata.defgsets['2087'] = ('gl2087', 'nil', 'gl310', 'gr310')
 graphdata.chcpdocs['2088'] = 'ebcdic'
 graphdata.defgsets['2088'] = ('gl2088', 'gr2088', 'gl310', 'gr310')
-graphdata.chcpdocs['?2088'] = 'ebcdic'
-graphdata.defgsets['?2088'] = ('gl2088/full', 'gr2088/ext', 'gl310', 'gr310')
 graphdata.chcpdocs['2089'] = 'ebcdic'
 graphdata.defgsets['2089'] = ('gl2089', 'nil', 'gl310', 'gr310')
 graphdata.chcpdocs['2090'] = 'ebcdic'

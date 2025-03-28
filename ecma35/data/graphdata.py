@@ -367,6 +367,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"!\"3"): ("alt646/ibm-usa-wp", (), ("alt646/ibm-usa-wp/small", "alt646/ibm-usa-wp")),
             tuple(b"!\"4"): ("alt646/ibm-usa-accounting", ("alt646/ibm-usa-accounting/a", "alt646/ibm-usa-accounting/b"), ("alt646/ibm-usa-accounting",)),
             tuple(b"!\"5"): "alt646/ibm-usa-alternative",
+            tuple(b"!\"6"): "ibm5080-technical",
             tuple(b"~"): "nil"}
 
 g96bytes = {tuple(b"@"): "ir111",

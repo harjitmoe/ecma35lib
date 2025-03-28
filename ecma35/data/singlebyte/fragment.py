@@ -153,4 +153,21 @@ graphdata.gsets["half-and-trema"] = (94, 1, (
          None, None, None, None, (0xBD,), None, None, None,
          None, None, None, None, None, None, None))
 
+# Technical symbols from the IBM 5080 or IBM 6090 graphics system.
+# Projected supplementary portion of EBCDIC code pages 881, 882, 883, 884 and 1037, superset of
+#   that of EBCDIC code pages 885 and 886, subset of that of EBCDIC code page 887.
+graphdata.gsets["ibm5080-technical"] = (94, 1, (
+               None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, None, None, None, None, None,
+         None, None, None, (8452,), None, None, None, (176,),
+         (177,), None, (9012,), (8615,), None, (8960,), None, (8804,),
+         (8805,), (8486,), None, None, (9013,), (181,), (8901,)))
+
 
