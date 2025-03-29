@@ -99,7 +99,8 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"B"): ("ir006",
                           ("ir006/overline", "ir006/brvbar", "ir006/pli", "ir006/florin",
                            "ir006/smartquotes", "ir006/ocr-b", "ir006/ibm-hp-alternatives",
-                           "ir006/ibm-hp-diacritics", "ir006/ibm-hp-ascii-tilde"),
+                           "ir006/ibm-hp-diacritics", "ir006/ibm-hp-ascii-tilde",
+                           "ir006/pli/unicameral"),
                           ("ir006",)),
             tuple(b"C"): ("ir008-1", ("ir008-1/dec",), ("ir008-1",)),
             tuple(b"D"): "ir008-2",
@@ -365,9 +366,12 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"!\"1"): "alt646/ibm-turkish-wp",
             tuple(b"!\"2"): "alt646/ibm-uk-wp",
             tuple(b"!\"3"): ("alt646/ibm-usa-wp", (), ("alt646/ibm-usa-wp/small", "alt646/ibm-usa-wp")),
-            tuple(b"!\"4"): ("alt646/ibm-usa-accounting", ("alt646/ibm-usa-accounting/a", "alt646/ibm-usa-accounting/b"), ("alt646/ibm-usa-accounting",)),
+            tuple(b"!\"4"): ("alt646/ibm-usa-accounting",
+                             ("alt646/ibm-usa-accounting/a", "alt646/ibm-usa-accounting/b"),
+                             ("alt646/ibm-usa-accounting",)),
             tuple(b"!\"5"): "alt646/ibm-usa-alternative",
             tuple(b"!\"6"): "ibm5080-technical",
+            tuple(b"!\"7"): "ibm3800-linedrawing",
             tuple(b"~"): "nil"}
 
 g96bytes = {tuple(b"@"): "ir111",

@@ -139,3 +139,6 @@ graphdata.gsets["pclinedrawing"] = (94, 1, (None, None, None, None, None, None, 
 graphdata.chcpdocs['1055'] = 'ecma-35'
 graphdata.defgsets['1055'] = ('pclinedrawing', 'nil', 'nil', 'nil')
 
+# Line Drawing LCS (library character set) of the IBM 3800 laser printer
+graphdata.gsets["ibm3800-linedrawing"] = (94, 1, (None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, (8282,), (9523,), (9531,), (9507,), (9515,), (9547,), (9473,), (9475,), (9550,), (9551,), None, None, None, None, None, None, None, (9484,), (9488,), (9496,), (9492,), (9516,), (9524,), (9500,), (9508,), (9532,), (9472,), (9474,), (9485,), (9489,), (9497,), (9493,), (9516, 63612), (9524, 63612), (9500, 63612), (9508, 63612), (9532, 63612), (9472, 63612), (65512, 63612), (9487,), (9491,), (9499,), (9495,), None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None))
+

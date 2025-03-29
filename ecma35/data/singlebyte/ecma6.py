@@ -50,6 +50,14 @@ raw_variants = {
     # Violation of ECMA-6:1991: 0x21 is not !.
     "ir006/pli": ([None, None, None, None, None, None, 0xAC, None, 
                                None, None, 0xA6, None, None], {0x21: 0x7C}),
+    # ASCII-1967, PL/I variant, subset without lowercase letters
+    #   (projection from EBCDIC code page 2097).
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    # Violation of ECMA-6:1991: lowercase letters omitted.
+    "ir006/pli/unicameral": ([None, None, None, None, None, None, 0xAC, None, 
+                                          -1,   -1,   -1,   -1,   -1], dict([
+        (0x21, 0x7C),
+        *[(i, -1) for i in range(0x61, 0x7B)]])),
     # Left-hand side of IBM code page 877 for the OCR-B optical character recognition font
     # Violation of ECMA-6:1991: 0x5F is not (strictly) _.
     "ir006/ocr-b": ([None, None, None, None, None,   None, 0x2303, 0x02CD,
