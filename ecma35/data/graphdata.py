@@ -95,12 +95,12 @@ chcpdocs["1392"] = chcpdocs["5488"] = "gbk"
 g94bytes = {tuple(b"@"): ("ir002", # Preferred version
                           ("ir002/tilde",), # Private versions
                           ("ir002",)), # Original followed by any registered revisions, each of which must be superset of the previous
-            tuple(b"A"): ("ir004", ("ir004/dec",), ("ir004",)),
+            tuple(b"A"): ("ir004", ("ir004/dec", "ir004/sterling"), ("ir004",)),
             tuple(b"B"): ("ir006",
                           ("ir006/overline", "ir006/brvbar", "ir006/pli", "ir006/florin",
                            "ir006/smartquotes", "ir006/ocr-b", "ir006/ibm-hp-alternatives",
                            "ir006/ibm-hp-diacritics", "ir006/ibm-hp-ascii-tilde",
-                           "ir006/pli/unicameral"),
+                           "ir006/pli/unicameral", "ir006/1963"),
                           ("ir006",)),
             tuple(b"C"): ("ir008-1", ("ir008-1/dec",), ("ir008-1",)),
             tuple(b"D"): "ir008-2",
@@ -109,7 +109,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"G"): ("ir010", ("ir010/ibm",), ("ir010",)),
             # Note: some pre-standardised variants of ISO-2022-JP / JIS_Encoding, as well as OKI
             #   dot-matrix / line printers, interpret "H" in a nonstandard way
-            #   (as "ir013" or "ir006").
+            #   (as "ir014" or "ir006").
             tuple(b"H"): ("ir011", ("ir011/dec",), ("ir011",)),
             tuple(b"I"): ("ir013", ("ir013/ibm", "ir013/mac", "ir013/win", "ir013/euro",
                                     "ir013/ibm/strict", "ir013/ibm/alternate", "ir013/ibm/sjis"),

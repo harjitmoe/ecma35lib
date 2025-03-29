@@ -83,10 +83,21 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |---|---|
 |`IRR 0 G*D4 @`|Old IRV with tilde (rather than overscore)|
 |``IRR 0 G*D4 [ACEH`g]``|DEC NRCS, where they differ from standard|
+|`IRR ? G*D4 A`|BS 4730 (7-bit for United Kingdom)|
+|`IRR 0 G*D4 A`|DEC 7-bit for United Kingdom|
+|`IRR 1 G*D4 A`|ISO-646:1967 "sterling" variant for fixed-width old-pence data|
+|`IRR ? G*D4 B`|ASCII|
 |`IRR 0 G*D4 B`|ASCII with overscore (rather than tilde)|
 |`IRR 1 G*D4 B`|ASCII-1967 using broken-bar mapping|
 |`IRR 2 G*D4 B`|ASCII-1967, PL/I variant|
 |`IRR 3 G*D4 B`|Modified ASCII with Florin sign (cross between ASCII and `G*D4 $ 2`)|
+|`IRR 4 G*D4 B`|ASCII, alternative Unicode mappings (backtick/apostrophe as quotation mark pair)|
+|`IRR 5 G*D4 B`|ASCII, alternative Unicode mappings (mid-line caret, continuous vertical bar, discontinuous underscore)|
+|`IRR 6 G*D4 B`|ASCII, alternative Unicode mappings (raised caret/tilde, backtick as grave-accent, continuous vertical bar)|
+|`IRR 7 G*D4 B`|ASCII, alternative Unicode mappings (raised caret/tilde, backtick as grave-accent)|
+|`IRR 8 G*D4 B`|ASCII, alternative Unicode mappings (raised caret, backtick as grave accent, continuous vertical bar)|
+|`IRR 9 G*D4 B`|ASCII 1963/1967 hybrid, unicameral PL/I variant|
+|`IRR : G*D4 B`|ASCII-1963 (graphic charset assignments only)|
 |`IRR 0 G*D4 G`|Variant Swedish and Finnish, projected from EBCDIC WP96|
 |`IRR 0 G*D4 I`|JIS X 0201 katakana, IBM's 4992 (used for its counterparts from IBM's 1041 in the Shift\_JIS filter).|
 |`IRR 1 G*D4 I`|JIS X 0201 katakana, an analogous extraction from MacJapanese.|

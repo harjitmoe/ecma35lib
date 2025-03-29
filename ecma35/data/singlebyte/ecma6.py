@@ -29,10 +29,21 @@ raw_variants = {
     "ir004": ([0xA3, None, None, None, None, None, None, None, 
                            None, None, None, None, 0x203E], {}),
     "ir004/dec": ([0xA3, None, None, None, None, None, None, None, 
-                              None, None, None, None, None], {}),
+                               None, None, None, None, None], {}),
+    # ISO-646:1967 "sterling" variant for fixed-width old-pence data
+    # Violation of ECMA-6:1991: 0x3A is not :.
+    # Violation of ECMA-6:1991: 0x3B is not ;.
+    "ir004/sterling": ([0xA3, None, None, None, None, None, None, None, 
+                                    None, None, None, None, 0x203E], {0x3A: 0x2491, 0x3B: 0x2492}),
     # US-ASCII / New IRV, ISO/IEC 10367 G0 set
     "ir006": ([None, None, None, None, None, None, None, None, 
                            None, None, None, None, None], {}),
+    # ASCII-1963
+    # Violation of ECMA-6:1991: 0x5F is not _.
+    # Violation of ECMA-6:1991: lowercase letters omitted.
+    "ir006/1963": ([None, None, None, None, None, None, 0x2191, 0x2190, 
+                                -1,   -1,   -1,   -1,   -1],
+                   dict((i, -1) for i in range(0x61, 0x7B))),
     # ASCII-1967 with broken vertical bar, also basis of DP94-range subset of EBCDIC code pages 256
     #   and 500.
     "ir006/brvbar": ([None, None, None, None, None, None, None, None, 
@@ -61,16 +72,16 @@ raw_variants = {
     # Left-hand side of IBM code page 877 for the OCR-B optical character recognition font
     # Violation of ECMA-6:1991: 0x5F is not (strictly) _.
     "ir006/ocr-b": ([None, None, None, None, None,   None, 0x2303, 0x02CD,
-                                  None, None, 0xFFE8, None, None], {}),
+                                 None, None, 0xFFE8, None, None], {}),
     # Left-hand side of IBM HP-compatibility code page 1053
     "ir006/ibm-hp-diacritics": ([None, None, None,   None, None, None, 0x02C6, None,
-                                              0x02CB, None, None, None, 0x02DC], {}),
+                                             0x02CB, None, None, None, 0x02DC], {}),
     # Left-hand side of IBM HP-compatibility code page 1057
     "ir006/ibm-hp-alternatives": ([None, None, None,   None, None,   None, 0x02C6, None,
                                                0x02CB, None, 0xFFE8, None, 0x02DC], {}),
     # Left-hand side of IBM HP-compatibility code page 1058
     "ir006/ibm-hp-ascii-tilde": ([None, None, None,   None, None,   None, 0x02C6, None,
-                                               0x02CB, None, 0xFFE8, None, None], {}),
+                                              0x02CB, None, 0xFFE8, None, None], {}),
     # ASCII-1967, curly quotation marks variant.
     # Violation of ECMA-6:1991: 0x27 is not (strictly) '.
     "ir006/smartquotes": ([None, None, None,   None, None, None, None, None, 
