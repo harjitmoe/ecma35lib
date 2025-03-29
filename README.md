@@ -254,7 +254,11 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 ' 2`|ICT 1900 character set, standardised in Poland as PN⁠-⁠T⁠-⁠42109-02-ZU1|
 |`G*D4 ' 3`|CENELEC supplementary set for characters in Annex A of T.51 but not in the first 9 parts of ISO 8859: same as `G*D6 N`, but as a 94-character set designatable to G0|
 |`G*D4 ' 4`|ISO 10367 box-drawing set: same as `G*D6 Q`, but as a 94-character set designatable to G0|
-|`G*D4 ' 5`|CCITT Hebrew (letters-only subset of right-hand-side of ISO-8859-8): same as `G*D6 S`, but as a 94-character set designatable to G0|
+|`IRR ? G*D4 ' 5`|CCITT Hebrew (letters-only subset of right-hand-side of ISO-8859-8): same as `G*D6 S`, but as a 94-character set designatable to G0|
+|`IRR @ G*D4 ' 5`|Right-hand side of 1988 edition of ISO-8859-8 (Hebrew), minus the non-breaking space|
+|`IRR A G*D4 ' 5`|Right-hand side of 1999 edition of ISO-8859-8 (Hebrew), minus the non-breaking space|
+|`IRR B G*D4 ' 5`|Right-hand side of 2002 edition of SI-1311 (Hebrew), minus the non-breaking space|
+|`IRR 0 G*D4 ' 5`|Hebrew with box-drawing characters but without the non-breaking space|
 |`G*D4 ' 6`|I.S. 434 charset for Ogham: same as `G*D6 g`, but as a 94-character set designatable to G0|
 |`G*D4 ' 7`|7-bit Polish with Euro sign|
 

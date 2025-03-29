@@ -109,6 +109,7 @@ graphdata.gsets["ir126"] = (96, 1, (
          (0x03C8,), (0x03C9,), (0x03CA,), (0x03CB,), (0x03CC,), (0x03CD,), (0x03CE,), None))
 graphdata.chcpdocs['813'] = 'ecma-35'
 graphdata.defgsets['813'] = ('ir006', 'ir126', 'nil', 'nil')
+graphdata.gsets["ir126/94"] = (94, 1, graphdata.gsets["ir126"][2][1:-1])
 
 # ELOT-928 ECMA-118 ISO-8859-7:1987 Latin/Greek RHS plus the Euro sign (only) from ISO-8859-7:2003
 # See also "ir227" below.
@@ -127,6 +128,7 @@ graphdata.gsets["ir126/euro"] = (96, 1, (
          (0x03C8,), (0x03C9,), (0x03CA,), (0x03CB,), (0x03CC,), (0x03CD,), (0x03CE,), None))
 graphdata.chcpdocs['4909'] = 'ecma-35'
 graphdata.defgsets['4909'] = ('ir006', 'ir126/euro', 'nil', 'nil')
+graphdata.gsets["ir126/euro/94"] = (94, 1, graphdata.gsets["ir126/euro"][2][1:-1])
 
 # DEC 8-bit Greek
 graphdata.gsets["decgreek8"] = (94, 1, tuple((i,) if i else None for i in (
@@ -222,6 +224,7 @@ graphdata.gsets["ir181"] = (96, 1, (
     (0x03C0,), (0x03F1,), None,      (0x03C3,), (0x03C4,), (0x03C5,), (0x03D5,),  (0x03C7,), 
     (0x03C8,), (0x03C9,), (0x03D1,), (0x03C6,), (0x03B5,), None,      None,       None,
 ))
+graphdata.gsets["ir181/94"] = (94, 1, graphdata.gsets["ir181"][2][1:-1])
 
 graphdata.chcpdocs['65503'] = 'ecma-35'
 graphdata.defgsets['65503'] = ('ir006', 'ir181', 'nil', 'nil')
@@ -242,6 +245,7 @@ graphdata.gsets["ir227"] = (96, 1, (
          (0x03C8,), (0x03C9,), (0x03CA,), (0x03CB,), (0x03CC,), (0x03CD,), (0x03CE,), None))
 graphdata.chcpdocs['9005'] = 'ecma-35'
 graphdata.defgsets['9005'] = ('ir006', 'ir227', 'nil', 'nil')
+graphdata.gsets["ir227/94"] = (94, 1, graphdata.gsets["ir227"][2][1:-1])
 
 # DEC Technical Character Set (TCS)
 #   https://vt100.net/charsets/technical.html

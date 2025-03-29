@@ -90,6 +90,7 @@ graphdata.gsets["ir127"] = (96, 1, tuple((i,) if i else None for i in (
              None,   None,   None,   None,   None,   None,   None,   None)))
 graphdata.chcpdocs['1089'] = 'ecma-35'
 graphdata.defgsets['1089'] = ('alt646/ibmarabic', 'ir127', 'nil', 'nil')
+graphdata.gsets["ir127/94"] = (94, 1, graphdata.gsets["ir127"][2][1:-1])
 
 # ECMA-121:1987 ISO-8859-8:1988 Latin/Hebrew RHS
 graphdata.gsets["ir138"] = (96, 1, tuple((i,) if i else None for i in (
@@ -107,6 +108,7 @@ graphdata.gsets["ir138"] = (96, 1, tuple((i,) if i else None for i in (
              0x05E8, 0x05E9, 0x05EA, None,   None,   None,   None,   None)))
 graphdata.chcpdocs['916'] = 'ecma-35'
 graphdata.defgsets['916'] = ('ir006', 'ir138', 'nil', 'nil')
+graphdata.gsets["ir138/94"] = (94, 1, graphdata.gsets["ir138"][2][1:-1])
 
 # DEC 8-bit Hebrew
 graphdata.gsets["ir138/dec"] = (94, 1, tuple((i,) if i else None for i in (
@@ -152,6 +154,7 @@ graphdata.gsets["ir164/ibm"] = (96, 1, (
     (0x05D8,), (0x05D9,), (0x05DA,), (0x05DB,), (0x05DC,), (0x05DD,), (0x05DE,), (0x05DF,),
     (0x05E0,), (0x05E1,), (0x05E2,), (0x05E3,), (0x05E4,), (0x05E5,), (0x05E6,), (0x05E7,),
     (0x05E8,), (0x05E9,), (0x05EA,), None,      None,      None,      None,      (0x00A0,)))
+graphdata.gsets["ir164/ibm/94"] = (94, 1, graphdata.gsets["ir164/ibm"][2][1:-1])
 
 # Extended version of ASMO-708/ISO-8859-6 to also support French and German, RHS
 graphdata.gsets["ir167"] = (96, 1, (
@@ -185,6 +188,7 @@ graphdata.gsets["ir198"] = (96, 1, tuple((i,) if i else None for i in (
              0x05E8, 0x05E9, 0x05EA, None,   None,   0x200E, 0x200F, None)))
 graphdata.chcpdocs['5012'] = 'ecma-35'
 graphdata.defgsets['5012'] = ('ir006', 'ir198', 'nil', 'nil')
+graphdata.gsets["ir198/94"] = (94, 1, graphdata.gsets["ir198"][2][1:-1])
 
 # ISO 8957-A 7-bit Hebrew
 graphdata.gsets["ir219"] = (94, 1, ((0x0021,), (0x05F4,), (0x0023,), (0x0024,), (0x0025,), (0x0026,), (0x05F3,), (0x0028,), (0x0029,), (0x002A,), (0x002B,), (0x002C,), (0x05BE,), (0x002E,), (0x002F,), (0x0030,), (0x0031,), (0x0032,), (0x0033,), (0x0034,), (0x0035,), (0x0036,), (0x0037,), (0x0038,), (0x0039,), (0x003A,), (0x003B,), (0x003C,), (0x003D,), (0x003E,), (0x003F,), (0x05B7,), (0x05B8,), (0x05B6,), (0x05B5,), (0x05B4,), (0x05C2,), (0x05BB,), (0x05B0,), (0x05B2,), (0x05B3,), (0x05B1,), (0x05BC,), (0x05BF,), (0x05C1,), (0xFB1E,), None, None, None, None, None, None, None, None, None, None, None, None, (0x005B,), None, (0x005D,), None, None, (0x05D0,), (0x05D1,), (0x05D2,), (0x05D3,), (0x05D4,), (0x05D5,), (0x05D6,), (0x05D7,), (0x05D8,), (0x05D9,), (0x05DA,), (0x05DB,), (0x05DC,), (0x05DD,), (0x05DE,), (0x05DF,), (0x05E0,), (0x05E1,), (0x05E2,), (0x05E3,), (0x05E4,), (0x05E5,), (0x05E6,), (0x05E7,), (0x05E8,), (0x05E9,), (0x05EA,), (0x05F0,), (0x05F1,), (0x05F2,), None))
@@ -244,6 +248,7 @@ graphdata.gsets["ir234"] = (96, 1, tuple((i,) if i else None for i in (
              0x05D8, 0x05D9, 0x05DA, 0x05DB, 0x05DC, 0x05DD, 0x05DE, 0x05DF, 
              0x05E0, 0x05E1, 0x05E2, 0x05E3, 0x05E4, 0x05E5, 0x05E6, 0x05E7, 
              0x05E8, 0x05E9, 0x05EA, 0x202A, 0x202B, 0x200E, 0x200F, None)))
+graphdata.gsets["ir234/94"] = (94, 1, graphdata.gsets["ir234"][2][1:-1])
 
 # SI-960 7-bit Hebrew
 graphdata.gsets["hebrew7"] = (94, 1, ((0x21,), (0x22,), (0x23,), (0x24,), (0x25,), (0x26,), (0x27,), (0x28,), (0x29,), (0x2A,), (0x2B,), (0x2C,), (0x2D,), (0x2E,), (0x2F,), (0x30,), (0x31,), (0x32,), (0x33,), (0x34,), (0x35,), (0x36,), (0x37,), (0x38,), (0x39,), (0x3A,), (0x3B,), (0x3C,), (0x3D,), (0x3E,), (0x3F,), (0x40,), (0x41,), (0x42,), (0x43,), (0x44,), (0x45,), (0x46,), (0x47,), (0x48,), (0x49,), (0x4A,), (0x4B,), (0x4C,), (0x4D,), (0x4E,), (0x4F,), (0x50,), (0x51,), (0x52,), (0x53,), (0x54,), (0x55,), (0x56,), (0x57,), (0x58,), (0x59,), (0x5A,), (0x5B,), (0x5C,), (0x5D,), (0x5E,), (0x5F,), (0x05D0,), (0x05D1,), (0x05D2,), (0x05D3,), (0x05D4,), (0x05D5,), (0x05D6,), (0x05D7,), (0x05D8,), (0x05D9,), (0x05DA,), (0x05DB,), (0x05DC,), (0x05DD,), (0x05DE,), (0x05DF,), (0x05E0,), (0x05E1,), (0x05E2,), (0x05E3,), (0x05E4,), (0x05E5,), (0x05E6,), (0x05E7,), (0x05E8,), (0x05E9,), (0x05EA,), (0x7B,), (0x7C,), (0x7D,), (0x7E,)))
@@ -310,10 +315,12 @@ graphdata.defgsets['1006'] = ('alt646/ibmarabic', 'ibmurdu', 'nil', 'nil')
 graphdata.gsets["ibmarabic"] = (96, 1, ((160,), (1548,), (162,), (1563,), (1567,), (65148,), (166,), (65149,), (1600,), (65139,), (65152,), (65153,), (172,), (173,), (65154,), (65155,), (1632,), (1633,), (1634,), (1635,), (1636,), (1637,), (1638,), (1639,), (1640,), (1641,), (65156,), (65157,), (65163,), (65165,), (65166,), (65167,), (65169,), (65171,), (65173,), (65175,), (65177,), (65179,), (65181,), (65183,), (65185,), (65187,), (65189,), (65191,), (65193,), (65195,), (65197,), (65199,), (1587,), (65203,), (1588,), (65207,), (1589,), (65211,), (1590,), (215,), (65215,), (65219,), (65223,), (65225,), (65226,), (65227,), (65228,), (65229,), (65230,), (65231,), (65232,), (65233,), (65235,), (65237,), (65239,), (65241,), (65243,), (65245,), (65269,), (65270,), (65271,), (65272,), (65275,), (65276,), (65247,), (65249,), (65251,), (65253,), (65255,), (65257,), (65259,), (247,), (65260,), (65261,), (65263,), (65264,), (65265,), (65266,), (65267,), None))
 graphdata.chcpdocs['1008'] = 'ecma-35'
 graphdata.defgsets['1008'] = ('alt646/ibmarabic', 'ibmarabic', 'nil', 'nil')
+graphdata.gsets["ibmarabic/94"] = (94, 1, graphdata.gsets["ibmarabic"][2][1:-1])
 
 graphdata.gsets["ibmaix-arabic/isoextended"] = (96, 1, ((160,), (1570,), (1571,), (1573,), (164,), (65163,), (1575,), (65169,), (65175,), (65179,), (65183,), (65187,), (1548,), (173,), (65191,), (65203,), (1632,), (1633,), (1634,), (1635,), (1636,), (1637,), (1638,), (1639,), (1640,), (1641,), (65207,), (1563,), (65211,), (65215,), (65226,), (1567,), (65227,), (65152,), (65154,), (65156,), (65157,), (65160,), (1574,), (65166,), (65167,), (65171,), (65173,), (65177,), (65181,), (65185,), (65189,), (65193,), (65195,), (65197,), (65199,), (65201,), (65205,), (65209,), (65213,), (65219,), (65223,), (65225,), (65229,), (65228,), (65230,), (65231,), (65232,), (65235,), (1600,), (65233,), (65237,), (65241,), (65245,), (65249,), (65253,), (65257,), (65261,), (65264,), (1610,), (65136,), (65138,), (65140,), (65142,), (65144,), (65146,), (65148,), (65150,), (65239,), (65243,), (65247,), (65251,), (65255,), (65259,), (65267,), (65143,), (65145,), (65147,), (65149,), (65151,), None))
 graphdata.chcpdocs['1029'] = 'ecma-35'
 graphdata.defgsets['1029'] = ('alt646/ibmarabic', 'ibmaix-arabic/isoextended', 'nil', 'nil')
+graphdata.gsets["ibmaix-arabic/isoextended/94"] = (94, 1, graphdata.gsets["ibmaix-arabic/isoextended"][2][1:-1])
 
 graphdata.gsets["ibmarabic/euro"] = (96, 1, ((160,), (1548,), (162,), (1563,), (1567,), (65148,), (166,), (65149,), (1600,), (65139,), (65152,), (65153,), (172,), (173,), (65154,), (65155,), (1632,), (1633,), (1634,), (1635,), (1636,), (1637,), (1638,), (1639,), (1640,), (1641,), (65156,), (65157,), (65163,), (65165,), (65166,), (65167,), (65169,), (65171,), (65173,), (65175,), (65177,), (65179,), (65181,), (65183,), (65185,), (65187,), (65189,), (65191,), (65193,), (65195,), (65197,), (65199,), (1587,), (65203,), (1588,), (65207,), (1589,), (65211,), (1590,), (215,), (65215,), (65219,), (65223,), (65225,), (65226,), (65227,), (65228,), (65229,), (65230,), (65231,), (65232,), (65233,), (65235,), (65237,), (65239,), (65241,), (65243,), (65245,), (65269,), (65270,), (65271,), (65272,), (65275,), (65276,), (65247,), (65249,), (65251,), (65253,), (65255,), (65257,), (65259,), (247,), (65260,), (65261,), (65263,), (65264,), (65265,), (65266,), (65267,), (8364,)))
 graphdata.chcpdocs['5104'] = 'ecma-35'
@@ -322,22 +329,28 @@ graphdata.defgsets['5104'] = ('alt646/ibmarabic', 'ibmarabic/euro', 'nil', 'nil'
 graphdata.gsets["ibmaix-arabic/base"] = (96, 1, ((160,), None, None, None, (164,), None, None, None, None, None, None, None, (1548,), (173,), None, None, None, None, None, None, None, None, None, None, None, None, None, (1563,), None, None, None, (1567,), None, (1569,), (1570,), (1571,), (1572,), (1573,), (65161,), (1575,), (1576,), (1577,), (1578,), (1579,), (1580,), (1581,), (1582,), (1583,), (1584,), (1585,), (1586,), (1587,), (1588,), (1589,), (1590,), (1591,), (1592,), (1593,), (1594,), None, None, None, None, None, (1600,), (1601,), (1602,), (1603,), (1604,), (1605,), (1606,), (1607,), (1608,), (1609,), (1610,), (1611,), (1612,), (1613,), (1614,), (1615,), (1616,), (1617,), (1618,), None, None, None, None, None, None, None, None, None, None, None, None, None))
 graphdata.chcpdocs['5142'] = 'ecma-35'
 graphdata.defgsets['5142'] = ('alt646/ibmarabic', 'ibmaix-arabic/base', 'nil', 'nil')
+graphdata.gsets["ibmaix-arabic/base/94"] = (94, 1, graphdata.gsets["ibmaix-arabic/base"][2][1:-1])
 
 graphdata.gsets["ibmpc-arabic/small"] = (96, 1, ((160,), (173,), None, (163,), (164,), None, None, None, None, None, None, None, (1548,), None, None, None, (1632,), (1633,), (1634,), (1635,), (1636,), (1637,), (1638,), (1639,), (1640,), (1641,), None, (1563,), None, None, None, (1567,), (162,), (1569,), (1570,), (1571,), (1572,), None, (1574,), (1575,), (1576,), (1577,), (1578,), (1579,), (1580,), (1581,), (1582,), (1583,), (1584,), (1585,), (1586,), (1587,), (1588,), (1589,), (1590,), (1591,), (1592,), (1593,), (1594,), (166,), (172,), (247,), (215,), None, (1600,), (1601,), (1602,), (1603,), (1604,), (1605,), (1606,), (1607,), (1608,), (1609,), (1610,), None, None, None, None, None, None, (1617,), None, None, None, None, None, None, None, None, None, None, None, None, None, None))
 graphdata.chcpdocs['9056'] = 'ecma-35'
 graphdata.defgsets['9056'] = ('alt646/ibmarabic', 'ibmpc-arabic/small', 'nil', 'nil')
 graphdata.rhses["37728"] = ((None,) * 32) + graphdata.gsets["ibmpc-arabic/small"][2]
 graphdata.defgsets["37728"] = ("alt646/ibmarabic", "ibmpc-arabic/small", "nil", "nil")
+graphdata.gsets["ibmpc-arabic/small/94"] = (94, 1, graphdata.gsets["ibmpc-arabic/small"][2][1:-1])
 
 graphdata.gsets["ibmpc-arabic/smaller"] = (96, 1, ((0x00A0,), (0x00AD,), None, None, None, None, None, None, None, (0x0628,), (0x062A,), (0x062B,), (0x060C,), (0x062C,), (0x062D,), (0x062E,), None, None, None, None, None, None, None, None, None, None, (0x0641,), (0x061B,), (0x0633,), (0x0634,), (0x0635,), (0x061F,), (0x00A2,), (0x0621,), (0x0622,), (0x0623,), (0x0624,), None, (0x0626,), (0x0627,), None, (0x0629,), None, None, None, None, None, (0x062F,), (0x0630,), (0x0631,), (0x0632,), None, None, None, None, (0x0637,), (0x0638,), None, None, (0x00A6,), (0x00AC,), (0x00F7,), (0x00D7,), (0x0639,), (0x0640,), None, None, None, None, None, None, None, (0x0648,), (0x0649,), None, (0x0636,), None, None, (0x063A,), (0x0645,), None, (0x0651,), (0x0646,), (0x0647,), None, None, None, None, (0x0642,), (0xFEF5,), None, (0x0644,), (0x0643,), (0x064A,), None, None))
 graphdata.rhses["41824"] = ((None,) * 41) + ((0xFEF7,), None, None, None, (0xFEFB,), None, None) + graphdata.gsets["ibmpc-arabic/smaller"][2]
 graphdata.defgsets["41824"] = ("alt646/ibmarabic/tiny", "ibmpc-arabic/smaller", "nil", "nil")
+graphdata.gsets["ibmpc-arabic/smaller/94"] = (94, 1, graphdata.gsets["ibmpc-arabic/smaller"][2][1:-1])
 
 graphdata.gsets["ibmpc-arabic/tiny"] = (96, 1, ((160,), (173,), None, None, None, None, None, None, None, (1576,), (1578,), (1579,), (1548,), (1580,), (1581,), (1582,), None, None, None, None, None, None, None, None, None, None, (1601,), (1563,), (1587,), (1588,), (1589,), (1567,), (162,), (1569,), (1570,), (1571,), (1572,), None, (1574,), (1575,), None, (1577,), None, None, None, None, None, (1583,), (1584,), (1585,), (1586,), None, None, None, None, (1591,), (1592,), None, None, (166,), (172,), (247,), (215,), (1593,), (1600,), None, None, None, None, None, None, None, (1608,), (1609,), None, (1590,), None, None, (1594,), (1605,), None, (1617,), (1606,), (1607,), None, None, None, None, (1602,), None, None, (1604,), (1603,), (1610,), None, None))
 graphdata.chcpdocs['13152'] = 'ecma-35'
 graphdata.defgsets['13152'] = ('alt646/ibmarabic/tiny', 'ibmpc-arabic/tiny', 'nil', 'nil')
+graphdata.gsets["ibmpc-arabic/tiny/94"] = (94, 1, graphdata.gsets["ibmpc-arabic/tiny"][2][1:-1])
 
 graphdata.gsets["ibmpc-arabic/base"] = (96, 1, tuple(i or j or k for i, j, k in zip(graphdata.gsets["ibmpc-arabic/small"][2], graphdata.gsets["ibmpc-arabic/tiny"][2], graphdata.gsets["ibmpc-arabic/smaller"][2])))
+graphdata.gsets["ibmpc-arabic/base/94"] = (94, 1, graphdata.gsets["ibmpc-arabic/base"][2][1:-1])
 
 graphdata.gsets["ibmpc-arabic/alternate"] = (96, 1, ((0x00A0,), (0x00AD,), (0xFE82,), (0x00A3,), (0x00A4,), (0xFE84,), (0xFE87,), (0xFE88,), (0xFE8E,), (0xFE8F,), (0xFE95,), (0xFE99,), (0x060C,), (0xFE9D,), (0xFEA1,), (0xFEA5,), (0x0660,), (0x0661,), (0x0662,), (0x0663,), (0x0664,), (0x0665,), (0x0666,), (0x0667,), (0x0668,), (0x0669,), (0xFED1,), (0x061B,), (0x0633,), (0x0634,), (0x0635,), (0x061F,), (0x00A2,), (0xFE80,), (0xFE81,), (0xFE83,), (0xFE85,), (0xFECA,), (0xFE8B,), (0xFE8D,), (0xFE91,), (0xFE93,), (0xFE97,), (0xFE9B,), (0xFE9F,), (0xFEA3,), (0xFEA7,), (0xFEA9,), (0xFEAB,), (0xFEAD,), (0xFEAF,), (0xFEB3,), (0xFEB7,), (0xFEBB,), (0xFEBF,), (0xFEC3,), (0xFEC7,), (0xFECB,), (0xFECF,), (0x00A6,), (0x00AC,), (0x00F7,), (0x00D7,), (0xFEC9,), (0x0640,), (0xFED3,), (0xFED7,), (0xFEDB,), (0xFEDF,), (0xFEE3,), (0xFEE7,), (0xFEEB,), (0xFEED,), (0xFEEF,), (0xFEF3,), (0x0636,), (0xFECC,), (0xFECE,), (0xFECD,), (0xFEE1,), (0xFE7D,), (0xFE7C,), (0xFEE5,), (0xFEE9,), (0xFEEC,), (0xFEF0,), (0xFEF2,), (0xFED0,), (0xFED5,), (0xFEF5,), (0xFEF6,), (0xFEDD,), (0xFED9,), (0xFEF1,), (0x25A0,), (0x00A0,)))
+graphdata.gsets["ibmpc-arabic/alternate/94"] = (94, 1, graphdata.gsets["ibmpc-arabic/alternate"][2][1:-1])
 
