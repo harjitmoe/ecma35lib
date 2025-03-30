@@ -81,12 +81,12 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 
 |Private assignment|Meaning|
 |---|---|
+|`IRR ? G*D4 @`|(Old ISO 646 International Reference Version)|
 |`IRR 0 G*D4 @`|Old IRV with tilde (rather than overscore)|
-|``IRR 0 G*D4 [ACEH`g]``|DEC NRCS, where they differ from standard|
-|`IRR ? G*D4 A`|BS 4730 (7-bit for United Kingdom)|
-|`IRR 0 G*D4 A`|DEC 7-bit for United Kingdom|
+|`IRR ? G*D4 A`|(BS 4730 (7-bit for United Kingdom))|
+|`IRR 0 G*D4 A`|DEC NRCS for United Kingdom|
 |`IRR 1 G*D4 A`|ISO-646:1967 "sterling" variant for fixed-width old-pence data|
-|`IRR ? G*D4 B`|ASCII|
+|`IRR ? G*D4 B`|(ASCII)|
 |`IRR 0 G*D4 B`|ASCII with overscore (rather than tilde)|
 |`IRR 1 G*D4 B`|ASCII-1967 using broken-bar mapping|
 |`IRR 2 G*D4 B`|ASCII-1967, PL/I variant|
@@ -98,45 +98,60 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 8 G*D4 B`|ASCII, alternative Unicode mappings (raised caret, backtick as grave accent, continuous vertical bar)|
 |`IRR 9 G*D4 B`|ASCII 1963/1967 hybrid, unicameral PL/I variant|
 |`IRR : G*D4 B`|ASCII-1963 (graphic charset assignments only)|
+|`IRR ? G*D4 C`|(7-bit Swedish and Finnish Journalism)|
+|`IRR 0 G*D4 C`|DEC NRCS for Finnish|
+|`IRR ? G*D4 E`|(7-bit Danish and Norwegian Journalism)
+|`IRR 0 G*D4 E`|DEC NRCS for Danish and Norwegian|
+|`IRR ? G*D4 G`|(7-bit Swedish and Finnish (SEN 85 02 00 annex B))|
 |`IRR 0 G*D4 G`|Variant Swedish and Finnish, projected from EBCDIC WP96|
+|`IRR ? G*D4 H`|(7-bit Swedish names or Swedish Teletext (SEN 85 02 00 annex C))|
+|`IRR 0 G*D4 H`|DEC NRCS for Swedish|
+|`IRR ? G*D4 I`|(JIS X 0201 katakana)|
 |`IRR 0 G*D4 I`|JIS X 0201 katakana, IBM's 4992 (used for its counterparts from IBM's 1041 in the Shift\_JIS filter).|
 |`IRR 1 G*D4 I`|JIS X 0201 katakana, an analogous extraction from MacJapanese.|
 |`IRR 2 G*D4 I`|JIS X 0201 katakana, an extraction from Windows-31J and friends.|
 |`IRR 3 G*D4 I`|JIS X 0201 katakana, an extraction from Windows-31J and friends, suppressing the 0x80 control mapping in some DOCS filters in favour of the Euro.|
+|`IRR ? G*D4 J`|(JIS X 0201 Roman set)|
 |`IRR 0 G*D4 J`|JIS-Roman with tilde (rather than overscore)|
-|`IRR ? G*D4 K`|DIN 66003 with apostrophe (default)|
+|`IRR ? G*D4 K`|(DIN 66003 with apostrophe (default))|
 |`IRR 0 G*D4 K`|DIN 66003 with acute|
 |`IRR 1 G*D4 K`|DIN 66003 variant projected from EBCDIC WP96|
-|`IRR ? G*D4 O`|DIN 31624, possibly-older German relative of ISO 5426-1|
+|`IRR ? G*D4 O`|(DIN 31624, possibly-older German relative of ISO 5426-1)|
 |`IRR 0 G*D4 O`|DIN 31624, falling thru to T.51 for unallocated cells|
-|`IRR ? G*D4 P`|ISO 5426-1, bibliographic set related to (but incompatible with) T.51|
+|`IRR ? G*D4 P`|(ISO 5426-1, bibliographic set related to (but incompatible with) T.51)|
 |`IRR 0 G*D4 P`|ISO 5426-1, falling thru to T.51 for unallocated cells|
-|`IRR ? G*D4 R`|NF Z 62-010 (7-bit French), 1973 edition (also used by DEC)|
+|`IRR ? G*D4 R`|(NF Z 62-010 (7-bit French), 1973 edition (also used by DEC))|
 |`IRR 0 G*D4 R`|Variant 7-bit French projected from EBCDIC DP94 for Belgian French|
 |`IRR 1 G*D4 R`|Variant 7-bit French projected from EBCDIC WP96 for Belgian French|
 |`IRR 2 G*D4 R`|Variant 7-bit French projected from EBCDIC 38xx for Belgian French|
+|`IRR ? G*D4 Y`|(Olivetti 7-bit Italian)|
 |`IRR 0 G*D4 Y`|ETS 300 706 Latin G0 for Italy|
 |`IRR 1 G*D4 Y`|7-bit Italian with not-sign|
+|`IRR 2 G*D4 Y`|7-bit Italian projected from EBCDIC DCF Migration encoding|
+|``IRR ? G*D4 ` ``|(NS 4551 version 1 (7-bit Norwegian))|
 |``IRR 0 G*D4 ` ``|DEC alternate NRCS for Denmark and Norway|
-|``IRR 1 G*D4 ` ``|Danish equivalent to NS 4551 (IBM's 1017)|
+|``IRR 1 G*D4 ` ``|Danish equivalent to NS 4551 (IBM code page 1017)|
 |``IRR 2 G*D4 ` ``|Variant Denmark and Norway projected from EBCDIC WP96|
-|`IRR ? G*D4 f`|NF Z 62-010 (7-bit French), 1982 edition|
+|`IRR ? G*D4 f`|(NF Z 62-010 (7-bit French), 1982 edition)|
 |`IRR 0 G*D4 f`|Variant 7-bit French projected from EBCDIC encodings for Maghrebi French|
 |`IRR 1 G*D4 f`|Variant 7-bit French projected from EBCDIC 38xx encoding|
 |`IRR 2 G*D4 f`|Variant 7-bit French projected from EBCDIC DCF Migration encoding|
-|`IRR ? G*D4 k`|ASMO 449 (ISO 9036) 7-bit Arabic|
+|`IRR ? G*D4 g`|(IBM 7-bit Portuguese)|
+|`IRR 0 G*D4 g`|DEC NRCS for Portuguese|
+|`IRR ? G*D4 k`|(ASMO 449 (ISO 9036) 7-bit Arabic)|
 |`IRR 0 G*D4 k`|MARC-8 Basic Arabic|
-|`IRR ? G*D4 l`|ITU T.51-1988 first supplementary set (i.e. older version of the T.51 supplementary set without NBSP, SHY, not sign or brvbar)|
+|`IRR ? G*D4 l`|(ITU T.51-1988 first supplementary set (i.e. older version of the T.51 supplementary set without NBSP, SHY, not sign or brvbar))|
 |`IRR 0 G*D4 l`|ITU T.51-1988 first supplementary set with ETS 300 706 extensions (default for this F-byte)|
-|`IRR 1 G*D4 l`|ITU T.51-1988 first supplementary set with ETS 300 706 extensions, alternative mapping|
-|`IRR ? G*D4 o`|JIS X 9010 non-JISCII set for OCR-B.|
+|`IRR 1 G*D4 l`|ITU T.51-1988 first supplementary set with ETS 300 706 extensions, alternative Unicode mapping|
+|`IRR ? G*D4 o`|(JIS X 9010 non-JISCII set for OCR-B.)|
 |`IRR 0 G*D4 o`|ISO-8859-1 RHS cropped to 94-set, with backslash replacing yen sign (superset of the non-JISCII set for OCR-B).|
 |`IRR ? G*D4 q`|JIS X 9010 backslash-only set for JIS X 9008, mapping to ASCII as strongly implied by registration rubric (subset of the non-JISCII set for OCR-B).|
 |`IRR 0 G*D4 q`|JIS X 9010 backslash-only set for JIS X 9008, mapping to OCR DOUBLE BACKSLASH.|
+|`IRR ? G*D4 ! B`|(ISO 646 invariant subset)|
 |`IRR 0 G*D4 ! B`|DEC NRCS, invariant subset|
 |`IRR 1 G*D4 ! B`|ETS 300 706 Latin G0, invariant subset|
 |`IRR 2 G*D4 ! B`|IBM version of the invariant set|
-|`IRR ? G*D4 ! E`|ANSEL supplementary set, ANSI standard version (i.e. no eszett)|
+|`IRR ? G*D4 ! E`|(ANSEL supplementary set, ANSI standard version (i.e. no eszett))|
 |`IRR 0 G*D4 ! E`|ANSEL supplementary set, Library of Congress version (i.e. eszett at 0x47)|
 |`IRR 1 G*D4 ! E`|ANSEL supplementary set, combined Library of Congress and Genealogical Society of Utah versions, i.e. duplicate eszetts at 0x47 and 0x4F (default for this F-byte)|
 |`G*D4 8`|ARIB-STD-B24-1 single-byte JIS-X-0208-based (as opposed to JIS-X-0201-based) Katakana|
@@ -171,19 +186,22 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 " 6`|Hewlett-Packard 8-bit Roman encoding, right-hand side|
 |`G*D4 " 7`|IBM additional pseudographics for `troff`|
 |`G*D4 " 9`|Adobe Standard / PostScript Standard encoding, right-hand side|
-|`G*D4 " :`|ASCII but with Arabic versions of certain punctuation marks|
-|`G*D4 " ;`|Thai TIS-620:1986 (as a 94-character set designatable to G0, unlike `G*D6 T`)|
+|`IRR ? G*D4 " :`|ASCII but with Arabic versions of certain punctuation marks|
+|`IRR 0 G*D4 " :`|Subset of ASCII but with Arabic versions of certain punctuation marks|
+|`IRR ? G*D4 " ;`|Subset of Thai TIS-620:1986|
+|`IRR @ G*D4 " ;`|Thai TIS-620:1986 (as a 94-character set designatable to G0, unlike `G*D6 T`)|
 |`G*D4 " <`|ARIB-STD-B24-1 mosaic set C|
-|`G*D4 " =`|Galaksija 7-bit Gajica|
+|`IRR ? G*D4 " =`|Galaksija 7-bit Gajica (excluding redundant representations of mosaic characters)|
+|`IRR @ G*D4 " =`|Galaksija 7-bit Gajica extended with lowercase letters|
 |`G*D4 " >`|DEC 7-bit Greek|
 |`G*D4 " ?`|DEC 8-bit Greek, right-hand side|
-|`G*D4 # 0`|KS X 1003|
+|`IRR ? G*D4 # 0`|KS X 1003|
 |`IRR 0 G*D4 # 0`|KS X 1003 with tilde|
 |`G*D4 # 1`|ETS 300 706 Latin G0 for France|
 |`G*D4 # 2`|ETS 300 706 Latin G0 for Spain and Portugal|
 |`G*D4 # 3`|ETS 300 706 Latin G0 for Estonia|
 |`G*D4 # 4`|ETS 300 706 Latin G0 for Latvia and Lithuania|
-|`G*D4 # 5`|ETS 300 706 Latin G0 for Serbia, Bosnia, Croatia and Slovenia|
+|`IRR ? G*D4 # 5`|ETS 300 706 Latin G0 for Serbia, Bosnia, Croatia and Slovenia|
 |`IRR 0 G*D4 # 5`|ETS 300 706 Latin G0 for Serbia, Slovenia _et al._ with the Dollar sign|
 |`G*D4 # 6`|ETS 300 706 Latin G0 for Czech and Slovak|
 |`G*D4 # 7`|ETS 300 706 Latin G0 for Poland|
@@ -231,13 +249,18 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR @ G*D4 % :`|7-bit Roman for use with a Greek set, projected from EBCDIC, large version|
 |`IRR ? G*D4 % ;`|7-bit Roman for use with a Cyrillic set, projected from EBCDIC, large version|
 |`IRR 0 G*D4 % ;`|7-bit Roman for use with a Cyrillic set, projected from EBCDIC, small version|
-|`G*D4 % <`|7-bit Belgium, projected from EBCDIC Document Composition Facility|
+|`G*D4 % <`|7-bit Belgium, projected from EBCDIC DCF Migration encoding|
 |`G*D4 % =`|7-bit Hebrew|
-|`G*D4 % >`|7-bit Roman, projected from EBCDIC Document Composition Facility|
+|`G*D4 % >`|7-bit Roman, projected from EBCDIC DCF Migration encoding|
 |`G*D4 % ?`|7-bit Roman, projected from EBCDIC WP96 for Israel|
-|`G*D4 & 0`|7-bit Roman, projected from EBCDIC DP94 for Japan|
-|`G*D4 & 1`|7-bit Roman, projected from EBCDIC for Korea|
-|`G*D4 & 2`|7-bit Roman, projected from EBCDIC Library Character Set|
+|`IRR ? G*D4 & 0`|7-bit Roman, projected from EBCDIC DP94 for Japan|
+|`IRR 0 G*D4 & 0`|7-bit Roman, projected from EBCDIC for Japan, without Yen sign|
+|`IRR 1 G*D4 & 0`|7-bit Roman, projected from EBCDIC for Japan, alternative representation of Yen sign|
+|`IRR 2 G*D4 & 0`|7-bit Roman, projected from EBCDIC for Japan, small version|
+|`IRR ? G*D4 & 1`|7-bit Roman, projected from EBCDIC for Korea, large version|
+|`IRR 0 G*D4 & 1`|7-bit Roman, projected from EBCDIC for Korea, small version|
+|`IRR ? G*D4 & 2`|7-bit Roman, projected from EBCDIC Library Character Set for IBM 3800, small version|
+|`IRR 0 G*D4 & 2`|7-bit Roman, projected from EBCDIC Library Character Set for IBM 3800, large version|
 |`G*D4 & 3`|7-bit Roman for use with a Simplified Chinese set, projected from EBCDIC, small version|
 |`G*D4 & 4`|8-bit Cyrillic (plain KOI-8), right-hand side|
 |`G*D4 & 5`|7-bit Cyrillic (Short-KOI)|
@@ -245,9 +268,13 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 0 G*D4 & 6`|7-bit Spanish, projected from EBCDIC 38xx|
 |`IRR 1 G*D4 & 6`|7-bit Spanish with Peseta sign, projected from EBCDIC DP94|
 |`IRR ? G*D4 & 7`|7-bit British, projected from EBCDIC DP94|
-|`IRR 0 G*D4 & 7`|7-bit British, projected from EBCDIC Document Composition Facility|
+|`IRR 0 G*D4 & 7`|7-bit British, projected from EBCDIC DCF Migration encoding|
 |`IRR 1 G*D4 & 7`|7-bit British, projected from EBCDIC DP94-coördinated WP96|
-|`G*D4 & 8`|7-bit United States, projected from EBCDIC DP94|
+|`IRR ? G*D4 & 8`|7-bit United States, projected from EBCDIC DP94|
+|`IRR 0 G*D4 & 8`|7-bit United States excluding non-ASCII, projected from EBCDIC DP94|
+|`IRR 1 G*D4 & 8`|7-bit United States excluding non-ASCII, projected from EBCDIC DP94 for POSIX|
+|`IRR 2 G*D4 & 8`|7-bit United States, projected from EBCDIC DP94 for POSIX Open Systems|
+|`IRR 3 G*D4 & 8`|7-bit United States, projected from subset of EBCDIC DP94|
 |`G*D4 & 9`|MARC-8 subscript numbers|
 |`G*D4 & :`|7-bit British, projected from EBCDIC WP96|
 |`IRR ? G*D4 & ;`|7-bit Brazilian Portuguese, projected from EBCDIC DP94|
@@ -272,6 +299,58 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 0 G*D4 ' 5`|Hebrew with box-drawing characters but without the non-breaking space|
 |`G*D4 ' 6`|I.S. 434 charset for Ogham: same as `G*D6 g`, but as a 94-character set designatable to G0|
 |`G*D4 ' 7`|7-bit Polish with Euro sign|
+|`G*D4 ' 8`|7-bit Afrikaans|
+|`IRR ? G*D4 ' 9`|7-bit Czech, projected from EBCDIC WP96|
+|`IRR 0 G*D4 ' 9`|7-bit Czech, projected from EBCDIC WP96, small version|
+|`G*D4 ' :`|7-bit Slovak, projected from EBCDIC WP96|
+|`G*D4 ' ;`|7-bit Dutch, projected from EBCDIC WP96|
+|`G*D4 ' <`|7-bit for Hong Kong, projected from EBCDIC WP96|
+|`IRR ? G*D4 ' =`|7-bit Romanian, projected from EBCDIC WP96|
+|`IRR 0 G*D4 ' =`|7-bit Romanian, projected from EBCDIC WP96, small version|
+|`G*D4 ' >`|Set containing only square brackets, projected from EBCDIC WP96 supplementary ranges|
+|`G*D4 ' ?`|Set containing only ²/³ superscripts, projected from EBCDIC WP96 supplementary ranges|
+|`G*D4 , 0`|Set containing only ½ and ¨, projected from EBCDIC WP96 supplementary ranges|
+|`G*D4 , 1`|7-bit Danish and Norwegian, projected from EBCDIC for IBM 3270|
+|`G*D4 , 2`|7-bit German, projected from EBCDIC for IBM 3270|
+|`G*D4 , 3`|7-bit Spanish, projected from EBCDIC for IBM 3270|
+|`G*D4 , 4`|7-bit Swedish and Finnish, projected from EBCDIC for IBM 3270|
+|`G*D4 , 5`|7-bit Brazilian Portuguese, projected from EBCDIC WP96|
+|`G*D4 , 6`|7-bit Canadian English, projected from EBCDIC WP96|
+|`G*D4 , 7`|7-bit Roman, projected from EBCDIC WP96 for Greece|
+|`G*D4 , 8`|7-bit Icelandic, projected from EBCDIC WP96|
+|`IRR ? G*D4 , 9`|7-bit Roman, projected from EBCDIC WP96 for Japan|
+|`IRR 0 G*D4 , 9`|7-bit Roman, projected from EBCDIC WP96 for Japan, small version|
+|`G*D4 , :`|7-bit Latin American Spanish, projected from EBCDIC WP96|
+|`G*D4 , ;`|7-bit Portugal, projected from EBCDIC WP96|
+|`G*D4 , <`|7-bit Spain, projected from EBCDIC WP96|
+|`G*D4 , =`|7-bit Swedish and Finnish, projected from EBCDIC WP96|
+|`G*D4 , >`|7-bit Swiss French, projected from EBCDIC WP96|
+|`G*D4 , ?`|7-bit Swiss German, projected from EBCDIC WP96|
+|`G*D4 ! " 0`|7-bit Switzerland, projected from EBCDIC WP96|
+|`G*D4 ! " 1`|7-bit Turkish, projected from EBCDIC WP96|
+|`G*D4 ! " 2`|7-bit United Kingdom, projected from EBCDIC non-DP94-coördinated WP96|
+|`G*D4 ! " 3`|7-bit United States, projected from EBCDIC WP96|
+|`IRR ? G*D4 ! " 4`|7-bit United States Accounting B (projected from EBCDIC WP96), extended|
+|`IRR 0 G*D4 ! " 4`|7-bit United States Accounting A, projected from EBCDIC WP96|
+|`IRR 1 G*D4 ! " 4`|7-bit United States Accounting B, projected from EBCDIC WP96|
+|`G*D4 ! " 5`|7-bit United States, projected from EBCDIC code page 2|
+|`G*D4 ! " 6`|Technical charset for the IBM 5080, projected from EBCDIC supplementary ranges|
+|`G*D4 ! " 7`|Line-drawing set for the IBM 3800, projected from EBCDIC Library Character Set|
+|`IRR ? G*D4 ! " 8`|Right-hand side of ISO-8859-7:1987 (Greek) minus non-breaking space|
+|`IRR @ G*D4 ! " 8`|Right-hand side of ISO-8859-7:1987 plus Euro sign minus non-breaking space|
+|`IRR A G*D4 ! " 8`|Right-hand side of ISO-8859-7:2003 (with Euro and Drachma) minus non-breaking space|
+|`G*D4 ! " 9`|Right-hand side of ISO-8859-6 (Arabic) minus non-breaking space|
+|`G*D4 ! " :`|IEC-P-1289 technical set number 1 minus non-breaking space|
+|`G*D6 ! " ;`|Right-hand side of ABICOMP encoding for Portuguese in Brazil minus non-breaking space|
+|`G*D6 ! " <`|Right-hand side of code page 1133 for Lao, minus non-breaking space|
+|`G*D6 ! " =`|Right-hand side of code page 1008 for Arabic, minus non-breaking space|
+|`IRR ? G*D6 ! " >`|Right-hand side of code page 5142 for Arabic, minus non-breaking space|
+|`IRR 0 G*D6 ! " >`|Right-hand side of code page 1029 for Arabic positional forms, minus non-breaking space|
+|`IRR ? G*D6 ! " ?`|0xA0–0xFF region of combined code pages 9056, 13152 and 41824 for Arabic, minus non-breaking space|
+|`IRR 0 G*D6 ! " ?`|0xA0–0xFF region of code page 9056 for Arabic, minus non-breaking space|
+|`IRR 1 G*D6 ! " ?`|0xA0–0xFF region of code page 13152 for Arabic, minus non-breaking space|
+|`IRR 2 G*D6 ! " ?`|0xA0–0xFF region of code page 165 for Arabic positional forms, minus non-breaking space|
+|`IRR 3 G*D6 ! " ?`|0xA0–0xFF region of code page 41824 for Arabic, minus non-breaking space|
 
 ## Additional single-byte 96-character G-sets, and additional selectors for particular variants of single-byte 96-character G-sets
 
