@@ -400,9 +400,8 @@ raw_variants = {
     # Roman G0 set of ETS 300 706 for Polish
     # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
     # Violation of ECMA-6:1991: 0x5F is not _.
-    "alt646/etspolish": ([None, 0x144, 0x105, (0x7A, 0x200D, 0x142), 
-                                              0x15A, 0x141, 0x107, 0xF3, 
-                                0x119, 0x17C, 0x15B, 0x142, 0x17A], {}),
+    "alt646/etspolish": ([None, 0x144, 0x105, 0x1B5, 0x15A, 0x141, 0x107, 0xF3, 
+                                       0x119, 0x17C, 0x15B, 0x142, 0x17A], {}),
     # Roman G0 set of ETS 300 706 for Romanian
     # Violation of ECMA-6:1991: 0x5F is not _.
     "alt646/etsromanian": ([None, 0xA4, 0x21A, 0xC2, 0x218, 0x102, 0xCE, 0x131, 
