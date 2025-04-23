@@ -321,8 +321,19 @@ graphdata.gsets["gb15564"] = gb15564 = (94, 2, parsers.fuse([
         graphdata.gsets["gb8565"][2],
     ], "GB15564.json"))
 
-graphdata.gsets["unihan-singapore-characters"] = (94, 2,
-    parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "GS"))
+graphdata.gsets["unihan-singapore-characters"] = (94, 2, parsers.fuse([
+        # https://www.unicode.org/irg/docs/n2841-SGMYIdeographs.pdf
+        (None,) * 48 + ((0x9097,),),
+        #
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "GS"),
+        # https://www.unicode.org/irg/docs/n2841-SGMYIdeographs.pdf
+        (None,) * 11 + ((0x3281D,),),
+        (None,) * ((94 * 1) + 28) + ((0x2AA78,),),
+        (None,) * ((94 * 1) + 47) + ((0x9FCE,),),
+        (None,) * ((94 * 3) + 1) + ((0x2B583,),),
+        (None,) * ((94 * 3) + 30) + ((0x2B594,),),
+        (None,) * ((94 * 3) + 37) + ((0x321FA,),),
+    ], "Singapore.json"))
 
 # Being as GB 7589, 13131, 7590, 13132, 16500 do not include non-Kanji, Unihan mappings theoretically
 #   can describe their entire mappings… in reality, the GB 13131 and 16500 mappings contain almost
