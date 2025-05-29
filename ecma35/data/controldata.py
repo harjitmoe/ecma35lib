@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020.
+# By HarJIT in 2019/2020/2025.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -89,10 +89,10 @@ c0sets = {# The ECMA-6 controls, i.e. originating from 1967 edition ASCII:
           # Alternative version with newline (NL) for linefeed. This is listed as a prior agreement
           # permitted alternative in ISO-IR-001. NL and LF are Unicode aliases for the same code.
           # This arrangement is used in some versions of Re-mapped EBCDIC.
-          "ir001nl": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
-                      "BS", "HT", "NL", "VT", "FF", "CR", "SO", "SI", 
-                      "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
-                      "CAN", "EM", "SUB", "ESC", "FS", "GS", "RS", "US"), 
+          "ir001/nl": ("NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", 
+                       "BS", "HT", "NL", "VT", "FF", "CR", "SO", "SI", 
+                       "DLE", "XON", "DC2", "XOFF", "DC4", "NAK", "SYN", "ETB", 
+                       "CAN", "EM", "SUB", "ESC", "FS", "GS", "RS", "US"), 
           # Scandinavian newspaper (NATS) controls. Particular perculiarities include commandeering
           # FS as a single-shift and GS/RS/US as EOLs which centre/right-align/justify the
           # terminated line, and changing the mnemonics of HT to be vague and CAN to be specific.
@@ -311,9 +311,9 @@ c1sets = {# German bibliographic controls used in DIN 31626
                   "NBD", # New Background
                   "HMS", # Hold Mosaic
                   "RMS"), # Release Mosaic
-          # Bibliographic controls from pre-1985 ISO 6630; closely related to the DIN controls but 
-          # omits several, and adds four more controls in space unused by the DIN controls.
-          # As such doesn't collide with DIN at any point, unlike its IRR replacement ir124.
+          # Bibliographic controls from pre-1985 DIN ISO 6630; closely related to DIN 31626 but 
+          #   omits several, and adds four more controls in space unused by DIN 31626.
+          # As such, doesn't collide with DIN 31626 at any point, unlike its IRR replacement ir124.
           "ir067": (None, None, None, None, None, None, None, "CUS",
                   "NSB", "NSE", None, None, None, None, None, None,
                   None, "EAB", "EAE", None, None,
@@ -395,16 +395,16 @@ c1sets = {# German bibliographic controls used in DIN 31626
                   None, None, None, "PLD", "PLU", None, None, None,
                   None, None, None, None, None, None, None, None, 
                   None, None, None, "CSI", None, None, None, None),
-          # Bibliographic controls from ISO 6630:1985; adds PLD and PLU in their ANSI locations
-          # (corresponding to TCI and ICI in DIN, and as such breaking the earlier ir067 property 
-          # of not colliding with DIN on any control code).
+          # Bibliographic controls from DIN ISO 6630:1985; adds PLD and PLU in their ANSI locations
+          #   (corresponding to TCI and ICI in DIN 31626, and as such breaking the earlier ir067
+          #   property of not colliding with DIN 31626 on any control code).
           "ir124": (None, None, None, None, None, None, None, "CUS",
                   "NSB", "NSE", None, "PLD", "PLU", None, None, None,
                   None, "EAB", "EAE", None, None, "SIB", "SIE", "SSB",
                   "SSE", None, None, None, "KWB", "KWE", "PSB", "PSE"),
           # MARC-8 control codes. Or rather, NSB, NSE, ZWJ and ZWNJ are. The rest are just included
           #   so that this can be validly be treated as an alternative for the ir124 escape seq.
-          "ir124-marc": (None, None, None, None, None, None, None, "CUS",
+          "ir124/marc": (None, None, None, None, None, None, None, "CUS",
                   "NSB", "NSE", None, "PLD", "PLU", "ZWJ", "ZWNJ", None,
                   None, "EAB", "EAE", None, None, "SIB", "SIE", "SSB",
                   "SSE", None, None, None, "KWB", "KWE", "PSB", "PSE"),
@@ -484,20 +484,23 @@ c1sets = {# German bibliographic controls used in DIN 31626
                   "SGCI", # Single Graphical Character Introducer
                   "SCI", "CSI", "ST", "OSC", "PM", "APC"),
           # EBCDIC, as translated using the EBCDIC bytes table from UTR 16 and/or others.
-          # Names and mnemonics: 
-          # IA 20180911044845 https://www-01.ibm.com/software/globalization/cdra/appendix_g1.html
+          # https://www.ibm.com/downloads/documents/us-en/107a02e95b48f605#page=322
+          # https://www.ibm.com/downloads/documents/us-en/107a02e95b48f605#page=347
           "c1ebcdic": ("DS", # Digit Select
-                       "IBMSOS", # Start of Significance
-                       "IBMFS", # Field Separator
+                       "SOS.", # Start of Significance
+                       "FDS", # Field Separator
                        "WUS", # Word Underscore (i.e. underline previous word)
-                       "BYP/INP", # Bypass or Inhibit Presentation (i.e. ignore printing chars)
+                       "INP", # Inhibit Presentation (i.e. ignore printing chars)
                        "NL/LF", # NL or LF, whichever isn't being mapped to the C0 set.
                        "RNL", # Required Newline (i.e. cancelling indent)
                        "POC", # Program Operator Communication (takes two bytes: action, effector)
                        "SA", # Set Attribute (deprecated in favour of CSP)
                        "SFE", # Start Field Extended (deprecated in favour of CSP)
-                       "SM/SW", # Set Mode or Switch
-                       "CSP", # Ctrl Seq Prefx (bytes: class, len (inc. len byte), type, params)
+                       "SW", # Switch Buffer
+                       # Control Sequence Prefix
+                       #   (bytes following: class, length (inc. length byte but not class byte),
+                       #   type, params)
+                       "CSP",
                        "MFA", # Modify Field Attribute (deprecated in favour of CSP)
                        "SPS", # Superscript (fractional linefeed up, pretty much PLU)
                        "RPT", # Repeat
@@ -512,15 +515,58 @@ c1sets = {# German bibliographic controls used in DIN 31626
                        "SBS", # Subscript (fractional linefeed down, pretty much PLD)
                        "IT", # Indent Tab (i.e. HT now and after every NL until a RNL or RFF)
                        "RFF", # Required Form Feed (i.e. cancelling indent)
-                       "CU3", # Customer Use Three (apparently no CU2)
+                       "CU3", # Customer Use Three
                        "SEL", # Select (followed by one byte to command a device)
-                       "RES/ENP", # Restore or Enable Presentation (i.e. end a BYP/INP)
+                       "ENP", # Enable Presentation (i.e. end an INP)
                        None, 
                        "EO"), # Eight Ones
+          # Another version of the transcoded-EBCDIC C1 control code set:
+          # https://web.archive.org/web/20220426134304/https://docs.cntd.ru/document/1200021886
+          "c1ebcdic/alt": ("DS", # Digit Select
+                           "SOS.", # Start of Significance
+                           "FDS", # Field Separator
+                           "WUS", # Word Underscore (i.e. underline previous word)
+                           "BYP", # Bypass (i.e. ignore printing chars)
+                           "NL/LF", # NL or LF, whichever isn't being mapped to the C0 set.
+                           "LC", # Lower Case
+                           "IL", # Idle
+                           "SA", # Set Attribute
+                           "SFE", # Start Field Extended
+                           "SM", # Set Mode
+                           "CU2", # Customer Use Two
+                           "MFA", # Modify Field Attribute
+                           "SPS", # Superscript (fractional linefeed up, pretty much PLU)
+                           "SMM", # Start of Manual Message
+                           "CU1", # Customer Use One
+                           None, None, 
+                           "CC", # Cursor Control
+                           "IR", # Index Return (functions as either NL or US; name evokes IND+CR)
+                           "PN", # Punch On
+                           "RS", # Reader Stop
+                           "UC", # Upper Case
+                           "GE", # Graphic Escape (EBCDIC single shift)
+                           "SBS", # Subscript (fractional linefeed down, pretty much PLD)
+                           "IT", # Indent Tab (i.e. HT now and after every NL until a RNL or RFF)
+                           "RFF", # Required Form Feed (i.e. cancelling indent)
+                           "CU3", # Customer Use Three
+                           "PF", # Punch Off
+                           "RES", # Restore (i.e. end a BYP)
+                           None, 
+                           "EO"), # Eight Ones
+          # Stratus OpenVOS C1 control-code set:
+          #   https://stratadoc.stratus.com/vos/19.3.1/r281-16/appar281-16.html
+          "openvos": ("SS1",  "SS4",  "SS5" , "SS6",  "SS7", "SS8", "SS9", "SS10",
+                      "SS11", "SS12", "SS13", "SS14", "SS15", None, "SS2", "SS3",
+                      "LSI", # Locking Shift Introducer
+                      "WPI", # Word-Processing Introducer
+                      "XCI", # Extended Control Introducer
+                      "BDI", # Binary Data Introducer
+                      None, None, None, None,
+                      None, None, None, None, None, None, None, None),
           "nil": (None,)*16,
           "Unknown": (None,)*16}
 
-c0bytes = {tuple(b"@"): ("ir001", ("ir001nl",), ("ir001",)),
+c0bytes = {tuple(b"@"): ("ir001", ("ir001/nl",), ("ir001",)),
            tuple(b"A"): "ir007",
            tuple(b"B"): "ir048",
            tuple(b"C"): "ir026",
@@ -537,8 +583,8 @@ c0bytes = {tuple(b"@"): ("ir001", ("ir001nl",), ("ir001",)),
 
 c1bytes = {tuple(b"@"): "ir056",
            tuple(b"A"): "ir073",
-           tuple(b"B"): ("ir124-marc", # Preferred version
-                         ("ir124-marc",), # Private versions
+           tuple(b"B"): ("ir124/marc", # Preferred version
+                         ("ir124/marc",), # Private versions
                          ("ir067", "ir124")), # Original followed by any registered revisions
            tuple(b"C"): ("RFC1345", ("RFC1345",), ("ir077",)),
            tuple(b"D"): "ir133",
@@ -546,7 +592,8 @@ c1bytes = {tuple(b"@"): "ir056",
            tuple(b"F"): "ir136",
            tuple(b"G"): "ir105",
            tuple(b"H"): "ir107",
-           tuple(b"!1"): "c1ebcdic",
+           tuple(b"!1"): ("c1ebcdic", ("c1ebcdic/alt",), ("c1ebcdic",)),
+           tuple(b"!2"): "openvos",
            tuple(b"~"): "nil"}
 
 csiseq = {tuple(b"@"): "ICH", # Insert Character

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020.
+# By HarJIT in 2019/2020/2025.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -15,7 +15,17 @@ def decode_invocations(stream, state):
     single_need = 0
     single_area = None
     start_of_ge = False
+    locking_shift_introducer_seen = False
+    single_shift_codes = ("SS1", "SS2", "SS3", "SS4", "SS5", "SS6", "SS7", "SS8", "SS9", "SS10", "SS11", "SS12", "SS13", "SS14", "SS15")
     for token in stream:
+        if locking_shift_introducer_seen:
+            if token[0] != "CTRL" or token[1] not in single_shift_codes:
+                yield ("ERROR", "TRUNCATEDLOCKINGSHIFTINTRODUCER")
+            else:
+                # TODO: should this change e.g. SS2 to LS2 or to LS2R?
+                token = (token[0], "L" + token[1][1:], *token[2:])
+            locking_shift_introducer_seen = False
+        #
         if start_of_ge:
             if token[0] in workingsets and token[2] in ("GL", "GR"):
                 single_area = token[2]
@@ -49,7 +59,10 @@ def decode_invocations(stream, state):
         # Keep the locking shift tokens in the stream for metadata, announcements, etc…
         # Since no GL or GR opcodes will remain, this won't break anything.
         # NOT elif (so byte after truncated single shift sequence isn't swallowed):
-        if token[0] == "CTRL" and token[1] in ("SI", "LS0"):
+        if token[0] == "CTRL" and token[1] == "LSI":
+            locking_shift_introducer_seen = True
+            yield ("LOCKINGSHIFTINTRODUCER", token)
+        elif token[0] == "CTRL" and token[1] in ("SI", "LS0"):
             if state.docsmode == "ebcdic" and token[1] == "SI":
                 state.in_ebcdic_dbcs_mode = False
             else:
@@ -61,12 +74,19 @@ def decode_invocations(stream, state):
             else:
                 state.glset = 1
             yield token
-        elif token[0] == "CTRL" and token[1] == "LS2":
-            state.glset = 2
-            yield token
         elif token[0] == "CTRL" and token[1] == "LS1R":
             state.grset = 1
             yield token
+        elif token[0] == "CTRL" and token[1] == "SS1":
+            single_area = None
+            single_set = 1
+            single_token = token
+            single_need = graphdata.gsets[state.cur_gsets[single_set]][1]
+            if single_set in (state.glset, state.grset):
+                yield ("ERROR", "REDUNDANTSINGLESHIFT", single_set)
+            if not single_need:
+                yield ("ERROR", "INDETERMSINGLE", token)
+                single_set = -1
         elif token[0] == "CTRL" and token[1] == "LS2":
             state.glset = 2
             yield token

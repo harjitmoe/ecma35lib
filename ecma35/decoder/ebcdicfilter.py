@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2023 (with some earlier material partly derived from other parts of ecma35lib).
+# By HarJIT in 2023, 2025 (with some earlier material partly derived from other parts of ecma35lib).
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -115,7 +115,11 @@ def decode_ebcdic(stream, state):
                     c0repl = graphdata.c0graphics[c0replset][
                              conv_byte if conv_byte != 0x7F else 0x20]
                     if c0repl is not None:
-                        yield ("CHAR", c0repl, c0replset, (conv_byte,), "C0REPL", "C0REPL")
+                        if isinstance(c0repl, tuple):
+                            for ic0repl in c0repl:
+                                yield ("CHAR", ic0repl, c0replset, (conv_byte,), "C0REPL", "C0REPL")
+                        else:
+                            yield ("CHAR", c0repl, c0replset, (conv_byte,), "C0REPL", "C0REPL")
                     else:
                         if token[1] == 0x7F:
                             yield ("CTRL", "DEL", "ECMA-35", 95, "GL", workingsets[state.glset])

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019, 2021, 2023.
+# By HarJIT in 2019, 2021, 2023, 2025.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -82,7 +82,7 @@ dat = (b"\x1B[m\x1B%G\x1B!F" + teststr.encode("utf-8-sig") + "\x1CJ염盐塩鹽\
        b"\x1B$)G\x1B$*!1\x8E\xA3\xC0\xDA\xFC\xFC" + # i.e. 塩鹽 in EUC-TW
        b"\x1BB\x82\x1B[?25h\x1B(0unrecdata" +
        "\x1B%BFran\xA0çais//".encode("latin-1") + b"\xA1\x7E\xF6\x21\x21\n" + # i.e. "ŝ䀖" in UTF-1
-       b"\x1B%@\x1B(!2\x1B)!2\x1B*!2\x1B+!2undefinedset\x8Editto\n" +
+       b"\x1B%@\x1B(!!!!2\x1B)!!!!2\x1B*!!!!2\x1B+!2undefinedset\x8Editto\n" +
        "\x1B%0⑨/⑨ちるの ＇ﾁﾙﾉ".encode("ms-kanji") + b"\xFA\x56\n\x1B$G`\x1B$QEW\x0Fbandbugs\n" +
        "\x1B$)Q\x1B$+P⑨/⑨ちるの ＇ﾁﾙﾉ＇\n".encode("shift_jis-2004") +
        b"\x1B&1\x1B$)B\x1B&1\x1B*I\xFE\x87\xE8\x86\xCD\x86\xCE\x87\xFA\x87\xFB\xEB\x6E\n" + # MacJapanese
