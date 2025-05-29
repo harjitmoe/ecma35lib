@@ -19,11 +19,11 @@ def decode_invocations(stream, state):
     single_shift_codes = ("SS1", "SS2", "SS3", "SS4", "SS5", "SS6", "SS7", "SS8", "SS9", "SS10", "SS11", "SS12", "SS13", "SS14", "SS15")
     for token in stream:
         if locking_shift_introducer_seen:
-            if token[0] != "CTRL" or token[1] not in single_shift_codes:
+            if token[0] not in workingsets or token[1] > 0xF or token[1] == 0xD or token[2] != "GR":
                 yield ("ERROR", "TRUNCATEDLOCKINGSHIFTINTRODUCER")
             else:
-                # TODO: should this change e.g. SS2 to LS2 or to LS2R?
-                token = (token[0], "L" + token[1][1:], *token[2:])
+                # https://stratadoc.stratus.com/vos/19.3.1/r194-02/appbr194-02h.html
+                token = ("CTRL", "LS" + {0: "1", 0xE: "2", 0xF: "3"}.get(token[1], f"{(token[1] + 3):d}") + "R", "LSI", (token[1],), "LSI", "LSI")
             locking_shift_introducer_seen = False
         #
         if start_of_ge:
@@ -61,7 +61,6 @@ def decode_invocations(stream, state):
         # NOT elif (so byte after truncated single shift sequence isn't swallowed):
         if token[0] == "CTRL" and token[1] == "LSI":
             locking_shift_introducer_seen = True
-            yield ("LOCKINGSHIFTINTRODUCER", token)
         elif token[0] == "CTRL" and token[1] in ("SI", "LS0"):
             if state.docsmode == "ebcdic" and token[1] == "SI":
                 state.in_ebcdic_dbcs_mode = False

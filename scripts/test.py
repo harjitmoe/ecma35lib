@@ -63,7 +63,8 @@ dat = (b"\x1B[m\x1B%G\x1B!F" + teststr.encode("utf-8-sig") + "\x1CJ염盐塩鹽\
        "\x1B%/F".encode("utf-16le") + teststr.encode("utf-32be") + 
        "\x1B%/F\uFFFE".encode("utf-32be") + teststr.encode("utf-32le") + 
        "\x1B%@".encode("utf-32le") + teststr.encode("iso-2022-jp-ext", errors="replace") +
-       "\x1B-A\x1B.BFrançaisFran\x0Eg\x0FaisÐð\x1B}Ðð\x1B~\x1b#//5".encode("latin-1") + 
+       "\x1B-A\x1B.BFrançaisFran\x0Eg\x0FaisÐð\x1B}Ðð\x1B~\x1b#//5\n".encode("latin-1") + 
+       "\x1B\"!2\x1B.BFrançaisFran\x0Eg\x0FaisÐð\x90\xAEÐð\x90\xA0\x1b#//5\x1B\"C".encode("latin-1") + 
        b"\x1B&@\x1B$)B\x1B$+D" + teststr.encode("euc-jp", errors="replace") + b"\xA0\xA0\xFE\xFE" + 
        b"\x1B$)Q\x1B$+P" + teststr.encode("euc-jis-2004", errors="replace") + b"\x8F\xA0\xA0" + 
        b"\x1B$)A\x1B$+~" + teststr.encode("euc-cn", errors="replace") +

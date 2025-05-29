@@ -555,6 +555,9 @@ c1sets = {# German bibliographic controls used in DIN 31626
                            "EO"), # Eight Ones
           # Stratus OpenVOS C1 control-code set:
           #   https://stratadoc.stratus.com/vos/19.3.1/r281-16/appar281-16.html
+          #   https://stratadoc.stratus.com/vos/19.3.1/r194-02/appbr194-02g.html
+          #   https://stratadoc.stratus.com/vos/19.3.1/r194-02/appbr194-02h.html
+          #   https://stratadoc.stratus.com/vos/19.3.1/r194-02/ch4r194-02m.html
           "openvos": ("SS1",  "SS4",  "SS5" , "SS6",  "SS7", "SS8", "SS9", "SS10",
                       "SS11", "SS12", "SS13", "SS14", "SS15", None, "SS2", "SS3",
                       "LSI", # Locking Shift Introducer
