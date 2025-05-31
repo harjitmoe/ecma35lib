@@ -555,7 +555,9 @@ g96nbytes = {tuple(b"!0"):("gbk-nonuro-extras-2022", ("gbk-nonuro-extras-web", "
 
 sumps = {"94": g94bytes, "96": g96bytes, "94n": g94nbytes, "96n": g96nbytes}
 
-
-
-
+# https://stratadoc.stratus.com/vos/19.3.1/r212-00/ch2r212-00g.html
+initial_gsets = ("ir006", "ir100", "ir168/web", "ir013", "ir149/unihan", "ir058/2022", "ir171/full", "ir172", "user-defined/6204", "nil", "nil", "nil", "nil", "nil", "nil", "nil")
+initial_is_96 = (0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+workingsets = ("G0", "G1", "G2", "G3", "G4", "G5", "G6", "G7", "G8", "G9", "G10", "G11", "G12", "G13", "G14", "G15")
+assert len(initial_gsets) == len(initial_is_96) == len(workingsets)
 

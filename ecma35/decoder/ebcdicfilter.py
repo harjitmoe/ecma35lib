@@ -33,7 +33,7 @@ import sys
 from ecma35.data import graphdata
 
 def decode_ebcdic(stream, state):
-    workingsets = ("G0", "G1", "G2", "G3")
+    workingsets = graphdata.workingsets
     dbcs_lead = None
     seeking_65th_control_code = None
     for token in stream:
@@ -69,6 +69,8 @@ def decode_ebcdic(stream, state):
                 state.cur_ebcdic = "37"
                 state.cur_gsets = list(graphdata.defgsets[state.cur_ebcdic])
                 state.is_96 = [graphdata.gsets[i][0] > 94 for i in state.cur_gsets]
+                state.cur_gsets.extend(graphdata.initial_gsets[len(state.cur_gsets):])
+                state.is_96.extend(graphdata.initial_gsets[len(state.is_96):])
                 state.c0_graphics_mode = 1
                 state.in_ebcdic_dbcs_mode = False # Gets set by special-casing in invocations module
                 state.ebcdic_dbcs = "nil"
@@ -162,6 +164,8 @@ def decode_ebcdic(stream, state):
                 state.cur_ebcdic = codepage
                 state.cur_gsets = list(graphdata.defgsets[state.cur_ebcdic])
                 state.is_96 = [graphdata.gsets[i][0] > 94 for i in state.cur_gsets]
+                state.cur_gsets.extend(graphdata.initial_gsets[len(state.cur_gsets):])
+                state.is_96.extend(graphdata.initial_gsets[len(state.is_96):])
                 if codepage in graphdata.ebcdicdbcs:
                     state.ebcdic_dbcs = graphdata.ebcdicdbcs[codepage]
                 else:

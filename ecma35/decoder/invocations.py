@@ -9,14 +9,16 @@
 from ecma35.data import graphdata
 
 def decode_invocations(stream, state):
-    workingsets = ("G0", "G1", "G2", "G3")
+    workingsets = graphdata.workingsets
     single_set = -1
     single_token = None
     single_need = 0
     single_area = None
     start_of_ge = False
     locking_shift_introducer_seen = False
-    single_shift_codes = ("SS1", "SS2", "SS3", "SS4", "SS5", "SS6", "SS7", "SS8", "SS9", "SS10", "SS11", "SS12", "SS13", "SS14", "SS15")
+    single_shift_codes = (None, "SS1", "SS2", "SS3", "SS4", "SS5", "SS6", "SS7", "SS8", "SS9", "SS10", "SS11", "SS12", "SS13", "SS14", "SS15")
+    locking_shift_codes_left = ("LS0", "LS1", "LS2", "LS3")
+    locking_shift_codes_right = (None, "LS1R", "LS2R", "LS3R", "LS4R", "LS5R", "LS6R", "LS7R", "LS8R", "LS9R", "LS10R", "LS11R", "LS12R", "LS13R", "LS14R", "LS15R")
     for token in stream:
         if locking_shift_introducer_seen:
             if token[0] not in workingsets or token[1] > 0xF or token[1] == 0xD or token[2] != "GR":
@@ -61,56 +63,27 @@ def decode_invocations(stream, state):
         # NOT elif (so byte after truncated single shift sequence isn't swallowed):
         if token[0] == "CTRL" and token[1] == "LSI":
             locking_shift_introducer_seen = True
-        elif token[0] == "CTRL" and token[1] in ("SI", "LS0"):
-            if state.docsmode == "ebcdic" and token[1] == "SI":
+        elif token[0] == "CTRL" and token[1] == "SI":
+            if state.docsmode == "ebcdic":
                 state.in_ebcdic_dbcs_mode = False
             else:
                 state.glset = 0
             yield token
-        elif token[0] == "CTRL" and token[1] in ("SO", "LS1"):
-            if state.docsmode == "ebcdic" and token[1] == "SO":
+        elif token[0] == "CTRL" and token[1] == "SO":
+            if state.docsmode == "ebcdic":
                 state.in_ebcdic_dbcs_mode = True
             else:
                 state.glset = 1
             yield token
-        elif token[0] == "CTRL" and token[1] == "LS1R":
-            state.grset = 1
+        elif token[0] == "CTRL" and token[1] is not None and token[1] in locking_shift_codes_left:
+            state.glset = locking_shift_codes_left.index(token[1])
             yield token
-        elif token[0] == "CTRL" and token[1] == "SS1":
+        elif token[0] == "CTRL" and token[1] is not None and token[1] in locking_shift_codes_right:
+            state.grset = locking_shift_codes_right.index(token[1])
+            yield token
+        elif token[0] == "CTRL" and token[1] is not None and token[1] in single_shift_codes:
             single_area = None
-            single_set = 1
-            single_token = token
-            single_need = graphdata.gsets[state.cur_gsets[single_set]][1]
-            if single_set in (state.glset, state.grset):
-                yield ("ERROR", "REDUNDANTSINGLESHIFT", single_set)
-            if not single_need:
-                yield ("ERROR", "INDETERMSINGLE", token)
-                single_set = -1
-        elif token[0] == "CTRL" and token[1] == "LS2":
-            state.glset = 2
-            yield token
-        elif token[0] == "CTRL" and token[1] == "LS2R":
-            state.grset = 2
-            yield token
-        elif token[0] == "CTRL" and token[1] == "SS2":
-            single_area = None
-            single_set = 2
-            single_token = token
-            single_need = graphdata.gsets[state.cur_gsets[single_set]][1]
-            if single_set in (state.glset, state.grset):
-                yield ("ERROR", "REDUNDANTSINGLESHIFT", single_set)
-            if not single_need:
-                yield ("ERROR", "INDETERMSINGLE", token)
-                single_set = -1
-        elif token[0] == "CTRL" and token[1] == "LS3":
-            state.glset = 3
-            yield token
-        elif token[0] == "CTRL" and token[1] == "LS3R":
-            state.grset = 3
-            yield token
-        elif token[0] == "CTRL" and token[1] == "SS3":
-            single_area = None
-            single_set = 3
+            single_set = single_shift_codes.index(token[1])
             single_token = token
             single_need = graphdata.gsets[state.cur_gsets[single_set]][1]
             if single_set in (state.glset, state.grset):

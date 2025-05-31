@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020/2023.
+# By HarJIT in 2019/2020/2023/2025.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -12,7 +12,7 @@ from ecma35.data import graphdata
 from ecma35.data.multibyte import korea
 
 def decode_uhc(stream, state):
-    workingsets = ("G0", "G1", "G2", "G3")
+    workingsets = graphdata.workingsets
     uhc_lead = None
     reconsume = None
     while 1:
@@ -31,6 +31,8 @@ def decode_uhc(stream, state):
                 state.grset = 1
                 state.cur_gsets = ["ir006", "ir149", "ir013/win", "2011kpsextras"]
                 state.is_96 = [0, 0, 0, 0]
+                state.cur_gsets.extend(graphdata.initial_gsets[len(state.cur_gsets):])
+                state.is_96.extend(graphdata.initial_gsets[len(state.is_96):])
             yield token
         elif state.docsmode == "uhc" and token[0] == "WORD":
             assert (token[1] < 0x100), token

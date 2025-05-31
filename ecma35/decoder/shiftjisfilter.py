@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020/2023.
+# By HarJIT in 2019/2020/2023/2025.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+from ecma35.data import graphdata
 
 # Note that this works by interpreting Shift_JIS codes as the corresponding EUC-JP codes would
 # have been interpreted; it is therefore possible to make full use of designation sequences to,
 # for example, switch to a certain edition of JIS X 0208, or switch to JIS X 0213 (inc. plane 2).
 
 def decode_shiftjis(stream, state):
-    workingsets = ("G0", "G1", "G2", "G3", "G4")
+    workingsets = graphdata.workingsets
     sjis_lead = None
     reconsume = None
     while 1:
@@ -29,9 +31,11 @@ def decode_shiftjis(stream, state):
                 state.docsmode = "shift_jis"
                 # Sensible-ish defaults (if ir014 is changed to ir006, it would correspond
                 # in mapping to IBM-943C, Windows-31J or WHATWG's Shift_JIS, minus EUDC)
-                # The G4 set is a kludge used by the SoftBank-2G emoji handling and nothing else.
-                state.cur_gsets = ["ir014", "ir168/web", "ir013", "ibmsjisext", None]
+                # The G4 set is used by the SoftBank-2G emoji handling.
+                state.cur_gsets = ["ir014", "ir168/web", "ir013", "ibmsjisext", "nil"]
                 state.is_96 = [0, 0, 0, 0, 0]
+                state.cur_gsets.extend(graphdata.initial_gsets[len(state.cur_gsets):])
+                state.is_96.extend(graphdata.initial_gsets[len(state.is_96):])
                 state.glset = 0
             yield token
         elif state.docsmode == "shift_jis" and token[0] == "WORD":

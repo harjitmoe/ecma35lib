@@ -100,6 +100,7 @@ dat = (b"\x1B[m\x1B%G\x1B!F" + teststr.encode("utf-8-sig") + "\x1CJ염盐塩鹽\
        b"\x43\x76\xE0\x53\x0F\xA5" + "\x9B1364*p".encode("cp500") + "\x0E똠방각하".encode("johab") + 
        "\x0F\x1B%@".encode("cp500") +
        b"\x9B915*p" + test2.encode("iso-8859-5") + b"\x1B%@" +
+       b"\x1B\"!2\x90\xA1" + "Ðð".encode("uhc") + b"\x1B\"C\n" +
        b"\x1B%/B\x1B%@HAHA_AS_IF\xA1" # i.e. the last DOCS @ should not switch back.
 )
 

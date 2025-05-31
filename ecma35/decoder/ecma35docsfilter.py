@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020/2023.
+# By HarJIT in 2019/2020/2023/2025.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -9,7 +9,7 @@
 from ecma35.data import graphdata
 
 def decode_ecma35docs(stream, state):
-    workingsets = ("G0", "G1", "G2", "G3")
+    workingsets = graphdata.workingsets
     for token in stream:
         if (token[0] == "RDOCS"):
             if token[1] == "ecma-35":
@@ -21,6 +21,8 @@ def decode_ecma35docs(stream, state):
                 state.grset = 1
                 state.cur_gsets = ["ir006", "ir100", "nil", "nil"]
                 state.is_96 = [0, 0, 1, 1]
+                state.cur_gsets.extend(graphdata.initial_gsets[len(state.cur_gsets):])
+                state.is_96.extend(graphdata.initial_gsets[len(state.is_96):])
             yield token
         elif state.docsmode == "ecma-35" and token[0] == "WORD":
             assert (token[1] < 0x100), token
@@ -41,6 +43,8 @@ def decode_ecma35docs(stream, state):
             codepage = token[1]
             state.cur_gsets = list(graphdata.defgsets[codepage])
             state.is_96 = [graphdata.gsets[i][0] > 94 for i in state.cur_gsets]
+            state.cur_gsets.extend(graphdata.initial_gsets[len(state.cur_gsets):])
+            state.is_96.extend(graphdata.initial_gsets[len(state.is_96):])
             yield token
         else:
             yield token

@@ -18,7 +18,7 @@ import sys
 from ecma35.data import graphdata
 
 def decode_plainextascii(stream, state):
-    workingsets = ("G0", "G1", "G2", "G3")
+    workingsets = graphdata.workingsets
     for token in stream:
         if (token[0] == "RDOCS"):
             if token[1] == "plainextascii":
@@ -31,6 +31,8 @@ def decode_plainextascii(stream, state):
                 state.cur_rhs = "437"
                 state.cur_gsets = list(graphdata.defgsets[state.cur_rhs])
                 state.is_96 = [graphdata.gsets[i][0] > 94 for i in state.cur_gsets]
+                state.cur_gsets.extend(graphdata.initial_gsets[len(state.cur_gsets):])
+                state.is_96.extend(graphdata.initial_gsets[len(state.is_96):])
                 state.c0_graphics_mode = 3
             yield token
         elif state.docsmode == "plainextascii" and token[0] == "WORD":
@@ -100,6 +102,8 @@ def decode_plainextascii(stream, state):
                                                       if state.cur_rhs in graphdata.defgsets
                                                       else "437"])
             state.is_96 = [graphdata.gsets[i][0] > 94 for i in state.cur_gsets]
+            state.cur_gsets.extend(graphdata.initial_gsets[len(state.cur_gsets):])
+            state.is_96.extend(graphdata.initial_gsets[len(state.is_96):])
             yield token
         elif state.docsmode == "plainextascii" and token[0] == "CSISEQ" and token[1] == "DECSDPT":
             # Select Digital Printed Data Type, also part of DEC's IBM ProPrinter emulation (i.e.

@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019, 2023.
+# By HarJIT in 2019, 2023, 2025.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-from ecma35.data import controldata
+from ecma35.data import controldata, graphdata
 
 def decode_csi_sequences(stream, state):
-    workingsets = ("G0", "G1", "G2", "G3")
+    workingsets = graphdata.workingsets
     active = []
     idbytes = []
     parbytes = []
