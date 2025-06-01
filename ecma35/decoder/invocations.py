@@ -17,15 +17,17 @@ def decode_invocations(stream, state):
     start_of_ge = False
     locking_shift_introducer_seen = False
     single_shift_codes = (None, "SS1", "SS2", "SS3", "SS4", "SS5", "SS6", "SS7", "SS8", "SS9", "SS10", "SS11", "SS12", "SS13", "SS14", "SS15")
-    locking_shift_codes_left = ("LS0", "LS1", "LS2", "LS3")
+    locking_shift_codes_left = ("LS0", "LS1", "LS2", "LS3", "LS4", "LS5", "LS6", "LS7", "LS8", "LS9", "LS10", "LS11", "LS12", "LS13", "LS14", "LS15")
     locking_shift_codes_right = (None, "LS1R", "LS2R", "LS3R", "LS4R", "LS5R", "LS6R", "LS7R", "LS8R", "LS9R", "LS10R", "LS11R", "LS12R", "LS13R", "LS14R", "LS15R")
     for token in stream:
         if locking_shift_introducer_seen:
-            if token[0] not in workingsets or token[1] > 0xF or token[1] == 0xD or token[2] != "GR":
+            if token[0] not in workingsets:
                 yield ("ERROR", "TRUNCATEDLOCKINGSHIFTINTRODUCER")
-            else:
+            elif token[1] <= 0xF and token[1] != 0xD and token[2] == "GR":
                 # https://stratadoc.stratus.com/vos/19.3.1/r194-02/appbr194-02h.html
                 token = ("CTRL", "LS" + {0: "1", 0xE: "2", 0xF: "3"}.get(token[1], f"{(token[1] + 3):d}") + "R", "LSI", (token[1],), "LSI", "LSI")
+            elif 1 <= token[1] <= 0xF and token[1] != 0xD and token[2] == "GL":
+                token = ("CTRL", "LS" + {0xE: "2", 0xF: "3"}.get(token[1], f"{(token[1] + 3):d}"), "LSI", (token[1],), "LSI", "LSI")
             locking_shift_introducer_seen = False
         #
         if start_of_ge:

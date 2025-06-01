@@ -61,6 +61,7 @@ Wenn ich nur nichts von Nachwelt hören sollte. Gesetzt daß ich von Nachwelt r
 Hello 𐡌𐡔ﬣ　⍝≡￼¬￼¬￼ϿЀ㿿䀀𲎯󰀀♪�ﾐ♪≛ﾐ똠방각하
 Наш благодетель знает своё высокое призвание и будет верен ему.
 ￼Ðð
+￼Ðð
 [1B][25][40][48][41][48][41][5F][41][53][5F][49][46][A1]￼
 
 [('RDOCS', 'ecma-35', False, (64,)),
@@ -3287,6 +3288,10 @@ Hello 𐡌𐡔ﬣ　⍝≡￼¬￼¬￼ϿЀ㿿䀀𲎯󰀀♪�ﾐ♪≛ﾐ똠�
  ('CTRL', 'LS4R', 'LSI', (1,), 'LSI', 'LSI'),
  ('CHAR', 208, 'ir149/unihan', (8, 2), 'G4', 'GR'),
  ('CHAR', 240, 'ir149/unihan', (9, 3), 'G4', 'GR'),
+ ('CTRL', 'LF', 'ir001', 10, 'C0', 'CL'),
+ ('CTRL', 'LS4', 'LSI', (1,), 'LSI', 'LSI'),
+ ('CHAR', 208, 'ir149/unihan', (8, 2), 'G4', 'GL'),
+ ('CHAR', 240, 'ir149/unihan', (9, 3), 'G4', 'GL'),
  ('RDESIG',
   'C1',
   ('RFC1345', ('RFC1345',), ('ir077',)),

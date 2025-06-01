@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020.
+# By HarJIT in 2019/2020/2025.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -22,21 +22,21 @@ def proc_irrset(myset, irrid):
         return myset[0]
     else:
         if irrid == (0x3F,): # i.e. only do this if it's the ONLY byte after the ESC
-            # It is private really, but we use it for the faithful original reg, i.e. the first
-            # item in the registered versions tuple. ECMA-35 doesn't provide a standard way of
-            # doing this (IRRs start at IRR 0x40 for the first registered *update*), but using
-            # IRR 0x3F for this (0x3F being private-use, and one less than 0x40) is (a) permitted
-            # and (b) sensible.
-            private = False
+            # It is private-use allocated really, but we use it for the faithful original reg, i.e.
+            #   the first item in the registered versions tuple. ECMA-35 doesn't provide a standard
+            #   way of doing this (IRRs start at IRR 0x40 for the first registered *update*), but
+            #   using IRR 0x3F for this (0x3F being private-use, and one less than 0x40) is (a)
+            #   permitted and (b) sensible.
+            private_use = False
         elif 0x30 <= irrid[-1] <= 0x3F:
-            # Used for the unregistered versions tuple. Technically, we're abusing the mechanism
-            # with this, since all IRR sets are supposed to be upwardly compatible, and much of
-            # what we're doing here plainly is not, but never mind.
-            private = True
+            # Used for the unregistered versions tuple. Technically, this isn't quite within the
+            #   spirit of ECMA-35, since all IRR sets are supposed to be upwardly compatible, and
+            #   many of these are not, but never mind.
+            private_use = True
         else:
             # Used for the rest of the registered versions tuple.
             assert 0x40 <= irrid[-1] <= 0x7E
-            private = False
+            private_use = False
         start = 0 # it's a tuple index here, and they start from zero.
         # First number for N bytes after ESC is one more than the largest number
         # representable with N-1 bytes after ESC.
@@ -45,19 +45,19 @@ def proc_irrset(myset, irrid):
             if i == 0:
                 noatlevel = 0 # There are no IRRs with no trail byte
             elif i == 1:
-                if private:
+                if private_use:
                     noatlevel = 15 # i.e. 16, but excluding IRR 0x3F
                 else:
                     noatlevel = 64 # i.e. 63, but with the addition of IRR 0x3F
             else:
-                if private:
+                if private_use:
                     # Sixteen possible I bytes, sixteen possible F bytes
                     noatlevel = 16 ** i
                 else:
                     # Sixteen possible I bytes, sixty-three possible F bytes
                     noatlevel = 63 * (16 ** (i - 1))
             start += noatlevel
-        if private:
+        if private_use:
             index = start + (irrid[-1] - 0x30)
             hs = myset[1]
         else:
@@ -143,12 +143,10 @@ def decode_graphical_sets(stream, state):
             else:
                 sbankpage = "sbank2gpage" + "".join(chr(iii) for iii in token[3])
                 if (not token[5]) and token[4] and (token[2] == "94n") and (
-                                      state.docsmode == "shift_jis") and (
                                       sbankpage in graphdata.gsets):
-                    # ESC / SI format emoji. Totally not ECMA-35 conformant, hence it's only being
-                    # done in Shift_JIS mode, and only for the legacy "multibyte" escapes (none of
-                    # the F-bytes used are grandfathered, so standard usage shouldn't strictly be 
-                    # using that exact escape syntax anyway).
+                    # ESC / SI format emoji. Not ECMA-35 conformant, although it only collides with
+                    #   the legacy syntax for multibyte-set designation sequences, and ECMA-35
+                    #   doesn't use the legacy syntax for any of the F-bytes in question.
                     state.cur_gsets[4] = sbankpage
                     state.glset = 4
                     continue
