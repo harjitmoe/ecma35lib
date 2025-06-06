@@ -20,7 +20,7 @@ def decode_ecma35docs(stream, state):
                 state.glset = 0
                 state.grset = 1
                 state.cur_gsets = ["ir006", "ir100", "nil", "nil"]
-                state.is_96 = [0, 0, 1, 1]
+                state.is_96 = [0, 1, 0, 0]
                 state.cur_gsets.extend(graphdata.initial_gsets[len(state.cur_gsets):])
                 state.is_96.extend(graphdata.initial_gsets[len(state.is_96):])
             yield token
