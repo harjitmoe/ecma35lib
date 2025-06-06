@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019, 2022, 2023.
+# By HarJIT in 2019, 2022, 2023, 2025.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -43,7 +43,7 @@ def process_stream(stream, *, lastfilter=None, **kwargs): # The entry point.
        designations, graphsets, simpleprinter, escsequences, csisequences, controlstrings, \
        rawfilter, unkdocsfilter, ecma35docsfilter, hangulfillers, utf1filter, shiftjisfilter, \
        scsufilter, uhcfilter, gbkfilter, gbhalfcodes, plainextasciifilter, bigfivefilter, \
-       bssequences, ebcdicfilter, docssequences, chcpsequences, utfebcdicfilter
+       bssequences, ebcdicfilter, docssequences, chcpsequences, utfebcdicfilter, modeucfilter
     for f in [_tokenise_stream, docssequences.decode_docs_sequences, chcpsequences.decode_chcp,
               ecma35docsfilter.decode_ecma35docs, utf8filter.decode_utf8, 
               utf1filter.decode_utf1, shiftjisfilter.decode_shiftjis, utf32filter.decode_utf32, 
@@ -51,7 +51,7 @@ def process_stream(stream, *, lastfilter=None, **kwargs): # The entry point.
               elexfilter.decode_elex, plainextasciifilter.decode_plainextascii,
               bigfivefilter.decode_bigfive, ebcdicfilter.decode_ebcdic, 
               utfebcdicfilter.decode_utfebcdic, utf16filter.decode_utf16, 
-              rawfilter.decode_raw, unkdocsfilter.decode_remaining_docs, 
+              rawfilter.decode_raw, modeucfilter.decode_modeuc, unkdocsfilter.decode_remaining_docs, 
               #
               designations.decode_designations, 
               gbhalfcodes.decode_gbhalfcodes, controlsets.decode_control_sets, 

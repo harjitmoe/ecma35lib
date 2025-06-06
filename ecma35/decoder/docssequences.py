@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2023, as a refactor extracting earlier work from various parts of ecma35lib.
+# By HarJIT in 2023/2025, as a refactor extracting earlier work from various parts of ecma35lib.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -18,6 +18,7 @@ plainextasciidocs = ("DOCS", False, (0x33,))
 bigfivedocs = ("DOCS", False, (0x34,))
 bigfivenarrowdocs = ("DOCS", False, (0x35,))
 elexdocs = ("DOCS", False, (0x36,))
+modeucdocs = ("DOCS", False, (0x37,))
 
 # Switch to ECMA-35 is 01 1B 25 40 in single-byte mode, and 00 1B 00 25 00 40 in "Unicode" mode.
 # In either case, just 1B 25 40 will not switch to ECMA-35, so SCSU is "without standard return".
@@ -58,6 +59,8 @@ def decode_docs_sequences(stream, state):
             yield ("RDOCS", "bigfivenarrow", token[1], token[2])
         elif token == elexdocs:
             yield ("RDOCS", "elex", token[1], token[2])
+        elif token == modeucdocs:
+            yield ("RDOCS", "modified-euc", token[1], token[2])
         elif token == scsudocs:
             yield ("RDOCS", "scsu", token[1], token[2])
         elif token == ebcdicdocs:

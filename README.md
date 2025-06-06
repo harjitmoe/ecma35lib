@@ -73,6 +73,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`DOCS 4`|Big Five (lead byte range `0x81-0xFE`)|
 |`DOCS 5`|Big Five (lead byte range `0xA1-0xFC`)|
 |`DOCS 6`|HangulTalk|
+|`DOCS 7`|Modified "hybrid" Extended Unix Code (as used by Windows code pages 20000 and 20932, and by Super DEC Kanji)|
 |`DOCS / 5`|Standard Compression Scheme for Unicode (SCSU). Was previously `DOCS / 0`; changed to avoid conflict with use of `DOCS / 0` by X11 Compound Text.|
 |`DOCS / 6`|EBCDIC.|
 |`DOCS / 7`|UTF-EBCDIC.|

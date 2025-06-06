@@ -251,6 +251,9 @@ graphdata.gsets["ir171/icu-2014"] = (94, 2, cns_icu_2014[planesize * 0 : planesi
 graphdata.gsets["ir172"] = (94, 2, cns_gov[planesize * 1 : planesize * 2])
 graphdata.gsets["ir172/unihan"] = (94, 2, cns_unihan[planesize * 1 : planesize * 2])
 
+graphdata.chcpdocs["20000"] = "modified-euc"
+graphdata.defgsets["20000"] = ("ir006", "ir171/full", "nil", "nil", "ir172")
+
 # ISO-IR-183 deserves particular mention.
 # It was first published in 1988, containing 6319 characters, as an extension to CNS 11643
 #   occupying plane 14. The main block within that plane, being the first 6148 characters,

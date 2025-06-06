@@ -404,6 +404,9 @@ graphdata.gsets["japan-plane-3"] = (94, 2, parsers.decode_main_plane_gl(
     parsers.parse_file_format("Custom/jasource.txt"),
     "jasource.txt"))
 
+graphdata.chcpdocs["20932"] = "modified-euc"
+graphdata.defgsets["20932"] = ("ir006", "ir168/web", "nil", "nil", "ir159")
+
 graphdata.gsets["ibmjapan/1992"] = (190, 2, parsers.decode_main_plane_dbebcdic(parsers.parse_file_format("ICU/ibm-930_P120-1999.ucm"), "ibm-930_P120-1999.ucm"))
 graphdata.ebcdicdbcs["300"] = graphdata.ebcdicdbcs["930"] = graphdata.ebcdicdbcs["931"] = graphdata.ebcdicdbcs["939"] = graphdata.ebcdicdbcs["9122"] = "ibmjapan/1992"
 graphdata.chcpdocs["300"] = graphdata.chcpdocs["930"] = graphdata.chcpdocs["931"] = graphdata.chcpdocs["939"] = graphdata.chcpdocs["9122"] = "ebcdic"
