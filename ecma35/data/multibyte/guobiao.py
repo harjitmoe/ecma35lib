@@ -455,6 +455,7 @@ graphdata.gsets["gb13132"] = (94, 2, parsers.fuse([
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G4", transformfirst=g_source_conversion),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "G4", transformfirst=g_source_conversion),
         parsers.read_unihan_planes("UCD/Unihan_OtherMappings-16.txt", "kGB5", kutenform=True),
+        parsers.read_unihan_planes("UCD/Unihan_OtherMappings-16beta.txt", "kGB5", kutenform=True),
         parsers.read_unihan_planes("UCD/Unihan_OtherMappings-15.txt", "kGB5", kutenform=True),
         parsers.read_unihan_planes("UCD/Unihan_OtherMappings-14.txt", "kGB5", kutenform=True),
         parsers.read_unihan_planes("UCD/Unihan_OtherMappings-13.txt", "kGB5", kutenform=True),

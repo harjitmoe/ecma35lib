@@ -1,13 +1,13 @@
+#
 # Unihan_OtherMappings.txt
-# Date: 2024-07-31 00:00:00 GMT [KL]
-# Unicode Version 16.0.0
+# Date: 2024-04-24 00:00:00 GMT [KL]
+# Unicode version: 16.0.0
 #
 # Unicode Character Database
 # © 2024 Unicode®, Inc.
 # Unicode and the Unicode Logo are registered trademarks of Unicode, Inc. in the U.S. and other countries.
-# For terms of use and license, see https://www.unicode.org/terms_of_use.html
-#
-# For documentation, see https://www.unicode.org/reports/tr38/
+# For terms of use, see http://www.unicode.org/terms_of_use.html
+# For documentation, see http://www.unicode.org/reports/tr38/
 #
 # This file contains data on the following fields from the Unihan database:
 #	kBigFive
@@ -35,6 +35,8 @@
 #	kTaiwanTelegraph
 #	kTGH
 #	kXerox
+#
+# For details on the file format, see http://www.unicode.org/reports/tr38/
 #
 U+3402	kJIS0213	1,14,03
 U+3406	kJIS0213	2,01,13
@@ -12886,6 +12888,7 @@ U+53D0	kTaiwanTelegraph	8166
 U+53D1	kCCCII	274C7B
 U+53D1	kEACC	27615F
 U+53D1	kGB0	2302
+U+53D1	kGB3	1957
 U+53D1	kMainlandTelegraph	4099
 U+53D1	kTGH	2013:339
 U+53D2	kCCCII	216E3F
@@ -38118,6 +38121,7 @@ U+5FF8	kXerox	272:241
 U+5FF9	kCCCII	242F25
 U+5FF9	kCNS1986	E-2623
 U+5FF9	kCNS1992	3-2623
+U+5FF9	kGB3	4923
 U+5FFA	kBigFive	CAE0
 U+5FFA	kCCCII	222A7C
 U+5FFA	kCNS1986	2-2422
@@ -77246,7 +77250,6 @@ U+72AE	kBigFive	C9A5
 U+72AE	kCCCII	22564D
 U+72AE	kCNS1986	2-2164
 U+72AE	kCNS1992	2-2164
-U+72AE	kGB3	1957
 U+72AE	kJIS0213	2,80,27
 U+72AE	kJis1	4278
 U+72AF	kBigFive	A5C7
@@ -163539,7 +163542,6 @@ U+223AD	kJIS0213	2,12,16
 U+224B0	kKoreanName	2015
 U+224ED	kKoreanName	2015
 U+2251B	kEACC	222A34
-U+225D6	kGB3	4923
 U+226F3	kJIS0213	2,12,48
 U+2285B	kJIS0213	2,12,69
 U+228AB	kJIS0213	2,12,77
