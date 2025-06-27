@@ -62,7 +62,7 @@ def gb2005to2000map(pointer, ucs):
     return ucs
 def gbutcto1986map(pointer, ucs):
     # GB 2312 subset of GB 6345.1.
-    # Contra Lunde, GB 6345.1 changes 03-71 from looped to open (not vice versa).
+    # Contra Lunde 2009 (printing error?), GB 6345.1 changes 03-71 from looped to open (not vice versa).
     if ucs == (0xFF47,):
         return (0x0261,)
     return ucs
