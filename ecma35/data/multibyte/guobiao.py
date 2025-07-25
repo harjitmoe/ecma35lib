@@ -769,6 +769,20 @@ non_gbk_bmp = [i for i in range(0x0080, 0x10000)
                (i not in graphdata.codepoint_coverages["gbk-nonuro-extras"]) and
                (i not in graphdata.codepoint_coverages["ir058/2000"]))]
 
+graphdata.gsets["ebcdic-simplified-chinese/1993"] = (190, 2, parsers.decode_main_plane_dbebcdic(parsers.parse_file_format("ICU/ibm-935_X110-1999.ucm"), "ibm-935_X110-1999.ucm"))
+graphdata.gsets["ebcdic-simplified-chinese/1997"] = (190, 2, parsers.decode_main_plane_dbebcdic(parsers.parse_file_format("ICU/ibm-9580_P110-1999.ucm"), "ibm-9580_P110-1999.ucm"))
+graphdata.gsets["ebcdic-simplified-chinese/2001-03"] = (190, 2, parsers.decode_main_plane_dbebcdic(parsers.parse_file_format("ICU/ibm-13676_P102-2001.ucm"), "ibm-13676_P102-2001.ucm"))
+graphdata.gsets["ebcdic-simplified-chinese/2001-12"] = (190, 2, parsers.decode_main_plane_dbebcdic(parsers.parse_file_format("ICU/ibm-1388_P103-2001.ucm"), "ibm-1388_P103-2001.ucm"))
+graphdata.gsets["ebcdic-simplified-chinese/2023"] = (190, 2, parsers.decode_main_plane_dbebcdic(parsers.parse_file_format("ICU/ibm-1388_P100-2024.ucm"), "ibm-1388_P100-2024.ucm"))
+graphdata.ebcdicdbcs["837"] = graphdata.ebcdicdbcs["935"] = graphdata.ebcdicdbcs["5031"] = graphdata.ebcdicdbcs["9127"] = "ebcdic-simplified-chinese/1993"
+graphdata.ebcdicdbcs["9580"] = graphdata.ebcdicdbcs["13125"] = "ebcdic-simplified-chinese/1997"
+graphdata.ebcdicdbcs["13676"] = graphdata.ebcdicdbcs["17221"] = "ebcdic-simplified-chinese/2001-03"
+graphdata.ebcdicdbcs["17772"] = graphdata.ebcdicdbcs["21317"] = "ebcdic-simplified-chinese/2001-12"
+graphdata.ebcdicdbcs["1388"] = graphdata.ebcdicdbcs["4933"] = "ebcdic-simplified-chinese/2023"
+graphdata.chcpdocs["837"] = graphdata.chcpdocs["935"] = graphdata.chcpdocs["1388"] = graphdata.chcpdocs["4933"] = graphdata.chcpdocs["9580"] = graphdata.chcpdocs["13125"] = graphdata.chcpdocs["13676"] = graphdata.chcpdocs["17221"] = graphdata.chcpdocs["17772"] = graphdata.chcpdocs["21317"] = "ebcdic"
+graphdata.defgsets["935"] = graphdata.defgsets["1388"] = graphdata.defgsets["9580"] = graphdata.defgsets["13676"] = graphdata.defgsets["17772"] = ("alt646/ibmjapan/swapyen", "gr836", "gl310", "gr310")
+graphdata.defgsets["5031"] = ("alt646/ibmjapan/swapyen", "nil", "gl310", "gr310")
+graphdata.defgsets["9127"] = ("alt646/ibmschsmall", "gr836", "gl310", "gr310")
 
 
 

@@ -763,6 +763,15 @@ graphdata.gsets["eacc"] = (96, 3, parsers.fuse([
     ((None,) * (96 * 99)) + graphdata.gsets["cccii"][2][96*99:],
 ], "EACC-Full4.json"))
 
-
+graphdata.gsets["ebcdic-traditional-chinese/1992"] = (190, 2, parsers.decode_main_plane_dbebcdic(parsers.parse_file_format("ICU/ibm-937_X110-1999.ucm"), "ibm-937_X110-1999.ucm"))
+graphdata.gsets["ebcdic-traditional-chinese/1999"] = (190, 2, parsers.decode_main_plane_dbebcdic(parsers.parse_file_format("ICU/ibm-1371_X100-1999.ucm"), "ibm-1371_X100-1999.ucm"))
+graphdata.gsets["ebcdic-traditional-chinese/2016"] = (190, 2, parsers.decode_main_plane_dbebcdic(parsers.parse_file_format("Other/T1K835U.ucm"), "T1K835U.ucm"))
+graphdata.ebcdicdbcs["835"] = graphdata.ebcdicdbcs["937"] = graphdata.ebcdicdbcs["5033"] = "ebcdic-traditional-chinese/1992"
+graphdata.ebcdicdbcs["5467"] = graphdata.ebcdicdbcs["13123"] = "ebcdic-traditional-chinese/1999"
+graphdata.ebcdicdbcs["1371"] = graphdata.ebcdicdbcs["9027"] = "ebcdic-traditional-chinese/2016"
+graphdata.chcpdocs["835"] = graphdata.chcpdocs["937"] = graphdata.chcpdocs["1371"] = graphdata.chcpdocs["5033"] = graphdata.chcpdocs["5467"] = graphdata.chcpdocs["9027"] = graphdata.chcpdocs["13123"] = "ebcdic"
+graphdata.defgsets["937"] = ("alt646/ibmusa", "gr24613", "gl310", "gr310")
+graphdata.defgsets["5033"] = ("alt646/ibmusa", "nil", "gl310", "gr310")
+graphdata.defgsets["1371"] = graphdata.defgsets["5467"] = ("alt646/ibmusa", "gr1159", "gl310", "gr310")
 
 

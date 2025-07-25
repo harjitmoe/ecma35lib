@@ -1,16 +1,14 @@
-# Copyright (C) 2016 and later: Unicode, Inc. and others.
-# License & terms of use: http://www.unicode.org/copyright.html
 # ***************************************************************************
 # *
-# *   Copyright (C) 1995-2007, International Business Machines
+# *   Copyright (C) 1995-2002, International Business Machines
 # *   Corporation and others.  All Rights Reserved.
 # *
 # ***************************************************************************
 #
 # File created by rptp2ucm (compiled on Dec  3 2002)
-# from source files 34B003A9.RPMAP110 and 03A934B0.TPMAP100
+# from source files 44B0055B.RXMAP100 and 055B44B0.TXMAP100
 #
-<code_set_name>               "ibm-937_P110-1999"
+<code_set_name>               "ibm-1371_X100-1999"
 <char_name_mask>              "AXXXX"
 <mb_cur_max>                  2
 <mb_cur_min>                  1
@@ -18,11 +16,7 @@
 <subchar>                     \xFE\xFE
 <subchar1>                    \x3F
 <icu:charsetFamily>           "EBCDIC"
-<icu:alias>                   "ibm-937_VPUA"
-
-# build an extension-only (delta) .cnv file
-# requires the base .cnv file at runtime
-<icu:base>                    "ibm-1371_P100-1999"
+<icu:alias>                   "ibm-1371_VPUA"
 
 CHARMAP
 <U0000> \x00 |0
@@ -420,6 +414,8 @@ CHARMAP
 <U2035> \x42\x79 |0
 <U203B> \x44\x6B |0
 <U203E> \x42\xA1 |0
+<U20AC> \x9F |0
+<U20AC> \x47\xA2 |3
 <U2103> \x44\x4E |0
 <U2105> \x46\xBB |0
 <U2109> \x46\xDB |0
@@ -596,6 +592,7 @@ CHARMAP
 <U2571> \x46\x89 |0
 <U2572> \x46\x8A |0
 <U2573> \x46\x8B |0
+<U2574> \x46\xA9 |3
 <U2574> \x46\xB7 |0
 <U2581> \x46\x60 |0
 <U2582> \x46\x61 |0
@@ -1012,6 +1009,7 @@ CHARMAP
 <U4ED9> \x4C\xEF |0
 <U4EDA> \x69\x6B |0
 <U4EDC> \x69\x67 |0
+<U4EDD> \x44\x5C |3
 <U4EDD> \x69\x6A |0
 <U4EDE> \x4C\xF0 |0
 <U4EDF> \x4D\x43 |0
@@ -20380,17 +20378,14 @@ CHARMAP
 <UF839> \xE2\xFB |0
 <UF83A> \xE2\xFC |0
 <UF83B> \xE2\xFD |0
-<UF83E> \x44\x5C |0
-<UF83F> \x46\xA8 |0
-<UF840> \x46\xA9 |0
-<UF841> \x46\xAA |0
-<UF842> \x46\xAB |0
 <UFA0C> \x69\x4B |0
 <UFA0D> \x7A\xA4 |0
 <UFE30> \x47\x41 |0
 <UFE31> \x46\xA7 |0
 <UFE32> \x47\x49 |0
+<UFE33> \x46\xA8 |3
 <UFE33> \x46\xB6 |0
+<UFE34> \x46\xAA |3
 <UFE34> \x46\xBC |0
 <UFE35> \x46\xAC |0
 <UFE36> \x46\xAD |0
@@ -20414,6 +20409,7 @@ CHARMAP
 <UFE4C> \x46\xC3 |0
 <UFE4D> \x46\xC0 |0
 <UFE4E> \x46\xC1 |0
+<UFE4F> \x46\xAB |3
 <UFE4F> \x46\xBD |0
 <UFE50> \x47\x42 |0
 <UFE51> \x47\x43 |0

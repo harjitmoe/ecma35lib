@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020/2021/2023/2024.
+# By HarJIT in 2019/2020/2021/2023/2024/2025.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -130,7 +130,8 @@ def readhexbytes(byt):
             byt = byt[2:]
 
 def parse_file_format(fil, *, twoway=False, prefer_sjis=False, skipstring=None, altcomments=False, 
-                      libcongress=False, hangulsourcestxt=None, cidmap=None, gb12052=False, moz2004=False):
+                      libcongress=False, hangulsourcestxt=None, cidmap=None, gb12052=False,
+                      moz2004=False):
     cidmapnames = None
     for _i in open(os.path.join(directory, fil), "r", encoding="utf-8"):
         if not _i.strip():
@@ -234,16 +235,16 @@ def parse_file_format(fil, *, twoway=False, prefer_sjis=False, skipstring=None, 
         elif _i[:2] == "<U":
             # ICU-style format
             ucs, byts, direction = _i.split(" ", 2)
-            if (direction.strip() == "|1") or (direction.strip() == "|2") or (twoway and (direction.strip() == "|3")):
+            if (direction.strip() in ("|1", "|2", "|4")) or (twoway and (direction.strip() == "|3")):
                 # |0 means a encoder/decoder two-way mapping
-                # |1 appears to mean an encoder-only mapping, e.g. fallback ("best fit"), graphical mapping for control codes, compatibility with what other vendors decode something to, etc
-                # |2 appears to mean a substitute mapping, e.g. to the SUB control.
-                # |3 appears to mean a decoder-only mapping (disfavoured duplicate)
+                # |1 or |4 means an encoder-only mapping
+                # |2 means a an alternative substitute mapping, e.g. to the SUB control-code
+                # |3 means a decoder-only mapping (disfavoured duplicate)
                 continue
             assert byts[:2] == "\\x"
             yield readhexbytes(byts), parse_ucs_codepoints(ucs)
         elif "-" in _i[:3]: # Maximum possible plane number is 95, so this will remain correct
-            # Format of the Taiwanese government supplied CNS 11643 mapping data
+            # Format of the CNS 11643 mapping tables provided by the government in Taiwan
             cod, ucs = _i.split("\t", 2)[:2]
             men, byts = cod.split("-")
             men = int(men, 10)
@@ -356,7 +357,9 @@ def _fill_to_plane_boundary(planelist, SZ):
         planelist.extend([None] * (SZ * SZ))
 
 def _put_at(planelist, pointer, iucs, ignore_later_altucs):
-    if len(planelist) > pointer:
+    if pointer < 0:
+        raise ValueError(pointer)
+    elif len(planelist) > pointer:
         if ignore_later_altucs and planelist[pointer] is not None:
             return
         assert planelist[pointer] is None, (pointer, planelist[pointer], iucs)
@@ -699,11 +702,9 @@ def decode_main_plane_dbebcdic(parsed_stream, filenamekey, *, mapper=identitymap
     #   even for the same filename.
     _temp = []
     for coded, ucs in parsed_stream:
-        if len(coded) != 2:
+        if len(coded) != 2 or tuple(coded) == (0x40, 0x40):
             continue
         pointer = ((coded[0] - 0x41) * 190) + (coded[1] - 0x41)
-        if pointer == None:
-            continue
         iucs = mapper(pointer, ucs)
         _put_at(_temp, pointer, iucs, False)
     _fill_to_plane_boundary(_temp, 190)
