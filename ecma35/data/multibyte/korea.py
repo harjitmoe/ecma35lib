@@ -303,8 +303,11 @@ graphdata.gsets["ksx1002"] = (94, 2, parsers.fuse([ksx1002_symbols, ksx1002_hanj
 #   Other parts are not ECMA-35 structured.
 ksx1027_1_unihan = parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_KSource", "K2")
 ksx1027_1 = parsers.fuse([
-            # "K2-6557" Unihan source reference removed from U+8FD6 in Unicode 3.1.1 for unclear
-            #   reasons. KS X 1027-1:2011 and KS X 1027-1:2021 both skip it.
+            # K2-6557 Unihan source reference removed from U+8FD6 in Unicode 3.1.1 per request
+            #   in IRGN0405. KS X 1027-1:2011 and KS X 1027-1:2021 both skip it.
+            # As highlighted in IRGN0400, a K-source glyph was never provided for U+8FD6.
+            # https://www.unicode.org/irg/docs/n0400-ErrorReportHQPv1.pdf
+            # https://www.unicode.org/irg/docs/n0405-IRGN400Feedback.txt
             ((None,) * 6446) + ((0x8FD6,),),
             ksx1027_1_unihan], "KSX1027-1.json")
 graphdata.gsets["ksx1027_1"] = (94, 2, ksx1027_1)
