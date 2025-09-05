@@ -602,10 +602,13 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR ? G*DM4 " 8`|SJ 11239 (yet another supplementary set but labelled SJ rather than GB; numbered the eighth in its title)|
 |`IRR 0 G*DM4 " 8`|SJ 11239 making use of the BabelStone Han PUA|
 |`G*DM4 " 9`|"Unified Japanese IT Vendors Contemporary Ideographs, 1993", essentially a third JIS plane|
-|`G*DM4 " :`|TCVN 5773:1993 (Chữ Nôm)|
-|`G*DM4 " ;`|TCVN 6056:1995 (Chữ Hán).&ensp;Consists of some characters that are not present in TCVN 5773, all of which are present in (and presumably selected from) the original Unicode URO, and which include many very common Chinese characters.&ensp;This may or may not have anything to do with TCVN 6909:2001.|
-|`G*DM4 " <`|An offsetting of VHN 01:1998 (Hán Nôm, first supplement) with all allocations moved backward by 19 rows so as to fit within a 94×94 plane.&ensp;This may or may not have anything to do with TCVN 6909:2001.|
-|`G*DM4 " =`|VHN 02:1998 (Hán Nôm, second supplement).&ensp;This may or may not have anything to do with TCVN 6909:2001.|
+|`IRR ? G*DM4 " :`|TCVN 5773:1993 (Chữ Nôm)|
+|`IRR @ G*DM4 " :`|TCVN 5773:1993 combined with TCVN 6056:1995, and VHN 01:1998 up to row 94|
+|`IRR ? G*DM4 " ;`|TCVN 6056:1995 (Chữ Hán).&ensp;Consists of some characters that are not present in TCVN 5773, all of which are present in (and presumably selected from) the original Unicode URO, and which include many very common Chinese characters; the rows used by TCVN 5773 are not used, so that the two can be combined.&ensp;This may or may not have anything to do with TCVN 6909:2001.|
+|`IRR @ G*DM4 " ;`|TCVN 6056:1995 combined with TCVN 5773:1993, and VHN 01:1998 up to row 94 (same as `IRR @ G*DM4 " :`)|
+|`G*DM4 " <`|An offsetting of VHN 01:1998 (Hán Nôm, first supplement) with all allocations moved backward by 19 rows so as to fit within a 94×94 plane (VHN 01:1998 itself doesn't use the rows used by either TCVN 5773 or TCVN 6909 and, consequently, does not otherwise fit within the 94×94 plane).&ensp;This may or may not have anything to do with TCVN 6909:2001.|
+|`IRR ? G*DM4 " =`|VHN 02:1998 (Hán Nôm, second supplement).&ensp;This may or may not have anything to do with TCVN 6909:2001.|
+|`IRR @ G*DM4 " =`|VHN 02:1998 combined with "Hán Nôm Coded Character Repertoire 2007" (which does not use the rows used by VHN 02:1998, so the two can be combined), and a transformation of VHN 01:1998 rows 95 and up (based on a reverse of the transform applied to JIS X 0213 plane 2 in `Shift_JISx0213`).|
 |`G*DM4 " >`|"Hán Nôm Coded Character Repertoire 2007" (Hán Nôm, third supplement)|
 |`G*DM4 " ?`|The extension plane 13 that appears in IBM's EUC-TW variant|
 |`IRR ? G*DM4 # 0`|CNS 11643-2007 plane 8|
