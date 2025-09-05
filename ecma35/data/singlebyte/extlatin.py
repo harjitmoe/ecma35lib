@@ -566,9 +566,9 @@ graphdata.defgsets['1051'] = ('ir006', 'hproman', 'nil', 'nil')
 
 # Windows code pages for non-Vietnamese Latin
 graphdata.rhses["1250"] = parsers.read_single_byte("WHATWG/index-windows-1250.txt") # Central European
-graphdata.rhses["1252"] = graphdata.rhses["1004"] = parsers.read_single_byte(
+graphdata.rhses["1252"] = graphdata.rhses["1004"] = graphdata.rhses["5348"] = parsers.read_single_byte(
     "WHATWG/index-windows-1252.txt") # ISO-8859-1 ext.
-graphdata.defgsets["1252"] = graphdata.defgsets["1004"] = ("ir006", "ir100", "nil", "nil")
+graphdata.defgsets["1252"] = graphdata.defgsets["1004"] = graphdata.defgsets["5348"] = ("ir006", "ir100", "nil", "nil")
 graphdata.rhses["1254"] = parsers.read_single_byte("WHATWG/index-windows-1254.txt") # ISO-8859-9 ext.
 graphdata.defgsets["1254"] = ("ir006", "ir148", "nil", "nil")
 graphdata.rhses["58598"] = graphdata.rhses["1254"][:32] + graphdata.gsets["ir148/azeri"][2]
@@ -576,6 +576,10 @@ graphdata.defgsets["58598"] = ("ir006", "ir148/azeri", "nil", "nil")
 graphdata.rhses["1257"] = parsers.read_single_byte("WHATWG/index-windows-1257.txt") # Baltic
 graphdata.rhses["59620"
     ] = parsers.read_single_byte("Other/T1059620.ucm") # CeltScript Latin-8 (FreeDOS variant)
+
+# Windows-1252 variant with card suits in positions reportedly supported by PalmOS
+graphdata.rhses["?1252"] = graphdata.rhses["1252"][:13] + ((0x2666,), (0x2663,), (0x2665,), (0x2660,)) + graphdata.rhses["1252"][17:]
+graphdata.defgsets["?1252"] = ("ir006", "ir100", "nil", "nil")
 
 # OEM code pages
 graphdata.rhses["112"] = parsers.read_single_byte("Other/T1000112.ucm") # Turkish and Maltese

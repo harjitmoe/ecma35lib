@@ -73,7 +73,7 @@ graphdata.c0graphics['60643'] = (
 
 # 0xabad1dea's C0 graphics for Windows-1252 on the Famicom
 # See: https://github.com/0xabad1dea/0xabad1dea.github.com/blob/master/img/nes-ansi.png
-graphdata.c0graphics["1252"] = (
+graphdata.c0graphics["1252"] = graphdata.c0graphics["?1252"] = (
   None,      (0x1F7E5,), (0x1F7E9,), (0x2588,), (0x1CD2A,), (0x1FB97,), (0x2592,), (0x2661,),
   (0x2662,), (0x2667,),  (0x2664,),  (0x263A,), (0x2639,),  (0x1D15E,), (0x266B,), (0x266A,),
   (0x2640,), (0x2642,),  (0x23FB,),  (0x24B6,), (0x24B7,),  (0x2191,),  (0x2193,), (0x2190,),
