@@ -342,21 +342,24 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR A G*D4 ! " 8`|Right-hand side of ISO-8859-7:2003 (with Euro and Drachma) minus non-breaking space|
 |`G*D4 ! " 9`|Right-hand side of ISO-8859-6 (Arabic) minus non-breaking space|
 |`G*D4 ! " :`|IEC-P-1289 technical set number 1 minus non-breaking space|
-|`G*D6 ! " ;`|Right-hand side of ABICOMP encoding for Portuguese in Brazil minus non-breaking space|
-|`G*D6 ! " <`|Right-hand side of code page 1133 for Lao, minus non-breaking space|
-|`G*D6 ! " =`|Right-hand side of code page 1008 for Arabic, minus non-breaking space|
-|`IRR ? G*D6 ! " >`|Right-hand side of code page 5142 for Arabic, minus non-breaking space|
-|`IRR 0 G*D6 ! " >`|Right-hand side of code page 1029 for Arabic positional forms, minus non-breaking space|
-|`IRR ? G*D6 ! " ?`|0xA0–0xFF region of combined code pages 9056, 13152 and 41824 for Arabic, minus non-breaking space|
-|`IRR 0 G*D6 ! " ?`|0xA0–0xFF region of code page 9056 for Arabic, minus non-breaking space|
-|`IRR 1 G*D6 ! " ?`|0xA0–0xFF region of code page 13152 for Arabic, minus non-breaking space|
-|`IRR 2 G*D6 ! " ?`|0xA0–0xFF region of code page 165 for Arabic positional forms, minus non-breaking space|
-|`IRR 3 G*D6 ! " ?`|0xA0–0xFF region of code page 41824 for Arabic, minus non-breaking space|
+|`G*D4 ! " ;`|Right-hand side of ABICOMP encoding for Portuguese in Brazil minus non-breaking space|
+|`G*D4 ! " <`|Right-hand side of code page 1133 for Lao, minus non-breaking space|
+|`G*D4 ! " =`|Right-hand side of code page 1008 for Arabic, minus non-breaking space|
+|`IRR ? G*D4 ! " >`|Right-hand side of code page 5142 for Arabic, minus non-breaking space|
+|`IRR 0 G*D4 ! " >`|Right-hand side of code page 1029 for Arabic positional forms, minus non-breaking space|
+|`IRR ? G*D4 ! " ?`|0xA0–0xFF region of combined code pages 9056, 13152 and 41824 for Arabic, minus non-breaking space|
+|`IRR 0 G*D4 ! " ?`|0xA0–0xFF region of code page 9056 for Arabic, minus non-breaking space|
+|`IRR 1 G*D4 ! " ?`|0xA0–0xFF region of code page 13152 for Arabic, minus non-breaking space|
+|`IRR 2 G*D4 ! " ?`|0xA0–0xFF region of code page 165 for Arabic positional forms, minus non-breaking space|
+|`IRR 3 G*D4 ! " ?`|0xA0–0xFF region of code page 41824 for Arabic, minus non-breaking space|
 
 ## Additional single-byte 96-character G-sets, and additional selectors for particular variants of single-byte 96-character G-sets
 
 |Private assignment|Meaning|
 |---|---|
+|`IRR ? G*D6 A`|Right-hand side of ISO-8859-1, Western European Roman with `×` and `÷`|
+|`IRR 0 G*D6 A`|Right-hand side of ECMA-94:1985, Western European Roman, first revision|
+|`IRR 1 G*D6 A`|Right-hand side of ABNT NBR-9611, Western European Roman with `Œ` and `œ`|
 |`IRR ? G*D6 B`|Right-hand side of ISO-8859-2, Central European Roman|
 |`IRR 0 G*D6 B`|Right-hand side of IBM code page 1111 (ISO-8859-2 with overring replacing degrees sign)|
 |`IRR ? G*D6 F`|Right-hand side of ISO-8859-7 for Greek, 1987 version|

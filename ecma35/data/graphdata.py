@@ -390,7 +390,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"~"): "nil"}
 
 g96bytes = {tuple(b"@"): "ir111",
-            tuple(b"A"): "ir100",
+            tuple(b"A"): ("ir100", ("ir100/1985", "ir100/abnt"), ("ir100",)),
             tuple(b"B"): ("ir101", ("ir101/overring",), ("ir101",)),
             tuple(b"C"): "ir109",
             tuple(b"D"): "ir110",

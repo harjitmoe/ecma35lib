@@ -54,9 +54,17 @@ graphdata.chcpdocs['65504'] = 'ecma-35'
 graphdata.defgsets['65504'] = ('ir006', 'ir039', 'nil', 'nil')
 
 # ECMA-94-L1 ISO-8859-1 Latin-1 Western European RHS
-graphdata.gsets["ir100"] = (96, 1, tuple((i,) for i in range(0xA0, 0x100)))
+_latin1_iso = tuple((i,) for i in range(0xA0, 0x100))
+graphdata.gsets["ir100"] = (96, 1, _latin1_iso)
 graphdata.chcpdocs['819'] = graphdata.chcpdocs['5100'] = 'ecma-35'
 graphdata.defgsets['819'] = graphdata.defgsets['5100'] = ('ir006', 'ir100', 'nil', 'nil')
+_latin1_1985 = _latin1_iso[:55] + (None,) + _latin1_iso[56:87] + (None,) + _latin1_iso[88:]
+graphdata.gsets["ir100/1985"] = (96, 1, _latin1_1985)
+_latin1_brazil = _latin1_iso[:55] + ((0x0152,),) + _latin1_iso[56:87] + ((0x0153,),) + _latin1_iso[88:]
+graphdata.gsets["ir100/abnt"] = (96, 1, _latin1_brazil)
+graphdata.chcpdocs['3847'] = graphdata.chcpdocs['7943'] = 'ecma-35'
+graphdata.defgsets['3847'] = ('ir006', 'ir100/1985', 'nil', 'nil')
+graphdata.defgsets['7943'] = ('ir006', 'ir100/abnt', 'nil', 'nil')
 
 # DEC Multinational Character Set (MCS); direct precursor to ISO-8859-1.
 graphdata.gsets["decmultinational"] = (94, 1, tuple((i,) if i else None for i in (
