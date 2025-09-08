@@ -9,7 +9,7 @@
 import sys, os, pprint, re
 sys.path.append(os.path.abspath(os.pardir))
 
-from ecma35.data.graphdata import gsets, g94bytes, g96bytes, g94nbytes, g96nbytes, defgsets, gsetflags, ebcdicdbcs
+from ecma35.data.graphdata import gsets, g94bytes, g96bytes, g94nbytes, g96nbytes, defgsets, gsetflags, ebcdicdbcs, rhses
 used = set()
 complaints = set()
 nominal_kind = {}
@@ -80,6 +80,22 @@ for (setcode, (kind, bytecount, entries)) in sorted(gsets.items()):
     if running_hash in checksums:
         edoctes = checksums[running_hash]
         if gsets[setcode] == gsets[edoctes] and gsetflags[setcode] == gsetflags[edoctes]:
+            complaints.add((setcode, "Duplicates", checksums[running_hash]))
+    else:
+        checksums[running_hash] = setcode
+
+for setcode, entries in sorted(rhses.items()):
+    running_hash = 0
+    for n, entry in enumerate(entries):
+        if entry:
+            if not hasattr(entry, "__iter__"):
+                entry = (entry,)
+            element = sum(i or 0 for i in entry)
+            running_hash += (element * n)
+            running_hash %= 0x40000000
+    if running_hash in checksums:
+        edoctes = checksums[running_hash]
+        if edoctes in rhses and rhses[setcode] == rhses[edoctes]:
             complaints.add((setcode, "Duplicates", checksums[running_hash]))
     else:
         checksums[running_hash] = setcode

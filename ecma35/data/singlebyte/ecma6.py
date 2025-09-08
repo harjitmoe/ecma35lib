@@ -917,6 +917,37 @@ raw_variants = {
     "alt646/ibm-3270-spanish": ([0xD1, 0x20A7, None, 0xA2, -1,   0x21, 0xAC, None,
                                                -1,   -1,   0xA6, -1,   -1],
                                 {0x21: 0x7C, 0x22: 0xF1}),
+    # LaTeX "OT1" encoding (Knuth's original TeX code page)
+    # Violation of ECMA-6:1991: 0x22 is not (strictly) ".
+    # Violation of ECMA-6:1991: 0x27 is not (strictly) '.
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    # Violation of ECMA-6:1991: 0x5F is not _.
+    "alt646/knuth": ([None, None, None,   None,   0x201C, None,   None, 0x02D9, 
+                                  0x2018, 0x2013, 0x2014, 0x02DD, None],
+                     {0x22: 0x201D, 0x27: 0x2019, 0x3C: 0xA1, 0x3E: 0xBF}),
+    # G0 set of LaTeX "Storm" charset
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    # Violation of ECMA-6:1991: 0x22 is not ".
+    # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
+    # Violation of ECMA-6:1991: 0x25 is not %.
+    # Violation of ECMA-6:1991: 0x26 thru 0x2B are omitted.
+    # Violation of ECMA-6:1991: 0x3F is omitted.
+    "alt646/storm": ([0xA3, 0xA5, None,   None, None, None, None, None, 
+                                  0x2018, None, None, None, None],
+                     {0x21: 0x20A3, 0x22: 0xA2, 0x25: 0x20AC, 0x26: -1, 0x27: -1,
+                      0x28: -1, 0x29: -1, 0x2A: -1, 0x2B: -1, 0x3F: -1}),
+    # G0 set of LaTeX "Storm" charset, falling through to "OT1"
+    # Violation of ECMA-6:1991: 0x21 is not !.
+    # Violation of ECMA-6:1991: 0x22 is not ".
+    # Violation of ECMA-6:1991: 0x24 is not $ or ¤.
+    # Violation of ECMA-6:1991: 0x25 is not %.
+    # Violation of ECMA-6:1991: 0x27 is not (strictly) '.
+    # Violation of ECMA-6:1991: 0x3C is not <.
+    # Violation of ECMA-6:1991: 0x3E is not >.
+    "alt646/storm/extended": ([0xA3, 0xA5, None,   None, None, None, None, None, 
+                                           0x2018, None, None, None, None],
+                              {0x21: 0x20A3, 0x22: 0xA2, 0x25: 0x20AC, 0x27: 0x2019}),
 }
 
 for (name, (myvars, override)) in raw_variants.items():
@@ -929,7 +960,7 @@ for (name, (myvars, override)) in raw_variants.items():
                 myset[frm - 0x21] = None
     graphdata.gsets[name] = (94, 1, tuple(myset))
 
-graphdata.chcpdocs['367'] = graphdata.chcpdocs['895'] = graphdata.chcpdocs['1009'] = graphdata.chcpdocs['1010'] = graphdata.chcpdocs['1011'] = graphdata.chcpdocs['1012'] = graphdata.chcpdocs['1013'] = graphdata.chcpdocs['1014'] = graphdata.chcpdocs['1015'] = graphdata.chcpdocs['1016'] = graphdata.chcpdocs['1017'] = graphdata.chcpdocs['1018'] = graphdata.chcpdocs['1019'] = graphdata.chcpdocs['1020'] = graphdata.chcpdocs['1021'] = graphdata.chcpdocs['1023'] = graphdata.chcpdocs['1052'] = graphdata.chcpdocs['1054'] = graphdata.chcpdocs['1088'] = graphdata.chcpdocs['1101'] = graphdata.chcpdocs['1102'] = graphdata.chcpdocs['1103'] = graphdata.chcpdocs['1104'] = graphdata.chcpdocs['1105'] = graphdata.chcpdocs['1106'] = graphdata.chcpdocs['1107'] = graphdata.chcpdocs['1114'] = graphdata.chcpdocs['1126'] = graphdata.chcpdocs['5211'] = graphdata.chcpdocs['5222'] = graphdata.chcpdocs['9089'] = graphdata.chcpdocs['9444'] = graphdata.chcpdocs['61697'] = graphdata.chcpdocs['61698'] = graphdata.chcpdocs['61699'] = graphdata.chcpdocs['61700'] = graphdata.chcpdocs['61710'] = 'ecma-35'
+graphdata.chcpdocs['367'] = graphdata.chcpdocs['895'] = graphdata.chcpdocs['1009'] = graphdata.chcpdocs['1010'] = graphdata.chcpdocs['1011'] = graphdata.chcpdocs['1012'] = graphdata.chcpdocs['1013'] = graphdata.chcpdocs['1014'] = graphdata.chcpdocs['1015'] = graphdata.chcpdocs['1016'] = graphdata.chcpdocs['1017'] = graphdata.chcpdocs['1018'] = graphdata.chcpdocs['1019'] = graphdata.chcpdocs['1020'] = graphdata.chcpdocs['1021'] = graphdata.chcpdocs['1023'] = graphdata.chcpdocs['1052'] = graphdata.chcpdocs['1054'] = graphdata.chcpdocs['1088'] = graphdata.chcpdocs['1101'] = graphdata.chcpdocs['1102'] = graphdata.chcpdocs['1103'] = graphdata.chcpdocs['1104'] = graphdata.chcpdocs['1105'] = graphdata.chcpdocs['1106'] = graphdata.chcpdocs['1107'] = graphdata.chcpdocs['1114'] = graphdata.chcpdocs['1126'] = graphdata.chcpdocs['5211'] = graphdata.chcpdocs['5222'] = graphdata.chcpdocs['9089'] = graphdata.chcpdocs['9444'] = graphdata.chcpdocs['61697'] = graphdata.chcpdocs['61698'] = graphdata.chcpdocs['61699'] = graphdata.chcpdocs['61700'] = graphdata.chcpdocs['61710'] = graphdata.chcpdocs["996710"] = 'ecma-35'
 
 graphdata.defgsets['895'] = ('ir014', 'nil', 'nil', 'nil')
 graphdata.defgsets['1009'] = ('ir002/tilde', 'nil', 'nil', 'nil')
@@ -961,4 +992,6 @@ graphdata.defgsets['9089'] = ('alt646/ibmjapan/tiny', 'nil', 'nil', 'nil')
 graphdata.defgsets['367'] = graphdata.defgsets['1054'] = graphdata.defgsets['1114'] = graphdata.defgsets['5211'] = graphdata.defgsets['9444'] = ('ir006', 'nil', 'nil', 'nil')
 graphdata.defgsets["61697"] = graphdata.defgsets["61698"] = graphdata.defgsets["61699"] = graphdata.defgsets["61700"] = ("ir170/ibm", "nil", "nil", "nil")
 graphdata.defgsets['61710'] = ('ir102/ibm', 'nil', 'nil', 'nil')
+
+graphdata.defgsets["996710"] = ("alt646/knuth", "nil", "nil", "nil")
 

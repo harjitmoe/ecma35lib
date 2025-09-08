@@ -387,6 +387,10 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
                              ("ibmpc-arabic/small/94", "ibmpc-arabic/tiny/94",
                               "ibmpc-arabic/alternate/94", "ibmpc-arabic/smaller/94"),
                              ("ibmpc-arabic/base/94",)),
+            tuple(b"!#0"): "alt646/knuth",
+            tuple(b"!#1"): ("alt646/storm/extended", (), ("alt646/storm", "alt646/storm/extended")),
+            tuple(b"!#2"): "ps-extension-gl",
+            tuple(b"!#3"): "tex-symbols-gl/94",
             tuple(b"~"): "nil"}
 
 g96bytes = {tuple(b"@"): "ir111",
@@ -450,6 +454,7 @@ g96bytes = {tuple(b"@"): "ir111",
             tuple(b"!<"): ("ibmpc-arabic/base",
                            ("ibmpc-arabic/small", "ibmpc-arabic/tiny", "ibmpc-arabic/alternate", "ibmpc-arabic/smaller"),
                            ("ibmpc-arabic/base",)),
+            tuple(b"!="): "ps-extension-gr",
             tuple(b"\"1"): "nbytehangul/ext",
             tuple(b"\"?"): "decgreek8/nbsp",
             tuple(b"%0"): "decturkish8/nbsp",
@@ -457,6 +462,7 @@ g96bytes = {tuple(b"@"): "ir111",
                            ("symbolgr/numsp",),
                            ("symbolgr/euro", "symbolgr/euro/numsp")),
             tuple(b"'0"): "ibmextras/zh-hans",
+            tuple(b"!#3"): "tex-symbols-gl/96",
             tuple(b"~"): "nil"}
 
 g94nbytes = {tuple(b"@"): ("ir042/nec", ("ir042/ibm", "ir042/nec", "ir042/1990pivot", "ir042/adobe"), ("ir042",)),

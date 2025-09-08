@@ -352,6 +352,11 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 1 G*D4 ! " ?`|0xA0–0xFF region of code page 13152 for Arabic, minus non-breaking space|
 |`IRR 2 G*D4 ! " ?`|0xA0–0xFF region of code page 165 for Arabic positional forms, minus non-breaking space|
 |`IRR 3 G*D4 ! " ?`|0xA0–0xFF region of code page 41824 for Arabic, minus non-breaking space|
+|`G*D4 " # 0`|"OT1" (7-bit TeX) charset|
+|`IRR ? G*D4 " # 1`|Left-hand side of LaTeX "Storm" charset|
+|`IRR @ G*D4 " # 1`|Left-hand side of LaTeX "Storm" charset, falling through to "OT1"|
+|`G*D4 " # 2`|Left-hand side of LaTeX "ASEXP" charset (supplementary charset for use with PostScript Standard charset)|
+|`G*D4 " # 3`|Left-hand side of LaTeX "TS1" (text symbols) charset|
 
 ## Additional single-byte 96-character G-sets, and additional selectors for particular variants of single-byte 96-character G-sets
 
@@ -398,12 +403,14 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 1 G*D6 ! <`|0xA0–0xFF region of code page 13152 for Arabic|
 |`IRR 2 G*D6 ! <`|0xA0–0xFF region of code page 165 for Arabic positional forms|
 |`IRR 3 G*D6 ! <`|0xA0–0xFF region of code page 41824 for Arabic|
+|`G*D6 ! =`|Right-hand side of LaTeX "ASEXP" charset (supplementary charset for use with PostScript Standard charset)|
 |`G*D6 " 1`|Korean N-byte Hangul Code (KS C 5601:1974) with IBM extensions|
 |`G*D6 " ?`|DEC 8-bit Greek, right-hand side with non-breaking space|
 |`G*D6 % 0`|DEC 8-bit Turkish, right-hand side with non-breaking space|
 |`IRR ? G*D6 $ 7`|Symbol font encoding, GR range (with euro)|
 |`IRR 0 G*D6 $ 7`|Symbol font encoding, GR range (with figure space)|
 |`G*D6 ' 0`|Right-hand side of single-byte component of IBM 5550 Simplified Chinese (extended `Shift_GB`) encoding|
+|`G*D6 " # 3`|Left-hand side of LaTeX "TS1" (text symbols) charset|
 
 ## Additional multiple-byte G-sets, and additional selectors for particular variants of multiple-byte G-sets
 
@@ -658,6 +665,20 @@ are used for custom purposes.&ensp;Specifically:
 
 |Private assignment|Meaning|
 |---|---|
+|`ESC [ 9 9 6 1 1 0 * p`|Switch to the Cork (LaTeX Extended Latin) encoding.|
+|`ESC [ 9 9 6 1 1 1 * p`|Switch to an old version of the Cork (LaTeX Extended Latin) encoding.|
+|`ESC [ 9 9 6 1 1 2 * p`|Switch to a variant of the Cork (LaTeX Extended Latin) encoding.|
+|`ESC [ 9 9 6 1 2 1 * p`|Switch to the T2A (LaTeX Cyrillic) encoding.|
+|`ESC [ 9 9 6 1 2 2 * p`|Switch to the T2B (LaTeX Cyrillic) encoding.|
+|`ESC [ 9 9 6 1 2 3 * p`|Switch to the T2C (LaTeX Cyrillic) encoding.|
+|`ESC [ 9 9 6 1 5 0 * p`|Switch to the T5 (LaTeX Vietnamese) encoding.|
+|`ESC [ 9 9 6 2 1 0 * p`|Switch to the TS1 (LaTeX Text Symbols) encoding.|
+|`ESC [ 9 9 6 7 4 0 * p`|Swith to the OT4 (LaTeX Polish) encoding.|
+|`ESC [ 9 9 6 7 4 1 * p`|Swith to the QX (LaTeX Polish, Extended) encoding.|
+|`ESC [ 9 9 6 7 4 2 * p`|Swith to the RM (LaTeX Polish, Extended) encoding.|
+|`ESC [ 9 9 6 8 1 2 * p`|Switch to the OML (LaTeX Mathematical Letters) encoding.|
+|`ESC [ 9 9 6 8 1 9 * p`|Switch to the OMS (LaTeX Mathematical Symbols) encoding.|
+|`ESC [ 9 9 6 8 2 4 * p`|Switch to the OMX (LaTeX Mathematical Brackets) encoding.|
 |`ESC [ 9 9 7 0 0 0 * p`|Switch to the VPS encoding.|
 |`ESC [ 9 9 7 0 0 1 * p`|Switch to the TCVN (ABC, .VN, VSCII; not VISCII) encoding.|
 |`ESC [ 9 9 7 0 0 2 * p`|Switch to the VISCII (not VSCII) encoding.|
@@ -666,6 +687,8 @@ are used for custom purposes.&ensp;Specifically:
 |`ESC [ 9 9 9 0 0 1 * p`|Switch to the Wingdings encoding.|
 |`ESC [ 9 9 9 0 0 2 * p`|Switch to the Wingdings 2 encoding.|
 |`ESC [ 9 9 9 0 0 3 * p`|Switch to the Wingdings 3 encoding.|
+|`ESC [ 9 9 9 9 0 1 * p`|Switch to the LaTeX "Storm" encoding.|
+|`ESC [ 9 9 9 9 0 2 * p`|Switch to the LaTeX "dvips" encoding.|
 
 .. Pending are VNI-Mac, VNI-DOS, SP-Tiberian (modified Michigan-Claremont), Bee Fonts
 
