@@ -98,7 +98,7 @@ _wansung_temp = parsers.fuse([
 graphdata.gsets["ir149/2002"] = (94, 2, _wansung_temp)
 graphdata.gsetflags["ir149/2002"] |= {"UHC:IS_WANSUNG"}
 graphdata.gsets["ir149/unihan"] = (94, 2, parsers.fuse([
-    parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_KSource", "K0"),
+    parsers.read_unihan_planes("UCD/Unihan_IRGSources-17.txt", "kIRG_KSource", "K0"),
     _wansung_temp,
 ], "Wansung_Updated.json"))
 graphdata.gsetflags["ir149/unihan"] |= {"UHC:IS_WANSUNG"}
@@ -289,7 +289,7 @@ graphdata.gsets["2011kpsextras"] = (94, 2, kpsext + (None,) * (94*94 - len(kpsex
 # KPS 10721 doesn't appear to be ECMA-35 structured.
 
 # KS X 1002.
-ksx1002_hanja = parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_KSource", "K1")
+ksx1002_hanja = parsers.read_unihan_planes("UCD/Unihan_IRGSources-17.txt", "kIRG_KSource", "K1")
 ksx1002_syllables = parsers.decode_main_plane_gl(
     parsers.parse_file_format("UTCDocs/HangulSources.txt", hangulsourcestxt = "1002"),
     "HangulSources.txt-1002")
@@ -301,7 +301,7 @@ graphdata.gsets["ksx1002"] = (94, 2, parsers.fuse([ksx1002_symbols, ksx1002_hanj
 #   horizontal extensions, while part 2 (vertical extensions) has a lot of holes (although these
 #   "holes" are indeed skipped in at least the most recent few editions of KS X 1027-2 itself).
 #   Other parts are not ECMA-35 structured.
-ksx1027_1_unihan = parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_KSource", "K2")
+ksx1027_1_unihan = parsers.read_unihan_planes("UCD/Unihan_IRGSources-17.txt", "kIRG_KSource", "K2")
 ksx1027_1 = parsers.fuse([
             # K2-6557 Unihan source reference removed from U+8FD6 in Unicode 3.1.1 per request
             #   in IRGN0405. KS X 1027-1:2011 and KS X 1027-1:2021 both skip it.
@@ -311,7 +311,7 @@ ksx1027_1 = parsers.fuse([
             ((None,) * 6446) + ((0x8FD6,),),
             ksx1027_1_unihan], "KSX1027-1.json")
 graphdata.gsets["ksx1027_1"] = (94, 2, ksx1027_1)
-ksx1027_2_hanja = parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_KSource", "K3")
+ksx1027_2_hanja = parsers.read_unihan_planes("UCD/Unihan_IRGSources-17.txt", "kIRG_KSource", "K3")
 graphdata.gsets["ksx1027_2"] = (94, 2, ksx1027_2_hanja)
 
 # Amounting to the entirety of the UHC extensions, in order:

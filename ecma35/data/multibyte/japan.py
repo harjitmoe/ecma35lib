@@ -246,6 +246,7 @@ arib_extonly = parsers.decode_main_plane_sjis(
     "pict_arib.txt")
 graphdata.gsets["ir168/arib"] = (94, 2, parsers.fuse([
         arib_extonly,
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources-17.txt", "kIRG_JSource", "JARIB"),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_JSource", "JARIB"),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-15-1.txt", "kIRG_JSource", "JARIB"),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_JSource", "JARIB"),
