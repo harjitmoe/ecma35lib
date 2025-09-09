@@ -391,6 +391,8 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"!#1"): ("alt646/storm/extended", (), ("alt646/storm", "alt646/storm/extended")),
             tuple(b"!#2"): "ps-extension-gl",
             tuple(b"!#3"): "tex-symbols-gl/94",
+            tuple(b"!#4"): "tex-greek-gl/94",
+            tuple(b"!#5"): "tex-extended-cyrillic-gl",
             tuple(b"~"): "nil"}
 
 g96bytes = {tuple(b"@"): "ir111",
@@ -463,6 +465,7 @@ g96bytes = {tuple(b"@"): "ir111",
                            ("symbolgr/euro", "symbolgr/euro/numsp")),
             tuple(b"'0"): "ibmextras/zh-hans",
             tuple(b"!#3"): "tex-symbols-gl/96",
+            tuple(b"!#4"): "tex-greek-gl/96",
             tuple(b"~"): "nil"}
 
 g94nbytes = {tuple(b"@"): ("ir042/nec", ("ir042/ibm", "ir042/nec", "ir042/1990pivot", "ir042/adobe"), ("ir042",)),
