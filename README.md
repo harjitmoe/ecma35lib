@@ -671,6 +671,7 @@ are used for custom purposes.&ensp;Specifically:
 |`ESC [ 9 9 6 1 2 1 * p`|Switch to the T2A (LaTeX Cyrillic) encoding.|
 |`ESC [ 9 9 6 1 2 2 * p`|Switch to the T2B (LaTeX Cyrillic) encoding.|
 |`ESC [ 9 9 6 1 2 3 * p`|Switch to the T2C (LaTeX Cyrillic) encoding.|
+|`ESC [ 9 9 6 1 4 0 * p`|Switch to the T4 (LaTeX African Latin) encoding.|
 |`ESC [ 9 9 6 1 5 0 * p`|Switch to the T5 (LaTeX Vietnamese) encoding.|
 |`ESC [ 9 9 6 2 1 0 * p`|Switch to the TS1 (LaTeX Text Symbols) encoding.|
 |`ESC [ 9 9 6 7 4 0 * p`|Swith to the OT4 (LaTeX Polish) encoding.|

@@ -135,7 +135,8 @@ graphdata.c0graphics["996741"] = ( # "OT4" variant
   (0x00B8,), (0x00DF,),            (0x00E6,), (0x0153,), (0x00F8,), (0x00C6,), (0x0152,), (0x00D8,),
     (0x00A8,))
 graphdata.c0graphics["101257"] = graphdata.c0graphics["996110"] = graphdata.c0graphics["996111"] = \
-graphdata.c0graphics["996112"] = ( # "T1" (Cork) and others using the same C0 replacements
+graphdata.c0graphics["996112"] = \
+graphdata.c0graphics["996140"] = ( # "T1" (Cork) and others using the same C0 replacements
   (0x02CB,), (0x00B4,), (0x02C6,), (0x02DC,), (0x00A8,), (0x02DD,), (0x02DA,), (0x02C7,),
   (0x02D8,), (0x00AF,), (0x02D9,), (0x00B8,), (0x02DB,), (0x201A,), (0x2039,), (0x203A,),
   (0x201C,), (0x201D,), (0x201E,), (0x00AB,), (0x00BB,), (0x2013,), (0x2014,), (0x200B,),
