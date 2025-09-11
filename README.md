@@ -683,6 +683,9 @@ are used for custom purposes.&ensp;Specifically:
 |`ESC [ 9 9 7 0 0 1 * p`|Switch to the TCVN (ABC, .VN, VSCII; not VISCII) encoding.|
 |`ESC [ 9 9 7 0 0 2 * p`|Switch to the VISCII (not VSCII) encoding.|
 |`ESC [ 9 9 8 0 0 0 * p`|Switch to the Zapf Dingbats encoding.|
+|`ESC [ 9 9 8 0 0 1 * p`|Switch to the extended Zapf Dingbats encoding.|
+|`ESC [ 9 9 8 0 0 2 * p`|Switch to the WordPerfect Iconic Symbols encoding.|
+|`ESC [ 9 9 8 1 0 0 * p`|Switch to the LaTeX `wasy10` symbol set encoding.|
 |`ESC [ 9 9 9 0 0 0 * p`|Switch to the Webdings encoding.|
 |`ESC [ 9 9 9 0 0 1 * p`|Switch to the Wingdings encoding.|
 |`ESC [ 9 9 9 0 0 2 * p`|Switch to the Wingdings 2 encoding.|
