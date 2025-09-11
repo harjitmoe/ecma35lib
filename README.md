@@ -357,6 +357,9 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR @ G*D4 " # 1`|Left-hand side of LaTeX "Storm" charset, falling through to "OT1"|
 |`G*D4 " # 2`|Left-hand side of LaTeX "ASEXP" charset (supplementary charset for use with PostScript Standard charset)|
 |`G*D4 " # 3`|Left-hand side of LaTeX "TS1" (text symbols) charset|
+|`G*D4 " # 4`|Left-hand side of LaTeX "LGR" (Greek) charset|
+|`G*D4 " # 5`|Left-hand side of LaTeX "X2" (extended Cyrillic) charset|
+|`G*D4 " # 6`|`0x21–7E` subrange of LaTeX "OT2" (7-bit Cyrillic) charset|
 
 ## Additional single-byte 96-character G-sets, and additional selectors for particular variants of single-byte 96-character G-sets
 
@@ -674,6 +677,9 @@ are used for custom purposes.&ensp;Specifically:
 |`ESC [ 9 9 6 1 4 0 * p`|Switch to the T4 (LaTeX African Latin) encoding.|
 |`ESC [ 9 9 6 1 5 0 * p`|Switch to the T5 (LaTeX Vietnamese) encoding.|
 |`ESC [ 9 9 6 2 1 0 * p`|Switch to the TS1 (LaTeX Text Symbols) encoding.|
+|`ESC [ 9 9 6 3 2 0 * p`|Switch to the X2 (LaTeX comprehensive Cyrillic) encoding.|
+|`ESC [ 9 9 6 7 2 0 * p`|Switch to the OT2 (LaTeX 7-bit Cyrillic) encoding.|
+|`ESC [ 9 9 6 7 2 1 * p`|Switch to a combination of ASCII with the OT2 (LaTeX 7-bit Cyrillic) encoding.|
 |`ESC [ 9 9 6 7 4 0 * p`|Swith to the OT4 (LaTeX Polish) encoding.|
 |`ESC [ 9 9 6 7 4 1 * p`|Swith to the QX (LaTeX Polish, Extended) encoding.|
 |`ESC [ 9 9 6 7 4 2 * p`|Swith to the RM (LaTeX Polish, Extended) encoding.|
