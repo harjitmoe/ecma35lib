@@ -89,24 +89,23 @@ def cnsmapper_contrabadcjkb(pointer, ucs):
     #   - https://archives.miloush.net/michkap/archive/2007/12/03/6643180.html
     if pointer in (3834, 56850) and ucs == (0x272F0,):
         return (0x27499,)
-    # ISO 10646:2020 Annex P says:
-    # - U+20885: mistakenly unified with T5-3669
+    # ISO 10646:2020 Annex P says (omitting the ones now unifiable under UCVs #194, #309 and #405):
     # - U+22936: mistakenly unified with T5-6777
-    # - U+23023: mistakenly unified with T5-6C34
     # - U+23EE4: mistakenly unified with T7-243F
-    # - U+243BE: T7-2F4B source but should have been unified with U+24381 (T-source glyph matches
-    #   latter since Unicode 6.0 so they are now homoglyphs; both are variants of U+70C8)
+    # - U+243BE: T7-2F4B source but should have been unified with U+24381 [both variants of U+70C8]
     # - U+27B1F: mistaken unification with T7-5035 although it's the G-source regarded as at fault
-    # - U+28321: mistakenly unified with T6-632A
-    # - U+28B75: glyph of TF-686D changed since UCS2003 glyph designed
+    # - U+28321: mistaken unification with T6-632A [although the two other source glyphs that have
+    #            since been added match the T glyph, so it's the G glyph that's the odd one out now]
     # - U+293FB: glyph of T5-7C22 later diverged from G-source glyph
-    # - U+29C52: glyph of T7-5666 changed since UCS2003 glyph designed
+    # - U+29C52: glyph of T7-5666 changed since UCS2003 glyph designed]
     # - U+2A0B8: glyph of T7-523A later diverged from G-source glyph
     # - U+2A6C0: mistaken unification with T5-7B5E although it's the G-source regarded as at fault
     if pointer in (1358, 54374) and ucs == (0x243BE,):
         return (0x24381,)
-    # U+20B9D is just U+BBF8 (mis)interpreted as a hanja:
+    # U+20B9D (TF-2136) is just U+BBF8 (mis)interpreted as a hanja:
     #   https://www.unicode.org/L2/L2024/24126-comments-cjk-abbrev.pdf
+    # Note that T9-3558 is U+C28C (so for TF-2136 to be U+BBF8 is not completely exceptional):
+    #   https://www.cns11643.gov.tw/wordView.jsp?ID=603480
     if ucs == (0x20B9D,):
         return (0xBBF8,)
     return deprecated_cjkci.remove_deprecated_cjkci(pointer, ucs)
