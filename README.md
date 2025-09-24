@@ -352,14 +352,14 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 1 G*D4 ! " ?`|0xA0–0xFF region of code page 13152 for Arabic, minus non-breaking space|
 |`IRR 2 G*D4 ! " ?`|0xA0–0xFF region of code page 165 for Arabic positional forms, minus non-breaking space|
 |`IRR 3 G*D4 ! " ?`|0xA0–0xFF region of code page 41824 for Arabic, minus non-breaking space|
-|`G*D4 " # 0`|"OT1" (7-bit TeX) charset|
-|`IRR ? G*D4 " # 1`|Left-hand side of LaTeX "Storm" charset|
-|`IRR @ G*D4 " # 1`|Left-hand side of LaTeX "Storm" charset, falling through to "OT1"|
-|`G*D4 " # 2`|Left-hand side of LaTeX "ASEXP" charset (supplementary charset for use with PostScript Standard charset)|
-|`G*D4 " # 3`|Left-hand side of LaTeX "TS1" (text symbols) charset|
-|`G*D4 " # 4`|Left-hand side of LaTeX "LGR" (Greek) charset|
-|`G*D4 " # 5`|Left-hand side of LaTeX "X2" (extended Cyrillic) charset|
-|`G*D4 " # 6`|`0x21–7E` subrange of LaTeX "OT2" (7-bit Cyrillic) charset|
+|`G*D4 ! # 0`|"OT1" (7-bit TeX) charset|
+|`IRR ? G*D4 ! # 1`|Left-hand side of LaTeX "Storm" charset|
+|`IRR @ G*D4 ! # 1`|Left-hand side of LaTeX "Storm" charset, falling through to "OT1"|
+|`G*D4 ! # 2`|Left-hand side of LaTeX "ASEXP" charset (supplementary charset for use with PostScript Standard charset)|
+|`G*D4 ! # 3`|Left-hand side of LaTeX "TS1" (text symbols) charset|
+|`G*D4 ! # 4`|Left-hand side of LaTeX "LGR" (Greek) charset|
+|`G*D4 ! # 5`|Left-hand side of LaTeX "X2" (extended Cyrillic) charset|
+|`G*D4 ! # 6`|Greek G0 set from ETS 300 706|
 
 ## Additional single-byte 96-character G-sets, and additional selectors for particular variants of single-byte 96-character G-sets
 
@@ -413,7 +413,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR ? G*D6 $ 7`|Symbol font encoding, GR range (with euro)|
 |`IRR 0 G*D6 $ 7`|Symbol font encoding, GR range (with figure space)|
 |`G*D6 ' 0`|Right-hand side of single-byte component of IBM 5550 Simplified Chinese (extended `Shift_GB`) encoding|
-|`G*D6 " # 3`|Left-hand side of LaTeX "TS1" (text symbols) charset|
+|`G*D6 ! # 3`|Left-hand side of LaTeX "TS1" (text symbols) charset|
 
 ## Additional multiple-byte G-sets, and additional selectors for particular variants of multiple-byte G-sets
 
