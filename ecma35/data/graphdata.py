@@ -395,6 +395,9 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"!#5"): "tex-extended-cyrillic-gl",
             tuple(b"!#6"): "tex-7bit-cyrillic-gl",
             tuple(b"!#7"): "etsgreek",
+            tuple(b"!#8"): "etscyrillic/serbian",
+            tuple(b"!#9"): "etscyrillic/bulgarian",
+            tuple(b"!#:"): "etscyrillic/ukrainian",
             tuple(b"~"): "nil"}
 
 g96bytes = {tuple(b"@"): "ir111",

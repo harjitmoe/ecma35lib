@@ -359,7 +359,11 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 ! # 3`|Left-hand side of LaTeX "TS1" (text symbols) charset|
 |`G*D4 ! # 4`|Left-hand side of LaTeX "LGR" (Greek) charset|
 |`G*D4 ! # 5`|Left-hand side of LaTeX "X2" (extended Cyrillic) charset|
-|`G*D4 ! # 6`|Greek G0 set from ETS 300 706|
+|`G*D4 ! # 6`|LaTeX "OT2" (7-bit Cyrillic) charset|
+|`G*D4 ! # 7`|Greek G0 set from ETS 300 706|
+|`G*D4 ! # 8`|Serbian Cyrillic G0 set from ETS 300 706|
+|`G*D4 ! # 9`|Russian and Bulgarian Cyrillic G0 set from ETS 300 706|
+|`G*D4 ! # :`|Ukrainian Cyrillic G0 set from ETS 300 706|
 
 ## Additional single-byte 96-character G-sets, and additional selectors for particular variants of single-byte 96-character G-sets
 
