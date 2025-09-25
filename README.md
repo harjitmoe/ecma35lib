@@ -411,6 +411,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 2 G*D6 ! <`|0xA0–0xFF region of code page 165 for Arabic positional forms|
 |`IRR 3 G*D6 ! <`|0xA0–0xFF region of code page 41824 for Arabic|
 |`G*D6 ! =`|Right-hand side of LaTeX "ASEXP" charset (supplementary charset for use with PostScript Standard charset)|
+|`G*D6 ! >`|ETS 300 706 G3 Line Drawing set|
 |`G*D6 " 1`|Korean N-byte Hangul Code (KS C 5601:1974) with IBM extensions|
 |`G*D6 " ?`|DEC 8-bit Greek, right-hand side with non-breaking space|
 |`G*D6 % 0`|DEC 8-bit Turkish, right-hand side with non-breaking space|
