@@ -405,6 +405,10 @@ graphdata.gsets["japan-plane-3"] = (94, 2, parsers.decode_main_plane_gl(
     parsers.parse_file_format("Custom/jasource.txt"),
     "jasource.txt"))
 
+graphdata.gsets["japan-plane-4"] = (94, 2, parsers.decode_main_plane_gl(parsers.parse_file_format("Other/plane_IB.txt"), "plane_IB.txt"))
+graphdata.gsets["japan-plane-5"] = (94, 2, parsers.decode_main_plane_gl(parsers.parse_file_format("Other/plane_FT.txt"), "plane_FT.txt"))
+graphdata.gsets["japan-plane-6"] = (94, 2, parsers.decode_main_plane_gl(parsers.parse_file_format("Other/plane_HG.txt"), "plane_HG.txt"))
+
 graphdata.chcpdocs["20932"] = "modified-euc"
 graphdata.defgsets["20932"] = ("ir006", "ir168/web", "nil", "nil", "ir159")
 

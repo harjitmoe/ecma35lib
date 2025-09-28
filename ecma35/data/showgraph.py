@@ -526,7 +526,8 @@ def dump_plane(outfile, planefunc, kutenfunc,
                lasturl=None, nexturl=None, lastname=None, nextname=None,
                is_96=False, is_sbcs=False, pua_collides=False, blot="",
                unicodefunc=_default_unicodefunc, big5ext_mode=0, skiprows=None,
-               siglum=None, showbmppuas=None, noallocatenotice=None, planewarn=None):
+               siglum=None, showbmppuas=None, noallocatenotice=None, planewarn=None,
+               planenote=None):
     """Dump an HTML mapping comparison."""
     if showbmppuas == None:
         showbmppuas = (False,) * len(plarray)
@@ -553,7 +554,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
             print("WARNING: Annotations will not be shown: ", missing_annotations)
         return dump_preview(outfile, planefunc(number), kutenfunc, number, 
                nonvacant_sets[0][1], lang = lang, css = css, part = part, jlfunc = jlfunc,
-               menuurl = menuurl, menuname = menuname, lasturl = lasturl, 
+               menuurl = menuurl, menuname = menuname, lasturl = lasturl, planenote = planenote,
                nexturl = nexturl, lastname = lastname, nextname = nextname, siglum = siglum,
                is_96 = is_96, is_sbcs = is_sbcs, blot = blot, showbmppua = showbmppuas[0],
                planewarn = planewarn, skiprows = skiprows, big5ext_mode = big5ext_mode,
@@ -571,6 +572,8 @@ def dump_plane(outfile, planefunc, kutenfunc,
         _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname)
     if planewarn:
         print(f"<p>Warning: {planewarn}</p>", file=outfile)
+    if planenote:
+        print(f"<p>Note: {planenote}</p>", file=outfile)
     if not nonvacant_sets:
         notice = noallocatenotice or "There are no allocated codepoints in this range."
         print(f"<p>{notice}</p>", file=outfile)
@@ -669,7 +672,8 @@ def dump_preview(outfile, planename, kutenfunc, number, array, *, lang="zh-TW", 
                css=None, part=None, menuurl=None, menuname="Up to menu", jlfunc=None, 
                lasturl=None, nexturl=None, lastname=None, nextname=None, showbmppua=False,
                is_96=False, is_sbcs=False, blot="", unicodefunc=_default_unicodefunc,
-               planewarn=None, skiprows=None, big5ext_mode=0, rowannots={}, siglum=None):
+               planewarn=None, skiprows=None, big5ext_mode=0, rowannots={}, siglum=None,
+               planenote=None):
     """Dump an HTML single-mapping table."""
     stx, edx = (1, 95) if not is_96 else (0, 96)
     if is_sbcs:
@@ -696,6 +700,8 @@ def dump_preview(outfile, planename, kutenfunc, number, array, *, lang="zh-TW", 
         _navbar(outfile, menuurl, menuname, lasturl, lastname, nexturl, nextname)
     if planewarn:
         print(f"<p>Warning: {planewarn}</p>", file=outfile)
+    if planenote:
+        print(f"<p>Note: {planenote}</p>", file=outfile)
     print("<table class=chart>", file=outfile)
     if skiprows:
         while stx < edx and stx in skiprows:

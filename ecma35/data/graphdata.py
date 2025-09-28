@@ -562,6 +562,9 @@ g94nbytes = {tuple(b"@"): ("ir042/nec", ("ir042/ibm", "ir042/nec", "ir042/1990pi
              tuple(b"%0"): ("unihan-singapore-characters", (), ("unihan-singapore-characters",)),
              tuple(b"%1"): ("pseudo-tcvn6056", (), ("pseudo-tcvn6056",)),
              tuple(b"%2"): ("the-new-other-gb7/ext", (), ("the-new-other-gb7", "the-new-other-gb7/ext")),
+             tuple(b"%3"): "japan-plane-4",
+             tuple(b"%4"): "japan-plane-5",
+             tuple(b"%5"): "japan-plane-6",
              tuple(b"~"): "nil"}
 
 g96nbytes = {tuple(b"!0"):("gbk-nonuro-extras-2022", ("gbk-nonuro-extras-web", "gbk-nonuro-extras-full", "gbk-nonuro-extras-2022"), ("gbk-nonuro-extras",)),

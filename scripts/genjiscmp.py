@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020, 2021, 2023, 2024.
+# By HarJIT in 2020, 2021, 2023, 2024, 2025.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -88,10 +88,28 @@ plane3 = (3, ("Plane 3",), [
           graphdata.gsets["japan-plane-3"][2],
 ])
 
+plane4 = (4, ("Plane 4",), [
+          graphdata.gsets["japan-plane-4"][2],
+])
+
+plane5 = (5, ("Plane 5",), [
+          graphdata.gsets["japan-plane-5"][2],
+])
+
+plane6 = (6, ("Plane 6",), [
+          graphdata.gsets["japan-plane-6"][2],
+])
+
 def planefunc(number, mapname=None):
     if mapname is None:
         if number == 3:
             return "Unified Japanese IT Vendors 1993"
+        elif number == 4:
+            return "Names of Persons and Places Supplement from the Han'yō Denshi Programme"
+        elif number == 5:
+            return "FDPC Supplement from the Han'yō Denshi Programme"
+        elif number == 6:
+            return "Heisei Minchō Supplement from the Han'yō Denshi Programme"
         return "JIS plane {:d}".format(number)
     return ""
 
@@ -582,7 +600,7 @@ blot = ""
 if os.path.exists("__analyt__"):
     blot = open("__analyt__").read()
 
-for n, p in enumerate([plane1, plane2, plane3]):
+for n, p in enumerate([plane1, plane2, plane3, plane4, plane5, plane6]):
     for q in range(1, 7):
         bn = n + 1
         f = open("jisplane{:X}{}.html".format(bn, chr(0x60 + q)), "w", encoding="utf-8")
@@ -599,13 +617,14 @@ for n, p in enumerate([plane1, plane2, plane3]):
         if q < 6:
             nexturl = "jisplane{:X}{}.html".format(bn, chr(0x60 + q + 1))
             nextname = "JIS plane {:d}, part {:d}".format(bn, q + 1)
-        elif bn < 3:
+        elif bn < 6:
             nexturl = "jisplane{:X}a.html".format(bn + 1)
             nextname = "JIS plane {:d}, part 1".format(bn + 1)
         showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ja", part=q, css="../css/codechart.css",
                              menuurl="../jis-conc.html", menuname="JIS character set variant comparison",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
-                             annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True, blot=blot, siglum="JIS")
+                             annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True, blot=blot, siglum="JIS",
+                             planenote = "No, I don't currently know what \"FDPC\" stands for." if bn == 5 else None)
         f.close()
 
 
