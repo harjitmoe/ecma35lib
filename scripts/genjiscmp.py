@@ -107,7 +107,7 @@ def planefunc(number, mapname=None):
         elif number == 4:
             return "Names of Persons and Places Supplement from the Han'yō Denshi Programme"
         elif number == 5:
-            return "FDPC Supplement from the Han'yō Denshi Programme"
+            return "Font Development and Promotion Center (FDPC) Supplement from the Han'yō Denshi Programme"
         elif number == 6:
             return "Heisei Minchō Supplement from the Han'yō Denshi Programme"
         return "JIS plane {:d}".format(number)
@@ -623,8 +623,7 @@ for n, p in enumerate([plane1, plane2, plane3, plane4, plane5, plane6]):
         showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="ja", part=q, css="../css/codechart.css",
                              menuurl="../jis-conc.html", menuname="JIS character set variant comparison",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
-                             annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True, blot=blot, siglum="JIS",
-                             planenote = "No, I don't currently know what \"FDPC\" stands for." if bn == 5 else None)
+                             annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True, blot=blot, siglum="JIS")
         f.close()
 
 

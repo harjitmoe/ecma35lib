@@ -654,7 +654,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*DM4 % 1`|Re-arrangement of TCVN 6056 (Chữ Hán), as was referenced by the Unicode 3.0 Unihan database|
 |`G*DM4 % 2`|"Data Statistics Table of Hanzi not included in GB 2312", as converted into a 94×94 set in [IRGN2808](https://www.unicode.org/irg/docs/n2808-GSourceChanges.pdf)|
 |`G*DM4 % 3`|The Han'yō Denshi Programme's "IB" charset for characters from names of persons or places|
-|`G*DM4 % 4`|The Han'yō Denshi Programme's "FT" charset for characters from the FDPC (TODO: what does "FDPC" stand for here?)|
+|`G*DM4 % 4`|The Han'yō Denshi Programme's "FT" charset for characters from the Font Development and Promotion Center (FDPC)|
 |`G*DM4 % 5`|The Han'yō Denshi Programme's "HG" charset for additional characters from the Heisei Minchō font|
 |`IRR ? G*DM6 ! 0`|GBK extras per GB 18030-2000 or GB 18030-2005 (GBK level 5 with associated UDC zone and non-URO part of level 4; accepted by GBK filter in G3 slot)|
 |`IRR 0 G*DM6 ! 0`|GBK extras, WHATWG/HTML5 variant|

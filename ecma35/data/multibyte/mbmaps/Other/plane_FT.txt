@@ -1,4 +1,4 @@
-# The FDPC Supplement charset from the Han'yō Denshi Programme (TODO: what does "FDPC" stand for?)
+# The Font Development & Promotion Center (FDPC) Supplement charset from the Han'yō Denshi Programme
 0x3024	U+53A9
 0x3027	U+6CBF
 0x3028	U+925B
