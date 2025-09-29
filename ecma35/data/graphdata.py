@@ -186,7 +186,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             #     ARIB: fixed-width "aribkana/katakana"
             # "2":
             #     VTx/MSTerm: "decgraphics"
-            #     MARC: "marc-he"
+            #     MARC: "ir219/marc"
             #     ARIB: "ir071"
             # "3":
             #     MARC: "ir089/marc"
@@ -226,7 +226,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"!7"): "ibmhebrew7",
             tuple(b"!8"): "digits-only",
             tuple(b"!9"): "ibm-e13b",
-            tuple(b"!:"): "ir219",
+            tuple(b"!:"): ("ir219", ("ir219/marc",), ("ir219",)), # Note: MARC itself uses b"2"
             tuple(b"!;"): "ir220",
             tuple(b"!<"): "webdings_g0",
             tuple(b"!="): "wingdings1_g0",
@@ -284,7 +284,6 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"$;"): ("ir224", ("ir224/marc",), ("ir224",)), # Note: MARC itself uses b"4"
             tuple(b"$<"): "ir222",
             tuple(b"$="): "ir221",
-            tuple(b"$>"): "marc-he", # Note: MARC itself uses b"2"
             tuple(b"$?"): "armscii",
             tuple(b"%0"): "decturkish8", # Thus VTx and compatible
             tuple(b"%1"): "marc-superscript",
@@ -303,7 +302,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
                            ("alt646/ibmusedwithcyrillic/small",),
                            ("alt646/ibmusedwithcyrillic",)),
             tuple(b"%<"): "alt646/ibmdcfbelgium",
-            tuple(b"%="): "hebrew7", # Thus VTx and compatibles
+            tuple(b"%="): ("hebrew7", ("hebrew7/ets",), ("hebrew7",)), # Thus VTx and compatibles
             tuple(b"%>"): ("alt646/ibmdcf", ("alt646/ibmdcf/braces", "alt646/ibmdcf/degreesign"), ("alt646/ibmdcf",)),
             tuple(b"%?"): "alt646/ibmisrael",
             tuple(b"&0"): ("alt646/ibmjapan", ("alt646/ibmjapan/noyen", "alt646/ibmjapan/swapyen", "alt646/ibmjapan/tiny"), ("alt646/ibmjapan",)),

@@ -172,7 +172,8 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 ! 7`|IBM 7-bit Hebrew|
 |`G*D4 ! 8`|Digits only|
 |`G*D4 ! 9`|Machine-readable cheque delimeter marks|
-|`G*D4 ! :`|ISO 8957-A 7-bit Hebrew|
+|`IRR ? G*D4 ! :`|ISO 8957-A 7-bit Hebrew|
+|`IRR 0 G*D4 ! :`|MARC-8 Hebrew|
 |`G*D4 ! ;`|ISO 8957-B Hebrew cantillation marks supplement|
 |`G*D4 ! <`|Left-hand side of the code page of the Webdings font|
 |`G*D4 ! =`|Left-hand side of the code page of the Wingdings font|
@@ -234,7 +235,6 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 0 G*D4 $ ;`|MARC-8 Extended Arabic|
 |`G*D4 $ <`|ISO 10586:1996 Georgian|
 |`G*D4 $ =`|ISO 10585:1996 Armenian|
-|`G*D4 $ >`|MARC-8 Hebrew|
 |`G*D4 $ ?`|Armenian ARMSCII|
 |`G*D4 % 0`|DEC 8-bit Turkish, right-hand side|
 |`G*D4 % 1`|MARC-8 superscript numbers|
@@ -251,7 +251,8 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR ? G*D4 % ;`|7-bit Roman for use with a Cyrillic set, projected from EBCDIC, large version|
 |`IRR 0 G*D4 % ;`|7-bit Roman for use with a Cyrillic set, projected from EBCDIC, small version|
 |`G*D4 % <`|7-bit Belgium, projected from EBCDIC DCF Migration encoding|
-|`G*D4 % =`|7-bit Hebrew|
+|`IRR ? G*D4 % =`|7-bit Hebrew (SI 960)|
+|`IRR 0 G*D4 % =`|7-bit Hebrew (ETS 300 706)|
 |`G*D4 % >`|7-bit Roman, projected from EBCDIC DCF Migration encoding|
 |`G*D4 % ?`|7-bit Roman, projected from EBCDIC WP96 for Israel|
 |`IRR ? G*D4 & 0`|7-bit Roman, projected from EBCDIC DP94 for Japan|
