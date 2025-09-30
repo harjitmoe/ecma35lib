@@ -397,6 +397,9 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"!#8"): "etscyrillic/serbian",
             tuple(b"!#9"): "etscyrillic/bulgarian",
             tuple(b"!#:"): "etscyrillic/ukrainian",
+            tuple(b"!#;"): "etsarabic-g0",
+            tuple(b"!#<"): "etsarabic-g2",
+            tuple(b"!#="): "etsgreek-g2",
             tuple(b"~"): "nil"}
 
 g96bytes = {tuple(b"@"): "ir111",
@@ -462,6 +465,7 @@ g96bytes = {tuple(b"@"): "ir111",
                            ("ibmpc-arabic/base",)),
             tuple(b"!="): "ps-extension-gr",
             tuple(b"!>"): "ir072/ets",
+            tuple(b"!?"): "etscyrillic-g2",
             tuple(b"\"1"): "nbytehangul/ext",
             tuple(b"\"?"): "decgreek8/nbsp",
             tuple(b"%0"): "decturkish8/nbsp",

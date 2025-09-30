@@ -365,6 +365,9 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 ! # 8`|Serbian Cyrillic G0 set from ETS 300 706|
 |`G*D4 ! # 9`|Russian and Bulgarian Cyrillic G0 set from ETS 300 706|
 |`G*D4 ! # :`|Ukrainian Cyrillic G0 set from ETS 300 706|
+|`G*D4 ! # ;`|Arabic G0 set from ETS 300 706|
+|`G*D4 ! # <`|Arabic G2 set from ETS 300 706|
+|`G*D4 ! # =`|G2 set used with the Greek G0 set, from ETS 300 706|
 
 ## Additional single-byte 96-character G-sets, and additional selectors for particular variants of single-byte 96-character G-sets
 
@@ -413,6 +416,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 3 G*D6 ! <`|0xA0–0xFF region of code page 41824 for Arabic|
 |`G*D6 ! =`|Right-hand side of LaTeX "ASEXP" charset (supplementary charset for use with PostScript Standard charset)|
 |`G*D6 ! >`|ETS 300 706 G3 Line Drawing set|
+|`G*D6 ! ?`|G2 set used with the Cyrillic G0 sets, from ETS 300 706|
 |`G*D6 " 1`|Korean N-byte Hangul Code (KS C 5601:1974) with IBM extensions|
 |`G*D6 " ?`|DEC 8-bit Greek, right-hand side with non-breaking space|
 |`G*D6 % 0`|DEC 8-bit Turkish, right-hand side with non-breaking space|
