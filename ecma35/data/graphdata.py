@@ -400,6 +400,8 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"!#;"): "etsarabic-g0",
             tuple(b"!#<"): "etsarabic-g2",
             tuple(b"!#="): "etsgreek-g2",
+            tuple(b"!#>"): "alt646/vni",
+            tuple(b"!#?"): "vni",
             tuple(b"~"): "nil"}
 
 g96bytes = {tuple(b"@"): "ir111",

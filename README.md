@@ -368,6 +368,8 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 ! # ;`|Arabic G0 set from ETS 300 706|
 |`G*D4 ! # <`|Arabic G2 set from ETS 300 706|
 |`G*D4 ! # =`|G2 set used with the Greek G0 set, from ETS 300 706|
+|`G*D4 ! # >`|Left-hand side of the VNI-for-DOS Vietnamese charset|
+|`G*D4 ! # ?`|Right-hand side of the VNI-for-Windows-or-Unix Vietnamese charset|
 
 ## Additional single-byte 96-character G-sets, and additional selectors for particular variants of single-byte 96-character G-sets
 
@@ -702,6 +704,7 @@ are used for custom purposes.&ensp;Specifically:
 |`ESC [ 9 9 7 0 0 0 * p`|Switch to the VPS encoding.|
 |`ESC [ 9 9 7 0 0 1 * p`|Switch to the TCVN (ABC, .VN, VSCII; not VISCII) encoding.|
 |`ESC [ 9 9 7 0 0 2 * p`|Switch to the VISCII (not VSCII) encoding.|
+|`ESC [ 9 9 7 0 0 4 * p`|Switch to the VNI-for-DOS encoding.|
 |`ESC [ 9 9 8 0 0 0 * p`|Switch to the Zapf Dingbats encoding.|
 |`ESC [ 9 9 8 0 0 1 * p`|Switch to the extended Zapf Dingbats encoding.|
 |`ESC [ 9 9 8 0 0 2 * p`|Switch to the WordPerfect Iconic Symbols encoding.|
@@ -712,8 +715,6 @@ are used for custom purposes.&ensp;Specifically:
 |`ESC [ 9 9 9 0 0 3 * p`|Switch to the Wingdings 3 encoding.|
 |`ESC [ 9 9 9 9 0 1 * p`|Switch to the LaTeX "Storm" encoding.|
 |`ESC [ 9 9 9 9 0 2 * p`|Switch to the LaTeX "dvips" encoding.|
-
-.. Pending are VNI-Mac, VNI-DOS, SP-Tiberian (modified Michigan-Claremont), Bee Fonts
 
 G-sets can still be used on the left-hand side of the code page (the mode is mostly business as
 usual as far as ECMA-35's 7-bit mechanisms are concerned, the only difference is the extra 128

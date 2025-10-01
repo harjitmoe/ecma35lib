@@ -948,6 +948,9 @@ raw_variants = {
     "alt646/storm/extended": ([0xA3, 0xA5, None,   None, None, None, None, None, 
                                            0x2018, None, None, None, None],
                               {0x21: 0x20A3, 0x22: 0xA2, 0x25: 0x20AC, 0x27: 0x2019}),
+    # G0 set of VNI-for-DOS charset for Vietnamese
+    "alt646/vni": ([None, None, 0x1EF4, None,   None,   None, 0xC1, None,
+                                0xC0,   0x1EB6, 0x1EA2, 0xC3, 0x1EA0], {}),
 }
 
 for (name, (myvars, override)) in raw_variants.items():
