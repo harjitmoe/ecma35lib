@@ -60,7 +60,29 @@ graphdata.gsets["vni"] = (94, 1, (
     (0x0300,),        (0x0301,), (0x0306, 0x0309), (0x0309,),
     (0x0306, 0x0303), None,             None))
 
-# TODO: VNI-Mac
+# VNI-for-Macintosh charset
+graphdata.rhses["997003"] = (
+  (0x0323, 0x0302,), (0x0302, 0x0309,),      None, (0x0306, 0x0301,),
+  (0x0110,),         (0x01AF,), (0x0306, 0x0303,), (0x0302, 0x0301,),
+  (0x0302, 0x0300,), (0x0302,), (0x0323, 0x0302,), (0x0302, 0x0303,),
+  (0x0302, 0x0309,), None,      (0x0306, 0x0301,), (0x0306, 0x0300,),
+  (0x0306,),         (0x0323, 0x0306,), (0x00ED,), (0x00EC,),
+  (0x1EF5,),         (0x0323,),         (0x0111,), (0x0129,),
+  (0x1ECB,),         (0x01A1,),         (0x01B0,), (0x0303,),
+  (0x0306, 0x0309,), (0x0301,),         (0x0309,), (0x0306, 0x0303,),
+  None, None, None, None, None, None, None, None,
+  None, None, None, None, None, None, (0x1EC8,), (0x0300,),
+  None, None, None, None, None, None, None, None,
+  None, None, None, None, None, None, (0x1EC9,), (0x0300,),
+  None, None, None, None, None, None, None, None,
+  None, None, None, (0x0302, 0x0300,), (0x0302, 0x0303,), (0x0303,), None, None,
+  None, None, None, None, None, None, None, None,
+  None, None, None, None, None, None, None, None,
+  None, None, None, None, None, (0x0302,), (0x0306,), (0x0302, 0x0301,),
+  (0x0323, 0x0306,), (0x0306, 0x0300,), (0x00CD,), (0x1EF4,),
+    (0x0323,), (0x00CC,), (0x0128,), (0x01A0,),
+  None, (0x1ECA,), (0x0306, 0x0309,), (0x0309,), (0x0301,), None, None, None,
+  None, None, None, None, None, None, None, None)
 
 # VNI-for-DOS charset
 graphdata.rhses["997004"] = (

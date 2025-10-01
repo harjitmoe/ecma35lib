@@ -230,7 +230,7 @@ graphdata.c0graphics["999903"] = ( # LaTeX "LGR" (full Greek with diacritics) ch
 #   closer match U+2666 (♦), see for example IBM's CPGID-1275 code chart.
 graphdata.c0graphics["1275"] = graphdata.c0graphics["1280"] = graphdata.c0graphics["1281"] = \
 graphdata.c0graphics["1282"] = graphdata.c0graphics["1283"] = graphdata.c0graphics["1284"] = \
-graphdata.c0graphics["1285"] = graphdata.c0graphics["1286"] = (
+graphdata.c0graphics["1285"] = graphdata.c0graphics["1286"] = graphdata.c0graphics["997003"] = (
   None,      None,      (0x2B72,), (0x2B70,), (0x2324,), (0x21E7,), (0x2303,), (0x2325,),
   None,      (0x2423,), (0x2326,), (0x2B90,), (0x2B91,), None,      None,      (0x1F589,),
   (0x2B6D,), (0x2318,), (0x2713,), (0x25C6,), (0xF8FF,), None,      None,      (0x232B,),

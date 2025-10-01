@@ -704,6 +704,7 @@ are used for custom purposes.&ensp;Specifically:
 |`ESC [ 9 9 7 0 0 0 * p`|Switch to the VPS encoding.|
 |`ESC [ 9 9 7 0 0 1 * p`|Switch to the TCVN (ABC, .VN, VSCII; not VISCII) encoding.|
 |`ESC [ 9 9 7 0 0 2 * p`|Switch to the VISCII (not VSCII) encoding.|
+|`ESC [ 9 9 7 0 0 3 * p`|Switch to the VNI-for-Macintosh encoding.|
 |`ESC [ 9 9 7 0 0 4 * p`|Switch to the VNI-for-DOS encoding.|
 |`ESC [ 9 9 8 0 0 0 * p`|Switch to the Zapf Dingbats encoding.|
 |`ESC [ 9 9 8 0 0 1 * p`|Switch to the extended Zapf Dingbats encoding.|
