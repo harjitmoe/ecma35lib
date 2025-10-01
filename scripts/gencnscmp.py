@@ -428,6 +428,7 @@ annots = {
               "U+6BF6 毶, although absent in non-GovTW mappings) and 02-49-32 (毿, the version "
               "present in Big5, due to being the favoured version in zh-Hant).",
  (3, 7, 8): 'Compare 12-87-16.',
+ (3, 65, 51): 'Compare 11-25-06.',
  (3, 69, 34): 'Compare 04-24-60.',
  (3, 69, 44): 'Compare 04-10-78.',
  (3, 69, 59): 'Compare 04-36-56.',
@@ -436,6 +437,7 @@ annots = {
  (3, 70, 87): 'Compare 04-67-25.',
  (4, 2, 59): "Compare 04-06-05.",
  (4, 3, 65): 'Compare 03-68-63.',
+ (4, 5, 4): 'Compare 11-13-84.',
  (4, 6, 5): "Compare 04-02-59.",
  (4, 7, 69): "This has a \"meat\" radical, not \"moon\"; compare 05-06-42.",
  (4, 7, 74): 'Compare 03-70-17.',
@@ -479,6 +481,8 @@ annots = {
 
  (11, 3, 39): 'Compare 07-41-75.',
  (11, 5, 47): "Compare 04-39-20",
+ (11, 13, 84): 'Compare 04-05-04.',
+ (11, 25, 6): 'Compare 03-65-51.',
  (13, 4, 28): "In IBM's private use area fallback scheme (code pages 1445 and 1449, 1449 in this case) which is being used here, U+F83F through U+F842 are basically duplicates of U+FE33 ︳, U+2574 ╴, U+FE34 ︴ and U+FE4F ﹏ respectively.&ensp;These also appear in IBM Big5, at Γ-61-30 through Γ-61-33.&ensp;Compare 01-01-26 through 01-01-29.",
  (12, 1, 0): "Plane 12 is used by IBM and ICU for an IBM-designated user defined area.&ensp;It is no longer considered private-use in the upstream standard however.",
  (12, 87, 16): 'Compare 03-07-08.',

@@ -77,11 +77,16 @@ def cnsmapper_contrabadcjkb(pointer, ucs):
     #   displays identically to U+27499 (with two insect radicals), despite being the only IRG
     #   source for U+272F0:
     #     https://www.cns11643.gov.tw/wordView.jsp?ID=477547
-    # The T-source glyph for U+272F0 currently (Unicode 15.1) follows the UCS2003 glyph, not the
-    #   CNS 11643 glyph, thus avoiding being an exact duplicate of U+27499; note further that it
-    #   is a Y-variant, not a Z-variant, of U+27499. Thus, the correct Unicode mapping for
-    #   EUC-TW \x8E\xA7\xC9\xEB is U+27499, despite the fact that no published mapping table
-    #   actually uses it.
+    # The T-source glyph for U+272F0 currently (Unicode 17, since at least 15.1) follows the
+    #   UCS2003 glyph, not the CNS 11643 07-41-75 glyph, thus avoiding being a duplicate of
+    #   U+27499; note further that it is a Y-variant, not a Z-variant, of U+27499. Thus, the
+    #   correct Unicode mapping for EUC-TW \x8E\xA7\xC9\xEB is U+27499.
+    # Also note that U+272F0's UCS2003 glyph or recent T-source glyph is properly TB-2347
+    #   (11-2347, 11-03-39, \x8E\xAB\xA3\xC7) in CNS 11643, although the reference is still
+    #   pending revision, not having been revised at the same time as the glyph. Note that older
+    #   mapping tables use U+27499 for 11-03-39, i.e. they've swapped CNS 11643 mappings
+    #   (U+27499 had not previously been horizontally extended).
+    #     https://www.unicode.org/irg/docs/n2880-TSourceChanges.pdf
     # Further info (note that interlinks between Michael Kaplan's and Andrew West's sites no longer
     #   work due to both having changed URL in the interim):
     #   - https://archives.miloush.net/michkap/archive/2007/11/22/6462768.html (see comments)
@@ -89,6 +94,19 @@ def cnsmapper_contrabadcjkb(pointer, ucs):
     #   - https://archives.miloush.net/michkap/archive/2007/12/03/6643180.html
     if pointer in (3834, 56850) and ucs == (0x272F0,):
         return (0x27499,)
+    if pointer in (226, 88586) and ucs == (0x27499,):
+        return (0x272F0,)
+    # Two more CNS-11643-to-Unicode mapping swaps/corrections from the same two IRG documents:
+    #   - https://www.unicode.org/irg/docs/n2879-TCAHorizontalExtension.pdf
+    #   - https://www.unicode.org/irg/docs/n2880-TSourceChanges.pdf
+    if pointer in (6066, 23738) and ucs == (0x4A36,):
+        return (0x291B9,)
+    if pointer in (2261, 90621) and ucs == (0x291B9,):
+        return (0x4A36,)
+    if pointer in (379, 26887) and ucs == (0x28453,):
+        return (0x28456,)
+    if pointer in (1210, 89570) and ucs == (0x28456,):
+        return (0x28453,)
     # ISO 10646:2020 Annex P says (omitting the ones now unifiable under UCVs #194, #309 and #405):
     # - U+22936: mistakenly unified with T5-6777
     # - U+23EE4: mistakenly unified with T7-243F
@@ -97,7 +115,7 @@ def cnsmapper_contrabadcjkb(pointer, ucs):
     # - U+28321: mistaken unification with T6-632A [although the two other source glyphs that have
     #            since been added match the T glyph, so it's the G glyph that's the odd one out now]
     # - U+293FB: glyph of T5-7C22 later diverged from G-source glyph
-    # - U+29C52: glyph of T7-5666 changed since UCS2003 glyph designed]
+    # - U+29C52: glyph of T7-5666 changed since UCS2003 glyph designed
     # - U+2A0B8: glyph of T7-523A later diverged from G-source glyph
     # - U+2A6C0: mistaken unification with T5-7B5E although it's the G-source regarded as at fault
     if pointer in (1358, 54374) and ucs == (0x243BE,):
@@ -114,7 +132,8 @@ planesize = 94 * 94
 cns_bmp = parsers.decode_main_plane_gl(
     parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode BMP.txt"),
     "CNS2UNICODE_Unicode BMP.txt",
-    mapper = cnsmapper_swaparrows_thrashscii2)
+    mapper = lambda pointer, ucs: cnsmapper_swaparrows_thrashscii2(pointer,
+        cnsmapper_contrabadcjkb(pointer, ucs)))
 cns_sip = parsers.decode_main_plane_gl(
     parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 2.txt"),
     "CNS2UNICODE_Unicode 2.txt",
