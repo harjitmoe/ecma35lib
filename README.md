@@ -370,6 +370,8 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 ! # =`|G2 set used with the Greek G0 set, from ETS 300 706|
 |`G*D4 ! # >`|Left-hand side of the VNI-for-DOS Vietnamese charset|
 |`G*D4 ! # ?`|Right-hand side of the VNI-for-Windows-or-Unix Vietnamese charset|
+|`G*D4 ! $ 0`|SPTiberian charset for Biblical Hebrew (modified Michigan-Claremont)|
+|`G*D4 ! $ 1`|SPIonic charset for Biblical Greek (modified Thesaurus Linguae Graecae)|
 
 ## Additional single-byte 96-character G-sets, and additional selectors for particular variants of single-byte 96-character G-sets
 
