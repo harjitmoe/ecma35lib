@@ -374,6 +374,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 ! $ 1`|SPIonic charset for Biblical Greek (modified Thesaurus Linguae Graecae)|
 |`IRR ? G*D4 ! $ 2`|SPAchmim charset for Sahidic Coptic (modified Thesaurus Linguae Graecae)|
 |`IRR 0 G*D4 ! $ 2`|SPAchmim charset for Sahidic Coptic (modified Thesaurus Linguae Graecae) with a few extensions adapted from the SPIonic charset|
+|`G*D4 ! $ 3`|SPCaesarea charset for notational symbols for New Testament textual apparatus|
 
 ## Additional single-byte 96-character G-sets, and additional selectors for particular variants of single-byte 96-character G-sets
 

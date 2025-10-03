@@ -169,3 +169,18 @@ graphdata.gsets["ibm5080-technical"] = (94, 1, (
          None, None, None, (8452,), None, None, None, (176,),
          (177,), None, (9012,), (8615,), None, (8960,), None, (8804,),
          (8805,), (8486,), None, None, (9013,), (181,), (8901,)))
+
+# SPCaesarea charset for notational symbols for New Testament textual apparatus
+graphdata.gsets["spcaesarea"] = (94, 1, (
+                None,      None,      (0x2E00,), (0x2E06,), None,       None,      None,
+    (0x27E6,),  (0x27E7,), (0x203B,), None,      None,      None,       (0x2E14,), (0x2E13,),
+    None,       None,      None,      None,      None,      None,       None,      None,
+    None,       None,      None,      None,      None,      None,       None,      None,
+    (0x2022,),  None,      None,      None,      None,      None,       None,      None,
+    None,       None,      None,      None,      None,      (0x1D510,), None,      None,
+    (0x1D513,), None,      None,      None,      None,      None,       None,      None,
+    None,       None,      None,      (0x005B,), (0x2E0C,), (0x005D,),  None,      None,
+    None,       None,      None,      None,      None,      None,       None,      None,
+    None,       None,      None,      None,      None,      None,       None,      (0x00B0,),
+    None,       None,      None,      None,      (0x2020,), None,       None,      None,
+    None,       None,      None,      (0x2E21,), (0x2E0B,), (0x2E20,),  None))
