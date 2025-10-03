@@ -111,6 +111,37 @@ graphdata.gsets["nbytehangul/ext"] = (96, 1, (
 graphdata.rhses["1040"] = graphdata.rhses["29712"] = ((0x00A2,),) + ((None,) * 31) + graphdata.gsets["nbytehangul/ext"][2]
 graphdata.defgsets["1040"] = graphdata.defgsets["29712"] = ("alt646/ksroman", "nbytehangul/ext", "nil", "nil")
 
+# SPAchmim charset for Sahidic Coptic (modified Thesaurus Linguae Graecae)
+graphdata.gsets["spachmim"] = (94, 1, (
+               None,      (0x00A8,), None,      None,      None,      None,      None,
+    None,      None,      None,      (0x00A8,), None,      (0x00AF,), None,      None,
+    None,      (0x03E6,), (0x03ED,), (0x03E5,), (0x03E3,), (0x03EF,), (0x03E9,), (0x00A0,),
+    (0x2CC9,), None,      None,      None,      None,      (0x03E7,), None,      (0x0323,),
+    None,      None,      None,      None,      None,      None,      None,      None,
+    None,      None,      None,      None,      None,      None,      None,      None,
+    None,      None,      None,      None,      None,      None,      None,      None,
+    None,      None,      None,      None,      (0x00AF,), None,      None,      (0x00AF,),
+    (0x03EB,), (0x2C81,), (0x2C83,), (0x2C9D,), (0x2C87,), (0x2C89,), (0x2CAB,), (0x2C85,),
+    (0x2C8F,), (0x2C93,), None,      (0x2C95,), (0x2C97,), (0x2C99,), (0x2C9B,), (0x2C9F,),
+    (0x2CA1,), (0x2C91,), (0x2CA3,), (0x2CA5,), (0x2CA7,), (0x2CA9,), None,      (0x2CB1,),
+    (0x2CAD,), (0x2CAF,), (0x2C8D,), None,      (0x2CEF,), None,      None))
+
+# SPAchmim charset for Sahidic Coptic (modified Thesaurus Linguae Graecae) with extensions
+#   adapted from the SPIonic Biblical Greek charset
+graphdata.gsets["spachmim/ext"] = (94, 1, (
+               None,      (0x00A8,), None,      None,      None,      None,      None,
+    None,      None,      None,      (0x00A8,), None,      (0x00AF,), None,      None,
+    None,      (0x03E6,), (0x03ED,), (0x03E5,), (0x03E3,), (0x03EF,), (0x03E9,), (0x00A0,),
+    (0x2CC9,), None,      None,      None,      None,      (0x03E7,), None,      (0x0323,),
+    (0x03EA,), (0x2C80,), (0x2C82,), (0x2C9C,), (0x2C86,), (0x2C88,), (0x2CAA,), (0x2C84,),
+    (0x2C8E,), (0x2C92,), (0x03D8,), (0x2C94,), (0x2C96,), (0x2C98,), (0x2C9A,), (0x2C9E,),
+    (0x2CA0,), (0x2C90,), (0x2CA2,), (0x2CA4,), (0x2CA6,), (0x2CA8,), (0x2C8A,), (0x2CB0,),
+    (0x2CAC,), (0x2CAE,), (0x2C8C,), None,      (0x00AF,), None,      None,      (0x00AF,),
+    (0x03EB,), (0x2C81,), (0x2C83,), (0x2C9D,), (0x2C87,), (0x2C89,), (0x2CAB,), (0x2C85,),
+    (0x2C8F,), (0x2C93,), (0x03D9,), (0x2C95,), (0x2C97,), (0x2C99,), (0x2C9B,), (0x2C9F,),
+    (0x2CA1,), (0x2C91,), (0x2CA3,), (0x2CA5,), (0x2CA7,), (0x2CA9,), (0x2C8B,), (0x2CB1,),
+    (0x2CAD,), (0x2CAF,), (0x2C8D,), None,      (0x2CEF,), None,      None))
+
 # TODO: Bee Fonts
 
 # ISO 6826-A (mathematical symbols)

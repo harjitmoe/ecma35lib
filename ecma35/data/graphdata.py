@@ -404,6 +404,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"!#?"): "vni",
             tuple(b"!$0"): "sptiberian",
             tuple(b"!$1"): "spionic",
+            tuple(b"!$2"): ("spachmim/ext", ("spachmim/ext",), ("spachmim",)),
             tuple(b"~"): "nil"}
 
 g96bytes = {tuple(b"@"): "ir111",
