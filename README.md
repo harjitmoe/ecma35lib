@@ -375,6 +375,8 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR ? G*D4 ! $ 2`|SPAchmim charset for Sahidic Coptic (modified Thesaurus Linguae Graecae)|
 |`IRR 0 G*D4 ! $ 2`|SPAchmim charset for Sahidic Coptic (modified Thesaurus Linguae Graecae) with a few extensions adapted from the SPIonic charset|
 |`G*D4 ! $ 3`|SPCaesarea charset for notational symbols for New Testament textual apparatus|
+|`G*D4 ! $ 4`|SPAtlantis charset for romanisations of Middle Eastern languages|
+|`G*D4 ! $ 5`|SPEdessa charset for Classical Syriac Aramaic (modified Michigan-Claremont)|
 
 ## Additional single-byte 96-character G-sets, and additional selectors for particular variants of single-byte 96-character G-sets
 
