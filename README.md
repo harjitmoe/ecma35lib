@@ -377,6 +377,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 ! $ 3`|SPCaesarea charset for notational symbols for New Testament textual apparatus|
 |`G*D4 ! $ 4`|SPAtlantis charset for romanisations of Middle Eastern languages|
 |`G*D4 ! $ 5`|SPEdessa charset for Classical Syriac Aramaic (modified Michigan-Claremont)|
+|`G*D4 ! $ 6`|"Bee" charset for the Deseret Alphabet|
 
 ## Additional single-byte 96-character G-sets, and additional selectors for particular variants of single-byte 96-character G-sets
 
@@ -723,6 +724,8 @@ are used for custom purposes.&ensp;Specifically:
 |`ESC [ 9 9 9 0 0 3 * p`|Switch to the Wingdings 3 encoding.|
 |`ESC [ 9 9 9 9 0 1 * p`|Switch to the LaTeX "Storm" encoding.|
 |`ESC [ 9 9 9 9 0 2 * p`|Switch to the LaTeX "dvips" encoding.|
+|`ESC [ 9 9 9 9 0 3 * p`|Switch to the LGR (LaTeX Greek) encoding.|
+|`ESC [ 9 9 9 9 0 4 * p`|Switch to the LaTeX `desalph` encoding for the Deseret Alphabet.|
 
 G-sets can still be used on the left-hand side of the code page (the mode is mostly business as
 usual as far as ECMA-35's 7-bit mechanisms are concerned, the only difference is the extra 128
