@@ -703,6 +703,7 @@ are used for custom purposes.&ensp;Specifically:
 |`ESC [ 9 9 6 3 2 0 * p`|Switch to the X2 (LaTeX comprehensive Cyrillic) encoding.|
 |`ESC [ 9 9 6 7 2 0 * p`|Switch to the OT2 (LaTeX 7-bit Cyrillic) encoding.|
 |`ESC [ 9 9 6 7 2 1 * p`|Switch to a combination of ASCII with the OT2 (LaTeX 7-bit Cyrillic) encoding.|
+|`ESC [ 9 9 6 7 3 0 * p`|Switch to the OT3 (LaTeX 7-bit phonetic notation) encoding.|
 |`ESC [ 9 9 6 7 4 0 * p`|Swith to the OT4 (LaTeX Polish) encoding.|
 |`ESC [ 9 9 6 7 4 1 * p`|Swith to the QX (LaTeX Polish, Extended) encoding.|
 |`ESC [ 9 9 6 7 4 2 * p`|Swith to the RM (LaTeX Polish, Extended) encoding.|
