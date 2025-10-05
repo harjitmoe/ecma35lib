@@ -428,6 +428,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D6 ! =`|Right-hand side of LaTeX "ASEXP" charset (supplementary charset for use with PostScript Standard charset)|
 |`G*D6 ! >`|ETS 300 706 G3 Line Drawing set|
 |`G*D6 ! ?`|G2 set used with the Cyrillic G0 sets, from ETS 300 706|
+|`G*D6 " 0`|LaTeX "TS3" (supplementary phonetic notation) charset (0x20–0x7F subset)|
 |`G*D6 " 1`|Korean N-byte Hangul Code (KS C 5601:1974) with IBM extensions|
 |`G*D6 " ?`|DEC 8-bit Greek, right-hand side with non-breaking space|
 |`G*D6 % 0`|DEC 8-bit Turkish, right-hand side with non-breaking space|
@@ -703,6 +704,7 @@ are used for custom purposes.&ensp;Specifically:
 |`ESC [ 9 9 6 1 4 0 * p`|Switch to the T4 (LaTeX African Latin) encoding.|
 |`ESC [ 9 9 6 1 5 0 * p`|Switch to the T5 (LaTeX Vietnamese) encoding.|
 |`ESC [ 9 9 6 2 1 0 * p`|Switch to the TS1 (LaTeX Text Symbols) encoding.|
+|`ESC [ 9 9 6 2 3 0 * p`|Switch to the TS3 (LaTeX supplementary phonetic notation) charset over the 0x80–0xFF range.|
 |`ESC [ 9 9 6 3 2 0 * p`|Switch to the X2 (LaTeX comprehensive Cyrillic) encoding.|
 |`ESC [ 9 9 6 7 2 0 * p`|Switch to the OT2 (LaTeX 7-bit Cyrillic) encoding.|
 |`ESC [ 9 9 6 7 2 1 * p`|Switch to a combination of ASCII with the OT2 (LaTeX 7-bit Cyrillic) encoding.|

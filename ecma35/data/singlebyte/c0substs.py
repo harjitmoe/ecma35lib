@@ -116,6 +116,7 @@ graphdata.c0graphics["899"] = graphdata.c0graphics["1092"] = (
 graphdata.c0graphics["996710"] = graphdata.c0graphics["996740"] = graphdata.c0graphics["996219"] = \
 graphdata.c0graphics["996742"] = graphdata.c0graphics["996812"] = graphdata.c0graphics["996819"] = \
 graphdata.c0graphics["996824"] = graphdata.c0graphics["999904"] = graphdata.c0graphics["996730"] = \
+graphdata.c0graphics["996230"] = \
 graphdata.c0graphics["998100"] = ( # "OT1" and charsets supplementing it
   (0x0393,), (0x0394,), (0x0398,), (0x039B,), (0x039E,), (0x03A0,), (0x03A3,), (0x03D2,),
   (0x03A6,), (0x03A8,), (0x03A9,), (0xFB00,), (0xFB01,), (0xFB02,), (0xFB03,), (0xFB04,),
