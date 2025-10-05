@@ -378,6 +378,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 ! $ 4`|SPAtlantis charset for romanisations of Middle Eastern languages|
 |`G*D4 ! $ 5`|SPEdessa charset for Classical Syriac Aramaic (modified Michigan-Claremont)|
 |`G*D4 ! $ 6`|"Bee" charset for the Deseret Alphabet|
+|`G*D4 ! $ 7`|Left-hand side of LaTeX "T3" (8-bit phonetic notation) charset|
 
 ## Additional single-byte 96-character G-sets, and additional selectors for particular variants of single-byte 96-character G-sets
 
@@ -434,6 +435,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 0 G*D6 $ 7`|Symbol font encoding, GR range (with figure space)|
 |`G*D6 ' 0`|Right-hand side of single-byte component of IBM 5550 Simplified Chinese (extended `Shift_GB`) encoding|
 |`G*D6 ! # 3`|Left-hand side of LaTeX "TS1" (text symbols) charset|
+|`G*D6 ! $ 7`|Left-hand side of LaTeX "T3" (8-bit phonetic notation) charset|
 
 ## Additional multiple-byte G-sets, and additional selectors for particular variants of multiple-byte G-sets
 
@@ -697,6 +699,7 @@ are used for custom purposes.&ensp;Specifically:
 |`ESC [ 9 9 6 1 2 1 * p`|Switch to the T2A (LaTeX Cyrillic) encoding.|
 |`ESC [ 9 9 6 1 2 2 * p`|Switch to the T2B (LaTeX Cyrillic) encoding.|
 |`ESC [ 9 9 6 1 2 3 * p`|Switch to the T2C (LaTeX Cyrillic) encoding.|
+|`ESC [ 9 9 6 1 3 0 * p`|Switch to the T3 (LaTeX 8-bit phonetic notation) encoding.|
 |`ESC [ 9 9 6 1 4 0 * p`|Switch to the T4 (LaTeX African Latin) encoding.|
 |`ESC [ 9 9 6 1 5 0 * p`|Switch to the T5 (LaTeX Vietnamese) encoding.|
 |`ESC [ 9 9 6 2 1 0 * p`|Switch to the TS1 (LaTeX Text Symbols) encoding.|

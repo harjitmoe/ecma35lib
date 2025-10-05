@@ -409,6 +409,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"!$4"): "spatlantis",
             tuple(b"!$5"): "spedessa",
             tuple(b"!$6"): "bee",
+            tuple(b"!$7"): "tex-ipa-gl/94",
             tuple(b"~"): "nil"}
 
 g96bytes = {tuple(b"@"): "ir111",
@@ -484,6 +485,7 @@ g96bytes = {tuple(b"@"): "ir111",
             tuple(b"'0"): "ibmextras/zh-hans",
             tuple(b"!#3"): "tex-symbols-gl/96",
             tuple(b"!#4"): "tex-greek-gl/96",
+            tuple(b"!$7"): "tex-ipa-gl/96",
             tuple(b"~"): "nil"}
 
 g94nbytes = {tuple(b"@"): ("ir042/nec", ("ir042/ibm", "ir042/nec", "ir042/1990pivot", "ir042/adobe"), ("ir042",)),
