@@ -180,7 +180,7 @@ if not os.path.exists(cachefile):
         "dᶚ": "𝼙", "tᶋ": "𝼗", "tᶘ": "𝼜", "əɐ": "ᴂ", "ᴀᴇ": "ᴁ", "ᴬᴱ": "ᴭ", "ᵊᵄ": "ᵆ",
     }
     for i in uts39data:
-        if i not in gcc_sequences and namedata.get_ucscategory(i[-1]) != "Mn":
+        if i not in gcc_sequences and namedata.get_ucscategory(i[-1]) != "Mn" and (not 0x1100 <= ord(i[0]) < 0x1200 or not namedata._is_cjkui(uts39data[i][0])):
             gcc_sequences[i] = uts39data[i]
     from_1F18B = ["IC", "PA", "SA", "AB", "WC", "DJ",
                   "CL", "COOL", "FREE", "ID", "NEW", "NG", "OK", "SOS", "UP!", "VS", "3D", 
