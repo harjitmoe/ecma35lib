@@ -39,6 +39,14 @@ conformation_sets = {frozenset(i) for i in (
     {"⊲", "◅"}, {"⊳", "▻"}, {"∘", "◦"}, {"¯", "‾"}, {"∙", "⋅", "·", "･", "・"}, {"∫", "ʃ"},
     {"‖", "∥"}, # Some CJK sets distinguish (making ∥ like ⫽), others unify so mappings differ
     {"∇", "🜄"}, {"⦅", "⸨", "｟"}, {"⦆", "⸩", "｠"},
+    #
+    # Since the word-ligature or honourific-ligature characters are in Arabic (not Urdu or Punjabi),
+    #   U+06D2 when it appears is a font variant of U+0649. For example, in the same word (تعالى),
+    #   the Unicode reference glyph for U+FDC8 uses a U+06D2-like form, while the Unicode reference
+    #   glyph for U+FDC9 uses a more prototypical U+0649 glyph form. Notably, the Unicode NFKD
+    #   decompositions for U+FDF0 and U+FDF1 use U+06D2 instead of U+0649, while the naming of their
+    #   combining counterparts U+06D6 and U+06D7 indicates that it is in fact a U+0649.
+    {r"ے", r"ى"},
 )}
 
 if not os.path.exists(cachefile) or not os.path.exists(bscachefile):
