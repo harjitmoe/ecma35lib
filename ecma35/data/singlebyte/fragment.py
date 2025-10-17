@@ -184,3 +184,18 @@ graphdata.gsets["spcaesarea"] = (94, 1, (
     None,       None,      None,      None,      None,      None,       None,      (0x00B0,),
     None,       None,      None,      None,      (0x2020,), None,       None,      None,
     None,       None,      None,      (0x2E21,), (0x2E0B,), (0x2E20,),  None))
+
+# Bookshelf Symbol 3 charset for astrological symbols and musical accidentals
+graphdata.gsets["bookshelf-3"] = (94, 1, (
+               None,      None,      None,      None,      None,      None,      None,
+    None,      None,      None,      None,      None,      None,      None,      None,
+    None,      None,      None,      None,      None,      None,      None,      None,
+    None,      None,      None,      None,      None,      None,      None,      None,
+    None,      (0x260C,), (0x260D,), (0x263C,), (0x263F,), (0x2640,), (0x2641,), (0x2642,),
+    (0x2643,), (0x266D,), (0x266E,), (0x261E,), (0x2648,), (0x2649,), (0x264A,), (0x264B,),
+    (0x264C,), (0x264D,), (0x260A,), (0x260B,), (0x266F,), (0x2610,), (0x2644,), (0x26E2,),
+    (0x2646,), (0x264E,), (0x264F,), (0x2650,), (0x2653,), (0x211E,), (0x2647,), (0x263D,),
+    (0x263E,), (0x2651,), (0x2652,), None,      None,      None,      None,      None,
+    None,      None,      None,      None,      None,      None,      None,      None,
+    None,      None,      None,      None,      None,      None,      None,      None,
+    None,      None,      None,      None,      None,      None,      None))

@@ -379,6 +379,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 ! $ 5`|SPEdessa charset for Classical Syriac Aramaic (modified Michigan-Claremont)|
 |`G*D4 ! $ 6`|"Bee" charset for the Deseret Alphabet|
 |`G*D4 ! $ 7`|Left-hand side of LaTeX "T3" (8-bit phonetic notation) charset|
+|`G*D4 ! $ 8`|"Bookshelf Symbol 3" charset for astrological symbols and musical accidentals|
 
 ## Additional single-byte 96-character G-sets, and additional selectors for particular variants of single-byte 96-character G-sets
 
