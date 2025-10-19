@@ -9,6 +9,7 @@
 import os, json, shutil
 from ecma35.data import graphdata, variationhints
 from ecma35.data.multibyte import mbmapparsers as parsers
+from ecma35.data.names import namedata
 
 # Layout of GBK (per GB 18030:2005):
 #   GB2312-inherited main EUC plane: [A1-FE][A1-FE], charted between:
@@ -312,9 +313,16 @@ graphdata.gsets["ir058/hant-strict"] = gb12345_strict = (94, 2, parsers.fuse([
 
 # GB/T 12052 (Korean in Mainland China). The non-Hangul non-kanji rows are basically
 #   the same as GB2312, but there is a second dollar sign instead of a yuan sign.
+def unicode_normalise_gb12052(pointer, ucs):
+    if len(ucs) == 3:
+        start = "".join(chr(i) for i in ucs[:2])
+        if start in namedata.canonical_recomp:
+            return (*(ord(i) for i in namedata.canonical_recomp[start]), *ucs[2:])
+    return ucs
 graphdata.gsets["gb12052"] = (94, 2, parsers.decode_main_plane_euc(
     parsers.parse_file_format("Other/gb12052-uni.txt", gb12052 = True),
-    "gb12052-uni.txt"))
+    "gb12052-uni.txt",
+    mapper = unicode_normalise_gb12052))
 
 graphdata.gsets["gb15564"] = gb15564 = (94, 2, parsers.fuse([
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-17.txt", "kIRG_GSource", "GH", kutenform=True),

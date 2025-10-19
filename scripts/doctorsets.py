@@ -7,6 +7,7 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import sys, os, pprint, re
+import unicodedata as ucd
 sys.path.append(os.path.abspath(os.pardir))
 
 from ecma35.data.graphdata import gsets, g94bytes, g96bytes, g94nbytes, g96nbytes, defgsets, gsetflags, ebcdicdbcs, rhses
@@ -126,6 +127,10 @@ for (setcode, (kind, bytecount, entries)) in gsets.items():
                     complaints.add((setcode, "NullInTuple"))
                 if any((abs(i) < 0x20 or 0x7F <= abs(i) < 0xA0) for i in entry):
                     complaints.add((setcode, "MapToCcCharacter"))
+                if len(entry) > 1 and all(i >= 0 for i in entry):
+                    string = "".join(chr(i) for i in entry)
+                    if string != ucd.normalize("NFC", string):
+                        complaints.add((setcode, "NotNormalised", entry))
 
 
 pprint.pprint([*sorted(complaints)])
