@@ -1000,7 +1000,7 @@ graphdata.rhses["101257"] = (
 graphdata.defgsets["101257"] = ("ir006", "ir179", "nil", "nil")
 
 graphdata.gsets["bookshelf-1-gl"] = (94, 1, (
-               (0xFF65,), None,      None,      None,      None,      None,      None,
+               None,      None,      None,      None,      None,      None,      None,
     None,      None,      None,      (0x207A,), None,      (0x207B,), None,      (0x002F, 0xF877),
     (0x2070,), (0x00B9,), (0x00B2,), (0x00B3,), (0x2074,), (0x2075,), (0x2076,), (0x2077,),
     (0x2078,), (0x2079,), None,      None,      None,      None,      None,      None,
@@ -1037,7 +1037,7 @@ graphdata.rhses["995001"] = (
 graphdata.defgsets["995001"] = ("bookshelf-1-gl", "nil", "nil", "nil")
 
 graphdata.gsets["bookshelf-2-gl"] = (94, 1, (
-               (0xFF65,), None,      None,         None,      None,      None,      None,
+               None,      None,      None,         None,      None,      None,      None,
     None,      None,      None,      (0x208A,),    None,      (0x208B,), None,      (0x002F, 0xF878),
     (0x2080,), (0x2081,), (0x2082,), (0x2083,),    (0x2084,), (0x2085,), (0x2086,), (0x2087,),
     (0x2088,), (0x2089,), None,      None,         None,      None,      None,      None,
@@ -1050,7 +1050,7 @@ graphdata.gsets["bookshelf-2-gl"] = (94, 1, (
     None,      None,      None,      (0x015B,),    (0x021B,), None,      None,      (0x209D,),
     (0x2093,), (0x209E,), (0x209F,), None,         None,      None,      None))
 graphdata.rhses["995002"] = (
-    (0xFF65,), None,      None,      None,      None,      None,      None,      None,
+    None,      None,      None,      None,      None,      None,      None,      None,
     None,      None,      None,      None,      None,      None,      None,      None,
     None,      None,      None,      None,      None,      None,      None,      None,
     None,      None,      None,      None,      None,      None,      None,      None,
