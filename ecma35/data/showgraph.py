@@ -184,7 +184,7 @@ def show(name, *, plane=None):
         orig_curchar = "".join(chr(abs(j)) for j in i) if isinstance(i, tuple) else chr(abs(i)) if i is not None else None
         if i is None:
             curchar = orig_curchar = "\uFFFD"
-        elif isinstance(i, tuple) and (namedata.get_ucscategory(chr(abs(i[0]))) == "Co"):
+        elif isinstance(i, tuple) and (namedata.get_ucscategory(chr(abs(i[0])), None) == "Co"):
             if len(i) == 1:
                 curchar = "\x1B[35m\u253C\x1B[m"
             else:
@@ -195,7 +195,7 @@ def show(name, *, plane=None):
             curchar = orig_curchar = "".join(chr(abs(j)) for j in i)
             if i[0] < 0:
                 curchar = curchar[::-1]
-            if ucd.category(orig_curchar[0]) == "Mn":
+            if namedata.get_ucscategory(orig_curchar[0], None) == "Mn":
                 curchar = "\uFF65" + curchar
             if 0xF870 <= ord(curchar[-1]) <= 0xF87F:
                 if curchar[-1] == "\uF874":
@@ -230,13 +230,13 @@ def show(name, *, plane=None):
                     curchar = "\x1B[32m" + curchar[:-1] + "\x1B[m"
                 else:
                     curchar = "\x1B[33m" + curchar[:-1] + "\x1B[m"
-        elif namedata.get_ucscategory(chr(i)) == "Co":
+        elif namedata.get_ucscategory(chr(i), None) == "Co":
             curchar = "\x1B[32m\u253C\x1B[m"
         elif 0x80 <= i <= 0x9F:
             curchar = "\x1B[31m\u253C\x1B[m"
         else:
             curchar = chr(i)
-            if ucd.category(orig_curchar[0]) == "Mn":
+            if namedata.get_ucscategory(orig_curchar[0], None) == "Mn":
                 curchar = "\uFF65" + curchar
         #
         offset += 2

@@ -411,6 +411,8 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"!$6"): "bee",
             tuple(b"!$7"): "tex-ipa-gl/94",
             tuple(b"!$8"): "bookshelf-3",
+            tuple(b"!$9"): "bookshelf-1-gl",
+            tuple(b"!$:"): "bookshelf-2-gl",
             tuple(b"~"): "nil"}
 
 g96bytes = {tuple(b"@"): "ir111",
