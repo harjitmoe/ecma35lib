@@ -170,6 +170,40 @@ graphdata.gsets["ibm5080-technical"] = (94, 1, (
          (177,), None, (9012,), (8615,), None, (8960,), None, (8804,),
          (8805,), (8486,), None, None, (9013,), (181,), (8901,)))
 
+# LaTeX Text Symbols ("TS1")
+_ts1_gl = (   None,       None,       None,       (0x0024,),  None,       None,       (0x02C8,),
+  None,       None,       (0x2217,),  None,       (0x002C,),  (0x2E40,),  (0x002E,),  (0x2044,),
+  (0x1D7CE,), (0x1D7CF,), (0x1D7D0,), (0x1D7D1,), (0x1D7D2,), (0x1D7D3,), (0x1D7D4,), (0x1D7D5,),
+  (0x1D7D6,), (0x1D7D7,), None,       None,       (0x27E8,),  (0x2212,),  (0x27E9,),  None,
+  None,       None,       None,       None,       None,       None,       None,       None,
+  None,       None,       None,       None,       None,       (0x2127,),  None,       (0x25EF,),
+  None,       None,       None,       None,       None,       None,       None,       (0x2126,),
+  None,       None,       None,       (0x27E6,),  None,       (0x27E7,),  (0x2191,),  (0x2193,),
+  (0x2035,),  None,       (0x22C6,),  (0x26AE,),  (0x271D,),  None,       None,       None,
+  None,       None,       None,       None,       (0x2E19,),  (0x26AD,),  (0x266A,),  None,
+  None,       None,       None,       (0x017F,),  None,       None,       None,       None,
+  None,       None,       None,       None,       None,       None,       (0x223C,))
+graphdata.gsets["tex-symbols-gl/94"] = (94, 1, _ts1_gl)
+graphdata.gsets["tex-symbols-gl/96"] = (96, 1, ((0x2422,), *_ts1_gl, (0x30A0,)))
+graphdata.rhses["996210"] = (
+    (0x02D8,), (0x02C7,), (0x2033,),        (0x2036,), (0x2020,), (0x2021,), (0x2016,), (0x2030,),
+    (0x2022,), (0x2103,), (0x0053, 0x20E6), (0x023C,), (0x0192,), (0x20A1,), (0x20A9,), (0x20A6,),
+    (0x20B2,), (0x20BD,), (0x20A4,),        (0x211E,), (0x203D,), (0x2E18,), (0x20AB,), (0x2122,),
+    (0x2031,), (0x2761,), (0x0E3F,),        (0x2116,), (0x2052,), (0x212E,), (0x25E6,), (0x2120,),
+    (0x2045,), (0x2046,), (0x00A2,),        (0x00A3,), (0x00A4,), (0x00A5,), (0x00A6,), (0x00A7,),
+    (0x00A8,), (0x00A9,), (0x00AA,),       (0x1F12F,), (0x00AC,), (0x2117,), (0x00AE,), (0x203E,),
+    (0x00B0,), (0x00B1,), (0x00B2,),        (0x00B3,), (0x2032,), (0x00B5,), (0x00B6,), (0x00B7,),
+    (0x203B,), (0x00B9,), (0x00BA,),        (0x221A,), (0x00BC,), (0x00BD,), (0x00BE,), (0x20AC,),
+    None, None, None, None, None, None, None,      None,
+    None, None, None, None, None, None, None,      None,
+    None, None, None, None, None, None, (0x00D7,), None,
+    None, None, None, None, None, None, None,      None,
+    None, None, None, None, None, None, None,      None,
+    None, None, None, None, None, None, None,      None,
+    None, None, None, None, None, None, (0x00F7,), None,
+    None, None, None, None, None, None, None,      None)
+graphdata.defgsets["996210"] = ("tex-symbols-gl/94", "nil", "nil", "nil")
+
 # SPCaesarea charset for notational symbols for New Testament textual apparatus
 graphdata.gsets["spcaesarea"] = (94, 1, (
                 None,      None,      (0x2E00,), (0x2E06,), None,       None,      None,
