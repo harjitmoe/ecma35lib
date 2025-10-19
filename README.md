@@ -382,6 +382,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 ! $ 8`|"Bookshelf Symbol 3" charset for astrological symbols and musical accidentals|
 |`G*D4 ! $ 9`|Left-hand side of "Bookshelf Symbol 1" charset for superscripts and extended Latin|
 |`G*D4 ! $ :`|Left-hand side of "Bookshelf Symbol 2" charset for subscripts and extended Latin|
+|`G*D4 ! $ ;`|Left-hand side of "Bookshelf Symbol 7" charset for extended Latin, musical symbols and assorted Japanese characters|
 
 ## Additional single-byte 96-character G-sets, and additional selectors for particular variants of single-byte 96-character G-sets
 
@@ -699,6 +700,7 @@ are used for custom purposes.&ensp;Specifically:
 |---|---|
 |`ESC [ 9 9 5 0 0 1 * p`|Switch to the Bookshelf Symbol 1 (superscripts and extended Latin) encoding.|
 |`ESC [ 9 9 5 0 0 2 * p`|Switch to the Bookshelf Symbol 2 (subscripts and extended Latin) encoding.|
+|`ESC [ 9 9 5 0 0 7 * p`|Switch to the Bookshelf Symbol 7 (extended Latin, musical symbols and assorted Japanese characters) encoding.|
 |`ESC [ 9 9 6 1 1 0 * p`|Switch to the Cork (LaTeX Extended Latin) encoding.|
 |`ESC [ 9 9 6 1 1 1 * p`|Switch to an old version of the Cork (LaTeX Extended Latin) encoding.|
 |`ESC [ 9 9 6 1 1 2 * p`|Switch to a variant of the Cork (LaTeX Extended Latin) encoding.|

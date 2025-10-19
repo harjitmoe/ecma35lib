@@ -999,6 +999,7 @@ graphdata.rhses["101257"] = (
   (0x0173,), (0x0142,), (0x015B,), (0x016B,), (0x00FC,), (0x017C,), (0x017E,), (0x02D9,))
 graphdata.defgsets["101257"] = ("ir006", "ir179", "nil", "nil")
 
+# "Bookshelf Symbol 1" charset for superscripts and extended Latin
 graphdata.gsets["bookshelf-1-gl"] = (94, 1, (
                None,      None,      None,      None,      None,      None,      None,
     None,      None,      None,      (0x207A,), None,      (0x207B,), None,      (0x002F, 0xF877),
@@ -1036,6 +1037,7 @@ graphdata.rhses["995001"] = (
     None,      (0x016D,), (0x016B,), (0x016B, 0x0306), (0x01D4,), (0x0233,), (0x00FE,), None)
 graphdata.defgsets["995001"] = ("bookshelf-1-gl", "nil", "nil", "nil")
 
+# "Bookshelf Symbol 2" charset for subscripts and extended Latin
 graphdata.gsets["bookshelf-2-gl"] = (94, 1, (
                None,      None,      None,         None,      None,      None,      None,
     None,      None,      None,      (0x208A,),    None,      (0x208B,), None,      (0x002F, 0xF878),
@@ -1067,3 +1069,48 @@ graphdata.rhses["995002"] = (
     None,      None, (0x006F, 0x0325), None,    None,      None,      None,      (0x00F7, 0xF878),
     None,      None,      None, (0x016F,), (0x016B, 0x0303), (0x00FD,), None,    None)
 graphdata.defgsets["995002"] = ("bookshelf-2-gl", "nil", "nil", "nil")
+
+# "Bookshelf Symbol 7" charset for extended Latin, musical symbols and assorted Japanese characters
+graphdata.gsets["bookshelf-7-gl"] = (94, 1, (
+                      (0x01CE,),        (0x0101, 0x0301), (0x0062, 0x0301),
+    (0x0042, 0x0301), (0x0043, 0x0300), (0x0044, 0x0301), (0x0044, 0x0300),
+    (0x0046, 0x0301), (0x0066, 0x0301), (0x2109,),        (0x01F4,),
+    (0x0047, 0x0300), (0x0048, 0x0301), (0x0068, 0x0301), (0x01D0,),
+    (0x012B, 0x0301), (0x1E3E,),        (0x006D, 0x0325), (0x01F8,),
+    (0x1E54,),        (0x1E55,),        (0x0050, 0x0300), (0x0051, 0x0301),
+    (0x0071, 0x0301), (0x0051, 0x0300), (0x0053, 0x0300), (0x0054, 0x0301),
+    (0x0074, 0x0301), (0x0054, 0x0300), (0x1E6D,),        (0x0056, 0x0301),
+    (0x0056, 0x0300), (0x0058, 0x0301), (0x0233,),        (0x0251, 0x0301),
+    (0x0251, 0x0300), (0x0251, 0x0303), (0x026A, 0x0301), (0x026A, 0x0300),
+    (0x1D1C,),        (0x1D1C, 0x0301), (0x1D1C, 0x0300), (0x028C, 0x0301),
+    (0x028C, 0x0300), (0x0259, 0x0301), (0x0259, 0x0300), (0x025A, 0x0301),
+    (0x025A, 0x0300), (0x0254, 0x0301), (0x0254, 0x0300), (0x0254, 0x0303),
+    (0x025B, 0x0303), (0x00E6, 0x0300), (0x0153, 0x0301), (0x0153, 0x0303),
+    (0x02A4,),        (0x014B,),        (0x0031, 0x0307), (0x0033, 0x0307),
+    (0x0034, 0x0301), (0x0038, 0x0301), (0x2014, 0x0301), (0x2014, 0x0300),
+    (0x223C, 0x0301), (0x223C, 0x0300), (0x2026, 0x0301), (0x2669,),
+    (0x1D110,),       (0x1D111,),       (0x266E,),        (0x1D15D,),
+    (0x20B0,),        (0x1D12A,),       (0x0024,),        (0x2213,),
+    (0x2253,),        (0x003D, 0x20E5), (0x2198,),        (0x2197,),
+    (0x2713,),        (0x204A,),        (0x2034,),        (0x2508,),
+    (0x2721,),        (0x2042,),        (0x156F, 0x0359), (0x2665,),
+    (0x2660,),        (0x23DC,),        (0x23DD,),        (0xFE37,),
+    (0x60AA, 0x20DD), (0x5584, 0x20DD), (0x0FD5, 0xF87F)))
+graphdata.rhses["995007"] = (
+    (0x4E41,),  (0x303D,), (0xFE45,),         (0x25E6,), (0x2022,), (0x26E9,),  (0x0FD5,), (0x25771,),
+    (0x29E8A,), (0x712E,), (0x83BD, 0xE0101), (0x6532,), (0x9EBD,), (0x29E3D,), (0x9BFC,), (0x303B,),
+    (0x8739,),  (0x6C74,), (0x355E,),         None,      None,      None,       None,      None,
+    None,       None,      None,              None,      None,      None,       None,      None,
+    None,       None,      None,              None,      None,      None,       None,      None,
+    None,       None,      None,              None,      None,      None,       None,      None,
+    None,       None,      None,              None,      None,      None,       None,      None,
+    None,       None,      None,              None,      None,      None,       None,      None,
+    None,       None,      None,              None,      None,      None,       None,      None,
+    None,       None,      None,              None,      None,      None,       None,      None,
+    None,       None,      None,              None,      None,      None,       None,      None,
+    None,       None,      None,              None,      None,      None,       None,      None,
+    None,       None,      None,              None,      None,      None,       None,      None,
+    None,       None,      None,              None,      None,      None,       None,      None,
+    None,       None,      None,              None,      None,      None,       None,      None,
+    None,       None,      None,              None,      None,      None,       None,      None)
+graphdata.defgsets["995007"] = ("bookshelf-7-gl", "nil", "nil", "nil")
