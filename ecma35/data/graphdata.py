@@ -39,7 +39,7 @@ class CoveragesOnDemand(dict):
                 if codeset is not None:
                     my_coverage |= {codeset}
             f = open(path, "w")
-            f.write(json.dumps(tuple(my_coverage)))
+            f.write(json.dumps(sorted(my_coverage)))
             f.close()
         else:
             f = open(path, "r")
