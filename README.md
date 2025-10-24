@@ -533,37 +533,42 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR ? G*DM4 I`|CNS 11643-1992 plane 3|
 |`IRR 0 G*DM4 I`|CNS 11643-1988 plane 14|
 |`IRR 1 G*DM4 I`|CNS 11643-1988 plane 14 with extensions, as submitted to the IRG|
-|`IRR 2 G*DM4 I`|CNS 11643-2007 plane 3|
+|`IRR 2 G*DM4 I`|CNS 11643-2007 plane 3, as officially defined in Taiwan as of 2019|
 |`IRR 3 G*DM4 I`|CNS 11643-2007 plane 3, plus the additional assignments from CNS 11643-1988 plane 14 (default)|
 |`IRR 4 G*DM4 I`|CNS 11643-1988 plane 14, UTC mappings (partial, with extensions)|
 |`IRR 5 G*DM4 I`|CNS 11643-1992 plane 3, per former ICU ISO-2022-CN-EXT mappings|
 |`IRR 6 G*DM4 I`|CNS 11643-1992 plane 3, per ICU EUC-TW 2014 mappings|
 |`IRR 7 G*DM4 I`|CNS 11643-1992 plane 3, per Yasuoka's mappings|
 |`IRR 8 G*DM4 I`|CNS 11643-1992 plane 3, per Unihan mappings|
+|`IRR 9 G*DM4 I`|CNS 11643-1992 plane 3, as officially defined in Taiwan as of 2025|
 |`IRR ? G*DM4 J`|CNS 11643-1992 plane 4|
-|`IRR 0 G*DM4 J`|CNS 11643-1992 plane 4, as officially defined in Taiwan|
+|`IRR 0 G*DM4 J`|CNS 11643-1992 plane 4, as officially defined in Taiwan as of 2019|
 |`IRR 1 G*DM4 J`|CNS 11643-1992 plane 4, per former ICU ISO-2022-CN-EXT mappings|
 |`IRR 2 G*DM4 J`|CNS 11643-1992 plane 4, per ICU EUC-TW 2014 mappings|
 |`IRR 3 G*DM4 J`|CNS 11643-1992 plane 4, per Yasuoka's mappings|
 |`IRR 4 G*DM4 J`|CNS 11643-1992 plane 4, per Unihan mappings|
+|`IRR 5 G*DM4 J`|CNS 11643-1992 plane 4, as officially defined in Taiwan as of 2025|
 |`IRR ? G*DM4 K`|CNS 11643-1992 plane 5|
-|`IRR 0 G*DM4 K`|CNS 11643-1992 plane 5, as officially defined in Taiwan|
+|`IRR 0 G*DM4 K`|CNS 11643-1992 plane 5, as officially defined in Taiwan as of 2019|
 |`IRR 1 G*DM4 K`|CNS 11643-1992 plane 5, per former ICU ISO-2022-CN-EXT mappings|
 |`IRR 2 G*DM4 K`|CNS 11643-1992 plane 5, per ICU EUC-TW 2014 mappings|
 |`IRR 3 G*DM4 K`|CNS 11643-1992 plane 5, per Yasuoka's mappings|
 |`IRR 4 G*DM4 K`|CNS 11643-1992 plane 5, per Unihan mappings|
+|`IRR 5 G*DM4 K`|CNS 11643-1992 plane 5, as officially defined in Taiwan as of 2025|
 |`IRR ? G*DM4 L`|CNS 11643-1992 plane 6|
-|`IRR 0 G*DM4 L`|CNS 11643-1992 plane 6, as officially defined in Taiwan|
+|`IRR 0 G*DM4 L`|CNS 11643-1992 plane 6, as officially defined in Taiwan as of 2019|
 |`IRR 1 G*DM4 L`|CNS 11643-1992 plane 6, per former ICU ISO-2022-CN-EXT mappings|
 |`IRR 2 G*DM4 L`|CNS 11643-1992 plane 6, per ICU EUC-TW 2014 mappings|
 |`IRR 3 G*DM4 L`|CNS 11643-1992 plane 6, per Yasuoka's mappings|
 |`IRR 4 G*DM4 L`|CNS 11643-1992 plane 6, per Unihan mappings|
+|`IRR 5 G*DM4 L`|CNS 11643-1992 plane 6, as officially defined in Taiwan as of 2025|
 |`IRR ? G*DM4 M`|CNS 11643-1992 plane 7|
-|`IRR 0 G*DM4 M`|CNS 11643-1992 plane 7, as officially defined in Taiwan|
+|`IRR 0 G*DM4 M`|CNS 11643-1992 plane 7, as officially defined in Taiwan as of 2019|
 |`IRR 1 G*DM4 M`|CNS 11643-1992 plane 7, per former ICU ISO-2022-CN-EXT mappings|
 |`IRR 2 G*DM4 M`|CNS 11643-1992 plane 7, per ICU EUC-TW 2014 mappings|
 |`IRR 3 G*DM4 M`|CNS 11643-1992 plane 7, per Yasuoka's mappings|
 |`IRR 4 G*DM4 M`|CNS 11643-1992 plane 7, per Unihan mappings|
+|`IRR 5 G*DM4 M`|CNS 11643-1992 plane 7, as officially defined in Taiwan as of 2025|
 |`IRR ? G*DM4 N`|KPS 9566-97|
 |`IRR 0 G*DM4 N`|KPS 9566-2003 (only the main plane unless in the UHC DOCS)|
 |`IRR 1 G*DM4 N`|KPS 9566-2011 (only the main plane unless in the UHC DOCS)|
@@ -574,7 +579,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 0 G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, as included by EUC-TW as its G2 set (ICU EUC-2014 version)|
 |`IRR 1 G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, as included by EUC-TW as its G2 set (Microsoft version)|
 |`IRR 2 G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, as included by EUC-TW as its G2 set (Apple version)|
-|`IRR 3 G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, as included by EUC-TW as its G2 set (GOV-TW version)|
+|`IRR 3 G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, as included by EUC-TW as its G2 set (as officially defined in Taiwan as of 2019)|
 |`IRR 4 G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, as included by EUC-TW as its G2 set (old ICU version)|
 |`IRR 5 G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, as included by EUC-TW as its G2 set (IBM version)|
 |`IRR 6 G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, as included by EUC-TW as its G2 set (Yasuoka version)|
@@ -582,6 +587,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 8 G*DM4 ! 1`|Planes 2 and up of CNS 11643 as a 94^3 set, as included by IBM EUC-TW as its G2 set (IBM version)|
 |`IRR 9 G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, following the Unihan database (thus excluding non-hanzi)|
 |`IRR : G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, including some highly approximate Unicode mappings|
+|`IRR ; G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, as included by EUC-TW as its G2 set (as officially defined in Taiwan as of 2025)|
 |`IRR ? G*DM4 ! 2`|MS-950 Big-5 extensions (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`IRR @ G*DM4 ! 2`|Big5-2003 extension set (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`IRR A G*DM4 ! 2`|Big5-ETEN extension set (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
@@ -652,24 +658,31 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*DM4 " >`|"Hán Nôm Coded Character Repertoire 2007" (Hán Nôm, third supplement)|
 |`G*DM4 " ?`|The extension plane 13 that appears in IBM's EUC-TW variant|
 |`IRR ? G*DM4 # 0`|CNS 11643-2007 plane 8|
-|`IRR 0 G*DM4 # 0`|CNS 11643-2007 plane 8 (following GOV-TW data)|
+|`IRR 0 G*DM4 # 0`|CNS 11643-2007 plane 8 (as officially defined in Taiwan as of 2019)|
+|`IRR 1 G*DM4 # 0`|CNS 11643-2007 plane 8 (as officially defined in Taiwan as of 2025)|
 |`IRR ? G*DM4 # 1`|CNS 11643-2007 plane 9|
-|`IRR 0 G*DM4 # 1`|CNS 11643-2007 plane 9 (following GOV-TW data)|
+|`IRR 0 G*DM4 # 1`|CNS 11643-2007 plane 9 (as officially defined in Taiwan as of 2019)|
+|`IRR 1 G*DM4 # 1`|CNS 11643-2007 plane 9 (as officially defined in Taiwan as of 2025)|
 |`IRR ? G*DM4 # 2`|CNS 11643-2007 plane 10|
-|`IRR 0 G*DM4 # 2`|CNS 11643-2007 plane 10 (following GOV-TW data)|
+|`IRR 0 G*DM4 # 2`|CNS 11643-2007 plane 10 (as officially defined in Taiwan as of 2019)|
 |`IRR ? G*DM4 # 3`|CNS 11643-2007 plane 11|
-|`IRR 0 G*DM4 # 3`|CNS 11643-2007 plane 11 (following GOV-TW data)|
+|`IRR 0 G*DM4 # 3`|CNS 11643-2007 plane 11 (as officially defined in Taiwan as of 2019)|
+|`IRR 1 G*DM4 # 3`|CNS 11643-2007 plane 11 (as officially defined in Taiwan as of 2025)|
 |`IRR ? G*DM4 # 4`|CNS 11643-2007 plane 12|
-|`IRR 0 G*DM4 # 4`|CNS 11643-2007 plane 12 (following GOV-TW data)|
+|`IRR 0 G*DM4 # 4`|CNS 11643-2007 plane 12 (as officially defined in Taiwan as of 2019)|
+|`IRR 1 G*DM4 # 4`|CNS 11643-2007 plane 12 (as officially defined in Taiwan as of 2025)|
 |`IRR ? G*DM4 # 5`|CNS 11643-2007 plane 13|
-|`IRR 0 G*DM4 # 5`|CNS 11643-2007 plane 13 (following GOV-TW data)|
+|`IRR 0 G*DM4 # 5`|CNS 11643-2007 plane 13 (as officially defined in Taiwan as of 2019)|
+|`IRR 1 G*DM4 # 5`|CNS 11643-2007 plane 13 (as officially defined in Taiwan as of 2025)|
 |`IRR ? G*DM4 # 6`|CNS 11643-2007 plane 14|
-|`IRR 0 G*DM4 # 6`|CNS 11643-2007 plane 14 (following GOV-TW data)|
+|`IRR 0 G*DM4 # 6`|CNS 11643-2007 plane 14 (as officially defined in Taiwan as of 2019)|
+|`IRR 1 G*DM4 # 6`|CNS 11643-2007 plane 14 (as officially defined in Taiwan as of 2025)|
 |`IRR ? G*DM4 # 7`|CNS 11643 plane 15|
-|`IRR 0 G*DM4 # 7`|CNS 11643 plane 15 (following GOV-TW data)|
+|`IRR 0 G*DM4 # 7`|CNS 11643 plane 15 (as officially defined in Taiwan as of 2019)|
 |`IRR 1 G*DM4 # 7`|CNS 11643 plane 15 (following "plane 9" of the 2000 ICU data)|
 |`IRR 2 G*DM4 # 7`|CNS 11643 plane 15 (following 2014 ICU data)|
 |`IRR 4 G*DM4 # 7`|CNS 11643 plane 15 (following Unihan data)|
+|`IRR 5 G*DM4 # 7`|CNS 11643 plane 15 (as officially defined in Taiwan as of 2025)|
 |`G*DM4 # 9`|CNS 11643 plane 17|
 |`G*DM4 # ;`|CNS 11643 plane 19|
 |`G*DM4 % 0`|The IRG/Unihan source described only as "Singapore Characters"|

@@ -134,10 +134,22 @@ cns_bmp = parsers.decode_main_plane_gl(
     "CNS2UNICODE_Unicode BMP.txt",
     mapper = lambda pointer, ucs: cnsmapper_swaparrows_thrashscii2(pointer,
         cnsmapper_contrabadcjkb(pointer, ucs)))
+cns_bmp_old = parsers.decode_main_plane_gl(
+    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode BMP (old).txt"),
+    "CNS2UNICODE_Unicode BMP (old).txt",
+    mapper = lambda pointer, ucs: cnsmapper_swaparrows_thrashscii2(pointer,
+        cnsmapper_contrabadcjkb(pointer, ucs)))
 cns_sip = parsers.decode_main_plane_gl(
     parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 2.txt"),
     "CNS2UNICODE_Unicode 2.txt",
     mapper = cnsmapper_contrabadcjkb)
+cns_sip_old = parsers.decode_main_plane_gl(
+    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 2 (old).txt"),
+    "CNS2UNICODE_Unicode 2_old.txt",
+    mapper = cnsmapper_contrabadcjkb)
+cns_tip = parsers.decode_main_plane_gl(
+    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 3.txt"),
+    "CNS2UNICODE_Unicode 3.txt")
 cns_spuaa = parsers.decode_main_plane_gl(
     parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
     "CNS2UNICODE_Unicode 15.txt",
@@ -171,7 +183,7 @@ misc_amendments = [
     (None,) * (94*94*2 + 94*6 + 7) + ((0x2ED9D,),), # 03-07-08 → U+2ED9D
     (None,) * (94*94*2 + 94*68 + 25) + ((0x6BF5,),), # 03-69-26 → U+6BF5
     #
-    # Unicode 17.0 (currently in alpha stage):
+    # Unicode 17.0:
     (None,) * (94*94*3 + 94*5 + 19) + ((0x2B73A,),), # 04-06-20 → U+2B73A
     (None,) * (94*94*10 + 94*92 + 11) + ((0x2B73C,),), # 11-93-12 → U+2B73C
     (None,) * (94*94*10 + 94*92 + 14) + ((0x2B73D,),), # 11-93-15 → U+2B73D
@@ -193,6 +205,9 @@ cns = parsers.fuse([
     cns_misc,
     cns_bmp,
     cns_sip,
+    cns_tip,
+    cns_bmp_old,
+    cns_sip_old,
     cns_spuaa,
     # https://sign.hakka.gov.tw/File/Attach/47455/File_98707.pdf#page=189
     (None,) * (94*94*10 + 94*92 + 8) + ((0xFFB1B,),), # 11-93-09 → U+FFB1B (SPUA)
@@ -201,13 +216,23 @@ cns = parsers.fuse([
 cns_govbmp = parsers.decode_main_plane_gl(
     parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode BMP.txt"),
     "CNS2UNICODE_Unicode BMP.txt")
+cns_govbmp_old = parsers.decode_main_plane_gl(
+    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode BMP (old).txt"),
+    "CNS2UNICODE_Unicode BMP (old).txt")
 cns_govsip = parsers.decode_main_plane_gl(
     parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 2.txt"),
     "CNS2UNICODE_Unicode 2.txt")
+cns_govsip_old = parsers.decode_main_plane_gl(
+    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 2 (old).txt"),
+    "CNS2UNICODE_Unicode 2 (old).txt")
 cns_govspuaa = parsers.decode_main_plane_gl(
     parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
     "CNS2UNICODE_Unicode 15.txt")
-cns_gov = parsers.fuse([cns_govbmp, cns_govsip, cns_govspuaa], "GOV-TW---CNS2UNICODE.json")
+cns_govspuaa_old = parsers.decode_main_plane_gl(
+    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15 (old).txt"),
+    "CNS2UNICODE_Unicode 15 (old).txt")
+cns_gov = parsers.fuse([cns_govbmp, cns_govsip, cns_tip, cns_govspuaa], "GOV-TW---CNS2UNICODE.json")
+cns_gov_old = parsers.fuse([cns_govbmp_old, cns_govsip_old, cns_govspuaa_old], "GOV-TW---CNS2UNICODE_old.json")
 
 cns_yasuoka = parsers.decode_main_plane_gl(
     parsers.parse_file_format("Other/Uni2CNS"), 
@@ -265,9 +290,10 @@ graphdata.gsets["ir171/yasuoka"] = (94, 2, cns_yasuoka[planesize * 0 : planesize
 graphdata.gsets["ir171/icu"] = (94, 2, cns_icu_old[planesize * 0 : planesize * 1])
 graphdata.gsets["ir171/icu-2014"] = (94, 2, cns_icu_2014[planesize * 0 : planesize * 1])
 
-# ir172-govtw, ir172-icu, ir172-icu-2014, ir172-utc, ir172-yasuoka are all same
-graphdata.gsets["ir172"] = (94, 2, cns_gov[planesize * 1 : planesize * 2])
-graphdata.gsets["ir172/unihan"] = (94, 2, cns_unihan[planesize * 1 : planesize * 2])
+# ir172/govtw/old, ir172/icu, ir172/icu/2014, ir172/utc, ir172/yasuoka are all same
+graphdata.gsets["ir172"] = (94, 2, cns_gov_old[planesize * 1 : planesize * 2])
+# ir172/unihan, ir172/govtw are the same
+graphdata.gsets["ir172/unihan"] = (94, 2, cns_gov[planesize * 1 : planesize * 2])
 
 graphdata.chcpdocs["20000"] = "modified-euc"
 graphdata.defgsets["20000"] = ("ir006", "ir171/full", "nil", "nil", "ir172")
@@ -287,6 +313,7 @@ graphdata.defgsets["20000"] = ("ir006", "ir171/full", "nil", "nil", "ir172")
 #   be the current 毵 versus the CNS11643.TXT 毶 at 69-26, both being itaiji of 02-49-32 毿).
 #   Note that an unrelated plane 14 was added in 2007.
 graphdata.gsets["ir183/govtw"] = (94, 2, cns_gov[planesize * 2 : planesize * 3])
+graphdata.gsets["ir183/govtw/old"] = (94, 2, cns_gov_old[planesize * 2 : planesize * 3])
 graphdata.gsets["ir183/unihan"] = (94, 2, cns_unihan[planesize * 2 : planesize * 3])
 _ir183oldirg = parsers.decode_main_plane_gl(
     parsers.parse_file_format("UTC/CNS11643.TXT"),
@@ -311,6 +338,7 @@ graphdata.gsets["ir183/icu-2014"] = (94, 2, cns_icu_2014[planesize * 2 : planesi
 
 graphdata.gsets["ir184"] = (94, 2, cns[planesize * 3 : planesize * 4])
 graphdata.gsets["ir184/govtw"] = (94, 2, cns_gov[planesize * 3 : planesize * 4])
+graphdata.gsets["ir184/govtw/old"] = (94, 2, cns_gov_old[planesize * 3 : planesize * 4])
 graphdata.gsets["ir184/unihan"] = (94, 2, cns_unihan[planesize * 3 : planesize * 4])
 graphdata.gsets["ir184/yasuoka"] = (94, 2, cns_yasuoka[planesize * 3 : planesize * 4])
 graphdata.gsets["ir184/icu"] = (94, 2, cns_icu_old[planesize * 3 : planesize * 4])
@@ -318,6 +346,7 @@ graphdata.gsets["ir184/icu-2014"] = (94, 2, cns_icu_2014[planesize * 3 : planesi
 
 graphdata.gsets["ir185"] = (94, 2, cns[planesize * 4 : planesize * 5])
 graphdata.gsets["ir185/govtw"] = (94, 2, cns_gov[planesize * 4 : planesize * 5])
+graphdata.gsets["ir185/govtw/old"] = (94, 2, cns_gov_old[planesize * 4 : planesize * 5])
 graphdata.gsets["ir185/unihan"] = (94, 2, cns_unihan[planesize * 4 : planesize * 5])
 graphdata.gsets["ir185/yasuoka"] = (94, 2, cns_yasuoka[planesize * 4 : planesize * 5])
 graphdata.gsets["ir185/icu"] = (94, 2, cns_icu_old[planesize * 4 : planesize * 5])
@@ -325,6 +354,7 @@ graphdata.gsets["ir185/icu-2014"] = (94, 2, cns_icu_2014[planesize * 4 : planesi
 
 graphdata.gsets["ir186"] = (94, 2, cns[planesize * 5 : planesize * 6])
 graphdata.gsets["ir186/govtw"] = (94, 2, cns_gov[planesize * 5 : planesize * 6])
+graphdata.gsets["ir186/govtw/old"] = (94, 2, cns_gov_old[planesize * 5 : planesize * 6])
 graphdata.gsets["ir186/unihan"] = (94, 2, cns_unihan[planesize * 5 : planesize * 6])
 graphdata.gsets["ir186/yasuoka"] = (94, 2, cns_yasuoka[planesize * 5 : planesize * 6])
 graphdata.gsets["ir186/icu"] = (94, 2, cns_icu_old[planesize * 5 : planesize * 6])
@@ -332,6 +362,7 @@ graphdata.gsets["ir186/icu-2014"] = (94, 2, cns_icu_2014[planesize * 5 : planesi
 
 graphdata.gsets["ir187"] = (94, 2, cns[planesize * 6 : planesize * 7])
 graphdata.gsets["ir187/govtw"] = (94, 2, cns_gov[planesize * 6 : planesize * 7])
+graphdata.gsets["ir187/govtw/old"] = (94, 2, cns_gov_old[planesize * 6 : planesize * 7])
 graphdata.gsets["ir187/unihan"] = (94, 2, cns_unihan[planesize * 6 : planesize * 7])
 graphdata.gsets["ir187/yasuoka"] = (94, 2, cns_yasuoka[planesize * 6 : planesize * 7])
 graphdata.gsets["ir187/icu"] = (94, 2, cns_icu_old[planesize * 6 : planesize * 7])
@@ -340,28 +371,34 @@ graphdata.gsets["ir187/icu-2014"] = (94, 2, cns_icu_2014[planesize * 6 : planesi
 
 graphdata.gsets["csic8"] = (94, 2, cns[planesize * 7 : planesize * 8])
 graphdata.gsets["csic8/govtw"] = (94, 2, cns_gov[planesize * 7 : planesize * 8])
+graphdata.gsets["csic8/govtw/old"] = (94, 2, cns_gov_old[planesize * 7 : planesize * 8])
 
 graphdata.gsets["csic9"] = (94, 2, cns[planesize * 8 : planesize * 9])
 graphdata.gsets["csic9/govtw"] = (94, 2, cns_gov[planesize * 8 : planesize * 9])
+graphdata.gsets["csic9/govtw/old"] = (94, 2, cns_gov_old[planesize * 8 : planesize * 9])
 
 graphdata.gsets["csic10"] = (94, 2, cns[planesize * 9 : planesize * 10])
-graphdata.gsets["csic10/govtw"] = (94, 2, cns_gov[planesize * 9 : planesize * 10])
+graphdata.gsets["csic10/govtw/old"] = (94, 2, cns_gov_old[planesize * 9 : planesize * 10])
 
 graphdata.gsets["csic11"] = (94, 2, cns[planesize * 10 : planesize * 11])
 graphdata.gsets["csic11/govtw"] = (94, 2, cns_gov[planesize * 10 : planesize * 11])
+graphdata.gsets["csic11/govtw/old"] = (94, 2, cns_gov_old[planesize * 10 : planesize * 11])
 
 graphdata.gsets["csic12"] = (94, 2, cns[planesize * 11 : planesize * 12])
 graphdata.gsets["csic12/govtw"] = (94, 2, cns_gov[planesize * 11 : planesize * 12])
+graphdata.gsets["csic12/govtw/old"] = (94, 2, cns_gov_old[planesize * 11 : planesize * 12])
 
 graphdata.gsets["user-defined/6204"] = (94, 2, cns_ibm[planesize * 11 : planesize * 12])
 
 graphdata.gsets["csic13-2007"] = (94, 2, cns[planesize * 12 : planesize * 13])
 graphdata.gsets["csic13-2007/govtw"] = (94, 2, cns_gov[planesize * 12 : planesize * 13])
+graphdata.gsets["csic13-2007/govtw/old"] = (94, 2, cns_gov_old[planesize * 12 : planesize * 13])
 
 graphdata.gsets["ibm-euctw-extension-plane"] = (94, 2, cns_ibm[planesize * 12 : planesize * 13])
 
 graphdata.gsets["csic14-2007"] = (94, 2, cns[planesize * 13 : planesize * 14])
 graphdata.gsets["csic14-2007/govtw"] = (94, 2, cns_gov[planesize * 13 : planesize * 14])
+graphdata.gsets["csic14-2007/govtw/old"] = (94, 2, cns_gov_old[planesize * 13 : planesize * 14])
 
 # Special mention is warrented for plane 15: it was published as an extension in 1990,
 #   but was only integrated into the standard proper in 2007, by which point several
@@ -370,6 +407,7 @@ graphdata.gsets["csic14-2007/govtw"] = (94, 2, cns_gov[planesize * 13 : planesiz
 #   it due to limiting that mapping's scope to ISO-2022-CN-EXT, then to ISO-2022-CN).
 graphdata.gsets["csic15"] = (94, 2, cns[planesize * 14 : planesize * 15])
 graphdata.gsets["csic15/govtw"] = (94, 2, cns_gov[planesize * 14 : planesize * 15])
+graphdata.gsets["csic15/govtw/old"] = (94, 2, cns_gov_old[planesize * 14 : planesize * 15])
 graphdata.gsets["csic15/unihan"] = (94, 2, cns_unihan[planesize * 14 : planesize * 15])
 graphdata.gsets["csic15/icu"] = (94, 2,
     cns_icu_old[planesize * 8 : planesize * 9]) # yes, this is correct.
@@ -397,6 +435,7 @@ graphdata.gsets["cns-eucg2-lax-matching"] = (94, 3, parsers.fuse([
 ], "CSIC-Lax-Matching.json"))
 graphdata.gsets["cns-eucg2-yasuoka"] = (94, 3, cns_yasuoka)
 graphdata.gsets["cns-eucg2-govtw"] = (94, 3, cns_gov)
+graphdata.gsets["cns-eucg2-govtw-old"] = (94, 3, cns_gov_old)
 graphdata.gsets["cns-eucg2-unihan"] = (94, 3, cns_unihan)
 # The version of EUC-TW used by ICU, with standard assignments in planes 1-7 and 15,
 #   a user-defined area in plane 12, and IBM corporate assignments in plane 13.
