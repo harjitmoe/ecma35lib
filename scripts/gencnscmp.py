@@ -289,7 +289,7 @@ def unicodefunc(cdisplayi, outfile, i=None, jlfunc=None, number=None, row=None, 
 annots = {
  (1, 1, 0): 'All of plane 1 has two possible EUC codes, a four-byte code prefixed with 0x8EA1 '
             'and a two-byte code without that prefix.&ensp;The ICU mapping for EUC-TW-2014 treats '
-            'the four-byte plane 1 codes as unassigned, while the GOV-TW 2025 11643 Word View '
+            'the four-byte plane 1 codes as unassigned, while the GOV-TW CNS 11643 Word View '
             '(linked from the left column) lists only the four-byte codes.&ensp;It is the '
             'two-byte codes that are listed in this chart.',
  (1, 1, 29): 'All four of these are underscores (horizontal versus vertical, straight versus '
@@ -433,11 +433,7 @@ annots = {
               "and only standardised beyond the <i>de facto</i> level in 2007.",
  (3, 68, 63): 'Compare 04-03-65.',
  (3, 68, 77): 'Compare 04-08-93.',
- (3, 69, 26): "The <a href='https://www.unicode.org/cgi-bin/GetUnihanData.pl?codepoint=6BF6'>"
-              "Unihan database</a> (i.e. the up-to-date UCS source) regards this as U+6BF6, while "
-              "the <a href='https://www.cns11643.gov.tw/wordView.jsp?ID=222522'>CNS 11643 Word "
-              "View</a> (i.e. the up-to-date CNS / GovTW source) regards this one as U+6BF5.&ensp;They "
-              "seem to be itaiji of one another, but 毵 is more common.&ensp;In "
+ (3, 69, 26): "These two seem to be itaiji of one another, but 毵 is more common.&ensp;In "
               "whatever case, compare 15-28-28 (always mapped to U+6BF5 毵), 15-28-30 (always "
               "U+6BF6 毶, although absent in non-GovTW mappings) and 02-49-32 (毿, the version "
               "present in Big5, due to being the favoured version in zh-Hant).",
