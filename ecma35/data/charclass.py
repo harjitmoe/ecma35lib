@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020, 2021, 2023.
+# By HarJIT in 2020, 2021, 2023, 2025.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -54,6 +54,8 @@ abbreviations = {
     "CJKH": "Chinese/Japanese/Korean Extension H",
     # CJKH has been shrinkwrapped to a multiple of 16 characters from the beginning, so no appendage
     #   can be made.
+    "CJKJ": "Chinese/Japanese/Korean Extension J",
+    "CJKJ+": "Appendage to Chinese/Japanese/Korean Extension J",
     "TIP": "Miscellaneous Tertiary Ideographic Plane", 
     "SSP": "Supplementary Special-purpose Plane",
     "SPUA": "Supplementary Private-Use Area A",
@@ -163,6 +165,10 @@ def initialism(codepoint):
         return "CJKG+"
     elif 0x31350 <= codepoint < 0x323B0:
         return "CJKH"
+    elif 0x323B0 <= codepoint < 0x3347A:
+        return "CJKJ"
+    elif 0x3347A <= codepoint < 0x33480:
+        return "CJKJ+"
     elif 0x30000 <= codepoint < 0x40000:
         return "TIP"
     #####################################
