@@ -92,6 +92,36 @@ graphdata.gsets["ir013/win"] = (94, 1, _the_mother + (
 graphdata.gsetflags["ir013/win"] |= {"GBK:NO_EURO"}
 graphdata.gsets["ir013/euro"] = graphdata.gsets["ir013/win"]
 
+# Hiragana homologue to JIS C 6220 / JIS X 0201 (dubbed simply "Hiragana" by Adobe-Japan1)
+graphdata.gsets["ir013/hiragana"] = _hiragana = (94, 1, (
+             (0xFF61,), (0xFF62,), (0xFF63,), (0xFF64,), (0xFF65,), (0x3092,), (0x3041,),
+  (0x3043,), (0x3045,), (0x3047,), (0x3049,), (0x3083,), (0x3085,), (0x3087,), (0x3063,),
+  (0xFF70,), (0x3042,), (0x3044,), (0x3046,), (0x3048,), (0x304A,), (0x304B,), (0x304D,),
+  (0x304F,), (0x3051,), (0x3053,), (0x3055,), (0x3057,), (0x3059,), (0x305B,), (0x305D,),
+  (0x305F,), (0x3061,), (0x3064,), (0x3066,), (0x3068,), (0x306A,), (0x306B,), (0x306C,),
+  (0x306D,), (0x306E,), (0x306F,), (0x3072,), (0x3075,), (0x3078,), (0x307B,), (0x307E,),
+  (0x307F,), (0x3080,), (0x3081,), (0x3082,), (0x3084,), (0x3086,), (0x3088,), (0x3089,),
+  (0x308A,), (0x308B,), (0x308C,), (0x308D,), (0x308F,), (0x3093,), (0xFF9E,), (0xFF9F,),
+  None, None, None, None, None, None, None, None,
+  None, None, None, None, None, None, None, None,
+  None, None, None, None, None, None, None, None,
+  None, None, None, None, None, None, None))
+graphdata.chcpdocs["994001"] = "ecma-35"
+graphdata.defgsets["994001"] = ("ir014", "ir013/hiragana", "nil", "nil")
+
+graphdata.chcpdocs["994002"] = "ecma-35"
+graphdata.defgsets["994002"] = ("ir014", "ir013", "nil", "nil")
+
+# The charset dubbed "Hankaku" by Adobe-Japan1: an extension of 8-bit JIS X 0201 adding Hiragana
+_hiragana_table = parsers.derive_supplementary_cid_mapping(
+    "../../multibyte/mbmaps/Adobe/AdobeJapan.txt",
+    "Hiragana", _hiragana[2], "GL94")
+graphdata.rhses["994003"] = parsers.read_single_byte(
+    "../../multibyte/mbmaps/Adobe/AdobeJapan.txt",
+    typ = "plainext",
+    cidmap = ("Hankaku", "UniJIS-UTF32"),
+    cidmap_extra = _hiragana_table)
+
 # ARIB STD-B24 Volume 1, single-byte Hiragana
 graphdata.gsets["aribkana/hiragana"] = (94, 1, tuple((i,) if i else None for i in
             tuple(range(0x3041, 0x3094)) +

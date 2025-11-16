@@ -166,3 +166,17 @@ graphdata.rhses["998100"] = (
 graphdata.defgsets["998100"] = ("alt646/knuth", "nil", "nil", "nil")
 
 
+#####################################################################
+# The charset dubbed "WP-Symbol" (presumably "word processor symbols") by Adobe-Japan1:
+
+graphdata.rhses["994005"] = parsers.read_single_byte(
+    "../../multibyte/mbmaps/Adobe/AdobeJapan.txt",
+    typ = "plainext7",
+    cidmap = ("WP-Symbol", "UniJIS-UTF32"),
+    cidmap_extra = {
+        "8189": "0000F861+00000073+00000065+00000063",
+        "8190": "0000F861+0000006D+00000069+0000006E",
+        "8196": "00005370+000020DE",
+        "8227": "0001F01B",
+    })
+

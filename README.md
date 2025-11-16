@@ -108,10 +108,14 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR ? G*D4 H`|(7-bit Swedish names or Swedish Teletext (SEN 85 02 00 annex C))|
 |`IRR 0 G*D4 H`|DEC NRCS for Swedish|
 |`IRR ? G*D4 I`|(JIS X 0201 katakana)|
-|`IRR 0 G*D4 I`|JIS X 0201 katakana, IBM's 4992 (used for its counterparts from IBM's 1041 in the Shift\_JIS filter).|
+|`IRR 0 G*D4 I`|JIS X 0201 katakana, with a superset of the extensions included in IBM's code page 4992 (and used for the counterparts from IBM's code page 1041 by the Shift\_JIS filter).|
 |`IRR 1 G*D4 I`|JIS X 0201 katakana, an analogous extraction from MacJapanese.|
 |`IRR 2 G*D4 I`|JIS X 0201 katakana, an extraction from Windows-31J and friends.|
 |`IRR 3 G*D4 I`|JIS X 0201 katakana, an extraction from Windows-31J and friends, suppressing the 0x80 control mapping in some DOCS filters in favour of the Euro.|
+|`IRR 4 G*D4 I`|JIS X 0201 katakana with extensions as in IBM's code page 4992.|
+|`IRR 5 G*D4 I`|JIS X 0201 katakana with extensions as in IBM's code page 911.|
+|`IRR 6 G*D4 I`|JIS X 0201 katakana with a subset of the extensions included in IBM's code page 1041.|
+|`IRR 7 G*D4 I`|Hiragana analogue to JIS X 0201.|
 |`IRR ? G*D4 J`|(JIS X 0201 Roman set)|
 |`IRR 0 G*D4 J`|JIS-Roman with tilde (rather than overscore)|
 |`IRR ? G*D4 K`|(DIN 66003 with apostrophe (default))|
@@ -711,6 +715,8 @@ are used for custom purposes.&ensp;Specifically:
 
 |Private assignment|Meaning|
 |---|---|
+|`ESC [ 9 9 4 0 0 3 * p`|Switch to the "Hankaku" encoding: an extension of 8-bit JIS X 0201 adding Hiragana.|
+|`ESC [ 9 9 4 0 0 5 * p`|Switch to the "WP-Symbol" (presumably, "word processor symbols") encoding.|
 |`ESC [ 9 9 5 0 0 1 * p`|Switch to the Bookshelf Symbol 1 (superscripts and extended Latin) encoding.|
 |`ESC [ 9 9 5 0 0 2 * p`|Switch to the Bookshelf Symbol 2 (subscripts and extended Latin) encoding.|
 |`ESC [ 9 9 5 0 0 7 * p`|Switch to the Bookshelf Symbol 7 (extended Latin, musical symbols and assorted Japanese characters) encoding.|

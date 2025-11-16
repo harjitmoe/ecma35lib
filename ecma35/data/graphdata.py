@@ -112,7 +112,8 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             #   (as "ir014" or "ir006").
             tuple(b"H"): ("ir011", ("ir011/dec",), ("ir011",)),
             tuple(b"I"): ("ir013", ("ir013/ibm", "ir013/mac", "ir013/win", "ir013/euro",
-                                    "ir013/ibm/strict", "ir013/ibm/alternate", "ir013/ibm/sjis"),
+                                    "ir013/ibm/strict", "ir013/ibm/alternate", "ir013/ibm/sjis",
+                                    "ir013/hiragana"),
                                    ("ir013",)),
             tuple(b"J"): ("ir014", ("ir014/tilde",), ("ir014",)),
             tuple(b"K"): ("ir021", ("ir021/acute", "ir021/ibm38xx", "ir021/ibm-wp"), ("ir021",)),
