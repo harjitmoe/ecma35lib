@@ -11,6 +11,7 @@ from ecma35.data import graphdata, variationhints, deprecated_cjkci
 from ecma35.data.multibyte import mbmapparsers as parsers
 from ecma35.data.multibyte.cns11643_pua_to_standard import cns11643_pua_to_standard
 from ecma35.data.multibyte.cns11643_pua_to_standard_loose import cns11643_pua_to_standard_loose
+from ecma35.data.multibyte.cns11643_pua_to_standard_semi_loose import cns11643_pua_to_standard_semi_loose
 
 # Charsets originating from Hong Kong or Taiwan (CCCII, CNS 11643, Big 5, HKSCS…).
 #   (GB12345 is traditional but Mainland Chinese: see guobiao.py for that one.)
@@ -18,6 +19,9 @@ from ecma35.data.multibyte.cns11643_pua_to_standard_loose import cns11643_pua_to
 
 def cnsmapper_contraspua(pointer, ucs):
     return cns11643_pua_to_standard.get(ucs, ucs)
+
+def cnsmapper_contraspua_semi_thorough(pointer, ucs):
+    return cns11643_pua_to_standard_semi_loose.get(ucs, None)
 
 def cnsmapper_contraspua_thorough(pointer, ucs):
     return cns11643_pua_to_standard_loose.get(ucs, None)
@@ -158,6 +162,10 @@ cns_spuaa_loose = parsers.decode_main_plane_gl(
     parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
     "CNS2UNICODE_Unicode 15.txt",
     mapper = cnsmapper_contraspua_thorough)
+cns_spuaa_semi_loose = parsers.decode_main_plane_gl(
+    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
+    "CNS2UNICODE_Unicode 15.txt",
+    mapper = cnsmapper_contraspua_semi_thorough)
 
 cns_unihan_amended_parts = []
 for _i in range(1, 20):
@@ -433,6 +441,17 @@ graphdata.gsets["cns-eucg2-lax-matching"] = (94, 3, parsers.fuse([
     cns_icu_2014_nobmppua,
     cns_spuaa_loose,
 ], "CSIC-Lax-Matching.json"))
+graphdata.gsets["cns-eucg2-semi-lax-matching"] = (94, 3, parsers.fuse([
+    *misc_amendments,
+    (None,) * (94*94*18) + tuple(cns_19),
+    irgn2779_amendments,
+    cns_unihan_amended,
+    cns_misc,
+    cns_bmp,
+    cns_sip,
+    cns_icu_2014_nobmppua,
+    cns_spuaa_semi_loose,
+], "CSIC-Semi-Lax-Matching.json"))
 graphdata.gsets["cns-eucg2-yasuoka"] = (94, 3, cns_yasuoka)
 graphdata.gsets["cns-eucg2-govtw"] = (94, 3, cns_gov)
 graphdata.gsets["cns-eucg2-govtw-old"] = (94, 3, cns_gov_old)
