@@ -592,6 +592,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 9 G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, following the Unihan database (thus excluding non-hanzi)|
 |`IRR : G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, including some highly approximate Unicode mappings|
 |`IRR ; G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, as included by EUC-TW as its G2 set (as officially defined in Taiwan as of 2025)|
+|`IRR < G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, including a somewhat smaller number of rather approximate Unicode mappings|
 |`IRR ? G*DM4 ! 2`|MS-950 Big-5 extensions (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`IRR @ G*DM4 ! 2`|Big5-2003 extension set (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`IRR A G*DM4 ! 2`|Big5-ETEN extension set (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|

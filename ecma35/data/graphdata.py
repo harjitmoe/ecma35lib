@@ -534,7 +534,7 @@ g94nbytes = {tuple(b"@"): ("ir042/nec", ("ir042/ibm", "ir042/nec", "ir042/1990pi
              tuple(b":"): "user-defined/6204",
              tuple(b"!0"): "gb12052",
              # Traditional Chinese off doing its own thing, as you do... no standard escapes here.
-             tuple(b"!1"): ("cns-eucg2", ("cns-eucg2-icu-2014-full", "cns-eucg2-ms", "cns-eucg2-mac", "cns-eucg2-govtw-old", "cns-eucg2-icu-old", "cns-eucg2-ibm-full", "cns-eucg2-yasuoka", "cns-eucg2-icu-2014-noplane1", "cns-eucg2-ibm-noplane1", "cns-eucg2-unihan", "cns-eucg2-lax-matching", "cns-eucg2-govtw"), ("cns-eucg2",)),
+             tuple(b"!1"): ("cns-eucg2", ("cns-eucg2-icu-2014-full", "cns-eucg2-ms", "cns-eucg2-mac", "cns-eucg2-govtw-old", "cns-eucg2-icu-old", "cns-eucg2-ibm-full", "cns-eucg2-yasuoka", "cns-eucg2-icu-2014-noplane1", "cns-eucg2-ibm-noplane1", "cns-eucg2-unihan", "cns-eucg2-lax-matching", "cns-eucg2-govtw", "cns-eucg2-semi-lax-matching"), ("cns-eucg2",)),
              tuple(b"!2"): ("hkscs-updated", ("ibmbig5exts", "etenextsplus"), ("ms950exts", "big5-2003-exts", "etenexts", "gccs", "hkscs1999", "hkscs2001", "hkscs2004", "hkscs", "hkscs-updated",)),
              tuple(b"!3"): ("ms950utcexts", (), ("utcbig5exts", "ms950utcexts")),
              # Shift_JIS extensions for IBM/Windows/HTML5 and for cellular emoji
