@@ -158,13 +158,25 @@ cns_spuaa = parsers.decode_main_plane_gl(
     parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
     "CNS2UNICODE_Unicode 15.txt",
     mapper = cnsmapper_contraspua)
+cns_spuaa_old = parsers.decode_main_plane_gl(
+    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15 (old).txt"),
+    "CNS2UNICODE_Unicode 15 (old).txt",
+    mapper = cnsmapper_contraspua)
 cns_spuaa_loose = parsers.decode_main_plane_gl(
     parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
     "CNS2UNICODE_Unicode 15.txt",
     mapper = cnsmapper_contraspua_thorough)
+cns_spuaa_loose_old = parsers.decode_main_plane_gl(
+    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15 (old).txt"),
+    "CNS2UNICODE_Unicode 15 (old).txt",
+    mapper = cnsmapper_contraspua_thorough)
 cns_spuaa_semi_loose = parsers.decode_main_plane_gl(
     parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
     "CNS2UNICODE_Unicode 15.txt",
+    mapper = cnsmapper_contraspua_semi_thorough)
+cns_spuaa_semi_loose_old = parsers.decode_main_plane_gl(
+    parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15 (old).txt"),
+    "CNS2UNICODE_Unicode 15 (old).txt",
     mapper = cnsmapper_contraspua_semi_thorough)
 
 cns_unihan_amended_parts = []
@@ -217,6 +229,7 @@ cns = parsers.fuse([
     cns_bmp_old,
     cns_sip_old,
     cns_spuaa,
+    cns_spuaa_old,
     # https://sign.hakka.gov.tw/File/Attach/47455/File_98707.pdf#page=189
     (None,) * (94*94*10 + 94*92 + 8) + ((0xFFB1B,),), # 11-93-09 → U+FFB1B (SPUA)
 ], "Unihan-GOV-TW---CNS2UNICODE_etc.json")
@@ -440,6 +453,7 @@ graphdata.gsets["cns-eucg2-lax-matching"] = (94, 3, parsers.fuse([
     cns_sip,
     cns_icu_2014_nobmppua,
     cns_spuaa_loose,
+    cns_spuaa_loose_old,
 ], "CSIC-Lax-Matching.json"))
 graphdata.gsets["cns-eucg2-semi-lax-matching"] = (94, 3, parsers.fuse([
     *misc_amendments,
@@ -451,6 +465,7 @@ graphdata.gsets["cns-eucg2-semi-lax-matching"] = (94, 3, parsers.fuse([
     cns_sip,
     cns_icu_2014_nobmppua,
     cns_spuaa_semi_loose,
+    cns_spuaa_semi_loose_old,
 ], "CSIC-Semi-Lax-Matching.json"))
 graphdata.gsets["cns-eucg2-yasuoka"] = (94, 3, cns_yasuoka)
 graphdata.gsets["cns-eucg2-govtw"] = (94, 3, cns_gov)
