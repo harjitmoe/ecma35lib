@@ -1,7 +1,6 @@
 # Miscellaneous CNS 11643 characters from planes 9 through 15 withdrawn from IRG
 #   working sets as unifiable with existing Unicode characters
 
-0x97D74	U+2E483
 0x97E3E	U+8224
 0xB6244	U+7576
 0xB6262	U+2E19D
@@ -13,7 +12,6 @@
 0xC2561	U+9EA6
 0xC2728	U+6C74
 0xC2938	U+5372
-0xC297B	U+2A8B6
 0xC2B37	U+2231C
 0xC2E41	U+4F7E
 0xC2E53	U+5169
@@ -98,7 +96,6 @@
 0xD594B	U+53E1
 0xD5A29	U+5880
 0xD5B73	U+227E8
-0xD5D44	U+2B78F
 0xD607E	U+799B
 0xD6168	U+7B86
 0xD622C	U+7DC1
