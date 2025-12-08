@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020, 2021, 2023.
+# By HarJIT in 2020, 2021, 2023, 2025.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -15,12 +15,12 @@ from ecma35.data import graphdata, showgraph
 import json
 
 plane = (1, ("Adobe-Korea1<br>KSCpc-EUC", "Apple for<br>Unicode 2.1", "Apple for<br>Unicode 3.2", "Apple for<br>Unicode 4.0", "Updated<br>Illustrative", "PUA Scheme<br>Nishiki-teki"), [
-          graphdata.gsets["mac-elex-extras-adobe"][2],
-          graphdata.gsets["mac-elex-extras-unicode2_1"][2],
-          graphdata.gsets["mac-elex-extras-unicode3_2"][2],
-          graphdata.gsets["mac-elex-extras-unicode4_0"][2],
+          graphdata.gsets["mac-elex-extras/adobe"][2],
+          graphdata.gsets["mac-elex-extras/unicode2_1"][2],
+          graphdata.gsets["mac-elex-extras/unicode3_2"][2],
+          graphdata.gsets["mac-elex-extras/unicode4_0"][2],
           graphdata.gsets["mac-elex-extras"][2],
-          graphdata.gsets["mac-elex-extras-nishiki-teki"][2],
+          graphdata.gsets["mac-elex-extras/nishiki-teki"][2],
 ])
 
 def planefunc(number, mapname=None):

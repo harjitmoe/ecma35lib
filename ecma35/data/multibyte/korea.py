@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020/2021/2022/2023/2024.
+# By HarJIT in 2019/2020/2021/2022/2023/2024/2025.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -147,7 +147,7 @@ def ibmpuamap_korea(pointer, ucs):
     return ucs 
 
 # The non-KS 94×94 plane encoded by the old IBM code page 944
-graphdata.gsets["oldibmkorea-withcorppua"] = (94, 2, parsers.decode_main_plane_whatwg(
+graphdata.gsets["oldibmkorea/withcorppua"] = (94, 2, parsers.decode_main_plane_whatwg(
     parsers.parse_file_format("Custom/index-oldibmkorea-withcorppua.txt"),
     "index-oldibmkorea-withcorppua.txt",
     plane = 1))
@@ -156,7 +156,7 @@ graphdata.gsets["oldibmkorea"] = (94, 2, parsers.decode_main_plane_whatwg(
     "index-oldibmkorea-withcorppua.txt",
     plane = 1,
     mapper = ibmpuamap_korea))
-graphdata.gsets["oldibmkorea-excavated"] = (94, 2, parsers.decode_main_plane_whatwg(
+graphdata.gsets["oldibmkorea/excavated"] = (94, 2, parsers.decode_main_plane_whatwg(
     parsers.parse_file_format("Custom/index-oldibmkorea-cleaned.txt"),
     "index-oldibmkorea-cleaned.txt",
     plane = 1))
@@ -208,21 +208,21 @@ rawelex21 = parsers.read_untracked(
     parsers.decode_extra_plane_elex,
     parsers.parse_file_format("Mac/KOREAN_b02.TXT"),
     "KOREAN_b02.TXT")
-graphdata.gsets["mac-elex-extras-unicode2_1"] = (94, 2, rawelex21)
+graphdata.gsets["mac-elex-extras/unicode2_1"] = (94, 2, rawelex21)
 rawelex = parsers.read_untracked(
     "Mac/macElex32.json",
     "Mac/KOREAN.TXT",
     parsers.decode_extra_plane_elex,
     parsers.parse_file_format("Mac/KOREAN.TXT"),
     "KOREAN.TXT")
-graphdata.gsets["mac-elex-extras-unicode3_2"] = (94, 2, rawelex)
+graphdata.gsets["mac-elex-extras/unicode3_2"] = (94, 2, rawelex)
 rawelex4 = parsers.read_untracked(
     "Mac/macElex40.json",
     "Mac/KOREAN.TXT",
     parsers.decode_extra_plane_elex,
     parsers.parse_file_format("Mac/KOREAN.TXT", altcomments=True),
     "KOREAN.TXT-altcomments-True")
-graphdata.gsets["mac-elex-extras-unicode4_0"] = (94, 2, rawelex4)
+graphdata.gsets["mac-elex-extras/unicode4_0"] = (94, 2, rawelex4)
 macelexdata = parsers.read_untracked(
     "Mac/macElex.json",
     "Mac/KOREAN.TXT",
@@ -238,7 +238,7 @@ macelexdata_nt = parsers.read_untracked(
     parsers.parse_file_format("Mac/KOREAN.TXT"),
     "KOREAN.TXT",
     mapper=ahmap_nt)
-graphdata.gsets["mac-elex-extras-nishiki-teki"] = (94, 2, macelexdata_nt)
+graphdata.gsets["mac-elex-extras/nishiki-teki"] = (94, 2, macelexdata_nt)
 macelexdata_pr = parsers.read_untracked(
     "Mac/macElexPR.json",
     "Mac/KOREAN.TXT",
@@ -246,7 +246,7 @@ macelexdata_pr = parsers.read_untracked(
     parsers.parse_file_format("Mac/KOREAN.TXT"),
     "KOREAN.TXT",
     mapper=ahmap_pr)
-graphdata.gsets["~mac-elex-extras-semipragmatic"] = (94, 2, macelexdata_pr)
+graphdata.gsets["~mac-elex-extras/semipragmatic"] = (94, 2, macelexdata_pr)
 macelexdata_adobe = parsers.decode_extra_plane_elex(
     parsers.parse_file_format("Adobe/AdobeKorea.txt", cidmap=("KSCpc-EUC", "UniKS-UTF32")),
     "AdobeKorea.txt-KSCpc-EUC-UniKS-UTF32"
@@ -255,7 +255,7 @@ elex2cid = parsers.decode_extra_plane_elex(
     parsers.parse_file_format("Adobe/AdobeKorea.txt", cidmap=("KSCpc-EUC", "CID")),
     "AdobeKorea.txt-KSCpc-EUC-CID"
 )
-graphdata.gsets["mac-elex-extras-adobe"] = (94, 2, macelexdata_adobe)
+graphdata.gsets["mac-elex-extras/adobe"] = (94, 2, macelexdata_adobe)
 
 # KPS 9566
 graphdata.gsets["ir202/2011"] = kps9566_2011 = (94, 2, parsers.decode_main_plane_euc(

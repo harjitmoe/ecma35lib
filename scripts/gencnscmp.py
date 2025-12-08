@@ -15,12 +15,12 @@ from ecma35.data import graphdata, showgraph
 import json
 
 print("Getting EACC coverage")
-eacc_data = tuple(graphdata.gsets["eacc"][2])
+eacc_data = tuple(graphdata.gsets["cccii/eacc"][2])
 eacc_rev = {}
 for n, i in enumerate(eacc_data):
     if i and (i not in eacc_rev) and (n >= (96 * 99)) and (n < (95 * 96 * 96)):
         eacc_rev[i] = n
-koha_data = tuple(graphdata.gsets["cccii-koha"][2])
+koha_data = tuple(graphdata.gsets["cccii/koha"][2])
 for n, i in enumerate(koha_data):
     if i and (i not in eacc_rev) and (n >= (96 * 99)) and (n < (95 * 96 * 96)):
         eacc_rev[i] = n
@@ -120,7 +120,7 @@ plane7 = (7, ("Yasuoka CNS", "ICU 1992 CNS", "ICU EUC 2014", "GOV-TW 2019", "GOV
           graphdata.gsets["ir187/govtw/old"][2],
           graphdata.gsets["ir187/govtw"][2],
           graphdata.gsets["ir187/unihan"][2],
-          graphdata.gsets["cns-eucg2-lax-matching"][2][94*94*6 : 94*94*7],
+          graphdata.gsets["cns-eucg2/lax-matching"][2][94*94*6 : 94*94*7],
           graphdata.gsets["ir187"][2],
 ])
 
@@ -134,8 +134,8 @@ print("Loading 9")
 plane9 = (9, ("GOV-TW 2019", "GOV-TW 2025", "Lax Matching", "Laxer Matching", "Output"), [
           graphdata.gsets["csic9/govtw/old"][2],
           graphdata.gsets["csic9/govtw"][2],
-          graphdata.gsets["cns-eucg2-semi-lax-matching"][2][94*94*8 : 94*94*9],
-          graphdata.gsets["cns-eucg2-lax-matching"][2][94*94*8 : 94*94*9],
+          graphdata.gsets["cns-eucg2/semi-lax-matching"][2][94*94*8 : 94*94*9],
+          graphdata.gsets["cns-eucg2/lax-matching"][2][94*94*8 : 94*94*9],
           graphdata.gsets["csic9"][2],
 ])
 
@@ -149,33 +149,33 @@ print("Loading 11")
 planeB = (11, ("GOV-TW 2019", "GOV-TW 2025", "Unihan CNS", "Lax Matching", "Laxer Matching", "Output"), [
           graphdata.gsets["csic11/govtw/old"][2],
           graphdata.gsets["csic11/govtw"][2],
-          graphdata.gsets["cns-eucg2-unihan"][2][94*94*10 : 94*94*11],
-          graphdata.gsets["cns-eucg2-semi-lax-matching"][2][94*94*10 : 94*94*11],
-          graphdata.gsets["cns-eucg2-lax-matching"][2][94*94*10 : 94*94*11],
+          graphdata.gsets["cns-eucg2/unihan"][2][94*94*10 : 94*94*11],
+          graphdata.gsets["cns-eucg2/semi-lax-matching"][2][94*94*10 : 94*94*11],
+          graphdata.gsets["cns-eucg2/lax-matching"][2][94*94*10 : 94*94*11],
           graphdata.gsets["csic11"][2],
 ])
 
 print("Loading 12")
 planeC = (12, ("IBM EUC", "ICU EUC 2014", "GOV-TW 2019", "GOV-TW 2025", "Unihan CNS", "Lax Matching", "Laxer Matching", "Output"), [
-          graphdata.gsets["cns-eucg2-ibm-full"][2][94*94*11 : 94*94*12],
-          graphdata.gsets["cns-eucg2-icu-2014-full"][2][94*94*11 : 94*94*12],
+          graphdata.gsets["cns-eucg2/ibm/full"][2][94*94*11 : 94*94*12],
+          graphdata.gsets["cns-eucg2/icu/2014/full"][2][94*94*11 : 94*94*12],
           graphdata.gsets["csic12/govtw/old"][2],
           graphdata.gsets["csic12/govtw"][2],
-          graphdata.gsets["cns-eucg2-unihan"][2][94*94*11 : 94*94*12],
-          graphdata.gsets["cns-eucg2-semi-lax-matching"][2][94*94*11 : 94*94*12],
-          graphdata.gsets["cns-eucg2-lax-matching"][2][94*94*11 : 94*94*12],
+          graphdata.gsets["cns-eucg2/unihan"][2][94*94*11 : 94*94*12],
+          graphdata.gsets["cns-eucg2/semi-lax-matching"][2][94*94*11 : 94*94*12],
+          graphdata.gsets["cns-eucg2/lax-matching"][2][94*94*11 : 94*94*12],
           graphdata.gsets["cns-eucg2"][2][94*94*11 : 94*94*12],
 ])
 
 print("Loading 13")
 planeD = (13, ("IBM EUC", "ICU EUC 2014", "GOV-TW 2019", "GOV-TW 2025", "Unihan CNS", "Lax Matching", "Laxer Matching", "Output"), [
           graphdata.gsets["ibm-euctw-extension-plane"][2],
-          graphdata.gsets["cns-eucg2-icu-2014-full"][2][94*94*12 : 94*94*13],
+          graphdata.gsets["cns-eucg2/icu/2014/full"][2][94*94*12 : 94*94*13],
           graphdata.gsets["csic13-2007/govtw/old"][2],
           graphdata.gsets["csic13-2007/govtw"][2],
-          graphdata.gsets["cns-eucg2-unihan"][2][94*94*12 : 94*94*13],
-          graphdata.gsets["cns-eucg2-semi-lax-matching"][2][94*94*12 : 94*94*13],
-          graphdata.gsets["cns-eucg2-lax-matching"][2][94*94*12 : 94*94*13],
+          graphdata.gsets["cns-eucg2/unihan"][2][94*94*12 : 94*94*13],
+          graphdata.gsets["cns-eucg2/semi-lax-matching"][2][94*94*12 : 94*94*13],
+          graphdata.gsets["cns-eucg2/lax-matching"][2][94*94*12 : 94*94*13],
           graphdata.gsets["cns-eucg2"][2][94*94*12 : 94*94*13],
 ])
 
@@ -183,9 +183,9 @@ print("Loading 14")
 planeE = (14, ("GOV-TW 2019", "GOV-TW 2025", "Unihan CNS", "Lax Matching", "Laxer Matching", "Output"), [
           graphdata.gsets["csic14-2007/govtw/old"][2],
           graphdata.gsets["csic14-2007/govtw"][2],
-          graphdata.gsets["cns-eucg2-unihan"][2][94*94*13 : 94*94*14],
-          graphdata.gsets["cns-eucg2-semi-lax-matching"][2][94*94*13 : 94*94*14],
-          graphdata.gsets["cns-eucg2-lax-matching"][2][94*94*13 : 94*94*14],
+          graphdata.gsets["cns-eucg2/unihan"][2][94*94*13 : 94*94*14],
+          graphdata.gsets["cns-eucg2/semi-lax-matching"][2][94*94*13 : 94*94*14],
+          graphdata.gsets["cns-eucg2/lax-matching"][2][94*94*13 : 94*94*14],
           graphdata.gsets["csic14-2007"][2],
 ])
 
@@ -196,28 +196,28 @@ planeF = (15, ("ICU 1992 CNS", "ICU EUC 2014", "GOV-TW 2019", "GOV-TW 2025", "Un
           graphdata.gsets["csic15/govtw/old"][2],
           graphdata.gsets["csic15/govtw"][2],
           graphdata.gsets["csic15/unihan"][2],
-          graphdata.gsets["cns-eucg2-semi-lax-matching"][2][94*94*14 : 94*94*15],
-          graphdata.gsets["cns-eucg2-lax-matching"][2][94*94*14 : 94*94*15],
+          graphdata.gsets["cns-eucg2/semi-lax-matching"][2][94*94*14 : 94*94*15],
+          graphdata.gsets["cns-eucg2/lax-matching"][2][94*94*14 : 94*94*15],
           graphdata.gsets["csic15"][2],
 ])
 
 print("Loading 17")
 planeH = (17, ("GOV-TW 2019", "GOV-TW 2025", "Unihan CNS", "Lax Matching", "Laxer Matching", "Output"), [
-          graphdata.gsets["cns-eucg2-govtw-old"][2][94*94*16 : 94*94*17],
-          graphdata.gsets["cns-eucg2-govtw"][2][94*94*16 : 94*94*17],
-          graphdata.gsets["cns-eucg2-unihan"][2][94*94*16 : 94*94*17],
-          graphdata.gsets["cns-eucg2-semi-lax-matching"][2][94*94*16 : 94*94*17],
-          graphdata.gsets["cns-eucg2-lax-matching"][2][94*94*16 : 94*94*17],
+          graphdata.gsets["cns-eucg2/govtw/old"][2][94*94*16 : 94*94*17],
+          graphdata.gsets["cns-eucg2/govtw"][2][94*94*16 : 94*94*17],
+          graphdata.gsets["cns-eucg2/unihan"][2][94*94*16 : 94*94*17],
+          graphdata.gsets["cns-eucg2/semi-lax-matching"][2][94*94*16 : 94*94*17],
+          graphdata.gsets["cns-eucg2/lax-matching"][2][94*94*16 : 94*94*17],
           graphdata.gsets["csic17"][2],
 ])
 
 print("Loading 19")
 planeJ = (19, ("GOV-TW 2019", "GOV-TW 2025", "Unihan CNS", "Lax Matching", "Laxer Matching", "Output"), [
-          graphdata.gsets["cns-eucg2-govtw-old"][2][94*94*18 : 94*94*19],
-          graphdata.gsets["cns-eucg2-govtw"][2][94*94*18 : 94*94*19],
-          graphdata.gsets["cns-eucg2-unihan"][2][94*94*18 : 94*94*19],
-          graphdata.gsets["cns-eucg2-semi-lax-matching"][2][94*94*18 : 94*94*19],
-          graphdata.gsets["cns-eucg2-lax-matching"][2][94*94*18 : 94*94*19],
+          graphdata.gsets["cns-eucg2/govtw/old"][2][94*94*18 : 94*94*19],
+          graphdata.gsets["cns-eucg2/govtw"][2][94*94*18 : 94*94*19],
+          graphdata.gsets["cns-eucg2/unihan"][2][94*94*18 : 94*94*19],
+          graphdata.gsets["cns-eucg2/semi-lax-matching"][2][94*94*18 : 94*94*19],
+          graphdata.gsets["cns-eucg2/lax-matching"][2][94*94*18 : 94*94*19],
           graphdata.gsets["csic19"][2],
 ])
 

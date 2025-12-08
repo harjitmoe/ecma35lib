@@ -271,11 +271,11 @@ graphdata.gsets["ir168/kddisym"] = (94, 2,
 graphdata.gsets["ir168/sbank"] = (94, 2, 
         parsers.fuse([cellemojidata.outmap["softbank"][:94*94], _windows_noNECSel],
                      "Emoji--Softbank-4.json"))
-graphdata.gsets["ibmsjisext"] = sjis_html5_g3 = (94, 2, parsers.decode_main_plane_whatwg(
+graphdata.gsets["sjisext/ibm"] = sjis_html5_g3 = (94, 2, parsers.decode_main_plane_whatwg(
     parsers.parse_file_format("WHATWG/index-jis0208.txt"),
     "index-jis0208.txt",
     plane = 2))
-graphdata.gsets["ibmsjisextold"] = (94, 2, parsers.decode_main_plane_sjis(
+graphdata.gsets["sjisext/ibm/old"] = (94, 2, parsers.decode_main_plane_sjis(
     parsers.parse_file_format("ICU/ibm-942_P12A-1999.ucm"),
     "ibm-942_P12A-1999.ucm",
     plane = 2))
@@ -296,12 +296,12 @@ for u, i in enumerate(range(0xE000, 0xE758)):
         if len(whatwgsjispuaonly) < pointer:
             whatwgsjispuaonly.extend([None] * (pointer - len(whatwgsjispuaonly)))
         whatwgsjispuaonly.append((i,))
-graphdata.gsets["ibmsjisextpua"] = (94, 2, 
+graphdata.gsets["sjisext/ibm/pua"] = (94, 2, 
         parsers.fuse([whatwgsjispuaonly, sjis_html5_g3[2]], "ibmextwithpua.json"))
-graphdata.gsets["docomosjisext"] = (94, 2, cellemojidata.outmap["docomo"][94*94:])
-graphdata.gsets["kddisymsjisext"] = (94, 2, cellemojidata.outmap["kddi_symboliczodiac"][94*94:])
-graphdata.gsets["kddipictsjisext"] = (94, 2, cellemojidata.outmap["kddi"][94*94:])
-graphdata.gsets["sbanksjisext"] = (94, 2, cellemojidata.outmap["softbank"][94*94:])
+graphdata.gsets["sjisext/docomo"] = (94, 2, cellemojidata.outmap["docomo"][94*94:])
+graphdata.gsets["sjisext/kddi/sym"] = (94, 2, cellemojidata.outmap["kddi_symboliczodiac"][94*94:])
+graphdata.gsets["sjisext/kddi/pict"] = (94, 2, cellemojidata.outmap["kddi"][94*94:])
+graphdata.gsets["sjisext/sbank"] = (94, 2, cellemojidata.outmap["softbank"][94*94:])
 graphdata.gsets["sbank2gpageG"] = (94, 1, tuple(cellemojidata.softbank_pages[0]))
 graphdata.gsets["sbank2gpageE"] = (94, 1, tuple(cellemojidata.softbank_pages[1]))
 graphdata.gsets["sbank2gpageF"] = (94, 1, tuple(cellemojidata.softbank_pages[2]))

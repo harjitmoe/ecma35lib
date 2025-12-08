@@ -443,7 +443,7 @@ graphdata.gsets["cns-eucg2"] = (94, 3, parsers.fuse([
     cns,
     cns_icu_2014,
 ], "CSIC-All.json"))
-graphdata.gsets["cns-eucg2-lax-matching"] = (94, 3, parsers.fuse([
+graphdata.gsets["cns-eucg2/lax-matching"] = (94, 3, parsers.fuse([
     *misc_amendments,
     (None,) * (94*94*18) + tuple(cns_19),
     irgn2779_amendments,
@@ -455,7 +455,7 @@ graphdata.gsets["cns-eucg2-lax-matching"] = (94, 3, parsers.fuse([
     cns_spuaa_loose,
     cns_spuaa_loose_old,
 ], "CSIC-Lax-Matching.json"))
-graphdata.gsets["cns-eucg2-semi-lax-matching"] = (94, 3, parsers.fuse([
+graphdata.gsets["cns-eucg2/semi-lax-matching"] = (94, 3, parsers.fuse([
     *misc_amendments,
     (None,) * (94*94*18) + tuple(cns_19),
     irgn2779_amendments,
@@ -467,22 +467,22 @@ graphdata.gsets["cns-eucg2-semi-lax-matching"] = (94, 3, parsers.fuse([
     cns_spuaa_semi_loose,
     cns_spuaa_semi_loose_old,
 ], "CSIC-Semi-Lax-Matching.json"))
-graphdata.gsets["cns-eucg2-yasuoka"] = (94, 3, cns_yasuoka)
-graphdata.gsets["cns-eucg2-govtw"] = (94, 3, cns_gov)
-graphdata.gsets["cns-eucg2-govtw-old"] = (94, 3, cns_gov_old)
-graphdata.gsets["cns-eucg2-unihan"] = (94, 3, cns_unihan)
+graphdata.gsets["cns-eucg2/yasuoka"] = (94, 3, cns_yasuoka)
+graphdata.gsets["cns-eucg2/govtw"] = (94, 3, cns_gov)
+graphdata.gsets["cns-eucg2/govtw/old"] = (94, 3, cns_gov_old)
+graphdata.gsets["cns-eucg2/unihan"] = (94, 3, cns_unihan)
 # The version of EUC-TW used by ICU, with standard assignments in planes 1-7 and 15,
 #   a user-defined area in plane 12, and IBM corporate assignments in plane 13.
 #   Note that this is incompatible with the current standard's use of planes 12 and 13.
-graphdata.gsets["cns-eucg2-icu-2014-full"] = (94, 3, cns_icu_2014)
-graphdata.gsetflags["cns-eucg2-icu-2014-full"] |= {"BIG5:IBMCOMPATKANJI"}
-graphdata.gsets["cns-eucg2-icu-2014-noplane1"] = (94, 3, (None,) * (94 * 94) + cns_icu_2014[94*94:])
-graphdata.gsetflags["cns-eucg2-icu-2014-noplane1"] |= {"BIG5:IBMCOMPATKANJI"}
-graphdata.gsets["cns-eucg2-icu-old"] = (94, 3, cns_icu_old)
-graphdata.gsets["cns-eucg2-ibm-full"] = (94, 3, cns_ibm)
-graphdata.gsetflags["cns-eucg2-ibm-full"] |= {"BIG5:IBMCOMPATKANJI"}
-graphdata.gsets["cns-eucg2-ibm-noplane1"] = (94, 3, (None,) * (94 * 94) + cns_ibm[94*94:])
-graphdata.gsetflags["cns-eucg2-ibm-noplane1"] |= {"BIG5:IBMCOMPATKANJI"}
+graphdata.gsets["cns-eucg2/icu/2014/full"] = (94, 3, cns_icu_2014)
+graphdata.gsetflags["cns-eucg2/icu/2014/full"] |= {"BIG5:IBMCOMPATKANJI"}
+graphdata.gsets["cns-eucg2/icu/2014/noplane1"] = (94, 3, (None,) * (94 * 94) + cns_icu_2014[94*94:])
+graphdata.gsetflags["cns-eucg2/icu/2014/noplane1"] |= {"BIG5:IBMCOMPATKANJI"}
+graphdata.gsets["cns-eucg2/icu/old"] = (94, 3, cns_icu_old)
+graphdata.gsets["cns-eucg2/ibm/full"] = (94, 3, cns_ibm)
+graphdata.gsetflags["cns-eucg2/ibm/full"] |= {"BIG5:IBMCOMPATKANJI"}
+graphdata.gsets["cns-eucg2/ibm/noplane1"] = (94, 3, (None,) * (94 * 94) + cns_ibm[94*94:])
+graphdata.gsetflags["cns-eucg2/ibm/noplane1"] |= {"BIG5:IBMCOMPATKANJI"}
 
 # # # # # # # # # #
 # Big Five
@@ -679,30 +679,30 @@ graphdata.gsets["ir171/mac"] = (94, 2, maccnsdata[:94*94])
 #   Big5. Anything more isn't really supported/used nearly as much. So using Big5
 #   mappings in EUC-TW implementations is applicable. Expecially since we're using 
 #   EUC-TW to underpin the Big5 filter.
-graphdata.gsets["cns-eucg2-mac"] = (94, 3, maccnsdata)
-graphdata.gsetflags["cns-eucg2-mac"] |= {"BIG5:IBMCOMPATKANJI"}
-graphdata.gsets["cns-eucg2-ms"] = (94, 3, parsers.decode_main_plane_big5(
+graphdata.gsets["cns-eucg2/mac"] = (94, 3, maccnsdata)
+graphdata.gsetflags["cns-eucg2/mac"] |= {"BIG5:IBMCOMPATKANJI"}
+graphdata.gsets["cns-eucg2/ms"] = (94, 3, parsers.decode_main_plane_big5(
     parsers.parse_file_format("ICU/windows-950-2000.ucm"),
     "windows-950-2000.ucm",
     "big5_to_cns2_ibmvar"))
-graphdata.gsetflags["cns-eucg2-ms"] |= {"BIG5:IBMCOMPATKANJI"}
+graphdata.gsetflags["cns-eucg2/ms"] |= {"BIG5:IBMCOMPATKANJI"}
 
-graphdata.gsets["chinasea-exts-core"] = (94, 2, parsers.decode_extra_plane_big5(
+graphdata.gsets["big5exts/eten/chinasea/core"] = (94, 2, parsers.decode_extra_plane_big5(
     parsers.parse_file_format("Custom/ChinaSea-core.txt"),
     "ChinaSea-core.txt"))
-graphdata.gsets["chinasea-exts-gothic"] = (94, 2, parsers.decode_extra_plane_big5(
+graphdata.gsets["big5exts/eten/chinasea/gothic"] = (94, 2, parsers.decode_extra_plane_big5(
     parsers.parse_file_format("Custom/ChinaSea-gothic.txt"),
     "ChinaSea-gothic.txt"))
-graphdata.gsets["aton-exts"] = (94, 2, parsers.decode_extra_plane_big5(
+graphdata.gsets["big5exts/eten/chinasea/aton/old"] = (94, 2, parsers.decode_extra_plane_big5(
     parsers.parse_file_format("Mozilla/uao241-b2u.txt"),
     "uao241-b2u.txt"))
-graphdata.gsets["aton-exts2"] = (94, 2, parsers.decode_extra_plane_big5(
+graphdata.gsets["big5exts/eten/chinasea/aton"] = (94, 2, parsers.decode_extra_plane_big5(
     parsers.parse_file_format("Mozilla/uao250-b2u.txt"),
     "uao250-b2u.txt"))
-graphdata.gsets["big5e-exts"] = (94, 2, parsers.decode_extra_plane_big5(
+graphdata.gsets["big5exts/big5e"] = (94, 2, parsers.decode_extra_plane_big5(
     parsers.parse_file_format("Mozilla/big5e.txt"),
     "big5e.txt"))
-graphdata.gsets["hkscs-updated"] = hkscs_extras = (94, 2, parsers.fuse([
+graphdata.gsets["big5exts/eten/hkscs/updated"] = hkscs_extras = (94, 2, parsers.fuse([
     parsers.decode_extra_plane_big5(
         parsers.parse_file_format("WHATWG/index-big5.txt"),
         "index-big5_updated.txt",
@@ -711,7 +711,7 @@ graphdata.gsets["hkscs-updated"] = hkscs_extras = (94, 2, parsers.fuse([
         parsers.parse_file_format("Mozilla/hkscs2004.txt", moz2004=True),
         "hkscs2004.txt"),
 ], "BIG5-HKSCS2008-updated.json"))
-graphdata.gsets["hkscs"] = hkscs_extras = (94, 2, parsers.fuse([
+graphdata.gsets["big5exts/eten/hkscs"] = hkscs_extras = (94, 2, parsers.fuse([
     parsers.decode_extra_plane_big5(
         parsers.parse_file_format("WHATWG/index-big5.txt"),
         "index-big5.txt"), 
@@ -719,51 +719,51 @@ graphdata.gsets["hkscs"] = hkscs_extras = (94, 2, parsers.fuse([
         parsers.parse_file_format("Mozilla/hkscs2004.txt", moz2004=True),
         "hkscs2004.txt"),
 ], "BIG5-HKSCS2008.json"))
-graphdata.gsets["hkscs2004"] = (94, 2, parsers.decode_extra_plane_big5(
+graphdata.gsets["big5exts/eten/hkscs/2004"] = (94, 2, parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Mozilla/hkscs2004.txt", moz2004=True),
         "hkscs2004.txt"))
-graphdata.gsets["hkscs2001"] = (94, 2, parsers.decode_extra_plane_big5(
+graphdata.gsets["big5exts/eten/hkscs/2001"] = (94, 2, parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Mozilla/hkscs2001.txt", skipstring="<reserved>"),
         "hkscs2001.txt-skipreserved"))
-graphdata.gsets["hkscs1999"] = (94, 2, parsers.decode_extra_plane_big5(
+graphdata.gsets["big5exts/eten/hkscs/1999"] = (94, 2, parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Mozilla/hkscs1999.txt", skipstring="<reserved>"),
         "hkscs1999.txt-skipreserved"))
-graphdata.gsets["gccs"] = (94, 2, parsers.decode_extra_plane_big5(
+graphdata.gsets["big5exts/eten/hkscs/gccs"] = (94, 2, parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Mozilla/gccs.txt"),
         "gccs.txt"))
 
 # ETEN exts, plus the handful of HKSCS ones which follow, rather than preceeding, the standard
 #   assignments. Used by WHATWG's encoder (as opposed to decoder, which is full HKSCS):
-graphdata.gsets["etenextsplus"] = (94, 2, 
+graphdata.gsets["big5exts/eten/web"] = (94, 2, 
     ((None,) * (32 * 188)) + hkscs_extras[2][(32 * 188):])
-graphdata.gsets["etenexts"] = (94, 2, parsers.decode_extra_plane_big5(
+graphdata.gsets["big5exts/eten"] = (94, 2, parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Mozilla/eten.txt"),
         "eten.txt"))
-graphdata.gsets["big5-2003-exts"] = (94, 2, parsers.decode_extra_plane_big5(
+graphdata.gsets["big5exts/eten/2003"] = (94, 2, parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Mozilla/big5_2003-b2u.txt"),
         "big5_2003-b2u.txt"))
-graphdata.gsets["big5-plus-exts1"] = (94, 2, parsers.decode_extra_plane_big5(
+graphdata.gsets["big5exts/eten/plus"] = (94, 2, parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Mozilla/big5plus-obsolete.txt"),
         "big5plus-obsolete.txt"))
-graphdata.gsets["big5-plus-exts2"] = (94, 2, parsers.decode_second_extra_plane_big5(
+graphdata.gsets["big5additional/plus"] = (94, 2, parsers.decode_second_extra_plane_big5(
         parsers.parse_file_format("Mozilla/big5plus-obsolete.txt"),
         "big5plus-obsolete.txt"))
-graphdata.gsets["ms950exts"] = (94, 2, parsers.decode_extra_plane_big5(
+graphdata.gsets["big5exts/ms"] = (94, 2, parsers.decode_extra_plane_big5(
         parsers.parse_file_format("ICU/windows-950-2000.ucm"),
         "windows-950-2000.ucm"))
-graphdata.gsets["ibmbig5exts"] = (94, 2, parsers.decode_extra_plane_big5(
+graphdata.gsets["big5exts/eten/ibm"] = (94, 2, parsers.decode_extra_plane_big5(
         parsers.parse_file_format("ICU/ibm-950_P110-1999.ucm"),
         "ibm-950_P110-1999.ucm"))
-graphdata.gsets["ibmbig5exts2"] = (94, 2, parsers.decode_second_extra_plane_big5(
+graphdata.gsets["big5additional/ibm"] = (94, 2, parsers.decode_second_extra_plane_big5(
         parsers.parse_file_format("ICU/ibm-950_P110-1999.ucm"),
         "ibm-950_P110-1999.ucm"))
 # IBM-1373 has the same Big5 exts mapping as MS-950. IBM-950 exts is also a subset of ETEN exts,
 #   but a different (and non-overlapping) one, for some reason.
-graphdata.gsets["utcbig5exts"] = (94, 2, parsers.decode_extra_plane_big5(
+graphdata.gsets["big5exts/utc"] = (94, 2, parsers.decode_extra_plane_big5(
         parsers.parse_file_format("UTC/BIG5.TXT"),
         "BIG5.TXT"))
-graphdata.gsets["ms950utcexts"] = (94, 2,
-    parsers.fuse([graphdata.gsets["utcbig5exts"][2], graphdata.gsets["ms950exts"][2]], "BIG5-MSUTC.json"))
+graphdata.gsets["big5exts/utc/ms"] = (94, 2,
+    parsers.fuse([graphdata.gsets["big5exts/utc"][2], graphdata.gsets["big5exts/ms"][2]], "BIG5-MSUTC.json"))
 #
 dynalab_a = parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Adobe/AdobeCNS.txt", cidmap=("HKdla-B5", "UniCNS-UTF32")),
@@ -771,11 +771,11 @@ dynalab_a = parsers.decode_extra_plane_big5(
 dynalab_b = parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Adobe/AdobeCNS.txt", cidmap=("HKdlb-B5", "UniCNS-UTF32")),
         "AdobeCNS.txt-HKdlb-B5-UniCNS-UTF32")
-graphdata.gsets["dynalabexts"] = (94, 2, parsers.fuse([
+graphdata.gsets["big5exts/dynalab"] = (94, 2, parsers.fuse([
     dynalab_a,
     dynalab_b,
 ], "Big5-Dynalab-Exts.json"))
-graphdata.gsets["monotypeexts"] = (94, 2, parsers.fuse([
+graphdata.gsets["big5exts/monotype"] = (94, 2, parsers.fuse([
     parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Adobe/AdobeCNS.txt", cidmap=("HKm314-B5", "UniCNS-UTF32")),
         "AdobeCNS.txt-HKm314-B5-UniCNS-UTF32"),
@@ -793,21 +793,22 @@ graphdata.gsets["monotypeexts"] = (94, 2, parsers.fuse([
 # I'm treating kCCCII as the best source for CCCII insofar as it covers.
 
 cccii_unihan = parsers.read_unihan_planes("UCD/Unihan_OtherMappings-17.txt", "kCCCII", set96=True)
-graphdata.gsets["eacc-pure"] = (96, 3, parsers.decode_main_plane_gl(
+graphdata.gsets["cccii/eacc/loc"] = (96, 3, parsers.decode_main_plane_gl(
     parsers.parse_file_format("LoC/eacc2uni.txt", libcongress=True),
     "eacc2uni.txt",
     set96=True))
-graphdata.gsets["cccii-koha"] = (96, 3, parsers.decode_main_plane_gl(
+graphdata.gsets["cccii/koha"] = (96, 3, parsers.decode_main_plane_gl(
     parsers.parse_file_format("Perl/Encode-HanExtra/ucm/cccii.ucm"),
     "cccii.ucm",
     set96=True,
     skip_invalid_kuten=True))
-graphdata.gsets["eacc-hongkong"] = (96, 3, parsers.decode_main_plane_gl(
+graphdata.gsets["cccii/eacc/hk"] = (96, 3, parsers.decode_main_plane_gl(
     parsers.parse_file_format("Other/eacc-hongkonguni.txt"),
     "eacc-hongkonguni.txt",
     set96=True, 
     ignore_later_altucs=True,
     skip_invalid_kuten=True))
+
 maxmat1 = parsers.decode_main_plane_gl(
     parsers.parse_file_format("Custom/cccii-maxmat.txt"),
     "cccii-maxmat.txt",
@@ -818,6 +819,7 @@ maxmat2 = parsers.decode_main_plane_gl(
     "eacc-maxmat.txt",
     set96=True,
     mapper=deprecated_cjkci.remove_deprecated_cjkci)
+
 # The tilde sets (~cccii and ~eacc) are used in the process of (re)generating the maxmat files.
 graphdata.gsets["~cccii"] = (96, 3, parsers.fuse([
     parsers.decode_main_plane_gl(
@@ -825,16 +827,18 @@ graphdata.gsets["~cccii"] = (96, 3, parsers.fuse([
         "cccii-nonkanji.txt",
         set96=True),
     cccii_unihan,
-    graphdata.gsets["cccii-koha"][2],
-    graphdata.gsets["eacc-pure"][2],
-    ((None,) * (96 * 99)) + graphdata.gsets["eacc-hongkong"][2][96*99:],
+    graphdata.gsets["cccii/koha"][2],
+    graphdata.gsets["cccii/eacc/loc"][2],
+    ((None,) * (96 * 99)) + graphdata.gsets["cccii/eacc/hk"][2][96*99:],
 ], "CCCII-Full-Raw.json"))
-graphdata.gsetflags["eacc-pure"] |= {"EACC:ONLY3PLANESPERLEVEL"}
-graphdata.gsets["~eacc"] = (96, 3, parsers.fuse([
-    graphdata.gsets["eacc-pure"][2],
-    graphdata.gsets["eacc-hongkong"][2],
+
+graphdata.gsetflags["~cccii/eacc"] |= {"EACC:ONLY3PLANESPERLEVEL"}
+graphdata.gsets["~cccii/eacc"] = (96, 3, parsers.fuse([
+    graphdata.gsets["cccii/eacc/loc"][2],
+    graphdata.gsets["cccii/eacc/hk"][2],
     ((None,) * (96 * 99)) + graphdata.gsets["~cccii"][2][96*99:],
 ], "EACC-Full-Raw.json"))
+
 graphdata.gsets["cccii"] = (96, 3, parsers.fuse([
     parsers.decode_main_plane_gl(
         parsers.parse_file_format("Custom/cccii-nonkanji.txt"),
@@ -842,15 +846,16 @@ graphdata.gsets["cccii"] = (96, 3, parsers.fuse([
         set96=True),
     maxmat1,
     cccii_unihan,
-    graphdata.gsets["cccii-koha"][2],
-    graphdata.gsets["eacc-pure"][2],
-    ((None,) * (96 * 99)) + graphdata.gsets["eacc-hongkong"][2][96*99:],
+    graphdata.gsets["cccii/koha"][2],
+    graphdata.gsets["cccii/eacc/loc"][2],
+    ((None,) * (96 * 99)) + graphdata.gsets["cccii/eacc/hk"][2][96*99:],
 ], "CCCII-Full4.json"))
-graphdata.gsetflags["eacc-pure"] |= {"EACC:ONLY3PLANESPERLEVEL"}
-graphdata.gsets["eacc"] = (96, 3, parsers.fuse([
+
+graphdata.gsetflags["cccii/eacc"] |= {"EACC:ONLY3PLANESPERLEVEL"}
+graphdata.gsets["cccii/eacc"] = (96, 3, parsers.fuse([
     maxmat2,
-    graphdata.gsets["eacc-pure"][2],
-    graphdata.gsets["eacc-hongkong"][2],
+    graphdata.gsets["cccii/eacc/loc"][2],
+    graphdata.gsets["cccii/eacc/hk"][2],
     ((None,) * (96 * 99)) + graphdata.gsets["cccii"][2][96*99:],
 ], "EACC-Full4.json"))
 

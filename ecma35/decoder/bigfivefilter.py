@@ -27,7 +27,7 @@ def decode_bigfive(stream, state):
                 state.cur_c1 = "RFC1345"
                 state.glset = 0
                 state.grset = 1
-                state.cur_gsets = ["ir006", "ir171/ms", "cns-eucg2-ms", "hkscs"]
+                state.cur_gsets = ["ir006", "ir171/ms", "cns-eucg2/ms", "big5exts/eten/hkscs"]
                 state.is_96 = [0, 0, 0, 0, *graphdata.initial_is_96[4:]]
                 state.cur_gsets.extend(graphdata.initial_gsets[len(state.cur_gsets):])
                 state.is_96.extend(graphdata.initial_gsets[len(state.is_96):])

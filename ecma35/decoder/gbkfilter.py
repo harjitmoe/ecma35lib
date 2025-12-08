@@ -29,7 +29,7 @@ def decode_gbk(stream, state):
                 state.cur_c1 = "RFC1345"
                 state.glset = 0
                 state.grset = 1
-                state.cur_gsets = ["ir006", "ir058/2005", "ir013/euro", "gbk-nonuro-extras-full"]
+                state.cur_gsets = ["ir006", "ir058/2005", "ir013/euro", "gbk-nonuro-extras/full"]
                 state.is_96 = [0, 0, 0, 0]
                 state.cur_gsets.extend(graphdata.initial_gsets[len(state.cur_gsets):])
                 state.is_96.extend(graphdata.initial_gsets[len(state.is_96):])

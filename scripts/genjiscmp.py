@@ -70,11 +70,11 @@ plane2 = (2, ("IBM SJIS Ext<br>78JIS Ver.", "IBM SJIS Ext<br>MS / HTML5", "DoCoM
               "1990 JIS<br>Plane 2", "IRG N2722<br>Plane 2", "Va Extension<br>Plane 2",
               "OSF EUC<br>Plane 2M",
               "IBM 90JIS<br>Plane 2", "ICU EUC<br>Plane 2", "2000/04 JIS<br>Plane 2"), [
-          graphdata.gsets["ibmsjisextold"][2],
-          graphdata.gsets["ibmsjisextpua"][2],
-          graphdata.gsets["docomosjisext"][2],
-          graphdata.gsets["kddipictsjisext"][2],
-          graphdata.gsets["sbanksjisext"][2],
+          graphdata.gsets["sjisext/ibm/old"][2],
+          graphdata.gsets["sjisext/ibm/pua"][2],
+          graphdata.gsets["sjisext/docomo"][2],
+          graphdata.gsets["sjisext/kddi/pict"][2],
+          graphdata.gsets["sjisext/sbank"][2],
           graphdata.gsets["ir159"][2],
           graphdata.gsets["ir159/irgn2722"][2],
           graphdata.gsets["ir159/va"][2],
@@ -146,8 +146,8 @@ for n, i in enumerate(graphdata.gsets["ir168/kddipict"][2]):
     j = graphdata.gsets["ir168/kddisym"][2][n]
     if i != j and j:
         cdispmap[(n, i)] = j
-for n, i in enumerate(graphdata.gsets["kddipictsjisext"][2]):
-    j = graphdata.gsets["kddisymsjisext"][2][n]
+for n, i in enumerate(graphdata.gsets["sjisext/kddi/pict"][2]):
+    j = graphdata.gsets["sjisext/kddi/sym"][2][n]
     if i != j and j:
         cdispmap[(n + (94 * 94), i)] = j
 

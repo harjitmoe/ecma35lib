@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020, 2021, 2023.
+# By HarJIT in 2020, 2021, 2023, 2025.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -15,9 +15,9 @@ from ecma35.data import graphdata, showgraph
 import json
 
 plane1 = (1, ("Original 926<br/>Reconstruct", "IBM 926/944<br/>Main Plane", "IBM 926/944<br/>PUA Roundtrip"), [
-          graphdata.gsets["oldibmkorea-excavated"][2],
+          graphdata.gsets["oldibmkorea/excavated"][2],
           graphdata.gsets["oldibmkorea"][2],
-          graphdata.gsets["oldibmkorea-withcorppua"][2]
+          graphdata.gsets["oldibmkorea/withcorppua"][2]
 ])
 
 def to_shiftkorea(men, ku, ten):

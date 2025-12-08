@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020, 2021, 2023.
+# By HarJIT in 2020, 2021, 2023, 2025.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -28,7 +28,7 @@ for pointer in range(96*96*7): # Remember plane 0 exists in the array and is com
     avail = set()
     lavail.append(avail)
     for layer in range(1, 13):
-        if graphdata.gsets["eacc"][2][pointer + (96*96*6*(layer - 1))]:
+        if graphdata.gsets["cccii/eacc"][2][pointer + (96*96*6*(layer - 1))]:
             avail.update({layer})
     if len(avail) >= 5:
         manies.append(((pointer // 96) // 96, (pointer // 96) % 96, 
@@ -39,17 +39,17 @@ planes = []
 are_96 = []
 bnx = []
 for number in range(1, 73):
-    if set(graphdata.gsets["eacc"][2][96*96*number:96*96*(number + 1)]) == {None}:
+    if set(graphdata.gsets["cccii/eacc"][2][96*96*number:96*96*(number + 1)]) == {None}:
         continue
     print("Loading {:d}".format(number))
     planes.append((number, ("Koha Taiwan", "Unihan DB", "Lib. of Cong.", "HKIUG", 
                             "CCCII Out", "EACC Out"), [
-              graphdata.gsets["cccii-koha"][2][96*96*number:96*96*(number + 1)],
+              graphdata.gsets["cccii/koha"][2][96*96*number:96*96*(number + 1)],
               traditional.cccii_unihan[96*96*number:96*96*(number + 1)],
-              graphdata.gsets["eacc-pure"][2][96*96*number:96*96*(number + 1)],
-              graphdata.gsets["eacc-hongkong"][2][96*96*number:96*96*(number + 1)],
+              graphdata.gsets["cccii/eacc/loc"][2][96*96*number:96*96*(number + 1)],
+              graphdata.gsets["cccii/eacc/hk"][2][96*96*number:96*96*(number + 1)],
               graphdata.gsets["cccii"][2][96*96*number:96*96*(number + 1)],
-              graphdata.gsets["eacc"][2][96*96*number:96*96*(number + 1)],
+              graphdata.gsets["cccii/eacc"][2][96*96*number:96*96*(number + 1)],
     ]))
     bnx.append(number)
     is_96 = False
@@ -62,28 +62,28 @@ for number in range(1, 73):
 print("Loading 73")
 planes.append((73, ("Koha Taiwan", "Unihan DB", "Lib. of Cong.", "HKIUG", "1990 JIS<br>Plane 1", 
                     "CCCII Out", "EACC Out"), [
-          parsers.to_94(graphdata.gsets["cccii-koha"][2][96*96*73:96*96*74]),
+          parsers.to_94(graphdata.gsets["cccii/koha"][2][96*96*73:96*96*74]),
           parsers.to_94(traditional.cccii_unihan[96*96*73:96*96*74]),
-          parsers.to_94(graphdata.gsets["eacc-pure"][2][96*96*73:96*96*74]),
-          parsers.to_94(graphdata.gsets["eacc-hongkong"][2][96*96*73:96*96*74]),
+          parsers.to_94(graphdata.gsets["cccii/eacc/loc"][2][96*96*73:96*96*74]),
+          parsers.to_94(graphdata.gsets["cccii/eacc/hk"][2][96*96*73:96*96*74]),
           graphdata.gsets["ir168"][2],
           parsers.to_94(graphdata.gsets["cccii"][2][96*96*73:96*96*74]),
-          parsers.to_94(graphdata.gsets["eacc"][2][96*96*73:96*96*74]),
+          parsers.to_94(graphdata.gsets["cccii/eacc"][2][96*96*73:96*96*74]),
 ]))
 bnx.append(73)
 are_96.append(False)
 for number in range(74, 95):
-    if set(graphdata.gsets["eacc"][2][96*96*number:96*96*(number + 1)]) == {None}:
+    if set(graphdata.gsets["cccii/eacc"][2][96*96*number:96*96*(number + 1)]) == {None}:
         continue
     print("Loading {:d}".format(number))
     planes.append((number, ("Koha Taiwan", "Unihan DB", "Lib. of Cong.", "HKIUG", 
                             "CCCII Out", "EACC Out"), [
-              graphdata.gsets["cccii-koha"][2][96*96*number:96*96*(number + 1)],
+              graphdata.gsets["cccii/koha"][2][96*96*number:96*96*(number + 1)],
               traditional.cccii_unihan[96*96*number:96*96*(number + 1)],
-              graphdata.gsets["eacc-pure"][2][96*96*number:96*96*(number + 1)],
-              graphdata.gsets["eacc-hongkong"][2][96*96*number:96*96*(number + 1)],
+              graphdata.gsets["cccii/eacc/loc"][2][96*96*number:96*96*(number + 1)],
+              graphdata.gsets["cccii/eacc/hk"][2][96*96*number:96*96*(number + 1)],
               graphdata.gsets["cccii"][2][96*96*number:96*96*(number + 1)],
-              graphdata.gsets["eacc"][2][96*96*number:96*96*(number + 1)],
+              graphdata.gsets["cccii/eacc"][2][96*96*number:96*96*(number + 1)],
     ]))
     bnx.append(number)
     is_96 = False

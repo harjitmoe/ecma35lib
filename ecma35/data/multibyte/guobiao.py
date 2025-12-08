@@ -768,9 +768,9 @@ _gbk_exceptions_full = tuple(dict2005tofull.get(_i, _i) for _i in _gbk_exception
 _gbk_exceptions = tuple({(0x3000,): (0xE5E5,)}.get(_i, _i) for _i in _gbk_exceptions_web)
 _gbk_exceptions_2022 = tuple(dict2005to2022.get(_i, _i) for _i in _gbk_exceptions)
 graphdata.gsets["gbk-nonuro-extras"] = (96, 2, _gbk_exceptions)
-graphdata.gsets["gbk-nonuro-extras-web"] = (96, 2, _gbk_exceptions_web)
-graphdata.gsets["gbk-nonuro-extras-full"] = (96, 2, _gbk_exceptions_full)
-graphdata.gsets["gbk-nonuro-extras-2022"] = (96, 2, _gbk_exceptions_2022)
+graphdata.gsets["gbk-nonuro-extras/web"] = (96, 2, _gbk_exceptions_web)
+graphdata.gsets["gbk-nonuro-extras/full"] = (96, 2, _gbk_exceptions_full)
+graphdata.gsets["gbk-nonuro-extras/2022"] = (96, 2, _gbk_exceptions_2022)
 
 # Amounting to the first section of four-byte codes in GB18030: the second section can be mapped
 # directly, since no astral codepoint is in any part of the 2000 standard mappings for GBK (nor in

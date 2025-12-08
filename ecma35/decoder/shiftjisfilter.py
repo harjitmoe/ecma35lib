@@ -31,7 +31,7 @@ def decode_shiftjis(stream, state):
                 state.docsmode = "shift_jis"
                 # Sensible-ish defaults (if ir014 is changed to ir006, it would correspond
                 # in mapping to IBM-943C, Windows-31J or WHATWG's Shift_JIS, minus EUDC)
-                state.cur_gsets = ["ir014", "ir168/web", "ir013", "ibmsjisext"]
+                state.cur_gsets = ["ir014", "ir168/web", "ir013", "sjisext/ibm"]
                 state.is_96 = [0, 0, 0, 0]
                 state.cur_gsets.extend(graphdata.initial_gsets[len(state.cur_gsets):])
                 state.is_96.extend(graphdata.initial_gsets[len(state.is_96):])
