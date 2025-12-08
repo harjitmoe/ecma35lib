@@ -63,8 +63,13 @@ graphdata.gsets["ir222"] = (94, 1, (
     None,      None,      None,      None,      None,      None,      None,
 ))
 
-# Windows-1252 modification for Georgian
-graphdata.rhses["58596"] = parsers.read_single_byte("Other/T1058596.ucm")
+# Windows-1252 modification for Georgian, sometimes called the "GEORGIAN-ACADEMY" charset.
+# The use of the code-page number 58596 for it is compatible with FreeDOS.
+georgian_academy_charset = parsers.read_single_byte("Other/T1058596.ucm")
+graphdata.gsets["georgian-academy/94"] = (94, 1, georgian_academy_charset[33:127])
+graphdata.gsets["georgian-academy/96"] = (96, 1, georgian_academy_charset[32:])
+graphdata.rhses["58596"] = georgian_academy_charset
+graphdata.defgsets["58596"] = ("ir006", "georgian-academy/96", "nil", "nil")
 
 # OEM code page for unicameral Georgian
 graphdata.rhses["59829"] = parsers.read_single_byte("Other/T1059829.ucm")

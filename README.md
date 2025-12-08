@@ -387,6 +387,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 ! $ 9`|Left-hand side of "Bookshelf Symbol 1" charset for superscripts and extended Latin|
 |`G*D4 ! $ :`|Left-hand side of "Bookshelf Symbol 2" charset for subscripts and extended Latin|
 |`G*D4 ! $ ;`|Left-hand side of "Bookshelf Symbol 7" charset for extended Latin, musical symbols and assorted Japanese characters|
+|`G*D4 ! $ <`|94-character part of the right-hand side of the "Georgian Academy" charset for unicameral Georgian|
 
 ## Additional single-byte 96-character G-sets, and additional selectors for particular variants of single-byte 96-character G-sets
 
@@ -445,6 +446,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D6 ' 0`|Right-hand side of single-byte component of IBM 5550 Simplified Chinese (extended `Shift_GB`) encoding|
 |`G*D6 ! # 3`|Left-hand side of LaTeX "TS1" (text symbols) charset|
 |`G*D6 ! $ 7`|Left-hand side of LaTeX "T3" (8-bit phonetic notation) charset|
+|`G*D6 ! $ <`|96-character part of the right-hand side of the "Georgian Academy" charset for unicameral Georgian|
 
 ## Additional multiple-byte G-sets, and additional selectors for particular variants of multiple-byte G-sets
 
