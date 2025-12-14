@@ -106,6 +106,13 @@ def utcto90jis(pointer, ucs):
         ret = to_1990[sucs]
         return tuple(ord(i) for i in ret) if ret else ret
     return ucs
+def later_disunifications(pointer, ucs):
+    if pointer == 4986 and ucs == (0x5C6E,): # U+5C6E[J]→U+4DB9; U+FA3C→U+5C6E
+        return (0x4DB9,)
+    elif pointer == 4661 and ucs == (0x7BF9,):
+        # https://www.unicode.org/irg/docs/n2722-JSourceIssues.pdf
+        return (0x25CBB,)
+    return map_to_zenkaku(pointer, ucs)
 
 # JIS C 6226:1978 / JIS X 0208:1978
 graphdata.gsets["ir042/1990pivot"] = (94, 2, parsers.decode_main_plane_gl(
@@ -160,15 +167,10 @@ graphdata.gsets["ir159/icueuc"] = (94, 2, parsers.decode_main_plane_euc(
     "euc-jp-2007.ucm",
     eucjp = 1,
     plane = 2))
-def irgn2722proposal(pointer, ucs):
-    # https://www.unicode.org/irg/docs/n2722-JSourceIssues.pdf
-    if pointer == 4661 and ucs == (0x7BF9,):
-        return (0x25CBB,)
-    return ucs
-graphdata.gsets["ir159/irgn2722"] = (94, 2, parsers.decode_main_plane_whatwg(
+graphdata.gsets["ir159/later-disunifications"] = (94, 2, parsers.decode_main_plane_whatwg(
     parsers.parse_file_format("WHATWG/index-jis0212.txt"),
     "index-jis0212.txt",
-    mapper = irgn2722proposal))
+    mapper = later_disunifications))
 
 # JIS X 0208:1990 or 1997
 graphdata.gsets["ir168"] = jisx0208_1990 = (94, 2, parsers.decode_main_plane_gl(
@@ -190,6 +192,11 @@ graphdata.gsets["ir168/web"] = jisx0208_html5 = (94, 2, parsers.decode_main_plan
     parsers.parse_file_format("WHATWG/index-jis0208.txt"),
     "index-jis0208.txt",
     plane = 1))
+graphdata.gsets["ir168/later-disunifications"] = (94, 2, parsers.decode_main_plane_whatwg(
+    parsers.parse_file_format("WHATWG/index-jis0208.txt"),
+    "index-jis0208.txt",
+    plane = 1,
+    mapper = later_disunifications))
 
 # Apple's three versions (KanjiTalk 7, PostScript, KanjiTalk 6)
 kanjitalk7data = parsers.read_untracked(
@@ -327,6 +334,12 @@ graphdata.gsets["ir228"] = (94, 2, parsers.decode_main_plane_euc(
     eucjp = True,
     plane = 1,
     mapper = map_to_2000))
+graphdata.gsets["ir233/later-disunifications"] = (94, 2, parsers.decode_main_plane_euc(
+    parsers.parse_file_format("Other/euc-jis-2004-std.txt"),
+    "euc-jis-2004-std.txt",
+    eucjp = True,
+    plane = 1,
+    mapper = later_disunifications))
 graphdata.gsets["ir229"] = (94, 2, parsers.decode_main_plane_euc(
     parsers.parse_file_format("Other/euc-jis-2004-std.txt"),
     "euc-jis-2004-std.txt",

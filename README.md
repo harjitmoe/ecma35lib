@@ -490,6 +490,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR < G*DM4 B`|JIS X 0208, KDDI JIS emoji, pictorial zodiac variant|
 |`IRR = G*DM4 B`|JIS X 0208, Fujitsu version|
 |`IRR > G*DM4 B`|JIS X 0208, ARIB STD-B.24 version|
+|`IRR ! 0 G*DM4 B`|JIS X 0208, using later-disunified Unicode codepoints with closer (other-source) glyphs|
 |`IRR SP 0 G*DM4 B`|"KanjiTalk 7" variant (row+84 verticals, non-NEC gaiji) used on classic Mac OS, Apple mappings|
 |`IRR SP 1 G*DM4 B`|"PostScript" / "KanjiTalk 6 PostScript" variant (row+84 verticals, NEC gaiji) used on classic Mac OS, Apple mappings|
 |`IRR ? G*DM4 C`|KS C 5601-1987 Wansung code, using new-UTC mappings (harmonious with Microsoft and WHATWG)|
@@ -509,7 +510,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 3 G*DM4 D`|JIS X 0212, Open Group version for Microsoft-style EUC-JP|
 |`IRR 4 G*DM4 D`|JIS X 0212, version encoded by IBM-954|
 |`IRR 5 G*DM4 D`|JIS X 0212, version encoded by ICU's EUC-JP|
-|`IRR 6 G*DM4 D`|JIS X 0212, with potential source-reference change highlighted in [IRGN2722](https://www.unicode.org/irg/docs/n2722-JSourceIssues.pdf)|
+|`IRR 6 G*DM4 D`|JIS X 0212, using later-disunified Unicode codepoints with closer (other-source) glyphs (see [IRGN2722](https://www.unicode.org/irg/docs/n2722-JSourceIssues.pdf)&rpar;|
 |`IRR ? G*DM4 E`|CCITT Hanzi Code (GB 2312 variant) from ITU T.101-C, which bases it on GB 6345.1-1986 and GB 8565.2-1988 with further adjustments and expansions|
 |`IRR 0 G*DM4 E`|CCITT Hanzi Code, with a more conventional mapping of the lowercase gs (appropriate for their GB 18030 reference glyphs)|
 |`IRR 1 G*DM4 E`|CCITT Hanzi Code, combined with an additional hanzi extension in row 8|
@@ -579,6 +580,8 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 0 G*DM4 N`|KPS 9566-2003 (only the main plane unless in the UHC DOCS)|
 |`IRR 1 G*DM4 N`|KPS 9566-2011 (only the main plane unless in the UHC DOCS)|
 |`IRR 2 G*DM4 N`|All KPS 9566 editions overlayed (but only the main plane unless in the UHC DOCS)|
+|`IRR ? G*DM4 Q`|JIS X 0213 plane 1, 2004 edition|
+|`IRR 0 G*DM4 Q`|JIS X 0213 plane 1, using later-disunified Unicode codepoints with closer (other-source) glyphs|
 |`G*D4 :`|User-defined (plane 12 from IBM's version of EUC-TW)|
 |`G*DM4 ! 0`|GB/T 12052 (Korean in Mainland China)|
 |`IRR ? G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, as included by EUC-TW as its G2 set (recommended version)|

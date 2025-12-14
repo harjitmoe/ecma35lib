@@ -40,7 +40,8 @@ def to_sjis(men, ku, ten):
         return "<br>(<abbr title='Shift JIS'>SJIS</abbr> {:02x}{:02x})".format(lead, trail)
 
 plane1 = (1, ("1978 JIS<br>Illustrative",  "1978 JIS<br>90JIS Pivot",  "1983 JIS",  "1990 JIS<br>Plane 1",
-              "2000 JIS<br>Plane 1",  "2004 JIS<br>Plane 1",  "NEC 78JIS<br>Illustrative", 
+              "2000 JIS<br>Plane 1",  "2004 JIS<br>Plane 1",  "Updated<br>Plane 1",
+              "NEC 78JIS<br>Illustrative", 
               "IBM 78JIS", "IBM 90JIS<br>Plane 1", "Fujitsu", "MS / HTML5", 
               "Apple<br>Row + 10", "Apple<br>PostScript", "Apple<br>KanjiTalk7", 
               "ARIB<br>JIS Emoji", "DoCoMo<br>JIS Emoji", "au by KDDI<br>JIS Emoji", "SoftBank<br>JIS Emoji"), [
@@ -50,6 +51,7 @@ plane1 = (1, ("1978 JIS<br>Illustrative",  "1978 JIS<br>90JIS Pivot",  "1983 JIS
           graphdata.gsets["ir168"][2],
           graphdata.gsets["ir228"][2],
           graphdata.gsets["ir233"][2],
+          graphdata.gsets["ir233/later-disunifications"][2],
           graphdata.gsets["ir042/nec"][2],
           graphdata.gsets["ir042/ibm"][2],
           graphdata.gsets["ir168/ibm"][2],
@@ -76,7 +78,7 @@ plane2 = (2, ("IBM SJIS Ext<br>78JIS Ver.", "IBM SJIS Ext<br>MS / HTML5", "DoCoM
           graphdata.gsets["sjisext/kddi/pict"][2],
           graphdata.gsets["sjisext/sbank"][2],
           graphdata.gsets["ir159"][2],
-          graphdata.gsets["ir159/irgn2722"][2],
+          graphdata.gsets["ir159/later-disunifications"][2],
           graphdata.gsets["ir159/va"][2],
           graphdata.gsets["ir159/osfm"][2],
           graphdata.gsets["ir159/ibm"][2],
