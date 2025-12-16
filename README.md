@@ -345,6 +345,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR ? G*D4 ! " 8`|Right-hand side of ISO-8859-7:1987 (Greek) minus non-breaking space|
 |`IRR @ G*D4 ! " 8`|Right-hand side of ISO-8859-7:1987 plus Euro sign minus non-breaking space|
 |`IRR A G*D4 ! " 8`|Right-hand side of ISO-8859-7:2003 (with Euro and Drachma) minus non-breaking space|
+|`IRR 0 G*D4 ! " 8`|Right-hand side of ISO-8859-7:2003 with Euro sign with alternative Unicode mappings (what X11 calls `suneu-greek`), minus non-breaking space|
 |`G*D4 ! " 9`|Right-hand side of ISO-8859-6 (Arabic) minus non-breaking space|
 |`G*D4 ! " :`|IEC-P-1289 technical set number 1 minus non-breaking space|
 |`G*D4 ! " ;`|Right-hand side of ABICOMP encoding for Portuguese in Brazil minus non-breaking space|
@@ -388,6 +389,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 ! $ :`|Left-hand side of "Bookshelf Symbol 2" charset for subscripts and extended Latin|
 |`G*D4 ! $ ;`|Left-hand side of "Bookshelf Symbol 7" charset for extended Latin, musical symbols and assorted Japanese characters|
 |`G*D4 ! $ <`|94-character part of the right-hand side of the "Georgian Academy" charset for unicameral Georgian|
+|`G*D4 ! $ =`|Lao charset which [X11 calls `mulelao`](https://salsa.debian.org/xorg-team/font/xfonts-encodings)|
 
 ## Additional single-byte 96-character G-sets, and additional selectors for particular variants of single-byte 96-character G-sets
 
@@ -400,6 +402,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 0 G*D6 B`|Right-hand side of IBM code page 1111 (ISO-8859-2 with overring replacing degrees sign)|
 |`IRR ? G*D6 F`|Right-hand side of ISO-8859-7 for Greek, 1987 version|
 |`IRR 0 G*D6 F`|Right-hand side of ISO-8859-7 with Euro sign; intermediate between 1987 and 2003 versions|
+|`IRR 1 G*D6 F`|Right-hand side of ISO-8859-7 with alternative Unicode mappings (what X11 calls `suneu-greek`)|
 |`IRR ? G*D6 J`|ITU T.51 supplementary set for use with old IRV (excludes universal currency sign and hash)|
 |`IRR 0 G*D6 J`|Complete ITU T.51 supplementary set (same as `IRR 0 G*D6 R`; default for this F-byte)|
 |`IRR ? G*D6 L`|Right-hand side for ISO-8859-5 for Cyrillic|
