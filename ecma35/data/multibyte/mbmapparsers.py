@@ -203,8 +203,8 @@ def parse_file_format(fil, *, twoway=False, prefer_sjis=False, skipstring=None, 
             yield readhexbytes(byts), parse_ucs_codepoints(ucs)
         elif _i[0] == "<" and _i[:2] != "<U":
             continue # is ICU metadata or state machine config which isn't relevant to us.
-        elif _i.strip() in ("CHARMAP", "END CHARMAP"):
-            continue # ICU delimitors we don't care about.
+        elif _i.strip().startswith(("CHARMAP", "END CHARMAP", "STARTENCODING", "ALIAS", "SIZE", "FIRSTINDEX", "STARTMAPPING", "UNDEFINE", "ENDMAPPING", "ENDENCODING")):
+            continue # ICU or X11 delimitors we don't care about.
         elif _i[:2] == "0x":
             # Consortium-style format
             if "\t" not in _i and " " in _i.strip():

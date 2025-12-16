@@ -536,10 +536,12 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR < G*DM4 G`|CNS 11643 plane 1, per ICU EUC-TW 2014 mappings|
 |`IRR = G*DM4 G`|CNS 11643 plane 1, per Yasuoka's mappings|
 |`IRR > G*DM4 G`|CNS 11643 plane 1, alternative mappings for HKSCS-2016 preferred forms|
+|`IRR ! 0 G*DM4 G`|CNS 11643 plane 1, variant supported by X11 as a font encoding|
 |`IRR ? G*DM4 H`|CNS 11643 plane 2|
 |`IRR 1 G*DM4 H`|CNS 11643 plane 2, Big5 mappings|
 |`IRR 5 G*DM4 H`|CNS 11643 plane 2, Unihan mappings|
 |`IRR 6 G*DM4 H`|CNS 11643 plane 2, alternative mappings for HKSCS-2016 preferred forms|
+|`IRR 7 G*DM4 H`|CNS 11643 plane 2, variant supported by X11 as a font encoding|
 |`IRR ? G*DM4 I`|CNS 11643-1992 plane 3|
 |`IRR 0 G*DM4 I`|CNS 11643-1988 plane 14|
 |`IRR 1 G*DM4 I`|CNS 11643-1988 plane 14 with extensions, as submitted to the IRG|
@@ -551,6 +553,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 7 G*DM4 I`|CNS 11643-1992 plane 3, per Yasuoka's mappings|
 |`IRR 8 G*DM4 I`|CNS 11643-1992 plane 3, per Unihan mappings|
 |`IRR 9 G*DM4 I`|CNS 11643-1992 plane 3, as officially defined in Taiwan as of 2025|
+|`IRR : G*DM4 I`|CNS 11643-1992 plane 3, variant supported by X11 as a font encoding|
 |`IRR ? G*DM4 J`|CNS 11643-1992 plane 4|
 |`IRR 0 G*DM4 J`|CNS 11643-1992 plane 4, as officially defined in Taiwan as of 2019|
 |`IRR 1 G*DM4 J`|CNS 11643-1992 plane 4, per former ICU ISO-2022-CN-EXT mappings|

@@ -5,3 +5,7 @@
 [submodule "emoji-toolkit"]
 	path = ecma35/data/names/namemaps/emoji-toolkit
 	url = https://github.com/joypixels/emoji-toolkit.git
+
+[submodule "xfonts-encodings"]
+	path = ecma35/data/multibyte/mbmaps/Other/xfonts-encodings
+	url = https://salsa.debian.org/xorg-team/font/xfonts-encodings.git

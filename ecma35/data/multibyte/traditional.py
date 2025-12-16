@@ -357,6 +357,27 @@ graphdata.gsets["ir183/yasuoka"] = (94, 2, cns_yasuoka[planesize * 2 : planesize
 graphdata.gsets["ir183/icu"] = (94, 2, cns_icu_old[planesize * 2 : planesize * 3])
 graphdata.gsets["ir183/icu-2014"] = (94, 2, cns_icu_2014[planesize * 2 : planesize * 3])
 
+def remove_placeholder_space(pointer, ucs):
+    if ucs == (0x3000,) and pointer > 0:
+        return None
+    return ucs
+
+# Subsets of CNS 11643 that X11 supports for older-file-format fonts.
+# This omits the Kangxi Radicals section from plane 1, and omits the first character (01-01) from
+#   planes 1 and 2 for some reason, as well as supporting only a subset of plane 3.
+graphdata.gsets["ir171/x11"] = (94, 2, parsers.decode_main_plane_gl(
+    parsers.parse_file_format("Other/xfonts-encodings/large/cns11643-1.enc"),
+    "cns11643-1.enc",
+    mapper=remove_placeholder_space))
+graphdata.gsets["ir172/x11"] = (94, 2, parsers.decode_main_plane_gl(
+    parsers.parse_file_format("Other/xfonts-encodings/large/cns11643-2.enc"),
+    "cns11643-2.enc",
+    mapper=remove_placeholder_space))
+graphdata.gsets["ir183/x11"] = (94, 2, parsers.decode_main_plane_gl(
+    parsers.parse_file_format("Other/xfonts-encodings/large/cns11643-3.enc"),
+    "cns11643-3.enc",
+    mapper=remove_placeholder_space))
+
 graphdata.gsets["ir184"] = (94, 2, cns[planesize * 3 : planesize * 4])
 graphdata.gsets["ir184/govtw"] = (94, 2, cns_gov[planesize * 3 : planesize * 4])
 graphdata.gsets["ir184/govtw/old"] = (94, 2, cns_gov_old[planesize * 3 : planesize * 4])
