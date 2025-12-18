@@ -148,6 +148,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR ? G*D4 l`|(ITU T.51-1988 first supplementary set (i.e. older version of the T.51 supplementary set without NBSP, SHY, not sign or brvbar))|
 |`IRR 0 G*D4 l`|ITU T.51-1988 first supplementary set with ETS 300 706 extensions (default for this F-byte)|
 |`IRR 1 G*D4 l`|ITU T.51-1988 first supplementary set with ETS 300 706 extensions, alternative Unicode mapping|
+|`IRR 2 G*D4 l`|ITU T.51 variant from positions 161 through 254 of the AFII charset (which starts with a variant/subset of T.51, much like how Unicode starts with ASCII).|
 |`IRR ? G*D4 o`|(JIS X 9010 non-JISCII set for OCR-B.)|
 |`IRR 0 G*D4 o`|ISO-8859-1 RHS cropped to 94-set, with backslash replacing yen sign (superset of the non-JISCII set for OCR-B).|
 |`IRR ? G*D4 q`|JIS X 9010 backslash-only set for JIS X 9008, mapping to ASCII as strongly implied by registration rubric (subset of the non-JISCII set for OCR-B).|

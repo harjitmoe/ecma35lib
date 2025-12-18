@@ -39,6 +39,13 @@ graphdata.gsets["ir090/ets"] = (94, 1, tuple(_t51))
 _t51[31] = _t51[40] = _t51[53] = _t51[54] = _t51[55] = None
 graphdata.gsets["ir090"] = (94, 1, tuple(_t51))
 
+# ITU T.51 variant from positions 161 through 254 of the AFII charset (which starts with a
+#   variant/subset of T.51, much like how Unicode starts with ASCII):
+_t51_afii = _t51[:]
+_t51_afii[5] = _t51_afii[7] = None
+_t51_afii[52:] = (None,) * 42
+graphdata.gsets["ir090/afii"] = (94, 1, tuple(_t51_afii))
+
 # ITU T.101-C (Videotex Data Syntax 2) G2 set
 _ir70 = _t51[:]
 _ir70[31] = (-0x0344,)
