@@ -233,3 +233,18 @@ graphdata.gsets["bookshelf-3"] = (94, 1, (
     None,      None,      None,      None,      None,      None,      None,      None,
     None,      None,      None,      None,      None,      None,      None,      None,
     None,      None,      None,      None,      None,      None,      None))
+
+# Hershey "markers" font's codepage for bullet-points for lists
+graphdata.gsets["hershey-list-markers"] = (94, 1, (
+               None,      None,             None,      None,      None,      None,      None,
+    None,      None,      None,             None,      None,      None,      None,      None,
+    None,      None,      None,             None,      None,      None,      None,      None,
+    None,      None,      None,             None,      None,      None,      None,      None,
+    None,      (0x25E6,), (0x25FD, 0xFE0E), (0x25B5,), (0x25CA,), (0x2606,), (0x2719,), (0x1F7A3,),
+    (0x2715,), (0x2217,), (0x2022,), (0x25FE, 0xFE0E), (0x2BC5,), (0x2BC7,), (0x2BC6,), (0x2BC8,),
+    (0x26DB,), None,      None,             None,      None,      None,      None,      None,
+    None,      None,      None,             None,      None,      None,      None,      None,
+    None,      (0x25E6,), (0x25FD, 0xFE0E), (0x25B5,), (0x25CA,), (0x2606,), (0x2719,), (0x1F7A3,),
+    (0x2715,), (0x2217,), (0x2022,), (0x25FE, 0xFE0E), (0x2BC5,), (0x2BC7,), (0x2BC6,), (0x2BC8,),
+    (0x26DB,), None,      None,             None,      None,      None,      None,      None,
+    None,      None,      None,             None,      None,      None,      None))
