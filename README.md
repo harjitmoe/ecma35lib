@@ -101,6 +101,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR : G*D4 B`|ASCII-1963 (graphic charset assignments only)|
 |`IRR ; G*D4 B`|ASCII with up-arrow with stem, and backtick/apostrophe mapped to Unicode as quotation mark pair|
 |`IRR < G*D4 B`|ASCII with angle-brackets in place of braces|
+|`IRR = G*D4 B`|ASCII with backtick mapped to Unicode as quotation mark, but mapping to usual Unicode apostrophe|
 |`IRR ? G*D4 C`|(7-bit Swedish and Finnish Journalism)|
 |`IRR 0 G*D4 C`|DEC NRCS for Finnish|
 |`IRR ? G*D4 E`|(7-bit Danish and Norwegian Journalism)
@@ -396,7 +397,8 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 ! $ >`|Astrological symbols charset as used by the Hershey "`astrology`" font|
 |`G*D4 ! $ ?`|Cyrillic charset as used by the Hershey "`cyrillic`" font|
 |`G*D4 ! % 0`|Cyrillic charset as used by the Hershey "`cyrilc_1`" font|
-|`G*D4 ! % 1`|Greek charset as used by the Hershey "`greek`" and "`timesg`" fonts|
+|`IRR ? G*D4 ! % 1`|Greek charset as used by the Hershey "`greek`" and "`timesg`" fonts, mapping to Unicode apostrophe and backtick|
+|`IRR 0 G*D4 ! % 1`|Greek charset as used by the Hershey "`greek`" and "`timesg`" fonts, mapping to Unicode curly single quotation marks|
 |`G*D4 ! % 2`|Greek charset as used by the Hershey "`greekc`" and "`greeks`" fonts|
 |`G*D4 ! % 3`|List bullet-points charset as used by the Hershey "`markers`" font|
 |`IRR ? G*D4 ! % 4`|Mathematical symbols charset as used by the Hershey "`mathupp`" font|

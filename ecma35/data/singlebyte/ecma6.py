@@ -86,6 +86,9 @@ raw_variants = {
     # Violation of ECMA-6:1991: 0x27 is not (strictly) '.
     "ir006/smartquotes": ([None, None, None,   None, None, None, None, None, 
                                        0x2018, None, None, None, None], {0x27: 0x2019}),
+    # ASCII-1967, hybrid curly quotation marks variant.
+    "ir006/smartquotes-hybrid": ([None, None, None,   None, None, None, None, None, 
+                                              0x2018, None, None, None, None], {}),
     # ASCII with curly single quotation marks, and an up-arrow with a stem like in ASCII-1963.
     # Violation of ECMA-6:1991: 0x27 is not (strictly) '.
     "ir006/smart-quotes-up-arrow": ([None, None, None,   None, None, None, 0x2191, None, 
