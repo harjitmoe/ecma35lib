@@ -100,6 +100,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 9 G*D4 B`|ASCII 1963/1967 hybrid, unicameral PL/I variant|
 |`IRR : G*D4 B`|ASCII-1963 (graphic charset assignments only)|
 |`IRR ; G*D4 B`|ASCII with up-arrow with stem, and backtick/apostrophe mapped to Unicode as quotation mark pair|
+|`IRR < G*D4 B`|ASCII with angle-brackets in place of braces|
 |`IRR ? G*D4 C`|(7-bit Swedish and Finnish Journalism)|
 |`IRR 0 G*D4 C`|DEC NRCS for Finnish|
 |`IRR ? G*D4 E`|(7-bit Danish and Norwegian Journalism)

@@ -90,6 +90,8 @@ raw_variants = {
     # Violation of ECMA-6:1991: 0x27 is not (strictly) '.
     "ir006/smart-quotes-up-arrow": ([None, None, None,   None, None, None, 0x2191, None, 
                                        0x2018, None, None, None, None], {0x27: 0x2019}),
+    "ir006/angle-brackets-for-braces": ([None, None,   None, None,   None, None, None, None, 
+                                         None, 0x27E8, None, 0x27E9, None], {}),
     # NATS-SEFI (Swedish and Finnish Journalism)
     "ir008-1": ([None, None, 0x3000, 0xC4, 0xD6, 0xC5, 0x25A0, None, 
                              0x2007, 0xE4, 0xF6, 0xE5, 0x2013], {}),
