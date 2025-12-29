@@ -422,7 +422,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"!$?"): "hershey-cyrillic",
             tuple(b"!%0"): "hershey-cyrillic-alternate",
             tuple(b"!%1"): ("hershey-greek", ("hershey-greek/smartquotes",), ("hershey-greek",)),
-            tuple(b"!%2"): "hershey-greek-alternate",
+            tuple(b"!%2"): ("hershey-greek-alternate", ("hershey-greek-alternate/disunified-semicolon",), ("hershey-greek-alternate",)),
             tuple(b"!%3"): "hershey-list-markers",
             tuple(b"!%4"): ("hershey-mathematical/uppercase", ("hershey-mathematical/lowercase",), ("hershey-mathematical/uppercase",)),
             tuple(b"!%5"): "hershey-meteorological",

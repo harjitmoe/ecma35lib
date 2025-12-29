@@ -399,7 +399,8 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*D4 ! % 0`|Cyrillic charset as used by the Hershey "`cyrilc_1`" font|
 |`IRR ? G*D4 ! % 1`|Greek charset as used by the Hershey "`greek`" and "`timesg`" fonts, mapping to Unicode apostrophe and backtick|
 |`IRR 0 G*D4 ! % 1`|Greek charset as used by the Hershey "`greek`" and "`timesg`" fonts, mapping to Unicode curly single quotation marks|
-|`G*D4 ! % 2`|Greek charset as used by the Hershey "`greekc`" and "`greeks`" fonts|
+|`IRR ? G*D4 ! % 2`|Greek charset as used by the Hershey "`greekc`" and "`greeks`" fonts, mapping to double quotation mark|
+|`IRR 0 G*D4 ! % 2`|Greek charset as used by the Hershey "`greekc`" and "`greeks`" fonts, mapping to Greek question mark|
 |`G*D4 ! % 3`|List bullet-points charset as used by the Hershey "`markers`" font|
 |`IRR ? G*D4 ! % 4`|Mathematical symbols charset as used by the Hershey "`mathupp`" font|
 |`IRR 0 G*D4 ! % 4`|Mathematical symbols charset as used by the Hershey "`mathlow`" font|
