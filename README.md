@@ -405,6 +405,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 0 G*D4 ! % 4`|Mathematical symbols charset as used by the Hershey "`mathlow`" font|
 |`G*D4 ! % 5`|Weather symbols charset as used by the Hershey "`meteorology`" font|
 |`G*D4 ! % 6`|Musical-notation symbols charset as used by the Hershey "`music`" font|
+|`G*D4 ! % 7`|Miscellaneous symbols charset as used by the Hershey "`symbolic`" font|
 
 ## Additional single-byte 96-character G-sets, and additional selectors for particular variants of single-byte 96-character G-sets
 

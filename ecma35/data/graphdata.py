@@ -427,6 +427,7 @@ g94bytes = {tuple(b"@"): ("ir002", # Preferred version
             tuple(b"!%4"): ("hershey-mathematical/uppercase", ("hershey-mathematical/lowercase",), ("hershey-mathematical/uppercase",)),
             tuple(b"!%5"): "hershey-meteorological",
             tuple(b"!%6"): "hershey-musical",
+            tuple(b"!%7"): "hershey-symbolic",
             tuple(b"~"): "nil"}
 
 g96bytes = {tuple(b"@"): "ir111",
