@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020/2021/2023/2024/2025.
+# By HarJIT in 2019/2020/2021/2023/2024/2025/2026.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -724,6 +724,8 @@ def read_unihan_planes(fil, wantkey, wantsource=None, set96=False, kutenform=Fal
         elif not i.strip():
             continue
         ucs, prop, data = i.strip().split("\t", 2)
+        if transformfirst and data in transformfirst:
+            data = transformfirst[data]
         if (prop != wantkey) or (wantsource and not data.startswith(wantsource)):
             continue
         assert ucs[:2] == "U+"
@@ -734,8 +736,6 @@ def read_unihan_planes(fil, wantkey, wantsource=None, set96=False, kutenform=Fal
             # Both are apparently y-variants of U+4EA1 (亡, CCCII 0x21305B)
             # Kludge to get this to work.
             continue
-        if transformfirst and data in transformfirst:
-            data = transformfirst[data]
         if wantsource:
             data = data[len(wantsource):]
         if kutenform:
