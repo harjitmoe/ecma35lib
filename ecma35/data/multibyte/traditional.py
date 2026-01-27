@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020/2021/2022/2023/2024/2025.
+# By HarJIT in 2020/2021/2022/2023/2024/2025/2026.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -132,6 +132,18 @@ def cnsmapper_contrabadcjkb(pointer, ucs):
         return (0xBBF8,)
     return deprecated_cjkci.remove_deprecated_cjkci(pointer, ucs)
 
+_components_table = {}
+with open(os.path.join(parsers.directory, "Custom/cns11643_components.txt"), "r", encoding="utf-8"
+        ) as _f:
+    for _line in [j for i in _f for j in [i.split("#", 1)[0].rstrip()] if j]:
+        _a, _b = _line.split()
+        _components_table[int(_a.removeprefix("TU-"), 16)] = int(_b.removeprefix("U+"), 16)
+
+def cnsmapper_components(pointer, ucs):
+    if len(ucs) == 1 and (result := _components_table.get(ucs[0], None)):
+        return (result,)
+    return ucs
+
 planesize = 94 * 94
 cns_bmp = parsers.decode_main_plane_gl(
     parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode BMP.txt"),
@@ -157,27 +169,33 @@ cns_tip = parsers.decode_main_plane_gl(
 cns_spuaa = parsers.decode_main_plane_gl(
     parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
     "CNS2UNICODE_Unicode 15.txt",
-    mapper = cnsmapper_contraspua)
+    mapper = lambda pointer, ucs: cnsmapper_contraspua(
+        pointer, cnsmapper_components(pointer, ucs)))
 cns_spuaa_old = parsers.decode_main_plane_gl(
     parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15 (old).txt"),
     "CNS2UNICODE_Unicode 15 (old).txt",
-    mapper = cnsmapper_contraspua)
+    mapper = lambda pointer, ucs: cnsmapper_contraspua(
+        pointer, cnsmapper_components(pointer, ucs)))
 cns_spuaa_loose = parsers.decode_main_plane_gl(
     parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
-    "CNS2UNICODE_Unicode 15.txt",
-    mapper = cnsmapper_contraspua_thorough)
+    "CNS2UNICODE_Unicode 15.txt (loose)",
+    mapper = lambda pointer, ucs: cnsmapper_contraspua_thorough(
+        pointer, cnsmapper_components(pointer, ucs)))
 cns_spuaa_loose_old = parsers.decode_main_plane_gl(
     parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15 (old).txt"),
-    "CNS2UNICODE_Unicode 15 (old).txt",
-    mapper = cnsmapper_contraspua_thorough)
+    "CNS2UNICODE_Unicode 15 (old).txt (loose)",
+    mapper = lambda pointer, ucs: cnsmapper_contraspua_thorough(
+        pointer, cnsmapper_components(pointer, ucs)))
 cns_spuaa_semi_loose = parsers.decode_main_plane_gl(
     parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15.txt"),
-    "CNS2UNICODE_Unicode 15.txt",
-    mapper = cnsmapper_contraspua_semi_thorough)
+    "CNS2UNICODE_Unicode 15.txt (semi-loose)",
+    mapper = lambda pointer, ucs: cnsmapper_contraspua_semi_thorough(
+        pointer, cnsmapper_components(pointer, ucs)))
 cns_spuaa_semi_loose_old = parsers.decode_main_plane_gl(
     parsers.parse_file_format("GOV-TW/CNS2UNICODE_Unicode 15 (old).txt"),
-    "CNS2UNICODE_Unicode 15 (old).txt",
-    mapper = cnsmapper_contraspua_semi_thorough)
+    "CNS2UNICODE_Unicode 15 (old).txt (semi-loose)",
+    mapper = lambda pointer, ucs: cnsmapper_contraspua_semi_thorough(
+        pointer, cnsmapper_components(pointer, ucs)))
 
 cns_unihan_amended_parts = []
 for _i in range(1, 20):
