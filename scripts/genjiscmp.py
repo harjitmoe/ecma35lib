@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020, 2021, 2023, 2024, 2025.
+# By HarJIT in 2020, 2021, 2023, 2024, 2025, 2026.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -295,6 +295,7 @@ annots = {
              'already use it for their own purposes though.',
  (1, 14, 26): 'Compare 01-22-02 and 02-17-34.',
  (1, 15, 8): 'Compare 01-16-02 and 02-21-64.',
+ (1, 15, 22): 'Compare 01-20-79.',
  (1, 15, 26): 'Compare 01-19-90 and 02-22-58.',
  (1, 15, 32): 'Compare 01-39-25 and 02-22-76.',
  (1, 15, 56): 'Compare 01-37-22 and 02-24-20.',
@@ -314,6 +315,7 @@ annots = {
  (1, 19, 90): 'Compare 01-15-26 and 02-22-58.',
  (1, 20, 35): 'Compare 01-62-85.',
  (1, 20, 50): 'Compare 01-75-61.',
+ (1, 20, 79): 'Compare 01-15-22.',
  (1, 22, 2): 'Compare 01-14-26 and 02-17-34.',
  (1, 22, 38): 'Compare 01-84-01.',
  (1, 22, 77): 'Compare 01-92-42 and 02-64-52.',
@@ -358,13 +360,16 @@ annots = {
  (1, 44, 89): 'Compare 01-73-14.',
  (1, 45, 58): 'Compare 01-84-03.',
  (1, 45, 73): 'Compare 01-91-06 and 02-56-39.',
+ (1, 46, 64): 'Compare 01-94-04.',
  (1, 47, 22): 'Compare 01-68-38.',
  (1, 47, 25): 'Compare 01-91-71 and 02-59-88.',
  (1, 47, 64): 'Compare 01-28-40 and 02-26-90.',
+ (1, 47, 66): 'Compare 01-54-05.',
  (1, 48, 54): 'Compare 01-43-89.',
 # (1, 49, 59): 'Compare 01-84-05.',
  (1, 52, 68): 'Compare 01-36-59.',
  (1, 54, 2): 'Compare 01-94-91.',
+ (1, 54, 5): 'Compare 01-47-66.',
  (1, 57, 88): 'Compare 01-19-41.',
  (1, 58, 25): 'Compare 01-85-06 and 02-33-34.',
  (1, 59, 56): 'Compare 01-41-16.',
@@ -461,6 +466,7 @@ annots = {
              'ones without canonical Unicode representations, though not all those included have '
              'canonical Unicode representations either (since six are logos).',
  (1, 94, 3): 'RE 2000 JIS / 2004 JIS: compare 01-37-31 and 02-72-19.',
+ (1, 94, 4): 'Compare 01-46-64.',
  (1, 94, 20): 'RE 2000 JIS / 2004 JIS: compare 01-34-45.',
  (1, 94, 69): 'RE 2000 JIS / 2004 JIS: compare 01-18-10 and 02-76-31.',
  (1, 94, 74): 'RE 2000 JIS / 2004 JIS: compare 01-24-20 and 02-76-59.',

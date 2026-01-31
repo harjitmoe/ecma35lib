@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020/2022/2023/2024/2025.
+# By HarJIT in 2019/2020/2022/2023/2024/2025/2026.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -107,11 +107,17 @@ def utcto90jis(pointer, ucs):
         return tuple(ord(i) for i in ret) if ret else ret
     return ucs
 def later_disunifications(pointer, ucs):
-    if pointer == 4986 and ucs == (0x5C6E,): # U+5C6E[J]→U+4DB9; U+FA3C→U+5C6E
+    if pointer == 4986 and ucs == (0x5C6E,): # U+5C6E[J]→U+4DB9; U+FA3C→U+5C6E[¬J]
         return (0x4DB9,)
     elif pointer == 4661 and ucs == (0x7BF9,):
         # https://www.unicode.org/irg/docs/n2722-JSourceIssues.pdf
         return (0x25CBB,)
+    elif pointer == 1864 and ucs == (0x5668,): # U+5668[J]→U+20F96; U+FA38→U+5668[¬J]
+        return (0x20F96,)
+    elif pointer == 2101 and ucs == (0x5F84,):
+        return (0x2EC7B,)
+    elif pointer == 4293 and ucs == (0x985E,): # U+985E[J]→U+29516; U+F9D0→U+985E[¬J]
+        return (0x29516,)
     return map_to_zenkaku(pointer, ucs)
 
 # JIS C 6226:1978 / JIS X 0208:1978
