@@ -18,12 +18,17 @@ print("Getting CNS coverage")
 cns_data = tuple(graphdata.gsets["cns-eucg2"][2])
 cns_data_ms = tuple(graphdata.gsets["cns-eucg2/ms"][2])
 cns_data_old = tuple(graphdata.gsets["cns-eucg2/icu/old"][2])
+cns_data_icu2014 = tuple(graphdata.gsets["cns-eucg2/icu/2014/full"][2])
+cns_data_ibm = tuple(graphdata.gsets["cns-eucg2/ibm/full"][2])
 cns_rev = {}
 for n, (i, j) in enumerate(zip(cns_data, cns_data_ms)):
     if i and (i == j):
         cns_rev.setdefault(i, n)
 for n, (i, j) in enumerate(zip(cns_data, cns_data_old)):
     if i and (i == j):
+        cns_rev.setdefault(i, n)
+for n, (i, j, k) in enumerate(zip(cns_data, cns_data_icu2014, cns_data_ibm)):
+    if i and (i == j) and (i != k):
         cns_rev.setdefault(i, n)
 for n, i in enumerate(cns_data):
     if i:
