@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020, 2021, 2023, 2025.
+# By HarJIT in 2020, 2021, 2023, 2025, 2026.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -16,7 +16,15 @@ import json
 
 print("Getting CNS coverage")
 cns_data = tuple(graphdata.gsets["cns-eucg2"][2])
+cns_data_ms = tuple(graphdata.gsets["cns-eucg2/ms"][2])
+cns_data_old = tuple(graphdata.gsets["cns-eucg2/icu/old"][2])
 cns_rev = {}
+for n, (i, j) in enumerate(zip(cns_data, cns_data_ms)):
+    if i and (i == j):
+        cns_rev.setdefault(i, n)
+for n, (i, j) in enumerate(zip(cns_data, cns_data_old)):
+    if i and (i == j):
+        cns_rev.setdefault(i, n)
 for n, i in enumerate(cns_data):
     if i:
         cns_rev.setdefault(i, n)
