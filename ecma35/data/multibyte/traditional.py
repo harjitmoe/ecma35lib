@@ -142,6 +142,14 @@ with open(os.path.join(parsers.directory, "Custom/cns11643_components.txt"), "r"
 def cnsmapper_components(pointer, ucs):
     if len(ucs) == 1 and (result := _components_table.get(ucs[0], None)):
         return (result,)
+    elif ucs in ((0xF6001,), (0xF8FAA,)):
+        return (0x31C0,)
+    elif ucs in ((0xF6005,), (0xF8FAB,)):
+        return (0xFE45,)
+    elif ucs == (0xF8FAC,):
+        return (0x200CB,)
+    elif ucs in ((0xF600B,), (0xF8FAD,)):
+        return (0x200D1,)
     return ucs
 
 planesize = 94 * 94
