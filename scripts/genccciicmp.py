@@ -207,7 +207,7 @@ for n, (p, is_96) in enumerate(zip(planes, are_96)):
                              menuurl="/eacc-conc.html", menuname="CCCII and EACC comparison tables",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
                              annots=annots, selfhandledanchorlink=True, is_96=is_96, blot=blot,
-                             unicodefunc=unicodefunc)
+                             unicodefunc=unicodefunc, always_multicolumn=True)
         f.close()
 
 

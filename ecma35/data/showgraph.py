@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020, 2021, 2022, 2023, 2024, 2025.
+# By HarJIT in 2020, 2021, 2022, 2023, 2024, 2025, 2026.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -527,7 +527,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
                is_96=False, is_sbcs=False, pua_collides=False, blot="",
                unicodefunc=_default_unicodefunc, big5ext_mode=0, skiprows=None,
                siglum=None, showbmppuas=None, noallocatenotice=None, planewarn=None,
-               planenote=None):
+               planenote=None, always_multicolumn=False):
     """Dump an HTML mapping comparison."""
     if showbmppuas == None:
         showbmppuas = (False,) * len(plarray)
@@ -548,7 +548,7 @@ def dump_plane(outfile, planefunc, kutenfunc,
     nonvacant_sets = [(i, j) for (i, j) in zip(setnames, plarray) if j[stpt:edpt] != (
                   (None,) * len(j[stpt:edpt]))]
     unique_nonvacant_sets = {tuple(j[stpt:edpt]) for (i, j) in nonvacant_sets}
-    if len(unique_nonvacant_sets) == 1:
+    if len(unique_nonvacant_sets) == 1 and not always_multicolumn:
         missing_annotations = [((i, j, k), v) for ((i, j, k), v) in annots.items() if i == number and k and stx <= j < edx]
         if missing_annotations:
             print("WARNING: Annotations will not be shown: ", missing_annotations)
