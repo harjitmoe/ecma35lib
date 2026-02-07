@@ -874,6 +874,7 @@ graphdata.gsets["~cccii"] = (96, 3, parsers.fuse([
         "cccii-nonkanji.txt",
         set96=True),
     cccii_unihan,
+    ((None,) * ((79*96*96)+(46*96)+49)) + ((0xB701,),), # typo'd as 0xBF01 in some tables
     graphdata.gsets["cccii/koha"][2],
     graphdata.gsets["cccii/eacc/loc"][2],
     ((None,) * (96 * 99)) + graphdata.gsets["cccii/eacc/hk"][2][96*99:],
@@ -893,6 +894,7 @@ graphdata.gsets["cccii"] = (96, 3, parsers.fuse([
         set96=True),
     maxmat1,
     cccii_unihan,
+    ((None,) * ((79*96*96)+(46*96)+49)) + ((0xB701,),), # typo'd as 0xBF01 in some tables
     graphdata.gsets["cccii/koha"][2],
     graphdata.gsets["cccii/eacc/loc"][2],
     ((None,) * (96 * 99)) + graphdata.gsets["cccii/eacc/hk"][2][96*99:],
