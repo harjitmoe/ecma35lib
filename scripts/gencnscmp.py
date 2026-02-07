@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020, 2021, 2022, 2023, 2025.
+# By HarJIT in 2020, 2021, 2022, 2023, 2025, 2026.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -496,7 +496,7 @@ annots = {
  (6, 43, 90): 'Compare 04-25-38; see <a href="https://unicode.org/wg2/docs/n3196.pdf">WG2 N3196</a> for explanation of this particular pair.&ensp;U+2F949 normalises to U+4039, so is redundant when 04-25-38 does not map to U+4039.',
 
  (7, 15, 43): 'Compare 10-60-31.',
- (7, 41, 75): 'This is a variant of U+86D7 蛗 (see 02-32-03); its glyph on the CNS 11643 website still matches U+27499 despite listing the Unicode mapping of U+272F0; by contrast, U+272F0\'s T-source glyph in the Unicode code charts as of Unicode 15.1 now matches the old UCS2003 glyph (with only one insect radical at the bottom).&ensp;<a href="https://www.babelstone.co.uk/Blog/2007/12/cjk-b-case-study-1-u272f0.html">More information from Andrew West</a> (note: the updated link to Michael Kaplan\'s post is <a href="https://archives.miloush.net/michkap/archive/2007/11/22/6462768.html">here</a>).&ensp;Compare 11-03-39.',
+ (7, 41, 75): 'This is a variant of U+86D7 蛗 (see 02-32-03).&ensp;<a href="https://www.babelstone.co.uk/Blog/2007/12/cjk-b-case-study-1-u272f0.html">More information from Andrew West</a> (note: the updated link to Michael Kaplan\'s post is <a href="https://archives.miloush.net/michkap/archive/2007/11/22/6462768.html">here</a>).&ensp;Compare 11-03-39.',
 
  (10, 55, 1): "Compare 04-13-81.",
  (10, 78, 79): "Compare 05-54-30.",
