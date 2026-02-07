@@ -179,6 +179,14 @@ annots = {
                  "its name in Unicode—although it is substantially the same symbol as the \"Old "
                  "English Libra\" sign encoded at PUA F52D in Aletheia and PUA F5F0 in "
                  "Nishiki-teki.",
+    (79, 46, 49): "Considering which initial-consonant group this syllable cluster is in the "
+                  "codepoint range for, U+BF01 is likely to be a typo for U+B701.",
+    (79, 54, 87): "Glyphs are similar but they are completely different syllables; considering "
+                  "that U+C655 is in all three of KS X 1001, KPS 9566 and GB/T 12052, while "
+                  "U+C78F isn't (it's in KS X 1002), U+C655 is somewhat more likely to be the "
+                  "intended syllable.",
+    (79, 60, 49): "Both U+D494 and U+D4CC are in all three of KS X 1001, KPS 9566 and GB/T 12052, "
+                  "so it's not clear which is intended here.",
 }
 
 blot = ""

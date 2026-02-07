@@ -874,7 +874,16 @@ graphdata.gsets["~cccii"] = (96, 3, parsers.fuse([
         "cccii-nonkanji.txt",
         set96=True),
     cccii_unihan,
-    ((None,) * ((79*96*96)+(46*96)+49)) + ((0xB701,),), # typo'd as 0xBF01 in some tables
+    # Appears as U+BF01 in some tables but this is probably a typo for U+B701, given that U+BF01
+    #   has the wrong initial consonant for the CCCII codepoint range this codepoint appears in.
+    ((None,) * ((79*96*96)+(46*96)+49)) + ((0xB701,),),
+    # Glyphs are similar but they are completely different syllables; considering that U+C655 is in
+    #   all three of KS X 1001, KPS 9566 and GB/T 12052, while U+C78F isn't (it's in KS X 1002),
+    #   U+C655 is rather more likely to be the intended syllable.
+    ((None,) * ((79*96*96)+(54*96)+87)) + ((0xC655,),),
+    # Tables differ on whether 79-60-49 is U+D494 or U+D4CC, but both of them are in all three of
+    #   KS X 1001, KPS 9566 and GB/T 12052, so it's not clear which is intended. Their glyphs are,
+    #   again, similar, and the syllables differ only in the second vowel in the cluster.
     graphdata.gsets["cccii/koha"][2],
     graphdata.gsets["cccii/eacc/loc"][2],
     ((None,) * (96 * 99)) + graphdata.gsets["cccii/eacc/hk"][2][96*99:],
@@ -894,7 +903,16 @@ graphdata.gsets["cccii"] = (96, 3, parsers.fuse([
         set96=True),
     maxmat1,
     cccii_unihan,
-    ((None,) * ((79*96*96)+(46*96)+49)) + ((0xB701,),), # typo'd as 0xBF01 in some tables
+    # Appears as U+BF01 in some tables but this is probably a typo for U+B701, given that U+BF01
+    #   has the wrong initial consonant for the CCCII codepoint range this codepoint appears in.
+    ((None,) * ((79*96*96)+(46*96)+49)) + ((0xB701,),),
+    # Glyphs are similar but they are completely different syllables; considering that U+C655 is in
+    #   all three of KS X 1001, KPS 9566 and GB/T 12052, while U+C78F isn't (it's in KS X 1002),
+    #   U+C655 is somewhat more likely to be the intended syllable.
+    ((None,) * ((79*96*96)+(54*96)+87)) + ((0xC655,),),
+    # Tables differ on whether 79-60-49 is U+D494 or U+D4CC, but both of them are in all three of
+    #   KS X 1001, KPS 9566 and GB/T 12052, so it's not clear which is intended. Their glyphs are,
+    #   again, similar, and the syllables differ only in the second vowel in the cluster.
     graphdata.gsets["cccii/koha"][2],
     graphdata.gsets["cccii/eacc/loc"][2],
     ((None,) * (96 * 99)) + graphdata.gsets["cccii/eacc/hk"][2][96*99:],
