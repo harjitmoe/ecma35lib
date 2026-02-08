@@ -866,6 +866,10 @@ maxmat2 = parsers.decode_main_plane_gl(
     "eacc-maxmat.txt",
     set96=True,
     mapper=deprecated_cjkci.remove_deprecated_cjkci)
+cccii_korean_syllables = parsers.decode_main_plane_gl(
+    parsers.parse_file_format("Custom/cccii-korean-syllables.txt"),
+    "cccii-korean-syllables.txt",
+    set96=True)
 
 # The tilde sets (~cccii and ~eacc) are used in the process of (re)generating the maxmat files.
 graphdata.gsets["~cccii"] = (96, 3, parsers.fuse([
@@ -879,7 +883,11 @@ graphdata.gsets["~cccii"] = (96, 3, parsers.fuse([
     ((None,) * ((79*96*96)+(46*96)+49)) + ((0xB701,),),
     # Glyphs are similar but they are completely different syllables; considering that U+C655 is in
     #   all three of KS X 1001, KPS 9566 and GB/T 12052, while U+C78F isn't (it's in KS X 1002),
-    #   U+C655 is rather more likely to be the intended syllable.
+    #   U+C655 is somewhat more likely to be the intended syllable. Like, 79-48-75, 79-54-87 seems
+    #   to have been appended to its initial-consonant group (hence, neither follows the usual
+    #   ordering within the initial-consonant group, and both are followed by only one unallocated
+    #   position before the next initial-consonant group instead of two), so the fact that U+C78F
+    #   follows the usual codepoint ordering is less relevant here.
     ((None,) * ((79*96*96)+(54*96)+87)) + ((0xC655,),),
     # Tables differ on whether 79-60-49 is U+D494 or U+D4CC, but both of them are in all three of
     #   KS X 1001, KPS 9566 and GB/T 12052, so it's not clear which is intended. Their glyphs are,
@@ -887,6 +895,7 @@ graphdata.gsets["~cccii"] = (96, 3, parsers.fuse([
     graphdata.gsets["cccii/koha"][2],
     graphdata.gsets["cccii/eacc/loc"][2],
     ((None,) * (96 * 99)) + graphdata.gsets["cccii/eacc/hk"][2][96*99:],
+    cccii_korean_syllables,
 ], "CCCII-Full-Raw.json"))
 
 graphdata.gsetflags["~cccii/eacc"] |= {"EACC:ONLY3PLANESPERLEVEL"}
@@ -908,7 +917,11 @@ graphdata.gsets["cccii"] = (96, 3, parsers.fuse([
     ((None,) * ((79*96*96)+(46*96)+49)) + ((0xB701,),),
     # Glyphs are similar but they are completely different syllables; considering that U+C655 is in
     #   all three of KS X 1001, KPS 9566 and GB/T 12052, while U+C78F isn't (it's in KS X 1002),
-    #   U+C655 is somewhat more likely to be the intended syllable.
+    #   U+C655 is somewhat more likely to be the intended syllable. Like, 79-48-75, 79-54-87 seems
+    #   to have been appended to its initial-consonant group (hence, neither follows the usual
+    #   ordering within the initial-consonant group, and both are followed by only one unallocated
+    #   position before the next initial-consonant group instead of two), so the fact that U+C78F
+    #   follows the usual codepoint ordering is less relevant here.
     ((None,) * ((79*96*96)+(54*96)+87)) + ((0xC655,),),
     # Tables differ on whether 79-60-49 is U+D494 or U+D4CC, but both of them are in all three of
     #   KS X 1001, KPS 9566 and GB/T 12052, so it's not clear which is intended. Their glyphs are,
@@ -916,6 +929,7 @@ graphdata.gsets["cccii"] = (96, 3, parsers.fuse([
     graphdata.gsets["cccii/koha"][2],
     graphdata.gsets["cccii/eacc/loc"][2],
     ((None,) * (96 * 99)) + graphdata.gsets["cccii/eacc/hk"][2][96*99:],
+    cccii_korean_syllables,
 ], "CCCII-Full4.json"))
 
 graphdata.gsetflags["cccii/eacc"] |= {"EACC:ONLY3PLANESPERLEVEL"}

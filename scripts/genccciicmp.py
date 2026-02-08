@@ -181,10 +181,15 @@ annots = {
                  "Nishiki-teki.",
     (79, 46, 49): "Considering which initial-consonant group this syllable cluster is in the "
                   "codepoint range for, U+BF01 is likely to be a typo for U+B701.",
-    (79, 54, 87): "Glyphs are similar but they are completely different syllables; considering "
+    (79, 54, 87): "Glyphs are similar but they are completely different syllables; if considering "
                   "that U+C655 is in all three of KS X 1001, KPS 9566 and GB/T 12052, while "
-                  "U+C78F isn't (it's in KS X 1002), U+C655 is somewhat more likely to be the "
-                  "intended syllable.",
+                  "U+C78F isn't (it's in KS X 1002), U+C655 seems somewhat more likely to be the "
+                  "intended syllable.</p><p>Like, 79-48-75, 79-54-87 seems to have been appended "
+                  "to its initial-consonant group (hence, neither follows the usual ordering "
+                  "within the initial-consonant group, and both are followed by only one "
+                  "unallocated position before the next initial-consonant group instead of two), "
+                  "so the fact that U+C78F follows the usual codepoint ordering is less relevant "
+                  "here.",
     (79, 60, 49): "Both U+D494 and U+D4CC are in all three of KS X 1001, KPS 9566 and GB/T 12052, "
                   "so it's not clear which is intended here.",
 }
