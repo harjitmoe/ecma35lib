@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020, 2021.
+# By HarJIT in 2020, 2021, 2026.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -19,15 +19,15 @@ from ecma35.data.maxmat import maximum_matching # Split off from this script to 
 from ecma35.data.multibyte import traditional
 from ecma35.data.names import namedata
 
-sets = [((None,) * (96 * 112)) + graphdata.gsets["cccii-koha"][2][96*112:],
+sets = [((None,) * (96 * 112)) + graphdata.gsets["cccii/koha"][2][96*112:],
         ((None,) * (96 * 112)) + traditional.cccii_unihan[96*112:],
-        ((None,) * (96 * 112)) + graphdata.gsets["eacc-pure"][2][96*112:],
-        ((None,) * (96 * 112)) + graphdata.gsets["eacc-hongkong"][2][96*112:],
+        ((None,) * (96 * 112)) + graphdata.gsets["cccii/eacc/loc"][2][96*112:],
+        ((None,) * (96 * 112)) + graphdata.gsets["cccii/eacc/hk"][2][96*112:],
         ((None,) * (96 * 112)) + graphdata.gsets["~cccii"][2][96*112:],
-        ((None,) * (96 * 112)) + graphdata.gsets["~eacc"][2][96*112:]]
+        ((None,) * (96 * 112)) + graphdata.gsets["~cccii/eacc"][2][96*112:]]
 
 out_set1 = list(graphdata.gsets["~cccii"][2][:96*96*73])
-out_set2 = list(graphdata.gsets["~eacc"][2][:96*96*73])
+out_set2 = list(graphdata.gsets["~cccii/eacc"][2][:96*96*73])
 out_set1[:96 * 112] = [None] * (96 * 112)
 out_set2[:96 * 112] = [None] * (96 * 112)
 
