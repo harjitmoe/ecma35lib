@@ -870,6 +870,10 @@ cccii_korean_syllables = parsers.decode_main_plane_gl(
     parsers.parse_file_format("Custom/cccii-korean-syllables.txt"),
     "cccii-korean-syllables.txt",
     set96=True)
+cccii_additional = parsers.decode_main_plane_gl(
+    parsers.parse_file_format("Custom/cccii-additional-not-in-other-tables.txt"),
+    "cccii-additional-not-in-other-tables.txt",
+    set96=True)
 
 # The tilde sets (~cccii and ~eacc) are used in the process of (re)generating the maxmat files.
 graphdata.gsets["~cccii"] = (96, 3, parsers.fuse([
@@ -896,19 +900,7 @@ graphdata.gsets["~cccii"] = (96, 3, parsers.fuse([
     graphdata.gsets["cccii/eacc/loc"][2],
     ((None,) * (96 * 99)) + graphdata.gsets["cccii/eacc/hk"][2][96*99:],
     cccii_korean_syllables,
-    ((None,) * ((1*96*96)+(75*96)+15)) + ((0x521F,),),
-    ((None,) * ((2*96*96)+(16*96)+3)) + ((0x625F,),),
-    ((None,) * ((2*96*96)+(62*96)+28)) + ((0x24D3F,),),
-    ((None,) * ((2*96*96)+(81*96)+92)) + ((0x31E79,),),
-    ((None,) * ((3*96*96)+(23*96)+79)) + ((0x27ED5,),),
-    ((None,) * ((3*96*96)+(28*96)+88)) + ((0x28469,),),
-    ((None,) * ((3*96*96)+(33*96)+86)) + ((0x91DB, 0xF87F),), # ⿰金⿵力丶
-    ((None,) * ((3*96*96)+(45*96)+54)) + ((0x9797,),),
-    ((None,) * ((3*96*96)+(55*96)+48)) + ((0x9BA3,),),
-    ((None,) * ((3*96*96)+(63*96)+47)) + ((0x2A54B,),),
-    ((None,) * ((3*96*96)+(65*96)+23)) + ((0x2007D,),),
-    ((None,) * ((3*96*96)+(80*96)+5)) + ((0x20DD1,),),
-    ((None,) * ((4*96*96)+(23*96)+21)) + ((0x3A28,),),
+    cccii_additional,
 ], "CCCII-Full-Raw.json"))
 
 graphdata.gsetflags["~cccii/eacc"] |= {"EACC:ONLY3PLANESPERLEVEL"}
@@ -943,6 +935,7 @@ graphdata.gsets["cccii"] = (96, 3, parsers.fuse([
     graphdata.gsets["cccii/eacc/loc"][2],
     ((None,) * (96 * 99)) + graphdata.gsets["cccii/eacc/hk"][2][96*99:],
     cccii_korean_syllables,
+    cccii_additional,
 ], "CCCII-Full4.json"))
 
 graphdata.gsetflags["cccii/eacc"] |= {"EACC:ONLY3PLANESPERLEVEL"}
