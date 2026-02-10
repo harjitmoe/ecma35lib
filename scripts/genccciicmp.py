@@ -36,6 +36,7 @@ for n, i in enumerate(cns_data):
 
 manies = []
 lavail = []
+satellite = []
 print("Scanning layer availability")
 for pointer in range(96*96*7): # Remember plane 0 exists in the array and is completely empty
     avail = set()
@@ -46,7 +47,11 @@ for pointer in range(96*96*7): # Remember plane 0 exists in the array and is com
     if len(avail) >= 5:
         manies.append(((pointer // 96) // 96, (pointer // 96) % 96, 
                                 pointer % 96, len(avail)))
+    if avail and 1 not in avail and ((pointer // 96) % 96) >= 16:
+        satellite.append(((pointer // 96) // 96, (pointer // 96) % 96, 
+                                pointer % 96, len(avail)))
 print(manies)
+print(satellite)
 
 planes = []
 are_96 = []
@@ -184,7 +189,7 @@ annots = {
     (79, 54, 87): "Glyphs are similar but they are completely different syllables; if considering "
                   "that U+C655 is in all three of KS X 1001, KPS 9566 and GB/T 12052, while "
                   "U+C78F isn't (it's in KS X 1002), U+C655 seems somewhat more likely to be the "
-                  "intended syllable.</p><p>Like, 79-48-75, 79-54-87 seems to have been appended "
+                  "intended syllable.</p><p>Like 79-48-75, 79-54-87 seems to have been appended "
                   "to its initial-consonant group (hence, neither follows the usual ordering "
                   "within the initial-consonant group, and both are followed by only one "
                   "unallocated position before the next initial-consonant group instead of two), "

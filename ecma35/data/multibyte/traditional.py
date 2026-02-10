@@ -896,6 +896,19 @@ graphdata.gsets["~cccii"] = (96, 3, parsers.fuse([
     graphdata.gsets["cccii/eacc/loc"][2],
     ((None,) * (96 * 99)) + graphdata.gsets["cccii/eacc/hk"][2][96*99:],
     cccii_korean_syllables,
+    ((None,) * ((1*96*96)+(75*96)+15)) + ((0x521F,),),
+    ((None,) * ((2*96*96)+(16*96)+3)) + ((0x625F,),),
+    ((None,) * ((2*96*96)+(62*96)+28)) + ((0x24D3F,),),
+    ((None,) * ((2*96*96)+(81*96)+92)) + ((0x31E79,),),
+    ((None,) * ((3*96*96)+(23*96)+79)) + ((0x27ED5,),),
+    ((None,) * ((3*96*96)+(28*96)+88)) + ((0x28469,),),
+    ((None,) * ((3*96*96)+(33*96)+86)) + ((0x91DB, 0xF87F),), # ⿰金⿵力丶
+    ((None,) * ((3*96*96)+(45*96)+54)) + ((0x9797,),),
+    ((None,) * ((3*96*96)+(55*96)+48)) + ((0x9BA3,),),
+    ((None,) * ((3*96*96)+(63*96)+47)) + ((0x2A54B,),),
+    ((None,) * ((3*96*96)+(65*96)+23)) + ((0x2007D,),),
+    ((None,) * ((3*96*96)+(80*96)+5)) + ((0x20DD1,),),
+    ((None,) * ((4*96*96)+(23*96)+21)) + ((0x3A28,),),
 ], "CCCII-Full-Raw.json"))
 
 graphdata.gsetflags["~cccii/eacc"] |= {"EACC:ONLY3PLANESPERLEVEL"}
@@ -917,7 +930,7 @@ graphdata.gsets["cccii"] = (96, 3, parsers.fuse([
     ((None,) * ((79*96*96)+(46*96)+49)) + ((0xB701,),),
     # Glyphs are similar but they are completely different syllables; considering that U+C655 is in
     #   all three of KS X 1001, KPS 9566 and GB/T 12052, while U+C78F isn't (it's in KS X 1002),
-    #   U+C655 is somewhat more likely to be the intended syllable. Like, 79-48-75, 79-54-87 seems
+    #   U+C655 is somewhat more likely to be the intended syllable. Like 79-48-75, 79-54-87 seems
     #   to have been appended to its initial-consonant group (hence, neither follows the usual
     #   ordering within the initial-consonant group, and both are followed by only one unallocated
     #   position before the next initial-consonant group instead of two), so the fact that U+C78F
