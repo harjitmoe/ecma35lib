@@ -454,6 +454,7 @@ graphdata.gsets["gb7589/gb13131-draft-homologue"] = (94, 2, (
     *gb7589[2][1493:]))
 graphdata.gsets["gb13132"] = (94, 2, parsers.fuse([
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-18alpha.txt", "kIRG_GSource", "G5", transformfirst=g_source_conversion),
+        parsers.read_unihan_planes("UCD/Unihan_OtherMappings-18alpha.txt", "kGB5", kutenform=True, transformfirst=g_source_conversion),
         #
         # https://www.unicode.org/review/pri508/feedback.html#ID20250202081204
         (None,) * ((94 * 30) + 22) + ((0x96DF,),),

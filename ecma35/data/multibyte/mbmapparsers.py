@@ -723,45 +723,46 @@ def read_unihan_planes(fil, wantkey, wantsource=None, set96=False, kutenform=Fal
             continue
         elif not i.strip():
             continue
-        ucs, prop, data = i.strip().split("\t", 2)
-        if transformfirst and data in transformfirst:
-            data = transformfirst[data]
-        if (prop != wantkey) or (wantsource and not data.startswith(wantsource)):
-            continue
-        assert ucs[:2] == "U+"
-        ucs = int(ucs[2:], 16)
-        if (ucs == 0x4EBE) and (wantkey == "kCCCII"):
-            # CCCII 0x2D305B is mapped to both U+4EBE 亾 (also EACC 0x2D305B) and
-            #   U+5166 兦 (which matches cccii.ucm, which uses CCCII 0x33305B for U+4EBE).
-            # Both are apparently y-variants of U+4EA1 (亡, CCCII 0x21305B)
-            # Kludge to get this to work.
-            continue
-        if wantsource:
-            data = data[len(wantsource):]
-        if kutenform:
-            assert len(data) == 4
-            men = 1
-            ku = int(data[:2], 10)
-            ten = int(data[2:], 10)
-        elif len(data) == 6:
-            men = int(data[:2], 16) - 0x20
-            ku = int(data[2:4], 16) - 0x20
-            ten = int(data[4:], 16) - 0x20
-        else:
-            assert len(data) == 4
-            men = 1
-            ku = int(data[:2], 16) - 0x20
-            ten = int(data[2:], 16) - 0x20
-        if (not 0 <= ten <= 95) and (ucs == 0x9C0C):
-            # U+9C0C → kCCCII 2358CF (not 94^n or even 7-bit)
-            # U+9C0C → kEACC 2D6222
-            # Being as non-94^3 codes in other CCCII mapping sources are mostly either 
-            #   (a) Non-kanji using 0x20 as a lead or continuation byte, or
-            #   (b) Extra URO or CJKA kanji encoded using prefixed 0x7F to escape a UCS-2BE code,
-            # I suspect this is an error in Unihan?
-            continue
-        pointer = _main_plane_pointer(men, ku, ten, None, set96)
-        _put_at(_temp, pointer, mapper(pointer, (ucs,)), False)
+        ucs_repr, prop, datas = i.strip().split("\t", 2)
+        for data in datas.split():
+            if transformfirst and data in transformfirst:
+                data = transformfirst[data]
+            if (prop != wantkey) or (wantsource and not data.startswith(wantsource)):
+                continue
+            assert ucs_repr[:2] == "U+"
+            ucs = int(ucs_repr[2:], 16)
+            if (ucs == 0x4EBE) and (wantkey == "kCCCII"):
+                # CCCII 0x2D305B is mapped to both U+4EBE 亾 (also EACC 0x2D305B) and
+                #   U+5166 兦 (which matches cccii.ucm, which uses CCCII 0x33305B for U+4EBE).
+                # Both are apparently y-variants of U+4EA1 (亡, CCCII 0x21305B)
+                # Kludge to get this to work.
+                continue
+            if wantsource:
+                data = data[len(wantsource):]
+            if kutenform:
+                assert len(data) == 4
+                men = 1
+                ku = int(data[:2], 10)
+                ten = int(data[2:], 10)
+            elif len(data) == 6:
+                men = int(data[:2], 16) - 0x20
+                ku = int(data[2:4], 16) - 0x20
+                ten = int(data[4:], 16) - 0x20
+            else:
+                assert len(data) == 4
+                men = 1
+                ku = int(data[:2], 16) - 0x20
+                ten = int(data[2:], 16) - 0x20
+            if (not 0 <= ten <= 95) and (ucs == 0x9C0C):
+                # U+9C0C → kCCCII 2358CF (not 94^n or even 7-bit)
+                # U+9C0C → kEACC 2D6222
+                # Being as non-94^3 codes in other CCCII mapping sources are mostly either 
+                #   (a) Non-kanji using 0x20 as a lead or continuation byte, or
+                #   (b) Extra URO or CJKA kanji encoded using prefixed 0x7F to escape a UCS-2BE code,
+                # I suspect this is an error in Unihan?
+                continue
+            pointer = _main_plane_pointer(men, ku, ten, None, set96)
+            _put_at(_temp, pointer, mapper(pointer, (ucs,)), False)
     _fill_to_plane_boundary(_temp, SZ)
     return tuple(_temp)
 
