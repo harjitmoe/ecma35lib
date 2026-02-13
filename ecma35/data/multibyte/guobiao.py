@@ -432,12 +432,12 @@ graphdata.gsets["gb13131"] = (94, 2, parsers.fuse([
         (None,) * ((94 * 72) + 82) + ((0x84C3,),),
         (None,) * ((94 * 78) + 18) + ((0x27C52,),),
     ], "GB13131.json"))
-_irgn2376gb3 = graphdata.gsets["gb13131"][2]
-graphdata.gsets["gb13131/gb7589-homologue"] = (94, 2, (
-    *_irgn2376gb3[:1474],
-    (0x201B5,),
-    *_irgn2376gb3[1474:1492],
-    *_irgn2376gb3[1493:]))
+_gb3 = graphdata.gsets["gb13131"][2]
+graphdata.gsets["gb13131/draft"] = (94, 2, (
+    *_gb3[:1474],
+    *_gb3[1474:1492],
+    (0x511C,),
+    *_gb3[1493:]))
 # Note: oddly, GB 7589's 42-79 has a 盾 rather than a 質=貭=质 as in the Unihan GB 13131.
 graphdata.gsets["gb7589"] = gb7589 = (94, 2, parsers.fuse([
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-18alpha.txt", "kIRG_GSource", "G2", transformfirst=g_source_conversion),
@@ -447,7 +447,7 @@ graphdata.gsets["gb7589"] = gb7589 = (94, 2, parsers.fuse([
             "GB7589.txt",
         ),
     ], "GB7589.json"))
-graphdata.gsets["gb7589/gb13131-homologue"] = (94, 2, (
+graphdata.gsets["gb7589/gb13131-draft-homologue"] = (94, 2, (
     *gb7589[2][:1474],
     *gb7589[2][1475:1493],
     (0x4F47,),
@@ -489,13 +489,13 @@ graphdata.gsets["gb13132"] = (94, 2, parsers.fuse([
         ),
     ], "GB13132.json"))
 _irgn2376gb5 = graphdata.gsets["gb13132"][2]
-graphdata.gsets["gb13132/gb7590-homologue"] = (94, 2, (
+graphdata.gsets["gb13132/draft"] = (94, 2, (
     *_irgn2376gb5[:6214],
-    (0x25B36,),
     *_irgn2376gb5[6214:6228],
+    (0x25B36,),
     *_irgn2376gb5[6229:6860],
+    (0x8575,),
     *_irgn2376gb5[6861:6880],
-    (0x859E,),
     *_irgn2376gb5[6880:]))
 graphdata.gsets["gb7590"] = gb7590 = (94, 2, parsers.fuse([
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-18alpha.txt", "kIRG_GSource", "G4", transformfirst=g_source_conversion),
@@ -505,7 +505,7 @@ graphdata.gsets["gb7590"] = gb7590 = (94, 2, parsers.fuse([
             "GB7590.txt",
         ),
     ], "GB7590.json"))
-graphdata.gsets["gb7590/gb13132-homologue"] = (94, 2, (
+graphdata.gsets["gb7590/gb13132-draft-homologue"] = (94, 2, (
     *gb7590[2][:6214],
     *gb7590[2][6215:6229],
     (0x25B36,),

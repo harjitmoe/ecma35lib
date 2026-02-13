@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020/2021/2023/2024/2025.
+# By HarJIT in 2019/2020/2021/2023/2024/2025/2026.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -559,8 +559,8 @@ g94nbytes = {tuple(b"@"): ("ir042/nec", ("ir042/ibm", "ir042/nec", "ir042/1990pi
              tuple(b"!6"): ("sjisext/kddi/pict", ("sjisext/kddi/sym",), ("sjisext/kddi/pict",)),
              tuple(b"!7"): "sjisext/sbank",
              # GB 7589/13131 and GB 7590/13132. Insofar as I can support them.
-             tuple(b"!8"): ("gb13131", ("gb7589/gb13131-homologue", "gb13131", "gb7589", "gb13131/gb7589-homologue"), ("gb13131",)),
-             tuple(b"!9"): ("gb13132", ("gb7590/gb13132-homologue", "gb13132", "gb7590", "gb13132/gb7590-homologue"), ("gb13132",)),
+             tuple(b"!8"): ("gb13131", ("gb7589/gb13131-draft-homologue", "gb13131/draft", "gb7589", "gb13131"), ("gb13131/draft",)),
+             tuple(b"!9"): ("gb13132", ("gb7590/gb13132-draft-homologue", "gb13132/draft", "gb7590", "gb13132"), ("gb13132/draft",)),
              tuple(b"!:"): ("mac-elex-extras", 
                             ("mac-elex-extras", "mac-elex-extras/unicode4_0", "mac-elex-extras/unicode2_1", "mac-elex-extras/adobe", "mac-elex-extras/nishiki-teki"),
                             ("mac-elex-extras/unicode3_2",)),
