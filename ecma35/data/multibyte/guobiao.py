@@ -276,9 +276,7 @@ graphdata.gsets["ir058/hant"] = gb12345 = (94, 2, parsers.fuse([
     ], "GB12345.json"))
 graphdata.gsets["ir058/hant-full"] = gb12345_full = (94, 2, parsers.fuse([
         gb12345[2],
-        parsers.read_unihan_planes("UCD/Unihan_OtherMappings-18alpha.txt", "kPseudoGB1", kutenform=True),
-        parsers.read_unihan_planes("UCD/Unihan_OtherMappings-17.txt", "kPseudoGB1", kutenform=True),
-        parsers.read_unihan_planes("UCD/Unihan_OtherMappings-16.txt", "kPseudoGB1", kutenform=True),
+        parsers.read_unihan_planes("UCD/Unihan_OtherMappings.txt", "kPseudoGB1", kutenform=True),
     ], "GB12345full.json"))
 #
 # Certain characters are still simplified in GB 12345 proper, but were replaced with traditional
@@ -326,9 +324,7 @@ graphdata.gsets["gb12052"] = (94, 2, parsers.decode_main_plane_euc(
     mapper = unicode_normalise_gb12052))
 
 graphdata.gsets["gb15564"] = gb15564 = (94, 2, parsers.fuse([
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-18alpha.txt", "kIRG_GSource", "GH", kutenform=True),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-17.txt", "kIRG_GSource", "GH", kutenform=True),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "GH", kutenform=True),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources.txt", "kIRG_GSource", "GH", kutenform=True),
         gb12345[2],
         graphdata.gsets["gb8565"][2],
     ], "GB15564.json"))
@@ -337,9 +333,7 @@ graphdata.gsets["unihan-singapore-characters"] = (94, 2, parsers.fuse([
         # https://www.unicode.org/irg/docs/n2841-SGMYIdeographs.pdf
         (None,) * 48 + ((0x9097,),),
         #
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-18alpha.txt", "kIRG_GSource", "GS"),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-17.txt", "kIRG_GSource", "GS"),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "GS"),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources.txt", "kIRG_GSource", "GS"),
         # https://www.unicode.org/irg/docs/n2841-SGMYIdeographs.pdf
         (None,) * 11 + ((0x3281D,),),
         (None,) * ((94 * 1) + 28) + ((0x2AA78,),),
@@ -349,53 +343,6 @@ graphdata.gsets["unihan-singapore-characters"] = (94, 2, parsers.fuse([
         (None,) * ((94 * 3) + 37) + ((0x321FA,),),
     ], "Singapore.json"))
 
-# Being as GB 7589, 13131, 7590, 13132, 16500 do not include non-Kanji, Unihan mappings theoretically
-#   can describe their entire mappings… in reality, the GB 13131 and 16500 mappings contain almost
-#   everything with only a few gaps (listed below), whereas the GB 13132 mapping is full of holes.
-# kGB3 and kGB5 actually provide the same data as the G3 and G5 in kIRG_GSource (despite the later
-#   citing 13131/13132 and the former citing 7589/7590), except for that kGB3 and kGB5 have many
-#   more gaps (they seem to only cover the URO).
-#
-# A few of the Unihan mappings for GB 13131 and 13132 are off by one versus the published GB 7589
-#   and 7590 standards per IRG N2302:
-#     https://www.unicode.org/irg/docs/n2302-GSourceIssues.pdf
-#   - Unihan's 03-16-65 thru 03-16-82 corresponds to 02-16-66 thru 02-16-83
-#     - The 02-16-65 position should be U+201B5 (𠆵). Unihan's 03-16-83 corresponds to nothing
-#       since U+4F47 (佇) does not appear in GB 7589.
-#   - Unihan's 05-67-11 thru 05-67-24 corresponds to 04-67-12 thru 04-67-25
-#   - Unihan's 05-74-05 thru 05-74-15 corresponds to 04-74-04 thru 04-74-14
-#     - Although IRG N2302 doesn't note the issues with 05-73-93 and 05-73-94, the off-by-one
-#       range is actually the somewhat larger 05-73-94 thru 05-74-18, which corresponds to
-#       04-73-93 thru 04-74-17. The 04-74-18 position should be U+859E (薞); the 05-73-93 position
-#       corresponds to nothing since U+8575 (蕵)—not quite U+859E—does not appear in GB 7590.
-# Note that the Chinese national body, having initially considered them per IRG N2293 (see also
-#   IRG N2290 / UTC L2/18-189), seemingly rejected the IRG N2302 corrections in IRG N2376.
-#   Possibly, this means they reflect regions of non-homology between the (published) GB 7589 and
-#   7590 and the (unpublished) GB 13131 and 13132?
-#     https://www.unicode.org/irg/docs/n2293-MiscEditorialReport.pdf
-#     https://www.unicode.org/L2/L2018/18189-irgn-2290-irg50-recs.pdf
-#     https://www.unicode.org/irg/docs/n2376-GSourceUpdate.pdf
-#
-# Handful of GB 7589 / 13131 not mapped to Unicode in kIRG_GSource:
-#     U+72AE at 19-57 (traditional / simplified)
-#     U+5829 at 20-53 (traditional; simplified not in Unicode)
-#     U+22341 at 21-05 (traditional / simplified)
-#     U+7D94 at 21-25 (traditional / simplified)
-#     U+5570 at 22-51 (simplified: U+5570; traditional: U+56C9)
-#         Note: U+56C9 is 88-51 in GB 12345, so this is U+5570 in both GB 7589 and 13131.
-#     U+625C at 41-53 (traditional / simplified)
-#     U+781E at 55-58 (traditional / simplified)
-#     U+77AD at 58-43 (traditional; traditional even in GB 7589 since simplified converges to 了)
-#         Note: U+77AD is 88-49 in GB 12345, so this is redundant in GB 13131.
-#     U+79C4 at 59-51 (traditional / simplified)
-#     U+8226 at 69-53 (traditional / simplified)
-#     U+84C3 at 73-83 (traditional / simplified)
-#
-# Also, U+8280 is 04-71-30 or 05-71-30 (GB 7590 or GB 13132). 02-72-15 or 03-72-15 (GB 7589 or
-#   GB 13131) is actually U+827B, not U+8280.
-# Some other issues:
-#   78-18 actually U+27C52: https://www.unicode.org/review/pri508/feedback.html#ID20250201120049
-#   25-80 actually U+5DC2: https://www.unicode.org/review/pri508/feedback.html#ID20250202081204
 g_source_conversion = {}
 with open(os.path.join(parsers.directory, "Custom/newgsource.txt"), "r") as _f:
     for _line in _f:
@@ -404,19 +351,9 @@ with open(os.path.join(parsers.directory, "Custom/newgsource.txt"), "r") as _f:
         _a, _b = _line.strip().split()
         g_source_conversion[_a] = _b
 graphdata.gsets["gb13131"] = (94, 2, parsers.fuse([
-        parsers.read_unihan_planes("UCD/Unihan_OtherMappings-18alpha.txt", "kGB3", kutenform=True, transformfirst=g_source_conversion),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-18alpha.txt", "kIRG_GSource", "G3", transformfirst=g_source_conversion),
-        parsers.read_unihan_planes("UCD/Unihan_OtherMappings-17.txt", "kGB3", kutenform=True, transformfirst=g_source_conversion),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-17.txt", "kIRG_GSource", "G3", transformfirst=g_source_conversion),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "G3", transformfirst=g_source_conversion),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_GSource", "G3", transformfirst=g_source_conversion),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G3", transformfirst=g_source_conversion),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "G3", transformfirst=g_source_conversion),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-17.txt", "kIRG_GSource", "G2", transformfirst=g_source_conversion),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "G2", transformfirst=g_source_conversion),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_GSource", "G2", transformfirst=g_source_conversion),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G2", transformfirst=g_source_conversion),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "G2", transformfirst=g_source_conversion),
+        parsers.read_unihan_planes("UCD/Unihan_OtherMappings.txt", "kGB3", kutenform=True, transformfirst=g_source_conversion),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources.txt", "kIRG_GSource", "G3", transformfirst=g_source_conversion),
+        (None,) * ((94 * 17) + 92) + ((0x4FB4, 0xF87F),),
         (None,) * ((94 * 18) + 56) + ((0x72AE,),),
         (None,) * ((94 * 19) + 52) + ((0x5829,),),
         (None,) * ((94 * 20) + 4) + ((0x22341,),),
@@ -438,10 +375,10 @@ graphdata.gsets["gb13131/draft"] = (94, 2, (
     *_gb3[1475:1493],
     (0x511C,),
     *_gb3[1493:]))
+
 # Note: oddly, GB 7589's 42-79 has a 盾 rather than a 質=貭=质 as in the Unihan GB 13131.
 graphdata.gsets["gb7589"] = gb7589 = (94, 2, parsers.fuse([
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-18alpha.txt", "kIRG_GSource", "G2", transformfirst=g_source_conversion),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-17.txt", "kIRG_GSource", "G2", transformfirst=g_source_conversion),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources.txt", "kIRG_GSource", "G2", transformfirst=g_source_conversion),
         parsers.decode_main_plane_gl(
             parsers.parse_file_format("Custom/GB7589.txt"),
             "GB7589.txt",
@@ -452,41 +389,13 @@ graphdata.gsets["gb7589/gb13131-draft-homologue"] = (94, 2, (
     *gb7589[2][1475:1493],
     (0x4F47,),
     *gb7589[2][1493:]))
+
 graphdata.gsets["gb13132"] = (94, 2, parsers.fuse([
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-18alpha.txt", "kIRG_GSource", "G5", transformfirst=g_source_conversion),
-        parsers.read_unihan_planes("UCD/Unihan_OtherMappings-18alpha.txt", "kGB5", kutenform=True, transformfirst=g_source_conversion),
-        #
-        # https://www.unicode.org/review/pri508/feedback.html#ID20250202081204
-        (None,) * ((94 * 30) + 22) + ((0x96DF,),),
-        #
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-17.txt", "kIRG_GSource", "G5", transformfirst=g_source_conversion),
-        #
-        # Pedantically, 05-37-52 is U+23727 𣜧 (or rather, 04-37-52 is 𣜧's Simplified Chinese
-        #   equivalent form).
-        # U+6A69 橩 is 07-56-19, although it is an extension not present in the published GB 16500.
-        # See https://www.unicode.org/irg/docs/n2297-GSourceChanges.pdf
-        # All three of the above (04-37-52, 05-37-52/U+23727, and 07-56-19/U+6A69) have the
-        #   pronunciation "qióng" and meaning "game dice", making them interchangable variants.
-        (None,) * ((94 * 36) + 51) + ((0x23727,),),
-        #
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "G5", transformfirst=g_source_conversion),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_GSource", "G5", transformfirst=g_source_conversion),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G5", transformfirst=g_source_conversion),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "G5", transformfirst=g_source_conversion),
-        parsers.read_unihan_planes("UCD/Unihan_OtherMappings-17.txt", "kGB5", kutenform=True, transformfirst=g_source_conversion),
-        parsers.read_unihan_planes("UCD/Unihan_OtherMappings-16.txt", "kGB5", kutenform=True),
-        parsers.read_unihan_planes("UCD/Unihan_OtherMappings-16beta.txt", "kGB5", kutenform=True),
-        parsers.read_unihan_planes("UCD/Unihan_OtherMappings-15.txt", "kGB5", kutenform=True),
-        parsers.read_unihan_planes("UCD/Unihan_OtherMappings-14.txt", "kGB5", kutenform=True),
-        parsers.read_unihan_planes("UCD/Unihan_OtherMappings-13.txt", "kGB5", kutenform=True),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-17.txt", "kIRG_GSource", "G4", transformfirst=g_source_conversion),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "G4", transformfirst=g_source_conversion),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_GSource", "G4", transformfirst=g_source_conversion),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G4", transformfirst=g_source_conversion),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "G4", transformfirst=g_source_conversion),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources.txt", "kIRG_GSource", "G5", transformfirst=g_source_conversion),
+        parsers.read_unihan_planes("UCD/Unihan_OtherMappings.txt", "kGB5", kutenform=True, transformfirst=g_source_conversion),
         parsers.decode_main_plane_gl(
-            parsers.parse_file_format("Custom/GB13132_additional.txt"),
-            "GB13132_additional.txt",
+            parsers.parse_file_format("Custom/GB13132_approximate.txt"),
+            "GB13132_approximate.txt",
         ),
     ], "GB13132.json"))
 _irgn2376gb5 = graphdata.gsets["gb13132"][2]
@@ -498,9 +407,9 @@ graphdata.gsets["gb13132/draft"] = (94, 2, (
     (0x8575,),
     *_irgn2376gb5[6860:6879],
     *_irgn2376gb5[6880:]))
+
 graphdata.gsets["gb7590"] = gb7590 = (94, 2, parsers.fuse([
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-18alpha.txt", "kIRG_GSource", "G4", transformfirst=g_source_conversion),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-17.txt", "kIRG_GSource", "G4", transformfirst=g_source_conversion),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources.txt", "kIRG_GSource", "G4", transformfirst=g_source_conversion),
         parsers.decode_main_plane_gl(
             parsers.parse_file_format("Custom/GB7590.txt"),
             "GB7590.txt",
@@ -520,11 +429,7 @@ graphdata.gsets["gb7590/gb13132-draft-homologue"] = (94, 2, (
 #     U+809E at 40-50
 #     U+891D at 44-23
 gb16500_strict = parsers.fuse([
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-18alpha.txt", "kIRG_GSource", "GE"),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-17.txt", "kIRG_GSource", "GE"),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "GE"),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_GSource", "GE"),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "GE"),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources.txt", "kIRG_GSource", "GE"),
         parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "GE"),
         (None,) * ((94 * 31) + 28) + ((0x6FF9,),),
         (None,) * ((94 * 39) + 49) + ((0x809E,),),
@@ -554,17 +459,7 @@ graphdata.gsets["gb16500"] = (94, 2, parsers.fuse([
 # As noted in IRGN2808, this will be replaced in future Unicode versions.
 # https://www.unicode.org/irg/docs/n2788-GSourceIssues.pdf#page=4
 # https://www.unicode.org/irg/docs/n2808-GSourceChanges.pdf
-graphdata.gsets["the-old-other-gb7"] = (94, 2, parsers.fuse([
-        # For reasons noted above, do not add post-Unicode-16 Unihan database versions here.
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-16.txt", "kIRG_GSource", "G7"),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-15.txt", "kIRG_GSource", "G7"),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-14.txt", "kIRG_GSource", "G7"),
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "G7"),
-        parsers.read_unihan_planes("UCD/Unihan_OtherMappings-16.txt", "kGB7", kutenform=True),
-        parsers.read_unihan_planes("UCD/Unihan_OtherMappings-15.txt", "kGB7", kutenform=True),
-        parsers.read_unihan_planes("UCD/Unihan_OtherMappings-14.txt", "kGB7", kutenform=True),
-        parsers.read_unihan_planes("UCD/Unihan_OtherMappings-13.txt", "kGB7", kutenform=True),
-    ], "the-old-other-GB7.json"))
+graphdata.gsets["the-old-other-gb7"] = (94, 2, parsers.read_unihan_planes("UCD/Unihan_IRGSources-13.txt", "kIRG_GSource", "G7"))
 
 # A replacement / redefinition of the "G7" Unihan source based on directly converting the numbered
 #   repertoire of the characters from "Data Statistics Table of Hanzi not included in GB 2312",
@@ -572,8 +467,7 @@ graphdata.gsets["the-old-other-gb7"] = (94, 2, parsers.fuse([
 #   in row 16.
 # See: https://www.unicode.org/irg/docs/n2808-GSourceChanges.pdf
 graphdata.gsets["the-new-other-gb7"] = (94, 2, parsers.fuse([
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-18alpha.txt", "kIRG_GSource", "G7"),
-        (),
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources.txt", "kIRG_GSource", "G7"),
         parsers.decode_main_plane_gl(
             parsers.parse_file_format("Custom/irgn2808a.txt"), "irgn2808a.txt"),
     ], "the-new-other-GB7.json"))
@@ -744,8 +638,7 @@ sjt_amendments = [
 ]
 
 graphdata.gsets["sj11239/babelstonehan"] = (94, 2, parsers.fuse([
-    parsers.read_unihan_planes("UCD/Unihan_IRGSources-18alpha.txt", "kIRG_GSource", "GSJT", transformfirst=g_source_conversion),
-    parsers.read_unihan_planes("UCD/Unihan_IRGSources-17.txt", "kIRG_GSource", "GSJT", transformfirst=g_source_conversion),
+    parsers.read_unihan_planes("UCD/Unihan_IRGSources.txt", "kIRG_GSource", "GSJT", transformfirst=g_source_conversion),
     *sjt_amendments,
     parsers.decode_main_plane_whatwg(
         parsers.parse_sjt11239_mapping_file("BabelStone/SJT-IDS.TXT"),
@@ -753,8 +646,7 @@ graphdata.gsets["sj11239/babelstonehan"] = (94, 2, parsers.fuse([
         mapper=babelstone_update_map)], "SJ-11239-BabelStoneHan.json"))
 
 graphdata.gsets["sj11239"] = (94, 2, parsers.fuse([
-    parsers.read_unihan_planes("UCD/Unihan_IRGSources-18alpha.txt", "kIRG_GSource", "GSJT", transformfirst=g_source_conversion),
-    parsers.read_unihan_planes("UCD/Unihan_IRGSources-17.txt", "kIRG_GSource", "GSJT", transformfirst=g_source_conversion),
+    parsers.read_unihan_planes("UCD/Unihan_IRGSources.txt", "kIRG_GSource", "GSJT", transformfirst=g_source_conversion),
     *sjt_amendments,
     parsers.decode_main_plane_whatwg(
         parsers.parse_sjt11239_mapping_file("BabelStone/SJT-IDS.TXT",

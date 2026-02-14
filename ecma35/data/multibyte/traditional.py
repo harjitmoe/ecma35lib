@@ -210,7 +210,7 @@ for _i in range(1, 20):
     cns_unihan_amended_parts.append(
         (None,) * (94 * 94 * (_i - 1)) + 
         parsers.read_unihan_planes(
-            "UCD/Unihan_IRGSources-18alpha.txt", "kIRG_TSource", f"T{_i:X}",
+            "UCD/Unihan_IRGSources.txt", "kIRG_TSource", f"T{_i:X}",
             mapper=cnsmapper_contrabadcjkb))
 cns_unihan_amended = parsers.fuse(cns_unihan_amended_parts, "Unihan-CNS-11643-Amended.json")
 
@@ -218,7 +218,7 @@ cns_unihan_parts = []
 for _i in range(1, 20):
     cns_unihan_parts.append(
         (None,) * (94 * 94 * (_i - 1)) + 
-        parsers.read_unihan_planes("UCD/Unihan_IRGSources-18alpha.txt", "kIRG_TSource", f"T{_i:X}"))
+        parsers.read_unihan_planes("UCD/Unihan_IRGSources.txt", "kIRG_TSource", f"T{_i:X}"))
 cns_unihan = parsers.fuse(cns_unihan_parts, "Unihan-CNS-11643.json")
 
 irgn2779_amendments = parsers.decode_main_plane_gl(
@@ -839,7 +839,7 @@ graphdata.gsets["big5exts/monotype"] = (94, 2, parsers.fuse([
 #   point and is therefore not referenced (the LoC mapping also includes non-kanji).
 # I'm treating kCCCII as the best source for CCCII insofar as it covers.
 
-cccii_unihan = parsers.read_unihan_planes("UCD/Unihan_OtherMappings-18alpha.txt", "kCCCII", set96=True)
+cccii_unihan = parsers.read_unihan_planes("UCD/Unihan_OtherMappings.txt", "kCCCII", set96=True)
 graphdata.gsets["cccii/eacc/loc"] = (96, 3, parsers.decode_main_plane_gl(
     parsers.parse_file_format("LoC/eacc2uni.txt", libcongress=True),
     "eacc2uni.txt",
