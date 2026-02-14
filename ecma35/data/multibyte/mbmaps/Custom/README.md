@@ -7,7 +7,10 @@ itself:
 > License, v. 2.0. If a copy of the MPL was not distributed with this
 > file, You can obtain one at https://mozilla.org/MPL/2.0/
 
-I have linked the file `GB13132_additional.txt` [from Unicode Public Review Issue
+I have linked the file `GB13132_additional.txt` (which has since been removed from this directory,
+but is present in [previous Git
+revisions](https://gitlab.com/harjitmoe/ecma35lib/-/commits/7e3a935d/ecma35/data/multibyte/mbmaps/Custom/GB13132_additional.txt)&rpar;
+[from Unicode Public Review Issue
 feedback](https://www.unicode.org/review/pri508/feedback.html#ID20250130151942).&ensp; For the
 avoidance of doubt, the above terms are not intended to replace, override nor affect the scope of
 the [Unicode Consortium Notice of Intellectual Property
