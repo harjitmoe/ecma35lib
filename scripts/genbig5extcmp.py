@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020, 2021, 2023, 2024, 2025.
+# By HarJIT in 2020, 2021, 2023, 2024, 2025, 2026.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -44,7 +44,7 @@ def _bar():
             yield i
 blendy = tuple(_bar())
 
-plane1 = (1, ("UTC <br/>BIG5.TXT", "Microsoft <br/>MS-950", "Python <br/>\"MS-950\"", "IBM <br/>IBM-950", "CNS Big5 <br/>Big5-2003", "CNS Big5 <br/>Big5-Plus", "CNS Big5 <br/>Big5-E", "ETEN", "HKSCS <br/>GCCS", "HKSCS <br/>1999", "HKSCS <br/>2001", "HKSCS <br/>2004", "HKSCS <br/>WHATWG", "HKSCS <br/>Updated", "WHATWG <br/>Encoder", "ChinaSea <br/>Core Subset", "ChinaSea <br/>Gothic", "ChinaSea <br/>At-On 2.41", "ChinaSea <br/>At-On 2.50", "Dynalab <br/>Ext. A", "Dynalab <br/>Ext. B", "Monotype <br/>Extensions"), [
+plane1 = (1, ("UTC <br/>BIG5.TXT", "Microsoft <br/>MS-950", "Python <br/>\"MS-950\"", "IBM <br/>IBM-950", "CNS Big5 <br/>Big5-2003", "CNS Big5 <br/>Big5-Plus", "CNS Big5 <br/>Big5-E", "ETEN", "HKSCS <br/>GCCS", "HKSCS <br/>DoJ GCCS", "HKSCS <br/>1999", "HKSCS <br/>2001", "HKSCS <br/>2004", "HKSCS <br/>WHATWG", "HKSCS <br/>Updated", "WHATWG <br/>Encoder", "ChinaSea <br/>Core Subset", "ChinaSea <br/>Gothic", "ChinaSea <br/>At-On 2.41", "ChinaSea <br/>At-On 2.50", "Dynalab <br/>Ext. A", "Dynalab <br/>Ext. B", "Monotype <br/>Extensions"), [
           graphdata.gsets["big5exts/utc"][2],
           graphdata.gsets["big5exts/ms"][2],
           pseudomicrosoft,
@@ -54,6 +54,7 @@ plane1 = (1, ("UTC <br/>BIG5.TXT", "Microsoft <br/>MS-950", "Python <br/>\"MS-95
           graphdata.gsets["big5exts/big5e"][2],
           tuple(_foo("ETEN", graphdata.gsets["big5exts/eten"][2])),
           graphdata.gsets["big5exts/eten/hkscs/gccs"][2],
+          graphdata.gsets["big5exts/eten/hkscs/gccs/ext"][2],
           tuple(_foo("HKSCS <br/>1999", graphdata.gsets["big5exts/eten/hkscs/1999"][2])),
           tuple(_foo("HKSCS <br/>2001", graphdata.gsets["big5exts/eten/hkscs/2001"][2])),
           graphdata.gsets["big5exts/eten/hkscs/2004"][2],

@@ -551,7 +551,7 @@ g94nbytes = {tuple(b"@"): ("ir042/nec", ("ir042/ibm", "ir042/nec", "ir042/1990pi
              tuple(b"!0"): "gb12052",
              # Traditional Chinese off doing its own thing, as you do... no standard escapes here.
              tuple(b"!1"): ("cns-eucg2", ("cns-eucg2/icu/2014/full", "cns-eucg2/ms", "cns-eucg2/mac", "cns-eucg2/govtw/old", "cns-eucg2/icu/old", "cns-eucg2/ibm/full", "cns-eucg2/yasuoka", "cns-eucg2/icu/2014/noplane1", "cns-eucg2/ibm/noplane1", "cns-eucg2/unihan", "cns-eucg2/lax-matching", "cns-eucg2/govtw", "cns-eucg2/semi-lax-matching"), ("cns-eucg2",)),
-             tuple(b"!2"): ("big5exts/eten/hkscs/updated", ("big5exts/eten/ibm", "big5exts/eten/web"), ("big5exts/ms", "big5exts/eten/2003", "big5exts/eten", "big5exts/eten/hkscs/gccs", "big5exts/eten/hkscs/1999", "big5exts/eten/hkscs/2001", "big5exts/eten/hkscs/2004", "big5exts/eten/hkscs", "big5exts/eten/hkscs/updated")),
+             tuple(b"!2"): ("big5exts/eten/hkscs/updated", ("big5exts/eten/ibm", "big5exts/eten/web", "big5exts/eten/hkscs/gccs/ext"), ("big5exts/ms", "big5exts/eten/2003", "big5exts/eten", "big5exts/eten/hkscs/gccs", "big5exts/eten/hkscs/1999", "big5exts/eten/hkscs/2001", "big5exts/eten/hkscs/2004", "big5exts/eten/hkscs", "big5exts/eten/hkscs/updated")),
              tuple(b"!3"): ("big5exts/utc/ms", (), ("big5exts/utc", "big5exts/utc/ms")),
              # Shift_JIS extensions for IBM/Windows/HTML5 and for cellular emoji
              tuple(b"!4"): ("sjisext/ibm/pua", ("sjisext/ibm/old",), ("sjisext/ibm", "sjisext/ibm/pua")),

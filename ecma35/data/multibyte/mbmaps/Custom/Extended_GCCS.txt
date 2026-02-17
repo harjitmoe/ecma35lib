@@ -1,0 +1,31 @@
+# Big5 codepoints from the Hong Kong Department of Judiciary extension to GCCS (which uses Big5
+#   codepoints 0x8A40…0x8AE5, 0x8B41…0x8B42, 0x8B45, 0x8B47, 0x8B49, 0x8B4B, 0x8B4D…0x8B50,
+#   0x8B54, 0x8B58 and 0x8B5A in addition to those used by GCCS, and is covered by
+#   CIDs 17160 thru 17304 in Adobe-CNS1) which were not retained as-is in HKSCS,
+#   with Unicode mappings.
+
+0x8A40 U+20C9C
+0x8A42 U+32582
+0x8A4D U+25299
+0x8A5A U+2BAB3
+0x8A5E U+356D
+0x8A63 U+92BC
+0x8A71 U+24674
+0x8A75 U+2BCD7
+0x8A77 U+325E7
+0x8A7A U+3A03
+0x8A7E U+2B977
+0x8AA8 U+810C
+0x8AAB U+317EA
+0x8AB1 U+7CDD
+0x8AB6 U+8EED
+0x8AB8 U+22E51+F87F
+0x8ABA U+80D7
+0x8AC8 U+9DC2
+0x8ACC U+2C5F8
+0x8ACD U+6409
+0x8AD6 U+35A5
+0x8AD7 U+22DA4
+0x8ADD U+2C9A0
+0x8ADE U+20BA8
+0x8B54 U+54DA

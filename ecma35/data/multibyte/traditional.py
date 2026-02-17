@@ -749,7 +749,7 @@ graphdata.gsets["big5exts/eten/chinasea/aton"] = (94, 2, parsers.decode_extra_pl
 graphdata.gsets["big5exts/big5e"] = (94, 2, parsers.decode_extra_plane_big5(
     parsers.parse_file_format("Mozilla/big5e.txt"),
     "big5e.txt"))
-graphdata.gsets["big5exts/eten/hkscs/updated"] = hkscs_extras = (94, 2, parsers.fuse([
+_hkscs_extras = parsers.fuse([
     parsers.decode_extra_plane_big5(
         parsers.parse_file_format("WHATWG/index-big5.txt"),
         "index-big5_updated.txt",
@@ -757,15 +757,17 @@ graphdata.gsets["big5exts/eten/hkscs/updated"] = hkscs_extras = (94, 2, parsers.
     parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Mozilla/hkscs2004.txt", moz2004=True),
         "hkscs2004.txt"),
-], "BIG5-HKSCS2008-updated.json"))
-graphdata.gsets["big5exts/eten/hkscs"] = hkscs_extras = (94, 2, parsers.fuse([
+], "BIG5-HKSCS2008-updated.json")
+graphdata.gsets["big5exts/eten/hkscs/updated"] = (94, 2, _hkscs_extras)
+_web_hkscs_extras = parsers.fuse([
     parsers.decode_extra_plane_big5(
         parsers.parse_file_format("WHATWG/index-big5.txt"),
         "index-big5.txt"), 
     parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Mozilla/hkscs2004.txt", moz2004=True),
         "hkscs2004.txt"),
-], "BIG5-HKSCS2008.json"))
+], "BIG5-HKSCS2008.json")
+graphdata.gsets["big5exts/eten/hkscs"] = (94, 2, _web_hkscs_extras)
 graphdata.gsets["big5exts/eten/hkscs/2004"] = (94, 2, parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Mozilla/hkscs2004.txt", moz2004=True),
         "hkscs2004.txt"))
@@ -775,14 +777,42 @@ graphdata.gsets["big5exts/eten/hkscs/2001"] = (94, 2, parsers.decode_extra_plane
 graphdata.gsets["big5exts/eten/hkscs/1999"] = (94, 2, parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Mozilla/hkscs1999.txt", skipstring="<reserved>"),
         "hkscs1999.txt-skipreserved"))
-graphdata.gsets["big5exts/eten/hkscs/gccs"] = (94, 2, parsers.decode_extra_plane_big5(
+_gccs = parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Mozilla/gccs.txt"),
-        "gccs.txt"))
+        "gccs.txt")
+graphdata.gsets["big5exts/eten/hkscs/gccs"] = (94, 2, _gccs)
+graphdata.gsets["big5exts/eten/hkscs/gccs/ext"] = (94, 2, parsers.fuse([
+    parsers.decode_extra_plane_big5(
+        parsers.parse_file_format("Custom/Extended_GCCS.txt"),
+        "Extended_GCCS.txt"),
+    _gccs,
+    ((None,) * (18*94)) + _hkscs_extras[(18*94):(19*94)+69],
+    ((None,) * ((20*94)+32)) + (
+        _hkscs_extras[(20*94)+32],
+        _hkscs_extras[(20*94)+33],
+        None, None,
+        _hkscs_extras[(20*94)+36],
+        None,
+        _hkscs_extras[(20*94)+38],
+        None,
+        _hkscs_extras[(20*94)+40],
+        None,
+        _hkscs_extras[(20*94)+42],
+        None,
+        _hkscs_extras[(20*94)+44],
+        _hkscs_extras[(20*94)+45],
+        _hkscs_extras[(20*94)+46],
+        _hkscs_extras[(20*94)+47],
+        None, None, None, None, None, None, None,
+        _hkscs_extras[(20*94)+55],
+        None,
+        _hkscs_extras[(20*94)+57]),
+], "GCCS-Extended.json"))
 
 # ETEN exts, plus the handful of HKSCS ones which follow, rather than preceeding, the standard
 #   assignments. Used by WHATWG's encoder (as opposed to decoder, which is full HKSCS):
 graphdata.gsets["big5exts/eten/web"] = (94, 2, 
-    ((None,) * (32 * 188)) + hkscs_extras[2][(32 * 188):])
+    ((None,) * (32 * 188)) + _web_hkscs_extras[(32 * 188):])
 graphdata.gsets["big5exts/eten"] = (94, 2, parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Mozilla/eten.txt"),
         "eten.txt"))
