@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020/2021/2023/2024.
+# By HarJIT in 2019/2020/2021/2023/2024/2026.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -764,8 +764,10 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
         else:
             print("<span class='cpc spua' lang={}>".format(lang), file=outfile)
             strep = "".join(chr(j) for j in i)
-    elif ((0x10000 <= i[0] < 0x20000) or (0xFE0F in i)) and (0xFE0E not in i):
-        # SMP best to fall back to applicable emoji (or otherwise applicable) fonts,
+    elif ((0x1F300 <= i[0] < 0x1F650)
+          or (0x1F900 <= i[0] < 0x1FB00) 
+          or (0xFE0F in i)) and (0xFE0E not in i):
+        # Probable emoji: best to fall back to applicable emoji fonts,
         # and not try to push CJK fonts first.
         print("<span class='cpc smp' lang={}>".format(lang), file=outfile)
         strep = "".join(chr(j) for j in i)
