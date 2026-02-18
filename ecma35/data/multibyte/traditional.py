@@ -757,6 +757,16 @@ _hkscs_extras = parsers.fuse([
     parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Mozilla/hkscs2004.txt", moz2004=True),
         "hkscs2004.txt"),
+    ((None,) * ((61*94)+12)) + ((0x32562,),),
+    ((None,) * ((61*94)+57)) + ((0x81BA, 0xF87F),),
+    ((None,) * ((61*94)+69)) + ((0x240D2, 0xF87F),),
+    ((None,) * ((61*94)+78)) + ((0x93BA, 0xF87F),),
+    ((None,) * ((62*94)+57)) + ((0x327F2,),),
+    ((None,) * ((62*94)+65)) + ((0x2DF3C,),),
+    ((None,) * ((63*94)+12)) + ((0x7910, 0xF87F),),
+    parsers.decode_extra_plane_big5(
+        parsers.parse_file_format("Custom/Extended_GCCS.txt"),
+        "Extended_GCCS.txt"),
 ], "BIG5-HKSCS2008-updated.json")
 graphdata.gsets["big5exts/eten/hkscs/updated"] = (94, 2, _hkscs_extras)
 _web_hkscs_extras = parsers.fuse([
