@@ -633,6 +633,10 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 0 G*DM4 ! 2`|IBM Big-5 ETEN-based in-plane extensions (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`IRR 1 G*DM4 ! 2`|Big5-ETEN with the subset of GCCS encoded with lead bytes following, not preceeding, the standard Big-5 assignments (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`IRR 2 G*DM4 ! 2`|Hong Kong GCCS extension set with extensions from the Hong Kong Department of Judiciary (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
+|`IRR 3 G*DM4 ! 2`|Hong Kong Supplementary Character Set 1999 extension set, with updated Unicode mappings (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
+|`IRR 4 G*DM4 ! 2`|Hong Kong Supplementary Character Set 2001 extension set, with updated Unicode mappings (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
+|`IRR 5 G*DM4 ! 2`|Hong Kong Supplementary Character Set 2001 extension set, with updated Unicode mappings, with further extensions as implemented by the Sakura font (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
+|`IRR 6 G*DM4 ! 2`|Hong Kong Supplementary Character Set full (GCCS + 2008) extension set, with updated Unicode mappings, with further extensions as implemented by the Sakura font (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`IRR ? G*DM4 ! 3`|Non-ETEN Big5 kana and Cyrillic (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`IRR @ G*DM4 ! 3`|Non-ETEN Big5 kana and Cyrillic (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere) combined with Microsoft non-EUDC extensions, as in Python's built-in `"cp950"` Windows codepage implementation.|
 |`IRR ? G*DM4 ! 4`|IBM extensions for Shift\_JIS (accepted by Shift\_JIS filter in G3 slot, mapped to/from Shift\_JIS by the same mapping scheme as JIS X 0213 plane 2); excluding UDC|

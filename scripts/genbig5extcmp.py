@@ -44,7 +44,7 @@ def _bar():
             yield i
 blendy = tuple(_bar())
 
-plane1 = (1, ("UTC <br/>BIG5.TXT", "Microsoft <br/>MS-950", "Python <br/>\"MS-950\"", "IBM <br/>IBM-950", "CNS Big5 <br/>Big5-2003", "CNS Big5 <br/>Big5-Plus", "CNS Big5 <br/>Big5-E", "ETEN", "HKSCS <br/>GCCS", "HKSCS <br/>DoJ GCCS", "HKSCS <br/>1999", "HKSCS <br/>2001", "HKSCS <br/>2004", "HKSCS <br/>WHATWG", "HKSCS <br/>Updated", "WHATWG <br/>Encoder", "ChinaSea <br/>Core Subset", "ChinaSea <br/>Gothic", "ChinaSea <br/>At-On 2.41", "ChinaSea <br/>At-On 2.50", "Dynalab <br/>Ext. A", "Dynalab <br/>Ext. B", "Monotype <br/>Extensions"), [
+plane1 = (1, ("UTC <br/>BIG5.TXT", "Microsoft <br/>MS-950", "Python <br/>\"MS-950\"", "IBM <br/>IBM-950", "CNS Big5 <br/>Big5-2003", "CNS Big5 <br/>Big5-Plus", "CNS Big5 <br/>Big5-E", "ETEN", "HKSCS <br/>GCCS", "HKSCS <br/>DoJ GCCS", "HKSCS <br/>1999", "HKSCS <br/>2001", "HKSCS <br/>Sakura", "HKSCS <br/>2004", "HKSCS <br/>WHATWG", "HKSCS <br/>Updated", "HKSCS <br/>Maximal", "WHATWG <br/>Encoder", "ChinaSea <br/>Core Subset", "ChinaSea <br/>Gothic", "ChinaSea <br/>At-On 2.41", "ChinaSea <br/>At-On 2.50", "Dynalab <br/>Ext. A", "Dynalab <br/>Ext. B", "Monotype <br/>Extensions"), [
           graphdata.gsets["big5exts/utc"][2],
           graphdata.gsets["big5exts/ms"][2],
           pseudomicrosoft,
@@ -57,9 +57,11 @@ plane1 = (1, ("UTC <br/>BIG5.TXT", "Microsoft <br/>MS-950", "Python <br/>\"MS-95
           tuple(_foo("HKSCS <br/>DoJ GCCS", graphdata.gsets["big5exts/eten/hkscs/gccs/ext"][2])),
           tuple(_foo("HKSCS <br/>1999", graphdata.gsets["big5exts/eten/hkscs/1999"][2])),
           tuple(_foo("HKSCS <br/>2001", graphdata.gsets["big5exts/eten/hkscs/2001"][2])),
+          graphdata.gsets["big5exts/eten/hkscs/2001/sakura"][2],
           graphdata.gsets["big5exts/eten/hkscs/2004"][2],
           graphdata.gsets["big5exts/eten/hkscs"][2],
           graphdata.gsets["big5exts/eten/hkscs/updated"][2],
+          graphdata.gsets["big5exts/eten/hkscs/sakura"][2],
           blendy,
           graphdata.gsets["big5exts/eten/chinasea/core"][2],
           graphdata.gsets["big5exts/eten/chinasea/gothic"][2],

@@ -789,6 +789,18 @@ def fuse(arrays, filename):
     else:
         return LazyJSON(filename)
 
+def cut_out(ranges_source, ucs_source, filename):
+    if not os.path.exists(os.path.join(cachedirectory, filename)):
+        out = []
+        for presence, ucs in zip(ranges_source, ucs_source):
+            out.append(ucs if presence else None)
+        _f = open(os.path.join(cachedirectory, filename), "w")
+        _f.write(json.dumps(out))
+        _f.close()
+        return tuple(out)
+    else:
+        return LazyJSON(filename)
+
 def without_compat(array, filename):
     if not os.path.exists(os.path.join(cachedirectory, filename)):
         out = []

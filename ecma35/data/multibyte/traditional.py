@@ -746,9 +746,11 @@ graphdata.gsets["big5exts/eten/chinasea/aton/old"] = (94, 2, parsers.decode_extr
 graphdata.gsets["big5exts/eten/chinasea/aton"] = (94, 2, parsers.decode_extra_plane_big5(
     parsers.parse_file_format("Mozilla/uao250-b2u.txt"),
     "uao250-b2u.txt"))
+
 graphdata.gsets["big5exts/big5e"] = (94, 2, parsers.decode_extra_plane_big5(
     parsers.parse_file_format("Mozilla/big5e.txt"),
     "big5e.txt"))
+
 _hkscs_extras = parsers.fuse([
     parsers.decode_extra_plane_big5(
         parsers.parse_file_format("WHATWG/index-big5.txt"),
@@ -769,6 +771,7 @@ _hkscs_extras = parsers.fuse([
         "Extended_GCCS.txt"),
 ], "BIG5-HKSCS2008-updated.json")
 graphdata.gsets["big5exts/eten/hkscs/updated"] = (94, 2, _hkscs_extras)
+
 _web_hkscs_extras = parsers.fuse([
     parsers.decode_extra_plane_big5(
         parsers.parse_file_format("WHATWG/index-big5.txt"),
@@ -778,15 +781,42 @@ _web_hkscs_extras = parsers.fuse([
         "hkscs2004.txt"),
 ], "BIG5-HKSCS2008.json")
 graphdata.gsets["big5exts/eten/hkscs"] = (94, 2, _web_hkscs_extras)
+
 graphdata.gsets["big5exts/eten/hkscs/2004"] = (94, 2, parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Mozilla/hkscs2004.txt", moz2004=True),
         "hkscs2004.txt"))
-graphdata.gsets["big5exts/eten/hkscs/2001"] = (94, 2, parsers.decode_extra_plane_big5(
+
+_hkscs_2001_extras = parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Mozilla/hkscs2001.txt", skipstring="<reserved>"),
-        "hkscs2001.txt-skipreserved"))
-graphdata.gsets["big5exts/eten/hkscs/1999"] = (94, 2, parsers.decode_extra_plane_big5(
+        "hkscs2001.txt-skipreserved")
+graphdata.gsets["big5exts/eten/hkscs/2001"] = (94, 2, _hkscs_2001_extras)
+_hkscs_2001_extras_updated = parsers.cut_out(
+    _hkscs_2001_extras, 
+    _hkscs_extras, 
+    "HKSCS-2001-updated.json")
+graphdata.gsets["big5exts/eten/hkscs/2001/updated"] = (94, 2, _hkscs_2001_extras_updated)
+
+_sakura_extras = parsers.decode_extra_plane_big5(
+    parsers.parse_file_format("Custom/SakuraExtensions.txt"),
+    "SakuraExtensions.txt")
+graphdata.gsets["big5exts/eten/hkscs/2001/sakura"] = (94, 2, parsers.fuse([
+    _sakura_extras,
+    _hkscs_2001_extras_updated,
+], "Big5-HKSCS2001-Sakura.json"))
+graphdata.gsets["big5exts/eten/hkscs/sakura"] = (94, 2, parsers.fuse([
+    _sakura_extras,
+    _hkscs_extras,
+], "Big5-HKSCS-Sakura.json"))
+
+_hkscs_1999_extras = parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Mozilla/hkscs1999.txt", skipstring="<reserved>"),
-        "hkscs1999.txt-skipreserved"))
+        "hkscs1999.txt-skipreserved")
+graphdata.gsets["big5exts/eten/hkscs/1999"] = (94, 2, _hkscs_1999_extras)
+graphdata.gsets["big5exts/eten/hkscs/1999/updated"] = (94, 2, parsers.cut_out(
+    _hkscs_1999_extras, 
+    _hkscs_extras, 
+    "HKSCS-1999-updated.json"))
+
 _gccs = parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Mozilla/gccs.txt"),
         "gccs.txt")
