@@ -743,6 +743,9 @@ graphdata.gsets["big5exts/eten/chinasea/gothic"] = (94, 2, parsers.decode_extra_
 graphdata.gsets["big5exts/eten/chinasea/mincho"] = (94, 2, parsers.decode_extra_plane_big5(
     parsers.parse_file_format("Custom/ChinaSea-mincho.txt"),
     "ChinaSea-mincho.txt"))
+graphdata.gsets["big5exts/eten/chinasea/script"] = (94, 2, parsers.decode_extra_plane_big5(
+    parsers.parse_file_format("Custom/ChinaSea-script.txt"),
+    "ChinaSea-script.txt"))
 graphdata.gsets["big5exts/eten/chinasea/aton/old"] = (94, 2, parsers.decode_extra_plane_big5(
     parsers.parse_file_format("Mozilla/uao241-b2u.txt"),
     "uao241-b2u.txt"))

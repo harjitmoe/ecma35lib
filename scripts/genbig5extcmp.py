@@ -44,7 +44,7 @@ def _bar():
             yield i
 blendy = tuple(_bar())
 
-plane1 = (1, ("UTC <br/>BIG5.TXT", "Microsoft <br/>MS-950", "Python <br/>\"MS-950\"", "IBM <br/>IBM-950", "CNS Big5 <br/>Big5-2003", "CNS Big5 <br/>Big5-Plus", "CNS Big5 <br/>Big5-E", "ETEN", "HKSCS <br/>GCCS", "HKSCS <br/>DoJ GCCS", "HKSCS <br/>1999", "HKSCS <br/>2001", "HKSCS <br/>Sakura", "HKSCS <br/>2004", "HKSCS <br/>WHATWG", "HKSCS <br/>Updated", "HKSCS <br/>Maximal", "WHATWG <br/>Encoder", "ChinaSea <br/>Core Subset", "ChinaSea <br/>Gothic", "ChinaSea <br/>Ming", "ChinaSea <br/>At-On 2.41", "ChinaSea <br/>At-On 2.50", "Dynalab <br/>Ext. A", "Dynalab <br/>Ext. B", "Monotype <br/>Extensions"), [
+plane1 = (1, ("UTC <br/>BIG5.TXT", "Microsoft <br/>MS-950", "Python <br/>\"MS-950\"", "IBM <br/>IBM-950", "CNS Big5 <br/>Big5-2003", "CNS Big5 <br/>Big5-Plus", "CNS Big5 <br/>Big5-E", "ETEN", "HKSCS <br/>GCCS", "HKSCS <br/>DoJ GCCS", "HKSCS <br/>1999", "HKSCS <br/>2001", "HKSCS <br/>Sakura", "HKSCS <br/>2004", "HKSCS <br/>WHATWG", "HKSCS <br/>Updated", "HKSCS <br/>Maximal", "WHATWG <br/>Encoder", "ChinaSea <br/>Core Subset", "ChinaSea <br/>Gothic", "ChinaSea <br/>Ming", "ChinaSea <br/>Script", "ChinaSea <br/>At-On 2.41", "ChinaSea <br/>At-On 2.50", "Dynalab <br/>Ext. A", "Dynalab <br/>Ext. B", "Monotype <br/>Extensions"), [
           graphdata.gsets["big5exts/utc"][2],
           graphdata.gsets["big5exts/ms"][2],
           pseudomicrosoft,
@@ -66,6 +66,7 @@ plane1 = (1, ("UTC <br/>BIG5.TXT", "Microsoft <br/>MS-950", "Python <br/>\"MS-95
           graphdata.gsets["big5exts/eten/chinasea/core"][2],
           graphdata.gsets["big5exts/eten/chinasea/gothic"][2],
           graphdata.gsets["big5exts/eten/chinasea/mincho"][2],
+          graphdata.gsets["big5exts/eten/chinasea/script"][2],
           graphdata.gsets["big5exts/eten/chinasea/aton/old"][2],
           graphdata.gsets["big5exts/eten/chinasea/aton"][2],
           traditional.dynalab_a,
