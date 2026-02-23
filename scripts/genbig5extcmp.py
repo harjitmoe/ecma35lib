@@ -80,6 +80,31 @@ plane2 = (2, ("IBM <br/>IBM-950", "CNS Big5 <br/>Big5-Plus"), [
           graphdata.gsets["big5additional/plus"][2],
 ])
 
+hkscs = (1, ("ETEN", "HKSCS <br/>GCCS", "HKSCS <br/>DoJ GCCS", "HKSCS <br/>1999", "HKSCS <br/>2001", "HKSCS <br/>Sakura", "HKSCS <br/>2004", "HKSCS <br/>WHATWG", "HKSCS <br/>Updated", "HKSCS <br/>Maximal", "WHATWG <br/>Encoder"), [
+          tuple(_foo("ETEN", graphdata.gsets["big5exts/eten"][2])),
+          tuple(_foo("HKSCS <br/>GCCS", graphdata.gsets["big5exts/eten/hkscs/gccs"][2])),
+          tuple(_foo("HKSCS <br/>DoJ GCCS", graphdata.gsets["big5exts/eten/hkscs/gccs/ext"][2])),
+          tuple(_foo("HKSCS <br/>1999", graphdata.gsets["big5exts/eten/hkscs/1999"][2])),
+          tuple(_foo("HKSCS <br/>2001", graphdata.gsets["big5exts/eten/hkscs/2001"][2])),
+          graphdata.gsets["big5exts/eten/hkscs/2001/sakura"][2],
+          graphdata.gsets["big5exts/eten/hkscs/2004"][2],
+          graphdata.gsets["big5exts/eten/hkscs"][2],
+          graphdata.gsets["big5exts/eten/hkscs/updated"][2],
+          graphdata.gsets["big5exts/eten/hkscs/sakura"][2],
+          blendy,
+])
+
+chinasea = (1, ("ETEN", "ChinaSea <br/>Core Subset", "ChinaSea <br/>Gothic", "ChinaSea <br/>Ming", "ChinaSea <br/>Script", "ChinaSea <br/>Fangsong", "ChinaSea <br/>At-On 2.41", "ChinaSea <br/>At-On 2.50"), [
+          tuple(_foo("ETEN", graphdata.gsets["big5exts/eten"][2])),
+          graphdata.gsets["big5exts/eten/chinasea/core"][2],
+          graphdata.gsets["big5exts/eten/chinasea/gothic"][2],
+          graphdata.gsets["big5exts/eten/chinasea/mincho"][2],
+          graphdata.gsets["big5exts/eten/chinasea/script"][2],
+          graphdata.gsets["big5exts/eten/chinasea/fangsong"][2],
+          graphdata.gsets["big5exts/eten/chinasea/aton/old"][2],
+          graphdata.gsets["big5exts/eten/chinasea/aton"][2],
+])
+
 def planefunc(number, mapname=None):
     if mapname is None:
         return "Big5 extension set number {0:d}".format(number)
@@ -152,6 +177,29 @@ for p in [plane1, plane2]:
             nexturl = "cnsplane3a.html"
             nextname = "CNS 11643 plane 3, part 1"
         showgraph.dump_plane(f, planefunc, kutenfunc, *p, lang="zh-HK", part=q, css="../css/codechart.css",
+                             menuurl="/cns-conc.html", menuname="CNS 11643 and Big5 comparison tables",
+                             lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
+                             annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True, blot=blot,
+                             pua_collides=False, big5ext_mode=bn, siglum="CNS")
+        f.close()
+
+for d, t, p in [("hk", "HKSCS Big5 extensions", hkscs), ("cs", "ChinaSea Big5 extensions", chinasea)]:
+    for q in range(1, 7):
+        bn = p[0]
+        f = open("{}plane{:X}{}.html".format(d, bn, chr(0x60 + q)), "w", encoding="utf-8")
+        lasturl = lastname = nexturl = nextname = None
+        if q > 1:
+            lasturl = "{}plane{:X}{}.html".format(d, bn, chr(0x60 + q - 1))
+            lastname = "{0}, part {1:d}".format(t, q - 1)
+        else:
+            lasturl = lastname = None
+        if q < 6:
+            nexturl = "{}plane{:X}{}.html".format(d, bn, chr(0x60 + q + 1))
+            nextname = "{0}, part {1:d}".format(t, q + 1)
+        else:
+            nexturl = nextname = None
+        showgraph.dump_plane(f, (lambda a, b=None: t if b is None else ""), kutenfunc, *p,
+                             lang="zh-HK", part=q, css="../css/codechart.css",
                              menuurl="/cns-conc.html", menuname="CNS 11643 and Big5 comparison tables",
                              lasturl=lasturl, lastname=lastname, nexturl=nexturl, nextname=nextname,
                              annots=annots, cdispmap=cdispmap, selfhandledanchorlink=True, blot=blot,
