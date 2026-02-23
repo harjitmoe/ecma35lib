@@ -569,7 +569,7 @@ g94nbytes = {tuple(b"@"): ("ir042/nec", ("ir042/ibm", "ir042/nec", "ir042/1990pi
              tuple(b"!="): "ksx1002",
              tuple(b"!>"): "ksx1027_1",
              tuple(b"!?"): "ksx1027_2",
-             tuple(b"\"0"): ("big5exts/eten/chinasea/aton/old", ("big5exts/eten/chinasea/aton", "big5exts/eten/chinasea/core", "big5exts/eten/chinasea/gothic", "big5exts/eten/chinasea/mincho", "big5exts/eten/chinasea/script"), ("big5exts/eten/chinasea/aton/old",)),
+             tuple(b"\"0"): ("big5exts/eten/chinasea/aton/old", ("big5exts/eten/chinasea/aton", "big5exts/eten/chinasea/core", "big5exts/eten/chinasea/gothic", "big5exts/eten/chinasea/mincho", "big5exts/eten/chinasea/script", "big5exts/eten/chinasea/fangsong"), ("big5exts/eten/chinasea/aton/old",)),
              tuple(b"\"1"): ("oldibmkorea", ("oldibmkorea/withcorppua",), ("oldibmkorea/excavated", "oldibmkorea")),
              tuple(b"\"2"): ("gb16500/ext", ("the-old-other-gb7", "gb16500"), ("gb16500/strict", "gb16500/ext")),
              tuple(b"\"3"): "big5exts/dynalab",

@@ -673,6 +673,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 2 G*DM4 " 0`|Big5 ChinaSea extensions (for Big-5 filter's G3 slot), 黑體 variant|
 |`IRR 3 G*DM4 " 0`|Big5 ChinaSea extensions (for Big-5 filter's G3 slot), 明朝體 variant|
 |`IRR 4 G*DM4 " 0`|Big5 ChinaSea extensions (for Big-5 filter's G3 slot), 楷書體 variant|
+|`IRR 5 G*DM4 " 0`|Big5 ChinaSea extensions (for Big-5 filter's G3 slot), 仿宋體 variant|
 |`IRR ? G*DM4 " 1`|IBM-926 (IBM-944)'s 94×94 plane (not KS X 1001 compatible for the most part).&ensp;No DOCS filter exists for it yet though.&ensp;Reconstructed original version.|
 |`IRR @ G*DM4 " 1`|IBM-926 (IBM-944)'s 94×94 plane (not KS X 1001 compatible for the most part).&ensp;No DOCS filter exists for it yet though.|
 |`IRR 0 G*DM4 " 1`|IBM-926 (IBM-944)'s 94×94 plane (not KS X 1001 compatible for the most part).&ensp;No DOCS filter exists for it yet though.&ensp;IBM mappings including corporate PUA.|
