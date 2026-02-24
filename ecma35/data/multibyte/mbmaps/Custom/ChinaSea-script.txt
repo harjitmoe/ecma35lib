@@ -1,5 +1,9 @@
 # Unicode equivalents for the 楷書體 variant of the ChinaSea Big-5 extension set.
 
+0x81D0 U+25A1 # □
+0x81D1 U+25A1 # □
+0x81D2 U+25A1 # □
+0x81D3 U+25A1 # □
 0x8340 U+5E7A # 幺
 0x8341 U+6C10 # 氐
 0x8342 U+53CE # 収
@@ -2886,7 +2890,7 @@
 0x96AB U+8148 # 腈
 0x96AC U+2E325 # 𮌥
 0x96AD U+4436 # 䐶
-0x96AE U+43E1 # 䏡
+0x96AE U+8159 # 腙
 0x96AF U+809F # 肟
 0x96B0 U+20BE4 # 𠯤
 0x96BC U+84BD # 蒽
@@ -4302,7 +4306,7 @@
 0xA0A4 U+8FCC # 迌
 0xA0A5 U+201FA # 𠇺
 0xA0A6 U+EE5F # 
-0xA0A7 U+0391 # Α
+0xA0A7 U+FF21 # Ａ
 0xA0D0 U+F862+005B+5382+5E7F+005D # 
 0xA0D1 U+4E28+20E3 # 丨⃣
 0xA0D2 U+8ECA+20E3 # 車⃣
