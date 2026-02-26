@@ -94,7 +94,7 @@ hkscs = (1, ("ETEN", "HKSCS <br/>GCCS", "HKSCS <br/>DoJ GCCS", "HKSCS <br/>1999"
           blendy,
 ])
 
-chinasea = (1, ("ETEN", "ChinaSea <br/>Core Subset", "ChinaSea <br/>Gothic", "ChinaSea <br/>Ming", "ChinaSea <br/>Script", "ChinaSea <br/>Fangsong", "ChinaSea <br/>At-On 2.41", "ChinaSea <br/>At-On 2.50"), [
+chinasea = (1, ("ETEN", "ChinaSea <br/>Core Subset", "ChinaSea <br/>Gothic", "ChinaSea <br/>Ming", "ChinaSea <br/>Script", "ChinaSea <br/>Fangsong", "ChinaSea <br/>At-On 2.41", "ChinaSea <br/>At-On 2.50", "Subset <br/>Components", "Subset <br/>Ext. Latin", "Subset <br/>Hanzi", "Subset <br/>Hanzi 2", "Subset <br/>Hanzi 3", "Subset <br/>Jamo", "Subset <br/>Kana", "Subset <br/>Keyboard", "Subset <br/>Letterlike", "Subset <br/>List", "Subset <br/>Semigraphics", "Subset <br/>Superscripts", "Subset <br/>Symbols"), [
           tuple(_foo("ETEN", graphdata.gsets["big5exts/eten"][2])),
           graphdata.gsets["big5exts/eten/chinasea/core"][2],
           graphdata.gsets["big5exts/eten/chinasea/gothic"][2],
@@ -103,6 +103,19 @@ chinasea = (1, ("ETEN", "ChinaSea <br/>Core Subset", "ChinaSea <br/>Gothic", "Ch
           graphdata.gsets["big5exts/eten/chinasea/fangsong"][2],
           graphdata.gsets["big5exts/eten/chinasea/aton/old"][2],
           graphdata.gsets["big5exts/eten/chinasea/aton"][2],
+          traditional.subset_components,
+          traditional.subset_extlatin,
+          traditional.subset_hanzi,
+          traditional.subset_hanzi2,
+          traditional.subset_hanzi3,
+          traditional.subset_jamo,
+          traditional.subset_kana,
+          traditional.subset_keyboard,
+          traditional.subset_letterlike,
+          traditional.subset_list,
+          traditional.subset_semigraphics,
+          traditional.subset_superscripts,
+          traditional.subset_symbols,
 ])
 
 def planefunc(number, mapname=None):

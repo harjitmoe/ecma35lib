@@ -1,0 +1,129 @@
+# Unicode equivalents for the CJK components encoding which has portions included in various
+#   variants of the ChinaSea Big-5 extension set.
+
+0x91C7	U+2BA4F	# 𫩏
+0x91C8	U+31F00	# 𱼀
+0x91C9	U+722B	# 爫
+0x91CA	U+5182	# 冂
+0x91CB	U+5196	# 冖
+0x91CC	U+4E37	# 丷
+0x91CD	U+516B	# 八
+0x91CE	U+513F	# 儿
+0x91CF	U+2CEB0	# 𬺰
+0x91D0	U+E556	# (top right of 也)
+0x91D1	U+6729	# 朩
+0x91D2	U+6C3A	# 氺
+0x91D3	U+5382	# 厂
+0x91D4	U+7592	# 疒
+0x91D5	U+8080	# 肀
+0x91D6	U+8864	# 衤
+0x91D7	U+4E06	# 丆
+0x91D8	U+2E84	# ⺄
+0x91D9	U+20089	# 𠂉
+0x91DA	U+E560	# (right hand side of 𰀠)
+0x91DB	U+2E97	# ⺗
+0x91DC	U+52F9	# 勹
+0x91DD	U+5315	# 匕
+0x91DE	U+2021	# ‡
+0x91DF	U+E565	# (龵 without top stroke)
+0x91E0	U+3404	# 㐄
+0x91E1	U+E567	# (first four strokes of 耳)
+0x91E2	U+E568	# (second through fourth strokes of 耳)
+0x91E3	U+9FB7	# 龷
+0x91E4	U+4E31	# 丱
+0x91E5	U+E56B	# (业 without dots)
+0x91E6	U+51F5	# 凵
+0x91E7	U+2010C	# 𠄌
+0x91E8	U+5C6E	# 屮
+0x91E9	U+E56F	# (first stroke of 女)
+0x91EA	U+56D7	# 囗
+0x91EB	U+4EA0	# 亠
+0x91EC	U+51AB	# 冫
+0x91ED	U+2E80	# ⺀
+0x91EE	U+2E84	# ⺄
+0x91F0	U+4E28	# 丨
+0x9CC7	U+5382	# 厂
+0x9CC8	U+5E7F	# 广
+0x9CC9	U+4E28	# 丨
+0x9CCA	U+5E7A	# 幺
+0x9CCB	U+5196	# 冖
+0x9CCC	U+5B80	# 宀
+0x9CCD	U+5369	# 卩
+0x9CCE	U+2E87	# ⺇
+0x9CCF	U+EC14	# (outside of 毋)
+0x9CD0	U+5303	# 匃
+0x9CD1	U+9FB1	# 龱
+0x9CD2	U+8279	# 艹
+0x9CD3	U+4491	# 䒑
+0x9CD4	U+2E8C	# ⺌
+0x9CD5	U+2E8A	# ⺊
+0x9CD6	U+4E36	# 丶
+0x9CD7	U+2B820	# 𫠠
+0x9CD8	U+531A	# 匚
+0x9CD9	U+EC1E	# (𧘇 without top-left dot)
+0x9CDA	U+EC1F	# (outside of ⺕)
+0x9CDB	U+2E95	# ⺕
+0x9CDC	U+4E2A	# 个
+0x9CDD	U+20087	# 𠂇
+0x9CDE	U+200CA	# 𠃊
+0x9CDF	U+4E5A	# 乚
+0x9CE0	U+8FB6	# 辶
+0x9CE1	U+5EF4	# 廴
+0x9CE2	U+5188	# 冈
+0x9CE3	U+4E85	# 亅
+0x9CE4	U+200CC	# 𠃌
+0x9CE5	U+4E3F	# 丿
+0x9CE6	U+2008A	# 𠂊
+0x9CE7	U+4E40	# 乀
+0x9CE8	U+4E5B	# 乛
+0x9CE9	U+53B6	# 厶
+0x9CEA	U+8F66	# 车
+0x9CEB	U+7E9F	# 纟
+0x9CEC	U+8BA0	# 讠
+0x9CED	U+8D1D	# 贝
+0x9CEE	U+9E1F	# 鸟
+0x9CEF	U+95E8	# 门
+0x9CF0	U+9485	# 钅
+0x9CF1	U+961D	# 阝
+0x9CF2	U+624C	# 扌
+0x9CF3	U+6C35	# 氵
+0x9CF4	U+4EBB	# 亻
+0x9CF5	U+5FC4	# 忄
+0x9CF6	U+706C	# 灬
+0x9CF7	U+2EAE	# ⺮
+0x9CF8	U+53E3	# 口
+0xC6BF	U+4E36	# 丶
+0xC6C0	U+4E3F	# 丿
+0xC6C1	U+4E85	# 亅
+0xC6C2	U+4EA0	# 亠
+0xC6C3	U+5182	# 冂
+0xC6C4	U+5196	# 冖
+0xC6C5	U+51AB	# 冫
+0xC6C6	U+52F9	# 勹
+0xC6C7	U+5338	# 匸
+0xC6C8	U+5369	# 卩
+0xC6C9	U+53B6	# 厶
+0xC6CA	U+590A	# 夊
+0xC6CB	U+5B80	# 宀
+0xC6CC	U+5DDB	# 巛
+0xC6CD	U+5E7A	# 幺
+0xC6CE	U+5E7F	# 广
+0xC6CF	U+5EF4	# 廴
+0xC6D0	U+5F50	# 彐
+0xC6D1	U+5F61	# 彡
+0xC6D2	U+6534	# 攴
+0xC6D3	U+65E0	# 无
+0xC6D4	U+7592	# 疒
+0xC6D5	U+7676	# 癶
+0xC6D6	U+8FB5	# 辵
+0xC6D7	U+96B6	# 隶
+0xC879	U+31CF	# ㇏
+0xC87A	U+200CC	# 𠃌
+0xC87B	U+4E5A	# 乚
+0xC87C	U+2008A	# 𠂊
+0xC87D	U+5202	# 刂
+0xC87E	U+4491	# 䒑
+0xC8A1	U+9FB0	# 龰
+0xC8A2	U+5188	# 冈
+0xC8A3	U+9FB1	# 龱
+0xC8A4	U+27607	# 𧘇

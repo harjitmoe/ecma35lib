@@ -1,0 +1,49 @@
+# Unicode equivalents for the letterlike symbols encoding which has portions included in various
+#   variants of the ChinaSea Big-5 extension set.
+
+0x964B	U+F860+004F+2082	# O₂
+0x9652	U+212B	# Å
+0x97FB	U+00AE	# ®
+0x97FC	U+2122	# ™
+0x99FB	U+F861+0028+80A1+0029	# (股)
+0x99FC	U+3232	# ㈲
+0x99FD	U+3231	# ㈱
+0x9CFA	U+4E2D+F87C	# stylised 中 (ChinaSea logo part 1)
+0x9CFB	U+570B+F87C	# stylised 國 (ChinaSea logo part 2)
+0x9CFC	U+6D77+F87C	# stylised 海 (ChinaSea logo part 3)
+0x9DBF	U+2139	# ℹ
+0x9DC1	U+F861+0053+0075+006E	# Sun
+0x9DC2	U+F861+004D+006F+006E	# Mon
+0x9DC3	U+F861+0054+0075+0065	# Tue
+0x9DC4	U+F861+0057+0065+0064	# Wed
+0x9DC5	U+F861+0054+0068+0075	# Thu
+0x9DC6	U+F861+0046+0072+0069	# Fri
+0x9DC7	U+F861+0053+0061+0074	# Sat
+0x9DC8	U+213B	# ℻
+0x9DC9	U+2121	# ℡
+0x9DCF	U+2116	# №
+0x9DE2	U+211E	# ℞
+0x9DE3	U+33C2	# ㏂
+0x9DE4	U+33D8	# ㏘
+0x9DE5	U+33A1	# ㎡
+0x9DE7	U+33A5	# ㎥
+0xA079	U+2202	# ∂
+0xC8D1	U+3231	# ㈱
+0xC8D2	U+2116	# №
+0xC8D3	U+2121	# ℡
+0xFB40	U+F862+9999+6E2F+5B57+96C6	# 香港字集
+0xFEB0	U+00BD	# ½
+0xFEB1	U+2153	# ⅓
+0xFEB2	U+2154	# ⅔
+0xFEB3	U+00BC	# ¼
+0xFEB4	U+00BE	# ¾
+0xFEB5	U+2155	# ⅕
+0xFEB6	U+2156	# ⅖
+0xFEB7	U+2157	# ⅗
+0xFEB8	U+2158	# ⅘
+0xFEB9	U+2159	# ⅙
+0xFEBA	U+215A	# ⅚
+0xFEC1	U+215B	# ⅛
+0xFEC2	U+215C	# ⅜
+0xFEC3	U+215D	# ⅝
+0xFEC4	U+215E	# ⅞

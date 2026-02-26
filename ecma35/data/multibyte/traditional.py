@@ -756,6 +756,46 @@ graphdata.gsets["big5exts/eten/chinasea/aton"] = (94, 2, parsers.decode_extra_pl
     parsers.parse_file_format("Mozilla/uao250-b2u.txt"),
     "uao250-b2u.txt"))
 
+subset_components = parsers.decode_extra_plane_big5(
+    parsers.parse_file_format("Custom/ChinaSea/ChinaSea-subset-components.txt"),
+    "ChinaSea-subset-components.txt")
+subset_extlatin = parsers.decode_extra_plane_big5(
+    parsers.parse_file_format("Custom/ChinaSea/ChinaSea-subset-extlatin.txt"),
+    "ChinaSea-subset-extlatin.txt")
+subset_hanzi = parsers.decode_extra_plane_big5(
+    parsers.parse_file_format("Custom/ChinaSea/ChinaSea-subset-hanzi.txt"),
+    "ChinaSea-subset-hanzi.txt")
+subset_hanzi2 = parsers.decode_extra_plane_big5(
+    parsers.parse_file_format("Custom/ChinaSea/ChinaSea-subset-hanzi2.txt"),
+    "ChinaSea-subset-hanzi2.txt")
+subset_hanzi3 = parsers.decode_extra_plane_big5(
+    parsers.parse_file_format("Custom/ChinaSea/ChinaSea-subset-hanzi3.txt"),
+    "ChinaSea-subset-hanzi3.txt")
+subset_jamo = parsers.decode_extra_plane_big5(
+    parsers.parse_file_format("Custom/ChinaSea/ChinaSea-subset-jamo.txt"),
+    "ChinaSea-subset-jamo.txt")
+subset_kana = parsers.decode_extra_plane_big5(
+    parsers.parse_file_format("Custom/ChinaSea/ChinaSea-subset-kana.txt"),
+    "ChinaSea-subset-kana.txt")
+subset_keyboard = parsers.decode_extra_plane_big5(
+    parsers.parse_file_format("Custom/ChinaSea/ChinaSea-subset-keyboard.txt"),
+    "ChinaSea-subset-keyboard.txt")
+subset_letterlike = parsers.decode_extra_plane_big5(
+    parsers.parse_file_format("Custom/ChinaSea/ChinaSea-subset-letterlike.txt"),
+    "ChinaSea-subset-letterlike.txt")
+subset_list = parsers.decode_extra_plane_big5(
+    parsers.parse_file_format("Custom/ChinaSea/ChinaSea-subset-list.txt"),
+    "ChinaSea-subset-list.txt")
+subset_semigraphics = parsers.decode_extra_plane_big5(
+    parsers.parse_file_format("Custom/ChinaSea/ChinaSea-subset-semigraphics.txt"),
+    "ChinaSea-subset-semigraphics.txt")
+subset_superscripts = parsers.decode_extra_plane_big5(
+    parsers.parse_file_format("Custom/ChinaSea/ChinaSea-subset-superscripts.txt"),
+    "ChinaSea-subset-superscripts.txt")
+subset_symbols = parsers.decode_extra_plane_big5(
+    parsers.parse_file_format("Custom/ChinaSea/ChinaSea-subset-symbols.txt"),
+    "ChinaSea-subset-symbols.txt")
+
 graphdata.gsets["big5exts/big5e"] = (94, 2, parsers.decode_extra_plane_big5(
     parsers.parse_file_format("Mozilla/big5e.txt"),
     "big5e.txt"))
