@@ -760,17 +760,24 @@ subset_components = parsers.decode_extra_plane_big5(
     parsers.parse_file_format("Custom/ChinaSea/ChinaSea-subset-components.txt"),
     "ChinaSea-subset-components.txt")
 subset_extlatin = parsers.decode_extra_plane_big5(
-    parsers.parse_file_format("Custom/ChinaSea/ChinaSea-subset-extlatin.txt"),
-    "ChinaSea-subset-extlatin.txt")
+    parsers.parse_file_format("Custom/ChinaSea/ChinaSea-subset-extlatin-cyrillic.txt"),
+    "ChinaSea-subset-extlatin-cyrillic.txt")
 subset_hanzi = parsers.decode_extra_plane_big5(
     parsers.parse_file_format("Custom/ChinaSea/ChinaSea-subset-hanzi.txt"),
     "ChinaSea-subset-hanzi.txt")
-subset_hanzi2 = parsers.decode_extra_plane_big5(
-    parsers.parse_file_format("Custom/ChinaSea/ChinaSea-subset-hanzi2.txt"),
-    "ChinaSea-subset-hanzi2.txt")
-subset_hanzi3 = parsers.decode_extra_plane_big5(
-    parsers.parse_file_format("Custom/ChinaSea/ChinaSea-subset-hanzi3.txt"),
-    "ChinaSea-subset-hanzi3.txt")
+subset_hanzi2 = parsers.fuse([
+    parsers.decode_extra_plane_big5(
+        parsers.parse_file_format("Custom/ChinaSea/ChinaSea-subset-hanzi2.txt"),
+        "ChinaSea-subset-hanzi2.txt"),
+    ((None, ) * ((81*94)+44)) + ((0x668E,), (0x9341,), (0x243EA,)),
+    subset_hanzi,
+], "ChinaSea-Hanzi-AlternativeOrdering.txt")
+subset_hanzi3 = parsers.fuse([
+    parsers.decode_extra_plane_big5(
+        parsers.parse_file_format("Custom/ChinaSea/ChinaSea-subset-hanzi3.txt"),
+        "ChinaSea-subset-hanzi3.txt"),
+    subset_hanzi,
+], "ChinaSea-Hanzi-UnicodeAtOn.txt")
 subset_jamo = parsers.decode_extra_plane_big5(
     parsers.parse_file_format("Custom/ChinaSea/ChinaSea-subset-jamo.txt"),
     "ChinaSea-subset-jamo.txt")

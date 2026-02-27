@@ -67,3 +67,6 @@
 0xFECA	U+8890	# 袐
 0xFECB	U+88E6	# 裦
 0xFECC	U+88FF	# 裿
+0xFECD	U+8900	# 褀
+0xFECE	U+8924	# 褤
+0xFECF	U+8947	# 襇

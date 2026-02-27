@@ -94,7 +94,7 @@ hkscs = (1, ("ETEN", "HKSCS <br/>GCCS", "HKSCS <br/>DoJ GCCS", "HKSCS <br/>1999"
           blendy,
 ])
 
-chinasea = (1, ("ETEN", "ChinaSea <br/>Core Subset", "ChinaSea <br/>Gothic", "ChinaSea <br/>Ming", "ChinaSea <br/>Script", "ChinaSea <br/>Fangsong", "ChinaSea <br/>At-On 2.41", "ChinaSea <br/>At-On 2.50", "Subset <br/>Components", "Subset <br/>Ext. Latin", "Subset <br/>Hanzi", "Subset <br/>Hanzi 2", "Subset <br/>Hanzi 3", "Subset <br/>Jamo", "Subset <br/>Kana", "Subset <br/>Keyboard", "Subset <br/>Letterlike", "Subset <br/>List", "Subset <br/>Semigraphics", "Subset <br/>Superscripts", "Subset <br/>Symbols"), [
+chinasea = (1, ("ETEN", "ChinaSea <br/>Core Subset", "ChinaSea <br/>Gothic", "ChinaSea <br/>Ming", "ChinaSea <br/>Script", "ChinaSea <br/>Fangsong", "ChinaSea <br/>At-On 2.41", "ChinaSea <br/>At-On 2.50", "Subset <br/>Components", "Latin/Cyrillic <br/>Subset", "Hanzi Subset <br>Gothic ext.", "Hanzi Subset <br/>Alt. Order", "Hanzi Subset <br/>At-On", "Jamo Subset", "Kana Subset", "Keyboard <br/>Subset", "Letterlike <br/>Subset", "List Markers <br/>Subset", "Semigraphics <br/>Subset", "Superscripts <br/>Subset", "Symbols <br/>Subset"), [
           tuple(_foo("ETEN", graphdata.gsets["big5exts/eten"][2])),
           graphdata.gsets["big5exts/eten/chinasea/core"][2],
           graphdata.gsets["big5exts/eten/chinasea/gothic"][2],
