@@ -160,3 +160,4 @@
 0xC8CF	U+FF07	# ＇
 0xC8D0	U+FF02	# ＂
 0xFED9	U+2312	# ⌒
+0xFEE2	U+2030	# ‰
