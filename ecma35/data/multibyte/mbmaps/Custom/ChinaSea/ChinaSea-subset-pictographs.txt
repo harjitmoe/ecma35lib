@@ -1,0 +1,77 @@
+# Unicode equivalents for the pictographs encoding which has portions included in various variants
+#   of the ChinaSea Big-5 extension set.
+
+0x98FB	U+263A	# ☺
+0x98FC	U+263B	# ☻
+0x9D40	U+260E	# ☎
+0x9D4D	U+261E	# ☞
+0x9D4E	U+261C	# ☜
+0x9D4F	U+261D	# ☝
+0x9D50	U+261F	# ☟
+0x9D56	U+1F323	# 🌣
+0x9D57	U+263D	# ☽
+0x9D58	U+2600	# ☀
+0x9D59	U+1F31B	# 🌛
+0x9D5D	U+263A	# ☺
+0x9D5E	U+2639	# ☹
+0x9D5F	U+1F616	# 😖
+0x9D60	U+1F635	# 😵
+0x9D61	U+1F60A	# 😊
+0x9D62	U+1F622	# 😢
+0x9D63	U+1F615	# 😕
+0x9D64	U+1F43C	# 🐼
+0x9D67	U+1F4D6	# 📖
+0x9D68	U+2711	# ✑
+0x9D69	U+1F58A	# 🖊
+0x9D6A	U+1F463	# 👣
+0x9D6B	U+2709	# ✉
+0x9D6C	U+2702	# ✂
+0x9D6D	U+2702+FE0F+200D+2B05+FE0F	# ✂️‍⬅️
+0x9D6E	U+2702+FE0F+200D+2B06+FE0F	# ✂️‍⬆️
+0x9D6F	U+2702+FE0F+200D+2B07+FE0F	# ✂️‍⬇️
+0x9D70	U+269B	# ⚛
+0x9D71	U+1F4BB	# 💻
+0x9D72	U+1F5A8	# 🖨
+0x9D73	U+1F4BE	# 💾
+0x9D74	U+1F5AC	# 🖬
+0x9D75	U+1F5CF	# 🗏
+0x9D76	U+1F4C4	# 📄
+0x9D77	U+274F	# ❏
+0x9D78	U+1F5B1	# 🖱
+0x9D79	U+1F5B3	# 🖳
+0x9D7A	U+EC7E	# (floppy disk drive)
+0x9D7B	U+1F580	# 🖀
+0x9D7C	U+1F3B2	# 🎲
+0x9DA1	U+EC83	# (golf? hockey?)
+0x9DA2	U+EC84	# (football?)
+0x9DA3	U+EC85	# (golf? cricket?)
+0x9DA4	U+1F938	# 🤸
+0x9DA5	U+EC87	# (dodgeball? volleyball? basketball?)
+0x9DA6	U+1F93A	# 🤺
+0x9DA7	U+1F3CB	# 🏋
+0x9DA8	U+1F3C3	# 🏃
+0x9DA9	U+1F6B4	# 🚴
+0x9DAA	U+EC8C	# (pole valuting?)
+0x9DAB	U+1F3F9	# 🏹
+0x9DAC	U+1F94A	# 🥊
+0x9DAD	U+EC8F	# (starjumping?)
+0x9DAE	U+1F3CA	# 🏊
+0x9DAF	U+1F6AE	# 🚮
+0x9DB8	U+263C	# ☼
+0x9DB9	U+26C5	# ⛅
+0x9DBA	U+2601	# ☁
+0x9DBB	U+1F327	# 🌧
+0x9DBC	U+2602	# ☂
+0x9DBD	U+1F3E0	# 🏠
+0x9DBE	U+ECA0	# (silhouette of island of Taiwan?)
+0x9DC0	U+2708	# ✈
+0x9DCB	U+1F4F1	# 📱
+0x9DCC	U+1F6AD	# 🚭
+0x9DD2	U+1F4CA	# 📊
+0x9DD3	U+26A1	# ⚡
+0x9DD4	U+1F511	# 🔑
+0x9DD5	U+2620	# ☠
+0x9DD6	U+1F571	# 🕱
+0x9DEB	U+1F68D	# 🚍
+0x9DEC	U+1F698	# 🚘
+0x9F52	U+1F4B0	# 💰

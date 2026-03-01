@@ -1,7 +1,7 @@
 # Unicode equivalents for the letterlike symbols encoding which has portions included in various
 #   variants of the ChinaSea Big-5 extension set.
 
-0x964B	U+F860+004F+2082	# O₂
+0x964B	U+F862+0055+0075+006E+000A+F861+0031+0031+0031	# "Uun 110"
 0x9652	U+212B	# Å
 0x97FB	U+00AE	# ®
 0x97FC	U+2122	# ™

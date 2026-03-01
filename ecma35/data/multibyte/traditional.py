@@ -771,13 +771,13 @@ subset_hanzi2 = parsers.fuse([
         "ChinaSea-subset-hanzi2.txt"),
     ((None, ) * ((81*94)+44)) + ((0x668E,), (0x9341,), (0x243EA,)),
     subset_hanzi,
-], "ChinaSea-Hanzi-AlternativeOrdering.txt")
+], "ChinaSea-Hanzi-AlternativeOrdering.json")
 subset_hanzi3 = parsers.fuse([
     parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Custom/ChinaSea/ChinaSea-subset-hanzi3.txt"),
         "ChinaSea-subset-hanzi3.txt"),
     subset_hanzi,
-], "ChinaSea-Hanzi-UnicodeAtOn.txt")
+], "ChinaSea-Hanzi-UnicodeAtOn.json")
 subset_jamo = parsers.decode_extra_plane_big5(
     parsers.parse_file_format("Custom/ChinaSea/ChinaSea-subset-jamo.txt"),
     "ChinaSea-subset-jamo.txt")
@@ -802,6 +802,9 @@ subset_superscripts = parsers.decode_extra_plane_big5(
 subset_symbols = parsers.decode_extra_plane_big5(
     parsers.parse_file_format("Custom/ChinaSea/ChinaSea-subset-symbols.txt"),
     "ChinaSea-subset-symbols.txt")
+subset_pictographs = parsers.decode_extra_plane_big5(
+    parsers.parse_file_format("Custom/ChinaSea/ChinaSea-subset-pictographs.txt"),
+    "ChinaSea-subset-pictographs.txt")
 
 graphdata.gsets["big5exts/big5e"] = (94, 2, parsers.decode_extra_plane_big5(
     parsers.parse_file_format("Mozilla/big5e.txt"),
