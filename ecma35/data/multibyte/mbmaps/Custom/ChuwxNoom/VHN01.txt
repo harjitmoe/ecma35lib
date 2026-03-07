@@ -1,4 +1,4 @@
-# "VHN 01:1998" to Unicode mappings compiled from multiple versions of the Unihan database,
+# "VHN 01:1998" to Unicode mappings compiled mainly from multiple versions of the Unihan database,
 #   excluding those for the Compatibility Ideographs Supplement Unicode block.
 0x6E21	U+20028
 0x6E22	U+26271
@@ -807,7 +807,7 @@
 0x766E	U+22BD0
 0x766F	U+22BD3
 0x7670	U+22BD7
-0x7671	U+22B31
+0x7671	U+2BF45
 0x7672	U+22BDC
 0x7673	U+22BDE
 0x7674	U+22BE0

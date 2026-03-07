@@ -1,4 +1,4 @@
-# "VHN 02:1998" to Unicode mappings compiled from multiple versions of the Unihan database.
+# "VHN 02:1998" to Unicode mappings compiled mainly from multiple versions of the Unihan database.
 #
 0x3021	U+2018D
 0x3024	U+5056
@@ -406,7 +406,7 @@
 0x3660	U+2602B
 0x3662	U+2603A
 0x3663	U+7DB4
-0x3664	U+7E06
+0x3664	U+2C5E5
 0x3665	U+260C0
 0x3666	U+7DF2
 0x3668	U+2616E
@@ -440,7 +440,7 @@
 0x3733	U+26A8F
 0x3734	U+82DE
 0x3738	U+8373
-0x3739	U+26BEC
+0x3739	U+837C
 0x373A	U+26C20
 0x373D	U+8409
 0x373E	U+26CB5
