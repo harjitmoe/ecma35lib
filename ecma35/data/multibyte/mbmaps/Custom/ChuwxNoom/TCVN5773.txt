@@ -1,5 +1,5 @@
-# TCVN 5773 to Unicode mappings compiled from multiple versions of the Unihan database,
-#   excluding those for the Compatibility Ideographs Supplement Unicode block.
+# TCVN 5773 to Unicode mappings compiled from multiple versions of the Unihan database combined
+#   with IRGN2429R, excluding those for the Compatibility Ideographs Supplement Unicode block.
 #
 0x3021	U+20126
 0x3022	U+20129
@@ -64,6 +64,7 @@
 0x305D	U+200C5
 0x305E	U+200E9
 0x305F	U+20032
+0x3060	U+16FF1
 0x3061	U+20929
 0x3062	U+20B99
 0x3063	U+53ED
@@ -507,7 +508,7 @@
 0x3545	U+22216
 0x3546	U+223D1
 0x3547	U+2240E
-0x3548	U+4E2A
+0x3548	U+16FF0
 0x3549	U+324D3
 0x354A	U+20034
 0x354B	U+2B833
@@ -515,7 +516,7 @@
 0x354D	U+235F1
 0x354E	U+21B08
 0x354F	U+20027
-0x3550	U+24F38
+0x3550	U+31C79
 0x3551	U+2856D
 0x3552	U+2014D
 0x3553	U+20173
@@ -554,7 +555,7 @@
 0x3575	U+608B
 0x3576	U+327FC
 0x3577	U+60A7
-0x3578	U+3908
+0x3578	U+3908+F87F
 0x3579	U+226B6
 0x357A	U+60CD
 0x357B	U+2271C
