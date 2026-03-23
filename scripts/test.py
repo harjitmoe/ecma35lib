@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019, 2021, 2023, 2025.
+# By HarJIT in 2019, 2021, 2023, 2025, 2026.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -102,6 +102,7 @@ dat = (b"\x1B[m\x1B%G\x1B!F" + teststr.encode("utf-8-sig") + "\x1CJ염盐塩鹽\
        b"\x9B915*p" + test2.encode("iso-8859-5") + b"\x1B%@" +
        b"\x1B\"!2\x90\xA1" + "Ðð".encode("uhc") + b"\n\x1BP!(\")#\x1B\"C\n" +
        b"\x9B20932*p\xB2\xAA\xEC\x3F\n"
+       b"\x1B[993300*p\x60\x6F\x8B\xFFtest\xB2\xAA\xEC\x3F\n"
        b"\x1B%/B\x1B%@HAHA_AS_IF\xA1" # i.e. the last DOCS @ should not switch back.
 )
 

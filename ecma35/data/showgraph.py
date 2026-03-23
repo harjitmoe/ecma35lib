@@ -104,6 +104,8 @@ def reptuple(tpl):
 def _resolve_name(name):
     if isinstance(name, tuple):
         x = name
+    elif name in graphdata.lhses:
+        x = (256, 1, graphdata.lhses[name] + graphdata.rhses.get(name, ()))
     elif name in graphdata.rhses:
         if name in graphdata.c0graphics:
             c0list = graphdata.c0graphics[name]

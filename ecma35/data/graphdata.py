@@ -10,7 +10,7 @@ import sys, os, urllib.parse, json, collections, shutil
 
 __all__ = [
     "codepoint_coverages", "gsets", "g94bytes", "g96bytes", "g94nbytes", "g96nbytes", "sumps",
-    "rhses", "c0graphics", "gsetflags"
+    "lhses", "rhses", "c0graphics", "gsetflags"
 ]
 
 # Although we could just use (x in gsets[foo][2]) to test whether a codepoint is covered by a
@@ -69,6 +69,7 @@ gsets = GrumblingDict("gsets", {"nil": (94, 1, (None,)*94), "Unknown": (94, 1, (
 gsetflags = collections.defaultdict(set)
 
 c0graphics = GrumblingDict("c0graphics")
+lhses = GrumblingDict("lhses")
 rhses = GrumblingDict("rhses")
 defgsets = GrumblingDict("defgsets")
 chcpdocs = GrumblingDict("chcpdocs")
