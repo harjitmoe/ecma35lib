@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019/2020/2025.
+# By HarJIT in 2019/2020/2025/2026.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -427,7 +427,7 @@ c1sets = {# German bibliographic controls used in DIN 31626
                   "COF", # Cursor Off
                   "COL", # Background or Foreground Colour
                   "FLC", # Flashing Control
-                  "CDC", # Concel Display Control
+                  "CDC", # Conceal Display Control
                   None, # Vacant
                   None, # Vacant
                   "P-MACRO", # Photo Macro
@@ -509,7 +509,7 @@ c1sets = {# German bibliographic controls used in DIN 31626
                        "UBS", # Unit Backspace (i.e. partial backspace)
                        "IR", # Index Return (functions as either NL or US; name evokes IND+CR)
                        "PP", # Presentation Position
-                       "TRN", # Transparant (takes len byte (not counting len byte) then raw data)
+                       "TRN", # Transparent (takes len byte (not counting len byte) then raw data)
                        "NBS", # Numeric Backspace (i.e. negative figure-space)
                        "GE", # Graphic Escape (EBCDIC single shift)
                        "SBS", # Subscript (fractional linefeed down, pretty much PLD)
@@ -630,7 +630,7 @@ csiseq = {tuple(b"@"): "ICH", # Insert Character
           tuple(b"["): "SRS", # Start Reversed String
           tuple(b"\\"): "PTX", # Parallel Texts
           tuple(b"]"): "SDS", # Start Directed String
-          # XTerm apparantly treats SIMD as an alternative SD syntax due to errors in the 1991
+          # XTerm apparently treats SIMD as an alternative SD syntax due to errors in the 1991
           # printing of ECMA-48?
           tuple(b"^"): "SIMD", # Select Implicit Movement Direction
           tuple(b"`"): "HPA", # Character [Horizontal] Position Absolute

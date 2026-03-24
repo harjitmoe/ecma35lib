@@ -797,9 +797,9 @@ purposes.&ensp;Specifically:
 |`ESC [ 9 9 6 7 2 0 * p`|Switch to the OT2 (LaTeX 7-bit Cyrillic) encoding.|
 |`ESC [ 9 9 6 7 2 1 * p`|Switch to a combination of ASCII with the OT2 (LaTeX 7-bit Cyrillic) encoding.|
 |`ESC [ 9 9 6 7 3 0 * p`|Switch to the OT3 (LaTeX 7-bit phonetic notation) encoding.|
-|`ESC [ 9 9 6 7 4 0 * p`|Swith to the OT4 (LaTeX Polish) encoding.|
-|`ESC [ 9 9 6 7 4 1 * p`|Swith to the QX (LaTeX Polish, Extended) encoding.|
-|`ESC [ 9 9 6 7 4 2 * p`|Swith to the RM (LaTeX Polish, Extended) encoding.|
+|`ESC [ 9 9 6 7 4 0 * p`|Switch to the OT4 (LaTeX Polish) encoding.|
+|`ESC [ 9 9 6 7 4 1 * p`|Switch to the QX (LaTeX Polish, Extended) encoding.|
+|`ESC [ 9 9 6 7 4 2 * p`|Switch to the RM (LaTeX Polish, Extended) encoding.|
 |`ESC [ 9 9 6 8 1 2 * p`|Switch to the OML (LaTeX Mathematical Letters) encoding.|
 |`ESC [ 9 9 6 8 1 9 * p`|Switch to the OMS (LaTeX Mathematical Symbols) encoding.|
 |`ESC [ 9 9 6 8 2 4 * p`|Switch to the OMX (LaTeX Mathematical Brackets) encoding.|
