@@ -18,8 +18,7 @@ def decode_chcp(stream, state):
                 yield ("ERROR", "UNRECCHCP", token)
                 continue
             elif graphdata.chcpdocs[codepage] != state.docsmode:
-                state.last_docs = state.docsmode
-                yield ("RDOCS", graphdata.chcpdocs[codepage], None, None)
+                yield ("RDOCS", graphdata.chcpdocs[codepage], None, token)
             yield ("CHCP", codepage)
         else:
             yield token

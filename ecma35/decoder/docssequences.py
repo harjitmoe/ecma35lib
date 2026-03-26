@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2023/2025/2026, as a refactor extracting earlier work from various parts of ecma35lib.
+# By HarJIT in 2023/2025/2026, based on various earlier parts of ecma35lib.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -44,59 +44,51 @@ utf32docs = (("DOCS", True, (0x41,)), # Deprecated (UCS-4 level 1)
 rawdocs = ("DOCS", True, (0x42,))
 
 def decode_docs_sequences(stream, state):
-    state.last_docs = "ecma-35"
     for token in stream:
         if token == shiftjisdocs:
-            state.last_docs = state.docsmode
             yield ("RDOCS", "shift_jis", token[1], token[2])
         elif token == uhcdocs:
-            state.last_docs = state.docsmode
             yield ("RDOCS", "uhc", token[1], token[2])
         elif token == gbkdocs:
-            state.last_docs = state.docsmode
             yield ("RDOCS", "gbk", token[1], token[2])
         elif token == plainextasciidocs:
-            state.last_docs = state.docsmode
             yield ("RDOCS", "plainextascii", token[1], token[2])
         elif token == bigfivedocs:
-            state.last_docs = state.docsmode
             yield ("RDOCS", "bigfive", token[1], token[2])
         elif token == bigfivenarrowdocs:
-            state.last_docs = state.docsmode
             yield ("RDOCS", "bigfivenarrow", token[1], token[2])
         elif token == elexdocs:
-            state.last_docs = state.docsmode
             yield ("RDOCS", "elex", token[1], token[2])
         elif token == modeucdocs:
-            state.last_docs = state.docsmode
             yield ("RDOCS", "modified-euc", token[1], token[2])
         elif token == scsudocs:
-            state.last_docs = state.docsmode
             yield ("RDOCS", "scsu", token[1], token[2])
         elif token == ebcdicdocs:
-            state.last_docs = state.docsmode
             yield ("RDOCS", "ebcdic", token[1], token[2])
         elif token == ecma35docs:
-            state.last_docs = state.docsmode
             yield ("RDOCS", "ecma-35", token[1], token[2])
         elif token == utf1docs:
-            state.last_docs = state.docsmode
             yield ("RDOCS", "utf-1", token[1], token[2])
         elif token in utf8docs:
-            state.last_docs = state.docsmode
             yield ("RDOCS", "utf-8", token[1], token[2])
         elif token in utf16docs:
-            state.last_docs = state.docsmode
             yield ("RDOCS", "utf-16", token[1], token[2])
         elif token in utf32docs:
-            state.last_docs = state.docsmode
             yield ("RDOCS", "utf-32", token[1], token[2])
         elif token == rawdocs:
-            state.last_docs = state.docsmode
             yield ("RDOCS", "raw", token[1], token[2])
-        elif token[0] == "POPDOCS":
-            this_docs, state.last_docs = state.last_docs, state.docsmode
-            yield ("RDOCS", this_docs, None, token)
         else:
             yield token
+
+def proc_docs_sequence_stack(stream, state):
+    state.docs_sequence_stack = []
+    for token in stream:
+        if token[0] == "POPDOCS":
+            this_docs = state.docs_sequence_stack.pop() if state.docs_sequence_stack else "ecma-35"
+            yield ("RDOCS", this_docs, None, token)
+        else:
+            if token[0] == "RDOCS":
+                state.docs_sequence_stack.append(state.docsmode or "ecma-35")
+            yield token
+
 
