@@ -47,7 +47,7 @@ for pointer in range(96*96*7): # Remember plane 0 exists in the array and is com
     if len(avail) >= 5:
         manies.append(((pointer // 96) // 96, (pointer // 96) % 96, 
                                 pointer % 96, len(avail)))
-    if avail and 1 not in avail and ((pointer // 96) % 96) >= 16:
+    if avail and 1 not in avail and pointer >= (96*96 + 16*96):
         satellite.append(((pointer // 96) // 96, (pointer // 96) % 96, 
                                 pointer % 96, len(avail)))
 print(manies)
