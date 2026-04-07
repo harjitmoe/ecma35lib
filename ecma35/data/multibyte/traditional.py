@@ -964,9 +964,8 @@ graphdata.gsets["big5exts/monotype"] = (94, 2, parsers.fuse([
 # # # # # # # # # #
 # CCCII and EACC
 
-# Note: kEACC does not add additional characters relative to or contradict the LoC mapping at any
-#   point and is therefore not referenced (the LoC mapping also includes non-kanji).
-# I'm treating kCCCII as the best source for CCCII insofar as it covers.
+# Note: kEACC does not add additional characters relative to nor contradict the LoC mapping at any
+#   point and is therefore not referenced, unlike kCCCII (the LoC mapping also includes non-kanji).
 
 cccii_unihan = parsers.read_unihan_planes("UCD/Unihan_OtherMappings.txt", "kCCCII", set96=True)
 graphdata.gsets["cccii/eacc/loc"] = (96, 3, parsers.decode_main_plane_gl(
@@ -1014,8 +1013,8 @@ graphdata.gsets["~cccii"] = (96, 3, parsers.fuse([
         parsers.parse_file_format("Custom/cccii-nonkanji.txt"),
         "cccii-nonkanji.txt",
         set96=True),
-    cccii_unihan,
     cccii_additional,
+    cccii_unihan,
     # Appears as U+BF01 in some tables but this is probably a typo for U+B701, given that U+BF01
     #   has the wrong initial consonant for the CCCII codepoint range this codepoint appears in.
     ((None,) * ((79*96*96)+(46*96)+49)) + ((0xB701,),),
