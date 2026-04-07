@@ -1003,6 +1003,10 @@ cccii_additional = parsers.decode_main_plane_gl(
     parsers.parse_file_format("Custom/cccii-additional-not-in-other-tables.txt"),
     "cccii-additional-not-in-other-tables.txt",
     set96=True)
+cccii_old = parsers.decode_main_plane_gl(
+    parsers.parse_file_format("Custom/cccii-old-versions.txt"),
+    "cccii-old-versions.txt",
+    set96=True)
 
 # The tilde sets (~cccii and ~eacc) are used in the process of (re)generating the maxmat files.
 graphdata.gsets["~cccii"] = (96, 3, parsers.fuse([
@@ -1011,6 +1015,7 @@ graphdata.gsets["~cccii"] = (96, 3, parsers.fuse([
         "cccii-nonkanji.txt",
         set96=True),
     cccii_unihan,
+    cccii_additional,
     # Appears as U+BF01 in some tables but this is probably a typo for U+B701, given that U+BF01
     #   has the wrong initial consonant for the CCCII codepoint range this codepoint appears in.
     ((None,) * ((79*96*96)+(46*96)+49)) + ((0xB701,),),
@@ -1029,13 +1034,13 @@ graphdata.gsets["~cccii"] = (96, 3, parsers.fuse([
     graphdata.gsets["cccii/eacc/loc"][2],
     ((None,) * (96 * 99)) + graphdata.gsets["cccii/eacc/hk"][2][96*99:],
     cccii_korean_syllables,
-    cccii_additional,
 ], "CCCII-Full-Raw.json"))
 
 graphdata.gsetflags["~cccii/eacc"] |= {"EACC:ONLY3PLANESPERLEVEL"}
 graphdata.gsets["~cccii/eacc"] = (96, 3, parsers.fuse([
     graphdata.gsets["cccii/eacc/loc"][2],
     graphdata.gsets["cccii/eacc/hk"][2],
+    cccii_old,
     ((None,) * (96 * 99)) + graphdata.gsets["~cccii"][2][96*99:],
 ], "EACC-Full-Raw.json"))
 
@@ -1046,6 +1051,7 @@ graphdata.gsets["cccii"] = (96, 3, parsers.fuse([
         set96=True),
     maxmat1,
     cccii_unihan,
+    cccii_additional,
     # Appears as U+BF01 in some tables but this is probably a typo for U+B701, given that U+BF01
     #   has the wrong initial consonant for the CCCII codepoint range this codepoint appears in.
     ((None,) * ((79*96*96)+(46*96)+49)) + ((0xB701,),),

@@ -1,0 +1,9 @@
+# Some additional places where old versions of CCCII (such as upon which EACC was based) include
+#   a different glyph compared to later versions of CCCII.
+
+0x2D3023 U+67D2
+0x2D3028 U+919C
+0x2D3325 U+9678
+0x2D336D U+207ED
+0x2D344D U+2CEFB
+0x2F2557 U+26EC0
