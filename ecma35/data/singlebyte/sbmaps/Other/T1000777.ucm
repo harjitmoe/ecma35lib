@@ -173,7 +173,6 @@ CHARMAP
 <U00E6> \xD2 |0
 <U00E8> \xA5 |0
 <U00E9> \x82 |0
-<U00EB> \x85 |0
 <U00EC> \xE9 |0
 <U00ED> \x8C |0
 <U00F0> \xD3 |0
@@ -247,6 +246,7 @@ CHARMAP
 <U02CC> \xD1 |0
 <U0398> \xCB |0
 <U1EBC> \x95 |0
+<U1EBD> \x85 |0
 <U1EF8> \xA3 |0
 <U1EF9> \xA4 |0
 <U2010> \xD7 |1
