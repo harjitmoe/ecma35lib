@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020.
+# By HarJIT in 2020, 2026.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -31,7 +31,7 @@ def _improve_matching(alpha, alpha_to_possible, assignments, rassignments, betas
                 return pairs
     return None
 
-def maximum_matching(alpha_to_possible):
+def maximum_matching(alpha_to_possible, preferred=None):
     #
     # First get the trivial matching:
     popularities = collections.defaultdict(int)
@@ -41,9 +41,13 @@ def maximum_matching(alpha_to_possible):
     ascending = sorted(list(popularities.keys()), key=popularities.__getitem__)
     assignments = {}
     rassignments = {}
+    for alpha, beta in (preferred or {}).items():
+        if beta not in rassignments:
+            assignments[alpha] = beta
+            rassignments[beta] = alpha
     for beta in ascending:
         for alpha, betas in alpha_to_possible.items():
-            if (beta in betas) and (alpha not in assignments):
+            if (beta in betas) and (alpha not in assignments) and (beta not in rassignments):
                 assignments[alpha] = beta
                 rassignments[beta] = alpha
                 break # Break the inner of the two for loops
