@@ -51,13 +51,16 @@ conformation_sets = {frozenset(i) for i in (
 
 if not os.path.exists(cachefile) or not os.path.exists(bscachefile):
     uts39data = {}
-    be_overridden_list = ("ꓺ", "⳹", "ꜻ", "Ꜻ", "Ƃ", "ꮜ", "Ɏ", "Ᏺ", "ǳ", "ѳ", "Ɵ", "ꚙ", "Ꚙ", "ѣ", r"ݲ", r"Ӊ", "ӊ", "ᶂ", "ᶆ", "ᶎ")
+    be_overridden_list = ("ꓺ", "⳹", "ꜻ", "Ꜻ", "Ƃ", "ꮜ", "Ɏ", "Ᏺ", "ǳ", "ѳ", "Ɵ", "ꚙ", "Ꚙ", "ѣ", r"ݲ", r"Ӊ", "ӊ", "ᶂ", "ᶆ", "ᶎ", "\uFE81", "\uFE82", "\uFE84", "\uFE87", "\uFE88", "\uFE8A", "\uFE8B", "\uFE8C", "㍳", "㎆")
     with open(confusablesfn, "r", encoding="utf-8-sig") as f:
         for line in f:
             if (not line.strip()) or line[0] == "#":
                 continue
             frm, to, detail = tuple(i.strip() for i in line.split(";", 2))
-            ma, human, via = tuple(i.strip() for i in detail.split("#"))
+            if to != "0023":
+                ma, human, via = tuple(i.strip() for i in detail.split("#"))
+            else:
+                via = None
             frombit = "".join(chr(int(i, 16)) for i in frm.split())
             if via:
                 assert via[0] == "→"
