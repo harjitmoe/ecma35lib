@@ -2367,7 +2367,7 @@
 0x91DC	U+52F9	# 勹
 0x91DD	U+5315	# 匕
 0x91DE	U+2021	# ‡
-0x91DF	U+E565	# (龵 without top stroke)
+0x91DF	U+F6061	# (龵 without top stroke)
 0x91E0	U+3404	# 㐄
 0x91E1	U+E567	# (first four strokes of 耳)
 0x91E2	U+E568	# (second through fourth strokes of 耳)
@@ -2377,7 +2377,7 @@
 0x91E6	U+51F5	# 凵
 0x91E7	U+2010C	# 𠄌
 0x91E8	U+5C6E	# 屮
-0x91E9	U+E56F	# (first stroke of 女)
+0x91E9	U+31DB+FE00	# ㇛︀
 0x91EA	U+56D7	# 囗
 0x91EB	U+4EA0	# 亠
 0x91EC	U+51AB	# 冫
@@ -3997,8 +3997,8 @@
 0x9CD6	U+4E36	# 丶
 0x9CD7	U+2B820	# 𫠠
 0x9CD8	U+531A	# 匚
-0x9CD9	U+EC1E	# (𧘇 without top-left dot)
-0x9CDA	U+EC1F	# (outside of ⺕)
+0x9CD9	U+F609D	# (𧘇 without top-left dot)
+0x9CDA	U+F6048	# (outside of ⺕)
 0x9CDB	U+2E95	# ⺕
 0x9CDC	U+4E2A	# 个
 0x9CDD	U+20087	# 𠂇
