@@ -2270,7 +2270,7 @@
 0x91DB	U+2E97	# ⺗
 0x91DC	U+52F9	# 勹
 0x91DD	U+5315	# 匕
-0x91DE	U+2021	# ‡
+0x91DE	U+30001	# 𰀁
 0x91DF	U+F6061	# (龵 without top stroke)
 0x91E0	U+3404	# 㐄
 0x91E1	U+E567	# (first four strokes of 耳)
