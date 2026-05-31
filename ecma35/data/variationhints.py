@@ -764,7 +764,8 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
         else:
             print("<span class='cpc spua' lang={}>".format(lang), file=outfile)
             strep = "".join(chr(j) for j in i)
-    elif ((0x1F300 <= i[0] < 0x1F650)
+    elif ((0x1F300 <= i[0] < 0x1F650 and i[0] not in (
+                0x1F323, 0x1F571, 0x1F580, 0x1F5AC, 0x1F5B3, 0x1F5CF))
           or (0x1F900 <= i[0] < 0x1FB00) 
           or (0xFE0F in i)) and (0xFE0E not in i):
         # Probable emoji: best to fall back to applicable emoji fonts,
@@ -789,7 +790,8 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
             print("<span class='cpc nobast' lang={}>".format(lang), file=outfile)
         else:
             print("<span class=cpc lang={}>".format(lang), file=outfile)
-    strep = strep.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+    strep = "<br/>".join(
+                strep.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").splitlines())
     if namedata.get_ucscategory(strep[0])[0] == "M":
         strep = "◌" + strep
     not_in_unicode3pt2_arrows_blocks = (
