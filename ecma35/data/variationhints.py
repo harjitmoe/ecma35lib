@@ -695,6 +695,18 @@ def invert_rotate(display_string, rotate_by, flip, selectable_string, invert, ou
             print(f"<text y='72px' fill='none' stroke='none'>", file=outfile)
             print(selectable_string, file=outfile)
             print("</text>", file=outfile)
+    elif "CIRCLED" in namedata.get_ucsname(display_string[0], ""):
+        cpts = "".join(f"u{ord(jj):04X}" for jj in display_string)
+        print(f"<mask id='letter{cpts}'>", file=outfile)
+        print("<polygon points='0,0 0,88 74,88 74,0' fill='white'/>", file=outfile)
+        print(f"<text y='72px' fill='black' aria-hidden='true' font-size='72px'{rot}>", file=outfile)
+        print(display_string, file=outfile)
+        print("</text>", file=outfile)
+        print("</mask>", file=outfile)
+        print(f"<circle cx='36px' cy='44px' r='37px' mask='url(#letter{cpts})'/>", file=outfile)
+        print(f"<text y='72px' font-size='72px' fill='none' stroke='none'>", file=outfile)
+        print(selectable_string, file=outfile)
+        print("</text>", file=outfile)
     else:
         cpts = "".join(f"u{ord(jj):04X}" for jj in display_string)
         print(f"<filter id='silhouette{cpts}'>", file=outfile)

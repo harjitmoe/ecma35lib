@@ -283,7 +283,7 @@ table {
     .lightcircle {
         border-color: #eee;
     }
-    :not(*|mask, *|clipPath)>*|text:not([fill], .inverse) {
+    :not(*|mask, *|clipPath)>*|text:not([fill], .inverse), .charwrapper>*|circle {
         fill: #eee;
     }
     .cpc .charwrapper.lightdiamond .enclosure, .cpc .charwrapper.lighttriangle .enclosure {
