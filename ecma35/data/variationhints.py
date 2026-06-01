@@ -698,49 +698,21 @@ def invert_rotate(display_string, rotate_by, flip, selectable_string, invert, ou
             print(f"<text y='72px' fill='none' stroke='none'>", file=outfile)
             print(selectable_string, file=outfile)
             print("</text>", file=outfile)
-    elif "CIRCLED" in namedata.get_ucsname(display_string[0], ""):
-        cpts = "".join(f"u{ord(jj):04X}" for jj in display_string)
-        print(f"<mask id='letter{cpts}'>", file=outfile)
-        print("<polygon points='0,0 0,88 74,88 74,0' fill='white'/>", file=outfile)
-        print(f"<text y='72px' fill='black' aria-hidden='true' font-size='72px'{rot}>", file=outfile)
-        print(display_string, file=outfile)
-        print("</text>", file=outfile)
-        print("</mask>", file=outfile)
-        print(f"<circle cx='36px' cy='44px' r='37px' mask='url(#letter{cpts})'/>", file=outfile)
-        print(f"<text y='72px' font-size='72px' fill='none' stroke='none'>", file=outfile)
-        print(selectable_string, file=outfile)
-        print("</text>", file=outfile)
-    elif "SQUARED" in namedata.get_ucsname(display_string[0], "") or is_nishiki_teki_squared(display_string[0]):
-        cpts = "".join(f"u{ord(jj):04X}" for jj in display_string)
-        print(f"<mask id='letter{cpts}'>", file=outfile)
-        print("<polygon points='0,0 0,88 74,88 74,0' fill='white'/>", file=outfile)
-        print(f"<text y='72px' fill='black' aria-hidden='true' font-size='72px'{rot}>", file=outfile)
-        print(display_string, file=outfile)
-        print("</text>", file=outfile)
-        print("</mask>", file=outfile)
-        print(f"<rect x='0px' y='10px' width='74px' height='74px' mask='url(#letter{cpts})'/>", file=outfile)
-        print(f"<text y='72px' font-size='72px' fill='none' stroke='none'>", file=outfile)
-        print(selectable_string, file=outfile)
-        print("</text>", file=outfile)
     else:
         cpts = "".join(f"u{ord(jj):04X}" for jj in display_string)
-        print(f"<filter id='silhouette{cpts}'>", file=outfile)
-        print("<feMorphology operator='dilate' radius='8'/>", file=outfile)
-        print("<feMorphology operator='erode' radius='7'/>", file=outfile)
-        print("</filter>", file=outfile)
         print(f"<mask id='letter{cpts}'>", file=outfile)
         print("<polygon points='0,0 0,88 74,88 74,0' fill='white'/>", file=outfile)
         print(f"<text y='72px' fill='black' aria-hidden='true' font-size='72px'{rot}>", file=outfile)
         print(display_string, file=outfile)
         print("</text>", file=outfile)
         print("</mask>", file=outfile)
-        print(f"<text y='72px' filter='url(#silhouette{cpts})' mask='url(#letter{cpts})' font-size='72px'{rot}{maybe_nosel}>", file=outfile)
-        print(display_string, file=outfile)
+        if "CIRCLED" in namedata.get_ucsname(display_string[0], ""):
+            print(f"<circle cx='36px' cy='44px' r='37px' mask='url(#letter{cpts})'/>", file=outfile)
+        else:
+            print(f"<rect x='0px' y='10px' width='74px' height='74px' mask='url(#letter{cpts})'/>", file=outfile)
+        print(f"<text y='72px' font-size='72px' fill='none' stroke='none'>", file=outfile)
+        print(selectable_string, file=outfile)
         print("</text>", file=outfile)
-        if separate_sel:
-            print(f"<text y='72px' font-size='72px' fill='none' stroke='none'>", file=outfile)
-            print(selectable_string, file=outfile)
-            print("</text>", file=outfile)
     print("</svg>", file=outfile)
 
 def arrow_to_angle(arrow):
@@ -836,6 +808,15 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
     elif len(strep) == 2 and 0x2190 <= ord(strep[0]) <= 0x2193 and strep[1] == "\uF87F":
         rot, flip = arrow_to_angle(strep[0])
         invert_rotate("\u279C", rot, flip, strep[0], False, outfile) 
+    elif len(strep) == 2 and 0x21E6 <= ord(strep[0]) <= 0x21E9 and strep[1] == "\uF875":
+        rot, flip = arrow_to_angle(strep[0])
+        invert_rotate("\U0001F846", rot, flip, strep[0], False, outfile) 
+    elif len(strep) == 2 and 0x21E6 <= ord(strep[0]) <= 0x21E9 and strep[1] == "\uF87A":
+        rot, flip = arrow_to_angle(strep[0])
+        invert_rotate("\u2B95", rot, flip, strep[0], False, outfile) 
+    elif len(strep) == 2 and 0x21E6 <= ord(strep[0]) <= 0x21E9 and strep[1] == "\uF87B":
+        rot, flip = arrow_to_angle(strep[0])
+        invert_rotate("\u279E", rot, flip, strep[0], False, outfile) 
     elif strep == "\uF843":
         invert_rotate("\u21F0", 0, True, "←", False, outfile) 
     elif strep == "\uF845":
