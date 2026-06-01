@@ -818,7 +818,7 @@ def print_hints_to_html5(i, outfile, *, lang="ja", showbmppua=False):
         else:
             print("<span class=cpc lang={}>".format(lang), file=outfile)
     strep = "<br/>".join(
-                strep.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").splitlines())
+            strep.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").splitlines()) or strep
     if namedata.get_ucscategory(strep[0])[0] == "M":
         strep = "◌" + strep
     not_in_unicode3pt2_arrows_blocks = (
