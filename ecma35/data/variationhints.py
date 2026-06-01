@@ -651,6 +651,9 @@ def ahmap(pointer, ucs, applesinglehints=applesinglehints):
             return ucs
     return ucs
 
+def is_nishiki_teki_squared(ucs):
+    return 0xF0620 <= ord(ucs) <= 0xF067F or 0xF06E0 <= ord(ucs) <= 0xF06E9 or 0xF06F0 <= ord(ucs) <= 0xF073F or 0xF07A2 <= ord(ucs) <= 0xF07D9 or 0xF07E7 <= ord(ucs) <= 0xF07FE or 0xF0A00 <= ord(ucs) <= 0xF0A55
+
 def is_filled_character(ucs):
     name = namedata.get_ucsname(ucs, "")
     if "BLACK" in name or "NEGATIVE" in name:
@@ -659,7 +662,7 @@ def is_filled_character(ucs):
         return False
     elif "SQUARED" in name or "CIRCLED" in name:
         return False
-    elif 0xF0620 <= ord(ucs) <= 0xF067F or 0xF06E0 <= ord(ucs) <= 0xF06E9 or 0xF06F0 <= ord(ucs) <= 0xF073F or 0xF07A2 <= ord(ucs) <= 0xF07D9 or 0xF07E7 <= ord(ucs) <= 0xF07FE or 0xF0A00 <= ord(ucs) <= 0xF0A55:
+    elif is_nishiki_teki_squared(ucs):
         return False
     else:
         return True
@@ -704,6 +707,18 @@ def invert_rotate(display_string, rotate_by, flip, selectable_string, invert, ou
         print("</text>", file=outfile)
         print("</mask>", file=outfile)
         print(f"<circle cx='36px' cy='44px' r='37px' mask='url(#letter{cpts})'/>", file=outfile)
+        print(f"<text y='72px' font-size='72px' fill='none' stroke='none'>", file=outfile)
+        print(selectable_string, file=outfile)
+        print("</text>", file=outfile)
+    elif "SQUARED" in namedata.get_ucsname(display_string[0], "") or is_nishiki_teki_squared(display_string[0]):
+        cpts = "".join(f"u{ord(jj):04X}" for jj in display_string)
+        print(f"<mask id='letter{cpts}'>", file=outfile)
+        print("<polygon points='0,0 0,88 74,88 74,0' fill='white'/>", file=outfile)
+        print(f"<text y='72px' fill='black' aria-hidden='true' font-size='72px'{rot}>", file=outfile)
+        print(display_string, file=outfile)
+        print("</text>", file=outfile)
+        print("</mask>", file=outfile)
+        print(f"<rect x='0px' y='10px' width='74px' height='74px' mask='url(#letter{cpts})'/>", file=outfile)
         print(f"<text y='72px' font-size='72px' fill='none' stroke='none'>", file=outfile)
         print(selectable_string, file=outfile)
         print("</text>", file=outfile)
