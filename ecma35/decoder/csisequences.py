@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019, 2023, 2025.
+# By HarJIT in 2019, 2023, 2025, 2026.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -106,9 +106,7 @@ def decode_csi_sequences(stream, state):
                 mode = "normal"
             else:
                 # Some take parameters (including CEX $ n, CEX 0 n1 n2 and 
-                # CEX 2 a1 a2 d1 d2 d3 ... d72). Sadly, I've not been able to
-                # find adequate documentation on the format or parsing of
-                # those parameters.
+                # CEX 2 a1 a2 d1 d2 d3 ... d72). Handling these is TODO.
                 active.append(token)
                 yield ("ERROR", "UNSUPCEX", tuple(active))
                 del active[:]

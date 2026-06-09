@@ -751,14 +751,44 @@ csiseq = {tuple(b"@"): "ICH", # Insert Character
           tuple(b"*y"): "DECRQCRA", # DEC Request Checksum of Rectangular Area
           tuple(b"*|"): "DECSNLS"} # DEC Select Number of Lines per Screen
 
-# Since the JIS standard behind them is withdrawn, documentation for CEX sequences is pauce.
-# Only thing I've been able to find is the "OKI® Programmer’s Reference Manual" released by
-# Printronix Inc., which has its own issues, in particular a complete lack of detail on what the
-# format of those with parameters is. It also seems to list an incomplete set of CEX sequences
-# including only the ones it supports (and not how the 78JIS/83JIS/90JIS diacritic composites were
-# supposed to be formed). I'm listing the documented ones without parameters below, insofar as
-# I can decipher what it's saying. Mnemonics are made up for this software.
-cexseq = {b"J"[0]: "SVP", # Select Vertical Printing
+# CEX sequences. JIS X 0207 is withdrawn, but some dot-matrix line printers implement a variant.
+# Mnemonics are made up for this software, except where given in SC2/WG6/N317 (SC2/WG8/N604).
+cexseq = {
+          #
+          # Set Inter-Character Spacing.
+          # Manuals for hardware implementations document the parameter as an 8-bit integer.
+          #b"$"[0]: "SICS",
+          #
+          # Select Character Pattern Configuration Mode (ambiguous "SCP" in SC2/WG6/N317).
+          # Either two or four parameters (sources conflict). First two parameters are the
+          #   width and height respectively, the next two (included in SC2/WG6/N317 but
+          #   omitted in manuals for the hardware implementations) are booleans for whether
+          #   it's a vertically-scanned raster and whether it's "packed" (presumably meaning
+          #   whether a raster line can start in the middle of a byte?). The hardware
+          #   implementations are documented as representing bitmaps as 24-pixel columns.
+          # Widths and heights might be constrained to fixed values by the implementation.
+          # Manuals for hardware implementations document the parameters as 8-bit integers;
+          #   notably, they'd be unable to specify width/height greater than 16 if their
+          #   values are stored only in the low four bits like the glyph data per SC2/WG6/N317).
+          #b"0"[0]: "SCPC",
+          #
+          # Character Pattern Transmit ("CPT" in SC2/WG6/N317 / SC2/WG8/N604)
+          # The first parameter (included in SC2/WG6/N317 but omitted in documentation for
+          #   the implementing hardware) is nominally 0 for JIS X 0208 and 1 otherwise, which
+          #   SC2/WG6/N317 suggests instead interpreting as a G-set number.
+          # This is followed by the GL representation of the codepoint (implementations might
+          #   constrain the lead byte to e.g. be at least 0x78).
+          # This is in turn followed by some number of bytes with length calculated per the width
+          #   and height parameters. Per manuals for hardware implementations, there are 72 of
+          #   these for a 24×24 pixel glyph, implying use of the entire byte. However, per
+          #   SC2/WG6/N317, only the low four bits of each byte are used, with the high nybble set
+          #   to 0x3.
+          # The hardware implementations seem to interpret multi-byte parameters as big-endian, so
+          #   we can probably assume the bitmap glyph to be packed most-significant-bit-first.
+          #b"2"[0]: "CPT",
+          #
+          # No parameters:
+          b"J"[0]: "SVP", # Select Vertical Printing
           b"K"[0]: "SHP", # Select Horizontal Printing
           b"N"[0]: "SSP", # Select Superscript Printing
           b"O"[0]: "CSP", # Cancel Superscript Printing
