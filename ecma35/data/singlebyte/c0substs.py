@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2020, 2024, 2025.
+# By HarJIT in 2020, 2024, 2025, 2026.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -24,6 +24,9 @@ graphdata.c0graphics["1051"] = graphdata.c0graphics["1052"] = graphdata.c0graphi
 graphdata.c0graphics["1054"] = graphdata.c0graphics["1055"] = graphdata.c0graphics["1056"] = \
 graphdata.c0graphics["1057"] = graphdata.c0graphics["1058"] = \
     graphdata.c0graphics["437"][:-1] + (0x2592,)
+
+# Similarly, but rendering 0x7F as a cent (currency) sign.
+graphdata.c0graphics["992001"] = (*graphdata.c0graphics["437"][:-1], (0x00A2,))
 
 # A different C0 graphics set used in East Asian IBM code pages (i.e. IBM 5550 instead of IBM 5150)
 graphdata.c0graphics['891'] = graphdata.c0graphics['897'] = graphdata.c0graphics['903'] = \
