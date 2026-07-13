@@ -115,6 +115,15 @@ graphdata.c0graphics["899"] = graphdata.c0graphics["1092"] = (
   None, None, None, None, None, None,      None, None,
     (0x0020,))
 
+# C0 graphics used by the NEC Advanced Personal Computer
+graphdata.c0graphics["992002"] = (
+    None,      (0x25B6,), (0x23E9,), (0x1F4D6,), (0x2621,), (0x2370,), (0x1F197,), (0x1FBFA,),
+    (0x2B06,), (0x2B95,), (0x22C4,), (0x2B07,),
+        (0x1CC0B, 0xF87F), (0x2B05,), (0x1FBC5,), (0x1FBC5, 0x20DE),
+    (0x229F,), (0x3000,), (0xFFE3,), (0x2015,), (0x00F7,), (0x00D7,), (0x23F0,), (0x25AF,),
+    (0x25AE,), (0x25AC,), (0x2007,), (0x1F031,), (0x1F512,), (0x26BF,), (0x25AD,), (0x23E2,),
+        (0x2302,))
+
 # LaTeX C0 graphics
 graphdata.c0graphics["996710"] = graphdata.c0graphics["996740"] = graphdata.c0graphics["996219"] = \
 graphdata.c0graphics["996742"] = graphdata.c0graphics["996812"] = graphdata.c0graphics["996819"] = \

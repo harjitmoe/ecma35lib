@@ -777,6 +777,7 @@ purposes.&ensp;Specifically:
 |Private assignment|Meaning|
 |---|---|
 |`ESC [ 9 9 2 0 0 1 * p`|Switch to the "WISCII" charset used on some Wang Laboratories computers.|
+|`ESC [ 9 9 2 0 0 2 * p`|Switch to the charset used on the NEC Advanced Personal Computer.|
 |`ESC [ 9 9 3 3 0 0 * p`|Switch to a hiragana/katakana encoding sometimes used on GBA consoles.|
 |`ESC [ 9 9 4 0 0 3 * p`|Switch to the "Hankaku" encoding: an extension of 8-bit JIS X 0201 adding Hiragana.|
 |`ESC [ 9 9 4 0 0 5 * p`|Switch to the "WP-Symbol" (presumably, "word processor symbols") encoding.|
