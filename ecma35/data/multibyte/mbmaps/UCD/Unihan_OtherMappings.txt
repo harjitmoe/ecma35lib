@@ -1,5 +1,5 @@
 # Unihan_OtherMappings.txt
-# Date: 2026-01-22 00:00:00 GMT [KL]
+# Date: 2026-07-31 00:00:00 GMT [KL]
 # Unicode Version 18.0.0
 #
 # Unicode Character Database
@@ -14398,6 +14398,7 @@ U+52D2	kCNS1992	1-592C
 U+52D2	kEACC	213432
 U+52D2	kGB0	3253
 U+52D2	kGB1	3253
+U+52D2	kJinmeiyoKanji	2026
 U+52D2	kJis0	8053
 U+52D2	kKoreanName	2015
 U+52D2	kMainlandTelegraph	0519
