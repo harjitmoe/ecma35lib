@@ -428,6 +428,26 @@ def decode_main_plane_euc(parsed_stream, filenamekey, *, eucjp=False, gbklike=Fa
     return tuple(_temp)
 
 @with_caching
+def decode_pseudoeuc_extra_plane(parsed_stream, filenamekey, *, 
+                          mapper=identitymap, ignore_later_altucs=False, set96=False):
+    ST, ED, SZ = _limits(set96)
+    _temp = []
+    for coded, ucs in parsed_stream:
+        if len(coded) == 1:
+            continue
+        elif coded[0] < 0xA0 or coded[1] >= 0xA0:
+            continue
+        ku = coded[0] - 0xA0
+        ten = coded[1] - 0x20
+        pointer = _main_plane_pointer(3, ku, ten, 3, set96)
+        if pointer == None:
+            continue
+        iucs = mapper(pointer, ucs)
+        _put_at(_temp, pointer, iucs, ignore_later_altucs)
+    _fill_to_plane_boundary(_temp, SZ)
+    return tuple(_temp)
+
+@with_caching
 def decode_main_plane_gl(parsed_stream, filenamekey, *, plane=None, mapper=identitymap,
                          ignore_later_altucs=False, set96=False, skip_invalid_kuten=True):
     # The filenamekey argument is absolutely needed for the @with_caching since the parsed_stream

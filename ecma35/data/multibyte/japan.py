@@ -173,6 +173,9 @@ graphdata.gsets["ir159/icueuc"] = (94, 2, parsers.decode_main_plane_euc(
     "euc-jp-2007.ucm",
     eucjp = 1,
     plane = 2))
+graphdata.gsets["ir159/ms"] = (94, 2, parsers.decode_pseudoeuc_extra_plane(
+    parsers.parse_file_format("ICU/windows-20932-2000.ucm"),
+    "windows-20932-2000.ucm"))
 graphdata.gsets["ir159/later-disunifications"] = (94, 2, parsers.decode_main_plane_whatwg(
     parsers.parse_file_format("WHATWG/index-jis0212.txt"),
     "index-jis0212.txt",
@@ -198,6 +201,11 @@ graphdata.gsets["ir168/web"] = jisx0208_html5 = (94, 2, parsers.decode_main_plan
     parsers.parse_file_format("WHATWG/index-jis0208.txt"),
     "index-jis0208.txt",
     plane = 1))
+graphdata.gsets["ir168/ms/euc"] = (94, 2, parsers.decode_main_plane_euc(
+    parsers.parse_file_format("ICU/windows-20932-2000.ucm"),
+    "windows-20932-2000.ucm",
+    plane = 1,
+    gbklike = True))
 graphdata.gsets["ir168/later-disunifications"] = (94, 2, parsers.decode_main_plane_whatwg(
     parsers.parse_file_format("WHATWG/index-jis0208.txt"),
     "index-jis0208.txt",

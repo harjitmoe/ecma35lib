@@ -336,11 +336,19 @@ graphdata.gsets["ir171/utc"] = (94, 2, parsers.decode_main_plane_gl(
 graphdata.gsets["ir171/yasuoka"] = (94, 2, cns_yasuoka[planesize * 0 : planesize * 1])
 graphdata.gsets["ir171/icu"] = (94, 2, cns_icu_old[planesize * 0 : planesize * 1])
 graphdata.gsets["ir171/icu-2014"] = (94, 2, cns_icu_2014[planesize * 0 : planesize * 1])
+graphdata.gsets["ir171/ms/cns"] = (94, 2, parsers.decode_main_plane_euc(
+    parsers.parse_file_format("ICU/windows-20000-2000.ucm"),
+    "windows-20000-2000.ucm",
+    plane = 1,
+    gbklike = True))
 
 # ir172/govtw/old, ir172/icu, ir172/icu/2014, ir172/utc, ir172/yasuoka are all same
 graphdata.gsets["ir172"] = (94, 2, cns_gov_old[planesize * 1 : planesize * 2])
 # ir172/unihan, ir172/govtw are the same
 graphdata.gsets["ir172/unihan"] = (94, 2, cns_gov[planesize * 1 : planesize * 2])
+graphdata.gsets["ir172/ms"] = (94, 2, parsers.decode_pseudoeuc_extra_plane(
+    parsers.parse_file_format("ICU/windows-20000-2000.ucm"),
+    "windows-20000-2000.ucm"))
 
 graphdata.chcpdocs["20000"] = "modified-euc"
 graphdata.defgsets["20000"] = ("ir006", "ir171/full", "nil", "nil", "ir172")
@@ -960,6 +968,16 @@ graphdata.gsets["big5exts/monotype"] = (94, 2, parsers.fuse([
         "AdobeCNS.txt-HKm471-B5-UniCNS-UTF32"),
 ], "Big5-Monotype-Exts.json"))
 
+
+graphdata.gsets["hpux-roc15-plane-1"] = (94, 2, parsers.decode_main_plane_euc(
+    parsers.parse_file_format("ICU/hpux-roc15-11.11.ucm"),
+    "hpux-roc15-11.11.ucm",
+    plane = 1,
+    gbklike = True))
+
+graphdata.gsets["hpux-roc15-plane-2"] = (94, 2, parsers.decode_pseudoeuc_extra_plane(
+    parsers.parse_file_format("ICU/hpux-roc15-11.11.ucm"),
+    "hpux-roc15-11.11.ucm"))
 
 # # # # # # # # # #
 # CCCII and EACC

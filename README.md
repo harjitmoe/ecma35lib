@@ -510,9 +510,10 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR < G*DM4 B`|JIS X 0208, KDDI JIS emoji, pictorial zodiac variant|
 |`IRR = G*DM4 B`|JIS X 0208, Fujitsu version|
 |`IRR > G*DM4 B`|JIS X 0208, ARIB STD-B.24 version|
-|`IRR ! 0 G*DM4 B`|JIS X 0208, using later-disunified Unicode codepoints with closer (other-source) glyphs|
 |`IRR SP 0 G*DM4 B`|"KanjiTalk 7" variant (row+84 verticals, non-NEC gaiji) used on classic Mac OS, Apple mappings|
 |`IRR SP 1 G*DM4 B`|"PostScript" / "KanjiTalk 6 PostScript" variant (row+84 verticals, NEC gaiji) used on classic Mac OS, Apple mappings|
+|`IRR SP 2 G*DM4 B`|JIS X 0208, using later-disunified Unicode codepoints with closer (other-source) glyphs|
+|`IRR SP 3 G*DM4 B`|JIS X 0208, version encoded by Microsoft's code page 20932|
 |`IRR ? G*DM4 C`|KS C 5601-1987 Wansung code, using new-UTC mappings (harmonious with Microsoft and WHATWG)|
 |`IRR 0 G*DM4 C`|KS C 5601-1987, but using old-UTC mappings for the non-syllables|
 |`IRR 1 G*DM4 C`|KS X 1001-1998 Wansung code. The Euro sign update, also adding the registered trademark sign, and matching the WHATWG mapping.|
@@ -531,6 +532,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 4 G*DM4 D`|JIS X 0212, version encoded by IBM-954|
 |`IRR 5 G*DM4 D`|JIS X 0212, version encoded by ICU's EUC-JP|
 |`IRR 6 G*DM4 D`|JIS X 0212, using later-disunified Unicode codepoints with closer (other-source) glyphs (see [IRGN2722](https://www.unicode.org/irg/docs/n2722-JSourceIssues.pdf)&rpar;|
+|`IRR 7 G*DM4 D`|JIS X 0212, version encoded by Microsoft's code page 20932|
 |`IRR ? G*DM4 E`|CCITT Hanzi Code (GB 2312 variant) from ITU T.101-C, which bases it on GB 6345.1-1986 and GB 8565.2-1988 with further adjustments and expansions|
 |`IRR 0 G*DM4 E`|CCITT Hanzi Code, with a more conventional mapping of the lowercase gs (appropriate for their GB 18030 reference glyphs)|
 |`IRR 1 G*DM4 E`|CCITT Hanzi Code, combined with an additional hanzi extension in row 8|
@@ -553,12 +555,14 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR < G*DM4 G`|CNS 11643 plane 1, per ICU EUC-TW 2014 mappings|
 |`IRR = G*DM4 G`|CNS 11643 plane 1, per Yasuoka's mappings|
 |`IRR > G*DM4 G`|CNS 11643 plane 1, alternative mappings for HKSCS-2016 preferred forms|
-|`IRR ! 0 G*DM4 G`|CNS 11643 plane 1, variant supported by X11 as a font encoding|
+|`IRR SP 0 G*DM4 G`|CNS 11643 plane 1, variant supported by X11 as a font encoding|
+|`IRR SP 1 G*DM4 G`|CNS 11643 plane 1, version encoded by Microsoft's code page 20000|
 |`IRR ? G*DM4 H`|CNS 11643 plane 2|
 |`IRR 1 G*DM4 H`|CNS 11643 plane 2, Big5 mappings|
 |`IRR 5 G*DM4 H`|CNS 11643 plane 2, Unihan mappings|
 |`IRR 6 G*DM4 H`|CNS 11643 plane 2, alternative mappings for HKSCS-2016 preferred forms|
 |`IRR 7 G*DM4 H`|CNS 11643 plane 2, variant supported by X11 as a font encoding|
+|`IRR 8 G*DM4 G`|CNS 11643 plane 2, version encoded by Microsoft's code page 20000|
 |`IRR ? G*DM4 I`|CNS 11643-1992 plane 3|
 |`IRR 0 G*DM4 I`|CNS 11643-1988 plane 14|
 |`IRR 1 G*DM4 I`|CNS 11643-1988 plane 14 with extensions, as submitted to the IRG|
@@ -732,6 +736,8 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*DM4 % 3`|The Han'yō Denshi Programme's "IB" charset for characters from names of persons or places|
 |`G*DM4 % 4`|The Han'yō Denshi Programme's "FT" charset for characters from the Font Development and Promotion Center (FDPC)|
 |`G*DM4 % 5`|The Han'yō Denshi Programme's "HG" charset for additional characters from the Heisei Minchō font|
+|`G*DM4 % 6`|Plane 1 of the encoding which ICU calls `hpux-roc15-11.11`|
+|`G*DM4 % 7`|Plane 2 of the encoding which ICU calls `hpux-roc15-11.11`|
 |`IRR ? G*DM6 ! 0`|GBK extras per GB 18030-2000 or GB 18030-2005 (GBK level 5 with associated UDC zone and non-URO part of level 4; accepted by GBK filter in G3 slot)|
 |`IRR 0 G*DM6 ! 0`|GBK extras, WHATWG/HTML5 variant|
 |`IRR 1 G*DM6 ! 0`|GBK extras, mapping all characters with defined glyphs to non-PUA|

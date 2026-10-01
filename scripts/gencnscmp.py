@@ -40,12 +40,13 @@ def swap_arrows(t):
     return t[:148] + (t[149], t[148]) + t[150:]
 
 print("Loading 1")
-plane1 = (1, ("UTC Big5", "UTC CNS", "X11 CNS", "MS Big5", "Mac Big5",
+plane1 = (1, ("UTC Big5", "UTC CNS", "X11 CNS", "MS CNS", "MS Big5", "Mac Big5",
               "IBM Big5", "Web Big5", "HKSCS'16", "Yasuoka CNS",
               "ICU '92CNS", "IBM EUC", "ICU EUC'14", "GOV-TW CNS", "Output"), [
           swap_arrows(graphdata.gsets["ir171/utcbig5"][2]),
           graphdata.gsets["ir171/utc"][2],
           graphdata.gsets["ir171/x11"][2],
+          graphdata.gsets["ir171/ms/cns"][2],
           swap_arrows(graphdata.gsets["ir171/ms"][2]),
           swap_arrows(graphdata.gsets["ir171/mac"][2]),
           swap_arrows(graphdata.gsets["ir171/ibm950"][2]),
@@ -60,8 +61,9 @@ plane1 = (1, ("UTC Big5", "UTC CNS", "X11 CNS", "MS Big5", "Mac Big5",
 ])
 
 print("Loading 2")
-plane2 = (2, ("Big5", "X11 CNS", "HKSCS'16", "GOV-TW 2019", "GOV-TW 2025"), [
+plane2 = (2, ("Big5", "MS CNS", "X11 CNS", "HKSCS'16", "GOV-TW 2019", "GOV-TW 2025"), [
           graphdata.gsets["ir172/big5"][2],
+          graphdata.gsets["ir172/ms"][2],
           graphdata.gsets["ir172/x11"][2],
           graphdata.gsets["ir172/hkscs2016"][2],
           graphdata.gsets["ir172"][2],

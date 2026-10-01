@@ -42,7 +42,7 @@ def to_sjis(men, ku, ten):
 plane1 = (1, ("1978 JIS<br>Illustrative",  "1978 JIS<br>90JIS Pivot",  "1983 JIS",  "1990 JIS<br>Plane 1",
               "2000 JIS<br>Plane 1",  "2004 JIS<br>Plane 1",  "Updated<br>Plane 1",
               "NEC 78JIS<br>Illustrative", 
-              "IBM 78JIS", "IBM 90JIS<br>Plane 1", "Fujitsu", "MS / HTML5", 
+              "IBM 78JIS", "IBM 90JIS<br>Plane 1", "Fujitsu", "MS / HTML5", "MS EUC<br>Plane 1", 
               "Apple<br>Row + 10", "Apple<br>PostScript", "Apple<br>KanjiTalk7", 
               "ARIB<br>JIS Emoji", "DoCoMo<br>JIS Emoji", "au by KDDI<br>JIS Emoji", "SoftBank<br>JIS Emoji"), [
           graphdata.gsets["ir042"][2],
@@ -58,6 +58,7 @@ plane1 = (1, ("1978 JIS<br>Illustrative",  "1978 JIS<br>90JIS Pivot",  "1983 JIS
           graphdata.gsets["ir087/fujitsu"][2],
           #graphdata.gsets["ir168/icueuc"][2], # same as web.
           graphdata.gsets["ir168/web"][2],
+          graphdata.gsets["ir168/ms/euc"][2],
           graphdata.gsets["ir168/mackt6"][2],
           graphdata.gsets["ir168/macps"][2],
           graphdata.gsets["ir168/mac"][2],
@@ -70,7 +71,7 @@ plane1 = (1, ("1978 JIS<br>Illustrative",  "1978 JIS<br>90JIS Pivot",  "1983 JIS
 plane2 = (2, ("IBM SJIS Ext<br>78JIS Ver.", "IBM SJIS Ext<br>MS / HTML5", "DoCoMo<br>SJIS Emoji",
               "au by KDDI<br>SJIS Emoji", "SoftBank<br>SJIS Emoji",
               "1990 JIS<br>Plane 2", "IRG N2722<br>Plane 2", "Va Extension<br>Plane 2",
-              "OSF EUC<br>Plane 2M",
+              "MS EUC<br>Plane 2", "OSF EUC<br>Plane 2M",
               "IBM 90JIS<br>Plane 2", "ICU EUC<br>Plane 2", "2000/04 JIS<br>Plane 2"), [
           graphdata.gsets["sjisext/ibm/old"][2],
           graphdata.gsets["sjisext/ibm/pua"][2],
@@ -80,6 +81,7 @@ plane2 = (2, ("IBM SJIS Ext<br>78JIS Ver.", "IBM SJIS Ext<br>MS / HTML5", "DoCoM
           graphdata.gsets["ir159"][2],
           graphdata.gsets["ir159/later-disunifications"][2],
           graphdata.gsets["ir159/va"][2],
+          graphdata.gsets["ir159/ms"][2],
           graphdata.gsets["ir159/osfm"][2],
           graphdata.gsets["ir159/ibm"][2],
           graphdata.gsets["ir159/icueuc"][2],
