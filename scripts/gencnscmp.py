@@ -376,6 +376,9 @@ annots = {
  (1, 3, 3): 'The preceding sequence of nine Chinese characters were created as unit symbols; '
              'Big5 and CNS include them in their unit symbols section, not their Chinese character '
              'section.',
+ (1, 3, 54): '01-03-54 is supposed to be a (duplicate) U+4EDD 仝.\u2002U+4EDD 仝 was located at '
+             'U+3004 in Unicode 1.0.0 (Unicode Standard, 1st Edition, Volume 1).\u2002Compare '
+             '02-01-41, 13-01-10, Ψ-66-63.',
  (1, 4, 32): 'The Suzhou numerals for ten, twenty and thirty were originally unified with the '
              'sinograms of the same glyph and meaning.\u2002This made the ten and thirty here '
              'duplicates before they were disunified in Unicode 3.0.\u2002The UTC Big5 mapping '
@@ -421,7 +424,9 @@ annots = {
               "(otherwise identical to Windows-950 as far as the CNS-mapped part of Big5 is "
               "concerned, hence it is not shown here) actually follows IBM-950 instead in this "
               "specific location in mapping it to U+5F5E.&ensp;Compare 03-55-68.",
- (2, 1, 41): 'Compare 13-01-10, Ψ-66-63.',
+ (1, 94, 79): "01-94-79 is probably supposed to be U+4E5A 乚.&ensp;Compare Ψ-69-91.",
+ (1, 94, 80): "01-94-80 is probably supposed to be U+2008A 𠂊.&ensp;Compare Ψ-69-92.",
+ (2, 1, 41): 'Compare 01-03-54, 13-01-10, Ψ-66-63.',
  (2, 8, 48): "This has a \"meat\" radical, not \"moon\"; compare 06-12-03.",
  (2, 23, 79): "I'm following RFC 1922 mappings between CNS and Big5 here, even though the gov-tw "
               "mappings seem to differ.&ensp;Not sure if these two are consistently supposed "
