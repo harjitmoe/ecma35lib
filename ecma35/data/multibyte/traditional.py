@@ -221,18 +221,8 @@ for _i in range(1, 20):
         parsers.read_unihan_planes("UCD/Unihan_IRGSources.txt", "kIRG_TSource", f"T{_i:X}"))
 cns_unihan = parsers.fuse(cns_unihan_parts, "Unihan-CNS-11643.json")
 
-irgn2779_amendments = parsers.decode_main_plane_gl(
-    parsers.parse_file_format("Other/csic_updates_from_irgn2779.txt"),
-    "csic_updates_from_irgn2779.txt")
-
 misc_amendments = [
     (None,) * (94*94*2 + 94*6 + 7) + ((0x2ED9D,),), # 03-07-08 → U+2ED9D
-    (None,) * (94*94*2 + 94*68 + 25) + ((0x6BF5,),), # 03-69-26 → U+6BF5
-    #
-    # Unicode 17.0:
-    (None,) * (94*94*3 + 94*5 + 19) + ((0x2B73A,),), # 04-06-20 → U+2B73A
-    (None,) * (94*94*10 + 94*92 + 11) + ((0x2B73C,),), # 11-93-12 → U+2B73C
-    (None,) * (94*94*10 + 94*92 + 14) + ((0x2B73D,),), # 11-93-15 → U+2B73D
 ]
 
 cns_19 = parsers.decode_main_plane_gl(
@@ -246,7 +236,6 @@ cns_misc = parsers.decode_main_plane_gl(
 cns = parsers.fuse([
     *misc_amendments,
     (None,) * (94*94*18) + tuple(cns_19),
-    irgn2779_amendments,
     cns_unihan_amended,
     cns_misc,
     cns_bmp,
@@ -501,7 +490,6 @@ graphdata.gsets["cns-eucg2"] = (94, 3, parsers.fuse([
 graphdata.gsets["cns-eucg2/lax-matching"] = (94, 3, parsers.fuse([
     *misc_amendments,
     (None,) * (94*94*18) + tuple(cns_19),
-    irgn2779_amendments,
     cns_unihan_amended,
     cns_misc,
     cns_bmp,
@@ -513,7 +501,6 @@ graphdata.gsets["cns-eucg2/lax-matching"] = (94, 3, parsers.fuse([
 graphdata.gsets["cns-eucg2/semi-lax-matching"] = (94, 3, parsers.fuse([
     *misc_amendments,
     (None,) * (94*94*18) + tuple(cns_19),
-    irgn2779_amendments,
     cns_unihan_amended,
     cns_misc,
     cns_bmp,
