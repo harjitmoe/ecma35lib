@@ -291,6 +291,30 @@ cns_ibm = parsers.decode_main_plane_euc(
     parsers.parse_file_format("ICU/ibm-964_P110-1999.ucm"), 
     "ibm-964_P110-1999.ucm")
 
+def adjust_ms20000(pointer, ucs):
+    if pointer == 241 and ucs == (0x3004,):
+        return (0x4EDD,)
+    elif pointer == 8820 and ucs == (0x415A,):
+        return (0x4E5A,)
+    elif pointer == 8821 and ucs == (0xFF78,):
+        return (0x2008A,)
+    return ucs
+
+cns1_ms = parsers.decode_main_plane_euc(
+    parsers.parse_file_format("ICU/windows-20000-2000.ucm"),
+    "windows-20000-2000.ucm",
+    plane = 1,
+    gbklike = True)
+cns1_ms_adjusted = parsers.decode_main_plane_euc(
+    parsers.parse_file_format("ICU/windows-20000-2000.ucm"),
+    "windows-20000-2000.ucm",
+    plane = 1,
+    gbklike = True,
+    mapper = adjust_ms20000)
+cns2_ms = parsers.decode_pseudoeuc_extra_plane(
+    parsers.parse_file_format("ICU/windows-20000-2000.ucm"),
+    "windows-20000-2000.ucm")
+
 cns_fullplane3 = list(cns) # Conversion from tuple creates a copy
 for index in ir184_to_old_ir183:
     cns_fullplane3[ir184_to_old_ir183[index]] = cns_fullplane3[index]
@@ -300,7 +324,9 @@ for index in ir184_to_old_ir183:
 # ir171 was mostly kept the same until 2007, then extended a bit, due to being the non-kanji plane.
 graphdata.gsets["ir171/full"] = (94, 2, parsers.fuse([
     cns[planesize * 0 : planesize * 1],
-    cns_icu_2014[planesize * 0 : planesize * 1]
+    cns_icu_2014[planesize * 0 : planesize * 1],
+    cns1_ms_adjusted,
+    cns_ibm[planesize * 0 : planesize * 1],
 ], "CSIC1-Full.json"))
 # 1992: 01-01 thru 05-80, 06-01 thru 06-30, 07-01 thru 09-25, 34-01 thru 34-33, 36-01 onward
 graphdata.gsets["ir171"] = cns1_1992 = (94, 2,
@@ -325,22 +351,20 @@ graphdata.gsets["ir171/utc"] = (94, 2, parsers.decode_main_plane_gl(
 graphdata.gsets["ir171/yasuoka"] = (94, 2, cns_yasuoka[planesize * 0 : planesize * 1])
 graphdata.gsets["ir171/icu"] = (94, 2, cns_icu_old[planesize * 0 : planesize * 1])
 graphdata.gsets["ir171/icu-2014"] = (94, 2, cns_icu_2014[planesize * 0 : planesize * 1])
-graphdata.gsets["ir171/ms/cns"] = (94, 2, parsers.decode_main_plane_euc(
-    parsers.parse_file_format("ICU/windows-20000-2000.ucm"),
-    "windows-20000-2000.ucm",
-    plane = 1,
-    gbklike = True))
+graphdata.gsets["ir171/ms/cns"] = (94, 2, cns1_ms)
 
+graphdata.gsets["ir172/full"] = (94, 2, parsers.fuse([
+    cns[planesize * 1 : planesize * 2],
+    cns2_ms,
+], "CSIC2-Full.json"))
 # ir172/govtw/old, ir172/icu, ir172/icu/2014, ir172/utc, ir172/yasuoka are all same
 graphdata.gsets["ir172"] = (94, 2, cns_gov_old[planesize * 1 : planesize * 2])
 # ir172/unihan, ir172/govtw are the same
 graphdata.gsets["ir172/unihan"] = (94, 2, cns_gov[planesize * 1 : planesize * 2])
-graphdata.gsets["ir172/ms"] = (94, 2, parsers.decode_pseudoeuc_extra_plane(
-    parsers.parse_file_format("ICU/windows-20000-2000.ucm"),
-    "windows-20000-2000.ucm"))
+graphdata.gsets["ir172/ms"] = (94, 2, cns2_ms)
 
 graphdata.chcpdocs["20000"] = "modified-euc"
-graphdata.defgsets["20000"] = ("ir006", "ir171/full", "nil", "nil", "ir172")
+graphdata.defgsets["20000"] = ("ir006", "ir171/full", "nil", "nil", "ir172/full")
 
 # ISO-IR-183 deserves particular mention.
 # It was first published in 1988, containing 6319 characters, as an extension to CNS 11643
@@ -486,6 +510,8 @@ graphdata.gsets["csic19"] = (94, 2, cns[planesize * 18 : planesize * 19])
 graphdata.gsets["cns-eucg2"] = (94, 3, parsers.fuse([
     cns,
     cns_icu_2014,
+    cns1_ms_adjusted + cns2_ms,
+    cns_ibm,
 ], "CSIC-All.json"))
 graphdata.gsets["cns-eucg2/lax-matching"] = (94, 3, parsers.fuse([
     *misc_amendments,

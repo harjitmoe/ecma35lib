@@ -61,13 +61,14 @@ plane1 = (1, ("UTC Big5", "UTC CNS", "X11 CNS", "MS CNS", "MS Big5", "Mac Big5",
 ])
 
 print("Loading 2")
-plane2 = (2, ("Big5", "MS CNS", "X11 CNS", "HKSCS'16", "GOV-TW 2019", "GOV-TW 2025"), [
+plane2 = (2, ("Big5", "MS CNS", "X11 CNS", "HKSCS'16", "GOV-TW 2019", "GOV-TW 2025", "Output"), [
           graphdata.gsets["ir172/big5"][2],
           graphdata.gsets["ir172/ms"][2],
           graphdata.gsets["ir172/x11"][2],
           graphdata.gsets["ir172/hkscs2016"][2],
           graphdata.gsets["ir172"][2],
           graphdata.gsets["ir172/unihan"][2],
+          graphdata.gsets["ir172/full"][2],
 ])
 
 print("Loading 3")

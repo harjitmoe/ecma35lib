@@ -557,9 +557,10 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR > G*DM4 G`|CNS 11643 plane 1, alternative mappings for HKSCS-2016 preferred forms|
 |`IRR SP 0 G*DM4 G`|CNS 11643 plane 1, variant supported by X11 as a font encoding|
 |`IRR SP 1 G*DM4 G`|CNS 11643 plane 1, version encoded by Microsoft's code page 20000|
-|`IRR ? G*DM4 H`|CNS 11643 plane 2|
+|`IRR ? G*DM4 H`|CNS 11643 plane 2, 1986, 1992 or 2007 version|
+|`IRR 0 G*DM4 H`|CNS 11643 plane 2, recommended version (default)|
 |`IRR 1 G*DM4 H`|CNS 11643 plane 2, Big5 mappings|
-|`IRR 5 G*DM4 H`|CNS 11643 plane 2, Unihan mappings|
+|`IRR 5 G*DM4 H`|CNS 11643 plane 2, 2022 version|
 |`IRR 6 G*DM4 H`|CNS 11643 plane 2, alternative mappings for HKSCS-2016 preferred forms|
 |`IRR 7 G*DM4 H`|CNS 11643 plane 2, variant supported by X11 as a font encoding|
 |`IRR 8 G*DM4 G`|CNS 11643 plane 2, version encoded by Microsoft's code page 20000|
