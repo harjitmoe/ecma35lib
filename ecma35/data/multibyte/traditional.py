@@ -981,17 +981,6 @@ graphdata.gsets["big5exts/monotype"] = (94, 2, parsers.fuse([
         "AdobeCNS.txt-HKm471-B5-UniCNS-UTF32"),
 ], "Big5-Monotype-Exts.json"))
 
-
-graphdata.gsets["hpux-roc15-plane-1"] = (94, 2, parsers.decode_main_plane_euc(
-    parsers.parse_file_format("ICU/hpux-roc15-11.11.ucm"),
-    "hpux-roc15-11.11.ucm",
-    plane = 1,
-    gbklike = True))
-
-graphdata.gsets["hpux-roc15-plane-2"] = (94, 2, parsers.decode_pseudoeuc_extra_plane(
-    parsers.parse_file_format("ICU/hpux-roc15-11.11.ucm"),
-    "hpux-roc15-11.11.ucm"))
-
 # # # # # # # # # #
 # CCCII and EACC
 
@@ -1110,6 +1099,42 @@ graphdata.gsets["cccii/eacc"] = (96, 3, parsers.fuse([
     graphdata.gsets["cccii/eacc/hk"][2],
     ((None,) * (96 * 99)) + graphdata.gsets["cccii"][2][96*99:],
 ], "EACC-Full4.json"))
+
+
+# # # # # # # # # #
+# Miscellaneous
+
+teletext_1_hp = parsers.decode_main_plane_euc(
+    parsers.parse_file_format("ICU/hpux-roc15-11.11.ucm"),
+    "hpux-roc15-11.11.ucm",
+    plane = 1,
+    gbklike = True)
+
+teletext_1_ms = parsers.decode_main_plane_euc(
+    parsers.parse_file_format("ICU/windows-20004-2000.ucm"),
+    "windows-20004-2000.ucm",
+    plane = 1,
+    gbklike = True)
+
+teletext_1 = parsers.fuse([teletext_1_hp, teletext_1_ms], "TCh_Teletext_1.json")
+
+graphdata.gsets["tch-teletext-1/hp"] = (94, 2, teletext_1_hp)
+graphdata.gsets["tch-teletext-1/ms"] = (94, 2, teletext_1_ms)
+graphdata.gsets["tch-teletext-1"] = (94, 2, teletext_1)
+
+teletext_2_hp = parsers.decode_pseudoeuc_extra_plane(
+    parsers.parse_file_format("ICU/hpux-roc15-11.11.ucm"),
+    "hpux-roc15-11.11.ucm")
+
+teletext_2_ms = parsers.decode_pseudoeuc_extra_plane(
+    parsers.parse_file_format("ICU/windows-20004-2000.ucm"),
+    "windows-20004-2000.ucm")
+
+teletext_2 = parsers.fuse([teletext_2_hp, teletext_2_ms], "TCh_Teletext_2.json")
+
+graphdata.gsets["tch-teletext-2/hp"] = (94, 2, teletext_2_hp)
+graphdata.gsets["tch-teletext-2/ms"] = (94, 2, teletext_2_ms)
+graphdata.gsets["tch-teletext-2"] = (94, 2, teletext_2)
 
 graphdata.gsets["ebcdic-traditional-chinese/1992"] = (190, 2, parsers.decode_main_plane_dbebcdic(parsers.parse_file_format("ICU/ibm-937_X110-1999.ucm"), "ibm-937_X110-1999.ucm"))
 graphdata.gsets["ebcdic-traditional-chinese/1999"] = (190, 2, parsers.decode_main_plane_dbebcdic(parsers.parse_file_format("ICU/ibm-1371_X100-1999.ucm"), "ibm-1371_X100-1999.ucm"))

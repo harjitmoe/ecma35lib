@@ -737,8 +737,12 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`G*DM4 % 3`|The Han'yō Denshi Programme's "IB" charset for characters from names of persons or places|
 |`G*DM4 % 4`|The Han'yō Denshi Programme's "FT" charset for characters from the Font Development and Promotion Center (FDPC)|
 |`G*DM4 % 5`|The Han'yō Denshi Programme's "HG" charset for additional characters from the Heisei Minchō font|
-|`G*DM4 % 6`|Plane 1 of the encoding which ICU calls `hpux-roc15-11.11`|
-|`G*DM4 % 7`|Plane 2 of the encoding which ICU calls `hpux-roc15-11.11`|
+|`IRR ? G*DM4 % 6`|Plane 1 of the Traditional Chinese "Teletext" charset|
+|`IRR 0 G*DM4 % 6`|Plane 1 of the Traditional Chinese "Teletext" charset (HP version)|
+|`IRR 1 G*DM4 % 6`|Plane 1 of the Traditional Chinese "Teletext" charset (Microsoft version)|
+|`IRR ? G*DM4 % 7`|Plane 2 of the Traditional Chinese "Teletext" charset|
+|`IRR 0 G*DM4 % 7`|Plane 2 of the Traditional Chinese "Teletext" charset (HP version)|
+|`IRR 1 G*DM4 % 7`|Plane 2 of the Traditional Chinese "Teletext" charset (Microsoft version)|
 |`IRR ? G*DM6 ! 0`|GBK extras per GB 18030-2000 or GB 18030-2005 (GBK level 5 with associated UDC zone and non-URO part of level 4; accepted by GBK filter in G3 slot)|
 |`IRR 0 G*DM6 ! 0`|GBK extras, WHATWG/HTML5 variant|
 |`IRR 1 G*DM6 ! 0`|GBK extras, mapping all characters with defined glyphs to non-PUA|
