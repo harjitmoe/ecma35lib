@@ -74,6 +74,13 @@ compsimple = {('ㄱ', 'ㄱ'): 'ㄲ', ('ㄱ', 'ㅅ'): 'ㄳ', ('ㄴ', 'ㄴ'): 'ㅥ
 compatjamo = set(finals.keys()) | set(vowels.keys()) | set(initials.keys()) | {"∘", "◦", '̥'}
 
 # KS C 5601 / KS X 1001 EUC-KR Wansung RHS
+graphdata.gsets["ir149/hp"] = (94, 2, parsers.decode_main_plane_euc(
+    parsers.parse_file_format("ICU/hpux-eucKR-11.11.ucm"),
+    "hpux-eucKR-11.11.ucm",
+    gbklike=True))
+graphdata.gsets["ir149/sun"] = (94, 2, parsers.decode_main_plane_euc(
+    parsers.parse_file_format("ICU/solaris-EUC_KR-2.7.ucm"),
+    "solaris-EUC_KR-2.7.ucm"))
 graphdata.gsets["ir149/ibm"] = (94, 2, parsers.decode_main_plane_euc(
     parsers.parse_file_format("ICU/ibm-949_P110-1999.ucm"),
     "ibm-949_P110-1999.ucm",

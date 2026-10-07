@@ -234,14 +234,14 @@ def parse_file_format(fil, *, twoway=False, prefer_sjis=False, skipstring=None, 
                 yield readhexbytes(byts), parse_ucs_codepoints(ucs)
         elif _i[:2] == "<U":
             # ICU-style format
-            ucs, byts, direction = _i.split(" ", 2)
+            ucs, byts, direction = _i.split(None, 2)
             if (direction.strip() in ("|1", "|2", "|4")) or (twoway and (direction.strip() == "|3")):
                 # |0 means a encoder/decoder two-way mapping
                 # |1 or |4 means an encoder-only mapping
                 # |2 means a an alternative substitute mapping, e.g. to the SUB control-code
                 # |3 means a decoder-only mapping (disfavoured duplicate)
                 continue
-            assert byts[:2] == "\\x"
+            assert byts[:2] == "\\x", repr(_i)
             yield readhexbytes(byts), parse_ucs_codepoints(ucs)
         elif "-" in _i[:3]: # Maximum possible plane number is 95, so this will remain correct
             # Format of the CNS 11643 mapping tables provided by the government in Taiwan

@@ -493,6 +493,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR < G*DM4 A`|GB/T 2312, variant used on classic Mac OS, mixed mappings|
 |`IRR = G*DM4 A`|GB/T 2312, Microsoft version|
 |`IRR > G*DM4 A`|GB/T 12345, including what Unihan calls the "Pseudo-GB1" extensions|
+|`IRR SP 0 G*DM4 A`|GB/T 2312, Sun version|
 |`IRR ? G*DM4 B`|JIS C 6226 / X 0208-1983|
 |`IRR @ G*DM4 B`|JIS X 0208-1990 (standard sequence, listed here for completeness)|
 |`IRR 0 G*DM4 B`|JIS X 0208, WHATWG variant (default; synchronised with Windows-31J)|
@@ -514,6 +515,9 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR SP 1 G*DM4 B`|"PostScript" / "KanjiTalk 6 PostScript" variant (row+84 verticals, NEC gaiji) used on classic Mac OS, Apple mappings|
 |`IRR SP 2 G*DM4 B`|JIS X 0208, using later-disunified Unicode codepoints with closer (other-source) glyphs|
 |`IRR SP 3 G*DM4 B`|JIS X 0208, version encoded by Microsoft's code page 20932|
+|`IRR SP 4 G*DM4 B`|JIS X 0208, HP version|
+|`IRR SP 5 G*DM4 B`|JIS X 0208, HP "MS" version|
+|`IRR SP 6 G*DM4 B`|JIS X 0208, Sun version|
 |`IRR ? G*DM4 C`|KS C 5601-1987 Wansung code, using new-UTC mappings (harmonious with Microsoft and WHATWG)|
 |`IRR 0 G*DM4 C`|KS C 5601-1987, but using old-UTC mappings for the non-syllables|
 |`IRR 1 G*DM4 C`|KS X 1001-1998 Wansung code. The Euro sign update, also adding the registered trademark sign, and matching the WHATWG mapping.|
@@ -524,6 +528,8 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 6 G*DM4 C`|KS X 1001-1987 extended, main plane of Apple/Elex extension (HangulTalk), Apple mappings|
 |`IRR 7 G*DM4 C`|KS X 1001-2002, updated mappings from Unihan database|
 |`IRR 8 G*DM4 C`|KS X 1001-2002, updated mappings from Unihan database, plus the changes implied by [the feedback to IRGN2298](https://www.unicode.org/irg/docs/n2298r-IICoreChanges.pdf#page=6)|
+|`IRR 9 G*DM4 C`|KS X 1001, HP version|
+|`IRR : G*DM4 C`|KS X 1001, Sun version|
 |`IRR ? G*DM4 D`|JIS X 0212:1990|
 |`IRR 0 G*DM4 D`|JIS X 0212 with va/vi/ve/vo|
 |`IRR 1 G*DM4 D`|JIS X 0212, Open Group version for JIS-Roman based EUC-JP|
@@ -533,6 +539,10 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 5 G*DM4 D`|JIS X 0212, version encoded by ICU's EUC-JP|
 |`IRR 6 G*DM4 D`|JIS X 0212, using later-disunified Unicode codepoints with closer (other-source) glyphs (see [IRGN2722](https://www.unicode.org/irg/docs/n2722-JSourceIssues.pdf)&rpar;|
 |`IRR 7 G*DM4 D`|JIS X 0212, version encoded by Microsoft's code page 20932|
+|`IRR 8 G*DM4 D`|JIS X 0212, HP version|
+|`IRR 9 G*DM4 D`|JIS X 0212, HP version for use with JIS-Roman|
+|`IRR : G*DM4 D`|JIS X 0212, HP "MS" version|
+|`IRR ; G*DM4 D`|JIS X 0212, Sun version|
 |`IRR ? G*DM4 E`|CCITT Hanzi Code (GB 2312 variant) from ITU T.101-C, which bases it on GB 6345.1-1986 and GB 8565.2-1988 with further adjustments and expansions|
 |`IRR 0 G*DM4 E`|CCITT Hanzi Code, with a more conventional mapping of the lowercase gs (appropriate for their GB 18030 reference glyphs)|
 |`IRR 1 G*DM4 E`|CCITT Hanzi Code, combined with an additional hanzi extension in row 8|
@@ -557,13 +567,16 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR > G*DM4 G`|CNS 11643 plane 1, alternative mappings for HKSCS-2016 preferred forms|
 |`IRR SP 0 G*DM4 G`|CNS 11643 plane 1, variant supported by X11 as a font encoding|
 |`IRR SP 1 G*DM4 G`|CNS 11643 plane 1, version encoded by Microsoft's code page 20000|
+|`IRR SP 2 G*DM4 G`|CNS 11643 plane 1, HP version|
+|`IRR SP 3 G*DM4 G`|CNS 11643 plane 1, mapped from HP Big-5|
 |`IRR ? G*DM4 H`|CNS 11643 plane 2, 1986, 1992 or 2007 version|
 |`IRR 0 G*DM4 H`|CNS 11643 plane 2, recommended version (default)|
 |`IRR 1 G*DM4 H`|CNS 11643 plane 2, Big5 mappings|
 |`IRR 5 G*DM4 H`|CNS 11643 plane 2, 2022 version|
 |`IRR 6 G*DM4 H`|CNS 11643 plane 2, alternative mappings for HKSCS-2016 preferred forms|
 |`IRR 7 G*DM4 H`|CNS 11643 plane 2, variant supported by X11 as a font encoding|
-|`IRR 8 G*DM4 G`|CNS 11643 plane 2, version encoded by Microsoft's code page 20000|
+|`IRR 8 G*DM4 H`|CNS 11643 plane 2, version encoded by Microsoft's code page 20000|
+|`IRR 9 G*DM4 H`|CNS 11643 plane 2, HP version|
 |`IRR ? G*DM4 I`|CNS 11643-1992 plane 3|
 |`IRR 0 G*DM4 I`|CNS 11643-1988 plane 14|
 |`IRR 1 G*DM4 I`|CNS 11643-1988 plane 14 with extensions, as submitted to the IRG|
@@ -576,6 +589,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 8 G*DM4 I`|CNS 11643-1992 plane 3, per Unihan mappings|
 |`IRR 9 G*DM4 I`|CNS 11643-1992 plane 3, as officially defined in Taiwan as of 2025|
 |`IRR : G*DM4 I`|CNS 11643-1992 plane 3, variant supported by X11 as a font encoding|
+|`IRR ; G*DM4 I`|CNS 11643-1992 plane 3, HP version|
 |`IRR ? G*DM4 J`|CNS 11643-1992 plane 4|
 |`IRR 0 G*DM4 J`|CNS 11643-1992 plane 4, as officially defined in Taiwan as of 2019|
 |`IRR 1 G*DM4 J`|CNS 11643-1992 plane 4, per former ICU ISO-2022-CN-EXT mappings|
@@ -583,6 +597,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 3 G*DM4 J`|CNS 11643-1992 plane 4, per Yasuoka's mappings|
 |`IRR 4 G*DM4 J`|CNS 11643-1992 plane 4, per Unihan mappings|
 |`IRR 5 G*DM4 J`|CNS 11643-1992 plane 4, as officially defined in Taiwan as of 2025|
+|`IRR 6 G*DM4 J`|CNS 11643-1992 plane 4, HP version|
 |`IRR ? G*DM4 K`|CNS 11643-1992 plane 5|
 |`IRR 0 G*DM4 K`|CNS 11643-1992 plane 5, as officially defined in Taiwan as of 2019|
 |`IRR 1 G*DM4 K`|CNS 11643-1992 plane 5, per former ICU ISO-2022-CN-EXT mappings|
@@ -626,6 +641,8 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR : G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, including some highly approximate Unicode mappings|
 |`IRR ; G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, as included by EUC-TW as its G2 set (as officially defined in Taiwan as of 2025)|
 |`IRR < G*DM4 ! 1`|All planes of CNS 11643 as a 94^3 set, including a somewhat smaller number of rather approximate Unicode mappings|
+|`IRR = G*DM4 ! 1`|Planes 2 and up of CNS 11643 as a 94^3 set, as included by EUC-TW as its G2 set (HP version)|
+|`IRR > G*DM4 ! 1`|Planes 2 and up of CNS 11643 as a 94^3 set, as included by EUC-TW as its G2 set (Sun version)|
 |`IRR ? G*DM4 ! 2`|MS-950 Big-5 extensions (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`IRR @ G*DM4 ! 2`|Big5-2003 extension set (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`IRR A G*DM4 ! 2`|Big5-ETEN extension set (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
@@ -642,6 +659,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 4 G*DM4 ! 2`|Hong Kong Supplementary Character Set 2001 extension set, with updated Unicode mappings (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`IRR 5 G*DM4 ! 2`|Hong Kong Supplementary Character Set 2001 extension set, with updated Unicode mappings, with further extensions as implemented by the Sakura font (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`IRR 6 G*DM4 ! 2`|Hong Kong Supplementary Character Set full (GCCS + 2008) extension set, with updated Unicode mappings, with further extensions as implemented by the Sakura font (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
+|`IRR 7 G*DM4 ! 2`|Hong Kong Supplementary Character Set extension set, HP version (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`IRR ? G*DM4 ! 3`|Non-ETEN Big5 kana and Cyrillic (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`IRR @ G*DM4 ! 3`|Non-ETEN Big5 kana and Cyrillic (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere) combined with Microsoft non-EUDC extensions, as in Python's built-in `"cp950"` Windows codepage implementation.|
 |`IRR ? G*DM4 ! 4`|IBM extensions for Shift\_JIS (accepted by Shift\_JIS filter in G3 slot, mapped to/from Shift\_JIS by the same mapping scheme as JIS X 0213 plane 2); excluding UDC|

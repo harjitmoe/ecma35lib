@@ -176,6 +176,26 @@ graphdata.gsets["ir159/icueuc"] = (94, 2, parsers.decode_main_plane_euc(
 graphdata.gsets["ir159/ms"] = (94, 2, parsers.decode_pseudoeuc_extra_plane(
     parsers.parse_file_format("ICU/windows-20932-2000.ucm"),
     "windows-20932-2000.ucm"))
+graphdata.gsets["ir159/hp"] = (94, 2, parsers.decode_main_plane_euc(
+    parsers.parse_file_format("ICU/hpux-eucJP-11.11.ucm"),
+    "hpux-eucJP-11.11.ucm",
+    eucjp = 1,
+    plane = 2))
+graphdata.gsets["ir159/hp/jisroman"] = (94, 2, parsers.decode_main_plane_euc(
+    parsers.parse_file_format("ICU/hpux-eucJP0201-11.11.ucm"),
+    "hpux-eucJP0201-11.11.ucm",
+    eucjp = 1,
+    plane = 2))
+graphdata.gsets["ir159/hp/ms"] = (94, 2, parsers.decode_main_plane_euc(
+    parsers.parse_file_format("ICU/hpux-eucJPMS-11.11.ucm"),
+    "hpux-eucJPMS-11.11.ucm",
+    eucjp = 1,
+    plane = 2))
+graphdata.gsets["ir159/sun"] = (94, 2, parsers.decode_main_plane_euc(
+    parsers.parse_file_format("ICU/solaris-eucJP-2.7.ucm"),
+    "solaris-eucJP-2.7.ucm",
+    eucjp = 1,
+    plane = 2))
 graphdata.gsets["ir159/later-disunifications"] = (94, 2, parsers.decode_main_plane_whatwg(
     parsers.parse_file_format("WHATWG/index-jis0212.txt"),
     "index-jis0212.txt",
@@ -206,6 +226,22 @@ graphdata.gsets["ir168/ms/euc"] = (94, 2, parsers.decode_main_plane_euc(
     "windows-20932-2000.ucm",
     plane = 1,
     gbklike = True))
+graphdata.gsets["ir168/hp"] = (94, 2, parsers.decode_main_plane_euc(
+    parsers.parse_file_format("ICU/hpux-eucJP-11.11.ucm"),
+    "hpux-eucJP-11.11.ucm",
+    eucjp = 1,
+    plane = 1))
+# ir168/hp/jisroman = ir168
+graphdata.gsets["ir168/hp/ms"] = (94, 2, parsers.decode_main_plane_euc(
+    parsers.parse_file_format("ICU/hpux-eucJPMS-11.11.ucm"),
+    "hpux-eucJPMS-11.11.ucm",
+    eucjp = 1,
+    plane = 1))
+graphdata.gsets["ir168/sun"] = (94, 2, parsers.decode_main_plane_euc(
+    parsers.parse_file_format("ICU/solaris-eucJP-2.7.ucm"),
+    "solaris-eucJP-2.7.ucm",
+    eucjp = 1,
+    plane = 1))
 graphdata.gsets["ir168/later-disunifications"] = (94, 2, parsers.decode_main_plane_whatwg(
     parsers.parse_file_format("WHATWG/index-jis0208.txt"),
     "index-jis0208.txt",

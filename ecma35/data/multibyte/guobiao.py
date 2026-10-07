@@ -88,6 +88,11 @@ graphdata.gsets["ir058/1986"] = gb2312_1986 = (94, 2,
         parsers.parse_file_format("UTC/GB2312.TXT"),
         "GB2312.TXT",
         mapper = gbutcto1986map))
+# ir058/hp = ir058/utc
+graphdata.gsets["ir058/sun"] = (94, 2,
+    parsers.decode_main_plane_euc(
+        parsers.parse_file_format("ICU/solaris-zh_CN.euc-2.7.ucm"),
+        "solaris-zh_CN.euc-2.7.ucm"))
 graphdata.gsets["ir058/ms"] = (94, 2,
     parsers.decode_main_plane_euc(
         parsers.parse_file_format("ICU/windows-936-2000.ucm"),

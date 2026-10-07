@@ -290,6 +290,12 @@ cns_icu_2014_nobmppua = parsers.decode_main_plane_euc(
 cns_ibm = parsers.decode_main_plane_euc(
     parsers.parse_file_format("ICU/ibm-964_P110-1999.ucm"), 
     "ibm-964_P110-1999.ucm")
+cns_hp = parsers.decode_main_plane_euc(
+    parsers.parse_file_format("ICU/hpux-eucTW-11.11.ucm"), 
+    "hpux-eucTW-11.11.ucm")
+cns_sun = parsers.decode_main_plane_euc(
+    parsers.parse_file_format("ICU/solaris-zh_TW_euc-2.7.ucm"), 
+    "solaris-zh_TW_euc-2.7.ucm")
 
 def adjust_ms20000(pointer, ucs):
     if pointer == 241 and ucs == (0x3004,):
@@ -352,16 +358,19 @@ graphdata.gsets["ir171/yasuoka"] = (94, 2, cns_yasuoka[planesize * 0 : planesize
 graphdata.gsets["ir171/icu"] = (94, 2, cns_icu_old[planesize * 0 : planesize * 1])
 graphdata.gsets["ir171/icu-2014"] = (94, 2, cns_icu_2014[planesize * 0 : planesize * 1])
 graphdata.gsets["ir171/ms/cns"] = (94, 2, cns1_ms)
+graphdata.gsets["ir171/hp"] = (94, 2, cns_hp[planesize * 0 : planesize * 1])
+# ir171/sun = ir171/utc
 
 graphdata.gsets["ir172/full"] = (94, 2, parsers.fuse([
     cns[planesize * 1 : planesize * 2],
     cns2_ms,
 ], "CSIC2-Full.json"))
-# ir172/govtw/old, ir172/icu, ir172/icu/2014, ir172/utc, ir172/yasuoka are all same
+# ir172/govtw/old, ir172/icu, ir172/icu/2014, ir172/utc, ir172/yasuoka, ir172/sun are all same
 graphdata.gsets["ir172"] = (94, 2, cns_gov_old[planesize * 1 : planesize * 2])
 # ir172/unihan, ir172/govtw are the same
 graphdata.gsets["ir172/unihan"] = (94, 2, cns_gov[planesize * 1 : planesize * 2])
 graphdata.gsets["ir172/ms"] = (94, 2, cns2_ms)
+graphdata.gsets["ir172/hp"] = (94, 2, cns_hp[planesize * 1 : planesize * 2])
 
 graphdata.chcpdocs["20000"] = "modified-euc"
 graphdata.defgsets["20000"] = ("ir006", "ir171/full", "nil", "nil", "ir172/full")
@@ -403,6 +412,8 @@ graphdata.gsets["ir183/utc"] = (94, 2, parsers.decode_main_plane_gl(
 graphdata.gsets["ir183/yasuoka"] = (94, 2, cns_yasuoka[planesize * 2 : planesize * 3])
 graphdata.gsets["ir183/icu"] = (94, 2, cns_icu_old[planesize * 2 : planesize * 3])
 graphdata.gsets["ir183/icu-2014"] = (94, 2, cns_icu_2014[planesize * 2 : planesize * 3])
+graphdata.gsets["ir183/hp"] = (94, 2, cns_hp[planesize * 2 : planesize * 3])
+# ir183/sun = ir183/utc
 
 def remove_placeholder_space(pointer, ucs):
     if ucs == (0x3000,) and pointer > 0:
@@ -432,6 +443,7 @@ graphdata.gsets["ir184/unihan"] = (94, 2, cns_unihan[planesize * 3 : planesize *
 graphdata.gsets["ir184/yasuoka"] = (94, 2, cns_yasuoka[planesize * 3 : planesize * 4])
 graphdata.gsets["ir184/icu"] = (94, 2, cns_icu_old[planesize * 3 : planesize * 4])
 graphdata.gsets["ir184/icu-2014"] = (94, 2, cns_icu_2014[planesize * 3 : planesize * 4])
+graphdata.gsets["ir184/hp"] = (94, 2, cns_hp[planesize * 3 : planesize * 4])
 
 graphdata.gsets["ir185"] = (94, 2, cns[planesize * 4 : planesize * 5])
 graphdata.gsets["ir185/govtw"] = (94, 2, cns_gov[planesize * 4 : planesize * 5])
@@ -539,6 +551,8 @@ graphdata.gsets["cns-eucg2/yasuoka"] = (94, 3, cns_yasuoka)
 graphdata.gsets["cns-eucg2/govtw"] = (94, 3, cns_gov)
 graphdata.gsets["cns-eucg2/govtw/old"] = (94, 3, cns_gov_old)
 graphdata.gsets["cns-eucg2/unihan"] = (94, 3, cns_unihan)
+graphdata.gsets["cns-eucg2/hp"] = (94, 3, cns_hp)
+graphdata.gsets["cns-eucg2/sun"] = (94, 3, cns_sun)
 # The version of EUC-TW used by ICU, with standard assignments in planes 1-7 and 15,
 #   a user-defined area in plane 12, and IBM corporate assignments in plane 13.
 #   Note that this is incompatible with the current standard's use of planes 12 and 13.
@@ -675,6 +689,12 @@ def hkscs2008_to_hkscs2016(pointer, ucs):
     return _hkscs2008_to_hkscs2016.get(ucs, ucs)
 
 # Now that big5_to_cns2 is defined, we can do this:
+graphdata.gsets["ir171/hp/big5"] = (94, 2, parsers.decode_main_plane_big5(
+    parsers.parse_file_format("ICU/hpux-hkbig5-11.11.ucm"),
+    "hpux-hkbig5-11.11.ucm",
+    "big5_to_cns2",
+    plane=1))
+# ir171/sun/big5 = ir171/hp/big5
 graphdata.gsets["ir171/ms"] = (94, 2, parsers.decode_main_plane_big5(
     parsers.parse_file_format("ICU/windows-950-2000.ucm"),
     "windows-950-2000.ucm",
@@ -861,6 +881,10 @@ _web_hkscs_extras = parsers.fuse([
         "hkscs2004.txt"),
 ], "BIG5-HKSCS2008.json")
 graphdata.gsets["big5exts/eten/hkscs"] = (94, 2, _web_hkscs_extras)
+
+graphdata.gsets["big5exts/eten/hkscs/hp"] = (94, 2, parsers.decode_extra_plane_big5(
+        parsers.parse_file_format("ICU/hpux-hkbig5-11.11.ucm"),
+        "hpux-hkbig5-11.11.ucm"))
 
 graphdata.gsets["big5exts/eten/hkscs/2004"] = (94, 2, parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Mozilla/hkscs2004.txt", moz2004=True),

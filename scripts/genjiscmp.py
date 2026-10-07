@@ -44,6 +44,7 @@ plane1 = (1, ("1978 JIS<br>Illustrative",  "1978 JIS<br>90JIS Pivot",  "1983 JIS
               "NEC 78JIS<br>Illustrative", 
               "IBM 78JIS", "IBM 90JIS<br>Plane 1", "Fujitsu", "MS / HTML5", "MS EUC<br>Plane 1", 
               "Apple<br>Row + 10", "Apple<br>PostScript", "Apple<br>KanjiTalk7", 
+              "HP<br>Plane 1", "HP<br>Plane 1M", "Sun<br>Plane 1",
               "ARIB<br>JIS Emoji", "DoCoMo<br>JIS Emoji", "au by KDDI<br>JIS Emoji", "SoftBank<br>JIS Emoji"), [
           graphdata.gsets["ir042"][2],
           graphdata.gsets["ir042/1990pivot"][2],
@@ -62,6 +63,9 @@ plane1 = (1, ("1978 JIS<br>Illustrative",  "1978 JIS<br>90JIS Pivot",  "1983 JIS
           graphdata.gsets["ir168/mackt6"][2],
           graphdata.gsets["ir168/macps"][2],
           graphdata.gsets["ir168/mac"][2],
+          graphdata.gsets["ir168/hp"][2],
+          graphdata.gsets["ir168/hp/ms"][2],
+          graphdata.gsets["ir168/sun"][2],
           graphdata.gsets["ir168/arib"][2],
           graphdata.gsets["ir168/docomo"][2],
           graphdata.gsets["ir168/kddipict"][2],
@@ -72,7 +76,9 @@ plane2 = (2, ("IBM SJIS Ext<br>78JIS Ver.", "IBM SJIS Ext<br>MS / HTML5", "DoCoM
               "au by KDDI<br>SJIS Emoji", "SoftBank<br>SJIS Emoji",
               "1990 JIS<br>Plane 2", "IRG N2722<br>Plane 2", "Va Extension<br>Plane 2",
               "MS EUC<br>Plane 2", "OSF EUC<br>Plane 2M",
-              "IBM 90JIS<br>Plane 2", "ICU EUC<br>Plane 2", "2000/04 JIS<br>Plane 2"), [
+              "IBM 90JIS<br>Plane 2", "ICU EUC<br>Plane 2",
+              "HP<br>Plane 2", "HP<br>Plane 2J", "HP<br>Plane 2M", "Sun<br>Plane 2"
+              "2000/04 JIS<br>Plane 2"), [
           graphdata.gsets["sjisext/ibm/old"][2],
           graphdata.gsets["sjisext/ibm/pua"][2],
           graphdata.gsets["sjisext/docomo"][2],
@@ -85,6 +91,10 @@ plane2 = (2, ("IBM SJIS Ext<br>78JIS Ver.", "IBM SJIS Ext<br>MS / HTML5", "DoCoM
           graphdata.gsets["ir159/osfm"][2],
           graphdata.gsets["ir159/ibm"][2],
           graphdata.gsets["ir159/icueuc"][2],
+          graphdata.gsets["ir159/hp"][2],
+          graphdata.gsets["ir159/hp/jisroman"][2],
+          graphdata.gsets["ir159/hp/ms"][2],
+          graphdata.gsets["ir159/sun"][2],
           graphdata.gsets["ir229"][2],
 ])
 
