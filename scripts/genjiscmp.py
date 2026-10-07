@@ -77,7 +77,7 @@ plane2 = (2, ("IBM SJIS Ext<br>78JIS Ver.", "IBM SJIS Ext<br>MS / HTML5", "DoCoM
               "1990 JIS<br>Plane 2", "IRG N2722<br>Plane 2", "Va Extension<br>Plane 2",
               "MS EUC<br>Plane 2", "OSF EUC<br>Plane 2M",
               "IBM 90JIS<br>Plane 2", "ICU EUC<br>Plane 2",
-              "HP<br>Plane 2", "HP<br>Plane 2J", "HP<br>Plane 2M", "Sun<br>Plane 2"
+              "HP<br>Plane 2", "HP<br>Plane 2J", "HP<br>Plane 2M", "Sun<br>Plane 2",
               "2000/04 JIS<br>Plane 2"), [
           graphdata.gsets["sjisext/ibm/old"][2],
           graphdata.gsets["sjisext/ibm/pua"][2],
