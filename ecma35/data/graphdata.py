@@ -523,7 +523,7 @@ g94nbytes = {tuple(b"@"): ("ir042/nec", ("ir042/ibm", "ir042/nec", "ir042/1990pi
                             "ir168/docomo", "ir168/kddisym", "ir168/sbank", "ir168/kddipict",
                             "ir087/fujitsu", "ir168/arib", "ir168/mac-raw", "ir168/macps-raw",
                             "ir168/later-disunifications", "ir168/ms/euc",
-                            "ir168/hp", "ir168/hp/ms", "ir168/sun"),
+                            "ir168/hp", "ir168/hp/ms", "ir168/sun", "ir168/sun/sjis"),
                            ("ir087", "ir168")),
              tuple(b"C"): ("ir149/unihan", ("ir149/altutc", "ir149/1998", "ir149/2002", "ir149/mac", "ir149/ibm", "ir149/mac-unicode2_1", "ir149/mac-unicode3_2", "ir149/unihan", "ir149/irgn2298feedback", "ir149/hp", "ir149/sun"), ("ir149",)),
              tuple(b"D"): ("ir159",
@@ -554,10 +554,10 @@ g94nbytes = {tuple(b"@"): ("ir042/nec", ("ir042/ibm", "ir042/nec", "ir042/1990pi
              tuple(b"!0"): "gb12052",
              # Traditional Chinese off doing its own thing, as you do... no standard escapes here.
              tuple(b"!1"): ("cns-eucg2", ("cns-eucg2/icu/2014/full", "cns-eucg2/ms", "cns-eucg2/mac", "cns-eucg2/govtw/old", "cns-eucg2/icu/old", "cns-eucg2/ibm/full", "cns-eucg2/yasuoka", "cns-eucg2/icu/2014/noplane1", "cns-eucg2/ibm/noplane1", "cns-eucg2/unihan", "cns-eucg2/lax-matching", "cns-eucg2/govtw", "cns-eucg2/semi-lax-matching", "cns-eucg2/hp", "cns-eucg2/sun"), ("cns-eucg2",)),
-             tuple(b"!2"): ("big5exts/eten/hkscs/updated", ("big5exts/eten/ibm", "big5exts/eten/web", "big5exts/eten/hkscs/gccs/ext", "big5exts/eten/hkscs/1999/updated", "big5exts/eten/hkscs/2001/updated", "big5exts/eten/hkscs/2001/sakura", "big5exts/eten/hkscs/sakura", "big5exts/eten/hkscs/hp"), ("big5exts/ms", "big5exts/eten/2003", "big5exts/eten", "big5exts/eten/hkscs/gccs", "big5exts/eten/hkscs/1999", "big5exts/eten/hkscs/2001", "big5exts/eten/hkscs/2004", "big5exts/eten/hkscs", "big5exts/eten/hkscs/updated")),
+             tuple(b"!2"): ("big5exts/eten/hkscs/updated", ("big5exts/eten/ibm", "big5exts/eten/web", "big5exts/eten/hkscs/gccs/ext", "big5exts/eten/hkscs/1999/updated", "big5exts/eten/hkscs/2001/updated", "big5exts/eten/hkscs/2001/sakura", "big5exts/eten/hkscs/sakura", "big5exts/eten/hkscs/hp", "big5exts/eten/hkscs/sun"), ("big5exts/ms", "big5exts/eten/2003", "big5exts/eten", "big5exts/eten/hkscs/gccs", "big5exts/eten/hkscs/1999", "big5exts/eten/hkscs/2001", "big5exts/eten/hkscs/2004", "big5exts/eten/hkscs", "big5exts/eten/hkscs/updated")),
              tuple(b"!3"): ("big5exts/utc/ms", (), ("big5exts/utc", "big5exts/utc/ms")),
              # Shift_JIS extensions for IBM/Windows/HTML5 and for cellular emoji
-             tuple(b"!4"): ("sjisext/ibm/pua", ("sjisext/ibm/old",), ("sjisext/ibm", "sjisext/ibm/pua")),
+             tuple(b"!4"): ("sjisext/ibm/pua", ("sjisext/ibm/old", "sjisext/ibm/sun"), ("sjisext/ibm", "sjisext/ibm/pua")),
              tuple(b"!5"): "sjisext/docomo",
              tuple(b"!6"): ("sjisext/kddi/pict", ("sjisext/kddi/sym",), ("sjisext/kddi/pict",)),
              tuple(b"!7"): "sjisext/sbank",

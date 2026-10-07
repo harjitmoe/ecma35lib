@@ -242,6 +242,10 @@ graphdata.gsets["ir168/sun"] = (94, 2, parsers.decode_main_plane_euc(
     "solaris-eucJP-2.7.ucm",
     eucjp = 1,
     plane = 1))
+graphdata.gsets["ir168/sun/sjis"] = (94, 2, parsers.decode_main_plane_sjis(
+    parsers.parse_file_format("ICU/solaris-PCK-2.7.ucm"),
+    "solaris-PCK-2.7.ucm",
+    plane = 1))
 graphdata.gsets["ir168/later-disunifications"] = (94, 2, parsers.decode_main_plane_whatwg(
     parsers.parse_file_format("WHATWG/index-jis0208.txt"),
     "index-jis0208.txt",
@@ -323,6 +327,18 @@ graphdata.gsets["ir168/kddisym"] = (94, 2,
 graphdata.gsets["ir168/sbank"] = (94, 2, 
         parsers.fuse([cellemojidata.outmap["softbank"][:94*94], _windows_noNECSel],
                      "Emoji--Softbank-4.json"))
+graphdata.gsets["sjisext/docomo"] = (94, 2, cellemojidata.outmap["docomo"][94*94:])
+graphdata.gsets["sjisext/kddi/sym"] = (94, 2, cellemojidata.outmap["kddi_symboliczodiac"][94*94:])
+graphdata.gsets["sjisext/kddi/pict"] = (94, 2, cellemojidata.outmap["kddi"][94*94:])
+graphdata.gsets["sjisext/sbank"] = (94, 2, cellemojidata.outmap["softbank"][94*94:])
+graphdata.gsets["sbank2gpageG"] = (94, 1, tuple(cellemojidata.softbank_pages[0]))
+graphdata.gsets["sbank2gpageE"] = (94, 1, tuple(cellemojidata.softbank_pages[1]))
+graphdata.gsets["sbank2gpageF"] = (94, 1, tuple(cellemojidata.softbank_pages[2]))
+graphdata.gsets["sbank2gpageO"] = (94, 1, tuple(cellemojidata.softbank_pages[3]))
+graphdata.gsets["sbank2gpageP"] = (94, 1, tuple(cellemojidata.softbank_pages[4]))
+graphdata.gsets["sbank2gpageQ"] = (94, 1, tuple(cellemojidata.softbank_pages[5]))
+
+# Other Shift_JIS extensions outside of the main JIS X 0208 plane
 graphdata.gsets["sjisext/ibm"] = sjis_html5_g3 = (94, 2, parsers.decode_main_plane_whatwg(
     parsers.parse_file_format("WHATWG/index-jis0208.txt"),
     "index-jis0208.txt",
@@ -350,16 +366,10 @@ for u, i in enumerate(range(0xE000, 0xE758)):
         whatwgsjispuaonly.append((i,))
 graphdata.gsets["sjisext/ibm/pua"] = (94, 2, 
         parsers.fuse([whatwgsjispuaonly, sjis_html5_g3[2]], "ibmextwithpua.json"))
-graphdata.gsets["sjisext/docomo"] = (94, 2, cellemojidata.outmap["docomo"][94*94:])
-graphdata.gsets["sjisext/kddi/sym"] = (94, 2, cellemojidata.outmap["kddi_symboliczodiac"][94*94:])
-graphdata.gsets["sjisext/kddi/pict"] = (94, 2, cellemojidata.outmap["kddi"][94*94:])
-graphdata.gsets["sjisext/sbank"] = (94, 2, cellemojidata.outmap["softbank"][94*94:])
-graphdata.gsets["sbank2gpageG"] = (94, 1, tuple(cellemojidata.softbank_pages[0]))
-graphdata.gsets["sbank2gpageE"] = (94, 1, tuple(cellemojidata.softbank_pages[1]))
-graphdata.gsets["sbank2gpageF"] = (94, 1, tuple(cellemojidata.softbank_pages[2]))
-graphdata.gsets["sbank2gpageO"] = (94, 1, tuple(cellemojidata.softbank_pages[3]))
-graphdata.gsets["sbank2gpageP"] = (94, 1, tuple(cellemojidata.softbank_pages[4]))
-graphdata.gsets["sbank2gpageQ"] = (94, 1, tuple(cellemojidata.softbank_pages[5]))
+graphdata.gsets["sjisext/ibm/sun"] = (94, 2, parsers.decode_main_plane_sjis(
+    parsers.parse_file_format("ICU/solaris-PCK-2.7.ucm"),
+    "solaris-PCK-2.7.ucm",
+    plane = 2))
 
 # JIS X 2013:2000 and :2004
 # Note: Python's *jisx0213 (i.e. JIS X 0213:2000) codecs map 02-93-27 to U+9B1D, rather than U+9B1C

@@ -886,6 +886,10 @@ graphdata.gsets["big5exts/eten/hkscs/hp"] = (94, 2, parsers.decode_extra_plane_b
         parsers.parse_file_format("ICU/hpux-hkbig5-11.11.ucm"),
         "hpux-hkbig5-11.11.ucm"))
 
+graphdata.gsets["big5exts/eten/hkscs/sun"] = (94, 2, parsers.decode_extra_plane_big5(
+    parsers.parse_file_format("ICU/solaris-zh_HK.hkscs-5.9.ucm"),
+    "solaris-zh_HK.hkscs-5.9.ucm"))
+
 graphdata.gsets["big5exts/eten/hkscs/2004"] = (94, 2, parsers.decode_extra_plane_big5(
         parsers.parse_file_format("Mozilla/hkscs2004.txt", moz2004=True),
         "hkscs2004.txt"))

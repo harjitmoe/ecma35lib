@@ -518,6 +518,7 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR SP 4 G*DM4 B`|JIS X 0208, HP version|
 |`IRR SP 5 G*DM4 B`|JIS X 0208, HP "MS" version|
 |`IRR SP 6 G*DM4 B`|JIS X 0208, Sun version|
+|`IRR SP 7 G*DM4 B`|JIS X 0208, Sun version for Shift\_JIS|
 |`IRR ? G*DM4 C`|KS C 5601-1987 Wansung code, using new-UTC mappings (harmonious with Microsoft and WHATWG)|
 |`IRR 0 G*DM4 C`|KS C 5601-1987, but using old-UTC mappings for the non-syllables|
 |`IRR 1 G*DM4 C`|KS X 1001-1998 Wansung code. The Euro sign update, also adding the registered trademark sign, and matching the WHATWG mapping.|
@@ -660,11 +661,13 @@ editions and mapping variations. See [CNS comparison](https://harjit.moe/cns-con
 |`IRR 5 G*DM4 ! 2`|Hong Kong Supplementary Character Set 2001 extension set, with updated Unicode mappings, with further extensions as implemented by the Sakura font (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`IRR 6 G*DM4 ! 2`|Hong Kong Supplementary Character Set full (GCCS + 2008) extension set, with updated Unicode mappings, with further extensions as implemented by the Sakura font (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`IRR 7 G*DM4 ! 2`|Hong Kong Supplementary Character Set extension set, HP version (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
+|`IRR 8 G*DM4 ! 2`|Hong Kong Supplementary Character Set extension set, Sun version (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`IRR ? G*DM4 ! 3`|Non-ETEN Big5 kana and Cyrillic (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere)|
 |`IRR @ G*DM4 ! 3`|Non-ETEN Big5 kana and Cyrillic (accepted by Big-5 filter in G3 slot, not expected to be used elsewhere) combined with Microsoft non-EUDC extensions, as in Python's built-in `"cp950"` Windows codepage implementation.|
 |`IRR ? G*DM4 ! 4`|IBM extensions for Shift\_JIS (accepted by Shift\_JIS filter in G3 slot, mapped to/from Shift\_JIS by the same mapping scheme as JIS X 0213 plane 2); excluding UDC|
 |`IRR @ G*DM4 ! 4`|IBM extensions for Shift\_JIS (accepted by Shift\_JIS filter in G3 slot, mapped to/from Shift\_JIS by the same mapping scheme as JIS X 0213 plane 2); including UDC|
 |`IRR 0 G*DM4 ! 4`|IBM extensions for Shift\_JIS (accepted by Shift\_JIS filter in G3 slot, mapped to/from Shift\_JIS by the same mapping scheme as JIS X 0213 plane 2); old mappings for use with 78JIS|
+|`IRR 1 G*DM4 ! 4`|IBM extensions for Shift\_JIS, Sun version without the characters duplicating NEC row 13 (accepted by Shift\_JIS filter in G3 slot, mapped to/from Shift\_JIS by the same mapping scheme as JIS X 0213 plane 2)|
 |`G*DM4 ! 5`|DoCoMo Emoji extensions for Shift\_JIS (as above)|
 |`IRR ? G*DM4 ! 6`|KDDI Emoji extensions for Shift\_JIS (as above), pictorial zodiac variant|
 |`IRR 0 G*DM4 ! 6`|KDDI Emoji extensions for Shift\_JIS (as above), symbolic zodiac variant|
