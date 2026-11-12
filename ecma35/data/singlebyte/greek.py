@@ -299,12 +299,14 @@ graphdata.gsets["ibmsymbol"] = (94, 1, (
 graphdata.rhses["1253"] = parsers.read_single_byte("WHATWG/index-windows-1253.txt")
 
 # OEM code pages
-graphdata.rhses["210"] = graphdata.rhses["737"] = parsers.read_single_byte("ICU/ibm-737_P100-1997.ucm")
+graphdata.rhses["737"] = parsers.read_single_byte("ICU/ibm-737_P100-1997.ucm")
+graphdata.rhses["210"] = graphdata.rhses["737"]
 graphdata.rhses["851"] = parsers.read_single_byte("ICU/ibm-851_P100-1995.ucm")
 graphdata.rhses["869"] = parsers.read_single_byte("ICU/ibm-869_P100-1995.ucm")
 
 # Macintosh code page
-graphdata.rhses["10006"] = graphdata.rhses["1280"] = parsers.read_mozilla_ut_file("Mozilla/macgreek.ut")
+graphdata.rhses["10006"] = parsers.read_mozilla_ut_file("Mozilla/macgreek.ut")
+graphdata.rhses["1280"] = graphdata.rhses["10006"]
 
 # Greek G0 set of ETS 300 706
 graphdata.gsets["etsgreek"] = (94, 1, (

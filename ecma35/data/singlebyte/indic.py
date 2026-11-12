@@ -73,7 +73,8 @@ graphdata.rhses["3860"] = parsers.read_single_byte("Other/DOS03860.ucm")
 graphdata.rhses["3861"] = parsers.read_single_byte("Other/DOS03861.ucm")
 graphdata.rhses["3863"] = parsers.read_single_byte("Other/DOS03863.ucm")
 graphdata.defgsets["3863"] = ('ir006', 'ir166', 'nil', 'nil')
-graphdata.rhses["3864"] = graphdata.rhses["3865"] = parsers.read_single_byte("Other/DOS03864.ucm")
+graphdata.rhses["3864"] = parsers.read_single_byte("Other/DOS03864.ucm")
+graphdata.rhses["3865"] = graphdata.rhses["3864"]
 graphdata.defgsets["3864"] = graphdata.defgsets["3865"] = ('ir006', 'ir166', 'nil', 'nil')
 
 # RHS of IBM code page 1133 for Lao

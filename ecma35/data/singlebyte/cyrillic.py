@@ -275,12 +275,12 @@ graphdata.defgsets['58259'] = ('ir006', 'ir201', 'nil', 'nil')
 graphdata.gsets["ir223"] = (94, 1, ((0x0301,), (0x0308,), (0x0328,), (0x0329,), (0x0306,), (0x0327,), (0x0300,), (0x04D5,), (0x0493,), (0x0495,), (0x0501,), (0x0503,), (0x04E1,), (0x0507,), (0x0505,), None, (0x030B,), (0x0304,), (0x0321,), (0x1DFA,), (0x030C,), (0x030A,), (0x0313,), (0x04D4,), (0x0492,), (0x0494,), (0x0500,), (0x0502,), (0x04E0,), (0x0506,), (0x0504,), (0x0268,), (0x0249,), (0x049D,), (0x04A1,), (0x049F,), (0x0199,), (0x051B,), (0x2CD1,), (0x0509,), (0x0521,), (0x0515,), (0x04A5,), (0x04C8,), (0x050B,), (0x0523,), (0x04E9,), (0x0197,), (0x0248,), (0x049C,), (0x04A0,), (0x049E,), (0x0198,), (0x051A,), (0x2CD0,), (0x0508,), (0x0520,), (0x0514,), (0x04A4,), (0x04C7,), (0x050A,), (0x0522,), (0x04E8,), (0x04A9,), (0x0153,), (0x04A7,), (0x0517,), (0x050D,), (0x050F,), (0x04AF,), (0x04B1,), (0x051D,), (0x04B5,), (0x04B9,), (0x04BB,), (0x04BD,), (0x04D9,), (0x0519,), (0x04C0,), (0x04A8,), (0x0152,), (0x04A6,), (0x0516,), (0x050C,), (0x050E,), (0x04AE,), (0x04B0,), (0x051C,), (0x04B4,), (0x04B8,), (0x04BA,), (0x04BC,), (0x04D8,), (0x0518,)))
 
 # Other KOI-8 encodings
-graphdata.rhses["878"] = graphdata.rhses["4019"] = graphdata.rhses["20866"
-    ] = parsers.read_single_byte("WHATWG/index-koi8-r.txt") # KOI8-R
-graphdata.rhses["1167"] = graphdata.rhses["59246"
-    ] = parsers.read_single_byte("ICU/ibm-1167_P100-2002.ucm") # KOI8-RU
-graphdata.rhses["1168"] = graphdata.rhses["58222"
-    ] = parsers.read_single_byte("ICU/ibm-1168_P100-2002.ucm") # KOI8-U
+graphdata.rhses["878"] = parsers.read_single_byte("WHATWG/index-koi8-r.txt") # KOI8-R
+graphdata.rhses["4019"] = graphdata.rhses["20866"] = graphdata.rhses["878"]
+graphdata.rhses["1167"] = parsers.read_single_byte("ICU/ibm-1167_P100-2002.ucm") # KOI8-RU
+graphdata.rhses["59246"] = graphdata.rhses["1167"]
+graphdata.rhses["1168"] = parsers.read_single_byte("ICU/ibm-1168_P100-2002.ucm") # KOI8-U
+graphdata.rhses["58222"] = graphdata.rhses["1168"]
 graphdata.rhses["3841"] = parsers.read_single_byte("Other/DOS03841.ucm") # KOI8 (Star Micronics)
 graphdata.rhses["21866"] = parsers.read_single_byte("WHATWG/index-koi8-u.txt") # KOI8-RU/U hybrid
 graphdata.rhses["60270"] = parsers.read_single_byte("Other/T1060270.ucm") # KOI8-F
@@ -289,10 +289,10 @@ graphdata.rhses["62318"] = parsers.read_single_byte("Other/T1062318.ucm") # KOI8
 graphdata.rhses["63342"] = parsers.read_single_byte("Other/T1063342.ucm") # KOI8-C
 
 # The Windows encoding
-graphdata.rhses["1251"] = graphdata.rhses["5347"
-    ] = parsers.read_single_byte("WHATWG/index-windows-1251.txt")
-graphdata.rhses["1169"] = graphdata.rhses["59619"
-    ] = parsers.read_single_byte("Other/T1001169.ucm") # Central Asia
+graphdata.rhses["1251"] = parsers.read_single_byte("WHATWG/index-windows-1251.txt")
+graphdata.rhses["5347"] = graphdata.rhses["1251"]
+graphdata.rhses["1169"] = parsers.read_single_byte("Other/T1001169.ucm") # Central Asia
+graphdata.rhses["59619"] = graphdata.rhses["1169"]
 graphdata.rhses["1174"
     ] = parsers.read_single_byte("ICU/ibm-1174_X100-2007.ucm") # Kazakhstan (KZ-1048)
 graphdata.rhses["59595"] = parsers.read_single_byte("Other/T1058595.ucm") # Kazakhstan (variant)
@@ -300,12 +300,13 @@ graphdata.rhses["59595"] = parsers.read_single_byte("Other/T1058595.ucm") # Kaza
 # 10007/1283 is the original MacCyrillic; current MacCyrillic is a Euro update of 10017.
 # Mappings to U+00A4 changed to U+20AC across the board, so number the current one 10017, and use
 #   a version with that change but not the others for 10007/1283.
-graphdata.rhses["10017"] = graphdata.rhses["58627"
-    ] = parsers.read_single_byte("WHATWG/index-x-mac-cyrillic.txt")
+graphdata.rhses["10017"] = parsers.read_single_byte("WHATWG/index-x-mac-cyrillic.txt")
+graphdata.rhses["58627"] = graphdata.rhses["10017"]
 maccy = list(graphdata.rhses["10017"])
 maccy[0x22] = (0x00A2,)
 maccy[0x36] = (0x2202,)
-graphdata.rhses["10007"] = graphdata.rhses["1283"] = tuple(maccy)
+graphdata.rhses["10007"] = tuple(maccy)
+graphdata.rhses["1283"] = graphdata.rhses["10007"]
 
 # OEM code pages
 graphdata.rhses["771"] = parsers.read_single_byte("Other/T1000771.ucm") # Lithuania (KBL)
@@ -318,8 +319,8 @@ graphdata.rhses["849"
     ] = parsers.read_single_byte("ICU/ibm-849_P100-1999.ucm") # Belarus with Euro sign
 graphdata.rhses["872"
     ] = parsers.read_single_byte("ICU/ibm-872_P100-1999.ucm") # non-Al’ternativnaja with Euro sign
-graphdata.rhses["866"] = graphdata.rhses["900"
-    ] = parsers.read_single_byte("WHATWG/index-ibm866.txt") # Russia; "Cyrillic (DOS)"
+graphdata.rhses["866"] = parsers.read_single_byte("WHATWG/index-ibm866.txt") # Russia; "Cyrillic (DOS)"
+graphdata.rhses["900"] = graphdata.rhses["866"]
 graphdata.rhses["1119"] = parsers.read_single_byte("Other/T1001119.ucm") # Lithuania (LST 1284)
 graphdata.rhses["1125"] = parsers.read_single_byte("ICU/ibm-1125_P100-1997.ucm") # Ukraine
 graphdata.rhses["1131"] = parsers.read_single_byte("ICU/ibm-1131_P100-1997.ucm") # Belarus
@@ -335,7 +336,7 @@ graphdata.rhses["62306"] = parsers.read_single_byte("Other/T1062306.ucm") # Uzbe
 
 # LaTeX "T2A" charset (matches Windows-1251 for Bulgarian/Russian; FreeDOS uses it for
 #   "Northeastern Iranian languages")
-graphdata.rhses["60643"] = graphdata.rhses["996121"] = (
+graphdata.rhses["60643"] = (
   (0x0490,), (0x0492,), (0x0402,), (0x040B,), (0x04BA,), (0x0496,), (0x0498,), (0x0409,),
   (0x0407,), (0x049A,), (0x04A0,), (0x049C,), (0x04D4,), (0x04A2,), (0x04A4,), (0x0405,),
   (0x04E8,), (0x04AA,), (0x040E,), (0x04AE,), (0x04B0,), (0x04B2,), (0x040F,), (0x04B8,),
@@ -352,10 +353,11 @@ graphdata.rhses["60643"] = graphdata.rhses["996121"] = (
   (0x0438,), (0x0439,), (0x043A,), (0x043B,), (0x043C,), (0x043D,), (0x043E,), (0x043F,),
   (0x0440,), (0x0441,), (0x0442,), (0x0443,), (0x0444,), (0x0445,), (0x0446,), (0x0447,),
   (0x0448,), (0x0449,), (0x044A,), (0x044B,), (0x044C,), (0x044D,), (0x044E,), (0x044F,))
+graphdata.rhses["996121"] = graphdata.rhses["60643"]
 
 # LaTeX "T2B" charset (matches Windows-1251 for Bulgarian/Russian; FreeDOS uses it for
 #   Aleutian languages)
-graphdata.rhses["61667"] = graphdata.rhses["996122"] = (
+graphdata.rhses["61667"] = (
   (0x04FA,), (0x0492,), (0x04F6,), (0x0494,), (0x04BA,), (0x0496,), (0xA7D8,), (0x04E0,),
   (0x0409,), (0x049A,), (0x04C5,), (0x04C3,), (0x0512,), (0x04A2,), (0x04A4,), (0x04C7,),
   (0x04E8,), (0x023B,), (0x040E,), (0x04AE,), (0x04FE,), (0x04B2,), (0x04FC,), (0x04CB,),
@@ -372,6 +374,7 @@ graphdata.rhses["61667"] = graphdata.rhses["996122"] = (
   (0x0438,), (0x0439,), (0x043A,), (0x043B,), (0x043C,), (0x043D,), (0x043E,), (0x043F,),
   (0x0440,), (0x0441,), (0x0442,), (0x0443,), (0x0444,), (0x0445,), (0x0446,), (0x0447,),
   (0x0448,), (0x0449,), (0x044A,), (0x044B,), (0x044C,), (0x044D,), (0x044E,), (0x044F,))
+graphdata.rhses["996122"] = graphdata.rhses["61667"]
 
 # LaTeX "T2C" charset (matches Windows-1251 for Bulgarian/Russian; FreeDOS uses it for
 #   Tungusic languages)

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2022, 2024, 2025.
+# By HarJIT in 2022, 2024, 2025, 2026.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -80,7 +80,7 @@ for (setcode, (kind, bytecount, entries)) in sorted(gsets.items()):
             running_hash %= 0x40000000
     if running_hash in checksums:
         edoctes = checksums[running_hash]
-        if gsets[setcode] == gsets[edoctes] and gsetflags[setcode] == gsetflags[edoctes]:
+        if gsets[setcode] is not gsets[edoctes] and gsets[setcode] == gsets[edoctes] and gsetflags[setcode] == gsetflags[edoctes]:
             complaints.add((setcode, "Duplicates", checksums[running_hash]))
     else:
         checksums[running_hash] = setcode
@@ -96,7 +96,7 @@ for setcode, entries in sorted(rhses.items()):
             running_hash %= 0x40000000
     if running_hash in checksums:
         edoctes = checksums[running_hash]
-        if edoctes in rhses and rhses[setcode] == rhses[edoctes]:
+        if edoctes in rhses and rhses[setcode] is not rhses[edoctes] and rhses[setcode] == rhses[edoctes]:
             complaints.add((setcode, "Duplicates", checksums[running_hash]))
     else:
         checksums[running_hash] = setcode

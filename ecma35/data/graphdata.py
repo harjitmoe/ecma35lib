@@ -49,6 +49,11 @@ class CoveragesOnDemand(dict):
         return my_coverage
 codepoint_coverages = CoveragesOnDemand()
 
+# Allows deliberate duplicates to be differentiated from other duplicates.
+# For a normal `tuple`, the `is` and `is not` operators tend to behave the same as `==` and `!=`.
+# Merely subclassing it with no other changes prevents this behaviour.
+class TupleWithReferenceIdentity(tuple): pass
+
 # Note: since gsets specifies length as second member, no more need for "94n" distinct from "94".
 # Necessary since a set could have a length of, say, 3 (take the EUC-TW G2 set).
 # Also, the individual characters may be:
@@ -64,8 +69,12 @@ class GrumblingDict(dict):
     def __setitem__(self, key, value):
         if key in self:
             print(f"{key!r} already in dictionary {self._name!r}", file=sys.stderr)
+        if isinstance(value, tuple) and not isinstance(value, TupleWithReferenceIdentity):
+            value = TupleWithReferenceIdentity(value)
         super().__setitem__(key, value)
-gsets = GrumblingDict("gsets", {"nil": (94, 1, (None,)*94), "Unknown": (94, 1, (None,)*94)})
+gsets = GrumblingDict("gsets")
+gsets["nil"] = (94, 1, (None,)*94)
+gsets["Unknown"] = gsets["nil"]
 gsetflags = collections.defaultdict(set)
 
 c0graphics = GrumblingDict("c0graphics")

@@ -586,15 +586,15 @@ graphdata.gsets["spatlantis"] = (94, 1, (
 
 # Windows code pages for non-Vietnamese Latin
 graphdata.rhses["1250"] = parsers.read_single_byte("WHATWG/index-windows-1250.txt") # Central European
-graphdata.rhses["1252"] = graphdata.rhses["1004"] = graphdata.rhses["5348"] = parsers.read_single_byte(
-    "WHATWG/index-windows-1252.txt") # ISO-8859-1 ext.
+graphdata.rhses["1252"] = parsers.read_single_byte("WHATWG/index-windows-1252.txt") # ISO-8859-1 ext.
+graphdata.rhses["1004"] = graphdata.rhses["5348"] = graphdata.rhses["1252"]
 graphdata.defgsets["1252"] = graphdata.defgsets["1004"] = graphdata.defgsets["5348"] = ("ir006", "ir100", "nil", "nil")
 graphdata.rhses["1254"] = parsers.read_single_byte("WHATWG/index-windows-1254.txt") # ISO-8859-9 ext.
 graphdata.defgsets["1254"] = ("ir006", "ir148", "nil", "nil")
 graphdata.rhses["58598"] = graphdata.rhses["1254"][:32] + graphdata.gsets["ir148/azeri"][2]
 graphdata.defgsets["58598"] = ("ir006", "ir148/azeri", "nil", "nil")
-graphdata.rhses["1257"] = graphdata.rhses["5353"
-    ] = parsers.read_single_byte("WHATWG/index-windows-1257.txt") # Baltic Rim
+graphdata.rhses["1257"] = parsers.read_single_byte("WHATWG/index-windows-1257.txt") # Baltic Rim
+graphdata.rhses["5353"] = graphdata.rhses["1257"]
 graphdata.defgsets["1257"] = graphdata.defgsets["5353"] = ("ir006", "ir179", "nil", "nil")
 graphdata.rhses["59620"
     ] = parsers.read_single_byte("Other/T1059620.ucm") # CeltScript Latin-8 (FreeDOS variant)
@@ -649,18 +649,18 @@ graphdata.rhses["57781"] = parsers.read_single_byte("Other/T1057781.ucm") # Hung
 graphdata.rhses["58335"] = parsers.read_single_byte("Other/T1058335.ucm") # Kashubian
 
 # Macintosh pages
-graphdata.rhses["10000"] = graphdata.rhses["1275"
-    ] = parsers.read_single_byte("WHATWG/index-macintosh.txt") # MacRoman
-graphdata.rhses["10081"] = graphdata.rhses["1281"
-    ] = parsers.read_mozilla_ut_file("Mozilla/macturki.ut") # MacTurkish
-graphdata.rhses["10029"] = graphdata.rhses["1282"
-    ] = parsers.read_mozilla_ut_file("Mozilla/macce.ut") # Macintosh Central European
-graphdata.rhses["10082"] = graphdata.rhses["1284"
-    ] = parsers.read_mozilla_ut_file("Mozilla/maccroat.ut") # MacCroatian
-graphdata.rhses["10010"] = graphdata.rhses["1285"
-    ] = parsers.read_mozilla_ut_file("Mozilla/macro.ut") # MacRomanian
-graphdata.rhses["10079"] = graphdata.rhses["1286"
-    ] = parsers.read_mozilla_ut_file("Mozilla/macicela.ut") # MacIcelandic
+graphdata.rhses["10000"] = parsers.read_single_byte("WHATWG/index-macintosh.txt") # MacRoman
+graphdata.rhses["1275"] = graphdata.rhses["10000"]
+graphdata.rhses["10081"] = parsers.read_mozilla_ut_file("Mozilla/macturki.ut") # MacTurkish
+graphdata.rhses["1281"] = graphdata.rhses["10081"]
+graphdata.rhses["10029"] = parsers.read_mozilla_ut_file("Mozilla/macce.ut") # Macintosh Central European
+graphdata.rhses["1282"] = graphdata.rhses["10029"]
+graphdata.rhses["10082"] = parsers.read_mozilla_ut_file("Mozilla/maccroat.ut") # MacCroatian
+graphdata.rhses["1284"] = graphdata.rhses["10082"]
+graphdata.rhses["10010"] = parsers.read_mozilla_ut_file("Mozilla/macro.ut") # MacRomanian
+graphdata.rhses["1285"] = graphdata.rhses["10010"]
+graphdata.rhses["10079"] = parsers.read_mozilla_ut_file("Mozilla/macicela.ut") # MacIcelandic
+graphdata.rhses["1286"] = graphdata.rhses["10079"]
 graphdata.rhses["58619"] = parsers.read_single_byte("Other/T1058619.ucm") # MacGaelic
 graphdata.rhses["58630"] = parsers.read_single_byte("Other/T1058630.ucm") # MacSaami
 

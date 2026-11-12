@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019–2025.
+# By HarJIT in 2019–2026.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -108,7 +108,8 @@ graphdata.gsets["nbytehangul/ext"] = (96, 1, (
     None,      None,      (0xFFCA,), (0xFFCB,), (0xFFCC,), (0xFFCD,), (0xFFCE,), (0xFFCF,),
     None,      None,      (0xFFD2,), (0xFFD3,), (0xFFD4,), (0xFFD5,), (0xFFD6,), (0xFFD7,),
     None,      None,      (0xFFDA,), (0xFFDB,), (0xFFDC,), (0x00AC,), (0x005C,), (0x007E,)))
-graphdata.rhses["1040"] = graphdata.rhses["29712"] = ((0x00A2,),) + ((None,) * 31) + graphdata.gsets["nbytehangul/ext"][2]
+graphdata.rhses["1040"] = ((0x00A2,),) + ((None,) * 31) + graphdata.gsets["nbytehangul/ext"][2]
+graphdata.rhses["29712"] = graphdata.rhses["1040"]
 graphdata.defgsets["1040"] = graphdata.defgsets["29712"] = ("alt646/ksroman", "nbytehangul/ext", "nil", "nil")
 
 # SPAchmim charset for Sahidic Coptic (modified Thesaurus Linguae Graecae)
