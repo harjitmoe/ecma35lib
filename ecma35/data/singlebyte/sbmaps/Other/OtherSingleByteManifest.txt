@@ -168,3 +168,27 @@ T1063342.ucm:
 
 next.txt:
     https://www.columbia.edu/kermit/ftp/charsets/next.txt
+
+DOS01001.ucm:
+    https://ccsids.net/viewer.html?ccsid=101001
+
+DOS03011.ucm:
+    https://ccsids.net/viewer.html?ccsid=3011
+
+DOS03841.ucm:
+    https://ccsids.net/viewer.html?ccsid=3841
+
+DOS03850.ucm:
+    https://ccsids.net/viewer.html?ccsid=3850
+
+DOS03860.ucm:
+    https://ccsids.net/viewer.html?ccsid=3860
+
+DOS03861.ucm:
+    https://ccsids.net/viewer.html?ccsid=3861
+
+DOS03863.ucm:
+    https://ccsids.net/viewer.html?ccsid=3863
+
+DOS03864.ucm:
+    https://ccsids.net/viewer.html?ccsid=3864

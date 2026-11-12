@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019, 2020, 2022, 2024, 2025.
+# By HarJIT in 2019, 2020, 2022, 2024, 2025, 2026.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -281,6 +281,7 @@ graphdata.rhses["1167"] = graphdata.rhses["59246"
     ] = parsers.read_single_byte("ICU/ibm-1167_P100-2002.ucm") # KOI8-RU
 graphdata.rhses["1168"] = graphdata.rhses["58222"
     ] = parsers.read_single_byte("ICU/ibm-1168_P100-2002.ucm") # KOI8-U
+graphdata.rhses["3841"] = parsers.read_single_byte("Other/DOS03841.ucm") # KOI8 (Star Micronics)
 graphdata.rhses["21866"] = parsers.read_single_byte("WHATWG/index-koi8-u.txt") # KOI8-RU/U hybrid
 graphdata.rhses["60270"] = parsers.read_single_byte("Other/T1060270.ucm") # KOI8-F
 graphdata.rhses["61294"] = parsers.read_single_byte("Other/T1061294.ucm") # KOI8-CA

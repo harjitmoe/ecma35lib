@@ -641,6 +641,7 @@ graphdata.rhses["991"] = parsers.read_single_byte("Other/T1000991.ucm") # Polish
 graphdata.rhses["1116"] = parsers.read_single_byte("Other/T1001116.ucm") # Estonian
 graphdata.rhses["1117"] = parsers.read_single_byte("Other/T1001117.ucm") # Latvian
 graphdata.rhses["1118"] = parsers.read_single_byte("Other/T1001118.ucm") # Baltic (LST 1283)
+graphdata.rhses["3011"] = parsers.read_single_byte("Other/DOS03011.ucm") # Latvian
 graphdata.rhses["3844"] = parsers.read_single_byte("Other/T1003844.ucm") # Czech
 graphdata.rhses["3845"] = parsers.read_single_byte("Other/T1003845.ucm") # Hungarian
 graphdata.rhses["3846"] = parsers.read_single_byte("Other/T1003846.ucm") # Turkish (Star Micronics)

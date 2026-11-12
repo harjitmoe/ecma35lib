@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019, 2020, 2022, 2024, 2025.
+# By HarJIT in 2019, 2020, 2022, 2024, 2025, 2026.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -339,6 +339,9 @@ graphdata.rhses["17248"] = graphdata.rhses["50016"] = _oem864[:31] + ((0xFE73,),
 graphdata.defgsets["165"] = graphdata.defgsets["864"] = graphdata.defgsets["17248"] = graphdata.defgsets["50016"] = ("alt646/ibmarabic", "ibmpc-arabic/alternate", "nil", "nil")
 graphdata.rhses["1127"] = parsers.read_single_byte("Other/T1001127.ucm")
 graphdata.defgsets["1127"] = ('alt646/ibmarabic', 'pclinedrawing', 'nil', 'nil')
+graphdata.gsets["gl1001"] = (94, 1, parsers.read_single_byte("Other/DOS01001.ucm", typ="GL94"))
+graphdata.rhses["?1001"] = parsers.read_single_byte("Other/DOS01001.ucm")
+graphdata.defgsets["?1001"] = ("gl1001", "pclinedrawing", "nil", "nil")
 
 # OEM code pages for Urdu
 graphdata.rhses["868"] = parsers.read_single_byte("Other/T1000868.ucm")
