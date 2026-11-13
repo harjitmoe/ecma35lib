@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- mode: python; coding: utf-8 -*-
-# By HarJIT in 2019, 2020, 2022, 2023, 2024, 2025.
+# By HarJIT in 2019, 2020, 2022, 2023, 2024, 2025, 2026.
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -972,7 +972,7 @@ for (name, (myvars, override)) in raw_variants.items():
                 myset[frm - 0x21] = None
     graphdata.gsets[name] = (94, 1, tuple(myset))
 
-graphdata.chcpdocs['367'] = graphdata.chcpdocs['895'] = graphdata.chcpdocs['1009'] = graphdata.chcpdocs['1010'] = graphdata.chcpdocs['1011'] = graphdata.chcpdocs['1012'] = graphdata.chcpdocs['1013'] = graphdata.chcpdocs['1014'] = graphdata.chcpdocs['1015'] = graphdata.chcpdocs['1016'] = graphdata.chcpdocs['1017'] = graphdata.chcpdocs['1018'] = graphdata.chcpdocs['1019'] = graphdata.chcpdocs['1020'] = graphdata.chcpdocs['1021'] = graphdata.chcpdocs['1023'] = graphdata.chcpdocs['1052'] = graphdata.chcpdocs['1054'] = graphdata.chcpdocs['1088'] = graphdata.chcpdocs['1101'] = graphdata.chcpdocs['1102'] = graphdata.chcpdocs['1103'] = graphdata.chcpdocs['1104'] = graphdata.chcpdocs['1105'] = graphdata.chcpdocs['1106'] = graphdata.chcpdocs['1107'] = graphdata.chcpdocs['1114'] = graphdata.chcpdocs['1126'] = graphdata.chcpdocs['5211'] = graphdata.chcpdocs['5222'] = graphdata.chcpdocs['9089'] = graphdata.chcpdocs['9444'] = graphdata.chcpdocs['61697'] = graphdata.chcpdocs['61698'] = graphdata.chcpdocs['61699'] = graphdata.chcpdocs['61700'] = graphdata.chcpdocs['61710'] = graphdata.chcpdocs["996710"] = 'ecma-35'
+graphdata.chcpdocs['367'] = graphdata.chcpdocs['895'] = graphdata.chcpdocs['1009'] = graphdata.chcpdocs['1010'] = graphdata.chcpdocs['1011'] = graphdata.chcpdocs['1012'] = graphdata.chcpdocs['1013'] = graphdata.chcpdocs['1014'] = graphdata.chcpdocs['1015'] = graphdata.chcpdocs['1016'] = graphdata.chcpdocs['1017'] = graphdata.chcpdocs['1018'] = graphdata.chcpdocs['1019'] = graphdata.chcpdocs['1020'] = graphdata.chcpdocs['1021'] = graphdata.chcpdocs['1023'] = graphdata.chcpdocs['1052'] = graphdata.chcpdocs['1054'] = graphdata.chcpdocs['1088'] = graphdata.chcpdocs['1101'] = graphdata.chcpdocs['1102'] = graphdata.chcpdocs['1103'] = graphdata.chcpdocs['1104'] = graphdata.chcpdocs['1105'] = graphdata.chcpdocs['1106'] = graphdata.chcpdocs['1107'] = graphdata.chcpdocs['1114'] = graphdata.chcpdocs['1126'] = graphdata.chcpdocs["3041"] = graphdata.chcpdocs['5211'] = graphdata.chcpdocs['5222'] = graphdata.chcpdocs['9089'] = graphdata.chcpdocs['9444'] = graphdata.chcpdocs['61697'] = graphdata.chcpdocs['61698'] = graphdata.chcpdocs['61699'] = graphdata.chcpdocs['61700'] = graphdata.chcpdocs['61710'] = graphdata.chcpdocs["996710"] = 'ecma-35'
 
 graphdata.defgsets['895'] = ('ir014', 'nil', 'nil', 'nil')
 graphdata.defgsets['1009'] = ('ir002/tilde', 'nil', 'nil', 'nil')
@@ -991,6 +991,7 @@ graphdata.defgsets['1021'] = ('alt646/decswiss', 'nil', 'nil', 'nil')
 graphdata.defgsets['1023'] = ('ir017', 'nil', 'nil', 'nil')
 graphdata.defgsets['1052'] = ('alt646/hplegal', 'nil', 'nil', 'nil')
 graphdata.defgsets['1088'] = graphdata.defgsets['1126'] = graphdata.defgsets['5222'] = ('alt646/ksroman/tilde', 'nil', 'nil', 'nil')
+graphdata.defgsets["3041"] = ("alt646/maltese", "nil", "nil", "nil")
 
 graphdata.defgsets['1101'] = ('ir004/dec', 'nil', 'nil', 'nil')
 graphdata.defgsets['1102'] = ('alt646/decdutch', 'nil', 'nil', 'nil')
