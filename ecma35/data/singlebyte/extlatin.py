@@ -62,6 +62,8 @@ _latin1_1985 = _latin1_iso[:55] + (None,) + _latin1_iso[56:87] + (None,) + _lati
 graphdata.gsets["ir100/1985"] = (96, 1, _latin1_1985)
 _latin1_brazil = _latin1_iso[:55] + ((0x0152,),) + _latin1_iso[56:87] + ((0x0153,),) + _latin1_iso[88:]
 graphdata.gsets["ir100/abnt"] = (96, 1, _latin1_brazil)
+graphdata.chcpdocs["3847"] = 'ecma-35'
+graphdata.defgsets["3847"] = ('ir006', 'ir100/abnt', 'nil', 'nil')
 
 # DEC Multinational Character Set (MCS); direct precursor to ISO-8859-1.
 graphdata.gsets["decmultinational"] = (94, 1, tuple((i,) if i else None for i in (
